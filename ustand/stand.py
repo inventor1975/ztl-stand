@@ -1566,6 +1566,26 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
                         lo_hi = {e: (lo, hi) for e, (lo, hi, _) in def_ranges.items() if lo != hi}
                         fx1 = dict(dfixed, **{e: lo for e, (lo, hi, _) in def_ranges.items() if lo == hi})
                         g1, l1, _ = J.judge([law_of[d]], fx1, dict(dboxes, **lo_hi), [d], grounds)
+                        # WITH THE SYSTEM (2026-10-20, the bridge girder): a definition reading two or more of the
+                        # system's unknowns is ALSO sent together with the linear laws, those unknowns left unknown —
+                        # ZTL then reads it through their dependence on the data (znumsolve._affine_def_eq) instead of
+                        # their separate ranges. Both answers are sound; their intersection is kept.
+                        reads = _names(law_of[d].split("==", 1)[1]) & {u for u in lin_derived if u in ranges
+                                                                       and ranges[u][0] != ranges[u][1]}
+                        if len(reads) >= 2:
+                            fx2 = dict(fixed, **{e: lo for e, (lo, hi, _) in def_ranges.items() if lo == hi})
+                            g2, l2, _ = J.judge(linear + [law_of[d]], fx2, dict(boxes, **lo_hi),
+                                                lin_derived + [d], grounds)
+                            if d in g2 and d in g1:
+                                lo_, hi_ = max(g1[d][0], g2[d][0]), min(g1[d][1], g2[d][1])
+                                if lo_ <= hi_:
+                                    tight = g2[d] if (g2[d][0], g2[d][1]) == (lo_, hi_) else g1[d]
+                                    g1 = dict(g1, **{d: (lo_, hi_, tight[2] if (tight[0], tight[1]) == (lo_, hi_)
+                                                         else False)})
+                                    l1 = l1 + [l for l in l2 if l.startswith(f"{d} -> ")]
+                            elif d in g2:
+                                g1 = dict(g1, **{d: g2[d]})
+                                l1 = l1 + [l for l in l2 if l.startswith(f"{d} -> ")]
                         todo.remove(d)
                         progress = True
                         if d in g1:

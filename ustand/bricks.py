@@ -1059,7 +1059,26 @@ def bound_value(v, boxes, fixed, side):
     env = {n: (x, x) for n, x in fixed.items()}
     env.update(boxes)
     lo, hi = _ival(tree, env)
+    # SPLIT WHAT VARIES (2026-10-20, the bridge girder: an EN 1993 buckling bound reads one toleranced modulus a dozen
+    # times through lambda, phi and chi; read once over E +-0.5 % it widened enough to leave two verticals OPEN that
+    # hold at every point). With one or two names varying, each interval is cut into pieces and the bound read on
+    # every piece — the union covers the box, so the ends stay sound, and the widening shrinks with the pieces.
+    vary = sorted(n for n in {x.id for x in _ast.walk(tree) if isinstance(x, _ast.Name)}
+                  if n in env and env[n][0] != env[n][1])
+    if 1 <= len(vary) <= 2:
+        k = BOUND_PIECES if len(vary) == 1 else 8
+        cuts = {n: [env[n][0] + (env[n][1] - env[n][0]) * i / k for i in range(k + 1)] for n in vary}
+        los, his = [], []
+        for idx in __import__("itertools").product(range(k), repeat=len(vary)):
+            sub = dict(env, **{n: (cuts[n][i], cuts[n][i + 1]) for n, i in zip(vary, idx)})
+            a, b = _ival(tree, sub)
+            los.append(a)
+            his.append(b)
+        lo, hi = max(lo, min(los)), min(hi, max(his))
     return lo if side == "upper" else hi
+
+
+BOUND_PIECES = 32       # pieces of ONE varying name in a requirement's bound (see bound_value)
 
 
 class Win(tuple):
