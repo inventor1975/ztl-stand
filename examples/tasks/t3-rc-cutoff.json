@@ -1,0 +1,85 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "pi": {
+   "role": "given",
+   "range": [
+    "3.14159",
+    "3.14160"
+   ],
+   "why": "pi, bracketed",
+   "unit": ""
+  },
+  "tau": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "f": {
+   "role": "derived",
+   "unit": "Hz"
+  }
+ },
+ "slots": {
+  "R": {
+   "from": [
+    "res_1pct"
+   ]
+  },
+  "C": {
+   "from": [
+    "cap_5pct"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "tau == R.R*C.C",
+   "source": "RC time constant"
+  },
+  {
+   "zfl": "f == 1/(2*pi*tau)",
+   "source": "first-order cutoff"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "f",
+   "op": "within",
+   "value": [
+    "950",
+    "1050"
+   ],
+   "why": "1 kHz +-5%"
+  }
+ ],
+ "catalog": {
+  "res_1pct": {
+   "series": "E24",
+   "decades": [
+    1000,
+    10000
+   ],
+   "fields": {
+    "R": {
+     "series": true,
+     "tolerance": "0.01",
+     "unit": "ohm"
+    }
+   }
+  },
+  "cap_5pct": {
+   "series": "E12",
+   "decades": [
+    "10",
+    "100"
+   ],
+   "fields": {
+    "C": {
+     "series": true,
+     "tolerance": "0.05",
+     "unit": "nF"
+    }
+   }
+  }
+ }
+}

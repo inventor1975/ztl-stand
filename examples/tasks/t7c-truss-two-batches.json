@@ -1,0 +1,235 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "L1": {
+   "role": "given",
+   "value": "3",
+   "unit": "m"
+  },
+  "L2": {
+   "role": "given",
+   "value": "4",
+   "unit": "m"
+  },
+  "L3": {
+   "role": "given",
+   "value": "5",
+   "unit": "m"
+  },
+  "Fx": {
+   "role": "given",
+   "value": "5",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "horizontal load"
+  },
+  "Fy": {
+   "role": "given",
+   "value": "-20",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "vertical load (down)"
+  },
+  "ux": {
+   "role": "derived",
+   "unit": "mm"
+  },
+  "uy": {
+   "role": "derived",
+   "unit": "mm"
+  },
+  "N1": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "N2": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "N3": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "s1": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "s2": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "s3": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "EA": {
+   "role": "given",
+   "value": "200",
+   "tolerance": "0.05",
+   "unit": "GPa",
+   "why": "steel batch A: bars 1 and 2"
+  },
+  "EB": {
+   "role": "given",
+   "value": "200",
+   "tolerance": "0.05",
+   "unit": "GPa",
+   "why": "steel batch B: bars 3 and 4"
+  },
+  "L4": {
+   "role": "given",
+   "value": "5",
+   "unit": "m"
+  },
+  "N4": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "s4": {
+   "role": "derived",
+   "unit": "MPa"
+  }
+ },
+ "slots": {
+  "B1": {
+   "from": [
+    "sections"
+   ]
+  },
+  "B2": {
+   "from": [
+    "sections"
+   ]
+  },
+  "B3": {
+   "from": [
+    "sections"
+   ]
+  },
+  "B4": {
+   "from": [
+    "sections"
+   ]
+  }
+ },
+ "define": {
+  "k1": "EA*B1.A/L1",
+  "k2": "EA*B2.A/L2",
+  "k3": "EB*B3.A/L3",
+  "k4": "EB*B4.A/L4",
+  "Kxx": "k1 + (k3 + k4)*9/25",
+  "Kxy": "(k3 - k4)*12/25",
+  "Kyy": "k2 + (k3 + k4)*16/25"
+ },
+ "laws": [
+  {
+   "zfl": "Kxx*ux + Kxy*uy == Fx",
+   "source": "node equilibrium, x (stiffness method)"
+  },
+  {
+   "zfl": "Kxy*ux + Kyy*uy == Fy",
+   "source": "node equilibrium, y"
+  },
+  {
+   "zfl": "N1 == -k1*ux",
+   "source": "bar 1 along (1,0): N = -k a.u (tension +)"
+  },
+  {
+   "zfl": "N2 == -k2*uy",
+   "source": "bar 2 along (0,1)"
+  },
+  {
+   "zfl": "N3 == -k3*(3/5*ux + 4/5*uy)",
+   "source": "bar 3 along (3/5,4/5)"
+  },
+  {
+   "zfl": "s1 == N1/B1.A",
+   "source": "stress"
+  },
+  {
+   "zfl": "s2 == N2/B2.A",
+   "source": "stress"
+  },
+  {
+   "zfl": "s3 == N3/B3.A",
+   "source": "stress"
+  },
+  {
+   "zfl": "N4 == -k4*(-3/5*ux + 4/5*uy)",
+   "source": "bar 4 along (-3/5,4/5)"
+  },
+  {
+   "zfl": "s4 == N4/B4.A",
+   "source": "stress"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "uy",
+   "op": ">=",
+   "value": "-2.3",
+   "why": "deflection at most 2.3 mm down (the all-100 design reaches 2.288 mm)"
+  },
+  {
+   "quantity": "s1",
+   "op": "within",
+   "value": [
+    "-112",
+    "112"
+   ],
+   "why": "bar 1 stress within 112 MPa (all-100 sections reach 114.2 in bar 2)"
+  },
+  {
+   "quantity": "s2",
+   "op": "within",
+   "value": [
+    "-112",
+    "112"
+   ],
+   "why": "bar 2 stress within 112 MPa (all-100 sections reach 114.2 in bar 2)"
+  },
+  {
+   "quantity": "s3",
+   "op": "within",
+   "value": [
+    "-112",
+    "112"
+   ],
+   "why": "bar 3 stress within 112 MPa (all-100 sections reach 114.2 in bar 2)"
+  },
+  {
+   "quantity": "s4",
+   "op": "within",
+   "value": [
+    "-112",
+    "112"
+   ],
+   "why": "bar 4 stress within 112 MPa (all-100 sections reach 114.2 in bar 2)"
+  }
+ ],
+ "objective": {
+  "minimize": "B1.A*L1 + B2.A*L2 + B3.A*L3 + B4.A*L4",
+  "why": "least steel (volume)"
+ },
+ "catalog": {
+  "sections": {
+   "items": [
+    {
+     "A": "100"
+    },
+    {
+     "A": "150"
+    },
+    {
+     "A": "200"
+    }
+   ],
+   "fields": {
+    "A": {
+     "unit": "mm^2"
+    }
+   }
+  }
+ },
+ "note": "TWO steel batches (EA: bars 1, 2; EB: bars 3, 4): each enters several stiffnesses. ZTL's rank-many rule refuses two such parameters; the stand decides through certificates the kernel checks on its own solution of the system."
+}

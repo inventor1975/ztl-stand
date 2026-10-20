@@ -1,0 +1,171 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "k02 flat: non-inverting amp (gain 5) + 12-bit ADC with 5 V ref; eCircuit Center EBA example",
+ "quantities": {
+  "R1": {
+   "role": "given",
+   "unit": "ohm",
+   "value": "10000",
+   "tolerance": "0.001"
+  },
+  "R2": {
+   "role": "given",
+   "unit": "ohm",
+   "value": "40000",
+   "tolerance": "0.001"
+  },
+  "dR1": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-3/1000",
+    "3/1000"
+   ]
+  },
+  "dR2": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-3/1000",
+    "3/1000"
+   ]
+  },
+  "Rs": {
+   "role": "given",
+   "unit": "ohm",
+   "value": "500"
+  },
+  "voff": {
+   "role": "given",
+   "unit": "V",
+   "range": [
+    "-4/10000",
+    "4/10000"
+   ]
+  },
+  "ibn": {
+   "role": "given",
+   "unit": "A",
+   "range": [
+    "-40/1000000000",
+    "40/1000000000"
+   ]
+  },
+  "ibp": {
+   "role": "given",
+   "unit": "A",
+   "range": [
+    "-40/1000000000",
+    "40/1000000000"
+   ]
+  },
+  "oadc": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-45/10",
+    "45/10"
+   ]
+  },
+  "ores": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-1/2",
+    "1/2"
+   ]
+  },
+  "oinl": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-1",
+    "1"
+   ]
+  },
+  "Vref": {
+   "role": "given",
+   "unit": "V",
+   "value": "5",
+   "tolerance": "0.005"
+  },
+  "dVref": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-15/10000",
+    "15/10000"
+   ]
+  },
+  "eg": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-22/20475",
+    "22/20475"
+   ]
+  },
+  "Vq": {
+   "role": "given",
+   "unit": "V",
+   "value": "1/4095"
+  },
+  "vin": {
+   "role": "given",
+   "unit": "V",
+   "value": "1"
+  },
+  "vo1": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "code": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Vmeas": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Err": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "define": {
+  "R1e": "R1*(1+dR1)",
+  "R2e": "R2*(1+dR2)",
+  "Vrefe": "Vref*(1+dVref)"
+ },
+ "laws": [
+  {
+   "zfl": "vo1 == (1 + R2e/R1e)*(vin + voff + ibp*Rs) - ibn*R2e",
+   "source": "non-inverting amp: gain 1+R2/R1 on input+offset+Ibp*Rs, minus Ibn*R2 (eCircuit Center sheet: S(ibn)=-R2, S(ibp)=Rs*Ka)"
+  },
+  {
+   "zfl": "code == 4095*vo1/Vrefe*(1+eg) + oadc + ores + oinl",
+   "source": "ADC: Kadc=(2^N-1)/Vref, gain error, offset+resolution+INL as LSB terms"
+  },
+  {
+   "zfl": "Vmeas == code*Vq",
+   "source": "reading referred to input: code/(Kadc_nom*Ka_nom)=code/4095 V"
+  },
+  {
+   "zfl": "Err == Vmeas - vin",
+   "source": "error referred to input (RTI)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Err",
+   "op": "within",
+   "value": [
+    "-1",
+    "1"
+   ],
+   "why": "wide window: only to read the guaranteed range"
+  }
+ ]
+}

@@ -1,0 +1,42 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "p": {
+   "role": "given",
+   "range": [
+    "1/4",
+    "4"
+   ],
+   "unit": "",
+   "why": "a ratio anywhere in 1/4..4"
+  },
+  "x": {
+   "role": "derived",
+   "unit": ""
+  },
+  "y": {
+   "role": "derived",
+   "unit": ""
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "x - p*y == 0",
+   "source": "the two-equation model"
+  },
+  {
+   "zfl": "p*x + y == 1",
+   "source": "the two-equation model"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "x",
+   "op": "<=",
+   "value": "0.45",
+   "why": "x = p/(1+p^2): 4/17 at both ends, 0.386 at the nominal 17/8, 1/2 at p = 1 INSIDE"
+  }
+ ]
+}

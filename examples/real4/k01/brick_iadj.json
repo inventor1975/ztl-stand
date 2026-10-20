@@ -1,0 +1,217 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "AN-1378 Table 5, Vout = 3.3 V column: largest R2 for which the adjust-pin current adds no more than 0.1 / 0.5 / 1 % to Vout (six rows read from the table)",
+ "quantities": {
+  "Vnom": {
+   "role": "given",
+   "value": "3.3",
+   "unit": "V"
+  },
+  "Ia": {
+   "role": "given",
+   "value": "10/1000000",
+   "unit": "A"
+  },
+  "Ra": {
+   "role": "given",
+   "value": "1",
+   "unit": "ohm"
+  },
+  "ea": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Ib": {
+   "role": "given",
+   "value": "1/1000000",
+   "unit": "A"
+  },
+  "Rb": {
+   "role": "given",
+   "value": "1",
+   "unit": "ohm"
+  },
+  "eb": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Ic": {
+   "role": "given",
+   "value": "1/10000000",
+   "unit": "A"
+  },
+  "Rc": {
+   "role": "given",
+   "value": "1",
+   "unit": "ohm"
+  },
+  "ec": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Id": {
+   "role": "given",
+   "value": "1/100000000",
+   "unit": "A"
+  },
+  "Rd": {
+   "role": "given",
+   "value": "1",
+   "unit": "ohm"
+  },
+  "ed": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Ie": {
+   "role": "given",
+   "value": "1/1000000",
+   "unit": "A"
+  },
+  "Re": {
+   "role": "given",
+   "value": "1",
+   "unit": "ohm"
+  },
+  "ee": {
+   "role": "derived",
+   "unit": ""
+  },
+  "If": {
+   "role": "given",
+   "value": "1/1000000",
+   "unit": "A"
+  },
+  "Rf": {
+   "role": "given",
+   "value": "1",
+   "unit": "ohm"
+  },
+  "ef": {
+   "role": "derived",
+   "unit": ""
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "ea == Ia*Ra/Vnom",
+   "source": "AN-1378 Eq. 20: the adjust-pin term Iadj*R2, relative to Vout"
+  },
+  {
+   "zfl": "eb == Ib*Rb/Vnom",
+   "source": "AN-1378 Eq. 20: the adjust-pin term Iadj*R2, relative to Vout"
+  },
+  {
+   "zfl": "ec == Ic*Rc/Vnom",
+   "source": "AN-1378 Eq. 20: the adjust-pin term Iadj*R2, relative to Vout"
+  },
+  {
+   "zfl": "ed == Id*Rd/Vnom",
+   "source": "AN-1378 Eq. 20: the adjust-pin term Iadj*R2, relative to Vout"
+  },
+  {
+   "zfl": "ee == Ie*Re/Vnom",
+   "source": "AN-1378 Eq. 20: the adjust-pin term Iadj*R2, relative to Vout"
+  },
+  {
+   "zfl": "ef == If*Rf/Vnom",
+   "source": "AN-1378 Eq. 20: the adjust-pin term Iadj*R2, relative to Vout"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "ea",
+   "op": "<=",
+   "value": "0.001",
+   "why": "extra error from Iadj at most 0.001"
+  }
+ ],
+ "find": [
+  {
+   "largest": "Ra",
+   "from": "0",
+   "to": "1000000",
+   "precision": "1",
+   "requirements": [
+    {
+     "quantity": "ea",
+     "op": "<=",
+     "value": "0.001",
+     "why": "extra error from Iadj at most 0.001"
+    }
+   ]
+  },
+  {
+   "largest": "Rb",
+   "from": "0",
+   "to": "1000000",
+   "precision": "1",
+   "requirements": [
+    {
+     "quantity": "eb",
+     "op": "<=",
+     "value": "0.001",
+     "why": "extra error from Iadj at most 0.001"
+    }
+   ]
+  },
+  {
+   "largest": "Rc",
+   "from": "0",
+   "to": "1000000",
+   "precision": "1",
+   "requirements": [
+    {
+     "quantity": "ec",
+     "op": "<=",
+     "value": "0.001",
+     "why": "extra error from Iadj at most 0.001"
+    }
+   ]
+  },
+  {
+   "largest": "Rd",
+   "from": "0",
+   "to": "1000000",
+   "precision": "1",
+   "requirements": [
+    {
+     "quantity": "ed",
+     "op": "<=",
+     "value": "0.001",
+     "why": "extra error from Iadj at most 0.001"
+    }
+   ]
+  },
+  {
+   "largest": "Re",
+   "from": "0",
+   "to": "1000000",
+   "precision": "1",
+   "requirements": [
+    {
+     "quantity": "ee",
+     "op": "<=",
+     "value": "0.005",
+     "why": "extra error from Iadj at most 0.005"
+    }
+   ]
+  },
+  {
+   "largest": "Rf",
+   "from": "0",
+   "to": "1000000",
+   "precision": "1",
+   "requirements": [
+    {
+     "quantity": "ef",
+     "op": "<=",
+     "value": "0.01",
+     "why": "extra error from Iadj at most 0.01"
+    }
+   ]
+  }
+ ]
+}

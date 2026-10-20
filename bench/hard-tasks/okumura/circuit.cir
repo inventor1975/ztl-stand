@@ -1,0 +1,13 @@
+* Okumura's problem (Popova & Kraemer 2008; Hladik SCAN 2010): conductances p1..p9 in [0.99, 1.01]
+I1 0 n1 10
+I3 0 n3 10
+G1 n1 0 n1 0 1
+G2 n2 0 n2 0 1
+G3 n3 0 n3 0 1
+G4 n4 0 n4 0 1
+G5 n5 0 n5 0 1
+G6 n1 n2 n1 n2 1
+G7 n2 n3 n2 n3 1
+G8 n3 n4 n3 n4 1
+G9 n4 n5 n4 n5 1
+.end

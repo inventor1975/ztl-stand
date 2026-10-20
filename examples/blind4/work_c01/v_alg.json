@@ -1,0 +1,430 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Lx": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "m",
+   "ground": "airline",
+   "why": "outer length"
+  },
+  "Ly": {
+   "role": "given",
+   "value": "0.4",
+   "unit": "m",
+   "ground": "airline",
+   "why": "outer width"
+  },
+  "Lz": {
+   "role": "given",
+   "value": "0.4",
+   "unit": "m",
+   "ground": "airline",
+   "why": "outer height"
+  },
+  "tend": {
+   "role": "given",
+   "value": "48",
+   "unit": "h",
+   "ground": "problem",
+   "why": "transit duration"
+  },
+  "Tm": {
+   "role": "given",
+   "value": "5",
+   "unit": "C",
+   "ground": "problem",
+   "why": "PCM melt point (difference-only C)"
+  },
+  "Ta": {
+   "role": "given",
+   "value": "36",
+   "unit": "C",
+   "why": "ambient, hot lane (mode overrides)"
+  },
+  "sg": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "+1 hot lane, -1 cold lane (mode overrides)"
+  },
+  "f": {
+   "role": "given",
+   "range": [
+    "0.85",
+    "1"
+   ],
+   "unit": "",
+   "why": "available latent fraction (mode overrides)"
+  },
+  "Llat": {
+   "role": "given",
+   "range": [
+    "185",
+    "215"
+   ],
+   "unit": "kJ/kg",
+   "why": "PCM latent heat"
+  },
+  "Cp": {
+   "role": "given",
+   "range": [
+    "30",
+    "34"
+   ],
+   "unit": "kJ/K",
+   "why": "payload thermal capacity"
+  },
+  "cpcm": {
+   "role": "given",
+   "value": "3.2",
+   "unit": "kJ/(kg*K)",
+   "ground": "problem",
+   "why": "PCM sensible heat"
+  },
+  "rpcm": {
+   "role": "given",
+   "value": "0.92",
+   "unit": "kg/L",
+   "ground": "problem",
+   "why": "pack density"
+  },
+  "ppcm": {
+   "role": "given",
+   "value": "6.5",
+   "unit": "EUR/kg",
+   "ground": "problem",
+   "why": "PCM price"
+  },
+  "Vpay": {
+   "role": "given",
+   "value": "8",
+   "unit": "L",
+   "ground": "problem",
+   "why": "payload volume"
+  },
+  "Mpay": {
+   "role": "given",
+   "value": "8",
+   "unit": "kg",
+   "ground": "problem"
+  },
+  "Mshell": {
+   "role": "given",
+   "value": "0.6",
+   "unit": "kg",
+   "ground": "problem"
+  },
+  "Mmax": {
+   "role": "given",
+   "value": "22",
+   "unit": "kg",
+   "ground": "carrier"
+  },
+  "mstep": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "kg",
+   "ground": "discretisation of PCM mass (my approximation)"
+  },
+  "moff": {
+   "role": "given",
+   "value": "0",
+   "unit": "kg"
+  },
+  "Tend": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Vmargin": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "Mtot": {
+   "role": "derived",
+   "unit": "kg"
+  }
+ },
+ "slots": {
+  "INS": {
+   "from": [
+    "insulation"
+   ]
+  },
+  "PCM": {
+   "from": [
+    "pcm"
+   ]
+  }
+ },
+ "define": {
+  "Vin": "(Lx-2*INS.t)*(Ly-2*INS.t)*(Lz-2*INS.t)",
+  "Aout": "2*(Lx*Ly+Lx*Lz+Ly*Lz)",
+  "Ain": "2*((Lx-2*INS.t)*(Ly-2*INS.t)+(Lx-2*INS.t)*(Lz-2*INS.t)+(Ly-2*INS.t)*(Lz-2*INS.t))",
+  "Am": "sqrt(Aout*Ain)",
+  "UA": "INS.k*Am/INS.t",
+  "dT": "sg*(Ta-Tm)"
+ },
+ "computed": {
+  "m": {
+   "value": "moff + PCM.N*mstep",
+   "unit": "kg"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Tend == Tm + sg*dT*(1 - exp(-max(0, tend*UA - f*m*Llat/dT)/(Cp + m*cpcm)))",
+   "source": "same as faithful, UA/tau algebra: (tend-t1)/tau = (tend*UA - f m L/dT)/(Cp+m c)"
+  },
+  {
+   "zfl": "Vmargin == Vin - Vpay - m/rpcm",
+   "source": "R3: interior volume contains payload and PCM"
+  },
+  {
+   "zfl": "Mtot == Mpay + Mshell + INS.rho*(Lx*Ly*Lz - Vin) + m",
+   "source": "mass formula"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vmargin",
+   "op": ">=",
+   "value": "0",
+   "why": "R3 PCM volume fits"
+  },
+  {
+   "quantity": "Mtot",
+   "op": "<=",
+   "value": "Mmax",
+   "why": "R4 shipping mass <= 22 kg"
+  }
+ ],
+ "modes": {
+  "hot lane": {
+   "quantities": {
+    "Ta": {
+     "value": "36"
+    },
+    "sg": {
+     "value": "1"
+    },
+    "f": {
+     "range": [
+      "0.85",
+      "1"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Tend",
+     "op": "<=",
+     "value": "8",
+     "why": "R1 hot lane T(48h) <= 8 C"
+    }
+   ]
+  },
+  "cold lane": {
+   "quantities": {
+    "Ta": {
+     "value": "-20"
+    },
+    "sg": {
+     "value": "-1"
+    },
+    "f": {
+     "range": [
+      "0.70",
+      "1"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Tend",
+     "op": ">=",
+     "value": "2",
+     "why": "R2 cold lane T(48h) >= 2 C"
+    }
+   ]
+  }
+ },
+ "objective": {
+  "minimize": "INS.price + ppcm*m",
+  "why": "panel price + 6.5 EUR/kg PCM"
+ },
+ "catalog": {
+  "insulation": {
+   "ground": "problem statement table",
+   "items": [
+    {
+     "name": "EPS-30",
+     "t": "30",
+     "k": {
+      "range": [
+       "7/200",
+       "41/1000"
+      ]
+     },
+     "price": "4.0",
+     "rho": "20"
+    },
+    {
+     "name": "EPS-40",
+     "t": "40",
+     "k": {
+      "range": [
+       "7/200",
+       "41/1000"
+      ]
+     },
+     "price": "5.5",
+     "rho": "20"
+    },
+    {
+     "name": "EPS-50",
+     "t": "50",
+     "k": {
+      "range": [
+       "7/200",
+       "41/1000"
+      ]
+     },
+     "price": "7.0",
+     "rho": "20"
+    },
+    {
+     "name": "EPS-60",
+     "t": "60",
+     "k": {
+      "range": [
+       "7/200",
+       "41/1000"
+      ]
+     },
+     "price": "8.5",
+     "rho": "20"
+    },
+    {
+     "name": "EPS-80",
+     "t": "80",
+     "k": {
+      "range": [
+       "7/200",
+       "41/1000"
+      ]
+     },
+     "price": "16.0",
+     "rho": "20"
+    },
+    {
+     "name": "PU-25",
+     "t": "25",
+     "k": {
+      "range": [
+       "23/1000",
+       "27/1000"
+      ]
+     },
+     "price": "7.0",
+     "rho": "40"
+    },
+    {
+     "name": "PU-35",
+     "t": "35",
+     "k": {
+      "range": [
+       "23/1000",
+       "27/1000"
+      ]
+     },
+     "price": "9.5",
+     "rho": "40"
+    },
+    {
+     "name": "PU-45",
+     "t": "45",
+     "k": {
+      "range": [
+       "23/1000",
+       "27/1000"
+      ]
+     },
+     "price": "12.0",
+     "rho": "40"
+    },
+    {
+     "name": "PU-55",
+     "t": "55",
+     "k": {
+      "range": [
+       "23/1000",
+       "27/1000"
+      ]
+     },
+     "price": "14.5",
+     "rho": "40"
+    },
+    {
+     "name": "VIP-20",
+     "t": "20",
+     "k": {
+      "range": [
+       "11/2000",
+       "19/2000"
+      ]
+     },
+     "price": "38.0",
+     "rho": "180"
+    },
+    {
+     "name": "VIP-30",
+     "t": "30",
+     "k": {
+      "range": [
+       "11/2000",
+       "19/2000"
+      ]
+     },
+     "price": "52.0",
+     "rho": "180"
+    },
+    {
+     "name": "VIP-40",
+     "t": "40",
+     "k": {
+      "range": [
+       "11/2000",
+       "19/2000"
+      ]
+     },
+     "price": "68.0",
+     "rho": "180"
+    }
+   ],
+   "fields": {
+    "t": {
+     "unit": "mm"
+    },
+    "k": {
+     "unit": "W/(m*K)"
+    },
+    "price": {
+     "unit": "EUR"
+    },
+    "rho": {
+     "unit": "kg/m^3"
+    }
+   }
+  },
+  "pcm": {
+   "ground": "discretised continuous PCM mass",
+   "integers": {
+    "field": "N",
+    "from": "0",
+    "to": "40",
+    "unit": ""
+   }
+  }
+ }
+}

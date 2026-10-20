@@ -1,0 +1,8 @@
+{
+  "verdict": "BRICK ERROR",
+  "why": "BrickError: continuous choices: a requirement or the objective is unreadable: unknown quantity or malformed arithmetic: '8.6541e'"
+}
+
+real	0m0.061s
+user	0m0.035s
+sys	0m0.013s

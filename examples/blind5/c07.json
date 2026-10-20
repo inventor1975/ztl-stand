@@ -1,0 +1,370 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "HVL_Pb_ext": {
+   "role": "given",
+   "value": "0.10",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "HVL_Ba_ext": {
+   "role": "given",
+   "value": "2.0",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "HVL_Co_ext": {
+   "role": "given",
+   "value": "10.0",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "B_ext": {
+   "role": "derived",
+   "unit": ""
+  },
+  "HVL_Pb_chest": {
+   "role": "given",
+   "value": "0.28",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "HVL_Ba_chest": {
+   "role": "given",
+   "value": "6.0",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "HVL_Co_chest": {
+   "role": "given",
+   "value": "21.0",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "B_chest": {
+   "role": "derived",
+   "unit": ""
+  },
+  "HVL_Pb_spine": {
+   "role": "given",
+   "value": "0.16",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "HVL_Ba_spine": {
+   "role": "given",
+   "value": "3.4",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "HVL_Co_spine": {
+   "role": "given",
+   "value": "14.0",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "B_spine": {
+   "role": "derived",
+   "unit": ""
+  },
+  "HVL_Pb_pelvis": {
+   "role": "given",
+   "value": "0.21",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "HVL_Ba_pelvis": {
+   "role": "given",
+   "value": "4.4",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "HVL_Co_pelvis": {
+   "role": "given",
+   "value": "17.0",
+   "tolerance": "0.1",
+   "unit": "mm",
+   "why": "nominal HVL +-10%, independent"
+  },
+  "B_pelvis": {
+   "role": "derived",
+   "unit": ""
+  },
+  "U": {
+   "role": "given",
+   "value": "0.25",
+   "unit": "",
+   "ground": "operator"
+  },
+  "T": {
+   "role": "given",
+   "value": "1.0",
+   "unit": "",
+   "ground": "operator"
+  },
+  "d": {
+   "role": "given",
+   "value": "2.2",
+   "unit": "m",
+   "ground": "layout"
+  },
+  "d1": {
+   "role": "given",
+   "value": "1",
+   "unit": "m",
+   "why": "reference distance of K"
+  },
+  "cK": {
+   "role": "given",
+   "value": "1.14",
+   "unit": "",
+   "why": "kerma-to-dose factor 1.14 (mSv per mGy, units not expressible)"
+  },
+  "rPb": {
+   "role": "given",
+   "value": "11.34",
+   "unit": "kg/(m^2*mm)"
+  },
+  "rBa": {
+   "role": "given",
+   "value": "2.7",
+   "unit": "kg/(m^2*mm)"
+  },
+  "rCo": {
+   "role": "given",
+   "value": "2.35",
+   "unit": "kg/(m^2*mm)"
+  },
+  "pPb": {
+   "role": "given",
+   "value": "40",
+   "unit": "EUR/(m^2*mm)"
+  },
+  "pBa": {
+   "role": "given",
+   "value": "1.8",
+   "unit": "EUR/(m^2*mm)"
+  },
+  "pCo": {
+   "role": "given",
+   "value": "0.55",
+   "unit": "EUR/(m^2*mm)"
+  },
+  "Area": {
+   "role": "given",
+   "value": "14",
+   "unit": "m^2"
+  },
+  "H": {
+   "role": "derived",
+   "unit": "mJ/kg"
+  },
+  "Mass": {
+   "role": "derived",
+   "unit": "kg/m^2"
+  },
+  "Thick": {
+   "role": "derived",
+   "unit": "mm"
+  },
+  "NK_ext": {
+   "role": "given",
+   "range": [
+    "154",
+    "234.0"
+   ],
+   "unit": "mJ/kg",
+   "why": "N_j*K_j: weekly count (140..180) times air kerma (1.1..1.3) mGy; independent ranges, so the product ranges exactly over [N0*K0, N1*K1]"
+  },
+  "NK_chest": {
+   "role": "given",
+   "range": [
+    "72",
+    "120.0"
+   ],
+   "unit": "mJ/kg",
+   "why": "N_j*K_j: weekly count (90..120) times air kerma (0.8..1.0) mGy; independent ranges, so the product ranges exactly over [N0*K0, N1*K1]"
+  },
+  "NK_spine": {
+   "role": "given",
+   "range": [
+    "200",
+    "360.0"
+   ],
+   "unit": "mJ/kg",
+   "why": "N_j*K_j: weekly count (40..60) times air kerma (5.0..6.0) mGy; independent ranges, so the product ranges exactly over [N0*K0, N1*K1]"
+  },
+  "NK_pelvis": {
+   "role": "given",
+   "range": [
+    "150",
+    "270.0"
+   ],
+   "unit": "mJ/kg",
+   "why": "N_j*K_j: weekly count (20..30) times air kerma (7.5..9.0) mGy; independent ranges, so the product ranges exactly over [N0*K0, N1*K1]"
+  }
+ },
+ "slots": {
+  "PB": {
+   "from": [
+    "lead"
+   ]
+  },
+  "BA": {
+   "from": [
+    "barite"
+   ]
+  },
+  "CO": {
+   "from": [
+    "concrete"
+   ]
+  }
+ },
+ "define": {
+  "S_ext": "PB.t/HVL_Pb_ext + BA.t/HVL_Ba_ext + CO.t/HVL_Co_ext",
+  "S_chest": "PB.t/HVL_Pb_chest + BA.t/HVL_Ba_chest + CO.t/HVL_Co_chest",
+  "S_spine": "PB.t/HVL_Pb_spine + BA.t/HVL_Ba_spine + CO.t/HVL_Co_spine",
+  "S_pelvis": "PB.t/HVL_Pb_pelvis + BA.t/HVL_Ba_pelvis + CO.t/HVL_Co_pelvis"
+ },
+ "laws": [
+  {
+   "zfl": "B_ext == pow(2, 0 - S_ext)",
+   "source": "transmission = 2^-(sum x/HVL), layers in series"
+  },
+  {
+   "zfl": "B_chest == pow(2, 0 - S_chest)",
+   "source": "transmission = 2^-(sum x/HVL), layers in series"
+  },
+  {
+   "zfl": "B_spine == pow(2, 0 - S_spine)",
+   "source": "transmission = 2^-(sum x/HVL), layers in series"
+  },
+  {
+   "zfl": "B_pelvis == pow(2, 0 - S_pelvis)",
+   "source": "transmission = 2^-(sum x/HVL), layers in series"
+  },
+  {
+   "zfl": "H == cK*U*T*d1*d1/(d*d)*(NK_ext*B_ext + NK_chest*B_chest + NK_spine*B_spine + NK_pelvis*B_pelvis)",
+   "source": "weekly dose behind wall (mSv/week, carried in mGy units)"
+  },
+  {
+   "zfl": "Mass == rPb*PB.t + rBa*BA.t + rCo*CO.t",
+   "source": "added mass per m2"
+  },
+  {
+   "zfl": "Thick == PB.t + BA.t + CO.t",
+   "source": "added thickness"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "H",
+   "op": "<=",
+   "value": "0.005",
+   "why": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)"
+  },
+  {
+   "quantity": "Mass",
+   "op": "<=",
+   "value": "55",
+   "why": "R2 slab limit"
+  },
+  {
+   "quantity": "Thick",
+   "op": "<=",
+   "value": "60",
+   "why": "R3 door frame limit"
+  }
+ ],
+ "objective": {
+  "minimize": "Area*(pPb*PB.t + pBa*BA.t + pCo*CO.t)",
+  "unit": "EUR",
+  "why": "price of the wall"
+ },
+ "catalog": {
+  "lead": {
+   "items": [
+    {
+     "t": "0"
+    },
+    {
+     "t": "0.5"
+    },
+    {
+     "t": "1.0"
+    },
+    {
+     "t": "1.5"
+    },
+    {
+     "t": "2.0"
+    },
+    {
+     "t": "2.5"
+    },
+    {
+     "t": "3.0"
+    }
+   ],
+   "fields": {
+    "t": {
+     "unit": "mm"
+    }
+   }
+  },
+  "barite": {
+   "items": [
+    {
+     "t": "0"
+    },
+    {
+     "t": "10"
+    },
+    {
+     "t": "20"
+    },
+    {
+     "t": "30"
+    }
+   ],
+   "fields": {
+    "t": {
+     "unit": "mm"
+    }
+   }
+  },
+  "concrete": {
+   "items": [
+    {
+     "t": "0"
+    },
+    {
+     "t": "50"
+    },
+    {
+     "t": "100"
+    },
+    {
+     "t": "150"
+    }
+   ],
+   "fields": {
+    "t": {
+     "unit": "mm"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,111 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "hold, two gates, skew up to 50; source: 80 vs 120 violated",
+ "quantities": {
+  "tcq": {
+   "role": "given",
+   "range": [
+    "30",
+    "50"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "clock-to-Q: min tccq=30, max tpcq=50"
+  },
+  "g1": {
+   "role": "given",
+   "range": [
+    "25",
+    "35"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "gate delay: min tcd=25, max tpd=35 (long path stage 1)"
+  },
+  "g2": {
+   "role": "given",
+   "range": [
+    "25",
+    "35"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "gate delay: min tcd=25, max tpd=35 (long path stage 2)"
+  },
+  "g3": {
+   "role": "given",
+   "range": [
+    "25",
+    "35"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "gate delay: min tcd=25, max tpd=35 (long path stage 3)"
+  },
+  "h1": {
+   "role": "given",
+   "range": [
+    "25",
+    "35"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "gate delay: min tcd=25, max tpd=35 (short path stage 1)"
+  },
+  "h2": {
+   "role": "given",
+   "range": [
+    "25",
+    "35"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "gate delay: min tcd=25, max tpd=35 (short path stage 2)"
+  },
+  "tsu": {
+   "role": "given",
+   "value": "60",
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "setup time"
+  },
+  "thold": {
+   "role": "given",
+   "value": "70",
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "hold time"
+  },
+  "sk": {
+   "role": "given",
+   "range": [
+    "-50",
+    "50"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "skew: capture clock lag minus launch clock, |skew|<=50 (slide: tskew=50 worst case, either sign)"
+  },
+  "sh": {
+   "role": "derived",
+   "unit": "ps"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "sh == tcq + (h1 + h2) - sk - thold",
+   "source": "hold: tccq + tcd > thold (+ tskew)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "sh",
+   "op": ">=",
+   "value": "0",
+   "why": "hold slack nonnegative (the source writes strict >; see report)"
+  }
+ ],
+ "catalog": {},
+ "conflicts": false
+}

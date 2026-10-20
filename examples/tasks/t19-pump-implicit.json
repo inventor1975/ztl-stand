@@ -1,0 +1,228 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "dz": {
+   "role": "given",
+   "range": [
+    "12",
+    "18"
+   ],
+   "unit": "m",
+   "why": "static lift, tank levels"
+  },
+  "D": {
+   "role": "given",
+   "range": [
+    "52",
+    "53"
+   ],
+   "unit": "mm",
+   "why": "inner diameter 52.5 +-0.5"
+  },
+  "L": {
+   "role": "given",
+   "value": "120",
+   "unit": "m"
+  },
+  "SK": {
+   "role": "given",
+   "range": [
+    "7.5",
+    "9.5"
+   ],
+   "unit": "",
+   "why": "total minor-loss coefficient 8.5 +-1.0"
+  },
+  "G": {
+   "role": "given",
+   "value": "9.81",
+   "unit": "m*s^-2"
+  },
+  "RHO": {
+   "role": "given",
+   "range": [
+    "983",
+    "998"
+   ],
+   "unit": "kg/m^3",
+   "why": "water density 60C..10C (correlation with nu/T lost)"
+  },
+  "H": {
+   "role": "derived",
+   "unit": "m",
+   "why": "pump head at the operating point"
+  },
+  "nu": {
+   "role": "given",
+   "range": [
+    "0.00000047",
+    "0.00000131"
+   ],
+   "unit": "m^2/s",
+   "why": "kinematic viscosity, 60C..10C"
+  },
+  "eps": {
+   "role": "given",
+   "value": "0.045",
+   "unit": "mm",
+   "why": "pipe roughness"
+  },
+  "Q": {
+   "role": "derived",
+   "unit": "m^3/h",
+   "search": [
+    "0.5",
+    "70"
+   ],
+   "why": "the operating flow: pump curve meets system curve"
+  },
+  "P": {
+   "role": "derived",
+   "unit": "W",
+   "why": "shaft power"
+  }
+ },
+ "slots": {
+  "PUMP": {
+   "from": [
+    "pumps"
+   ]
+  }
+ },
+ "define": {
+  "AR": "pi*D*D/4",
+  "V": "Q/AR",
+  "RE": "V*D/nu",
+  "FSJ": "0.25/(log10(eps/(3.7*D) + 5.74/RE**0.9))**2"
+ },
+ "laws": [
+  {
+   "zfl": "PUMP.H0 - PUMP.a*Q*Q == dz + (FSJ*L/D + SK)*V*V/(2*G)",
+   "source": "operating point: pump curve H0 - a Q^2 = system curve dz + (f L/D + SK) V^2/2g, f by Swamee-Jain at the flow itself"
+  },
+  {
+   "zfl": "H == PUMP.H0 - PUMP.a*Q*Q",
+   "source": "pump head at the operating point"
+  },
+  {
+   "zfl": "P == RHO*G*Q*H/PUMP.eta",
+   "source": "shaft power"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Q",
+   "op": "within",
+   "value": [
+    "9",
+    "14"
+   ],
+   "why": "9 <= Q <= 14 m3/h"
+  },
+  {
+   "quantity": "P",
+   "op": "<=",
+   "value": "1500",
+   "why": "P_shaft <= 1.5 kW"
+  }
+ ],
+ "objective": {
+  "minimize": "PUMP.price",
+  "why": "cheapest pump"
+ },
+ "catalog": {
+  "pumps": {
+   "ground": "vendor pump curve",
+   "items": [
+    {
+     "H0": {
+      "value": "28",
+      "tolerance": "0.03"
+     },
+     "a": {
+      "value": "972000",
+      "tolerance": "0.05"
+     },
+     "eta": {
+      "range": [
+       "0.52",
+       "0.58"
+      ]
+     },
+     "price": "420",
+     "grade": "P1"
+    },
+    {
+     "H0": {
+      "value": "32",
+      "tolerance": "0.03"
+     },
+     "a": {
+      "value": "1166400",
+      "tolerance": "0.05"
+     },
+     "eta": {
+      "range": [
+       "0.55",
+       "0.61"
+      ]
+     },
+     "price": "510",
+     "grade": "P2"
+    },
+    {
+     "H0": {
+      "value": "36",
+      "tolerance": "0.03"
+     },
+     "a": {
+      "value": "1425600",
+      "tolerance": "0.05"
+     },
+     "eta": {
+      "range": [
+       "0.59",
+       "0.65"
+      ]
+     },
+     "price": "640",
+     "grade": "P3"
+    },
+    {
+     "H0": {
+      "value": "40",
+      "tolerance": "0.03"
+     },
+     "a": {
+      "value": "1101600",
+      "tolerance": "0.05"
+     },
+     "eta": {
+      "range": [
+       "0.57",
+       "0.63"
+      ]
+     },
+     "price": "780",
+     "grade": "P4"
+    }
+   ],
+   "fields": {
+    "H0": {
+     "unit": "m"
+    },
+    "a": {
+     "unit": "m^-5*s^2"
+    },
+    "eta": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ },
+ "report": "all",
+ "note": "b03 rewritten 2026-10-10 with the implicit operating point and Swamee-Jain friction at the flow itself (G6); the blind author froze f offline over an assumed Q window"
+}

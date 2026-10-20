@@ -1,0 +1,164 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "DRY=dryers(name=DR8, B=8, Tmax=80, price=40); FAN=fans(name=none, qa=0, price=0); TD=tdry(x=319709009/4859992); MF=mfin(x=1472821/8330849)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Q": [
+          "4/5 (~0.8)",
+          "73786976294838206464/43299976449027979269 (~1.70409)"
+        ],
+        "DI": [
+          "~0.234735233602 (an exact fraction of 40 digits)",
+          "3/5 (~0.6)"
+        ],
+        "ST": [
+          "25940737796209870009/72057594037927936 (~360)",
+          "20341587593200663345/36028797018963968 (~564.592)"
+        ],
+        "TD_x_req": [
+          "319709009/4859992 (~65.7839)",
+          "319709009/4859992 (~65.7839)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "objective": {
+    "minimize": "DRY.price + FAN.price + Mtot*Wu*1000*(M0c - MF.x)/(1 + M0c)*cw*(1 + 12*(Tdn - 60)/1000)",
+    "value": "4445433709067260733/86036701423067000 (~51.669)",
+    "unit": "kEUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "DRY": {
+      "catalog": "dryers",
+      "name": "DR8",
+      "B": {
+        "nominal": "8",
+        "tolerance": "0"
+      },
+      "Tmax": {
+        "nominal": "80",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "40",
+        "tolerance": "0"
+      }
+    },
+    "FAN": {
+      "catalog": "fans",
+      "name": "none",
+      "qa": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "TD": {
+      "catalog": "tdry",
+      "x": {
+        "nominal": "319709009/4859992 (~65.7839)",
+        "tolerance": "0"
+      }
+    },
+    "MF": {
+      "catalog": "mfin",
+      "x": {
+        "nominal": "1472821/8330849 (~0.176791)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Q": [
+      "4/5 (~0.8)",
+      "73786976294838206464/43299976449027979269 (~1.70409)"
+    ],
+    "DI": [
+      "~0.234735233602 (an exact fraction of 40 digits)",
+      "3/5 (~0.6)"
+    ],
+    "ST": [
+      "25940737796209870009/72057594037927936 (~360)",
+      "20341587593200663345/36028797018963968 (~564.592)"
+    ],
+    "TD_x_req": [
+      "319709009/4859992 (~65.7839)",
+      "319709009/4859992 (~65.7839)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Q": "t/h",
+    "DI": "",
+    "ST": "day",
+    "TD_x_req": "C"
+  },
+  "guaranteed_ends": {
+    "Q": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside",
+    "DI": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+  },
+  "how": {
+    "Q": "ZTL, certificate checked exactly (10 pieces; found by the stand's search, the extreme may lie inside the box)",
+    "DI": "ZTL, certificate checked exactly (3 pieces; found by the stand's search, the extreme may lie inside the box)",
+    "ST": "ZTL, interval reading of the definition (sound, may be wide)",
+    "TD_x_req": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "Q",
+      "op": ">=",
+      "value": "Thr",
+      "why": "R1 throughput >= 0.8 t/h"
+    },
+    {
+      "quantity": "DI",
+      "op": "<=",
+      "value": "DImax",
+      "why": "R2 damage index <= 0.6"
+    },
+    {
+      "quantity": "ST",
+      "op": ">=",
+      "value": "STmin",
+      "why": "R3 safe storage >= 360 d"
+    },
+    {
+      "quantity": "TD_x_req",
+      "op": "<=",
+      "value": "DRY.Tmax",
+      "why": "R4 Td <= dryer maximum"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "Mwb = 14728210/980367 by exact elimination (credit)",
+    "TD_x_req = 319709009/4859992 by exact elimination (credit)",
+    "RHd -> [34012816330251272019/1180591620717411303424, 31915080079472976973/368934881474191032320] by [RHd == RH0*exp(17.27*(T0/Tu)/((T0/Tu) + 237.3) - 17.27*(TD__x/Tu)/((TD__x/Tu) + 237.3))], interval reading, sound, may be wider than the truth (credit)",
+    "Me -> [4099767770630094589/230584300921369395200, 30070381742888363647/922337203685477580800] by [Me == pow(-ln(1 - RHd)/((86541/1000000000)*((TD__x/Tu) + 49.81)), 5000/9317)/100], interval reading, sound, may be wider than the truth (credit)",
+    "MR -> [1107925792996888994631190497/2629568524626200787164131468, 1221819417740504964524732556/2054643781623427384158783457] by [MR == (MF__x - Me)/(M0 - Me)], interval reading, sound, may be wider than the truth (credit)",
+    "kk -> [162777704393597372044875/1208925819614629174706176, 198950527592174567083875/1208925819614629174706176] by [kk == k0f*65000*exp(-4400/((TD__x/Tu) + 273.15))], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	0m3.130s
+user	0m2.695s
+sys	0m0.412s

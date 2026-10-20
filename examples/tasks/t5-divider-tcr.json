@@ -1,0 +1,108 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "value": "5",
+   "unit": "V",
+   "ground": "psu"
+  },
+  "T": {
+   "role": "given",
+   "range": [
+    "0",
+    "85"
+   ],
+   "unit": "C"
+  },
+  "I": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Vout": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {
+  "R1": {
+   "from": [
+    "res_100ppm",
+    "res_25ppm"
+   ]
+  },
+  "R2": {
+   "from": [
+    "res_100ppm",
+    "res_25ppm"
+   ]
+  }
+ },
+ "define": {
+  "R1T": "R1.R*(1 + R1.a*(T - 25))",
+  "R2T": "R2.R*(1 + R2.a*(T - 25))"
+ },
+ "laws": [
+  {
+   "zfl": "Vin - Vout == I*R1T",
+   "source": "Ohm's law at temperature"
+  },
+  {
+   "zfl": "Vout == I*R2T",
+   "source": "Ohm's law at temperature"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vout",
+   "op": "within",
+   "value": [
+    "2.47",
+    "2.53"
+   ],
+   "why": "2.5 V +-1.2% over 0..85 C"
+  }
+ ],
+ "catalog": {
+  "res_100ppm": {
+   "series": "E24",
+   "decades": [
+    10000
+   ],
+   "fields": {
+    "R": {
+     "series": true,
+     "tolerance": "0.01",
+     "unit": "ohm"
+    },
+    "a": {
+     "range": [
+      "-1/10000",
+      "1/10000"
+     ],
+     "unit": "1/C"
+    }
+   }
+  },
+  "res_25ppm": {
+   "series": "E24",
+   "decades": [
+    10000
+   ],
+   "fields": {
+    "R": {
+     "series": true,
+     "tolerance": "0.01",
+     "unit": "ohm"
+    },
+    "a": {
+     "range": [
+      "-1/40000",
+      "1/40000"
+     ],
+     "unit": "1/C"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "stand": "universal-stand/1",
+ "why": "AFFINE CONTRACTS: two ratiometric sensors on ONE supply 5 V +-5 %, their difference must stay within 4 mV \u2014 with ranges only the supply's spread does not cancel",
+ "components": {
+  "S1": {
+   "file": "ratiometric-sensor.json"
+  },
+  "S2": {
+   "file": "ratiometric-sensor.json"
+  }
+ },
+ "connect": {
+  "S1.Vs": "Vs",
+  "S2.Vs": "Vs"
+ },
+ "quantities": {
+  "Vs": {
+   "role": "given",
+   "value": "5",
+   "tolerance": "0.05",
+   "unit": "V"
+  },
+  "Diff": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Diff == S1.Vo - S2.Vo"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Diff",
+   "op": "within",
+   "value": [
+    "-0.004",
+    "0.004"
+   ]
+  }
+ ]
+}

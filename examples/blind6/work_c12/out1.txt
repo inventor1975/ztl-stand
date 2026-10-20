@@ -1,0 +1,75 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 6,
+  "notes": [],
+  "combinations_proved_without_mix": 3,
+  "verdict": "EARNED",
+  "design": {
+    "TM": {
+      "catalog": "tests",
+      "name": "TL load-bank run",
+      "c": {
+        "range": [
+          "4/5 (~0.8)",
+          "22/25 (~0.88)"
+        ]
+      },
+      "td": {
+        "range": [
+          "3/5 (~0.6)",
+          "9/10 (~0.9)"
+        ]
+      },
+      "ct": {
+        "nominal": "8/5 (~1.6)",
+        "tolerance": "0"
+      }
+    },
+    "CM": {
+      "catalog": "mon",
+      "name": "condition monitoring",
+      "k": {
+        "range": [
+          "17/20 (~0.85)",
+          "23/25 (~0.92)"
+        ]
+      },
+      "cm": {
+        "nominal": "11/5 (~2.2)",
+        "tolerance": "0"
+      }
+    },
+    "TAU": {
+      "catalog": "tauc",
+      "x": "8017118536477/5823096600 (~1376.78)"
+    }
+  },
+  "objective": {
+    "minimize": "Hyr*TM.ct/TAU.x + CM.cm",
+    "value": "496270913629247/40085592682385 (~12.3803)",
+    "unit": "kEUR",
+    "lower_bound": "186176213/15038235 (~12.3802)",
+    "gap": "10956270873630208/120563312574397198095 (~9.08757e-05)",
+    "lower_bound_is": "proved by ZTL: no mix in the continuous box costs less — zmin: the amounts' box of 3 combination(s) split in 23 pieces, 13 with the objective >= L, 10 failing a requirement at one point of its data; 3 combination(s) proved to have no mix at all (a split of the amounts, zmin)",
+    "optimal": false,
+    "optimal_means": "true only at a zero gap; otherwise the mix is PROVED to cost at most `gap` above the cheapest possible (blind test 4, c03: optimal false at a 0.00093 EUR gap)"
+  },
+  "guaranteed": {
+    "U": [
+      "~0.00112119099928 (an exact fraction of 72 digits)",
+      "~0.002249999775 (an exact fraction of 70 digits)"
+    ],
+    "tauq": [
+      "8017118536477/5823096600 (~1376.78)",
+      "8017118536477/5823096600 (~1376.78)"
+    ]
+  },
+  "how": {
+    "U": "ZTL, interval reading of the definition (sound, may be wide)",
+    "tauq": "ZTL, outer range"
+  },
+  "mix_verdict_checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

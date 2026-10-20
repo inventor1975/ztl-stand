@@ -1,0 +1,643 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "blind6 c02: two pump motors on one transformer; cables and breakers (problem 2). All data fictional. (find variant 2: narrowed search window 250..254)",
+ "quantities": {
+  "V0": {
+   "role": "given",
+   "unit": "V",
+   "why": "no-load busbar voltage (tap tolerance)",
+   "range": [
+    "395",
+    "415"
+   ]
+  },
+  "ks": {
+   "role": "given",
+   "unit": "V/A",
+   "why": "transformer load regulation, ONE shared value",
+   "range": [
+    "0.060",
+    "0.085"
+   ]
+  },
+  "L1": {
+   "role": "given",
+   "unit": "m",
+   "why": "feeder 1 length",
+   "value": "160"
+  },
+  "L2": {
+   "role": "given",
+   "unit": "m",
+   "why": "feeder 2 length",
+   "value": "85"
+  },
+  "Tamb": {
+   "role": "given",
+   "unit": "C",
+   "why": "ambient for conductor temperature and rating (worst case of 5..38)",
+   "value": "38"
+  },
+  "Tins": {
+   "role": "given",
+   "unit": "C",
+   "why": "XLPE insulation limit",
+   "value": "90"
+  },
+  "Tcal": {
+   "role": "given",
+   "unit": "C",
+   "why": "rating reference ambient",
+   "value": "30"
+  },
+  "dTr": {
+   "role": "given",
+   "unit": "C",
+   "why": "conductor rise at rated current",
+   "value": "60"
+  },
+  "alpha": {
+   "role": "given",
+   "unit": "1/C",
+   "why": "copper temperature coefficient",
+   "value": "0.00393"
+  },
+  "Tref": {
+   "role": "given",
+   "unit": "C",
+   "why": "resistance reference temperature",
+   "value": "20"
+  },
+  "Xp": {
+   "role": "given",
+   "unit": "mohm/m",
+   "why": "cable reactance, every cable",
+   "value": "0.08"
+  },
+  "Irun1": {
+   "role": "given",
+   "unit": "A",
+   "why": "M1 running current (theta, R4)",
+   "range": [
+    "50",
+    "56"
+   ]
+  },
+  "Irun2": {
+   "role": "given",
+   "unit": "A",
+   "why": "M2 running current (theta, R4)",
+   "range": [
+    "30",
+    "35"
+   ]
+  },
+  "kls1": {
+   "role": "given",
+   "unit": "",
+   "why": "M1 locked-rotor ratio",
+   "range": [
+    "5.8",
+    "6.4"
+   ]
+  },
+  "kls2": {
+   "role": "given",
+   "unit": "",
+   "why": "M2 locked-rotor ratio",
+   "range": [
+    "5.8",
+    "6.4"
+   ]
+  },
+  "Iref1": {
+   "role": "given",
+   "unit": "A",
+   "why": "M1 starting-current base",
+   "value": "53"
+  },
+  "Iref2": {
+   "role": "given",
+   "unit": "A",
+   "why": "M2 starting-current base",
+   "value": "32"
+  },
+  "Ib1": {
+   "role": "given",
+   "unit": "A",
+   "why": "feeder-1 base current in the situation (mode overrides)",
+   "range": [
+    "50",
+    "56"
+   ]
+  },
+  "Ib2": {
+   "role": "given",
+   "unit": "A",
+   "why": "feeder-2 base current in the situation (mode overrides)",
+   "range": [
+    "30",
+    "35"
+   ]
+  },
+  "k1": {
+   "role": "given",
+   "unit": "",
+   "why": "feeder-1 multiplier in the situation (mode overrides)",
+   "value": "1"
+  },
+  "k2": {
+   "role": "given",
+   "unit": "",
+   "why": "feeder-2 multiplier in the situation (mode overrides)",
+   "value": "1"
+  },
+  "c1": {
+   "role": "given",
+   "unit": "",
+   "why": "cos phi on feeder 1 in the situation (mode overrides)",
+   "value": "0.85"
+  },
+  "c2": {
+   "role": "given",
+   "unit": "",
+   "why": "cos phi on feeder 2 in the situation (mode overrides)",
+   "value": "0.85"
+  },
+  "Vbus": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "dV1": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "dV2": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Vt1": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Vt2": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Iz1": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Iz2": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "m4_1": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "m4_2": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "m5_1": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "m5_2": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "m6_1": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "m6_2": {
+   "role": "derived",
+   "unit": "A"
+  }
+ },
+ "slots": {
+  "C1": {
+   "from": [
+    "cables"
+   ]
+  },
+  "C2": {
+   "from": [
+    "cables"
+   ]
+  },
+  "B1": {
+   "from": [
+    "breakers"
+   ]
+  },
+  "B2": {
+   "from": [
+    "breakers"
+   ]
+  }
+ },
+ "define": {
+  "th1": "Tamb + dTr*(Irun1/C1.Iz30)*(Irun1/C1.Iz30)",
+  "Rp1": "C1.R20*(1 + alpha*(th1 - Tref))",
+  "I1": "Ib1*k1",
+  "s1": "sqrt(1 - c1*c1)",
+  "th2": "Tamb + dTr*(Irun2/C2.Iz30)*(Irun2/C2.Iz30)",
+  "Rp2": "C2.R20*(1 + alpha*(th2 - Tref))",
+  "I2": "Ib2*k2",
+  "s2": "sqrt(1 - c2*c2)"
+ },
+ "laws": [
+  {
+   "zfl": "Vbus == V0 - ks*(I1 + I2)",
+   "source": "transformer: V_bus = V0 - ks (I_a + I_b)"
+  },
+  {
+   "zfl": "dV1 == sqrt(3)*I1*L1*(Rp1*c1 + Xp*s1)",
+   "source": "3-phase cable drop, R'(theta) from the conductor temperature"
+  },
+  {
+   "zfl": "Vt1 == Vbus - dV1",
+   "source": "terminal voltage = V_bus - dV of its feeder"
+  },
+  {
+   "zfl": "Iz1 == C1.Iz30*sqrt((Tins - Tamb)/(Tins - Tcal))",
+   "source": "Iz(T) = Iz30 sqrt((90-T)/60)"
+  },
+  {
+   "zfl": "m4_1 == B1.In - 1.1*Irun1",
+   "source": "R4 margin"
+  },
+  {
+   "zfl": "m5_1 == 8*B1.In - 1.25*kls1*Iref1",
+   "source": "R5 margin"
+  },
+  {
+   "zfl": "m6_1 == Iz1 - B1.In",
+   "source": "R6 margin"
+  },
+  {
+   "zfl": "dV2 == sqrt(3)*I2*L2*(Rp2*c2 + Xp*s2)",
+   "source": "3-phase cable drop, R'(theta) from the conductor temperature"
+  },
+  {
+   "zfl": "Vt2 == Vbus - dV2",
+   "source": "terminal voltage = V_bus - dV of its feeder"
+  },
+  {
+   "zfl": "Iz2 == C2.Iz30*sqrt((Tins - Tamb)/(Tins - Tcal))",
+   "source": "Iz(T) = Iz30 sqrt((90-T)/60)"
+  },
+  {
+   "zfl": "m4_2 == B2.In - 1.1*Irun2",
+   "source": "R4 margin"
+  },
+  {
+   "zfl": "m5_2 == 8*B2.In - 1.25*kls2*Iref2",
+   "source": "R5 margin"
+  },
+  {
+   "zfl": "m6_2 == Iz2 - B2.In",
+   "source": "R6 margin"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "m4_1",
+   "op": ">=",
+   "value": "0",
+   "why": "R4 feeder 1: In >= 1.1 x highest running current"
+  },
+  {
+   "quantity": "m5_1",
+   "op": ">=",
+   "value": "0",
+   "why": "R5 feeder 1: 8 In >= 1.25 x highest starting current"
+  },
+  {
+   "quantity": "m6_1",
+   "op": ">=",
+   "value": "0",
+   "why": "R6 feeder 1: In <= Iz(38) of its cable"
+  },
+  {
+   "quantity": "m4_2",
+   "op": ">=",
+   "value": "0",
+   "why": "R4 feeder 2: In >= 1.1 x highest running current"
+  },
+  {
+   "quantity": "m5_2",
+   "op": ">=",
+   "value": "0",
+   "why": "R5 feeder 2: 8 In >= 1.25 x highest starting current"
+  },
+  {
+   "quantity": "m6_2",
+   "op": ">=",
+   "value": "0",
+   "why": "R6 feeder 2: In <= Iz(38) of its cable"
+  }
+ ],
+ "modes": {
+  "S1": {
+   "quantities": {
+    "Ib1": {
+     "range": [
+      "50",
+      "56"
+     ]
+    },
+    "k1": {
+     "value": "1"
+    },
+    "Ib2": {
+     "range": [
+      "30",
+      "35"
+     ]
+    },
+    "k2": {
+     "value": "1"
+    },
+    "c1": {
+     "value": "0.85"
+    },
+    "c2": {
+     "value": "0.85"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Vt1",
+     "op": ">=",
+     "value": "380",
+     "why": "R1 M1 running"
+    },
+    {
+     "quantity": "Vt2",
+     "op": ">=",
+     "value": "380",
+     "why": "R1 M2 running"
+    }
+   ]
+  },
+  "S2": {
+   "quantities": {
+    "Ib1": {
+     "value": "53"
+    },
+    "k1": {
+     "range": [
+      "5.8",
+      "6.4"
+     ]
+    },
+    "Ib2": {
+     "range": [
+      "30",
+      "35"
+     ]
+    },
+    "k2": {
+     "value": "1"
+    },
+    "c1": {
+     "value": "0.40"
+    },
+    "c2": {
+     "value": "0.85"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Vt1",
+     "op": ">=",
+     "value": "340",
+     "why": "R2 M1 starting, M2 running"
+    },
+    {
+     "quantity": "Vbus",
+     "op": ">=",
+     "value": "352",
+     "why": "R3 busbar in S2"
+    }
+   ]
+  },
+  "S3": {
+   "quantities": {
+    "Ib1": {
+     "range": [
+      "50",
+      "56"
+     ]
+    },
+    "k1": {
+     "value": "1"
+    },
+    "Ib2": {
+     "value": "32"
+    },
+    "k2": {
+     "range": [
+      "5.8",
+      "6.4"
+     ]
+    },
+    "c1": {
+     "value": "0.85"
+    },
+    "c2": {
+     "value": "0.40"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Vt2",
+     "op": ">=",
+     "value": "340",
+     "why": "R2 M2 starting, M1 running"
+    },
+    {
+     "quantity": "Vbus",
+     "op": ">=",
+     "value": "352",
+     "why": "R3 busbar in S3"
+    }
+   ]
+  }
+ },
+ "objective": {
+  "minimize": "C1.price*L1 + C2.price*L2 + B1.price + B2.price",
+  "unit": "EUR",
+  "why": "cables over their lengths + breakers"
+ },
+ "catalog": {
+  "cables": {
+   "items": [
+    {
+     "R20": {
+      "value": "1.150"
+     },
+     "Iz30": {
+      "value": "100"
+     },
+     "price": "5.5",
+     "type": "C16",
+     "S": {
+      "value": "16"
+     }
+    },
+    {
+     "R20": {
+      "value": "0.727"
+     },
+     "Iz30": {
+      "value": "130"
+     },
+     "price": "8.0",
+     "type": "C25",
+     "S": {
+      "value": "25"
+     }
+    },
+    {
+     "R20": {
+      "value": "0.524"
+     },
+     "Iz30": {
+      "value": "160"
+     },
+     "price": "10.5",
+     "type": "C35",
+     "S": {
+      "value": "35"
+     }
+    },
+    {
+     "R20": {
+      "value": "0.387"
+     },
+     "Iz30": {
+      "value": "190"
+     },
+     "price": "14.0",
+     "type": "C50",
+     "S": {
+      "value": "50"
+     }
+    },
+    {
+     "R20": {
+      "value": "0.268"
+     },
+     "Iz30": {
+      "value": "240"
+     },
+     "price": "19.0",
+     "type": "C70",
+     "S": {
+      "value": "70"
+     }
+    },
+    {
+     "R20": {
+      "value": "0.193"
+     },
+     "Iz30": {
+      "value": "290"
+     },
+     "price": "26.0",
+     "type": "C95",
+     "S": {
+      "value": "95"
+     }
+    }
+   ],
+   "fields": {
+    "R20": {
+     "unit": "mohm/m"
+    },
+    "Iz30": {
+     "unit": "A"
+    },
+    "price": {
+     "unit": "EUR/m"
+    },
+    "S": {
+     "unit": "mm^2"
+    }
+   }
+  },
+  "breakers": {
+   "items": [
+    {
+     "In": {
+      "value": "40"
+     },
+     "price": "48",
+     "type": "B40"
+    },
+    {
+     "In": {
+      "value": "50"
+     },
+     "price": "58",
+     "type": "B50"
+    },
+    {
+     "In": {
+      "value": "63"
+     },
+     "price": "70",
+     "type": "B63"
+    },
+    {
+     "In": {
+      "value": "80"
+     },
+     "price": "95",
+     "type": "B80"
+    },
+    {
+     "In": {
+      "value": "100"
+     },
+     "price": "120",
+     "type": "B100"
+    },
+    {
+     "In": {
+      "value": "125"
+     },
+     "price": "160",
+     "type": "B125"
+    },
+    {
+     "In": {
+      "value": "160"
+     },
+     "price": "230",
+     "type": "B160"
+    }
+   ],
+   "fields": {
+    "In": {
+     "unit": "A"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ },
+ "find": {
+  "largest": "L1",
+  "from": "250",
+  "to": "254",
+  "precision": "0.5"
+ },
+ "conflicts": false
+}

@@ -1,0 +1,178 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "largest",
+  "quantity": "sk",
+  "unit": "ps",
+  "proved": "10",
+  "proved_means": "every sk in [0, 10] ps works (EARNED on the whole range)",
+  "beyond": "11",
+  "beyond_is": "REFUTED: the range [0, 11] ps holds a concrete failing point (at_beyond)",
+  "precision": "1",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "sh": [
+            "0",
+            "50"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {},
+    "guaranteed": {
+      "sh": [
+        "0",
+        "50"
+      ]
+    },
+    "guaranteed_unit": {
+      "sh": "ps"
+    },
+    "how": {
+      "sh": "ZTL, outer range"
+    },
+    "requirements": [
+      {
+        "quantity": "sh",
+        "op": ">=",
+        "value": "0",
+        "why": "hold slack nonnegative (the source writes strict >; see report)"
+      }
+    ],
+    "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "sh -> [0, 1/20000000000] by [sh == tcq + (h1 + h2) - sk - thold]"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "REFUTED",
+        "fails": "hold slack nonnegative (the source writes strict >; see report)",
+        "by_at_witness": "1",
+        "unit": "ps"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {},
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "g1": "25",
+      "g2": "25",
+      "g3": "25",
+      "h1": "25",
+      "h2": "25",
+      "sk": "11",
+      "tcq": "30"
+    },
+    "point_units": {
+      "g1": "ps",
+      "g2": "ps",
+      "g3": "ps",
+      "h1": "ps",
+      "h2": "ps",
+      "sk": "ps",
+      "tcq": "ps"
+    },
+    "value_there": {
+      "sh": "-1"
+    },
+    "unit": "ps",
+    "requirement": {
+      "quantity": "sh",
+      "op": ">=",
+      "value": "0",
+      "why": "hold slack nonnegative (the source writes strict >; see report)"
+    },
+    "overshoot": "1",
+    "reasons": {
+      "spread_over_tolerances": [
+        "-1",
+        "50"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "tcq",
+          "moves_it_by": "20"
+        },
+        {
+          "quantity": "sk",
+          "moves_it_by": "11"
+        },
+        {
+          "quantity": "h2",
+          "moves_it_by": "10"
+        },
+        {
+          "quantity": "h1",
+          "moves_it_by": "10"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+  },
+  "tries": [
+    {
+      "sk": "0",
+      "verdict": "EARNED"
+    },
+    {
+      "sk": "60",
+      "verdict": "REFUTED"
+    },
+    {
+      "sk": "30",
+      "verdict": "REFUTED"
+    },
+    {
+      "sk": "15",
+      "verdict": "REFUTED"
+    },
+    {
+      "sk": "8",
+      "verdict": "EARNED"
+    },
+    {
+      "sk": "12",
+      "verdict": "REFUTED"
+    },
+    {
+      "sk": "10",
+      "verdict": "EARNED"
+    },
+    {
+      "sk": "11",
+      "verdict": "REFUTED"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

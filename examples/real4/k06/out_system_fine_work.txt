@@ -1,0 +1,720 @@
+{
+  "stand": "ztl-stand/1",
+  "verdict": "EARNED",
+  "why": "several limits, each searched on its own; the verdict is the weakest of theirs",
+  "finds": [
+    {
+      "verdict": "EARNED",
+      "find": "smallest",
+      "quantity": "Hp",
+      "unit": "ft",
+      "proved": "2261/50 (~45.22)",
+      "proved_means": "every Hp in [2261/50 (~45.22), 60] ft works (EARNED on the whole range)",
+      "beyond": "4521/100 (~45.21)",
+      "beyond_is": "OPEN: the stand could not decide the range [4521/100 (~45.21), 60] ft — the limit lies between 2261/50 (~45.22) and 4521/100 (~45.21), unproved",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "TDH": [
+                "~33.9660725458 (an exact fraction of 89 digits)",
+                "~45.2150837795 (an exact fraction of 88 digits)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "TDH": [
+            "~33.9660725458 (an exact fraction of 89 digits)",
+            "~45.2150837795 (an exact fraction of 88 digits)"
+          ]
+        },
+        "guaranteed_unit": {
+          "TDH": "ft"
+        },
+        "how": {
+          "TDH": "ZTL, exact at the corners"
+        },
+        "requirements": [
+          {
+            "quantity": "TDH",
+            "op": "<=",
+            "value": "Hp",
+            "why": "pump head covers the highest need"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "ST_Hst -> [1020699/125000, 1448943/125000] by the system over its parameters, exact at the corners (credit)",
+          "TDH -> [368305132697678777639404530907622365297757833580257766770061158340951279385629481543496981/35575210270867826352726472224358162144220892735455742381828378795412912825517998080000000, 249032029055391295676578998073843412932741472818413385160465456704179216570959216164914343/18069948074091582740312491330919531898709423798025742045002732288807693801068953600000000] by the system over its parameters, exact at the corners (credit)"
+        ],
+        "components": {
+          "FIT": {
+            "inputs": {
+              "Q": {
+                "from": "Qsys",
+                "arrives": [
+                  "473176473/312500",
+                  "473176473/312500"
+                ],
+                "assume": [
+                  "300/1",
+                  "3000/1"
+                ],
+                "inside": true
+              }
+            },
+            "bands_used": [
+              {
+                "band": {
+                  "Q": [
+                    "1514/1",
+                    "1515/1"
+                  ]
+                },
+                "earned": true,
+                "outputs": {
+                  "HLm": [
+                    "25777411682128906250000000000000000000000000000000/10935987208663983693222992919396546554302319853921",
+                    "11471766662597656250000000000000000000000000000000/4860438759406211880514358011090112369411216583609"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "HLm": [
+                "25777411682128906250000000000000000000000000000000/10935987208663983693222992919396546554302319853921",
+                "11471766662597656250000000000000000000000000000000/4860438759406211880514358011090112369411216583609"
+              ]
+            }
+          },
+          "PIP": {
+            "inputs": {
+              "Q": {
+                "from": "Qsys",
+                "arrives": [
+                  "473176473/312500",
+                  "473176473/312500"
+                ],
+                "assume": [
+                  "300/1",
+                  "3000/1"
+                ],
+                "inside": true
+              }
+            },
+            "bands_used": [
+              {
+                "band": {
+                  "Q": [
+                    "1514/1",
+                    "1515/1"
+                  ]
+                },
+                "earned": true,
+                "outputs": {
+                  "HLf": [
+                    "4778122498757256390256325251370948635701/991526771535535602339869989592367104000",
+                    "38271751840451945509038856840076232865689/7932214172284284777502016127044157440000"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "HLf": [
+                "4778122498757256390256325251370948635701/991526771535535602339869989592367104000",
+                "38271751840451945509038856840076232865689/7932214172284284777502016127044157440000"
+              ]
+            }
+          },
+          "ST": {
+            "inputs": {},
+            "bands_used": [
+              {
+                "band": {},
+                "earned": true,
+                "outputs": {
+                  "Hst": [
+                    "2679/100",
+                    "3803/100"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "Hst": [
+                "2679/100",
+                "3803/100"
+              ]
+            },
+            "outputs_affine": {
+              "Hst": {
+                "slope": {},
+                "remainder": [
+                  "2679/100",
+                  "3803/100"
+                ]
+              }
+            }
+          }
+        },
+        "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)"
+      },
+      "at_beyond": {
+        "verdict": "OPEN",
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point",
+        "refuted_inside_the_enclosures": {
+          "its_violating_point": {
+            "FIT_HLm": "~2.36023273421 (an exact fraction of 49 digits)",
+            "Hp": "4521/100 (~45.21)",
+            "PIP_HLf": "~4.82485104527 (an exact fraction of 40 digits)",
+            "ST_Hst_e": "3803/100 (~38.03)"
+          }
+        },
+        "components": {
+          "FIT": {
+            "inputs": {
+              "Q": {
+                "from": "Qsys",
+                "arrives": [
+                  "473176473/312500",
+                  "473176473/312500"
+                ],
+                "assume": [
+                  "300/1",
+                  "3000/1"
+                ],
+                "inside": true
+              }
+            },
+            "bands_used": [
+              {
+                "band": {
+                  "Q": [
+                    "1514/1",
+                    "1515/1"
+                  ]
+                },
+                "earned": true,
+                "outputs": {
+                  "HLm": [
+                    "25777411682128906250000000000000000000000000000000/10935987208663983693222992919396546554302319853921",
+                    "11471766662597656250000000000000000000000000000000/4860438759406211880514358011090112369411216583609"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "HLm": [
+                "25777411682128906250000000000000000000000000000000/10935987208663983693222992919396546554302319853921",
+                "11471766662597656250000000000000000000000000000000/4860438759406211880514358011090112369411216583609"
+              ]
+            }
+          },
+          "PIP": {
+            "inputs": {
+              "Q": {
+                "from": "Qsys",
+                "arrives": [
+                  "473176473/312500",
+                  "473176473/312500"
+                ],
+                "assume": [
+                  "300/1",
+                  "3000/1"
+                ],
+                "inside": true
+              }
+            },
+            "bands_used": [
+              {
+                "band": {
+                  "Q": [
+                    "1514/1",
+                    "1515/1"
+                  ]
+                },
+                "earned": true,
+                "outputs": {
+                  "HLf": [
+                    "4778122498757256390256325251370948635701/991526771535535602339869989592367104000",
+                    "38271751840451945509038856840076232865689/7932214172284284777502016127044157440000"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "HLf": [
+                "4778122498757256390256325251370948635701/991526771535535602339869989592367104000",
+                "38271751840451945509038856840076232865689/7932214172284284777502016127044157440000"
+              ]
+            }
+          },
+          "ST": {
+            "inputs": {},
+            "bands_used": [
+              {
+                "band": {},
+                "earned": true,
+                "outputs": {
+                  "Hst": [
+                    "2679/100",
+                    "3803/100"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "Hst": [
+                "2679/100",
+                "3803/100"
+              ]
+            },
+            "outputs_affine": {
+              "Hst": {
+                "slope": {},
+                "remainder": [
+                  "2679/100",
+                  "3803/100"
+                ]
+              }
+            }
+          }
+        },
+        "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)"
+      },
+      "tries": [
+        {
+          "Hp": "60",
+          "verdict": "EARNED"
+        },
+        {
+          "Hp": "30",
+          "verdict": "OPEN"
+        },
+        {
+          "Hp": "45",
+          "verdict": "OPEN"
+        },
+        {
+          "Hp": "105/2 (~52.5)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hp": "195/4 (~48.75)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hp": "1172/25 (~46.88)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hp": "2297/50 (~45.94)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hp": "4547/100 (~45.47)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hp": "1131/25 (~45.24)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hp": "1128/25 (~45.12)",
+          "verdict": "OPEN"
+        },
+        {
+          "Hp": "2259/50 (~45.18)",
+          "verdict": "OPEN"
+        },
+        {
+          "Hp": "4521/100 (~45.21)",
+          "verdict": "OPEN"
+        },
+        {
+          "Hp": "2261/50 (~45.22)",
+          "verdict": "EARNED"
+        }
+      ],
+      "find_index": 0
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "Hl",
+      "unit": "ft",
+      "proved": "849/25 (~33.96)",
+      "proved_means": "every Hl in [0, 849/25 (~33.96)] ft works (EARNED on the whole range)",
+      "beyond": "3397/100 (~33.97)",
+      "beyond_is": "OPEN: the stand could not decide the range [0, 3397/100 (~33.97)] ft — the limit lies between 849/25 (~33.96) and 3397/100 (~33.97), unproved",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "TDH": [
+                "~33.9660725458 (an exact fraction of 89 digits)",
+                "~45.2150837795 (an exact fraction of 88 digits)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "TDH": [
+            "~33.9660725458 (an exact fraction of 89 digits)",
+            "~45.2150837795 (an exact fraction of 88 digits)"
+          ]
+        },
+        "guaranteed_unit": {
+          "TDH": "ft"
+        },
+        "how": {
+          "TDH": "ZTL, exact at the corners"
+        },
+        "requirements": [
+          {
+            "quantity": "TDH",
+            "op": ">=",
+            "value": "Hl",
+            "why": "lowest head the system can ask"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "ST_Hst -> [1020699/125000, 1448943/125000] by the system over its parameters, exact at the corners (credit)",
+          "TDH -> [368305132697678777639404530907622365297757833580257766770061158340951279385629481543496981/35575210270867826352726472224358162144220892735455742381828378795412912825517998080000000, 249032029055391295676578998073843412932741472818413385160465456704179216570959216164914343/18069948074091582740312491330919531898709423798025742045002732288807693801068953600000000] by the system over its parameters, exact at the corners (credit)"
+        ],
+        "components": {
+          "FIT": {
+            "inputs": {
+              "Q": {
+                "from": "Qsys",
+                "arrives": [
+                  "473176473/312500",
+                  "473176473/312500"
+                ],
+                "assume": [
+                  "300/1",
+                  "3000/1"
+                ],
+                "inside": true
+              }
+            },
+            "bands_used": [
+              {
+                "band": {
+                  "Q": [
+                    "1514/1",
+                    "1515/1"
+                  ]
+                },
+                "earned": true,
+                "outputs": {
+                  "HLm": [
+                    "25777411682128906250000000000000000000000000000000/10935987208663983693222992919396546554302319853921",
+                    "11471766662597656250000000000000000000000000000000/4860438759406211880514358011090112369411216583609"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "HLm": [
+                "25777411682128906250000000000000000000000000000000/10935987208663983693222992919396546554302319853921",
+                "11471766662597656250000000000000000000000000000000/4860438759406211880514358011090112369411216583609"
+              ]
+            }
+          },
+          "PIP": {
+            "inputs": {
+              "Q": {
+                "from": "Qsys",
+                "arrives": [
+                  "473176473/312500",
+                  "473176473/312500"
+                ],
+                "assume": [
+                  "300/1",
+                  "3000/1"
+                ],
+                "inside": true
+              }
+            },
+            "bands_used": [
+              {
+                "band": {
+                  "Q": [
+                    "1514/1",
+                    "1515/1"
+                  ]
+                },
+                "earned": true,
+                "outputs": {
+                  "HLf": [
+                    "4778122498757256390256325251370948635701/991526771535535602339869989592367104000",
+                    "38271751840451945509038856840076232865689/7932214172284284777502016127044157440000"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "HLf": [
+                "4778122498757256390256325251370948635701/991526771535535602339869989592367104000",
+                "38271751840451945509038856840076232865689/7932214172284284777502016127044157440000"
+              ]
+            }
+          },
+          "ST": {
+            "inputs": {},
+            "bands_used": [
+              {
+                "band": {},
+                "earned": true,
+                "outputs": {
+                  "Hst": [
+                    "2679/100",
+                    "3803/100"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "Hst": [
+                "2679/100",
+                "3803/100"
+              ]
+            },
+            "outputs_affine": {
+              "Hst": {
+                "slope": {},
+                "remainder": [
+                  "2679/100",
+                  "3803/100"
+                ]
+              }
+            }
+          }
+        },
+        "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)"
+      },
+      "at_beyond": {
+        "verdict": "OPEN",
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point",
+        "refuted_inside_the_enclosures": {
+          "its_violating_point": {
+            "FIT_HLm": "~2.35711794375 (an exact fraction of 50 digits)",
+            "Hl": "3397/100 (~33.97)",
+            "PIP_HLf": "~4.81895460206 (an exact fraction of 39 digits)",
+            "ST_Hst_e": "2679/100 (~26.79)"
+          }
+        },
+        "components": {
+          "FIT": {
+            "inputs": {
+              "Q": {
+                "from": "Qsys",
+                "arrives": [
+                  "473176473/312500",
+                  "473176473/312500"
+                ],
+                "assume": [
+                  "300/1",
+                  "3000/1"
+                ],
+                "inside": true
+              }
+            },
+            "bands_used": [
+              {
+                "band": {
+                  "Q": [
+                    "1514/1",
+                    "1515/1"
+                  ]
+                },
+                "earned": true,
+                "outputs": {
+                  "HLm": [
+                    "25777411682128906250000000000000000000000000000000/10935987208663983693222992919396546554302319853921",
+                    "11471766662597656250000000000000000000000000000000/4860438759406211880514358011090112369411216583609"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "HLm": [
+                "25777411682128906250000000000000000000000000000000/10935987208663983693222992919396546554302319853921",
+                "11471766662597656250000000000000000000000000000000/4860438759406211880514358011090112369411216583609"
+              ]
+            }
+          },
+          "PIP": {
+            "inputs": {
+              "Q": {
+                "from": "Qsys",
+                "arrives": [
+                  "473176473/312500",
+                  "473176473/312500"
+                ],
+                "assume": [
+                  "300/1",
+                  "3000/1"
+                ],
+                "inside": true
+              }
+            },
+            "bands_used": [
+              {
+                "band": {
+                  "Q": [
+                    "1514/1",
+                    "1515/1"
+                  ]
+                },
+                "earned": true,
+                "outputs": {
+                  "HLf": [
+                    "4778122498757256390256325251370948635701/991526771535535602339869989592367104000",
+                    "38271751840451945509038856840076232865689/7932214172284284777502016127044157440000"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "HLf": [
+                "4778122498757256390256325251370948635701/991526771535535602339869989592367104000",
+                "38271751840451945509038856840076232865689/7932214172284284777502016127044157440000"
+              ]
+            }
+          },
+          "ST": {
+            "inputs": {},
+            "bands_used": [
+              {
+                "band": {},
+                "earned": true,
+                "outputs": {
+                  "Hst": [
+                    "2679/100",
+                    "3803/100"
+                  ]
+                }
+              }
+            ],
+            "outputs": {
+              "Hst": [
+                "2679/100",
+                "3803/100"
+              ]
+            },
+            "outputs_affine": {
+              "Hst": {
+                "slope": {},
+                "remainder": [
+                  "2679/100",
+                  "3803/100"
+                ]
+              }
+            }
+          }
+        },
+        "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)"
+      },
+      "tries": [
+        {
+          "Hl": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "Hl": "60",
+          "verdict": "OPEN"
+        },
+        {
+          "Hl": "30",
+          "verdict": "EARNED"
+        },
+        {
+          "Hl": "45",
+          "verdict": "OPEN"
+        },
+        {
+          "Hl": "75/2 (~37.5)",
+          "verdict": "OPEN"
+        },
+        {
+          "Hl": "135/4 (~33.75)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hl": "1781/50 (~35.62)",
+          "verdict": "OPEN"
+        },
+        {
+          "Hl": "867/25 (~34.68)",
+          "verdict": "OPEN"
+        },
+        {
+          "Hl": "1711/50 (~34.22)",
+          "verdict": "OPEN"
+        },
+        {
+          "Hl": "1699/50 (~33.98)",
+          "verdict": "OPEN"
+        },
+        {
+          "Hl": "1693/50 (~33.86)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hl": "848/25 (~33.92)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hl": "679/20 (~33.95)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hl": "849/25 (~33.96)",
+          "verdict": "EARNED"
+        },
+        {
+          "Hl": "3397/100 (~33.97)",
+          "verdict": "OPEN"
+        }
+      ],
+      "find_index": 1
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

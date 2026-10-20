@@ -1,0 +1,10 @@
+name = "ztlstand"
+defaultTargets = ["ZNet"]
+
+# the public ZTL's Lean (ZCertify: the cut and corner rules), checked out next to this repository
+[[require]]
+name = "ztl"
+path = "../../ZTL/lean"
+
+[[lean_lib]]
+name = "ZNet"

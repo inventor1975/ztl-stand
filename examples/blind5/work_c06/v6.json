@@ -1,0 +1,303 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "phid": {
+   "role": "given",
+   "range": [
+    "25",
+    "29"
+   ],
+   "unit": "",
+   "why": "friction angle, DEGREES carried as a plain number (no deg unit); converted to radians in define phi"
+  },
+  "c": {
+   "role": "given",
+   "range": [
+    "0",
+    "4"
+   ],
+   "unit": "kPa",
+   "why": "cohesion"
+  },
+  "gam": {
+   "role": "given",
+   "range": [
+    "17.5",
+    "19.5"
+   ],
+   "unit": "kN/m^3",
+   "why": "soil unit weight, ONE value used in W, q0, gamma_b"
+  },
+  "N": {
+   "role": "given",
+   "range": [
+    "100",
+    "115"
+   ],
+   "unit": "kN/m",
+   "why": "wall line load"
+  },
+  "Mabs": {
+   "role": "given",
+   "range": [
+    "8",
+    "18"
+   ],
+   "unit": "kN*m/m",
+   "why": "|M|: only the absolute value is given, sign irrelevant"
+  },
+  "zw": {
+   "role": "given",
+   "range": [
+    "0.8",
+    "2.2"
+   ],
+   "unit": "m",
+   "why": "water table depth below ground"
+  },
+  "E": {
+   "role": "given",
+   "range": [
+    "10",
+    "16"
+   ],
+   "unit": "MPa",
+   "why": "soil Young's modulus"
+  },
+  "gc": {
+   "role": "given",
+   "value": "24",
+   "unit": "kN/m^3",
+   "ground": "problem statement: footing+backfill weight coefficient"
+  },
+  "tf": {
+   "role": "given",
+   "value": "0.45",
+   "unit": "m",
+   "ground": "problem statement: footing thickness"
+  },
+  "gw": {
+   "role": "given",
+   "value": "9.81",
+   "unit": "kN/m^3",
+   "ground": "problem statement: water unit weight"
+  },
+  "nu": {
+   "role": "given",
+   "value": "0.3",
+   "unit": "",
+   "ground": "problem statement: Poisson ratio"
+  },
+  "Is": {
+   "role": "given",
+   "value": "1.12",
+   "unit": "",
+   "ground": "problem statement: settlement influence factor"
+  },
+  "Bmax": {
+   "role": "given",
+   "value": "2.0",
+   "unit": "m",
+   "ground": "problem statement: plot boundary"
+  },
+  "c72": {
+   "role": "given",
+   "value": "72",
+   "unit": "EUR/m^2",
+   "ground": "problem statement: cost coefficient"
+  },
+  "c28": {
+   "role": "given",
+   "value": "28",
+   "unit": "EUR/m^3",
+   "ground": "problem statement: cost coefficient"
+  },
+  "c32": {
+   "role": "given",
+   "value": "32",
+   "unit": "EUR/m",
+   "ground": "problem statement: cost constant"
+  },
+  "W": {
+   "role": "derived",
+   "unit": "kN/m"
+  },
+  "Nt": {
+   "role": "derived",
+   "unit": "kN/m"
+  },
+  "e": {
+   "role": "derived",
+   "unit": "m"
+  },
+  "Bp": {
+   "role": "derived",
+   "unit": "m"
+  },
+  "q": {
+   "role": "derived",
+   "unit": "kPa"
+  },
+  "Nq": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Nc": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Ng": {
+   "role": "derived",
+   "unit": ""
+  },
+  "q0": {
+   "role": "derived",
+   "unit": "kPa"
+  },
+  "gb": {
+   "role": "derived",
+   "unit": "kN/m^3"
+  },
+  "qu": {
+   "role": "derived",
+   "unit": "kPa"
+  },
+  "FS": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s": {
+   "role": "derived",
+   "unit": "mm"
+  }
+ },
+ "slots": {
+  "FB": {
+   "from": [
+    "widths"
+   ]
+  },
+  "FD": {
+   "from": [
+    "depths"
+   ]
+  }
+ },
+ "computed": {
+  "Dbf": {
+   "value": "max(FD.Df - tf, 0*tf)",
+   "unit": "m"
+  }
+ },
+ "define": {
+  "phi": "phid*pi/180"
+ },
+ "laws": [
+  {
+   "zfl": "W == gc*tf*FB.B + gam*FB.B*Dbf",
+   "source": "footing + backfill weight, W = 24*0.45*B + gamma*B*max(Df-0.45,0)"
+  },
+  {
+   "zfl": "Nt == N + W",
+   "source": "total vertical load"
+  },
+  {
+   "zfl": "e == Mabs/Nt",
+   "source": "eccentricity e = |M|/N_t"
+  },
+  {
+   "zfl": "Bp == FB.B - 2*e",
+   "source": "effective width B' = B - 2e"
+  },
+  {
+   "zfl": "q == Nt/Bp",
+   "source": "contact pressure q = N_t/B'",
+   "valid": "Bp > 0"
+  },
+  {
+   "zfl": "Nq == exp(pi*tan(phi))*tan(pi/4 + phi/2)*tan(pi/4 + phi/2)",
+   "source": "bearing factor Nq = exp(pi tan phi) tan^2(45 deg + phi/2)"
+  },
+  {
+   "zfl": "Nc == (Nq - 1)/tan(phi)",
+   "source": "bearing factor Nc = (Nq-1)/tan phi"
+  },
+  {
+   "zfl": "Ng == (Nq - 1)*tan(1.4*phi)",
+   "source": "bearing factor Ngamma = (Nq-1) tan(1.4 phi)"
+  },
+  {
+   "zfl": "q0 == if(zw >= FD.Df, gam*FD.Df, gam*zw + (gam - gw)*(FD.Df - zw))",
+   "source": "overburden at founding level, two cases on z_w vs Df"
+  },
+  {
+   "zfl": "gb == if(zw <= FD.Df, gam - gw, if(zw < FD.Df + Bp, (gam - gw) + gw*(zw - FD.Df)/Bp, gam))",
+   "source": "unit weight below the base, three cases (z_w<=Df ; Df<z_w<Df+B' ; z_w>=Df+B')"
+  },
+  {
+   "zfl": "qu == c*Nc + q0*Nq + 0.5*gb*Bp*Ng",
+   "source": "ultimate bearing pressure"
+  },
+  {
+   "zfl": "FS == qu/q",
+   "source": "factor of safety"
+  },
+  {
+   "zfl": "s == q*Bp*(1 - nu*nu)*Is/E",
+   "source": "settlement s = q B' (1-0.3^2) 1.12 / E"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "FS",
+   "op": ">=",
+   "value": "3",
+   "why": "R1"
+  },
+  {
+   "quantity": "s",
+   "op": "<=",
+   "value": "25",
+   "why": "R2, 25 mm"
+  },
+  {
+   "quantity": "e",
+   "op": "<=",
+   "value": "FB.B/6",
+   "why": "R3 eccentricity within middle third"
+  }
+ ],
+ "objective": {
+  "minimize": "c72*FB.B + c28*(FB.B + 0.6)*FD.Df + c32",
+  "why": "cost per metre = 72 B + 28 (B+0.6) Df + 32 EUR/m"
+ },
+ "catalog": {
+  "widths": {
+   "ground": "problem statement catalog",
+   "items": [
+    {
+     "B": "2.4"
+    }
+   ],
+   "fields": {
+    "B": {
+     "unit": "m"
+    }
+   }
+  },
+  "depths": {
+   "ground": "problem statement catalog",
+   "items": [
+    {
+     "Df": "1.5"
+    }
+   ],
+   "fields": {
+    "Df": {
+     "unit": "m"
+    }
+   }
+  }
+ },
+ "report": "all"
+}

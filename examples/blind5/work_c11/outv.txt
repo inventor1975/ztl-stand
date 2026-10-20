@@ -1,0 +1,26 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 1,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "SK=strikes(label=K=1.10, K=11/10, pi=3/250, on=1); H1=hf1(x=5795456/6818183); O1=of1(x=0); H2=hf2(x=2786885/3278688); O2=of2(x=0); H3=hf3(x=2765652/5028463); O3=of3(x=3000007/10000000); H4=hf4(x=0); O4=of4(x=1766267/2964902)",
+      "verdict": "OPEN",
+      "why": "R1 quarter 1 profit >= -0.10 MEUR: P1 proved within [-0.416568, 1.65672] MEUR, which reaches past the bound, yet no corner violates it — the extreme may lie inside the box and no certificate decided it; R1 quarter 2 profit >= -0.10 MEUR: P2 proved within [-0.430925, 1.64236] MEUR, which reaches past the bound, yet no corner violates it — the extreme may lie inside the box and no certificate decided it; R1 quarter 3 profit >= -0.10 MEUR: P3 proved within [-0.463218, 1.69563] MEUR, which reaches past the bound, yet no corner violates it — the extreme may lie inside the box and no certificate decided it; R1 quarter 4 profit >= -0.10 MEUR: P4 proved within [-0.411613, 1.66811] MEUR, which reaches past the bound, yet no corner violates it — the extreme may lie inside the box and no certificate decided it; R2 annual profit >= 0.30 MEUR: A proved within [-1.72232, 6.66283] MEUR, which reaches past the bound, yet no corner violates it — the extreme may lie inside the box and no certificate decided it"
+    }
+  ],
+  "designs_count": {
+    "OPEN": 1
+  },
+  "verdict": "OPEN",
+  "why": "1 design(s) could not be decided and none was earned"
+}
+
+real	0m9.819s
+user	0m8.072s
+sys	0m1.724s

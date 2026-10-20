@@ -1,0 +1,237 @@
+{
+ "stand": "ztl-stand/1",
+ "report": "all",
+ "conflicts": false,
+ "quantities": {
+  "Ru": {
+   "role": "given",
+   "value": "1",
+   "unit": "kohm",
+   "ground": "unit constant"
+  },
+  "Kmin": {
+   "role": "given",
+   "value": "56850",
+   "unit": "mA",
+   "ground": "TPS25221 eq.(1)"
+  },
+  "Kmax": {
+   "role": "given",
+   "value": "52640",
+   "unit": "mA",
+   "ground": "TPS25221 eq.(1)"
+  },
+  "IOSmin": {
+   "role": "derived",
+   "unit": "mA"
+  },
+  "IOSmax": {
+   "role": "derived",
+   "unit": "mA"
+  }
+ },
+ "slots": {
+  "RL": {
+   "from": [
+    "table3"
+   ]
+  }
+ },
+ "define": {
+  "Rk": "RL.R/Ru"
+ },
+ "laws": [
+  {
+   "zfl": "IOSmin == Kmin/pow(Rk, 1.033)",
+   "source": "TPS25221 eq.(1)"
+  },
+  {
+   "zfl": "IOSmax == Kmax/pow(Rk, 0.97)",
+   "source": "TPS25221 eq.(1)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "IOSmin",
+   "op": ">=",
+   "value": "RL.Pmin",
+   "why": "Table 3 published IOS(min) for this row"
+  },
+  {
+   "quantity": "IOSmax",
+   "op": "<=",
+   "value": "RL.Pmax",
+   "why": "Table 3 published IOS(max) for this row"
+  }
+ ],
+ "catalog": {
+  "table3": {
+   "items": [
+    {
+     "R": {
+      "value": "200",
+      "tolerance": "0.01"
+     },
+     "Pmin": "236",
+     "Pmax": "312",
+     "name": "row 200"
+    },
+    {
+     "R": {
+      "value": "137",
+      "tolerance": "0.01"
+     },
+     "Pmin": "349",
+     "Pmax": "450",
+     "name": "row 137"
+    },
+    {
+     "R": {
+      "value": "110",
+      "tolerance": "0.01"
+     },
+     "Pmin": "438",
+     "Pmax": "556",
+     "name": "row 110"
+    },
+    {
+     "R": {
+      "value": "90.9",
+      "tolerance": "0.01"
+     },
+     "Pmin": "533",
+     "Pmax": "669",
+     "name": "row 90.9"
+    },
+    {
+     "R": {
+      "value": "78.7",
+      "tolerance": "0.01"
+     },
+     "Pmin": "619",
+     "Pmax": "770",
+     "name": "row 78.7"
+    },
+    {
+     "R": {
+      "value": "68.1",
+      "tolerance": "0.01"
+     },
+     "Pmin": "719",
+     "Pmax": "886",
+     "name": "row 68.1"
+    },
+    {
+     "R": {
+      "value": "61.9",
+      "tolerance": "0.01"
+     },
+     "Pmin": "793",
+     "Pmax": "972",
+     "name": "row 61.9"
+    },
+    {
+     "R": {
+      "value": "54.9",
+      "tolerance": "0.01"
+     },
+     "Pmin": "898",
+     "Pmax": "1092",
+     "name": "row 54.9"
+    },
+    {
+     "R": {
+      "value": "46.4",
+      "tolerance": "0.01"
+     },
+     "Pmin": "1068",
+     "Pmax": "1285",
+     "name": "row 46.4"
+    },
+    {
+     "R": {
+      "value": "39.2",
+      "tolerance": "0.01"
+     },
+     "Pmin": "1272",
+     "Pmax": "1514",
+     "name": "row 39.2"
+    },
+    {
+     "R": {
+      "value": "34.8",
+      "tolerance": "0.01"
+     },
+     "Pmin": "1438",
+     "Pmax": "1699",
+     "name": "row 34.8"
+    },
+    {
+     "R": {
+      "value": "30.9",
+      "tolerance": "0.01"
+     },
+     "Pmin": "1626",
+     "Pmax": "1907",
+     "name": "row 30.9"
+    },
+    {
+     "R": {
+      "value": "27.4",
+      "tolerance": "0.01"
+     },
+     "Pmin": "1841",
+     "Pmax": "2143",
+     "name": "row 27.4"
+    },
+    {
+     "R": {
+      "value": "24.9",
+      "tolerance": "0.01"
+     },
+     "Pmin": "2032",
+     "Pmax": "2351",
+     "name": "row 24.9"
+    },
+    {
+     "R": {
+      "value": "23.2",
+      "tolerance": "0.01"
+     },
+     "Pmin": "2186",
+     "Pmax": "2518",
+     "name": "row 23.2"
+    },
+    {
+     "R": {
+      "value": "21.5",
+      "tolerance": "0.01"
+     },
+     "Pmin": "2365",
+     "Pmax": "2711",
+     "name": "row 21.5"
+    },
+    {
+     "R": {
+      "value": "20.5",
+      "tolerance": "0.01"
+     },
+     "Pmin": "2484",
+     "Pmax": "2839",
+     "name": "row 20.5"
+    }
+   ],
+   "fields": {
+    "R": {
+     "unit": "kohm"
+    },
+    "Pmin": {
+     "unit": "mA"
+    },
+    "Pmax": {
+     "unit": "mA"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,6 @@
+Reference,Value,Tolerance
+rg,10k,1%
+rf,160k,1%
+r1,12.4k,1%
+r2,38.3k,1%
+vref,2.5,1%

@@ -1,0 +1,300 @@
+[stand] 1/36 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 36,
+  "failed_at_nominal": 27,
+  "judged": 9,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "HSA=sinks_A(name=A6.5, R=13/2); HSB=sinks_B(name=B1.2, R=6/5)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "HSA=sinks_A(name=A6.5, R=13/2); HSB=sinks_B(name=B1.5, R=3/2)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "HSA=sinks_A(name=A6.5, R=13/2); HSB=sinks_B(name=B1.525, R=61/40)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "HSA=sinks_A(name=A6.5, R=13/2); HSB=sinks_B(name=B1.53, R=153/100)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application B",
+      "by_at_witness": "1/5 (~0.2)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A6.5, R=13/2); HSB=sinks_B(name=B1.6, R=8/5)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application B",
+      "by_at_witness": "3",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A6.5, R=13/2); HSB=sinks_B(name=B2.0, R=2)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application B",
+      "by_at_witness": "19",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.0, R=7); HSB=sinks_B(name=B1.2, R=6/5)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.0, R=7); HSB=sinks_B(name=B1.5, R=3/2)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.0, R=7); HSB=sinks_B(name=B1.525, R=61/40)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.0, R=7); HSB=sinks_B(name=B1.53, R=153/100)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application B",
+      "by_at_witness": "1/5 (~0.2)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.0, R=7); HSB=sinks_B(name=B1.6, R=8/5)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application B",
+      "by_at_witness": "3",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.0, R=7); HSB=sinks_B(name=B2.0, R=2)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application B",
+      "by_at_witness": "19",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.15, R=143/20); HSB=sinks_B(name=B1.2, R=6/5)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.15, R=143/20); HSB=sinks_B(name=B1.5, R=3/2)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.15, R=143/20); HSB=sinks_B(name=B1.525, R=61/40)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.15, R=143/20); HSB=sinks_B(name=B1.53, R=153/100)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application B",
+      "by_at_witness": "1/5 (~0.2)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.15, R=143/20); HSB=sinks_B(name=B1.6, R=8/5)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application B",
+      "by_at_witness": "3",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.15, R=143/20); HSB=sinks_B(name=B2.0, R=2)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application B",
+      "by_at_witness": "19",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.2, R=36/5); HSB=sinks_B(name=B1.2, R=6/5)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "3/4 (~0.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.2, R=36/5); HSB=sinks_B(name=B1.5, R=3/2)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "3/4 (~0.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.2, R=36/5); HSB=sinks_B(name=B1.525, R=61/40)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "3/4 (~0.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.2, R=36/5); HSB=sinks_B(name=B1.53, R=153/100)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "3/4 (~0.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.2, R=36/5); HSB=sinks_B(name=B1.6, R=8/5)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "3/4 (~0.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A7.2, R=36/5); HSB=sinks_B(name=B2.0, R=2)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "3/4 (~0.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A8.0, R=8); HSB=sinks_B(name=B1.2, R=6/5)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "51/4 (~12.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A8.0, R=8); HSB=sinks_B(name=B1.5, R=3/2)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "51/4 (~12.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A8.0, R=8); HSB=sinks_B(name=B1.525, R=61/40)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "51/4 (~12.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A8.0, R=8); HSB=sinks_B(name=B1.53, R=153/100)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "51/4 (~12.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A8.0, R=8); HSB=sinks_B(name=B1.6, R=8/5)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "51/4 (~12.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A8.0, R=8); HSB=sinks_B(name=B2.0, R=2)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "51/4 (~12.75)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A9.5, R=19/2); HSB=sinks_B(name=B1.2, R=6/5)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "141/4 (~35.25)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A9.5, R=19/2); HSB=sinks_B(name=B1.5, R=3/2)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "141/4 (~35.25)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A9.5, R=19/2); HSB=sinks_B(name=B1.525, R=61/40)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "141/4 (~35.25)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A9.5, R=19/2); HSB=sinks_B(name=B1.53, R=153/100)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "141/4 (~35.25)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A9.5, R=19/2); HSB=sinks_B(name=B1.6, R=8/5)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "141/4 (~35.25)",
+      "unit": "C"
+    },
+    {
+      "design": "HSA=sinks_A(name=A9.5, R=19/2); HSB=sinks_B(name=B2.0, R=2)",
+      "verdict": "REFUTED",
+      "fails": "max junction temperature, application A",
+      "by_at_witness": "141/4 (~35.25)",
+      "unit": "C"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 9,
+    "REFUTED": 27
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "EARNED",
+  "design": {
+    "HSA": {
+      "catalog": "sinks_A",
+      "R": {
+        "nominal": "13/2 (~6.5)",
+        "tolerance": "0"
+      },
+      "name": "A6.5"
+    },
+    "HSB": {
+      "catalog": "sinks_B",
+      "R": {
+        "nominal": "6/5 (~1.2)",
+        "tolerance": "0"
+      },
+      "name": "B1.2"
+    }
+  },
+  "guaranteed": {
+    "TjA": [
+      "661/4 (~165.25)",
+      "661/4 (~165.25)"
+    ],
+    "TjB": [
+      "162",
+      "162"
+    ]
+  },
+  "guaranteed_unit": {
+    "TjA": "C",
+    "TjB": "C"
+  },
+  "how": {
+    "TjA": "ZTL, outer range",
+    "TjB": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "TjA",
+      "op": "<=",
+      "value": "175",
+      "why": "max junction temperature, application A"
+    },
+    {
+      "quantity": "TjB",
+      "op": "<=",
+      "value": "175",
+      "why": "max junction temperature, application B"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "TjA = 661/4 by exact elimination (credit)",
+    "TjB = 162 by exact elimination (credit)"
+  ],
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

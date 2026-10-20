@@ -1,0 +1,72 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "the thermal chain as a SYSTEM: regulator -> power -> (heat sink, interface, die); P bands every 5 W",
+ "components": {
+  "REG": {
+   "file": "comp_reg_s5.json"
+  },
+  "HS": {
+   "file": "comp_hs_s5.json"
+  },
+  "TIM": {
+   "file": "comp_tim_s5.json"
+  },
+  "DIE": {
+   "file": "comp_die_s5.json"
+  }
+ },
+ "connect": {
+  "REG.Vin": "Vin",
+  "HS.P": "REG.PD",
+  "TIM.P": "REG.PD",
+  "DIE.P": "REG.PD"
+ },
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "range": [
+    "6.5",
+    "9"
+   ],
+   "unit": "V",
+   "ground": "datasheet"
+  },
+  "Ta": {
+   "role": "given",
+   "value": "75",
+   "unit": "C"
+  },
+  "Tj_c": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Tj_p": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Tj_c == Ta + HS.dT + TIM.dT + DIE.dTc",
+   "source": "series thermal path"
+  },
+  {
+   "zfl": "Tj_p == Ta + HS.dT + TIM.dT + DIE.dTp",
+   "source": "series thermal path"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tj_c",
+   "op": "<=",
+   "value": "125",
+   "why": "control section"
+  },
+  {
+   "quantity": "Tj_p",
+   "op": "<=",
+   "value": "150",
+   "why": "power transistor"
+  }
+ ]
+}

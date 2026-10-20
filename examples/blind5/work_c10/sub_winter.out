@@ -1,0 +1,184 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "excluded_by_where": 120,
+  "designs_tried": 16,
+  "failed_at_nominal": 8,
+  "judged": 8,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); M=mcount(k=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: night DO >= 4.0 mg/L in every season, worst case",
+      "by": "~1.31587227448 (an exact fraction of 62 digits)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); M=mcount(k=1)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); M=mcount(k=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: night DO >= 4.0 mg/L in every season, worst case",
+      "by": "~1.31587227448 (an exact fraction of 62 digits)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); M=mcount(k=1)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); M=mcount(k=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: night DO >= 4.0 mg/L in every season, worst case",
+      "by": "~1.31587227448 (an exact fraction of 62 digits)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); M=mcount(k=1)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); M=mcount(k=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: night DO >= 4.0 mg/L in every season, worst case",
+      "by": "~1.31587227448 (an exact fraction of 62 digits)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); M=mcount(k=1)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "AE=aer(name=PROP, P=3/2, SAE=17/10, price=23/10); OX=lox(name=none, price=0, rate=0); M=mcount(k=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: night DO >= 4.0 mg/L in every season, worst case",
+      "by": "~1.31587227448 (an exact fraction of 62 digits)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "AE=aer(name=PROP, P=3/2, SAE=17/10, price=23/10); OX=lox(name=none, price=0, rate=0); M=mcount(k=1)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "AE=aer(name=PROP, P=3/2, SAE=17/10, price=23/10); OX=lox(name=LOX, price=13/2, rate=6000); M=mcount(k=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: night DO >= 4.0 mg/L in every season, worst case",
+      "by": "~1.31587227448 (an exact fraction of 62 digits)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "AE=aer(name=PROP, P=3/2, SAE=17/10, price=23/10); OX=lox(name=LOX, price=13/2, rate=6000); M=mcount(k=1)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); M=mcount(k=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: night DO >= 4.0 mg/L in every season, worst case",
+      "by": "~1.31587227448 (an exact fraction of 62 digits)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); M=mcount(k=1)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); M=mcount(k=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: night DO >= 4.0 mg/L in every season, worst case",
+      "by": "~1.31587227448 (an exact fraction of 62 digits)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); M=mcount(k=1)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 8,
+    "EARNED": 8
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "EARNED",
+  "design": {
+    "AE": {
+      "catalog": "aer",
+      "name": "PW2",
+      "P": {
+        "nominal": "2",
+        "tolerance": "0"
+      },
+      "SAE": {
+        "nominal": "11/5 (~2.2)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "18/5 (~3.6)",
+        "tolerance": "0"
+      }
+    },
+    "OX": {
+      "catalog": "lox",
+      "name": "none",
+      "price": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "rate": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "M": {
+      "catalog": "mcount",
+      "k": {
+        "nominal": "1",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Css": [
+      "168203953034416534785957/29936432838439941418304 (~5.6187)",
+      "2455377640345240891866881/278804757058992435966870 (~8.8068)"
+    ],
+    "C2": [
+      "3",
+      "~12.3845672817 (an exact fraction of 61 digits)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Css": "mg/L",
+    "C2": "mg/L"
+  },
+  "guaranteed_ends": {
+    "C2": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+  },
+  "how": {
+    "Css": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~5.61870393651 (~5.6187)', '~8.80679966241 (~8.8068)']",
+    "C2": "ZTL, certificate checked exactly (2 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic"
+  },
+  "requirements": [
+    {
+      "quantity": "Css",
+      "op": ">=",
+      "value": "4.0",
+      "why": "R1: night DO >= 4.0 mg/L in every season, worst case"
+    },
+    {
+      "quantity": "C2",
+      "op": ">=",
+      "value": "3.0",
+      "why": "R2: DO >= 3.0 mg/L after the 2 h power cut, every season"
+    }
+  ],
+  "rests_on": "ZTL disposition None: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "Css -> [168203953034416534785957/29936432838439941418304000, 2455377640345240891866881/278804757058992435966870000] by [Css == ((kd0 * pow(1.024, T / Tu - 20) + 0.95 * (M__k * AE__P * AE__SAE * 0.9 * pow(1.024, T / Tu - 20) / (Cstd * Vp))) * (Cu * ifpos(T / Tu - 5, ifpos(T / Tu - 10, ifpos(T / Tu - 15, ifpos(T / Tu - 20, ifpos(T / Tu - 25, ifpos(T / Tu - 30, ifpos(T / Tu - 35, 7.0, 7.6 + (7.0 - 7.6) * (T / Tu - 30) / (35 - 30)), 8.3 + (7.6 - 8.3) * (T / Tu - 25) / (30 - 25)), 9.1 + (8.3 - 9.1) * (T / Tu - 20) / (25 - 20)), 10.1 + (9.1 - 10.1) * (T / Tu - 15) / (20 - 15)), 11.3 + (10.1 - 11.3) * (T / Tu - 10) / (15 - 10)), 12.8 + (11.3 - 12.8) * (T / Tu - 5) / (10 - 5)), 12.8)) - (rf * W * pow(1.08, T / Tu - 20) / Vp + r0 * pow(1.065, T / Tu - 20))) / (kd0 * pow(1.024, T / Tu - 20) + M__k * AE__P * AE__SAE * 0.9 * pow(1.024, T / Tu - 20) / (Cstd * Vp))], interval reading, sound, may be wider than the truth (credit)",
+    "C2 -> [8594458739111592069169201165132183450021322523018892150170263/4692077636718749997732208807772159998326142048334784170557440000, 44489971999295320100233088525148117753098694209038675148689567/3592371940612792967013722368450559998718452505756319130583040000] by [C2 == max(Cu * ifpos(T / Tu - 5, ifpos(T / Tu - 10, ifpos(T / Tu - 15, ifpos(T / Tu - 20, ifpos(T / Tu - 25, ifpos(T / Tu - 30, ifpos(T / Tu - 35, 7.0, 7.6 + (7.0 - 7.6) * (T / Tu - 30) / (35 - 30)), 8.3 + (7.6 - 8.3) * (T / Tu - 25) / (30 - 25)), 9.1 + (8.3 - 9.1) * (T / Tu - 20) / (25 - 20)), 10.1 + (9.1 - 10.1) * (T / Tu - 15) / (20 - 15)), 11.3 + (10.1 - 11.3) * (T / Tu - 10) / (15 - 10)), 12.8 + (11.3 - 12.8) * (T / Tu - 5) / (10 - 5)), 12.8) - (rf * W * pow(1.08, T / Tu - 20) / Vp + r0 * pow(1.065, T / Tu - 20) - OX__rate / Vp) / (kd0 * pow(1.024, T / Tu - 20)) + (((kd0 * pow(1.024, T / Tu - 20) + 0.95 * (M__k * AE__P * AE__SAE * 0.9 * pow(1.024, T / Tu - 20) / (Cstd * Vp))) * (Cu * ifpos(T / Tu - 5, ifpos(T / Tu - 10, ifpos(T / Tu - 15, ifpos(T / Tu - 20, ifpos(T / Tu - 25, ifpos(T / Tu - 30, ifpos(T / Tu - 35, 7.0, 7.6 + (7.0 - 7.6) * (T / Tu - 30) / (35 - 30)), 8.3 + (7.6 - 8.3) * (T / Tu - 25) / (30 - 25)), 9.1 + (8.3 - 9.1) * (T / Tu - 20) / (25 - 20)), 10.1 + (9.1 - 10.1) * (T / Tu - 15) / (20 - 15)), 11.3 + (10.1 - 11.3) * (T / Tu - 10) / (15 - 10)), 12.8 + (11.3 - 12.8) * (T / Tu - 5) / (10 - 5)), 12.8)) - (rf * W * pow(1.08, T / Tu - 20) / Vp + r0 * pow(1.065, T / Tu - 20))) / (kd0 * pow(1.024, T / Tu - 20) + M__k * AE__P * AE__SAE * 0.9 * pow(1.024, T / Tu - 20) / (Cstd * Vp)) - (Cu * ifpos(T / Tu - 5, ifpos(T / Tu - 10, ifpos(T / Tu - 15, ifpos(T / Tu - 20, ifpos(T / Tu - 25, ifpos(T / Tu - 30, ifpos(T / Tu - 35, 7.0, 7.6 + (7.0 - 7.6) * (T / Tu - 30) / (35 - 30)), 8.3 + (7.6 - 8.3) * (T / Tu - 25) / (30 - 25)), 9.1 + (8.3 - 9.1) * (T / Tu - 20) / (25 - 20)), 10.1 + (9.1 - 10.1) * (T / Tu - 15) / (20 - 15)), 11.3 + (10.1 - 11.3) * (T / Tu - 10) / (15 - 10)), 12.8 + (11.3 - 12.8) * (T / Tu - 5) / (10 - 5)), 12.8) - (rf * W * pow(1.08, T / Tu - 20) / Vp + r0 * pow(1.065, T / Tu - 20) - OX__rate / Vp) / (kd0 * pow(1.024, T / Tu - 20)))) * exp(-(kd0 * pow(1.024, T / Tu - 20)) * t2), 0 * Cu)], interval reading, sound, may be wider than the truth (credit)"
+  ]
+}

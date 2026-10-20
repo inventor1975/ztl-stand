@@ -1,0 +1,49 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "heat sink: temperature rise sink-to-ambient = P * 1 C/W",
+ "interface": {
+  "inputs": {
+   "P": {
+    "assume": [
+     "0",
+     "30"
+    ],
+    "bands": [
+     "0",
+     "8.4",
+     "24.6",
+     "30"
+    ]
+   }
+  },
+  "outputs": [
+   "dT"
+  ]
+ },
+ "quantities": {
+  "P": {
+   "role": "given",
+   "value": "10",
+   "unit": "W"
+  },
+  "Rhs": {
+   "role": "given",
+   "value": "1",
+   "unit": "C/W",
+   "ground": "example"
+  },
+  "dT": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "dT == P*Rhs",
+   "source": "thermal resistance"
+  }
+ ],
+ "requirements": [],
+ "catalog": {}
+}

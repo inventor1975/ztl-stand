@@ -1,0 +1,358 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "rho": {
+   "role": "given",
+   "value": "1025",
+   "unit": "kg/m^3",
+   "why": "sea water density, problem statement"
+  },
+  "w": {
+   "role": "given",
+   "value": "0.12",
+   "unit": "",
+   "why": "wake fraction"
+  },
+  "t": {
+   "role": "given",
+   "value": "0.10",
+   "unit": "",
+   "why": "thrust deduction"
+  },
+  "eg": {
+   "role": "given",
+   "value": "0.97",
+   "unit": "",
+   "why": "gear efficiency"
+  },
+  "KN": {
+   "role": "given",
+   "value": "0.5144",
+   "unit": "m/s",
+   "why": "1 knot, the statement's own value"
+  },
+  "URPM": {
+   "role": "given",
+   "value": "1",
+   "unit": "rpm",
+   "why": "unit constant: 1 rpm"
+  },
+  "HZ": {
+   "role": "given",
+   "value": "1",
+   "unit": "1/s",
+   "why": "unit constant"
+  },
+  "TQ1": {
+   "role": "given",
+   "value": "1",
+   "unit": "N*m",
+   "why": "unit constant"
+  },
+  "KNF": {
+   "role": "given",
+   "value": "1",
+   "unit": "kN",
+   "why": "unit constant"
+  },
+  "fKT": {
+   "role": "given",
+   "range": [
+    "0.97",
+    "1.03"
+   ],
+   "unit": "",
+   "why": "propeller K_T tolerance factor +-3%"
+  },
+  "fKQ": {
+   "role": "given",
+   "range": [
+    "0.97",
+    "1.03"
+   ],
+   "unit": "",
+   "why": "propeller K_Q tolerance factor +-3%"
+  },
+  "fE": {
+   "role": "given",
+   "range": [
+    "0.96",
+    "1.00"
+   ],
+   "unit": "",
+   "why": "engine torque factor, aged..new"
+  },
+  "fres": {
+   "role": "given",
+   "value": "1.365",
+   "unit": "",
+   "why": "resistance factor: heavy 1.30*1.05; set per mode"
+  },
+  "bol": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "1 = bollard mode (J=0, no hull resistance), 0 = free running; set per mode"
+  },
+  "N": {
+   "role": "derived",
+   "unit": "rpm",
+   "search": [
+    "300",
+    "2400"
+   ],
+   "why": "engine rpm at the operating point"
+  },
+  "Tnet": {
+   "role": "derived",
+   "unit": "kN",
+   "why": "net thrust T(1-t)"
+  },
+  "Vkn": {
+   "role": "derived",
+   "unit": "",
+   "why": "boat speed in knots (numeric)"
+  },
+  "Tip": {
+   "role": "derived",
+   "unit": "m/s",
+   "why": "propeller tip speed pi n D"
+  },
+  "Jm": {
+   "role": "derived",
+   "unit": "",
+   "why": "J0 - J, validity of the linear K_T,K_Q (J <= J0)"
+  }
+ },
+ "slots": {
+  "PR": {
+   "from": [
+    "propellers"
+   ]
+  },
+  "GR": {
+   "from": [
+    "gears"
+   ]
+  }
+ },
+ "define": {
+  "Nr": "N/URPM",
+  "nn": "Nr/(60*GR.i)*HZ",
+  "Tab": "if(Nr > 800, if(Nr > 1000, if(Nr > 1400, if(Nr > 1800, if(Nr > 2000, if(Nr > 2150, 0, 1430 - (1430/150)*(Nr - 2000)), 1450 - (1/10)*(Nr - 1800)), 1500 - (1/8)*(Nr - 1400)), 1250 + (5/8)*(Nr - 1000)), 1000 + (1/4)*(Nr - 800)), 1000)",
+  "Te": "fE*Tab*TQ1",
+  "KQn": "Te*GR.i*eg/(rho*nn*nn*PR.D*PR.D*PR.D*PR.D*PR.D)",
+  "Jt": "(PR.J0/(3/4))*(1 - KQn/(PR.KQ0*fKQ))",
+  "Jd": "if(bol > 0.5, 0, Jt)",
+  "Vk": "Jd*nn*PR.D/(1 - w)/KN",
+  "Rtab": "if(Vk > 4, if(Vk > 6, if(Vk > 8, if(Vk > 9, if(Vk > 10, if(Vk > 11, if(Vk > 12, if(Vk > 13, 64 + 17*(Vk - 13), 47 + 17*(Vk - 12)), 34 + 13*(Vk - 11)), 25 + 9*(Vk - 10)), 18.5 + (13/2)*(Vk - 9)), 13.5 + 5*(Vk - 8)), 7 + (13/4)*(Vk - 6)), 3 + 2*(Vk - 4)), (3/4)*Vk)"
+ },
+ "laws": [
+  {
+   "zfl": "if(bol > 0.5, PR.KQ0*fKQ*rho*nn*nn*PR.D*PR.D*PR.D*PR.D, (1 - t)*fKT*PR.KT0*(1 - Jd/PR.J0)*rho*nn*nn*PR.D*PR.D*PR.D*PR.D) == if(bol > 0.5, Te*GR.i*eg/PR.D, fres*Rtab*KNF)",
+   "source": "operating point: free running = net thrust equals hull resistance while propeller torque (through J from the torque balance) equals engine torque curve; bollard (bol=1) = J=0, propeller torque equals engine torque, force form Q_p/D"
+  },
+  {
+   "zfl": "Tnet == (1 - t)*fKT*PR.KT0*(1 - Jd/PR.J0)*rho*nn*nn*PR.D*PR.D*PR.D*PR.D",
+   "source": "T = K_T rho n^2 D^4, net T(1-t)"
+  },
+  {
+   "zfl": "Vkn == Vk",
+   "source": "speed through water V from J = V(1-w)/(nD), in knots"
+  },
+  {
+   "zfl": "Tip == pi*nn*PR.D",
+   "source": "tip speed"
+  },
+  {
+   "zfl": "Jm == PR.J0 - Jd",
+   "source": "linear K_T/K_Q model valid for J <= J0"
+  }
+ ],
+ "requirements": [],
+ "modes": {
+  "heavy R2": {
+   "quantities": {
+    "fKT": {
+     "value": "0.97"
+    },
+    "fKQ": {
+     "value": "1.03"
+    },
+    "fE": {
+     "value": "0.96"
+    },
+    "bol": {
+     "value": "0"
+    },
+    "fres": {
+     "value": "1.365"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Vkn",
+     "op": ">=",
+     "value": "9",
+     "why": "R2 heavy speed >= 9 kn, unfavourable tolerances"
+    },
+    {
+     "quantity": "Jm",
+     "op": ">=",
+     "value": "0",
+     "why": "linear K_T/K_Q valid for J<=J0"
+    }
+   ]
+  },
+  "bollard R1": {
+   "quantities": {
+    "fKT": {
+     "value": "0.97"
+    },
+    "fKQ": {
+     "value": "1.03"
+    },
+    "fE": {
+     "value": "0.96"
+    },
+    "bol": {
+     "value": "1"
+    },
+    "fres": {
+     "value": "1"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Tnet",
+     "op": ">=",
+     "value": "30",
+     "why": "R1 bollard pull >= 30 kN, unfavourable tolerances"
+    },
+    {
+     "quantity": "Jm",
+     "op": ">=",
+     "value": "0",
+     "why": "validity (J=0 here, trivial)"
+    }
+   ]
+  },
+  "light R4": {
+   "quantities": {
+    "fKT": {
+     "value": "1.03"
+    },
+    "fKQ": {
+     "value": "0.97"
+    },
+    "fE": {
+     "value": "1.00"
+    },
+    "bol": {
+     "value": "0"
+    },
+    "fres": {
+     "value": "0.76"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "N",
+     "op": "<=",
+     "value": "2060",
+     "why": "R4 light over-speed margin"
+    },
+    {
+     "quantity": "Tip",
+     "op": "<=",
+     "value": "32",
+     "why": "R4 tip speed <= 32 m/s"
+    },
+    {
+     "quantity": "Jm",
+     "op": ">=",
+     "value": "0",
+     "why": "validity"
+    }
+   ]
+  },
+  "heavy R3": {
+   "quantities": {
+    "bol": {
+     "value": "0"
+    },
+    "fres": {
+     "value": "1.365"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "N",
+     "op": ">=",
+     "value": "1900",
+     "why": "R3 heavy engine rpm >= 1900, whole tolerance box"
+    },
+    {
+     "quantity": "Jm",
+     "op": ">=",
+     "value": "0",
+     "why": "validity"
+    }
+   ]
+  }
+ },
+ "objective": {
+  "minimize": "PR.price + GR.price",
+  "why": "cheapest propeller + gear"
+ },
+ "catalog": {
+  "propellers": {
+   "ground": "problem statement table",
+   "fields": {
+    "D": {
+     "unit": "m"
+    },
+    "KT0": {
+     "unit": ""
+    },
+    "J0": {
+     "unit": ""
+    },
+    "KQ0": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "items": [
+    {
+     "D": "1.30",
+     "KT0": "0.28",
+     "J0": "0.62",
+     "KQ0": "0.030",
+     "price": "5200",
+     "grade": "P1"
+    }
+   ]
+  },
+  "gears": {
+   "ground": "problem statement table",
+   "fields": {
+    "i": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "items": [
+    {
+     "i": "3.5",
+     "price": "5200",
+     "grade": "G2"
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,367 @@
+{
+ "stand": "ztl-stand/1",
+ "report": "all",
+ "quantities": {
+  "f": {
+   "role": "given",
+   "range": [
+    "0.97",
+    "1"
+   ],
+   "unit": "",
+   "why": "cylinder filled to 0.97..1.00 of nominal pressure"
+  },
+  "Ta": {
+   "role": "given",
+   "value": "263.15",
+   "unit": "K",
+   "why": "coldest ambient -10 degC (absolute, K)",
+   "ground": "problem statement"
+  },
+  "Tf": {
+   "role": "given",
+   "value": "288.15",
+   "unit": "K",
+   "why": "fill temperature 15 degC",
+   "ground": "problem statement"
+  },
+  "T0": {
+   "role": "given",
+   "value": "273.15",
+   "unit": "K",
+   "why": "standard temperature 0 degC",
+   "ground": "problem statement"
+  },
+  "pu": {
+   "role": "given",
+   "value": "1",
+   "unit": "bar",
+   "why": "unit pressure, makes p dimensionless inside Z(p)"
+  },
+  "pstd": {
+   "role": "given",
+   "value": "1.013",
+   "unit": "bar",
+   "why": "standard pressure for standard litres",
+   "ground": "problem statement"
+  },
+  "Cman": {
+   "role": "given",
+   "value": "40",
+   "unit": "EUR",
+   "why": "manifold price, needed if n = 2",
+   "ground": "problem statement"
+  },
+  "s1": {
+   "role": "given",
+   "range": [
+    "-1",
+    "1"
+   ],
+   "unit": "",
+   "why": "regulator 1 error as fraction of its accuracy, e1 = s1*acc"
+  },
+  "s2": {
+   "role": "given",
+   "range": [
+    "-1",
+    "1"
+   ],
+   "unit": "",
+   "why": "regulator 2 error as fraction of its accuracy, e2 = s2*acc"
+  },
+  "M": {
+   "role": "derived",
+   "unit": "kg",
+   "why": "total cylinder mass"
+  },
+  "q1": {
+   "role": "given",
+   "value": "8",
+   "unit": "L/min",
+   "why": "patient 1 set flow, per mode"
+  },
+  "q2": {
+   "role": "given",
+   "value": "8",
+   "unit": "L/min",
+   "why": "patient 2 set flow, per mode"
+  },
+  "cons": {
+   "role": "derived",
+   "unit": "L/min",
+   "why": "total delivered flow incl. leakage"
+  },
+  "tmin": {
+   "role": "given",
+   "value": "1",
+   "unit": "min"
+  }
+ },
+ "slots": {
+  "CY": {
+   "from": [
+    "cylinders"
+   ]
+  },
+  "NC": {
+   "from": [
+    "ncyl"
+   ]
+  },
+  "R1": {
+   "from": [
+    "regulators"
+   ]
+  },
+  "R2": {
+   "from": [
+    "regulators"
+   ]
+  },
+  "CV": {
+   "from": [
+    "conserver"
+   ],
+   "optional": true
+  }
+ },
+ "computed": {
+  "pmin": {
+   "value": "max(max(R1.pmin, R2.pmin), CV.pmin)",
+   "unit": "bar"
+  },
+  "Zmin": "1 - 0.00048*(pmin/pu) + 0.0000013*(pmin/pu)*(pmin/pu)",
+  "Gmin": {
+   "value": "pmin/Zmin",
+   "unit": "bar"
+  },
+  "Pman": {
+   "value": "Cman*(NC.n - 1)",
+   "unit": "EUR"
+  }
+ },
+ "define": {
+  "PF": "CY.Pn*f",
+  "Zf": "1 - 0.00048*(PF/pu) + 0.0000013*(PF/pu)*(PF/pu)",
+  "Nexpr": "NC.n*CY.Vw*((PF/Zf)*(T0/Tf) - (max(max(R1.pmin, R2.pmin), CV.pmin)/(1 - 0.00048*(max(max(R1.pmin, R2.pmin), CV.pmin)/pu) + 0.0000013*(max(max(R1.pmin, R2.pmin), CV.pmin)/pu)*(max(max(R1.pmin, R2.pmin), CV.pmin)/pu)))*(T0/Ta))/pstd"
+ },
+ "laws": [
+  {
+   "zfl": "cons == q1*(1 + s1*R1.acc)*(1 - CV.kappa) + q2*(1 + s2*R2.acc) + R1.leak + R2.leak",
+   "source": "flow per phase"
+  },
+  {
+   "zfl": "M == NC.n*CY.mass",
+   "source": "n cylinders"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Ctot",
+   "op": "<=",
+   "value": "Nexpr/(12/10)",
+   "why": "R1: N >= 1.2 C"
+  },
+  {
+   "quantity": "M",
+   "op": "<=",
+   "value": "16",
+   "why": "R2"
+  }
+ ],
+ "objective": {
+  "minimize": "NC.n*CY.price + Pman + R1.price + R2.price + CV.price",
+  "why": "cheapest kit: cylinders + manifold + regulators + conserver"
+ },
+ "catalog": {
+  "cylinders": {
+   "items": [
+    {
+     "name": "CY5",
+     "Vw": "5",
+     "Pn": "200",
+     "mass": "7.5",
+     "price": "95"
+    },
+    {
+     "name": "CY7",
+     "Vw": "7",
+     "Pn": "200",
+     "mass": "10.4",
+     "price": "120"
+    },
+    {
+     "name": "CY10",
+     "Vw": "10",
+     "Pn": "200",
+     "mass": "14.0",
+     "price": "165"
+    },
+    {
+     "name": "CY5H",
+     "Vw": "5",
+     "Pn": "300",
+     "mass": "4.2",
+     "price": "480"
+    },
+    {
+     "name": "CY7H",
+     "Vw": "7",
+     "Pn": "300",
+     "mass": "5.6",
+     "price": "640"
+    }
+   ],
+   "fields": {
+    "Vw": {
+     "unit": "L"
+    },
+    "Pn": {
+     "unit": "bar"
+    },
+    "mass": {
+     "unit": "kg"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "ground": "problem statement"
+  },
+  "ncyl": {
+   "integers": {
+    "field": "n",
+    "from": "1",
+    "to": "2",
+    "unit": ""
+   }
+  },
+  "regulators": {
+   "items": [
+    {
+     "name": "RA",
+     "acc": "0.10",
+     "leak": "0.30",
+     "pmin": "10",
+     "price": "60"
+    },
+    {
+     "name": "RB",
+     "acc": "0.05",
+     "leak": "0.15",
+     "pmin": "10",
+     "price": "140"
+    },
+    {
+     "name": "RC",
+     "acc": "0.02",
+     "leak": "0.05",
+     "pmin": "10",
+     "price": "320"
+    }
+   ],
+   "fields": {
+    "acc": {
+     "unit": ""
+    },
+    "leak": {
+     "unit": "L/min"
+    },
+    "pmin": {
+     "unit": "bar"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "ground": "problem statement"
+  },
+  "conserver": {
+   "items": [
+    {
+     "name": "conserver",
+     "kappa": {
+      "range": [
+       "0.30",
+       "0.40"
+      ]
+     },
+     "pmin": "25",
+     "price": "450"
+    }
+   ],
+   "fields": {
+    "kappa": {
+     "unit": ""
+    },
+    "pmin": {
+     "unit": "bar"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "ground": "problem statement"
+  }
+ },
+ "modes": {
+  "A": {
+   "weight": "20*tmin",
+   "quantities": {
+    "q1": {
+     "range": [
+      "7.5",
+      "8.5"
+     ]
+    },
+    "q2": {
+     "range": [
+      "9",
+      "10"
+     ]
+    }
+   }
+  },
+  "B": {
+   "weight": "35*tmin",
+   "quantities": {
+    "q1": {
+     "range": [
+      "8",
+      "9"
+     ]
+    },
+    "q2": {
+     "range": [
+      "6",
+      "8"
+     ]
+    }
+   }
+  },
+  "C": {
+   "weight": "40*tmin",
+   "quantities": {
+    "q1": {
+     "range": [
+      "4",
+      "5"
+     ]
+    },
+    "q2": {
+     "range": [
+      "5",
+      "6"
+     ]
+    }
+   }
+  }
+ },
+ "totals": {
+  "Ctot": {
+   "sum": "cons",
+   "unit": "L"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL d606f40",
+  "continuous": true,
+  "combinations": 5,
+  "notes": [],
+  "combinations_proved_without_mix": 5,
+  "verdict": "REFUTED",
+  "why": "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  "mixes": [
+    {
+      "design": "PL=plates(name=O60, d=60, price=3/10)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 1 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "PL=plates(name=O80, d=80, price=9/20)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 10 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "PL=plates(name=O100, d=100, price=3/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 10 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "PL=plates(name=O120, d=120, price=4/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 7 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "PL=plates(name=O150, d=150, price=11/10)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 2 pieces, each failing a requirement at one point of its data — no mix exists"
+    }
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R2: 100-year Qpeak <= 45 L/s (storm 3600s)",
+        "R3: h <= H - 0.30 m (storm 3600s)"
+      ]
+    ],
+    "undecided_sets": [],
+    "complete": false,
+    "subset_runs": 20,
+    "how": "first one minimal set by deletion (each requirement dropped in turn while the rest stays refuted), then every subset by size, smallest first, within a budget of 20 subset runs",
+    "incomplete": "the budget of subset runs ran out: the sets listed are minimal conflicts, but there may be others — ask for more with \"conflicts\": N (runs) or \"all\""
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

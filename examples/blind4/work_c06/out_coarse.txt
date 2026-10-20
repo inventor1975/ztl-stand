@@ -1,0 +1,1370 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "excluded_by_where": 27351,
+  "designs_tried": 304,
+  "failed_at_nominal": 173,
+  "judged": 131,
+  "undecided": 86,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=3); M5=cnt(N=0); P=purge(p=3/200)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=1); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=2); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=3); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=3); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=2); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=1); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=3); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=3); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=0)",
+      "verdict": "OPEN",
+      "why": "the checker could not evaluate it: the laws do not determine every derived quantity"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "122779/210000 (~0.584662)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "8158261/213990000 (~0.0381245)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "181991/10010000 (~0.0181809)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "702713/15750000 (~0.0446167)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1559549/97230000 (~0.0160398)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "799367/46830000 (~0.0170695)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "3001543/205170000 (~0.0146295)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4396501/556710000 (~0.00789729)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6277381/385350000 (~0.0162901)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "453669/65030000 (~0.0069763)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4239761/570990000 (~0.00742528)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "232493/58590000 (~0.00396813)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "389233/44310000 (~0.00878432)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1282637/202230000 (~0.00634247)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "181991/10010000 (~0.0181809)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "619109/182910000 (~0.00338477)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1089329/140070000 (~0.00777703)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "564257/68250000 (~0.0082675)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "540739/190050000 (~0.00284525)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1120663/376530000 (~0.00297629)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=1); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "16109/5180000 (~0.00310985)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2061103/290850000 (~0.00708648)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "963923/390810000 (~0.00246647)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "634741/899430000 (~0.000705715)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2515621/728070000 (~0.00345519)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "26449/12547500 (~0.00210791)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4396501/556710000 (~0.00789729)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "107087/309330000 (~0.00034619)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "734047/252210000 (~0.00291046)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "336983/106050000 (~0.00317759)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=2); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "25251/24290000 (~0.00103956)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "7781/956550000 (~8.13444e-06)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "28717/316470000 (~9.07416e-05)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "232493/58590000 (~0.00396813)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "218559/86450000 (~0.00252816)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "20093/70000 (~0.287043)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "389233/44310000 (~0.00878432)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "148889/225750000 (~0.00065953)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "619109/182910000 (~0.00338477)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "47021/12810000 (~0.00367065)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "70519/232890000 (~0.0003028)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "180223/462210000 (~0.000389916)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1120663/376530000 (~0.00297629)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=3); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "23483/476490000 (~4.92833e-05)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "634741/899430000 (~0.000705715)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "7971697/231630000 (~0.0344156)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2515621/728070000 (~0.00345519)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "107087/309330000 (~0.00034619)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "265213/15750000 (~0.0168389)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "25251/24290000 (~0.00103956)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "28717/316470000 (~9.07416e-05)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=3); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "343583/8610000 (~0.0399051)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "232493/58590000 (~0.00396813)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=2); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "378227/25410000 (~0.014885)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "148889/225750000 (~0.00065953)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1552093/98070000 (~0.0158264)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "94037/111090000 (~0.000846494)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=1); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2908261/213990000 (~0.0135906)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "180223/462210000 (~0.000389916)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=3); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4209937/574350000 (~0.00732992)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6090817/402990000 (~0.0151141)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "634741/899430000 (~0.000705715)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1298819/200970000 (~0.00646275)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4053197/588630000 (~0.00688581)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "108473/30030000 (~0.00361215)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "62281/7630000 (~0.00816265)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1220449/208110000 (~0.00586444)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "265213/15750000 (~0.0168389)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "143117/46830000 (~0.0030561)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=3); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4073/564375 (~0.00721683)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1081873/140910000 (~0.00767776)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "247049/97230000 (~0.00254087)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=2); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1027381/385350000 (~0.0026661)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=1); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "177761/63630000 (~0.00279367)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1967821/299670000 (~0.00656663)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "870641/399630000 (~0.00217862)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "448177/917070000 (~0.000488705)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2329057/745710000 (~0.00312327)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=4); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "376543/205170000 (~0.00183527)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=4); M2=cnt(N=0); M3=cnt(N=3); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4209937/574350000 (~0.00732992)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "44899/315210000 (~0.000142442)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/100)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "223953/86030000 (~0.0026032)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=4); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R3 c_T2 <= 0.4 wt%",
+      "by": "41/15000 (~0.00273333)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "OPEN": 86,
+    "REFUTED": 217,
+    "EARNED": 1
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "designs_not_listed": 104,
+  "listing": "earned first, then open, then refuted",
+  "checker_could_not_evaluate": [
+    "{'M1': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M2': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M3': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M4': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M5': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'P': {'catalog': 'purge', 'p': {'nominal': '0', 'tolerance': '0'}}}: the checker could not evaluate it: the laws do not determine every derived quantity",
+    "{'M1': {'catalog': 'cnt', 'N': {'nominal': '1', 'tolerance': '0'}}, 'M2': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M3': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M4': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M5': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'P': {'catalog': 'purge', 'p': {'nominal': '0', 'tolerance': '0'}}}: the checker could not evaluate it: the laws do not determine every derived quantity",
+    "{'M1': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M2': {'catalog': 'cnt', 'N': {'nominal': '1', 'tolerance': '0'}}, 'M3': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M4': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M5': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'P': {'catalog': 'purge', 'p': {'nominal': '0', 'tolerance': '0'}}}: the checker could not evaluate it: the laws do not determine every derived quantity",
+    "{'M1': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M2': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M3': {'catalog': 'cnt', 'N': {'nominal': '1', 'tolerance': '0'}}, 'M4': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M5': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'P': {'catalog': 'purge', 'p': {'nominal': '0', 'tolerance': '0'}}}: the checker could not evaluate it: the laws do not determine every derived quantity",
+    "{'M1': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M2': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M3': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'M4': {'catalog': 'cnt', 'N': {'nominal': '1', 'tolerance': '0'}}, 'M5': {'catalog': 'cnt', 'N': {'nominal': '0', 'tolerance': '0'}}, 'P': {'catalog': 'purge', 'p': {'nominal': '0', 'tolerance': '0'}}}: the checker could not evaluate it: the laws do not determine every derived quantity"
+  ],
+  "objective": {
+    "minimize": "(M1.N*C1 + M2.N*C2 + M3.N*C3 + M4.N*C4 + M5.N*C5) + P.p*FH*hrs*price",
+    "value": "172500",
+    "unit": "EUR",
+    "optimal": false,
+    "note": "86 cheaper design(s) undecided: optimal only among the decided ones"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "M1": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "M2": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "M3": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "M4": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    },
+    "M5": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "P": {
+      "catalog": "purge",
+      "p": {
+        "nominal": "3/200 (~0.015)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "cT": [
+      "35211/8102500 (~0.0043457)",
+      "376123/48615000 (~0.00773677)"
+    ],
+    "cBi": [
+      "41693/8102500 (~0.0051457)",
+      "146981/16205000 (~0.0090701)"
+    ],
+    "cBo": [
+      "215387/32410000 (~0.0066457)",
+      "48899/4051250 (~0.0120701)"
+    ],
+    "cT2": [
+      "131/78750 (~0.00166349)",
+      "51/17500 (~0.00291429)"
+    ]
+  },
+  "guaranteed_unit": {
+    "cT": "",
+    "cBi": "",
+    "cBo": "",
+    "cT2": ""
+  },
+  "how": {
+    "cT": "ZTL, exact at the corners",
+    "cBi": "ZTL, exact at the corners",
+    "cBo": "ZTL, exact at the corners",
+    "cT2": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "cT",
+      "op": "<=",
+      "value": "0.008",
+      "why": "R1 c_T <= 0.8 wt%"
+    },
+    {
+      "quantity": "cBi",
+      "op": "<=",
+      "value": "0.011",
+      "why": "R2 c_Bi <= 1.1 wt%"
+    },
+    {
+      "quantity": "cBo",
+      "op": "<=",
+      "value": "0.015",
+      "why": "R2 c_Bo <= 1.5 wt%"
+    },
+    {
+      "quantity": "cT2",
+      "op": "<=",
+      "value": "0.004",
+      "why": "R3 c_T2 <= 0.4 wt%"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "cAo -> [12854/2025625, 179391/16205000] by the system over its parameters, exact at the corners (credit)",
+    "cAo2 -> [1069/630000, 1041/350000] by the system over its parameters, exact at the corners (credit)",
+    "cBi -> [41693/8102500, 146981/16205000] by the system over its parameters, exact at the corners (credit)",
+    "cBi2 -> [2641/1575000, 2571/875000] by the system over its parameters, exact at the corners (credit)",
+    "cBo -> [215387/32410000, 48899/4051250] by the system over its parameters, exact at the corners (credit)",
+    "cBo2 -> [2641/1575000, 2571/875000] by the system over its parameters, exact at the corners (credit)"
+  ]
+}

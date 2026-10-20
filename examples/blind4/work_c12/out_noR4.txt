@@ -1,0 +1,218 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "continuous": true,
+  "combinations": 1,
+  "notes": [],
+  "verdict": "EARNED",
+  "design": {
+    "N10": {
+      "catalog": "cat_B10",
+      "x": "213817769/3453979 (~61.9048)"
+    },
+    "N11": {
+      "catalog": "cat_B11",
+      "x": "0"
+    },
+    "N12": {
+      "catalog": "cat_B12",
+      "x": "0"
+    },
+    "N13": {
+      "catalog": "cat_B13",
+      "x": "0"
+    },
+    "N14": {
+      "catalog": "cat_B14",
+      "x": "0"
+    },
+    "N1": {
+      "catalog": "cat_B1",
+      "x": "285922911/9051098 (~31.5899)"
+    },
+    "N2": {
+      "catalog": "cat_B2",
+      "x": "121153627/4450634 (~27.2217)"
+    },
+    "N3": {
+      "catalog": "cat_B3",
+      "x": "0"
+    },
+    "N4": {
+      "catalog": "cat_B4",
+      "x": "335753633/8826724 (~38.0383)"
+    },
+    "N5": {
+      "catalog": "cat_B5",
+      "x": "12125629/497571 (~24.3696)"
+    },
+    "N6": {
+      "catalog": "cat_B6",
+      "x": "0"
+    },
+    "N7": {
+      "catalog": "cat_B7",
+      "x": "421099133/9336857 (~45.1007)"
+    },
+    "N8": {
+      "catalog": "cat_B8",
+      "x": "0"
+    },
+    "N9": {
+      "catalog": "cat_B9",
+      "x": "0"
+    }
+  },
+  "objective": {
+    "minimize": "N1.x*p_B1*face + N2.x*p_B2*face + N3.x*p_B3*face + N4.x*p_B4*face + N5.x*p_B5*face + N6.x*p_B6*face + N7.x*p_B7*face + N8.x*p_B8*face + N9.x*p_B9*face + N10.x*p_B10*face + N11.x*p_B11*face + N12.x*p_B12*face + N13.x*p_B13*face + N14.x*p_B14*face",
+    "value": "~2306284.1911 (an exact fraction of 38 digits)",
+    "unit": "EUR",
+    "lower_bound": "23062839604539/10000000 (~2.30628e+06)",
+    "gap": "~0.230643440454 (an exact fraction of 45 digits)",
+    "lower_bound_is": "proved by ZTL (zlp) from the LP solver's dual multipliers: no mix in the continuous box costs less",
+    "optimal": false
+  },
+  "guaranteed": null,
+  "how": null,
+  "per_mode": {
+    "Base": {
+      "guaranteed": {
+        "S1": [
+          "~0.0400038500191 (an exact fraction of 36 digits)",
+          "~0.0400038500191 (an exact fraction of 36 digits)"
+        ],
+        "S2": [
+          "~0.0750070999775 (an exact fraction of 37 digits)",
+          "~0.0750070999775 (an exact fraction of 37 digits)"
+        ],
+        "S3": [
+          "~0.120009550032 (an exact fraction of 38 digits)",
+          "~0.120009550032 (an exact fraction of 38 digits)"
+        ],
+        "S4": [
+          "~0.150013150668 (an exact fraction of 38 digits)",
+          "~0.150013150668 (an exact fraction of 38 digits)"
+        ],
+        "S5": [
+          "~0.200015050526 (an exact fraction of 38 digits)",
+          "~0.200015050526 (an exact fraction of 38 digits)"
+        ],
+        "S6": [
+          "~0.26501255051 (an exact fraction of 38 digits)",
+          "~0.26501255051 (an exact fraction of 38 digits)"
+        ],
+        "M2": [
+          "~691885.257329 (an exact fraction of 38 digits)",
+          "~691885.257329 (an exact fraction of 38 digits)"
+        ],
+        "DA": [
+          "~-572341.975502 (an exact fraction of 54 digits)",
+          "~-572341.975502 (an exact fraction of 54 digits)"
+        ],
+        "DB": [
+          "~-572341.975466 (an exact fraction of 53 digits)",
+          "~-572341.975466 (an exact fraction of 53 digits)"
+        ]
+      },
+      "how": {
+        "S1": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.0400038500191 (~0.0400039)', '~0.0400038500191 (~0.0400039)']",
+        "S2": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.0750070999775 (~0.0750071)', '~0.0750070999775 (~0.0750071)']",
+        "S3": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.120009550032 (~0.12001)', '~0.120009550032 (~0.12001)']",
+        "S4": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.150013150668 (~0.150013)', '~0.150013150668 (~0.150013)']",
+        "S5": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.200015050526 (~0.200015)', '~0.200015050526 (~0.200015)']",
+        "S6": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.26501255051 (~0.265013)', '~0.26501255051 (~0.265013)']",
+        "M2": "ZTL, outer range",
+        "DA": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~-572341.975502 (~-572342)', '~-572341.975502 (~-572342)']",
+        "DB": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~-572341.975466 (~-572342)', '~-572341.975466 (~-572342)']"
+      }
+    },
+    "Stress": {
+      "guaranteed": {
+        "S1": [
+          "~0.0400038500191 (an exact fraction of 36 digits)",
+          "~0.0400038500191 (an exact fraction of 36 digits)"
+        ],
+        "S2": [
+          "~0.0750070999775 (an exact fraction of 37 digits)",
+          "~0.0750070999775 (an exact fraction of 37 digits)"
+        ],
+        "S3": [
+          "~0.120009550032 (an exact fraction of 38 digits)",
+          "~0.120009550032 (an exact fraction of 38 digits)"
+        ],
+        "S4": [
+          "~0.150013150668 (an exact fraction of 38 digits)",
+          "~0.150013150668 (an exact fraction of 38 digits)"
+        ],
+        "S5": [
+          "~0.200015050526 (an exact fraction of 38 digits)",
+          "~0.200015050526 (an exact fraction of 38 digits)"
+        ],
+        "S6": [
+          "~0.26501255051 (an exact fraction of 38 digits)",
+          "~0.26501255051 (an exact fraction of 38 digits)"
+        ],
+        "M2": [
+          "~691885.257329 (an exact fraction of 38 digits)",
+          "~691885.257329 (an exact fraction of 38 digits)"
+        ]
+      },
+      "how": {
+        "S1": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.0400038500191 (~0.0400039)', '~0.0400038500191 (~0.0400039)']",
+        "S2": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.0750070999775 (~0.0750071)', '~0.0750070999775 (~0.0750071)']",
+        "S3": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.120009550032 (~0.12001)', '~0.120009550032 (~0.12001)']",
+        "S4": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.150013150668 (~0.150013)', '~0.150013150668 (~0.150013)']",
+        "S5": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.200015050526 (~0.200015)', '~0.200015050526 (~0.200015)']",
+        "S6": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.26501255051 (~0.265013)', '~0.26501255051 (~0.265013)']",
+        "M2": "ZTL, outer range"
+      }
+    },
+    "Fall": {
+      "guaranteed": {
+        "S1": [
+          "~0.0400038500191 (an exact fraction of 36 digits)",
+          "~0.0400038500191 (an exact fraction of 36 digits)"
+        ],
+        "S2": [
+          "~0.0750070999775 (an exact fraction of 37 digits)",
+          "~0.0750070999775 (an exact fraction of 37 digits)"
+        ],
+        "S3": [
+          "~0.120009550032 (an exact fraction of 38 digits)",
+          "~0.120009550032 (an exact fraction of 38 digits)"
+        ],
+        "S4": [
+          "~0.150013150668 (an exact fraction of 38 digits)",
+          "~0.150013150668 (an exact fraction of 38 digits)"
+        ],
+        "S5": [
+          "~0.200015050526 (an exact fraction of 38 digits)",
+          "~0.200015050526 (an exact fraction of 38 digits)"
+        ],
+        "S6": [
+          "~0.26501255051 (an exact fraction of 38 digits)",
+          "~0.26501255051 (an exact fraction of 38 digits)"
+        ],
+        "M2": [
+          "~691885.257329 (an exact fraction of 38 digits)",
+          "~691885.257329 (an exact fraction of 38 digits)"
+        ]
+      },
+      "how": {
+        "S1": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.0400038500191 (~0.0400039)', '~0.0400038500191 (~0.0400039)']",
+        "S2": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.0750070999775 (~0.0750071)', '~0.0750070999775 (~0.0750071)']",
+        "S3": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.120009550032 (~0.12001)', '~0.120009550032 (~0.12001)']",
+        "S4": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.150013150668 (~0.150013)', '~0.150013150668 (~0.150013)']",
+        "S5": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.200015050526 (~0.200015)', '~0.200015050526 (~0.200015)']",
+        "S6": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.26501255051 (~0.265013)', '~0.26501255051 (~0.265013)']",
+        "M2": "ZTL, outer range"
+      }
+    }
+  },
+  "modes": [
+    "Base",
+    "Stress",
+    "Fall"
+  ],
+  "mix_verdict_checker": null
+}

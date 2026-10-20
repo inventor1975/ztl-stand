@@ -1,0 +1,654 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "dT": {
+   "role": "given",
+   "range": [
+    "-0.5",
+    "1.5"
+   ],
+   "unit": "C",
+   "why": "T_ch - T_set, chamber temperature during hold"
+  },
+  "T0": {
+   "role": "given",
+   "range": [
+    "45",
+    "80"
+   ],
+   "unit": "C",
+   "why": "initial pack temperature"
+  },
+  "D121": {
+   "role": "given",
+   "value": "1.5",
+   "unit": "min",
+   "why": "spore D at reference",
+   "ground": "problem statement"
+  },
+  "zs": {
+   "role": "given",
+   "value": "10",
+   "unit": "C",
+   "why": "spore z-value",
+   "ground": "problem statement"
+  },
+  "Tref": {
+   "role": "given",
+   "value": "121.1",
+   "unit": "C",
+   "why": "spore reference temperature",
+   "ground": "problem statement"
+  },
+  "zm": {
+   "role": "given",
+   "value": "25",
+   "unit": "C",
+   "why": "material z-value",
+   "ground": "problem statement"
+  },
+  "Tm0": {
+   "role": "given",
+   "value": "121",
+   "unit": "C",
+   "why": "material reference temperature",
+   "ground": "problem statement"
+  },
+  "step": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "min",
+   "why": "grid of the hold time (real t_h approximated by a 0.5 min grid)",
+   "ground": "modelling choice"
+  },
+  "ovh": {
+   "role": "given",
+   "value": "15",
+   "unit": "min",
+   "why": "vacuum and heat-up",
+   "ground": "problem statement"
+  },
+  "Wlim": {
+   "role": "given",
+   "value": "48",
+   "unit": "h",
+   "why": "weekly autoclave time limit",
+   "ground": "problem statement"
+  },
+  "rate": {
+   "role": "given",
+   "value": "0.9",
+   "unit": "EUR/min",
+   "why": "cost per cycle minute",
+   "ground": "problem statement"
+  },
+  "dhi": {
+   "role": "given",
+   "value": "1.5",
+   "unit": "C",
+   "why": "chamber overshoot max (T_set+1.5)",
+   "ground": "problem statement"
+  },
+  "tau0L1": {
+   "role": "given",
+   "value": "30",
+   "unit": "s",
+   "why": "base tau L1",
+   "ground": "problem statement"
+  },
+  "reqL1": {
+   "role": "given",
+   "value": "9",
+   "unit": "",
+   "why": "required log-reduction L1",
+   "ground": "problem statement"
+  },
+  "pkL1": {
+   "role": "given",
+   "value": "12",
+   "unit": "",
+   "why": "packs per cycle L1",
+   "ground": "problem statement"
+  },
+  "cyL1": {
+   "role": "given",
+   "value": "20",
+   "unit": "",
+   "why": "cycles per week L1",
+   "ground": "problem statement"
+  },
+  "budL1": {
+   "role": "given",
+   "value": "120",
+   "unit": "min",
+   "why": "damage budget L1",
+   "ground": "problem statement"
+  },
+  "LRL1": {
+   "role": "derived",
+   "unit": "",
+   "why": "log-reduction of L1 (left Riemann sum, 10 panels, lower bound of the integral)"
+  },
+  "DmL1": {
+   "role": "derived",
+   "unit": "min"
+  },
+  "PmL1": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "tau0L2": {
+   "role": "given",
+   "value": "60",
+   "unit": "s",
+   "why": "base tau L2",
+   "ground": "problem statement"
+  },
+  "reqL2": {
+   "role": "given",
+   "value": "12",
+   "unit": "",
+   "why": "required log-reduction L2",
+   "ground": "problem statement"
+  },
+  "pkL2": {
+   "role": "given",
+   "value": "6",
+   "unit": "",
+   "why": "packs per cycle L2",
+   "ground": "problem statement"
+  },
+  "cyL2": {
+   "role": "given",
+   "value": "15",
+   "unit": "",
+   "why": "cycles per week L2",
+   "ground": "problem statement"
+  },
+  "budL2": {
+   "role": "given",
+   "value": "120",
+   "unit": "min",
+   "why": "damage budget L2",
+   "ground": "problem statement"
+  },
+  "LRL2": {
+   "role": "derived",
+   "unit": "",
+   "why": "log-reduction of L2 (left Riemann sum, 10 panels, lower bound of the integral)"
+  },
+  "DmL2": {
+   "role": "derived",
+   "unit": "min"
+  },
+  "PmL2": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "tau0L3": {
+   "role": "given",
+   "value": "110",
+   "unit": "s",
+   "why": "base tau L3",
+   "ground": "problem statement"
+  },
+  "reqL3": {
+   "role": "given",
+   "value": "12",
+   "unit": "",
+   "why": "required log-reduction L3",
+   "ground": "problem statement"
+  },
+  "pkL3": {
+   "role": "given",
+   "value": "8",
+   "unit": "",
+   "why": "packs per cycle L3",
+   "ground": "problem statement"
+  },
+  "cyL3": {
+   "role": "given",
+   "value": "10",
+   "unit": "",
+   "why": "cycles per week L3",
+   "ground": "problem statement"
+  },
+  "budL3": {
+   "role": "given",
+   "value": "150",
+   "unit": "min",
+   "why": "damage budget L3",
+   "ground": "problem statement"
+  },
+  "LRL3": {
+   "role": "derived",
+   "unit": "",
+   "why": "log-reduction of L3 (left Riemann sum, 10 panels, lower bound of the integral)"
+  },
+  "DmL3": {
+   "role": "derived",
+   "unit": "min"
+  },
+  "PmL3": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "tau0L4": {
+   "role": "given",
+   "value": "150",
+   "unit": "s",
+   "why": "base tau L4",
+   "ground": "problem statement"
+  },
+  "reqL4": {
+   "role": "given",
+   "value": "15",
+   "unit": "",
+   "why": "required log-reduction L4",
+   "ground": "problem statement"
+  },
+  "pkL4": {
+   "role": "given",
+   "value": "4",
+   "unit": "",
+   "why": "packs per cycle L4",
+   "ground": "problem statement"
+  },
+  "cyL4": {
+   "role": "given",
+   "value": "5",
+   "unit": "",
+   "why": "cycles per week L4",
+   "ground": "problem statement"
+  },
+  "budL4": {
+   "role": "given",
+   "value": "40",
+   "unit": "min",
+   "why": "damage budget L4",
+   "ground": "problem statement"
+  },
+  "LRL4": {
+   "role": "derived",
+   "unit": "",
+   "why": "log-reduction of L4 (left Riemann sum, 10 panels, lower bound of the integral)"
+  },
+  "DmL4": {
+   "role": "derived",
+   "unit": "min"
+  },
+  "PmL4": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Wk": {
+   "role": "derived",
+   "unit": "h",
+   "why": "weekly autoclave time"
+  }
+ },
+ "slots": {
+  "TS": {
+   "from": [
+    "setpoints"
+   ]
+  },
+  "H": {
+   "from": [
+    "hold"
+   ]
+  },
+  "PL1": {
+   "from": [
+    "packL1"
+   ]
+  },
+  "PL2": {
+   "from": [
+    "packL2"
+   ]
+  },
+  "PL3": {
+   "from": [
+    "packL3"
+   ]
+  },
+  "PL4": {
+   "from": [
+    "packL4"
+   ]
+  }
+ },
+ "define": {
+  "th": "H.n*step",
+  "Tch": "TS.Tset + dT",
+  "tauL1": "tau0L1*PL1.mult",
+  "tauL2": "tau0L2*PL2.mult",
+  "tauL3": "tau0L3*PL3.mult",
+  "tauL4": "tau0L4*PL4.mult"
+ },
+ "laws": [
+  {
+   "zfl": "LRL1 == th/(10*D121)*(pow(10, (Tch - (Tch - T0)*exp(-(0*th/10)/tauL1) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(1*th/10)/tauL1) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(2*th/10)/tauL1) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(3*th/10)/tauL1) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(4*th/10)/tauL1) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(5*th/10)/tauL1) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(6*th/10)/tauL1) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(7*th/10)/tauL1) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(8*th/10)/tauL1) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(9*th/10)/tauL1) - Tref)/zs))",
+   "source": "LR = (1/D)*integral 10^((Tcs-Tref)/z) dt; integrand increasing in t so the left Riemann sum is a lower bound"
+  },
+  {
+   "zfl": "DmL1 == th*pow(10, (TS.Tset + dhi - Tm0)/zm)",
+   "source": "thermal damage index, z_m = 25"
+  },
+  {
+   "zfl": "PmL1 == PL1.Tmax - (TS.Tset + dhi)",
+   "source": "packaging temperature limit margin"
+  },
+  {
+   "zfl": "LRL2 == th/(10*D121)*(pow(10, (Tch - (Tch - T0)*exp(-(0*th/10)/tauL2) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(1*th/10)/tauL2) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(2*th/10)/tauL2) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(3*th/10)/tauL2) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(4*th/10)/tauL2) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(5*th/10)/tauL2) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(6*th/10)/tauL2) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(7*th/10)/tauL2) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(8*th/10)/tauL2) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(9*th/10)/tauL2) - Tref)/zs))",
+   "source": "LR = (1/D)*integral 10^((Tcs-Tref)/z) dt; integrand increasing in t so the left Riemann sum is a lower bound"
+  },
+  {
+   "zfl": "DmL2 == th*pow(10, (TS.Tset + dhi - Tm0)/zm)",
+   "source": "thermal damage index, z_m = 25"
+  },
+  {
+   "zfl": "PmL2 == PL2.Tmax - (TS.Tset + dhi)",
+   "source": "packaging temperature limit margin"
+  },
+  {
+   "zfl": "LRL3 == th/(10*D121)*(pow(10, (Tch - (Tch - T0)*exp(-(0*th/10)/tauL3) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(1*th/10)/tauL3) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(2*th/10)/tauL3) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(3*th/10)/tauL3) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(4*th/10)/tauL3) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(5*th/10)/tauL3) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(6*th/10)/tauL3) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(7*th/10)/tauL3) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(8*th/10)/tauL3) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(9*th/10)/tauL3) - Tref)/zs))",
+   "source": "LR = (1/D)*integral 10^((Tcs-Tref)/z) dt; integrand increasing in t so the left Riemann sum is a lower bound"
+  },
+  {
+   "zfl": "DmL3 == th*pow(10, (TS.Tset + dhi - Tm0)/zm)",
+   "source": "thermal damage index, z_m = 25"
+  },
+  {
+   "zfl": "PmL3 == PL3.Tmax - (TS.Tset + dhi)",
+   "source": "packaging temperature limit margin"
+  },
+  {
+   "zfl": "LRL4 == th/(10*D121)*(pow(10, (Tch - (Tch - T0)*exp(-(0*th/10)/tauL4) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(1*th/10)/tauL4) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(2*th/10)/tauL4) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(3*th/10)/tauL4) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(4*th/10)/tauL4) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(5*th/10)/tauL4) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(6*th/10)/tauL4) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(7*th/10)/tauL4) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(8*th/10)/tauL4) - Tref)/zs) + pow(10, (Tch - (Tch - T0)*exp(-(9*th/10)/tauL4) - Tref)/zs))",
+   "source": "LR = (1/D)*integral 10^((Tcs-Tref)/z) dt; integrand increasing in t so the left Riemann sum is a lower bound"
+  },
+  {
+   "zfl": "DmL4 == th*pow(10, (TS.Tset + dhi - Tm0)/zm)",
+   "source": "thermal damage index, z_m = 25"
+  },
+  {
+   "zfl": "PmL4 == PL4.Tmax - (TS.Tset + dhi)",
+   "source": "packaging temperature limit margin"
+  },
+  {
+   "zfl": "Wk == cyL1*(ovh + th + TS.dry) + cyL2*(ovh + th + TS.dry) + cyL3*(ovh + th + TS.dry) + cyL4*(ovh + th + TS.dry)",
+   "source": "sum of cycles x cycle time"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "LRL1",
+   "op": ">=",
+   "value": "reqL1",
+   "why": "R1 log-reduction L1"
+  },
+  {
+   "quantity": "DmL1",
+   "op": "<=",
+   "value": "budL1",
+   "why": "R2 damage budget L1"
+  },
+  {
+   "quantity": "PmL1",
+   "op": ">=",
+   "value": "0",
+   "why": "R3 packaging limit L1"
+  },
+  {
+   "quantity": "LRL2",
+   "op": ">=",
+   "value": "reqL2",
+   "why": "R1 log-reduction L2"
+  },
+  {
+   "quantity": "DmL2",
+   "op": "<=",
+   "value": "budL2",
+   "why": "R2 damage budget L2"
+  },
+  {
+   "quantity": "PmL2",
+   "op": ">=",
+   "value": "0",
+   "why": "R3 packaging limit L2"
+  },
+  {
+   "quantity": "LRL3",
+   "op": ">=",
+   "value": "reqL3",
+   "why": "R1 log-reduction L3"
+  },
+  {
+   "quantity": "DmL3",
+   "op": "<=",
+   "value": "budL3",
+   "why": "R2 damage budget L3"
+  },
+  {
+   "quantity": "PmL3",
+   "op": ">=",
+   "value": "0",
+   "why": "R3 packaging limit L3"
+  },
+  {
+   "quantity": "LRL4",
+   "op": ">=",
+   "value": "reqL4",
+   "why": "R1 log-reduction L4"
+  },
+  {
+   "quantity": "DmL4",
+   "op": "<=",
+   "value": "budL4",
+   "why": "R2 damage budget L4"
+  },
+  {
+   "quantity": "PmL4",
+   "op": ">=",
+   "value": "0",
+   "why": "R3 packaging limit L4"
+  },
+  {
+   "quantity": "Wk",
+   "op": "<=",
+   "value": "Wlim",
+   "why": "R4 weekly time"
+  }
+ ],
+ "objective": {
+  "minimize": "rate*(cyL1*(ovh + th + TS.dry) + cyL2*(ovh + th + TS.dry) + cyL3*(ovh + th + TS.dry) + cyL4*(ovh + th + TS.dry)) + cyL1*pkL1*PL1.price + cyL2*pkL2*PL2.price + cyL3*pkL3*PL3.price + cyL4*pkL4*PL4.price",
+  "unit": "EUR",
+  "why": "weekly cost"
+ },
+ "catalog": {
+  "setpoints": {
+   "items": [
+    {
+     "Tset": "121",
+     "dry": "25",
+     "lbl": "T121"
+    },
+    {
+     "Tset": "124",
+     "dry": "23",
+     "lbl": "T124"
+    },
+    {
+     "Tset": "126",
+     "dry": "22",
+     "lbl": "T126"
+    },
+    {
+     "Tset": "130",
+     "dry": "20",
+     "lbl": "T130"
+    },
+    {
+     "Tset": "134",
+     "dry": "18",
+     "lbl": "T134"
+    }
+   ],
+   "fields": {
+    "Tset": {
+     "unit": "C"
+    },
+    "dry": {
+     "unit": "min"
+    }
+   }
+  },
+  "hold": {
+   "integers": {
+    "field": "n",
+    "from": "2",
+    "to": "80",
+    "unit": ""
+   }
+  },
+  "packL1": {
+   "items": [
+    {
+     "mult": "1.0",
+     "Tmax": "137",
+     "price": "0.10",
+     "name": "PK1"
+    },
+    {
+     "mult": "1.4",
+     "Tmax": "137",
+     "price": "0.35",
+     "name": "PK2"
+    },
+    {
+     "mult": "1.2",
+     "Tmax": "126",
+     "price": "0.80",
+     "name": "PK5"
+    }
+   ],
+   "fields": {
+    "mult": {
+     "unit": ""
+    },
+    "Tmax": {
+     "unit": "C"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "packL2": {
+   "items": [
+    {
+     "mult": "1.4",
+     "Tmax": "137",
+     "price": "0.35",
+     "name": "PK2"
+    },
+    {
+     "mult": "1.8",
+     "Tmax": "135",
+     "price": "1.20",
+     "name": "PK3"
+    },
+    {
+     "mult": "2.2",
+     "Tmax": "132",
+     "price": "1.90",
+     "name": "PK4"
+    },
+    {
+     "mult": "1.2",
+     "Tmax": "126",
+     "price": "0.80",
+     "name": "PK5"
+    }
+   ],
+   "fields": {
+    "mult": {
+     "unit": ""
+    },
+    "Tmax": {
+     "unit": "C"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "packL3": {
+   "items": [
+    {
+     "mult": "1.4",
+     "Tmax": "137",
+     "price": "0.35",
+     "name": "PK2"
+    },
+    {
+     "mult": "1.8",
+     "Tmax": "135",
+     "price": "1.20",
+     "name": "PK3"
+    },
+    {
+     "mult": "2.2",
+     "Tmax": "132",
+     "price": "1.90",
+     "name": "PK4"
+    }
+   ],
+   "fields": {
+    "mult": {
+     "unit": ""
+    },
+    "Tmax": {
+     "unit": "C"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "packL4": {
+   "items": [
+    {
+     "mult": "1.8",
+     "Tmax": "135",
+     "price": "1.20",
+     "name": "PK3"
+    },
+    {
+     "mult": "2.2",
+     "Tmax": "132",
+     "price": "1.90",
+     "name": "PK4"
+    },
+    {
+     "mult": "1.2",
+     "Tmax": "126",
+     "price": "0.80",
+     "name": "PK5"
+    }
+   ],
+   "fields": {
+    "mult": {
+     "unit": ""
+    },
+    "Tmax": {
+     "unit": "C"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ }
+}

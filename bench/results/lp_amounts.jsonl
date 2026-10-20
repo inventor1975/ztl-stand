@@ -1,0 +1,9 @@
+{"axis": "lp_amounts", "size": 2, "wall_s": 0.29, "peak_mb": 76, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 6}
+{"axis": "lp_amounts", "size": 5, "wall_s": 0.36, "peak_mb": 76, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 6}
+{"axis": "lp_amounts", "size": 10, "wall_s": 0.37, "peak_mb": 77, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 6}
+{"axis": "lp_amounts", "size": 20, "wall_s": 0.63, "peak_mb": 78, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:07", "cpu": 6}
+{"axis": "lp_amounts", "size": 40, "wall_s": 2.77, "peak_mb": 83, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:09", "cpu": 6}
+{"axis": "lp_amounts", "size": 80, "wall_s": 20.84, "peak_mb": 106, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:30", "cpu": 6}
+{"axis": "lp_amounts", "size": 120, "wall_s": 71.25, "peak_mb": 150, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:34:00", "cpu": 10}
+{"axis": "lp_amounts", "size": 160, "wall_s": 174.93, "peak_mb": 222, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:36:55", "cpu": 10}
+{"axis": "lp_amounts", "size": 240, "wall_s": 587.55, "peak_mb": 466, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "jobs": 1, "at": "2026-10-13 01:37:54", "cpu": "10"}

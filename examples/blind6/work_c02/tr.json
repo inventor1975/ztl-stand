@@ -1,0 +1,66 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "workshop transformer: V_bus = V0 - ks (Ia + Ib)",
+ "interface": {
+  "inputs": {
+   "Ia": {
+    "assume": [
+     "0",
+     "400"
+    ],
+    "bands": "arriving"
+   },
+   "Ib": {
+    "assume": [
+     "0",
+     "400"
+    ],
+    "bands": "arriving"
+   }
+  },
+  "outputs": [
+   "Vbus"
+  ]
+ },
+ "quantities": {
+  "V0": {
+   "role": "given",
+   "range": [
+    "395",
+    "415"
+   ],
+   "unit": "V"
+  },
+  "ks": {
+   "role": "given",
+   "range": [
+    "0.060",
+    "0.085"
+   ],
+   "unit": "V/A"
+  },
+  "Ia": {
+   "role": "given",
+   "value": "50",
+   "unit": "A"
+  },
+  "Ib": {
+   "role": "given",
+   "value": "30",
+   "unit": "A"
+  },
+  "Vbus": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "Vbus == V0 - ks*(Ia + Ib)",
+   "source": "transformer datasheet"
+  }
+ ],
+ "requirements": []
+}

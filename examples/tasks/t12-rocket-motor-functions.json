@@ -1,0 +1,212 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "m_air": {
+   "role": "given",
+   "value": "2.40",
+   "tolerance": "0.05",
+   "unit": "kg",
+   "why": "airframe mass without motor"
+  },
+  "L": {
+   "role": "given",
+   "range": [
+    "1.78",
+    "1.82"
+   ],
+   "unit": "m",
+   "why": "rail length 1.80 +-0.02 m"
+  },
+  "g0": {
+   "role": "given",
+   "value": "9.81",
+   "unit": "m*s^-2",
+   "ground": "problem statement constant"
+  },
+  "Dv": {
+   "role": "derived",
+   "unit": "m/s",
+   "why": "ideal delta-v, Tsiolkovsky with the real ln"
+  },
+  "tb": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "Dveff": {
+   "role": "derived",
+   "unit": "m/s"
+  },
+  "TWR": {
+   "role": "derived",
+   "unit": ""
+  },
+  "amax": {
+   "role": "derived",
+   "unit": "m*s^-2"
+  },
+  "v_rail": {
+   "role": "derived",
+   "unit": "m/s",
+   "why": "rail exit speed, with the real sqrt"
+  }
+ },
+ "slots": {
+  "M": {
+   "from": [
+    "motors"
+   ]
+  }
+ },
+ "define": {
+  "M0": "m_air + M.mass"
+ },
+ "laws": [
+  {
+   "zfl": "Dv == M.Isp*g0*ln(M0/(M0 - M.mp))",
+   "source": "Tsiolkovsky: dv = Isp*g0*ln(m0/mf)"
+  },
+  {
+   "zfl": "tb == M.Isp*g0*M.mp/M.F",
+   "source": "burn time = total impulse / F_avg, It = Isp*g0*mp"
+  },
+  {
+   "zfl": "Dveff == Dv - g0*tb",
+   "source": "gravity loss only"
+  },
+  {
+   "zfl": "TWR == M.F/(M0*g0)",
+   "source": "thrust-to-weight at liftoff"
+  },
+  {
+   "zfl": "v_rail == sqrt(2*(M.F/M0 - g0)*L)",
+   "source": "constant-acceleration rail run"
+  },
+  {
+   "zfl": "amax == M.F/(M0 - M.mp)",
+   "source": "F_avg / burnout mass"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "TWR",
+   "op": ">=",
+   "value": "5",
+   "why": "thrust-to-weight >= 5"
+  },
+  {
+   "quantity": "v_rail",
+   "op": ">=",
+   "value": "15",
+   "why": "v_rail >= 15 m/s"
+  },
+  {
+   "quantity": "Dveff",
+   "op": ">=",
+   "value": "250",
+   "why": "usable delta-v >= 250 m/s"
+  },
+  {
+   "quantity": "amax",
+   "op": "<=",
+   "value": "15*g0",
+   "why": "a_max <= 15 g0 (payload limit)"
+  }
+ ],
+ "objective": {
+  "minimize": "M.price",
+  "why": "cheapest motor"
+ },
+ "catalog": {
+  "motors": {
+   "ground": "problem statement catalog",
+   "items": [
+    {
+     "mass": "0.95",
+     "mp": {
+      "value": "0.50",
+      "tolerance": "0.02"
+     },
+     "Isp": {
+      "value": "195",
+      "tolerance": "0.04"
+     },
+     "F": {
+      "value": "260",
+      "tolerance": "0.1"
+     },
+     "price": "95",
+     "name": "M1"
+    },
+    {
+     "mass": "1.20",
+     "mp": {
+      "value": "0.62",
+      "tolerance": "0.02"
+     },
+     "Isp": {
+      "value": "200",
+      "tolerance": "0.04"
+     },
+     "F": {
+      "value": "180",
+      "tolerance": "0.1"
+     },
+     "price": "110",
+     "name": "M2"
+    },
+    {
+     "mass": "1.45",
+     "mp": {
+      "value": "0.80",
+      "tolerance": "0.02"
+     },
+     "Isp": {
+      "value": "190",
+      "tolerance": "0.04"
+     },
+     "F": {
+      "value": "420",
+      "tolerance": "0.1"
+     },
+     "price": "150",
+     "name": "M3"
+    },
+    {
+     "mass": "1.80",
+     "mp": {
+      "value": "1.00",
+      "tolerance": "0.02"
+     },
+     "Isp": {
+      "value": "205",
+      "tolerance": "0.04"
+     },
+     "F": {
+      "value": "350",
+      "tolerance": "0.1"
+     },
+     "price": "185",
+     "name": "M4"
+    }
+   ],
+   "fields": {
+    "mass": {
+     "unit": "kg"
+    },
+    "mp": {
+     "unit": "kg"
+    },
+    "Isp": {
+     "unit": "s"
+    },
+    "F": {
+     "unit": "N"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ },
+ "report": "all"
+}

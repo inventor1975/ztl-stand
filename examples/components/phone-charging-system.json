@@ -1,0 +1,48 @@
+{
+ "stand": "universal-stand/1",
+ "why": "the curator's example (2026-10-12): socket 230 V +-8 % -> 5 V adapter -> charging board -> battery, each a component proved once",
+ "components": {
+  "AD": {
+   "file": "adapter-5v.json"
+  },
+  "CH": {
+   "file": "charging-board.json"
+  },
+  "BT": {
+   "file": "battery-cell.json"
+  }
+ },
+ "connect": {
+  "AD.Vin": "Vmains",
+  "CH.Vin": "AD.Vout",
+  "BT.Vchg": "CH.Vchg"
+ },
+ "quantities": {
+  "Vmains": {
+   "role": "given",
+   "value": "230",
+   "tolerance": "0.08",
+   "unit": "V"
+  },
+  "Vend": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vend == BT.Vcell"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vend",
+   "op": "within",
+   "value": [
+    "4.1",
+    "4.25"
+   ],
+   "why": "the cell ends charged (>= 4.1 V), not overcharged (<= 4.25 V)"
+  }
+ ]
+}

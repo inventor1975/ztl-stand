@@ -1,0 +1,928 @@
+[stand] 1/112 designs, 0 s: 
+[stand] 51/112 designs, 104 s: 50 REFUTED
+[stand] 1/112 designs, 0 s: 
+[stand] 1/112 designs, 0 s: 
+[stand] 1/112 designs, 0 s: 
+[stand] 1/112 designs, 0 s: 
+[stand] 98/112 designs, 111 s: 97 REFUTED
+[stand] 1/112 designs, 0 s: 
+[stand] 74/112 designs, 114 s: 73 REFUTED
+[stand] 1/112 designs, 0 s: 
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 112,
+  "failed_at_nominal": 111,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "PB=lead(t=0); BA=barite(t=0); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "1111379/24200 (~45.9248)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=10); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~6.83819228054 (an exact fraction of 65 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=0); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~6.25540757481 (an exact fraction of 64 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=0); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~4.43419917026 (an exact fraction of 65 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=20); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~1.37604316021 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=10); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~1.25991309649 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=0); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~1.15406759928 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=10); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.861748538484 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=0); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.788991068589 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=30); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.317976483238 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=0); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.540802371124 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=20); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.291711328251 (an exact fraction of 67 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=10); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.267647602277 (an exact fraction of 67 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=0); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.245593852898 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=20); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.195479017801 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=10); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.179155242027 (an exact fraction of 67 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=0); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.164203554662 (an exact fraction of 67 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=10); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.119545574905 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=30); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0714553949863 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=0); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.109395252618 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=20); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.065377848427 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=10); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0597913061592 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=0); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0546552265002 (an exact fraction of 66 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=30); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0462543340419 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=0); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0724563598054 (an exact fraction of 67 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=20); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.042170774522 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=10); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0384183088835 (an exact fraction of 67 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=0); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0349694583172 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=20); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0266367631943 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=10); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0241141287083 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=30); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0143772440541 (an exact fraction of 69 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=0); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0217963661818 (an exact fraction of 67 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=20); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0128511744349 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=10); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0114462655202 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=0); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0101527904068 (an exact fraction of 69 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=10); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0145360103209 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=30); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.00792666468816 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=0); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.0129770323407 (an exact fraction of 67 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=20); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.00690764453309 (an exact fraction of 67 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=10); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.00596966016367 (an exact fraction of 69 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=0); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.00510618932415 (an exact fraction of 69 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=30); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.00362651058123 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=20); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.00294574679933 (an exact fraction of 69 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=10); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.00231921731658 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=30); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.000140051847526 (an exact fraction of 69 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=0); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.00174254479598 (an exact fraction of 68 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=20); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "542/25 (~21.68)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=10); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "7/20 (~0.35)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=20); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.000304015686044 (an exact fraction of 69 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=0); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+      "by": "~0.000110511281975 (an exact fraction of 74 digits)",
+      "unit": "mJ/kg"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=10); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "33017/100 (~330.17)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=30); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "3871/25 (~154.84)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=0); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "7721/25 (~308.84)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=20); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "13351/100 (~133.51)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=10); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "5609/50 (~112.18)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=0); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "1817/20 (~90.85)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=30); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "26667/100 (~266.67)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=20); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "12267/50 (~245.34)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=10); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "22401/100 (~224.01)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=30); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "1217/25 (~48.68)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=0); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "5067/25 (~202.68)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=20); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "547/20 (~27.35)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=0); BA=barite(t=30); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "757/2 (~378.5)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=10); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "301/50 (~6.02)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=20); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "35717/100 (~357.17)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=10); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "8396/25 (~335.84)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=30); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "16051/100 (~160.51)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=0); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "31451/100 (~314.51)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=20); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "6959/50 (~139.18)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=10); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "2357/20 (~117.85)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=0); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "2413/25 (~96.52)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=30); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "13617/50 (~272.34)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=20); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "25101/100 (~251.01)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=10); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "5742/25 (~229.68)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=30); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "1087/20 (~54.35)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=0); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "4167/20 (~208.35)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=20); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "1651/50 (~33.02)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=1/2); BA=barite(t=30); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "38417/100 (~384.17)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=20); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "9071/25 (~362.84)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=10); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "34151/100 (~341.51)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=30); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "8309/50 (~166.18)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=0); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "16009/50 (~320.18)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=20); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "2897/20 (~144.85)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=10); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "3088/25 (~123.52)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=30); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "27801/100 (~278.01)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=20); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "6417/25 (~256.68)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=10); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "4707/20 (~235.35)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=30); CO=concrete(t=0)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "3001/50 (~60.02)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=0); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "10701/50 (~214.02)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=1); BA=barite(t=30); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "9746/25 (~389.84)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=20); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "36851/100 (~368.51)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=10); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "17359/50 (~347.18)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=30); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "3437/20 (~171.85)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=0); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "6517/20 (~325.85)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=20); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "3763/25 (~150.52)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=30); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "7092/25 (~283.68)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=20); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "5247/20 (~262.35)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=10); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "12051/50 (~241.02)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3/2); BA=barite(t=30); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "39551/100 (~395.51)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=20); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "18709/50 (~374.18)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=10); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "7057/20 (~352.85)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=30); CO=concrete(t=50)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "4438/25 (~177.52)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=0); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "8288/25 (~331.52)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=30); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "5787/20 (~289.35)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=20); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "13401/50 (~268.02)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=2); BA=barite(t=30); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "20059/50 (~401.18)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=20); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "7597/20 (~379.85)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=10); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "8963/25 (~358.52)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=30); CO=concrete(t=100)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "14751/50 (~295.02)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=5/2); BA=barite(t=30); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "8137/20 (~406.85)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=20); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "9638/25 (~385.52)",
+      "unit": "kg/m^2"
+    },
+    {
+      "design": "PB=lead(t=3); BA=barite(t=30); CO=concrete(t=150)",
+      "verdict": "REFUTED",
+      "fails": "R2 slab limit",
+      "by": "10313/25 (~412.52)",
+      "unit": "kg/m^2"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 112
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "PB": {
+      "catalog": "lead",
+      "t": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    },
+    "BA": {
+      "catalog": "barite",
+      "t": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "CO": {
+      "catalog": "concrete",
+      "t": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "HVL_Ba_chest": "27/5 (~5.4)",
+    "HVL_Ba_ext": "9/5 (~1.8)",
+    "HVL_Ba_pelvis": "99/25 (~3.96)",
+    "HVL_Ba_spine": "153/50 (~3.06)",
+    "HVL_Co_chest": "189/10 (~18.9)",
+    "HVL_Co_ext": "9",
+    "HVL_Co_pelvis": "153/10 (~15.3)",
+    "HVL_Co_spine": "63/5 (~12.6)",
+    "HVL_Pb_chest": "77/250 (~0.308)",
+    "HVL_Pb_ext": "9/100 (~0.09)",
+    "HVL_Pb_pelvis": "189/1000 (~0.189)",
+    "HVL_Pb_spine": "18/125 (~0.144)",
+    "NK_chest": "72",
+    "NK_ext": "154",
+    "NK_pelvis": "150",
+    "NK_spine": "200"
+  },
+  "point_units": {
+    "HVL_Ba_chest": "mm",
+    "HVL_Ba_ext": "mm",
+    "HVL_Ba_pelvis": "mm",
+    "HVL_Ba_spine": "mm",
+    "HVL_Co_chest": "mm",
+    "HVL_Co_ext": "mm",
+    "HVL_Co_pelvis": "mm",
+    "HVL_Co_spine": "mm",
+    "HVL_Pb_chest": "mm",
+    "HVL_Pb_ext": "mm",
+    "HVL_Pb_pelvis": "mm",
+    "HVL_Pb_spine": "mm",
+    "NK_chest": "mJ/kg",
+    "NK_ext": "mJ/kg",
+    "NK_pelvis": "mJ/kg",
+    "NK_spine": "mJ/kg"
+  },
+  "value_there": {
+    "H": [
+      "~0.00511051128198 (an exact fraction of 72 digits)",
+      "~0.00511051128198 (an exact fraction of 73 digits)"
+    ]
+  },
+  "unit": "mJ/kg",
+  "requirement": {
+    "quantity": "H",
+    "op": "<=",
+    "value": "0.005",
+    "why": "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)"
+  },
+  "overshoot": "~0.000110511281975 (an exact fraction of 74 digits)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "~0.00125919098634 (an exact fraction of 72 digits)",
+      "~0.0103768340674 (an exact fraction of 72 digits)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "HVL_Pb_chest",
+        "moves_it_by": "~0.00385132029563 (an exact fraction of 65 digits)"
+      },
+      {
+        "quantity": "NK_chest",
+        "moves_it_by": "~0.00330468742875 (an exact fraction of 65 digits)"
+      },
+      {
+        "quantity": "HVL_Pb_pelvis",
+        "moves_it_by": "~0.000940777447808 (an exact fraction of 67 digits)"
+      },
+      {
+        "quantity": "NK_pelvis",
+        "moves_it_by": "~0.000117740762762 (an exact fraction of 67 digits)"
+      },
+      {
+        "quantity": "HVL_Pb_spine",
+        "moves_it_by": "~8.07602054269e-05 (an exact fraction of 69 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1 operator constraint 0.005 mSv/week (0.25 mSv/yr)",
+        "R2 slab limit"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  }
+}
+
+real	17m21.026s
+user	17m20.626s
+sys	0m0.370s

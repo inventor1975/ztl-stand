@@ -1,0 +1,243 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "pi": {
+   "role": "given",
+   "range": [
+    "3.14159",
+    "3.14160"
+   ],
+   "unit": "",
+   "why": "pi, bracketed"
+  },
+  "T": {
+   "role": "given",
+   "value": "25",
+   "unit": "C",
+   "why": "temperature; each mode overrides it"
+  },
+  "fin": {
+   "role": "given",
+   "value": "10000",
+   "unit": "Hz",
+   "why": "alias test frequency 10 kHz"
+  },
+  "Rf": {
+   "role": "given",
+   "value": "39000",
+   "tolerance": "0.01",
+   "unit": "ohm",
+   "ground": "problem statement"
+  },
+  "af": {
+   "role": "given",
+   "range": [
+    "-1/10000",
+    "1/10000"
+   ],
+   "unit": "1/C",
+   "why": "Rf tempco +-100 ppm/C"
+  },
+  "Rg": {
+   "role": "given",
+   "value": "4300",
+   "tolerance": "0.01",
+   "unit": "ohm",
+   "ground": "problem statement"
+  },
+  "ag": {
+   "role": "given",
+   "range": [
+    "-1/10000",
+    "1/10000"
+   ],
+   "unit": "1/C",
+   "why": "Rg tempco +-100 ppm/C"
+  },
+  "Rr": {
+   "role": "given",
+   "value": "15000",
+   "tolerance": "0.01",
+   "unit": "ohm",
+   "ground": "problem statement"
+  },
+  "ar": {
+   "role": "given",
+   "range": [
+    "-1/10000",
+    "1/10000"
+   ],
+   "unit": "1/C",
+   "why": "filter R tempco +-100 ppm/C"
+  },
+  "G": {
+   "role": "derived",
+   "unit": ""
+  },
+  "fc": {
+   "role": "derived",
+   "unit": "Hz"
+  },
+  "r": {
+   "role": "derived",
+   "unit": "",
+   "why": "f/fc at fin"
+  },
+  "tau": {
+   "role": "derived",
+   "unit": "s",
+   "why": "R*C of the filter"
+  }
+ },
+ "slots": {
+  "C": {
+   "from": [
+    "caps"
+   ]
+  }
+ },
+ "define": {
+  "RfT": "Rf*(1 + af*(T - 25))",
+  "RgT": "Rg*(1 + ag*(T - 25))",
+  "RrT": "Rr*(1 + ar*(T - 25))",
+  "CT": "C.C*(1 + C.d)"
+ },
+ "laws": [
+  {
+   "zfl": "G*RgT == RgT + RfT",
+   "source": "non-inverting amplifier gain, G = 1 + Rf/Rg"
+  },
+  {
+   "zfl": "tau == RrT*CT",
+   "source": "RC time constant"
+  },
+  {
+   "zfl": "fc == 1/(2*pi*tau)",
+   "source": "first-order cutoff, fc = 1/(2 pi R C)"
+  },
+  {
+   "zfl": "r == fin*2*pi*tau",
+   "source": "f/fc = f * 2 pi R C"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "fc",
+   "op": "within",
+   "value": [
+    "990",
+    "1140"
+   ],
+   "why": "cutoff 990..1140 Hz"
+  },
+  {
+   "quantity": "r",
+   "op": ">=",
+   "value": "8.8563",
+   "why": "A(10 kHz) >= 19 dB  <=>  (f/fc)^2 >= 10^1.9 - 1 = 78.4328, f/fc >= 8.85623; rounded up to 8.8563 (gives 19.00007 dB)"
+  },
+  {
+   "quantity": "G",
+   "op": "within",
+   "value": [
+    "9.8",
+    "10.3"
+   ],
+   "why": "gain 9.8..10.3"
+  }
+ ],
+ "objective": {
+  "minimize": "C.price",
+  "why": "cheapest capacitor"
+ },
+ "modes": {
+  "cold": {
+   "quantities": {
+    "T": {
+     "value": "-20"
+    }
+   }
+  },
+  "hot": {
+   "quantities": {
+    "T": {
+     "value": "70"
+    }
+   }
+  }
+ },
+ "catalog": {
+  "caps": {
+   "items": [
+    {
+     "C": {
+      "value": "10",
+      "tolerance": "0.10"
+     },
+     "d": {
+      "range": [
+       "-1/10",
+       "1/20"
+      ]
+     },
+     "price": "0.02",
+     "kind": "X7R"
+    },
+    {
+     "C": {
+      "value": "10",
+      "tolerance": "0.05"
+     },
+     "d": {
+      "range": [
+       "-3/1000",
+       "3/1000"
+      ]
+     },
+     "price": "0.08",
+     "kind": "C0G"
+    },
+    {
+     "C": {
+      "value": "10",
+      "tolerance": "0.02"
+     },
+     "d": {
+      "range": [
+       "-3/1000",
+       "3/1000"
+      ]
+     },
+     "price": "0.15",
+     "kind": "C0G"
+    },
+    {
+     "C": {
+      "value": "10",
+      "tolerance": "0.01"
+     },
+     "d": {
+      "range": [
+       "-3/200",
+       "1/200"
+      ]
+     },
+     "price": "0.45",
+     "kind": "polypropylene"
+    }
+   ],
+   "ground": "problem statement",
+   "fields": {
+    "C": {
+     "unit": "nF"
+    },
+    "d": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ }
+}

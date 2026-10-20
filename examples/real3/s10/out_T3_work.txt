@@ -1,0 +1,271 @@
+[stand] 1/17 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 17,
+  "failed_at_nominal": 0,
+  "judged": 17,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "RL=table3(name=row 200, R=200, Pmin=236, Pmax=312)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "8192948442112406323200/34684682030266181989 (~236.212)",
+          "4096474221056203161600/16987712356871855363 (~241.143)"
+        ],
+        "IOSmax": [
+          "1517244700062610620416/4965129461937768499 (~305.58)",
+          "474138968769565818880/1521790976966678841 (~311.566)"
+        ]
+      }
+    },
+    {
+      "design": "RL=table3(name=row 137, R=137, Pmin=349, Pmax=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "1638589688422481264640/4692843523578649057 (~349.168)",
+          "1638589688422481264640/4596880885043031851 (~356.457)"
+        ],
+        "IOSmax": [
+          "7586223500313053102080/17199682717717156133 (~441.068)",
+          "1517244700062610620416/3373842754148399833 (~449.708)"
+        ]
+      }
+    },
+    {
+      "design": "RL=table3(name=row 110, R=110, Pmin=438, Pmax=556)",
+      "verdict": "REFUTED",
+      "fails": "Table 3 published IOS(max) for this row",
+      "by_at_witness": "~0.415010154722 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=table3(name=row 90.9, R=909/10, Pmin=533, Pmax=669)",
+      "verdict": "REFUTED",
+      "fails": "Table 3 published IOS(max) for this row",
+      "by_at_witness": "~0.487966179021 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=table3(name=row 78.7, R=787/10, Pmin=619, Pmax=770)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "1365491407018734387200/2205791100121730017 (~619.048)",
+          "5461965628074937548800/8642741990949901561 (~631.971)"
+        ],
+        "IOSmax": [
+          "474138968769565818880/627880496683188519 (~755.142)",
+          "1517244700062610620416/1970613155112281387 (~769.935)"
+        ]
+      }
+    },
+    {
+      "design": "RL=table3(name=row 68.1, R=681/10, Pmin=719, Pmax=886)",
+      "verdict": "REFUTED",
+      "fails": "Table 3 published IOS(min) for this row",
+      "by_at_witness": "~0.171109906991 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=table3(name=row 61.9, R=619/10, Pmin=793, Pmax=972)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "16385896884224812646400/20654760715832965823 (~793.323)",
+          "2730982814037468774400/3372066219649049807 (~809.884)"
+        ],
+        "IOSmax": [
+          "2167492428660872314880/2273910518559299321 (~953.2)",
+          "3793111750156526551040/3902885635140483581 (~971.874)"
+        ]
+      }
+    },
+    {
+      "design": "RL=table3(name=row 54.9, R=549/10, Pmin=898, Pmax=1092)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "5461965628074937548800/6082200109901964909 (~898.025)",
+          "32771793768449625292800/35746961453631420133 (~916.771)"
+        ],
+        "IOSmax": [
+          "6068978800250442481664/5667305791125896185 (~1070.88)",
+          "30344894001252212408320/27792080372560455019 (~1091.85)"
+        ]
+      }
+    },
+    {
+      "design": "RL=table3(name=row 46.4, R=232/5, Pmin=1068, Pmax=1285)",
+      "verdict": "REFUTED",
+      "fails": "Table 3 published IOS(max) for this row",
+      "by_at_witness": "~0.367458434573 (an exact fraction of 59 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=table3(name=row 39.2, R=196/5, Pmin=1272, Pmax=1514)",
+      "verdict": "REFUTED",
+      "fails": "Table 3 published IOS(min) for this row",
+      "by_at_witness": "~0.249307832341 (an exact fraction of 59 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=table3(name=row 34.8, R=174/5, Pmin=1438, Pmax=1699)",
+      "verdict": "REFUTED",
+      "fails": "Table 3 published IOS(max) for this row",
+      "by_at_witness": "~0.095834675671 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=table3(name=row 30.9, R=309/10, Pmin=1626, Pmax=1907)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "5461965628074937548800/3358996738511958581 (~1626.07)",
+          "16385896884224812646400/9870928674229039559 (~1660.02)"
+        ],
+        "IOSmax": [
+          "60689788002504424816640/32452727078499871529 (~1870.1)",
+          "30344894001252212408320/15914595621198263459 (~1906.73)"
+        ]
+      }
+    },
+    {
+      "design": "RL=table3(name=row 27.4, R=137/5, Pmin=1841, Pmax=2143)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "32771793768449625292800/17800412011636339649 (~1841.07)",
+          "5461965628074937548800/2906069398047414441 (~1879.5)"
+        ],
+        "IOSmax": [
+          "12137957600500884963328/5776163980651760505 (~2101.39)",
+          "4334984857321744629760/2023279535435509487 (~2142.55)"
+        ]
+      }
+    },
+    {
+      "design": "RL=table3(name=row 24.9, R=249/10, Pmin=2032, Pmax=2351)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "6554358753689925058560/3225058854267106057 (~2032.32)",
+          "21847862512299750195200/10530368439967283683 (~2074.75)"
+        ],
+        "IOSmax": [
+          "30344894001252212408320/13160574361531671409 (~2305.74)",
+          "60689788002504424816640/25815422981231650897 (~2350.91)"
+        ]
+      }
+    },
+    {
+      "design": "RL=table3(name=row 23.2, R=116/5, Pmin=2186, Pmax=2518)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "32771793768449625292800/14989350387487889117 (~2186.34)",
+          "65543587536899250585600/29365674746773026089 (~2231.98)"
+        ],
+        "IOSmax": [
+          "3034489400125221240832/1228810240835213315 (~2469.45)",
+          "30344894001252212408320/12052002921526832129 (~2517.83)"
+        ]
+      }
+    },
+    {
+      "design": "RL=table3(name=row 21.5, R=43/2, Pmin=2365, Pmax=2711)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "4369572502459950039040/1847486990922245749 (~2365.14)",
+          "32771793768449625292800/13572811864382967043 (~2414.52)"
+        ],
+        "IOSmax": [
+          "60689788002504424816640/22827417323572304441 (~2658.64)",
+          "15172447000626106204160/5597204741873147869 (~2710.72)"
+        ]
+      }
+    },
+    {
+      "design": "RL=table3(name=row 20.5, R=41/2, Pmin=2484, Pmax=2839)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "2184786251229975019520/879395426635573877 (~2484.42)",
+          "32771793768449625292800/12921193749965384257 (~2536.28)"
+        ],
+        "IOSmax": [
+          "60689788002504424816640/21796798913687655917 (~2784.34)",
+          "6068978800250442481664/2137800251478573181 (~2838.89)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 11,
+    "REFUTED": 6
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "EARNED",
+  "design": {
+    "RL": {
+      "catalog": "table3",
+      "R": {
+        "nominal": "200",
+        "tolerance": "1/100 (~0.01)"
+      },
+      "Pmin": {
+        "nominal": "236",
+        "tolerance": "0"
+      },
+      "Pmax": {
+        "nominal": "312",
+        "tolerance": "0"
+      },
+      "name": "row 200"
+    }
+  },
+  "guaranteed": {
+    "IOSmin": [
+      "8192948442112406323200/34684682030266181989 (~236.212)",
+      "4096474221056203161600/16987712356871855363 (~241.143)"
+    ],
+    "IOSmax": [
+      "1517244700062610620416/4965129461937768499 (~305.58)",
+      "474138968769565818880/1521790976966678841 (~311.566)"
+    ]
+  },
+  "guaranteed_unit": {
+    "IOSmin": "mA",
+    "IOSmax": "mA"
+  },
+  "how": {
+    "IOSmin": "ZTL, interval reading of the definition (sound, may be wide)",
+    "IOSmax": "ZTL, interval reading of the definition (sound, may be wide)"
+  },
+  "requirements": [
+    {
+      "quantity": "IOSmin",
+      "op": ">=",
+      "value": "RL.Pmin",
+      "why": "Table 3 published IOS(min) for this row"
+    },
+    {
+      "quantity": "IOSmax",
+      "op": "<=",
+      "value": "RL.Pmax",
+      "why": "Table 3 published IOS(max) for this row"
+    }
+  ],
+  "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "IOSmin -> [40964742210562031616/173423410151330909945, 20482371105281015808/84938561784359276815] by [IOSmin == Kmin/pow((RL__R/Ru), 1.033)], interval reading, sound, may be wider than the truth (credit)",
+    "IOSmax -> [189655587507826327552/620641182742221062375, 11853474219239145472/38044774424166971025] by [IOSmax == Kmax/pow((RL__R/Ru), 0.97)], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

@@ -1,0 +1,79 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "component 1: the regulator's reference, Vref 1.275 V +-grade (AN-1378 Table 1 basis); grade is its own slot",
+ "interface": {
+  "inputs": {},
+  "outputs": [
+   "Vo"
+  ]
+ },
+ "quantities": {
+  "Vo": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {
+  "REF": {
+   "from": [
+    "vref"
+   ]
+  }
+ },
+ "catalog": {
+  "vref": {
+   "items": [
+    {
+     "name": "Vref +-5%",
+     "Vref": {
+      "value": "1.275",
+      "tolerance": "0.05"
+     },
+     "cost": "1"
+    },
+    {
+     "name": "Vref +-2%",
+     "Vref": {
+      "value": "1.275",
+      "tolerance": "0.02"
+     },
+     "cost": "2"
+    },
+    {
+     "name": "Vref +-1%",
+     "Vref": {
+      "value": "1.275",
+      "tolerance": "0.01"
+     },
+     "cost": "3"
+    },
+    {
+     "name": "Vref +-0.5%",
+     "Vref": {
+      "value": "1.275",
+      "tolerance": "0.005"
+     },
+     "cost": "4"
+    }
+   ],
+   "fields": {
+    "Vref": {
+     "unit": "V"
+    },
+    "cost": {
+     "unit": ""
+    }
+   }
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vo == REF.Vref",
+   "source": "reference output"
+  }
+ ],
+ "requirements": [],
+ "objective": {
+  "minimize": "REF.cost"
+ }
+}

@@ -1,0 +1,132 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Ta": {
+   "role": "given",
+   "range": [
+    "20",
+    "45"
+   ],
+   "unit": "C",
+   "why": "ambient air"
+  },
+  "P": {
+   "role": "given",
+   "value": "20",
+   "tolerance": "0.1",
+   "unit": "W",
+   "why": "dissipation"
+  },
+  "Rjc": {
+   "role": "given",
+   "value": "0.5",
+   "tolerance": "0.2",
+   "unit": "C/W",
+   "ground": "device datasheet"
+  },
+  "Tj": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {
+  "HS": {
+   "from": [
+    "heatsinks"
+   ]
+  },
+  "PAD": {
+   "from": [
+    "pads"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Tj == Ta + P*(Rjc + PAD.R + HS.R)",
+   "source": "series thermal resistances"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tj",
+   "op": "<=",
+   "value": "125",
+   "why": "max junction temperature"
+  }
+ ],
+ "catalog": {
+  "heatsinks": {
+   "items": [
+    {
+     "R": {
+      "value": "5",
+      "tolerance": "0.1"
+     },
+     "price": "1"
+    },
+    {
+     "R": {
+      "value": "3",
+      "tolerance": "0.1"
+     },
+     "price": "2"
+    },
+    {
+     "R": {
+      "value": "2",
+      "tolerance": "0.1"
+     },
+     "price": "4"
+    },
+    {
+     "R": {
+      "value": "1.2",
+      "tolerance": "0.1"
+     },
+     "price": "7"
+    }
+   ],
+   "ground": "vendor datasheet",
+   "fields": {
+    "R": {
+     "unit": "C/W"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  },
+  "pads": {
+   "items": [
+    {
+     "R": {
+      "value": "0.5",
+      "tolerance": "0.2"
+     },
+     "price": "0.1"
+    },
+    {
+     "R": {
+      "value": "0.2",
+      "tolerance": "0.2"
+     },
+     "price": "0.5"
+    }
+   ],
+   "ground": "vendor datasheet",
+   "fields": {
+    "R": {
+     "unit": "C/W"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ },
+ "objective": {
+  "minimize": "HS.price + PAD.price",
+  "why": "cheapest parts that hold Tj"
+ }
+}

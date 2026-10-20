@@ -1,0 +1,78 @@
+{
+ "stand": "universal-stand/1",
+ "why": "hose B 16 mm 8 m",
+ "interface": {
+  "inputs": {
+   "Q": {
+    "assume": [
+     "5",
+     "25"
+    ],
+    "bands": "arriving"
+   },
+   "Pabs": {
+    "assume": [
+     "6.5",
+     "9.0"
+    ],
+    "bands": "arriving"
+   }
+  },
+  "outputs": [
+   "dp"
+  ]
+ },
+ "quantities": {
+  "Q": {
+   "role": "given",
+   "value": "20",
+   "unit": "L/s"
+  },
+  "Pabs": {
+   "role": "given",
+   "value": "7",
+   "unit": "bar"
+  },
+  "KP": {
+   "role": "given",
+   "value": "1600",
+   "unit": "bar^2"
+  },
+  "Qu": {
+   "role": "given",
+   "value": "1",
+   "unit": "L/s"
+  },
+  "du": {
+   "role": "given",
+   "value": "1",
+   "unit": "mm"
+  },
+  "Lu": {
+   "role": "given",
+   "value": "1",
+   "unit": "m"
+  },
+  "d": {
+   "role": "given",
+   "value": "16",
+   "unit": "mm"
+  },
+  "L": {
+   "role": "given",
+   "value": "8",
+   "unit": "m"
+  },
+  "dp": {
+   "role": "derived",
+   "unit": "bar"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "dp == KP*(L/Lu)/((d/du)*(d/du)*(d/du)*(d/du)*(d/du)*Pabs)*pow(Q/Qu, 1.85)",
+   "source": "empirical pipe law"
+  }
+ ],
+ "requirements": []
+}

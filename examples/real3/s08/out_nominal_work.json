@@ -1,0 +1,613 @@
+{
+  "stand": "ztl-stand/1",
+  "verdict": "EARNED",
+  "why": "several limits, each searched on its own; the verdict is the weakest of theirs",
+  "finds": [
+    {
+      "verdict": "EARNED",
+      "find": "smallest",
+      "quantity": "Cap1",
+      "unit": "mAh",
+      "proved": "11826/25 (~473.04)",
+      "proved_means": "every Cap1 in [11826/25 (~473.04), 1500] mAh works (EARNED on the whole range)",
+      "beyond": "47303/100 (~473.03)",
+      "beyond_is": "REFUTED: the range [47303/100 (~473.03), 1500] mAh holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "margin1": [
+                "0",
+                "12837/12500 (~1.02696)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "margin1": [
+            "0",
+            "12837/12500 (~1.02696)"
+          ]
+        },
+        "guaranteed_unit": {
+          "margin1": "Ah"
+        },
+        "how": {
+          "margin1": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "margin1",
+            "op": ">=",
+            "value": "0",
+            "why": "cell capacity covers eq 2.2 for every k in the source's range"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "margin2 = 18/125 by exact elimination (credit)",
+          "margin3 = 36522/25 by exact elimination (credit)",
+          "margin1 -> [0, 462132/125] by [margin1 == Cap1 - Treq*I3*k]"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "cell capacity covers eq 2.2 for every k in the source's range",
+            "by_at_witness": "1/100000 (~1e-05)",
+            "unit": "Ah"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Cap1": "47303/100 (~473.03)"
+        },
+        "point_units": {
+          "Cap1": "mAh"
+        },
+        "value_there": {
+          "margin1": "-1/100000 (~-1e-05)"
+        },
+        "unit": "Ah",
+        "requirement": {
+          "quantity": "margin1",
+          "op": ">=",
+          "value": "0",
+          "why": "cell capacity covers eq 2.2 for every k in the source's range"
+        },
+        "overshoot": "1/100000 (~1e-05)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "-1/100000 (~-1e-05)",
+            "12837/12500 (~1.02696)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Cap1",
+              "moves_it_by": "102697/100000 (~1.02697)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Cap1": "1500",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap1": "0",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap1": "750",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap1": "375",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap1": "1125/2 (~562.5)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap1": "1875/4 (~468.75)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap1": "25781/50 (~515.62)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap1": "24609/50 (~492.18)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap1": "24023/50 (~480.46)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap1": "2373/5 (~474.6)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap1": "11792/25 (~471.68)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap1": "23657/50 (~473.14)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap1": "47241/100 (~472.41)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap1": "23639/50 (~472.78)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap1": "11824/25 (~472.96)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap1": "9461/20 (~473.05)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap1": "473",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap1": "23651/50 (~473.02)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap1": "11826/25 (~473.04)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap1": "47303/100 (~473.03)",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 0
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "T2",
+      "unit": "h",
+      "proved": "73600",
+      "proved_means": "every T2 in [0, 73600] h works (EARNED on the whole range)",
+      "beyond": "73601",
+      "beyond_is": "REFUTED: the range [0, 73601] h holds a concrete failing point (at_beyond)",
+      "precision": "1",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "margin2": [
+                "0",
+                "23/125 (~0.184)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "margin2": [
+            "0",
+            "23/125 (~0.184)"
+          ]
+        },
+        "guaranteed_unit": {
+          "margin2": "Ah"
+        },
+        "how": {
+          "margin2": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "margin2",
+            "op": ">=",
+            "value": "0",
+            "why": "the cell lasts at least T2 for every f2 in the source's range"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "margin1 = 237132/125 by exact elimination (credit)",
+          "margin3 = 36522/25 by exact elimination (credit)",
+          "margin2 -> [0, 3312/5] by [margin2 == Cap2*f2 - T2*I2]"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "the cell lasts at least T2 for every f2 in the source's range",
+            "by_at_witness": "1/400000 (~2.5e-06)",
+            "unit": "Ah"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "T2": "73601"
+        },
+        "point_units": {
+          "T2": "h"
+        },
+        "value_there": {
+          "margin2": "-1/400000 (~-2.5e-06)"
+        },
+        "unit": "Ah",
+        "requirement": {
+          "quantity": "margin2",
+          "op": ">=",
+          "value": "0",
+          "why": "the cell lasts at least T2 for every f2 in the source's range"
+        },
+        "overshoot": "1/400000 (~2.5e-06)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "-1/400000 (~-2.5e-06)",
+            "23/125 (~0.184)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "T2",
+              "moves_it_by": "73601/400000 (~0.184003)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "T2": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "100000",
+          "verdict": "REFUTED"
+        },
+        {
+          "T2": "50000",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "75000",
+          "verdict": "REFUTED"
+        },
+        {
+          "T2": "62500",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "68750",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "71875",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "73438",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "74219",
+          "verdict": "REFUTED"
+        },
+        {
+          "T2": "73828",
+          "verdict": "REFUTED"
+        },
+        {
+          "T2": "73633",
+          "verdict": "REFUTED"
+        },
+        {
+          "T2": "73536",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "73584",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "73608",
+          "verdict": "REFUTED"
+        },
+        {
+          "T2": "73596",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "73602",
+          "verdict": "REFUTED"
+        },
+        {
+          "T2": "73599",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "73600",
+          "verdict": "EARNED"
+        },
+        {
+          "T2": "73601",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 1
+    },
+    {
+      "verdict": "EARNED",
+      "find": "smallest",
+      "quantity": "Cap3",
+      "unit": "mAh",
+      "proved": "1971/4 (~492.75)",
+      "proved_means": "every Cap3 in [1971/4 (~492.75), 1500] mAh works (EARNED on the whole range)",
+      "beyond": "24637/50 (~492.74)",
+      "beyond_is": "REFUTED: the range [24637/50 (~492.74), 1500] mAh holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "margin3": [
+                "0",
+                "4029/5000 (~0.8058)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "margin3": [
+            "0",
+            "4029/5000 (~0.8058)"
+          ]
+        },
+        "guaranteed_unit": {
+          "margin3": "Ah"
+        },
+        "how": {
+          "margin3": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "margin3",
+            "op": ">=",
+            "value": "0",
+            "why": "the cell lasts at least 15 y for every f3 in the source's range"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "margin1 = 237132/125 by exact elimination (credit)",
+          "margin2 = 18/125 by exact elimination (credit)",
+          "margin3 -> [0, 72522/25] by [margin3 == Cap3*f3 - Treq*I3]"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "the cell lasts at least 15 y for every f3 in the source's range",
+            "by_at_witness": "1/125000 (~8e-06)",
+            "unit": "Ah"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Cap3": "24637/50 (~492.74)"
+        },
+        "point_units": {
+          "Cap3": "mAh"
+        },
+        "value_there": {
+          "margin3": "-1/125000 (~-8e-06)"
+        },
+        "unit": "Ah",
+        "requirement": {
+          "quantity": "margin3",
+          "op": ">=",
+          "value": "0",
+          "why": "the cell lasts at least 15 y for every f3 in the source's range"
+        },
+        "overshoot": "1/125000 (~8e-06)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "-1/125000 (~-8e-06)",
+            "4029/5000 (~0.8058)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Cap3",
+              "moves_it_by": "50363/62500 (~0.805808)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Cap3": "1500",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "0",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap3": "750",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "375",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap3": "1125/2 (~562.5)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "1875/4 (~468.75)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap3": "25781/50 (~515.62)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "24609/50 (~492.18)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap3": "5039/10 (~503.9)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "12451/25 (~498.04)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "49511/100 (~495.11)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "12341/25 (~493.64)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "49291/100 (~492.91)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "24627/50 (~492.54)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap3": "12318/25 (~492.72)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap3": "24641/50 (~492.82)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "49277/100 (~492.77)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "24637/50 (~492.74)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Cap3": "12319/25 (~492.76)",
+          "verdict": "EARNED"
+        },
+        {
+          "Cap3": "1971/4 (~492.75)",
+          "verdict": "EARNED"
+        }
+      ],
+      "find_index": 2
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

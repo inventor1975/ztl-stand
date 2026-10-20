@@ -1,0 +1,176 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "excluded_by_where": 98,
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=10); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Mfwd": [
+          "0",
+          "483754815268310399876377335741977/198669218065839345217264932618240 (~2.43498)"
+        ],
+        "Mrear": [
+          "~0.192470786829 (an exact fraction of 35 digits)",
+          "543355580688062203441556815527449/198669218065839345217264932618240 (~2.73498)"
+        ],
+        "Mside": [
+          "~0.192470786829 (an exact fraction of 35 digits)",
+          "543355580688062203441556815527449/198669218065839345217264932618240 (~2.73498)"
+        ],
+        "NS_N_req": [
+          "10",
+          "10"
+        ],
+        "Tp": [
+          "1105/2 (~552.5)",
+          "1495/2 (~747.5)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "objective": {
+    "minimize": "NS.N*ST.price + MT.price",
+    "value": "640",
+    "unit": "EUR",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "ST": {
+      "catalog": "straps",
+      "LC": {
+        "nominal": "5000",
+        "tolerance": "0"
+      },
+      "STF": {
+        "nominal": "650",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "38",
+        "tolerance": "0"
+      },
+      "grade": "S3"
+    },
+    "NS": {
+      "catalog": "counts",
+      "N": {
+        "nominal": "10",
+        "tolerance": "0"
+      }
+    },
+    "MT": {
+      "catalog": "mats",
+      "mu": {
+        "range": [
+          "7/10 (~0.7)",
+          "3/4 (~0.75)"
+        ]
+      },
+      "price": {
+        "nominal": "260",
+        "tolerance": "0"
+      },
+      "mat": "M2 premium"
+    }
+  },
+  "guaranteed": {
+    "Mfwd": [
+      "0",
+      "483754815268310399876377335741977/198669218065839345217264932618240 (~2.43498)"
+    ],
+    "Mrear": [
+      "~0.192470786829 (an exact fraction of 35 digits)",
+      "543355580688062203441556815527449/198669218065839345217264932618240 (~2.73498)"
+    ],
+    "Mside": [
+      "~0.192470786829 (an exact fraction of 35 digits)",
+      "543355580688062203441556815527449/198669218065839345217264932618240 (~2.73498)"
+    ],
+    "NS_N_req": [
+      "10",
+      "10"
+    ],
+    "Tp": [
+      "1105/2 (~552.5)",
+      "1495/2 (~747.5)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Mfwd": "",
+    "Mrear": "",
+    "Mside": "",
+    "NS_N_req": "",
+    "Tp": "10N"
+  },
+  "guaranteed_ends": {
+    "Mfwd": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+  },
+  "how": {
+    "Mfwd": "ZTL, certificate checked exactly (30 pieces; found by the stand's search, the extreme may lie inside the box)",
+    "Mrear": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Mside": "ZTL, interval reading of the definition (sound, may be wide)",
+    "NS_N_req": "ZTL, outer range",
+    "Tp": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "Mfwd",
+      "op": ">=",
+      "value": "0",
+      "why": "R1 forward holds"
+    },
+    {
+      "quantity": "Mrear",
+      "op": ">=",
+      "value": "0",
+      "why": "R1 rearward holds"
+    },
+    {
+      "quantity": "Mside",
+      "op": ">=",
+      "value": "0",
+      "why": "R1 sideways holds"
+    },
+    {
+      "quantity": "NS_N_req",
+      "op": "<=",
+      "value": "10",
+      "why": "R2 at most 10 anchor pairs"
+    },
+    {
+      "quantity": "Tp",
+      "op": "<=",
+      "value": "ST.LC/2",
+      "why": "R3 1.15 STF <= 0.5 LC"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "NS_N_req = 10 by exact elimination (credit)",
+    "Tp -> [5525, 7475] by [Tp == f*ST__STF]",
+    "Fv -> [14429064369305110690911865234375/2900095460895869832697741312, 20939546355259130756793212890625/799409375767903368812429312] by [Fv == f*ST__STF*(tan(al)/sqrt(1 + tan(al)*tan(al)))*(1 + kf)], interval reading, sound, may be wider than the truth (credit)",
+    "Mfwd -> [-2049663519970873704939810221116151/19061457435830283649372444321382400, 483754815268310399876377335741977/198669218065839345217264932618240] by [Mfwd == MT__mu*(8/10 + NS__N*Fv/(m*g)) - 8/10], interval reading, sound, may be wider than the truth (credit)",
+    "Mrear -> [3668773710778211389871923075298569/19061457435830283649372444321382400, 543355580688062203441556815527449/198669218065839345217264932618240] by [Mrear == MT__mu*(8/10 + NS__N*Fv/(m*g)) - 5/10], interval reading, sound, may be wider than the truth (credit)",
+    "Mside -> [3668773710778211389871923075298569/19061457435830283649372444321382400, 543355580688062203441556815527449/198669218065839345217264932618240] by [Mside == MT__mu*(8/10 + NS__N*Fv/(m*g)) - 5/10], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	0m17.429s
+user	0m16.991s
+sys	0m0.422s

@@ -1,0 +1,16 @@
+{"stand": "ztl-stand/1",
+ "why": "network v2 (current source, node potential, reference at ambient): a TO-220 MOSFET on a sink through an insulating pad — the junction temperature for a dissipated power, real round 3 n02's chain as a thermal network (DigiKey TechForum, 'A Thermal Management Example'; datasheet maxima as ranges)",
+ "quantities": {
+  "P":   {"role": "given", "range": ["9", "10.4"], "unit": "W", "why": "dissipated power range"},
+  "Ta":  {"role": "given", "range": ["25", "40"], "unit": "C", "why": "ambient"},
+  "Rjc": {"role": "given", "range": ["0.3", "0.45"], "unit": "C/W", "ground": "datasheet max 0.45"},
+  "Rcs": {"role": "given", "range": ["0.6", "0.8"], "unit": "C/W", "ground": "pad table"},
+  "Rsa": {"role": "given", "range": ["6", "7"], "unit": "C/W", "ground": "sink chart, 'a bit under 7'"},
+  "Rja": {"role": "given", "value": "62", "tolerance": "0.1", "unit": "C/W", "why": "the package's own path to air, in parallel"}},
+ "network": {
+  "branches": {"jc": {"from": "j", "to": "c", "R": "Rjc"}, "cs": {"from": "c", "to": "s", "R": "Rcs"},
+               "sa": {"from": "s", "to": "amb", "R": "Rsa"}, "ja": {"from": "j", "to": "amb", "R": "Rja"}},
+  "source": {"into": "j", "from": "amb", "I": "P", "at": "Ta"}},
+ "requirements": [{"quantity": "V(j)", "op": "<=", "value": "125", "unit": "C"},
+                  {"quantity": "V(j, s)", "op": "<=", "value": "13", "unit": "C"},
+                  {"quantity": "I(sa)", "op": ">=", "value": "8", "unit": "W"}]}

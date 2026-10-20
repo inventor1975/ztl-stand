@@ -1,0 +1,166 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "T": {
+   "role": "given",
+   "value": "300",
+   "unit": "K",
+   "ground": "battery pack NTC temperature"
+  },
+  "T25": {
+   "role": "given",
+   "value": "298.15",
+   "unit": "K",
+   "ground": "25 C in kelvin"
+  },
+  "beta": {
+   "role": "given",
+   "value": "3435",
+   "unit": "K",
+   "ground": "NTC 10k beta(25/85C), TI SPVA059 ex.1"
+  },
+  "R25": {
+   "role": "given",
+   "value": "10000",
+   "unit": "ohm",
+   "ground": "NTC 10k at 25C, TI SPVA059 ex.1"
+  },
+  "Ib": {
+   "role": "given",
+   "range": [
+    "76.8",
+    "83.2"
+   ],
+   "unit": "uA",
+   "ground": "BQ25190 TS bias current min/max (SPVA059 sec 4.2)"
+  },
+  "Vth": {
+   "role": "given",
+   "range": [
+    "272/1000",
+    "280/1000"
+   ],
+   "unit": "V",
+   "ground": "BQ25190 TS threshold min/max (SPVA059 sec 4.2)"
+  },
+  "Rn": {
+   "role": "derived",
+   "unit": "ohm"
+  },
+  "Vts": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "VthC": {
+   "role": "given",
+   "range": [
+    "576/1000",
+    "584/1000"
+   ],
+   "unit": "V",
+   "ground": "BQ25190 TS threshold min/max (SPVA059 sec 4.2)"
+  }
+ },
+ "slots": {
+  "RP": {
+   "from": [
+    "rp_12k_1pct"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Rn == R25*exp(beta*(1/T - 1/T25))",
+   "source": "beta equation (SPVA059 eq.1)"
+  },
+  {
+   "zfl": "Vts == Ib*RP.R*Rn/(RP.R + Rn)",
+   "source": "TS pin: bias current into RP parallel (RS=0 + NTC) (SPVA059 eq.4)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vts",
+   "op": "<=",
+   "value": "Vth",
+   "why": "HOT trip is guaranteed for every NTC temperature from a up to 60 C: Vts below the lowest HOT threshold"
+  }
+ ],
+ "find": [
+  {
+   "smallest": "T",
+   "from": "305",
+   "to": "333.15",
+   "precision": "1/100",
+   "requirements": [
+    {
+     "quantity": "Vts",
+     "op": "<=",
+     "value": "Vth",
+     "why": "HOT trip is guaranteed for every NTC temperature from a up to 60 C: Vts below the lowest HOT threshold"
+    }
+   ]
+  },
+  {
+   "largest": "T",
+   "from": "298.15",
+   "to": "325",
+   "precision": "1/100",
+   "requirements": [
+    {
+     "quantity": "Vts",
+     "op": ">=",
+     "value": "Vth",
+     "why": "no HOT trip for any NTC temperature from 25 C up to a: Vts above the highest HOT threshold"
+    }
+   ]
+  },
+  {
+   "largest": "T",
+   "from": "263.15",
+   "to": "298.15",
+   "precision": "1/100",
+   "requirements": [
+    {
+     "quantity": "Vts",
+     "op": ">=",
+     "value": "VthC",
+     "why": "COLD trip is guaranteed for every NTC temperature from -10 C up to a"
+    }
+   ]
+  },
+  {
+   "smallest": "T",
+   "from": "263.15",
+   "to": "298.15",
+   "precision": "1/100",
+   "requirements": [
+    {
+     "quantity": "Vts",
+     "op": "<=",
+     "value": "VthC",
+     "why": "no COLD trip for any NTC temperature from a up to 25 C"
+    }
+   ]
+  }
+ ],
+ "catalog": {
+  "rp_12k_1pct": {
+   "items": [
+    {
+     "R": {
+      "value": "12000",
+      "tolerance": "0.01"
+     }
+    }
+   ],
+   "fields": {
+    "R": {
+     "unit": "ohm"
+    }
+   },
+   "ground": "SPVA059 ex.1: RP = 12k E96 1%, RS = 0 ohm (short)"
+  }
+ },
+ "why": "real round 2, s05 (TI SPVA059, ex. 1): the four trip-temperature limits in ONE brick (a find list)"
+}

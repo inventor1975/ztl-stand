@@ -1,0 +1,54 @@
+{
+ "stand": "ztl-stand/1",
+ "interface": {
+  "inputs": {
+   "Vr": {
+    "assume": [
+     "1.2",
+     "1.35"
+    ],
+    "bands": [
+     "1.2",
+     "1.245",
+     "1.305",
+     "1.35"
+    ]
+   }
+  },
+  "outputs": [
+   "Vout"
+  ]
+ },
+ "quantities": {
+  "Vr": {
+   "role": "given",
+   "value": "1.275",
+   "unit": "V"
+  },
+  "R1": {
+   "role": "given",
+   "value": "17000",
+   "tolerance": "0.005",
+   "unit": "ohm"
+  },
+  "R2": {
+   "role": "given",
+   "value": "27000",
+   "tolerance": "0.005",
+   "unit": "ohm"
+  },
+  "Vout": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "Vout == Vr*(R1+R2)/R1",
+   "source": "Eq1"
+  }
+ ],
+ "requirements": []
+}

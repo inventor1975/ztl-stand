@@ -1,0 +1,256 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "catalog statement: speed 2..20 % below synchronous 1800 rpm, whatever the load",
+ "quantities": {
+  "Wf": {
+   "role": "given",
+   "value": "30",
+   "unit": "lbf"
+  },
+  "mu": {
+   "role": "given",
+   "value": "0.3",
+   "unit": ""
+  },
+  "Dd": {
+   "role": "given",
+   "value": "4",
+   "unit": "in"
+  },
+  "etab": {
+   "role": "given",
+   "value": "0.9",
+   "unit": ""
+  },
+  "etag": {
+   "role": "given",
+   "range": [
+    "0.66",
+    "0.81"
+   ],
+   "unit": ""
+  },
+  "Tst": {
+   "role": "given",
+   "value": "139/80",
+   "unit": "lbf*in"
+  },
+  "SF": {
+   "role": "given",
+   "value": "2",
+   "unit": ""
+  },
+  "F": {
+   "role": "derived",
+   "unit": "lbf"
+  },
+  "TL": {
+   "role": "derived",
+   "unit": "lbf*in"
+  },
+  "TM": {
+   "role": "derived",
+   "unit": "lbf*in"
+  },
+  "NM": {
+   "role": "derived",
+   "unit": "rpm"
+  },
+  "V": {
+   "role": "derived",
+   "unit": "in/s"
+  },
+  "Tstart": {
+   "role": "derived",
+   "unit": "lbf*in"
+  },
+  "Ns": {
+   "role": "given",
+   "value": "1800",
+   "unit": "rpm"
+  },
+  "s": {
+   "role": "given",
+   "range": [
+    "0.02",
+    "0.2"
+   ],
+   "unit": ""
+  }
+ },
+ "slots": {
+  "G": {
+   "from": [
+    "gearheads"
+   ]
+  }
+ },
+ "catalog": {
+  "gearheads": {
+   "items": [
+    {
+     "name": "5GN3KA",
+     "i": "3",
+     "Tmax": "5.5"
+    },
+    {
+     "name": "5GN3.6KA",
+     "i": "3.6",
+     "Tmax": "6.6"
+    },
+    {
+     "name": "5GN5KA",
+     "i": "5",
+     "Tmax": "9.1"
+    },
+    {
+     "name": "5GN6KA",
+     "i": "6",
+     "Tmax": "11"
+    },
+    {
+     "name": "5GN7.5KA",
+     "i": "7.5",
+     "Tmax": "14"
+    },
+    {
+     "name": "5GN9KA",
+     "i": "9",
+     "Tmax": "16"
+    },
+    {
+     "name": "5GN12.5KA",
+     "i": "12.5",
+     "Tmax": "23"
+    },
+    {
+     "name": "5GN15KA",
+     "i": "15",
+     "Tmax": "27"
+    },
+    {
+     "name": "5GN18KA",
+     "i": "18",
+     "Tmax": "33"
+    },
+    {
+     "name": "5GN25KA",
+     "i": "25",
+     "Tmax": "41"
+    },
+    {
+     "name": "5GN30KA",
+     "i": "30",
+     "Tmax": "49"
+    },
+    {
+     "name": "5GN36KA",
+     "i": "36",
+     "Tmax": "59"
+    },
+    {
+     "name": "5GN50KA",
+     "i": "50",
+     "Tmax": "74"
+    },
+    {
+     "name": "5GN60KA",
+     "i": "60",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN75KA",
+     "i": "75",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN90KA",
+     "i": "90",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN100KA",
+     "i": "100",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN120KA",
+     "i": "120",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN150KA",
+     "i": "150",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN180KA",
+     "i": "180",
+     "Tmax": "87"
+    }
+   ],
+   "fields": {
+    "i": {
+     "unit": ""
+    },
+    "Tmax": {
+     "unit": "lbf*in"
+    }
+   }
+  }
+ },
+ "laws": [
+  {
+   "zfl": "F == mu*Wf",
+   "source": "sliding friction of belt and work, tech ref"
+  },
+  {
+   "zfl": "TL == F*Dd/(2*etab)",
+   "source": "torque at the gearhead shaft, tech ref"
+  },
+  {
+   "zfl": "TM == TL/(G.i*etag)",
+   "source": "torque at the motor shaft through the gearhead, tech ref"
+  },
+  {
+   "zfl": "V == pi*Dd*NM/G.i",
+   "source": "belt speed from drum diameter and drum speed"
+  },
+  {
+   "zfl": "Tstart == SF*TM",
+   "source": "tech ref: safety factor 2 on the torque"
+  },
+  {
+   "zfl": "NM == Ns*(1 - s)",
+   "source": "catalog: actual speed 2-20 % below synchronous 1800 rpm"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "V",
+   "op": "within",
+   "value": [
+    "6.3",
+    "7.7"
+   ],
+   "why": "7 in/s +-10 %"
+  },
+  {
+   "quantity": "Tstart",
+   "op": "<=",
+   "value": "Tst",
+   "why": "motor starting torque 27.8 oz-in (catalog) must cover the doubled torque"
+  },
+  {
+   "quantity": "TL",
+   "op": "<=",
+   "value": "G.Tmax",
+   "why": "gearhead permissible torque (catalog table)"
+  }
+ ],
+ "objective": {
+  "minimize": "G.i",
+  "why": "order only"
+ },
+ "report": "all"
+}

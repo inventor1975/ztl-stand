@@ -1,0 +1,80 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 9,
+  "failed_at_nominal": 6,
+  "judged": 3,
+  "undecided": 3,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "OPEN",
+      "why": "the implicit law of tBp: no root in the search range [0.01, 3.8896] for any value of the box — widen `search` if a root may lie outside it"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "OPEN",
+      "why": "the implicit law of tBp: no root in the search range [0.01, 3.8896] for any value of the box — widen `search` if a root may lie outside it"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=1/125)",
+      "verdict": "REFUTED",
+      "fails": "R4 outfall depth <= 5.0 m",
+      "by": "101/100 (~1.01)",
+      "unit": "m"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "OPEN",
+      "why": "the implicit law of tBp: no root in the search range [0.01, 3.8896] for any value of the box — widen `search` if a root may lie outside it"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R4 outfall depth <= 5.0 m",
+      "by": "1/2 (~0.5)",
+      "unit": "m"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=1/125)",
+      "verdict": "REFUTED",
+      "fails": "R4 outfall depth <= 5.0 m",
+      "by": "41/25 (~1.64)",
+      "unit": "m"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/125); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R4 outfall depth <= 5.0 m",
+      "by": "119/100 (~1.19)",
+      "unit": "m"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/125); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R4 outfall depth <= 5.0 m",
+      "by": "44/25 (~1.76)",
+      "unit": "m"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/125); DB=diam(D=200, pf=1); SB=slope(S=1/125)",
+      "verdict": "REFUTED",
+      "fails": "R4 outfall depth <= 5.0 m",
+      "by": "29/10 (~2.9)",
+      "unit": "m"
+    }
+  ],
+  "designs_count": {
+    "OPEN": 3,
+    "REFUTED": 6
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "checker_could_not_evaluate": [
+    "{'M': {'catalog': 'mats', 'name': 'PVC', 'n': {'range': ['19/2000 (~0.0095)', '23/2000 (~0.0115)']}, 'k': {'nominal': '62', 'tolerance': '0'}, 'vmax': {'nominal': '3', 'tolerance': '0'}}, 'DA': {'catalog': 'diam', 'D': {'nominal': '200', 'tolerance': '0'}, 'pf': {'nominal': '1', 'tolerance': '0'}}, 'SA': {'catalog': 'slope', 'S': {'nominal': '7/2000 (~0.0035)', 'tolerance': '0'}}, 'DB': {'catalog': 'diam', 'D': {'nominal': '200', 'tolerance': '0'}, 'pf': {'nominal': '1', 'tolerance': '0'}}, 'SB': {'catalog': 'slope', 'S': {'nominal': '7/2000 (~0.0035)', 'tolerance': '0'}}}: tBp: no root in the search range [0.01, 3.8896] for any value of the box — widen `search` if a root may lie outside it",
+    "{'M': {'catalog': 'mats', 'name': 'PVC', 'n': {'range': ['19/2000 (~0.0095)', '23/2000 (~0.0115)']}, 'k': {'nominal': '62', 'tolerance': '0'}, 'vmax': {'nominal': '3', 'tolerance': '0'}}, 'DA': {'catalog': 'diam', 'D': {'nominal': '200', 'tolerance': '0'}, 'pf': {'nominal': '1', 'tolerance': '0'}}, 'SA': {'catalog': 'slope', 'S': {'nominal': '7/2000 (~0.0035)', 'tolerance': '0'}}, 'DB': {'catalog': 'diam', 'D': {'nominal': '200', 'tolerance': '0'}, 'pf': {'nominal': '1', 'tolerance': '0'}}, 'SB': {'catalog': 'slope', 'S': {'nominal': '1/200 (~0.005)', 'tolerance': '0'}}}: tBp: no root in the search range [0.01, 3.8896] for any value of the box — widen `search` if a root may lie outside it",
+    "{'M': {'catalog': 'mats', 'name': 'PVC', 'n': {'range': ['19/2000 (~0.0095)', '23/2000 (~0.0115)']}, 'k': {'nominal': '62', 'tolerance': '0'}, 'vmax': {'nominal': '3', 'tolerance': '0'}}, 'DA': {'catalog': 'diam', 'D': {'nominal': '200', 'tolerance': '0'}, 'pf': {'nominal': '1', 'tolerance': '0'}}, 'SA': {'catalog': 'slope', 'S': {'nominal': '1/200 (~0.005)', 'tolerance': '0'}}, 'DB': {'catalog': 'diam', 'D': {'nominal': '200', 'tolerance': '0'}, 'pf': {'nominal': '1', 'tolerance': '0'}}, 'SB': {'catalog': 'slope', 'S': {'nominal': '7/2000 (~0.0035)', 'tolerance': '0'}}}: tBp: no root in the search range [0.01, 3.8896] for any value of the box — widen `search` if a root may lie outside it"
+  ],
+  "verdict": "OPEN",
+  "why": "3 design(s) could not be decided and none was earned"
+}

@@ -1,0 +1,106 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "verdict": "EARNED",
+  "modes": [
+    "ex1_Vin10",
+    "ex2_Vin12"
+  ],
+  "designs_tried": 6,
+  "undecided": 0,
+  "design": {
+    "PKG": {
+      "catalog": "packages",
+      "Rth": {
+        "nominal": "44",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "1",
+        "tolerance": "0"
+      },
+      "label": "TO220 + hypothetical sink, RthJA 44 (boundary probe)"
+    }
+  },
+  "per_mode": {
+    "ex1_Vin10": {
+      "guaranteed": {
+        "Tj": [
+          "-98691/2500 (~-39.4764)",
+          "527/4 (~131.75)"
+        ]
+      },
+      "how": {
+        "Tj": "ZTL, exact at the corners"
+      },
+      "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic"
+    },
+    "ex2_Vin12": {
+      "guaranteed": {
+        "Tj": [
+          "-98691/2500 (~-39.4764)",
+          "37387/250 (~149.548)"
+        ]
+      },
+      "how": {
+        "Tj": "ZTL, exact at the corners"
+      },
+      "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic"
+    }
+  },
+  "objective": {
+    "minimize": "PKG.price",
+    "value": "1",
+    "unit": "USD",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode"
+  },
+  "designs": [
+    {
+      "design": "PKG=packages(label=SO14 narrow (published 125), Rth=125, price=2/5)",
+      "verdict": "REFUTED",
+      "mode": "ex1_Vin10",
+      "fails": "maximum junction temperature 150 C used by the app note",
+      "by_at_witness": "537/8 (~67.125)",
+      "unit": "C"
+    },
+    {
+      "design": "PKG=packages(label=PDIP8 (published 100), Rth=100, price=1/2)",
+      "verdict": "REFUTED",
+      "mode": "ex1_Vin10",
+      "fails": "maximum junction temperature 150 C used by the app note",
+      "by_at_witness": "407/10 (~40.7)",
+      "unit": "C"
+    },
+    {
+      "design": "PKG=packages(label=TO220 bare (published RthJA 50), Rth=50, price=3/5)",
+      "verdict": "REFUTED",
+      "mode": "ex2_Vin12",
+      "fails": "maximum junction temperature 150 C used by the app note",
+      "by_at_witness": "401/50 (~8.02)",
+      "unit": "C"
+    },
+    {
+      "design": "PKG=packages(label=TO220 + hypothetical sink, RthJA 44 (boundary probe), Rth=44, price=1)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "PKG=packages(label=TO220 + hypothetical sink, RthJA 45 (boundary probe), Rth=45, price=3/2)",
+      "verdict": "REFUTED",
+      "mode": "ex2_Vin12",
+      "fails": "maximum junction temperature 150 C used by the app note",
+      "by_at_witness": "359/500 (~0.718)",
+      "unit": "C"
+    },
+    {
+      "design": "PKG=packages(label=TO220 + AAVID 504222 + pad (my reading of the curve, +-20% assumed), Rth=13521/1000, price=2)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 4,
+    "EARNED": 2
+  },
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

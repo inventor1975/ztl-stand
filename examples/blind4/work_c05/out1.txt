@@ -1,0 +1,1498 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "excluded_by_where": 0,
+  "designs_tried": 1959,
+  "failed_at_nominal": 1417,
+  "judged": 542,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=9/10); SP2=spacing(s=11/10); HS=hgrid(N=2)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.289791717522 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.281189134909 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.218486961252 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.289791717522 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.209408465722 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.218486961252 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.281189134909 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.137615747325 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.273306260365 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.289791717522 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.209408465722 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.137615747325 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.12891922879 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.201154113837 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0825597748143 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.218486961252 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.273306260365 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.282719347413 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.281189134909 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.289791717522 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.273995685317 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.210410992175 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.12891922879 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0825597748143 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.282719347413 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.209408465722 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.201154113837 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0749453313595 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.137615747325 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.218486961252 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=19/10); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.121117059179 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=3/2); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0326967500136 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.201204718789 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.281189134909 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.210410992175 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.273995685317 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.273306260365 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.128401533463 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.266001861024 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0749453313595 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0825597748143 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.282719347413 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.12891922879 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=3/2); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0326967500136 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.137615747325 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.289791717522 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.209408465722 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=19/10); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.121117059179 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.201204718789 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.201154113837 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.128401533463 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=3/2); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.026988857314 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.119582613317 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=17/10); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0682123981137 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.192834188693 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0725706600882 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.210410992175 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.266001861024 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.27577043336 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=27/20); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.00310793380987 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.218486961252 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.273995685317 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.273306260365 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0825597748143 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0749453313595 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.282719347413 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.281189134909 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=3/2); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0326967500136 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.12891922879 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.266927805357 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=3/2); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.026988857314 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.202475998084 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.119582613317 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0725706600882 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.27577043336 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=27/20); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.00310793380987 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.201204718789 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=17/10); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0682123981137 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.192834188693 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0648490449944 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.128401533463 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.137615747325 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=19/10); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.121117059179 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.210410992175 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=27/20); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.289791717522 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=19/10); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.111670629862 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.201154113837 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=3/2); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0220058240355 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.209408465722 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.193144177349 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.273995685317 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=27/20); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0887217100224 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=11/5); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.202475998084 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.266927805357 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.266001861024 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.119348163912 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.258824968067 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0749453313595 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=3/2); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0326967500136 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=3/2); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0220547106991 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0648490449944 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=27/20); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.218486961252 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0725706600882 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=3/2); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.026988857314 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=19/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.27577043336 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.119582613317 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0825597748143 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=27/20); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.00310793380987 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=3/2); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0220058240355 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=6/5); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0934487963982 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.128401533463 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=3/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.282719347413 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.201204718789 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=19/10); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.111670629862 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=11/5); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.193144177349 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=27/20); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0515582017548 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=17/10); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0682123981137 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.192834188693 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.12891922879 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=11/5); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.119348163912 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.273306260365 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=3/2); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0162175939849 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.110408978812 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=27/20); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.281189134909 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=17/10); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0580213471744 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.184659497061 (an exact fraction of 181 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=19/10); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.121117059179 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0627559164268 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=19/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.202475998084 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.258824968067 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=3)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.268940739081 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=27/20); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0880173982099 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=3/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.210410992175 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=3/2); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0220547106991 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=27/20); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.137615747325 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=19/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.266927805357 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=6/5); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0560224279769 (an exact fraction of 185 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.266001861024 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0725706600882 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0648490449944 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=17/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.27577043336 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=27/20); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.00310793380987 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=27/20); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.209408465722 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=3/2); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.026988857314 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=3/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.273995685317 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=3/2); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0220058240355 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.119582613317 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=3)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.259981186223 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=3/2); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0162175939849 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=3)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.194677141555 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.201154113837 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=11/5); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.110408978812 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=3/2); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0326967500136 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=11/5); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0627559164268 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=3)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.268940739081 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=3/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0749453313595 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=27/20); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0500974260921 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=19/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.193144177349 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=17/10); SP2=spacing(s=11/5); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0580213471744 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=11/5); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.184659497061 (an exact fraction of 181 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0549290004936 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=6/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.289791717522 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=19/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.119348163912 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=27/20); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0153583141248 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=3/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.128401533463 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=27/20); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0825597748143 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=27/20); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0844393336979 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=6/5); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0887217100224 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=19/10); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.111670629862 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=17/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.202475998084 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=27/20); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.282719347413 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=17/10); SP2=spacing(s=17/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0682123981137 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=19/10); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.102389098434 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=11/5); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.192834188693 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/10); SP2=spacing(s=5/2); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0934487963982 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=3/2); SP2=spacing(s=5/2); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0115015200149 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=3/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.201204718789 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=6/5); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0189538487431 (an exact fraction of 185 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=11/5); SP2=spacing(s=5/2); HS=hgrid(N=3)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.185221927435 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=17/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.266927805357 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=27/20); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0832279678931 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=11/5); HS=hgrid(N=3)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.194677141555 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=5/2); SP2=spacing(s=11/5); HS=hgrid(N=3)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.259981186223 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=19/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.258824968067 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=6/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.218486961252 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=3/2); SP2=spacing(s=19/10); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0220547106991 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=19/10); SP2=spacing(s=5/2); HS=hgrid(N=3)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.110450119448 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=5/2); SP2=spacing(s=5/2); HS=hgrid(N=3)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.251771206228 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=27/20); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.12891922879 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0648490449944 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=3/2); SP2=spacing(s=17/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0220058240355 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=C, dw=9/100, pm=19/20); SP1=spacing(s=3/2); SP2=spacing(s=5/2); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0112140003272 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=17/10); SP2=spacing(s=11/5); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0549290004936 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=11/5); SP2=spacing(s=27/20); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.210410992175 (an exact fraction of 182 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=17/10); SP2=spacing(s=19/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0627559164268 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=6/5); SP2=spacing(s=11/5); HS=hgrid(N=0)",
+      "verdict": "REFUTED",
+      "fails": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0515582017548 (an exact fraction of 184 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=3/2); SP2=spacing(s=19/10); HS=hgrid(N=1)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.0162175939849 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=A, dw=663/10000, pm=11/20); SP1=spacing(s=5/2); SP2=spacing(s=19/10); HS=hgrid(N=3)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.268940739081 (an exact fraction of 183 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "DR=drain(name=B, dw=39/500, pm=7/10); SP1=spacing(s=19/10); SP2=spacing(s=19/10); HS=hgrid(N=2)",
+      "verdict": "REFUTED",
+      "fails": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s",
+      "by": "~0.110408978812 (an exact fraction of 183 digits)",
+      "unit": "m"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1958,
+    "EARNED": 1
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "designs_not_listed": 1759,
+  "listing": "earned first, then open, then refuted",
+  "objective": {
+    "minimize": "A1/(866/1000*SP1.s*SP1.s)*(H1*DR.pm + cinst) + A2/(866/1000*SP2.s*SP2.s)*(H2*DR.pm + cinst) + cs*(A1+A2)*hs",
+    "value": "71827082500/471537 (~152325)",
+    "unit": "EUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "DR": {
+      "catalog": "drain",
+      "name": "A",
+      "dw": {
+        "nominal": "663/10000 (~0.0663)",
+        "tolerance": "0"
+      },
+      "pm": {
+        "nominal": "11/20 (~0.55)",
+        "tolerance": "0"
+      }
+    },
+    "SP1": {
+      "catalog": "spacing",
+      "s": {
+        "nominal": "9/10 (~0.9)",
+        "tolerance": "0"
+      }
+    },
+    "SP2": {
+      "catalog": "spacing",
+      "s": {
+        "nominal": "11/10 (~1.1)",
+        "tolerance": "0"
+      }
+    },
+    "HS": {
+      "catalog": "hgrid",
+      "N": {
+        "nominal": "2",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "M1": [
+      "0",
+      "~0.0529447118183 (an exact fraction of 59 digits)"
+    ],
+    "M2": [
+      "0",
+      "~0.0439886222326 (an exact fraction of 61 digits)"
+    ]
+  },
+  "guaranteed_unit": {
+    "M1": "m",
+    "M2": "m"
+  },
+  "guaranteed_ends": {
+    "M1": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside",
+    "M2": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+  },
+  "how": {
+    "M1": "ZTL, certificate checked exactly (2 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic",
+    "M2": "ZTL, certificate checked exactly (2 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic"
+  },
+  "requirements": [
+    {
+      "quantity": "M1",
+      "op": ">=",
+      "value": "0",
+      "why": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s"
+    },
+    {
+      "quantity": "M2",
+      "op": ">=",
+      "value": "0",
+      "why": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s"
+    }
+  ],
+  "rests_on": "ZTL disposition None: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": []
+}

@@ -1,0 +1,533 @@
+{
+ "stand": "universal-stand/1",
+ "why": "c05 compressed-air line, flat brick with three operating situations as modes",
+ "quantities": {
+  "QA": {
+   "role": "given",
+   "range": [
+    "14",
+    "18"
+   ],
+   "unit": "L/s",
+   "why": "tool A free-air flow, any value 14..18"
+  },
+  "QB": {
+   "role": "given",
+   "range": [
+    "8.5",
+    "10.5"
+   ],
+   "unit": "L/s",
+   "why": "tool B free-air flow, any value 8.5..10.5"
+  },
+  "leak": {
+   "role": "given",
+   "range": [
+    "1.5",
+    "2.5"
+   ],
+   "unit": "L/s",
+   "why": "system leakage, ONE value for the whole system"
+  },
+  "f": {
+   "role": "given",
+   "range": [
+    "1.0",
+    "1.7"
+   ],
+   "unit": "",
+   "why": "dryer filter fouling factor, one value"
+  },
+  "facfad": {
+   "role": "given",
+   "range": [
+    "0.94",
+    "1.0"
+   ],
+   "unit": "",
+   "why": "actual FAD = 0.94..1.00 of nominal (R2 uses the lower end)"
+  },
+  "dtol": {
+   "role": "given",
+   "value": "0.15",
+   "unit": "bar",
+   "why": "cut-in / cut-out tolerance"
+  },
+  "poff": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "bar",
+   "why": "gauge-to-absolute pressure offset used by the pipe law (as stated: -0.5)"
+  },
+  "patm": {
+   "role": "given",
+   "value": "1.013",
+   "unit": "bar",
+   "why": "atmosphere"
+  },
+  "KP": {
+   "role": "given",
+   "value": "1600",
+   "unit": "bar^2",
+   "why": "empirical constant 1.6e3 of the pipe law, carries the units so that dp comes out in bar"
+  },
+  "Qu": {
+   "role": "given",
+   "value": "1",
+   "unit": "L/s",
+   "why": "unit flow for the law's Q^1.85"
+  },
+  "du": {
+   "role": "given",
+   "value": "1",
+   "unit": "mm",
+   "why": "unit diameter for the law's d^5"
+  },
+  "Lu": {
+   "role": "given",
+   "value": "1",
+   "unit": "m",
+   "why": "unit length for the law's Lm"
+  },
+  "Lmain": {
+   "role": "given",
+   "value": "180",
+   "unit": "m",
+   "why": "main pipe length"
+  },
+  "dA": {
+   "role": "given",
+   "value": "19",
+   "unit": "mm",
+   "why": "hose A inside diameter"
+  },
+  "LA": {
+   "role": "given",
+   "value": "12",
+   "unit": "m",
+   "why": "hose A length"
+  },
+  "dB": {
+   "role": "given",
+   "value": "16",
+   "unit": "mm",
+   "why": "hose B inside diameter"
+  },
+  "LB": {
+   "role": "given",
+   "value": "8",
+   "unit": "m",
+   "why": "hose B length"
+  },
+  "Qt": {
+   "role": "derived",
+   "unit": "L/s"
+  },
+  "dpdry": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "dpmain": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "Pnf": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "dphA": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "PinA": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "dphB": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "PinB": {
+   "role": "derived",
+   "unit": "bar"
+  }
+ },
+ "slots": {
+  "C": {
+   "from": [
+    "compressors"
+   ]
+  },
+  "D": {
+   "from": [
+    "dryers"
+   ]
+  },
+  "P": {
+   "from": [
+    "pipes"
+   ]
+  }
+ },
+ "computed": {
+  "PCMIN": {
+   "value": "C.cutin - dtol",
+   "unit": "bar"
+  },
+  "PABS": {
+   "value": "C.cutin - dtol - poff + patm",
+   "unit": "bar"
+  },
+  "CMAIN": {
+   "value": "KP*(Lmain/Lu)/((P.d/du)*(P.d/du)*(P.d/du)*(P.d/du)*(P.d/du)*PABS)",
+   "unit": "bar"
+  },
+  "CHA": {
+   "value": "KP*(LA/Lu)/((dA/du)*(dA/du)*(dA/du)*(dA/du)*(dA/du)*PABS)",
+   "unit": "bar"
+  },
+  "CHB": {
+   "value": "KP*(LB/Lu)/((dB/du)*(dB/du)*(dB/du)*(dB/du)*(dB/du)*PABS)",
+   "unit": "bar"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "dpdry == D.dpr*Qt*Qt*f/(D.Qr*D.Qr)",
+   "source": "dryer: dp = dp_rated (Qt/Qr)^2 f"
+  },
+  {
+   "zfl": "dpmain == CMAIN*pow(Qt/Qu, 1.85)",
+   "source": "empirical pipe law, CMAIN = 1.6e3*Lm/(d^5*pabs) per design"
+  },
+  {
+   "zfl": "Pnf == C.pout + dtol",
+   "source": "no-flow pressure = cut-out + 0.15"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Pnf",
+   "op": "<=",
+   "value": "8.5",
+   "why": "R3 no-flow protection vs tool A maximum inlet pressure"
+  },
+  {
+   "quantity": "Pnf",
+   "op": "<=",
+   "value": "9.0",
+   "why": "R3 no-flow protection vs tool B maximum inlet pressure"
+  }
+ ],
+ "objective": {
+  "minimize": "C.price + D.price + P.price*Lmain",
+  "unit": "EUR",
+  "why": "total price: compressor + dryer + 180 m of pipe"
+ },
+ "modes": {
+  "S1 tool A alone": {
+   "laws": [
+    {
+     "zfl": "Qt == QA + leak",
+     "source": "total flow = running tools + leakage"
+    },
+    {
+     "zfl": "dphA == CHA*pow(QA/Qu, 1.85)",
+     "source": "hose A, own flow only"
+    },
+    {
+     "zfl": "PinA == PCMIN - dpdry - dpmain - dphA",
+     "source": "tool inlet pressure"
+    },
+    {
+     "zfl": "dphB == 0*dpdry",
+     "source": "tool B idle: no flow, no hose drop (keeps the system determined)"
+    },
+    {
+     "zfl": "PinB == PCMIN - dpdry - dpmain - dphB",
+     "source": "tool inlet pressure (idle tool: not required)"
+    }
+   ],
+   "requirements": [
+    {
+     "quantity": "PinA",
+     "op": ">=",
+     "value": "6.0",
+     "why": "R1 tool A minimum inlet pressure"
+    }
+   ]
+  },
+  "S2 tool B alone": {
+   "laws": [
+    {
+     "zfl": "Qt == QB + leak",
+     "source": "total flow = running tools + leakage"
+    },
+    {
+     "zfl": "dphA == 0*dpdry",
+     "source": "tool A idle: no flow, no hose drop (keeps the system determined)"
+    },
+    {
+     "zfl": "PinA == PCMIN - dpdry - dpmain - dphA",
+     "source": "tool inlet pressure (idle tool: not required)"
+    },
+    {
+     "zfl": "dphB == CHB*pow(QB/Qu, 1.85)",
+     "source": "hose B, own flow only"
+    },
+    {
+     "zfl": "PinB == PCMIN - dpdry - dpmain - dphB",
+     "source": "tool inlet pressure"
+    }
+   ],
+   "requirements": [
+    {
+     "quantity": "PinB",
+     "op": ">=",
+     "value": "6.2",
+     "why": "R1 tool B minimum inlet pressure"
+    }
+   ]
+  },
+  "S3 both tools": {
+   "laws": [
+    {
+     "zfl": "Qt == QA + QB + leak",
+     "source": "total flow = running tools + leakage"
+    },
+    {
+     "zfl": "dphA == CHA*pow(QA/Qu, 1.85)",
+     "source": "hose A, own flow only"
+    },
+    {
+     "zfl": "PinA == PCMIN - dpdry - dpmain - dphA",
+     "source": "tool inlet pressure"
+    },
+    {
+     "zfl": "dphB == CHB*pow(QB/Qu, 1.85)",
+     "source": "hose B, own flow only"
+    },
+    {
+     "zfl": "PinB == PCMIN - dpdry - dpmain - dphB",
+     "source": "tool inlet pressure"
+    }
+   ],
+   "requirements": [
+    {
+     "quantity": "Qt",
+     "op": "<=",
+     "value": "facfad*C.FAD",
+     "why": "R2 compressor capacity: 0.94 FAD >= QA+QB+leak (S3, upper ends)"
+    },
+    {
+     "quantity": "Qt",
+     "op": "<=",
+     "value": "D.Qr",
+     "why": "R4 dryer rated flow >= largest Qt (S3, upper ends)"
+    },
+    {
+     "quantity": "PinA",
+     "op": ">=",
+     "value": "6.0",
+     "why": "R1 tool A minimum inlet pressure"
+    },
+    {
+     "quantity": "PinB",
+     "op": ">=",
+     "value": "6.2",
+     "why": "R1 tool B minimum inlet pressure"
+    }
+   ]
+  }
+ },
+ "catalog": {
+  "compressors": {
+   "items": [
+    {
+     "FAD": {
+      "value": "32"
+     },
+     "cutin": {
+      "value": "6.8"
+     },
+     "pout": {
+      "value": "8.0"
+     },
+     "price": "6900",
+     "name": "K32"
+    },
+    {
+     "FAD": {
+      "value": "40"
+     },
+     "cutin": {
+      "value": "6.8"
+     },
+     "pout": {
+      "value": "8.0"
+     },
+     "price": "8200",
+     "name": "K40"
+    },
+    {
+     "FAD": {
+      "value": "40"
+     },
+     "cutin": {
+      "value": "7.3"
+     },
+     "pout": {
+      "value": "8.4"
+     },
+     "price": "8900",
+     "name": "K40M"
+    },
+    {
+     "FAD": {
+      "value": "50"
+     },
+     "cutin": {
+      "value": "7.3"
+     },
+     "pout": {
+      "value": "8.4"
+     },
+     "price": "10600",
+     "name": "K50"
+    },
+    {
+     "FAD": {
+      "value": "50"
+     },
+     "cutin": {
+      "value": "8.0"
+     },
+     "pout": {
+      "value": "9.0"
+     },
+     "price": "11800",
+     "name": "K50H"
+    }
+   ],
+   "ground": "vendor datasheet",
+   "fields": {
+    "FAD": {
+     "unit": "L/s"
+    },
+    "cutin": {
+     "unit": "bar"
+    },
+    "pout": {
+     "unit": "bar"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "dryers": {
+   "items": [
+    {
+     "Qr": {
+      "value": "30"
+     },
+     "dpr": {
+      "value": "0.40"
+     },
+     "price": "1100",
+     "name": "D30"
+    },
+    {
+     "Qr": {
+      "value": "40"
+     },
+     "dpr": {
+      "value": "0.35"
+     },
+     "price": "1450",
+     "name": "D40"
+    },
+    {
+     "Qr": {
+      "value": "50"
+     },
+     "dpr": {
+      "value": "0.30"
+     },
+     "price": "1900",
+     "name": "D50"
+    },
+    {
+     "Qr": {
+      "value": "60"
+     },
+     "dpr": {
+      "value": "0.30"
+     },
+     "price": "2500",
+     "name": "D60"
+    }
+   ],
+   "ground": "vendor datasheet",
+   "fields": {
+    "Qr": {
+     "unit": "L/s"
+    },
+    "dpr": {
+     "unit": "bar"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "pipes": {
+   "items": [
+    {
+     "d": {
+      "value": "25"
+     },
+     "price": "6.0",
+     "name": "d25"
+    },
+    {
+     "d": {
+      "value": "32"
+     },
+     "price": "9.0",
+     "name": "d32"
+    },
+    {
+     "d": {
+      "value": "40"
+     },
+     "price": "14.0",
+     "name": "d40"
+    },
+    {
+     "d": {
+      "value": "50"
+     },
+     "price": "21.0",
+     "name": "d50"
+    },
+    {
+     "d": {
+      "value": "63"
+     },
+     "price": "33.0",
+     "name": "d63"
+    }
+   ],
+   "ground": "vendor price list",
+   "fields": {
+    "d": {
+     "unit": "mm"
+    },
+    "price": {
+     "unit": "EUR/m"
+    }
+   }
+  }
+ }
+}

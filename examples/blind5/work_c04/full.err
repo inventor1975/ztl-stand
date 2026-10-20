@@ -1,0 +1,6 @@
+bash: line 1: 2466444 Killed                  OPENBLAS_NUM_THREADS=1 timeout 900 ~/bin/heavy -m 3G --cores 1 python3 -m ustand.stand examples/blind5/c04.json
+
+real	10m28.494s
+user	10m28.411s
+sys	0m0.018s
+done

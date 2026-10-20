@@ -1,0 +1,83 @@
+{
+  "stand": "ztl-stand/1",
+  "quantities": {
+    "OD": {
+      "role": "given",
+      "value": "0.75",
+      "tolerance": "1/150",
+      "unit": "25.4mm",
+      "why": "1/2 in tube OD, tolerance +-0.005 in (datasheet p.3 ASTM A269 example)"
+    },
+    "S": {
+      "role": "given",
+      "value": "20000",
+      "unit": "6894.757293168Pa",
+      "ground": "datasheet",
+      "why": "maximum S value 20 000 psi, Table 4 text"
+    },
+    "Y": {
+      "role": "given",
+      "value": "0.4",
+      "unit": "",
+      "why": "B31.3 Table 304.1.1 coefficient (not in the datasheet)"
+    },
+    "T": {
+      "role": "given",
+      "range": [
+        "-20",
+        "100"
+      ],
+      "unit": "",
+      "why": "degF, the datasheet's room-temperature rating range -20..100"
+    },
+    "P": {
+      "role": "given",
+      "value": "0",
+      "unit": "6894.757293168Pa",
+      "why": "design pressure, found by find"
+    },
+    "wall": {
+      "role": "given",
+      "value": "0.109",
+      "tolerance": "0.1",
+      "unit": "25.4mm",
+      "why": "nominal wall 0.065 in, +-10 % (datasheet p.3)"
+    },
+    "treq": {
+      "role": "derived",
+      "unit": "25.4mm"
+    },
+    "margin": {
+      "role": "derived",
+      "unit": "25.4mm"
+    }
+  },
+  "slots": {},
+  "define": {
+    "TF": "table(T, 100, 1, 200, 82/100, 400, 68/100, 600, 58/100)"
+  },
+  "laws": [
+    {
+      "zfl": "treq == P*OD/(2*(S*TF + P*Y))",
+      "source": "ASME B31.3 304.1.2, E=W=1, with Table 1 temperature factor applied to S (datasheet derives its factors from allowable stress)"
+    },
+    {
+      "zfl": "margin == wall - treq",
+      "source": "actual minimum wall minus required thickness"
+    }
+  ],
+  "requirements": [
+    {
+      "quantity": "margin",
+      "op": ">=",
+      "value": "0",
+      "why": "the wall at its -10 % end still covers the pressure design thickness"
+    }
+  ],
+  "find": {
+    "largest": "P",
+    "from": "0",
+    "to": "9000",
+    "precision": "1"
+  }
+}

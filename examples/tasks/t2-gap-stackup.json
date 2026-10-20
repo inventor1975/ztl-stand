@@ -1,0 +1,128 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "gap": {
+   "role": "derived",
+   "unit": "mm"
+  },
+  "Hn": {
+   "role": "given",
+   "value": "50",
+   "unit": "mm",
+   "why": "drawing nominal"
+  },
+  "An": {
+   "role": "given",
+   "value": "20",
+   "unit": "mm",
+   "why": "drawing nominal"
+  },
+  "Bn": {
+   "role": "given",
+   "value": "15",
+   "unit": "mm",
+   "why": "drawing nominal"
+  },
+  "Cn": {
+   "role": "given",
+   "value": "14.6",
+   "unit": "mm",
+   "why": "drawing nominal"
+  }
+ },
+ "slots": {
+  "H": {
+   "from": [
+    "housing_grades"
+   ]
+  },
+  "A": {
+   "from": [
+    "part_grades"
+   ]
+  },
+  "B": {
+   "from": [
+    "part_grades"
+   ]
+  },
+  "C": {
+   "from": [
+    "part_grades"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "gap == (Hn + H.dev) - (An + A.dev) - (Bn + B.dev) - (Cn + C.dev)",
+   "source": "dimension chain"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "gap",
+   "op": "within",
+   "value": [
+    "0.1",
+    "0.7"
+   ],
+   "why": "assembly clearance"
+  }
+ ],
+ "catalog": {
+  "housing_grades": {
+   "items": [
+    {
+     "dev": {
+      "range": [
+       "-0.2",
+       "0.2"
+      ]
+     },
+     "grade": "coarse"
+    },
+    {
+     "dev": {
+      "range": [
+       "-0.05",
+       "0.05"
+      ]
+     },
+     "grade": "fine"
+    }
+   ],
+   "fields": {
+    "dev": {
+     "unit": "mm"
+    }
+   }
+  },
+  "part_grades": {
+   "items": [
+    {
+     "dev": {
+      "range": [
+       "-0.1",
+       "0.1"
+      ]
+     },
+     "grade": "coarse"
+    },
+    {
+     "dev": {
+      "range": [
+       "-0.03",
+       "0.03"
+      ]
+     },
+     "grade": "fine"
+    }
+   ],
+   "fields": {
+    "dev": {
+     "unit": "mm"
+    }
+   }
+  }
+ }
+}

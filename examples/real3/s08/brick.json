@@ -1,0 +1,169 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "s08 round 3: congatec AN9 RTC battery calculations; uncertainty = the source's own stated factor ranges",
+ "quantities": {
+  "Treq": {
+   "role": "given",
+   "value": "131400",
+   "unit": "h",
+   "why": "15 years x 24 x 365 (source sec 2.4)",
+   "ground": "congatec AN9 rev 1.3, sec 2.1/2.2 notes"
+  },
+  "I3": {
+   "role": "given",
+   "value": "3",
+   "unit": "uA",
+   "why": "maximum RTC battery current, sec 2.4",
+   "ground": "congatec AN9 rev 1.3, sec 2.1/2.2 notes"
+  },
+  "k": {
+   "role": "given",
+   "range": [
+    "1.1",
+    "1.3"
+   ],
+   "unit": "",
+   "why": "capacity multiplier 1.2, 'can vary from 1.1 to 1.3'",
+   "ground": "congatec AN9 rev 1.3, sec 2.1/2.2 notes"
+  },
+  "Cap1": {
+   "role": "given",
+   "value": "1000",
+   "unit": "mAh",
+   "why": "searched (find 1): nominal capacity of the cell, formula-2.2 check",
+   "ground": "placeholder"
+  },
+  "margin1": {
+   "role": "derived",
+   "unit": "Ah",
+   "why": "Cap1 minus the capacity the source's eq 2.2 demands"
+  },
+  "Cap2": {
+   "role": "given",
+   "value": "230",
+   "unit": "mAh",
+   "why": "CR2032 nominal capacity, sec 2.3",
+   "ground": "congatec AN9 rev 1.3, sec 2.1/2.2 notes"
+  },
+  "I2": {
+   "role": "given",
+   "value": "2.5",
+   "unit": "uA",
+   "why": "maximum RTC battery current, sec 2.3",
+   "ground": "congatec AN9 rev 1.3, sec 2.1/2.2 notes"
+  },
+  "f2": {
+   "role": "given",
+   "range": [
+    "0.7",
+    "0.9"
+   ],
+   "unit": "",
+   "why": "life factor 0.8, 'can vary from 0.7 to 0.9'",
+   "ground": "congatec AN9 rev 1.3, sec 2.1/2.2 notes"
+  },
+  "T2": {
+   "role": "given",
+   "value": "73584",
+   "unit": "h",
+   "why": "searched (find 2): guaranteed lifetime in hours (placeholder = 8.4 y published)",
+   "ground": "placeholder"
+  },
+  "margin2": {
+   "role": "derived",
+   "unit": "Ah",
+   "why": "charge available (Cap2*f2) minus charge drawn over T2"
+  },
+  "Cap3": {
+   "role": "given",
+   "value": "1000",
+   "unit": "mAh",
+   "why": "searched (find 3): capacity needed so that 15 y holds under formula 2.1's factor range",
+   "ground": "placeholder"
+  },
+  "f3": {
+   "role": "given",
+   "range": [
+    "0.7",
+    "0.9"
+   ],
+   "unit": "",
+   "why": "life factor 0.8, 'can vary from 0.7 to 0.9' (same source note as f2, a separate draw)",
+   "ground": "congatec AN9 rev 1.3, sec 2.1/2.2 notes"
+  },
+  "margin3": {
+   "role": "derived",
+   "unit": "Ah",
+   "why": "Cap3*f3 minus charge drawn over Treq"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "margin1 == Cap1 - Treq*I3*k",
+   "source": "congatec AN9 eq 2.2: BatNomCap = tmin*24*365*IBatMax*k, required Cap >= that"
+  },
+  {
+   "zfl": "margin2 == Cap2*f2 - T2*I2",
+   "source": "congatec AN9 eq 2.1: tmax = Cap/(24*365*I)*f, lifetime >= T2 iff Cap*f >= T2*I"
+  },
+  {
+   "zfl": "margin3 == Cap3*f3 - Treq*I3",
+   "source": "congatec AN9 eq 2.1 applied to the 15 y / 3 uA case of sec 2.4"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "margin1",
+   "op": ">=",
+   "value": "0",
+   "why": "cell capacity covers eq 2.2 for every k in the source's range"
+  }
+ ],
+ "catalog": {},
+ "conflicts": false,
+ "find": [
+  {
+   "smallest": "Cap1",
+   "from": "0",
+   "to": "1500",
+   "precision": "0.01",
+   "requirements": [
+    {
+     "quantity": "margin1",
+     "op": ">=",
+     "value": "0",
+     "why": "cell capacity covers eq 2.2 for every k in the source's range"
+    }
+   ]
+  },
+  {
+   "largest": "T2",
+   "from": "0",
+   "to": "100000",
+   "precision": "1",
+   "requirements": [
+    {
+     "quantity": "margin2",
+     "op": ">=",
+     "value": "0",
+     "why": "the cell lasts at least T2 for every f2 in the source's range"
+    }
+   ]
+  },
+  {
+   "smallest": "Cap3",
+   "from": "0",
+   "to": "1500",
+   "precision": "0.01",
+   "requirements": [
+    {
+     "quantity": "margin3",
+     "op": ">=",
+     "value": "0",
+     "why": "the cell lasts at least 15 y for every f3 in the source's range"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,183 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "EX=extractors(name=E4, N=4, eta=3/4, price=22); SV=solvents(name=SA, Kt=[360129809/100000000,61683903/12500000], cS=6/5); BD=beds(name=G2000, m=2000, price=5)",
+      "verdict": "REFUTED",
+      "fails": "R1 raffinate x_N <= 0.12 g/L",
+      "by_at_witness": "~0.0385304219483 (an exact fraction of 51 digits)",
+      "unit": "g/L"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "EX": {
+      "catalog": "extractors",
+      "name": "E4",
+      "N": {
+        "nominal": "4",
+        "tolerance": "0"
+      },
+      "eta": {
+        "nominal": "3/4 (~0.75)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "22",
+        "tolerance": "0"
+      }
+    },
+    "SV": {
+      "catalog": "solvents",
+      "name": "SA",
+      "Kt": {
+        "range": [
+          "360129809/100000000 (~3.6013)",
+          "61683903/12500000 (~4.93471)"
+        ]
+      },
+      "cS": {
+        "nominal": "6/5 (~1.2)",
+        "tolerance": "0"
+      }
+    },
+    "BD": {
+      "catalog": "beds",
+      "name": "G2000",
+      "m": {
+        "nominal": "2000",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "5",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "SV.Kt": "360129809/100000000 (~3.6013)",
+    "cF": "15/2 (~7.5)",
+    "e": "9/10 (~0.9)",
+    "qc": "1/10 (~0.1)",
+    "rho": "1/25 (~0.04)"
+  },
+  "point_units": {
+    "SV.Kt": "",
+    "cF": "g/L",
+    "e": "",
+    "qc": "kg/kg",
+    "rho": ""
+  },
+  "value_there": {
+    "xN": "~0.158530421948 (an exact fraction of 50 digits)"
+  },
+  "unit": "g/L",
+  "requirement": {
+    "quantity": "xN",
+    "op": "<=",
+    "value": "0.12",
+    "why": "R1 raffinate x_N <= 0.12 g/L"
+  },
+  "overshoot": "~0.0385304219483 (an exact fraction of 51 digits)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "~0.0441348193832 (an exact fraction of 48 digits)",
+      "~0.158530421948 (an exact fraction of 50 digits)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "SV.Kt",
+        "moves_it_by": "~0.0658934373551 (an exact fraction of 96 digits)"
+      },
+      {
+        "quantity": "rho",
+        "moves_it_by": "~0.0505236447596 (an exact fraction of 100 digits)"
+      },
+      {
+        "quantity": "cF",
+        "moves_it_by": "~0.0317060843897 (an exact fraction of 50 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "each_requirement": [
+    {
+      "requirement": {
+        "quantity": "xN",
+        "op": "<=",
+        "value": "0.12",
+        "why": "R1 raffinate x_N <= 0.12 g/L"
+      },
+      "verdict": "REFUTED",
+      "overshoot": "~0.0385304219483 (an exact fraction of 51 digits)"
+    },
+    {
+      "requirement": {
+        "quantity": "Dis",
+        "op": "<=",
+        "value": "0.006",
+        "why": "R2 discharge <= 0.006 g/L"
+      },
+      "verdict": "REFUTED",
+      "overshoot": "~0.00985304219483 (an exact fraction of 53 digits)"
+    },
+    {
+      "requirement": {
+        "quantity": "Life",
+        "op": ">=",
+        "value": "2",
+        "why": "R3 bed life >= 2 months"
+      },
+      "verdict": "REFUTED",
+      "overshoot": "~0.798488087426 (an exact fraction of 50 digits)"
+    },
+    {
+      "requirement": {
+        "quantity": "y1",
+        "op": "<=",
+        "value": "8.5",
+        "why": "R5 loaded solvent <= 8.5 g/L"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "y1": [
+          "~5.35333586044 (an exact fraction of 50 digits)",
+          "~6.84528312726 (an exact fraction of 48 digits)"
+        ]
+      }
+    }
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1 raffinate x_N <= 0.12 g/L"
+      ],
+      [
+        "R2 discharge <= 0.006 g/L"
+      ],
+      [
+        "R3 bed life >= 2 months"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	0m0.960s
+user	0m0.906s
+sys	0m0.031s

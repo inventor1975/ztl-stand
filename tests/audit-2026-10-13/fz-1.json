@@ -1,0 +1,35 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "audit fuzz seed 1 family poly",
+ "quantities": {
+  "x0": {
+   "role": "given",
+   "range": [
+    "-4",
+    "0"
+   ],
+   "unit": ""
+  },
+  "y": {
+   "role": "derived",
+   "unit": ""
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "conflicts": false,
+ "laws": [
+  {
+   "zfl": "y == (((x0) * (x0)) + ((x0) - ((-19)))) - (((x0) * ((13/2)))/(1 + ((x0) * (x0))*((x0) * (x0))))",
+   "source": "audit fuzz"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "y",
+   "op": ">=",
+   "value": "48519/2570",
+   "why": "audit"
+  }
+ ]
+}

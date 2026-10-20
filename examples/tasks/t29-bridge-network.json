@@ -1,0 +1,16 @@
+{"stand": "ztl-stand/1",
+ "why": "a Wheatstone bridge, 1 % resistors: the current through the bridge resistor stays within +-0.2 mA (a network brick)",
+ "quantities": {
+  "V":  {"role": "given", "value": "10", "unit": "V"},
+  "R1": {"role": "given", "value": "1000", "tolerance": "0.01", "unit": "ohm"},
+  "R2": {"role": "given", "value": "1000", "tolerance": "0.01", "unit": "ohm"},
+  "R3": {"role": "given", "value": "2000", "tolerance": "0.01", "unit": "ohm"},
+  "R4": {"role": "given", "value": "2000", "tolerance": "0.01", "unit": "ohm"},
+  "R5": {"role": "given", "value": "500",  "tolerance": "0.05", "unit": "ohm"}},
+ "network": {
+  "branches": {"b1": {"from": "a", "to": "n1", "R": "R1"}, "b2": {"from": "n1", "to": "gnd", "R": "R2"},
+               "b3": {"from": "a", "to": "n2", "R": "R3"}, "b4": {"from": "n2", "to": "gnd", "R": "R4"},
+               "b5": {"from": "n1", "to": "n2", "R": "R5"}},
+  "source": {"from": "a", "to": "gnd", "V": "V"}},
+ "requirements": [{"quantity": "I(b5)", "op": "within", "value": ["-0.2", "0.2"], "unit": "mA"},
+                  {"quantity": "I(b1)", "op": "<=", "value": "5.1", "unit": "mA"}]}

@@ -1,0 +1,86 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "modes": [
+    "heavy R2",
+    "bollard R1",
+    "light R4",
+    "heavy R3"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "designs": [
+    {
+      "design": "PR=propellers(grade=P2, D=13/10, KT0=33/100, J0=39/50, KQ0=9/250, price=5400); GR=gears(grade=G3, i=4, price=5900)",
+      "verdict": "REFUTED",
+      "mode": "light R4",
+      "fails": "R4 tip speed <= 32 m/s",
+      "by": "~2.18836310951 (an exact fraction of 59 digits)",
+      "unit": "m/s"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "verdict": "REFUTED",
+  "why": "every design violates a requirement in at least one mode, at a concrete point",
+  "closest_design": {
+    "PR": {
+      "catalog": "propellers",
+      "D": {
+        "nominal": "13/10 (~1.3)",
+        "tolerance": "0"
+      },
+      "KT0": {
+        "nominal": "33/100 (~0.33)",
+        "tolerance": "0"
+      },
+      "J0": {
+        "nominal": "39/50 (~0.78)",
+        "tolerance": "0"
+      },
+      "KQ0": {
+        "nominal": "9/250 (~0.036)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "5400",
+        "tolerance": "0"
+      },
+      "grade": "P2"
+    },
+    "GR": {
+      "catalog": "gears",
+      "i": {
+        "nominal": "4",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "5900",
+        "tolerance": "0"
+      },
+      "grade": "G3"
+    }
+  },
+  "failing_mode": "light R4",
+  "its_violating_point": {
+    "pi": "6283185307179587/2000000000000000 (~3.14159)"
+  },
+  "value_there": {
+    "Tip": [
+      "~34.1883631095 (an exact fraction of 59 digits)",
+      "~34.1883631095 (an exact fraction of 60 digits)"
+    ]
+  },
+  "requirement": {
+    "quantity": "Tip",
+    "op": "<=",
+    "value": "32",
+    "why": "R4 tip speed <= 32 m/s"
+  },
+  "overshoot": "~2.18836310951 (an exact fraction of 59 digits)",
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "skipped": "9 requirements: subsets over 8 not enumerated"
+  }
+}

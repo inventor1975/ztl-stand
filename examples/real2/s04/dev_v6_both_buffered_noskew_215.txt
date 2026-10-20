@@ -1,0 +1,70 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ss": [
+          "0",
+          "50"
+        ],
+        "sh": [
+          "10",
+          "50"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "verdict": "EARNED",
+  "design": {},
+  "guaranteed": {
+    "ss": [
+      "0",
+      "50"
+    ],
+    "sh": [
+      "10",
+      "50"
+    ]
+  },
+  "guaranteed_unit": {
+    "ss": "ps",
+    "sh": "ps"
+  },
+  "how": {
+    "ss": "ZTL, exact at the corners",
+    "sh": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "ss",
+      "op": ">=",
+      "value": "0",
+      "why": "setup slack nonnegative"
+    },
+    {
+      "quantity": "sh",
+      "op": ">=",
+      "value": "0",
+      "why": "hold slack nonnegative (the source writes strict >; see report)"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "sh -> [1/100000000000, 1/20000000000] by the system over its parameters, exact at the corners (credit)",
+    "ss -> [0, 1/20000000000] by the system over its parameters, exact at the corners (credit)"
+  ],
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

@@ -1,0 +1,960 @@
+{
+  "verdict": "EARNED",
+  "find": "smallest",
+  "quantity": "Ta",
+  "unit": "K",
+  "proved": "25703/100 (~257.03)",
+  "proved_means": "every Ta in [25703/100 (~257.03), 5263/20 (~263.15)] K works (EARNED on the whole range)",
+  "beyond": "12851/50 (~257.02)",
+  "beyond_is": "OPEN: the stand could not decide the range [12851/50 (~257.02), 5263/20 (~263.15)] K — the limit lies between 25703/100 (~257.03) and 12851/50 (~257.02), unproved",
+  "precision": "1/100 (~0.01)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 7ef9b6f",
+    "designs_tried": 4,
+    "failed_at_nominal": 1,
+    "judged": 3,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "BMS=bms(name=M30, Irat=30, R=9, price=16/5)",
+        "verdict": "REFUTED",
+        "fails": "R3 BMS rating",
+        "by_at_witness": "~9.41162867668 (an exact fraction of 61 digits)",
+        "unit": "A"
+      },
+      {
+        "design": "BMS=bms(name=M40, Irat=40, R=6, price=9/2)",
+        "verdict": "REFUTED",
+        "fails": "R1 controller shut-down threshold",
+        "by_at_witness": "~0.247564785841 (an exact fraction of 61 digits)",
+        "unit": "V"
+      },
+      {
+        "design": "BMS=bms(name=M60, Irat=60, R=7/2, price=15/2)",
+        "verdict": "REFUTED",
+        "fails": "R1 controller shut-down threshold",
+        "by_at_witness": "~0.0695055697176 (an exact fraction of 60 digits)",
+        "unit": "V"
+      },
+      {
+        "design": "BMS=bms(name=M80, Irat=80, R=5/2, price=11)",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "Vt": [
+            "7100059422803/500000000000 (~14.2001)",
+            "32344304702757/2000000000000 (~16.1722)"
+          ],
+          "Runtime": [
+            "3069561/312500 (~9.8226)",
+            "762367/56250 (~13.5532)"
+          ],
+          "I": [
+            "360000000000000/10781434900919 (~33.3907)",
+            "320000000000000/7100059422803 (~45.07)"
+          ],
+          "Imarg": [
+            "4542656485972646/4437537139251875 (~1.02369)",
+            "1717568043538192/269535872522975 (~6.37232)"
+          ],
+          "Vcell": [
+            "580185722422001986419107879353/199848906067774810689948876800 (~2.90312)",
+            "3978907928066744694635325468137/1213881655057451721556597145600 (~3.27784)"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 3,
+      "EARNED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "objective": {
+      "minimize": "PK.cost + BMS.price",
+      "value": "147/2 (~73.5)",
+      "unit": "EUR",
+      "optimal": false,
+      "optimal_means": "among the candidates: true only when no cheaper combination is left undecided — a system cannot refute, so a cheaper one not earned stays OPEN"
+    },
+    "verdict": "EARNED",
+    "design": {
+      "BMS": {
+        "catalog": "bms",
+        "Irat": {
+          "nominal": "80",
+          "tolerance": "0"
+        },
+        "R": {
+          "nominal": "5/2 (~2.5)",
+          "tolerance": "0"
+        },
+        "price": {
+          "nominal": "11",
+          "tolerance": "0"
+        },
+        "name": "M80"
+      },
+      "component PK": "CELL=H25, NP.N=4, HT=film"
+    },
+    "guaranteed": {
+      "Vt": [
+        "7100059422803/500000000000 (~14.2001)",
+        "32344304702757/2000000000000 (~16.1722)"
+      ],
+      "Runtime": [
+        "3069561/312500 (~9.8226)",
+        "762367/56250 (~13.5532)"
+      ],
+      "I": [
+        "360000000000000/10781434900919 (~33.3907)",
+        "320000000000000/7100059422803 (~45.07)"
+      ],
+      "Imarg": [
+        "4542656485972646/4437537139251875 (~1.02369)",
+        "1717568043538192/269535872522975 (~6.37232)"
+      ],
+      "Vcell": [
+        "580185722422001986419107879353/199848906067774810689948876800 (~2.90312)",
+        "3978907928066744694635325468137/1213881655057451721556597145600 (~3.27784)"
+      ]
+    },
+    "guaranteed_unit": {
+      "Vt": "V",
+      "Runtime": "min",
+      "I": "A",
+      "Imarg": "A",
+      "Vcell": "V"
+    },
+    "how": {
+      "Vt": "ZTL, interval reading of the definition (sound, may be wide)",
+      "Runtime": "ZTL, outer range",
+      "I": "ZTL, interval reading of the definition (sound, may be wide)",
+      "Imarg": "ZTL, interval reading of the definition (sound, may be wide)",
+      "Vcell": "ZTL, interval reading of the definition (sound, may be wide)"
+    },
+    "requirements": [
+      {
+        "quantity": "Vt",
+        "op": ">=",
+        "value": "14.2",
+        "why": "R1 controller shut-down threshold"
+      },
+      {
+        "quantity": "Runtime",
+        "op": ">=",
+        "value": "9",
+        "why": "R2"
+      },
+      {
+        "quantity": "I",
+        "op": "<=",
+        "value": "BMS.Irat",
+        "why": "R3 BMS rating"
+      },
+      {
+        "quantity": "Imarg",
+        "op": ">=",
+        "value": "0",
+        "why": "R4 cell current <= Imax(Tc)"
+      },
+      {
+        "quantity": "Vcell",
+        "op": ">=",
+        "value": "2.9",
+        "why": "R5 cell cut-off"
+      }
+    ],
+    "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "Rtot -> [788815902437194338859/18446744073709551616000, 2537504184916710346099/36893488147419103232000] by [Rtot == PK_Rpk + BMS__R*kb + Rw]",
+      "Runtime -> [9208683/15625, 1524734/1875] by [Runtime == PK_E/P], interval reading, sound, may be wider than the truth (credit)",
+      "Vt -> [7100059422803/500000000000, 32344304702757/2000000000000] by [Vt == (PK_V0 + sqrt(max(0, PK_V0*PK_V0 - 4*Rtot*P)))/2], interval reading, sound, may be wider than the truth (credit)",
+      "I -> [360000000000000/10781434900919, 320000000000000/7100059422803] by [I == P/Vt], interval reading, sound, may be wider than the truth (credit)",
+      "Icell -> [90000000000000/10781434900919, 80000000000000/7100059422803] by [Icell == I/PK_NP_N]",
+      "Vcell -> [580185722422001986419107879353/199848906067774810689948876800, 3978907928066744694635325468137/1213881655057451721556597145600] by [Vcell == PK_V0/5 - Icell*PK_Rc], multilinear, exact at the corners (credit)"
+    ],
+    "components": {
+      "PK": {
+        "inputs": {
+          "Ta": {
+            "from": "Ta",
+            "arrives": [
+              "25703/100",
+              "5263/20"
+            ],
+            "assume": [
+              "4663/20",
+              "6263/20"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "Ta": [
+                "25703/100",
+                "5263/20"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "Rpk": [
+                "668912065958082253355/18446744073709551616",
+                "2279249767884776623475/36893488147419103232"
+              ],
+              "V0": [
+                "173/10",
+                "88/5"
+              ],
+              "Rc": [
+                "133782413191616450671/4611686018427387904",
+                "455849953576955324695/9223372036854775808"
+              ],
+              "E": [
+                "8185496/78125",
+                "762367/6250"
+              ],
+              "Imaxc": [
+                "7682/625",
+                "368/25"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "Rpk": [
+            "668912065958082253355/18446744073709551616",
+            "2279249767884776623475/36893488147419103232"
+          ],
+          "V0": [
+            "173/10",
+            "88/5"
+          ],
+          "Rc": [
+            "133782413191616450671/4611686018427387904",
+            "455849953576955324695/9223372036854775808"
+          ],
+          "E": [
+            "8185496/78125",
+            "762367/6250"
+          ],
+          "Imaxc": [
+            "7682/625",
+            "368/25"
+          ]
+        }
+      }
+    },
+    "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)",
+    "combinations": [
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=1, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=1, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=2, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=2, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=3, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=3, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=4, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=4, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=1, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=1, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=2, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=2, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=3, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=3, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=4, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=4, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=1, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=1, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=2, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=2, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=3, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=3, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=4, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=4, HT=film"
+        },
+        "verdict": "EARNED",
+        "cost": "147/2 (~73.5)"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=1, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=1, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=2, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=2, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=3, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=3, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=4, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=4, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=1, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=1, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=2, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=2, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=3, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=3, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=4, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=4, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      }
+    ],
+    "combinations_judged": "40 of 40"
+  },
+  "at_beyond": {
+    "verdict": "OPEN",
+    "why": "components: none of the 40 combinations of candidates was earned (a system cannot refute: its ranges enclose)",
+    "combinations": [
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=1, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=1, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=2, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=2, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=3, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=3, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=4, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=P15, NP.N=4, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=1, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=1, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=2, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=2, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=3, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=3, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=4, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H20, NP.N=4, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=1, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=1, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=2, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=2, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=3, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=3, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=4, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=H25, NP.N=4, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=1, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=1, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=2, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=2, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=3, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=3, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=4, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E25, NP.N=4, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=1, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=1, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=2, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=2, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=3, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=3, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=4, HT=none"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      },
+      {
+        "design": {
+          "PK": "CELL=E30, NP.N=4, HT=film"
+        },
+        "verdict": "OPEN",
+        "cost": null,
+        "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+      }
+    ]
+  },
+  "tries": [
+    {
+      "Ta": "5263/20 (~263.15)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "4663/20 (~233.15)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "4963/20 (~248.15)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "5113/20 (~255.65)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "1297/5 (~259.4)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "25753/100 (~257.53)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "25659/100 (~256.59)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "12853/50 (~257.06)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "25683/100 (~256.83)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "5139/20 (~256.95)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "25701/100 (~257.01)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "25703/100 (~257.03)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "12851/50 (~257.02)",
+      "verdict": "OPEN"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	2m5.871s
+user	1m59.967s
+sys	0m6.168s

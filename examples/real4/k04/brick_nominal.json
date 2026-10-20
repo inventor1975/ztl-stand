@@ -1,0 +1,106 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "value": "28",
+   "unit": "V",
+   "ground": "TI datasheet Table 8-1 (max of 7-28 V)"
+  },
+  "Vo": {
+   "role": "given",
+   "value": "3.3",
+   "unit": "V",
+   "ground": "TI datasheet Table 8-1"
+  },
+  "fsw": {
+   "role": "given",
+   "value": "570",
+   "unit": "kHz",
+   "ground": "TI datasheet 6.6 typ"
+  },
+  "Io": {
+   "role": "given",
+   "value": "3",
+   "unit": "A",
+   "ground": "TI datasheet Table 8-1 output current rating"
+  },
+  "Isat": {
+   "role": "given",
+   "value": "3.84",
+   "unit": "A",
+   "ground": "TI datasheet 8.2.2.5.1, Sumida CDRH103-6R8 saturation rating"
+  },
+  "Irmsmax": {
+   "role": "given",
+   "value": "3.6",
+   "unit": "A",
+   "ground": "TI datasheet 8.2.2.5.1, Sumida CDRH103-6R8 RMS rating"
+  },
+  "Lind": {
+   "role": "given",
+   "value": "10",
+   "unit": "uH",
+   "why": "the inductance searched (find): nominal value of the inductor"
+  },
+  "ILPP": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Kr": {
+   "role": "derived",
+   "unit": ""
+  },
+  "ILpk": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "ILrms": {
+   "role": "derived",
+   "unit": "A"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "ILPP == Vo*(Vin - Vo)/(Vin*Lind*fsw)",
+   "source": "datasheet Eq. 8/9 (ripple current)"
+  },
+  {
+   "zfl": "Kr == ILPP/Io",
+   "source": "definition of KIND, Eq. 8"
+  },
+  {
+   "zfl": "ILpk == Io + ILPP/2",
+   "source": "datasheet Eq. 11"
+  },
+  {
+   "zfl": "ILrms == sqrt(Io*Io + ILPP*ILPP/12)",
+   "source": "datasheet Eq. 10"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Kr",
+   "op": "<=",
+   "value": "0.3",
+   "why": "KIND = 0.3 (low-ESR ceramic output caps), Eq. 8 guideline"
+  }
+ ],
+ "catalog": {},
+ "find": {
+  "smallest": "Lind",
+  "from": "1",
+  "to": "30",
+  "precision": "0.01",
+  "requirements": [
+   {
+    "quantity": "Kr",
+    "op": "<=",
+    "value": "0.3",
+    "why": "KIND = 0.3 (low-ESR ceramic output caps), Eq. 8 guideline"
+   }
+  ]
+ },
+ "conflicts": false
+}

@@ -1,0 +1,350 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Pout": {
+   "role": "given",
+   "unit": "W",
+   "value": "400",
+   "why": "controller load at converter output"
+  },
+  "eta": {
+   "role": "given",
+   "unit": "",
+   "value": "0.92",
+   "why": "converter efficiency"
+  },
+  "Vmin": {
+   "role": "given",
+   "unit": "V",
+   "value": "10",
+   "why": "converter works while bank terminal voltage >= 10 V"
+  },
+  "Vsmin": {
+   "role": "given",
+   "unit": "V",
+   "value": "21.6",
+   "why": "minimum supply = initial capacitor voltage for R2"
+  },
+  "Vsmax": {
+   "role": "given",
+   "unit": "V",
+   "value": "26.4",
+   "why": "maximum supply for R1"
+  },
+  "Vfloat": {
+   "role": "given",
+   "unit": "V",
+   "value": "24",
+   "why": "float voltage of the bank (lifetime profile)"
+  },
+  "kpk": {
+   "role": "given",
+   "unit": "",
+   "value": "1.06",
+   "why": "imbalance factor, peak"
+  },
+  "kfl": {
+   "role": "given",
+   "unit": "",
+   "value": "1.03",
+   "why": "imbalance factor, float"
+  },
+  "kC": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0.72",
+    "0.80"
+   ],
+   "why": "EOL capacitance factor: 0.80 x nominal after a further -10 % = 0.72; range [0.72,0.80]"
+  },
+  "kESRe": {
+   "role": "given",
+   "unit": "",
+   "value": "2",
+   "why": "EOL ESR = 2.0 x (nominal x temperature multiplier)"
+  },
+  "T": {
+   "role": "given",
+   "unit": "C",
+   "range": [
+    "-20",
+    "65"
+   ],
+   "why": "ambient range for R2"
+  },
+  "Tu": {
+   "role": "given",
+   "unit": "C",
+   "value": "1",
+   "why": "unit temperature, to make T dimensionless"
+  },
+  "Cbal": {
+   "role": "given",
+   "unit": "EUR",
+   "value": "0.5",
+   "why": "balancing circuit per cell"
+  },
+  "L0": {
+   "role": "given",
+   "unit": "h",
+   "value": "1500",
+   "why": "life at 65 C and rated voltage"
+  },
+  "Tref": {
+   "role": "given",
+   "unit": "C",
+   "value": "65"
+  },
+  "dTL": {
+   "role": "given",
+   "unit": "C",
+   "value": "10",
+   "why": "life halves per 10 C"
+  },
+  "dVL": {
+   "role": "given",
+   "unit": "V",
+   "value": "0.1",
+   "why": "life halves per 0.1 V over rated"
+  },
+  "T1": {
+   "role": "given",
+   "unit": "C",
+   "value": "25"
+  },
+  "T2": {
+   "role": "given",
+   "unit": "C",
+   "value": "45"
+  },
+  "T3": {
+   "role": "given",
+   "unit": "C",
+   "value": "60"
+  },
+  "f1": {
+   "role": "given",
+   "unit": "",
+   "value": "0.6"
+  },
+  "f2": {
+   "role": "given",
+   "unit": "",
+   "value": "0.3"
+  },
+  "f3": {
+   "role": "given",
+   "unit": "",
+   "value": "0.1"
+  },
+  "thold": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "mB": {
+   "role": "derived",
+   "unit": "V^2"
+  },
+  "dis": {
+   "role": "derived",
+   "unit": "V^2"
+  },
+  "Vpk": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "life": {
+   "role": "derived",
+   "unit": "h"
+  }
+ },
+ "slots": {
+  "CELL": {
+   "from": [
+    "cells"
+   ]
+  },
+  "NS": {
+   "from": [
+    "ns"
+   ]
+  },
+  "NP": {
+   "from": [
+    "np"
+   ]
+  }
+ },
+ "where": [
+  "NS.N*NP.N <= 100"
+ ],
+ "define": {
+  "u": "T/Tu",
+  "kT": "if(u < -10, 12/5 - 2/25*(u + 10), if(u < 0, 12/5 - 7/100*(u + 10), if(u < 25, 17/10 - 7/250*u, if(u < 45, 1 - 1/200*(u - 25), 9/10 - 1/400*(u - 45)))))",
+  "Pin": "Pout/eta",
+  "Rb": "NS.N*CELL.ESR*kESRe*kT/NP.N",
+  "Cb": "NP.N*CELL.C*kC/NS.N",
+  "v1": "Vmin + Rb*Pin/Vmin",
+  "s0": "sqrt(max(Vsmin*Vsmin - 4*Rb*Pin, 0))",
+  "s1": "Vmin - Rb*Pin/Vmin",
+  "Vc": "Vfloat/NS.N*kfl",
+  "Lf": "pow(2, (CELL.Vr - Vc)/dVL)",
+  "Li1": "L0*pow(2, (Tref - T1)/dTL)*Lf",
+  "Li2": "L0*pow(2, (Tref - T2)/dTL)*Lf",
+  "Li3": "L0*pow(2, (Tref - T3)/dTL)*Lf"
+ },
+ "laws": [
+  {
+   "zfl": "dis == Vsmin*Vsmin - 4*Rb*Pin",
+   "source": "discriminant of v_t = (v_c + sqrt(v_c^2 - 4 R P_in))/2 at the start; negative = load cannot be supplied"
+  },
+  {
+   "zfl": "mB == Vmin*Vmin - Rb*Pin",
+   "source": "closed form valid on the upper-root branch: v_c at vt=Vmin is Vmin + R P/Vmin, upper root iff R P <= Vmin^2 (see report)"
+  },
+  {
+   "zfl": "thold == Cb/Pin*((Vsmin*Vsmin - v1*v1)/4 + (Vsmin*s0 - v1*s1 - 4*Rb*Pin*ln((Vsmin + s0)/(2*Vmin)))/4)",
+   "source": "hand integral: dt = C_bank v_t dv_c / P_in, v_t=(v+sqrt(v^2-4RP))/2, from v_c=Vsmin down to v_c1 where v_t = Vmin"
+  },
+  {
+   "zfl": "Vpk == Vsmax/NS.N*kpk",
+   "source": "worst cell voltage = bank voltage/n_s x 1.06"
+  },
+  {
+   "zfl": "life == 1/(f1/Li1 + f2/Li2 + f3/Li3)",
+   "source": "L(T,Vc)=1500h*2^((65-T)/10)*2^((Vr-Vc)/0.1V); damage = sum fraction/L"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vpk",
+   "op": "<=",
+   "value": "CELL.Vr",
+   "why": "R1 peak cell voltage <= rated"
+  },
+  {
+   "quantity": "dis",
+   "op": ">=",
+   "value": "0",
+   "why": "R2: load must be suppliable (discriminant >= 0)"
+  },
+  {
+   "quantity": "mB",
+   "op": ">=",
+   "value": "0",
+   "why": "R2 validity of closed form (branch), see report"
+  },
+  {
+   "quantity": "thold",
+   "op": ">=",
+   "value": "8",
+   "why": "R2 hold >= 8.0 s at EOL, min supply, all ambients"
+  },
+  {
+   "quantity": "life",
+   "op": ">=",
+   "value": "131400",
+   "why": "R3 life >= 15 years"
+  }
+ ],
+ "objective": {
+  "minimize": "NS.N*NP.N*(CELL.price + Cbal)",
+  "why": "bank cost = n_s n_p (price + 0.50 balancing)"
+ },
+ "catalog": {
+  "cells": {
+   "ground": "problem statement cell table",
+   "items": [
+    {
+     "name": "S1",
+     "Vr": "2.70",
+     "C": "100",
+     "ESR": "10.0",
+     "price": "4.20"
+    },
+    {
+     "name": "S2",
+     "Vr": "2.70",
+     "C": "150",
+     "ESR": "7.0",
+     "price": "5.60"
+    },
+    {
+     "name": "S3",
+     "Vr": "2.70",
+     "C": "310",
+     "ESR": "2.2",
+     "price": "10.50"
+    },
+    {
+     "name": "S4",
+     "Vr": "3.00",
+     "C": "60",
+     "ESR": "18.0",
+     "price": "3.40"
+    },
+    {
+     "name": "S5",
+     "Vr": "3.00",
+     "C": "120",
+     "ESR": "9.0",
+     "price": "6.20"
+    },
+    {
+     "name": "S6",
+     "Vr": "2.50",
+     "C": "350",
+     "ESR": "3.0",
+     "price": "9.40"
+    },
+    {
+     "name": "S7",
+     "Vr": "2.70",
+     "C": "50",
+     "ESR": "22.0",
+     "price": "2.20"
+    },
+    {
+     "name": "S8",
+     "Vr": "2.85",
+     "C": "200",
+     "ESR": "5.5",
+     "price": "7.80"
+    }
+   ],
+   "fields": {
+    "Vr": {
+     "unit": "V"
+    },
+    "C": {
+     "unit": "F"
+    },
+    "ESR": {
+     "unit": "mohm"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "ns": {
+   "ground": "problem: n_s 6..15",
+   "integers": {
+    "field": "N",
+    "from": "6",
+    "to": "15",
+    "unit": ""
+   }
+  },
+  "np": {
+   "ground": "problem: n_p integer; n_s*n_p<=100 and n_s>=6 give n_p<=16",
+   "integers": {
+    "field": "N",
+    "from": "1",
+    "to": "16",
+    "unit": ""
+   }
+  }
+ }
+}

@@ -1,0 +1,60 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683 + the network certificate (ustand/znet.py)",
+  "verdict": "REFUTED",
+  "network": {
+    "nodes": 4,
+    "branches": 5,
+    "free_branches": 4
+  },
+  "units": "checked: every branch one kind, the current's unit = the source's x a conductance",
+  "requirements": [
+    {
+      "requirement": {
+        "quantity": "I(b5)",
+        "op": "within",
+        "value": [
+          "-0.000499",
+          "0.000499"
+        ],
+        "unit": "uA",
+        "why": "detector current times Rm = offset bound"
+      },
+      "proved_range": [
+        "~-0.000499500500001 (an exact fraction of 39 digits)",
+        "~0.0004995005 (an exact fraction of 39 digits)"
+      ],
+      "certificate": {
+        "max": {
+          "rounds": 2,
+          "free": 0,
+          "lam": "200/999999 (~0.0002)"
+        },
+        "min": {
+          "rounds": 2,
+          "free": 0,
+          "lam": "200/999999 (~0.0002)"
+        }
+      },
+      "verdict": "REFUTED",
+      "its_violating_point": {
+        "R1": "9990",
+        "R2": "10010",
+        "R3": "10010",
+        "R4": "9990"
+      },
+      "value_there": [
+        "~0.000499500499999 (an exact fraction of 39 digits)",
+        "~0.0004995005 (an exact fraction of 39 digits)"
+      ],
+      "value_there_is": "the current at that point, enclosed exactly (two certificates on the point)",
+      "found_inside": [
+        "-0.0004995005",
+        "0.0004995005"
+      ],
+      "found_inside_is": "the range the search reached at corners (floating point): the proved range's tightness"
+    }
+  ],
+  "rests_on": "the network certificate: znet.py checks every certificate exactly by the kernel's rules; it is in the stand, not yet in public ZTL, and NOT proved in Lean",
+  "checked_by": "the network certificate (work mode; --dev adds every corner solved exactly, small networks)"
+}

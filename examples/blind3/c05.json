@@ -1,0 +1,307 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "F": {
+   "role": "given",
+   "value": "9.5",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "ground": "problem statement: belt pull +-10%"
+  },
+  "D": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "m",
+   "ground": "problem statement"
+  },
+  "vreq": {
+   "role": "given",
+   "value": "1.6",
+   "unit": "m/s",
+   "ground": "problem statement: required belt speed"
+  },
+  "V": {
+   "role": "given",
+   "range": [
+    "360",
+    "420"
+   ],
+   "unit": "V",
+   "why": "400 V -10% ... +5%"
+  },
+  "V0": {
+   "role": "given",
+   "value": "400",
+   "unit": "V"
+  },
+  "kb": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "load factor on running torque; modes set 1.5 for breakaway"
+  },
+  "xs": {
+   "role": "given",
+   "range": [
+    "1/20",
+    "22/25"
+   ],
+   "unit": "",
+   "why": "swept speed n/n_sync for requirement (b); modes override"
+  },
+  "xop": {
+   "role": "derived",
+   "unit": "",
+   "search": [
+    "22/25",
+    "1"
+   ]
+  },
+  "TL": {
+   "role": "derived",
+   "unit": "N*m"
+  },
+  "Tbk": {
+   "role": "derived",
+   "unit": "N*m"
+  },
+  "Tsh": {
+   "role": "derived",
+   "unit": "N*m"
+  },
+  "v": {
+   "role": "derived",
+   "unit": "m/s"
+  },
+  "vrel": {
+   "role": "derived",
+   "unit": ""
+  },
+  "mb": {
+   "role": "derived",
+   "unit": "N*m"
+  }
+ },
+ "slots": {
+  "M": {
+   "from": [
+    "motor"
+   ]
+  },
+  "RAT": {
+   "from": [
+    "ratio"
+   ]
+  },
+  "GB": {
+   "from": [
+    "gearbox"
+   ]
+  }
+ },
+ "define": {
+  "Vs2": "(V/V0)*(V/V0)",
+  "Tlm": "F*D/2/(RAT.i*RAT.eta)",
+  "Kop": "if(xop <= 1/5, 21/10 - 3/2*xop, if(xop <= 2/5, 9/5 + 1/2*(xop - 1/5), if(xop <= 3/5, 19/10 + 3/2*(xop - 2/5), if(xop <= 4/5, 11/5 + 3/2*(xop - 3/5), if(xop <= 22/25, 5/2 + 5/2*(xop - 4/5), if(xop <= 47/50, 27/10 - 35/3*(xop - 22/25), if(xop <= 197/200, 2 - 200/9*(xop - 47/50), 1 - 200/3*(xop - 197/200))))))))",
+  "Ks": "if(xs <= 1/5, 21/10 - 3/2*xs, if(xs <= 2/5, 9/5 + 1/2*(xs - 1/5), if(xs <= 3/5, 19/10 + 3/2*(xs - 2/5), if(xs <= 4/5, 11/5 + 3/2*(xs - 3/5), if(xs <= 22/25, 5/2 + 5/2*(xs - 4/5), if(xs <= 47/50, 27/10 - 35/3*(xs - 22/25), if(xs <= 197/200, 2 - 200/9*(xs - 47/50), 1 - 200/3*(xs - 197/200))))))))"
+ },
+ "laws": [
+  {
+   "zfl": "M.Tn*Kop*Vs2 == Tlm",
+   "source": "operating point: motor curve (x V^2) meets load torque at motor shaft"
+  },
+  {
+   "zfl": "TL == F*D/2",
+   "source": "load torque at drum"
+  },
+  {
+   "zfl": "Tbk == 3/2*TL",
+   "source": "breakaway = 1.5 x running"
+  },
+  {
+   "zfl": "Tsh == TL/(RAT.i*RAT.eta)",
+   "source": "load torque at motor shaft"
+  },
+  {
+   "zfl": "v == pi*D*M.ns*xop/RAT.i",
+   "source": "belt speed = pi D n_motor / i"
+  },
+  {
+   "zfl": "vrel == v/vreq",
+   "source": "relative to required speed"
+  },
+  {
+   "zfl": "mb == M.Tn*Ks*Vs2 - kb*Tlm - M.Tn/4",
+   "source": "requirement (b): motor torque minus start-case load torque minus 25% Tn"
+  }
+ ],
+ "requirements": [],
+ "objective": {
+  "minimize": "M.price + GB.price",
+  "why": "cheapest motor+gearbox (ratio has no price)"
+ },
+ "report": "all",
+ "catalog": {
+  "motor": {
+   "items": [
+    {
+     "Tn": "120",
+     "ns": "1500",
+     "price": "1100",
+     "name": "M18"
+    },
+    {
+     "Tn": "142",
+     "ns": "1500",
+     "price": "1350",
+     "name": "M22"
+    },
+    {
+     "Tn": "194",
+     "ns": "1500",
+     "price": "1900",
+     "name": "M30"
+    }
+   ],
+   "fields": {
+    "Tn": {
+     "unit": "N*m"
+    },
+    "ns": {
+     "unit": "rpm"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "ratio": {
+   "items": [
+    {
+     "i": "20",
+     "eta": "0.96"
+    },
+    {
+     "i": "22.4",
+     "eta": "0.96"
+    },
+    {
+     "i": "25",
+     "eta": "0.96"
+    },
+    {
+     "i": "28",
+     "eta": "0.95"
+    }
+   ],
+   "fields": {
+    "i": {
+     "unit": ""
+    },
+    "eta": {
+     "unit": ""
+    }
+   }
+  },
+  "gearbox": {
+   "items": [
+    {
+     "Tr": "2400",
+     "price": "900",
+     "name": "G1"
+    },
+    {
+     "Tr": "3300",
+     "price": "1250",
+     "name": "G2"
+    },
+    {
+     "Tr": "4500",
+     "price": "1700",
+     "name": "G3"
+    }
+   ],
+   "fields": {
+    "Tr": {
+     "unit": "N*m"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ },
+ "modes": {
+  "operating": {
+   "quantities": {},
+   "requirements": [
+    {
+     "quantity": "vrel",
+     "op": "within",
+     "value": [
+      "0.96",
+      "1.02"
+     ],
+     "why": "(a) belt speed -4%..+2%"
+    },
+    {
+     "quantity": "Tsh",
+     "op": "<=",
+     "value": "M.Tn",
+     "why": "(c) motor shaft torque at operating point <= Tn"
+    },
+    {
+     "quantity": "TL",
+     "op": "<=",
+     "value": "GB.Tr*5/7",
+     "why": "(d) rating >= 1.4 x max running torque"
+    },
+    {
+     "quantity": "Tbk",
+     "op": "<=",
+     "value": "GB.Tr",
+     "why": "(d) rating >= breakaway output torque"
+    }
+   ]
+  },
+  "breakaway": {
+   "quantities": {
+    "kb": {
+     "value": "3/2"
+    },
+    "xs": {
+     "range": [
+      "0",
+      "1/20"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "mb",
+     "op": ">=",
+     "value": "0",
+     "why": "(b) margin >= 25% Tn"
+    }
+   ]
+  },
+  "sweep 1/20..22/25": {
+   "quantities": {
+    "xs": {
+     "range": [
+      "1/20",
+      "22/25"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "mb",
+     "op": ">=",
+     "value": "0",
+     "why": "(b) margin >= 25% Tn"
+    }
+   ]
+  }
+ }
+}

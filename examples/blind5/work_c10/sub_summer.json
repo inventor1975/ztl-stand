@@ -1,0 +1,286 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "T": {
+   "role": "given",
+   "range": [
+    "26",
+    "30"
+   ],
+   "unit": "C"
+  },
+  "W": {
+   "role": "given",
+   "range": [
+    "16000",
+    "19000"
+   ],
+   "unit": "kg"
+  },
+  "Tu": {
+   "role": "given",
+   "value": "1",
+   "unit": "C"
+  },
+  "Cu": {
+   "role": "given",
+   "value": "1",
+   "unit": "mg/L"
+  },
+  "Vp": {
+   "role": "given",
+   "value": "24000",
+   "unit": "m^3"
+  },
+  "rf": {
+   "role": "given",
+   "value": "0.30",
+   "unit": "g/(kg*h)"
+  },
+  "r0": {
+   "role": "given",
+   "value": "0.15",
+   "unit": "g/(m^3*h)"
+  },
+  "kd0": {
+   "role": "given",
+   "value": "0.015",
+   "unit": "1/h"
+  },
+  "Cstd": {
+   "role": "given",
+   "value": "9.09",
+   "unit": "mg/L"
+  },
+  "t2": {
+   "role": "given",
+   "value": "2",
+   "unit": "h"
+  },
+  "Css": {
+   "role": "derived",
+   "unit": "mg/L"
+  },
+  "C2": {
+   "role": "derived",
+   "unit": "mg/L"
+  },
+  "days_winter": {
+   "role": "given",
+   "value": "90",
+   "unit": ""
+  },
+  "hrs_winter": {
+   "role": "given",
+   "value": "12",
+   "unit": "h"
+  },
+  "days_spring": {
+   "role": "given",
+   "value": "92",
+   "unit": ""
+  },
+  "hrs_spring": {
+   "role": "given",
+   "value": "10",
+   "unit": "h"
+  },
+  "days_summer": {
+   "role": "given",
+   "value": "92",
+   "unit": ""
+  },
+  "hrs_summer": {
+   "role": "given",
+   "value": "8",
+   "unit": "h"
+  },
+  "days_autumn": {
+   "role": "given",
+   "value": "91",
+   "unit": ""
+  },
+  "hrs_autumn": {
+   "role": "given",
+   "value": "11",
+   "unit": "h"
+  },
+  "Emax": {
+   "role": "given",
+   "value": "31000",
+   "unit": "kWh"
+  },
+  "Pmax": {
+   "role": "given",
+   "value": "40",
+   "unit": "kW"
+  },
+  "pe": {
+   "role": "given",
+   "value": "0.16",
+   "unit": "EUR/kWh"
+  },
+  "yrs": {
+   "role": "given",
+   "value": "10",
+   "unit": ""
+  }
+ },
+ "slots": {
+  "AE": {
+   "from": [
+    "aer"
+   ]
+  },
+  "OX": {
+   "from": [
+    "lox"
+   ]
+  },
+  "M": {
+   "from": [
+    "mcount"
+   ]
+  }
+ },
+ "catalog": {
+  "aer": {
+   "items": [
+    {
+     "name": "PW2",
+     "P": {
+      "value": "2.0"
+     },
+     "SAE": {
+      "value": "2.2"
+     },
+     "price": "3.6"
+    },
+    {
+     "name": "PW37",
+     "P": {
+      "value": "3.7"
+     },
+     "SAE": {
+      "value": "2.0"
+     },
+     "price": "5.2"
+    },
+    {
+     "name": "PROP",
+     "P": {
+      "value": "1.5"
+     },
+     "SAE": {
+      "value": "1.7"
+     },
+     "price": "2.3"
+    },
+    {
+     "name": "DIFF",
+     "P": {
+      "value": "5.5"
+     },
+     "SAE": {
+      "value": "1.4"
+     },
+     "price": "6.8"
+    }
+   ],
+   "fields": {
+    "P": {
+     "unit": "kW"
+    },
+    "SAE": {
+     "unit": "kg/kWh"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "lox": {
+   "items": [
+    {
+     "name": "none",
+     "price": "0",
+     "rate": "0"
+    },
+    {
+     "name": "LOX",
+     "price": "6.5",
+     "rate": "6000"
+    }
+   ],
+   "fields": {
+    "price": {
+     "unit": "kEUR"
+    },
+    "rate": {
+     "unit": "g/h"
+    }
+   }
+  },
+  "ncount": {
+   "integers": {
+    "field": "k",
+    "from": "1",
+    "to": "16",
+    "unit": ""
+   }
+  },
+  "mcount": {
+   "integers": {
+    "field": "k",
+    "from": "0",
+    "to": "16",
+    "unit": ""
+   }
+  }
+ },
+ "where": [
+  "AE.name != \"PW2\" or OX.name != \"none\" or (M.k >= 11 and M.k <= 12)",
+  "AE.name != \"PW2\" or OX.name != \"LOX\" or (M.k >= 9 and M.k <= 10)",
+  "AE.name != \"PW37\" or OX.name != \"none\" or (M.k >= 6 and M.k <= 7)",
+  "AE.name != \"PW37\" or OX.name != \"LOX\" or (M.k >= 5 and M.k <= 6)",
+  "AE.name != \"PROP\" or OX.name != \"none\" or (M.k >= 16 and M.k <= 16)",
+  "AE.name != \"PROP\" or OX.name != \"LOX\" or (M.k >= 16 and M.k <= 16)",
+  "AE.name != \"DIFF\" or OX.name != \"none\" or (M.k >= 6 and M.k <= 7)",
+  "AE.name != \"DIFF\" or OX.name != \"LOX\" or (M.k >= 5 and M.k <= 6)"
+ ],
+ "computed": {},
+ "define": {
+  "Cs": "Cu*table(T/Tu, 5, 12.8, 10, 11.3, 15, 10.1, 20, 9.1, 25, 8.3, 30, 7.6, 35, 7.0)",
+  "kd": "kd0*pow(1.024, T/Tu - 20)",
+  "r": "rf*W*pow(1.08, T/Tu - 20)/Vp + r0*pow(1.065, T/Tu - 20)",
+  "ox": "OX.rate/Vp",
+  "mrun": "M.k",
+  "a": "mrun*AE.P*AE.SAE*0.90*pow(1.024, T/Tu - 20)/(Cstd*Vp)",
+  "Cssd": "((kd + 0.95*a)*Cs - r)/(kd + a)"
+ },
+ "laws": [
+  {
+   "zfl": "Css == Cssd",
+   "source": "night steady state: r = kd(Cs-C) + aerator transfer/V, solved for C"
+  },
+  {
+   "zfl": "C2 == max(Cs - (r - ox)/kd + (Cssd - (Cs - (r - ox)/kd))*exp(-kd*t2), 0*Cu)",
+   "source": "closed form after 2 h power cut, floored at 0"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Css",
+   "op": ">=",
+   "value": "4.0",
+   "why": "R1: night DO >= 4.0 mg/L in every season, worst case"
+  },
+  {
+   "quantity": "C2",
+   "op": ">=",
+   "value": "3.0",
+   "why": "R2: DO >= 3.0 mg/L after the 2 h power cut, every season"
+  }
+ ],
+ "report": "all"
+}

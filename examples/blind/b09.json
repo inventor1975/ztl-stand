@@ -1,0 +1,187 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Price": {
+   "role": "given",
+   "value": "350000",
+   "unit": "USD",
+   "why": "home price"
+  },
+  "D": {
+   "role": "given",
+   "range": [
+    "60000",
+    "75000"
+   ],
+   "unit": "USD",
+   "why": "down payment"
+  },
+  "Inc": {
+   "role": "given",
+   "range": [
+    "5200",
+    "5800"
+   ],
+   "unit": "USD",
+   "why": "net monthly income"
+  },
+  "Sav": {
+   "role": "given",
+   "value": "78000",
+   "unit": "USD",
+   "why": "cash savings"
+  },
+  "Dmin": {
+   "role": "given",
+   "value": "60000",
+   "unit": "USD",
+   "why": "smallest allowed down payment = largest principal (objective only)"
+  },
+  "A": {
+   "role": "derived",
+   "unit": "USD"
+  },
+  "Fee": {
+   "role": "derived",
+   "unit": "USD"
+  },
+  "Cash": {
+   "role": "derived",
+   "unit": "USD"
+  },
+  "Tot": {
+   "role": "derived",
+   "unit": "USD"
+  },
+  "Slack": {
+   "role": "derived",
+   "unit": "USD"
+  }
+ },
+ "slots": {
+  "M": {
+   "from": [
+    "mortgages"
+   ]
+  }
+ },
+ "define": {
+  "Pr": "Price - D"
+ },
+ "laws": [
+  {
+   "zfl": "A == Pr*M.k",
+   "source": "annuity: A = P*r(1+r)^n/((1+r)^n-1); factor k precomputed outside the stand, outward-rounded, over the index range"
+  },
+  {
+   "zfl": "Fee == M.fp*Pr + M.fx",
+   "source": "upfront fee = share of principal + fixed amount"
+  },
+  {
+   "zfl": "Slack == 35/100*Inc - A",
+   "source": "headroom of the payment under 35% of net monthly income"
+  },
+  {
+   "zfl": "Cash == D + Fee",
+   "source": "cash needed up front"
+  },
+  {
+   "zfl": "Tot == M.n*A + Fee",
+   "source": "total paid over the term"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Slack",
+   "op": ">=",
+   "value": "0",
+   "why": "payment <= 35% of net income, every allowed income"
+  },
+  {
+   "quantity": "Cash",
+   "op": "<=",
+   "value": "78000",
+   "why": "down payment + fee <= cash savings"
+  }
+ ],
+ "objective": {
+  "minimize": "M.n*M.khi*(Price - Dmin) + M.fp*(Price - Dmin) + M.fx",
+  "why": "worst-case total paid (largest principal, highest rate)"
+ },
+ "catalog": {
+  "mortgages": {
+   "items": [
+    {
+     "k": {
+      "range": [
+       "0.006504280112",
+       "0.006504280113"
+      ]
+     },
+     "khi": "0.006504280113",
+     "n": "300",
+     "fp": "0.01",
+     "fx": "0",
+     "label": "L1"
+    },
+    {
+     "k": {
+      "range": [
+       "0.005740789806",
+       "0.005740789807"
+      ]
+     },
+     "khi": "0.005740789807",
+     "n": "360",
+     "fp": "0",
+     "fx": "2500",
+     "label": "L2"
+    },
+    {
+     "k": {
+      "range": [
+       "0.005333740079",
+       "0.006814690995"
+      ]
+     },
+     "khi": "0.006814690995",
+     "n": "300",
+     "fp": "0.005",
+     "fx": "0",
+     "label": "L3"
+    },
+    {
+     "k": {
+      "range": [
+       "0.004602829847",
+       "0.005995505252"
+      ]
+     },
+     "khi": "0.005995505252",
+     "n": "360",
+     "fp": "0.015",
+     "fx": "0",
+     "label": "L4"
+    }
+   ],
+   "ground": "lender offer sheet",
+   "fields": {
+    "k": {
+     "unit": ""
+    },
+    "khi": {
+     "unit": ""
+    },
+    "n": {
+     "unit": ""
+    },
+    "fp": {
+     "unit": ""
+    },
+    "fx": {
+     "unit": "USD"
+    }
+   }
+  }
+ }
+}

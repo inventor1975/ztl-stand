@@ -1,0 +1,64 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "LT1083CP junction-to-case: control 0.5 and power transistor 1.6 C/W (datasheet)",
+ "interface": {
+  "inputs": {
+   "P": {
+    "assume": [
+     "0",
+     "30"
+    ],
+    "bands": [
+     "0",
+     "8.4",
+     "24.6",
+     "30"
+    ]
+   }
+  },
+  "outputs": [
+   "dTc",
+   "dTp"
+  ]
+ },
+ "quantities": {
+  "P": {
+   "role": "given",
+   "value": "10",
+   "unit": "W"
+  },
+  "Rjc_c": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "C/W",
+   "ground": "datasheet"
+  },
+  "Rjc_p": {
+   "role": "given",
+   "value": "1.6",
+   "unit": "C/W",
+   "ground": "datasheet"
+  },
+  "dTc": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "dTp": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "dTc == P*Rjc_c",
+   "source": "thermal resistance"
+  },
+  {
+   "zfl": "dTp == P*Rjc_p",
+   "source": "thermal resistance"
+  }
+ ],
+ "requirements": [],
+ "catalog": {}
+}

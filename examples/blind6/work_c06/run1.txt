@@ -1,0 +1,8 @@
+{
+  "verdict": "BRICK ERROR",
+  "why": "laws: a nonlinear law, or one with a function, must define one derived quantity (X == expression): 'a1*F*(z2 - z1) + b1*F*(z1 - cF) == a1*SS__x*(EX__eta*SV__K25*exp(-SV__a*(T - Tref)))*(z1 - rho*xf)'"
+}
+
+real	0m0.068s
+user	0m0.035s
+sys	0m0.014s

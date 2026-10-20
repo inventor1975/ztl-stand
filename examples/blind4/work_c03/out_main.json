@@ -1,0 +1,96 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "continuous": true,
+  "combinations": 480,
+  "notes": [],
+  "combinations_proved_without_mix": 400,
+  "verdict": "EARNED",
+  "design": {
+    "CH": {
+      "catalog": "chambers",
+      "R": {
+        "nominal": "5",
+        "tolerance": "0"
+      },
+      "rq": {
+        "nominal": "5/4 (~1.25)",
+        "tolerance": "0"
+      },
+      "L": {
+        "nominal": "150",
+        "tolerance": "0"
+      },
+      "Puv": {
+        "nominal": "110",
+        "tolerance": "0"
+      },
+      "kW": {
+        "nominal": "2/5 (~0.4)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "2600",
+        "tolerance": "0"
+      },
+      "lamp": {
+        "nominal": "110",
+        "tolerance": "0"
+      },
+      "model": "U2"
+    },
+    "NN": {
+      "catalog": "counts",
+      "N": {
+        "nominal": "19",
+        "tolerance": "0"
+      }
+    },
+    "DA": {
+      "catalog": "dima",
+      "x": "2/5 (~0.4)"
+    },
+    "DL": {
+      "catalog": "diml",
+      "x": "2/5 (~0.4)"
+    },
+    "DP": {
+      "catalog": "dimp",
+      "x": "2544653/2559826 (~0.994073)"
+    }
+  },
+  "objective": {
+    "minimize": "NN.N*CH.price + 10*(Ce*Hyr*(frp*(NN.N*(CH.kW*DP.x + Pb))+fra*(NN.N*(CH.kW*DA.x + Pb))+frl*(NN.N*(CH.kW*DL.x + Pb))) + NN.N*CH.lamp*Hyr/Llife)",
+    "value": "18313503529219/159989125 (~114467)",
+    "unit": "EUR",
+    "lower_bound": "~114467.176322 (an exact fraction of 37 digits)",
+    "gap": "~0.000926777356658 (an exact fraction of 43 digits)",
+    "lower_bound_is": "proved by ZTL (zlp) from the LP solver's dual multipliers: no mix in the continuous box costs less; 400 combination(s) proved to have no mix at all (Farkas)",
+    "optimal": false
+  },
+  "guaranteed": {
+    "LRp": [
+      "~4.0000004001 (an exact fraction of 48 digits)",
+      "~8.02652613685 (an exact fraction of 47 digits)"
+    ],
+    "LRa": [
+      "~4.31764872397 (an exact fraction of 41 digits)",
+      "~7.55019576381 (an exact fraction of 42 digits)"
+    ],
+    "LRl": [
+      "~17.161913475 (an exact fraction of 43 digits)",
+      "~25.9015299708 (an exact fraction of 42 digits)"
+    ],
+    "Pel": [
+      "1039923181/127991300 (~8.12495)",
+      "1039923181/127991300 (~8.12495)"
+    ]
+  },
+  "how": {
+    "LRp": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~4.0000004001 (~4)', '~8.02652613685 (~8.02653)']",
+    "LRa": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~4.31764872397 (~4.31765)', '~7.55019576381 (~7.5502)']",
+    "LRl": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~17.161913475 (~17.1619)', '~25.9015299708 (~25.9015)']",
+    "Pel": "ZTL, outer range"
+  },
+  "mix_verdict_checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic"
+}

@@ -1,0 +1,1227 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "lam1": {
+   "role": "given",
+   "range": [
+    "180",
+    "220"
+   ],
+   "unit": "1/h",
+   "why": "arrival rate P1 before deflection, calls/hour (independent per day part)"
+  },
+  "c1": {
+   "role": "given",
+   "value": "33",
+   "unit": "EUR/h",
+   "ground": "problem statement",
+   "why": "agent cost per hour P1"
+  },
+  "lam2": {
+   "role": "given",
+   "range": [
+    "230",
+    "280"
+   ],
+   "unit": "1/h",
+   "why": "arrival rate P2 before deflection, calls/hour (independent per day part)"
+  },
+  "c2": {
+   "role": "given",
+   "value": "36",
+   "unit": "EUR/h",
+   "ground": "problem statement",
+   "why": "agent cost per hour P2"
+  },
+  "lam3": {
+   "role": "given",
+   "range": [
+    "170",
+    "210"
+   ],
+   "unit": "1/h",
+   "why": "arrival rate P3 before deflection, calls/hour (independent per day part)"
+  },
+  "c3": {
+   "role": "given",
+   "value": "38",
+   "unit": "EUR/h",
+   "ground": "problem statement",
+   "why": "agent cost per hour P3"
+  },
+  "lam4": {
+   "role": "given",
+   "range": [
+    "90",
+    "120"
+   ],
+   "unit": "1/h",
+   "why": "arrival rate P4 before deflection, calls/hour (independent per day part)"
+  },
+  "c4": {
+   "role": "given",
+   "value": "45",
+   "unit": "EUR/h",
+   "ground": "problem statement",
+   "why": "agent cost per hour P4"
+  },
+  "AHT": {
+   "role": "given",
+   "range": [
+    "4.8",
+    "5.6"
+   ],
+   "unit": "min",
+   "why": "mean handling time incl. wrap-up, ONE value common to all day parts"
+  },
+  "Tw": {
+   "role": "given",
+   "value": "20",
+   "unit": "s",
+   "ground": "problem statement",
+   "why": "service-level threshold, 20 s"
+  },
+  "Hyr": {
+   "role": "given",
+   "value": "900",
+   "unit": "h",
+   "ground": "problem statement",
+   "why": "hours per year per day part: 3 h x 300 days"
+  },
+  "A1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Pw1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "E1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "SL1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Occ1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "X1_1": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_2": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_3": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_4": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_5": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_6": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_7": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_8": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_9": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_10": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_11": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_12": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_13": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_14": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_15": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_16": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_17": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_18": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_19": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_20": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_21": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_22": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_23": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_24": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X1_25": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "A2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Pw2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "E2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "SL2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Occ2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "X2_1": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_2": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_3": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_4": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_5": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_6": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_7": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_8": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_9": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_10": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_11": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_12": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_13": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_14": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_15": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_16": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_17": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_18": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_19": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_20": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_21": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_22": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_23": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_24": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_25": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_26": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_27": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_28": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X2_29": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "A3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Pw3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "E3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "SL3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Occ3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "X3_1": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_2": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_3": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_4": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_5": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_6": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_7": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_8": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_9": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_10": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_11": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_12": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_13": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_14": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_15": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_16": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_17": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_18": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_19": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_20": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_21": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X3_22": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "A4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Pw4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "E4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "SL4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Occ4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "X4_1": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_2": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_3": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_4": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_5": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_6": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_7": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_8": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_9": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_10": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_11": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_12": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_13": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "X4_14": {
+   "role": "derived",
+   "unit": "",
+   "why": "inverse Erlang-B recursion"
+  },
+  "M": {
+   "role": "derived",
+   "unit": "1/h",
+   "why": "sum_s lambda_s*(SL_s - 0.87); R2 SL_day >= 0.87 <=> M >= 0 after dividing by (1-d) > 0"
+  }
+ },
+ "slots": {
+  "S1": {
+   "from": [
+    "agents1"
+   ]
+  },
+  "S2": {
+   "from": [
+    "agents2"
+   ]
+  },
+  "S3": {
+   "from": [
+    "agents3"
+   ]
+  },
+  "S4": {
+   "from": [
+    "agents4"
+   ]
+  },
+  "IVR": {
+   "from": [
+    "ivr"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "A1 == lam1*(1 - IVR.d)*AHT",
+   "source": "offered load A = lambda_e*AHT/60 (lambda per hour, AHT minutes; units convert), lambda_e = lambda(1-d)"
+  },
+  {
+   "zfl": "X1_1 == 1 + 1*1/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_2 == 1 + 2*X1_1/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_3 == 1 + 3*X1_2/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_4 == 1 + 4*X1_3/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_5 == 1 + 5*X1_4/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_6 == 1 + 6*X1_5/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_7 == 1 + 7*X1_6/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_8 == 1 + 8*X1_7/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_9 == 1 + 9*X1_8/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_10 == 1 + 10*X1_9/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_11 == 1 + 11*X1_10/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_12 == 1 + 12*X1_11/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_13 == 1 + 13*X1_12/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_14 == 1 + 14*X1_13/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_15 == 1 + 15*X1_14/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_16 == 1 + 16*X1_15/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_17 == 1 + 17*X1_16/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_18 == 1 + 18*X1_17/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_19 == 1 + 19*X1_18/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_20 == 1 + 20*X1_19/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_21 == 1 + 21*X1_20/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_22 == 1 + 22*X1_21/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_23 == 1 + 23*X1_22/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_24 == 1 + 24*X1_23/A1",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X1_25 == if(25 > S1.N, X1_24, 1 + 25*X1_24/A1)",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form); steps beyond n are held (n <= k)"
+  },
+  {
+   "zfl": "Pw1 == 1/(1 + (1 - A1/S1.N)*(X1_25 - 1))",
+   "source": "Erlang C from Erlang B: C = B/(1-rho(1-B)), 1/C = 1+(1-rho)(1/B-1); equals the stated P_wait",
+   "valid": "S1.N > lam1*(1 - IVR.d)*AHT"
+  },
+  {
+   "zfl": "E1 == exp(Tw*(lam1*(1 - IVR.d) - S1.N/AHT))",
+   "source": "exp(-(n-A)*20/(60*AHT)) with A = lambda_e*AHT: (n-A)/AHT = n/AHT - lambda_e"
+  },
+  {
+   "zfl": "SL1 == 1 - Pw1*E1",
+   "source": "service level SL = 1 - P_wait*exp(...)"
+  },
+  {
+   "zfl": "Occ1 == A1/S1.N",
+   "source": "occupancy = A/n"
+  },
+  {
+   "zfl": "A2 == lam2*(1 - IVR.d)*AHT",
+   "source": "offered load A = lambda_e*AHT/60 (lambda per hour, AHT minutes; units convert), lambda_e = lambda(1-d)"
+  },
+  {
+   "zfl": "X2_1 == 1 + 1*1/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_2 == 1 + 2*X2_1/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_3 == 1 + 3*X2_2/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_4 == 1 + 4*X2_3/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_5 == 1 + 5*X2_4/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_6 == 1 + 6*X2_5/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_7 == 1 + 7*X2_6/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_8 == 1 + 8*X2_7/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_9 == 1 + 9*X2_8/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_10 == 1 + 10*X2_9/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_11 == 1 + 11*X2_10/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_12 == 1 + 12*X2_11/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_13 == 1 + 13*X2_12/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_14 == 1 + 14*X2_13/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_15 == 1 + 15*X2_14/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_16 == 1 + 16*X2_15/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_17 == 1 + 17*X2_16/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_18 == 1 + 18*X2_17/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_19 == 1 + 19*X2_18/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_20 == 1 + 20*X2_19/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_21 == 1 + 21*X2_20/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_22 == 1 + 22*X2_21/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_23 == 1 + 23*X2_22/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_24 == 1 + 24*X2_23/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_25 == 1 + 25*X2_24/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_26 == 1 + 26*X2_25/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_27 == 1 + 27*X2_26/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_28 == 1 + 28*X2_27/A2",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X2_29 == if(29 > S2.N, X2_28, 1 + 29*X2_28/A2)",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form); steps beyond n are held (n <= k)"
+  },
+  {
+   "zfl": "Pw2 == 1/(1 + (1 - A2/S2.N)*(X2_29 - 1))",
+   "source": "Erlang C from Erlang B: C = B/(1-rho(1-B)), 1/C = 1+(1-rho)(1/B-1); equals the stated P_wait",
+   "valid": "S2.N > lam2*(1 - IVR.d)*AHT"
+  },
+  {
+   "zfl": "E2 == exp(Tw*(lam2*(1 - IVR.d) - S2.N/AHT))",
+   "source": "exp(-(n-A)*20/(60*AHT)) with A = lambda_e*AHT: (n-A)/AHT = n/AHT - lambda_e"
+  },
+  {
+   "zfl": "SL2 == 1 - Pw2*E2",
+   "source": "service level SL = 1 - P_wait*exp(...)"
+  },
+  {
+   "zfl": "Occ2 == A2/S2.N",
+   "source": "occupancy = A/n"
+  },
+  {
+   "zfl": "A3 == lam3*(1 - IVR.d)*AHT",
+   "source": "offered load A = lambda_e*AHT/60 (lambda per hour, AHT minutes; units convert), lambda_e = lambda(1-d)"
+  },
+  {
+   "zfl": "X3_1 == 1 + 1*1/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_2 == 1 + 2*X3_1/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_3 == 1 + 3*X3_2/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_4 == 1 + 4*X3_3/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_5 == 1 + 5*X3_4/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_6 == 1 + 6*X3_5/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_7 == 1 + 7*X3_6/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_8 == 1 + 8*X3_7/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_9 == 1 + 9*X3_8/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_10 == 1 + 10*X3_9/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_11 == 1 + 11*X3_10/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_12 == 1 + 12*X3_11/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_13 == 1 + 13*X3_12/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_14 == 1 + 14*X3_13/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_15 == 1 + 15*X3_14/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_16 == 1 + 16*X3_15/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_17 == 1 + 17*X3_16/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_18 == 1 + 18*X3_17/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_19 == 1 + 19*X3_18/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_20 == 1 + 20*X3_19/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_21 == 1 + 21*X3_20/A3",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X3_22 == if(22 > S3.N, X3_21, 1 + 22*X3_21/A3)",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form); steps beyond n are held (n <= k)"
+  },
+  {
+   "zfl": "Pw3 == 1/(1 + (1 - A3/S3.N)*(X3_22 - 1))",
+   "source": "Erlang C from Erlang B: C = B/(1-rho(1-B)), 1/C = 1+(1-rho)(1/B-1); equals the stated P_wait",
+   "valid": "S3.N > lam3*(1 - IVR.d)*AHT"
+  },
+  {
+   "zfl": "E3 == exp(Tw*(lam3*(1 - IVR.d) - S3.N/AHT))",
+   "source": "exp(-(n-A)*20/(60*AHT)) with A = lambda_e*AHT: (n-A)/AHT = n/AHT - lambda_e"
+  },
+  {
+   "zfl": "SL3 == 1 - Pw3*E3",
+   "source": "service level SL = 1 - P_wait*exp(...)"
+  },
+  {
+   "zfl": "Occ3 == A3/S3.N",
+   "source": "occupancy = A/n"
+  },
+  {
+   "zfl": "A4 == lam4*(1 - IVR.d)*AHT",
+   "source": "offered load A = lambda_e*AHT/60 (lambda per hour, AHT minutes; units convert), lambda_e = lambda(1-d)"
+  },
+  {
+   "zfl": "X4_1 == 1 + 1*1/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_2 == 1 + 2*X4_1/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_3 == 1 + 3*X4_2/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_4 == 1 + 4*X4_3/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_5 == 1 + 5*X4_4/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_6 == 1 + 6*X4_5/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_7 == 1 + 7*X4_6/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_8 == 1 + 8*X4_7/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_9 == 1 + 9*X4_8/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_10 == 1 + 10*X4_9/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_11 == 1 + 11*X4_10/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_12 == 1 + 12*X4_11/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_13 == 1 + 13*X4_12/A4",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form)"
+  },
+  {
+   "zfl": "X4_14 == if(14 > S4.N, X4_13, 1 + 14*X4_13/A4)",
+   "source": "1/B(k) = 1 + (k/A)/B(k-1), Erlang B recursion (equivalent to the sum form); steps beyond n are held (n <= k)"
+  },
+  {
+   "zfl": "Pw4 == 1/(1 + (1 - A4/S4.N)*(X4_14 - 1))",
+   "source": "Erlang C from Erlang B: C = B/(1-rho(1-B)), 1/C = 1+(1-rho)(1/B-1); equals the stated P_wait",
+   "valid": "S4.N > lam4*(1 - IVR.d)*AHT"
+  },
+  {
+   "zfl": "E4 == exp(Tw*(lam4*(1 - IVR.d) - S4.N/AHT))",
+   "source": "exp(-(n-A)*20/(60*AHT)) with A = lambda_e*AHT: (n-A)/AHT = n/AHT - lambda_e"
+  },
+  {
+   "zfl": "SL4 == 1 - Pw4*E4",
+   "source": "service level SL = 1 - P_wait*exp(...)"
+  },
+  {
+   "zfl": "Occ4 == A4/S4.N",
+   "source": "occupancy = A/n"
+  },
+  {
+   "zfl": "M == lam1*(SL1 - 0.87) + lam2*(SL2 - 0.87) + lam3*(SL3 - 0.87) + lam4*(SL4 - 0.87)",
+   "source": "SL_day >= 0.87  <=>  sum lambda_e,s (SL_s - 0.87) >= 0, lambda_e,s = lambda_s (1-d), the factor (1-d)>0 divided out"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "SL1",
+   "op": ">=",
+   "value": "0.7",
+   "why": "R1: SL >= 0.70 in day part P1"
+  },
+  {
+   "quantity": "Occ1",
+   "op": "<=",
+   "value": "0.92",
+   "why": "R3: occupancy <= 0.92 in day part P1"
+  },
+  {
+   "quantity": "SL2",
+   "op": ">=",
+   "value": "0.7",
+   "why": "R1: SL >= 0.70 in day part P2"
+  },
+  {
+   "quantity": "Occ2",
+   "op": "<=",
+   "value": "0.92",
+   "why": "R3: occupancy <= 0.92 in day part P2"
+  },
+  {
+   "quantity": "SL3",
+   "op": ">=",
+   "value": "0.7",
+   "why": "R1: SL >= 0.70 in day part P3"
+  },
+  {
+   "quantity": "Occ3",
+   "op": "<=",
+   "value": "0.92",
+   "why": "R3: occupancy <= 0.92 in day part P3"
+  },
+  {
+   "quantity": "SL4",
+   "op": ">=",
+   "value": "0.7",
+   "why": "R1: SL >= 0.70 in day part P4"
+  },
+  {
+   "quantity": "Occ4",
+   "op": "<=",
+   "value": "0.92",
+   "why": "R3: occupancy <= 0.92 in day part P4"
+  },
+  {
+   "quantity": "M",
+   "op": ">=",
+   "value": "0",
+   "why": "R2: SL_day >= 0.87 (worst case of the weighted average)"
+  }
+ ],
+ "objective": {
+  "minimize": "(S1.N*c1 + S2.N*c2 + S3.N*c3 + S4.N*c4)*Hyr + IVR.price",
+  "unit": "kEUR",
+  "why": "annual cost: agents x EUR/h x 3 h x 300 days + IVR price"
+ },
+ "catalog": {
+  "agents1": {
+   "integers": {
+    "field": "N",
+    "from": "24",
+    "to": "25",
+    "unit": ""
+   },
+   "ground": "problem statement (R4 n<=60 met by the window; window computed outside the stand)"
+  },
+  "agents2": {
+   "integers": {
+    "field": "N",
+    "from": "28",
+    "to": "29",
+    "unit": ""
+   },
+   "ground": "problem statement (R4 n<=60 met by the window; window computed outside the stand)"
+  },
+  "agents3": {
+   "integers": {
+    "field": "N",
+    "from": "21",
+    "to": "22",
+    "unit": ""
+   },
+   "ground": "problem statement (R4 n<=60 met by the window; window computed outside the stand)"
+  },
+  "agents4": {
+   "integers": {
+    "field": "N",
+    "from": "13",
+    "to": "14",
+    "unit": ""
+   },
+   "ground": "problem statement (R4 n<=60 met by the window; window computed outside the stand)"
+  },
+  "ivr": {
+   "items": [
+    {
+     "d": {
+      "range": [
+       "0.12",
+       "0.18"
+      ]
+     },
+     "price": "31",
+     "option": "advanced"
+    }
+   ],
+   "fields": {
+    "d": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   },
+   "ground": "problem statement"
+  }
+ },
+ "report": "all"
+}

@@ -1,0 +1,5 @@
+{"axis": "designs", "size": 100, "wall_s": 0.06, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 4}
+{"axis": "designs", "size": 1000, "wall_s": 0.14, "peak_mb": 16, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 4}
+{"axis": "designs", "size": 10000, "wall_s": 0.54, "peak_mb": 17, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 4}
+{"axis": "designs", "size": 100000, "wall_s": 2.08, "peak_mb": 21, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:08", "cpu": 4}
+{"axis": "designs", "size": 1000000, "wall_s": 54.68, "peak_mb": 140, "verdict": "REFUTED", "stopped": false, "why": "every design in the catalog violates a requirement at a concrete point", "mode": "work", "at": "2026-10-13 00:31:02", "cpu": 4}

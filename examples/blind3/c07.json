@@ -1,0 +1,81 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "m0":   {"role": "given", "value": "2.3", "unit": "kg", "ground": "problem statement (frame, motors, ESCs, avionics)"},
+  "mpay": {"role": "given", "range": ["0", "1.5"], "unit": "kg", "why": "payload anywhere from 0 to 1.5 kg; modes override"},
+  "g":    {"role": "given", "value": "9.81", "unit": "m*s^-2", "ground": "problem statement"},
+  "rho":  {"role": "given", "range": ["1.05", "1.225"], "unit": "kg*m^-3", "why": "hot high site to sea level"},
+  "eta":  {"role": "given", "range": ["0.75", "0.85"], "unit": "", "why": "motor+ESC efficiency 0.80 +-0.05"},
+  "fu":   {"role": "given", "range": ["0.77", "0.83"], "unit": "", "why": "usable energy fraction 0.80 +-0.03"},
+  "kT":   {"role": "given", "value": "1", "unit": "", "why": "capacity multiplier by temperature; cold mode sets 0.85"},
+  "Vb":   {"role": "given", "value": "22.2", "unit": "V", "ground": "6S nominal"},
+  "Pav":  {"role": "given", "value": "18", "unit": "W", "ground": "constant avionics load"},
+  "kpk":  {"role": "given", "value": "1.6", "unit": "", "why": "peak thrust = 1.6 x weight"},
+  "Pel":  {"role": "derived", "unit": "W", "why": "hover electric power, four rotors + avionics"},
+  "tfl":  {"role": "derived", "unit": "min", "why": "hover flight time"},
+  "nrev": {"role": "derived", "unit": "rpm", "why": "hover rotor speed"},
+  "Ipk":  {"role": "derived", "unit": "A", "why": "battery current at 1.6 x weight thrust"},
+  "mto":  {"role": "derived", "unit": "kg", "why": "take-off mass"}
+ },
+ "slots": {
+  "PR": {"from": ["props"]},
+  "B":  {"from": ["cells"]},
+  "NB": {"from": ["npacks"]}
+ },
+ "define": {
+  "Ar":    "pi*PR.D*PR.D/4",
+  "Mt":    "m0 + NB.N*B.mass + mpay",
+  "Pprop": "4*sqrt(pow(Mt*g/4, 3)/(2*rho*Ar))/(PR.FM*eta)"
+ },
+ "laws": [
+  {"zfl": "mto == Mt", "source": "mass sum: airframe + packs + payload"},
+  {"zfl": "Pel == Pprop + Pav", "source": "momentum theory P_ind = T^1.5/sqrt(2 rho A) per rotor; /FM /eta; + avionics"},
+  {"zfl": "tfl == NB.N*B.Ah*Vb*fu*kT/Pel", "source": "usable energy / electric power"},
+  {"zfl": "nrev == sqrt(Mt*g/4/(PR.cT*rho*pow(PR.D, 4)))", "source": "T = cT rho n^2 D^4 with T = m g / 4"},
+  {"zfl": "Ipk == (sqrt(pow(kpk, 3))*Pprop + Pav)/Vb", "source": "propulsion power scales with T^1.5; avionics constant; / pack voltage"}
+ ],
+ "requirements": [],
+ "modes": {
+  "endurance 0.5 kg, 20 C": {
+   "quantities": {"mpay": {"value": "0.5"}, "kT": {"value": "1"}},
+   "requirements": [{"quantity": "tfl", "op": ">=", "value": "22", "why": "(a) hover >= 22 min at 0.5 kg payload, 20 C"}]
+  },
+  "endurance 1.5 kg, 0 C": {
+   "quantities": {"mpay": {"value": "1.5"}, "kT": {"value": "0.85"}},
+   "requirements": [{"quantity": "tfl", "op": ">=", "value": "15", "why": "(a) hover >= 15 min at 1.5 kg payload, 0 C (capacity x 0.85)"}]
+  },
+  "all payloads": {
+   "quantities": {"mpay": {"range": ["0", "1.5"]}},
+   "requirements": [
+    {"quantity": "nrev", "op": "<=", "value": "0.65*PR.rpmmax", "why": "(b) hover rpm <= 65% of max rpm"},
+    {"quantity": "Ipk", "op": "<=", "value": "B.Crate*NB.N*B.Ah", "why": "(c) peak current <= C-rating x total capacity"},
+    {"quantity": "mto", "op": "<=", "value": "7", "why": "(d) take-off mass <= 7.0 kg"}
+   ]
+  }
+ },
+ "objective": {"minimize": "NB.N*B.price + PR.price", "why": "cheapest (propeller, battery, count)"},
+ "catalog": {
+  "props": {
+   "ground": "problem statement propeller rows",
+   "items": [
+    {"name": "P1 15x5", "D": "0.381", "cT": {"range": ["0.097", "0.113"]}, "FM": {"range": ["0.58", "0.66"]}, "rpmmax": "6800", "price": "45"},
+    {"name": "P2 17x6", "D": "0.432", "cT": {"range": ["0.104", "0.120"]}, "FM": {"range": ["0.64", "0.72"]}, "rpmmax": "5800", "price": "85"}
+   ],
+   "fields": {"D": {"unit": "m"}, "cT": {"unit": ""}, "FM": {"unit": ""}, "rpmmax": {"unit": "rpm"}, "price": {"unit": "EUR"}}
+  },
+  "cells": {
+   "ground": "problem statement battery rows (per pack)",
+   "items": [
+    {"name": "B1 LiPo 8000", "Ah": "8", "mass": "1.00", "Crate": "25", "price": "210"},
+    {"name": "B2 LiPo 12000", "Ah": "12", "mass": "1.50", "Crate": "25", "price": "300"},
+    {"name": "B3 Li-ion 16000", "Ah": "16", "mass": "1.45", "Crate": "3", "price": "380"}
+   ],
+   "fields": {"Ah": {"unit": "Ah"}, "mass": {"unit": "kg"}, "Crate": {"unit": "1/h"}, "price": {"unit": "EUR"}}
+  },
+  "npacks": {
+   "ground": "problem statement: 1 or 2 packs in parallel",
+   "integers": {"field": "N", "from": "1", "to": "2", "unit": ""}
+  }
+ },
+ "report": "all"
+}

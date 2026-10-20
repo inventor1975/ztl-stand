@@ -1,0 +1,188 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "smallest",
+  "quantity": "Tc",
+  "unit": "ps",
+  "proved": "215",
+  "proved_means": "every Tc in [215, 400] ps works (EARNED on the whole range)",
+  "beyond": "214",
+  "beyond_is": "REFUTED: the range [214, 400] ps holds a concrete failing point (at_beyond)",
+  "precision": "1",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "ss": [
+            "0",
+            "235"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {},
+    "guaranteed": {
+      "ss": [
+        "0",
+        "235"
+      ]
+    },
+    "guaranteed_unit": {
+      "ss": "ps"
+    },
+    "how": {
+      "ss": "ZTL, outer range"
+    },
+    "requirements": [
+      {
+        "quantity": "ss",
+        "op": ">=",
+        "value": "0",
+        "why": "setup slack nonnegative"
+      }
+    ],
+    "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "ss -> [0, 47/200000000000] by [ss == Tc - tcq - (g1 + g2 + g3) - tsu]"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "REFUTED",
+        "fails": "setup slack nonnegative",
+        "by_at_witness": "1",
+        "unit": "ps"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {},
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "Tc": "214",
+      "g1": "35",
+      "g2": "35",
+      "g3": "35",
+      "h1": "25",
+      "tcq": "50"
+    },
+    "point_units": {
+      "Tc": "ps",
+      "g1": "ps",
+      "g2": "ps",
+      "g3": "ps",
+      "h1": "ps",
+      "tcq": "ps"
+    },
+    "value_there": {
+      "ss": "-1"
+    },
+    "unit": "ps",
+    "requirement": {
+      "quantity": "ss",
+      "op": ">=",
+      "value": "0",
+      "why": "setup slack nonnegative"
+    },
+    "overshoot": "1",
+    "reasons": {
+      "spread_over_tolerances": [
+        "-1",
+        "235"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "Tc",
+          "moves_it_by": "186"
+        },
+        {
+          "quantity": "tcq",
+          "moves_it_by": "20"
+        },
+        {
+          "quantity": "g3",
+          "moves_it_by": "10"
+        },
+        {
+          "quantity": "g2",
+          "moves_it_by": "10"
+        },
+        {
+          "quantity": "g1",
+          "moves_it_by": "10"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+  },
+  "tries": [
+    {
+      "Tc": "400",
+      "verdict": "EARNED"
+    },
+    {
+      "Tc": "150",
+      "verdict": "REFUTED"
+    },
+    {
+      "Tc": "275",
+      "verdict": "EARNED"
+    },
+    {
+      "Tc": "212",
+      "verdict": "REFUTED"
+    },
+    {
+      "Tc": "244",
+      "verdict": "EARNED"
+    },
+    {
+      "Tc": "228",
+      "verdict": "EARNED"
+    },
+    {
+      "Tc": "220",
+      "verdict": "EARNED"
+    },
+    {
+      "Tc": "216",
+      "verdict": "EARNED"
+    },
+    {
+      "Tc": "214",
+      "verdict": "REFUTED"
+    },
+    {
+      "Tc": "215",
+      "verdict": "EARNED"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

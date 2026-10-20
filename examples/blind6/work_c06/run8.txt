@@ -1,0 +1,7 @@
+[stand] 1/1 designs, 0 s: 
+[stand] 1/1 designs, 34 s: 
+[stand] 1/1 designs, 65 s: 
+
+real	10m8.313s
+user	10m5.985s
+sys	0m2.306s

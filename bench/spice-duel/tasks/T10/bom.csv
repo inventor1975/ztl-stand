@@ -1,0 +1,4 @@
+Reference,Value,Tolerance
+vs,10,2%
+rs,50,1%
+rload,50,20%

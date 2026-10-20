@@ -1,0 +1,8 @@
+* a common-emitter stage biased by Rb; BF 100 +-50 %
+Vcc vcc 0 12
+Rb vcc b 470k
+Rc vcc c 1k
+Re e 0 100
+Q1 c b e qmod
+.model qmod NPN(BF=100 Vbe=0.65 Vcesat=0.2 VbeTol=5%)
+.end

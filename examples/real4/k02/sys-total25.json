@@ -1,0 +1,59 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "k02 system: amp component -> ADC component",
+ "components": {
+  "AMP": {
+   "file": "k02-amp.json"
+  },
+  "ADC": {
+   "file": "k02-adc.json"
+  }
+ },
+ "connect": {
+  "AMP.vin": "vin",
+  "ADC.vo1": "AMP.vo1"
+ },
+ "quantities": {
+  "vin": {
+   "role": "given",
+   "unit": "V",
+   "value": "1"
+  },
+  "KAnom": {
+   "role": "given",
+   "unit": "",
+   "value": "5"
+  },
+  "Vmeas": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Err": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "Vmeas == ADC.vrec/KAnom",
+   "source": "RTI: divide by nominal amp gain 1+40k/10k"
+  },
+  {
+   "zfl": "Err == Vmeas - vin",
+   "source": "error RTI"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Err",
+   "op": "within",
+   "value": [
+    "-25/1000",
+    "25/1000"
+   ],
+   "why": "25 mV (MY loosened bound, not the source's)"
+  }
+ ]
+}

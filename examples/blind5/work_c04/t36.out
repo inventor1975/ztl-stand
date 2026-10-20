@@ -1,0 +1,363 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "excluded_by_where": 0,
+  "designs_tried": 36,
+  "failed_at_nominal": 35,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/500); DB=diam(D=200, pf=1); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0699829262888 (an exact fraction of 601 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/500); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0699829262888 (an exact fraction of 601 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/500); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0699829262888 (an exact fraction of 601 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/500); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0699829262888 (an exact fraction of 601 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/500); DB=diam(D=200, pf=1); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0782013911463 (an exact fraction of 914 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach A",
+      "by": "~0.0527574620887 (an exact fraction of 99 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/500); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0699829262888 (an exact fraction of 601 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/500); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0782013911463 (an exact fraction of 914 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach A",
+      "by": "~0.0527574620887 (an exact fraction of 99 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/500); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0699829262888 (an exact fraction of 601 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/500); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0782013911463 (an exact fraction of 914 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach A",
+      "by": "~0.0527574620887 (an exact fraction of 99 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/500); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0782013911463 (an exact fraction of 914 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach A",
+      "by": "~0.0527574620887 (an exact fraction of 99 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~84.4689701716 (an exact fraction of 732 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/500); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0782013911463 (an exact fraction of 914 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~84.4689701716 (an exact fraction of 732 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach A",
+      "by": "~0.0527574620887 (an exact fraction of 99 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~14.9475629475 (an exact fraction of 732 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/500); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.0782013911463 (an exact fraction of 914 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~14.9475629475 (an exact fraction of 732 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach A",
+      "by": "~0.0527574620887 (an exact fraction of 99 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~4.47001409098 (an exact fraction of 734 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~4.47001409098 (an exact fraction of 734 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=7/2000); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~1.40573763885 (an exact fraction of 743 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~1.40573763885 (an exact fraction of 743 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~84.4689701716 (an exact fraction of 732 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=7/2000); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach B",
+      "by": "~0.0714219081264 (an exact fraction of 131 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach B",
+      "by": "~0.0714219081264 (an exact fraction of 131 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~14.9475629475 (an exact fraction of 732 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=7/2000); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R1 dry-weather velocity >= 0.60 m/s reach A",
+      "by": "~0.00274851469401 (an exact fraction of 260 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~4.47001409098 (an exact fraction of 734 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R4 outfall depth <= 5.0 m",
+      "by": "1/2 (~0.5)",
+      "unit": "m"
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/200); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/500)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~1.40573763885 (an exact fraction of 743 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/200); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach B",
+      "by": "~0.0714219081264 (an exact fraction of 131 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=250, pf=133654324999/100000000000); SA=slope(S=1/200); DB=diam(D=250, pf=133654324999/100000000000); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R4 outfall depth <= 5.0 m",
+      "by": "1/2 (~0.5)",
+      "unit": "m"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 36
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "M": {
+      "catalog": "mats",
+      "name": "PVC",
+      "n": {
+        "range": [
+          "19/2000 (~0.0095)",
+          "23/2000 (~0.0115)"
+        ]
+      },
+      "k": {
+        "nominal": "62",
+        "tolerance": "0"
+      },
+      "vmax": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    },
+    "DA": {
+      "catalog": "diam",
+      "D": {
+        "nominal": "250",
+        "tolerance": "0"
+      },
+      "pf": {
+        "nominal": "133654324999/100000000000 (~1.33654)",
+        "tolerance": "0"
+      }
+    },
+    "SA": {
+      "catalog": "slope",
+      "S": {
+        "nominal": "7/2000 (~0.0035)",
+        "tolerance": "0"
+      }
+    },
+    "DB": {
+      "catalog": "diam",
+      "D": {
+        "nominal": "250",
+        "tolerance": "0"
+      },
+      "pf": {
+        "nominal": "133654324999/100000000000 (~1.33654)",
+        "tolerance": "0"
+      }
+    },
+    "SB": {
+      "catalog": "slope",
+      "S": {
+        "nominal": "1/200 (~0.005)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "M.n": "23/2000 (~0.0115)"
+  },
+  "point_units": {
+    "M.n": "s*m^(-1/3)"
+  },
+  "value_there": {
+    "vAd": [
+      "~0.597251485306 (an exact fraction of 256 digits)",
+      "~0.597251485306 (an exact fraction of 260 digits)"
+    ]
+  },
+  "unit": "m/s",
+  "requirement": {
+    "quantity": "vAd",
+    "op": ">=",
+    "value": "vmin",
+    "why": "R1 dry-weather velocity >= 0.60 m/s reach A"
+  },
+  "overshoot": "~0.00274851469401 (an exact fraction of 260 digits)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "~0.597251485306 (an exact fraction of 256 digits)",
+      "~0.684325139856 (an exact fraction of 299 digits)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "M.n",
+        "moves_it_by": "~0.0870736545505 (an exact fraction of 1107 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "skipped": "12 requirements: subsets over 8 not enumerated"
+  }
+}

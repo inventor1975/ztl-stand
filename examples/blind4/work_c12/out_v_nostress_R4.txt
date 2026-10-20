@@ -1,0 +1,16 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "continuous": true,
+  "combinations": 1,
+  "notes": [],
+  "verdict": "REFUTED",
+  "why": "no mix the solver found was earned",
+  "mixes": [
+    {
+      "design": "",
+      "verdict": "REFUTED",
+      "why": "every design violates a requirement in at least one mode, at a concrete point"
+    }
+  ]
+}

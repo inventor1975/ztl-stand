@@ -1,0 +1,1130 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "excluded_by_where": 480,
+  "designs_tried": 800,
+  "failed_at_nominal": 604,
+  "judged": 196,
+  "undecided": 178,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=11); NP=np(N=5)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=12); NP=np(N=5)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=13); NP=np(N=5)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=11); NP=np(N=6)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=12); NP=np(N=6)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=12); NP=np(N=7)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=11); NP=np(N=7)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=13); NP=np(N=6)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=13); NP=np(N=7)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=12); NP=np(N=7)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=14); NP=np(N=6)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=12); NP=np(N=8)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=11); NP=np(N=8)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=15); NP=np(N=6)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=13); NP=np(N=7)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=12); NP=np(N=8)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=14); NP=np(N=7)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=11); NP=np(N=9)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=8); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=9); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=10); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=11); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=8); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=12); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=9); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=10); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=11); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=12); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=12); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=13); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=14); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=15); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=14); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=15); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=11); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=10); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=11); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=11); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=12); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=10); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=12); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=11); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=13); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=11); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=13); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=11); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=12); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=11); NP=np(N=9)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=10); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=11); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=10); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=11); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=14); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=12); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=13); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=12); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=11); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=15); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=12); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=11); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=13); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=14); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=11); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=10); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=13); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=12); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=13); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=12); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=14); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=15); NP=np(N=2)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=10); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=11); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=12); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=14); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=11); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=13); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=14); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=10); NP=np(N=9)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=12); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=11); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=11); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=11); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=12); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=15); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=13); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=11); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=15); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=12); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=11); NP=np(N=9)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=13); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=10); NP=np(N=10)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=12); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=14); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=12); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=13); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=12); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=10); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=12); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=11); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=11); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=14); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=15); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=14); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=13); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=13); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=13); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=13); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=12); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=11); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=15); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=12); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=11); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=15); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=14); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=14); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=14); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=11); NP=np(N=9)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=10); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=14); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=11); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=12); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=13); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=12); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=11); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=15); NP=np(N=3)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=12); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=15); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=15); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=12); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=14); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=13); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=11); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=13); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=12); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=10); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=11); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=13); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=11); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=15); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=14); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=13); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=12); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=14); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=13); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=14); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=12); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=11); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=12); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=15); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=12); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=14); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=10); NP=np(N=9)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=15); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=11); NP=np(N=9)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=13); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=14); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=15); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=11); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=12); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=13); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=13); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=14); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=15); NP=np(N=4)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=11); NP=np(N=9)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=10); NP=np(N=10)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=14); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=12); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=14); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=12); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=11); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=15); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=15); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=13); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=14); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=13); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=12); NP=np(N=8)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=14); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=11); NP=np(N=9)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=15); NP=np(N=5)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=14); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=15); NP=np(N=6)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=14); NP=np(N=7)",
+      "verdict": "OPEN",
+      "why": "a definition could not be bounded: cannot bound ['thold']"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "208/125 (~1.664)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    }
+  ],
+  "designs_count": {
+    "OPEN": 178,
+    "REFUTED": 604,
+    "EARNED": 18
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "designs_not_listed": 600,
+  "listing": "earned first, then open, then refuted",
+  "objective": {
+    "minimize": "NS.N*NP.N*(CELL.price + Cbal)",
+    "value": "605",
+    "optimal": false,
+    "note": "150 cheaper design(s) undecided: optimal only among the decided ones"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "CELL": {
+      "catalog": "cells",
+      "name": "S3",
+      "Vr": {
+        "nominal": "27/10 (~2.7)",
+        "tolerance": "0"
+      },
+      "C": {
+        "nominal": "310",
+        "tolerance": "0"
+      },
+      "ESR": {
+        "nominal": "11/5 (~2.2)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "21/2 (~10.5)",
+        "tolerance": "0"
+      }
+    },
+    "NS": {
+      "catalog": "ns",
+      "N": {
+        "nominal": "11",
+        "tolerance": "0"
+      }
+    },
+    "NP": {
+      "catalog": "np",
+      "N": {
+        "nominal": "5",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Vpk": [
+      "318/125 (~2.544)",
+      "318/125 (~2.544)"
+    ],
+    "dis": [
+      "237296/575 (~412.689)",
+      "60624/115 (~527.165)"
+    ],
+    "mB": [
+      "49756/575 (~86.5322)",
+      "66212/575 (~115.151)"
+    ],
+    "thold": [
+      "~32.2615300354 (an exact fraction of 34 digits)",
+      "~60.2977313105 (an exact fraction of 34 digits)"
+    ],
+    "life": [
+      "~188792.773384 (an exact fraction of 37 digits)",
+      "~188792.773384 (an exact fraction of 37 digits)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Vpk": "V",
+    "dis": "V^2",
+    "mB": "V^2",
+    "thold": "s",
+    "life": "h"
+  },
+  "how": {
+    "Vpk": "ZTL, outer range",
+    "dis": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['237296/575 (~412.689)', '60624/115 (~527.165)']",
+    "mB": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['49756/575 (~86.5322)', '66212/575 (~115.151)']",
+    "thold": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~32.2615300354 (~32.2615)', '~60.2977313105 (~60.2977)']",
+    "life": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~188792.773384 (~188793)', '~188792.773384 (~188793)']"
+  },
+  "requirements": [
+    {
+      "quantity": "Vpk",
+      "op": "<=",
+      "value": "CELL.Vr",
+      "why": "R1 peak cell voltage <= rated"
+    },
+    {
+      "quantity": "dis",
+      "op": ">=",
+      "value": "0",
+      "why": "R2: load must be suppliable (discriminant >= 0)"
+    },
+    {
+      "quantity": "mB",
+      "op": ">=",
+      "value": "0",
+      "why": "R2 validity of closed form (branch), see report"
+    },
+    {
+      "quantity": "thold",
+      "op": ">=",
+      "value": "8",
+      "why": "R2 hold >= 8.0 s at EOL, min supply, all ambients"
+    },
+    {
+      "quantity": "life",
+      "op": ">=",
+      "value": "131400",
+      "why": "R3 life >= 15 years"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "Vpk = 318/125 by exact elimination (credit)",
+    "dis -> [237296/575, 60624/115] by [dis == Vsmin * Vsmin - 4 * (NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N) * (Pout / eta)], interval reading, sound, may be wider than the truth (credit)",
+    "mB -> [49756/575, 66212/575] by [mB == Vmin * Vmin - NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta)], interval reading, sound, may be wider than the truth (credit)",
+    "thold -> [89743976331457587505839942788575197/2781764418273280000000000000000000, 134187266769650059812704048001716259/2225411534618624000000000000000000] by [thold == NP__N * CELL__C * kC / NS__N / (Pout / eta) * ((Vsmin * Vsmin - (Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin) * (Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin)) / 4 + (Vsmin * sqrt(Vsmin * Vsmin - 4 * (NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N) * (Pout / eta)) - (Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin) * sqrt((Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin) * (Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin) - 4 * (NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N) * (Pout / eta)) - 4 * (NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N) * (Pout / eta) * ln((Vsmin + sqrt(Vsmin * Vsmin - 4 * (NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N) * (Pout / eta))) / (Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin + sqrt((Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin) * (Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin) - 4 * (NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N) * (Pout / eta))))) / 4)], interval reading, sound, may be wider than the truth (credit)",
+    "life -> [58518493276938148639691169860516456271909375/86100419682514513125433493136867328, 146296233192345371924211749617733036001515625/215251049206286282828783381584543744] by [life == 1/(f1/(L0*pow(2, (Tref - T1)/dTL)*(pow(2, (CELL__Vr - (Vfloat/NS__N*kfl))/dVL))) + f2/(L0*pow(2, (Tref - T2)/dTL)*(pow(2, (CELL__Vr - (Vfloat/NS__N*kfl))/dVL))) + f3/(L0*pow(2, (Tref - T3)/dTL)*(pow(2, (CELL__Vr - (Vfloat/NS__N*kfl))/dVL))))], interval reading, sound, may be wider than the truth (credit)"
+  ]
+}

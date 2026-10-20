@@ -1,0 +1,69 @@
+{
+ "stand": "universal-stand/1",
+ "why": "dryer D60",
+ "interface": {
+  "inputs": {
+   "Qt": {
+    "assume": [
+     "0",
+     "60"
+    ],
+    "bands": "arriving"
+   }
+  },
+  "outputs": [
+   "dp"
+  ]
+ },
+ "quantities": {
+  "Qt": {
+   "role": "given",
+   "value": "30",
+   "unit": "L/s"
+  },
+  "Qr": {
+   "role": "given",
+   "value": "60",
+   "unit": "L/s"
+  },
+  "dpr": {
+   "role": "given",
+   "value": "0.30",
+   "unit": "bar"
+  },
+  "f": {
+   "role": "given",
+   "range": [
+    "1.0",
+    "1.7"
+   ],
+   "unit": ""
+  },
+  "dp": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "Qload": {
+   "role": "derived",
+   "unit": "L/s"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "dp == dpr*Qt*Qt*f/(Qr*Qr)",
+   "source": "dryer law"
+  },
+  {
+   "zfl": "Qload == Qt",
+   "source": "load"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Qload",
+   "op": "<=",
+   "value": "Qr",
+   "why": "R4 rated flow >= largest Qt"
+  }
+ ]
+}

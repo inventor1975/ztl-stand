@@ -1,0 +1,100 @@
+[stand] 1/4 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 4,
+  "failed_at_nominal": 2,
+  "judged": 2,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "TUBE=w1_2(name=1/2x0.035, wall=7/200)",
+      "verdict": "REFUTED",
+      "fails": "the wall at its -10 % end still covers the pressure design thickness",
+      "by_at_witness": "1837/102425 (~0.0179351)",
+      "unit": "25.4mm"
+    },
+    {
+      "design": "TUBE=w1_2(name=1/2x0.049, wall=49/1000)",
+      "verdict": "REFUTED",
+      "fails": "the wall at its -10 % end still covers the pressure design thickness",
+      "by_at_witness": "8061/2048500 (~0.00393507)",
+      "unit": "25.4mm"
+    },
+    {
+      "design": "TUBE=w1_2(name=1/2x0.065, wall=13/200)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "0",
+          "413017/17788000 (~0.0232189)"
+        ]
+      }
+    },
+    {
+      "design": "TUBE=w1_2(name=1/2x0.083, wall=83/1000)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "0",
+          "3826097/88940000 (~0.0430189)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 2,
+    "EARNED": 2
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "TUBE.wall",
+    "value": "13/200 (~0.065)",
+    "unit": "25.4mm",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "TUBE": {
+      "catalog": "w1_2",
+      "wall": {
+        "nominal": "13/200 (~0.065)",
+        "tolerance": "1/10 (~0.1)"
+      },
+      "name": "1/2x0.065"
+    }
+  },
+  "guaranteed": {
+    "margin": [
+      "0",
+      "413017/17788000 (~0.0232189)"
+    ]
+  },
+  "guaranteed_unit": {
+    "margin": "25.4mm"
+  },
+  "guaranteed_ends": {
+    "margin": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+  },
+  "how": {
+    "margin": "ZTL, certificate checked exactly (2 pieces; found by the stand's search, the extreme may lie inside the box)"
+  },
+  "requirements": [
+    {
+      "quantity": "margin",
+      "op": ">=",
+      "value": "0",
+      "why": "the wall at its -10 % end still covers the pressure design thickness"
+    }
+  ],
+  "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "treq -> [4362831/3557600000, 4450969/2117600000] by [treq == P * OD / (2 * (S * ifpos(T - 100, ifpos(T - 200, ifpos(T - 400, ifpos(T - 600, 58 / 100, 68 / 100 + (58 / 100 - 68 / 100) * (T - 400) / (600 - 400)), 82 / 100 + (68 / 100 - 82 / 100) * (T - 200) / (400 - 200)), 1 + (82 / 100 - 1) * (T - 100) / (200 - 100)), 1) + P * Y))], interval reading, sound, may be wider than the truth (credit)",
+    "margin -> [-32610679/52940000000, 52453159/88940000000] by [margin == TUBE__wall - treq]"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

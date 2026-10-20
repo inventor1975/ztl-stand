@@ -1,0 +1,80 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 20,
+  "notes": [],
+  "combinations_proved_without_mix": 17,
+  "verdict": "EARNED",
+  "design": {
+    "DED": {
+      "catalog": "deductibles",
+      "name": "D20",
+      "D": {
+        "nominal": "20",
+        "tolerance": "0"
+      },
+      "prem": {
+        "nominal": "82",
+        "tolerance": "0"
+      }
+    },
+    "SL": {
+      "catalog": "stoploss",
+      "name": "SL60",
+      "A": {
+        "nominal": "60",
+        "tolerance": "0"
+      },
+      "lim": {
+        "nominal": "200",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "16",
+        "tolerance": "0"
+      }
+    },
+    "RES": {
+      "catalog": "reserve",
+      "x": "600001/10000 (~60.0001)"
+    }
+  },
+  "objective": {
+    "minimize": "S",
+    "value": "98568003/200000 (~492.84)",
+    "unit": "kEUR",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "lower_bound": "12321/25 (~492.84)",
+    "gap": "3/200000 (~1.5e-05)",
+    "lower_bound_is": "proved by ZTL (zlp) from the LP solver's dual multipliers: no mix in the continuous box costs less; 17 combination(s) proved to have no mix at all (Farkas); the box LP had no mix (its coefficients' worst cases taken apart), so the robust LP was relaxed to data points — scenario cuts: 4 data points, 1 round(s) — a RELAXATION of the robust problem: its bound holds for every mix",
+    "optimal": false,
+    "optimal_means": "true only at a zero gap; otherwise the mix is PROVED to cost at most `gap` above the cheapest possible (blind test 4, c03: optimal false at a 0.00093 EUR gap)"
+  },
+  "guaranteed": {
+    "T_n": [
+      "-5399999/200000 (~-27)",
+      "210"
+    ],
+    "T_b": [
+      "-599999/200000 (~-3)",
+      "300"
+    ],
+    "M3": [
+      "-1720001/10000 (~-172)",
+      "40"
+    ],
+    "S": [
+      "-8199997/200000 (~-41)",
+      "631"
+    ]
+  },
+  "how": {
+    "T_n": "ZTL, certificate checked exactly (4 pieces; found by the stand's search, the extreme may lie inside the box; a SUM proved term by term (4 terms, each over its own data, the bounds added — sound; a datum shared by terms may make it wider))",
+    "T_b": "ZTL, certificate checked exactly (4 pieces; found by the stand's search, the extreme may lie inside the box; a SUM proved term by term (4 terms, each over its own data, the bounds added — sound; a datum shared by terms may make it wider))",
+    "M3": "ZTL, certificate checked exactly (1 pieces; found by the stand's search, the extreme may lie inside the box)",
+    "S": "ZTL, certificate checked exactly (1 pieces; found by the stand's search, the extreme may lie inside the box)"
+  },
+  "mix_verdict_checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

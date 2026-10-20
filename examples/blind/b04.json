@@ -1,0 +1,36 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Q":   {"role": "given", "value": "1/1800", "tolerance": "0.1", "unit": "m^3/s", "why": "feed flow 2.0 m3/h +-10% (converted: 2/3600 m3/s)"},
+  "Cin": {"role": "given", "value": "2000", "tolerance": "0.05", "unit": "1/m^3", "why": "feed concentration 2.0 mol/L +-5% (mol treated as a pure count: unit 1/m^3, value 2000)"},
+  "k":   {"role": "given", "range": ["0.002135", "0.0051"], "unit": "1/s", "why": "Arrhenius k(T) over T 55..65 C, kref +-10%, Ea +-3%; enclosure computed OUTSIDE the stand (exp not available), outward rounded: 0.1281..0.3060 1/min"},
+  "dH":  {"role": "given", "value": "70000", "tolerance": "0.05", "unit": "J", "why": "|DeltaH| = 70 kJ/mol +-5%, per mol dropped (mol unit unknown): J per mol-as-count"},
+  "Cout": {"role": "derived", "unit": "1/m^3"},
+  "X":    {"role": "derived", "unit": ""},
+  "q":    {"role": "derived", "unit": "kW"}
+ },
+ "slots": {"RX": {"from": ["reactors"]}},
+ "define": {"tau": "RX.V/Q"},
+ "laws": [
+  {"zfl": "Cout == Cin/(1 + k*tau)", "source": "first-order CSTR balance, tau = V/Q"},
+  {"zfl": "X == 1 - Cout/Cin", "source": "definition of conversion"},
+  {"zfl": "q == dH*Q*Cin*X", "source": "heat released = |dH| * molar conversion rate"}
+ ],
+ "requirements": [
+  {"quantity": "X", "op": ">=", "value": "0.85", "why": "conversion at least 85% in every case"},
+  {"quantity": "q", "op": "<=", "value": "RX.jacket", "why": "jacket must remove all heat released, vs its minimum duty"}
+ ],
+ "objective": {"minimize": "RX.price", "why": "cheapest vessel"},
+ "catalog": {
+  "reactors": {
+   "items": [
+    {"V": {"value": "1.2", "tolerance": "0.03"}, "jacket": {"value": "80",  "tolerance": "0.1"}, "price": "38000"},
+    {"V": {"value": "1.6", "tolerance": "0.03"}, "jacket": {"value": "95",  "tolerance": "0.1"}, "price": "46000"},
+    {"V": {"value": "2.0", "tolerance": "0.03"}, "jacket": {"value": "105", "tolerance": "0.1"}, "price": "55000"},
+    {"V": {"value": "2.5", "tolerance": "0.03"}, "jacket": {"value": "120", "tolerance": "0.1"}, "price": "67000"}
+   ],
+   "ground": "vendor datasheet",
+   "fields": {"V": {"unit": "m^3"}, "jacket": {"unit": "kW"}, "price": {"unit": "USD"}}
+  }
+ }
+}

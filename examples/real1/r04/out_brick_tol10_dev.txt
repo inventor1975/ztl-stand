@@ -1,0 +1,118 @@
+[stand] 1/3 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 3,
+  "failed_at_nominal": 2,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "B=deep_groove_63(bore=35, Cr=417/10, C0r=193/10, f0=66/5, name=6307)",
+      "verdict": "REFUTED",
+      "fails": "required life 15000 h",
+      "by_at_witness": "967219850194156611181875/119538143007988106084 (~8091.31)",
+      "unit": "h"
+    },
+    {
+      "design": "B=deep_groove_63(bore=40, Cr=509/10, C0r=24, f0=66/5, name=6308)",
+      "verdict": "REFUTED",
+      "fails": "required life 15000 h",
+      "by_at_witness": "5389232923358125/1537203407052 (~3505.87)",
+      "unit": "h"
+    },
+    {
+      "design": "B=deep_groove_63(bore=45, Cr=611/10, C0r=59/2, f0=133/10, name=6309)",
+      "verdict": "REFUTED",
+      "fails": "required life 15000 h",
+      "by_at_witness": "97217200066669373750/132431389516977177 (~734.095)",
+      "unit": "h"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 3
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "B": {
+      "catalog": "deep_groove_63",
+      "bore": {
+        "nominal": "45",
+        "tolerance": "0"
+      },
+      "Cr": {
+        "nominal": "611/10 (~61.1)",
+        "tolerance": "0"
+      },
+      "C0r": {
+        "nominal": "59/2 (~29.5)",
+        "tolerance": "0"
+      },
+      "f0": {
+        "nominal": "133/10 (~13.3)",
+        "tolerance": "0"
+      },
+      "name": {
+        "nominal": "6309",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "Fa": "2640",
+    "Fr": "4400"
+  },
+  "point_units": {
+    "Fa": "N",
+    "Fr": "N"
+  },
+  "value_there": {
+    "L10h": [
+      "1889253642687988281250/132431389516977177 (~14265.9)",
+      "1889253642687988281250/132431389516977177 (~14265.9)"
+    ]
+  },
+  "unit": "h",
+  "requirement": {
+    "quantity": "L10h",
+    "op": ">=",
+    "value": "Lreq",
+    "why": "required life 15000 h"
+  },
+  "overshoot": "97217200066669373750/132431389516977177 (~734.095)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "1889253642687988281250/132431389516977177 (~14265.9)",
+      "181402323730248921565332031250/7601358077988465471198021 (~23864.5)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "Fa",
+        "moves_it_by": "~4540.08534245 (an exact fraction of 42 digits)"
+      },
+      {
+        "quantity": "Fr",
+        "moves_it_by": "~3448.0345379 (an exact fraction of 39 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "required life 15000 h"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}
+
+real	0m0.116s
+user	0m0.082s
+sys	0m0.014s

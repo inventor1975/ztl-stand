@@ -1,0 +1,180 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "gearhead 5GN..KA: torque at motor shaft; its ratio is the tuned slot; its own rating = permissible torque",
+ "interface": {
+  "inputs": {
+   "TL": {
+    "assume": [
+     "0",
+     "20"
+    ],
+    "bands": [
+     "0",
+     "19.9",
+     "20"
+    ]
+   }
+  },
+  "outputs": [
+   "TM"
+  ]
+ },
+ "quantities": {
+  "TL": {
+   "role": "given",
+   "value": "20",
+   "unit": "lbf*in"
+  },
+  "etag": {
+   "role": "given",
+   "range": [
+    "0.66",
+    "0.81"
+   ],
+   "unit": ""
+  },
+  "TM": {
+   "role": "derived",
+   "unit": "lbf*in"
+  }
+ },
+ "slots": {
+  "G": {
+   "from": [
+    "gearheads"
+   ]
+  }
+ },
+ "catalog": {
+  "gearheads": {
+   "items": [
+    {
+     "name": "5GN3KA",
+     "i": "3",
+     "Tmax": "5.5"
+    },
+    {
+     "name": "5GN3.6KA",
+     "i": "3.6",
+     "Tmax": "6.6"
+    },
+    {
+     "name": "5GN5KA",
+     "i": "5",
+     "Tmax": "9.1"
+    },
+    {
+     "name": "5GN6KA",
+     "i": "6",
+     "Tmax": "11"
+    },
+    {
+     "name": "5GN7.5KA",
+     "i": "7.5",
+     "Tmax": "14"
+    },
+    {
+     "name": "5GN9KA",
+     "i": "9",
+     "Tmax": "16"
+    },
+    {
+     "name": "5GN12.5KA",
+     "i": "12.5",
+     "Tmax": "23"
+    },
+    {
+     "name": "5GN15KA",
+     "i": "15",
+     "Tmax": "27"
+    },
+    {
+     "name": "5GN18KA",
+     "i": "18",
+     "Tmax": "33"
+    },
+    {
+     "name": "5GN25KA",
+     "i": "25",
+     "Tmax": "41"
+    },
+    {
+     "name": "5GN30KA",
+     "i": "30",
+     "Tmax": "49"
+    },
+    {
+     "name": "5GN36KA",
+     "i": "36",
+     "Tmax": "59"
+    },
+    {
+     "name": "5GN50KA",
+     "i": "50",
+     "Tmax": "74"
+    },
+    {
+     "name": "5GN60KA",
+     "i": "60",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN75KA",
+     "i": "75",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN90KA",
+     "i": "90",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN100KA",
+     "i": "100",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN120KA",
+     "i": "120",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN150KA",
+     "i": "150",
+     "Tmax": "87"
+    },
+    {
+     "name": "5GN180KA",
+     "i": "180",
+     "Tmax": "87"
+    }
+   ],
+   "fields": {
+    "i": {
+     "unit": ""
+    },
+    "Tmax": {
+     "unit": "lbf*in"
+    }
+   }
+  }
+ },
+ "laws": [
+  {
+   "zfl": "TM == TL/(G.i*etag)",
+   "source": "tech ref"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "TL",
+   "op": "<=",
+   "value": "G.Tmax",
+   "why": "permissible torque of the gearhead (catalog table)"
+  }
+ ],
+ "objective": {
+  "minimize": "G.i",
+  "why": "order only; the ratio travels to the system as the field cost"
+ }
+}

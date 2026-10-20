@@ -1,0 +1,20 @@
+{
+  "verdict": "BRICK ERROR",
+  "why": "BrickError: requirement on S: in continuous choices a bound is a number or an expression of exact values of the combination (version 1): 'Bsum' (['Bsum'])",
+  "find": "smallest",
+  "quantity": "Bsum",
+  "unit": "kEUR",
+  "stopped_at": "620",
+  "proved": "660",
+  "tries": [
+    {
+      "Bsum": "660",
+      "verdict": "EARNED"
+    },
+    {
+      "Bsum": "620",
+      "verdict": "BRICK ERROR"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

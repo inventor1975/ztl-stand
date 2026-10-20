@@ -1,0 +1,6 @@
+{"axis": "network", "size": 5, "wall_s": 0.32, "peak_mb": 58, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 12}
+{"axis": "network", "size": 10, "wall_s": 1.82, "peak_mb": 59, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:07", "cpu": 12}
+{"axis": "network", "size": 20, "wall_s": 29.26, "peak_mb": 63, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:36", "cpu": 12}
+{"axis": "network", "size": 30, "wall_s": 136.03, "peak_mb": 69, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:52", "cpu": 12}
+{"axis": "network", "size": 50, "wall_s": 1099.35, "peak_mb": 91, "verdict": "EARNED", "stopped": true, "why": "", "mode": "work", "at": "2026-10-13 00:51:12", "cpu": 12}
+{"axis": "network", "size": 40, "wall_s": 489.0, "peak_mb": 79, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "jobs": 1, "at": "2026-10-13 01:36:15", "cpu": "6"}

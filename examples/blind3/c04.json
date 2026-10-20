@@ -1,0 +1,596 @@
+{
+ "stand": "universal-stand/1",
+ "report": "all",
+ "quantities": {
+  "S": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "wind-speed scaling factor on all speeds (nominal 1.0; box 0.93..1.07 in mode 'worst case')"
+  },
+  "AV": {
+   "role": "given",
+   "value": "0.96",
+   "unit": "",
+   "why": "availability (nominal 0.96; 0.94..0.98 in worst-case mode)"
+  },
+  "LS": {
+   "role": "given",
+   "value": "0.08",
+   "unit": "",
+   "why": "wake/electrical losses (nominal 8%; 6..10% in worst-case mode)"
+  },
+  "Sn": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "NOMINAL wind factor, used only in the objective"
+  },
+  "AVn": {
+   "role": "given",
+   "value": "0.96",
+   "unit": "",
+   "why": "NOMINAL availability, objective only"
+  },
+  "LSn": {
+   "role": "given",
+   "value": "0.08",
+   "unit": "",
+   "why": "NOMINAL losses, objective only"
+  },
+  "T": {
+   "role": "given",
+   "value": "278.15",
+   "unit": "K",
+   "why": "annual mean hub temperature 5 C (nominal; 275.15..281.15 K in worst-case mode, +-3 K)"
+  },
+  "PISA": {
+   "role": "given",
+   "value": "101325",
+   "unit": "Pa",
+   "why": "ISA sea-level pressure",
+   "ground": "problem statement"
+  },
+  "HH": {
+   "role": "given",
+   "value": "1530",
+   "unit": "m",
+   "why": "hub altitude a.s.l. (1450 + 80)",
+   "ground": "problem statement"
+  },
+  "AL": {
+   "role": "given",
+   "value": "0.0000225577",
+   "unit": "1/m",
+   "why": "ISA coefficient 2.25577e-5 1/m",
+   "ground": "problem statement"
+  },
+  "RS": {
+   "role": "given",
+   "value": "287.05",
+   "unit": "J/(kg*K)",
+   "why": "specific gas constant of air",
+   "ground": "problem statement"
+  },
+  "RHO0": {
+   "role": "given",
+   "value": "1.225",
+   "unit": "kg/m^3",
+   "why": "power-curve reference density",
+   "ground": "problem statement"
+  },
+  "VU": {
+   "role": "given",
+   "value": "1",
+   "unit": "m/s",
+   "why": "one m/s (bare numbers are dimensionless in computed)"
+  },
+  "H1": {
+   "role": "given",
+   "value": "1",
+   "unit": "h",
+   "why": "one hour (so hours-per-bin carry a time unit)"
+  },
+  "HY": {
+   "role": "given",
+   "value": "8760",
+   "unit": "h",
+   "why": "hours per year"
+  },
+  "YR": {
+   "role": "given",
+   "value": "20",
+   "unit": "",
+   "why": "lifetime, years (no discounting)"
+  },
+  "OM": {
+   "role": "given",
+   "value": "0.025",
+   "unit": "",
+   "why": "O&M per year as fraction of price"
+  },
+  "RHO_NOM": {
+   "role": "given",
+   "value": "1.0551359049052067",
+   "unit": "kg/m^3",
+   "why": "HAND-COMPUTED nominal air density (see report), used only in the objective"
+  },
+  "P0": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 0-1 m/s"
+  },
+  "P1": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 1-2 m/s"
+  },
+  "P2": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 2-3 m/s"
+  },
+  "P3": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 3-4 m/s"
+  },
+  "P4": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 4-5 m/s"
+  },
+  "P5": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 5-6 m/s"
+  },
+  "P6": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 6-7 m/s"
+  },
+  "P7": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 7-8 m/s"
+  },
+  "P8": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 8-9 m/s"
+  },
+  "P9": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 9-10 m/s"
+  },
+  "P10": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 10-11 m/s"
+  },
+  "P11": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 11-12 m/s"
+  },
+  "P12": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 12-13 m/s"
+  },
+  "P13": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 13-14 m/s"
+  },
+  "P14": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 14-15 m/s"
+  },
+  "P15": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 15-16 m/s"
+  },
+  "P16": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 16-17 m/s"
+  },
+  "P17": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 17-18 m/s"
+  },
+  "P18": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 18-19 m/s"
+  },
+  "P19": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 19-20 m/s"
+  },
+  "P20": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 20-21 m/s"
+  },
+  "P21": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 21-22 m/s"
+  },
+  "P22": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 22-23 m/s"
+  },
+  "P23": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 23-24 m/s"
+  },
+  "P24": {
+   "role": "derived",
+   "unit": "kW",
+   "why": "power in bin 24-25 m/s"
+  },
+  "E": {
+   "role": "derived",
+   "unit": "MWh",
+   "why": "annual net energy"
+  },
+  "CF": {
+   "role": "derived",
+   "unit": "",
+   "why": "capacity factor"
+  }
+ },
+ "slots": {
+  "TUR": {
+   "from": [
+    "turbines"
+   ]
+  }
+ },
+ "define": {
+  "RHO": "PISA*pow(1 - AL*HH, 5.25588)/(RS*T)",
+  "W3": "S*S*S*RHO/RHO0"
+ },
+ "computed": {
+  "W3n": "Sn*Sn*Sn*RHO_NOM/RHO0",
+  "Pn0": {
+   "value": "TUR.Pr*max(0, min(1, ((0.125*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (0.125*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn1": {
+   "value": "TUR.Pr*max(0, min(1, ((3.375*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (3.375*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn2": {
+   "value": "TUR.Pr*max(0, min(1, ((15.625*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (15.625*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn3": {
+   "value": "TUR.Pr*max(0, min(1, ((42.875*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (42.875*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn4": {
+   "value": "TUR.Pr*max(0, min(1, ((91.125*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (91.125*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn5": {
+   "value": "TUR.Pr*max(0, min(1, ((166.375*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (166.375*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn6": {
+   "value": "TUR.Pr*max(0, min(1, ((274.625*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (274.625*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn7": {
+   "value": "TUR.Pr*max(0, min(1, ((421.875*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (421.875*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn8": {
+   "value": "TUR.Pr*max(0, min(1, ((614.125*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (614.125*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn9": {
+   "value": "TUR.Pr*max(0, min(1, ((857.375*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (857.375*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn10": {
+   "value": "TUR.Pr*max(0, min(1, ((1157.625*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (1157.625*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn11": {
+   "value": "TUR.Pr*max(0, min(1, ((1520.875*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (1520.875*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn12": {
+   "value": "TUR.Pr*max(0, min(1, ((1953.125*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (1953.125*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn13": {
+   "value": "TUR.Pr*max(0, min(1, ((2460.375*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (2460.375*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn14": {
+   "value": "TUR.Pr*max(0, min(1, ((3048.625*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (3048.625*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn15": {
+   "value": "TUR.Pr*max(0, min(1, ((3723.875*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (3723.875*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn16": {
+   "value": "TUR.Pr*max(0, min(1, ((4492.125*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (4492.125*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn17": {
+   "value": "TUR.Pr*max(0, min(1, ((5359.375*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (5359.375*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn18": {
+   "value": "TUR.Pr*max(0, min(1, ((6331.625*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (6331.625*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn19": {
+   "value": "TUR.Pr*max(0, min(1, ((7414.875*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (7414.875*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn20": {
+   "value": "TUR.Pr*max(0, min(1, ((8615.125*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (8615.125*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn21": {
+   "value": "TUR.Pr*max(0, min(1, ((9938.375*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (9938.375*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn22": {
+   "value": "TUR.Pr*max(0, min(1, ((11390.625*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (11390.625*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn23": {
+   "value": "TUR.Pr*max(0, min(1, ((12977.875*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (12977.875*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Pn24": {
+   "value": "TUR.Pr*max(0, min(1, ((14706.125*VU*VU*VU*W3n) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin))))*ceil(max(0, min(1, ((TUR.vout*TUR.vout*TUR.vout) - (14706.125*VU*VU*VU*W3n))/(TUR.vout*TUR.vout*TUR.vout))))",
+   "unit": "kW"
+  },
+  "Enom": {
+   "value": "AVn*(1 - LSn)*(136*H1*Pn0 + 405*H1*Pn1 + 633*H1*Pn2 + 804*H1*Pn3 + 911*H1*Pn4 + 947*H1*Pn5 + 926*H1*Pn6 + 854*H1*Pn7 + 751*H1*Pn8 + 627*H1*Pn9 + 503*H1*Pn10 + 389*H1*Pn11 + 288*H1*Pn12 + 205*H1*Pn13 + 141*H1*Pn14 + 93*H1*Pn15 + 60*H1*Pn16 + 37*H1*Pn17 + 22*H1*Pn18 + 13*H1*Pn19 + 7*H1*Pn20 + 4*H1*Pn21 + 2*H1*Pn22 + 1*H1*Pn23 + 1*H1*Pn24)",
+   "unit": "MWh"
+  },
+  "cost_per_MWh": {
+   "value": "TUR.price*(1 + YR*OM)/(YR*Enom)",
+   "unit": "EUR/MWh"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "P0 == if((0.125*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((0.125*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((0.125*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((0.125*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P1 == if((3.375*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((3.375*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((3.375*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((3.375*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P2 == if((15.625*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((15.625*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((15.625*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((15.625*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P3 == if((42.875*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((42.875*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((42.875*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((42.875*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P4 == if((91.125*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((91.125*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((91.125*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((91.125*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P5 == if((166.375*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((166.375*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((166.375*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((166.375*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P6 == if((274.625*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((274.625*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((274.625*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((274.625*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P7 == if((421.875*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((421.875*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((421.875*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((421.875*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P8 == if((614.125*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((614.125*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((614.125*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((614.125*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P9 == if((857.375*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((857.375*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((857.375*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((857.375*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P10 == if((1157.625*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((1157.625*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((1157.625*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((1157.625*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P11 == if((1520.875*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((1520.875*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((1520.875*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((1520.875*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P12 == if((1953.125*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((1953.125*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((1953.125*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((1953.125*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P13 == if((2460.375*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((2460.375*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((2460.375*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((2460.375*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P14 == if((3048.625*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((3048.625*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((3048.625*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((3048.625*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P15 == if((3723.875*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((3723.875*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((3723.875*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((3723.875*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P16 == if((4492.125*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((4492.125*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((4492.125*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((4492.125*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P17 == if((5359.375*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((5359.375*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((5359.375*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((5359.375*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P18 == if((6331.625*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((6331.625*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((6331.625*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((6331.625*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P19 == if((7414.875*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((7414.875*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((7414.875*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((7414.875*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P20 == if((8615.125*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((8615.125*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((8615.125*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((8615.125*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P21 == if((9938.375*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((9938.375*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((9938.375*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((9938.375*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P22 == if((11390.625*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((11390.625*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((11390.625*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((11390.625*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P23 == if((12977.875*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((12977.875*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((12977.875*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((12977.875*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "P24 == if((14706.125*VU*VU*VU*W3) < (TUR.vin*TUR.vin*TUR.vin), 0, if((14706.125*VU*VU*VU*W3) < (TUR.vr*TUR.vr*TUR.vr), TUR.Pr*((14706.125*VU*VU*VU*W3) - (TUR.vin*TUR.vin*TUR.vin))/((TUR.vr*TUR.vr*TUR.vr) - (TUR.vin*TUR.vin*TUR.vin)), if((14706.125*VU*VU*VU*W3) < (TUR.vout*TUR.vout*TUR.vout), TUR.Pr, 0)))",
+   "source": "power curve of the problem with v_eq^3 = (s*v_bin)^3*rho/rho0 (cube root removed algebraically)"
+  },
+  {
+   "zfl": "E == AV*(1 - LS)*(136*H1*P0 + 405*H1*P1 + 633*H1*P2 + 804*H1*P3 + 911*H1*P4 + 947*H1*P5 + 926*H1*P6 + 854*H1*P7 + 751*H1*P8 + 627*H1*P9 + 503*H1*P10 + 389*H1*P11 + 288*H1*P12 + 205*H1*P13 + 141*H1*P14 + 93*H1*P15 + 60*H1*P16 + 37*H1*P17 + 22*H1*P18 + 13*H1*P19 + 7*H1*P20 + 4*H1*P21 + 2*H1*P22 + 1*H1*P23 + 1*H1*P24)",
+   "source": "annual energy = availability*(1-losses)*sum(hours_bin * P_bin)"
+  },
+  {
+   "zfl": "CF == E/(TUR.Pr*HY)",
+   "source": "definition of capacity factor"
+  }
+ ],
+ "modes": {
+  "worst case: all uncertain data": {
+   "quantities": {
+    "S": {
+     "range": [
+      "0.93",
+      "1.07"
+     ]
+    },
+    "AV": {
+     "range": [
+      "0.94",
+      "0.98"
+     ]
+    },
+    "LS": {
+     "range": [
+      "0.06",
+      "0.10"
+     ]
+    },
+    "T": {
+     "range": [
+      "275.15",
+      "281.15"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "E",
+     "op": ">=",
+     "value": "5500",
+     "why": "annual net energy >= 5.5 GWh for every allowed combination"
+    }
+   ]
+  },
+  "nominal point": {
+   "quantities": {},
+   "requirements": [
+    {
+     "quantity": "CF",
+     "op": ">=",
+     "value": "0.22",
+     "why": "capacity factor >= 0.22 at S=1, AV=0.96, losses 8%, T=5 C"
+    }
+   ]
+  }
+ },
+ "requirements": [],
+ "objective": {
+  "minimize": "cost_per_MWh",
+  "why": "20-year total cost (price + 20 yr * 2.5% O&M) / 20-year nominal energy"
+ },
+ "catalog": {
+  "turbines": {
+   "ground": "problem statement catalog",
+   "items": [
+    {
+     "name": "T1",
+     "Pr": "1500",
+     "vin": "3.0",
+     "vr": "11.5",
+     "vout": "25",
+     "price": "1350000"
+    },
+    {
+     "name": "T2",
+     "Pr": "2000",
+     "vin": "3.5",
+     "vr": "12.0",
+     "vout": "22",
+     "price": "1700000"
+    },
+    {
+     "name": "T3",
+     "Pr": "2500",
+     "vin": "3.0",
+     "vr": "12.5",
+     "vout": "25",
+     "price": "2150000"
+    },
+    {
+     "name": "T4",
+     "Pr": "3000",
+     "vin": "4.0",
+     "vr": "13.0",
+     "vout": "20",
+     "price": "2800000"
+    }
+   ],
+   "fields": {
+    "Pr": {
+     "unit": "kW"
+    },
+    "vin": {
+     "unit": "m/s"
+    },
+    "vr": {
+     "unit": "m/s"
+    },
+    "vout": {
+     "unit": "m/s"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ }
+}

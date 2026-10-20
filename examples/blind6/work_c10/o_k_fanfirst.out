@@ -1,0 +1,87 @@
+[stand] 1/4 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 4,
+  "notes": [],
+  "verdict": "EARNED",
+  "design": {
+    "FAN": {
+      "catalog": "fans",
+      "name": "none",
+      "qa": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "DRY": {
+      "catalog": "dryers",
+      "name": "DR6",
+      "B": {
+        "nominal": "6",
+        "tolerance": "0"
+      },
+      "Tmax": {
+        "nominal": "85",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "33",
+        "tolerance": "0"
+      }
+    },
+    "MF": {
+      "catalog": "mfin",
+      "x": "1342477/7375948 (~0.182007)"
+    },
+    "TD": {
+      "catalog": "tdry",
+      "x": "172997281/2733229 (~63.2941)"
+    }
+  },
+  "objective": {
+    "minimize": "DRY.price + FAN.price + Mtot*Wu*1000*(M0c - MF.x)/(1 + M0c)*cw*(1 + 12*(Tdn - 60)/1000)",
+    "value": "7543339170681040791/171361317296782000 (~44.0201)",
+    "unit": "kEUR",
+    "lower_bound": "82917951421870443/1869169767219200 (~44.3608)",
+    "gap": "-16051156100726909102166908241/47103440229706100226654208000 (~-0.340764)",
+    "lower_bound_is": "proved by ZTL: no mix in the continuous box costs less — zmin: the amounts' box of 4 combination(s) split in 10 pieces, 5 with the objective >= L, 5 failing a requirement at one point of its data",
+    "optimal": true,
+    "optimal_means": "true only at a zero gap; otherwise the mix is PROVED to cost at most `gap` above the cheapest possible (blind test 4, c03: optimal false at a 0.00093 EUR gap)"
+  },
+  "guaranteed": {
+    "Q": [
+      "11529215046068469760/13273528032612822957 (~0.868587)",
+      "92233720368547758080/44452313474910238403 (~2.07489)"
+    ],
+    "DI": [
+      "~0.198846869737 (an exact fraction of 39 digits)",
+      "~0.547310153305 (an exact fraction of 39 digits)"
+    ],
+    "ST": [
+      "14514780427902977025/36028797018963968 (~402.866)",
+      "22763707014794445613/36028797018963968 (~631.82)"
+    ],
+    "TD_x_req": [
+      "172997281/2733229 (~63.2941)",
+      "172997281/2733229 (~63.2941)"
+    ]
+  },
+  "how": {
+    "Q": "ZTL, interval reading of the definition (sound, may be wide)",
+    "DI": "ZTL, interval reading of the definition (sound, may be wide)",
+    "ST": "ZTL, interval reading of the definition (sound, may be wide)",
+    "TD_x_req": "ZTL, outer range"
+  },
+  "mix_verdict_checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	0m1.771s
+user	0m1.584s
+sys	0m0.168s

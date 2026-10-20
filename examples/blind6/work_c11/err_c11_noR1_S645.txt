@@ -1,0 +1,7 @@
+[stand] 1/20 designs, 0 s: 
+[stand] 5/20 designs, 32 s: 4 REFUTED
+[stand] 1/20 designs, 68 s: 
+[stand] 5/20 designs, 99 s: 4 REFUTED
+[stand] 1/20 designs, 131 s: 
+[stand] 1/20 designs, 165 s: 
+[stand] 1/20 designs, 198 s: 

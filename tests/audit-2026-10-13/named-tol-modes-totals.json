@@ -1,0 +1,70 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "AUDIT: a mode widens a NAMED tolerance (tol) that the given R reads",
+ "quantities": {
+  "tol": {
+   "role": "given",
+   "value": "0.001",
+   "unit": ""
+  },
+  "R": {
+   "role": "given",
+   "value": "1000",
+   "tolerance": "tol",
+   "unit": "ohm"
+  },
+  "Rref": {
+   "role": "given",
+   "value": "1000",
+   "unit": "ohm"
+  },
+  "y": {
+   "role": "derived",
+   "unit": ""
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "y == R/Rref",
+   "source": "ratio"
+  }
+ ],
+ "requirements": [],
+ "modes": {
+  "cool": {
+   "weight": "1",
+   "requirements": [
+    {
+     "quantity": "y",
+     "op": "<=",
+     "value": "1.05",
+     "why": "cool: y <= 1.05"
+    }
+   ]
+  },
+  "hot": {
+   "weight": "1",
+   "quantities": {
+    "tol": {
+     "value": "0.1"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "y",
+     "op": "<=",
+     "value": "1.05",
+     "why": "hot: R is 1000 +-10 %, so y reaches 1.1"
+    }
+   ]
+  }
+ },
+ "totals": {
+  "Ysum": {
+   "sum": "y",
+   "unit": ""
+  }
+ }
+}

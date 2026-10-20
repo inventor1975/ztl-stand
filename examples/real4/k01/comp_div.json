@@ -1,0 +1,102 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "component 2: feedback divider R1=17k, R2=27k, applied to the reference voltage: Vout = Vref*(R1+R2)/R1; resistor grade is its own slot",
+ "interface": {
+  "inputs": {
+   "Vr": {
+    "assume": [
+     "1.2",
+     "1.35"
+    ],
+    "bands": [
+     "1.2",
+     "1.35"
+    ]
+   }
+  },
+  "outputs": [
+   "Vout"
+  ]
+ },
+ "quantities": {
+  "Vr": {
+   "role": "given",
+   "value": "1.275",
+   "unit": "V"
+  },
+  "Vout": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {
+  "RES": {
+   "from": [
+    "pair"
+   ]
+  }
+ },
+ "catalog": {
+  "pair": {
+   "items": [
+    {
+     "name": "R +-5%",
+     "R1": {
+      "value": "17000",
+      "tolerance": "0.05"
+     },
+     "R2": {
+      "value": "27000",
+      "tolerance": "0.05"
+     },
+     "cost": "1"
+    },
+    {
+     "name": "R +-1%",
+     "R1": {
+      "value": "17000",
+      "tolerance": "0.01"
+     },
+     "R2": {
+      "value": "27000",
+      "tolerance": "0.01"
+     },
+     "cost": "2"
+    },
+    {
+     "name": "R +-0.5%",
+     "R1": {
+      "value": "17000",
+      "tolerance": "0.005"
+     },
+     "R2": {
+      "value": "27000",
+      "tolerance": "0.005"
+     },
+     "cost": "3"
+    }
+   ],
+   "fields": {
+    "R1": {
+     "unit": "ohm"
+    },
+    "R2": {
+     "unit": "ohm"
+    },
+    "cost": {
+     "unit": ""
+    }
+   }
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vout == Vr*(RES.R1+RES.R2)/RES.R1",
+   "source": "AN-1378 Eq. 1"
+  }
+ ],
+ "requirements": [],
+ "objective": {
+  "minimize": "RES.cost"
+ }
+}

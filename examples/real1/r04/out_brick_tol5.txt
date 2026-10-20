@@ -1,0 +1,103 @@
+[stand] 1/3 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 3,
+  "failed_at_nominal": 2,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "B=deep_groove_63(bore=35, Cr=417/10, C0r=193/10, f0=66/5, name=6307)",
+      "verdict": "REFUTED",
+      "fails": "required life 15000 h",
+      "by_at_witness": "967219850194156611181875/119538143007988106084 (~8091.31)",
+      "unit": "h"
+    },
+    {
+      "design": "B=deep_groove_63(bore=40, Cr=509/10, C0r=24, f0=66/5, name=6308)",
+      "verdict": "REFUTED",
+      "fails": "required life 15000 h",
+      "by_at_witness": "5389232923358125/1537203407052 (~3505.87)",
+      "unit": "h"
+    },
+    {
+      "design": "B=deep_groove_63(bore=45, Cr=611/10, C0r=59/2, f0=133/10, name=6309)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 2,
+    "EARNED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "B.bore",
+    "value": "45",
+    "unit": "mm",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "B": {
+      "catalog": "deep_groove_63",
+      "bore": {
+        "nominal": "45",
+        "tolerance": "0"
+      },
+      "Cr": {
+        "nominal": "611/10 (~61.1)",
+        "tolerance": "0"
+      },
+      "C0r": {
+        "nominal": "59/2 (~29.5)",
+        "tolerance": "0"
+      },
+      "f0": {
+        "nominal": "133/10 (~13.3)",
+        "tolerance": "0"
+      },
+      "name": {
+        "nominal": "6309",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "L10h": [
+      "1451218589841991372522656250000/93664724565161875757969673 (~15493.8)",
+      "48713322474639702343750000/2188728914392907732433 (~22256.4)"
+    ]
+  },
+  "guaranteed_unit": {
+    "L10h": "h"
+  },
+  "how": {
+    "L10h": "ZTL, interval reading of the definition (sound, may be wide)"
+  },
+  "requirements": [
+    {
+      "quantity": "L10h",
+      "op": ">=",
+      "value": "Lreq",
+      "why": "required life 15000 h"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "zz -> [7581/7375, 8379/7375] by [zz == B__f0*Fa/B__C0r]",
+    "ee -> [140772/502975, 4644/16225] by [ee == ifpos(zz - 0.172, ifpos(zz - 0.345, ifpos(zz - 0.689, ifpos(zz - 1.03, ifpos(zz - 1.38, ifpos(zz - 2.07, ifpos(zz - 3.45, ifpos(zz - 5.17, ifpos(zz - 6.89, 0.44, 0.42 + (0.44 - 0.42) * (zz - 5.17) / (6.89 - 5.17)), 0.38 + (0.42 - 0.38) * (zz - 3.45) / (5.17 - 3.45)), 0.34 + (0.38 - 0.34) * (zz - 2.07) / (3.45 - 2.07)), 0.3 + (0.34 - 0.3) * (zz - 1.38) / (2.07 - 1.38)), 0.28 + (0.3 - 0.28) * (zz - 1.03) / (1.38 - 1.03)), 0.26 + (0.28 - 0.26) * (zz - 0.689) / (1.03 - 0.689)), 0.22 + (0.26 - 0.22) * (zz - 0.345) / (0.689 - 0.345)), 0.19 + (0.22 - 0.19) * (zz - 0.172) / (0.345 - 0.172)), 0.19)], interval reading, sound, may be wider than the truth (credit)",
+    "Yy -> [97363/64900, 3120397/2011900] by [Yy == ifpos(zz - 0.172, ifpos(zz - 0.345, ifpos(zz - 0.689, ifpos(zz - 1.03, ifpos(zz - 1.38, ifpos(zz - 2.07, ifpos(zz - 3.45, ifpos(zz - 5.17, ifpos(zz - 6.89, 1.0, 1.04 + (1.0 - 1.04) * (zz - 5.17) / (6.89 - 5.17)), 1.15 + (1.04 - 1.15) * (zz - 3.45) / (5.17 - 3.45)), 1.31 + (1.15 - 1.31) * (zz - 2.07) / (3.45 - 2.07)), 1.45 + (1.31 - 1.45) * (zz - 1.38) / (2.07 - 1.38)), 1.55 + (1.45 - 1.55) * (zz - 1.03) / (1.38 - 1.03)), 1.71 + (1.55 - 1.71) * (zz - 0.689) / (1.03 - 0.689)), 1.99 + (1.71 - 1.99) * (zz - 0.345) / (0.689 - 0.345)), 2.3 + (1.99 - 2.3) * (zz - 0.172) / (0.345 - 0.172)), 2.3)], interval reading, sound, may be wider than the truth (credit)",
+    "Pr -> [18004742/3245, 629769462/100595] by [Pr == ifpos(Fa - ee * Fr, Xf * Fr + Yy * Fa, Fr)], interval reading, sound, may be wider than the truth (credit)",
+    "L10h -> [580487435936796549009062500000000/10407191618351319528663297, 58455986969567642812500000000/729576304797635910811] by [L10h == Mrev*pow(B__Cr/Pr, 3)/n], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	0m0.088s
+user	0m0.057s
+sys	0m0.014s

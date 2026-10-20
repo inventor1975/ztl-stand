@@ -1,0 +1,281 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 33,
+  "failed_at_nominal": 11,
+  "judged": 22,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "SOL=bleach(name=4 oz, Vb=473176473/4000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump maximum output 100 mL/min (not in the doc)",
+      "by_at_witness": "680207817/2500000 (~272.083)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=8 oz, Vb=473176473/2000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump maximum output 100 mL/min (not in the doc)",
+      "by_at_witness": "649658491/7500000 (~86.6211)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=12 oz, Vb=1419529419/4000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump maximum output 100 mL/min (not in the doc)",
+      "by_at_witness": "558010513/22500000 (~24.8005)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=16 oz, Vb=473176473/1000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump maximum output 100 mL/min (not in the doc)",
+      "by_at_witness": "145539719/1562500 (~93.1454)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=20 oz, Vb=473176473/800000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump maximum output 100 mL/min (not in the doc)",
+      "by_at_witness": "17185387/312500 (~54.9932)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=24 oz, Vb=1419529419/2000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump maximum output 100 mL/min (not in the doc)",
+      "by_at_witness": "46185079/1562500 (~29.5585)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=28 oz, Vb=3312235311/4000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump maximum output 100 mL/min (not in the doc)",
+      "by_at_witness": "17798039/1562500 (~11.3907)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=32 oz, Vb=473176473/500000)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "SOL=bleach(name=36 oz, Vb=4258588257/4000000)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "SOL=bleach(name=40 oz, Vb=473176473/400000)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "SOL=bleach(name=44 oz, Vb=5204941203/4000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "129107/4687500 (~0.0275428)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=48 oz, Vb=1419529419/1000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "9419561/14062500 (~0.669835)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=58 oz, Vb=13722117717/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "85548941/45312500 (~1.88798)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=70 oz, Vb=3312235311/1600000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "903229/312500 (~2.89033)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=82 oz, Vb=19400235393/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "230581209/64062500 (~3.59932)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=94 oz, Vb=22239294231/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "303097343/73437500 (~4.12728)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=106 oz, Vb=25078353069/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "375613477/82812500 (~4.53571)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=118 oz, Vb=27917411907/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "448129611/92187500 (~4.86107)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=130 oz, Vb=6151294149/1600000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "104129149/20312500 (~5.12636)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=142 oz, Vb=33595529583/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "593161879/110937500 (~5.34681)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=154 oz, Vb=36434588421/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "8645169/1562500 (~5.53291)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=166 oz, Vb=39273647259/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "738194147/129687500 (~5.6921)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=178 oz, Vb=42112706097/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "810710281/139062500 (~5.82983)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=190 oz, Vb=8990352987/1600000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "176645283/29687500 (~5.95016)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=204 oz, Vb=24132000123/4000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "1451742857/239062500 (~6.07265)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=222 oz, Vb=52522588503/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "131158219/832500000 (~0.157547)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=240 oz, Vb=1419529419/200000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "14822911/22500000 (~0.658796)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=260 oz, Vb=6151294149/800000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "110598113/97500000 (~1.13434)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=282 oz, Vb=66717882693/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "1670352289/1057500000 (~1.57953)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=306 oz, Vb=72396000369/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "2286029917/1147500000 (~1.99218)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=330 oz, Vb=15614823609/1600000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "52758319/22500000 (~2.34481)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=354 oz, Vb=83752235721/8000000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "3517385173/1327500000 (~2.64963)",
+      "unit": "mL/min"
+    },
+    {
+      "design": "SOL=bleach(name=384 oz, Vb=1419529419/125000)",
+      "verdict": "REFUTED",
+      "fails": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)",
+      "by_at_witness": "66984097/22500000 (~2.97707)",
+      "unit": "mL/min"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 30,
+    "EARNED": 3
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "EARNED",
+  "design": {
+    "SOL": {
+      "catalog": "bleach",
+      "name": "32 oz",
+      "Vb": {
+        "nominal": "473176473/500000 (~946.353)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Qf": [
+      "50919253/4687500 (~10.8628)",
+      "152757759/1562500 (~97.765)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Qf": "mL/min"
+  },
+  "how": {
+    "Qf": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "Qf",
+      "op": ">=",
+      "value": "8",
+      "why": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)"
+    },
+    {
+      "quantity": "Qf",
+      "op": "<=",
+      "value": "100",
+      "why": "ASSUMED metering pump maximum output 100 mL/min (not in the doc)"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "Qf -> [50919253/281250000000000, 50919253/31250000000000] by [Qf == D*Q/(fCl*(SOL__Vb*rho*wf/(Vw+SOL__Vb)))], multilinear, exact at the corners (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

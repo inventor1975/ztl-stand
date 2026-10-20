@@ -1,0 +1,11 @@
+{"axis": "corners_lin", "size": 4, "wall_s": 0.05, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 0}
+{"axis": "corners_lin", "size": 8, "wall_s": 0.07, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 0}
+{"axis": "corners_lin", "size": 12, "wall_s": 0.07, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 0}
+{"axis": "corners_lin", "size": 16, "wall_s": 0.08, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 0}
+{"axis": "corners_lin", "size": 20, "wall_s": 0.08, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 0}
+{"axis": "corners_lin", "size": 24, "wall_s": 0.09, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 0}
+{"axis": "corners_lin", "size": 32, "wall_s": 0.08, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 0}
+{"axis": "corners_lin", "size": 48, "wall_s": 0.09, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 0}
+{"axis": "corners_lin", "size": 64, "wall_s": 0.1, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 0}
+{"axis": "corners_lin", "size": 96, "wall_s": 0.14, "peak_mb": 16, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 0}
+{"axis": "corners_lin", "size": 128, "wall_s": 0.15, "peak_mb": 16, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 0}

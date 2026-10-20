@@ -1,0 +1,611 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "CURB": {
+   "role": "given",
+   "unit": "kg",
+   "why": "curb mass with driver",
+   "value": "2050",
+   "ground": "problem statement"
+  },
+  "RHO": {
+   "role": "given",
+   "unit": "kg/m^3",
+   "why": "air density",
+   "value": "1.20",
+   "ground": "problem statement"
+  },
+  "GR": {
+   "role": "given",
+   "unit": "m/s^2",
+   "why": "gravity (problem value, not g0)",
+   "value": "9.81",
+   "ground": "problem statement"
+  },
+  "CDA0": {
+   "role": "given",
+   "unit": "m^2",
+   "why": "baseline CdA, common to all routes",
+   "range": [
+    "1.05",
+    "1.15"
+   ]
+  },
+  "PAY": {
+   "role": "given",
+   "unit": "kg",
+   "why": "payload, the same on all routes",
+   "range": [
+    "500",
+    "850"
+   ]
+  },
+  "KR": {
+   "role": "given",
+   "unit": "",
+   "why": "rolling-resistance multiplier on catalog Crr",
+   "range": [
+    "0.90",
+    "1.10"
+   ]
+  },
+  "FT": {
+   "role": "given",
+   "unit": "",
+   "why": "cold-day usable-capacity factor",
+   "range": [
+    "0.82",
+    "0.92"
+   ]
+  },
+  "PAYMAX": {
+   "role": "given",
+   "unit": "kg",
+   "why": "highest payload (R3)",
+   "value": "850",
+   "ground": "problem statement"
+  },
+  "PAUX": {
+   "role": "given",
+   "unit": "kW",
+   "why": "auxiliary base power",
+   "value": "0.4",
+   "ground": "problem statement"
+  },
+  "RGEN": {
+   "role": "given",
+   "unit": "",
+   "why": "regeneration recovery",
+   "value": "0.55",
+   "ground": "problem statement"
+  },
+  "ETA": {
+   "role": "given",
+   "unit": "",
+   "why": "drivetrain efficiency",
+   "value": "0.88",
+   "ground": "problem statement"
+  },
+  "RES": {
+   "role": "given",
+   "unit": "",
+   "why": "reserve factor",
+   "value": "0.92",
+   "ground": "problem statement"
+  },
+  "SOLC": {
+   "role": "given",
+   "unit": "h",
+   "why": "solar credit on a cold day, 0.35 kWh per kWp (kWh/kW = h)",
+   "value": "0.35",
+   "ground": "problem statement"
+  },
+  "HALF": {
+   "role": "given",
+   "unit": "",
+   "why": "half of the days cold, half warm",
+   "value": "0.5",
+   "ground": "problem statement"
+  },
+  "Du": {
+   "role": "given",
+   "unit": "km",
+   "why": "urban daily distance",
+   "value": "140",
+   "ground": "problem statement"
+  },
+  "vau": {
+   "role": "given",
+   "unit": "km/h",
+   "why": "urban average speed",
+   "value": "26",
+   "ground": "problem statement"
+  },
+  "vcu": {
+   "role": "given",
+   "unit": "km/h",
+   "why": "urban cruise speed",
+   "value": "45",
+   "ground": "problem statement"
+  },
+  "stu": {
+   "role": "given",
+   "unit": "1/km",
+   "why": "urban stops per km",
+   "value": "2.4",
+   "ground": "problem statement"
+  },
+  "shu": {
+   "role": "given",
+   "unit": "",
+   "why": "urban share of days",
+   "value": "0.50",
+   "ground": "problem statement"
+  },
+  "Fu": {
+   "role": "derived",
+   "unit": "N",
+   "why": "road load force, urban"
+  },
+  "Ku": {
+   "role": "derived",
+   "unit": "J/m",
+   "why": "kinetic loss per distance, urban"
+  },
+  "Etu": {
+   "role": "derived",
+   "unit": "Wh/km",
+   "why": "traction energy, urban"
+  },
+  "Ecu": {
+   "role": "derived",
+   "unit": "Wh/km",
+   "why": "total energy cold day, urban"
+  },
+  "Ewu": {
+   "role": "derived",
+   "unit": "Wh/km",
+   "why": "total energy warm day, urban"
+  },
+  "Rgu": {
+   "role": "derived",
+   "unit": "km",
+   "why": "cold-day range, urban"
+  },
+  "Ds": {
+   "role": "given",
+   "unit": "km",
+   "why": "suburban daily distance",
+   "value": "170",
+   "ground": "problem statement"
+  },
+  "vas": {
+   "role": "given",
+   "unit": "km/h",
+   "why": "suburban average speed",
+   "value": "52",
+   "ground": "problem statement"
+  },
+  "vcs": {
+   "role": "given",
+   "unit": "km/h",
+   "why": "suburban cruise speed",
+   "value": "70",
+   "ground": "problem statement"
+  },
+  "sts": {
+   "role": "given",
+   "unit": "1/km",
+   "why": "suburban stops per km",
+   "value": "0.6",
+   "ground": "problem statement"
+  },
+  "shs": {
+   "role": "given",
+   "unit": "",
+   "why": "suburban share of days",
+   "value": "0.35",
+   "ground": "problem statement"
+  },
+  "Fs": {
+   "role": "derived",
+   "unit": "N",
+   "why": "road load force, suburban"
+  },
+  "Ks": {
+   "role": "derived",
+   "unit": "J/m",
+   "why": "kinetic loss per distance, suburban"
+  },
+  "Ets": {
+   "role": "derived",
+   "unit": "Wh/km",
+   "why": "traction energy, suburban"
+  },
+  "Ecs": {
+   "role": "derived",
+   "unit": "Wh/km",
+   "why": "total energy cold day, suburban"
+  },
+  "Ews": {
+   "role": "derived",
+   "unit": "Wh/km",
+   "why": "total energy warm day, suburban"
+  },
+  "Rgs": {
+   "role": "derived",
+   "unit": "km",
+   "why": "cold-day range, suburban"
+  },
+  "Dm": {
+   "role": "given",
+   "unit": "km",
+   "why": "motorway daily distance",
+   "value": "158",
+   "ground": "problem statement"
+  },
+  "vam": {
+   "role": "given",
+   "unit": "km/h",
+   "why": "motorway average speed",
+   "value": "95",
+   "ground": "problem statement"
+  },
+  "vcm": {
+   "role": "given",
+   "unit": "km/h",
+   "why": "motorway cruise speed",
+   "value": "110",
+   "ground": "problem statement"
+  },
+  "stm": {
+   "role": "given",
+   "unit": "1/km",
+   "why": "motorway stops per km",
+   "value": "0.05",
+   "ground": "problem statement"
+  },
+  "shm": {
+   "role": "given",
+   "unit": "",
+   "why": "motorway share of days",
+   "value": "0.15",
+   "ground": "problem statement"
+  },
+  "Fm": {
+   "role": "derived",
+   "unit": "N",
+   "why": "road load force, motorway"
+  },
+  "Km": {
+   "role": "derived",
+   "unit": "J/m",
+   "why": "kinetic loss per distance, motorway"
+  },
+  "Etm": {
+   "role": "derived",
+   "unit": "Wh/km",
+   "why": "traction energy, motorway"
+  },
+  "Ecm": {
+   "role": "derived",
+   "unit": "Wh/km",
+   "why": "total energy cold day, motorway"
+  },
+  "Ewm": {
+   "role": "derived",
+   "unit": "Wh/km",
+   "why": "total energy warm day, motorway"
+  },
+  "Rgm": {
+   "role": "derived",
+   "unit": "km",
+   "why": "cold-day range, motorway"
+  },
+  "U": {
+   "role": "derived",
+   "unit": "kWh",
+   "why": "cold-day usable energy after 8 years"
+  },
+  "Cons": {
+   "role": "derived",
+   "unit": "Wh/km",
+   "why": "average consumption"
+  },
+  "Mg": {
+   "role": "derived",
+   "unit": "kg",
+   "why": "gross mass at highest payload"
+  }
+ },
+ "slots": {
+  "PACK": {
+   "from": [
+    "packs"
+   ]
+  },
+  "TYR": {
+   "from": [
+    "tyres"
+   ]
+  },
+  "AERO": {
+   "from": [
+    "aeros"
+   ]
+  },
+  "HEAT": {
+   "from": [
+    "heaters"
+   ]
+  },
+  "SOL": {
+   "from": [
+    "solar"
+   ],
+   "optional": true
+  }
+ },
+ "define": {
+  "M": "CURB + PACK.mass + PAY + SOL.mass",
+  "RET": "exp(-0.028*8)"
+ },
+ "laws": [
+  {
+   "zfl": "Fu == TYR.Crr*KR*M*GR + 0.5*RHO*CDA0*AERO.k*vcu*vcu",
+   "source": "road load: rolling + aero"
+  },
+  {
+   "zfl": "Ku == stu*0.5*M*vcu*vcu*(1 - RGEN)",
+   "source": "kinetic loss net of regeneration"
+  },
+  {
+   "zfl": "Etu == (Fu + Ku)/ETA",
+   "source": "traction energy at battery"
+  },
+  {
+   "zfl": "Ecu == Etu + (PAUX + HEAT.P)/vau",
+   "source": "aux energy incl. cabin heating (cold)"
+  },
+  {
+   "zfl": "Ewu == Etu + PAUX/vau",
+   "source": "aux energy, no heating (warm)"
+  },
+  {
+   "zfl": "Rgu == U/Ecu",
+   "source": "range = usable energy / consumption"
+  },
+  {
+   "zfl": "Fs == TYR.Crr*KR*M*GR + 0.5*RHO*CDA0*AERO.k*vcs*vcs",
+   "source": "road load: rolling + aero"
+  },
+  {
+   "zfl": "Ks == sts*0.5*M*vcs*vcs*(1 - RGEN)",
+   "source": "kinetic loss net of regeneration"
+  },
+  {
+   "zfl": "Ets == (Fs + Ks)/ETA",
+   "source": "traction energy at battery"
+  },
+  {
+   "zfl": "Ecs == Ets + (PAUX + HEAT.P)/vas",
+   "source": "aux energy incl. cabin heating (cold)"
+  },
+  {
+   "zfl": "Ews == Ets + PAUX/vas",
+   "source": "aux energy, no heating (warm)"
+  },
+  {
+   "zfl": "Rgs == U/Ecs",
+   "source": "range = usable energy / consumption"
+  },
+  {
+   "zfl": "Fm == TYR.Crr*KR*M*GR + 0.5*RHO*CDA0*AERO.k*vcm*vcm",
+   "source": "road load: rolling + aero"
+  },
+  {
+   "zfl": "Km == stm*0.5*M*vcm*vcm*(1 - RGEN)",
+   "source": "kinetic loss net of regeneration"
+  },
+  {
+   "zfl": "Etm == (Fm + Km)/ETA",
+   "source": "traction energy at battery"
+  },
+  {
+   "zfl": "Ecm == Etm + (PAUX + HEAT.P)/vam",
+   "source": "aux energy incl. cabin heating (cold)"
+  },
+  {
+   "zfl": "Ewm == Etm + PAUX/vam",
+   "source": "aux energy, no heating (warm)"
+  },
+  {
+   "zfl": "Rgm == U/Ecm",
+   "source": "range = usable energy / consumption"
+  },
+  {
+   "zfl": "U == PACK.E*RET*FT*RES + SOLC*SOL.kWp",
+   "source": "retention, cold factor, reserve, solar credit"
+  },
+  {
+   "zfl": "Cons == shu*(HALF*Ecu + HALF*Ewu) + shs*(HALF*Ecs + HALF*Ews) + shm*(HALF*Ecm + HALF*Ewm)",
+   "source": "share-weighted half cold/half warm; solar not counted"
+  },
+  {
+   "zfl": "Mg == CURB + PACK.mass + SOL.mass + PAYMAX",
+   "source": "gross mass limit"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Rgu",
+   "op": ">=",
+   "value": "Du",
+   "why": "R1: cold-day range covers daily distance, urban"
+  },
+  {
+   "quantity": "Rgs",
+   "op": ">=",
+   "value": "Ds",
+   "why": "R1: cold-day range covers daily distance, suburban"
+  },
+  {
+   "quantity": "Rgm",
+   "op": ">=",
+   "value": "Dm",
+   "why": "R1: cold-day range covers daily distance, motorway"
+  },
+  {
+   "quantity": "Cons",
+   "op": "<=",
+   "value": "248",
+   "why": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)"
+  },
+  {
+   "quantity": "Mg",
+   "op": "<=",
+   "value": "3500",
+   "why": "R3: legal gross mass"
+  }
+ ],
+ "objective": {
+  "minimize": "PACK.price + TYR.price + AERO.price + HEAT.price + SOL.price",
+  "why": "minimum total price"
+ },
+ "catalog": {
+  "packs": {
+   "items": [
+    {
+     "E": "40",
+     "mass": "285",
+     "price": "6.4"
+    },
+    {
+     "E": "52",
+     "mass": "365",
+     "price": "8.1"
+    },
+    {
+     "E": "64",
+     "mass": "440",
+     "price": "9.8"
+    },
+    {
+     "E": "77",
+     "mass": "530",
+     "price": "11.9"
+    },
+    {
+     "E": "90",
+     "mass": "610",
+     "price": "13.8"
+    },
+    {
+     "E": "110",
+     "mass": "745",
+     "price": "17.0"
+    }
+   ],
+   "fields": {
+    "E": {
+     "unit": "kWh"
+    },
+    "mass": {
+     "unit": "kg"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "tyres": {
+   "items": [
+    {
+     "Crr": "0.0105",
+     "price": "0"
+    },
+    {
+     "Crr": "0.0082",
+     "price": "0.35"
+    },
+    {
+     "Crr": "0.0072",
+     "price": "0.70"
+    }
+   ],
+   "fields": {
+    "Crr": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "aeros": {
+   "items": [
+    {
+     "k": "1.00",
+     "price": "0"
+    },
+    {
+     "k": "0.92",
+     "price": "0.5"
+    },
+    {
+     "k": "0.86",
+     "price": "1.4"
+    }
+   ],
+   "fields": {
+    "k": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "heaters": {
+   "items": [
+    {
+     "P": "2.6",
+     "price": "0"
+    },
+    {
+     "P": "1.1",
+     "price": "0.85"
+    }
+   ],
+   "fields": {
+    "P": {
+     "unit": "kW"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "solar": {
+   "items": [
+    {
+     "kWp": "0.9",
+     "mass": "18",
+     "price": "1.1"
+    }
+   ],
+   "fields": {
+    "kWp": {
+     "unit": "kW"
+    },
+    "mass": {
+     "unit": "kg"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  }
+ },
+ "report": "all"
+}

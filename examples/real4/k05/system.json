@@ -1,0 +1,51 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "the same chain as a system: belt -> gearhead (ratio tuned from the catalog) -> motor; the speed conversion V = pi D NM / i is a system law",
+ "components": {
+  "BT": {
+   "file": "comp_belt.json"
+  },
+  "GR": {
+   "file": "comp_gear.json"
+  },
+  "MT": {
+   "file": "comp_motor.json"
+  }
+ },
+ "connect": {
+  "GR.TL": "BT.TL",
+  "MT.TM": "GR.TM"
+ },
+ "quantities": {
+  "Dd": {
+   "role": "given",
+   "value": "4",
+   "unit": "in"
+  },
+  "V": {
+   "role": "derived",
+   "unit": "in/s"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "V == pi*Dd*MT.NM/GR.cost",
+   "source": "belt speed from drum diameter and drum speed; GR.cost is the gear ratio (objective = ratio)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "V",
+   "op": "within",
+   "value": [
+    "6.3",
+    "7.7"
+   ],
+   "why": "7 in/s +-10 %"
+  }
+ ],
+ "objective": {
+  "minimize": "GR.cost",
+  "unit": ""
+ }
+}

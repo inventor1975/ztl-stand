@@ -1,0 +1,84 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "PUMP=pumps(grade=BYU slide pump, H0=200, c=1, eta=9/10)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "verdict": "EARNED",
+  "design": {
+    "PUMP": {
+      "catalog": "pumps",
+      "H0": {
+        "nominal": "200",
+        "tolerance": "0"
+      },
+      "c": {
+        "nominal": "1",
+        "tolerance": "0"
+      },
+      "eta": {
+        "nominal": "9/10 (~0.9)",
+        "tolerance": "0"
+      },
+      "grade": "BYU slide pump"
+    }
+  },
+  "guaranteed": {
+    "Vel": [
+      "49263887034106496307373046875/6908435304715275381441036288 (~7.13098)",
+      "788222192545704193145751953125/110534964875444370918684491776 (~7.13098)"
+    ],
+    "H": [
+      "~149.149179886 (an exact fraction of 59 digits)",
+      "~149.149179886 (an exact fraction of 56 digits)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Vel": "m/s",
+    "H": "m"
+  },
+  "how": {
+    "Vel": "ZTL, interval reading of the definition (sound, may be wide)",
+    "H": "ZTL, interval reading of the definition (sound, may be wide)"
+  },
+  "requirements": [
+    {
+      "quantity": "Vel",
+      "op": "within",
+      "value": [
+        "7.1305",
+        "7.1315"
+      ],
+      "why": "published v_op = 7.131 m/s (4 digits, +-half of last digit)"
+    },
+    {
+      "quantity": "H",
+      "op": "within",
+      "value": [
+        "149.1485",
+        "149.1495"
+      ],
+      "why": "published H_op = 149.149 m (+-half of last digit)"
+    }
+  ],
+  "rests_on": "ZTL disposition None: tolerances are the catalog's (datasheet) word",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "Vel -> [49263887034106496307373046875/6908435304715275381441036288, 788222192545704193145751953125/110534964875444370918684491776] by [Vel == (Q/(pi*D*D/4))], interval reading, sound, may be wider than the truth (credit)",
+    "H -> [1822301467181586987772679178591835394102691995855730129569575/12217978460015720813401721024848145235202197669727411634176, 7118365106178081800926113182248591080634322947445616523175/47726478359436439810970261844024243063062564463332818944] by [H == PUMP__H0 - PUMP__c*Vel*Vel], interval reading, sound, may be wider than the truth (credit)",
+    "Pw -> [23078602022204735880479758480007072943238853164131130027475876689154943828964670269/253554661968756695732248067668129913759480446980216331723133127873796629331968, 1442412626387798000170130060028231515671091710033826272106881218274045625298380291/15847166373047303571884953309818112920202162821313282851702169680111911043072] by [Pw == RHO*g0*Q*H/PUMP__eta], multilinear, exact at the corners (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

@@ -1,0 +1,396 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL fd6593d",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "V": [
+          "94112691123589428901/13537500000000000000 (~6.952)",
+          "8901179185171083/1250000000000000 (~7.12094)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "objective": {
+    "minimize": "GR.cost",
+    "value": "50",
+    "optimal": false,
+    "optimal_means": "among the candidates: true only when no cheaper combination is left undecided — a system cannot refute, so a cheaper one not earned stays OPEN"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "component BT": "comp_belt.json",
+    "component GR": "G=5GN50KA",
+    "component MT": "comp_motor.json"
+  },
+  "guaranteed": {
+    "V": [
+      "94112691123589428901/13537500000000000000 (~6.952)",
+      "8901179185171083/1250000000000000 (~7.12094)"
+    ]
+  },
+  "guaranteed_unit": {
+    "V": "in/s"
+  },
+  "how": {
+    "V": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "V",
+      "op": "within",
+      "value": [
+        "6.3",
+        "7.7"
+      ],
+      "why": "7 in/s +-10 %"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "BT_TL = 1129848290276167/500000000000000 by exact elimination (credit)",
+    "GR_TM -> [224839809764957233/4050000000000000000, 1114338554655103253/16200000000000000000] by the system over its parameters, exact at the corners (credit)",
+    "V -> [11952311772695857470427/67687500000000000000000, 1130449756516727541/6250000000000000000] by the system over its parameters, exact at the corners (credit)"
+  ],
+  "components": {
+    "BT": {
+      "inputs": {},
+      "bands_used": [
+        {
+          "band": {},
+          "earned": true,
+          "outputs": {
+            "TL": [
+              "20/1",
+              "20/1"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "TL": [
+          "20/1",
+          "20/1"
+        ]
+      },
+      "outputs_affine": {
+        "TL": {
+          "slope": {},
+          "remainder": [
+            "20/1",
+            "20/1"
+          ]
+        }
+      }
+    },
+    "GR": {
+      "inputs": {
+        "TL": {
+          "from": "BT.TL",
+          "arrives": [
+            "20/1",
+            "20/1"
+          ],
+          "assume": [
+            "0/1",
+            "20/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "TL": [
+              "199/10",
+              "20/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "TM": [
+              "199/405",
+              "20/33"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "TM": [
+          "199/405",
+          "20/33"
+        ]
+      },
+      "outputs_affine": {
+        "TM": {
+          "slope": {
+            "TL": "49/1782"
+          },
+          "remainder": [
+            "-29/495",
+            "1049/17820"
+          ]
+        }
+      }
+    },
+    "MT": {
+      "inputs": {
+        "TM": {
+          "from": "GR.TM",
+          "arrives": [
+            "199/405",
+            "20/33"
+          ],
+          "assume": [
+            "0/1",
+            "361/160"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "TM": [
+              "19/40",
+              "1/2"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "NM": [
+              "604940/361",
+              "1700/1"
+            ]
+          }
+        },
+        {
+          "band": {
+            "TM": [
+              "1/2",
+              "21/40"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "NM": [
+              "603780/361",
+              "32260/19"
+            ]
+          }
+        },
+        {
+          "band": {
+            "TM": [
+              "21/40",
+              "11/20"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "NM": [
+              "602620/361",
+              "32220/19"
+            ]
+          }
+        },
+        {
+          "band": {
+            "TM": [
+              "11/20",
+              "23/40"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "NM": [
+              "601460/361",
+              "32180/19"
+            ]
+          }
+        },
+        {
+          "band": {
+            "TM": [
+              "23/40",
+              "3/5"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "NM": [
+              "600300/361",
+              "32140/19"
+            ]
+          }
+        },
+        {
+          "band": {
+            "TM": [
+              "3/5",
+              "5/8"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "NM": [
+              "599140/361",
+              "32100/19"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "NM": [
+          "599140/361",
+          "1700/1"
+        ]
+      }
+    }
+  },
+  "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)",
+  "combinations": [
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN3KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "3/1 (~3)",
+      "why": "components: component GR: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN3.6KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "18/5 (~3.6)",
+      "why": "components: component GR: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN5KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "5/1 (~5)",
+      "why": "components: component GR: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN6KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "6/1 (~6)",
+      "why": "components: component GR: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN7.5KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "15/2 (~7.5)",
+      "why": "components: component GR: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN9KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "9/1 (~9)",
+      "why": "components: component GR: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN12.5KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "25/2 (~12.5)",
+      "why": "components: MT.TM: the range arriving from GR.TM, [1.96543, 2.42424], leaves the component's assume [0, 2.25625] — its contract does not cover it (an arriving range encloses, so this is not a refutation)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN15KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "15/1 (~15)",
+      "why": "components: component MT: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN18KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "18/1 (~18)",
+      "why": "components: component MT: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN25KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "25/1 (~25)",
+      "why": "components: component MT: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN30KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "30/1 (~30)",
+      "why": "components: component MT: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN36KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "OPEN",
+      "cost": "36/1 (~36)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "BT": "comp_belt.json",
+        "GR": "G=5GN50KA",
+        "MT": "comp_motor.json"
+      },
+      "verdict": "EARNED",
+      "cost": "50/1 (~50)"
+    }
+  ],
+  "combinations_judged": "13 of 20 (cheapest first; stopped at the first EARNED)",
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

@@ -1,0 +1,407 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "verdict": "EARNED",
+  "why": "several limits, each searched on its own; the verdict is the weakest of theirs",
+  "finds": [
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "Rn",
+      "unit": "kohm",
+      "proved": "4947/100 (~49.47)",
+      "proved_means": "every Rn in [20, 4947/100 (~49.47)] kohm works (EARNED on the whole range)",
+      "beyond": "1237/25 (~49.48)",
+      "beyond_is": "REFUTED: the range [20, 1237/25 (~49.48)] kohm holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "IOSmin": [
+                "32771793768449625292800/32770941347404007689 (~1000.03)",
+                "32771793768449625292800/12595774754670984383 (~2601.81)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "IOSmin": [
+            "32771793768449625292800/32770941347404007689 (~1000.03)",
+            "32771793768449625292800/12595774754670984383 (~2601.81)"
+          ]
+        },
+        "guaranteed_unit": {
+          "IOSmin": "mA"
+        },
+        "how": {
+          "IOSmin": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~1000.02601149 (~1000.03)', '~2601.80849584 (~2601.81)']"
+        },
+        "requirements": [
+          {
+            "quantity": "IOSmin",
+            "op": ">=",
+            "value": "1000",
+            "why": "TPS25221 sec 10.2.1.2.1: current limit must not occur below 1000 mA"
+          }
+        ],
+        "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+        "judge_log": [
+          "IOSmin -> [163858968842248126464/163854706737020038445, 163858968842248126464/62978873773354921915] by [IOSmin == Kmin/pow((Rn*(1 + s/100)/Ru), 1.033)], interval reading, sound, may be wider than the truth (credit)",
+          "IOSmax -> [94827793753913163776/80042962017189765425, 32281802128991715328/11102150879020895475] by [IOSmax == Kmax/pow((Rn*(1 + s/100)/Ru), 0.97)], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "TPS25221 sec 10.2.1.2.1: current limit must not occur below 1000 mA",
+            "by_at_witness": "~0.182764463906 (an exact fraction of 61 digits)",
+            "unit": "mA"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Rn": "1237/25 (~49.48)",
+          "s": "1"
+        },
+        "point_units": {
+          "Rn": "kohm",
+          "s": ""
+        },
+        "value_there": {
+          "IOSmin": [
+            "~999.817235536 (an exact fraction of 60 digits)",
+            "~999.817235536 (an exact fraction of 61 digits)"
+          ]
+        },
+        "unit": "mA",
+        "requirement": {
+          "quantity": "IOSmin",
+          "op": ">=",
+          "value": "1000",
+          "why": "TPS25221 sec 10.2.1.2.1: current limit must not occur below 1000 mA"
+        },
+        "overshoot": "~0.182764463906 (an exact fraction of 61 digits)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "~999.817235536 (an exact fraction of 60 digits)",
+            "~2601.80849584 (an exact fraction of 61 digits)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Rn",
+              "moves_it_by": "~1548.78760948 (an exact fraction of 238 digits)"
+            },
+            {
+              "quantity": "s",
+              "moves_it_by": "~20.8717829273 (an exact fraction of 240 digits)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Rn": "20",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "210",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "115",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "135/2 (~67.5)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "175/4 (~43.75)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "2781/50 (~55.62)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "1242/25 (~49.68)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "1168/25 (~46.72)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "241/5 (~48.2)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "2447/50 (~48.94)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "4931/100 (~49.31)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "99/2 (~49.5)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "247/5 (~49.4)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "989/20 (~49.45)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "1237/25 (~49.48)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "2473/50 (~49.46)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "4947/100 (~49.47)",
+          "verdict": "EARNED"
+        }
+      ],
+      "find_index": 0
+    },
+    {
+      "verdict": "EARNED",
+      "find": "smallest",
+      "quantity": "Rn",
+      "unit": "kohm",
+      "proved": "6141/50 (~122.82)",
+      "proved_means": "every Rn in [6141/50 (~122.82), 210] kohm works (EARNED on the whole range)",
+      "beyond": "12281/100 (~122.81)",
+      "beyond_is": "REFUTED: the range [12281/100 (~122.81), 210] kohm holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "IOSmax": [
+                "3793111750156526551040/13014401645760319241 (~291.455)",
+                "15172447000626106204160/30345682356038624803 (~499.987)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "IOSmax": [
+            "3793111750156526551040/13014401645760319241 (~291.455)",
+            "15172447000626106204160/30345682356038624803 (~499.987)"
+          ]
+        },
+        "guaranteed_unit": {
+          "IOSmax": "mA"
+        },
+        "how": {
+          "IOSmax": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~291.454947634 (~291.455)', '~499.987010429 (~499.987)']"
+        },
+        "requirements": [
+          {
+            "quantity": "IOSmax",
+            "op": "<=",
+            "value": "500",
+            "why": "TPS25221 sec 10.2.1.2.2: current limit must occur below 500 mA"
+          }
+        ],
+        "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+        "judge_log": [
+          "IOSmin -> [40964742210562031616/182388002819409175295, 1280148194080063488/3208011437478708485] by [IOSmin == Kmin/pow((Rn*(1 + s/100)/Ru), 1.033)], interval reading, sound, may be wider than the truth (credit)",
+          "IOSmax -> [94827793753913163776/325360041144007981025, 379311175015652655104/758642058900965620075] by [IOSmax == Kmax/pow((Rn*(1 + s/100)/Ru), 0.97)], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "TPS25221 sec 10.2.1.2.2: current limit must occur below 500 mA",
+            "by_at_witness": "~0.0265012529313 (an exact fraction of 59 digits)",
+            "unit": "mA"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Rn": "12281/100 (~122.81)",
+          "s": "-1"
+        },
+        "point_units": {
+          "Rn": "kohm",
+          "s": ""
+        },
+        "value_there": {
+          "IOSmax": [
+            "~500.026501253 (an exact fraction of 59 digits)",
+            "~500.026501253 (an exact fraction of 60 digits)"
+          ]
+        },
+        "unit": "mA",
+        "requirement": {
+          "quantity": "IOSmax",
+          "op": "<=",
+          "value": "500",
+          "why": "TPS25221 sec 10.2.1.2.2: current limit must occur below 500 mA"
+        },
+        "overshoot": "~0.0265012529313 (an exact fraction of 59 digits)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "~291.454947634 (an exact fraction of 60 digits)",
+            "~500.026501253 (an exact fraction of 60 digits)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Rn",
+              "moves_it_by": "~202.861933067 (an exact fraction of 237 digits)"
+            },
+            {
+              "quantity": "s",
+              "moves_it_by": "~9.60734183535 (an exact fraction of 239 digits)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Rn": "210",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "20",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "115",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "325/2 (~162.5)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "555/4 (~138.75)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "3172/25 (~126.88)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "6047/50 (~120.94)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "12391/100 (~123.91)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "6121/50 (~122.42)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "3079/25 (~123.16)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "12279/100 (~122.79)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "6149/50 (~122.98)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "3072/25 (~122.88)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "3071/25 (~122.84)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "6141/50 (~122.82)",
+          "verdict": "EARNED"
+        },
+        {
+          "Rn": "614/5 (~122.8)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rn": "12281/100 (~122.81)",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 1
+    }
+  ],
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

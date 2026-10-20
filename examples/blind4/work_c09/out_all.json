@@ -1,0 +1,1789 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "verdict": "EARNED",
+  "modes": [
+    "a loaded slow",
+    "b loaded fast",
+    "c empty cold"
+  ],
+  "designs_tried": 900,
+  "undecided": 0,
+  "design": {
+    "F": {
+      "catalog": "discs",
+      "mass": {
+        "nominal": "40",
+        "tolerance": "0"
+      },
+      "A": {
+        "nominal": "21/20 (~1.05)",
+        "tolerance": "0"
+      },
+      "Kf": {
+        "nominal": "125",
+        "tolerance": "0"
+      },
+      "Kr": {
+        "nominal": "96",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "900",
+        "tolerance": "0"
+      },
+      "name": "D6"
+    },
+    "RR": {
+      "catalog": "discs",
+      "mass": {
+        "nominal": "40",
+        "tolerance": "0"
+      },
+      "A": {
+        "nominal": "21/20 (~1.05)",
+        "tolerance": "0"
+      },
+      "Kf": {
+        "nominal": "125",
+        "tolerance": "0"
+      },
+      "Kr": {
+        "nominal": "96",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "900",
+        "tolerance": "0"
+      },
+      "name": "D6"
+    },
+    "PAD": {
+      "catalog": "pads",
+      "m20": {
+        "nominal": "9/25 (~0.36)",
+        "tolerance": "0"
+      },
+      "m100": {
+        "nominal": "21/50 (~0.42)",
+        "tolerance": "0"
+      },
+      "m300": {
+        "nominal": "23/50 (~0.46)",
+        "tolerance": "0"
+      },
+      "m450": {
+        "nominal": "2/5 (~0.4)",
+        "tolerance": "0"
+      },
+      "m550": {
+        "nominal": "3/10 (~0.3)",
+        "tolerance": "0"
+      },
+      "m650": {
+        "nominal": "1/5 (~0.2)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "60",
+        "tolerance": "0"
+      },
+      "name": "PA"
+    },
+    "RET": {
+      "catalog": "retarders",
+      "P40": {
+        "nominal": "45",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "1200",
+        "tolerance": "0"
+      },
+      "name": "R1"
+    }
+  },
+  "per_mode": {
+    "a loaded slow": {
+      "guaranteed": {
+        "Tf": [
+          "232146814732628810351958456511/918326881523853124278681600 (~252.793)",
+          "84332055352962862519733347033/229581720380963281069670400 (~367.329)"
+        ],
+        "Tr": [
+          "20423306091437982485435601847/131189554503407589182668800 (~155.678)",
+          "7095514282576325942227549291/32797388625851897295667200 (~216.344)"
+        ],
+        "Fav": [
+          "23958779669695753544594329731722051/318863500529115668152320000000 (~75138)",
+          "235124147256692259478623492783229/2550908004232925345218560000 (~92172.7)"
+        ]
+      },
+      "how": {
+        "Tf": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~252.793225815 (~252.793)', '~367.329137586 (~367.329)']",
+        "Tr": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~155.677837071 (~155.678)', '~216.343879189 (~216.344)']",
+        "Fav": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~75138.0438023 (~75138)', '~92172.7270707 (~92172.7)']"
+      }
+    },
+    "b loaded fast": {
+      "guaranteed": {
+        "Tf": [
+          "93549930211169747526774733063/592893111924283956579532800 (~157.785)",
+          "130180954793395005112137028147/444669833943212967434649600 (~292.759)"
+        ],
+        "Tr": [
+          "59758518184311405912792523957/592893111924283956579532800 (~100.791)",
+          "76640282066687158219449650233/444669833943212967434649600 (~172.353)"
+        ],
+        "Fav": [
+          "122136830433276522908666620209810439/1646925310900788768276480000000 (~74160.5)",
+          "220174153030476474434199418140743/2470387966351183152414720000 (~89125.3)"
+        ]
+      },
+      "how": {
+        "Tf": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~157.785490048 (~157.785)', '~292.758682636 (~292.759)']",
+        "Tr": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~100.791385466 (~100.791)', '~172.353229782 (~172.353)']",
+        "Fav": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~74160.5157349 (~74160.5)', '~89125.33417 (~89125.3)']"
+      }
+    },
+    "c empty cold": {
+      "guaranteed": {
+        "Tf": [
+          "1522230763559462816930018596399/18676133025614944632255283200 (~81.5067)",
+          "71855095142569175351122568651/583629157050467019757977600 (~123.118)"
+        ],
+        "Tr": [
+          "127194215241726995239142791723/2668019003659277804607897600 (~47.6737)",
+          "5755531781851862190146515127/83375593864352431393996800 (~69.0314)"
+        ],
+        "Fav": [
+          "950199271122996846269396397995782447/13834172611566625653522432000000 (~68684.9)",
+          "72181344355976075539264782062719/864635788222914103345152000 (~83481.8)"
+        ]
+      },
+      "how": {
+        "Tf": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~81.5067424007 (~81.5067)', '~123.117726855 (~123.118)']",
+        "Tr": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~47.6736541484 (~47.6737)', '~69.0313737521 (~69.0314)']",
+        "Fav": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~68684.9367723 (~68684.9)', '~83481.7912226 (~83481.8)']"
+      }
+    }
+  },
+  "objective": {
+    "minimize": "2*F.price + 2*RR.price + 4*PAD.price + RET.price",
+    "value": "5040",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode",
+    "ties": {
+      "same_objective": 2,
+      "first": [
+        "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R2, P40=70, price=2600)",
+        "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R2, P40=70, price=2600)"
+      ],
+      "note": "these cost the same; they were not all judged — \"report\": \"all\" shows which pass"
+    }
+  },
+  "designs": [
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~88.4822057212 (an exact fraction of 69 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~88.4822057212 (an exact fraction of 69 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~88.4822057212 (an exact fraction of 69 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~88.4822057212 (an exact fraction of 69 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~88.4822057212 (an exact fraction of 69 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~88.4822057212 (an exact fraction of 69 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~14.0468840441 (an exact fraction of 71 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~88.4822057212 (an exact fraction of 69 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 rear disc end temperature <= 600 C",
+      "by": "~147.720766113 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 rear disc end temperature <= 600 C",
+      "by": "~147.720766113 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 rear disc end temperature <= 600 C",
+      "by": "~18.4268100336 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 rear disc end temperature <= 600 C",
+      "by": "~18.4268100336 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~28061.3176342 (an exact fraction of 69 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 rear disc end temperature <= 600 C",
+      "by": "~147.720766113 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~3.33311383726 (an exact fraction of 70 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~20483.2185436 (an exact fraction of 68 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 rear disc end temperature <= 600 C",
+      "by": "~147.720766113 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~15448.8109795 (an exact fraction of 71 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~25788.733122 (an exact fraction of 69 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 rear disc end temperature <= 600 C",
+      "by": "~18.4268100336 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~4639.76026811 (an exact fraction of 71 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~18359.6817689 (an exact fraction of 71 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 rear disc end temperature <= 600 C",
+      "by": "~18.4268100336 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~138.785304065 (an exact fraction of 71 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~219.997897679 (an exact fraction of 72 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~297.032250762 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 rear disc end temperature <= 600 C",
+      "by": "~147.720766113 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~22566.7512029 (an exact fraction of 69 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~5550.99349797 (an exact fraction of 70 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~22419.133122 (an exact fraction of 69 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "195884/125 (~1567.07)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~14786.7787453 (an exact fraction of 68 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PB, m20=3/10, m100=19/50, m300=11/25, m450=11/25, m550=19/50, m650=7/25, price=95); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~18871.3114965 (an exact fraction of 70 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D5, mass=33, A=22/25, Kf=112, Kr=86, price=690); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~40.941010597 (an exact fraction of 66 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~11119.3271999 (an exact fraction of 70 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~132.257190699 (an exact fraction of 67 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~15038.3874851 (an exact fraction of 69 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~36.7214333533 (an exact fraction of 68 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 rear disc end temperature <= 600 C",
+      "by": "~18.4268100336 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~9213.9465773 (an exact fraction of 72 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PE, m20=2/5, m100=2/5, m300=2/5, m450=33/100, m550=1/4, m650=9/50, price=45); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~20294.1666907 (an exact fraction of 69 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~16.062673146 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); RR=discs(name=D2, mass=18, A=1/2, Kf=78, Kr=58, price=320); PAD=pads(name=PD, m20=11/50, m100=3/10, m300=19/50, m450=2/5, m550=39/100, m650=37/100, price=110); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "c empty cold",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~4428.05001731 (an exact fraction of 71 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); RR=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~155.993479529 (an exact fraction of 65 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "F=discs(name=D6, mass=40, A=21/20, Kf=125, Kr=96, price=900); RR=discs(name=D4, mass=27, A=3/4, Kf=100, Kr=76, price=520); PAD=pads(name=PA, m20=9/25, m100=21/50, m300=23/50, m450=2/5, m550=3/10, m650=1/5, price=60); RET=retarders(name=R0, P40=0, price=0)",
+      "verdict": "REFUTED",
+      "mode": "b loaded fast",
+      "fails": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)",
+      "by": "~139.325028472 (an exact fraction of 70 digits)",
+      "unit": "N"
+    },
+    {
+      "design": "F=discs(name=D1, mass=14, A=21/50, Kf=70, Kr=52, price=260); RR=discs(name=D3, mass=22, A=31/50, Kf=90, Kr=68, price=400); PAD=pads(name=PC, m20=7/25, m100=17/50, m300=2/5, m450=21/50, m550=41/100, m650=9/25, price=150); RET=retarders(name=R1, P40=45, price=1200)",
+      "verdict": "REFUTED",
+      "mode": "a loaded slow",
+      "fails": "R1 front disc end temperature <= 600 C",
+      "by": "~144.824699714 (an exact fraction of 67 digits)",
+      "unit": "C"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 899,
+    "EARNED": 1
+  },
+  "designs_not_listed": 700,
+  "listing": "earned first, then open, then refuted"
+}

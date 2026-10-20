@@ -1,0 +1,264 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "PL=plates(name=O100, d=100, price=3/5); PA=pondA(A=610); PH=pondH(H=2)",
+      "verdict": "REFUTED",
+      "fails": "R3: h <= H - 0.30 m (storm 3600s)",
+      "by_at_witness": "~0.0688935217404 (an exact fraction of 154 digits)",
+      "unit": "m"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "PL": {
+      "catalog": "plates",
+      "name": "O100",
+      "d": {
+        "nominal": "100",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "3/5 (~0.6)",
+        "tolerance": "0"
+      }
+    },
+    "PA": {
+      "catalog": "pondA",
+      "A": {
+        "nominal": "610",
+        "tolerance": "0"
+      }
+    },
+    "PH": {
+      "catalog": "pondH",
+      "H": {
+        "nominal": "2",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "C": "4/5 (~0.8)",
+    "Cd": "16/25 (~0.64)",
+    "i1": "92",
+    "i2": "68",
+    "i3": "44",
+    "i4": "135",
+    "i5": "100",
+    "i6": "66"
+  },
+  "point_units": {
+    "C": "",
+    "Cd": "",
+    "i1": "mm/h",
+    "i2": "mm/h",
+    "i3": "mm/h",
+    "i4": "mm/h",
+    "i5": "mm/h",
+    "i6": "mm/h"
+  },
+  "value_there": {
+    "M6": [
+      "~0.23110647826 (an exact fraction of 156 digits)",
+      "~0.23110647826 (an exact fraction of 154 digits)"
+    ]
+  },
+  "unit": "m",
+  "requirement": {
+    "quantity": "M6",
+    "op": ">=",
+    "value": "fb",
+    "why": "R3: h <= H - 0.30 m (storm 3600s)"
+  },
+  "overshoot": "~0.0688935217404 (an exact fraction of 154 digits)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "~0.218840269681 (an exact fraction of 159 digits)",
+      "~0.557017960551 (an exact fraction of 154 digits)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "C",
+        "moves_it_by": "~0.228968125172 (an exact fraction of 137 digits)"
+      },
+      {
+        "quantity": "i6",
+        "moves_it_by": "~0.111090195451 (an exact fraction of 137 digits)"
+      },
+      {
+        "quantity": "Cd",
+        "moves_it_by": "~0.0122662085791 (an exact fraction of 159 digits)"
+      },
+      {
+        "quantity": "pi",
+        "moves_it_by": "~4.15012288373e-17 (an exact fraction of 156 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "each_requirement": [
+    {
+      "requirement": {
+        "quantity": "Qp1",
+        "op": "<=",
+        "value": "0.025",
+        "why": "R1: 10-year Qpeak <= 25 L/s (storm 900s)"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Qp1": [
+          "145240256537603083453840257677/10000000000000000000000000000000 (~0.014524)",
+          "1117680398091942564768951861/62500000000000000000000000000 (~0.0178829)"
+        ]
+      }
+    },
+    {
+      "requirement": {
+        "quantity": "Qp2",
+        "op": "<=",
+        "value": "0.025",
+        "why": "R1: 10-year Qpeak <= 25 L/s (storm 1800s)"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Qp2": [
+          "346857286520607336719918230649/20000000000000000000000000000000 (~0.0173429)",
+          "3366557444291122036675878759/156250000000000000000000000000 (~0.021546)"
+        ]
+      }
+    },
+    {
+      "requirement": {
+        "quantity": "Qp3",
+        "op": "<=",
+        "value": "0.025",
+        "why": "R1: 10-year Qpeak <= 25 L/s (storm 3600s)"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Qp3": [
+          "192709893829664827139390607923/10000000000000000000000000000000 (~0.019271)",
+          "188164524553651878067805733/7812500000000000000000000000 (~0.0240851)"
+        ]
+      }
+    },
+    {
+      "requirement": {
+        "quantity": "Qp4",
+        "op": "<=",
+        "value": "0.045",
+        "why": "R2: 100-year Qpeak <= 45 L/s (storm 900s)"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Qp4": [
+          "353337091684230410936919436567/20000000000000000000000000000000 (~0.0176669)",
+          "339312582381238196303622429/15625000000000000000000000000 (~0.021716)"
+        ]
+      }
+    },
+    {
+      "requirement": {
+        "quantity": "M4",
+        "op": ">=",
+        "value": "fb",
+        "why": "R3: h <= H - 0.30 m (storm 900s)"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "M4": [
+          "~1.04869196899 (an exact fraction of 65 digits)",
+          "~1.23337369699 (an exact fraction of 62 digits)"
+        ]
+      }
+    },
+    {
+      "requirement": {
+        "quantity": "Qp5",
+        "op": "<=",
+        "value": "0.045",
+        "why": "R2: 100-year Qpeak <= 45 L/s (storm 1800s)"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Qp5": [
+          "424713398776664539304047846483/20000000000000000000000000000000 (~0.0212357)",
+          "1639668385524615383267666847/62500000000000000000000000000 (~0.0262347)"
+        ]
+      }
+    },
+    {
+      "requirement": {
+        "quantity": "M5",
+        "op": ">=",
+        "value": "fb",
+        "why": "R3: h <= H - 0.30 m (storm 1800s)"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "M5": [
+          "~0.611604179036 (an exact fraction of 64 digits)",
+          "~0.892363699891 (an exact fraction of 61 digits)"
+        ]
+      }
+    },
+    {
+      "requirement": {
+        "quantity": "Qp6",
+        "op": "<=",
+        "value": "0.045",
+        "why": "R2: 100-year Qpeak <= 45 L/s (storm 3600s)"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Qp6": [
+          "484686591896175395819731224833/20000000000000000000000000000000 (~0.0242343)",
+          "9286997887139569200613223433/312500000000000000000000000000 (~0.0297184)"
+        ]
+      }
+    },
+    {
+      "requirement": {
+        "quantity": "M6",
+        "op": ">=",
+        "value": "fb",
+        "why": "R3: h <= H - 0.30 m (storm 3600s)"
+      },
+      "verdict": "REFUTED",
+      "overshoot": "~0.0811597303195 (an exact fraction of 158 digits)"
+    },
+    {
+      "requirement": {
+        "quantity": "PL_d_req",
+        "op": ">=",
+        "value": "80",
+        "why": "R4: d >= 80 mm (clogging)"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "PL_d_req": [
+          "100",
+          "100"
+        ]
+      }
+    }
+  ],
+  "minimal_conflicts": {
+    "skipped": "10 requirements: subsets over 8 not enumerated"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

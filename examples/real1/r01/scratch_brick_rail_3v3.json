@@ -1,0 +1,79 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "R1": {
+   "role": "given",
+   "value": "17661.357921",
+   "tolerance": "0.01",
+   "unit": "ohm",
+   "why": "top divider resistor, 1% (mode overrides value per rail)"
+  },
+  "R2": {
+   "role": "given",
+   "value": "10000",
+   "tolerance": "0.01",
+   "unit": "ohm",
+   "why": "bottom divider resistor, 1%; absolute size is my assumption (only the ratio matters)"
+  },
+  "Vo": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {
+  "REG": {
+   "from": [
+    "TPS79901"
+   ]
+  }
+ },
+ "define": {},
+ "laws": [
+  {
+   "zfl": "Vo == (1 + R1/R2)*REG.Vref",
+   "source": "SLVA423 Eq.1: Vo = (1+R1/R2)*Vref"
+  }
+ ],
+ "requirements": [],
+ "modes": {
+  "rail_3v3": {
+   "quantities": {
+    "R1": {
+     "value": "17661.357921",
+     "tolerance": "0.01"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Vo",
+     "op": "within",
+     "value": [
+      "80619/25000",
+      "84381/25000"
+     ],
+     "why": "3.3 V rail, total accuracy bound"
+    }
+   ]
+  }
+ },
+ "catalog": {
+  "TPS79901": {
+   "items": [
+    {
+     "Vref": {
+      "value": "1.193",
+      "tolerance": "0.01"
+     },
+     "grade": "TPS79901 typ Vref, 1% device accuracy"
+    }
+   ],
+   "fields": {
+    "Vref": {
+     "unit": "V"
+    }
+   },
+   "ground": "datasheet (as quoted in SLVA423)"
+  }
+ },
+ "conflicts": false
+}

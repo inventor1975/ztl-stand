@@ -1,0 +1,291 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "F": {
+   "role": "given",
+   "value": "1.5",
+   "unit": "m^3/h",
+   "why": "wastewater flow"
+  },
+  "cF": {
+   "role": "given",
+   "range": [
+    "6.0",
+    "7.5"
+   ],
+   "unit": "g/L",
+   "why": "feed solute concentration"
+  },
+  "rho": {
+   "role": "given",
+   "range": [
+    "0.02",
+    "0.04"
+   ],
+   "unit": "",
+   "why": "recycle residual fraction, shared"
+  },
+  "qc": {
+   "role": "given",
+   "range": [
+    "0.10",
+    "0.14"
+   ],
+   "unit": "kg/kg",
+   "why": "carbon capacity"
+  },
+  "e": {
+   "role": "given",
+   "range": [
+    "0.90",
+    "0.96"
+   ],
+   "unit": "",
+   "why": "carbon removal efficiency"
+  },
+  "Hmo": {
+   "role": "given",
+   "value": "700",
+   "unit": "h",
+   "why": "hours per month"
+  },
+  "Hyr": {
+   "role": "given",
+   "value": "8000",
+   "unit": "h",
+   "why": "operating hours per year"
+  },
+  "Yrs": {
+   "role": "given",
+   "value": "5",
+   "unit": "",
+   "why": "years"
+  },
+  "z1": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "x_(N+1-1): water concentration leaving the stage numbered 1 from the solvent end"
+  },
+  "z2": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "x_(N+1-2): water concentration leaving the stage numbered 2 from the solvent end"
+  },
+  "z3": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "x_(N+1-3): water concentration leaving the stage numbered 3 from the solvent end"
+  },
+  "z4": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "x_(N+1-4): water concentration leaving the stage numbered 4 from the solvent end"
+  },
+  "xN": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "raffinate x_N = z1"
+  },
+  "xf": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "x_1 (feed-end stage) = z_N"
+  },
+  "y1": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "loaded solvent y_1 = Keff x_1"
+  },
+  "Dis": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "final discharge (1-e) x_N"
+  },
+  "Life": {
+   "role": "derived",
+   "unit": "",
+   "why": "bed life, months"
+  }
+ },
+ "slots": {
+  "EX": {
+   "from": [
+    "extractors"
+   ]
+  },
+  "SV": {
+   "from": [
+    "solvents"
+   ]
+  },
+  "BD": {
+   "from": [
+    "beds"
+   ]
+  },
+  "SS": {
+   "from": [
+    "flow"
+   ]
+  }
+ },
+ "define": {
+  "Keff": "EX.eta*SV.Kt"
+ },
+ "computed": {
+  "a1": "min(1, max(0, EX.N - 0))",
+  "a2": "min(1, max(0, EX.N - 1))",
+  "a3": "min(1, max(0, EX.N - 2))",
+  "a4": "min(1, max(0, EX.N - 3))",
+  "b1": "1 - a1",
+  "b2": "1 - a2",
+  "b3": "1 - a3",
+  "b4": "1 - a4",
+  "w1": "a1 - a2",
+  "w2": "a2 - a3",
+  "w3": "a3 - a4",
+  "w4": "a4"
+ },
+ "laws": [
+  {
+   "zfl": "a1*F*(z2 - z1) + b1*F*(z1 - cF) == a1*SS.x*Keff*(z1 - rho*xf)",
+   "source": "stage N (solvent end): F (x_{N-1}-x_N) = S (Keff x_N - rho Keff x_1)"
+  },
+  {
+   "zfl": "a2*F*(z3 - z2) + b2*F*(z2 - cF) == a2*SS.x*Keff*(z2 - z1)",
+   "source": "stage N-1: F (x_{N-2}-x_{N-1}) = S Keff (x_{N-1}-x_N)"
+  },
+  {
+   "zfl": "a3*F*(z4 - z3) + b3*F*(z3 - cF) == a3*SS.x*Keff*(z3 - z2)",
+   "source": "stage N-2"
+  },
+  {
+   "zfl": "a4*F*(cF - z4) + b4*F*(z4 - cF) == a4*SS.x*Keff*(z4 - z3)",
+   "source": "stage N-3 (x_0 = cF)"
+  },
+  {
+   "zfl": "xN == z1",
+   "source": "raffinate is the solvent-end stage"
+  },
+  {
+   "zfl": "xf == w1*z1 + w2*z2 + w3*z3 + w4*z4",
+   "source": "x_1 is stage number N from the solvent end"
+  },
+  {
+   "zfl": "y1 == Keff*xf",
+   "source": "loaded solvent y_1 = Keff x_1"
+  },
+  {
+   "zfl": "Dis == (1 - e)*xN",
+   "source": "final discharge"
+  },
+  {
+   "zfl": "Life == qc*BD.m/(F*xN*Hmo)",
+   "source": "bed life = q m /(F x_N)/700"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "xN",
+   "op": "<=",
+   "value": "0.12",
+   "why": "R1 raffinate x_N <= 0.12 g/L"
+  },
+  {
+   "quantity": "Dis",
+   "op": "<=",
+   "value": "0.006",
+   "why": "R2 discharge <= 0.006 g/L"
+  },
+  {
+   "quantity": "Life",
+   "op": ">=",
+   "value": "2",
+   "why": "R3 bed life >= 2 months"
+  },
+  {
+   "quantity": "y1",
+   "op": "<=",
+   "value": "8.5",
+   "why": "R5 loaded solvent <= 8.5 g/L"
+  }
+ ],
+ "objective": {
+  "minimize": "EX.price + BD.price + Yrs*Hyr*SS.x*SV.cS",
+  "unit": "kEUR",
+  "why": "5-year cost: extractor + bed + solvent circulation"
+ },
+ "catalog": {
+  "extractors": {
+   "ground": "problem table",
+   "items": [
+    {
+     "name": "E2",
+     "N": "2",
+     "eta": "0.85",
+     "price": "12.0"
+    }
+   ],
+   "fields": {
+    "N": {
+     "unit": ""
+    },
+    "eta": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "solvents": {
+   "ground": "problem table",
+   "items": [
+    {
+     "name": "SA",
+     "Kt": {
+      "range": [
+       "3.601298090",
+       "4.934712240"
+      ]
+     },
+     "cS": "1.2"
+    }
+   ],
+   "fields": {
+    "Kt": {
+     "unit": ""
+    },
+    "cS": {
+     "unit": "EUR/m^3"
+    }
+   }
+  },
+  "beds": {
+   "ground": "problem table",
+   "items": [
+    {
+     "name": "G600",
+     "m": "600",
+     "price": "1.8"
+    }
+   ],
+   "fields": {
+    "m": {
+     "unit": "kg"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "flow": {
+   "continuous": {
+    "field": "x",
+    "from": "0.5",
+    "to": "1.8",
+    "unit": "m^3/h"
+   }
+  }
+ }
+}

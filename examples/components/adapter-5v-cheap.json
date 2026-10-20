@@ -1,0 +1,51 @@
+{
+ "stand": "universal-stand/1",
+ "why": "a cheap 5 V adapter: set point +-10 %, line regulation 2 mV/V +-50 %",
+ "interface": {
+  "inputs": {
+   "Vin": {
+    "assume": [
+     "200",
+     "250"
+    ],
+    "bands": [
+     "200",
+     "230",
+     "250"
+    ]
+   }
+  },
+  "outputs": [
+   "Vout"
+  ]
+ },
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "value": "230",
+   "unit": "V"
+  },
+  "V0": {
+   "role": "given",
+   "value": "5",
+   "tolerance": "0.10",
+   "unit": "V"
+  },
+  "a": {
+   "role": "given",
+   "value": "0.002",
+   "tolerance": "0.5",
+   "unit": ""
+  },
+  "Vout": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vout == V0 + a*(Vin - 230)"
+  }
+ ],
+ "requirements": []
+}

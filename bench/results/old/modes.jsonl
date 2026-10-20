@@ -1,0 +1,6 @@
+{"axis": "modes", "size": 1, "wall_s": 0.08, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:52", "cpu": 14}
+{"axis": "modes", "size": 2, "wall_s": 0.1, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:52", "cpu": 14}
+{"axis": "modes", "size": 4, "wall_s": 0.1, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:52", "cpu": 14}
+{"axis": "modes", "size": 8, "wall_s": 0.11, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 14}
+{"axis": "modes", "size": 16, "wall_s": 0.13, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 14}
+{"axis": "modes", "size": 32, "wall_s": 2.46, "peak_mb": 16, "verdict": "REFUTED", "stopped": false, "why": "every design violates a requirement in at least one mode, at a concrete point", "mode": "work", "at": "2026-10-13 00:30:55", "cpu": 14}

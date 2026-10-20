@@ -1,0 +1,492 @@
+[stand] 1/56 designs, 0 s: 
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 56,
+  "failed_at_nominal": 46,
+  "judged": 10,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "B=bearings(name=R-60A, C=95, C0=100, OD=110, price=19/50); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~53991.7257151 (an exact fraction of 724 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60A, C=95, C0=100, OD=110, price=19/50); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~52396.9797327 (an exact fraction of 601 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60B, C=118, C0=128, OD=110, price=13/25); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~51863.010988 (an exact fraction of 722 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60A, C=95, C0=100, OD=110, price=19/50); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~51168.8596768 (an exact fraction of 361 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60B, C=118, C0=128, OD=110, price=13/25); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~48577.8787449 (an exact fraction of 600 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60C, C=135, C0=150, OD=130, price=61/100); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~49192.6185348 (an exact fraction of 726 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60C, C=135, C0=150, OD=130, price=61/100); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~44036.6664248 (an exact fraction of 601 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60B, C=118, C0=128, OD=110, price=13/25); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~46047.9856846 (an exact fraction of 359 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60A, C=95, C0=100, OD=110, price=19/50); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~50944.3774722 (an exact fraction of 238 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60C, C=135, C0=150, OD=130, price=61/100); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~40311.8593855 (an exact fraction of 361 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60D, C=160, C0=180, OD=130, price=4/5); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~44006.8259871 (an exact fraction of 726 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60B, C=118, C0=128, OD=110, price=13/25); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~45585.5586045 (an exact fraction of 238 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60D, C=160, C0=180, OD=130, price=4/5); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~34923.1230723 (an exact fraction of 601 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60C, C=135, C0=150, OD=130, price=61/100); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~39689.2029335 (an exact fraction of 236 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60D, C=160, C0=180, OD=130, price=4/5); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~28360.7966896 (an exact fraction of 360 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60E, C=190, C0=215, OD=150, price=21/20); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~33799.7790044 (an exact fraction of 724 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60D, C=160, C0=180, OD=130, price=4/5); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~27263.8070149 (an exact fraction of 236 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60E, C=190, C0=215, OD=150, price=21/20); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~17625.8390433 (an exact fraction of 601 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60E, C=190, C0=215, OD=150, price=21/20); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~6696.85609666 (an exact fraction of 359 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60A, C=95, C0=100, OD=110, price=19/50); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~52652.8761918 (an exact fraction of 723 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60A, C=95, C0=100, OD=110, price=19/50); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~49994.9662211 (an exact fraction of 602 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60E, C=190, C0=215, OD=150, price=21/20); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~5042.51805565 (an exact fraction of 235 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60B, C=118, C0=128, OD=110, price=13/25); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~49105.0183133 (an exact fraction of 722 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60A, C=95, C0=100, OD=110, price=19/50); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~47948.0994613 (an exact fraction of 361 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60F, C=235, C0=270, OD=150, price=29/20); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~10910.9067013 (an exact fraction of 727 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60B, C=118, C0=128, OD=110, price=13/25); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~43629.7979081 (an exact fraction of 600 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60F, C=235, C0=270, OD=150, price=29/20); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "B=bearings(name=R-60C, C=135, C0=150, OD=130, price=61/100); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~44654.3642246 (an exact fraction of 726 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60C, C=135, C0=150, OD=130, price=61/100); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~36061.110708 (an exact fraction of 601 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60B, C=118, C0=128, OD=110, price=13/25); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~39413.3094743 (an exact fraction of 359 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60A, C=95, C0=100, OD=110, price=19/50); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~47573.9624537 (an exact fraction of 238 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60F, C=235, C0=270, OD=150, price=29/20); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "B=bearings(name=R-60C, C=135, C0=150, OD=130, price=61/100); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~29853.0989759 (an exact fraction of 361 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60D, C=160, C0=180, OD=130, price=4/5); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~36011.3766451 (an exact fraction of 726 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60B, C=118, C0=128, OD=110, price=13/25); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~38642.5976741 (an exact fraction of 238 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60D, C=160, C0=180, OD=130, price=4/5); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~20871.8717872 (an exact fraction of 601 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60F, C=235, C0=270, OD=150, price=29/20); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "B=bearings(name=R-60C, C=135, C0=150, OD=130, price=61/100); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~28815.3382225 (an exact fraction of 236 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60D, C=160, C0=180, OD=130, price=4/5); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~9934.66114941 (an exact fraction of 360 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60E, C=190, C0=215, OD=150, price=21/20); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~18999.631674 (an exact fraction of 724 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60D, C=160, C0=180, OD=130, price=4/5); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~8106.34502485 (an exact fraction of 236 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60E, C=190, C0=215, OD=150, price=21/20); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~316.806235887 (an exact fraction of 596 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60E, C=190, C0=215, OD=150, price=21/20); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "B=bearings(name=R-60G, C=290, C0=345, OD=180, price=21/10); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R3 OD <= 150 mm",
+      "by": "30",
+      "unit": "mm"
+    },
+    {
+      "design": "B=bearings(name=R-60G, C=290, C0=345, OD=180, price=21/10); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R3 OD <= 150 mm",
+      "by": "30",
+      "unit": "mm"
+    },
+    {
+      "design": "B=bearings(name=R-60E, C=190, C0=215, OD=150, price=21/20); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "B=bearings(name=R-60G, C=290, C0=345, OD=180, price=21/10); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R3 OD <= 150 mm",
+      "by": "30",
+      "unit": "mm"
+    },
+    {
+      "design": "B=bearings(name=R-60F, C=235, C0=270, OD=150, price=29/20); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 service life 1/d >= 56000 h for all loads and temperatures",
+      "by": "~668.47278325 (an exact fraction of 722 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "B=bearings(name=R-60F, C=235, C0=270, OD=150, price=29/20); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "B=bearings(name=R-60G, C=290, C0=345, OD=180, price=21/10); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=none, fc=3/5, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R3 OD <= 150 mm",
+      "by": "30",
+      "unit": "mm"
+    },
+    {
+      "design": "B=bearings(name=R-60F, C=235, C0=270, OD=150, price=29/20); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "B=bearings(name=R-60F, C=235, C0=270, OD=150, price=29/20); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "B=bearings(name=R-60G, C=290, C0=345, OD=180, price=21/10); O=oils(name=VG68, nu40=68, price=1/5); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R3 OD <= 150 mm",
+      "by": "30",
+      "unit": "mm"
+    },
+    {
+      "design": "B=bearings(name=R-60G, C=290, C0=345, OD=180, price=21/10); O=oils(name=VG150, nu40=150, price=1/4); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R3 OD <= 150 mm",
+      "by": "30",
+      "unit": "mm"
+    },
+    {
+      "design": "B=bearings(name=R-60G, C=290, C0=345, OD=180, price=21/10); O=oils(name=VG320, nu40=320, price=7/20); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R3 OD <= 150 mm",
+      "by": "30",
+      "unit": "mm"
+    },
+    {
+      "design": "B=bearings(name=R-60G, C=290, C0=345, OD=180, price=21/10); O=oils(name=VG680, nu40=680, price=1/2); K=kits(name=filter-and-seal kit, fc=1, price=9/10)",
+      "verdict": "REFUTED",
+      "fails": "R3 OD <= 150 mm",
+      "by": "30",
+      "unit": "mm"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 48,
+    "EARNED": 8
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "B.price + O.price + K.price",
+    "value": "1700",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "B": {
+      "catalog": "bearings",
+      "name": "R-60F",
+      "C": {
+        "nominal": "235",
+        "tolerance": "0"
+      },
+      "C0": {
+        "nominal": "270",
+        "tolerance": "0"
+      },
+      "OD": {
+        "nominal": "150",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "29/20 (~1.45)",
+        "tolerance": "0"
+      }
+    },
+    "O": {
+      "catalog": "oils",
+      "name": "VG150",
+      "nu40": {
+        "nominal": "150",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "1/4 (~0.25)",
+        "tolerance": "0"
+      }
+    },
+    "K": {
+      "catalog": "kits",
+      "name": "none",
+      "fc": {
+        "nominal": "3/5 (~0.6)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Lh": [
+      "~56403.4917333 (an exact fraction of 193 digits)",
+      "~119286.656343 (an exact fraction of 190 digits)"
+    ],
+    "m0": [
+      "152",
+      "819/5 (~163.8)"
+    ],
+    "ODq": [
+      "150",
+      "150"
+    ]
+  },
+  "guaranteed_unit": {
+    "Lh": "h",
+    "m0": "kN",
+    "ODq": "mm"
+  },
+  "how": {
+    "Lh": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~56403.4917333 (~56403.5)', '~119286.656343 (~119287)']",
+    "m0": "ZTL, exact at the corners",
+    "ODq": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "Lh",
+      "op": ">=",
+      "value": "Lreq",
+      "why": "R1 service life 1/d >= 56000 h for all loads and temperatures"
+    },
+    {
+      "quantity": "m0",
+      "op": ">=",
+      "value": "0",
+      "why": "R2 static safety C0/P0 >= 2.5 at the shock cycle, worst Fr"
+    },
+    {
+      "quantity": "ODq",
+      "op": "<=",
+      "value": "ODmax",
+      "why": "R3 OD <= 150 mm"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "ODq = 3/20 by exact elimination (credit)",
+    "P1 -> [4540, 5675] by the system over its parameters, exact at the corners (credit)",
+    "P2 -> [12485, 14755] by the system over its parameters, exact at the corners (credit)",
+    "P3 -> [22700, 52437/2] by the system over its parameters, exact at the corners (credit)",
+    "P4 -> [40860, 45400] by the system over its parameters, exact at the corners (credit)",
+    "Ps -> [42480, 47200] by the system over its parameters, exact at the corners (credit)"
+  ]
+}

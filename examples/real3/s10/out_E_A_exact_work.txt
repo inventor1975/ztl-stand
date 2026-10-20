@@ -1,0 +1,865 @@
+[stand] 1/99 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "excluded_by_where": 93,
+  "designs_tried": 99,
+  "failed_at_nominal": 60,
+  "judged": 39,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "RL=res_E96(R=20)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "21847862512299750195200/8484816818725792443 (~2574.94)",
+          "16385896884224812646400/6363612614044344319 (~2574.94)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=41/2)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "65543587536899250585600/26112080642057649643 (~2510.09)",
+          "6554358753689925058560/2611208064205764959 (~2510.09)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=21)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "682745703509367193600/278856670883118869 (~2448.38)",
+          "8192948442112406323200/3346280050597426421 (~2448.38)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=43/2)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "21335803234667724800/8928684096464919 (~2389.58)",
+          "6554358753689925058560/2742891754434023111 (~2389.58)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=221/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "10923931256149875097600/4703332782498803197 (~2322.59)",
+          "10923931256149875097600/4703332782498803187 (~2322.59)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=113/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "2730982814037468774400/1203323825671407827 (~2269.53)",
+          "6554358753689925058560/2887977181611378779 (~2269.53)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=116/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "32771793768449625292800/14836068592699249501 (~2208.93)",
+          "1092393125614987509760/494535619756641649 (~2208.93)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=237/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "21847862512299750195200/10110986407349640727 (~2160.8)",
+          "21847862512299750195200/10110986407349640707 (~2160.8)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=243/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "65543587536899250585600/31126552392701526997 (~2105.71)",
+          "32771793768449625292800/15563276196350763467 (~2105.71)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=249/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "21847862512299750195200/10640264174343069527 (~2053.32)",
+          "65543587536899250585600/31920792523029208517 (~2053.32)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=51/2)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "1024118555264050790400/511182258267807569 (~2003.43)",
+          "21847862512299750195200/10905221509713228117 (~2003.43)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=261/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "65543587536899250585600/33511154025729124093 (~1955.87)",
+          "16385896884224812646400/8377788506432281007 (~1955.87)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=267/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "21847862512299750195200/11435749092799318369 (~1910.49)",
+          "341372851754683596800/178683579574989349 (~1910.49)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=137/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "21847862512299750195200/11745589446553002611 (~1860.09)",
+          "65543587536899250585600/35236768339659007771 (~1860.09)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=28)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "65543587536899250585600/36034125453359556667 (~1818.93)",
+          "6554358753689925058560/3603412545335955659 (~1818.93)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=287/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "10923931256149875097600/6160847925356275069 (~1773.12)",
+          "682745703509367193600/385052995334767191 (~1773.12)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=147/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "1310871750737985011712/757935986732971013 (~1729.53)",
+          "4096474221056203161600/2368549958540534411 (~1729.53)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=301/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "32771793768449625292800/19414621768091401511 (~1688)",
+          "32771793768449625292800/19414621768091401471 (~1688)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=309/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "32771793768449625292800/19947884889053567081 (~1642.87)",
+          "16385896884224812646400/9973942444526783521 (~1642.87)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=158/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "10923931256149875097600/6804954814574672819 (~1605.29)",
+          "32771793768449625292800/20414864443724018419 (~1605.29)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=162/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "819294844211240632320/523724328251142817 (~1564.36)",
+          "8534321293867089920/5455461752616071 (~1564.36)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=166/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "5461965628074937548800/3580586206154437733 (~1525.44)",
+          "10923931256149875097600/7161172412308875453 (~1525.44)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=34)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "8192948442112406323200/5504621653129485371 (~1488.38)",
+          "8192948442112406323200/5504621653129485361 (~1488.38)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=174/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "10923931256149875097600/7517957191712966111 (~1453.05)",
+          "32771793768449625292800/22553871575138898299 (~1453.05)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=357/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "4096474221056203161600/2894583115147723079 (~1415.22)",
+          "32771793768449625292800/23156664921181784587 (~1415.22)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=73/2)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "10923931256149875097600/7897634274196396031 (~1383.19)",
+          "2184786251229975019520/1579526854839279203 (~1383.19)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=187/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "16385896884224812646400/12148316934118522997 (~1348.82)",
+          "16385896884224812646400/12148316934118522973 (~1348.82)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=383/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "2730982814037468774400/2075070381944263713 (~1316.09)",
+          "3277179376844962529280/2490084458333116451 (~1316.09)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=196/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "136549140701873438720/106273016924870449 (~1284.89)",
+          "3277179376844962529280/2550552406196890771 (~1284.89)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=201/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "3277179376844962529280/2617792728429298379 (~1251.89)",
+          "32771793768449625292800/26177927284292983739 (~1251.89)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=206/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "5461965628074937548800/4475147127012726927 (~1220.51)",
+          "3277179376844962529280/2685088276207636151 (~1220.51)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=211/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "16385896884224812646400/13762188762814168657 (~1190.65)",
+          "6554358753689925058560/5504875505125667453 (~1190.65)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=216/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "3277179376844962529280/2819839921020484693 (~1162.19)",
+          "32771793768449625292800/28198399210204846901 (~1162.19)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=221/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "1310871750737985011712/1154917440577159487 (~1135.04)",
+          "32771793768449625292800/28872936014428987121 (~1135.04)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=453/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "10923931256149875097600/9871836006453622971 (~1106.58)",
+          "16385896884224812646400/14807754009680434429 (~1106.58)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=232/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "68274570350936719360/63247240336419941 (~1079.49)",
+          "1310871750737985011712/1214347014459262865 (~1079.49)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=95/2)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "2184786251229975019520/2073494959000796671 (~1053.67)",
+          "32771793768449625292800/31102424385011950007 (~1053.67)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=487/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "32771793768449625292800/31914435062182838351 (~1026.86)",
+          "10923931256149875097600/10638145020727612759 (~1026.86)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=499/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "IOSmin": [
+          "10923931256149875097600/10909035451129714553 (~1001.37)",
+          "16385896884224812646400/16363553176694571787 (~1001.37)"
+        ]
+      }
+    },
+    {
+      "design": "RL=res_E96(R=511/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~22.9165005287 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=523/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~46.066227802 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=268/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~69.9565440762 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=549/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~92.6972291137 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=281/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~114.368907892 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=288/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~136.596025224 (an exact fraction of 57 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=59)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~157.751316152 (an exact fraction of 59 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=302/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~177.910102218 (an exact fraction of 58 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=619/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~198.480618286 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=317/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~218.06209634 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=649/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~236.723841241 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=133/2)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~255.68681991 (an exact fraction of 59 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=681/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~273.744386194 (an exact fraction of 59 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=349/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~292.008868781 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=143/2)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~309.390850399 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=366/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~325.952468918 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=75)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~342.656785951 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=384/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~358.565479795 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=787/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~374.555798542 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=403/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~389.780093762 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=165/2)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~404.291852244 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=169/2)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~418.851008241 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=433/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~433.40271837 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=887/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~447.254303817 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=909/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~461.067992153 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=931/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~474.218321435 (an exact fraction of 57 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=953/10)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~486.751719966 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=488/5)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~499.240949397 (an exact fraction of 59 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=100)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~511.650813024 (an exact fraction of 59 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=102)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~521.539057326 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=105)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~535.653770858 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=107)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~544.616776832 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=110)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~557.440339515 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=113)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~569.572077496 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=115)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~577.302577191 (an exact fraction of 59 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=118)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~588.399062314 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=121)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~598.93646122 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=124)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~608.955782468 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=127)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~618.494129378 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=130)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~627.585153436 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=133)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~636.259446014 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=137)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~647.224737939 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=140)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~655.030890058 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=143)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~662.504223514 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=147)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~671.986542326 (an exact fraction of 58 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=150)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~678.761049471 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=154)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~687.37654071 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=158)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~695.548794373 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=162)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~703.31099028 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=165)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~708.881667724 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=169)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~715.996623645 (an exact fraction of 58 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=174)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~724.422919059 (an exact fraction of 59 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=178)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~730.817633649 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=182)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~736.926728712 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=187)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~744.189663214 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=191)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~749.721812802 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=196)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~756.314354589 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=200)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~761.347227806 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=205)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~767.35767443 (an exact fraction of 60 digits)",
+      "unit": "mA"
+    },
+    {
+      "design": "RL=res_E96(R=210)",
+      "verdict": "REFUTED",
+      "fails": "sec 10.2.1.2.1: min current limit 1000 mA",
+      "by_at_witness": "~773.077302475 (an exact fraction of 61 digits)",
+      "unit": "mA"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 39,
+    "REFUTED": 60
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "EARNED",
+  "design": {
+    "RL": {
+      "catalog": "res_E96",
+      "R": {
+        "nominal": "20",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "IOSmin": [
+      "21847862512299750195200/8484816818725792443 (~2574.94)",
+      "16385896884224812646400/6363612614044344319 (~2574.94)"
+    ]
+  },
+  "guaranteed_unit": {
+    "IOSmin": "mA"
+  },
+  "how": {
+    "IOSmin": "ZTL, interval reading of the definition (sound, may be wide)"
+  },
+  "requirements": [
+    {
+      "quantity": "IOSmin",
+      "op": ">=",
+      "value": "1000",
+      "why": "sec 10.2.1.2.1: min current limit 1000 mA"
+    }
+  ],
+  "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "IOSmin -> [109239312561498750976/42424084093628962215, 81929484421124063232/31818063070221721595] by [IOSmin == Kmin/pow((RL__R/Ru), 1.033)], interval reading, sound, may be wider than the truth (credit)",
+    "IOSmax -> [1517244700062610620416/526912915902159021575, 758622350031305310208/263456457951079510175] by [IOSmax == Kmax/pow((RL__R/Ru), 0.97)], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

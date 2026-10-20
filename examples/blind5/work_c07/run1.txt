@@ -1,0 +1,8 @@
+{
+  "verdict": "BRICK ERROR",
+  "why": "UnitError: unit 'mGy' not known (known: ['%', '1', 'A', 'Ah', 'C', 'CHF', 'CNY', 'EUR', 'F', 'GBP', 'H', 'Hz', 'ILS', 'J', 'JPY', 'K', 'L', 'N', 'Pa', 'RUB', 'USD', 'V', 'W', 'Wh', 'bar', 'dB', 'dBA', 'day', 'g', 'h', 'm', 'min', 'mol', 'ohm', 'ppm', 'rad', 'rpm', 's', 't', 'year', 'yr']; prefixes ['G', 'M', 'c', 'k', 'm', 'n', 'p', 'u'])"
+}
+
+real	0m0.081s
+user	0m0.042s
+sys	0m0.022s

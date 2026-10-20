@@ -1,0 +1,56 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "AUDIT: an M/M/1 latency law with its domain (valid: mu > lam); the peak mode overrides lam past mu",
+ "quantities": {
+  "mu": {
+   "role": "given",
+   "value": "10",
+   "unit": "1/s"
+  },
+  "lam": {
+   "role": "given",
+   "value": "5",
+   "unit": "1/s"
+  },
+  "T": {
+   "role": "derived",
+   "unit": "s"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "T == 1/(mu - lam)",
+   "valid": "mu > lam",
+   "source": "M/M/1 mean time in system"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "T",
+   "op": "<=",
+   "value": "1",
+   "why": "latency at most 1 s"
+  }
+ ],
+ "modes": {
+  "night": {
+   "weight": "1"
+  },
+  "peak": {
+   "weight": "1",
+   "quantities": {
+    "lam": {
+     "value": "12"
+    }
+   }
+  }
+ },
+ "totals": {
+  "Tsum": {
+   "sum": "T",
+   "unit": "s"
+  }
+ }
+}

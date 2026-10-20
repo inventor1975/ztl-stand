@@ -1,0 +1,115 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 20,
+  "notes": [
+    "DED=deductibles(name=D10, D=10, prem=104); SL=stoploss(name=SL60, A=60, lim=200, price=16): the robust LP found no mix (it is conservative: this is not a proof that none exists; ZTL's Farkas check: the box-maximum of sum y*h is 62000, not below zero)"
+  ],
+  "combinations_proved_without_mix": 19,
+  "verdict": "OPEN",
+  "why": "not decided: no mix the solver found was earned, and no proof that none exists (19 combination(s) proved to have no mix) (see notes)",
+  "mixes": [
+    {
+      "design": "DED=deductibles(name=D5, D=5, prem=128); SL=stoploss(name=none, A=0, lim=0, price=0)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -191860 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D5, D=5, prem=128); SL=stoploss(name=SL60, A=60, lim=200, price=16)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 11 data points of the box already admit no mix — the weighted sum of their margins is at most -626.087 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D5, D=5, prem=128); SL=stoploss(name=SL100, A=100, lim=200, price=10)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -84360 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D5, D=5, prem=128); SL=stoploss(name=SL160, A=160, lim=200, price=6)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -197360 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D10, D=10, prem=104); SL=stoploss(name=none, A=0, lim=0, price=0)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -144480 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D10, D=10, prem=104); SL=stoploss(name=SL60, A=60, lim=200, price=16)",
+      "verdict": null,
+      "why": "the robust LP found no mix (it is conservative: this is not a proof that none exists; ZTL's Farkas check: the box-maximum of sum y*h is 62000, not below zero)"
+    },
+    {
+      "design": "DED=deductibles(name=D10, D=10, prem=104); SL=stoploss(name=SL100, A=100, lim=200, price=10)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -16069.6 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D10, D=10, prem=104); SL=stoploss(name=SL160, A=160, lim=200, price=6)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -137480 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D20, D=20, prem=82); SL=stoploss(name=none, A=0, lim=0, price=0)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -132687 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D20, D=20, prem=82); SL=stoploss(name=SL60, A=60, lim=200, price=16)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 10 data points of the box already admit no mix — the weighted sum of their margins is at most -26000 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D20, D=20, prem=82); SL=stoploss(name=SL100, A=100, lim=200, price=10)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 16 data points of the box already admit no mix — the weighted sum of their margins is at most -46000 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D20, D=20, prem=82); SL=stoploss(name=SL160, A=160, lim=200, price=6)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -79860.9 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D40, D=40, prem=63); SL=stoploss(name=none, A=0, lim=0, price=0)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -183313 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D40, D=40, prem=63); SL=stoploss(name=SL60, A=60, lim=200, price=16)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 10 data points of the box already admit no mix — the weighted sum of their margins is at most -86000 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D40, D=40, prem=63); SL=stoploss(name=SL100, A=100, lim=200, price=10)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 16 data points of the box already admit no mix — the weighted sum of their margins is at most -106000 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D40, D=40, prem=63); SL=stoploss(name=SL160, A=160, lim=200, price=6)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -37008.7 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D80, D=80, prem=48); SL=stoploss(name=none, A=0, lim=0, price=0)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -354760 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D80, D=80, prem=48); SL=stoploss(name=SL60, A=60, lim=200, price=16)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -38000 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D80, D=80, prem=48); SL=stoploss(name=SL100, A=100, lim=200, price=10)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 10 data points of the box already admit no mix — the weighted sum of their margins is at most -248520 < 0"
+    },
+    {
+      "design": "DED=deductibles(name=D80, D=80, prem=48); SL=stoploss(name=SL160, A=160, lim=200, price=6)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 5 data points of the box already admit no mix — the weighted sum of their margins is at most -13704.3 < 0"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

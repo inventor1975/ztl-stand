@@ -1,0 +1,9 @@
+{"axis": "lin_system", "size": 2, "wall_s": 0.23, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 10}
+{"axis": "lin_system", "size": 3, "wall_s": 0.32, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 10}
+{"axis": "lin_system", "size": 4, "wall_s": 0.65, "peak_mb": 52, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 10}
+{"axis": "lin_system", "size": 5, "wall_s": 1.83, "peak_mb": 55, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:08", "cpu": 10}
+{"axis": "lin_system", "size": 6, "wall_s": 8.65, "peak_mb": 67, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:17", "cpu": 10}
+{"axis": "lin_system", "size": 7, "wall_s": 16.24, "peak_mb": 102, "verdict": "OPEN", "stopped": false, "why": "1 design(s) could not be decided and none was earned", "mode": "work", "at": "2026-10-13 00:33:18", "cpu": 2}
+{"axis": "lin_system", "size": 8, "wall_s": 0.25, "peak_mb": 49, "verdict": "OPEN", "stopped": false, "why": "1 design(s) could not be decided and none was earned", "mode": "work", "at": "2026-10-13 00:33:18", "cpu": 2}
+{"axis": "lin_system", "size": 10, "wall_s": 0.29, "peak_mb": 49, "verdict": "OPEN", "stopped": false, "why": "1 design(s) could not be decided and none was earned", "mode": "work", "at": "2026-10-13 00:33:19", "cpu": 2}
+{"axis": "lin_system", "size": 12, "wall_s": 0.32, "peak_mb": 49, "verdict": "OPEN", "stopped": false, "why": "1 design(s) could not be decided and none was earned", "mode": "work", "at": "2026-10-13 00:33:19", "cpu": 2}

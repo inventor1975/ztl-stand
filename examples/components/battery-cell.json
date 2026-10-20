@@ -1,0 +1,58 @@
+{
+ "stand": "universal-stand/1",
+ "why": "a Li-ion cell at the end of charge: contact and wiring 0.1 ohm +-20 % at the 50 mA termination current",
+ "interface": {
+  "inputs": {
+   "Vchg": {
+    "assume": [
+     "4.1",
+     "4.25"
+    ],
+    "bands": [
+     "4.1",
+     "4.15",
+     "4.2",
+     "4.25"
+    ]
+   }
+  },
+  "outputs": [
+   "Vcell"
+  ]
+ },
+ "quantities": {
+  "Vchg": {
+   "role": "given",
+   "value": "4.2",
+   "unit": "V"
+  },
+  "Iend": {
+   "role": "given",
+   "value": "0.05",
+   "unit": "A"
+  },
+  "Rc": {
+   "role": "given",
+   "value": "0.1",
+   "tolerance": "0.2",
+   "unit": "ohm"
+  },
+  "Vcell": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vcell == Vchg - Iend*Rc"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vchg",
+   "op": "<=",
+   "value": "4.25",
+   "why": "the cell's overcharge limit"
+  }
+ ]
+}

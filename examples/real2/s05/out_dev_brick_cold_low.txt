@@ -1,0 +1,215 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "smallest",
+  "quantity": "T",
+  "unit": "K",
+  "proved": "1145/4 (~286.25)",
+  "proved_means": "every T in [1145/4 (~286.25), 5963/20 (~298.15)] K works (EARNED on the whole range)",
+  "beyond": "7156/25 (~286.24)",
+  "beyond_is": "REFUTED: the range [7156/25 (~286.24), 5963/20 (~298.15)] K holds a concrete failing point (at_beyond)",
+  "precision": "1/100 (~0.01)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "RP=rp_12k_1pct(R=12000)",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "Vts": [
+            "131488391757401683918848/407324882000679970973375 (~0.32281)",
+            "72/125 (~0.576)"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {
+      "RP": {
+        "catalog": "rp_12k_1pct",
+        "R": {
+          "nominal": "12000",
+          "tolerance": "1/100 (~0.01)"
+        }
+      }
+    },
+    "guaranteed": {
+      "Vts": [
+        "131488391757401683918848/407324882000679970973375 (~0.32281)",
+        "72/125 (~0.576)"
+      ]
+    },
+    "guaranteed_unit": {
+      "Vts": "V"
+    },
+    "guaranteed_ends": {
+      "Vts": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+    },
+    "how": {
+      "Vts": "ZTL, certificate checked exactly (2 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic"
+    },
+    "requirements": [
+      {
+        "quantity": "Vts",
+        "op": "<=",
+        "value": "Vth",
+        "why": "no COLD trip for any NTC temperature from a up to 25 C"
+      }
+    ],
+    "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+    "judge_log": [
+      "Rn -> [10000, 9306290962109706164375/576460752303423488] by [Rn == R25*exp(beta*(1/T - 1/T25))], interval reading, sound, may be wider than the truth (credit)",
+      "Vts -> [131488391757401683918848/407324882000679970973375, 58651968159600212130357/78831007877493161984000] by [Vts == Ib*RP__R*Rn/(RP__R + Rn)], interval reading, sound, may be wider than the truth (credit)"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "RP=rp_12k_1pct(R=12000)",
+        "verdict": "REFUTED",
+        "fails": "no COLD trip for any NTC temperature from a up to 25 C",
+        "by_at_witness": "~7.58983903967e-05 (an exact fraction of 65 digits)",
+        "unit": "V"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {
+      "RP": {
+        "catalog": "rp_12k_1pct",
+        "R": {
+          "nominal": "12000",
+          "tolerance": "1/100 (~0.01)"
+        }
+      }
+    },
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "Ib": "416/5 (~83.2)",
+      "RP.R": "12120",
+      "T": "7156/25 (~286.24)",
+      "Vth": "72/125 (~0.576)"
+    },
+    "point_units": {
+      "Ib": "uA",
+      "RP.R": "ohm",
+      "T": "K",
+      "Vth": "V"
+    },
+    "value_there": {
+      "Vts": [
+        "~0.57607589839 (an exact fraction of 65 digits)",
+        "~0.57607589839 (an exact fraction of 63 digits)"
+      ]
+    },
+    "unit": "V",
+    "requirement": {
+      "quantity": "Vts",
+      "op": "<=",
+      "value": "Vth",
+      "why": "no COLD trip for any NTC temperature from a up to 25 C"
+    },
+    "overshoot": "~7.58983903967e-05 (an exact fraction of 65 digits)",
+    "reasons": {
+      "spread_over_tolerances": [
+        "28512/68375 (~0.416995)",
+        "~0.57607589839 (an exact fraction of 63 digits)"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "T",
+          "moves_it_by": "~0.120206097305 (an exact fraction of 128 digits)"
+        },
+        {
+          "quantity": "Ib",
+          "moves_it_by": "~0.0443135306454 (an exact fraction of 127 digits)"
+        },
+        {
+          "quantity": "RP.R",
+          "moves_it_by": "~0.00657271373643 (an exact fraction of 247 digits)"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+  },
+  "tries": [
+    {
+      "T": "5963/20 (~298.15)",
+      "verdict": "EARNED"
+    },
+    {
+      "T": "5263/20 (~263.15)",
+      "verdict": "REFUTED"
+    },
+    {
+      "T": "5613/20 (~280.65)",
+      "verdict": "REFUTED"
+    },
+    {
+      "T": "1447/5 (~289.4)",
+      "verdict": "EARNED"
+    },
+    {
+      "T": "28503/100 (~285.03)",
+      "verdict": "REFUTED"
+    },
+    {
+      "T": "28721/100 (~287.21)",
+      "verdict": "EARNED"
+    },
+    {
+      "T": "7153/25 (~286.12)",
+      "verdict": "REFUTED"
+    },
+    {
+      "T": "28667/100 (~286.67)",
+      "verdict": "EARNED"
+    },
+    {
+      "T": "28639/100 (~286.39)",
+      "verdict": "EARNED"
+    },
+    {
+      "T": "1145/4 (~286.25)",
+      "verdict": "EARNED"
+    },
+    {
+      "T": "28619/100 (~286.19)",
+      "verdict": "REFUTED"
+    },
+    {
+      "T": "14311/50 (~286.22)",
+      "verdict": "REFUTED"
+    },
+    {
+      "T": "28623/100 (~286.23)",
+      "verdict": "REFUTED"
+    },
+    {
+      "T": "7156/25 (~286.24)",
+      "verdict": "REFUTED"
+    }
+  ],
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

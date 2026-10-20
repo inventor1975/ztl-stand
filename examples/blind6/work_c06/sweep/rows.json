@@ -1,0 +1,308 @@
+[
+ [
+  "E2",
+  "SA",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  1.3228838443756104
+ ],
+ [
+  "E2",
+  "SA",
+  "G1200",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  1.3095242977142334
+ ],
+ [
+  "E2",
+  "SA",
+  "G2000",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  1.305478572845459
+ ],
+ [
+  "E2",
+  "SB",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  1.4911413192749023
+ ],
+ [
+  "E2",
+  "SB",
+  "G1200",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  1.5433783531188965
+ ],
+ [
+  "E2",
+  "SB",
+  "G2000",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  1.861522912979126
+ ],
+ [
+  "E2",
+  "SC",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  2.9895877838134766
+ ],
+ [
+  "E2",
+  "SC",
+  "G1200",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  4.468637466430664
+ ],
+ [
+  "E2",
+  "SC",
+  "G2000",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  4.255788087844849
+ ],
+ [
+  "E3",
+  "SA",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  2.0716471672058105
+ ],
+ [
+  "E3",
+  "SA",
+  "G1200",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  2.0724589824676514
+ ],
+ [
+  "E3",
+  "SA",
+  "G2000",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  2.093177318572998
+ ],
+ [
+  "E3",
+  "SB",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  5.309703826904297
+ ],
+ [
+  "E3",
+  "SB",
+  "G1200",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  8.249150037765503
+ ],
+ [
+  "E3",
+  "SB",
+  "G2000",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  17.461477756500244
+ ],
+ [
+  "E3",
+  "SC",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  16.705423593521118
+ ],
+ [
+  "E3",
+  "SC",
+  "G1200",
+  "EARNED",
+  "4622400/3166961 (~1.45957)",
+  "4480023061/15834805 (~282.923)",
+  "1518926489849/5368709120 (~282.922)",
+  "~8.0037715485 (an exact fraction of 44 digits)",
+  4.57366943359375
+ ],
+ [
+  "E3",
+  "SC",
+  "G2000",
+  "EARNED",
+  "6348600/4493131 (~1.41296)",
+  "1241596882/4493131 (~276.332)",
+  "4747335535423/17179869184 (~276.331)",
+  "~8.26679569015 (an exact fraction of 45 digits)",
+  4.301069736480713
+ ],
+ [
+  "E4",
+  "SA",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  6.9529266357421875
+ ],
+ [
+  "E4",
+  "SA",
+  "G1200",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  7.162052154541016
+ ],
+ [
+  "E4",
+  "SA",
+  "G2000",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  11.395982265472412
+ ],
+ [
+  "E4",
+  "SB",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  17.128003120422363
+ ],
+ [
+  "E4",
+  "SB",
+  "G1200",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  17.598143339157104
+ ],
+ [
+  "E4",
+  "SB",
+  "G2000",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  36.87147879600525
+ ],
+ [
+  "E4",
+  "SC",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  38.73551321029663
+ ],
+ [
+  "E4",
+  "SC",
+  "G1200",
+  "EARNED",
+  "2341440/1703831 (~1.37422)",
+  "2321978706/8519155 (~272.56)",
+  "23412400609059/85899345920 (~272.556)",
+  "~8.49989117977 (an exact fraction of 60 digits)",
+  10.223386287689209
+ ],
+ [
+  "E4",
+  "SC",
+  "G2000",
+  "EARNED",
+  "2341440/1703831 (~1.37422)",
+  "467462637/1703831 (~274.36)",
+  "4713403886343/17179869184 (~274.356)",
+  "~8.49989117977 (an exact fraction of 60 digits)",
+  10.299769878387451
+ ],
+ [
+  "E3H",
+  "SA",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  2.7244434356689453
+ ],
+ [
+  "E3H",
+  "SA",
+  "G1200",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  2.7100870609283447
+ ],
+ [
+  "E3H",
+  "SA",
+  "G2000",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  3.2826499938964844
+ ],
+ [
+  "E3H",
+  "SB",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  8.58260464668274
+ ],
+ [
+  "E3H",
+  "SB",
+  "G1200",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  8.78317141532898
+ ],
+ [
+  "E3H",
+  "SB",
+  "G2000",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  16.09512186050415
+ ],
+ [
+  "E3H",
+  "SC",
+  "G600",
+  "REFUTED",
+  "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  18.54891014099121
+ ],
+ [
+  "E3H",
+  "SC",
+  "G1200",
+  "EARNED",
+  "12409200/9026443 (~1.37476)",
+  "12215347388/45132215 (~270.657)",
+  "23248883053469/85899345920 (~270.653)",
+  "~8.4998980597 (an exact fraction of 50 digits)",
+  5.2828686237335205
+ ],
+ [
+  "E3H",
+  "SC",
+  "G2000",
+  "EARNED",
+  "12409200/9026443 (~1.37476)",
+  "2459317075/9026443 (~272.457)",
+  "4680700375225/17179869184 (~272.453)",
+  "~8.4998980597 (an exact fraction of 50 digits)",
+  5.253289699554443
+ ]
+]

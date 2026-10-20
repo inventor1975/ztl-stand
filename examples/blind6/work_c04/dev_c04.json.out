@@ -1,0 +1,564 @@
+[stand] 1/20 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "smallest",
+  "quantity": "Ta",
+  "unit": "C",
+  "proved": "-1893/50 (~-37.86)",
+  "proved_means": "every Ta in [-1893/50 (~-37.86), -35] C works (EARNED on the whole range)",
+  "beyond": "-3787/100 (~-37.87)",
+  "beyond_is": "REFUTED: the range [-3787/100 (~-37.87), -35] C holds a concrete failing point (at_beyond)",
+  "precision": "1/100 (~0.01)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 7ef9b6f",
+    "designs_tried": 12,
+    "failed_at_nominal": 9,
+    "judged": 3,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "INS=insulation(name=MW-30 mineral wool, t=30, k10=1/25, w=[0,3/10], price=15/2); CAB=cable(name=T10, P10=10, price=24/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~14.9793644658 (an exact fraction of 81 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-30 mineral wool, t=30, k10=1/25, w=[0,3/10], price=15/2); CAB=cable(name=T15, P10=15, price=31/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~9.5593644658 (an exact fraction of 82 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-30 mineral wool, t=30, k10=1/25, w=[0,3/10], price=15/2); CAB=cable(name=T20, P10=20, price=8)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~4.1393644658 (an exact fraction of 81 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-50 mineral wool, t=50, k10=1/25, w=[0,3/10], price=11); CAB=cable(name=T10, P10=10, price=24/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~7.35364481728 (an exact fraction of 81 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-50 mineral wool, t=50, k10=1/25, w=[0,3/10], price=11); CAB=cable(name=T15, P10=15, price=31/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~1.93364481728 (an exact fraction of 81 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-30 foam, t=30, k10=13/500, w=[0,2/25], price=13); CAB=cable(name=T10, P10=10, price=24/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~4.75366562791 (an exact fraction of 83 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-30 mineral wool, t=30, k10=1/25, w=[0,3/10], price=15/2); CAB=cable(name=T30, P10=30, price=23/2)",
+        "verdict": "REFUTED",
+        "fails": "R2 liner protection: output at the highest supply voltage <= 24 W/m",
+        "by_at_witness": "213/25 (~8.52)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-50 mineral wool, t=50, k10=1/25, w=[0,3/10], price=11); CAB=cable(name=T20, P10=20, price=8)",
+        "verdict": "REFUTED",
+        "fails": "R3 rack clearance",
+        "by_at_witness": "10",
+        "unit": "mm"
+      },
+      {
+        "design": "INS=insulation(name=PIR-30 foam, t=30, k10=13/500, w=[0,2/25], price=13); CAB=cable(name=T15, P10=15, price=31/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~1.20590210231 (an exact fraction of 140 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-40 foam, t=40, k10=13/500, w=[0,2/25], price=16); CAB=cable(name=T10, P10=10, price=24/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~1.8292080668 (an exact fraction of 84 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-30 foam, t=30, k10=13/500, w=[0,2/25], price=13); CAB=cable(name=T20, P10=20, price=8)",
+        "verdict": "REFUTED",
+        "fails": "R2 liner protection: output at the highest supply voltage <= 24 W/m",
+        "by_at_witness": "~1.25152283648 (an exact fraction of 62 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-40 foam, t=40, k10=13/500, w=[0,2/25], price=16); CAB=cable(name=T15, P10=15, price=31/5)",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "margin": [
+            "0",
+            "~7.52817726371 (an exact fraction of 57 digits)"
+          ],
+          "Pc": [
+            "12670632161648437162851/922337203685477580800 (~13.7375)",
+            "4366953555337079933499/230584300921369395200 (~18.9386)"
+          ],
+          "D2": [
+            "170",
+            "170"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 11,
+      "EARNED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "objective": {
+      "minimize": "(INS.price + CAB.price)*L",
+      "value": "3108",
+      "unit": "EUR",
+      "optimal": true,
+      "note": "every cheaper design was refuted"
+    },
+    "verdict": "EARNED",
+    "design": {
+      "INS": {
+        "catalog": "insulation",
+        "name": "PIR-40 foam",
+        "t": {
+          "nominal": "40",
+          "tolerance": "0"
+        },
+        "k10": {
+          "nominal": "13/500 (~0.026)",
+          "tolerance": "0"
+        },
+        "w": {
+          "range": [
+            "0",
+            "2/25 (~0.08)"
+          ]
+        },
+        "price": {
+          "nominal": "16",
+          "tolerance": "0"
+        }
+      },
+      "CAB": {
+        "catalog": "cable",
+        "name": "T15",
+        "P10": {
+          "nominal": "15",
+          "tolerance": "0"
+        },
+        "price": {
+          "nominal": "31/5 (~6.2)",
+          "tolerance": "0"
+        }
+      }
+    },
+    "guaranteed": {
+      "margin": [
+        "0",
+        "~7.52817726371 (an exact fraction of 57 digits)"
+      ],
+      "Pc": [
+        "12670632161648437162851/922337203685477580800 (~13.7375)",
+        "4366953555337079933499/230584300921369395200 (~18.9386)"
+      ],
+      "D2": [
+        "170",
+        "170"
+      ]
+    },
+    "guaranteed_unit": {
+      "margin": "W/m",
+      "Pc": "W/m",
+      "D2": "mm"
+    },
+    "guaranteed_ends": {
+      "margin": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+    },
+    "how": {
+      "margin": "ZTL, certificate checked exactly (1 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic",
+      "Pc": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~13.7375269164 (~13.7375)', '~18.9386421274 (~18.9386)']",
+      "D2": "ZTL, outer range"
+    },
+    "requirements": [
+      {
+        "quantity": "margin",
+        "op": ">=",
+        "value": "0",
+        "why": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)"
+      },
+      {
+        "quantity": "Pc",
+        "op": "<=",
+        "value": "Pcap",
+        "why": "R2 liner protection: output at the highest supply voltage <= 24 W/m"
+      },
+      {
+        "quantity": "D2",
+        "op": "<=",
+        "value": "Dmax",
+        "why": "R3 rack clearance"
+      }
+    ],
+    "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+    "judge_log": [
+      "D2 = 17/100 by exact elimination (credit)",
+      "q -> [179245645707031261363290017723387478016/15708881964841806555944126129150390625, 386516217849430433265433824820067303424/28062834976007979903649868011474609375] by [q == fa*(Tp - Ta)/(ln((r1 + INS__t)/r1)/(2*pi*(INS__k10*(1 + alpha*(((Tp + Ta)/2) - 10))*(1 + INS__w))) + 1/(2*pi*(r1 + INS__t)*ho))], interval reading, sound, may be wider than the truth (credit)",
+      "Pc -> [12670632161648437162851/922337203685477580800, 4366953555337079933499/230584300921369395200] by [Pc == CAB__P10*(1 + lam*(10 - Tp))*pow(V/V230, 1.6)], interval reading, sound, may be wider than the truth (credit)",
+      "margin -> [-36977126251647370371424742662577203086675493012583613243/1035335869570328660790248194354863669248000000000000000000, 1090749041527248015330515219498872374767062140695586284947/144888862644774226026090805309099474944000000000000000000] by [margin == Pc - q]"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 7ef9b6f",
+    "designs_tried": 20,
+    "failed_at_nominal": 16,
+    "judged": 4,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "INS=insulation(name=MW-30 mineral wool, t=30, k10=1/25, w=[0,3/10], price=15/2); CAB=cable(name=T10, P10=10, price=24/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~14.982524378 (an exact fraction of 81 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-30 mineral wool, t=30, k10=1/25, w=[0,3/10], price=15/2); CAB=cable(name=T15, P10=15, price=31/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~9.56252437795 (an exact fraction of 82 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-30 mineral wool, t=30, k10=1/25, w=[0,3/10], price=15/2); CAB=cable(name=T20, P10=20, price=8)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~4.14252437795 (an exact fraction of 81 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-50 mineral wool, t=50, k10=1/25, w=[0,3/10], price=11); CAB=cable(name=T10, P10=10, price=24/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~7.35586898058 (an exact fraction of 81 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-50 mineral wool, t=50, k10=1/25, w=[0,3/10], price=11); CAB=cable(name=T15, P10=15, price=31/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~1.93586898058 (an exact fraction of 81 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-30 foam, t=30, k10=13/500, w=[0,2/25], price=13); CAB=cable(name=T10, P10=10, price=24/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~4.75557217271 (an exact fraction of 83 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-30 mineral wool, t=30, k10=1/25, w=[0,3/10], price=15/2); CAB=cable(name=T30, P10=30, price=23/2)",
+        "verdict": "REFUTED",
+        "fails": "R2 liner protection: output at the highest supply voltage <= 24 W/m",
+        "by_at_witness": "213/25 (~8.52)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-50 mineral wool, t=50, k10=1/25, w=[0,3/10], price=11); CAB=cable(name=T20, P10=20, price=8)",
+        "verdict": "REFUTED",
+        "fails": "R3 rack clearance",
+        "by_at_witness": "10",
+        "unit": "mm"
+      },
+      {
+        "design": "INS=insulation(name=PIR-30 foam, t=30, k10=13/500, w=[0,2/25], price=13); CAB=cable(name=T15, P10=15, price=31/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~1.20942837843 (an exact fraction of 140 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-40 foam, t=40, k10=13/500, w=[0,2/25], price=16); CAB=cable(name=T10, P10=10, price=24/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~1.83075639205 (an exact fraction of 84 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-30 foam, t=30, k10=13/500, w=[0,2/25], price=13); CAB=cable(name=T20, P10=20, price=8)",
+        "verdict": "REFUTED",
+        "fails": "R2 liner protection: output at the highest supply voltage <= 24 W/m",
+        "by_at_witness": "~1.25152283648 (an exact fraction of 62 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-40 foam, t=40, k10=13/500, w=[0,2/25], price=16); CAB=cable(name=T15, P10=15, price=31/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~0.00247687887531 (an exact fraction of 143 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=MW-50 mineral wool, t=50, k10=1/25, w=[0,3/10], price=11); CAB=cable(name=T30, P10=30, price=23/2)",
+        "verdict": "REFUTED",
+        "fails": "R2 liner protection: output at the highest supply voltage <= 24 W/m",
+        "by_at_witness": "213/25 (~8.52)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-40 foam, t=40, k10=13/500, w=[0,2/25], price=16); CAB=cable(name=T20, P10=20, price=8)",
+        "verdict": "REFUTED",
+        "fails": "R2 liner protection: output at the highest supply voltage <= 24 W/m",
+        "by_at_witness": "~1.25152283648 (an exact fraction of 62 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-50 foam, t=50, k10=13/500, w=[0,2/25], price=39/2); CAB=cable(name=T10, P10=10, price=24/5)",
+        "verdict": "REFUTED",
+        "fails": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)",
+        "by_at_witness": "~0.0172794762424 (an exact fraction of 82 digits)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-30 foam, t=30, k10=13/500, w=[0,2/25], price=13); CAB=cable(name=T30, P10=30, price=23/2)",
+        "verdict": "REFUTED",
+        "fails": "R2 liner protection: output at the highest supply voltage <= 24 W/m",
+        "by_at_witness": "213/25 (~8.52)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-50 foam, t=50, k10=13/500, w=[0,2/25], price=39/2); CAB=cable(name=T15, P10=15, price=31/5)",
+        "verdict": "REFUTED",
+        "fails": "R3 rack clearance",
+        "by_at_witness": "10",
+        "unit": "mm"
+      },
+      {
+        "design": "INS=insulation(name=PIR-40 foam, t=40, k10=13/500, w=[0,2/25], price=16); CAB=cable(name=T30, P10=30, price=23/2)",
+        "verdict": "REFUTED",
+        "fails": "R2 liner protection: output at the highest supply voltage <= 24 W/m",
+        "by_at_witness": "213/25 (~8.52)",
+        "unit": "W/m"
+      },
+      {
+        "design": "INS=insulation(name=PIR-50 foam, t=50, k10=13/500, w=[0,2/25], price=39/2); CAB=cable(name=T20, P10=20, price=8)",
+        "verdict": "REFUTED",
+        "fails": "R3 rack clearance",
+        "by_at_witness": "10",
+        "unit": "mm"
+      },
+      {
+        "design": "INS=insulation(name=PIR-50 foam, t=50, k10=13/500, w=[0,2/25], price=39/2); CAB=cable(name=T30, P10=30, price=23/2)",
+        "verdict": "REFUTED",
+        "fails": "R2 liner protection: output at the highest supply voltage <= 24 W/m",
+        "by_at_witness": "213/25 (~8.52)",
+        "unit": "W/m"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 20
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {
+      "INS": {
+        "catalog": "insulation",
+        "name": "PIR-40 foam",
+        "t": {
+          "nominal": "40",
+          "tolerance": "0"
+        },
+        "k10": {
+          "nominal": "13/500 (~0.026)",
+          "tolerance": "0"
+        },
+        "w": {
+          "range": [
+            "0",
+            "2/25 (~0.08)"
+          ]
+        },
+        "price": {
+          "nominal": "16",
+          "tolerance": "0"
+        }
+      },
+      "CAB": {
+        "catalog": "cable",
+        "name": "T15",
+        "P10": {
+          "nominal": "15",
+          "tolerance": "0"
+        },
+        "price": {
+          "nominal": "31/5 (~6.2)",
+          "tolerance": "0"
+        }
+      }
+    },
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "INS.w": "2/25 (~0.08)",
+      "Ta": "-3787/100 (~-37.87)",
+      "V": "207",
+      "ho": "25"
+    },
+    "point_units": {
+      "INS.w": "",
+      "Ta": "C",
+      "V": "V",
+      "ho": "W/(m^2*K)"
+    },
+    "value_there": {
+      "margin": [
+        "~-0.00247687887531 (an exact fraction of 142 digits)",
+        "~-0.00247687887531 (an exact fraction of 143 digits)"
+      ]
+    },
+    "unit": "W/m",
+    "requirement": {
+      "quantity": "margin",
+      "op": ">=",
+      "value": "0",
+      "why": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)"
+    },
+    "overshoot": "~0.00247687887531 (an exact fraction of 143 digits)",
+    "reasons": {
+      "spread_over_tolerances": [
+        "~-0.00247687887532 (an exact fraction of 142 digits)",
+        "~7.49895582775 (an exact fraction of 137 digits)"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "V",
+          "moves_it_by": "~5.20111521094 (an exact fraction of 63 digits)"
+        },
+        {
+          "quantity": "INS.w",
+          "moves_it_by": "~0.999499038164 (an exact fraction of 279 digits)"
+        },
+        {
+          "quantity": "Ta",
+          "moves_it_by": "~0.930821301356 (an exact fraction of 285 digits)"
+        },
+        {
+          "quantity": "ho",
+          "moves_it_by": "~0.543161550616 (an exact fraction of 287 digits)"
+        },
+        {
+          "quantity": "pi",
+          "moves_it_by": "~4.37357904425e-15 (an exact fraction of 151 digits)"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+    "each_requirement": [
+      {
+        "requirement": {
+          "quantity": "margin",
+          "op": ">=",
+          "value": "0",
+          "why": "R1 freeze protection: output at the lowest supply voltage >= heat loss (V ranges over the box, so the worst V is covered)"
+        },
+        "verdict": "REFUTED",
+        "overshoot": "~0.00247687887531 (an exact fraction of 143 digits)"
+      },
+      {
+        "requirement": {
+          "quantity": "Pc",
+          "op": "<=",
+          "value": "Pcap",
+          "why": "R2 liner protection: output at the highest supply voltage <= 24 W/m"
+        },
+        "verdict": "EARNED",
+        "guaranteed": {
+          "Pc": [
+            "12670632161648437162851/922337203685477580800 (~13.7375)",
+            "4366953555337079933499/230584300921369395200 (~18.9386)"
+          ]
+        }
+      },
+      {
+        "requirement": {
+          "quantity": "D2",
+          "op": "<=",
+          "value": "Dmax",
+          "why": "R3 rack clearance"
+        },
+        "verdict": "EARNED",
+        "guaranteed": {
+          "D2": [
+            "170",
+            "170"
+          ]
+        }
+      }
+    ]
+  },
+  "tries": [
+    {
+      "Ta": "-35",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "-45",
+      "verdict": "REFUTED"
+    },
+    {
+      "Ta": "-40",
+      "verdict": "REFUTED"
+    },
+    {
+      "Ta": "-75/2 (~-37.5)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "-155/4 (~-38.75)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Ta": "-953/25 (~-38.12)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Ta": "-3781/100 (~-37.81)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "-949/25 (~-37.96)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Ta": "-947/25 (~-37.88)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Ta": "-946/25 (~-37.84)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "-1893/50 (~-37.86)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "-3787/100 (~-37.87)",
+      "verdict": "REFUTED"
+    }
+  ],
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

@@ -1,0 +1,1654 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 499,
+  "failed_at_nominal": 13,
+  "judged": 486,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "refuted_by_groups": 0,
+  "groups_pruned": 0,
+  "groups_read": 43,
+  "designs": [
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~21.3221179091 (an exact fraction of 222 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~9.6952743781 (an exact fraction of 223 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~13.0574905199 (an exact fraction of 304 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~6.39772721863 (an exact fraction of 225 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~9.90351935828 (an exact fraction of 223 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~14.9374689142 (an exact fraction of 219 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~2.08699672334 (an exact fraction of 225 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~10.1881588301 (an exact fraction of 307 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~11.676297672 (an exact fraction of 181 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~9.00706329797 (an exact fraction of 299 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~15.3768129835 (an exact fraction of 183 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~13.3573041748 (an exact fraction of 181 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~10.2794387058 (an exact fraction of 306 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~11.4157214324 (an exact fraction of 181 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~2.49343251127 (an exact fraction of 227 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~3.31062538317 (an exact fraction of 221 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~1.75756503097 (an exact fraction of 306 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~0.0130782236874 (an exact fraction of 224 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~3.51887036334 (an exact fraction of 223 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~11.3448588768 (an exact fraction of 226 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~10.9695852178 (an exact fraction of 326 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~11.5587814857 (an exact fraction of 178 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~8.52178221246 (an exact fraction of 308 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~2.38420219549 (an exact fraction of 181 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~6.13773160824 (an exact fraction of 303 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~6.08471750699 (an exact fraction of 182 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~7.41010701603 (an exact fraction of 310 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~12.2158098683 (an exact fraction of 304 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=30); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~4.97573843673 (an exact fraction of 183 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~10.7543226519 (an exact fraction of 302 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~5.96027802343 (an exact fraction of 184 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~8.68719350154 (an exact fraction of 310 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~2.5542826123 (an exact fraction of 179 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~1.99918647231 (an exact fraction of 182 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~27.509287028 (an exact fraction of 301 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~2.02655754154 (an exact fraction of 183 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=24); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~11.1801365679 (an exact fraction of 186 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~7.43579124301 (an exact fraction of 299 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~5.72707285304 (an exact fraction of 184 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~3.7075640443 (an exact fraction of 183 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~12.6721132889 (an exact fraction of 300 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~1.76598130192 (an exact fraction of 183 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~2.14312344007 (an exact fraction of 187 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~12.471161315 (an exact fraction of 184 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=30); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~29.6301670873 (an exact fraction of 300 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~8.51006976384 (an exact fraction of 181 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=15); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~12.2105850753 (an exact fraction of 184 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=24); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~5.883562651 (an exact fraction of 330 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=26); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~11.2207038852 (an exact fraction of 181 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~7.58663336898 (an exact fraction of 313 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~4.88624347928 (an exact fraction of 329 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=16); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~9.42009176739 (an exact fraction of 228 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~4.47135499056 (an exact fraction of 302 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P2",
+      "by": "~0.160897593922 (an exact fraction of 148 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~0.140663230858 (an exact fraction of 186 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~5.74373039835 (an exact fraction of 310 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~9.34647817857 (an exact fraction of 308 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=30); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~7.88499096221 (an exact fraction of 305 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=30); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~0.951536144429 (an exact fraction of 308 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~5.81786181181 (an exact fraction of 313 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=15); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~1.12269762945 (an exact fraction of 329 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~1.9090413552 (an exact fraction of 180 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=31); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~9.26669208723 (an exact fraction of 318 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~25.8429104103 (an exact fraction of 302 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=30); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~4.3691159811 (an exact fraction of 328 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.3216445457 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=24); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=26); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~4.56645955328 (an exact fraction of 303 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=24); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~7.80674363084 (an exact fraction of 312 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.132549494473 (an exact fraction of 94 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.3216445457 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=24); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~9.80278159915 (an exact fraction of 304 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=16); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~0.915884379398 (an exact fraction of 305 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.132549494473 (an exact fraction of 94 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=25); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~10.8643072148 (an exact fraction of 190 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=30); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.3216445457 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~4.39008913036 (an exact fraction of 326 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~16.9766396057 (an exact fraction of 202 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.132549494473 (an exact fraction of 94 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~0.744495494328 (an exact fraction of 303 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~3.17906583841 (an exact fraction of 183 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=30); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=23); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~14.6887904106 (an exact fraction of 200 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~26.7608353976 (an exact fraction of 304 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.3216445457 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=24); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~1.53039643738 (an exact fraction of 188 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=31); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~6.68733961261 (an exact fraction of 303 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=15); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~0.108320144634 (an exact fraction of 185 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=30); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.3216445457 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=15); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~11.9236616585 (an exact fraction of 302 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=24); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=15); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.132549494473 (an exact fraction of 94 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~2.76596037191 (an exact fraction of 332 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=27); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~11.0495886076 (an exact fraction of 183 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=24); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=15); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~2.79405011523 (an exact fraction of 186 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=26); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~7.07954786786 (an exact fraction of 316 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P2",
+      "by": "~0.0260915677343 (an exact fraction of 152 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=25); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=16); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~12.2202440878 (an exact fraction of 185 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=26); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=30); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~3.53620614708 (an exact fraction of 308 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=16); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~29.293635496 (an exact fraction of 303 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P2",
+      "by": "~0.160897593922 (an exact fraction of 148 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=26); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~0.964579697757 (an exact fraction of 333 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=16); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~8.25915253665 (an exact fraction of 184 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~4.80858155487 (an exact fraction of 315 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~7.68010156089 (an exact fraction of 307 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=23); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P2",
+      "by": "~0.0260915677343 (an exact fraction of 152 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=16); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~11.9596678482 (an exact fraction of 185 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=30); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~6.21861434454 (an exact fraction of 304 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=24); S4=agents4(N=14); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P2",
+      "by": "~0.160897593922 (an exact fraction of 148 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=30); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~8.28665192855 (an exact fraction of 324 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~4.15148519414 (an exact fraction of 314 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=27); S3=agents3(N=22); S4=agents4(N=15); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P2",
+      "by": "~0.160897593922 (an exact fraction of 148 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=31); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=26); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~1.5709637547 (an exact fraction of 183 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~15.0540468353 (an exact fraction of 325 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=15); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.0953399290952 (an exact fraction of 129 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~24.9077615669 (an exact fraction of 307 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=31); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~5.70077611518 (an exact fraction of 322 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=30); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=28); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~6.28910842269 (an exact fraction of 332 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=15); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P2",
+      "by": "~0.0260915677343 (an exact fraction of 152 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P3",
+      "by": "~0.3216445457 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=17); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~8.43889271487 (an exact fraction of 229 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=27); S3=agents3(N=24); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=32); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=22); S2=agents2(N=30); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~8.11391884093 (an exact fraction of 322 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=27); S2=agents2(N=27); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=basic, d=[3/50,1/10], price=14)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.0227687237374 (an exact fraction of 92 digits)",
+      "unit": ""
+    },
+    {
+      "design": "S1=agents1(N=23); S2=agents2(N=29); S3=agents3(N=23); S4=agents4(N=13); IVR=ivr(option=none, d=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: SL >= 0.70 in day part P4",
+      "by": "~0.157598937466 (an exact fraction of 71 digits)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 498,
+    "EARNED": 1
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "designs_not_listed": 299,
+  "listing": "earned first, then open, then refuted",
+  "objective": {
+    "minimize": "(S1.N*c1 + S2.N*c2 + S3.N*c3 + S4.N*c4)*Hyr + IVR.price",
+    "value": "2992",
+    "unit": "kEUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted",
+    "ties": {
+      "same_objective": 1,
+      "first": [
+        {
+          "design": "S1=agents1(N=22); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=16); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+          "verdict": "not judged"
+        }
+      ],
+      "note": "these cost the same; \"not judged\" ones come after the earned design in the search, which stops at the first EARNED — \"report\": \"all\" judges them"
+    }
+  },
+  "verdict": "EARNED",
+  "design": {
+    "S1": {
+      "catalog": "agents1",
+      "N": {
+        "nominal": "25",
+        "tolerance": "0"
+      }
+    },
+    "S2": {
+      "catalog": "agents2",
+      "N": {
+        "nominal": "29",
+        "tolerance": "0"
+      }
+    },
+    "S3": {
+      "catalog": "agents3",
+      "N": {
+        "nominal": "22",
+        "tolerance": "0"
+      }
+    },
+    "S4": {
+      "catalog": "agents4",
+      "N": {
+        "nominal": "13",
+        "tolerance": "0"
+      }
+    },
+    "IVR": {
+      "catalog": "ivr",
+      "d": {
+        "range": [
+          "3/25 (~0.12)",
+          "9/50 (~0.18)"
+        ]
+      },
+      "price": {
+        "nominal": "31",
+        "tolerance": "0"
+      },
+      "option": "advanced"
+    }
+  },
+  "guaranteed": {
+    "SL1": [
+      "~0.942964224835 (an exact fraction of 89 digits)",
+      "~0.999768064423 (an exact fraction of 82 digits)"
+    ],
+    "Occ1": [
+      "1476/3125 (~0.47232)",
+      "6776/9375 (~0.722773)"
+    ],
+    "SL2": [
+      "~0.884156177837 (an exact fraction of 102 digits)",
+      "~0.999619329134 (an exact fraction of 107 digits)"
+    ],
+    "Occ2": [
+      "1886/3625 (~0.520276)",
+      "8624/10875 (~0.793011)"
+    ],
+    "SL3": [
+      "~0.847488208621 (an exact fraction of 75 digits)",
+      "~0.998658600727 (an exact fraction of 84 digits)"
+    ],
+    "Occ3": [
+      "697/1375 (~0.506909)",
+      "98/125 (~0.784)"
+    ],
+    "SL4": [
+      "~0.781296020901 (an exact fraction of 43 digits)",
+      "~0.994810076811 (an exact fraction of 53 digits)"
+    ],
+    "Occ4": [
+      "738/1625 (~0.454154)",
+      "1232/1625 (~0.758154)"
+    ],
+    "M": [
+      "~1.01752769123 (an exact fraction of 291 digits)",
+      "~106.837901701 (an exact fraction of 270 digits)"
+    ],
+    "valid_29": [
+      "2599/375 (~6.93067)",
+      "1649/125 (~13.192)"
+    ],
+    "valid_66": [
+      "2251/375 (~6.00267)",
+      "1739/125 (~13.912)"
+    ],
+    "valid_97": [
+      "594/125 (~4.752)",
+      "1356/125 (~10.848)"
+    ],
+    "valid_119": [
+      "393/125 (~3.144)",
+      "887/125 (~7.096)"
+    ]
+  },
+  "guaranteed_unit": {
+    "SL1": "",
+    "Occ1": "",
+    "SL2": "",
+    "Occ2": "",
+    "SL3": "",
+    "Occ3": "",
+    "SL4": "",
+    "Occ4": "",
+    "M": "1/h",
+    "valid_29": "",
+    "valid_66": "",
+    "valid_97": "",
+    "valid_119": ""
+  },
+  "how": {
+    "SL1": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.942964224835 (~0.942964)', '~0.999768064423 (~0.999768)']",
+    "Occ1": "ZTL, exact at the corners",
+    "SL2": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.884156177837 (~0.884156)', '~0.999619329134 (~0.999619)']",
+    "Occ2": "ZTL, exact at the corners",
+    "SL3": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.847488208621 (~0.847488)', '~0.998658600727 (~0.998659)']",
+    "Occ3": "ZTL, exact at the corners",
+    "SL4": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.781296020901 (~0.781296)', '~0.994810076811 (~0.99481)']",
+    "Occ4": "ZTL, exact at the corners",
+    "M": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~1.01752769123 (~1.01753)', '~106.837901701 (~106.838)']",
+    "valid_29": "ZTL, exact at the corners",
+    "valid_66": "ZTL, exact at the corners",
+    "valid_97": "ZTL, exact at the corners",
+    "valid_119": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "SL1",
+      "op": ">=",
+      "value": "0.7",
+      "why": "R1: SL >= 0.70 in day part P1"
+    },
+    {
+      "quantity": "Occ1",
+      "op": "<=",
+      "value": "0.92",
+      "why": "R3: occupancy <= 0.92 in day part P1"
+    },
+    {
+      "quantity": "SL2",
+      "op": ">=",
+      "value": "0.7",
+      "why": "R1: SL >= 0.70 in day part P2"
+    },
+    {
+      "quantity": "Occ2",
+      "op": "<=",
+      "value": "0.92",
+      "why": "R3: occupancy <= 0.92 in day part P2"
+    },
+    {
+      "quantity": "SL3",
+      "op": ">=",
+      "value": "0.7",
+      "why": "R1: SL >= 0.70 in day part P3"
+    },
+    {
+      "quantity": "Occ3",
+      "op": "<=",
+      "value": "0.92",
+      "why": "R3: occupancy <= 0.92 in day part P3"
+    },
+    {
+      "quantity": "SL4",
+      "op": ">=",
+      "value": "0.7",
+      "why": "R1: SL >= 0.70 in day part P4"
+    },
+    {
+      "quantity": "Occ4",
+      "op": "<=",
+      "value": "0.92",
+      "why": "R3: occupancy <= 0.92 in day part P4"
+    },
+    {
+      "quantity": "M",
+      "op": ">=",
+      "value": "0",
+      "why": "R2: SL_day >= 0.87 (worst case of the weighted average)"
+    },
+    {
+      "quantity": "valid_29",
+      "op": ">",
+      "value": "0",
+      "why": "laws[29] (Pw1 == 1/(1 + (1 - A1/S1.N)*(X1_28 - 1))) holds only where S1.N > lam1*(1 - IVR.d)*AHT"
+    },
+    {
+      "quantity": "valid_66",
+      "op": ">",
+      "value": "0",
+      "why": "laws[66] (Pw2 == 1/(1 + (1 - A2/S2.N)*(X2_32 - 1))) holds only where S2.N > lam2*(1 - IVR.d)*AHT"
+    },
+    {
+      "quantity": "valid_97",
+      "op": ">",
+      "value": "0",
+      "why": "laws[97] (Pw3 == 1/(1 + (1 - A3/S3.N)*(X3_26 - 1))) holds only where S3.N > lam3*(1 - IVR.d)*AHT"
+    },
+    {
+      "quantity": "valid_119",
+      "op": ">",
+      "value": "0",
+      "why": "laws[119] (Pw4 == 1/(1 + (1 - A4/S4.N)*(X4_17 - 1))) holds only where S4.N > lam4*(1 - IVR.d)*AHT"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "A1 -> [1476/125, 6776/375] by the system over its parameters, exact at the corners (credit)",
+    "A2 -> [1886/125, 8624/375] by the system over its parameters, exact at the corners (credit)",
+    "A3 -> [1394/125, 2156/125] by the system over its parameters, exact at the corners (credit)",
+    "A4 -> [738/125, 1232/125] by the system over its parameters, exact at the corners (credit)",
+    "Occ1 -> [1476/3125, 6776/9375] by the system over its parameters, exact at the corners (credit)",
+    "Occ2 -> [1886/3625, 8624/10875] by the system over its parameters, exact at the corners (credit)"
+  ]
+}

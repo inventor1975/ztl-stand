@@ -1,0 +1,30 @@
+{
+ "stand": "ztl-stand/1",
+ "interface": {
+  "inputs": {},
+  "outputs": [
+   "Vo"
+  ]
+ },
+ "quantities": {
+  "Vref": {
+   "role": "given",
+   "value": "1.275",
+   "tolerance": "0.005",
+   "unit": "V"
+  },
+  "Vo": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "Vo == Vref",
+   "source": "reference"
+  }
+ ],
+ "requirements": []
+}

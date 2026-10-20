@@ -1,0 +1,237 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "verdict": "REFUTED",
+  "why": "several limits, each searched on its own; the verdict is the weakest of theirs",
+  "finds": [
+    {
+      "verdict": "REFUTED",
+      "find": "largest",
+      "quantity": "ig",
+      "unit": "",
+      "why": "even ig = 48 alone fails — no value in the search range works",
+      "at_the_end": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "7 in/s +-10 %",
+            "by_at_witness": "8407346410207/500000000000000 (~0.0168147)",
+            "unit": "in/s"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "etag": "33/50 (~0.66)",
+          "s": "1/5 (~0.2)"
+        },
+        "point_units": {
+          "etag": "",
+          "s": ""
+        },
+        "value_there": {
+          "V": "3141592653589793/500000000000000 (~6.28319)"
+        },
+        "unit": "in/s",
+        "requirement": {
+          "quantity": "V",
+          "op": "within",
+          "value": [
+            "6.3",
+            "7.7"
+          ],
+          "why": "7 in/s +-10 %"
+        },
+        "overshoot": "8407346410207/500000000000000 (~0.0168147)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "3141592653589793/500000000000000 (~6.28319)",
+            "76969020012949953/10000000000000000 (~7.6969)"
+          ],
+          "window": [
+            "63/10 (~6.3)",
+            "77/10 (~7.7)"
+          ],
+          "verdict_on_window": "for this design the spread over its tolerances alone is wider than the window: centring cannot fix it, only tighter tolerances or another design",
+          "largest_contributors": [
+            {
+              "quantity": "s",
+              "moves_it_by": "28274333882308137/20000000000000000 (~1.41372)"
+            },
+            {
+              "quantity": "pi",
+              "moves_it_by": "1/500000000000000 (~2e-15)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+        "each_requirement": [
+          {
+            "requirement": {
+              "quantity": "V",
+              "op": "within",
+              "value": [
+                "6.3",
+                "7.7"
+              ],
+              "why": "7 in/s +-10 %"
+            },
+            "verdict": "REFUTED",
+            "overshoot": "8407346410207/500000000000000 (~0.0168147)"
+          },
+          {
+            "requirement": {
+              "quantity": "Tstart",
+              "op": "<=",
+              "value": "Tst",
+              "why": "motor starting torque 27.8 oz-in (catalog) must cover the doubled torque"
+            },
+            "verdict": "EARNED",
+            "guaranteed": {
+              "Tstart": [
+                "250/243 (~1.02881)",
+                "125/99 (~1.26263)"
+              ]
+            }
+          }
+        ]
+      },
+      "tries": [
+        {
+          "ig": "48",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 0
+    },
+    {
+      "verdict": "REFUTED",
+      "find": "smallest",
+      "quantity": "ig",
+      "unit": "",
+      "why": "even ig = 48 alone fails — no value in the search range works",
+      "at_the_end": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "7 in/s +-10 %",
+            "by_at_witness": "8407346410207/500000000000000 (~0.0168147)",
+            "unit": "in/s"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "etag": "33/50 (~0.66)",
+          "s": "1/5 (~0.2)"
+        },
+        "point_units": {
+          "etag": "",
+          "s": ""
+        },
+        "value_there": {
+          "V": "3141592653589793/500000000000000 (~6.28319)"
+        },
+        "unit": "in/s",
+        "requirement": {
+          "quantity": "V",
+          "op": "within",
+          "value": [
+            "6.3",
+            "7.7"
+          ],
+          "why": "7 in/s +-10 %"
+        },
+        "overshoot": "8407346410207/500000000000000 (~0.0168147)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "3141592653589793/500000000000000 (~6.28319)",
+            "76969020012949953/10000000000000000 (~7.6969)"
+          ],
+          "window": [
+            "63/10 (~6.3)",
+            "77/10 (~7.7)"
+          ],
+          "verdict_on_window": "for this design the spread over its tolerances alone is wider than the window: centring cannot fix it, only tighter tolerances or another design",
+          "largest_contributors": [
+            {
+              "quantity": "s",
+              "moves_it_by": "28274333882308137/20000000000000000 (~1.41372)"
+            },
+            {
+              "quantity": "pi",
+              "moves_it_by": "1/500000000000000 (~2e-15)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+        "each_requirement": [
+          {
+            "requirement": {
+              "quantity": "V",
+              "op": "within",
+              "value": [
+                "6.3",
+                "7.7"
+              ],
+              "why": "7 in/s +-10 %"
+            },
+            "verdict": "REFUTED",
+            "overshoot": "8407346410207/500000000000000 (~0.0168147)"
+          },
+          {
+            "requirement": {
+              "quantity": "Tstart",
+              "op": "<=",
+              "value": "Tst",
+              "why": "motor starting torque 27.8 oz-in (catalog) must cover the doubled torque"
+            },
+            "verdict": "EARNED",
+            "guaranteed": {
+              "Tstart": [
+                "250/243 (~1.02881)",
+                "125/99 (~1.26263)"
+              ]
+            }
+          }
+        ]
+      },
+      "tries": [
+        {
+          "ig": "48",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 1
+    }
+  ],
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

@@ -1,0 +1,192 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "k06 variant A: Hazen-Williams C taken anywhere in the source's own list range 120 (cast iron) to 150 (PVC): ADDED reading, the source uses 140",
+ "quantities": {
+  "ELw": {
+   "role": "given",
+   "range": [
+    "4",
+    "6"
+   ],
+   "unit": "ft",
+   "why": "wet-well water level varies from EL 4.0 to EL 6.0 (source Example 3)"
+  },
+  "Pd": {
+   "role": "given",
+   "range": [
+    "9",
+    "13"
+   ],
+   "unit": "psi",
+   "why": "force-main tie-in pressure varies 9 to 13 psi (source Example 3)"
+  },
+  "ELc": {
+   "role": "given",
+   "value": "12",
+   "unit": "ft",
+   "why": "tie-in pipe centerline EL 12.0"
+  },
+  "kh": {
+   "role": "given",
+   "value": "2.31",
+   "unit": "ft/psi",
+   "why": "source: 1 psi = 2.31 ft of head"
+  },
+  "Q": {
+   "role": "given",
+   "value": "1514.1647136",
+   "unit": "L/min",
+   "why": "peak hour flow 400 gpm (US gal = 3.785411784 L)"
+  },
+  "Qg": {
+   "role": "given",
+   "value": "3.785411784",
+   "unit": "L/min",
+   "why": "one gpm, to make Q/Qg the number of gpm for the Hazen-Williams formula"
+  },
+  "D": {
+   "role": "given",
+   "value": "6",
+   "unit": "in",
+   "why": "6 in ductile iron pipe, taken as 6.0 in inside diameter as the source does"
+  },
+  "Din": {
+   "role": "given",
+   "value": "1",
+   "unit": "in",
+   "why": "one inch, makes D/Din the number of inches"
+  },
+  "Lp": {
+   "role": "given",
+   "value": "400",
+   "unit": "ft",
+   "why": "total pipe length 400 ft"
+  },
+  "Lh": {
+   "role": "given",
+   "value": "100",
+   "unit": "ft",
+   "why": "the formula is per 100 ft"
+  },
+  "Hu": {
+   "role": "given",
+   "value": "1",
+   "unit": "ft",
+   "why": "one foot, the unit of the Hazen-Williams head"
+  },
+  "C": {
+   "role": "given",
+   "range": [
+    "120",
+    "150"
+   ],
+   "unit": "",
+   "why": "C anywhere between the source's cast iron 120 and PVC 150 (added reading)"
+  },
+  "Cn": {
+   "role": "given",
+   "value": "100",
+   "unit": "",
+   "why": "the 100 in (100/C)^1.852"
+  },
+  "SK": {
+   "role": "given",
+   "value": "7.37",
+   "unit": "",
+   "why": "sum of the K values of the nine fittings (source Table 5)"
+  },
+  "g": {
+   "role": "given",
+   "value": "32.2",
+   "unit": "ft*s^-2",
+   "why": "source uses g = 32.2 ft/s2"
+  },
+  "Hp": {
+   "role": "given",
+   "value": "50",
+   "unit": "ft",
+   "why": "placeholder: pump head at 400 gpm, searched by find"
+  },
+  "Hl": {
+   "role": "given",
+   "value": "0",
+   "unit": "ft",
+   "why": "placeholder: lower head, searched by find"
+  },
+  "Hst": {
+   "role": "derived",
+   "unit": "ft",
+   "why": "static head"
+  },
+  "HLm": {
+   "role": "derived",
+   "unit": "ft",
+   "why": "minor losses"
+  },
+  "HLf": {
+   "role": "derived",
+   "unit": "ft",
+   "why": "pipe friction loss"
+  },
+  "TDH": {
+   "role": "derived",
+   "unit": "ft",
+   "why": "total dynamic head at the peak hour flow"
+  }
+ },
+ "slots": {},
+ "define": {
+  "AR": "pi*D*D/4",
+  "V": "Q/AR",
+  "HW": "Lp/Lh*0.2083*pow(Cn/C, 1.852)*pow(Q/Qg, 1.852)/pow(D/Din, 4.8655)*Hu"
+ },
+ "laws": [
+  {
+   "zfl": "Hst == (ELc - ELw) + Pd*kh",
+   "source": "static head: elevation of tie-in above water + pressure expressed as head"
+  },
+  {
+   "zfl": "HLm == SK*V*V/(2*g)",
+   "source": "K-value method, sum K times V^2/2g"
+  },
+  {
+   "zfl": "HLf == HW",
+   "source": "Hazen-Williams, US units, as printed in the source"
+  },
+  {
+   "zfl": "TDH == Hst + HLm + HLf",
+   "source": "total dynamic head = static + minor + friction"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "TDH",
+   "op": "<=",
+   "value": "Hp",
+   "why": "the pump must deliver 400 gpm against the highest head"
+  }
+ ],
+ "find": [
+  {
+   "smallest": "Hp",
+   "from": "30",
+   "to": "60",
+   "precision": "0.01"
+  },
+  {
+   "largest": "Hl",
+   "from": "0",
+   "to": "60",
+   "precision": "0.01",
+   "requirements": [
+    {
+     "quantity": "TDH",
+     "op": ">=",
+     "value": "Hl",
+     "why": "the lowest head the system can ask (for pump run-out check)"
+    }
+   ]
+  }
+ ],
+ "catalog": {}
+}

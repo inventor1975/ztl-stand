@@ -1,0 +1,6 @@
+* a diode clamp: 5 V through 1k into a forward diode
+V1 a 0 5
+R1 a b 1k
+D1 b 0 dmod
+.model dmod D(Vfwd=0.7 Ron=10)
+.end

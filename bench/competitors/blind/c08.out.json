@@ -1,0 +1,1944 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL d606f40",
+  "designs_tried": 180,
+  "failed_at_nominal": 90,
+  "judged": 90,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "34426236693408604836663483/48720974851730319770695 (~706.6)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "2376747528687887833809069/6960139264532902824385 (~341.48)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "308376137084855456523897/2435832378600673664339 (~126.6)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "67186216046888032737169197/97441949703460639541390 (~689.5)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "67186216046888032737169197/97441949703460639541390 (~689.5)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "4515458294528750391024171/13920278529065805648770 (~324.38)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "4515458294528750391024171/13920278529065805648770 (~324.38)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "308376137084855456523897/2435832378600673664339 (~126.6)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "1614954446552348345642553/24358323786006736643390 (~66.2999)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "833053463251481246296836/12179161893003368321695 (~68.3999)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "32759979353479427900505714/48720974851730319770695 (~672.4)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "2138710765840862557215102/6960139264532902824385 (~307.28)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "1614954446552348345642553/24358323786006736643390 (~66.2999)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "833053463251481246296836/12179161893003368321695 (~68.3999)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "39460000441351254599451/4871664757201347328678 (~8.0999)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "66075377820268581446397351/97441949703460639541390 (~678.1)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "66075377820268581446397351/97441949703460639541390 (~678.1)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "4356767119297400206628193/13920278529065805648770 (~312.98)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "4356767119297400206628193/13920278529065805648770 (~312.98)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "39460000441351254599451/4871664757201347328678 (~8.0999)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "3529509014292884670556191/121791618930033683216950 (~28.9799)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "3938728853897797846165143/121791618930033683216950 (~32.3399)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "32204560240169702255119791/48720974851730319770695 (~661)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "32204560240169702255119791/48720974851730319770695 (~661)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "2059365178225187465017113/6960139264532902824385 (~295.88)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "2059365178225187465017113/6960139264532902824385 (~295.88)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "49121226602487489010094547/198102014252646976664255 (~247.959)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "3529509014292884670556191/121791618930033683216950 (~28.9799)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "3938728853897797846165143/121791618930033683216950 (~32.3399)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "7066071193329270808671/305458037020741791550 (~23.1327)",
+          "4092190169044285361199513/8673188653204244506925 (~471.821)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "3340597033341568075659/152729018510370895775 (~21.8727)",
+          "4092190169044285361199513/8673188653204244506925 (~471.821)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "16012439145546106736315619/30977245461474099608860 (~516.91)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "91467364317534451418271573/396204028505293953328510 (~230.859)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "91467364317534451418271573/396204028505293953328510 (~230.859)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "7066071193329270808671/305458037020741791550 (~23.1327)",
+          "4092190169044285361199513/8673188653204244506925 (~471.821)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "3340597033341568075659/152729018510370895775 (~21.8727)",
+          "4092190169044285361199513/8673188653204244506925 (~471.821)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "5669257272563962736315619/30977245461474099608860 (~183.014)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "31649141126859976609733868/48720974851730319770695 (~649.6)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "17065013200937247050757/1489158371975636145550 (~11.4595)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "15482728248154899633004113/30977245461474099608860 (~499.81)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "15482728248154899633004113/30977245461474099608860 (~499.81)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "1980019590609512372819124/6960139264532902824385 (~284.48)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "42346137715046962408177026/198102014252646976664255 (~213.759)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "43454409330347662155639/1413163443314934301693 (~30.7497)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "5139546375172755633004113/30977245461474099608860 (~165.914)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "5139546375172755633004113/30977245461474099608860 (~165.914)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "17065013200937247050757/1489158371975636145550 (~11.4595)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "9040444004148609905982/152729018510370895775 (~59.1927)",
+          "4006845992696755595251371/8673188653204244506925 (~461.981)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "79838562903087645666/1867433067697360475 (~42.7531)",
+          "11555752903988052978402627/19300726870011161452150 (~598.721)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "211566014944858936047/7469732270789441900 (~28.3231)",
+          "11829051196467411024565071/19300726870011161452150 (~612.881)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "14953017350763692529692607/30977245461474099608860 (~482.71)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "556925726432977557429/35580826290328164730 (~15.6524)",
+          "8454707283450928153827777/14068723955690898424930 (~600.958)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "241102995611644205748/17790413145164082365 (~13.5524)",
+          "8454707283450928153827777/14068723955690898424930 (~600.958)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "4609835477781548529692607/30977245461474099608860 (~148.814)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "86950638392574100350326559/396204028505293953328510 (~219.459)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "86950638392574100350326559/396204028505293953328510 (~219.459)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "9040444004148609905982/152729018510370895775 (~59.1927)",
+          "4006845992696755595251371/8673188653204244506925 (~461.981)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "79838562903087645666/1867433067697360475 (~42.7531)",
+          "11555752903988052978402627/19300726870011161452150 (~598.721)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "211566014944858936047/7469732270789441900 (~28.3231)",
+          "11829051196467411024565071/19300726870011161452150 (~612.881)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "661990870873462282617/7469732270789441900 (~88.6231)",
+          "5737923947373103384995363/9650363435005580726075 (~594.581)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "525545963306015348943/7116165258065632946 (~73.8524)",
+          "4098624817530892356325779/7034361977845449212465 (~582.658)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "15129587649894094897463109/30977245461474099608860 (~488.41)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "15129587649894094897463109/30977245461474099608860 (~488.41)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "40087774752566786874204519/198102014252646976664255 (~202.359)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "40087774752566786874204519/198102014252646976664255 (~202.359)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "4786405776911950897463109/30977245461474099608860 (~154.514)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "4786405776911950897463109/30977245461474099608860 (~154.514)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "661990870873462282617/7469732270789441900 (~88.6231)",
+          "5737923947373103384995363/9650363435005580726075 (~594.581)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "149531164989553138593/1867433067697360475 (~80.0731)",
+          "11365833751587143149713471/19300726870011161452150 (~588.881)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "532079351612782399731/9337165338486802375 (~56.9851)",
+          "59015555097770580117866907/96503634350055807260750 (~611.537)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "14599876752502887794151603/30977245461474099608860 (~471.31)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "14599876752502887794151603/30977245461474099608860 (~471.31)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "9424010817940123325763/177904131451640823650 (~52.9724)",
+          "41581355198634648566632329/70343619778454492124650 (~591.118)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "8826252936262610158299/177904131451640823650 (~49.6124)",
+          "41581355198634648566632329/70343619778454492124650 (~591.118)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "4256694879520743794151603/30977245461474099608860 (~137.414)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "4256694879520743794151603/30977245461474099608860 (~137.414)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "7339283282004647049978171/125955088965112186623740 (~58.269)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "149531164989553138593/1867433067697360475 (~80.0731)",
+          "11365833751587143149713471/19300726870011161452150 (~588.881)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "532079351612782399731/9337165338486802375 (~56.9851)",
+          "59015555097770580117866907/96503634350055807260750 (~611.537)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "37630451168772970173/298789290831577676 (~125.943)",
+          "1128592874234529694130157/1930072687001116145215 (~584.741)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "2190220843047073165887/18674330676973604750 (~117.285)",
+          "28624769294582279422497591/48251817175027903630375 (~593.237)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "19778031268425619262193/177904131451640823650 (~111.172)",
+          "20147033478344465680375617/35171809889227246062325 (~572.818)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "9776936031398275912197/88952065725820411825 (~109.912)",
+          "20147033478344465680375617/35171809889227246062325 (~572.818)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "37829411790086611340232012/198102014252646976664255 (~190.959)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "18937980588016507456947/24906578403229715311 (~760.361)",
+          "71898048450752965582513986/49240533844918144487255 (~1460.14)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "5185451260701228658712217/125955088965112186623740 (~41.169)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "5185451260701228658712217/125955088965112186623740 (~41.169)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "37630451168772970173/298789290831577676 (~125.943)",
+          "1128592874234529694130157/1930072687001116145215 (~584.741)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "2190220843047073165887/18674330676973604750 (~117.285)",
+          "28624769294582279422497591/48251817175027903630375 (~593.237)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "14246736154242083058610599/30977245461474099608860 (~459.91)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "204398472657312592902003/249065784032297153110 (~820.661)",
+          "141993893362781927076794439/98481067689836288974510 (~1441.84)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "101937717255422384440236/124532892016148576555 (~818.561)",
+          "141993893362781927076794439/98481067689836288974510 (~1441.84)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "3903554281259939058610599/30977245461474099608860 (~126.014)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "3031619239397810267446263/125955088965112186623740 (~24.069)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "23224968477429301756491/197947905175920210350 (~117.329)",
+          "29932162564473624871156374/39134482330505961034675 (~764.854)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "2887146863911728095157/18674330676973604750 (~154.605)",
+          "28149971413580004850774701/48251817175027903630375 (~583.397)"
+        ],
+        "M": [
+          "14",
+          "14"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "43778820257598457442601/49813156806459430622 (~878.861)",
+          "70095844912028961494280453/49240533844918144487255 (~1423.54)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "13096627124285893681506/88952065725820411825 (~147.232)",
+          "19800942869034469579122339/35171809889227246062325 (~562.978)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "17580613579768645220298/98973952587960105175 (~177.629)",
+          "58432003075650731568443643/78268964661011922069350 (~746.554)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "64609677775697523610491/395895810351840420700 (~163.199)",
+          "59540291615250660384945639/78268964661011922069350 (~760.714)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "3749563246498949731201581/125955088965112186623740 (~29.769)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "3749563246498949731201581/125955088965112186623740 (~29.769)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5, Vw=5, Pn=200, mass=15/2, price=95); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "2887146863911728095157/18674330676973604750 (~154.605)",
+          "28149971413580004850774701/48251817175027903630375 (~583.397)"
+        ],
+        "M": [
+          "15",
+          "15"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7, Vw=7, Pn=200, mass=52/5, price=120); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "24/5 (~4.8)",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "88482195139913500978701/395895810351840420700 (~223.499)",
+          "29053984780977071105538267/39134482330505961034675 (~742.414)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "1068468038586989613280341/1245328920161485765550 (~857.981)",
+          "705124198283569689966426303/492405338449181444872550 (~1432)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "1064283733415247021108093/1245328920161485765550 (~854.621)",
+          "705124198283569689966426303/492405338449181444872550 (~1432)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "1595731225195531339935627/125955088965112186623740 (~12.669)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "1595731225195531339935627/125955088965112186623740 (~12.669)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "6524473275855343922421/3558082629032816473 (~1833.7)",
+          "18157906195690940797501998/7034361977845449212465 (~2581.32)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R2: total cylinder mass <= 16 kg",
+      "by_at_witness": "12",
+      "unit": "kg"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "1140946181740388084835351/1245328920161485765550 (~916.181)",
+          "348056590294974834762629319/246202669224590722436275 (~1413.7)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "569688533650492306385379/622664460080742882775 (~914.921)",
+          "348056590294974834762629319/246202669224590722436275 (~1413.7)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "21274321490351316345429/98973952587960105175 (~214.949)",
+          "57661836463386374255281239/78268964661011922069350 (~736.714)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "94946054365002467185743/494869762939800525875 (~191.861)",
+          "297175490633731301808422163/391344823305059610346750 (~759.37)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "67390256583860227557429/35580826290328164730 (~1894)",
+          "36058354742992738153827777/14068723955690898424930 (~2563.02)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "33657768424325269205748/17790413145164082365 (~1891.9)",
+          "36058354742992738153827777/14068723955690898424930 (~2563.02)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "4130281071289767419169/15835832414073616828 (~260.819)",
+          "5733780294968978489791413/7826896466101192206935 (~732.574)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "249573402140544877792011/989739525879601051750 (~252.161)",
+          "145006940183624355469538319/195672411652529805173375 (~741.07)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "REFUTED",
+      "fails": "R1: N >= 1.2 C",
+      "by_at_witness": "159843210993252412424991/125955088965112186623740 (~1.26905)",
+      "unit": "L"
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "173303586208588051756491/197947905175920210350 (~875.501)",
+          "61006740527964054871156374/39134482330505961034675 (~1558.9)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "13892212134791465348943/7116165258065632946 (~1952.2)",
+          "17900448547301797356325779/7034361977845449212465 (~2544.72)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "592926371300705630770542/622664460080742882775 (~952.241)",
+          "345633956029804862053856373/246202669224590722436275 (~1403.86)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "92619922445348020220298/98973952587960105175 (~935.801)",
+          "120581159002631591568443643/78268964661011922069350 (~1540.6)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "364766913238015023610491/395895810351840420700 (~921.371)",
+          "121689447542231520384945639/78268964661011922069350 (~1554.76)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "343590665105076373325763/177904131451640823650 (~1931.32)",
+          "179599592496343698566632329/70343619778454492124650 (~2553.18)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "342992907223398860158299/177904131451640823650 (~1927.96)",
+          "179599592496343698566632329/70343619778454492124650 (~2553.18)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "388639430602231000978701/395895810351840420700 (~981.671)",
+          "60128562744467501105538267/39134482330505961034675 (~1536.46)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "286510481246371589043321/989739525879601051750 (~289.481)",
+          "143081523652963462186632309/195672411652529805173375 (~731.23)"
+        ],
+        "M": [
+          "28/5 (~5.6)",
+          "28/5 (~5.6)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "353944685555561869262193/177904131451640823650 (~1989.52)",
+          "89156152127198990680375617/35171809889227246062325 (~2534.88)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "176860263174966400912197/88952065725820411825 (~1988.26)",
+          "89156152127198990680375617/35171809889227246062325 (~2534.88)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "96313630355930691345429/98973952587960105175 (~973.121)",
+          "119810992390367234255281239/78268964661011922069350 (~1530.76)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "470142598692899342185743/494869762939800525875 (~950.033)",
+          "607921270268635601808422163/391344823305059610346750 (~1553.42)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "373408409850133051756491/197947905175920210350 (~1886.4)",
+          "102439511145951294871156374/39134482330505961034675 (~2617.63)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "16136570489782467419169/15835832414073616828 (~1018.99)",
+          "11948695887667064489791413/7826896466101192206935 (~1526.62)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "999966490796338627792011/989739525879601051750 (~1010.33)",
+          "300379830001076505469538319/195672411652529805173375 (~1535.12)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "180179954267854018681506/88952065725820411825 (~2025.58)",
+          "88810061517888994579122339/35171809889227246062325 (~2525.04)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "192672334266120520220298/98973952587960105175 (~1946.7)",
+          "203446700238606071568443643/78268964661011922069350 (~2599.33)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "764976560521105023610491/395895810351840420700 (~1932.27)",
+          "204554988778206000384945639/78268964661011922069350 (~2613.49)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "788849077885321000978701/395895810351840420700 (~1992.57)",
+          "101561333362454741105538267/39134482330505961034675 (~2595.19)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY5H, Vw=5, Pn=300, mass=21/5, price=480); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "1036903569902165339043321/989739525879601051750 (~1047.65)",
+          "298454413470415612186632309/195672411652529805173375 (~1525.28)"
+        ],
+        "M": [
+          "42/5 (~8.4)",
+          "42/5 (~8.4)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "196366042176703191345429/98973952587960105175 (~1984.02)",
+          "202676533626341714255281239/78268964661011922069350 (~2589.49)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RA, acc=1/10, leak=3/10, pmin=10, price=60); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "970404657796761842185743/494869762939800525875 (~1960.93)",
+          "1022248976448508001808422163/391344823305059610346750 (~2612.14)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "32144956381106067419169/15835832414073616828 (~2029.89)",
+          "20235250011264512489791413/7826896466101192206935 (~2585.35)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "2000490609004063627792011/989739525879601051750 (~2021.23)",
+          "507543683091012705469538319/195672411652529805173375 (~2593.84)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    },
+    {
+      "design": "CY=cylinders(name=CY7H, Vw=7, Pn=300, mass=28/5, price=640); NC=ncyl(n=2); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=conserver(name=conserver, kappa=[3/10,2/5], pmin=25, price=450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "2037427688109890339043321/989739525879601051750 (~2058.55)",
+          "505618266560351812186632309/195672411652529805173375 (~2584)"
+        ],
+        "M": [
+          "56/5 (~11.2)",
+          "56/5 (~11.2)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 105,
+    "EARNED": 75
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "NC.n*CY.price + Pman + R1.price + R2.price + CV.price",
+    "value": "625",
+    "unit": "EUR",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted",
+    "ties": {
+      "same_objective": 1,
+      "first": [
+        {
+          "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); R2=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); CV=CV_none(name=none, kappa=0, pmin=0, price=0)",
+          "verdict": "EARNED"
+        }
+      ],
+      "note": "these cost the same; \"not judged\" ones come after the earned design in the search, which stops at the first EARNED — \"report\": \"all\" judges them"
+    }
+  },
+  "verdict": "EARNED",
+  "design": {
+    "CY": {
+      "catalog": "cylinders",
+      "name": "CY10",
+      "Vw": {
+        "nominal": "10",
+        "tolerance": "0"
+      },
+      "Pn": {
+        "nominal": "200",
+        "tolerance": "0"
+      },
+      "mass": {
+        "nominal": "14",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "165",
+        "tolerance": "0"
+      }
+    },
+    "NC": {
+      "catalog": "ncyl",
+      "n": {
+        "nominal": "1",
+        "tolerance": "0"
+      }
+    },
+    "R1": {
+      "catalog": "regulators",
+      "name": "RB",
+      "acc": {
+        "nominal": "1/20 (~0.05)",
+        "tolerance": "0"
+      },
+      "leak": {
+        "nominal": "3/20 (~0.15)",
+        "tolerance": "0"
+      },
+      "pmin": {
+        "nominal": "10",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "140",
+        "tolerance": "0"
+      }
+    },
+    "R2": {
+      "catalog": "regulators",
+      "name": "RC",
+      "acc": {
+        "nominal": "1/50 (~0.02)",
+        "tolerance": "0"
+      },
+      "leak": {
+        "nominal": "1/20 (~0.05)",
+        "tolerance": "0"
+      },
+      "pmin": {
+        "nominal": "10",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "320",
+        "tolerance": "0"
+      }
+    },
+    "CV": {
+      "catalog": "CV_none",
+      "kappa": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "pmin": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "name": "none"
+    }
+  },
+  "guaranteed": {
+    "margin": [
+      "7066071193329270808671/305458037020741791550 (~23.1327)",
+      "4092190169044285361199513/8673188653204244506925 (~471.821)"
+    ],
+    "M": [
+      "14",
+      "14"
+    ]
+  },
+  "guaranteed_unit": {
+    "margin": "L",
+    "M": "kg"
+  },
+  "how": {
+    "margin": "outside ZTL: ZTL left it unbounded (a product of toleranced quantities); interval bound by the stand, every corner checked inside",
+    "M": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "margin",
+      "op": ">=",
+      "value": "0",
+      "why": "R1: N >= 1.2 C"
+    },
+    {
+      "quantity": "M",
+      "op": "<=",
+      "value": "16",
+      "why": "R2: total cylinder mass <= 16 kg"
+    }
+  ],
+  "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "M = 14 by exact elimination (credit)",
+    "2 independent equalities for 3 unknowns at the box's midpoint: not uniquely solvable"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

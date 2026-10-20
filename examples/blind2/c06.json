@@ -1,0 +1,331 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "T": {
+   "role": "given",
+   "value": "37",
+   "unit": "C",
+   "why": "assay temperature"
+  },
+  "c1": {
+   "role": "given",
+   "value": "1",
+   "tolerance": "0.01",
+   "unit": "mol/L",
+   "why": "stock 1 concentration 1.0 M +-1%"
+  },
+  "c2": {
+   "role": "given",
+   "value": "1",
+   "tolerance": "0.01",
+   "unit": "mol/L",
+   "why": "stock 2 concentration 1.0 M +-1%"
+  },
+  "e1": {
+   "role": "given",
+   "range": [
+    "-0.5",
+    "0.5"
+   ],
+   "unit": "mL",
+   "why": "pipette error, stock 1"
+  },
+  "e2": {
+   "role": "given",
+   "range": [
+    "-0.5",
+    "0.5"
+   ],
+   "unit": "mL",
+   "why": "pipette error, stock 2"
+  },
+  "Vf": {
+   "role": "given",
+   "value": "1",
+   "tolerance": "0.003",
+   "unit": "L",
+   "why": "final volume 1.00 L +-3 mL"
+  },
+  "s0": {
+   "role": "given",
+   "value": "0.06",
+   "unit": "",
+   "why": "pKa' shift extrapolated linearly: -0.08 at I=0.05, -0.12 at I=0.15 -> -(0.06+0.4*I)"
+  },
+  "kI": {
+   "role": "given",
+   "value": "0.4",
+   "unit": "L/mol",
+   "why": "slope of the ionic-strength pKa shift"
+  },
+  "Ion": {
+   "role": "derived",
+   "unit": "mol/L"
+  },
+  "pH": {
+   "role": "derived",
+   "unit": ""
+  },
+  "beta": {
+   "role": "derived",
+   "unit": "mmol/L"
+  }
+ },
+ "slots": {
+  "SYS": {
+   "from": [
+    "systems"
+   ]
+  },
+  "VA": {
+   "from": [
+    "mLA"
+   ]
+  },
+  "VB": {
+   "from": [
+    "mLB"
+   ]
+  }
+ },
+ "define": {
+  "v1": "SYS.q11*VA.N + SYS.q12*VB.N + e1",
+  "v2": "SYS.q21*VA.N + SYS.q22*VB.N + e2",
+  "n1": "c1*v1",
+  "n2": "c2*v2",
+  "nHA": "SYS.a1*n1 + SYS.a2*n2",
+  "nA": "SYS.b1*n1 + SYS.b2*n2",
+  "Iof": "(SYS.i1*n1 + SYS.i2*n2)/Vf",
+  "pKap": "SYS.pKa + SYS.dpKa*(T - 25) - (s0 + kI*Iof)",
+  "Ka": "pow(10, 0 - pKap)",
+  "Hp": "pow(10, 0 - 7.4)",
+  "Ctot": "(nHA + nA)/Vf"
+ },
+ "laws": [
+  {
+   "zfl": "Ion == Iof",
+   "source": "ionic strength: Na+ and anion counted per charge, 1/2*sum(c z^2)"
+  },
+  {
+   "zfl": "pH == pKap + log10(nA/nHA)",
+   "source": "Henderson-Hasselbalch with apparent pKa(T, I)",
+   "valid": "min(nHA, nA) > 0"
+  },
+  {
+   "zfl": "beta == 2.303*Ctot*Ka*Hp/((Ka + Hp)*(Ka + Hp))",
+   "source": "buffer capacity at pH 7.40"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Ion",
+   "op": "<=",
+   "value": "0.15",
+   "why": "ionic strength limit"
+  }
+ ],
+ "modes": {
+  "at 37C": {
+   "quantities": {},
+   "requirements": [
+    {
+     "quantity": "pH",
+     "op": "within",
+     "value": [
+      "7.35",
+      "7.45"
+     ],
+     "why": "pH 7.40 +-0.05 at 37 C"
+    },
+    {
+     "quantity": "beta",
+     "op": ">=",
+     "value": "15",
+     "why": "capacity at 7.40"
+    }
+   ]
+  },
+  "temp drift": {
+   "quantities": {
+    "T": {
+     "range": [
+      "35",
+      "39"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "pH",
+     "op": "within",
+     "value": [
+      "7.30",
+      "7.50"
+     ],
+     "why": "assay temperature 35-39 C"
+    }
+   ]
+  }
+ },
+ "objective": {
+  "minimize": "SYS.p1*(SYS.q11*VA.N + SYS.q12*VB.N) + SYS.p2*(SYS.q21*VA.N + SYS.q22*VB.N)",
+  "why": "stock cost"
+ },
+ "catalog": {
+  "systems": {
+   "items": [
+    {
+     "pKa": {
+      "range": [
+       "7.18",
+       "7.22"
+      ]
+     },
+     "dpKa": "-0.0028",
+     "a1": "1",
+     "a2": "0",
+     "b1": "0",
+     "b2": "1",
+     "i1": "1",
+     "i2": "3",
+     "p1": "0.02",
+     "p2": "0.02",
+     "q11": "1",
+     "q12": "0",
+     "q21": "0",
+     "q22": "1",
+     "name": "phosphate"
+    },
+    {
+     "pKa": {
+      "range": [
+       "7.46",
+       "7.5"
+      ]
+     },
+     "dpKa": "-0.014",
+     "a1": "1",
+     "a2": "-1",
+     "b1": "0",
+     "b2": "1",
+     "i1": "0",
+     "i2": "1",
+     "p1": "0.35",
+     "p2": "0",
+     "q11": "1",
+     "q12": "1",
+     "q21": "0",
+     "q22": "1",
+     "name": "HEPES"
+    },
+    {
+     "pKa": {
+      "range": [
+       "8.04",
+       "8.1"
+      ]
+     },
+     "dpKa": "-0.028",
+     "a1": "0",
+     "a2": "1",
+     "b1": "1",
+     "b2": "-1",
+     "i1": "0",
+     "i2": "1",
+     "p1": "0.05",
+     "p2": "0",
+     "q11": "1",
+     "q12": "1",
+     "q21": "1",
+     "q22": "0",
+     "name": "Tris"
+    },
+    {
+     "pKa": {
+      "range": [
+       "7.18",
+       "7.22"
+      ]
+     },
+     "dpKa": "-0.015",
+     "a1": "1",
+     "a2": "-1",
+     "b1": "0",
+     "b2": "1",
+     "i1": "0",
+     "i2": "1",
+     "p1": "0.3",
+     "p2": "0",
+     "q11": "1",
+     "q12": "1",
+     "q21": "0",
+     "q22": "1",
+     "name": "MOPS"
+    }
+   ],
+   "ground": "supplier pKa tables",
+   "fields": {
+    "pKa": {
+     "unit": ""
+    },
+    "dpKa": {
+     "unit": "1/C"
+    },
+    "a1": {
+     "unit": ""
+    },
+    "a2": {
+     "unit": ""
+    },
+    "b1": {
+     "unit": ""
+    },
+    "b2": {
+     "unit": ""
+    },
+    "i1": {
+     "unit": ""
+    },
+    "i2": {
+     "unit": ""
+    },
+    "p1": {
+     "unit": "USD/mL"
+    },
+    "p2": {
+     "unit": "USD/mL"
+    },
+    "q11": {
+     "unit": ""
+    },
+    "q12": {
+     "unit": ""
+    },
+    "q21": {
+     "unit": ""
+    },
+    "q22": {
+     "unit": ""
+    }
+   }
+  },
+  "mLA": {
+   "integers": {
+    "field": "N",
+    "from": "8",
+    "to": "30",
+    "unit": "mL"
+   },
+   "ground": "pipette steps"
+  },
+  "mLB": {
+   "integers": {
+    "field": "N",
+    "from": "8",
+    "to": "44",
+    "unit": "mL"
+   },
+   "ground": "pipette steps"
+  }
+ }
+}

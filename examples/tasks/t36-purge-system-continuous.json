@@ -1,0 +1,409 @@
+{
+ "note": "J3 + systems (2026-10-12): blind test 4 c06 with the purge fraction p CONTINUOUS (the author's grid: k/10000) and the modules pinned to the author's M4 x 3; the concentrations are fixed by a LINEAR SYSTEM of laws with p in its coefficients — the kernel solves it itself (zcertify.solve_system). The author's own continuous optimum by hand: p = 1/92, 137 804 EUR/yr",
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Q1": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "M1 new capacity",
+   "value": "500"
+  },
+  "RJ1": {
+   "role": "given",
+   "unit": "",
+   "why": "M1 new rejection",
+   "value": "0.60"
+  },
+  "C1": {
+   "role": "given",
+   "unit": "EUR",
+   "why": "M1 annualised cost per module, EUR/yr (year not in unit list)",
+   "value": "9000"
+  },
+  "Q2": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "M2 new capacity",
+   "value": "1200"
+  },
+  "RJ2": {
+   "role": "given",
+   "unit": "",
+   "why": "M2 new rejection",
+   "value": "0.45"
+  },
+  "C2": {
+   "role": "given",
+   "unit": "EUR",
+   "why": "M2 annualised cost per module, EUR/yr (year not in unit list)",
+   "value": "13000"
+  },
+  "Q3": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "M3 new capacity",
+   "value": "300"
+  },
+  "RJ3": {
+   "role": "given",
+   "unit": "",
+   "why": "M3 new rejection",
+   "value": "0.85"
+  },
+  "C3": {
+   "role": "given",
+   "unit": "EUR",
+   "why": "M3 annualised cost per module, EUR/yr (year not in unit list)",
+   "value": "14000"
+  },
+  "Q4": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "M4 new capacity",
+   "value": "800"
+  },
+  "RJ4": {
+   "role": "given",
+   "unit": "",
+   "why": "M4 new rejection",
+   "value": "0.70"
+  },
+  "C4": {
+   "role": "given",
+   "unit": "EUR",
+   "why": "M4 annualised cost per module, EUR/yr (year not in unit list)",
+   "value": "15500"
+  },
+  "Q5": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "M5 new capacity",
+   "value": "2000"
+  },
+  "RJ5": {
+   "role": "given",
+   "unit": "",
+   "why": "M5 new rejection",
+   "value": "0.30"
+  },
+  "C5": {
+   "role": "given",
+   "unit": "EUR",
+   "why": "M5 annualised cost per module, EUR/yr (year not in unit list)",
+   "value": "16000"
+  },
+  "kq": {
+   "role": "given",
+   "unit": "",
+   "why": "end-of-life capacity factor",
+   "value": "0.85"
+  },
+  "dr": {
+   "role": "given",
+   "unit": "",
+   "why": "end-of-life rejection loss (absolute)",
+   "value": "0.05"
+  },
+  "FA": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "tank to stage A",
+   "value": "3000"
+  },
+  "FB": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "stage B total feed",
+   "value": "2000"
+  },
+  "x": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "stage A outlet to stage B",
+   "value": "800"
+  },
+  "FH": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "header flow = (FA-x)+FB",
+   "value": "4200"
+  },
+  "gA": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "impurity 1 pickup stage A",
+   "range": [
+    "6",
+    "10"
+   ]
+  },
+  "gB": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "impurity 1 pickup stage B",
+   "range": [
+    "3",
+    "6"
+   ]
+  },
+  "cm": {
+   "role": "given",
+   "unit": "",
+   "why": "make-up concentration imp.1",
+   "range": [
+    "0.0002",
+    "0.0006"
+   ]
+  },
+  "g2": {
+   "role": "given",
+   "unit": "kg/h",
+   "why": "impurity 2 pickup stage A",
+   "range": [
+    "0.10",
+    "0.18"
+   ]
+  },
+  "cm2": {
+   "role": "given",
+   "unit": "",
+   "why": "make-up concentration imp.2",
+   "value": "0.0001"
+  },
+  "hrs": {
+   "role": "given",
+   "unit": "h",
+   "why": "operating hours per year",
+   "value": "8000"
+  },
+  "price": {
+   "role": "given",
+   "unit": "EUR/kg",
+   "why": "purge and make-up price",
+   "value": "0.25"
+  },
+  "qmax": {
+   "role": "given",
+   "unit": "",
+   "why": "max treated fraction of FH",
+   "value": "0.6"
+  },
+  "cT": {
+   "role": "derived",
+   "unit": ""
+  },
+  "cAo": {
+   "role": "derived",
+   "unit": ""
+  },
+  "cBi": {
+   "role": "derived",
+   "unit": ""
+  },
+  "cBo": {
+   "role": "derived",
+   "unit": ""
+  },
+  "cH": {
+   "role": "derived",
+   "unit": ""
+  },
+  "cT2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "cAo2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "cBi2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "cBo2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "cH2": {
+   "role": "derived",
+   "unit": ""
+  }
+ },
+ "slots": {
+  "M1": {
+   "from": [
+    "cnt1"
+   ]
+  },
+  "M2": {
+   "from": [
+    "cnt2"
+   ]
+  },
+  "M3": {
+   "from": [
+    "cnt3"
+   ]
+  },
+  "M4": {
+   "from": [
+    "cnt4"
+   ]
+  },
+  "M5": {
+   "from": [
+    "cnt5"
+   ]
+  },
+  "P": {
+   "from": [
+    "purge"
+   ]
+  }
+ },
+ "computed": {
+  "Rcap": {
+   "value": "kq*(M1.N*Q1*(RJ1 - dr) + M2.N*Q2*(RJ2 - dr) + M3.N*Q3*(RJ3 - dr) + M4.N*Q4*(RJ4 - dr) + M5.N*Q5*(RJ5 - dr))",
+   "unit": "kg/h"
+  },
+  "Qtot": {
+   "value": "kq*(M1.N*Q1 + M2.N*Q2 + M3.N*Q3 + M4.N*Q4 + M5.N*Q5)",
+   "unit": "kg/h"
+  }
+ },
+ "where": [
+  "M1.N + M2.N + M3.N + M4.N + M5.N <= 8",
+  "Qtot <= qmax*FH"
+ ],
+ "laws": [
+  {
+   "zfl": "cAo == cT + gA/FA",
+   "source": "stage A balance, imp.1"
+  },
+  {
+   "zfl": "FB*cBi == x*cAo + (FB - x)*cT",
+   "source": "stage B inlet mix, imp.1"
+  },
+  {
+   "zfl": "cBo == cBi + gB/FB",
+   "source": "stage B balance, imp.1"
+  },
+  {
+   "zfl": "FH*cH == (FA - x)*cAo + FB*cBo",
+   "source": "header mix, imp.1"
+  },
+  {
+   "zfl": "FH*cT == ((1 - P.p)*FH - Rcap)*cH + P.p*FH*cm",
+   "source": "tank balance with purge and module removal, imp.1"
+  },
+  {
+   "zfl": "cAo2 == cT2 + g2/FA",
+   "source": "stage A balance, imp.2"
+  },
+  {
+   "zfl": "FB*cBi2 == x*cAo2 + (FB - x)*cT2",
+   "source": "stage B inlet mix, imp.2"
+  },
+  {
+   "zfl": "cBo2 == cBi2",
+   "source": "stage B balance, imp.2 (gB = 0)"
+  },
+  {
+   "zfl": "FH*cH2 == (FA - x)*cAo2 + FB*cBo2",
+   "source": "header mix, imp.2"
+  },
+  {
+   "zfl": "FH*cT2 == (1 - P.p)*FH*cH2 + P.p*FH*cm2",
+   "source": "tank balance, imp.2 (no removal)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "cT",
+   "op": "<=",
+   "value": "0.008",
+   "why": "R1 c_T <= 0.8 wt%"
+  },
+  {
+   "quantity": "cBi",
+   "op": "<=",
+   "value": "0.011",
+   "why": "R2 c_Bi <= 1.1 wt%"
+  },
+  {
+   "quantity": "cBo",
+   "op": "<=",
+   "value": "0.015",
+   "why": "R2 c_Bo <= 1.5 wt%"
+  },
+  {
+   "quantity": "cT2",
+   "op": "<=",
+   "value": "0.004",
+   "why": "R3 c_T2 <= 0.4 wt%"
+  }
+ ],
+ "objective": {
+  "minimize": "(M1.N*C1 + M2.N*C2 + M3.N*C3 + M4.N*C4 + M5.N*C5) + P.p*FH*hrs*price",
+  "unit": "EUR",
+  "why": "annual cost: modules + purge/make-up"
+ },
+ "catalog": {
+  "cnt": {
+   "integers": {
+    "field": "N",
+    "from": "0",
+    "to": "4",
+    "unit": ""
+   }
+  },
+  "purge": {
+   "continuous": {
+    "field": "p",
+    "from": "0.0001",
+    "to": "0.04",
+    "unit": ""
+   }
+  },
+  "cnt1": {
+   "integers": {
+    "field": "N",
+    "from": "0",
+    "to": "0",
+    "unit": ""
+   }
+  },
+  "cnt2": {
+   "integers": {
+    "field": "N",
+    "from": "0",
+    "to": "0",
+    "unit": ""
+   }
+  },
+  "cnt3": {
+   "integers": {
+    "field": "N",
+    "from": "0",
+    "to": "0",
+    "unit": ""
+   }
+  },
+  "cnt4": {
+   "integers": {
+    "field": "N",
+    "from": "3",
+    "to": "3",
+    "unit": ""
+   }
+  },
+  "cnt5": {
+   "integers": {
+    "field": "N",
+    "from": "0",
+    "to": "0",
+    "unit": ""
+   }
+  }
+ }
+}

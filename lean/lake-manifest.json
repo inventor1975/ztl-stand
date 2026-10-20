@@ -1,0 +1,12 @@
+{"version": "1.1.0",
+ "packagesDir": ".lake/packages",
+ "packages":
+ [{"type": "path",
+   "scope": "",
+   "name": "ztl",
+   "manifestFile": "lake-manifest.json",
+   "inherited": false,
+   "dir": "../../ZTL/lean",
+   "configFile": "lakefile.toml"}],
+ "name": "ztlstand",
+ "lakeDir": ".lake"}

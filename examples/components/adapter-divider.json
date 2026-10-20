@@ -1,0 +1,114 @@
+{
+ "stand": "universal-stand/1",
+ "why": "a 5 V adapter whose set point comes from a feedback divider: Vref 1.25 V +-1 %, R2 = 1 kohm, R1 CHOSEN from a catalog (the component's own parameter); its objective is the part's price",
+ "interface": {
+  "inputs": {
+   "Vin": {
+    "assume": [
+     "200",
+     "250"
+    ],
+    "bands": [
+     "200",
+     "230",
+     "250"
+    ]
+   }
+  },
+  "outputs": [
+   "Vout"
+  ]
+ },
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "value": "230",
+   "unit": "V"
+  },
+  "Vref": {
+   "role": "given",
+   "value": "1.25",
+   "tolerance": "0.01",
+   "unit": "V"
+  },
+  "R2": {
+   "role": "given",
+   "value": "1000",
+   "tolerance": "0.01",
+   "unit": "ohm"
+  },
+  "a": {
+   "role": "given",
+   "value": "0.002",
+   "tolerance": "0.5",
+   "unit": ""
+  },
+  "Vout": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {
+  "R1": {
+   "from": [
+    "r1"
+   ]
+  }
+ },
+ "catalog": {
+  "r1": {
+   "items": [
+    {
+     "name": "2k7-1%",
+     "R": {
+      "value": "2700",
+      "tolerance": "0.01"
+     },
+     "price": "0.010"
+    },
+    {
+     "name": "3k0-1%",
+     "R": {
+      "value": "3000",
+      "tolerance": "0.01"
+     },
+     "price": "0.012"
+    },
+    {
+     "name": "3k3-1%",
+     "R": {
+      "value": "3300",
+      "tolerance": "0.01"
+     },
+     "price": "0.010"
+    },
+    {
+     "name": "3k0-0.1%",
+     "R": {
+      "value": "3000",
+      "tolerance": "0.001"
+     },
+     "price": "0.050"
+    }
+   ],
+   "fields": {
+    "R": {
+     "unit": "ohm"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vout == Vref*(1 + R1.R/R2) + a*(Vin - 230)"
+  }
+ ],
+ "requirements": [],
+ "objective": {
+  "minimize": "R1.price",
+  "unit": "EUR"
+ }
+}

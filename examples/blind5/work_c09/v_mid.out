@@ -1,0 +1,1024 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 132,
+  "failed_at_nominal": 110,
+  "judged": 22,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "OWN=own_block(B=1700); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "23500/13 (~1807.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1700); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "13100/13 (~1007.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1700); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "4000/13 (~307.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1700); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "1050/11 (~95.4545)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1750); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "22850/13 (~1757.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1750); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "12450/13 (~957.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1750); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "3350/13 (~257.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1750); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "500/11 (~45.4545)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=19750/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "244850/143 (~1712.24)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=19750/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "130450/143 (~912.238)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=19750/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "30350/143 (~212.238)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=19750/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "1069/550 (~1.94364)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=1800); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "22200/13 (~1707.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1800); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "11800/13 (~907.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1800); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "2700/13 (~207.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1800); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "592/275 (~2.15273)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=1850); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "21550/13 (~1657.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1850); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "11150/13 (~857.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1850); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "2050/13 (~157.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1850); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "19/550 (~0.0345455)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=20825/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "230875/143 (~1614.51)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=20825/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "116475/143 (~814.51)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=20825/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "16375/143 (~114.51)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=20825/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "1539/550 (~2.79818)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=1900); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "20900/13 (~1607.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1900); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "10500/13 (~807.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1900); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "1400/13 (~107.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1900); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "1779/550 (~3.23455)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=1950); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "20250/13 (~1557.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1950); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "9850/13 (~757.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1950); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "750/13 (~57.6923)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1950); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "3539/550 (~6.43455)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=21950/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "216250/143 (~1512.24)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=21950/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "101850/143 (~712.238)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=21950/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "1750/143 (~12.2378)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=21950/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "5139/550 (~9.34364)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2000); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "19600/13 (~1507.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2000); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "9200/13 (~707.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2000); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "100/13 (~7.69231)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2000); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "5299/550 (~9.63455)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=22025/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "215275/143 (~1505.42)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=22025/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "100875/143 (~705.42)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=22025/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "775/143 (~5.41958)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=22025/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "489/50 (~9.78)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2050); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "18950/13 (~1457.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2050); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "8550/13 (~657.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2050); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "4900/11 (~445.455)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2050); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "7059/550 (~12.8345)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=23050/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "201950/143 (~1412.24)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=23050/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "87550/143 (~612.238)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=23050/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "400",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=23050/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "12341/3575 (~3.45203)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=23075/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "201625/143 (~1409.97)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=23075/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "87225/143 (~609.965)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=23075/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "4375/11 (~397.727)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=23075/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "2619/715 (~3.66294)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2100); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "18300/13 (~1407.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2100); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "7900/13 (~607.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2100); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "4350/11 (~395.455)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2100); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "1259/325 (~3.87385)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2150); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "17650/13 (~1357.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2150); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "7250/13 (~557.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2150); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "3800/11 (~345.455)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2150); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "2767/325 (~8.51385)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2200); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "17000/13 (~1307.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2200); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "6600/13 (~507.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2200); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "3250/11 (~295.455)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2200); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "171/13 (~13.1538)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2250); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "16350/13 (~1257.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2250); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "5950/13 (~457.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2250); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "2700/11 (~245.455)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2250); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "5783/325 (~17.7938)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2300); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "15700/13 (~1207.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2300); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "5300/13 (~407.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2300); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "2150/11 (~195.455)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2300); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "7291/325 (~22.4338)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=25325/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "172375/143 (~1205.42)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=25325/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "57975/143 (~405.42)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=25325/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "2125/11 (~193.182)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=25325/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "16191/715 (~22.6448)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2350); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "15050/13 (~1157.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2350); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "4650/13 (~357.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2350); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "1600/11 (~145.455)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2350); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "8799/325 (~27.0738)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=26325/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "159375/143 (~1114.51)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=26325/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "44975/143 (~314.51)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=26325/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "7703/2860 (~2.69336)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=26325/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "22223/715 (~31.0811)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=26375/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "158725/143 (~1109.97)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=26375/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "44325/143 (~309.965)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=26375/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "44313/14300 (~3.09881)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=26375/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "112623/3575 (~31.5029)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2400); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "14400/13 (~1107.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2400); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "4000/13 (~307.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2400); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "1073/325 (~3.30154)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2400); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "10307/325 (~31.7138)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2450); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "13750/13 (~1057.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2450); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "3350/13 (~257.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2450); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "1009/130 (~7.76154)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2450); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "2363/65 (~36.3538)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=27450/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "144750/143 (~1012.24)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=27450/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "30350/143 (~212.238)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=27450/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "16897/1430 (~11.8161)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=27450/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "29009/715 (~40.572)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2500); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "13100/13 (~1007.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2500); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "2700/13 (~207.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2500); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "3972/325 (~12.2215)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2500); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "13323/325 (~40.9938)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2550); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "12450/13 (~957.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2550); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "2050/13 (~157.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2550); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "10843/650 (~16.6815)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2550); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "14831/325 (~45.6338)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2600); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "11800/13 (~907.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2600); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "1400/13 (~107.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2600); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "6871/325 (~21.1415)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2600); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "16339/325 (~50.2738)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2650); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "11150/13 (~857.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2650); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "750/13 (~57.6923)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2650); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "16641/650 (~25.6015)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2650); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "17847/325 (~54.9138)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=29625/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "116475/143 (~814.51)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=29625/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "2075/143 (~14.5105)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=29625/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "421183/14300 (~29.4534)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=29625/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "210643/3575 (~58.9211)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=29650/11); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "116150/143 (~812.238)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=29650/11); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "1750/143 (~12.2378)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=29650/11); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "212041/7150 (~29.6561)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=29650/11); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "211397/3575 (~59.132)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2700); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "10500/13 (~807.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2700); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+      "by": "100/13 (~7.69231)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2700); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "1954/65 (~30.0615)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2700); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "3871/65 (~59.5538)",
+      "unit": "kEUR"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 132
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "OWN": {
+      "catalog": "own_block",
+      "B": {
+        "nominal": "22025/11 (~2002.27)",
+        "tolerance": "0"
+      }
+    },
+    "T": {
+      "catalog": "tiers",
+      "name": "T2",
+      "price": {
+        "nominal": "48/5 (~9.6)",
+        "tolerance": "0"
+      },
+      "commit": {
+        "nominal": "400",
+        "tolerance": "0"
+      },
+      "cap": {
+        "nominal": "1500",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "I1": "2185",
+    "I2": "1930",
+    "I3": "2515",
+    "I4": "3465",
+    "u": "91/100 (~0.91)",
+    "Ps": "21"
+  },
+  "point_units": {
+    "I1": "",
+    "I2": "",
+    "I3": "",
+    "I4": "",
+    "u": "",
+    "Ps": "EUR"
+  },
+  "value_there": {
+    "Mmin": [
+      "775/143 (~5.41958)",
+      "775/143 (~5.41958)"
+    ]
+  },
+  "unit": "",
+  "requirement": {
+    "quantity": "Mmin",
+    "op": "<=",
+    "value": "0",
+    "why": "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0"
+  },
+  "overshoot": "775/143 (~5.41958)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "0",
+      "5425/11 (~493.182)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "I4",
+        "moves_it_by": "50275/143 (~351.573)"
+      },
+      {
+        "quantity": "u",
+        "moves_it_by": "2975/22 (~135.227)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1 every quarter: B+F+S >= needed with F<=cap, S<=spot availability: uncovered need must be 0",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  }
+}

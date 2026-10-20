@@ -1,0 +1,246 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "E": {
+   "role": "given",
+   "value": "200",
+   "unit": "GPa",
+   "ground": "problem statement: steel modulus"
+  },
+  "Sy": {
+   "role": "given",
+   "range": [
+    "330",
+    "380"
+   ],
+   "unit": "MPa",
+   "why": "supplier guarantees >=330; range 330-380 per problem"
+  },
+  "KA": {
+   "role": "given",
+   "range": [
+    "0.7",
+    "1.0"
+   ],
+   "unit": "",
+   "why": "partly stiff base plates"
+  },
+  "KB": {
+   "role": "given",
+   "range": [
+    "0.8",
+    "1.2"
+   ],
+   "unit": "",
+   "why": "one end may sway"
+  },
+  "LA": {
+   "role": "given",
+   "value": "1.3",
+   "unit": "m"
+  },
+  "LB": {
+   "role": "given",
+   "value": "3.6",
+   "unit": "m"
+  },
+  "PA": {
+   "role": "given",
+   "value": "380",
+   "tolerance": "0.05",
+   "unit": "kN"
+  },
+  "PB": {
+   "role": "given",
+   "value": "95",
+   "tolerance": "0.10",
+   "unit": "kN"
+  },
+  "nA": {
+   "role": "given",
+   "value": "2",
+   "unit": ""
+  },
+  "nB": {
+   "role": "given",
+   "value": "5/2",
+   "unit": ""
+  },
+  "lamA": {
+   "role": "derived",
+   "unit": "",
+   "why": "slenderness K*L/r"
+  },
+  "lamB": {
+   "role": "derived",
+   "unit": ""
+  },
+  "PallA": {
+   "role": "derived",
+   "unit": "kN",
+   "why": "allowable load sigma_cr*A/n"
+  },
+  "PallB": {
+   "role": "derived",
+   "unit": "kN"
+  }
+ },
+ "slots": {
+  "SA": {
+   "from": [
+    "sections"
+   ]
+  },
+  "SB": {
+   "from": [
+    "sections"
+   ]
+  }
+ },
+ "define": {
+  "lamAd": "KA*LA*sqrt(SA.A/SA.I)",
+  "xA": "Sy*lamAd*lamAd/(2*pi*pi*E)",
+  "lamBd": "KB*LB*sqrt(SB.A/SB.I)",
+  "xB": "Sy*lamBd*lamBd/(2*pi*pi*E)"
+ },
+ "laws": [
+  {
+   "zfl": "lamA == lamAd",
+   "source": "slenderness lambda = K*L/r, r = sqrt(I/A)"
+  },
+  {
+   "zfl": "PallA == if(xA > 1, Sy/(2*xA), Sy*(1 - xA/2))*SA.A/nA",
+   "source": "Euler sigma_cr = Sy/(2x) for x > 1, Johnson Sy(1 - x/2) otherwise, x = (lambda/lambda_c)^2 \u2014 the textbook branch, written as such"
+  },
+  {
+   "zfl": "lamB == lamBd",
+   "source": "slenderness lambda = K*L/r, r = sqrt(I/A)"
+  },
+  {
+   "zfl": "PallB == if(xB > 1, Sy/(2*xB), Sy*(1 - xB/2))*SB.A/nB",
+   "source": "Euler sigma_cr = Sy/(2x) for x > 1, Johnson Sy(1 - x/2) otherwise, x = (lambda/lambda_c)^2 \u2014 the textbook branch, written as such"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "PallA",
+   "op": ">=",
+   "value": "PA",
+   "why": "column A: allowable >= applied for all E,Sy,K,load"
+  },
+  {
+   "quantity": "lamA",
+   "op": "<=",
+   "value": "120",
+   "why": "slenderness limit column A"
+  },
+  {
+   "quantity": "PallB",
+   "op": ">=",
+   "value": "PB",
+   "why": "column B: allowable >= applied for all E,Sy,K,load"
+  },
+  {
+   "quantity": "lamB",
+   "op": "<=",
+   "value": "200",
+   "why": "slenderness limit column B"
+  }
+ ],
+ "objective": {
+  "minimize": "SA.pm*LA + SB.pm*LB",
+  "why": "cheapest pair, price per metre x length"
+ },
+ "catalog": {
+  "sections": {
+   "ground": "problem statement catalog",
+   "items": [
+    {
+     "name": "Round d50",
+     "A": {
+      "range": [
+       "314159265358979/16000000000000",
+       "15707963267949/800000000000"
+      ]
+     },
+     "I": {
+      "range": [
+       "314159265358979/10240000000000",
+       "15707963267949/512000000000"
+      ]
+     },
+     "pm": "18"
+    },
+    {
+     "name": "Round d60",
+     "A": {
+      "range": [
+       "2827433388230811/100000000000000",
+       "141371669411541/5000000000000"
+      ]
+     },
+     "I": {
+      "range": [
+       "25446900494077299/400000000000000",
+       "1272345024703869/20000000000000"
+      ]
+     },
+     "pm": "26"
+    },
+    {
+     "name": "Round d70",
+     "A": {
+      "range": [
+       "15393804002589971/400000000000000",
+       "769690200129501/20000000000000"
+      ]
+     },
+     "I": {
+      "range": [
+       "754296396126908579/6400000000000000",
+       "37714819806345549/320000000000000"
+      ]
+     },
+     "pm": "35"
+    },
+    {
+     "name": "CHS 76.1x4",
+     "A": "9.06",
+     "I": "59.1",
+     "pm": "22"
+    },
+    {
+     "name": "CHS 101.6x5",
+     "A": "15.2",
+     "I": "180",
+     "pm": "34"
+    },
+    {
+     "name": "CHS 139.7x5",
+     "A": "21.2",
+     "I": "481",
+     "pm": "48"
+    },
+    {
+     "name": "RHS 100x100x6",
+     "A": "21.6",
+     "I": "336",
+     "pm": "44"
+    }
+   ],
+   "fields": {
+    "A": {
+     "unit": "cm^2"
+    },
+    "I": {
+     "unit": "cm^4"
+    },
+    "pm": {
+     "unit": "USD/m"
+    }
+   }
+  }
+ },
+ "report": "all",
+ "note": "blind-2 c05 with the Euler/Johnson switch as if(...) instead of the author's min/max identity (2026-10-10)"
+}

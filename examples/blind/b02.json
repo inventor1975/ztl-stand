@@ -1,0 +1,238 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Tamb": {
+   "role": "given",
+   "range": [
+    "15",
+    "30"
+   ],
+   "unit": "C",
+   "why": "ambient (the mode sets it)"
+  },
+  "P": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "W",
+   "why": "dissipated power (the mode sets it)"
+  },
+  "K": {
+   "role": "given",
+   "value": "32000",
+   "tolerance": "0.15",
+   "unit": "Pa*s^2*m^-6",
+   "why": "filter+system resistance, clean to partly clogged"
+  },
+  "cp": {
+   "role": "given",
+   "value": "1007",
+   "unit": "J*kg^-1*K^-1",
+   "ground": "problem statement"
+  },
+  "p0": {
+   "role": "given",
+   "value": "101325",
+   "unit": "Pa",
+   "ground": "problem statement"
+  },
+  "Rg": {
+   "role": "given",
+   "value": "287",
+   "unit": "J*kg^-1*K^-1",
+   "ground": "problem statement"
+  },
+  "dT": {
+   "role": "derived",
+   "unit": "K"
+  },
+  "Tout": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "noise": {
+   "role": "derived",
+   "unit": ""
+  }
+ },
+ "slots": {
+  "F": {
+   "from": [
+    "fans"
+   ]
+  }
+ },
+ "define": {
+  "rho": "p0/(Rg*(Tamb + 273.15))",
+  "Qlb": "g7",
+  "g0": "F.Qmax",
+  "g1": "F.pmax*F.Qmax/(F.pmax + K*F.Qmax*g0)",
+  "g2": "F.pmax*F.Qmax/(F.pmax + K*F.Qmax*g1)",
+  "g3": "F.pmax*F.Qmax/(F.pmax + K*F.Qmax*g2)",
+  "g4": "F.pmax*F.Qmax/(F.pmax + K*F.Qmax*g3)",
+  "g5": "F.pmax*F.Qmax/(F.pmax + K*F.Qmax*g4)",
+  "g6": "F.pmax*F.Qmax/(F.pmax + K*F.Qmax*g5)",
+  "g7": "F.pmax*F.Qmax/(F.pmax + K*F.Qmax*g6)"
+ },
+ "laws": [
+  {
+   "zfl": "dT == P/(rho*cp*Qlb)",
+   "source": "energy balance, all heat leaves with the air; Q replaced by rigorous lower bound Qlb"
+  },
+  {
+   "zfl": "Tout == Tamb + dT",
+   "source": "outlet temperature"
+  },
+  {
+   "zfl": "noise == F.noise",
+   "source": "fan datasheet"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "noise",
+   "op": "<=",
+   "value": "40",
+   "why": "noise limit in the worst case"
+  }
+ ],
+ "catalog": {
+  "fans": {
+   "items": [
+    {
+     "Qmax": {
+      "value": "0.032",
+      "tolerance": "0.05"
+     },
+     "pmax": {
+      "value": "35",
+      "tolerance": "0.08"
+     },
+     "noise": {
+      "range": [
+       "26",
+       "30"
+      ]
+     },
+     "price": "9"
+    },
+    {
+     "Qmax": {
+      "value": "0.040",
+      "tolerance": "0.05"
+     },
+     "pmax": {
+      "value": "48",
+      "tolerance": "0.08"
+     },
+     "noise": {
+      "range": [
+       "31",
+       "35"
+      ]
+     },
+     "price": "14"
+    },
+    {
+     "Qmax": {
+      "value": "0.047",
+      "tolerance": "0.05"
+     },
+     "pmax": {
+      "value": "62",
+      "tolerance": "0.08"
+     },
+     "noise": {
+      "range": [
+       "36",
+       "40"
+      ]
+     },
+     "price": "19"
+    },
+    {
+     "Qmax": {
+      "value": "0.055",
+      "tolerance": "0.06"
+     },
+     "pmax": {
+      "value": "80",
+      "tolerance": "0.10"
+     },
+     "noise": {
+      "range": [
+       "41",
+       "45"
+      ]
+     },
+     "price": "27"
+    }
+   ],
+   "ground": "fan datasheet",
+   "fields": {
+    "Qmax": {
+     "unit": "m^3/s"
+    },
+    "pmax": {
+     "unit": "Pa"
+    },
+    "noise": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ },
+ "objective": {
+  "minimize": "F.price",
+  "why": "cheapest fan"
+ },
+ "modes": {
+  "normal": {
+   "quantities": {
+    "P": {
+     "value": "150",
+     "tolerance": "0.1"
+    },
+    "Tamb": {
+     "range": [
+      "15",
+      "30"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Tout",
+     "op": "<=",
+     "value": "40",
+     "why": "outlet <= 40 C"
+    }
+   ]
+  },
+  "hot": {
+   "quantities": {
+    "P": {
+     "value": "260",
+     "tolerance": "0.1"
+    },
+    "Tamb": {
+     "range": [
+      "30",
+      "45"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Tout",
+     "op": "<=",
+     "value": "55",
+     "why": "outlet <= 55 C"
+    }
+   ]
+  }
+ }
+}

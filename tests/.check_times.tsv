@@ -1,0 +1,275 @@
+0.09	+-1% from 1% parts: EARNED, 1k/1k, guaranteed exactly [99/40, 101/40]
+0.39	+-0.5% from 1% parts: REFUTED, with a violating point recomputed
+1.23	+-0.5% with 0.1% parts in the catalog: EARNED on the 0.1% parts
+4.03	power, 1/16 W parts only: REFUTED at a real corner where P1 exceeds the rating
+1.20	power, 1/16 or 1/4 W: EARNED on 1/4 W parts, power bounded BY ZTL (interval reading, Z1 in
+0.00	checker: divider at (990, 1010) is exactly 101/40, and P1 = (1/400)^2*990 exactly
+0.00	checker refuses a nonlinear law that defines nothing (outside its class) aloud
+0.10	MUTATION: a judge claiming a too-narrow exact range is caught (STAND FAULT, not EARNED)
+1.48	MUTATION: a judge claiming a violation no corner shows is caught (STAND FAULT)
+0.09	a sound but not-exact range inside the requirement still EARNS (exactness is needed only t
+0.10	a judge whose solver bounds nothing: EARNED only through ZTL's OTHER instrument, the certi
+0.77	a judge silent in BOTH instruments (solver and certificate check) yields OPEN, never EARNE
+0.29	MUTATION: ZTL claiming zero power for a definition is caught (STAND FAULT, not EARNED)
+0.70	MUTATION: when ZTL is silent, a fallback claiming zero power is caught too (STAND FAULT)
+4.35	when ZTL is silent on a definition, the stand's fallback bounds it and labels it 'outside 
+0.02	t1 thermal: EARNED (2 C/W heatsink, 0.5 pad), Tj <= 599/5, now bounded BY ZTL exactly (Z2 
+0.02	t2 gap stack-up: EARNED, gap in [11/100, 69/100]
+0.15	t3 RC cutoff: REFUTED with a real violating point (f below 950 Hz), in nF/ohm/Hz with unit
+0.00	t3 reasons (J7): the spread is wider than the window, and the capacitor's tolerance moves 
+0.02	t1 objective (J2): the cheapest design that holds Tj (4.1), proven optimal (every cheaper 
+0.00	units (J5): a law adding watts to degrees is refused as a BRICK ERROR
+0.01	t4 battery: EARNED with 7 cells, the count given as an integer range (J6), V bounded by ZT
+0.95	t5 divider over 0..85 C: EARNED on 25 ppm parts, exact through ZTL
+0.00	a nonlinear law that defines nothing is refused as a BRICK ERROR (not a crash)
+0.11	t6 truss, independent E per bar: EARNED, lightest sections 150/150/100 proven optimal, all
+0.14	t7 truss, ONE E for all bars (correlated): EARNED directly now (ZTL _solve_rank_many), sam
+0.08	t7b the same, rewritten with the scaled displacement v = E*u: EARNED, stresses independent
+0.16	t3 minimal conflicts: the 1 kHz +-5% window alone
+3.63	power on 1/16 W parts: exactly three minimal conflicts, none containing another (an antich
+0.00	minimal conflicts on a small brick are still COMPLETE (4 requirements: every subset fits t
+11.10	minimal conflicts over 12 requirements: found by deletion within the budget, each one of t
+20.53	minimal conflicts with --jobs 3: the same listing as one process
+0.49	dropping the one requirement every conflict shares (>= 24 mA) makes it EARNED
+1.16	t8 load power (peak at RL = Rs, inside 1..100 ohm) <= 0.6 W: Rs = 10 refuted at an interio
+0.09	t8b 0.05 W over 1..1000 ohm: nominal and every corner pass, REFUTED at an interior point t
+0.85	MUTATION: a searcher flipping every monotone sign — ZTL refused all 5 such certificates (c
+1.13	t8: the checker re-checked the certificate itself (its own derivative and interval arithme
+1.62	MUTATION: a checker that confirms nothing — no design is EARNED on a certificate, and the 
+0.00	the checker refuses a false monotone certificate (P is not increasing in RL past RL = Rs)
+0.00	the checker refuses a true certificate for a FALSE bound (0.57 W; the peak is 0.5739)
+9.79	J9 at random: 140 certificates ZTL accepted — the checker re-checked 140, could not 0; fal
+1.73	t9 the load power written as a circuit (P == VL*I, VL and I from the loop): the same answe
+0.15	t9b as a circuit: REFUTED at an interior point (before: 16 designs OPEN)
+0.97	MUTATION: the stand's symbolic solution made wrong — ZTL, solving the system ITSELF, refus
+1.74	t9: ZTL solved the circuit's system itself (the stand's solution is used only to search)
+0.00	the checker's own Cramer expression equals the solved system at 9 points (exact)
+1.17	t7c two batches: EARNED and optimal (B2 = 150, the two cheaper refuted), every requirement
+1.16	t7c, the earned design sampled independently on a 7^4 grid (2401 points, exact): max |s| 9
+0.01	t10 x = p/(1+p^2) <= 0.45 on p in 1/4..4: nominal and corners pass, REFUTED at an interior
+0.01	MUTATION: a certificate check that 'proves' the bound ZTL's exact range contradicts -> STA
+0.14	t11 heatsink, full load (Tj <= 125) and cold idle (Tj >= -6): no catalog design holds both
+0.00	minimal_conflicts ACROSS MODES: neither mode's requirement alone, only the pair conflicts 
+0.08	t11b the same with Tj >= -7 at idle: EARNED and optimal (HS 1.2, pad 0.5, 7.1), guaranteed
+36.81	one mode equal to the plain brick gives the same verdict and design on 6 examples: [True, 
+0.00	a mode overriding a DERIVED quantity is a BRICK ERROR
+0.00	units: parentheses, h, min, L, mol, Ah, Wh, bar, dB, currencies, the c prefix
+0.00	each currency is its own dimension (USD + EUR is a unit error, a rate is a quantity)
+0.30	pi undeclared: the built-in bracket is used — same verdict and design as the brick's own p
+0.00	load never edits the caller's brick (the constant went into a copy)
+2.05	bounds as expressions: R1.P*2/2 and 2.5*99/100 decide exactly as R1.P and 2.475
+0.65	a bound whose dimension is not the quantity's (W*W for a W) is a BRICK ERROR
+0.53	a ratiometric window Vin*0.49..Vin*0.51 with Vin +-2% (true ratio 0.495..0.505): OPEN, not
+0.14	the same window written as the RATIO k (Vout == k*Vin): EARNED — the correlation kept
+0.80	valve springs, report all: S2 the only EARNED, each other REFUTED with the requirement it 
+0.69	without report all: the same verdict, the list stops at the first EARNED
+0.10	with modes, report all: every design listed, each REFUTED one names its failing mode
+0.83	rocket motor with the real ln (Tsiolkovsky) and sqrt (rail speed): REFUTED like the blind 
+0.09	dosing with the real exp: every regimen REFUTED (the author's corner scan with the true ex
+0.05	mortgage with the real annuity (pow) and the rate cap (min): L2 the only feasible product,
+0.06	lens with the real atan and tan: L4 the only lens that holds W and s, as the author found
+0.00	exp of a time (unit h): a BRICK ERROR — a transcendental function reads a dimensionless ar
+0.00	an unknown function (sinh): a BRICK ERROR naming the functions that exist
+0.10	WITHOUT the law's domain the stand 'earns' I1 x 2 — mu 220 < lambda/N 900, a negative M/M/
+0.17	WITH "valid": "INST.mu > lam/CNT.N": I1 x 2 REFUTED as outside the law's domain; I2 x 7 EA
+0.00	a strict bound: 0 does not satisfy > 0, and a value exactly 0 violates it
+0.57	servers, normal (N_active = N) and degraded (a mode define N_active = N - 1): I2 x 7 EARNE
+1.26	fan (blind b02) with the REAL operating point pmax(1 - Q/Qmax) = K Q^2: F3 EARNED and OPTI
+37.13	pump (blind b03) with Swamee-Jain friction AT THE FLOW ITSELF (log10, Re^0.9): P2 EARNED, 
+0.09	x^3 + x = p (one root, monotone in p): y = x^2 EARNED inside its bound
+0.02	the same, y <= 1: REFUTED at a concrete point (x^2 reaches 1.38 at p = 4), recomputed by t
+0.05	x^2 = p: TWO roots (-2..-1 and 1..2) — the enclosure holds both, y = x is bounded by 2: EA
+1.15	x^2 = p, y >= 0: the negative branch exists, so NOT earned (the enclosure keeps it)
+0.00	no root in the search range for this design: OPEN with the reason, never a value
+0.00	refused aloud: an explicit law with "search"
+0.00	refused aloud: two implicit laws for one quantity
+0.00	refused aloud: an implicit law over a derived quantity (version 1)
+0.00	refused aloud: "search" on a given quantity
+0.00	refused aloud: a search range upside down
+0.11	MUTATION: ZTL hides the negative branch of x^2 = p (reports the top quarter, so y >= -1.5 
+0.08	mortgage (blind b09), minimize the WORST-CASE total paid: L2 EARNED and optimal, worst tot
+0.01	worst case reorders: A is cheaper at nominal (2.25 vs 3.25) but B wins the worst case (4 v
+0.01	a loose bound is NOT called optimal: A's worst (truly 2) is proved only <= 5, so B (2.5) i
+0.00	I3: a NOMINAL objective naming a derived quantity is read at the nominal point by the laws
+0.00	worst case with modes: refused aloud (not supported yet)
+1.55	G12: four spellings of fc = 1/(2 pi R C) give the SAME verdict on every one of the 216 des
+0.00	an OPEN design says WHICH requirement, the proved range and why it stayed open (blind b06:
+0.00	H7: a define named like a catalog field (Uc vs HX.Uc) is NOT substituted inside the field
+0.23	H8: min inside an implicit law (a piecewise fan curve) is read as an enclosure — no STAND 
+0.01	H9: an implicit law with no root no longer hides a refutation that does not depend on it (
+0.00	H4: E96 generated by the IEC rule equals the printed table, E48 is every other value, E192
+0.00	H4: an E96 decade of 1000 runs 1000 .. 9760 ohm (as E24's runs 1000 .. 9100)
+7.30	H6: 576 designs, 5 earned: the cut list shows the EARNED first and counts every verdict (t
+0.76	H14: designs with the SAME objective as the reported optimum are said (bolts at $5.60)
+14.95	buffer (blind c06): phosphate 16 + 35 mL EARNED and optimal at $1.02 — the author's true c
+10.80	PV (blind c09) with computed spi = ceil(NP / inputs) and where NP <= 2*inputs: the author'
+0.00	where on a label: only item b is a design (1 excluded)
+0.00	where comparing two quantities in mL: exact, in SI (item a: 2 mL <= 3 mL; b excluded)
+0.00	where with a bare number beside mL: refused aloud (it would be read as 3 m^3)
+0.00	where reading a toleranced field: refused aloud (exact values only)
+0.00	computed m = max(k, 2) is an exact value per design: y = 4 and 6, both EARNED
+0.00	computed with a declared unit that does not match its expression (mL declared dimensionles
+0.00	ceil of a ratio of two mL quantities: exact (ceil(2/3) = 1, ceil(4/3) = 2)
+0.00	if compiles to the one branch every reader knows; >= and <= swap the branches (the boundar
+0.15	columns (blind c05) with the textbook Euler/Johnson branch as if(...): the author's answer
+0.00	a JUMP: y = 10 where x > 1, else 0, required >= 5 over x in [0, 2]: REFUTED at a point (ne
+0.00	the same jump where the branch is decided (x in [1.5, 2]): EARNED, y = 10
+0.00	if with == : refused aloud (< <= > >= only)
+0.03	I5: 20 toleranced quantities in 10 INDEPENDENT laws — the checker enumerates corners per g
+0.07	I8: max inside an expression decided by a certificate (true peak 1.25 <= 1.3): EARNED by i
+0.31	I4: an end a certificate proved is labelled as such (the accumulator's 6.8 L is the bound,
+0.00	nominal(S.t) in computed reads the toleranced field at its nominal (5): y = 12 for both it
+0.00	without nominal() the same toleranced field is refused in computed (exact values only)
+2.83	I3: wind turbine (blind c04) — the objective names the derived energy E, read at the nomin
+5.44	pruning: the same verdict, objective and EARNED set as judging all 3721 designs one by one
+2.78	MUTATION: ZTL claims every group violates (its readings lie) — the checker's own enclosure
+26.73	I1: room acoustics (blind c11) over the FULL integer space 0..125 per panel type (2 M comb
+13.45	pruning over a LINEAR SYSTEM (a T-network, two loop laws, 110 592 designs): REFUTED as wit
+0.21	I2: a two-ingredient diet with uncertain protein: the solver's mix (0.4074 / 0.5926) is EA
+0.01	Farkas: the diet asking protein 0.5 (0.44 at most): REFUTED — ZTL PROVES no mix exists (it
+0.02	Farkas with a discrete slot: without the premix no mix exists (proved), with it the cheape
+0.02	continuous choices WITH MODES: summer alone would cost 70/27 (~2.593), winter's weaker bea
+0.01	with modes, Farkas: winter asking 0.35 (0.33 at most) — REFUTED, proved no mix exists
+0.04	scenario cuts: a datum shared by two coefficients — the box LP finds no mix, the cuts find
+0.01	scenario cuts, Farkas: asking P >= 2.1 (2 at most, at every s) — REFUTED, the cuts' own da
+0.13	J3: a purge inside a ratio (not affine): EARNED at p ~ 0.0975, ZTL (zmin) proves L <= 97.5
+0.02	J3, no mix: asking c <= 0.004 needs p >= 0.235 > 0.2 — REFUTED, ZTL (zmin) proves every pi
+4.37	J3: blind c01 with the PCM mass continuous (exp, two lanes as modes): EARNED VIP-40, m ~ 6
+6.11	J3: blind c05 with the surcharge height continuous (log10): EARNED h ~ 0.1762 m at ~149 64
+2.47	J3 + a SYSTEM of laws: blind c06 with the purge continuous (concentrations from 10 linear 
+0.07	J10: continuous mode names its minimal conflict — protein, batch and budget together (ever
+0.37	continuous + a bound naming the part's limit (DEV.Tc): EARNED part M, sink R ~ 3.5 K/W (ha
+0.16	find WITH MODES: the largest V both modes keep is 5.94 (hand 0.06 x 99), 5.941 refuted at 
+0.00	  ... and a mode that overrides the searched given — refused
+0.00	units of round 4: oz (1/16 lb), ozf, gal (231 in^3), gpm — exact; 1 gpm = 3.785411784 L/mi
+34.27	blind 6 c10: a mix is judged in ITS OWN combination — DR6/DR10 x none/F15: EARNED DR10 wit
+0.71	blind 6 c03: a stalled pack (sqrt of a negative number at the nominal point) no longer a S
+2.15	blind 6 c04: a brick with `find` also returns the DECISION as written — the limit -37.86 C
+0.00	scientific notation in a law (8.6541e-5) is read as an exact fraction (blind 6, c10: 'malf
+0.00	units: daN (the lashing tables' decanewton, blind 6 c09) = 10 N
+20.09	blind 6 c06/c07/c12: `timeout 20` stops the NONLINEAR continuous path (20 s; it ran past 9
+0.10	sin and cos: a strap at 55..65 deg, 1000 N — Fv >= 800 and Fh <= 580 EARNED, Fv from 1000 
+0.48	  ... Fv >= 830 REFUTED at alpha = 55 deg
+58.48	J1: a pension portfolio whose LP vertex is tight: EARNED (was a false REFUTED), the contin
+43.05	J6: the anode bed in its LITERAL form (Es = Ea - I*R, I implicit): EARNED Mg-S-32 x 4 at 6
+0.13	K9: c09's literal coverage B + F + S - N >= 0 (min/max chains, 0 over whole regions; read 
+1.87	I2: broiler feed (blind c12) with CONTINUOUS amounts over the full uncertainty box: EARNED
+45.07	J4: a run killed by `timeout` (SIGTERM) still prints JSON: OPEN, how far it got, and the d
+0.00	table compiles to the ifpos chain an author typed by hand (the same text)
+0.01	table: the maximum 3 at the INNER knot x = 10 (both corners pass): y <= 2.9 REFUTED at a p
+0.02	table: y <= 3.01 EARNED by a certificate (the box cut at the knot)
+0.00	table with two knots is a line, held flat beyond the ends
+0.00	table with x-knots that do not increase: BRICK ERROR
+0.00	J7: year = yr = 365.25 days = 31 557 600 s; kEUR = 1000 EUR, MUSD = 10^6 USD; mEUR refused
+0.00	J7: fractional powers read and written back (m^2.5/s, m^(1/2)); a fractional power of a sc
+0.00	J7: a weir Q = C*L*H^1.5 with C in m^0.5/s — units checked, EARNED (Q <= 1.7*2*0.3^1.5 = 0
+0.00	J7: the same with H*sqrt(H) — sqrt of metres is a half power now, not an error
+0.00	J7: C in m/s (the wrong unit) — BRICK ERROR: the right side is m^(7/2)/s
+0.00	J11: x^n is pow(x, n) (never xor); abs(x) is the branch if(x > 0, x, -x)
+0.02	J11: |x - 5| <= 9 EARNED on [2, 14]; |x - 5| >= 0.01 REFUTED (x = 5 inside); x^2 - 3x <= 1
+0.01	J8: a total over two modes (P_high - P_low) with the head H shared: 9.32..10.30 kW, D <= 1
+0.02	J8: the same with H overridden in each mode (two independent draws): up to 11.28 kW, D <= 
+0.00	J8: a mode without a weight, an objective on a per-mode quantity: BRICK ERROR, said where
+0.01	J11 optional slot: Tj <= 150 with NO heatsink (0 EUR; 40 + 2.2/0.02 = 150), <= 100 the sma
+0.00	J11 where: exp(2) > 7.389 True, ln(7.389) < 2 True, ceil(exp(2)) == 8 True; log10(1000) ==
+0.01	J11 where with exp in a real brick: exp(price/1 EUR) > 10 drops the 2 EUR sink and 'none' 
+0.00	J11: exp in `computed` is a BRICK ERROR (a computed value must stay exact)
+0.00	J11: p = 0 (no purge) is named — 'the linear laws have NO solution ... no steady state', a
+0.02	B5: a stop while the conflict subsets are judged is HEARD (it was cleared by each subset's
+0.01	B5: an optional slot with modes (it was a BRICK ERROR): EARNED the small sink — 'none' pas
+0.00	B5: Manning v = R^(2/3) S^(1/2) / n with n in s/m^(1/3): units checked, v >= 1.3 EARNED (1
+0.00	B5: with prices in kEUR and no objective unit, the cost is shown in kEUR (2, not 2000), th
+0.00	B5 units: kWh/100km = 36 N, mSv = 0.001 J/kg, kvar = 1000 W, deg = pi/180 to 40 digits
+0.04	B5 degrees: tan(phi) for phi 25..29 deg <= 0.56 EARNED, <= 0.55 REFUTED (tan 29 deg = 0.55
+0.02	B5: a requirement directly on a catalog field (HS.price <= 3, no dummy quantity) — REFUTED
+0.01	B5: "conflicts": false switches minimal_conflicts off
+0.01	B5: a requirement directly on a given (P <= 2.3 W with P = 2 W +-10 %) EARNED, its range s
+0.89	speed: 12 toleranced quantities, y = sum x_i^2 (nominal 12, all-high corner 14.52): y <= 1
+0.50	parallel: --jobs 3 gives the SAME output as one process, plain (40 sinks, report all) and 
+0.29	parallel: --jobs 3 gives the SAME output on the nonlinear continuous path (EARNED and REFU
+0.01	modes: the same verdict and design in work and dev mode; checked_by says which judged
+0.00	real r04: table() inside an if() condition reads (it was 'not a readable expression')
+0.01	real r01/r02: with modes, REFUTED lists EVERY failing mode (failing_modes), not only the f
+0.01	real r06: with report all, every EARNED design shows its guaranteed ranges
+0.08	FALSE EARNED fixed: two requirements on one quantity, in either order, REFUTED (it was EAR
+0.03	... and EARNED when both hold, the shown range the merged one [1.4, 3.01]
+0.06	find largest: r03 case B, every Rsa in [0, 1.525] proved, a failing point within [0, 1.526
+0.01	find smallest: when the whole search range works, it says so (widen it)
+0.06	find smallest: Rsa >= 2.15 exactly, every Rsa in [2.15, 20] proved, a failing point in [2.
+0.00	find: no value works — REFUTED at the end every range shares
+0.00	find: a missing 'from' is a BRICK ERROR
+0.04	network: a 1 % bridge, I(b5) within +-0.2 mA and I(b1) <= 5.1 mA EARNED; the proved range 
+0.03	network: +-0.04 mA REFUTED at a corner whose current is enclosed exactly above 0.04 mA
+0.00	network: a floating node is a BRICK ERROR
+0.00	network: a requirement in volts on a current is a unit error
+4.13	network + find: every R5 in [334, 2000] ohm proved, 333 fails (by hand 333.48)
+0.00	real round 2, s05: a quotient of decimals reads exactly ('76.8/1000000' = 0.0000768)
+0.00	a unit written as a number is a BRICK ERROR (the fuzz: it reached .replace)
+0.06	dev: F >= Fneed with Fneed in [0, 25.9] kN REFUTED at mu 0.24, F 25.8914 (was OPEN: 'no co
+10.64	find list: s05's four NTC trip limits in ONE brick, each its own requirement — 320.51 / 31
+10.70	find list: a malformed item is its own BRICK ERROR, and the weakest verdict
+0.80	each_requirement: s03's combined budget REFUTED by the gain; the offset's own verdict EARN
+0.00	units: psi is exactly lbf/in^2 (6894.757293168... Pa), ft = 12 in, ksi = 1000 psi; no 'kin
+0.39	named tolerance + find on a network: the largest shared resistor tolerance keeping |I(b5)|
+0.00	a tolerance naming a quantity with a unit is a BRICK ERROR
+0.02	network v2: a bridge's UNLOADED offset V(n1, n2) proved within exactly [-5, 5] mV = TOL x 
+0.06	network v2: a MOSFET's thermal network with a power source and ambient at Ta — Tj in [80.2
+0.02	network v2: 4.999 mV REFUTED at the corner R1 = R4 = 9990, R2 = R3 = 10010
+0.00	network v2: a potential required in amperes is a unit error
+0.00	network v2: V() of an unknown node is a BRICK ERROR
+0.40	network + laws: P = ID^2 RDS into the MOSFET's thermal network; the largest drain current 
+0.02	network + laws at ID = 40 A: Tj in [67.6, 119.2] C exactly (40 + 1600*0.0025*6.9, 40 + 160
+0.02	network + laws: two inputs resting on one toleranced given — the correlation_note says so
+0.00	network: a derived input with no laws is a BRICK ERROR
+0.00	a brick with an unknown role is refused
+0.13	components: socket -> adapter -> charging board -> battery, each proved once per band: EAR
+0.04	components, RECURSION: the adapter and the board as one component (a system with an interf
+0.00	components: mains +-12 % arrives at [202.4, 257.6] V, outside the adapter's assume [200, 2
+0.05	components: the charging board as ONE band [4.5, 5.5]: its headroom fails at 4.5 V, the ba
+0.03	components: Vend >= 4.15 — the flat brick EARNS it (4.152), the system's enclosure reaches
+0.00	components: a feedback between siblings (the adapter fed by the board) — refused (version 
+0.00	components: an input left unconnected — refused
+0.00	components: a brick that contains itself (a cycle in the hierarchy) — BRICK ERROR
+0.21	components: a second identical adapter on the same mains reuses the contract (18 contract 
+0.07	components, CHOICE: three adapters cheapest first — the cheap one (+-10 %) leaves the boar
+0.04	components, CHOICE: the cheap adapter at +-3 % keeps the chain earned — it wins at 1.5, op
+0.00	components, CHOICE: an empty choice — refused
+0.00	components, CHOICE: two candidates with one label — refused
+0.00	components, CHOICE: a field that is not a number — refused
+0.01	components, CHOICE: a candidate's price without its unit against an objective in EUR — BRI
+0.00	components, CHOICE: the EARLY-blocked candidate's price without a unit is still said (chec
+0.00	components, CHOICE: a candidate whose own law mixes volts with a number — refused before j
+0.02	components, FIND over a system: the widest mains the chain earns is 250 V (the adapter's a
+0.71	components, PARAMETERS: the adapter's feedback resistor from its own catalog — 2k7 and 3k3
+0.02	components, AFFINE contracts: two ratiometric sensors on one supply 5 V +-5 % — each outpu
+0.01	components, the same with RANGES only ("contracts": "ranges"): each output +-0.13 V on its
+0.01	components: the mains given in kV reaches the adapter's input in V — the same arriving ran
+0.00	components: an ampere source wired to a volt input — refused (dimensions differ)
+2.52	tight contracts: k01's original single-band divider system (all 12 OPEN in round 4) — EARN
+3.48	tight contracts (work mode): k02's amplifier + ADC as components within 20 mV (OPEN in rou
+4.69	  ... and in --dev it stays OPEN, said: the checker cannot confirm the ADC remainder's tig
+0.06	components, "bands": "arriving": each contract judged on what arrives — the charger's Vend
+0.79	components: the chosen part's fields reach the system — AD.R1.price as the objective (the 
+0.01	components: AD.R1.nope (no such field) — refused, said plainly
+16.65	blind 6 c03: an optional slot inside a component (KeyError 'HT_none' before) — EARNED
+0.03	blind 6 c03: `valid` on a system law naming a component output (a units BRICK ERROR before
+0.17	blind 6 c02: AD.cost read from a price that depends on the system's input — refused, said
+0.00	components: a component with PARAMETERS inside a component that is a system — refused
+0.00	components: a CHOICE inside a component that is a system — refused (its contract is one de
+0.08	a linear system above the symbolic cap (8 unknowns): no longer OPEN — zlin certifies it (2
+0.03	audit cx1: both inputs of a difference stage wired to ONE source — Out = G*(S - S) = 0, so
+0.01	audit cx1, the twin: Out >= 0 — true (Out = 0), but the ranges hold points on both sides: 
+0.02	audit cx2: a mode overriding a NAMED tolerance (hot: R = 1000 +-10 %, y reaches 1.1 > 1.05
+0.03	audit cx2 with totals: the same named tolerance per mode: REFUTED
+0.10	audit cx3: modes with totals — a law's `valid` read in the mode (peak: mu - lam = -2, outs
+0.02	audit fuzz fz-1: `x0 - -19` (as ast.unparse writes it) is read — ZTL's parser took the sec
+0.01	audit fz-3020 (dev): a bound tight through min/max — every corner inside, the checker's ow
+0.04	zlin: a 3-unknown ladder, 7 tolerances — the max over all 128 corners (solved exactly) is 
+0.01	zlin: and the min, with no slack
+0.01	zlin: a bound a billionth below the max — a witness, and the witness truly fails (solved e
+0.01	zlin MUTATION: the max's certificate for a bound below the max — refused
+0.01	zlin MUTATION: a flipped monotonicity sign — refused
+0.01	zlin MUTATION: a zero R (no inverse) — refused (beta >= 1)
+0.00	zlin MUTATION: an exact leaf on a piece that is not a point — refused
+1.47	a ladder of 8 coupled linear unknowns (was OPEN at the cap of 6): EARNED by zlin
+0.00	a ladder of 20 coupled linear unknowns, 41 tolerances: EARNED by zlin

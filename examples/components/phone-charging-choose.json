@@ -1,0 +1,83 @@
+{
+ "stand": "universal-stand/1",
+ "why": "choose the adapter: the cheapest that keeps the chain earned (price as each candidate's field)",
+ "components": {
+  "AD": {
+   "choose": [
+    {
+     "label": "cheap",
+     "file": "adapter-5v-cheap.json",
+     "fields": {
+      "price": {
+       "value": "1.5",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "standard",
+     "file": "adapter-5v.json",
+     "fields": {
+      "price": {
+       "value": "3.0",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "premium",
+     "file": "adapter-5v-premium.json",
+     "fields": {
+      "price": {
+       "value": "5.0",
+       "unit": "EUR"
+      }
+     }
+    }
+   ]
+  },
+  "CH": {
+   "file": "charging-board.json"
+  },
+  "BT": {
+   "file": "battery-cell.json"
+  }
+ },
+ "connect": {
+  "AD.Vin": "Vmains",
+  "CH.Vin": "AD.Vout",
+  "BT.Vchg": "CH.Vchg"
+ },
+ "quantities": {
+  "Vmains": {
+   "role": "given",
+   "value": "230",
+   "tolerance": "0.08",
+   "unit": "V"
+  },
+  "Vend": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vend == BT.Vcell"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vend",
+   "op": "within",
+   "value": [
+    "4.1",
+    "4.25"
+   ],
+   "why": "the cell ends charged (>= 4.1 V), not overcharged (<= 4.25 V)"
+  }
+ ],
+ "objective": {
+  "minimize": "AD.price",
+  "unit": "EUR"
+ }
+}

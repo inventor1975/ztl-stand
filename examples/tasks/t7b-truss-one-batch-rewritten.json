@@ -1,0 +1,204 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "L1": {
+   "role": "given",
+   "value": "3",
+   "unit": "m"
+  },
+  "L2": {
+   "role": "given",
+   "value": "4",
+   "unit": "m"
+  },
+  "L3": {
+   "role": "given",
+   "value": "5",
+   "unit": "m"
+  },
+  "Fx": {
+   "role": "given",
+   "value": "5",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "horizontal load"
+  },
+  "Fy": {
+   "role": "given",
+   "value": "-20",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "vertical load (down)"
+  },
+  "E": {
+   "role": "given",
+   "value": "200",
+   "tolerance": "0.05",
+   "unit": "GPa",
+   "why": "ONE steel batch for all bars"
+  },
+  "uy": {
+   "role": "derived",
+   "unit": "mm"
+  },
+  "N1": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "N2": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "N3": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "s1": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "s2": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "s3": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "vx": {
+   "role": "derived",
+   "unit": "GPa*mm",
+   "why": "scaled displacement E*ux"
+  },
+  "vy": {
+   "role": "derived",
+   "unit": "GPa*mm",
+   "why": "scaled displacement E*uy"
+  }
+ },
+ "slots": {
+  "B1": {
+   "from": [
+    "sections"
+   ]
+  },
+  "B2": {
+   "from": [
+    "sections"
+   ]
+  },
+  "B3": {
+   "from": [
+    "sections"
+   ]
+  }
+ },
+ "define": {
+  "g1": "B1.A/L1",
+  "g2": "B2.A/L2",
+  "g3": "B3.A/L3",
+  "Gxx": "g1 + g3*9/25",
+  "Gxy": "g3*12/25",
+  "Gyy": "g2 + g3*16/25"
+ },
+ "laws": [
+  {
+   "zfl": "Gxx*vx + Gxy*vy == Fx",
+   "source": "equilibrium with K = E*G: G*(E*u) = F"
+  },
+  {
+   "zfl": "Gxy*vx + Gyy*vy == Fy",
+   "source": "equilibrium, y"
+  },
+  {
+   "zfl": "E*uy == vy",
+   "source": "u = v/E written as E*u = v: E in ONE row, to the first power"
+  },
+  {
+   "zfl": "N1 == -g1*vx",
+   "source": "N = -E*A/L*a.u = -A/L*a.v: E cancels"
+  },
+  {
+   "zfl": "N2 == -g2*vy",
+   "source": "E cancels"
+  },
+  {
+   "zfl": "N3 == -g3*(3/5*vx + 4/5*vy)",
+   "source": "E cancels"
+  },
+  {
+   "zfl": "s1 == N1/B1.A",
+   "source": "stress"
+  },
+  {
+   "zfl": "s2 == N2/B2.A",
+   "source": "stress"
+  },
+  {
+   "zfl": "s3 == N3/B3.A",
+   "source": "stress"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "uy",
+   "op": ">=",
+   "value": "-2.5",
+   "why": "deflection at most 2.5 mm down"
+  },
+  {
+   "quantity": "s1",
+   "op": "within",
+   "value": [
+    "-160",
+    "160"
+   ],
+   "why": "bar 1 stress within allowable"
+  },
+  {
+   "quantity": "s2",
+   "op": "within",
+   "value": [
+    "-160",
+    "160"
+   ],
+   "why": "bar 2 stress within allowable"
+  },
+  {
+   "quantity": "s3",
+   "op": "within",
+   "value": [
+    "-160",
+    "160"
+   ],
+   "why": "bar 3 stress within allowable"
+  }
+ ],
+ "objective": {
+  "minimize": "B1.A*L1 + B2.A*L2 + B3.A*L3",
+  "why": "least steel (volume)"
+ },
+ "catalog": {
+  "sections": {
+   "items": [
+    {
+     "A": "100"
+    },
+    {
+     "A": "150"
+    },
+    {
+     "A": "200"
+    },
+    {
+     "A": "300"
+    }
+   ],
+   "fields": {
+    "A": {
+     "unit": "mm^2"
+    }
+   }
+  }
+ }
+}

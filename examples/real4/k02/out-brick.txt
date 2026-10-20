@@ -1,0 +1,79 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL fd6593d",
+  "modes": [
+    "offset_vin0",
+    "gain_only_vin1",
+    "total_vin1"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "designs": [
+    {
+      "design": "",
+      "verdict": "REFUTED",
+      "mode": "total_vin1",
+      "fails": "5 mV offset + 1% of 1 V reading (source's combined form)",
+      "by_at_witness": "6647884148905457/5090642920715625000 (~0.0013059)",
+      "unit": "V",
+      "failing_modes": [
+        "gain_only_vin1",
+        "total_vin1"
+      ]
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "verdict": "REFUTED",
+  "why": "every design violates a requirement in at least one mode, at a concrete point",
+  "closest_design": {},
+  "failing_mode": "total_vin1",
+  "failing_modes": [
+    "gain_only_vin1",
+    "total_vin1"
+  ],
+  "its_violating_point": {
+    "R1": "9990",
+    "R2": "40040",
+    "Vref": "199/40 (~4.975)",
+    "dR1": "-3/1000 (~-0.003)",
+    "dR2": "3/1000 (~0.003)",
+    "dVref": "-3/2000 (~-0.0015)",
+    "eg": "22/20475 (~0.00107448)",
+    "ibn": "-1/25000000 (~-4e-08)",
+    "ibp": "1/25000000 (~4e-08)",
+    "oadc": "9/2 (~4.5)",
+    "oinl": "1",
+    "ores": "1/2 (~0.5)",
+    "voff": "1/2500 (~0.0004)"
+  },
+  "value_there": {
+    "Err": "10375940994954979/636330365089453125 (~0.0163059)"
+  },
+  "requirement": {
+    "quantity": "Err",
+    "op": "within",
+    "value": [
+      "-15/1000",
+      "15/1000"
+    ],
+    "why": "5 mV offset + 1% of 1 V reading (source's combined form)"
+  },
+  "overshoot": "6647884148905457/5090642920715625000 (~0.0013059)",
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "[gain_only_vin1] gain budget 1% of reading (1 V), offsets zeroed (source)"
+      ],
+      [
+        "[total_vin1] 5 mV offset + 1% of 1 V reading (source's combined form)"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted — a mode's own requirement is marked [mode]; the brick's apply in every mode"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

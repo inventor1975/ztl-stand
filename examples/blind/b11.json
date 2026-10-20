@@ -1,0 +1,48 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "m_air": {"role": "given", "value": "2.40", "tolerance": "0.05", "unit": "kg", "why": "airframe mass without motor"},
+  "L": {"role": "given", "range": ["1.78", "1.82"], "unit": "m", "why": "rail length 1.80 +-0.02 m"},
+  "g0": {"role": "given", "value": "9.81", "unit": "m*s^-2", "ground": "problem statement constant"},
+  "Dv": {"role": "derived", "unit": "m/s", "why": "ideal delta-v, ln replaced by a series LOWER bound"},
+  "tb": {"role": "derived", "unit": "s"},
+  "Dveff": {"role": "derived", "unit": "m/s"},
+  "TWR": {"role": "derived", "unit": ""},
+  "v2": {"role": "derived", "unit": "m^2*s^-2", "why": "v_rail squared (sqrt not expressible)"},
+  "amax": {"role": "derived", "unit": "m*s^-2"}
+ },
+ "slots": {"M": {"from": ["motors"]}},
+ "define": {
+  "M0": "m_air + M.mass",
+  "X": "M.mp/(m_air + M.mass)"
+ },
+ "laws": [
+  {"zfl": "Dv == M.Isp*g0*(X + X*X/2 + X*X*X/3)", "source": "Tsiolkovsky dv = Isp*g0*ln(m0/mf); ln(m0/mf) = -ln(1-x) >= x + x^2/2 + x^3/3 with x = mp/m0 (all series terms positive, so a true lower bound)"},
+  {"zfl": "tb == M.Isp*g0*M.mp/M.F", "source": "burn time = total impulse / F_avg, It = Isp*g0*mp"},
+  {"zfl": "Dveff == Dv - g0*tb", "source": "gravity loss only"},
+  {"zfl": "TWR == M.F/(M0*g0)", "source": "thrust-to-weight at liftoff"},
+  {"zfl": "v2 == 2*(M.F/M0 - g0)*L", "source": "constant-acceleration rail run: v^2 = 2*a*L"},
+  {"zfl": "amax == M.F/(M0 - M.mp)", "source": "F_avg / burnout mass"}
+ ],
+ "requirements": [
+  {"quantity": "TWR", "op": ">=", "value": "5", "why": "thrust-to-weight >= 5"},
+  {"quantity": "v2", "op": ">=", "value": "225", "why": "v_rail >= 15 m/s  <=>  v_rail^2 >= 225 (positive speeds)"},
+  {"quantity": "Dveff", "op": ">=", "value": "250", "why": "usable delta-v >= 250 m/s"},
+  {"quantity": "amax", "op": "<=", "value": "147.15", "why": "15*g0 = 147.15 m/s^2 payload limit"}
+ ],
+ "objective": {"minimize": "M.price", "why": "cheapest motor"},
+ "catalog": {
+  "motors": {
+   "ground": "problem statement catalog",
+   "items": [
+    {"mass": "0.95", "mp": {"value": "0.50", "tolerance": "0.02"}, "Isp": {"value": "195", "tolerance": "0.04"}, "F": {"value": "260", "tolerance": "0.1"}, "price": "95",  "name": "M1"},
+    {"mass": "1.20", "mp": {"value": "0.62", "tolerance": "0.02"}, "Isp": {"value": "200", "tolerance": "0.04"}, "F": {"value": "180", "tolerance": "0.1"}, "price": "110", "name": "M2"},
+    {"mass": "1.45", "mp": {"value": "0.80", "tolerance": "0.02"}, "Isp": {"value": "190", "tolerance": "0.04"}, "F": {"value": "420", "tolerance": "0.1"}, "price": "150", "name": "M3"},
+    {"mass": "1.80", "mp": {"value": "1.00", "tolerance": "0.02"}, "Isp": {"value": "205", "tolerance": "0.04"}, "F": {"value": "350", "tolerance": "0.1"}, "price": "185", "name": "M4"}
+   ],
+   "fields": {
+    "mass": {"unit": "kg"}, "mp": {"unit": "kg"}, "Isp": {"unit": "s"}, "F": {"unit": "N"}, "price": {"unit": "USD"}
+   }
+  }
+ }
+}

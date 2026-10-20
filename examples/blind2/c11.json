@@ -1,0 +1,368 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "T": {
+   "role": "given",
+   "range": [
+    "10",
+    "40"
+   ],
+   "unit": "C",
+   "why": "air temperature 10..40 C (rho and nu both follow T)"
+  },
+  "T0": {
+   "role": "given",
+   "value": "273",
+   "unit": "C",
+   "why": "Kelvin offset as stated in rho = 353/(T+273)"
+  },
+  "T20": {
+   "role": "given",
+   "value": "20",
+   "unit": "C",
+   "why": "temperature of the fan curves"
+  },
+  "RHO0": {
+   "role": "given",
+   "value": "353",
+   "unit": "kg*K/m^3",
+   "why": "rho = 353/(T+273)"
+  },
+  "DTNU": {
+   "role": "given",
+   "value": "25",
+   "unit": "C",
+   "why": "40 C minus 15 C"
+  },
+  "NU15": {
+   "role": "given",
+   "value": "0.0000146",
+   "unit": "m^2/s",
+   "why": "kinematic viscosity at 15 C"
+  },
+  "NU40": {
+   "role": "given",
+   "value": "0.000017",
+   "unit": "m^2/s",
+   "why": "kinematic viscosity at 40 C (linear in T)"
+  },
+  "Kel": {
+   "role": "given",
+   "value": "0.3",
+   "unit": "",
+   "why": "90 deg elbow loss coefficient (x4)"
+  },
+  "Kdamp": {
+   "role": "given",
+   "range": [
+    "0.4",
+    "1.2"
+   ],
+   "unit": "",
+   "why": "balancing damper: 0.4 fully open .. 1.2 at the 60% open limit; any setting in between must work"
+  },
+  "Kred": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "",
+   "why": "sudden reduction"
+  },
+  "Kdif": {
+   "role": "given",
+   "value": "1.5",
+   "unit": "",
+   "why": "outlet diffuser, on duct velocity"
+  },
+  "Lg": {
+   "role": "given",
+   "value": "28",
+   "unit": "m",
+   "why": "galvanised run (38 m total minus 10 m flexible)"
+  },
+  "Lf": {
+   "role": "given",
+   "value": "10",
+   "unit": "m",
+   "why": "flexible duct, final part"
+  },
+  "Ltot": {
+   "role": "given",
+   "value": "38",
+   "unit": "m",
+   "why": "total length priced"
+  },
+  "epsG": {
+   "role": "given",
+   "value": "0.15",
+   "unit": "mm",
+   "why": "galvanised roughness"
+  },
+  "epsF": {
+   "role": "given",
+   "value": "0.9",
+   "tolerance": "0.5",
+   "unit": "mm",
+   "why": "flexible duct roughness 0.9 mm +-50%"
+  },
+  "Qd": {
+   "role": "given",
+   "range": [
+    "3600",
+    "4400"
+   ],
+   "unit": "m^3/h",
+   "why": "required flow band"
+  },
+  "Qn": {
+   "role": "given",
+   "value": "4000",
+   "unit": "m^3/h",
+   "why": "nominal flow"
+  },
+  "Qs": {
+   "role": "given",
+   "value": "3600",
+   "unit": "m^3/h",
+   "why": "minimum flow the fan must deliver"
+  },
+  "Hrs": {
+   "role": "given",
+   "value": "40000",
+   "unit": "h",
+   "why": "lifetime hours"
+  },
+  "Ce": {
+   "role": "given",
+   "value": "0.15",
+   "unit": "USD/(kWh)",
+   "why": "electricity price"
+  },
+  "vmax": {
+   "role": "derived",
+   "unit": "m/s"
+  },
+  "m10": {
+   "role": "derived",
+   "unit": "Pa",
+   "why": "fan pressure at 4000 minus 1.1 x system dp (fan scaled by rho/rho20)"
+  },
+  "Pw": {
+   "role": "derived",
+   "unit": "W",
+   "why": "fan input power at nominal point"
+  },
+  "Cl": {
+   "role": "derived",
+   "unit": "USD",
+   "why": "lifetime cost"
+  },
+  "m36": {
+   "role": "derived",
+   "unit": "Pa",
+   "why": "fan pressure minus system dp at 3600 m3/h; >= 0 means the operating point is at or beyond 3600 (fan falls, system rises)"
+  }
+ },
+ "slots": {
+  "DUCT": {
+   "from": [
+    "ducts"
+   ]
+  },
+  "FAN": {
+   "from": [
+    "fans"
+   ]
+  }
+ },
+ "define": {
+  "AR": "pi*DUCT.D*DUCT.D/4",
+  "eG": "epsG/(3.7*DUCT.D)",
+  "eF": "epsF/(3.7*DUCT.D)",
+  "rho": "RHO0/(T + T0)",
+  "rho20": "RHO0/(T20 + T0)",
+  "nu": "NU15 + (T - 15)*(NU40 - NU15)/DTNU",
+  "SK": "4*Kel + Kdamp + Kred + Kdif",
+  "Vn": "Qn/AR",
+  "REn": "Vn*DUCT.D/nu",
+  "fGn": "1/(4*pow(log10(eG + 2.51/(REn*sqrt(1/(4*pow(log10(eG + 2.51/(REn*sqrt(0.25/pow(log10(eG + 5.74/pow(REn, 0.9)), 2)))), 2))))), 2))",
+  "fFn": "1/(4*pow(log10(eF + 2.51/(REn*sqrt(1/(4*pow(log10(eF + 2.51/(REn*sqrt(0.25/pow(log10(eF + 5.74/pow(REn, 0.9)), 2)))), 2))))), 2))",
+  "dpn": "(fGn*Lg/DUCT.D + fFn*Lf/DUCT.D + SK)*rho*Vn*Vn/2",
+  "fann": "min(min(FAN.c1 - FAN.s1*Qn, FAN.c2 - FAN.s2*Qn), min(FAN.c3 - FAN.s3*Qn, FAN.c4 - FAN.s4*Qn))",
+  "Vs": "Qs/AR",
+  "REs": "Vs*DUCT.D/nu",
+  "fGs": "1/(4*pow(log10(eG + 2.51/(REs*sqrt(1/(4*pow(log10(eG + 2.51/(REs*sqrt(0.25/pow(log10(eG + 5.74/pow(REs, 0.9)), 2)))), 2))))), 2))",
+  "fFs": "1/(4*pow(log10(eF + 2.51/(REs*sqrt(1/(4*pow(log10(eF + 2.51/(REs*sqrt(0.25/pow(log10(eF + 5.74/pow(REs, 0.9)), 2)))), 2))))), 2))",
+  "dps": "(fGs*Lg/DUCT.D + fFs*Lf/DUCT.D + SK)*rho*Vs*Vs/2",
+  "fans": "min(min(FAN.c1 - FAN.s1*Qs, FAN.c2 - FAN.s2*Qs), min(FAN.c3 - FAN.s3*Qs, FAN.c4 - FAN.s4*Qs))"
+ },
+ "laws": [
+  {
+   "zfl": "vmax == Qd/AR",
+   "source": "v = Q/A at the highest flow"
+  },
+  {
+   "zfl": "m10 == fann*rho/rho20 - 11/10*dpn",
+   "source": "fan pressure at 4000 m3/h vs system dp at 4000 m3/h, 10% margin; fan pressure scaled by rho/rho20 from the 20 C curve"
+  },
+  {
+   "zfl": "Pw == Qn*dpn/FAN.eta",
+   "source": "P = Q dp / eta at the nominal point, dp = system dp at 4000"
+  },
+  {
+   "zfl": "Cl == DUCT.price*Ltot + FAN.price + Hrs*Ce*Pw",
+   "source": "purchase + 40000 h x power x 0.15 USD/kWh"
+  },
+  {
+   "zfl": "m36 == fans*rho/rho20 - dps",
+   "source": "fan curve minus system curve at 3600 m3/h"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "vmax",
+   "op": "<=",
+   "value": "8",
+   "why": "main duct velocity <= 8 m/s at the highest flow (noise)"
+  },
+  {
+   "quantity": "m10",
+   "op": ">=",
+   "value": "0",
+   "why": "at 4000 m3/h fan pressure exceeds system dp by >= 10%"
+  },
+  {
+   "quantity": "Pw",
+   "op": "<=",
+   "value": "1600",
+   "why": "fan input power at nominal <= 1.6 kW"
+  },
+  {
+   "quantity": "m36",
+   "op": ">=",
+   "value": "0",
+   "why": "fan delivers at least 3600 m3/h against the system (operating point >= 3600)"
+  }
+ ],
+ "objective": {
+  "minimize": "Cl",
+  "case": "worst",
+  "why": "lowest lifetime cost, worst case over the ranges"
+ },
+ "catalog": {
+  "ducts": {
+   "ground": "duct price list",
+   "items": [
+    {
+     "D": "250",
+     "price": "14",
+     "grade": "D250"
+    },
+    {
+     "D": "280",
+     "price": "17",
+     "grade": "D280"
+    },
+    {
+     "D": "315",
+     "price": "21",
+     "grade": "D315"
+    },
+    {
+     "D": "355",
+     "price": "27",
+     "grade": "D355"
+    },
+    {
+     "D": "400",
+     "price": "34",
+     "grade": "D400"
+    }
+   ],
+   "fields": {
+    "D": {
+     "unit": "mm"
+    },
+    "price": {
+     "unit": "USD/m"
+    }
+   }
+  },
+  "fans": {
+   "ground": "fan curves at 20 C",
+   "items": [
+    {
+     "c1": "640",
+     "s1": "1/50",
+     "c2": "720",
+     "s2": "3/50",
+     "c3": "960",
+     "s3": "3/25",
+     "c4": "1210",
+     "s4": "17/100",
+     "eta": "0.55",
+     "price": "520",
+     "grade": "F1"
+    },
+    {
+     "c1": "900",
+     "s1": "3/100",
+     "c2": "980",
+     "s2": "7/100",
+     "c3": "1180",
+     "s3": "3/25",
+     "c4": "1480",
+     "s4": "9/50",
+     "eta": "0.6",
+     "price": "780",
+     "grade": "F2"
+    },
+    {
+     "c1": "1150",
+     "s1": "7/200",
+     "c2": "1220",
+     "s2": "7/100",
+     "c3": "1500",
+     "s3": "7/50",
+     "c4": "1700",
+     "s4": "9/50",
+     "eta": "0.62",
+     "price": "1150",
+     "grade": "F3"
+    }
+   ],
+   "fields": {
+    "c1": {
+     "unit": "Pa"
+    },
+    "c2": {
+     "unit": "Pa"
+    },
+    "c3": {
+     "unit": "Pa"
+    },
+    "c4": {
+     "unit": "Pa"
+    },
+    "s1": {
+     "unit": "Pa*h/m^3"
+    },
+    "s2": {
+     "unit": "Pa*h/m^3"
+    },
+    "s3": {
+     "unit": "Pa*h/m^3"
+    },
+    "s4": {
+     "unit": "Pa*h/m^3"
+    },
+    "eta": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ },
+ "report": "all"
+}

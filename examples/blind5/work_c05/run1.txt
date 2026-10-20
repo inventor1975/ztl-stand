@@ -1,0 +1,172 @@
+[stand] 1/36 designs, 0 s: 
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "continuous": true,
+  "combinations": 36,
+  "notes": [],
+  "combinations_proved_without_mix": 30,
+  "verdict": "EARNED",
+  "design": {
+    "SRC": {
+      "catalog": "sources",
+      "name": "Town",
+      "Ca": {
+        "range": [
+          "60",
+          "80"
+        ]
+      },
+      "Alk": {
+        "range": [
+          "70",
+          "90"
+        ]
+      },
+      "Cl": {
+        "range": [
+          "20",
+          "30"
+        ]
+      },
+      "Si": {
+        "range": [
+          "8",
+          "12"
+        ]
+      },
+      "SO4": {
+        "range": [
+          "25",
+          "35"
+        ]
+      },
+      "TDS": {
+        "range": [
+          "220",
+          "280"
+        ]
+      },
+      "price": {
+        "nominal": "19/10 (~1.9)",
+        "tolerance": "0"
+      },
+      "Alkhi": {
+        "nominal": "90",
+        "tolerance": "0"
+      }
+    },
+    "PROG": {
+      "catalog": "programmes",
+      "name": "P2",
+      "Lmax": {
+        "nominal": "19/10 (~1.9)",
+        "tolerance": "0"
+      },
+      "cost": {
+        "nominal": "11/50 (~0.22)",
+        "tolerance": "0"
+      }
+    },
+    "ACID": {
+      "catalog": "acids",
+      "name": "70%",
+      "r": {
+        "nominal": "7/10 (~0.7)",
+        "tolerance": "0"
+      }
+    },
+    "BM": {
+      "catalog": "flow_m",
+      "x": "2840400/9788839 (~0.290167)"
+    },
+    "BS": {
+      "catalog": "flow_s",
+      "x": "620400/1493939 (~0.415278)"
+    },
+    "BW": {
+      "catalog": "flow_w",
+      "x": "1105200/6695747 (~0.16506)"
+    }
+  },
+  "objective": {
+    "minimize": "h_w*((kE*Qtop_w + BW.x + Dr)*(SRC.price + PROG.cost + ACID.r*SRC.Alkhi*kacid*cacid) + disch*BW.x) + h_m*((kE*Qtop_m + BM.x + Dr)*(SRC.price + PROG.cost + ACID.r*SRC.Alkhi*kacid*cacid) + disch*BM.x) + h_s*((kE*Qtop_s + BS.x + Dr)*(SRC.price + PROG.cost + ACID.r*SRC.Alkhi*kacid*cacid) + disch*BS.x)",
+    "value": "1293033118697262466964179252209/23905792079209392159912109375 (~54.0887)",
+    "unit": "kEUR",
+    "lower_bound": "2027992014214389117793489/37500000000000000000000 (~54.0798)",
+    "gap": "~0.00890888257221 (an exact fraction of 43 digits)",
+    "lower_bound_is": "proved by ZTL (zlp) from the LP solver's dual multipliers: no mix in the continuous box costs less; 30 combination(s) proved to have no mix at all (Farkas)",
+    "optimal": false,
+    "optimal_means": "true only at a zero gap; otherwise the mix is PROVED to cost at most `gap` above the cheapest possible (blind test 4, c03: optimal false at a 0.00093 EUR gap)"
+  },
+  "guaranteed": {
+    "gSi_w": [
+      "77313781947/16739367500 (~4.61868)",
+      "134230644503/8369683750 (~16.0377)"
+    ],
+    "gCl_w": [
+      "13599229559/836968375 (~16.2482)",
+      "299941343531/6695747000 (~44.7958)"
+    ],
+    "gSO_w": [
+      "75261707911/209242093750 (~0.359687)",
+      "262666199006931/3347873500000 (~78.4576)"
+    ],
+    "gLSI_w": [
+      "24855875012694491378465703789/77196707057067818190110720000 (~0.321981)",
+      "32870705791697401411592318627/19299176764266954547527680000 (~1.70322)"
+    ],
+    "gSi_m": [
+      "37496507751/4894419500 (~7.66107)",
+      "32660146054/1223604875 (~26.6917)"
+    ],
+    "gCl_m": [
+      "13206056059/489441950 (~26.9819)",
+      "145968300701/1957767800 (~74.5585)"
+    ],
+    "gSO_m": [
+      "43897483851/122360487500 (~0.358755)",
+      "127759761030741/978883900000 (~130.516)"
+    ],
+    "gLSI_m": [
+      "4748362865675309768955599151/11285762988234183345700864000 (~0.420739)",
+      "6033731469438078434148640969/2257152597646836669140172800 (~2.67316)"
+    ],
+    "gSi_s": [
+      "39977673171/3734847500 (~10.704)",
+      "135056104281/3734847500 (~36.1611)"
+    ],
+    "gCl_s": [
+      "7043336012/186742375 (~37.7169)",
+      "75712559603/746969500 (~101.36)"
+    ],
+    "gSO_s": [
+      "8428629574/23342796875 (~0.361081)",
+      "64203702055603/373484750000 (~171.904)"
+    ],
+    "gLSI_s": [
+      "2480514114715586438527108261/8611971998354241822392320000 (~0.288031)",
+      "54509658372353412651917245523/17223943996708483644784640000 (~3.16476)"
+    ],
+    "Vyr": [
+      "47223039043726572324705668/2447953108911041757175 (~19290.8)",
+      "59988820752324585763362432/2447953108911041757175 (~24505.7)"
+    ]
+  },
+  "how": {
+    "gSi_w": "ZTL, exact at the corners",
+    "gCl_w": "ZTL, exact at the corners",
+    "gSO_w": "ZTL, exact at the corners",
+    "gLSI_w": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.321981026915 (~0.321981)', '~1.70321802806 (~1.70322)']",
+    "gSi_m": "ZTL, exact at the corners",
+    "gCl_m": "ZTL, exact at the corners",
+    "gSO_m": "ZTL, exact at the corners",
+    "gLSI_m": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.420739197751 (~0.420739)', '~2.67316063421 (~2.67316)']",
+    "gSi_s": "ZTL, exact at the corners",
+    "gCl_s": "ZTL, exact at the corners",
+    "gSO_s": "ZTL, exact at the corners",
+    "gLSI_s": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.288030908042 (~0.288031)', '~3.16476054397 (~3.16476)']",
+    "Vyr": "ZTL, exact at the corners"
+  },
+  "mix_verdict_checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic"
+}

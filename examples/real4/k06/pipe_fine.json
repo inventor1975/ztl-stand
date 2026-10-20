@@ -1,0 +1,89 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "k06 component PIPE: Hazen-Williams friction of 400 ft of 6 in ductile iron, C = 140",
+ "interface": {
+  "inputs": {
+   "Q": {
+    "assume": [
+     "300",
+     "3000"
+    ],
+    "bands": [
+     "300",
+     "1514",
+     "1515",
+     "3000"
+    ]
+   }
+  },
+  "outputs": [
+   "HLf"
+  ]
+ },
+ "quantities": {
+  "Q": {
+   "role": "given",
+   "value": "1514.1647136",
+   "unit": "L/min",
+   "why": "peak hour flow 400 gpm"
+  },
+  "Qg": {
+   "role": "given",
+   "value": "3.785411784",
+   "unit": "L/min",
+   "why": "one gpm"
+  },
+  "D": {
+   "role": "given",
+   "value": "6",
+   "unit": "in"
+  },
+  "Din": {
+   "role": "given",
+   "value": "1",
+   "unit": "in",
+   "why": "one inch"
+  },
+  "Lp": {
+   "role": "given",
+   "value": "400",
+   "unit": "ft"
+  },
+  "Lh": {
+   "role": "given",
+   "value": "100",
+   "unit": "ft"
+  },
+  "Hu": {
+   "role": "given",
+   "value": "1",
+   "unit": "ft",
+   "why": "one foot"
+  },
+  "C": {
+   "role": "given",
+   "value": "140",
+   "unit": "",
+   "why": "ductile iron"
+  },
+  "Cn": {
+   "role": "given",
+   "value": "100",
+   "unit": "",
+   "why": "the 100 of (100/C)"
+  },
+  "HLf": {
+   "role": "derived",
+   "unit": "ft"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "HLf == Lp/Lh*0.2083*pow(Cn/C, 1.852)*pow(Q/Qg, 1.852)/pow(D/Din, 4.8655)*Hu",
+   "source": "Hazen-Williams (US units)"
+  }
+ ],
+ "requirements": [],
+ "catalog": {}
+}

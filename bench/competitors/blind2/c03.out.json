@@ -1,0 +1,1315 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL c11d8d1",
+  "designs_tried": 159,
+  "failed_at_nominal": 152,
+  "judged": 7,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=1); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=1); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=1); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=1); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=1); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=1); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=1); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=1); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=1); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=1); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=1); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=1); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=1); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=1); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=1); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=1); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=1); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=1); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=1); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=1); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=2); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=1); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=1); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=1); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.76619866627 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=1); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=2); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=1); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=2); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=1); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.26887171765 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=1); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=2); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=1); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=1); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=1); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=1); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=2); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~4.13115084135 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=1); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=1); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=2); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=2); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=1); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~2.92754990271 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=1); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=2); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.53775180702 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=2); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=2); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=2); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=1); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=1); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=2); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=1); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=2); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=2); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.734955424964 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=3); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=1); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~2.80320247807 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=2); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.15650252077 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=2); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.930934029515 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=2); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=2); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=2); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.533844004352 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=3); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=3); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~4.13115084135 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=2); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.721523846265 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=2); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~4.71342871891 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=1); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=3); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.53775180702 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=2); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.02052845582 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=2); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.372302421921 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=2); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=3); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=2); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "210216/36875 (~5.70077)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=3); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.76619866627 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=2); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.553817668068 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=2); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=2); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~4.36640141792 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=2); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "210216/36875 (~5.70077)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=3); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.15650252077 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=3); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.26887171765 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=3); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.591815037894 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=3); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.930934029515 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=2); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=3); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.396368749935 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=3); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.721523846265 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=2); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.309100022907 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=3); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=4); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "219/40 (~5.475)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=2); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.488314172306 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=2); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "210216/36875 (~5.70077)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=3); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~2.92754990271 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=2); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~4.36009544858 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=3); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.02052845582 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=4); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~4.17626162758 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=2); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~1.26860249701 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=4); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~1.19299063862 (an exact fraction of 59 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=3); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.239066905112 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=3); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.553817668068 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=3); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "75432/36875 (~2.04561)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=2); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~1.04320804266 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=4); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.971378771377 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=3); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "75432/36875 (~2.04561)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=3); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "29682/7375 (~4.02468)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=2); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "210216/36875 (~5.70077)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=3); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~2.80320247807 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=4); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.65587346235 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=4); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~1.09651193348 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=2); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~4.09949567111 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=3); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "29682/7375 (~4.02468)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=3); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.177453834638 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=2); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.863787583169 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=3); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.488314172306 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=4); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.879550321391 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=4); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.794711101769 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=4); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R3 BMS rating",
+      "by_at_witness": "~10.9067967568 (an exact fraction of 61 digits)",
+      "unit": "A"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=3); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "75432/36875 (~2.04561)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=4); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R3 BMS rating",
+      "by_at_witness": "~0.434798154583 (an exact fraction of 62 digits)",
+      "unit": "A"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=4); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~3.4854720761 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=4); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "1143/7375 (~0.154983)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=3); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "29682/7375 (~4.02468)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=3); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "142824/36875 (~3.87319)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=4); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.706283427522 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=4); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "1143/7375 (~0.154983)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=2); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.793944568462 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=3); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "142824/36875 (~3.87319)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=4); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.725883853715 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=3); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "75432/36875 (~2.04561)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=4); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R4 cell current <= Imax(Tc)",
+      "by_at_witness": "~1.47087812692 (an exact fraction of 64 digits)",
+      "unit": "A"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=3); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.882555142136 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=3); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "29682/7375 (~4.02468)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=4); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "1143/7375 (~0.154983)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=E30, Cap=3, R25=33, Imax25=9, price=8/5); NP=np(N=4); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.638714467835 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=4); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R3 BMS rating",
+      "by_at_witness": "~8.36196659759 (an exact fraction of 61 digits)",
+      "unit": "A"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=3); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "142824/36875 (~3.87319)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=3); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.675255238815 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=4); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "758757/1000000 (~0.758757)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=E25, Cap=5/2, R25=24, Imax25=12, price=17/10); NP=np(N=4); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R4 cell current <= Imax(Tc)",
+      "by_at_witness": "~1.43441842253 (an exact fraction of 63 digits)",
+      "unit": "A"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=4); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "1143/7375 (~0.154983)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=3); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.509111381382 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=4); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "17451/7375 (~2.36624)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=3); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "1608/7375 (~0.218034)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=3); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "142824/36875 (~3.87319)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=4); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "758757/1000000 (~0.758757)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=4); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "17451/7375 (~2.36624)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=3); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "1608/7375 (~0.218034)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=3); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.444189948674 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=4); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "17451/7375 (~2.36624)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H20, Cap=2, R25=16, Imax25=22, price=2); NP=np(N=4); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "758757/1000000 (~0.758757)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=3); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "1608/7375 (~0.218034)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=4); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "75432/36875 (~2.04561)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=4); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "75432/36875 (~2.04561)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=4); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "17451/7375 (~2.36624)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=3); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "1608/7375 (~0.218034)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=4); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "75432/36875 (~2.04561)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=4); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R3 BMS rating",
+      "by_at_witness": "~10.8246662624 (an exact fraction of 62 digits)",
+      "unit": "A"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=4); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R3 BMS rating",
+      "by_at_witness": "~0.35683763974 (an exact fraction of 62 digits)",
+      "unit": "A"
+    },
+    {
+      "design": "CELL=cells(name=P15, Cap=3/2, R25=11, Imax25=30, price=12/5); NP=np(N=4); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R2",
+      "by_at_witness": "75432/36875 (~2.04561)",
+      "unit": "min"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=4); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.457578632104 (an exact fraction of 61 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=4); BMS=bms(name=M30, Irat=30, R=9, price=16/5); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R3 BMS rating",
+      "by_at_witness": "~8.64323174384 (an exact fraction of 60 digits)",
+      "unit": "A"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=4); BMS=bms(name=M40, Irat=40, R=6, price=9/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "REFUTED",
+      "fails": "R3 BMS rating",
+      "by_at_witness": "~3.84234827001 (an exact fraction of 61 digits)",
+      "unit": "A"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=4); BMS=bms(name=M80, Irat=80, R=5/2, price=11); HT=HT_none(name=none, dTh=0, Eh=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 controller shut-down threshold",
+      "by_at_witness": "~0.382722632933 (an exact fraction of 60 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=H25, Cap=5/2, R25=17, Imax25=20, price=29/10); NP=np(N=4); BMS=bms(name=M60, Irat=60, R=7/2, price=15/2); HT=heater(name=film, dTh=[9,13], Eh=7/2, price=9/2)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Vt": [
+          "461157219393/31250000000 (~14.757)",
+          "16135436612223/1000000000000 (~16.1354)"
+        ],
+        "Runtime": [
+          "2076717/200000 (~10.3836)",
+          "762367/56250 (~13.5532)"
+        ],
+        "I": [
+          "60000000000000/1792826290247 (~33.4667)",
+          "20000000000000/461157219393 (~43.3692)"
+        ],
+        "Imarg": [
+          "33638083471192/11528930484825 (~2.91771)",
+          "284760074810896/44820657256175 (~6.35332)"
+        ],
+        "Vcell": [
+          "418493175837237674416621405017/138457832094501924771148595200 (~3.02253)",
+          "1323069073122741096568363213987/403708590634820895355017625600 (~3.27729)"
+        ],
+        "valid_2": [
+          "21499581001102721184291/144115188075855872000 (~149.183)",
+          "49629701597608978814327/230584300921369395200 (~215.235)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 158,
+    "EARNED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "5*NP.N*CELL.price + BMS.price + HT.price",
+    "value": "70",
+    "unit": "EUR",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "CELL": {
+      "catalog": "cells",
+      "Cap": {
+        "nominal": "5/2 (~2.5)",
+        "tolerance": "0"
+      },
+      "R25": {
+        "nominal": "17",
+        "tolerance": "0"
+      },
+      "Imax25": {
+        "nominal": "20",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "29/10 (~2.9)",
+        "tolerance": "0"
+      },
+      "name": "H25"
+    },
+    "NP": {
+      "catalog": "np",
+      "N": {
+        "nominal": "4",
+        "tolerance": "0"
+      }
+    },
+    "BMS": {
+      "catalog": "bms",
+      "Irat": {
+        "nominal": "60",
+        "tolerance": "0"
+      },
+      "R": {
+        "nominal": "7/2 (~3.5)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "15/2 (~7.5)",
+        "tolerance": "0"
+      },
+      "name": "M60"
+    },
+    "HT": {
+      "catalog": "heater",
+      "dTh": {
+        "range": [
+          "9",
+          "13"
+        ]
+      },
+      "Eh": {
+        "nominal": "7/2 (~3.5)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "9/2 (~4.5)",
+        "tolerance": "0"
+      },
+      "name": "film"
+    }
+  },
+  "guaranteed": {
+    "Vt": [
+      "461157219393/31250000000 (~14.757)",
+      "16135436612223/1000000000000 (~16.1354)"
+    ],
+    "Runtime": [
+      "2076717/200000 (~10.3836)",
+      "762367/56250 (~13.5532)"
+    ],
+    "I": [
+      "60000000000000/1792826290247 (~33.4667)",
+      "20000000000000/461157219393 (~43.3692)"
+    ],
+    "Imarg": [
+      "33638083471192/11528930484825 (~2.91771)",
+      "284760074810896/44820657256175 (~6.35332)"
+    ],
+    "Vcell": [
+      "418493175837237674416621405017/138457832094501924771148595200 (~3.02253)",
+      "1323069073122741096568363213987/403708590634820895355017625600 (~3.27729)"
+    ],
+    "valid_2": [
+      "21499581001102721184291/144115188075855872000 (~149.183)",
+      "49629701597608978814327/230584300921369395200 (~215.235)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Vt": "V",
+    "Runtime": "min",
+    "I": "A",
+    "Imarg": "A",
+    "Vcell": "V",
+    "valid_2": "m^4*kg^2*s^-6*A^-2"
+  },
+  "how": {
+    "Vt": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Runtime": "ZTL, interval reading of the definition (sound, may be wide)",
+    "I": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Imarg": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Vcell": "ZTL, interval reading of the definition (sound, may be wide)",
+    "valid_2": "ZTL, interval reading of the definition (sound, may be wide)"
+  },
+  "requirements": [
+    {
+      "quantity": "Vt",
+      "op": ">=",
+      "value": "14.2",
+      "why": "R1 controller shut-down threshold"
+    },
+    {
+      "quantity": "Runtime",
+      "op": ">=",
+      "value": "9",
+      "why": "R2"
+    },
+    {
+      "quantity": "I",
+      "op": "<=",
+      "value": "BMS.Irat",
+      "why": "R3 BMS rating"
+    },
+    {
+      "quantity": "Imarg",
+      "op": ">=",
+      "value": "0",
+      "why": "R4 cell current <= Imax(Tc)"
+    },
+    {
+      "quantity": "Vcell",
+      "op": ">=",
+      "value": "2.9",
+      "why": "R5 cell cut-off"
+    },
+    {
+      "quantity": "valid_2",
+      "op": ">",
+      "value": "0",
+      "why": "laws[2] (Vt == (V0 + sqrt(max(0, V0*V0 - 4*Rtot*P)))/2) holds only where V0*V0 > 4*Rtot*P"
+    }
+  ],
+  "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "Rcell -> [133782413191616450671/4611686018427387904000, 3721477522006363256313/92233720368547758080000] by [Rcell == a*CELL__R25*exp(B*(1/(Ta + HT__dTh) - 1/Tref))], interval reading, sound, may be wider than the truth (credit)",
+    "Rtot -> [32290505860436155619/737869762948382064640, 21632653638120182746589/368934881474191032320000] by [Rtot == 5*Rcell/NP__N + BMS__R*kb + Rw]",
+    "Vt -> [461157219393/31250000000, 16135436612223/1000000000000] by [Vt == ((5*Voc) + sqrt(max(0, (5*Voc)*(5*Voc) - 4*Rtot*P)))/2], interval reading, sound, may be wider than the truth (credit)",
+    "I -> [60000000000000/1792826290247, 20000000000000/461157219393] by [I == P/Vt], interval reading, sound, may be wider than the truth (credit)",
+    "Icell -> [15000000000000/1792826290247, 5000000000000/461157219393] by [Icell == I/NP__N]",
+    "Vcell -> [418493175837237674416621405017/138457832094501924771148595200, 1323069073122741096568363213987/403708590634820895355017625600] by [Vcell == Voc - Icell*Rcell], multilinear, exact at the corners (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

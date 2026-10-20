@@ -1,0 +1,103 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL fd6593d",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "REFUTED",
+      "fails": "gain budget 1% of reading (1 V), offsets zeroed (source)",
+      "by_at_witness": "666435202471/162900573462900 (~0.00409105)",
+      "unit": "V"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {},
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "R1": "9990",
+    "R2": "40040",
+    "Vref": "199/40 (~4.975)",
+    "dR1": "-3/1000 (~-0.003)",
+    "dR2": "3/1000 (~0.003)",
+    "dVref": "-3/2000 (~-0.0015)",
+    "eg": "22/20475 (~0.00107448)"
+  },
+  "point_units": {
+    "R1": "ohm",
+    "R2": "ohm",
+    "Vref": "V",
+    "dR1": "",
+    "dR2": "",
+    "dVref": "",
+    "eg": ""
+  },
+  "value_there": {
+    "Err": "22954409371/1629005734629 (~0.0140911)"
+  },
+  "unit": "V",
+  "requirement": {
+    "quantity": "Err",
+    "op": "within",
+    "value": [
+      "-1/100",
+      "1/100"
+    ],
+    "why": "gain budget 1% of reading (1 V), offsets zeroed (source)"
+  },
+  "overshoot": "666435202471/162900573462900 (~0.00409105)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "-4588187079571/331051773623571 (~-0.0138594)",
+      "22954409371/1629005734629 (~0.0140911)"
+    ],
+    "window": [
+      "-1/100 (~-0.01)",
+      "1/100 (~0.01)"
+    ],
+    "verdict_on_window": "for this design the spread over its tolerances alone is wider than the window: centring cannot fix it, only tighter tolerances or another design",
+    "largest_contributors": [
+      {
+        "quantity": "Vref",
+        "moves_it_by": "3303920288000/327430152660429 (~0.0100905)"
+      },
+      {
+        "quantity": "dR2",
+        "moves_it_by": "29004800/5967053973 (~0.00486082)"
+      },
+      {
+        "quantity": "dR1",
+        "moves_it_by": "29004800/5967053973 (~0.00486082)"
+      },
+      {
+        "quantity": "dVref",
+        "moves_it_by": "3303920288000/1087632828820629 (~0.00303772)"
+      },
+      {
+        "quantity": "eg",
+        "moves_it_by": "705691712000/324172141191171 (~0.0021769)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "gain budget 1% of reading (1 V), offsets zeroed (source)"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

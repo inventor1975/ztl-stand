@@ -1,0 +1,250 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "F": {
+   "role": "given",
+   "value": "1.5",
+   "unit": "m^3/h",
+   "why": "wastewater flow"
+  },
+  "cF": {
+   "role": "given",
+   "range": [
+    "6.0",
+    "7.5"
+   ],
+   "unit": "g/L",
+   "why": "feed solute concentration"
+  },
+  "rho": {
+   "role": "given",
+   "range": [
+    "0.02",
+    "0.04"
+   ],
+   "unit": "",
+   "why": "recycle residual fraction, shared (ONE quantity)"
+  },
+  "qc": {
+   "role": "given",
+   "range": [
+    "0.10",
+    "0.14"
+   ],
+   "unit": "kg/kg",
+   "why": "carbon capacity"
+  },
+  "e": {
+   "role": "given",
+   "range": [
+    "0.90",
+    "0.96"
+   ],
+   "unit": "",
+   "why": "carbon removal efficiency"
+  },
+  "Hmo": {
+   "role": "given",
+   "value": "700",
+   "unit": "h",
+   "why": "hours per month"
+  },
+  "Hyr": {
+   "role": "given",
+   "value": "8000",
+   "unit": "h",
+   "why": "operating hours per year"
+  },
+  "Yrs": {
+   "role": "given",
+   "value": "5",
+   "unit": "",
+   "why": "years"
+  },
+  "z1": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "water concentration leaving stage x_2 (z1 counted from the solvent end)"
+  },
+  "z2": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "water concentration leaving stage x_1 (z2 counted from the solvent end)"
+  },
+  "xN": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "raffinate x_N = z1"
+  },
+  "y1": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "loaded solvent y_1 = Keff x_1"
+  },
+  "Dis": {
+   "role": "derived",
+   "unit": "g/L",
+   "why": "final discharge (1-e) x_N"
+  },
+  "Life": {
+   "role": "derived",
+   "unit": "",
+   "why": "bed life in months"
+  }
+ },
+ "slots": {
+  "EX": {
+   "from": [
+    "extractors"
+   ]
+  },
+  "SV": {
+   "from": [
+    "solvents"
+   ]
+  },
+  "BD": {
+   "from": [
+    "beds"
+   ]
+  },
+  "SS": {
+   "from": [
+    "flow"
+   ]
+  }
+ },
+ "define": {
+  "Keff": "EX.eta*SV.Kt"
+ },
+ "laws": [
+  {
+   "zfl": "F*(z2 - z1) == SS.x*Keff*(z1 - rho*z2)",
+   "source": "stage N: F (x_{N-1}-x_N) = S (Keff x_N - y_in), y_in = rho Keff x_1"
+  },
+  {
+   "zfl": "F*(cF - z2) == SS.x*Keff*(z2 - z1)",
+   "source": "stage N+1-2: F (x_{i-1}-x_i) = S Keff (x_i - x_{i+1})"
+  },
+  {
+   "zfl": "xN == z1",
+   "source": "raffinate"
+  },
+  {
+   "zfl": "y1 == Keff*z2",
+   "source": "loaded solvent y_1 = Keff x_1"
+  },
+  {
+   "zfl": "Dis == (1 - e)*xN",
+   "source": "final discharge"
+  },
+  {
+   "zfl": "Life == qc*BD.m/(F*xN*Hmo)",
+   "source": "bed life = q m /(F x_N)/700"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "xN",
+   "op": "<=",
+   "value": "0.12",
+   "why": "R1 raffinate x_N <= 0.12 g/L"
+  },
+  {
+   "quantity": "Dis",
+   "op": "<=",
+   "value": "0.006",
+   "why": "R2 discharge <= 0.006 g/L"
+  },
+  {
+   "quantity": "Life",
+   "op": ">=",
+   "value": "2",
+   "why": "R3 bed life >= 2 months"
+  },
+  {
+   "quantity": "y1",
+   "op": "<=",
+   "value": "8.5",
+   "why": "R5 loaded solvent <= 8.5 g/L"
+  }
+ ],
+ "objective": {
+  "minimize": "EX.price + BD.price + Yrs*Hyr*SS.x*SV.cS",
+  "unit": "kEUR",
+  "why": "5-year cost: extractor + bed + solvent circulation"
+ },
+ "catalog": {
+  "extractors": {
+   "ground": "problem table",
+   "items": [
+    {
+     "name": "E2",
+     "N": "2",
+     "eta": "0.85",
+     "price": "12.0"
+    }
+   ],
+   "fields": {
+    "N": {
+     "unit": ""
+    },
+    "eta": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "solvents": {
+   "ground": "problem table; Kt = K25*exp(-a(T-25)) over T in 15..30 C, rounded OUT to 1e-9",
+   "items": [
+    {
+     "name": "SC",
+     "Kt": {
+      "range": [
+       "9.582194625",
+       "18.819746226"
+      ]
+     },
+     "cS": "4.5"
+    }
+   ],
+   "fields": {
+    "Kt": {
+     "unit": ""
+    },
+    "cS": {
+     "unit": "EUR/m^3"
+    }
+   }
+  },
+  "beds": {
+   "ground": "problem table",
+   "items": [
+    {
+     "name": "G2000",
+     "m": "2000",
+     "price": "5.0"
+    }
+   ],
+   "fields": {
+    "m": {
+     "unit": "kg"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "flow": {
+   "continuous": {
+    "field": "x",
+    "from": "0.5",
+    "to": "1.8",
+    "unit": "m^3/h"
+   }
+  }
+ }
+}

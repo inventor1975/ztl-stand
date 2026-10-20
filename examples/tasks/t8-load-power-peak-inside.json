@@ -1,0 +1,61 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "V": {
+   "role": "given",
+   "value": "5",
+   "unit": "V",
+   "ground": "psu"
+  },
+  "RL": {
+   "role": "given",
+   "range": [
+    "1",
+    "100"
+   ],
+   "unit": "ohm",
+   "why": "any load the user may connect"
+  },
+  "P": {
+   "role": "derived",
+   "unit": "W"
+  }
+ },
+ "slots": {
+  "Rs": {
+   "from": [
+    "res_1pct"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "P == V*V*RL/((Rs.R + RL)*(Rs.R + RL))",
+   "source": "power into a load behind a series resistor"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "P",
+   "op": "<=",
+   "value": "0.6",
+   "why": "the load is rated 0.6 W; the power peaks INSIDE the range, at RL = Rs"
+  }
+ ],
+ "catalog": {
+  "res_1pct": {
+   "series": "E24",
+   "decades": [
+    10
+   ],
+   "ground": "datasheet",
+   "fields": {
+    "R": {
+     "series": true,
+     "tolerance": "0.01",
+     "unit": "ohm"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,171 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "real round 2, s03: eCircuit Center amp+ADC error budget",
+ "quantities": {
+  "dT": {
+   "role": "given",
+   "value": "30",
+   "unit": "C",
+   "why": "max temperature change from 25 C",
+   "ground": "eCircuit Center EBA, amp+ADC page (conditions)"
+  },
+  "Rs": {
+   "role": "given",
+   "value": "500",
+   "unit": "ohm",
+   "why": "source resistance",
+   "ground": "eCircuit Center EBA, amp+ADC page (conditions)"
+  },
+  "R1n": {
+   "role": "given",
+   "value": "10",
+   "unit": "kohm",
+   "why": "nominal R1",
+   "ground": "eCircuit Center EBA, amp+ADC page (conditions)"
+  },
+  "R2n": {
+   "role": "given",
+   "value": "40",
+   "unit": "kohm",
+   "why": "nominal R2",
+   "ground": "eCircuit Center EBA, amp+ADC page (conditions)"
+  },
+  "Kn": {
+   "role": "given",
+   "value": "5",
+   "unit": "",
+   "why": "nominal gain 1+R2/R1",
+   "ground": "eCircuit Center EBA, amp+ADC page (conditions)"
+  },
+  "Vlsb": {
+   "role": "given",
+   "value": "5/4095",
+   "unit": "V",
+   "why": "12-bit LSB, 5 V ref",
+   "ground": "eCircuit Center EBA, amp+ADC page (conditions)"
+  },
+  "voff": {
+   "role": "given",
+   "range": [
+    "-0.1",
+    "0.1"
+   ],
+   "unit": "mV",
+   "why": "U1 input offset voltage (+-)",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "voffTC": {
+   "role": "given",
+   "range": [
+    "-10",
+    "10"
+   ],
+   "unit": "uV/C",
+   "why": "U1 offset drift",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "ib": {
+   "role": "given",
+   "range": [
+    "-5",
+    "5"
+   ],
+   "unit": "nA",
+   "why": "U1 input bias current",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "ibTC": {
+   "role": "given",
+   "range": [
+    "-1",
+    "1"
+   ],
+   "unit": "nA/C",
+   "why": "ib drift",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "iboff": {
+   "role": "given",
+   "range": [
+    "-5",
+    "5"
+   ],
+   "unit": "nA",
+   "why": "U1 input offset current",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "iboffTC": {
+   "role": "given",
+   "range": [
+    "-1",
+    "1"
+   ],
+   "unit": "nA/C",
+   "why": "iboff drift",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "aoff": {
+   "role": "given",
+   "range": [
+    "-3",
+    "3"
+   ],
+   "unit": "",
+   "why": "ADC offset, LSB",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "aoffTC": {
+   "role": "given",
+   "range": [
+    "-0.04",
+    "0.04"
+   ],
+   "unit": "1/C",
+   "why": "ADC offset drift, LSB per C",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "ares": {
+   "role": "given",
+   "range": [
+    "-1/2",
+    "1/2"
+   ],
+   "unit": "",
+   "why": "ADC resolution error, LSB",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "ainl": {
+   "role": "given",
+   "range": [
+    "-1",
+    "1"
+   ],
+   "unit": "",
+   "why": "ADC INL, LSB",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "Eoff": {
+   "role": "derived",
+   "unit": "mV"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "Eoff == (voff + voffTC*dT) + ((ib + ibTC*dT)*(Rs*Kn - R2n) + (iboff + iboffTC*dT)*(Rs*Kn + R2n)/2)/Kn + ((aoff + aoffTC*dT + ares + ainl)*Vlsb)/Kn",
+   "source": "source: voff referred to input; ib sensitivity Rs*K-R2, iboff sensitivity (Rs*K+R2)/2, divided by K; ADC terms in LSB*Vlsb divided by K"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Eoff",
+   "op": "within",
+   "value": [
+    "-5",
+    "5"
+   ],
+   "why": "offset budget 5 mV (RTI), source"
+  }
+ ],
+ "catalog": {}
+}

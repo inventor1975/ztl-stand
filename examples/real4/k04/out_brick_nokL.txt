@@ -1,0 +1,489 @@
+{
+  "stand": "ztl-stand/1",
+  "verdict": "EARNED",
+  "why": "several limits, each searched on its own; the verdict is the weakest of theirs",
+  "finds": [
+    {
+      "verdict": "EARNED",
+      "find": "smallest",
+      "quantity": "Lind",
+      "unit": "uH",
+      "proved": "147/20 (~7.35)",
+      "proved_means": "every Lind in [147/20 (~7.35), 30] uH works (EARNED on the whole range)",
+      "beyond": "367/50 (~7.34)",
+      "beyond_is": "REFUTED: the range [367/50 (~7.34), 30] uH holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "Kr": [
+                "516082/77911875 (~0.00662392)",
+                "3/10 (~0.3)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "Kr": [
+            "516082/77911875 (~0.00662392)",
+            "3/10 (~0.3)"
+          ]
+        },
+        "guaranteed_unit": {
+          "Kr": ""
+        },
+        "guaranteed_ends": {
+          "Kr": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+        },
+        "how": {
+          "Kr": "ZTL, certificate checked exactly (234 pieces; found by the stand's search, the extreme may lie inside the box)"
+        },
+        "requirements": [
+          {
+            "quantity": "Kr",
+            "op": "<=",
+            "value": "0.3",
+            "why": "KIND = 0.3 (low-ESR ceramic output caps), Eq. 8 guideline"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "Vo -> [10808/3375, 1288/375] by [Vo == Vref*(1 + R5/R6)]",
+          "ILPP -> [516082/25970625, 1257088/346275] by [ILPP == Vo*(Vin - Vo)/(Vin*Lind*fsw)], interval reading, sound, may be wider than the truth (credit)",
+          "Kr -> [516082/77911875, 1257088/1038825] by [Kr == ILPP/Io]",
+          "ILpk -> [78169916/25970625, 1667369/346275] by [ILpk == Io + ILPP/2]",
+          "ILrms -> [3000005484533/1000000000000, 1588888507721/500000000000] by [ILrms == sqrt(Io*Io + ILPP*ILPP/12)], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "KIND = 0.3 (low-ESR ceramic output caps), Eq. 8 guideline",
+            "by_at_witness": "569/5648130 (~0.000100741)",
+            "unit": ""
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Lind": "367/50 (~7.34)",
+          "Vin": "28",
+          "Vref": "207/250 (~0.828)",
+          "fsw": "456"
+        },
+        "point_units": {
+          "Lind": "uH",
+          "Vin": "V",
+          "Vref": "V",
+          "fsw": "kHz"
+        },
+        "value_there": {
+          "Kr": "847504/2824065 (~0.300101)"
+        },
+        "unit": "",
+        "requirement": {
+          "quantity": "Kr",
+          "op": "<=",
+          "value": "0.3",
+          "why": "KIND = 0.3 (low-ESR ceramic output caps), Eq. 8 guideline"
+        },
+        "overshoot": "569/5648130 (~0.000100741)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "19789448/701206875 (~0.028222)",
+            "847504/2824065 (~0.300101)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Lind",
+              "moves_it_by": "240055508/1059024375 (~0.226676)"
+            },
+            {
+              "quantity": "Vin",
+              "moves_it_by": "118496/941355 (~0.125878)"
+            },
+            {
+              "quantity": "fsw",
+              "moves_it_by": "847504/8472195 (~0.100034)"
+            },
+            {
+              "quantity": "Vref",
+              "moves_it_by": "807520/45749853 (~0.0176508)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Lind": "30",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "1",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "31/2 (~15.5)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "33/4 (~8.25)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "231/50 (~4.62)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "161/25 (~6.44)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "367/50 (~7.34)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "39/5 (~7.8)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "757/100 (~7.57)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "373/50 (~7.46)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "37/5 (~7.4)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "737/100 (~7.37)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "184/25 (~7.36)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "147/20 (~7.35)",
+          "verdict": "EARNED"
+        }
+      ],
+      "find_index": 0
+    },
+    {
+      "verdict": "EARNED",
+      "find": "smallest",
+      "quantity": "Lind",
+      "unit": "uH",
+      "proved": "197/50 (~3.94)",
+      "proved_means": "every Lind in [197/50 (~3.94), 30] uH works (EARNED on the whole range)",
+      "beyond": "393/100 (~3.93)",
+      "beyond_is": "REFUTED: the range [393/100 (~3.93), 30] uH holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "ILpk": [
+                "78169916/25970625 (~3.00994)",
+                "96/25 (~3.84)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "ILpk": [
+            "78169916/25970625 (~3.00994)",
+            "96/25 (~3.84)"
+          ]
+        },
+        "guaranteed_unit": {
+          "ILpk": "A"
+        },
+        "guaranteed_ends": {
+          "ILpk": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+        },
+        "how": {
+          "ILpk": "ZTL, certificate checked exactly (223 pieces; found by the stand's search, the extreme may lie inside the box)"
+        },
+        "requirements": [
+          {
+            "quantity": "ILpk",
+            "op": "<=",
+            "value": "Isat",
+            "why": "peak inductor current below the part's saturation rating"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "Vo -> [10808/3375, 1288/375] by [Vo == Vref*(1 + R5/R6)]",
+          "ILPP -> [516082/25970625, 30798656/4547745] by [ILPP == Vo*(Vin - Vo)/(Vin*Lind*fsw)], interval reading, sound, may be wider than the truth (credit)",
+          "Kr -> [516082/77911875, 30798656/13643235] by [Kr == ILPP/Io]",
+          "ILpk -> [78169916/25970625, 29042563/4547745] by [ILpk == Io + ILPP/2]",
+          "ILrms -> [3000005484533/1000000000000, 3580781289423/1000000000000] by [ILrms == sqrt(Io*Io + ILPP*ILPP/12)], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "peak inductor current below the part's saturation rating",
+            "by_at_witness": "3731/5040225 (~0.000740245)",
+            "unit": "A"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Lind": "393/100 (~3.93)",
+          "Vin": "28",
+          "Vref": "207/250 (~0.828)",
+          "fsw": "456"
+        },
+        "point_units": {
+          "Lind": "uH",
+          "Vin": "V",
+          "Vref": "V",
+          "fsw": "kHz"
+        },
+        "value_there": {
+          "ILpk": "3871639/1008045 (~3.84074)"
+        },
+        "unit": "A",
+        "requirement": {
+          "quantity": "ILpk",
+          "op": "<=",
+          "value": "Isat",
+          "why": "peak inductor current below the part's saturation rating"
+        },
+        "overshoot": "3731/5040225 (~0.000740245)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "711101599/233735625 (~3.04233)",
+            "3871639/1008045 (~3.84074)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Lind",
+              "moves_it_by": "92060122/126005625 (~0.730603)"
+            },
+            {
+              "quantity": "Vin",
+              "moves_it_by": "118496/336015 (~0.352651)"
+            },
+            {
+              "quantity": "fsw",
+              "moves_it_by": "847504/3024135 (~0.280247)"
+            },
+            {
+              "quantity": "Vref",
+              "moves_it_by": "807520/16330329 (~0.0494491)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Lind": "30",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "1",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "31/2 (~15.5)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "33/4 (~8.25)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "231/50 (~4.62)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "281/100 (~2.81)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "93/25 (~3.72)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "417/100 (~4.17)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "197/50 (~3.94)",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "383/100 (~3.83)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "97/25 (~3.88)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "391/100 (~3.91)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "98/25 (~3.92)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Lind": "393/100 (~3.93)",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 1
+    },
+    {
+      "verdict": "EARNED",
+      "find": "smallest",
+      "quantity": "Lind",
+      "unit": "uH",
+      "proved": "1",
+      "proved_means": "every Lind in [1, 30] uH works — the WHOLE search range; widen it to find the limit",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "ILrms": [
+                "3000005484533/1000000000000 (~3.00001)",
+                "18/5 (~3.6)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "ILrms": [
+            "3000005484533/1000000000000 (~3.00001)",
+            "18/5 (~3.6)"
+          ]
+        },
+        "guaranteed_unit": {
+          "ILrms": "A"
+        },
+        "guaranteed_ends": {
+          "ILrms": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+        },
+        "how": {
+          "ILrms": "ZTL, certificate checked exactly (32 pieces; found by the stand's search, the extreme may lie inside the box)"
+        },
+        "requirements": [
+          {
+            "quantity": "ILrms",
+            "op": "<=",
+            "value": "Irmsmax",
+            "why": "RMS inductor current below the part's RMS rating"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "Vo -> [10808/3375, 1288/375] by [Vo == Vref*(1 + R5/R6)]",
+          "ILPP -> [516082/25970625, 15399328/577125] by [ILPP == Vo*(Vin - Vo)/(Vin*Lind*fsw)], interval reading, sound, may be wider than the truth (credit)",
+          "Kr -> [516082/77911875, 15399328/1731375] by [Kr == ILPP/Io]",
+          "ILpk -> [78169916/25970625, 9431039/577125] by [ILpk == Io + ILPP/2]",
+          "ILrms -> [3000005484533/1000000000000, 8266263728859/1000000000000] by [ILrms == sqrt(Io*Io + ILPP*ILPP/12)], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "tries": [
+        {
+          "Lind": "30",
+          "verdict": "EARNED"
+        },
+        {
+          "Lind": "1",
+          "verdict": "EARNED"
+        }
+      ],
+      "find_index": 2
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

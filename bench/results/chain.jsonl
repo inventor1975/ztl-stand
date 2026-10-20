@@ -1,0 +1,8 @@
+{"axis": "chain", "size": 2, "wall_s": 0.08, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 14}
+{"axis": "chain", "size": 4, "wall_s": 0.11, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 14}
+{"axis": "chain", "size": 8, "wall_s": 0.29, "peak_mb": 20, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 14}
+{"axis": "chain", "size": 16, "wall_s": 0.26, "peak_mb": 20, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 14}
+{"axis": "chain", "size": 32, "wall_s": 0.46, "peak_mb": 20, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 14}
+{"axis": "chain", "size": 64, "wall_s": 1.4, "peak_mb": 22, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:51", "cpu": 8}
+{"axis": "chain", "size": 128, "wall_s": 5.0, "peak_mb": 27, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:56", "cpu": 8}
+{"axis": "chain", "size": 256, "wall_s": 1.99, "peak_mb": 26, "verdict": "OPEN", "stopped": false, "why": "components: C150.vin: the range arriving from C149.vout, [4.72741, 100.867], leaves the component's assume [0, 100] \u2014 its contract does not cover it (an arrivin", "mode": "work", "at": "2026-10-13 00:32:58", "cpu": 8}

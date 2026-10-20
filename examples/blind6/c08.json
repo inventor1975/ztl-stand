@@ -1,0 +1,89 @@
+{
+ "stand": "ztl-stand/1",
+ "report": "all",
+ "quantities": {
+  "f":    {"role": "given", "range": ["0.97", "1"], "unit": "", "why": "cylinder filled to 0.97..1.00 of nominal pressure"},
+  "Ta":   {"role": "given", "value": "263.15", "unit": "K", "why": "coldest ambient -10 degC (absolute, K)", "ground": "problem statement"},
+  "Tf":   {"role": "given", "value": "288.15", "unit": "K", "why": "fill temperature 15 degC", "ground": "problem statement"},
+  "T0":   {"role": "given", "value": "273.15", "unit": "K", "why": "standard temperature 0 degC", "ground": "problem statement"},
+  "pu":   {"role": "given", "value": "1", "unit": "bar", "why": "unit pressure, makes p dimensionless inside Z(p)"},
+  "pstd": {"role": "given", "value": "1.013", "unit": "bar", "why": "standard pressure for standard litres", "ground": "problem statement"},
+  "Cman": {"role": "given", "value": "40", "unit": "EUR", "why": "manifold price, needed if n = 2", "ground": "problem statement"},
+  "TA":   {"role": "given", "value": "20", "unit": "min", "why": "phase A duration"},
+  "TB":   {"role": "given", "value": "35", "unit": "min", "why": "phase B duration Tt"},
+  "TC":   {"role": "given", "value": "40", "unit": "min", "why": "phase C duration"},
+  "q1A":  {"role": "given", "range": ["7.5", "8.5"], "unit": "L/min", "why": "A: patient 1 set flow"},
+  "q2A":  {"role": "given", "range": ["9", "10"],   "unit": "L/min", "why": "A: patient 2 set flow"},
+  "q1B":  {"role": "given", "range": ["8", "9"],     "unit": "L/min", "why": "B: patient 1 set flow"},
+  "q2B":  {"role": "given", "range": ["6", "8"],     "unit": "L/min", "why": "B: patient 2 set flow"},
+  "q1C":  {"role": "given", "range": ["4", "5"],     "unit": "L/min", "why": "C: patient 1 set flow"},
+  "q2C":  {"role": "given", "range": ["5", "6"],     "unit": "L/min", "why": "C: patient 2 set flow"},
+  "s1":   {"role": "given", "range": ["-1", "1"], "unit": "", "why": "regulator 1 error as fraction of its accuracy, e1 = s1*acc"},
+  "s2":   {"role": "given", "range": ["-1", "1"], "unit": "", "why": "regulator 2 error as fraction of its accuracy, e2 = s2*acc"},
+  "N":      {"role": "derived", "unit": "L", "why": "free gas available, standard litres"},
+  "C":      {"role": "derived", "unit": "L", "why": "consumption over three phases, standard litres"},
+  "margin": {"role": "derived", "unit": "L", "why": "N - 1.2 C"},
+  "M":      {"role": "derived", "unit": "kg", "why": "total cylinder mass"}
+ },
+ "slots": {
+  "CY": {"from": ["cylinders"]},
+  "NC": {"from": ["ncyl"]},
+  "R1": {"from": ["regulators"]},
+  "R2": {"from": ["regulators"]},
+  "CV": {"from": ["conserver"], "optional": true}
+ },
+ "computed": {
+  "pmin": {"value": "max(max(R1.pmin, R2.pmin), CV.pmin)", "unit": "bar"},
+  "Zmin": "1 - 0.00048*(pmin/pu) + 0.0000013*(pmin/pu)*(pmin/pu)",
+  "Gmin": {"value": "pmin/Zmin", "unit": "bar"},
+  "Pman": {"value": "Cman*(NC.n - 1)", "unit": "EUR"}
+ },
+ "define": {
+  "PF": "CY.Pn*f",
+  "Zf": "1 - 0.00048*(PF/pu) + 0.0000013*(PF/pu)*(PF/pu)",
+  "dA": "q1A*(1 + s1*R1.acc)*(1 - CV.kappa) + q2A*(1 + s2*R2.acc) + R1.leak + R2.leak",
+  "dB": "q1B*(1 + s1*R1.acc)*(1 - CV.kappa) + q2B*(1 + s2*R2.acc) + R1.leak + R2.leak",
+  "dC": "q1C*(1 + s1*R1.acc)*(1 - CV.kappa) + q2C*(1 + s2*R2.acc) + R1.leak + R2.leak"
+ },
+ "laws": [
+  {"zfl": "N == NC.n*CY.Vw*((PF/Zf)*(T0/Tf) - Gmin*(T0/Ta))/pstd", "source": "problem statement: free gas from the bank, real-gas Z(p), pf at 15 degC, pmin at Ta"},
+  {"zfl": "C == TA*dA + TB*dB + TC*dC", "source": "problem statement: consumption summed over phases"},
+  {"zfl": "margin == N - 12/10*C", "source": "R1 with the 20 % reserve, as a difference"},
+  {"zfl": "M == NC.n*CY.mass", "source": "n cylinders"}
+ ],
+ "requirements": [
+  {"quantity": "margin", "op": ">=", "value": "0", "why": "R1: N >= 1.2 C"},
+  {"quantity": "M", "op": "<=", "value": "16", "why": "R2: total cylinder mass <= 16 kg"}
+ ],
+ "objective": {"minimize": "NC.n*CY.price + Pman + R1.price + R2.price + CV.price", "why": "cheapest kit: cylinders + manifold + regulators + conserver"},
+ "catalog": {
+  "cylinders": {
+   "items": [
+    {"name": "CY5",  "Vw": "5",  "Pn": "200", "mass": "7.5", "price": "95"},
+    {"name": "CY7",  "Vw": "7",  "Pn": "200", "mass": "10.4", "price": "120"},
+    {"name": "CY10", "Vw": "10", "Pn": "200", "mass": "14.0", "price": "165"},
+    {"name": "CY5H", "Vw": "5",  "Pn": "300", "mass": "4.2", "price": "480"},
+    {"name": "CY7H", "Vw": "7",  "Pn": "300", "mass": "5.6", "price": "640"}
+   ],
+   "fields": {"Vw": {"unit": "L"}, "Pn": {"unit": "bar"}, "mass": {"unit": "kg"}, "price": {"unit": "EUR"}},
+   "ground": "problem statement"
+  },
+  "ncyl": {"integers": {"field": "n", "from": "1", "to": "2", "unit": ""}},
+  "regulators": {
+   "items": [
+    {"name": "RA", "acc": "0.10", "leak": "0.30", "pmin": "10", "price": "60"},
+    {"name": "RB", "acc": "0.05", "leak": "0.15", "pmin": "10", "price": "140"},
+    {"name": "RC", "acc": "0.02", "leak": "0.05", "pmin": "10", "price": "320"}
+   ],
+   "fields": {"acc": {"unit": ""}, "leak": {"unit": "L/min"}, "pmin": {"unit": "bar"}, "price": {"unit": "EUR"}},
+   "ground": "problem statement"
+  },
+  "conserver": {
+   "items": [
+    {"name": "conserver", "kappa": {"range": ["0.30", "0.40"]}, "pmin": "25", "price": "450"}
+   ],
+   "fields": {"kappa": {"unit": ""}, "pmin": {"unit": "bar"}, "price": {"unit": "EUR"}},
+   "ground": "problem statement"
+  }
+ }
+}

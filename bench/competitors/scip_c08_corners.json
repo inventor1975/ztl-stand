@@ -1,0 +1,1 @@
+{"brick": "c08", "form": "corners", "status": "optimal", "scenarios": 1024, "solve_s": 230.0, "cost": 625.0, "design": "CY10, n=1, R1=RC, R2=RB, CV none (the stand tie of its answer)", "stand_on_it": "EARNED", "note": "MEASURED 18.10 outside heavy (no cap): max RSS 34.6 GB, wall 235 s; under the 8G cap it is killed", "at": "2026-10-18 20:36"}

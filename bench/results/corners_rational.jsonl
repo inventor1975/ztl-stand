@@ -1,0 +1,12 @@
+{"axis": "corners_rational", "size": 1, "wall_s": 0.09, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:52", "cpu": 0}
+{"axis": "corners_rational", "size": 2, "wall_s": 0.3, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 0}
+{"axis": "corners_rational", "size": 3, "wall_s": 0.32, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 0}
+{"axis": "corners_rational", "size": 4, "wall_s": 0.35, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 0}
+{"axis": "corners_rational", "size": 6, "wall_s": 0.38, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:54", "cpu": 0}
+{"axis": "corners_rational", "size": 8, "wall_s": 0.43, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:54", "cpu": 0}
+{"axis": "corners_rational", "size": 10, "wall_s": 0.59, "peak_mb": 52, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:55", "cpu": 0}
+{"axis": "corners_rational", "size": 12, "wall_s": 1.07, "peak_mb": 54, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:56", "cpu": 0}
+{"axis": "corners_rational", "size": 16, "wall_s": 12.19, "peak_mb": 111, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:31:08", "cpu": 0}
+{"axis": "corners_rational", "size": 14, "wall_s": 3.53, "peak_mb": 63, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:52", "cpu": 6}
+{"axis": "corners_rational", "size": 20, "wall_s": 0.81, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:53", "cpu": 6}
+{"axis": "corners_rational", "size": 24, "wall_s": 0.93, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:54", "cpu": 6}

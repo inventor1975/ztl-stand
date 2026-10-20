@@ -1,0 +1,5 @@
+Ref,Value,Tolerance
+R1,240,1%
+R2,720,1%
+Vref,1.25,4%
+Iadj,50u,100%

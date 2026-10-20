@@ -1,0 +1,281 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "m": {
+   "role": "given",
+   "value": "1200",
+   "tolerance": "0.05",
+   "unit": "kg",
+   "why": "skid mass 1140..1260"
+  },
+  "n": {
+   "role": "given",
+   "range": [
+    "1350",
+    "1500"
+   ],
+   "unit": "rpm",
+   "why": "operating speed"
+  },
+  "G": {
+   "role": "given",
+   "value": "9.81",
+   "unit": "m*s^-2"
+  },
+  "fref": {
+   "role": "given",
+   "value": "1",
+   "unit": "Hz",
+   "why": "unit constant so that sqrt gets a dimensionless argument"
+  },
+  "fn": {
+   "role": "derived",
+   "unit": "Hz",
+   "why": "natural frequency"
+  },
+  "r": {
+   "role": "derived",
+   "unit": "",
+   "why": "frequency ratio f/fn"
+  },
+  "Tr": {
+   "role": "derived",
+   "unit": "",
+   "why": "force transmissibility"
+  },
+  "Tpeak": {
+   "role": "derived",
+   "unit": "",
+   "why": "resonance peak at run-up"
+  },
+  "Fst": {
+   "role": "derived",
+   "unit": "N",
+   "why": "static load per mount"
+  },
+  "dst": {
+   "role": "derived",
+   "unit": "mm",
+   "why": "static deflection"
+  }
+ },
+ "slots": {
+  "MNT": {
+   "from": [
+    "mounts"
+   ]
+  },
+  "CNT": {
+   "from": [
+    "counts"
+   ]
+  }
+ },
+ "define": {
+  "ktot": "CNT.N*MNT.k",
+  "f": "n"
+ },
+ "laws": [
+  {
+   "zfl": "fn == fref*sqrt(ktot/(m*fref*fref))/(2*pi)",
+   "source": "SDOF natural frequency"
+  },
+  {
+   "zfl": "r == f/fn",
+   "source": "frequency ratio"
+  },
+  {
+   "zfl": "Tr == sqrt((1 + (2*MNT.zeta*r)*(2*MNT.zeta*r))/((1 - r*r)*(1 - r*r) + (2*MNT.zeta*r)*(2*MNT.zeta*r)))",
+   "source": "force transmissibility of SDOF with viscous damping"
+  },
+  {
+   "zfl": "Tpeak == sqrt(1 + 4*MNT.zeta*MNT.zeta)/(2*MNT.zeta)",
+   "source": "problem statement approximation of resonance peak"
+  },
+  {
+   "zfl": "Fst == m*G/CNT.N",
+   "source": "static load per mount"
+  },
+  {
+   "zfl": "dst == m*G/ktot",
+   "source": "static deflection"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tr",
+   "op": "<=",
+   "value": "0.06",
+   "why": "(a) transmissibility at every speed"
+  },
+  {
+   "quantity": "Fst",
+   "op": ">=",
+   "value": "MNT.Fmin",
+   "why": "(b) lower allowed load"
+  },
+  {
+   "quantity": "Fst",
+   "op": "<=",
+   "value": "MNT.Fmax",
+   "why": "(b) upper allowed load"
+  },
+  {
+   "quantity": "dst",
+   "op": "<=",
+   "value": "25",
+   "why": "(c) static deflection mm (all m,k: conservative reading)"
+  },
+  {
+   "quantity": "Tpeak",
+   "op": "<=",
+   "value": "12",
+   "why": "(d) run-up peak at smallest zeta"
+  },
+  {
+   "quantity": "fn",
+   "op": "<=",
+   "value": "0.4*f",
+   "why": "(d) resonance below band: fn <= 0.4 f_min"
+  }
+ ],
+ "objective": {
+  "minimize": "CNT.N*MNT.price",
+  "why": "cheapest total mount price"
+ },
+ "catalog": {
+  "mounts": {
+   "items": [
+    {
+     "type": "S1",
+     "k": {
+      "value": "120",
+      "tolerance": "0.15"
+     },
+     "zeta": {
+      "range": [
+       "0.01",
+       "0.03"
+      ]
+     },
+     "Fmin": "1500",
+     "Fmax": "4500",
+     "price": "38"
+    },
+    {
+     "type": "S2",
+     "k": {
+      "value": "180",
+      "tolerance": "0.15"
+     },
+     "zeta": {
+      "range": [
+       "0.01",
+       "0.03"
+      ]
+     },
+     "Fmin": "2000",
+     "Fmax": "6000",
+     "price": "44"
+    },
+    {
+     "type": "S3",
+     "k": {
+      "value": "260",
+      "tolerance": "0.15"
+     },
+     "zeta": {
+      "range": [
+       "0.01",
+       "0.03"
+      ]
+     },
+     "Fmin": "3000",
+     "Fmax": "8000",
+     "price": "52"
+    },
+    {
+     "type": "SD2",
+     "k": {
+      "value": "180",
+      "tolerance": "0.15"
+     },
+     "zeta": {
+      "range": [
+       "0.10",
+       "0.20"
+      ]
+     },
+     "Fmin": "2000",
+     "Fmax": "6000",
+     "price": "96"
+    },
+    {
+     "type": "R1",
+     "k": {
+      "value": "300",
+      "tolerance": "0.15"
+     },
+     "zeta": {
+      "range": [
+       "0.06",
+       "0.10"
+      ]
+     },
+     "Fmin": "1500",
+     "Fmax": "3500",
+     "price": "21"
+    },
+    {
+     "type": "R2",
+     "k": {
+      "value": "520",
+      "tolerance": "0.15"
+     },
+     "zeta": {
+      "range": [
+       "0.08",
+       "0.14"
+      ]
+     },
+     "Fmin": "2500",
+     "Fmax": "6000",
+     "price": "19"
+    }
+   ],
+   "fields": {
+    "k": {
+     "unit": "N/mm"
+    },
+    "zeta": {
+     "unit": ""
+    },
+    "Fmin": {
+     "unit": "N"
+    },
+    "Fmax": {
+     "unit": "N"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "counts": {
+   "items": [
+    {
+     "N": "4"
+    },
+    {
+     "N": "6"
+    }
+   ],
+   "fields": {
+    "N": {
+     "unit": ""
+    }
+   }
+  }
+ },
+ "report": "all"
+}

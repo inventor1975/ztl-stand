@@ -1,0 +1,24 @@
+{
+  "stand": "ztl-stand/1",
+  "why": "Cisco doc 27042, 1310 nm, 20.5 km link, 2 connectors, 4 splices; ranges = the doc's Table 1 min..max; card Tx -3..0 dBm, Rx sensitivity -27..-20 dBm. Asks: link works with the WORST card in the WORST field conditions (published: 16.05 dB loss vs 17 dB budget)",
+  "quantities": {
+    "a":    {"role": "given", "range": ["0.3", "0.5"], "unit": "dB/km", "ground": "source Table 1, attenuation per km, 1310 nm, Min..Max"},
+    "C":    {"role": "given", "range": ["0.4", "1"], "unit": "dB", "ground": "source Table 1, per optical connector, Min..Max"},
+    "J":    {"role": "given", "range": ["0.02", "0.2"], "unit": "dB", "ground": "source Table 1, per joint (splice), Min..Max"},
+    "L":    {"role": "given", "value": "20.5", "unit": "km", "ground": "link length in the source example"},
+    "M":    {"role": "given", "value": "3", "unit": "dB", "ground": "source: system margin 'around 3 dB'"},
+    "Tx":   {"role": "given", "range": ["-3", "0"], "unit": "dB", "why": "dBm, written as dB; source: card Tx -3 to 0 dBm at 1310 nm"},
+    "Sens": {"role": "given", "range": ["-27", "-20"], "unit": "dB", "why": "dBm, written as dB; source: card Rx -20 to -27 dBm at 1310 nm"},
+    "TA":   {"role": "derived", "unit": "dB"},
+    "Mg":   {"role": "derived", "unit": "dB"}
+  },
+  "slots": {},
+  "laws": [
+    {"zfl": "TA == 2*C + 4*J + L*a + M", "source": "source formula TA = n*C + c*J + L*a + M, n=2, c=4"},
+    {"zfl": "Mg == Tx - Sens - TA", "source": "power budget minus total attenuation (source: budget = Tx - Rx sensitivity)"}
+  ],
+  "requirements": [
+    {"quantity": "Mg", "op": ">=", "value": "0", "why": "received power not below sensitivity: the link works"}
+  ],
+  "catalog": {}
+}

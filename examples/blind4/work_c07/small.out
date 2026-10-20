@@ -1,0 +1,27 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "modes": [
+    "wide",
+    "control"
+  ],
+  "designs_tried": 1,
+  "undecided": 1,
+  "designs": [
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=20000, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "OPEN",
+      "why": "undecided in: wide (a definition could not be bounded: cannot bound ['E_adc', 'Etot']); control (a definition could not be bounded: cannot bound ['E_adc', 'Etot'])"
+    }
+  ],
+  "designs_count": {
+    "OPEN": 1
+  },
+  "excluded_by_where": 0,
+  "verdict": "OPEN",
+  "why": "1 design(s) could not be decided in every mode and none was earned"
+}
+
+real	0m0.568s
+user	0m0.501s
+sys	0m0.056s

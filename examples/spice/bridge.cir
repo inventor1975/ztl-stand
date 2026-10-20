@@ -1,0 +1,7 @@
+* a Wheatstone bridge: the offset V(a,b)
+V1 top 0 10
+R1 top a 1k tol=0.1%
+R2 a 0 1k tol=0.1%
+R3 top b 1k tol=0.1%
+R4 b 0 1k tol=0.1%
+.end

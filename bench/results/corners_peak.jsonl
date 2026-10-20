@@ -1,0 +1,12 @@
+{"axis": "corners_peak", "size": 1, "wall_s": 0.06, "peak_mb": 15, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 2}
+{"axis": "corners_peak", "size": 2, "wall_s": 0.24, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 2}
+{"axis": "corners_peak", "size": 3, "wall_s": 0.26, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 2}
+{"axis": "corners_peak", "size": 4, "wall_s": 0.24, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 2}
+{"axis": "corners_peak", "size": 6, "wall_s": 0.23, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 2}
+{"axis": "corners_peak", "size": 8, "wall_s": 0.27, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:06", "cpu": 2}
+{"axis": "corners_peak", "size": 10, "wall_s": 0.33, "peak_mb": 52, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:07", "cpu": 2}
+{"axis": "corners_peak", "size": 12, "wall_s": 0.65, "peak_mb": 54, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 2}
+{"axis": "corners_peak", "size": 16, "wall_s": 11.24, "peak_mb": 104, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:33:01", "cpu": 2}
+{"axis": "corners_peak", "size": 20, "wall_s": 0.36, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:33:01", "cpu": 2}
+{"axis": "corners_peak", "size": 24, "wall_s": 0.39, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:33:01", "cpu": 2}
+{"axis": "corners_peak", "size": 32, "wall_s": 0.45, "peak_mb": 51, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:33:02", "cpu": 2}

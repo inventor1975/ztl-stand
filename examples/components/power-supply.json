@@ -1,0 +1,51 @@
+{
+ "stand": "universal-stand/1",
+ "why": "RECURSION: the adapter and the charging board as ONE component (a system with an interface)",
+ "interface": {
+  "inputs": {
+   "Vmains": {
+    "assume": [
+     "200",
+     "250"
+    ],
+    "bands": [
+     "200",
+     "230",
+     "250"
+    ]
+   }
+  },
+  "outputs": [
+   "Vchg"
+  ]
+ },
+ "components": {
+  "AD": {
+   "file": "adapter-5v.json"
+  },
+  "CH": {
+   "file": "charging-board.json"
+  }
+ },
+ "connect": {
+  "AD.Vin": "Vmains",
+  "CH.Vin": "AD.Vout"
+ },
+ "quantities": {
+  "Vmains": {
+   "role": "given",
+   "value": "230",
+   "unit": "V"
+  },
+  "Vchg": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vchg == CH.Vchg"
+  }
+ ],
+ "requirements": []
+}

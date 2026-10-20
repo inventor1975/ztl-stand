@@ -1,0 +1,360 @@
+{
+ "stand": "universal-stand/1",
+ "report": "all",
+ "quantities": {
+  "Tamb": {
+   "role": "given",
+   "value": "38",
+   "unit": "C",
+   "why": "overridden per mode"
+  },
+  "G": {
+   "role": "given",
+   "value": "1000",
+   "unit": "W/m^2",
+   "why": "overridden per mode"
+  },
+  "NOCT": {
+   "role": "given",
+   "range": [
+    "43",
+    "47"
+   ],
+   "unit": "C",
+   "why": "NOCT 45 +-2"
+  },
+  "Gref": {
+   "role": "given",
+   "value": "800",
+   "unit": "W/m^2",
+   "why": "NOCT test irradiance"
+  },
+  "Gstc": {
+   "role": "given",
+   "value": "1000",
+   "unit": "W/m^2",
+   "why": "STC irradiance"
+  },
+  "Vocs": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Vmps": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Pdc": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "Pstc": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "ratio": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Istr": {
+   "role": "derived",
+   "unit": "A"
+  }
+ },
+ "slots": {
+  "MOD": {
+   "from": [
+    "modules"
+   ]
+  },
+  "INV": {
+   "from": [
+    "inverters"
+   ]
+  },
+  "N": {
+   "from": [
+    "modules_per_string"
+   ]
+  },
+  "STR": {
+   "from": [
+    "string_count"
+   ]
+  }
+ },
+ "define": {
+  "Tc": "Tamb + (NOCT - 20)/Gref*G"
+ },
+ "laws": [
+  {
+   "zfl": "Vocs == N.N*MOD.Voc*(1 + MOD.bvoc*(Tc - 25))",
+   "source": "Voc(T) = Voc,STC (1 + beta_Voc (T-25)), n in series"
+  },
+  {
+   "zfl": "Vmps == N.N*MOD.Vmp*(1 + MOD.bvmp*(Tc - 25))",
+   "source": "Vmp(T) = Vmp,STC (1 + beta_Vmp (T-25)), n in series"
+  },
+  {
+   "zfl": "Pdc == STR.NP*N.N*MOD.Pmax*(1 + MOD.gam*(Tc - 25))*G/Gstc",
+   "source": "Pmax(T) = Pmax,STC (1 + gamma (T-25)), P ~ G"
+  },
+  {
+   "zfl": "Pstc == STR.NP*N.N*MOD.Pmax",
+   "source": "installed STC power"
+  },
+  {
+   "zfl": "ratio == Pstc/INV.Pac",
+   "source": "DC/AC ratio"
+  },
+  {
+   "zfl": "Istr == 5/4*spi*MOD.Isc",
+   "source": "1.25 x Isc, times strings sharing one MPPT input"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Istr",
+   "op": "<=",
+   "value": "INV.Imax",
+   "why": "string current within MPPT input rating"
+  },
+  {
+   "quantity": "Pstc",
+   "op": "within",
+   "value": [
+    "11500",
+    "13500"
+   ],
+   "why": "installed DC 11.5-13.5 kWp"
+  },
+  {
+   "quantity": "ratio",
+   "op": "within",
+   "value": [
+    "1.05",
+    "1.35"
+   ],
+   "why": "DC/AC ratio"
+  }
+ ],
+ "modes": {
+  "winter morning Voc": {
+   "quantities": {
+    "Tamb": {
+     "value": "-18"
+    },
+    "G": {
+     "value": "100"
+    }
+   },
+   "define": {
+    "Tc": "Tamb + 2"
+   },
+   "requirements": [
+    {
+     "quantity": "Vocs",
+     "op": "<=",
+     "value": "97/100*INV.Vmax",
+     "why": "Voc cold <= max DC voltage with 3% margin"
+    }
+   ]
+  },
+  "winter clear Vmp": {
+   "quantities": {
+    "Tamb": {
+     "value": "-18"
+    },
+    "G": {
+     "value": "1000"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Vmps",
+     "op": "<=",
+     "value": "INV.Vhi",
+     "why": "Vmp winter at STC-like irradiance <= MPPT max"
+    }
+   ]
+  },
+  "summer hot": {
+   "quantities": {
+    "Tamb": {
+     "value": "38"
+    },
+    "G": {
+     "value": "1000"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Vmps",
+     "op": ">=",
+     "value": "INV.Vlo",
+     "why": "Vmp hot >= MPPT min"
+    },
+    {
+     "quantity": "Pdc",
+     "op": "<=",
+     "value": "11/10*INV.Pac",
+     "why": "clipping limit"
+    },
+    {
+     "quantity": "Pdc",
+     "op": ">=",
+     "value": "4/5*INV.Pac",
+     "why": "at least 80% of AC"
+    }
+   ]
+  }
+ },
+ "objective": {
+  "minimize": "MOD.price*STR.NP*N.N + INV.price",
+  "why": "cheapest hardware"
+ },
+ "catalog": {
+  "modules": {
+   "items": [
+    {
+     "Pmax": "410",
+     "Voc": "37.2",
+     "Vmp": "31.0",
+     "Isc": "13.9",
+     "gam": "-0.0034",
+     "bvoc": "-0.0026",
+     "bvmp": "-0.0034",
+     "price": "135",
+     "model": "M-410"
+    },
+    {
+     "Pmax": "450",
+     "Voc": "41.5",
+     "Vmp": "34.8",
+     "Isc": "13.7",
+     "gam": "-0.0035",
+     "bvoc": "-0.0027",
+     "bvmp": "-0.0035",
+     "price": "162",
+     "model": "M-450"
+    },
+    {
+     "Pmax": "380",
+     "Voc": "45.0",
+     "Vmp": "36.0",
+     "Isc": "10.8",
+     "gam": "-0.0026",
+     "bvoc": "-0.0020",
+     "bvmp": "-0.0026",
+     "price": "140",
+     "model": "M-380"
+    }
+   ],
+   "fields": {
+    "Pmax": {
+     "unit": "W"
+    },
+    "Voc": {
+     "unit": "V"
+    },
+    "Vmp": {
+     "unit": "V"
+    },
+    "Isc": {
+     "unit": "A"
+    },
+    "gam": {
+     "unit": "1/C"
+    },
+    "bvoc": {
+     "unit": "1/C"
+    },
+    "bvmp": {
+     "unit": "1/C"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  },
+  "inverters": {
+   "items": [
+    {
+     "Vmax": "600",
+     "Vlo": "125",
+     "Vhi": "560",
+     "Imax": "16",
+     "Pac": "8000",
+     "price": "1300",
+     "model": "INV-8",
+     "inputs": "2"
+    },
+    {
+     "Vmax": "1000",
+     "Vlo": "200",
+     "Vhi": "800",
+     "Imax": "16",
+     "Pac": "10000",
+     "price": "1900",
+     "model": "INV-10",
+     "inputs": "2"
+    },
+    {
+     "Vmax": "1000",
+     "Vlo": "180",
+     "Vhi": "850",
+     "Imax": "20",
+     "Pac": "12000",
+     "price": "2350",
+     "model": "INV-12",
+     "inputs": "2"
+    }
+   ],
+   "fields": {
+    "Vmax": {
+     "unit": "V"
+    },
+    "Vlo": {
+     "unit": "V"
+    },
+    "Vhi": {
+     "unit": "V"
+    },
+    "Imax": {
+     "unit": "A"
+    },
+    "Pac": {
+     "unit": "W"
+    },
+    "price": {
+     "unit": "USD"
+    },
+    "inputs": {
+     "unit": ""
+    }
+   }
+  },
+  "modules_per_string": {
+   "integers": {
+    "field": "N",
+    "from": "5",
+    "to": "20",
+    "unit": ""
+   }
+  },
+  "string_count": {
+   "integers": {
+    "field": "NP",
+    "from": "1",
+    "to": "8",
+    "unit": ""
+   }
+  }
+ },
+ "computed": {
+  "spi": "ceil(STR.NP / INV.inputs)"
+ },
+ "where": [
+  "STR.NP <= 2*INV.inputs"
+ ],
+ "note": "blind-2 c09 with computed strings per input and a where on the string count (2026-10-10)"
+}

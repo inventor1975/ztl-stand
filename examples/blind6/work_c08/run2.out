@@ -1,0 +1,8 @@
+{
+  "verdict": "BRICK ERROR",
+  "why": "BrickError: requirement on 'Ctot': 'max' in the bound is not a quantity"
+}
+
+real	0m0.107s
+user	0m0.052s
+sys	0m0.037s

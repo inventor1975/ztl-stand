@@ -1,0 +1,152 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "c02 as a system of devices: 3 transformer instances (one per situation), 2 motors, 2 feeders (cable+breaker chosen inside)",
+ "components": {
+  "M1": {
+   "file": "motor1.json"
+  },
+  "M2": {
+   "file": "motor2.json"
+  },
+  "F1": {
+   "file": "feeder1.json"
+  },
+  "F2": {
+   "file": "feeder2.json"
+  },
+  "T1": {
+   "file": "tr.json"
+  },
+  "T2": {
+   "file": "tr.json"
+  },
+  "T3": {
+   "file": "tr.json"
+  }
+ },
+ "connect": {
+  "T1.Ia": "M1.Irun",
+  "T1.Ib": "M2.Irun",
+  "T2.Ia": "M1.Istart",
+  "T2.Ib": "M2.Irun",
+  "T3.Ia": "M1.Irun",
+  "T3.Ib": "M2.Istart",
+  "F1.L": "L1",
+  "F1.Ir": "M1.Irun",
+  "F1.Is": "M1.Istart",
+  "F1.Vb1": "T1.Vbus",
+  "F1.Vb2": "T2.Vbus",
+  "F1.Vb3": "T3.Vbus",
+  "F2.L": "L2",
+  "F2.Ir": "M2.Irun",
+  "F2.Is": "M2.Istart",
+  "F2.Vb1": "T1.Vbus",
+  "F2.Vb2": "T2.Vbus",
+  "F2.Vb3": "T3.Vbus"
+ },
+ "quantities": {
+  "L1": {
+   "role": "given",
+   "value": "160",
+   "unit": "m"
+  },
+  "L2": {
+   "role": "given",
+   "value": "85",
+   "unit": "m"
+  },
+  "R1_1": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "R1_2": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "R2_1": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "R2_2": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "R3_S2": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "R3_S3": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "R1_1 == F1.Vt1",
+   "source": "contract output"
+  },
+  {
+   "zfl": "R1_2 == F2.Vt1",
+   "source": "contract output"
+  },
+  {
+   "zfl": "R2_1 == F1.Vt2",
+   "source": "contract output"
+  },
+  {
+   "zfl": "R2_2 == F2.Vt3",
+   "source": "contract output"
+  },
+  {
+   "zfl": "R3_S2 == T2.Vbus",
+   "source": "contract output"
+  },
+  {
+   "zfl": "R3_S3 == T3.Vbus",
+   "source": "contract output"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "R1_1",
+   "op": ">=",
+   "value": "380",
+   "why": "R1_1"
+  },
+  {
+   "quantity": "R1_2",
+   "op": ">=",
+   "value": "380",
+   "why": "R1_2"
+  },
+  {
+   "quantity": "R2_1",
+   "op": ">=",
+   "value": "340",
+   "why": "R2_1"
+  },
+  {
+   "quantity": "R2_2",
+   "op": ">=",
+   "value": "340",
+   "why": "R2_2"
+  },
+  {
+   "quantity": "R3_S2",
+   "op": ">=",
+   "value": "352",
+   "why": "R3_S2"
+  },
+  {
+   "quantity": "R3_S3",
+   "op": ">=",
+   "value": "352",
+   "why": "R3_S3"
+  }
+ ],
+ "objective": {
+  "minimize": "F1.C.price*L1 + F1.B.price + F2.C.price*L2 + F2.B.price",
+  "unit": "EUR",
+  "why": "cables over their lengths + breakers (priced from the chosen parts' fields, not the component's internal cost)"
+ }
+}

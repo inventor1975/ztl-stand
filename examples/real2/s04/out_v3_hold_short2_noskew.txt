@@ -1,0 +1,53 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "sh": [
+          "10",
+          "50"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "verdict": "EARNED",
+  "design": {},
+  "guaranteed": {
+    "sh": [
+      "10",
+      "50"
+    ]
+  },
+  "guaranteed_unit": {
+    "sh": "ps"
+  },
+  "how": {
+    "sh": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "sh",
+      "op": ">=",
+      "value": "0",
+      "why": "hold slack nonnegative (the source writes strict >; see report)"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "sh -> [1/100000000000, 1/20000000000] by [sh == tcq + (h1 + h2) - thold]"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

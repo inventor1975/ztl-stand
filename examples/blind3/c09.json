@@ -1,0 +1,777 @@
+{
+ "stand": "universal-stand/1",
+ "report": "all",
+ "quantities": {
+  "A": {
+   "role": "given",
+   "value": "180",
+   "tolerance": "0.05",
+   "unit": "m^2",
+   "why": "roof area 180 +-5%"
+  },
+  "rc": {
+   "role": "given",
+   "range": [
+    "0.70",
+    "0.90"
+   ],
+   "unit": "",
+   "why": "runoff coefficient 0.80 (0.70..0.90)"
+  },
+  "hh": {
+   "role": "given",
+   "value": "140",
+   "tolerance": "0.15",
+   "unit": "L/day",
+   "why": "household 140 L/day +-15%"
+  },
+  "gar": {
+   "role": "given",
+   "value": "120",
+   "unit": "L/day",
+   "why": "garden, April..September"
+  },
+  "fy": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "year factor; overridden per mode (dry 0.75, normal 1, wet 1.15)"
+  },
+  "inst": {
+   "role": "given",
+   "value": "380",
+   "unit": "EUR/m^3",
+   "why": "installation per m^3 of tank"
+  },
+  "R1": {
+   "role": "given",
+   "value": "78",
+   "unit": "mm",
+   "why": "normal-year rain, month 1"
+  },
+  "nd1": {
+   "role": "given",
+   "value": "31",
+   "unit": "day"
+  },
+  "R2": {
+   "role": "given",
+   "value": "65",
+   "unit": "mm",
+   "why": "normal-year rain, month 2"
+  },
+  "nd2": {
+   "role": "given",
+   "value": "28",
+   "unit": "day"
+  },
+  "R3": {
+   "role": "given",
+   "value": "58",
+   "unit": "mm",
+   "why": "normal-year rain, month 3"
+  },
+  "nd3": {
+   "role": "given",
+   "value": "31",
+   "unit": "day"
+  },
+  "R4": {
+   "role": "given",
+   "value": "41",
+   "unit": "mm",
+   "why": "normal-year rain, month 4"
+  },
+  "nd4": {
+   "role": "given",
+   "value": "30",
+   "unit": "day"
+  },
+  "R5": {
+   "role": "given",
+   "value": "29",
+   "unit": "mm",
+   "why": "normal-year rain, month 5"
+  },
+  "nd5": {
+   "role": "given",
+   "value": "31",
+   "unit": "day"
+  },
+  "R6": {
+   "role": "given",
+   "value": "14",
+   "unit": "mm",
+   "why": "normal-year rain, month 6"
+  },
+  "nd6": {
+   "role": "given",
+   "value": "30",
+   "unit": "day"
+  },
+  "R7": {
+   "role": "given",
+   "value": "5",
+   "unit": "mm",
+   "why": "normal-year rain, month 7"
+  },
+  "nd7": {
+   "role": "given",
+   "value": "31",
+   "unit": "day"
+  },
+  "R8": {
+   "role": "given",
+   "value": "8",
+   "unit": "mm",
+   "why": "normal-year rain, month 8"
+  },
+  "nd8": {
+   "role": "given",
+   "value": "31",
+   "unit": "day"
+  },
+  "R9": {
+   "role": "given",
+   "value": "24",
+   "unit": "mm",
+   "why": "normal-year rain, month 9"
+  },
+  "nd9": {
+   "role": "given",
+   "value": "30",
+   "unit": "day"
+  },
+  "R10": {
+   "role": "given",
+   "value": "52",
+   "unit": "mm",
+   "why": "normal-year rain, month 10"
+  },
+  "nd10": {
+   "role": "given",
+   "value": "31",
+   "unit": "day"
+  },
+  "R11": {
+   "role": "given",
+   "value": "81",
+   "unit": "mm",
+   "why": "normal-year rain, month 11"
+  },
+  "nd11": {
+   "role": "given",
+   "value": "30",
+   "unit": "day"
+  },
+  "R12": {
+   "role": "given",
+   "value": "90",
+   "unit": "mm",
+   "why": "normal-year rain, month 12"
+  },
+  "nd12": {
+   "role": "given",
+   "value": "31",
+   "unit": "day"
+  },
+  "S1": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U1": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O1": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S2": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U2": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O2": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S3": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U3": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O3": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S4": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U4": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O4": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S5": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U5": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O5": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh5": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S6": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U6": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O6": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh6": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S7": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U7": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O7": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh7": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S8": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U8": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O8": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh8": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S9": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U9": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O9": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh9": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S10": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U10": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O10": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh10": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S11": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U11": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O11": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh11": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S12": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "U12": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "O12": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "sh12": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Utot": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "Otot": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "Nshort": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Mu": {
+   "role": "derived",
+   "unit": "L"
+  },
+  "Mo": {
+   "role": "derived",
+   "unit": "L"
+  }
+ },
+ "slots": {
+  "T": {
+   "from": [
+    "tanks"
+   ]
+  },
+  "F": {
+   "from": [
+    "filters"
+   ]
+  }
+ },
+ "define": {
+  "Y1": "A*rc*F.eff*fy*R1",
+  "D1": "hh*nd1",
+  "Y2": "A*rc*F.eff*fy*R2",
+  "D2": "hh*nd2",
+  "Y3": "A*rc*F.eff*fy*R3",
+  "D3": "hh*nd3",
+  "Y4": "A*rc*F.eff*fy*R4",
+  "D4": "(hh+gar)*nd4",
+  "Y5": "A*rc*F.eff*fy*R5",
+  "D5": "(hh+gar)*nd5",
+  "Y6": "A*rc*F.eff*fy*R6",
+  "D6": "(hh+gar)*nd6",
+  "Y7": "A*rc*F.eff*fy*R7",
+  "D7": "(hh+gar)*nd7",
+  "Y8": "A*rc*F.eff*fy*R8",
+  "D8": "(hh+gar)*nd8",
+  "Y9": "A*rc*F.eff*fy*R9",
+  "D9": "(hh+gar)*nd9",
+  "Y10": "A*rc*F.eff*fy*R10",
+  "D10": "hh*nd10",
+  "Y11": "A*rc*F.eff*fy*R11",
+  "D11": "hh*nd11",
+  "Y12": "A*rc*F.eff*fy*R12",
+  "D12": "hh*nd12",
+  "S0": "0.5*T.C",
+  "Dtot": "D1+D2+D3+D4+D5+D6+D7+D8+D9+D10+D11+D12",
+  "Ytot": "Y1+Y2+Y3+Y4+Y5+Y6+Y7+Y8+Y9+Y10+Y11+Y12"
+ },
+ "laws": [
+  {
+   "zfl": "S1 == min(T.C, max(0, S0 + Y1 - D1))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U1 == max(0, D1 - S0 - Y1)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O1 == max(0, S0 + Y1 - D1 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh1 == if(U1 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S2 == min(T.C, max(0, S1 + Y2 - D2))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U2 == max(0, D2 - S1 - Y2)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O2 == max(0, S1 + Y2 - D2 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh2 == if(U2 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S3 == min(T.C, max(0, S2 + Y3 - D3))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U3 == max(0, D3 - S2 - Y3)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O3 == max(0, S2 + Y3 - D3 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh3 == if(U3 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S4 == min(T.C, max(0, S3 + Y4 - D4))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U4 == max(0, D4 - S3 - Y4)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O4 == max(0, S3 + Y4 - D4 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh4 == if(U4 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S5 == min(T.C, max(0, S4 + Y5 - D5))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U5 == max(0, D5 - S4 - Y5)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O5 == max(0, S4 + Y5 - D5 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh5 == if(U5 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S6 == min(T.C, max(0, S5 + Y6 - D6))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U6 == max(0, D6 - S5 - Y6)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O6 == max(0, S5 + Y6 - D6 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh6 == if(U6 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S7 == min(T.C, max(0, S6 + Y7 - D7))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U7 == max(0, D7 - S6 - Y7)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O7 == max(0, S6 + Y7 - D7 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh7 == if(U7 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S8 == min(T.C, max(0, S7 + Y8 - D8))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U8 == max(0, D8 - S7 - Y8)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O8 == max(0, S7 + Y8 - D8 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh8 == if(U8 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S9 == min(T.C, max(0, S8 + Y9 - D9))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U9 == max(0, D9 - S8 - Y9)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O9 == max(0, S8 + Y9 - D9 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh9 == if(U9 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S10 == min(T.C, max(0, S9 + Y10 - D10))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U10 == max(0, D10 - S9 - Y10)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O10 == max(0, S9 + Y10 - D10 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh10 == if(U10 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S11 == min(T.C, max(0, S10 + Y11 - D11))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U11 == max(0, D11 - S10 - Y11)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O11 == max(0, S10 + Y11 - D11 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh11 == if(U11 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "S12 == min(T.C, max(0, S11 + Y12 - D12))",
+   "source": "monthly water balance S_next = min(C, max(0, S + yield - demand))"
+  },
+  {
+   "zfl": "U12 == max(0, D12 - S11 - Y12)",
+   "source": "unmet demand = max(0, demand - S - yield)"
+  },
+  {
+   "zfl": "O12 == max(0, S11 + Y12 - D12 - T.C)",
+   "source": "overflow = yield above C (lost)"
+  },
+  {
+   "zfl": "sh12 == if(U12 > 0, 1, 0)",
+   "source": "month is short if unmet > 0"
+  },
+  {
+   "zfl": "Utot == U1+U2+U3+U4+U5+U6+U7+U8+U9+U10+U11+U12",
+   "source": "annual unmet"
+  },
+  {
+   "zfl": "Otot == O1+O2+O3+O4+O5+O6+O7+O8+O9+O10+O11+O12",
+   "source": "annual overflow"
+  },
+  {
+   "zfl": "Nshort == sh1+sh2+sh3+sh4+sh5+sh6+sh7+sh8+sh9+sh10+sh11+sh12",
+   "source": "number of short months"
+  },
+  {
+   "zfl": "Mu == Utot - 0.12*Dtot",
+   "source": "margin: unmet <= 12% of annual demand"
+  },
+  {
+   "zfl": "Mo == Otot - 0.25*Ytot",
+   "source": "margin: overflow <= 25% of annual yield"
+  }
+ ],
+ "requirements": [],
+ "modes": {
+  "dry year": {
+   "quantities": {
+    "fy": {
+     "value": "0.75"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Mu",
+     "op": "<=",
+     "value": "0",
+     "why": "dry year: unmet <= 12% of annual demand"
+    },
+    {
+     "quantity": "Nshort",
+     "op": "<=",
+     "value": "3",
+     "why": "dry year: <= 3 short months"
+    }
+   ]
+  },
+  "normal year": {
+   "quantities": {
+    "fy": {
+     "value": "1"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Nshort",
+     "op": "<=",
+     "value": "1",
+     "why": "normal year: <= 1 short month"
+    }
+   ]
+  },
+  "wet year": {
+   "quantities": {
+    "fy": {
+     "value": "1.15"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Mo",
+     "op": "<=",
+     "value": "0",
+     "why": "wet year: overflow <= 25% of annual yield"
+    }
+   ]
+  }
+ },
+ "objective": {
+  "minimize": "T.price + inst*T.C + F.price",
+  "why": "tank + installation + filter set"
+ },
+ "catalog": {
+  "tanks": {
+   "items": [
+    {
+     "C": "3",
+     "price": "1100",
+     "grade": "3 m3"
+    },
+    {
+     "C": "5",
+     "price": "1500",
+     "grade": "5 m3"
+    },
+    {
+     "C": "7.5",
+     "price": "2050",
+     "grade": "7.5 m3"
+    },
+    {
+     "C": "10",
+     "price": "2600",
+     "grade": "10 m3"
+    },
+    {
+     "C": "15",
+     "price": "3700",
+     "grade": "15 m3"
+    }
+   ],
+   "fields": {
+    "C": {
+     "unit": "m^3"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "ground": "supplier price list"
+  },
+  "filters": {
+   "items": [
+    {
+     "eff": {
+      "range": [
+       "0.85",
+       "0.90"
+      ]
+     },
+     "price": "650",
+     "grade": "basic"
+    },
+    {
+     "eff": {
+      "range": [
+       "0.90",
+       "0.95"
+      ]
+     },
+     "price": "1100",
+     "grade": "premium"
+    }
+   ],
+   "fields": {
+    "eff": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "ground": "supplier price list"
+  }
+ }
+}

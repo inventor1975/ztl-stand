@@ -1,0 +1,473 @@
+{
+ "stand": "ztl-stand/1",
+ "note": "fixed-design check O100 A=610 H=2.1 freeboard 0.30",
+ "quantities": {
+  "Ac": {
+   "role": "given",
+   "value": "22000",
+   "unit": "m^2",
+   "ground": "problem statement",
+   "why": "paved catchment 2.2 ha"
+  },
+  "C": {
+   "role": "given",
+   "range": [
+    "0.70",
+    "0.80"
+   ],
+   "unit": "",
+   "why": "runoff coefficient, one value for all storms"
+  },
+  "Cd": {
+   "role": "given",
+   "range": [
+    "0.58",
+    "0.64"
+   ],
+   "unit": "",
+   "why": "orifice discharge coefficient, one value for all storms"
+  },
+  "g": {
+   "role": "given",
+   "value": "9.81",
+   "unit": "m/s^2",
+   "why": "g = 9.81 as the problem states (not g0)"
+  },
+  "cp": {
+   "role": "given",
+   "value": "0.12",
+   "unit": "kEUR/m^3",
+   "why": "pond price per m3 of plan area x depth"
+  },
+  "fb": {
+   "role": "given",
+   "value": "0.30",
+   "unit": "m",
+   "why": "freeboard"
+  },
+  "t1": {
+   "role": "given",
+   "value": "900",
+   "unit": "s",
+   "why": "storm duration 900 s"
+  },
+  "i1": {
+   "role": "given",
+   "range": [
+    "85",
+    "92"
+   ],
+   "unit": "mm/h",
+   "why": "10-year, 15 min intensity, independent"
+  },
+  "h1": {
+   "role": "derived",
+   "unit": "m",
+   "why": "water depth at end of storm 10y/900s"
+  },
+  "Qp1": {
+   "role": "derived",
+   "unit": "m^3/s",
+   "why": "peak outflow storm 10y/900s"
+  },
+  "s1": {
+   "role": "derived",
+   "unit": "m^0.5",
+   "why": "sqrt(h)"
+  },
+  "t2": {
+   "role": "given",
+   "value": "1800",
+   "unit": "s",
+   "why": "storm duration 1800 s"
+  },
+  "i2": {
+   "role": "given",
+   "range": [
+    "62",
+    "68"
+   ],
+   "unit": "mm/h",
+   "why": "10-year, 30 min intensity, independent"
+  },
+  "h2": {
+   "role": "derived",
+   "unit": "m",
+   "why": "water depth at end of storm 10y/1800s"
+  },
+  "Qp2": {
+   "role": "derived",
+   "unit": "m^3/s",
+   "why": "peak outflow storm 10y/1800s"
+  },
+  "s2": {
+   "role": "derived",
+   "unit": "m^0.5",
+   "why": "sqrt(h)"
+  },
+  "t3": {
+   "role": "given",
+   "value": "3600",
+   "unit": "s",
+   "why": "storm duration 3600 s"
+  },
+  "i3": {
+   "role": "given",
+   "range": [
+    "40",
+    "44"
+   ],
+   "unit": "mm/h",
+   "why": "10-year, 60 min intensity, independent"
+  },
+  "h3": {
+   "role": "derived",
+   "unit": "m",
+   "why": "water depth at end of storm 10y/3600s"
+  },
+  "Qp3": {
+   "role": "derived",
+   "unit": "m^3/s",
+   "why": "peak outflow storm 10y/3600s"
+  },
+  "s3": {
+   "role": "derived",
+   "unit": "m^0.5",
+   "why": "sqrt(h)"
+  },
+  "t4": {
+   "role": "given",
+   "value": "900",
+   "unit": "s",
+   "why": "storm duration 900 s"
+  },
+  "i4": {
+   "role": "given",
+   "range": [
+    "125",
+    "135"
+   ],
+   "unit": "mm/h",
+   "why": "100-year, 15 min intensity, independent"
+  },
+  "h4": {
+   "role": "derived",
+   "unit": "m",
+   "why": "water depth at end of storm 100y/900s"
+  },
+  "Qp4": {
+   "role": "derived",
+   "unit": "m^3/s",
+   "why": "peak outflow storm 100y/900s"
+  },
+  "s4": {
+   "role": "derived",
+   "unit": "m^0.5",
+   "why": "sqrt(h)"
+  },
+  "M4": {
+   "role": "derived",
+   "unit": "m",
+   "why": "depth margin H - h"
+  },
+  "t5": {
+   "role": "given",
+   "value": "1800",
+   "unit": "s",
+   "why": "storm duration 1800 s"
+  },
+  "i5": {
+   "role": "given",
+   "range": [
+    "92",
+    "100"
+   ],
+   "unit": "mm/h",
+   "why": "100-year, 30 min intensity, independent"
+  },
+  "h5": {
+   "role": "derived",
+   "unit": "m",
+   "why": "water depth at end of storm 100y/1800s"
+  },
+  "Qp5": {
+   "role": "derived",
+   "unit": "m^3/s",
+   "why": "peak outflow storm 100y/1800s"
+  },
+  "s5": {
+   "role": "derived",
+   "unit": "m^0.5",
+   "why": "sqrt(h)"
+  },
+  "M5": {
+   "role": "derived",
+   "unit": "m",
+   "why": "depth margin H - h"
+  },
+  "t6": {
+   "role": "given",
+   "value": "3600",
+   "unit": "s",
+   "why": "storm duration 3600 s"
+  },
+  "i6": {
+   "role": "given",
+   "range": [
+    "62",
+    "66"
+   ],
+   "unit": "mm/h",
+   "why": "100-year, 60 min intensity, independent"
+  },
+  "h6": {
+   "role": "derived",
+   "unit": "m",
+   "why": "water depth at end of storm 100y/3600s"
+  },
+  "Qp6": {
+   "role": "derived",
+   "unit": "m^3/s",
+   "why": "peak outflow storm 100y/3600s"
+  },
+  "s6": {
+   "role": "derived",
+   "unit": "m^0.5",
+   "why": "sqrt(h)"
+  },
+  "M6": {
+   "role": "derived",
+   "unit": "m",
+   "why": "depth margin H - h"
+  }
+ },
+ "slots": {
+  "PL": {
+   "from": [
+    "plates"
+   ]
+  },
+  "PA": {
+   "from": [
+    "pondA"
+   ]
+  },
+  "PH": {
+   "from": [
+    "pondH"
+   ]
+  }
+ },
+ "define": {
+  "Ao": "pi*PL.d*PL.d/4",
+  "Qin1": "C*i1*Ac",
+  "kk1": "Cd*Ao*sqrt(1.2*g)*t1",
+  "Qin2": "C*i2*Ac",
+  "kk2": "Cd*Ao*sqrt(1.2*g)*t2",
+  "Qin3": "C*i3*Ac",
+  "kk3": "Cd*Ao*sqrt(1.2*g)*t3",
+  "Qin4": "C*i4*Ac",
+  "kk4": "Cd*Ao*sqrt(1.2*g)*t4",
+  "Qin5": "C*i5*Ac",
+  "kk5": "Cd*Ao*sqrt(1.2*g)*t5",
+  "Qin6": "C*i6*Ac",
+  "kk6": "Cd*Ao*sqrt(1.2*g)*t6"
+ },
+ "laws": [
+  {
+   "zfl": "s1 == (sqrt(kk1*kk1 + 4*PA.A*Qin1*t1) - kk1)/(2*PA.A)",
+   "source": "positive root of A s^2 + kk s = Qin t"
+  },
+  {
+   "zfl": "h1 == s1*s1",
+   "source": "h = s^2"
+  },
+  {
+   "zfl": "Qp1 == Cd*Ao*sqrt(2*g*h1)",
+   "source": "orifice peak outflow"
+  },
+  {
+   "zfl": "s2 == (sqrt(kk2*kk2 + 4*PA.A*Qin2*t2) - kk2)/(2*PA.A)",
+   "source": "positive root of A s^2 + kk s = Qin t"
+  },
+  {
+   "zfl": "h2 == s2*s2",
+   "source": "h = s^2"
+  },
+  {
+   "zfl": "Qp2 == Cd*Ao*sqrt(2*g*h2)",
+   "source": "orifice peak outflow"
+  },
+  {
+   "zfl": "s3 == (sqrt(kk3*kk3 + 4*PA.A*Qin3*t3) - kk3)/(2*PA.A)",
+   "source": "positive root of A s^2 + kk s = Qin t"
+  },
+  {
+   "zfl": "h3 == s3*s3",
+   "source": "h = s^2"
+  },
+  {
+   "zfl": "Qp3 == Cd*Ao*sqrt(2*g*h3)",
+   "source": "orifice peak outflow"
+  },
+  {
+   "zfl": "s4 == (sqrt(kk4*kk4 + 4*PA.A*Qin4*t4) - kk4)/(2*PA.A)",
+   "source": "positive root of A s^2 + kk s = Qin t"
+  },
+  {
+   "zfl": "h4 == s4*s4",
+   "source": "h = s^2"
+  },
+  {
+   "zfl": "Qp4 == Cd*Ao*sqrt(2*g*h4)",
+   "source": "orifice peak outflow"
+  },
+  {
+   "zfl": "M4 == PH.H - h4",
+   "source": "freeboard margin"
+  },
+  {
+   "zfl": "s5 == (sqrt(kk5*kk5 + 4*PA.A*Qin5*t5) - kk5)/(2*PA.A)",
+   "source": "positive root of A s^2 + kk s = Qin t"
+  },
+  {
+   "zfl": "h5 == s5*s5",
+   "source": "h = s^2"
+  },
+  {
+   "zfl": "Qp5 == Cd*Ao*sqrt(2*g*h5)",
+   "source": "orifice peak outflow"
+  },
+  {
+   "zfl": "M5 == PH.H - h5",
+   "source": "freeboard margin"
+  },
+  {
+   "zfl": "s6 == (sqrt(kk6*kk6 + 4*PA.A*Qin6*t6) - kk6)/(2*PA.A)",
+   "source": "positive root of A s^2 + kk s = Qin t"
+  },
+  {
+   "zfl": "h6 == s6*s6",
+   "source": "h = s^2"
+  },
+  {
+   "zfl": "Qp6 == Cd*Ao*sqrt(2*g*h6)",
+   "source": "orifice peak outflow"
+  },
+  {
+   "zfl": "M6 == PH.H - h6",
+   "source": "freeboard margin"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Qp1",
+   "op": "<=",
+   "value": "0.025",
+   "why": "R1: 10-year Qpeak <= 25 L/s (storm 900s)"
+  },
+  {
+   "quantity": "Qp2",
+   "op": "<=",
+   "value": "0.025",
+   "why": "R1: 10-year Qpeak <= 25 L/s (storm 1800s)"
+  },
+  {
+   "quantity": "Qp3",
+   "op": "<=",
+   "value": "0.025",
+   "why": "R1: 10-year Qpeak <= 25 L/s (storm 3600s)"
+  },
+  {
+   "quantity": "Qp4",
+   "op": "<=",
+   "value": "0.045",
+   "why": "R2: 100-year Qpeak <= 45 L/s (storm 900s)"
+  },
+  {
+   "quantity": "M4",
+   "op": ">=",
+   "value": "fb",
+   "why": "R3: h <= H - 0.30 m (storm 900s)"
+  },
+  {
+   "quantity": "Qp5",
+   "op": "<=",
+   "value": "0.045",
+   "why": "R2: 100-year Qpeak <= 45 L/s (storm 1800s)"
+  },
+  {
+   "quantity": "M5",
+   "op": ">=",
+   "value": "fb",
+   "why": "R3: h <= H - 0.30 m (storm 1800s)"
+  },
+  {
+   "quantity": "Qp6",
+   "op": "<=",
+   "value": "0.045",
+   "why": "R2: 100-year Qpeak <= 45 L/s (storm 3600s)"
+  },
+  {
+   "quantity": "M6",
+   "op": ">=",
+   "value": "fb",
+   "why": "R3: h <= H - 0.30 m (storm 3600s)"
+  },
+  {
+   "quantity": "PL.d",
+   "op": ">=",
+   "value": "80",
+   "why": "R4: d >= 80 mm (clogging)"
+  }
+ ],
+ "objective": {
+  "minimize": "cp*PA.A*PH.H + PL.price",
+  "unit": "kEUR",
+  "why": "pond + plate price"
+ },
+ "catalog": {
+  "plates": {
+   "ground": "problem statement",
+   "items": [
+    {
+     "name": "O100",
+     "d": "100",
+     "price": "0.60"
+    }
+   ],
+   "fields": {
+    "d": {
+     "unit": "mm"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "pondA": {
+   "items": [
+    {
+     "A": "610"
+    }
+   ],
+   "fields": {
+    "A": {
+     "unit": "m^2"
+    }
+   }
+  },
+  "pondH": {
+   "items": [
+    {
+     "H": "2.1"
+    }
+   ],
+   "fields": {
+    "H": {
+     "unit": "m"
+    }
+   }
+  }
+ }
+}

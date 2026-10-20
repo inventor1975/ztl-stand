@@ -1,0 +1,294 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "lam0": {
+   "role": "given",
+   "unit": "1/h",
+   "why": "base failure rate at 20 degC, ONE value for all regimes",
+   "range": [
+    "0.0000018",
+    "0.0000024"
+   ]
+  },
+  "B": {
+   "role": "given",
+   "unit": "K",
+   "why": "thermal constant",
+   "value": "3000",
+   "ground": "problem statement"
+  },
+  "Tref": {
+   "role": "given",
+   "unit": "K",
+   "why": "20 degC reference",
+   "value": "293.15",
+   "ground": "problem statement"
+  },
+  "Tov": {
+   "role": "given",
+   "unit": "h",
+   "why": "quarterly overhaul interval",
+   "value": "2190",
+   "ground": "problem statement"
+  },
+  "Hn": {
+   "role": "given",
+   "unit": "h",
+   "why": "normalising hours in (H/50)^0.35",
+   "value": "50",
+   "ground": "problem statement"
+  },
+  "Hyr": {
+   "role": "given",
+   "unit": "h",
+   "why": "hours per year for the test count",
+   "value": "8760",
+   "ground": "problem statement"
+  },
+  "Ulim": {
+   "role": "given",
+   "unit": "",
+   "why": "R1 limit",
+   "value": "0.00225",
+   "ground": "problem statement"
+  },
+  "f1": {
+   "role": "given",
+   "unit": "",
+   "why": "winter share of year",
+   "value": "0.33",
+   "ground": "problem statement"
+  },
+  "T1": {
+   "role": "given",
+   "unit": "K",
+   "why": "winter room temperature (degC range + 273.15, written in K)",
+   "range": [
+    "278.15",
+    "285.15"
+   ]
+  },
+  "H1": {
+   "role": "given",
+   "unit": "h",
+   "why": "winter annual running hours",
+   "range": [
+    "40",
+    "60"
+   ]
+  },
+  "lam1": {
+   "role": "derived",
+   "unit": "1/h",
+   "why": "winter failure rate"
+  },
+  "U1": {
+   "role": "derived",
+   "unit": "",
+   "why": "winter hidden-state unavailability"
+  },
+  "f2": {
+   "role": "given",
+   "unit": "",
+   "why": "summer share of year",
+   "value": "0.25",
+   "ground": "problem statement"
+  },
+  "T2": {
+   "role": "given",
+   "unit": "K",
+   "why": "summer room temperature (degC range + 273.15, written in K)",
+   "range": [
+    "297.15",
+    "305.15"
+   ]
+  },
+  "H2": {
+   "role": "given",
+   "unit": "h",
+   "why": "summer annual running hours",
+   "range": [
+    "25",
+    "40"
+   ]
+  },
+  "lam2": {
+   "role": "derived",
+   "unit": "1/h",
+   "why": "summer failure rate"
+  },
+  "U2": {
+   "role": "derived",
+   "unit": "",
+   "why": "summer hidden-state unavailability"
+  },
+  "f3": {
+   "role": "given",
+   "unit": "",
+   "why": "shoulder share of year",
+   "value": "0.42",
+   "ground": "problem statement"
+  },
+  "T3": {
+   "role": "given",
+   "unit": "K",
+   "why": "shoulder room temperature (degC range + 273.15, written in K)",
+   "range": [
+    "285.15",
+    "293.15"
+   ]
+  },
+  "H3": {
+   "role": "given",
+   "unit": "h",
+   "why": "shoulder annual running hours",
+   "range": [
+    "15",
+    "25"
+   ]
+  },
+  "lam3": {
+   "role": "derived",
+   "unit": "1/h",
+   "why": "shoulder failure rate"
+  },
+  "U3": {
+   "role": "derived",
+   "unit": "",
+   "why": "shoulder hidden-state unavailability"
+  },
+  "U": {
+   "role": "derived",
+   "unit": "",
+   "why": "weighted unavailability"
+  },
+  "tauq": {
+   "role": "derived",
+   "unit": "h",
+   "why": "the chosen interval, for R2"
+  },
+  "tau": {
+   "role": "given",
+   "unit": "h",
+   "value": "1376.7",
+   "why": "test interval: searched by find"
+  }
+ },
+ "slots": {
+  "TM": {
+   "from": [
+    "TL"
+   ]
+  },
+  "CM": {
+   "from": [
+    "mon2"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "lam1 == lam0*exp(B*(1/Tref - 1/T1))*pow(H1/Hn, 7/20)*CM.k",
+   "source": "Arrhenius-type temperature factor x (H/50)^0.35 x monitoring factor"
+  },
+  {
+   "zfl": "U1 == TM.c*lam1*tau/2 + (1 - TM.c)*lam1*Tov/2 + TM.td/tau",
+   "source": "hidden-state unavailability: undetected-failure term + overhaul term + test downtime share"
+  },
+  {
+   "zfl": "lam2 == lam0*exp(B*(1/Tref - 1/T2))*pow(H2/Hn, 7/20)*CM.k",
+   "source": "Arrhenius-type temperature factor x (H/50)^0.35 x monitoring factor"
+  },
+  {
+   "zfl": "U2 == TM.c*lam2*tau/2 + (1 - TM.c)*lam2*Tov/2 + TM.td/tau",
+   "source": "hidden-state unavailability: undetected-failure term + overhaul term + test downtime share"
+  },
+  {
+   "zfl": "lam3 == lam0*exp(B*(1/Tref - 1/T3))*pow(H3/Hn, 7/20)*CM.k",
+   "source": "Arrhenius-type temperature factor x (H/50)^0.35 x monitoring factor"
+  },
+  {
+   "zfl": "U3 == TM.c*lam3*tau/2 + (1 - TM.c)*lam3*Tov/2 + TM.td/tau",
+   "source": "hidden-state unavailability: undetected-failure term + overhaul term + test downtime share"
+  },
+  {
+   "zfl": "U == f1*U1 + f2*U2 + f3*U3",
+   "source": "weighted unavailability"
+  },
+  {
+   "zfl": "tauq == tau",
+   "source": "the chosen test interval"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "U",
+   "op": "<=",
+   "value": "Ulim",
+   "why": "R1: U <= 2.25e-3"
+  },
+  {
+   "quantity": "tauq",
+   "op": "<=",
+   "value": "Tov",
+   "why": "R2: tau <= Tov"
+  }
+ ],
+ "catalog": {
+  "TL": {
+   "ground": "problem statement",
+   "items": [
+    {
+     "name": "TL load-bank run",
+     "c": {
+      "range": [
+       "0.80",
+       "0.88"
+      ]
+     },
+     "td": {
+      "range": [
+       "0.6",
+       "0.9"
+      ]
+     },
+     "ct": "1.6"
+    }
+   ],
+   "fields": {
+    "c": {
+     "unit": ""
+    },
+    "td": {
+     "unit": "h"
+    },
+    "ct": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "mon2": {
+   "ground": "problem statement",
+   "items": [
+    {
+     "name": "condition monitoring",
+     "k": {
+      "range": [
+       "0.85",
+       "0.92"
+      ]
+     },
+     "cm": "2.2"
+    }
+   ],
+   "fields": {
+    "k": {
+     "unit": ""
+    },
+    "cm": {
+     "unit": "kEUR"
+    }
+   }
+  }
+ }
+}

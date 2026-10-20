@@ -1,0 +1,132 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "motor speed anywhere between the stated rated low (1450) and no-load (1740)",
+ "quantities": {
+  "Wf": {
+   "role": "given",
+   "value": "30",
+   "unit": "lbf"
+  },
+  "mu": {
+   "role": "given",
+   "value": "0.3",
+   "unit": ""
+  },
+  "Dd": {
+   "role": "given",
+   "value": "4",
+   "unit": "in"
+  },
+  "etab": {
+   "role": "given",
+   "value": "0.9",
+   "unit": ""
+  },
+  "etag": {
+   "role": "given",
+   "range": [
+    "0.66",
+    "0.81"
+   ],
+   "unit": ""
+  },
+  "Tst": {
+   "role": "given",
+   "value": "139/80",
+   "unit": "lbf*in"
+  },
+  "SF": {
+   "role": "given",
+   "value": "2",
+   "unit": ""
+  },
+  "F": {
+   "role": "derived",
+   "unit": "lbf"
+  },
+  "TL": {
+   "role": "derived",
+   "unit": "lbf*in"
+  },
+  "TM": {
+   "role": "derived",
+   "unit": "lbf*in"
+  },
+  "NM": {
+   "role": "given",
+   "range": [
+    "1450",
+    "1740"
+   ],
+   "unit": "rpm"
+  },
+  "V": {
+   "role": "derived",
+   "unit": "in/s"
+  },
+  "Tstart": {
+   "role": "derived",
+   "unit": "lbf*in"
+  },
+  "ig": {
+   "role": "given",
+   "value": "48",
+   "unit": ""
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "F == mu*Wf",
+   "source": "sliding friction of belt and work, tech ref"
+  },
+  {
+   "zfl": "TL == F*Dd/(2*etab)",
+   "source": "torque at the gearhead shaft, tech ref"
+  },
+  {
+   "zfl": "TM == TL/(ig*etag)",
+   "source": "torque at the motor shaft through the gearhead, tech ref"
+  },
+  {
+   "zfl": "V == pi*Dd*NM/ig",
+   "source": "belt speed from drum diameter and drum speed"
+  },
+  {
+   "zfl": "Tstart == SF*TM",
+   "source": "tech ref: safety factor 2 on the torque"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "V",
+   "op": "within",
+   "value": [
+    "6.3",
+    "7.7"
+   ],
+   "why": "7 in/s +-10 %"
+  },
+  {
+   "quantity": "Tstart",
+   "op": "<=",
+   "value": "Tst",
+   "why": "motor starting torque 27.8 oz-in (catalog) must cover the doubled torque"
+  }
+ ],
+ "find": [
+  {
+   "largest": "ig",
+   "from": "48",
+   "to": "80",
+   "precision": "0.01"
+  },
+  {
+   "smallest": "ig",
+   "from": "20",
+   "to": "48",
+   "precision": "0.01"
+  }
+ ]
+}

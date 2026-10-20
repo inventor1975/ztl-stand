@@ -1,0 +1,147 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "D": {
+   "role": "given",
+   "range": [
+    "1.8",
+    "2.2"
+   ],
+   "unit": "m",
+   "why": "camera-to-belt distance, mounting tolerance and belt sag"
+  },
+  "w": {
+   "role": "given",
+   "value": "14.13",
+   "unit": "mm",
+   "ground": "sensor datasheet",
+   "why": "active sensor width"
+  },
+  "p": {
+   "role": "given",
+   "value": "3.45",
+   "unit": "um",
+   "ground": "sensor datasheet",
+   "why": "pixel pitch"
+  },
+  "W": {
+   "role": "derived",
+   "unit": "m",
+   "why": "covered width on the belt"
+  },
+  "s": {
+   "role": "derived",
+   "unit": "mm",
+   "why": "pixel footprint on the belt"
+  },
+  "HFOV": {
+   "role": "derived",
+   "unit": "",
+   "why": "horizontal field of view, rad"
+  }
+ },
+ "slots": {
+  "LENS": {
+   "from": [
+    "lenses"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "HFOV == 2*atan(w/(2*LENS.f))",
+   "source": "field of view"
+  },
+  {
+   "zfl": "W == 2*D*tan(HFOV/2)",
+   "source": "covered width at distance D"
+  },
+  {
+   "zfl": "s == D*p/LENS.f",
+   "source": "pixel footprint"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "W",
+   "op": ">=",
+   "value": "3.3",
+   "why": "10% margin over 3.00 m belt (W grows with D, so the shortest D is the binding one)"
+  },
+  {
+   "quantity": "s",
+   "op": "<=",
+   "value": "1.2",
+   "why": "max pixel footprint (s grows with D, so the longest D is the binding one)"
+  }
+ ],
+ "objective": {
+  "minimize": "LENS.price",
+  "why": "cheapest lens"
+ },
+ "catalog": {
+  "lenses": {
+   "items": [
+    {
+     "f": {
+      "value": "5.0",
+      "tolerance": "0.03"
+     },
+     "IC": "17.6",
+     "price": "95",
+     "name": "L1"
+    },
+    {
+     "f": {
+      "value": "6.0",
+      "tolerance": "0.03"
+     },
+     "IC": "16.0",
+     "price": "110",
+     "name": "L2"
+    },
+    {
+     "f": {
+      "value": "6.0",
+      "tolerance": "0.02"
+     },
+     "IC": "17.6",
+     "price": "160",
+     "name": "L3"
+    },
+    {
+     "f": {
+      "value": "7.0",
+      "tolerance": "0.02"
+     },
+     "IC": "17.6",
+     "price": "185",
+     "name": "L4"
+    },
+    {
+     "f": {
+      "value": "8.0",
+      "tolerance": "0.02"
+     },
+     "IC": "17.6",
+     "price": "150",
+     "name": "L5"
+    }
+   ],
+   "ground": "lens datasheet",
+   "fields": {
+    "f": {
+     "unit": "mm"
+    },
+    "IC": {
+     "unit": "mm"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ },
+ "report": "all",
+ "note": "the image-circle requirement is a catalog filter (IC >= 17.5 mm): L2 removed by it, kept out of the laws"
+}

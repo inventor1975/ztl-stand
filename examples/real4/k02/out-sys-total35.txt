@@ -1,0 +1,161 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL fd6593d",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Err": [
+          "-6943103480219951211173972743/216555438307240929487500000000 (~-0.0320616)",
+          "~0.0323228606486 (an exact fraction of 37 digits)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "verdict": "EARNED",
+  "design": {},
+  "guaranteed": {
+    "Err": [
+      "-6943103480219951211173972743/216555438307240929487500000000 (~-0.0320616)",
+      "~0.0323228606486 (an exact fraction of 37 digits)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Err": "V"
+  },
+  "how": {
+    "Err": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "Err",
+      "op": "within",
+      "value": [
+        "-35/1000",
+        "35/1000"
+      ],
+      "why": "35 mV (MY loosened bound, not the source's)"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "ADC_vrec -> [209612334827020978276326027257/43311087661448185897500000000, 1653112342942340127714497184297236603/320270412669874356729938535000000000] by the system over its parameters, exact at the corners (credit)",
+    "AMP_vo1 -> [21784341426187/4388125000000, 1567179735379953694046413/311201624146466250000000] by the system over its parameters, exact at the corners (credit)",
+    "Err -> [-6943103480219951211173972743/216555438307240929487500000000, 51760279592968344064804509297236603/1601352063349371783649692675000000000] by the system over its parameters, exact at the corners (credit)",
+    "Vmeas -> [209612334827020978276326027257/216555438307240929487500000000, 1653112342942340127714497184297236603/1601352063349371783649692675000000000] by the system over its parameters, exact at the corners (credit)"
+  ],
+  "components": {
+    "AMP": {
+      "inputs": {
+        "vin": {
+          "from": "vin",
+          "arrives": [
+            "1/1",
+            "1/1"
+          ],
+          "assume": [
+            "0/1",
+            "1/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "vin": [
+              "99999/100000",
+              "1/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "vo1": [
+              "21784341426187/4388125000000",
+              "3134825018937509/622501875000000"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "vo1": [
+          "21784341426187/4388125000000",
+          "3134825018937509/622501875000000"
+        ]
+      },
+      "outputs_affine": {
+        "vo1": {
+          "slope": {
+            "vin": "4999335801/999841564"
+          },
+          "remainder": [
+            "-39205102373581090883/1096857440756875000000",
+            "11131780441390256546413/311201624146466250000000"
+          ]
+        }
+      }
+    },
+    "ADC": {
+      "inputs": {
+        "vo1": {
+          "from": "AMP.vo1",
+          "arrives": [
+            "21784341426187/4388125000000",
+            "3134825018937509/622501875000000"
+          ],
+          "assume": [
+            "-1/10",
+            "11/2"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "vo1": [
+              "124/25",
+              "126/25"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "vrec": [
+              "1620734462/329731857",
+              "2772634/545181"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "vrec": [
+          "1620734462/329731857",
+          "2772634/545181"
+        ]
+      },
+      "outputs_affine": {
+        "vrec": {
+          "slope": {
+            "vo1": "209544061/209535316"
+          },
+          "remainder": [
+            "-107867352890880551/863630860647022650",
+            "89606971068379/713966706951225"
+          ]
+        }
+      }
+    }
+  },
+  "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

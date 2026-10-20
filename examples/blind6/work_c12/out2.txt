@@ -1,0 +1,269 @@
+{
+  "stand": "ztl-stand/1",
+  "verdict": "OPEN",
+  "why": "several limits, each searched on its own; the verdict is the weakest of theirs",
+  "finds": [
+    {
+      "verdict": "EARNED",
+      "find": "smallest",
+      "quantity": "tau",
+      "unit": "h",
+      "proved": "866",
+      "proved_means": "every tau in [866, 1300] h works (EARNED on the whole range)",
+      "beyond": "8659/10 (~865.9)",
+      "beyond_is": "OPEN: the stand could not decide the range [8659/10 (~865.9), 1300] h — the limit lies between 866 and 8659/10 (~865.9), unproved; a failing point is proved within [662, 1300] h",
+      "precision": "1/10 (~0.1)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 7ef9b6f",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "TM=TL(name=TL load-bank run, c=[4/5,22/25], td=[3/5,9/10], ct=8/5); CM=mon2(name=condition monitoring, k=[17/20,23/25], cm=11/5)",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "U": [
+                "~0.000905770104546 (an exact fraction of 50 digits)",
+                "9/4000 (~0.00225)"
+              ],
+              "tauq": [
+                "866",
+                "1300"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {
+          "TM": {
+            "catalog": "TL",
+            "name": "TL load-bank run",
+            "c": {
+              "range": [
+                "4/5 (~0.8)",
+                "22/25 (~0.88)"
+              ]
+            },
+            "td": {
+              "range": [
+                "3/5 (~0.6)",
+                "9/10 (~0.9)"
+              ]
+            },
+            "ct": {
+              "nominal": "8/5 (~1.6)",
+              "tolerance": "0"
+            }
+          },
+          "CM": {
+            "catalog": "mon2",
+            "name": "condition monitoring",
+            "k": {
+              "range": [
+                "17/20 (~0.85)",
+                "23/25 (~0.92)"
+              ]
+            },
+            "cm": {
+              "nominal": "11/5 (~2.2)",
+              "tolerance": "0"
+            }
+          }
+        },
+        "guaranteed": {
+          "U": [
+            "~0.000905770104546 (an exact fraction of 50 digits)",
+            "9/4000 (~0.00225)"
+          ],
+          "tauq": [
+            "866",
+            "1300"
+          ]
+        },
+        "guaranteed_unit": {
+          "U": "",
+          "tauq": "h"
+        },
+        "guaranteed_ends": {
+          "U": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+        },
+        "how": {
+          "U": "ZTL, certificate checked exactly (100 pieces; found by the stand's search, the extreme may lie inside the box)",
+          "tauq": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "U",
+            "op": "<=",
+            "value": "Ulim",
+            "why": "R1: U <= 2.25e-3"
+          },
+          {
+            "quantity": "tauq",
+            "op": "<=",
+            "value": "Tov",
+            "why": "R2: tau <= Tov"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "tauq -> [3117600, 4680000] by [tauq == tau]",
+          "lam1 -> [1540501186358323241239985004954171742281/6805647338418769269267492148635364229120000000000, 313011673002593697306935509352935334579/638029437976759618993827388934565396480000000000] by [lam1 == lam0*exp(B*(1/Tref - 1/T1))*pow(H1/Hn, 7/20)*CM__k], interval reading, sound, may be wider than the truth (credit)",
+          "U1 -> [941013658483981699323773839837407723384189153/1105917692493050006255967474153246687232000000000, 560883350356506904448837269130187256377933711/230222288869947429186939382840555680563200000000] by [U1 == TM__c*lam1*tau/2 + (1 - TM__c)*lam1*Tov/2 + TM__td/tau], interval reading, sound, may be wider than the truth (credit)",
+          "lam2 -> [1302252645230174319265690325659450198083/3402823669209384634633746074317682114560000000000, 112759786550111479051352630874627095619/132922799578491587290380706028034457600000000000] by [lam2 == lam0*exp(B*(1/Tref - 1/T2))*pow(H2/Hn, 7/20)*CM__k], interval reading, sound, may be wider than the truth (credit)",
+          "U2 -> [619208318816925562098441855569876061808773579/552958846246525003127983737076623343616000000000, 497123236080758522887407165473610401977149213/143888930543717143241837114275347300352000000000] by [U2 == TM__c*lam2*tau/2 + (1 - TM__c)*lam2*Tov/2 + TM__td/tau], interval reading, sound, may be wider than the truth (credit)",
+          "lam3 -> [11393328231288891821884737468914641720233/54445178707350154154139937189082913832960000000000, 66575901467736750049/138350580552821637120000000000] by [lam3 == lam0*exp(B*(1/Tref - 1/T3))*pow(H3/Hn, 7/20)*CM__k], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 7ef9b6f",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 1,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "TM=TL(name=TL load-bank run, c=[4/5,22/25], td=[3/5,9/10], ct=8/5); CM=mon2(name=condition monitoring, k=[17/20,23/25], cm=11/5)",
+            "verdict": "OPEN",
+            "why": "R1: U <= 2.25e-3: U proved within [0.000905733, 0.00267983] , which reaches past the bound, yet no corner violates it — the extreme may lie inside the box and no certificate decided it"
+          }
+        ],
+        "designs_count": {
+          "OPEN": 1
+        },
+        "verdict": "OPEN",
+        "why": "1 design(s) could not be decided and none was earned"
+      },
+      "tries": [
+        {
+          "tau": "1300",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "24",
+          "verdict": "REFUTED"
+        },
+        {
+          "tau": "662",
+          "verdict": "REFUTED"
+        },
+        {
+          "tau": "981",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "1643/2 (~821.5)",
+          "verdict": "OPEN"
+        },
+        {
+          "tau": "4506/5 (~901.2)",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "4307/5 (~861.4)",
+          "verdict": "OPEN"
+        },
+        {
+          "tau": "8813/10 (~881.3)",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "4357/5 (~871.4)",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "4332/5 (~866.4)",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "8639/10 (~863.9)",
+          "verdict": "OPEN"
+        },
+        {
+          "tau": "4326/5 (~865.2)",
+          "verdict": "OPEN"
+        },
+        {
+          "tau": "4329/5 (~865.8)",
+          "verdict": "OPEN"
+        },
+        {
+          "tau": "8661/10 (~866.1)",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "866",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "8659/10 (~865.9)",
+          "verdict": "OPEN"
+        }
+      ],
+      "find_index": 0
+    },
+    {
+      "verdict": "OPEN",
+      "stopped": "a stop asked from outside, mid-search: the bracket so far",
+      "find": "largest",
+      "quantity": "tau",
+      "unit": "h",
+      "stopped_at": "13521/10 (~1352.1)",
+      "proved": "6743/5 (~1348.6)",
+      "tries": [
+        {
+          "tau": "1300",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "2190",
+          "verdict": "REFUTED"
+        },
+        {
+          "tau": "1745",
+          "verdict": "REFUTED"
+        },
+        {
+          "tau": "3045/2 (~1522.5)",
+          "verdict": "REFUTED"
+        },
+        {
+          "tau": "7056/5 (~1411.2)",
+          "verdict": "REFUTED"
+        },
+        {
+          "tau": "6778/5 (~1355.6)",
+          "verdict": "OPEN"
+        },
+        {
+          "tau": "6639/5 (~1327.8)",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "13417/10 (~1341.7)",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "6743/5 (~1348.6)",
+          "verdict": "EARNED"
+        },
+        {
+          "tau": "13521/10 (~1352.1)",
+          "verdict": "OPEN"
+        }
+      ],
+      "find_index": 1
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

@@ -1,0 +1,40 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "AN-1378 3.3 V case as a chain: reference component -> divider component; cheapest (my ordinal cost) pair keeping Vout within +-3 %",
+ "components": {
+  "REF": {
+   "file": "comp_ref.json"
+  },
+  "DIV": {
+   "file": "comp_div3.json"
+  }
+ },
+ "connect": {
+  "DIV.Vr": "REF.Vo"
+ },
+ "quantities": {
+  "Vend": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vend == DIV.Vout"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vend",
+   "op": "within",
+   "value": [
+    "3.201",
+    "3.399"
+   ],
+   "why": "3.3 V +-3 %"
+  }
+ ],
+ "objective": {
+  "minimize": "REF.cost + DIV.cost"
+ }
+}

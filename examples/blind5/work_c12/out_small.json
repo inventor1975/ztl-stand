@@ -1,0 +1,345 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 16,
+  "failed_at_nominal": 0,
+  "judged": 16,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~4.47135499056 (an exact fraction of 302 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~3.53620614708 (an exact fraction of 308 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~7.68010156089 (an exact fraction of 307 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~6.21861434454 (an exact fraction of 304 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~2.9000829356 (an exact fraction of 305 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~6.74495271741 (an exact fraction of 312 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~5.28346550106 (an exact fraction of 310 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~3.18321545962 (an exact fraction of 328 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=28); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~1.96493409212 (an exact fraction of 310 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~9.58979539958 (an exact fraction of 327 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~8.12830818323 (an exact fraction of 325 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=13); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=29); S3=agents3(N=21); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~1.7626743635 (an exact fraction of 332 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=28); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "REFUTED",
+      "fails": "R2: SL_day >= 0.87 (worst case of the weighted average)",
+      "by": "~0.301187147146 (an exact fraction of 330 digits)",
+      "unit": "1/h"
+    },
+    {
+      "design": "S1=agents1(N=24); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "S1=agents1(N=25); S2=agents2(N=29); S3=agents3(N=22); S4=agents4(N=14); IVR=ivr(option=advanced, d=[3/25,9/50], price=31)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 13,
+    "EARNED": 3
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "(S1.N*c1 + S2.N*c2 + S3.N*c3 + S4.N*c4)*Hyr + IVR.price",
+    "value": "2992",
+    "unit": "kEUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "S1": {
+      "catalog": "agents1",
+      "N": {
+        "nominal": "25",
+        "tolerance": "0"
+      }
+    },
+    "S2": {
+      "catalog": "agents2",
+      "N": {
+        "nominal": "29",
+        "tolerance": "0"
+      }
+    },
+    "S3": {
+      "catalog": "agents3",
+      "N": {
+        "nominal": "22",
+        "tolerance": "0"
+      }
+    },
+    "S4": {
+      "catalog": "agents4",
+      "N": {
+        "nominal": "13",
+        "tolerance": "0"
+      }
+    },
+    "IVR": {
+      "catalog": "ivr",
+      "d": {
+        "range": [
+          "3/25 (~0.12)",
+          "9/50 (~0.18)"
+        ]
+      },
+      "price": {
+        "nominal": "31",
+        "tolerance": "0"
+      },
+      "option": "advanced"
+    }
+  },
+  "guaranteed": {
+    "SL1": [
+      "~0.942964224835 (an exact fraction of 89 digits)",
+      "~0.999768064423 (an exact fraction of 82 digits)"
+    ],
+    "Occ1": [
+      "1476/3125 (~0.47232)",
+      "6776/9375 (~0.722773)"
+    ],
+    "SL2": [
+      "~0.884156177837 (an exact fraction of 102 digits)",
+      "~0.999619329134 (an exact fraction of 107 digits)"
+    ],
+    "Occ2": [
+      "1886/3625 (~0.520276)",
+      "8624/10875 (~0.793011)"
+    ],
+    "SL3": [
+      "~0.847488208621 (an exact fraction of 75 digits)",
+      "~0.998658600727 (an exact fraction of 84 digits)"
+    ],
+    "Occ3": [
+      "697/1375 (~0.506909)",
+      "98/125 (~0.784)"
+    ],
+    "SL4": [
+      "~0.781296020901 (an exact fraction of 43 digits)",
+      "~0.994810076811 (an exact fraction of 53 digits)"
+    ],
+    "Occ4": [
+      "738/1625 (~0.454154)",
+      "1232/1625 (~0.758154)"
+    ],
+    "M": [
+      "~1.01752769123 (an exact fraction of 291 digits)",
+      "~106.837901701 (an exact fraction of 270 digits)"
+    ],
+    "valid_26": [
+      "2599/375 (~6.93067)",
+      "1649/125 (~13.192)"
+    ],
+    "valid_60": [
+      "2251/375 (~6.00267)",
+      "1739/125 (~13.912)"
+    ],
+    "valid_87": [
+      "594/125 (~4.752)",
+      "1356/125 (~10.848)"
+    ],
+    "valid_106": [
+      "393/125 (~3.144)",
+      "887/125 (~7.096)"
+    ]
+  },
+  "guaranteed_unit": {
+    "SL1": "",
+    "Occ1": "",
+    "SL2": "",
+    "Occ2": "",
+    "SL3": "",
+    "Occ3": "",
+    "SL4": "",
+    "Occ4": "",
+    "M": "1/h",
+    "valid_26": "",
+    "valid_60": "",
+    "valid_87": "",
+    "valid_106": ""
+  },
+  "how": {
+    "SL1": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.942964224835 (~0.942964)', '~0.999768064423 (~0.999768)']",
+    "Occ1": "ZTL, exact at the corners",
+    "SL2": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.884156177837 (~0.884156)', '~0.999619329134 (~0.999619)']",
+    "Occ2": "ZTL, exact at the corners",
+    "SL3": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.847488208621 (~0.847488)', '~0.998658600727 (~0.998659)']",
+    "Occ3": "ZTL, exact at the corners",
+    "SL4": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.781296020901 (~0.781296)', '~0.994810076811 (~0.99481)']",
+    "Occ4": "ZTL, exact at the corners",
+    "M": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~1.01752769123 (~1.01753)', '~106.837901701 (~106.838)']",
+    "valid_26": "ZTL, exact at the corners",
+    "valid_60": "ZTL, exact at the corners",
+    "valid_87": "ZTL, exact at the corners",
+    "valid_106": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "SL1",
+      "op": ">=",
+      "value": "0.7",
+      "why": "R1: SL >= 0.70 in day part P1"
+    },
+    {
+      "quantity": "Occ1",
+      "op": "<=",
+      "value": "0.92",
+      "why": "R3: occupancy <= 0.92 in day part P1"
+    },
+    {
+      "quantity": "SL2",
+      "op": ">=",
+      "value": "0.7",
+      "why": "R1: SL >= 0.70 in day part P2"
+    },
+    {
+      "quantity": "Occ2",
+      "op": "<=",
+      "value": "0.92",
+      "why": "R3: occupancy <= 0.92 in day part P2"
+    },
+    {
+      "quantity": "SL3",
+      "op": ">=",
+      "value": "0.7",
+      "why": "R1: SL >= 0.70 in day part P3"
+    },
+    {
+      "quantity": "Occ3",
+      "op": "<=",
+      "value": "0.92",
+      "why": "R3: occupancy <= 0.92 in day part P3"
+    },
+    {
+      "quantity": "SL4",
+      "op": ">=",
+      "value": "0.7",
+      "why": "R1: SL >= 0.70 in day part P4"
+    },
+    {
+      "quantity": "Occ4",
+      "op": "<=",
+      "value": "0.92",
+      "why": "R3: occupancy <= 0.92 in day part P4"
+    },
+    {
+      "quantity": "M",
+      "op": ">=",
+      "value": "0",
+      "why": "R2: SL_day >= 0.87 (worst case of the weighted average)"
+    },
+    {
+      "quantity": "valid_26",
+      "op": ">",
+      "value": "0",
+      "why": "laws[26] (Pw1 == 1/(1 + (1 - A1/S1.N)*(X1_25 - 1))) holds only where S1.N > lam1*(1 - IVR.d)*AHT"
+    },
+    {
+      "quantity": "valid_60",
+      "op": ">",
+      "value": "0",
+      "why": "laws[60] (Pw2 == 1/(1 + (1 - A2/S2.N)*(X2_29 - 1))) holds only where S2.N > lam2*(1 - IVR.d)*AHT"
+    },
+    {
+      "quantity": "valid_87",
+      "op": ">",
+      "value": "0",
+      "why": "laws[87] (Pw3 == 1/(1 + (1 - A3/S3.N)*(X3_22 - 1))) holds only where S3.N > lam3*(1 - IVR.d)*AHT"
+    },
+    {
+      "quantity": "valid_106",
+      "op": ">",
+      "value": "0",
+      "why": "laws[106] (Pw4 == 1/(1 + (1 - A4/S4.N)*(X4_14 - 1))) holds only where S4.N > lam4*(1 - IVR.d)*AHT"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "A1 -> [1476/125, 6776/375] by the system over its parameters, exact at the corners (credit)",
+    "A2 -> [1886/125, 8624/375] by the system over its parameters, exact at the corners (credit)",
+    "A3 -> [1394/125, 2156/125] by the system over its parameters, exact at the corners (credit)",
+    "A4 -> [738/125, 1232/125] by the system over its parameters, exact at the corners (credit)",
+    "Occ1 -> [1476/3125, 6776/9375] by the system over its parameters, exact at the corners (credit)",
+    "Occ2 -> [1886/3625, 8624/10875] by the system over its parameters, exact at the corners (credit)"
+  ]
+}

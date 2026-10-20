@@ -1,0 +1,459 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "m": {
+   "role": "given",
+   "unit": "kg",
+   "value": "16000"
+  },
+  "sl": {
+   "role": "given",
+   "unit": "",
+   "value": "0.07"
+  },
+  "vk": {
+   "role": "given",
+   "unit": "km/h",
+   "value": "40"
+  },
+  "Lk": {
+   "role": "given",
+   "unit": "km",
+   "value": "7"
+  },
+  "Ta": {
+   "role": "given",
+   "unit": "C",
+   "value": "35"
+  },
+  "g": {
+   "role": "given",
+   "unit": "m*s^-2",
+   "value": "9.81",
+   "why": "g = 9.81 per problem (not g0)"
+  },
+  "rho": {
+   "role": "given",
+   "unit": "kg*m^-3",
+   "value": "1.2"
+  },
+  "CdA": {
+   "role": "given",
+   "unit": "m^2",
+   "value": "5.0"
+  },
+  "cp": {
+   "role": "given",
+   "unit": "J/(kg*K)",
+   "value": "460"
+  },
+  "dT0": {
+   "role": "given",
+   "unit": "K",
+   "value": "30",
+   "why": "T0 = Tamb + 30 K"
+  },
+  "Tu": {
+   "role": "given",
+   "unit": "C",
+   "value": "1",
+   "why": "unit temperature for dimensionless ratios"
+  },
+  "vu": {
+   "role": "given",
+   "unit": "m/s",
+   "value": "1"
+  },
+  "hu": {
+   "role": "given",
+   "unit": "W/(m^2*K)",
+   "value": "1"
+  },
+  "vref": {
+   "role": "given",
+   "unit": "km/h",
+   "value": "40",
+   "why": "retarder P40 reference speed"
+  },
+  "fh": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0.8",
+    "1"
+   ],
+   "why": "convective h x 0.80 (worst case: h anywhere in 0.8..1.0 of table)"
+  },
+  "fmu": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0.92",
+    "1"
+   ],
+   "why": "mu x 0.92"
+  },
+  "fK": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0.95",
+    "1"
+   ],
+   "why": "K x 0.95"
+  },
+  "Tf": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Tr": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "muf": {
+   "role": "derived",
+   "unit": ""
+  },
+  "mur": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Fav": {
+   "role": "derived",
+   "unit": "N"
+  }
+ },
+ "slots": {
+  "F": {
+   "from": [
+    "discs"
+   ]
+  },
+  "RR": {
+   "from": [
+    "discs"
+   ]
+  },
+  "PAD": {
+   "from": [
+    "pads"
+   ]
+  },
+  "RET": {
+   "from": [
+    "retarders"
+   ]
+  }
+ },
+ "define": {
+  "h0": "hu*if(vk <= 5*vu, 12 + 16*vk/(5*vu), if(vk <= 10*vu, 28 + 17*(vk-5*vu)/(5*vu), if(vk <= 15*vu, 45 + 17*(vk-10*vu)/(5*vu), 62)))",
+  "Pgrav": "m*g*sl*vk",
+  "Proll": "0.012*m*g*vk",
+  "Pair": "0.5*rho*CdA*vk**3",
+  "Pret": "RET.P40*vk/vref",
+  "Pf": "max(0, Pgrav - Proll - Pair - Pret)",
+  "Pdf": "0.92*Pf*0.65/2",
+  "Pdr": "0.92*Pf*0.35/2",
+  "hAf": "fh*h0*F.A",
+  "hAr": "fh*h0*RR.A",
+  "tf": "F.mass*cp/hAf",
+  "tr": "RR.mass*cp/hAr",
+  "tt": "Lk/vk",
+  "Tssf": "Ta + Pdf/hAf",
+  "Tssr": "Ta + Pdr/hAr"
+ },
+ "laws": [
+  {
+   "zfl": "Tf == Tssf - (Tssf - Ta - dT0)*exp(-tt/tf)",
+   "source": "disc Newton cooling T(t)=Tss-(Tss-T0)exp(-t/tau), front disc"
+  },
+  {
+   "zfl": "Tr == Tssr - (Tssr - Ta - dT0)*exp(-tt/tr)",
+   "source": "same, rear disc"
+  },
+  {
+   "zfl": "muf == if(Tf <= 100*Tu, PAD.m20 + (PAD.m100-PAD.m20)*(max(Tf,20*Tu)-20*Tu)/(80*Tu), if(Tf <= 300*Tu, PAD.m100 + (PAD.m300-PAD.m100)*(Tf-100*Tu)/(200*Tu), if(Tf <= 450*Tu, PAD.m300 + (PAD.m450-PAD.m300)*(Tf-300*Tu)/(150*Tu), if(Tf <= 550*Tu, PAD.m450 + (PAD.m550-PAD.m450)*(Tf-450*Tu)/(100*Tu), if(Tf <= 650*Tu, PAD.m550 + (PAD.m650-PAD.m550)*(Tf-550*Tu)/(100*Tu), PAD.m650)))))",
+   "source": "pad mu(T) piecewise linear, front disc temperature"
+  },
+  {
+   "zfl": "mur == if(Tr <= 100*Tu, PAD.m20 + (PAD.m100-PAD.m20)*(max(Tr,20*Tu)-20*Tu)/(80*Tu), if(Tr <= 300*Tu, PAD.m100 + (PAD.m300-PAD.m100)*(Tr-100*Tu)/(200*Tu), if(Tr <= 450*Tu, PAD.m300 + (PAD.m450-PAD.m300)*(Tr-300*Tu)/(150*Tu), if(Tr <= 550*Tu, PAD.m450 + (PAD.m550-PAD.m450)*(Tr-450*Tu)/(100*Tu), if(Tr <= 650*Tu, PAD.m550 + (PAD.m650-PAD.m550)*(Tr-550*Tu)/(100*Tu), PAD.m650)))))",
+   "source": "pad mu(T) piecewise linear, rear disc temperature"
+  },
+  {
+   "zfl": "Fav == 0.9*fK*fmu*(muf*F.Kf + mur*RR.Kr)",
+   "source": "available stop force; K in kN so x1000 N"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tf",
+   "op": "<=",
+   "value": "600",
+   "why": "R1 front disc end temperature <= 600 C"
+  },
+  {
+   "quantity": "Tr",
+   "op": "<=",
+   "value": "600",
+   "why": "R1 rear disc end temperature <= 600 C"
+  },
+  {
+   "quantity": "Fav",
+   "op": ">=",
+   "value": "m*(4.0 + g*sl - 0.012*g)",
+   "why": "R2 emergency stop F >= F_req (decel 4.0 m/s2 on the grade)"
+  }
+ ],
+ "modes": {
+  "a loaded slow": {
+   "quantities": {
+    "m": {
+     "value": "16000"
+    },
+    "sl": {
+     "value": "0.07"
+    },
+    "vk": {
+     "value": "40"
+    },
+    "Lk": {
+     "value": "7"
+    },
+    "Ta": {
+     "value": "35"
+    }
+   }
+  },
+  "b loaded fast": {
+   "quantities": {
+    "m": {
+     "value": "16000"
+    },
+    "sl": {
+     "value": "0.07"
+    },
+    "vk": {
+     "value": "55"
+    },
+    "Lk": {
+     "value": "4"
+    },
+    "Ta": {
+     "value": "20"
+    }
+   }
+  },
+  "c empty cold": {
+   "quantities": {
+    "m": {
+     "value": "9500"
+    },
+    "sl": {
+     "value": "0.08"
+    },
+    "vk": {
+     "value": "55"
+    },
+    "Lk": {
+     "value": "7"
+    },
+    "Ta": {
+     "value": "0"
+    }
+   }
+  }
+ },
+ "objective": {
+  "minimize": "2*F.price + 2*RR.price + 4*PAD.price + RET.price",
+  "why": "total price EUR"
+ },
+ "catalog": {
+  "discs": {
+   "ground": "problem statement table",
+   "items": [
+    {
+     "mass": "14",
+     "A": "0.42",
+     "Kf": "70",
+     "Kr": "52",
+     "price": "260",
+     "name": "D1"
+    },
+    {
+     "mass": "18",
+     "A": "0.50",
+     "Kf": "78",
+     "Kr": "58",
+     "price": "320",
+     "name": "D2"
+    },
+    {
+     "mass": "22",
+     "A": "0.62",
+     "Kf": "90",
+     "Kr": "68",
+     "price": "400",
+     "name": "D3"
+    },
+    {
+     "mass": "27",
+     "A": "0.75",
+     "Kf": "100",
+     "Kr": "76",
+     "price": "520",
+     "name": "D4"
+    },
+    {
+     "mass": "33",
+     "A": "0.88",
+     "Kf": "112",
+     "Kr": "86",
+     "price": "690",
+     "name": "D5"
+    },
+    {
+     "mass": "40",
+     "A": "1.05",
+     "Kf": "125",
+     "Kr": "96",
+     "price": "900",
+     "name": "D6"
+    }
+   ],
+   "fields": {
+    "mass": {
+     "unit": "kg"
+    },
+    "A": {
+     "unit": "m^2"
+    },
+    "Kf": {
+     "unit": "kN"
+    },
+    "Kr": {
+     "unit": "kN"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "pads": {
+   "ground": "problem statement table",
+   "items": [
+    {
+     "m20": "0.36",
+     "m100": "0.42",
+     "m300": "0.46",
+     "m450": "0.40",
+     "m550": "0.30",
+     "m650": "0.20",
+     "price": "60",
+     "name": "PA"
+    },
+    {
+     "m20": "0.30",
+     "m100": "0.38",
+     "m300": "0.44",
+     "m450": "0.44",
+     "m550": "0.38",
+     "m650": "0.28",
+     "price": "95",
+     "name": "PB"
+    },
+    {
+     "m20": "0.28",
+     "m100": "0.34",
+     "m300": "0.40",
+     "m450": "0.42",
+     "m550": "0.41",
+     "m650": "0.36",
+     "price": "150",
+     "name": "PC"
+    },
+    {
+     "m20": "0.22",
+     "m100": "0.30",
+     "m300": "0.38",
+     "m450": "0.40",
+     "m550": "0.39",
+     "m650": "0.37",
+     "price": "110",
+     "name": "PD"
+    },
+    {
+     "m20": "0.40",
+     "m100": "0.40",
+     "m300": "0.40",
+     "m450": "0.33",
+     "m550": "0.25",
+     "m650": "0.18",
+     "price": "45",
+     "name": "PE"
+    }
+   ],
+   "fields": {
+    "m20": {
+     "unit": ""
+    },
+    "m100": {
+     "unit": ""
+    },
+    "m300": {
+     "unit": ""
+    },
+    "m450": {
+     "unit": ""
+    },
+    "m550": {
+     "unit": ""
+    },
+    "m650": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "retarders": {
+   "ground": "problem statement table",
+   "items": [
+    {
+     "P40": "0",
+     "price": "0",
+     "name": "R0"
+    },
+    {
+     "P40": "45",
+     "price": "1200",
+     "name": "R1"
+    },
+    {
+     "P40": "70",
+     "price": "2600",
+     "name": "R2"
+    },
+    {
+     "P40": "90",
+     "price": "4100",
+     "name": "R3"
+    },
+    {
+     "P40": "115",
+     "price": "5600",
+     "name": "R4"
+    }
+   ],
+   "fields": {
+    "P40": {
+     "unit": "kW"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ },
+ "report": "all"
+}

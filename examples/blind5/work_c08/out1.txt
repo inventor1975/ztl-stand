@@ -1,0 +1,1180 @@
+[stand] 1/216 designs, 0 s: 
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 145,
+  "failed_at_nominal": 135,
+  "judged": 10,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~61.4934909803 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~55.9670118876 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~60.861256049 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~53.3138437329 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~44.6109887043 (an exact fraction of 64 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~55.242220464 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~60.7858706587 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~36.3266356626 (an exact fraction of 64 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~52.5423521223 (an exact fraction of 64 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~43.6759779108 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~60.3803565627 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~55.1934290262 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~32.2583052475 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~60.1500305122 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~35.2212236424 (an exact fraction of 64 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~39.4018268954 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~54.6903685309 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~52.5078364542 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~43.8185320229 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~54.4642270693 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~31.0639345045 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~32.2300023279 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~51.9546610485 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~38.6033654503 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~42.962601598 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~35.4471621683 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~51.7315081865 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~28.7826614774 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~42.8795164931 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~59.6664110997 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~18.143549552 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~31.3131163607 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~34.3765702718 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~31.3350320455 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~34.3366308329 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~38.7751921873 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~53.9090428391 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~7.45942174108 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~27.8059129095 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~30.150632994 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~16.9700042794 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~37.9961515887 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~30.134925656 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~31.5386087714 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~51.1401603222 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~2.20661925534 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~37.9743557171 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~42.1631336586 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~6.06989345701 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~17.8257196948 (an exact fraction of 64 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~30.6151477362 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~28.0591857115 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~17.4675883525 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~30.6186550814 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~33.4881260766 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~0.704145609085 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~9.01564674924 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~27.0620180258 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~16.8689419022 (an exact fraction of 64 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~16.0749036687 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~6.70177655431 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~27.0789946593 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=40, mass=285, price=32/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~29.217304574 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~4.77604046348 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~16.2921611504 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~37.3653630043 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~13.4299920491 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~7.91528452963 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~5.00847583266 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~1.40748641937 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~5.30955392525 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~17.2756783843 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~29.9183829246 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~22.0399522488 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~3.60297504573 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~15.454650075 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~9.5641442932 (an exact fraction of 64 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~16.1414661953 (an exact fraction of 64 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~17.8211108506 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~8.40219394242 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~26.3325118717 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~17.4665056515 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~16.3176603117 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~15.3956842493 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~14.6321908482 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~7.07780341275 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~4.13093092067 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~12.7517665668 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~7.30000787804 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~4.24615126709 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~9.53746305408 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~2.70973209143 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~2.85994000232 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~6.53711519611 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~21.2286647279 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~2.95571709465 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=52, mass=365, price=81/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~14.4907563039 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~8.88244284595 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~3.82881051655 (an exact fraction of 69 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~15.5892733692 (an exact fraction of 65 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~8.52406144024 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~7.42065594715 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~16.6090718917 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~13.7901590812 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "522723061153/67607654400 (~7.73171)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~6.46117570676 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~2.97757078148 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~7.31528385293 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "809224763393/67607654400 (~11.9694)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~8.64496412364 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, urban",
+      "by": "~2.06087786867 (an exact fraction of 66 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~2.28923334895 (an exact fraction of 69 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~2.03176018642 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "127779941153/67607654400 (~1.89002)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, suburban",
+      "by": "~5.85313686895 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "10316706511/711659520 (~14.4967)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~1.85032463081 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~3.09350002452 (an exact fraction of 69 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~1.63936886891 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~7.65772348776 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~6.75595859339 (an exact fraction of 69 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "1298733091/269568000 (~4.81783)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "513017423393/67607654400 (~7.58816)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "2867642624219/338038272000 (~8.48319)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=90, mass=610, price=69/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "610512458573/13521530880 (~45.1511)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=64, mass=440, price=49/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~2.05713453569 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~6.65032973652 (an exact fraction of 69 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "4318992927739/338038272000 (~12.7766)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~2.38070785983 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "541291517099/56339712000 (~9.60764)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "7198734511/711659520 (~10.1154)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=90, mass=610, price=69/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "1446718204081/67607654400 (~21.3987)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~1.26974871528 (an exact fraction of 68 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "892927024219/338038272000 (~2.6415)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=90, mass=610, price=69/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "531523834573/13521530880 (~39.3094)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "54912008693/3558297600 (~15.4321)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~1.17245261223 (an exact fraction of 69 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "1885039001/2965248000 (~0.63571)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=90, mass=610, price=69/5); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "748525122001/67607654400 (~11.0716)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R1: cold-day range covers daily distance, motorway",
+      "by": "~0.843798357907 (an exact fraction of 67 digits)",
+      "unit": "km"
+    },
+    {
+      "design": "PACK=packs(E=90, mass=610, price=69/5); TYR=tyres(Crr=21/2000, price=0); AERO=aeros(k=1, price=0); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "17432647967/711659520 (~24.4958)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=90, mass=610, price=69/5); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=13/5, price=0); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "1051775084081/67607654400 (~15.557)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=23/25, price=1/2); HEAT=heaters(P=11/10, price=17/20); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "21018976717/3706560000 (~5.67075)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=41/5000, price=7/20); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=13/5, price=0); SOL=solar(kWp=9/10, mass=18, price=11/10)",
+      "verdict": "REFUTED",
+      "fails": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)",
+      "by": "2837956227739/338038272000 (~8.39537)",
+      "unit": "Wh/km"
+    },
+    {
+      "design": "PACK=packs(E=77, mass=530, price=119/10); TYR=tyres(Crr=9/1250, price=7/10); AERO=aeros(k=43/50, price=7/5); HEAT=heaters(P=11/10, price=17/20); SOL=SOL_none(name=none, kWp=0, mass=0, price=0)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 144,
+    "EARNED": 1
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "PACK.price + TYR.price + AERO.price + HEAT.price + SOL.price",
+    "value": "14850",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "PACK": {
+      "catalog": "packs",
+      "E": {
+        "nominal": "77",
+        "tolerance": "0"
+      },
+      "mass": {
+        "nominal": "530",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "119/10 (~11.9)",
+        "tolerance": "0"
+      }
+    },
+    "TYR": {
+      "catalog": "tyres",
+      "Crr": {
+        "nominal": "9/1250 (~0.0072)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "7/10 (~0.7)",
+        "tolerance": "0"
+      }
+    },
+    "AERO": {
+      "catalog": "aeros",
+      "k": {
+        "nominal": "43/50 (~0.86)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "7/5 (~1.4)",
+        "tolerance": "0"
+      }
+    },
+    "HEAT": {
+      "catalog": "heaters",
+      "P": {
+        "nominal": "11/10 (~1.1)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "17/20 (~0.85)",
+        "tolerance": "0"
+      }
+    },
+    "SOL": {
+      "catalog": "SOL_none",
+      "kWp": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "mass": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "name": "none"
+    }
+  },
+  "guaranteed": {
+    "Rgu": [
+      "5741263526761565476938038775/32450098548590007132618752 (~176.926)",
+      "2147139205130341560626513025/9407720384403325138763776 (~228.232)"
+    ],
+    "Rgs": [
+      "465042345667686803631981140775/2394251380039131750478118912 (~194.233)",
+      "173918275615557666410747555025/684188231401941500591865856 (~254.197)"
+    ],
+    "Rgm": [
+      "61788843130671673209843648075/380814703106833783032119296 (~162.254)",
+      "7702674211411644899310497775/36592663887255014123503616 (~210.498)"
+    ],
+    "Cons": [
+      "154063846661/741312000 (~207.826)",
+      "2158651909963/8895744000 (~242.661)"
+    ],
+    "Mg": [
+      "3430",
+      "3430"
+    ]
+  },
+  "guaranteed_unit": {
+    "Rgu": "km",
+    "Rgs": "km",
+    "Rgm": "km",
+    "Cons": "Wh/km",
+    "Mg": "kg"
+  },
+  "how": {
+    "Rgu": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~176.925919598 (~176.926)', '~228.231613759 (~228.232)']",
+    "Rgs": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~194.232881954 (~194.233)', '~254.196531939 (~254.197)']",
+    "Rgm": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~162.254352646 (~162.254)', '~210.49777177 (~210.498)']",
+    "Cons": "ZTL, exact at the corners",
+    "Mg": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "Rgu",
+      "op": ">=",
+      "value": "Du",
+      "why": "R1: cold-day range covers daily distance, urban"
+    },
+    {
+      "quantity": "Rgs",
+      "op": ">=",
+      "value": "Ds",
+      "why": "R1: cold-day range covers daily distance, suburban"
+    },
+    {
+      "quantity": "Rgm",
+      "op": ">=",
+      "value": "Dm",
+      "why": "R1: cold-day range covers daily distance, motorway"
+    },
+    {
+      "quantity": "Cons",
+      "op": "<=",
+      "value": "248",
+      "why": "R2: 24.8 kWh/100km written as 248 Wh/km (x10 by hand: 1 kWh/100km = 10 Wh/km)"
+    },
+    {
+      "quantity": "Mg",
+      "op": "<=",
+      "value": "3500",
+      "why": "R3: legal gross mass"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "Mg = 3430 by exact elimination (credit)",
+    "Cons -> [154063846661/205920000, 2158651909963/2471040000] by the system over its parameters, exact at the corners (credit)",
+    "Ecm -> [2031300899/2280000, 84557850301/82080000] by the system over its parameters, exact at the corners (credit)",
+    "Ecs -> [1186877387/1608750, 132907650443/154440000] by the system over its parameters, exact at the corners (credit)",
+    "Ecu -> [4700100501/5720000, 675503373/715000] by the system over its parameters, exact at the corners (credit)",
+    "Etm -> [100089521/120000, 4204855279/4320000] by the system over its parameters, exact at the corners (credit)"
+  ]
+}

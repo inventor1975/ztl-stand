@@ -1,0 +1,152 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "W": {
+   "role": "given",
+   "range": [
+    "55",
+    "95"
+   ],
+   "unit": "kg",
+   "why": "adult patient weight"
+  },
+  "Vf": {
+   "role": "given",
+   "value": "1",
+   "tolerance": "0.15",
+   "unit": "",
+   "why": "V = 0.70 L/kg * W, +-15% between patients"
+  },
+  "CLf": {
+   "role": "given",
+   "value": "1",
+   "tolerance": "0.25",
+   "unit": "",
+   "why": "CL = 0.060 L/(h*kg) * W, +-25% between patients"
+  },
+  "vd": {
+   "role": "given",
+   "value": "0.70",
+   "unit": "L/kg",
+   "ground": "popPK_literature"
+  },
+  "cl": {
+   "role": "given",
+   "value": "0.060",
+   "unit": "L/(h*kg)",
+   "ground": "popPK_literature"
+  },
+  "Cmax": {
+   "role": "derived",
+   "unit": "mg/L"
+  },
+  "Cmin": {
+   "role": "derived",
+   "unit": "mg/L"
+  }
+ },
+ "slots": {
+  "REG": {
+   "from": [
+    "regimens"
+   ]
+  }
+ },
+ "define": {
+  "V": "vd*W*Vf",
+  "CL": "cl*W*CLf",
+  "k": "CL/V"
+ },
+ "laws": [
+  {
+   "zfl": "Cmax == (REG.dose/V)/(1 - exp(0 - k*REG.tau))",
+   "source": "one-compartment IV bolus, steady-state peak"
+  },
+  {
+   "zfl": "Cmin == Cmax*exp(0 - k*REG.tau)",
+   "source": "steady-state trough"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Cmin",
+   "op": ">=",
+   "value": "10",
+   "why": "efficacy"
+  },
+  {
+   "quantity": "Cmax",
+   "op": "<=",
+   "value": "40",
+   "why": "toxicity"
+  }
+ ],
+ "objective": {
+  "minimize": "REG.cost*86400/REG.tau",
+  "why": "lowest daily cost"
+ },
+ "catalog": {
+  "regimens": {
+   "items": [
+    {
+     "dose": {
+      "value": "750",
+      "tolerance": "0.05"
+     },
+     "tau": "8",
+     "cost": "11",
+     "name": "D1"
+    },
+    {
+     "dose": {
+      "value": "1000",
+      "tolerance": "0.05"
+     },
+     "tau": "12",
+     "cost": "14",
+     "name": "D2"
+    },
+    {
+     "dose": {
+      "value": "1000",
+      "tolerance": "0.05"
+     },
+     "tau": "8",
+     "cost": "14",
+     "name": "D3"
+    },
+    {
+     "dose": {
+      "value": "1250",
+      "tolerance": "0.05"
+     },
+     "tau": "12",
+     "cost": "17",
+     "name": "D4"
+    },
+    {
+     "dose": {
+      "value": "1500",
+      "tolerance": "0.05"
+     },
+     "tau": "12",
+     "cost": "20",
+     "name": "D5"
+    }
+   ],
+   "ground": "labelled doses",
+   "fields": {
+    "dose": {
+     "unit": "mg"
+    },
+    "tau": {
+     "unit": "h"
+    },
+    "cost": {
+     "unit": "USD"
+    }
+   }
+  }
+ },
+ "report": "all"
+}

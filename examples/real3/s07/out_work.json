@@ -1,0 +1,211 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "largest",
+  "quantity": "P",
+  "unit": "6894.757293168Pa",
+  "proved": "3472",
+  "proved_means": "every P in [0, 3472] 6894.757293168Pa works (EARNED on the whole range)",
+  "beyond": "3473",
+  "beyond_is": "REFUTED: the range [0, 3473] 6894.757293168Pa holds a concrete failing point (at_beyond)",
+  "precision": "1",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "margin": [
+            "0",
+            "143/2000 (~0.0715)"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {},
+    "guaranteed": {
+      "margin": [
+        "0",
+        "143/2000 (~0.0715)"
+      ]
+    },
+    "guaranteed_unit": {
+      "margin": "25.4mm"
+    },
+    "guaranteed_ends": {
+      "margin": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+    },
+    "how": {
+      "margin": "ZTL, certificate checked exactly (3 pieces; found by the stand's search, the extreme may lie inside the box)"
+    },
+    "requirements": [
+      {
+        "quantity": "margin",
+        "op": ">=",
+        "value": "0",
+        "why": "the wall at its -10 % end still covers the pressure design thickness"
+      }
+    ],
+    "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "treq -> [0, 2783459/1150000000] by [treq == P * OD / (2 * (S * ifpos(T - 100, ifpos(T - 200, ifpos(T - 400, ifpos(T - 600, 58 / 100, 68 / 100 + (58 / 100 - 68 / 100) * (T - 400) / (600 - 400)), 82 / 100 + (68 / 100 - 82 / 100) * (T - 200) / (400 - 200)), 1 + (82 / 100 - 1) * (T - 100) / (200 - 100)), 1) + P * Y))], interval reading, sound, may be wider than the truth (credit)",
+      "margin -> [-537337/575000000, 18161/10000000] by [margin == wall - treq]"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "REFUTED",
+        "fails": "the wall at its -10 % end still covers the pressure design thickness",
+        "by_at_witness": "643/149892000 (~4.28976e-06)",
+        "unit": "25.4mm"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {},
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "OD": "101/200 (~0.505)",
+      "P": "3473",
+      "T": "400",
+      "wall": "117/2000 (~0.0585)"
+    },
+    "point_units": {
+      "OD": "25.4mm",
+      "P": "6894.757293168Pa",
+      "T": "",
+      "wall": "25.4mm"
+    },
+    "value_there": {
+      "margin": [
+        "-643/149892000 (~-4.28976e-06)",
+        "-643/149892000 (~-4.28976e-06)"
+      ]
+    },
+    "unit": "25.4mm",
+    "requirement": {
+      "quantity": "margin",
+      "op": ">=",
+      "value": "0",
+      "why": "the wall at its -10 % end still covers the pressure design thickness"
+    },
+    "overshoot": "643/149892000 (~4.28976e-06)",
+    "reasons": {
+      "spread_over_tolerances": [
+        "-643/149892000 (~-4.28976e-06)",
+        "143/2000 (~0.0715)"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "P",
+          "moves_it_by": "350773/5995680 (~0.0585043)"
+        },
+        {
+          "quantity": "wall",
+          "moves_it_by": "13/1000 (~0.013)"
+        },
+        {
+          "quantity": "T",
+          "moves_it_by": "61385275/6666146916 (~0.00920851)"
+        },
+        {
+          "quantity": "OD",
+          "moves_it_by": "3473/2997840 (~0.0011585)"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+  },
+  "tries": [
+    {
+      "P": "0",
+      "verdict": "EARNED"
+    },
+    {
+      "P": "12000",
+      "verdict": "REFUTED"
+    },
+    {
+      "P": "6000",
+      "verdict": "REFUTED"
+    },
+    {
+      "P": "3000",
+      "verdict": "EARNED"
+    },
+    {
+      "P": "4500",
+      "verdict": "REFUTED"
+    },
+    {
+      "P": "3750",
+      "verdict": "REFUTED"
+    },
+    {
+      "P": "3375",
+      "verdict": "EARNED"
+    },
+    {
+      "P": "3562",
+      "verdict": "REFUTED"
+    },
+    {
+      "P": "3468",
+      "verdict": "EARNED"
+    },
+    {
+      "P": "3515",
+      "verdict": "REFUTED"
+    },
+    {
+      "P": "3492",
+      "verdict": "REFUTED"
+    },
+    {
+      "P": "3480",
+      "verdict": "REFUTED"
+    },
+    {
+      "P": "3474",
+      "verdict": "REFUTED"
+    },
+    {
+      "P": "3471",
+      "verdict": "EARNED"
+    },
+    {
+      "P": "3472",
+      "verdict": "EARNED"
+    },
+    {
+      "P": "3473",
+      "verdict": "REFUTED"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

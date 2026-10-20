@@ -1,0 +1,18 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 1,
+  "notes": [],
+  "combinations_proved_without_mix": 1,
+  "verdict": "REFUTED",
+  "why": "ZTL proved (Farkas) that no mix in the box meets the requirements",
+  "mixes": [
+    {
+      "design": "DED=deductibles(name=D10, D=10, prem=104); SL=stoploss(name=SL60, A=60, lim=200, price=16)",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas, scenario cuts): the requirements read at 18 data points of the box already admit no mix — the weighted sum of their margins is at most -6000 < 0"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

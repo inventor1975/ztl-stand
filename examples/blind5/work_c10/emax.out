@@ -1,0 +1,878 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "modes": [
+    "winter",
+    "spring",
+    "summer",
+    "autumn"
+  ],
+  "designs_tried": 96,
+  "undecided": 0,
+  "designs": [
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=10); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=10); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "406",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=10); MW=cnt_MW(k=1); MS=cnt_MS(k=4); MU=cnt_MU(k=10); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "2246",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=10); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=10); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "2408",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=10); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=10); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "2566",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=6); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "32753/5 (~6550.6)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=12); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=12); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "3350",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=11); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=11); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "1878",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=10); MW=cnt_MW(k=1); MS=cnt_MS(k=4); MU=cnt_MU(k=10); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "4248",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=10); MW=cnt_MW(k=2); MS=cnt_MS(k=4); MU=cnt_MU(k=10); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "4406",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=10); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=10); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "4568",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "46369/5 (~9273.8)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=12); MW=cnt_MW(k=1); MS=cnt_MS(k=4); MU=cnt_MU(k=12); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "5190",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=12); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=12); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "5352",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=12); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=12); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "5510",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=11); MW=cnt_MW(k=1); MS=cnt_MS(k=4); MU=cnt_MU(k=11); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "3718",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=11); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=11); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "3880",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=11); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=11); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "4038",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=10); MW=cnt_MW(k=2); MS=cnt_MS(k=4); MU=cnt_MU(k=10); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "6408",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=6); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "49773/5 (~9954.6)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=6); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "102543/10 (~10254.3)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=13); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=13); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "4822",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=6); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "52733/5 (~10546.6)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=12); MW=cnt_MW(k=1); MS=cnt_MS(k=4); MU=cnt_MU(k=12); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "7192",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=12); MW=cnt_MW(k=2); MS=cnt_MS(k=4); MU=cnt_MU(k=12); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "7350",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=12); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=12); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "7512",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=11); MW=cnt_MW(k=1); MS=cnt_MS(k=4); MU=cnt_MU(k=11); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "5720",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=11); MW=cnt_MW(k=2); MS=cnt_MS(k=4); MU=cnt_MU(k=11); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "5878",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=11); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=11); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "6040",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "63389/5 (~12677.8)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "25955/2 (~12977.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=13); MW=cnt_MW(k=1); MS=cnt_MS(k=4); MU=cnt_MU(k=13); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "6662",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "66349/5 (~13269.8)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=13); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=13); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "6824",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "46369/5 (~9273.8)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=13); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=13); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "6982",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=12); MW=cnt_MW(k=2); MS=cnt_MS(k=4); MU=cnt_MU(k=12); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "9352",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=11); MW=cnt_MW(k=2); MS=cnt_MS(k=4); MU=cnt_MU(k=11); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "7880",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=6); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "136583/10 (~13658.3)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=6); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "69753/5 (~13950.6)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=6); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "142503/10 (~14250.3)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=13); MW=cnt_MW(k=1); MS=cnt_MS(k=4); MU=cnt_MU(k=13); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "8664",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=8); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "11997",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=13); MW=cnt_MW(k=2); MS=cnt_MS(k=4); MU=cnt_MU(k=13); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "8822",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=13); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=13); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "8984",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "32763/2 (~16381.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "83369/5 (~16673.8)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "63389/5 (~12677.8)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "33947/2 (~16973.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "25955/2 (~12977.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=13); MW=cnt_MW(k=2); MS=cnt_MS(k=4); MU=cnt_MU(k=13); MA=cnt_MA(k=4)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "10824",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "66349/5 (~13269.8)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=6); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "176543/10 (~17654.3)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=8); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "15401",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=8); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "157007/10 (~15700.7)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=8); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "15993",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "40755/2 (~20377.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "32763/2 (~16381.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "83369/5 (~16673.8)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "33947/2 (~16973.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=8); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "191047/10 (~19104.7)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=8); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "19397",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=8); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "196967/10 (~19696.7)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "40755/2 (~20377.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=PW37, P=37/10, SAE=2, price=26/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=8); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "231007/10 (~23100.7)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=6); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "23359",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "27407",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=6); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "28419",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=6); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "57729/2 (~28864.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=6); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "29299",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "27407",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "32467",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "65825/2 (~32912.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "33347",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=6); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "67849/2 (~33924.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=6); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "34359",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=6); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "69609/2 (~34804.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=8); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "31455",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "32467",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "65825/2 (~32912.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "33347",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "75945/2 (~37972.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "38407",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "77705/2 (~38852.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=6); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=6); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "79729/2 (~39864.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=8); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "36515",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=1); MS=cnt_MS(k=2); MU=cnt_MU(k=8); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "73921/2 (~36960.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=8); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "37395",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "75945/2 (~37972.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "38407",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "77705/2 (~38852.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "87825/2 (~43912.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=8); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "84041/2 (~42020.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=8); MA=cnt_MA(k=2)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "42455",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=2); MS=cnt_MS(k=2); MU=cnt_MU(k=8); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "85801/2 (~42900.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=7); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=7); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "87825/2 (~43912.5)",
+      "unit": "kWh"
+    },
+    {
+      "design": "AE=aer(name=DIFF, P=11/2, SAE=7/5, price=34/5); OX=lox(name=none, price=0, rate=0); N=cnt_N(k=8); MW=cnt_MW(k=2); MS=cnt_MS(k=3); MU=cnt_MU(k=8); MA=cnt_MA(k=3)",
+      "verdict": "REFUTED",
+      "mode": "winter",
+      "fails": "R3: annual aerator energy <= 31000 kWh",
+      "by": "95921/2 (~47960.5)",
+      "unit": "kWh"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 96
+  },
+  "excluded_by_where": 20384,
+  "verdict": "REFUTED",
+  "why": "every design violates a requirement in at least one mode, at a concrete point",
+  "closest_design": {
+    "AE": {
+      "catalog": "aer",
+      "name": "PW2",
+      "P": {
+        "nominal": "2",
+        "tolerance": "0"
+      },
+      "SAE": {
+        "nominal": "11/5 (~2.2)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "18/5 (~3.6)",
+        "tolerance": "0"
+      }
+    },
+    "OX": {
+      "catalog": "lox",
+      "name": "LOX",
+      "price": {
+        "nominal": "13/2 (~6.5)",
+        "tolerance": "0"
+      },
+      "rate": {
+        "nominal": "6000",
+        "tolerance": "0"
+      }
+    },
+    "N": {
+      "catalog": "cnt_N",
+      "k": {
+        "nominal": "10",
+        "tolerance": "0"
+      }
+    },
+    "MW": {
+      "catalog": "cnt_MW",
+      "k": {
+        "nominal": "1",
+        "tolerance": "0"
+      }
+    },
+    "MS": {
+      "catalog": "cnt_MS",
+      "k": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    },
+    "MU": {
+      "catalog": "cnt_MU",
+      "k": {
+        "nominal": "10",
+        "tolerance": "0"
+      }
+    },
+    "MA": {
+      "catalog": "cnt_MA",
+      "k": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    }
+  },
+  "failing_mode": "winter",
+  "its_violating_point": {
+    "T": "19/2 (~9.5)",
+    "W": "4500"
+  },
+  "value_there": {
+    "Ey": "28406"
+  },
+  "requirement": {
+    "quantity": "Ey",
+    "op": "<=",
+    "value": "Emax",
+    "why": "R3: annual aerator energy <= 31000 kWh"
+  },
+  "overshoot": "406",
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R3: annual aerator energy <= 31000 kWh"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted — a mode's own requirement is marked [mode]; the brick's apply in every mode"
+  }
+}

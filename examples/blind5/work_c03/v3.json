@@ -1,0 +1,471 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "H": {
+   "role": "given",
+   "range": [
+    "1",
+    "7"
+   ],
+   "unit": "kWh/m^2/day",
+   "why": "overridden per season"
+  },
+  "hs": {
+   "role": "given",
+   "value": "8",
+   "unit": "h",
+   "why": "sun hours, overridden per season"
+  },
+  "Ta": {
+   "role": "given",
+   "range": [
+    "0",
+    "30"
+   ],
+   "unit": "C",
+   "why": "day ambient, overridden per season"
+  },
+  "Tc": {
+   "role": "given",
+   "range": [
+    "5",
+    "20"
+   ],
+   "unit": "C",
+   "why": "cold inlet, overridden per season"
+  },
+  "D": {
+   "role": "given",
+   "range": [
+    "540",
+    "660"
+   ],
+   "unit": "L/day",
+   "why": "daily draw, ONE shared value for all seasons (not overridden in any mode)"
+  },
+  "cw": {
+   "role": "given",
+   "value": "0.0011628",
+   "unit": "kWh/(L*K)",
+   "why": "c_w of water"
+  },
+  "Tt": {
+   "role": "given",
+   "value": "45",
+   "unit": "C",
+   "why": "hot-water set point"
+  },
+  "dTo": {
+   "role": "given",
+   "value": "6",
+   "unit": "C",
+   "why": "mean collector T = T + 6"
+  },
+  "dTr": {
+   "role": "given",
+   "value": "8",
+   "unit": "C",
+   "why": "room = Ta + 8"
+  },
+  "dd": {
+   "role": "given",
+   "value": "1",
+   "unit": "day",
+   "why": "unit of a day for season weights"
+  },
+  "Tmax": {
+   "role": "given",
+   "value": "80",
+   "unit": "C",
+   "why": "R2 limit"
+  },
+  "Emax": {
+   "role": "given",
+   "value": "3700",
+   "unit": "kWh",
+   "why": "R1 limit (annual)"
+  },
+  "Rmin": {
+   "role": "given",
+   "value": "50",
+   "unit": "L/m^2",
+   "why": "R3"
+  },
+  "Rmax": {
+   "role": "given",
+   "value": "100",
+   "unit": "L/m^2",
+   "why": "R3"
+  },
+  "T": {
+   "role": "derived",
+   "unit": "C",
+   "search": [
+    "0",
+    "150"
+   ],
+   "why": "tank temperature: collector heat = load + losses"
+  },
+  "Bk": {
+   "role": "derived",
+   "unit": "kWh/day",
+   "why": "daily back-up boiler energy"
+  },
+  "Pmin": {
+   "role": "given",
+   "value": "4.6",
+   "unit": "kEUR",
+   "why": "PRE-FILTER (run-time cut, my own): designs cheaper than this were refuted outside the stand"
+  },
+  "Pmax": {
+   "role": "given",
+   "value": "4.65",
+   "unit": "kEUR",
+   "why": "isolate one design"
+  }
+ },
+ "slots": {
+  "COL": {
+   "from": [
+    "collectors"
+   ]
+  },
+  "N": {
+   "from": [
+    "modules"
+   ]
+  },
+  "TANK": {
+   "from": [
+    "tanks"
+   ]
+  },
+  "INS": {
+   "from": [
+    "insulation"
+   ]
+  }
+ },
+ "where": [
+  "TANK.V/(N.n*COL.A) >= Rmin",
+  "TANK.V/(N.n*COL.A) <= Rmax",
+  "N.n*COL.price + TANK.price + INS.price >= Pmin",
+  "N.n*COL.price + TANK.price + INS.price <= Pmax"
+ ],
+ "define": {
+  "G": "H*dd/hs",
+  "UAe": "TANK.UA*INS.f",
+  "Tr": "Ta + dTr"
+ },
+ "laws": [
+  {
+   "zfl": "N.n*COL.A*H*if(COL.eta0 - COL.a1*(T + dTo - Ta)/G - COL.a2*(T + dTo - Ta)*(T + dTo - Ta)/G > 0, COL.eta0 - COL.a1*(T + dTo - Ta)/G - COL.a2*(T + dTo - Ta)*(T + dTo - Ta)/G, 0) == cw*D*(T - Tc) + UAe*(T - Tr)",
+   "source": "daily heat balance: collector useful heat = load + tank loss (0.024 = 24 h/day is carried by the units)"
+  },
+  {
+   "zfl": "Bk == cw*D*if(T > Tt, 0, Tt - T)",
+   "source": "back-up boiler tops water up to 45 C"
+  }
+ ],
+ "modes": {
+  "winter": {
+   "weight": "90*dd",
+   "quantities": {
+    "H": {
+     "range": [
+      "1.4",
+      "2.0"
+     ]
+    },
+    "hs": {
+     "value": "6"
+    },
+    "Ta": {
+     "range": [
+      "3",
+      "7"
+     ]
+    },
+    "Tc": {
+     "range": [
+      "6",
+      "9"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "<=",
+     "value": "Tmax",
+     "why": "R2: tank <= 80 C in winter"
+    }
+   ]
+  },
+  "spring": {
+   "weight": "92*dd",
+   "quantities": {
+    "H": {
+     "range": [
+      "3.6",
+      "4.6"
+     ]
+    },
+    "hs": {
+     "value": "8"
+    },
+    "Ta": {
+     "range": [
+      "10",
+      "14"
+     ]
+    },
+    "Tc": {
+     "range": [
+      "9",
+      "12"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "<=",
+     "value": "Tmax",
+     "why": "R2: tank <= 80 C in spring"
+    }
+   ]
+  },
+  "summer": {
+   "weight": "92*dd",
+   "quantities": {
+    "H": {
+     "range": [
+      "5.6",
+      "6.8"
+     ]
+    },
+    "hs": {
+     "value": "10"
+    },
+    "Ta": {
+     "range": [
+      "20",
+      "26"
+     ]
+    },
+    "Tc": {
+     "range": [
+      "15",
+      "18"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "<=",
+     "value": "Tmax",
+     "why": "R2: tank <= 80 C in summer"
+    }
+   ]
+  },
+  "autumn": {
+   "weight": "91*dd",
+   "quantities": {
+    "H": {
+     "range": [
+      "2.6",
+      "3.4"
+     ]
+    },
+    "hs": {
+     "value": "7"
+    },
+    "Ta": {
+     "range": [
+      "11",
+      "15"
+     ]
+    },
+    "Tc": {
+     "range": [
+      "11",
+      "14"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "<=",
+     "value": "Tmax",
+     "why": "R2: tank <= 80 C in autumn"
+    }
+   ]
+  }
+ },
+ "totals": {
+  "Eyear": {
+   "sum": "Bk",
+   "unit": "kWh"
+  }
+ },
+ "requirements": [
+  {
+   "quantity": "Eyear",
+   "op": "<=",
+   "value": "Emax",
+   "why": "R1 annual back-up <= 3700 kWh"
+  }
+ ],
+ "objective": {
+  "minimize": "N.n*COL.price + TANK.price + INS.price",
+  "unit": "kEUR",
+  "why": "minimum price"
+ },
+ "catalog": {
+  "collectors": {
+   "ground": "datasheet",
+   "items": [
+    {
+     "A": "2.0",
+     "eta0": "0.76",
+     "a1": "4.2",
+     "a2": "0.016",
+     "price": "0.42",
+     "model": "F1"
+    },
+    {
+     "A": "2.3",
+     "eta0": "0.80",
+     "a1": "3.4",
+     "a2": "0.014",
+     "price": "0.55",
+     "model": "F2"
+    },
+    {
+     "A": "2.5",
+     "eta0": "0.81",
+     "a1": "3.0",
+     "a2": "0.012",
+     "price": "0.68",
+     "model": "F3"
+    },
+    {
+     "A": "2.2",
+     "eta0": "0.74",
+     "a1": "1.4",
+     "a2": "0.005",
+     "price": "0.85",
+     "model": "T1"
+    },
+    {
+     "A": "3.0",
+     "eta0": "0.76",
+     "a1": "1.3",
+     "a2": "0.004",
+     "price": "1.15",
+     "model": "T2"
+    },
+    {
+     "A": "2.6",
+     "eta0": "0.78",
+     "a1": "1.2",
+     "a2": "0.0035",
+     "price": "1.05",
+     "model": "T3"
+    }
+   ],
+   "fields": {
+    "A": {
+     "unit": "m^2"
+    },
+    "eta0": {
+     "unit": ""
+    },
+    "a1": {
+     "unit": "W/(m^2*K)"
+    },
+    "a2": {
+     "unit": "W/(m^2*K^2)"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "modules": {
+   "integers": {
+    "field": "n",
+    "from": "1",
+    "to": "16",
+    "unit": ""
+   }
+  },
+  "tanks": {
+   "ground": "tank price/loss formulas (rounded to 8 / 6 digits)",
+   "items": [
+    {
+     "V": "300",
+     "UA": "1.80000000",
+     "price": "0.900000"
+    },
+    {
+     "V": "500",
+     "UA": "2.44557933",
+     "price": "1.354321"
+    },
+    {
+     "V": "750",
+     "UA": "3.11915179",
+     "price": "1.873245"
+    },
+    {
+     "V": "1000",
+     "UA": "3.70680510",
+     "price": "2.358009"
+    },
+    {
+     "V": "1500",
+     "UA": "4.72775005",
+     "price": "3.261508"
+    }
+   ],
+   "fields": {
+    "V": {
+     "unit": "L"
+    },
+    "UA": {
+     "unit": "W/K"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "insulation": {
+   "ground": "problem statement",
+   "items": [
+    {
+     "f": "1",
+     "price": "0",
+     "kind": "none"
+    },
+    {
+     "f": "0.6",
+     "price": "0.25",
+     "kind": "upgrade"
+    }
+   ],
+   "fields": {
+    "f": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,7 @@
+Multiple dc sources (Kuphaldt, Lessons in Electric Circuits vol. V, ch. 7: published nominal V(2) = 9.7470)
+v1 1 0 dc 24
+v2 3 0 dc 15
+r1 1 2 10k
+r2 2 3 8.1k
+r3 2 0 4.7k
+.end

@@ -1,0 +1,40 @@
+{
+  "verdict": "OPEN",
+  "stopped": "a stop asked from outside, mid-search: the bracket so far",
+  "find": "largest",
+  "quantity": "L1",
+  "unit": "m",
+  "stopped_at": "525/2 (~262.5)",
+  "proved": "250",
+  "tries": [
+    {
+      "L1": "0",
+      "verdict": "EARNED"
+    },
+    {
+      "L1": "400",
+      "verdict": "REFUTED"
+    },
+    {
+      "L1": "200",
+      "verdict": "EARNED"
+    },
+    {
+      "L1": "300",
+      "verdict": "REFUTED"
+    },
+    {
+      "L1": "250",
+      "verdict": "EARNED"
+    },
+    {
+      "L1": "275",
+      "verdict": "REFUTED"
+    },
+    {
+      "L1": "525/2 (~262.5)",
+      "verdict": "OPEN"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

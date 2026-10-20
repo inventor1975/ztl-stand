@@ -1,0 +1,302 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Tstep": {
+   "role": "given",
+   "value": "5",
+   "unit": "N*m",
+   "why": "torque setting step"
+  },
+  "W": {
+   "role": "given",
+   "value": "1",
+   "tolerance": "0.08",
+   "unit": "",
+   "why": "torque wrench accuracy +-8 % of the set torque"
+  },
+  "Pmax": {
+   "role": "given",
+   "value": "20",
+   "unit": "kN",
+   "why": "external load per bolt, overload (test pressure, once)"
+  },
+  "dP": {
+   "role": "given",
+   "value": "14",
+   "unit": "kN",
+   "why": "pulsating 0..14 kN cycle"
+  },
+  "Fi": {
+   "role": "derived",
+   "unit": "kN",
+   "why": "actual preload with wrench error and K scatter"
+  },
+  "sig_ovl": {
+   "role": "derived",
+   "unit": "MPa",
+   "why": "bolt stress at max preload + overload"
+  },
+  "Fclamp": {
+   "role": "derived",
+   "unit": "kN",
+   "why": "clamp force left under the overload"
+  },
+  "amp": {
+   "role": "derived",
+   "unit": "MPa",
+   "why": "bolt stress amplitude of the 0..14 kN cycle"
+  },
+  "Fn": {
+   "role": "derived",
+   "unit": "kN",
+   "why": "preload at the target torque, nominal K, perfect wrench"
+  }
+ },
+ "slots": {
+  "BOLT": {
+   "from": [
+    "bolts"
+   ]
+  },
+  "FR": {
+   "from": [
+    "friction"
+   ]
+  },
+  "TQ": {
+   "from": [
+    "torque"
+   ]
+  }
+ },
+ "define": {
+  "Cl": "1/(1 + BOLT.r)",
+  "Fp": "BOLT.Sp*BOLT.At"
+ },
+ "laws": [
+  {
+   "zfl": "Fi*FR.K*BOLT.d == Tstep*TQ.N*W",
+   "source": "T = K*d*Fi (torque-tension), T = set torque times wrench factor"
+  },
+  {
+   "zfl": "sig_ovl*BOLT.At == Fi + Cl*Pmax",
+   "source": "bolt takes C*P of the external load: F_bolt = Fi + C*P"
+  },
+  {
+   "zfl": "Fclamp == Fi - (1 - Cl)*Pmax",
+   "source": "clamped parts lose (1-C)*P of clamp force"
+  },
+  {
+   "zfl": "2*amp*BOLT.At == Cl*dP",
+   "source": "bolt amplitude = C*dP/(2*At)"
+  },
+  {
+   "zfl": "Fn*FR.Kn*BOLT.d == Tstep*TQ.N",
+   "source": "T = K*d*Fi at nominal K"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "sig_ovl",
+   "op": "<=",
+   "value": "0.9*BOLT.Sp",
+   "why": "bolt stress <= 0.90 Sp at max preload and 20 kN overload"
+  },
+  {
+   "quantity": "Fclamp",
+   "op": ">",
+   "value": "0",
+   "why": "no separation at min preload and 20 kN overload"
+  },
+  {
+   "quantity": "amp",
+   "op": "<=",
+   "value": "55",
+   "why": "fatigue: bolt stress amplitude <= 55 MPa"
+  },
+  {
+   "quantity": "Fn",
+   "op": "within",
+   "value": [
+    "0.6*BOLT.Sp*BOLT.At",
+    "0.75*BOLT.Sp*BOLT.At"
+   ],
+   "why": "nominal preload 60..75 % of proof load"
+  }
+ ],
+ "objective": {
+  "minimize": "8*(BOLT.price + FR.lube)",
+  "why": "8 bolts incl. nut, plus lube $0.02 per bolt"
+ },
+ "report": "all",
+ "catalog": {
+  "bolts": {
+   "ground": "bolt datasheet / ISO 898-1",
+   "items": [
+    {
+     "d": {
+      "value": "10"
+     },
+     "At": {
+      "value": "58.0"
+     },
+     "Sp": {
+      "value": "600"
+     },
+     "r": {
+      "value": "3.2"
+     },
+     "price": "0.45",
+     "name": "M10 8.8"
+    },
+    {
+     "d": {
+      "value": "12"
+     },
+     "At": {
+      "value": "84.3"
+     },
+     "Sp": {
+      "value": "600"
+     },
+     "r": {
+      "value": "3.2"
+     },
+     "price": "0.70",
+     "name": "M12 8.8"
+    },
+    {
+     "d": {
+      "value": "12"
+     },
+     "At": {
+      "value": "84.3"
+     },
+     "Sp": {
+      "value": "830"
+     },
+     "r": {
+      "value": "3.2"
+     },
+     "price": "1.30",
+     "name": "M12 10.9"
+    },
+    {
+     "d": {
+      "value": "14"
+     },
+     "At": {
+      "value": "115"
+     },
+     "Sp": {
+      "value": "600"
+     },
+     "r": {
+      "value": "3.0"
+     },
+     "price": "1.15",
+     "name": "M14 8.8"
+    },
+    {
+     "d": {
+      "value": "14"
+     },
+     "At": {
+      "value": "115"
+     },
+     "Sp": {
+      "value": "830"
+     },
+     "r": {
+      "value": "3.0"
+     },
+     "price": "2.10",
+     "name": "M14 10.9"
+    }
+   ],
+   "fields": {
+    "d": {
+     "unit": "mm"
+    },
+    "At": {
+     "unit": "mm^2"
+    },
+    "Sp": {
+     "unit": "MPa"
+    },
+    "r": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  },
+  "friction": {
+   "ground": "nut-factor table",
+   "items": [
+    {
+     "K": {
+      "range": [
+       "0.13",
+       "0.17"
+      ]
+     },
+     "Kn": {
+      "value": "0.15"
+     },
+     "lube": "0.02",
+     "state": "lubricated",
+     "mu": "0.10-0.14"
+    },
+    {
+     "K": {
+      "range": [
+       "0.17",
+       "0.23"
+      ]
+     },
+     "Kn": {
+      "value": "0.20"
+     },
+     "lube": "0",
+     "state": "as-delivered oil film",
+     "mu": "0.12-0.18"
+    },
+    {
+     "K": {
+      "range": [
+       "0.22",
+       "0.30"
+      ]
+     },
+     "Kn": {
+      "value": "0.26"
+     },
+     "lube": "0",
+     "state": "dry zinc plated",
+     "mu": "0.16-0.24"
+    }
+   ],
+   "fields": {
+    "K": {
+     "unit": ""
+    },
+    "Kn": {
+     "unit": ""
+    },
+    "lube": {
+     "unit": "USD"
+    }
+   }
+  },
+  "torque": {
+   "integers": {
+    "field": "N",
+    "from": "5",
+    "to": "53",
+    "unit": ""
+   }
+  }
+ }
+}

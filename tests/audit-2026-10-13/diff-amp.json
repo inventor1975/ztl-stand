@@ -1,0 +1,14 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "AUDIT component: a difference stage, Vo = G*(Vp - Vn), gain G = 1 +-1%",
+ "interface": {"inputs": {"Vp": {"assume": ["0", "10"]}, "Vn": {"assume": ["0", "10"]}}, "outputs": ["Vo"]},
+ "quantities": {
+  "Vp": {"role": "given", "value": "5", "unit": "V"},
+  "Vn": {"role": "given", "value": "5", "unit": "V"},
+  "G":  {"role": "given", "value": "1", "tolerance": "0.01", "unit": ""},
+  "Vo": {"role": "derived", "unit": "V"}
+ },
+ "slots": {}, "catalog": {},
+ "laws": [{"zfl": "Vo == G*(Vp - Vn)", "source": "difference amplifier"}],
+ "requirements": [{"quantity": "Vo", "op": "within", "value": ["-20", "20"], "why": "output swing"}]
+}

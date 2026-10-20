@@ -1,0 +1,49 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "case-to-sink interface (thermal compound): rise = P * 0.2 C/W",
+ "interface": {
+  "inputs": {
+   "P": {
+    "assume": [
+     "0",
+     "30"
+    ],
+    "bands": [
+     "0",
+     "8.4",
+     "24.6",
+     "30"
+    ]
+   }
+  },
+  "outputs": [
+   "dT"
+  ]
+ },
+ "quantities": {
+  "P": {
+   "role": "given",
+   "value": "10",
+   "unit": "W"
+  },
+  "Rcs": {
+   "role": "given",
+   "value": "0.2",
+   "unit": "C/W",
+   "ground": "example"
+  },
+  "dT": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "dT == P*Rcs",
+   "source": "thermal resistance"
+  }
+ ],
+ "requirements": [],
+ "catalog": {}
+}

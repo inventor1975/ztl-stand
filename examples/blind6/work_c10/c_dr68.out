@@ -1,0 +1,89 @@
+[stand] 1/4 designs, 0 s: 
+[stand] 1/4 designs, 69 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 4,
+  "notes": [],
+  "combinations_proved_without_mix": 1,
+  "verdict": "EARNED",
+  "design": {
+    "DRY": {
+      "catalog": "dryers",
+      "name": "DR8",
+      "B": {
+        "nominal": "8",
+        "tolerance": "0"
+      },
+      "Tmax": {
+        "nominal": "80",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "40",
+        "tolerance": "0"
+      }
+    },
+    "FAN": {
+      "catalog": "fans",
+      "name": "none",
+      "qa": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "MF": {
+      "catalog": "mfin",
+      "x": "1472821/8330849 (~0.176791)"
+    },
+    "TD": {
+      "catalog": "tdry",
+      "x": "319709009/4859992 (~65.7839)"
+    }
+  },
+  "objective": {
+    "minimize": "DRY.price + FAN.price + Mtot*Wu*1000*(M0c - MF.x)/(1 + M0c)*cw*(1 + 12*(Tdn - 60)/1000)",
+    "value": "4445433709067260733/86036701423067000 (~51.669)",
+    "unit": "kEUR",
+    "lower_bound": "23269527971315837407/450359962737049600 (~51.6687)",
+    "gap": "59646208745332305806755430439/193737428234555582063224815616000 (~0.000307871)",
+    "lower_bound_is": "proved by ZTL: no mix in the continuous box costs less — zmin: the amounts' box of 3 combination(s) split in 105 pieces, 43 with the objective >= L, 62 failing a requirement at one point of its data; 1 combination(s) proved to have no mix at all (a split of the amounts, zmin)",
+    "optimal": false,
+    "optimal_means": "true only at a zero gap; otherwise the mix is PROVED to cost at most `gap` above the cheapest possible (blind test 4, c03: optimal false at a 0.00093 EUR gap)"
+  },
+  "guaranteed": {
+    "Q": [
+      "4/5 (~0.8)",
+      "73786976294838206464/43299976449027979269 (~1.70409)"
+    ],
+    "DI": [
+      "~0.234735233602 (an exact fraction of 40 digits)",
+      "3/5 (~0.6)"
+    ],
+    "ST": [
+      "25940737796209870009/72057594037927936 (~360)",
+      "20341587593200663345/36028797018963968 (~564.592)"
+    ],
+    "TD_x_req": [
+      "319709009/4859992 (~65.7839)",
+      "319709009/4859992 (~65.7839)"
+    ]
+  },
+  "how": {
+    "Q": "ZTL, certificate checked exactly (10 pieces; found by the stand's search, the extreme may lie inside the box)",
+    "DI": "ZTL, certificate checked exactly (3 pieces; found by the stand's search, the extreme may lie inside the box)",
+    "ST": "ZTL, interval reading of the definition (sound, may be wide)",
+    "TD_x_req": "ZTL, outer range"
+  },
+  "mix_verdict_checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	1m28.233s
+user	1m23.090s
+sys	0m5.112s

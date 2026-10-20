@@ -1,0 +1,65 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "k06 component FIT: minor losses of the nine fittings, K sum 7.37, in a 6 in pipe",
+ "interface": {
+  "inputs": {
+   "Q": {
+    "assume": [
+     "300",
+     "3000"
+    ],
+    "bands": [
+     "300",
+     "1500",
+     "1530",
+     "3000"
+    ]
+   }
+  },
+  "outputs": [
+   "HLm"
+  ]
+ },
+ "quantities": {
+  "Q": {
+   "role": "given",
+   "value": "1514.1647136",
+   "unit": "L/min",
+   "why": "peak hour flow 400 gpm"
+  },
+  "D": {
+   "role": "given",
+   "value": "6",
+   "unit": "in",
+   "why": "6 in pipe"
+  },
+  "SK": {
+   "role": "given",
+   "value": "7.37",
+   "unit": "",
+   "why": "sum of K (Table 5)"
+  },
+  "g": {
+   "role": "given",
+   "value": "32.2",
+   "unit": "ft*s^-2",
+   "why": "g as in source"
+  },
+  "HLm": {
+   "role": "derived",
+   "unit": "ft"
+  }
+ },
+ "define": {
+  "V": "Q/(pi*D*D/4)"
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "HLm == SK*V*V/(2*g)",
+   "source": "K-value method"
+  }
+ ],
+ "requirements": [],
+ "catalog": {}
+}

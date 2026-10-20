@@ -1,0 +1,383 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL fd6593d",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Tj_c": [
+          "167/2 (~83.5)",
+          "235/2 (~117.5)"
+        ],
+        "Tj_p": [
+          "89",
+          "145"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "verdict": "EARNED",
+  "design": {},
+  "guaranteed": {
+    "Tj_c": [
+      "167/2 (~83.5)",
+      "235/2 (~117.5)"
+    ],
+    "Tj_p": [
+      "89",
+      "145"
+    ]
+  },
+  "guaranteed_unit": {
+    "Tj_c": "C",
+    "Tj_p": "C"
+  },
+  "how": {
+    "Tj_c": "ZTL, exact at the corners",
+    "Tj_p": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "Tj_c",
+      "op": "<=",
+      "value": "125",
+      "why": "control section"
+    },
+    {
+      "quantity": "Tj_p",
+      "op": "<=",
+      "value": "150",
+      "why": "power transistor"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "Tj_c -> [167/2, 235/2] by the system over its parameters, exact at the corners (credit)",
+    "Tj_p -> [89, 145] by the system over its parameters, exact at the corners (credit)"
+  ],
+  "components": {
+    "REG": {
+      "inputs": {
+        "Vin": {
+          "from": "Vin",
+          "arrives": [
+            "13/2",
+            "9/1"
+          ],
+          "assume": [
+            "13/2",
+            "9/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "Vin": [
+              "13/2",
+              "9/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "PD": [
+              "42/5",
+              "123/5"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "PD": [
+          "42/5",
+          "123/5"
+        ]
+      }
+    },
+    "DIE": {
+      "inputs": {
+        "P": {
+          "from": "REG.PD",
+          "arrives": [
+            "42/5",
+            "123/5"
+          ],
+          "assume": [
+            "0/1",
+            "30/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "P": [
+              "5/1",
+              "10/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dTc": [
+              "5/2",
+              "5/1"
+            ],
+            "dTp": [
+              "8/1",
+              "16/1"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "10/1",
+              "15/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dTc": [
+              "5/1",
+              "15/2"
+            ],
+            "dTp": [
+              "16/1",
+              "24/1"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "15/1",
+              "20/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dTc": [
+              "15/2",
+              "10/1"
+            ],
+            "dTp": [
+              "24/1",
+              "32/1"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "20/1",
+              "25/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dTc": [
+              "10/1",
+              "25/2"
+            ],
+            "dTp": [
+              "32/1",
+              "40/1"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "dTc": [
+          "5/2",
+          "25/2"
+        ],
+        "dTp": [
+          "8/1",
+          "40/1"
+        ]
+      }
+    },
+    "HS": {
+      "inputs": {
+        "P": {
+          "from": "REG.PD",
+          "arrives": [
+            "42/5",
+            "123/5"
+          ],
+          "assume": [
+            "0/1",
+            "30/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "P": [
+              "5/1",
+              "10/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "5/1",
+              "10/1"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "10/1",
+              "15/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "10/1",
+              "15/1"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "15/1",
+              "20/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "15/1",
+              "20/1"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "20/1",
+              "25/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "20/1",
+              "25/1"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "dT": [
+          "5/1",
+          "25/1"
+        ]
+      }
+    },
+    "TIM": {
+      "inputs": {
+        "P": {
+          "from": "REG.PD",
+          "arrives": [
+            "42/5",
+            "123/5"
+          ],
+          "assume": [
+            "0/1",
+            "30/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "P": [
+              "5/1",
+              "10/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "1/1",
+              "2/1"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "10/1",
+              "15/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "2/1",
+              "3/1"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "15/1",
+              "20/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "3/1",
+              "4/1"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "20/1",
+              "25/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "4/1",
+              "5/1"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "dT": [
+          "1/1",
+          "5/1"
+        ]
+      }
+    }
+  },
+  "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)",
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

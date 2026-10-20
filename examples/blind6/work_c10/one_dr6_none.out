@@ -1,0 +1,37 @@
+[stand] 1/1 designs, 0 s: 
+[stand] 1/1 designs, 32 s: 
+[stand] 1/1 designs, 68 s: 
+[stand] 1/1 designs, 108 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 1,
+  "notes": [],
+  "combinations_proved_without_mix": 1,
+  "verdict": "REFUTED",
+  "why": "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  "mixes": [
+    {
+      "design": "DRY=dryers(name=DR6, B=6, Tmax=85, price=33); FAN=fans(name=none, qa=0, price=0)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 24 pieces, each failing a requirement at one point of its data — no mix exists"
+    }
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1 throughput >= 0.8 t/h",
+        "R2 damage index <= 0.6",
+        "R3 safe storage >= 360 d"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	2m8.755s
+user	2m0.429s
+sys	0m8.293s

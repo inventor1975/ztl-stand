@@ -1,0 +1,786 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "HG": {
+   "role": "given",
+   "value": "85",
+   "unit": "m",
+   "why": "gross head"
+  },
+  "LU": {
+   "role": "given",
+   "value": "240",
+   "unit": "m"
+  },
+  "LL": {
+   "role": "given",
+   "value": "180",
+   "unit": "m"
+  },
+  "HSU": {
+   "role": "given",
+   "value": "40",
+   "unit": "m",
+   "why": "max static head upper section"
+  },
+  "HSL": {
+   "role": "given",
+   "value": "85",
+   "unit": "m",
+   "why": "max static head lower section"
+  },
+  "SURGE": {
+   "role": "given",
+   "value": "1.3",
+   "unit": "",
+   "why": "surge allowance on pressure head"
+  },
+  "Q0": {
+   "role": "given",
+   "value": "1",
+   "unit": "m^3/s",
+   "why": "unit flow, makes HW powers dimensionless"
+  },
+  "D0": {
+   "role": "given",
+   "value": "1",
+   "unit": "m",
+   "why": "unit diameter"
+  },
+  "ETAG": {
+   "role": "given",
+   "value": "0.93",
+   "unit": "",
+   "why": "drive and generator efficiency"
+  },
+  "G": {
+   "role": "given",
+   "value": "9.81",
+   "unit": "m*s^-2"
+  },
+  "RHO": {
+   "role": "given",
+   "value": "1000",
+   "unit": "kg/m^3"
+  },
+  "HY": {
+   "role": "given",
+   "value": "8760",
+   "unit": "h",
+   "why": "hours per year"
+  },
+  "f": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "common river-flow factor; set per mode"
+  },
+  "FR1": {
+   "role": "given",
+   "value": "0.05",
+   "unit": "",
+   "why": "fraction of the year"
+  },
+  "QR1": {
+   "role": "given",
+   "value": "0.28",
+   "unit": "m^3/s",
+   "why": "river flow, nominal (flow-duration)"
+  },
+  "FR2": {
+   "role": "given",
+   "value": "0.15",
+   "unit": "",
+   "why": "fraction of the year"
+  },
+  "QR2": {
+   "role": "given",
+   "value": "0.20",
+   "unit": "m^3/s",
+   "why": "river flow, nominal (flow-duration)"
+  },
+  "FR3": {
+   "role": "given",
+   "value": "0.25",
+   "unit": "",
+   "why": "fraction of the year"
+  },
+  "QR3": {
+   "role": "given",
+   "value": "0.14",
+   "unit": "m^3/s",
+   "why": "river flow, nominal (flow-duration)"
+  },
+  "FR4": {
+   "role": "given",
+   "value": "0.25",
+   "unit": "",
+   "why": "fraction of the year"
+  },
+  "QR4": {
+   "role": "given",
+   "value": "0.10",
+   "unit": "m^3/s",
+   "why": "river flow, nominal (flow-duration)"
+  },
+  "FR5": {
+   "role": "given",
+   "value": "0.20",
+   "unit": "",
+   "why": "fraction of the year"
+  },
+  "QR5": {
+   "role": "given",
+   "value": "0.07",
+   "unit": "m^3/s",
+   "why": "river flow, nominal (flow-duration)"
+  },
+  "FR6": {
+   "role": "given",
+   "value": "0.10",
+   "unit": "",
+   "why": "fraction of the year"
+  },
+  "QR6": {
+   "role": "given",
+   "value": "0.04",
+   "unit": "m^3/s",
+   "why": "river flow, nominal (flow-duration)"
+  },
+  "QF": {
+   "role": "derived",
+   "unit": "m^3/s",
+   "search": [
+    "0.005",
+    "0.45"
+   ],
+   "why": "turbine full flow: QF = K sqrt(Hnet(QF)), written squared (QF*QF = K2*Hnet)"
+  },
+  "Q1": {
+   "role": "derived",
+   "unit": "m^3/s"
+  },
+  "PH1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "ET1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "HN1": {
+   "role": "derived",
+   "unit": "m"
+  },
+  "P1": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "Q2": {
+   "role": "derived",
+   "unit": "m^3/s"
+  },
+  "PH2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "ET2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "HN2": {
+   "role": "derived",
+   "unit": "m"
+  },
+  "P2": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "Q3": {
+   "role": "derived",
+   "unit": "m^3/s"
+  },
+  "PH3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "ET3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "HN3": {
+   "role": "derived",
+   "unit": "m"
+  },
+  "P3": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "Q4": {
+   "role": "derived",
+   "unit": "m^3/s"
+  },
+  "PH4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "ET4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "HN4": {
+   "role": "derived",
+   "unit": "m"
+  },
+  "P4": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "Q5": {
+   "role": "derived",
+   "unit": "m^3/s"
+  },
+  "PH5": {
+   "role": "derived",
+   "unit": ""
+  },
+  "ET5": {
+   "role": "derived",
+   "unit": ""
+  },
+  "HN5": {
+   "role": "derived",
+   "unit": "m"
+  },
+  "P5": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "Q6": {
+   "role": "derived",
+   "unit": "m^3/s"
+  },
+  "PH6": {
+   "role": "derived",
+   "unit": ""
+  },
+  "ET6": {
+   "role": "derived",
+   "unit": ""
+  },
+  "HN6": {
+   "role": "derived",
+   "unit": "m"
+  },
+  "P6": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "E": {
+   "role": "derived",
+   "unit": "MWh"
+  },
+  "PPK": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "VU": {
+   "role": "derived",
+   "unit": "m/s"
+  },
+  "VL": {
+   "role": "derived",
+   "unit": "m/s"
+  },
+  "MU": {
+   "role": "derived",
+   "unit": "m"
+  },
+  "ML": {
+   "role": "derived",
+   "unit": "m"
+  }
+ },
+ "slots": {
+  "UP": {
+   "from": [
+    "pipes"
+   ]
+  },
+  "LO": {
+   "from": [
+    "pipes"
+   ]
+  },
+  "TB": {
+   "from": [
+    "turbines"
+   ]
+  }
+ },
+ "define": {
+  "AU": "pi*UP.D*UP.D/4",
+  "AL": "pi*LO.D*LO.D/4",
+  "KU": "10.67*LU/(pow(UP.C,1.852)*pow(UP.D/D0,4.87))",
+  "KL": "10.67*LL/(pow(LO.C,1.852)*pow(LO.D/D0,4.87))",
+  "SL1": "(TB.e03-TB.e02)/0.1",
+  "SL2": "(TB.e04-TB.e03)/0.1",
+  "SL3": "(TB.e06-TB.e04)/0.2",
+  "SL4": "(TB.e08-TB.e06)/0.2",
+  "SL5": "(TB.e10-TB.e08)/0.2"
+ },
+ "laws": [
+  {
+   "zfl": "QF*QF == TB.K2*(HG - KU*pow(QF/Q0,1.852) - KL*pow(QF/Q0,1.852))",
+   "source": "turbine full flow QF=K sqrt(Hnet(QF)) squared, Hnet = Hg - HW loss(upper) - HW loss(lower)"
+  },
+  {
+   "zfl": "Q1 == min(f*QR1, QF)",
+   "source": "flow used = min(river flow, turbine full flow)"
+  },
+  {
+   "zfl": "PH1 == Q1/QF",
+   "source": "flow fraction"
+  },
+  {
+   "zfl": "HN1 == HG - KU*pow(Q1/Q0,1.852) - KL*pow(Q1/Q0,1.852)",
+   "source": "net head at the flow used (Hazen-Williams, both sections)"
+  },
+  {
+   "zfl": "ET1 == if(PH1 < TB.phimin, 0, if(PH1 < 0.3, TB.e02 + SL1*(PH1-0.2), if(PH1 < 0.4, TB.e03 + SL2*(PH1-0.3), if(PH1 < 0.6, TB.e04 + SL3*(PH1-0.4), if(PH1 < 0.8, TB.e06 + SL4*(PH1-0.6), TB.e08 + SL5*(PH1-0.8))))))",
+   "source": "turbine efficiency curve, linear between listed fractions, zero below phimin (shut down)"
+  },
+  {
+   "zfl": "P1 == ET1*ETAG*RHO*G*Q1*HN1",
+   "source": "electric power"
+  },
+  {
+   "zfl": "Q2 == min(f*QR2, QF)",
+   "source": "flow used = min(river flow, turbine full flow)"
+  },
+  {
+   "zfl": "PH2 == Q2/QF",
+   "source": "flow fraction"
+  },
+  {
+   "zfl": "HN2 == HG - KU*pow(Q2/Q0,1.852) - KL*pow(Q2/Q0,1.852)",
+   "source": "net head at the flow used (Hazen-Williams, both sections)"
+  },
+  {
+   "zfl": "ET2 == if(PH2 < TB.phimin, 0, if(PH2 < 0.3, TB.e02 + SL1*(PH2-0.2), if(PH2 < 0.4, TB.e03 + SL2*(PH2-0.3), if(PH2 < 0.6, TB.e04 + SL3*(PH2-0.4), if(PH2 < 0.8, TB.e06 + SL4*(PH2-0.6), TB.e08 + SL5*(PH2-0.8))))))",
+   "source": "turbine efficiency curve, linear between listed fractions, zero below phimin (shut down)"
+  },
+  {
+   "zfl": "P2 == ET2*ETAG*RHO*G*Q2*HN2",
+   "source": "electric power"
+  },
+  {
+   "zfl": "Q3 == min(f*QR3, QF)",
+   "source": "flow used = min(river flow, turbine full flow)"
+  },
+  {
+   "zfl": "PH3 == Q3/QF",
+   "source": "flow fraction"
+  },
+  {
+   "zfl": "HN3 == HG - KU*pow(Q3/Q0,1.852) - KL*pow(Q3/Q0,1.852)",
+   "source": "net head at the flow used (Hazen-Williams, both sections)"
+  },
+  {
+   "zfl": "ET3 == if(PH3 < TB.phimin, 0, if(PH3 < 0.3, TB.e02 + SL1*(PH3-0.2), if(PH3 < 0.4, TB.e03 + SL2*(PH3-0.3), if(PH3 < 0.6, TB.e04 + SL3*(PH3-0.4), if(PH3 < 0.8, TB.e06 + SL4*(PH3-0.6), TB.e08 + SL5*(PH3-0.8))))))",
+   "source": "turbine efficiency curve, linear between listed fractions, zero below phimin (shut down)"
+  },
+  {
+   "zfl": "P3 == ET3*ETAG*RHO*G*Q3*HN3",
+   "source": "electric power"
+  },
+  {
+   "zfl": "Q4 == min(f*QR4, QF)",
+   "source": "flow used = min(river flow, turbine full flow)"
+  },
+  {
+   "zfl": "PH4 == Q4/QF",
+   "source": "flow fraction"
+  },
+  {
+   "zfl": "HN4 == HG - KU*pow(Q4/Q0,1.852) - KL*pow(Q4/Q0,1.852)",
+   "source": "net head at the flow used (Hazen-Williams, both sections)"
+  },
+  {
+   "zfl": "ET4 == if(PH4 < TB.phimin, 0, if(PH4 < 0.3, TB.e02 + SL1*(PH4-0.2), if(PH4 < 0.4, TB.e03 + SL2*(PH4-0.3), if(PH4 < 0.6, TB.e04 + SL3*(PH4-0.4), if(PH4 < 0.8, TB.e06 + SL4*(PH4-0.6), TB.e08 + SL5*(PH4-0.8))))))",
+   "source": "turbine efficiency curve, linear between listed fractions, zero below phimin (shut down)"
+  },
+  {
+   "zfl": "P4 == ET4*ETAG*RHO*G*Q4*HN4",
+   "source": "electric power"
+  },
+  {
+   "zfl": "Q5 == min(f*QR5, QF)",
+   "source": "flow used = min(river flow, turbine full flow)"
+  },
+  {
+   "zfl": "PH5 == Q5/QF",
+   "source": "flow fraction"
+  },
+  {
+   "zfl": "HN5 == HG - KU*pow(Q5/Q0,1.852) - KL*pow(Q5/Q0,1.852)",
+   "source": "net head at the flow used (Hazen-Williams, both sections)"
+  },
+  {
+   "zfl": "ET5 == if(PH5 < TB.phimin, 0, if(PH5 < 0.3, TB.e02 + SL1*(PH5-0.2), if(PH5 < 0.4, TB.e03 + SL2*(PH5-0.3), if(PH5 < 0.6, TB.e04 + SL3*(PH5-0.4), if(PH5 < 0.8, TB.e06 + SL4*(PH5-0.6), TB.e08 + SL5*(PH5-0.8))))))",
+   "source": "turbine efficiency curve, linear between listed fractions, zero below phimin (shut down)"
+  },
+  {
+   "zfl": "P5 == ET5*ETAG*RHO*G*Q5*HN5",
+   "source": "electric power"
+  },
+  {
+   "zfl": "Q6 == min(f*QR6, QF)",
+   "source": "flow used = min(river flow, turbine full flow)"
+  },
+  {
+   "zfl": "PH6 == Q6/QF",
+   "source": "flow fraction"
+  },
+  {
+   "zfl": "HN6 == HG - KU*pow(Q6/Q0,1.852) - KL*pow(Q6/Q0,1.852)",
+   "source": "net head at the flow used (Hazen-Williams, both sections)"
+  },
+  {
+   "zfl": "ET6 == if(PH6 < TB.phimin, 0, if(PH6 < 0.3, TB.e02 + SL1*(PH6-0.2), if(PH6 < 0.4, TB.e03 + SL2*(PH6-0.3), if(PH6 < 0.6, TB.e04 + SL3*(PH6-0.4), if(PH6 < 0.8, TB.e06 + SL4*(PH6-0.6), TB.e08 + SL5*(PH6-0.8))))))",
+   "source": "turbine efficiency curve, linear between listed fractions, zero below phimin (shut down)"
+  },
+  {
+   "zfl": "P6 == ET6*ETAG*RHO*G*Q6*HN6",
+   "source": "electric power"
+  },
+  {
+   "zfl": "E == FR1*HY*P1 + FR2*HY*P2 + FR3*HY*P3 + FR4*HY*P4 + FR5*HY*P5 + FR6*HY*P6",
+   "source": "annual energy = sum fraction x 8760 h x P"
+  },
+  {
+   "zfl": "PPK == max(max(max(P1,P2),max(P3,P4)),max(P5,P6))",
+   "source": "peak electric power over the flow-duration points"
+  },
+  {
+   "zfl": "VU == QF/AU",
+   "source": "velocity at full turbine flow, upper section"
+  },
+  {
+   "zfl": "VL == QF/AL",
+   "source": "velocity at full turbine flow, lower section"
+  },
+  {
+   "zfl": "MU == UP.hmax - SURGE*HSU",
+   "source": "pressure margin upper: allowable head - 1.3 x max static head"
+  },
+  {
+   "zfl": "ML == LO.hmax - SURGE*HSL",
+   "source": "pressure margin lower"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "MU",
+   "op": ">=",
+   "value": "0",
+   "why": "R4 upper pipe allowable head >= 1.3 x 40 m"
+  },
+  {
+   "quantity": "ML",
+   "op": ">=",
+   "value": "0",
+   "why": "R4 lower pipe allowable head >= 1.3 x 85 m"
+  }
+ ],
+ "modes": {
+  "low river 0.85": {
+   "quantities": {
+    "f": {
+     "value": "0.85"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "E",
+     "op": ">=",
+     "value": "520",
+     "why": "R1 annual energy >= 520 MWh at factor 0.85"
+    }
+   ]
+  },
+  "high river 1.15": {
+   "quantities": {
+    "f": {
+     "value": "1.15"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "PPK",
+     "op": "<=",
+     "value": "125",
+     "why": "R2 grid connection limit 125 kW at factor 1.15"
+    },
+    {
+     "quantity": "VU",
+     "op": "<=",
+     "value": "3.5",
+     "why": "R3 velocity upper section at full turbine flow"
+    },
+    {
+     "quantity": "VL",
+     "op": "<=",
+     "value": "3.5",
+     "why": "R3 velocity lower section at full turbine flow"
+    }
+   ]
+  }
+ },
+ "objective": {
+  "minimize": "UP.price*LU + LO.price*LL + TB.price",
+  "why": "capital cost: pipe price x length for both sections + turbine"
+ },
+ "catalog": {
+  "pipes": {
+   "ground": "manufacturer pipe list",
+   "items": [
+    {
+     "D": {
+      "value": "0.176"
+     },
+     "C": "140",
+     "hmax": "100",
+     "price": "18",
+     "grade": "H200-10"
+    },
+    {
+     "D": {
+      "value": "0.198"
+     },
+     "C": "140",
+     "hmax": "100",
+     "price": "23",
+     "grade": "H225-10"
+    },
+    {
+     "D": {
+      "value": "0.220"
+     },
+     "C": "140",
+     "hmax": "100",
+     "price": "29",
+     "grade": "H250-10"
+    },
+    {
+     "D": {
+      "value": "0.277"
+     },
+     "C": "140",
+     "hmax": "100",
+     "price": "45",
+     "grade": "H315-10"
+    },
+    {
+     "D": {
+      "value": "0.312"
+     },
+     "C": "140",
+     "hmax": "100",
+     "price": "57",
+     "grade": "H355-10"
+    },
+    {
+     "D": {
+      "value": "0.163"
+     },
+     "C": "140",
+     "hmax": "160",
+     "price": "24",
+     "grade": "H200-16"
+    },
+    {
+     "D": {
+      "value": "0.184"
+     },
+     "C": "140",
+     "hmax": "160",
+     "price": "30",
+     "grade": "H225-16"
+    },
+    {
+     "D": {
+      "value": "0.204"
+     },
+     "C": "140",
+     "hmax": "160",
+     "price": "37",
+     "grade": "H250-16"
+    },
+    {
+     "D": {
+      "value": "0.257"
+     },
+     "C": "140",
+     "hmax": "160",
+     "price": "58",
+     "grade": "H315-16"
+    },
+    {
+     "D": {
+      "value": "0.290"
+     },
+     "C": "140",
+     "hmax": "160",
+     "price": "73",
+     "grade": "H355-16"
+    },
+    {
+     "D": {
+      "value": "0.327"
+     },
+     "C": "140",
+     "hmax": "160",
+     "price": "92",
+     "grade": "H400-16"
+    },
+    {
+     "D": {
+      "value": "0.250"
+     },
+     "C": "120",
+     "hmax": "300",
+     "price": "70",
+     "grade": "S250"
+    },
+    {
+     "D": {
+      "value": "0.300"
+     },
+     "C": "120",
+     "hmax": "300",
+     "price": "95",
+     "grade": "S300"
+    },
+    {
+     "D": {
+      "value": "0.350"
+     },
+     "C": "120",
+     "hmax": "300",
+     "price": "128",
+     "grade": "S350"
+    }
+   ],
+   "fields": {
+    "D": {
+     "unit": "m"
+    },
+    "C": {
+     "unit": ""
+    },
+    "hmax": {
+     "unit": "m"
+    },
+    "price": {
+     "unit": "EUR/m"
+    }
+   }
+  },
+  "turbines": {
+   "ground": "turbine data sheet",
+   "items": [
+    {
+     "K2": "81/160000",
+     "phimin": "0.2",
+     "price": "58000",
+     "grade": "T1",
+     "e02": "7/10",
+     "e03": "39/50",
+     "e04": "41/50",
+     "e06": "17/20",
+     "e08": "43/50",
+     "e10": "17/20"
+    },
+    {
+     "K2": "9/10000",
+     "phimin": "0.2",
+     "price": "74000",
+     "grade": "T2",
+     "e02": "33/50",
+     "e03": "3/4",
+     "e04": "4/5",
+     "e06": "21/25",
+     "e08": "43/50",
+     "e10": "43/50"
+    },
+    {
+     "K2": "9/10000",
+     "phimin": "0.2",
+     "price": "42000",
+     "grade": "T3",
+     "e02": "11/20",
+     "e03": "13/20",
+     "e04": "18/25",
+     "e06": "39/50",
+     "e08": "4/5",
+     "e10": "79/100"
+    },
+    {
+     "K2": "441/250000",
+     "phimin": "0.2",
+     "price": "56000",
+     "grade": "T4",
+     "e02": "11/20",
+     "e03": "13/20",
+     "e04": "18/25",
+     "e06": "39/50",
+     "e08": "4/5",
+     "e10": "79/100"
+    },
+    {
+     "K2": "81/62500",
+     "phimin": "0.4",
+     "price": "96000",
+     "grade": "T5",
+     "e02": "31/50",
+     "e03": "31/50",
+     "e04": "31/50",
+     "e06": "41/50",
+     "e08": "89/100",
+     "e10": "9/10"
+    }
+   ],
+   "fields": {
+    "K2": {
+     "unit": "m^5/s^2"
+    },
+    "phimin": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "EUR"
+    },
+    "e02": {
+     "unit": ""
+    },
+    "e03": {
+     "unit": ""
+    },
+    "e04": {
+     "unit": ""
+    },
+    "e06": {
+     "unit": ""
+    },
+    "e08": {
+     "unit": ""
+    },
+    "e10": {
+     "unit": ""
+    }
+   }
+  }
+ },
+ "report": "all"
+}

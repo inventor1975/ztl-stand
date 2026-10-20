@@ -1,0 +1,620 @@
+{
+ "stand": "universal-stand/1",
+ "report": "all",
+ "quantities": {
+  "f1": {
+   "role": "given",
+   "unit": "",
+   "why": "time fraction of cycle Idle",
+   "value": "0.25",
+   "ground": "problem statement"
+  },
+  "n1": {
+   "role": "given",
+   "unit": "1/min",
+   "why": "speed of cycle Idle",
+   "value": "1450",
+   "ground": "problem statement"
+  },
+  "Fr1": {
+   "role": "given",
+   "unit": "kN",
+   "why": "radial load of cycle Idle",
+   "range": [
+    "4",
+    "5"
+   ]
+  },
+  "T1": {
+   "role": "given",
+   "unit": "C",
+   "why": "bearing temperature of cycle Idle",
+   "range": [
+    "58",
+    "66"
+   ]
+  },
+  "f2": {
+   "role": "given",
+   "unit": "",
+   "why": "time fraction of cycle Normal",
+   "value": "0.45",
+   "ground": "problem statement"
+  },
+  "n2": {
+   "role": "given",
+   "unit": "1/min",
+   "why": "speed of cycle Normal",
+   "value": "1450",
+   "ground": "problem statement"
+  },
+  "Fr2": {
+   "role": "given",
+   "unit": "kN",
+   "why": "radial load of cycle Normal",
+   "range": [
+    "11",
+    "13"
+   ]
+  },
+  "T2": {
+   "role": "given",
+   "unit": "C",
+   "why": "bearing temperature of cycle Normal",
+   "range": [
+    "66",
+    "74"
+   ]
+  },
+  "f3": {
+   "role": "given",
+   "unit": "",
+   "why": "time fraction of cycle Heavy",
+   "value": "0.25",
+   "ground": "problem statement"
+  },
+  "n3": {
+   "role": "given",
+   "unit": "1/min",
+   "why": "speed of cycle Heavy",
+   "value": "900",
+   "ground": "problem statement"
+  },
+  "Fr3": {
+   "role": "given",
+   "unit": "kN",
+   "why": "radial load of cycle Heavy",
+   "range": [
+    "20",
+    "23.1"
+   ]
+  },
+  "T3": {
+   "role": "given",
+   "unit": "C",
+   "why": "bearing temperature of cycle Heavy",
+   "range": [
+    "70",
+    "80"
+   ]
+  },
+  "f4": {
+   "role": "given",
+   "unit": "",
+   "why": "time fraction of cycle Shock start",
+   "value": "0.05",
+   "ground": "problem statement"
+  },
+  "n4": {
+   "role": "given",
+   "unit": "1/min",
+   "why": "speed of cycle Shock start",
+   "value": "300",
+   "ground": "problem statement"
+  },
+  "Fr4": {
+   "role": "given",
+   "unit": "kN",
+   "why": "radial load of cycle Shock start",
+   "range": [
+    "36",
+    "40"
+   ]
+  },
+  "T4": {
+   "role": "given",
+   "unit": "C",
+   "why": "bearing temperature of cycle Shock start",
+   "range": [
+    "60",
+    "70"
+   ]
+  },
+  "D0": {
+   "role": "given",
+   "unit": "mm",
+   "why": "shaft diameter d",
+   "value": "60",
+   "ground": "problem statement"
+  },
+  "MM1": {
+   "role": "given",
+   "unit": "mm",
+   "why": "one mm (to make a ratio dimensionless)",
+   "value": "1"
+  },
+  "RPM": {
+   "role": "given",
+   "unit": "1/min",
+   "why": "one rpm (dimensionless ratio)",
+   "value": "1"
+  },
+  "NLIM": {
+   "role": "given",
+   "unit": "1/min",
+   "why": "speed split of the nu1 formula",
+   "value": "1000",
+   "ground": "problem statement"
+  },
+  "NUU": {
+   "role": "given",
+   "unit": "mm^2/s",
+   "why": "one mm2/s",
+   "value": "1"
+  },
+  "MR": {
+   "role": "given",
+   "unit": "",
+   "why": "revolutions per million (L is in million revolutions)",
+   "value": "1000000"
+  },
+  "KT": {
+   "role": "given",
+   "unit": "1/C",
+   "why": "viscosity-temperature coefficient 0.040",
+   "value": "0.04",
+   "ground": "problem statement"
+  },
+  "T0": {
+   "role": "given",
+   "unit": "C",
+   "why": "reference temperature of nu40",
+   "value": "40",
+   "ground": "problem statement"
+  },
+  "FAR": {
+   "role": "given",
+   "unit": "",
+   "why": "Fa/Fr",
+   "value": "0.30",
+   "ground": "problem statement"
+  },
+  "XE": {
+   "role": "given",
+   "unit": "",
+   "why": "equivalent-load axial factor 0.45",
+   "value": "0.45",
+   "ground": "problem statement"
+  },
+  "XS": {
+   "role": "given",
+   "unit": "",
+   "why": "static axial factor 0.6",
+   "value": "0.6",
+   "ground": "problem statement"
+  },
+  "EXPL": {
+   "role": "given",
+   "unit": "",
+   "why": "life exponent 10/3 (documentation only)",
+   "value": "10/3"
+  },
+  "Lreq": {
+   "role": "given",
+   "unit": "h",
+   "why": "required service life 8 y x 7000 h",
+   "value": "56000",
+   "ground": "problem statement"
+  },
+  "SFmin": {
+   "role": "given",
+   "unit": "",
+   "why": "required static safety C0/P0",
+   "value": "2.5",
+   "ground": "problem statement"
+  },
+  "ODmax": {
+   "role": "given",
+   "unit": "mm",
+   "why": "housing bore limit",
+   "value": "150",
+   "ground": "problem statement"
+  },
+  "P1": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "L1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "kap1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "aL1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "P2": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "L2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "kap2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "aL2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "P3": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "L3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "kap3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "aL3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "P4": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "L4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "kap4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "aL4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "d": {
+   "role": "derived",
+   "unit": "1/h"
+  },
+  "Lh": {
+   "role": "derived",
+   "unit": "h"
+  },
+  "Ps": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "m0": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "ODq": {
+   "role": "derived",
+   "unit": "mm"
+  }
+ },
+ "slots": {
+  "B": {
+   "from": [
+    "bearings"
+   ]
+  },
+  "O": {
+   "from": [
+    "oils"
+   ]
+  },
+  "K": {
+   "from": [
+    "kits"
+   ]
+  }
+ },
+ "define": {
+  "DM": "(D0 + B.OD)/2",
+  "NU1_1": "NUU*if(n1 >= NLIM, 4500*pow(n1/RPM, -0.5), 45000*pow(n1/RPM, -0.83))*pow(DM/MM1, -0.5)",
+  "NU1_2": "NUU*if(n2 >= NLIM, 4500*pow(n2/RPM, -0.5), 45000*pow(n2/RPM, -0.83))*pow(DM/MM1, -0.5)",
+  "NU1_3": "NUU*if(n3 >= NLIM, 4500*pow(n3/RPM, -0.5), 45000*pow(n3/RPM, -0.83))*pow(DM/MM1, -0.5)",
+  "NU1_4": "NUU*if(n4 >= NLIM, 4500*pow(n4/RPM, -0.5), 45000*pow(n4/RPM, -0.83))*pow(DM/MM1, -0.5)"
+ },
+ "laws": [
+  {
+   "zfl": "P1 == Fr1 + XE*FAR*Fr1",
+   "source": "equivalent load P = Fr + 0.45 Fa, Fa = 0.30 Fr"
+  },
+  {
+   "zfl": "kap1 == O.nu40*exp(0 - KT*(T1 - T0))/NU1_1",
+   "source": "nu(T)=nu40 exp(-0.040(T-40)); kappa = nu/nu1; nu1 per speed and mean diameter"
+  },
+  {
+   "zfl": "aL1 == table(kap1, 0.4, 0.4, 0.7, 0.75, 1, 1, 2, 1.7, 4, 2.3)",
+   "source": "a_L(kappa) piecewise linear, constant beyond ends"
+  },
+  {
+   "zfl": "L1 == aL1*K.fc*pow(B.C/P1, EXPL)",
+   "source": "modified life L_i = a_L f_c (C/P)^(10/3), million rev"
+  },
+  {
+   "zfl": "P2 == Fr2 + XE*FAR*Fr2",
+   "source": "equivalent load P = Fr + 0.45 Fa, Fa = 0.30 Fr"
+  },
+  {
+   "zfl": "kap2 == O.nu40*exp(0 - KT*(T2 - T0))/NU1_2",
+   "source": "nu(T)=nu40 exp(-0.040(T-40)); kappa = nu/nu1; nu1 per speed and mean diameter"
+  },
+  {
+   "zfl": "aL2 == table(kap2, 0.4, 0.4, 0.7, 0.75, 1, 1, 2, 1.7, 4, 2.3)",
+   "source": "a_L(kappa) piecewise linear, constant beyond ends"
+  },
+  {
+   "zfl": "L2 == aL2*K.fc*pow(B.C/P2, EXPL)",
+   "source": "modified life L_i = a_L f_c (C/P)^(10/3), million rev"
+  },
+  {
+   "zfl": "P3 == Fr3 + XE*FAR*Fr3",
+   "source": "equivalent load P = Fr + 0.45 Fa, Fa = 0.30 Fr"
+  },
+  {
+   "zfl": "kap3 == O.nu40*exp(0 - KT*(T3 - T0))/NU1_3",
+   "source": "nu(T)=nu40 exp(-0.040(T-40)); kappa = nu/nu1; nu1 per speed and mean diameter"
+  },
+  {
+   "zfl": "aL3 == table(kap3, 0.4, 0.4, 0.7, 0.75, 1, 1, 2, 1.7, 4, 2.3)",
+   "source": "a_L(kappa) piecewise linear, constant beyond ends"
+  },
+  {
+   "zfl": "L3 == aL3*K.fc*pow(B.C/P3, EXPL)",
+   "source": "modified life L_i = a_L f_c (C/P)^(10/3), million rev"
+  },
+  {
+   "zfl": "P4 == Fr4 + XE*FAR*Fr4",
+   "source": "equivalent load P = Fr + 0.45 Fa, Fa = 0.30 Fr"
+  },
+  {
+   "zfl": "kap4 == O.nu40*exp(0 - KT*(T4 - T0))/NU1_4",
+   "source": "nu(T)=nu40 exp(-0.040(T-40)); kappa = nu/nu1; nu1 per speed and mean diameter"
+  },
+  {
+   "zfl": "aL4 == table(kap4, 0.4, 0.4, 0.7, 0.75, 1, 1, 2, 1.7, 4, 2.3)",
+   "source": "a_L(kappa) piecewise linear, constant beyond ends"
+  },
+  {
+   "zfl": "L4 == aL4*K.fc*pow(B.C/P4, EXPL)",
+   "source": "modified life L_i = a_L f_c (C/P)^(10/3), million rev"
+  },
+  {
+   "zfl": "d == f1*n1/(MR*L1) + f2*n2/(MR*L2) + f3*n3/(MR*L3) + f4*n4/(MR*L4)",
+   "source": "Miner damage per operating hour, d = sum f_i 60 n_i/(1e6 L_i)"
+  },
+  {
+   "zfl": "Lh == 1/d",
+   "source": "service life in hours = 1/d"
+  },
+  {
+   "zfl": "Ps == Fr4 + XS*FAR*Fr4",
+   "source": "static P0 = Fr + 0.6 Fa at the shock cycle, largest Fr"
+  },
+  {
+   "zfl": "m0 == B.C0 - SFmin*Ps",
+   "source": "C0/P0 >= 2.5 written as C0 - 2.5 P0 >= 0"
+  },
+  {
+   "zfl": "ODq == B.OD",
+   "source": "housing bore limit on bearing OD"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Lh",
+   "op": ">=",
+   "value": "Lreq",
+   "why": "R1 service life 1/d >= 56000 h for all loads and temperatures"
+  },
+  {
+   "quantity": "m0",
+   "op": ">=",
+   "value": "0",
+   "why": "R2 static safety C0/P0 >= 2.5 at the shock cycle, worst Fr"
+  },
+  {
+   "quantity": "ODq",
+   "op": "<=",
+   "value": "ODmax",
+   "why": "R3 OD <= 150 mm"
+  }
+ ],
+ "objective": {
+  "minimize": "B.price + O.price + K.price",
+  "why": "cheapest bearing + oil + kit"
+ },
+ "catalog": {
+  "bearings": {
+   "items": [
+    {
+     "name": "R-60A",
+     "C": {
+      "value": "95"
+     },
+     "C0": {
+      "value": "100"
+     },
+     "OD": {
+      "value": "110"
+     },
+     "price": "0.38"
+    },
+    {
+     "name": "R-60B",
+     "C": {
+      "value": "118"
+     },
+     "C0": {
+      "value": "128"
+     },
+     "OD": {
+      "value": "110"
+     },
+     "price": "0.52"
+    },
+    {
+     "name": "R-60C",
+     "C": {
+      "value": "135"
+     },
+     "C0": {
+      "value": "150"
+     },
+     "OD": {
+      "value": "130"
+     },
+     "price": "0.61"
+    },
+    {
+     "name": "R-60D",
+     "C": {
+      "value": "160"
+     },
+     "C0": {
+      "value": "180"
+     },
+     "OD": {
+      "value": "130"
+     },
+     "price": "0.80"
+    },
+    {
+     "name": "R-60E",
+     "C": {
+      "value": "190"
+     },
+     "C0": {
+      "value": "215"
+     },
+     "OD": {
+      "value": "150"
+     },
+     "price": "1.05"
+    },
+    {
+     "name": "R-60F",
+     "C": {
+      "value": "235"
+     },
+     "C0": {
+      "value": "270"
+     },
+     "OD": {
+      "value": "150"
+     },
+     "price": "1.45"
+    },
+    {
+     "name": "R-60G",
+     "C": {
+      "value": "290"
+     },
+     "C0": {
+      "value": "345"
+     },
+     "OD": {
+      "value": "180"
+     },
+     "price": "2.10"
+    }
+   ],
+   "fields": {
+    "C": {
+     "unit": "kN"
+    },
+    "C0": {
+     "unit": "kN"
+    },
+    "OD": {
+     "unit": "mm"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   },
+   "ground": "problem statement"
+  },
+  "oils": {
+   "items": [
+    {
+     "name": "VG68",
+     "nu40": "68",
+     "price": "0.20"
+    },
+    {
+     "name": "VG150",
+     "nu40": "150",
+     "price": "0.25"
+    },
+    {
+     "name": "VG320",
+     "nu40": "320",
+     "price": "0.35"
+    },
+    {
+     "name": "VG680",
+     "nu40": "680",
+     "price": "0.50"
+    }
+   ],
+   "fields": {
+    "nu40": {
+     "unit": "mm^2/s"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   },
+   "ground": "problem statement"
+  },
+  "kits": {
+   "items": [
+    {
+     "name": "none",
+     "fc": "0.6",
+     "price": "0"
+    },
+    {
+     "name": "filter-and-seal kit",
+     "fc": "1",
+     "price": "0.9"
+    }
+   ],
+   "fields": {
+    "fc": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   },
+   "ground": "problem statement"
+  }
+ }
+}

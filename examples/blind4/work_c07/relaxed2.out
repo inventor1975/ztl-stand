@@ -1,0 +1,918 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "verdict": "EARNED",
+  "modes": [
+    "wide",
+    "control"
+  ],
+  "designs_tried": 97,
+  "undecided": 0,
+  "design": {
+    "NTC": {
+      "catalog": "ntc",
+      "R25": {
+        "nominal": "10000",
+        "tolerance": "0"
+      },
+      "tR": {
+        "nominal": "1/500 (~0.002)",
+        "tolerance": "0"
+      },
+      "B": {
+        "nominal": "3977",
+        "tolerance": "0"
+      },
+      "tB": {
+        "nominal": "3/1000 (~0.003)",
+        "tolerance": "0"
+      },
+      "dl": {
+        "nominal": "2",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "9/5 (~1.8)",
+        "tolerance": "0"
+      },
+      "name": "N4"
+    },
+    "ADC": {
+      "catalog": "adc",
+      "lsb": {
+        "nominal": "1/4096 (~0.000244141)",
+        "tolerance": "0"
+      },
+      "tue": {
+        "nominal": "4",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "1/2 (~0.5)",
+        "tolerance": "0"
+      },
+      "name": "A12"
+    },
+    "RP": {
+      "catalog": "rp_0.1",
+      "R": {
+        "nominal": "10000",
+        "tolerance": "0"
+      },
+      "t": {
+        "nominal": "1/1000 (~0.001)",
+        "tolerance": "0"
+      },
+      "cls": {
+        "nominal": "1/10 (~0.1)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "2/25 (~0.08)",
+        "tolerance": "0"
+      }
+    },
+    "RPAR": {
+      "catalog": "none_0.1",
+      "R": {
+        "nominal": "1000000000000",
+        "tolerance": "0"
+      },
+      "t": {
+        "nominal": "1/1000 (~0.001)",
+        "tolerance": "0"
+      },
+      "cls": {
+        "nominal": "1/10 (~0.1)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    }
+  },
+  "per_mode": {
+    "wide": {
+      "guaranteed": {
+        "Etot": [
+          "~-0.0448471663772 (an exact fraction of 252 digits)",
+          "1"
+        ],
+        "xn": [
+          "3/100 (~0.03)",
+          "97/100 (~0.97)"
+        ]
+      },
+      "how": {
+        "Etot": "ZTL, certificate checked exactly (7 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic",
+        "xn": "ZTL, certificate checked exactly (21 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic"
+      }
+    },
+    "control": {
+      "guaranteed": {
+        "Etot": [
+          "~0.0525860137395 (an exact fraction of 244 digits)",
+          "2/5 (~0.4)"
+        ]
+      },
+      "how": {
+        "Etot": "ZTL, certificate checked exactly (27 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic"
+      }
+    }
+  },
+  "objective": {
+    "minimize": "NTC.price + ADC.price + RP.price + RPAR.price",
+    "value": "119/50 (~2.38)",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode",
+    "ties": {
+      "same_objective": 71,
+      "first": [
+        "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=1000, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+        "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=1100, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+        "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=1200, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)"
+      ],
+      "note": "these cost the same; they were not all judged — \"report\": \"all\" shows which pass"
+    }
+  },
+  "excluded_by_where": 144,
+  "designs": [
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=1000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.558487215044 (an exact fraction of 612 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=1100, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.524789560827 (an exact fraction of 616 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=1200, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.495825799629 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=1300, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.470526992315 (an exact fraction of 616 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=1500, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.428074721618 (an exact fraction of 611 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=1600, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.409941315037 (an exact fraction of 612 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=1800, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.378224211872 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=2000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.295786925904 (an exact fraction of 611 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=2200, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.20488930103 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=2400, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.129454059099 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=2700, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.0376254153308 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=3000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R2: node ratio in [0.03,0.97]",
+      "by": "~0.00275077066181 (an exact fraction of 137 digits)",
+      "unit": ""
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=3300, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R2: node ratio in [0.03,0.97]",
+      "by": "~0.000107303023535 (an exact fraction of 138 digits)",
+      "unit": ""
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=3600, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.215277704837 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=3900, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.198187056348 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=4300, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.17771451684 (an exact fraction of 616 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=4700, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.159426625581 (an exact fraction of 615 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=5100, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.142950145892 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=5600, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.124481142319 (an exact fraction of 612 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=6200, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.104907793836 (an exact fraction of 616 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=6800, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0876693929752 (an exact fraction of 615 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=7500, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.069993286622 (an exact fraction of 611 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=8200, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0544993747486 (an exact fraction of 616 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=9100, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0372221841988 (an exact fraction of 616 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=10000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0224115616402 (an exact fraction of 609 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=11000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.00831227818862 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=12000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0114136634206 (an exact fraction of 616 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=13000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.00312746375371 (an exact fraction of 621 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=15000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0443194774022 (an exact fraction of 624 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=16000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0412486219182 (an exact fraction of 618 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=18000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0381544882538 (an exact fraction of 625 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=20000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0380940882733 (an exact fraction of 622 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=22000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0402145703418 (an exact fraction of 624 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=24000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0439442235927 (an exact fraction of 624 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=27000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0517242947138 (an exact fraction of 622 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=30000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0613741978059 (an exact fraction of 624 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=33000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0723385716025 (an exact fraction of 623 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=36000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0842556218765 (an exact fraction of 624 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=39000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0968813399586 (an exact fraction of 625 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=43000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.114532422665 (an exact fraction of 625 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=47000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.132873136823 (an exact fraction of 625 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=51000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.0259717990242 (an exact fraction of 628 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=56000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.0890540311959 (an exact fraction of 627 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=62000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.165275923436 (an exact fraction of 628 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=68000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.235234281611 (an exact fraction of 623 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=75000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.270582528227 (an exact fraction of 622 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=82000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.306272327184 (an exact fraction of 622 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=91000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.352539094013 (an exact fraction of 625 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=100000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0134979524246 (an exact fraction of 611 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=110000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0313598923365 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=120000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0495051863493 (an exact fraction of 610 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=130000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0678642783031 (an exact fraction of 612 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=150000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.105046501969 (an exact fraction of 611 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=160000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.123811344158 (an exact fraction of 611 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=180000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.16159620177 (an exact fraction of 612 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=200000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.199645834398 (an exact fraction of 611 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=220000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.237901729084 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=240000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.276327174374 (an exact fraction of 607 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=270000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.334232989049 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=300000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.392417006563 (an exact fraction of 610 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=330000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.450849269334 (an exact fraction of 612 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=360000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.509511392781 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=390000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.568391712099 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=430000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.0472255349602 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=470000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.126422946011 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=509999, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.205975650569 (an exact fraction of 621 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=560000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.305918511264 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=620000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.42657413708 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=680000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.54802297984 (an exact fraction of 612 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=750000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.690720939222 (an exact fraction of 609 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=819999, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.834510992657 (an exact fraction of 621 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.5(R=910000, t=1/200, cls=1/2, price=3/100); RPAR=none_0.5(R=1000000000000, t=1/200, cls=1/2, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~1.02101534269 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=1000, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.471831507766 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=1100, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.438133853548 (an exact fraction of 615 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=1200, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.40917009235 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=1300, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.383871285036 (an exact fraction of 617 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=1500, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.341419014339 (an exact fraction of 612 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=1600, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.323285607758 (an exact fraction of 612 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=1800, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.291568504593 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=2000, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.231162071514 (an exact fraction of 613 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=2200, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.14026444664 (an exact fraction of 615 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=2400, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R1: total error <= 1 K for T in [253.15,333.15] K",
+      "by": "~0.0648292047096 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=2700, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R2: node ratio in [0.03,0.97]",
+      "by": "~0.00540868415511 (an exact fraction of 138 digits)",
+      "unit": ""
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=3000, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R2: node ratio in [0.03,0.97]",
+      "by": "~0.00275077066181 (an exact fraction of 137 digits)",
+      "unit": ""
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=3300, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "wide",
+      "fails": "R2: node ratio in [0.03,0.97]",
+      "by": "~0.000107303023535 (an exact fraction of 138 digits)",
+      "unit": ""
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=3600, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.128621997558 (an exact fraction of 615 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=3900, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.111531349069 (an exact fraction of 615 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=4300, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0910588095615 (an exact fraction of 617 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=4700, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0727709183027 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=5100, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0562944386131 (an exact fraction of 614 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=5600, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0378254350399 (an exact fraction of 612 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=6200, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0182520865571 (an exact fraction of 617 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=6800, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.00101368569653 (an exact fraction of 616 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=7500, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0426024263317 (an exact fraction of 626 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=8200, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.0233888879604 (an exact fraction of 625 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=9100, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "REFUTED",
+      "mode": "control",
+      "fails": "R1: total error <= 0.4 K for T in [273.15,313.15] K",
+      "by": "~0.00346927332873 (an exact fraction of 626 digits)",
+      "unit": "K"
+    },
+    {
+      "design": "NTC=ntc(name=N4, R25=10000, tR=1/500, B=3977, tB=3/1000, dl=2, price=9/5); ADC=adc(name=A12, lsb=1/4096, tue=4, price=1/2); RP=rp_0.1(R=10000, t=1/1000, cls=1/10, price=2/25); RPAR=none_0.1(R=1000000000000, t=1/1000, cls=1/10, price=0)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 96,
+    "EARNED": 1
+  }
+}

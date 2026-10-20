@@ -1,0 +1,103 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "setup without skew; source: 215 ps",
+ "quantities": {
+  "tcq": {
+   "role": "given",
+   "range": [
+    "30",
+    "50"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "clock-to-Q: min tccq=30, max tpcq=50"
+  },
+  "g1": {
+   "role": "given",
+   "range": [
+    "25",
+    "35"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "gate delay: min tcd=25, max tpd=35 (long path stage 1)"
+  },
+  "g2": {
+   "role": "given",
+   "range": [
+    "25",
+    "35"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "gate delay: min tcd=25, max tpd=35 (long path stage 2)"
+  },
+  "g3": {
+   "role": "given",
+   "range": [
+    "25",
+    "35"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "gate delay: min tcd=25, max tpd=35 (long path stage 3)"
+  },
+  "h1": {
+   "role": "given",
+   "range": [
+    "25",
+    "35"
+   ],
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "gate delay: min tcd=25, max tpd=35 (short path stage 1)"
+  },
+  "tsu": {
+   "role": "given",
+   "value": "60",
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "setup time"
+  },
+  "thold": {
+   "role": "given",
+   "value": "70",
+   "unit": "ps",
+   "ground": "UCSD CSE140 lec10 timing slides (Harris&Harris style example), tccq/tpcq/tcd/tpd/tsetup/thold/tskew table",
+   "why": "hold time"
+  },
+  "Tc": {
+   "role": "given",
+   "value": "215",
+   "unit": "ps",
+   "why": "clock period"
+  },
+  "ss": {
+   "role": "derived",
+   "unit": "ps"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "ss == Tc - tcq - (g1 + g2 + g3) - tsu",
+   "source": "setup: Tc >= tpcq + tpd + tsetup (+ tskew)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "ss",
+   "op": ">=",
+   "value": "0",
+   "why": "setup slack nonnegative"
+  }
+ ],
+ "catalog": {},
+ "conflicts": false,
+ "find": {
+  "smallest": "Tc",
+  "from": "150",
+  "to": "400",
+  "precision": "1"
+ }
+}

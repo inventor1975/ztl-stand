@@ -1,0 +1,80 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "REFUTED",
+      "fails": "setup slack nonnegative",
+      "by_at_witness": "1",
+      "unit": "ps"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {},
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "g1": "35",
+    "g2": "35",
+    "g3": "35",
+    "h1": "25",
+    "h2": "25",
+    "tcq": "50"
+  },
+  "point_units": {
+    "g1": "ps",
+    "g2": "ps",
+    "g3": "ps",
+    "h1": "ps",
+    "h2": "ps",
+    "tcq": "ps"
+  },
+  "value_there": {
+    "ss": "-1"
+  },
+  "unit": "ps",
+  "requirement": {
+    "quantity": "ss",
+    "op": ">=",
+    "value": "0",
+    "why": "setup slack nonnegative"
+  },
+  "overshoot": "1",
+  "reasons": {
+    "spread_over_tolerances": [
+      "-1",
+      "49"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "tcq",
+        "moves_it_by": "20"
+      },
+      {
+        "quantity": "g3",
+        "moves_it_by": "10"
+      },
+      {
+        "quantity": "g2",
+        "moves_it_by": "10"
+      },
+      {
+        "quantity": "g1",
+        "moves_it_by": "10"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

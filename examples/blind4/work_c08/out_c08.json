@@ -1,0 +1,1548 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "excluded_by_where": 480,
+  "designs_tried": 319,
+  "failed_at_nominal": 312,
+  "judged": 7,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=12); NP=np(N=2)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=8); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "208/125 (~1.664)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=9); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=10); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "873/875 (~0.997714)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=11); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "249608/575 (~434.101)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=8); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "249/500 (~0.498)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=12); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "296688/575 (~515.979)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=9); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "41/375 (~0.109333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "343768/575 (~597.857)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=8); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=7); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "390848/575 (~679.736)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=10); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "116928/575 (~203.353)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "208/125 (~1.664)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "437928/575 (~761.614)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=9); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=11); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "155448/575 (~270.344)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=8); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=6); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "208/125 (~1.664)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=12); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "193968/575 (~337.336)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "873/875 (~0.997714)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=10); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=9); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=8); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "907/500 (~1.814)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "232488/575 (~404.327)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=11); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 validity of closed form (branch), see report",
+      "by": "54/23 (~2.34783)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=8); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "249/500 (~0.498)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=10); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=7); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "873/875 (~0.997714)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "271008/575 (~471.318)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=9); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=6); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=12); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 validity of closed form (branch), see report",
+      "by": "268/23 (~11.6522)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=7); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "4017/3500 (~1.14771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "309528/575 (~538.31)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "541/250 (~2.164)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=11); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 validity of closed form (branch), see report",
+      "by": "1447/115 (~12.5826)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=9); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "41/375 (~0.109333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=10); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "9928/575 (~17.2661)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=8); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "249/500 (~0.498)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=8); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=12); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "14208/575 (~24.7096)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=7); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "31328/575 (~54.4835)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=6); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=8); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "81/125 (~0.648)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=10); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~7.06443201643 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=11); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.49500240609 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2621/1750 (~1.49771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=6); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "208/125 (~1.664)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=9); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "41/375 (~0.109333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=13); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "37748/575 (~65.6487)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "52728/575 (~91.7009)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=9); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=6); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=12); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.84038937896 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=11); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~7.38572980025 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=9); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "389/1500 (~0.259333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=8); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=7); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=14); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "61288/575 (~106.588)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=7); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=10); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~7.06443201643 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=8); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "499/500 (~0.998)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~7.12857368047 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=6); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "208/125 (~1.664)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=12); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 validity of closed form (branch), see report",
+      "by": "56/115 (~0.486957)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=5)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=10); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=15); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "84828/575 (~147.527)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=7); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "873/875 (~0.997714)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=10); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~4.64786062726 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=6); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=9); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=7); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~7.37130321001 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=11); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~7.38572980025 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=8); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 validity of closed form (branch), see report",
+      "by": "1019/115 (~8.86087)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=8); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=9); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "457/750 (~0.609333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=11); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.62126605404 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=11); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~5.2173094603 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~7.57700467178 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=6); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "208/125 (~1.664)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=8); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "249/500 (~0.498)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=12); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 validity of closed form (branch), see report",
+      "by": "56/115 (~0.486957)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=7); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "873/875 (~0.997714)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "1368/575 (~2.37913)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=10); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=7); NP=np(N=5)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=6)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=9); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=12); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.96414310146 (an exact fraction of 65 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=8); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=7); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=9); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=10); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "373/1250 (~0.2984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=6); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "907/500 (~1.814)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=12); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~5.68920379899 (an exact fraction of 64 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "20628/575 (~35.8748)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=13); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 validity of closed form (branch), see report",
+      "by": "1019/115 (~8.86087)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=11); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~4.95260057024 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=9); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "41/375 (~0.109333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=13); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~7.24948363859 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=8); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "249/500 (~0.498)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.08589808087 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=8); NP=np(N=5)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=10); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=11); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "11/250 (~0.044)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=7); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "873/875 (~0.997714)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=14); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "1368/575 (~2.37913)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=6); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=9); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=10); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=6); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=8); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=12); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~5.42724823214 (an exact fraction of 65 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=7)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=7); NP=np(N=6)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=14); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~7.48890645396 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=7); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "4017/3500 (~1.14771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.423335854 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=6); NP=np(N=5)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "208/125 (~1.664)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=10); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~5.22142809071 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=15); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2: load must be suppliable (discriminant >= 0)",
+      "by": "20628/575 (~35.8748)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=6); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "541/250 (~2.164)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=12); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~1.61229900818 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=11); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~5.2173094603 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=6); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "208/125 (~1.664)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=9); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "41/375 (~0.109333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=11); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~0.906533438421 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=9); NP=np(N=5)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=15); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R2 validity of closed form (branch), see report",
+      "by": "54/23 (~2.34783)",
+      "unit": "V^2"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=10); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=13); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~5.8268655683 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.71318030035 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=8); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "249/500 (~0.498)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=9); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=7); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=11); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~5.73121827537 (an exact fraction of 65 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~2.32503137873 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=8)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=8); NP=np(N=6)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=12); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~5.68920379899 (an exact fraction of 64 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=7); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=14); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.16742239296 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=6); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=12); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~1.65621068057 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=7); NP=np(N=7)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=8); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "81/125 (~0.648)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=10); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~3.33305147685 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=11); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~2.21402829706 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=10); NP=np(N=5)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=7); NP=np(N=5)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "873/875 (~0.997714)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=7); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2621/1750 (~1.49771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~2.93498379747 (an exact fraction of 65 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=6); NP=np(N=6)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "208/125 (~1.664)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=9); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "41/375 (~0.109333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=12); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.15302502354 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=13); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.08589808087 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=7); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "873/875 (~0.997714)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=6); NP=np(N=5)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=10); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "123/1250 (~0.0984)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=15); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.46061534515 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=13); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~2.29010673452 (an exact fraction of 64 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=6); NP=np(N=9)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=9); NP=np(N=6)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "307/750 (~0.409333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=6); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "491/250 (~1.964)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=8); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S2, Vr=27/10, C=150, ESR=7, price=28/5); NS=ns(N=12); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~2.93498379747 (an exact fraction of 65 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S5, Vr=3, C=120, ESR=9, price=31/5); NS=ns(N=11); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~4.0222009846 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=15); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~3.46268893583 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=11); NP=np(N=5)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~3.78920858907 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=6); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "907/500 (~1.814)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S8, Vr=57/20, C=200, ESR=11/2, price=39/5); NS=ns(N=9); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "389/1500 (~0.259333)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=8); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=7); NP=np(N=8)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=8); NP=np(N=7)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "399/500 (~0.798)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=14); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.423335854 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=13); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~6.50693558904 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=7); NP=np(N=2)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "2271/1750 (~1.29771)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S3, Vr=27/10, C=310, ESR=11/5, price=21/2); NS=ns(N=14); NP=np(N=1)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~2.83302495461 (an exact fraction of 67 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S1, Vr=27/10, C=100, ESR=10, price=21/5); NS=ns(N=11); NP=np(N=3)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~2.07700642718 (an exact fraction of 66 digits)",
+      "unit": "s"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=8); NP=np(N=5)",
+      "verdict": "REFUTED",
+      "fails": "R1 peak cell voltage <= rated",
+      "by": "249/500 (~0.498)",
+      "unit": "V"
+    },
+    {
+      "design": "CELL=cells(name=S4, Vr=3, C=60, ESR=18, price=17/5); NS=ns(N=10); NP=np(N=4)",
+      "verdict": "REFUTED",
+      "fails": "R2 hold >= 8.0 s at EOL, min supply, all ambients",
+      "by": "~3.33305147685 (an exact fraction of 67 digits)",
+      "unit": "s"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 318,
+    "EARNED": 1
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "designs_not_listed": 119,
+  "listing": "earned first, then open, then refuted",
+  "objective": {
+    "minimize": "NS.N*NP.N*(CELL.price + Cbal)",
+    "value": "1188/5 (~237.6)",
+    "optimal": true,
+    "note": "every cheaper design was refuted",
+    "ties": {
+      "same_objective": 4,
+      "first": [
+        "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=6); NP=np(N=4)",
+        "CELL=cells(name=S6, Vr=5/2, C=350, ESR=3, price=47/5); NS=ns(N=8); NP=np(N=3)",
+        "CELL=cells(name=S7, Vr=27/10, C=50, ESR=22, price=11/5); NS=ns(N=8); NP=np(N=11)"
+      ],
+      "note": "these cost the same; they were not all judged — \"report\": \"all\" shows which pass"
+    }
+  },
+  "verdict": "EARNED",
+  "design": {
+    "CELL": {
+      "catalog": "cells",
+      "name": "S6",
+      "Vr": {
+        "nominal": "5/2 (~2.5)",
+        "tolerance": "0"
+      },
+      "C": {
+        "nominal": "350",
+        "tolerance": "0"
+      },
+      "ESR": {
+        "nominal": "3",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "47/5 (~9.4)",
+        "tolerance": "0"
+      }
+    },
+    "NS": {
+      "catalog": "ns",
+      "N": {
+        "nominal": "12",
+        "tolerance": "0"
+      }
+    },
+    "NP": {
+      "catalog": "np",
+      "N": {
+        "nominal": "2",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Vpk": [
+      "583/250 (~2.332)",
+      "583/250 (~2.332)"
+    ],
+    "dis": [
+      "153072/575 (~266.212)",
+      "397872/575 (~691.951)"
+    ],
+    "mB": [
+      "1148/23 (~49.913)",
+      "3596/23 (~156.348)"
+    ],
+    "thold": [
+      "8",
+      "775720375237136616049325118912097/24277216741294080000000000000000 (~31.9526)"
+    ],
+    "life": [
+      "~172851.223432 (an exact fraction of 35 digits)",
+      "~172851.223432 (an exact fraction of 36 digits)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Vpk": "V",
+    "dis": "V^2",
+    "mB": "V^2",
+    "thold": "s",
+    "life": "h"
+  },
+  "guaranteed_ends": {
+    "thold": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+  },
+  "how": {
+    "Vpk": "ZTL, outer range",
+    "dis": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['153072/575 (~266.212)', '397872/575 (~691.951)']",
+    "mB": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['1148/23 (~49.913)', '3596/23 (~156.348)']",
+    "thold": "ZTL, certificate checked exactly (3 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic",
+    "life": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~172851.223432 (~172851)', '~172851.223432 (~172851)']"
+  },
+  "requirements": [
+    {
+      "quantity": "Vpk",
+      "op": "<=",
+      "value": "CELL.Vr",
+      "why": "R1 peak cell voltage <= rated"
+    },
+    {
+      "quantity": "dis",
+      "op": ">=",
+      "value": "0",
+      "why": "R2: load must be suppliable (discriminant >= 0)"
+    },
+    {
+      "quantity": "mB",
+      "op": ">=",
+      "value": "0",
+      "why": "R2 validity of closed form (branch), see report"
+    },
+    {
+      "quantity": "thold",
+      "op": ">=",
+      "value": "8",
+      "why": "R2 hold >= 8.0 s at EOL, min supply, all ambients"
+    },
+    {
+      "quantity": "life",
+      "op": ">=",
+      "value": "131400",
+      "why": "R3 life >= 15 years"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "Vpk = 583/250 by exact elimination (credit)",
+    "dis -> [153072/575, 397872/575] by [dis == Vsmin * Vsmin - 4 * (NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N) * (Pout / eta)], interval reading, sound, may be wider than the truth (credit)",
+    "mB -> [1148/23, 3596/23] by [mB == Vmin * Vmin - NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta)], interval reading, sound, may be wider than the truth (credit)",
+    "thold -> [44965381252475213122864783360821/10115506975539200000000000000000, 775720375237136616049325118912097/24277216741294080000000000000000] by [thold == NP__N * CELL__C * kC / NS__N / (Pout / eta) * ((Vsmin * Vsmin - (Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin) * (Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin)) / 4 + (Vsmin * sqrt(max(Vsmin * Vsmin - 4 * (NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N) * (Pout / eta), 0)) - (Vmin + NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin) * (Vmin - NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N * (Pout / eta) / Vmin) - 4 * (NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N) * (Pout / eta) * ln((Vsmin + sqrt(max(Vsmin * Vsmin - 4 * (NS__N * CELL__ESR * kESRe * ifpos(-10 - T / Tu, 12 / 5 - 2 / 25 * (T / Tu + 10), ifpos(0 - T / Tu, 12 / 5 - 7 / 100 * (T / Tu + 10), ifpos(25 - T / Tu, 17 / 10 - 7 / 250 * (T / Tu), ifpos(45 - T / Tu, 1 - 1 / 200 * (T / Tu - 25), 9 / 10 - 1 / 400 * (T / Tu - 45))))) / NP__N) * (Pout / eta), 0))) / (2 * Vmin))) / 4)], interval reading, sound, may be wider than the truth (credit)",
+    "life -> [878315186366563203738587708903977843809375/1411482289877287100416942510440448, 33485766480225222191783019620982322054734375/53812762301571570707195845396135936] by [life == 1/(f1/(L0*pow(2, (Tref - T1)/dTL)*(pow(2, (CELL__Vr - (Vfloat/NS__N*kfl))/dVL))) + f2/(L0*pow(2, (Tref - T2)/dTL)*(pow(2, (CELL__Vr - (Vfloat/NS__N*kfl))/dVL))) + f3/(L0*pow(2, (Tref - T3)/dTL)*(pow(2, (CELL__Vr - (Vfloat/NS__N*kfl))/dVL))))], interval reading, sound, may be wider than the truth (credit)"
+  ]
+}

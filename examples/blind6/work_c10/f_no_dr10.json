@@ -1,0 +1,392 @@
+{
+ "stand": "ztl-stand/1",
+ "note": "blind6 problem 10: maize batch dryer + aeration fan, Td and Mf continuous",
+ "quantities": {
+  "Tu": {
+   "role": "given",
+   "value": "1",
+   "unit": "C",
+   "ground": "unit",
+   "why": "one degree, to make temperatures dimensionless in the empirical formulas"
+  },
+  "Hu": {
+   "role": "given",
+   "value": "1",
+   "unit": "h",
+   "ground": "unit",
+   "why": "one hour, to make the Page time dimensionless"
+  },
+  "Hload": {
+   "role": "given",
+   "value": "1",
+   "unit": "h",
+   "ground": "problem statement",
+   "why": "loading and unloading time per batch"
+  },
+  "Du": {
+   "role": "given",
+   "value": "1",
+   "unit": "day",
+   "ground": "unit",
+   "why": "one day"
+  },
+  "Wu": {
+   "role": "given",
+   "value": "1",
+   "unit": "kg/t",
+   "ground": "unit",
+   "why": "one kg of water per tonne of wet grain"
+  },
+  "DIk": {
+   "role": "given",
+   "value": "0.04",
+   "unit": "1/h",
+   "ground": "problem statement",
+   "why": "damage index rate coefficient"
+  },
+  "cq": {
+   "role": "given",
+   "value": "0.3",
+   "unit": "C*h*t/m^3",
+   "ground": "problem statement",
+   "why": "grain cooling per unit aeration airflow"
+  },
+  "dTs": {
+   "role": "given",
+   "value": "6",
+   "unit": "C",
+   "ground": "problem statement",
+   "why": "uncooled self-heating offset"
+  },
+  "Thr": {
+   "role": "given",
+   "value": "4/5",
+   "unit": "t/h",
+   "ground": "problem statement",
+   "why": "R1: throughput floor"
+  },
+  "DImax": {
+   "role": "given",
+   "value": "0.6",
+   "unit": "",
+   "ground": "problem statement",
+   "why": "R2: damage index ceiling"
+  },
+  "STmin": {
+   "role": "given",
+   "value": "360",
+   "unit": "day",
+   "ground": "problem statement",
+   "why": "R3: safe storage time floor"
+  },
+  "Mtot": {
+   "role": "given",
+   "value": "900",
+   "unit": "t",
+   "ground": "problem statement",
+   "why": "season wet-grain mass"
+  },
+  "cw": {
+   "role": "given",
+   "value": "0.09",
+   "unit": "EUR/kg",
+   "ground": "problem statement",
+   "why": "cost of removing a kg of water at Td = 60"
+  },
+  "M0c": {
+   "role": "given",
+   "value": "0.36",
+   "unit": "",
+   "ground": "problem statement",
+   "why": "worst-case M0, used for the cost (problem says so)"
+  },
+  "M0": {
+   "role": "given",
+   "range": [
+    "0.30",
+    "0.36"
+   ],
+   "unit": "",
+   "why": "initial moisture, d.b."
+  },
+  "k0f": {
+   "role": "given",
+   "range": [
+    "0.90",
+    "1.10"
+   ],
+   "unit": "",
+   "why": "variety factor on the drying rate"
+  },
+  "nP": {
+   "role": "given",
+   "range": [
+    "0.82",
+    "0.88"
+   ],
+   "unit": "",
+   "why": "Page exponent"
+  },
+  "RH0": {
+   "role": "given",
+   "range": [
+    "0.55",
+    "0.80"
+   ],
+   "unit": "",
+   "why": "ambient relative humidity during drying"
+  },
+  "T0": {
+   "role": "given",
+   "range": [
+    "12",
+    "22"
+   ],
+   "unit": "C",
+   "why": "ambient temperature during drying"
+  },
+  "Ta": {
+   "role": "given",
+   "range": [
+    "10",
+    "16"
+   ],
+   "unit": "C",
+   "why": "mean storage ambient temperature"
+  },
+  "RHd": {
+   "role": "derived",
+   "unit": "",
+   "why": "RH after heating to Td"
+  },
+  "Me": {
+   "role": "derived",
+   "unit": "",
+   "why": "equilibrium moisture d.b."
+  },
+  "MR": {
+   "role": "derived",
+   "unit": "",
+   "why": "moisture ratio"
+  },
+  "kk": {
+   "role": "derived",
+   "unit": "",
+   "why": "Page rate constant, number in 1/h^n"
+  },
+  "t": {
+   "role": "derived",
+   "unit": "h",
+   "why": "drying time"
+  },
+  "Q": {
+   "role": "derived",
+   "unit": "t/h",
+   "why": "throughput"
+  },
+  "DI": {
+   "role": "derived",
+   "unit": "",
+   "why": "damage index"
+  },
+  "Ts": {
+   "role": "derived",
+   "unit": "C",
+   "why": "storage grain temperature"
+  },
+  "Mwb": {
+   "role": "derived",
+   "unit": "",
+   "why": "final moisture, wet basis, percent"
+  },
+  "ST": {
+   "role": "derived",
+   "unit": "day",
+   "why": "safe storage time"
+  }
+ },
+ "slots": {
+  "DRY": {
+   "from": [
+    "dryers"
+   ]
+  },
+  "FAN": {
+   "from": [
+    "fans"
+   ]
+  },
+  "TD": {
+   "from": [
+    "tdry"
+   ]
+  },
+  "MF": {
+   "from": [
+    "mfin"
+   ]
+  }
+ },
+ "define": {
+  "Tdn": "TD.x/Tu",
+  "T0n": "T0/Tu"
+ },
+ "laws": [
+  {
+   "zfl": "RHd == RH0*exp(17.27*T0n/(T0n + 237.3) - 17.27*Tdn/(Tdn + 237.3))",
+   "source": "problem: RH after heating (Magnus)"
+  },
+  {
+   "zfl": "Me == pow(-ln(1 - RHd)/((86541/1000000000)*(Tdn + 49.81)), 5000/9317)/100",
+   "source": "problem: equilibrium moisture (Henderson-type), decimal d.b."
+  },
+  {
+   "zfl": "MR == (MF.x - Me)/(M0 - Me)",
+   "source": "problem: moisture ratio"
+  },
+  {
+   "zfl": "kk == k0f*65000*exp(-4400/(Tdn + 273.15))",
+   "source": "problem: Page rate constant, 1/h^n"
+  },
+  {
+   "zfl": "t == Hu*pow(-ln(MR)/kk, 1/nP)",
+   "source": "problem: Page thin-layer drying inverted"
+  },
+  {
+   "zfl": "Q == DRY.B/(t + Hload)",
+   "source": "problem: batch throughput"
+  },
+  {
+   "zfl": "DI == DIk*t*exp(8*(Tdn - 60)/100)",
+   "source": "problem: drying damage index"
+  },
+  {
+   "zfl": "Ts == max(Ta, Ta + dTs - cq*FAN.qa)",
+   "source": "problem: storage grain temperature"
+  },
+  {
+   "zfl": "Mwb == 100*MF.x/(1 + MF.x)",
+   "source": "problem: wet-basis percentage"
+  },
+  {
+   "zfl": "ST == Du*exp(74/10 - 6/10*(Mwb - 14) - 75/1000*(Ts/Tu - 10))",
+   "source": "problem: safe storage time"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Q",
+   "op": ">=",
+   "value": "Thr",
+   "why": "R1 throughput >= 0.8 t/h"
+  },
+  {
+   "quantity": "DI",
+   "op": "<=",
+   "value": "DImax",
+   "why": "R2 damage index <= 0.6"
+  },
+  {
+   "quantity": "ST",
+   "op": ">=",
+   "value": "STmin",
+   "why": "R3 safe storage >= 360 d"
+  },
+  {
+   "quantity": "TD.x",
+   "op": "<=",
+   "value": "DRY.Tmax",
+   "why": "R4 Td <= dryer maximum"
+  }
+ ],
+ "objective": {
+  "minimize": "DRY.price + FAN.price + Mtot*Wu*1000*(M0c - MF.x)/(1 + M0c)*cw*(1 + 12*(Tdn - 60)/1000)",
+  "unit": "kEUR",
+  "why": "season cost with the worst-case M0 (problem statement)"
+ },
+ "catalog": {
+  "dryers": {
+   "ground": "problem statement",
+   "items": [
+    {
+     "name": "DR4",
+     "B": "4",
+     "Tmax": "85",
+     "price": "26"
+    },
+    {
+     "name": "DR6",
+     "B": "6",
+     "Tmax": "85",
+     "price": "33"
+    },
+    {
+     "name": "DR8",
+     "B": "8",
+     "Tmax": "80",
+     "price": "40"
+    }
+   ],
+   "fields": {
+    "B": {
+     "unit": "t"
+    },
+    "Tmax": {
+     "unit": "C"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "fans": {
+   "ground": "problem statement",
+   "items": [
+    {
+     "name": "none",
+     "qa": "0",
+     "price": "0"
+    },
+    {
+     "name": "F8",
+     "qa": "8",
+     "price": "2.4"
+    },
+    {
+     "name": "F15",
+     "qa": "15",
+     "price": "4.1"
+    },
+    {
+     "name": "F25",
+     "qa": "25",
+     "price": "7.5"
+    }
+   ],
+   "fields": {
+    "qa": {
+     "unit": "m^3/(h*t)"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "tdry": {
+   "continuous": {
+    "field": "x",
+    "from": "50",
+    "to": "85",
+    "unit": "C"
+   }
+  },
+  "mfin": {
+   "continuous": {
+    "field": "x",
+    "from": "0.14",
+    "to": "0.20",
+    "unit": ""
+   }
+  }
+ }
+}

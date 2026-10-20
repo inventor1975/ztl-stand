@@ -1,0 +1,58 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Tj": [
+          "7932937/80000 (~99.1617)",
+          "8824663/80000 (~110.308)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "verdict": "EARNED",
+  "design": {},
+  "guaranteed": {
+    "Tj": [
+      "7932937/80000 (~99.1617)",
+      "8824663/80000 (~110.308)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Tj": "C"
+  },
+  "how": {
+    "Tj": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "Tj",
+      "op": "<=",
+      "value": "125",
+      "why": "TJMAX = 125 C, the example's limit (same as PD <= PDmax = 508 mW)"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "PD -> [5643/80000, 20757/80000] by the system over its parameters, exact at the corners (credit)",
+    "Tj -> [7932937/80000, 8824663/80000] by the system over its parameters, exact at the corners (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	0m0.051s
+user	0m0.031s
+sys	0m0.008s

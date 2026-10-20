@@ -1,0 +1,30 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "Ru":   {"role": "given", "value": "1", "unit": "kohm", "ground": "unit constant for the datasheet's R in kohm"},
+  "Rn":   {"role": "given", "value": "50", "unit": "kohm", "ground": "placeholder; searched by find"},
+  "s":    {"role": "given", "range": ["-1", "1"], "unit": "", "ground": "resistor tolerance position, +-1% = s*0.01 (TPS25221 sec 10.2.1.2.3: assuming 1% resistors)"},
+  "Kmin": {"role": "given", "value": "56850", "unit": "mA", "ground": "TPS25221 eq.(1): IOSmin = 56850 / RILIM^1.033, RILIM in kohm"},
+  "Kmax": {"role": "given", "value": "52640", "unit": "mA", "ground": "TPS25221 eq.(1): IOSmax = 52640 / RILIM^0.97, RILIM in kohm"},
+  "IOSmin": {"role": "derived", "unit": "mA"},
+  "IOSmax": {"role": "derived", "unit": "mA"}
+ },
+ "slots": {},
+ "define": {
+  "Rk": "Rn*(1 + s/100)/Ru"
+ },
+ "laws": [
+  {"zfl": "IOSmin == Kmin/pow(Rk, 1.033)", "source": "TPS25221 datasheet eq.(1), guaranteed lower current-limit curve"},
+  {"zfl": "IOSmax == Kmax/pow(Rk, 0.97)", "source": "TPS25221 datasheet eq.(1), guaranteed upper current-limit curve"}
+ ],
+ "requirements": [
+  {"quantity": "IOSmin", "op": ">=", "value": "1000", "why": "default; replaced per find"}
+ ],
+ "catalog": {},
+ "find": [
+  {"largest": "Rn", "from": "20", "to": "210", "precision": "0.01",
+   "requirements": [{"quantity": "IOSmin", "op": ">=", "value": "1000", "why": "TPS25221 sec 10.2.1.2.1: current limit must not occur below 1000 mA"}]},
+  {"smallest": "Rn", "from": "20", "to": "210", "precision": "0.01",
+   "requirements": [{"quantity": "IOSmax", "op": "<=", "value": "500", "why": "TPS25221 sec 10.2.1.2.2: current limit must occur below 500 mA"}]}
+ ]
+}

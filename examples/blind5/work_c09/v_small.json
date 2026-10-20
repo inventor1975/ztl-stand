@@ -1,0 +1,343 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "I1": {
+   "role": "given",
+   "range": [
+    "2000",
+    "2370"
+   ],
+   "unit": "",
+   "why": "average inventory Q1, pallets"
+  },
+  "Sc1": {
+   "role": "given",
+   "value": "800",
+   "unit": "",
+   "why": "spot availability Q1, positions",
+   "ground": "spot pool contract"
+  },
+  "I2": {
+   "role": "given",
+   "range": [
+    "1750",
+    "2110"
+   ],
+   "unit": "",
+   "why": "average inventory Q2, pallets"
+  },
+  "Sc2": {
+   "role": "given",
+   "value": "800",
+   "unit": "",
+   "why": "spot availability Q2, positions",
+   "ground": "spot pool contract"
+  },
+  "I3": {
+   "role": "given",
+   "range": [
+    "2300",
+    "2730"
+   ],
+   "unit": "",
+   "why": "average inventory Q3, pallets"
+  },
+  "Sc3": {
+   "role": "given",
+   "value": "800",
+   "unit": "",
+   "why": "spot availability Q3, positions",
+   "ground": "spot pool contract"
+  },
+  "I4": {
+   "role": "given",
+   "range": [
+    "3150",
+    "3780"
+   ],
+   "unit": "",
+   "why": "average inventory Q4, pallets"
+  },
+  "Sc4": {
+   "role": "given",
+   "value": "300",
+   "unit": "",
+   "why": "spot availability Q4, positions",
+   "ground": "spot pool contract"
+  },
+  "u": {
+   "role": "given",
+   "range": [
+    "0.88",
+    "0.94"
+   ],
+   "unit": "",
+   "why": "space utilisation, ONE value for the year"
+  },
+  "Ps": {
+   "role": "given",
+   "range": [
+    "18",
+    "24"
+   ],
+   "unit": "EUR",
+   "why": "spot price EUR per position-month"
+  },
+  "Cown": {
+   "role": "given",
+   "value": "118",
+   "unit": "EUR",
+   "why": "own block EUR per position per year",
+   "ground": "lease"
+  },
+  "Bmax": {
+   "role": "given",
+   "value": "3200",
+   "unit": "",
+   "why": "building limit, positions",
+   "ground": "building"
+  },
+  "F1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "M1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "F2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "M2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "F3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "M3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "F4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "S4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "M4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Bchk": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Cost": {
+   "role": "derived",
+   "unit": "kEUR"
+  }
+ },
+ "slots": {
+  "OWN": {
+   "from": [
+    "own_block"
+   ]
+  },
+  "T": {
+   "from": [
+    "tiers"
+   ]
+  }
+ },
+ "define": {
+  "N1": "I1/u",
+  "N2": "I2/u",
+  "N3": "I3/u",
+  "N4": "I4/u"
+ },
+ "laws": [
+  {
+   "zfl": "F1 == min(T.cap, max(0, N1 - OWN.B))",
+   "source": "Q1: 3PL takes the shortfall first, up to the tier cap"
+  },
+  {
+   "zfl": "S1 == min(Sc1, max(0, N1 - OWN.B - F1))",
+   "source": "Q1: spot covers the rest, up to availability"
+  },
+  {
+   "zfl": "M1 == OWN.B + F1 + S1 - N1",
+   "source": "Q1: positions provided minus positions needed"
+  },
+  {
+   "zfl": "F2 == min(T.cap, max(0, N2 - OWN.B))",
+   "source": "Q2: 3PL takes the shortfall first, up to the tier cap"
+  },
+  {
+   "zfl": "S2 == min(Sc2, max(0, N2 - OWN.B - F2))",
+   "source": "Q2: spot covers the rest, up to availability"
+  },
+  {
+   "zfl": "M2 == OWN.B + F2 + S2 - N2",
+   "source": "Q2: positions provided minus positions needed"
+  },
+  {
+   "zfl": "F3 == min(T.cap, max(0, N3 - OWN.B))",
+   "source": "Q3: 3PL takes the shortfall first, up to the tier cap"
+  },
+  {
+   "zfl": "S3 == min(Sc3, max(0, N3 - OWN.B - F3))",
+   "source": "Q3: spot covers the rest, up to availability"
+  },
+  {
+   "zfl": "M3 == OWN.B + F3 + S3 - N3",
+   "source": "Q3: positions provided minus positions needed"
+  },
+  {
+   "zfl": "F4 == min(T.cap, max(0, N4 - OWN.B))",
+   "source": "Q4: 3PL takes the shortfall first, up to the tier cap"
+  },
+  {
+   "zfl": "S4 == min(Sc4, max(0, N4 - OWN.B - F4))",
+   "source": "Q4: spot covers the rest, up to availability"
+  },
+  {
+   "zfl": "M4 == OWN.B + F4 + S4 - N4",
+   "source": "Q4: positions provided minus positions needed"
+  },
+  {
+   "zfl": "Bchk == OWN.B",
+   "source": "own block size"
+  },
+  {
+   "zfl": "Cost == Cown*OWN.B + 3*T.price*(max(F1, T.commit) + max(F2, T.commit) + max(F3, T.commit) + max(F4, T.commit)) + 3*Ps*(S1 + S2 + S3 + S4)",
+   "source": "own lease + 3PL billing max(F,commit)*price*3 months per quarter + spot at its price"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "M1",
+   "op": ">=",
+   "value": "0",
+   "why": "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+  },
+  {
+   "quantity": "M2",
+   "op": ">=",
+   "value": "0",
+   "why": "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+  },
+  {
+   "quantity": "M3",
+   "op": ">=",
+   "value": "0",
+   "why": "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+  },
+  {
+   "quantity": "M4",
+   "op": ">=",
+   "value": "0",
+   "why": "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+  },
+  {
+   "quantity": "Cost",
+   "op": "<=",
+   "value": "355",
+   "why": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)"
+  },
+  {
+   "quantity": "Bchk",
+   "op": "<=",
+   "value": "Bmax",
+   "why": "R3 building limit"
+  }
+ ],
+ "objective": {
+  "minimize": "Cost",
+  "case": "worst",
+  "why": "minimum worst-case annual cost"
+ },
+ "catalog": {
+  "own_block": {
+   "ground": "lease",
+   "items": [
+    {
+     "B": "0"
+    },
+    {
+     "B": "800"
+    },
+    {
+     "B": "1600"
+    },
+    {
+     "B": "2400"
+    },
+    {
+     "B": "3200"
+    }
+   ],
+   "fields": {
+    "B": {
+     "unit": ""
+    }
+   }
+  },
+  "tiers": {
+   "ground": "3PL tariff",
+   "items": [
+    {
+     "name": "T0",
+     "price": "0",
+     "commit": "0",
+     "cap": "0"
+    },
+    {
+     "name": "T1",
+     "price": "11.8",
+     "commit": "0",
+     "cap": "800"
+    },
+    {
+     "name": "T2",
+     "price": "9.6",
+     "commit": "400",
+     "cap": "1500"
+    },
+    {
+     "name": "T3",
+     "price": "8.4",
+     "commit": "900",
+     "cap": "2200"
+    }
+   ],
+   "fields": {
+    "price": {
+     "unit": "EUR"
+    },
+    "commit": {
+     "unit": ""
+    },
+    "cap": {
+     "unit": ""
+    }
+   }
+  }
+ }
+}

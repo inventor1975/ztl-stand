@@ -1,0 +1,75 @@
+[stand] 1/9 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 9,
+  "notes": [],
+  "combinations_proved_without_mix": 9,
+  "verdict": "REFUTED",
+  "why": "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  "mixes": [
+    {
+      "design": "EX=extractors(name=E2, N=2, eta=17/20, price=12); SV=solvents(name=SA, Kt=[360129809/100000000,61683903/12500000], cS=6/5); BD=beds(name=G600, m=600, price=9/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 2 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "EX=extractors(name=E2, N=2, eta=17/20, price=12); SV=solvents(name=SA, Kt=[360129809/100000000,61683903/12500000], cS=6/5); BD=beds(name=G1200, m=1200, price=16/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 2 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "EX=extractors(name=E2, N=2, eta=17/20, price=12); SV=solvents(name=SA, Kt=[360129809/100000000,61683903/12500000], cS=6/5); BD=beds(name=G2000, m=2000, price=5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 2 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "EX=extractors(name=E2, N=2, eta=17/20, price=12); SV=solvents(name=SB, Kt=[1259185531/200000000,2128601323/200000000], cS=13/5); BD=beds(name=G600, m=600, price=9/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 1 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "EX=extractors(name=E2, N=2, eta=17/20, price=12); SV=solvents(name=SB, Kt=[1259185531/200000000,2128601323/200000000], cS=13/5); BD=beds(name=G1200, m=1200, price=16/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 1 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "EX=extractors(name=E2, N=2, eta=17/20, price=12); SV=solvents(name=SB, Kt=[1259185531/200000000,2128601323/200000000], cS=13/5); BD=beds(name=G2000, m=2000, price=5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 2 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "EX=extractors(name=E2, N=2, eta=17/20, price=12); SV=solvents(name=SC, Kt=[76657557/8000000,9409873113/500000000], cS=9/2); BD=beds(name=G600, m=600, price=9/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 1 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "EX=extractors(name=E2, N=2, eta=17/20, price=12); SV=solvents(name=SC, Kt=[76657557/8000000,9409873113/500000000], cS=9/2); BD=beds(name=G1200, m=1200, price=16/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 1 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "EX=extractors(name=E2, N=2, eta=17/20, price=12); SV=solvents(name=SC, Kt=[76657557/8000000,9409873113/500000000], cS=9/2); BD=beds(name=G2000, m=2000, price=5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 1 pieces, each failing a requirement at one point of its data — no mix exists"
+    }
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R2 discharge <= 0.006 g/L"
+      ],
+      [
+        "R3 bed life >= 2 months"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	0m10.106s
+user	0m9.956s
+sys	0m0.135s

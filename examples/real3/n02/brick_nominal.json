@@ -1,0 +1,275 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "real round 3, n02: largest continuous current of an IRL3713 per thermal scenario (DigiKey TechForum, 'A Thermal Management Example, part 2'); mode=nominal",
+ "quantities": {
+  "Ta": {
+   "role": "given",
+   "value": "40",
+   "unit": "C",
+   "why": "design assumption of the source: ambient 40 C",
+   "ground": "source text"
+  },
+  "ID_s2": {
+   "role": "given",
+   "value": "0",
+   "unit": "A",
+   "why": "searched: continuous current (forced air, grease, Tj<=175)"
+  },
+  "Tj_s2": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "RDS_s2": {
+   "role": "given",
+   "value": "4.9",
+   "unit": "mohm",
+   "ground": "source fig.11"
+  },
+  "RJC_s2": {
+   "role": "given",
+   "value": "0.45",
+   "unit": "C/W",
+   "ground": "datasheet max"
+  },
+  "RSA_s2": {
+   "role": "given",
+   "value": "7",
+   "unit": "C/W",
+   "ground": "source"
+  },
+  "RINT_s2": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "C/W",
+   "ground": "IRL3713 greased typ 0.50 / Sil-Pad table at 50 psi 2.90"
+  },
+  "ID_s3": {
+   "role": "given",
+   "value": "0",
+   "unit": "A",
+   "why": "searched: continuous current (forced air, insulating pad, Tj<=175)"
+  },
+  "Tj_s3": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "RDS_s3": {
+   "role": "given",
+   "value": "4.9",
+   "unit": "mohm",
+   "ground": "source fig.11"
+  },
+  "RJC_s3": {
+   "role": "given",
+   "value": "0.45",
+   "unit": "C/W",
+   "ground": "datasheet max"
+  },
+  "RSA_s3": {
+   "role": "given",
+   "value": "7",
+   "unit": "C/W",
+   "ground": "source"
+  },
+  "RINT_s3": {
+   "role": "given",
+   "value": "2.9",
+   "unit": "C/W",
+   "ground": "IRL3713 greased typ 0.50 / Sil-Pad table at 50 psi 2.90"
+  },
+  "ID_s4": {
+   "role": "given",
+   "value": "0",
+   "unit": "A",
+   "why": "searched: continuous current (forced air, insulating pad, Tj<=150)"
+  },
+  "Tj_s4": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "RDS_s4": {
+   "role": "given",
+   "value": "4.5",
+   "unit": "mohm",
+   "ground": "source fig.11"
+  },
+  "RJC_s4": {
+   "role": "given",
+   "value": "0.45",
+   "unit": "C/W",
+   "ground": "datasheet max"
+  },
+  "RSA_s4": {
+   "role": "given",
+   "value": "7",
+   "unit": "C/W",
+   "ground": "source"
+  },
+  "RINT_s4": {
+   "role": "given",
+   "value": "2.9",
+   "unit": "C/W",
+   "ground": "IRL3713 greased typ 0.50 / Sil-Pad table at 50 psi 2.90"
+  },
+  "ID_s5": {
+   "role": "given",
+   "value": "0",
+   "unit": "A",
+   "why": "searched: continuous current (natural conv, insulating pad, Tj<=150)"
+  },
+  "Tj_s5": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "RDS_s5": {
+   "role": "given",
+   "value": "4.5",
+   "unit": "mohm",
+   "ground": "source fig.11"
+  },
+  "RJC_s5": {
+   "role": "given",
+   "value": "0.45",
+   "unit": "C/W",
+   "ground": "datasheet max"
+  },
+  "RSA_s5": {
+   "role": "given",
+   "value": "19",
+   "unit": "C/W",
+   "ground": "source"
+  },
+  "RINT_s5": {
+   "role": "given",
+   "value": "2.9",
+   "unit": "C/W",
+   "ground": "IRL3713 greased typ 0.50 / Sil-Pad table at 50 psi 2.90"
+  },
+  "ID_s6": {
+   "role": "given",
+   "value": "0",
+   "unit": "A",
+   "why": "searched: continuous current (D2PAK on PCB, RthJA(PCB)=40 max, Tj<=150)"
+  },
+  "Tj_s6": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "RDS_s6": {
+   "role": "given",
+   "value": "4.5",
+   "unit": "mohm",
+   "ground": "source fig.11"
+  },
+  "RJA_s6": {
+   "role": "given",
+   "value": "40",
+   "unit": "C/W",
+   "ground": "IRL3713 datasheet p1, PCB mount, max"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "Tj_s2 == Ta + ID_s2*ID_s2*RDS_s2*(RJC_s2 + RINT_s2 + RSA_s2)",
+   "source": "P = I^2*RDS(on); Tj = Ta + P*(sum of series thermal resistances)"
+  },
+  {
+   "zfl": "Tj_s3 == Ta + ID_s3*ID_s3*RDS_s3*(RJC_s3 + RINT_s3 + RSA_s3)",
+   "source": "P = I^2*RDS(on); Tj = Ta + P*(sum of series thermal resistances)"
+  },
+  {
+   "zfl": "Tj_s4 == Ta + ID_s4*ID_s4*RDS_s4*(RJC_s4 + RINT_s4 + RSA_s4)",
+   "source": "P = I^2*RDS(on); Tj = Ta + P*(sum of series thermal resistances)"
+  },
+  {
+   "zfl": "Tj_s5 == Ta + ID_s5*ID_s5*RDS_s5*(RJC_s5 + RINT_s5 + RSA_s5)",
+   "source": "P = I^2*RDS(on); Tj = Ta + P*(sum of series thermal resistances)"
+  },
+  {
+   "zfl": "Tj_s6 == Ta + ID_s6*ID_s6*RDS_s6*RJA_s6",
+   "source": "P = I^2*RDS(on); Tj = Ta + P*(sum of series thermal resistances)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tj_s2",
+   "op": "<=",
+   "value": "175",
+   "why": "Tj max 175 C (forced air, grease, Tj<=175)"
+  }
+ ],
+ "catalog": {},
+ "find": [
+  {
+   "largest": "ID_s2",
+   "from": "0",
+   "to": "100",
+   "precision": "0.01",
+   "requirements": [
+    {
+     "quantity": "Tj_s2",
+     "op": "<=",
+     "value": "175",
+     "why": "Tj max 175 C (forced air, grease, Tj<=175); published ID 58.9 A"
+    }
+   ]
+  },
+  {
+   "largest": "ID_s3",
+   "from": "0",
+   "to": "100",
+   "precision": "0.01",
+   "requirements": [
+    {
+     "quantity": "Tj_s3",
+     "op": "<=",
+     "value": "175",
+     "why": "Tj max 175 C (forced air, insulating pad, Tj<=175); published ID 51.6 A"
+    }
+   ]
+  },
+  {
+   "largest": "ID_s4",
+   "from": "0",
+   "to": "100",
+   "precision": "0.01",
+   "requirements": [
+    {
+     "quantity": "Tj_s4",
+     "op": "<=",
+     "value": "150",
+     "why": "Tj max 150 C (forced air, insulating pad, Tj<=150); published ID 48.6 A"
+    }
+   ]
+  },
+  {
+   "largest": "ID_s5",
+   "from": "0",
+   "to": "100",
+   "precision": "0.01",
+   "requirements": [
+    {
+     "quantity": "Tj_s5",
+     "op": "<=",
+     "value": "150",
+     "why": "Tj max 150 C (natural conv, insulating pad, Tj<=150); published ID 33.1 A"
+    }
+   ]
+  },
+  {
+   "largest": "ID_s6",
+   "from": "0",
+   "to": "100",
+   "precision": "0.01",
+   "requirements": [
+    {
+     "quantity": "Tj_s6",
+     "op": "<=",
+     "value": "150",
+     "why": "Tj max 150 C (D2PAK on PCB, RthJA(PCB)=40 max, Tj<=150); published ID 24.7 A"
+    }
+   ]
+  }
+ ]
+}

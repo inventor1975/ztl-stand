@@ -1,0 +1,46 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Lins": {"role": "given", "range": ["39.8", "40.2"], "unit": "mm", "why": "installed length 40.0 +-0.2"},
+  "lift": {"role": "given", "range": ["7.9", "8.1"], "unit": "mm", "why": "further compression at full lift 8.0 +-0.1"},
+  "G": {"role": "given", "value": "79.3", "tolerance": "0.02", "unit": "GPa", "ground": "spring steel shear modulus"},
+  "pi": {"role": "given", "range": ["3.14159", "3.14160"], "unit": "", "why": "pi, bracketed"},
+  "Finst": {"role": "derived", "unit": "N"},
+  "Ffull": {"role": "derived", "unit": "N"},
+  "tau": {"role": "derived", "unit": "MPa"},
+  "gap": {"role": "derived", "unit": "mm"}
+ },
+ "slots": {"S": {"from": ["springs"]}},
+ "define": {
+  "k": "G*S.dw*S.dw*S.dw*S.dw/(8*S.Dm*S.Dm*S.Dm*S.n)",
+  "Kw": "(4*S.Dm/S.dw - 1)/(4*S.Dm/S.dw - 4) + 0.615*S.dw/S.Dm"
+ },
+ "laws": [
+  {"zfl": "Finst == k*(S.L0 - Lins)", "source": "F = k (L0 - L) at installed length"},
+  {"zfl": "Ffull == k*(S.L0 - Lins + lift)", "source": "F = k (L0 - L) at full lift, L = Lins - lift"},
+  {"zfl": "tau == Kw*8*k*(S.L0 - Lins + lift)*S.Dm/(pi*S.dw*S.dw*S.dw)", "source": "corrected shear stress, Wahl factor, at full lift"},
+  {"zfl": "gap == (Lins - lift) - (S.n + 2)*S.dw", "source": "full-lift length minus solid length Ls=(n+2)d"}
+ ],
+ "requirements": [
+  {"quantity": "Finst", "op": ">=", "value": "140", "why": "force at installed length >= 140 N"},
+  {"quantity": "Finst", "op": "<=", "value": "240", "why": "force at installed length <= 240 N"},
+  {"quantity": "Ffull", "op": "<=", "value": "420", "why": "force at full lift <= 420 N"},
+  {"quantity": "tau", "op": "<=", "value": "650", "why": "shear stress at full lift <= 650 MPa"},
+  {"quantity": "gap", "op": ">=", "value": "0.5", "why": "solid length at least 0.5 mm shorter than full-lift length"}
+ ],
+ "objective": {"minimize": "S.price", "why": "cheapest spring"},
+ "catalog": {
+  "springs": {
+   "ground": "supplier catalog",
+   "items": [
+    {"dw": {"range": ["3.18", "3.22"]}, "Dm": {"range": ["23.8", "24.2"]}, "n": {"range": ["5.75", "6.25"]}, "L0": {"range": ["51.5", "52.5"]}, "price": "0.95"},
+    {"dw": {"range": ["3.48", "3.52"]}, "Dm": {"range": ["23.8", "24.2"]}, "n": {"range": ["5.75", "6.25"]}, "L0": {"range": ["49.5", "50.5"]}, "price": "1.20"},
+    {"dw": {"range": ["3.48", "3.52"]}, "Dm": {"range": ["21.8", "22.2"]}, "n": {"range": ["6.25", "6.75"]}, "L0": {"range": ["48.5", "49.5"]}, "price": "1.35"},
+    {"dw": {"range": ["3.77", "3.83"]}, "Dm": {"range": ["24.75", "25.25"]}, "n": {"range": ["5.25", "5.75"]}, "L0": {"range": ["48.0", "49.0"]}, "price": "1.60"}
+   ],
+   "fields": {
+    "dw": {"unit": "mm"}, "Dm": {"unit": "mm"}, "n": {"unit": ""}, "L0": {"unit": "mm"}, "price": {"unit": "USD"}
+   }
+  }
+ }
+}

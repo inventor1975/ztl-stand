@@ -1,0 +1,68 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Vcell": {
+   "role": "given",
+   "range": [
+    "3.2",
+    "4.2"
+   ],
+   "unit": "V",
+   "why": "empty .. full"
+  },
+  "r": {
+   "role": "given",
+   "value": "0.05",
+   "tolerance": "0.3",
+   "unit": "ohm",
+   "why": "cell internal resistance"
+  },
+  "I": {
+   "role": "given",
+   "range": [
+    "0.5",
+    "5"
+   ],
+   "unit": "A",
+   "why": "load current"
+  },
+  "V": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {
+  "PACK": {
+   "from": [
+    "cell_counts"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "V == PACK.N*(Vcell - I*r)",
+   "source": "series cells with internal resistance"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "V",
+   "op": "within",
+   "value": [
+    "20",
+    "30"
+   ],
+   "why": "the load's input range"
+  }
+ ],
+ "catalog": {
+  "cell_counts": {
+   "integers": {
+    "field": "N",
+    "from": "1",
+    "to": "12",
+    "unit": ""
+   }
+  }
+ }
+}

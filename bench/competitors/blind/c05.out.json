@@ -1,0 +1,714 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL d606f40",
+  "verdict": "EARNED",
+  "modes": [
+    "S1 tool A alone",
+    "S2 tool B alone",
+    "S3 both tools"
+  ],
+  "designs_tried": 48,
+  "undecided": 0,
+  "design": {
+    "C": {
+      "catalog": "compressors",
+      "FAD": {
+        "nominal": "40",
+        "tolerance": "0"
+      },
+      "cutin": {
+        "nominal": "34/5 (~6.8)",
+        "tolerance": "0"
+      },
+      "pout": {
+        "nominal": "8",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "8200",
+        "tolerance": "0"
+      },
+      "name": "K40"
+    },
+    "D": {
+      "catalog": "dryers",
+      "Qr": {
+        "nominal": "50",
+        "tolerance": "0"
+      },
+      "dpr": {
+        "nominal": "3/10 (~0.3)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "1900",
+        "tolerance": "0"
+      },
+      "name": "D50"
+    },
+    "P": {
+      "catalog": "pipes",
+      "d": {
+        "nominal": "50",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "21",
+        "tolerance": "0"
+      },
+      "name": "d50"
+    }
+  },
+  "per_mode": {
+    "S1 tool A alone": {
+      "guaranteed": {
+        "Pnf": [
+          "163/20 (~8.15)",
+          "163/20 (~8.15)"
+        ],
+        "PinA": [
+          "983261475038623211334598806149/156010119486573427818496000000 (~6.30255)",
+          "805993665219679760361672537841/124808095589258742254796800000 (~6.45786)"
+        ]
+      },
+      "how": {
+        "Pnf": "ZTL, outer range",
+        "PinA": "ZTL, interval reading of the definition (sound, may be wide)"
+      },
+      "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)"
+    },
+    "S2 tool B alone": {
+      "guaranteed": {
+        "Pnf": [
+          "163/20 (~8.15)",
+          "163/20 (~8.15)"
+        ],
+        "PinB": [
+          "1027323273580974878216518031/158814937259593170944000000 (~6.46868)",
+          "2160250385473265048486420431/330335069499953795563520000 (~6.53957)"
+        ]
+      },
+      "how": {
+        "Pnf": "ZTL, outer range",
+        "PinB": "ZTL, interval reading of the definition (sound, may be wide)"
+      },
+      "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)"
+    },
+    "S3 both tools": {
+      "guaranteed": {
+        "Pnf": [
+          "163/20 (~8.15)",
+          "163/20 (~8.15)"
+        ],
+        "Qt": [
+          "24",
+          "31"
+        ],
+        "PinA": [
+          "239972331346518231181821246569/39002529871643356954624000000 (~6.15274)",
+          "398890170783572978625785498837/62404047794629371127398400000 (~6.39206)"
+        ],
+        "PinB": [
+          "12899673797598066708642135107/2064594184374711222272000000 (~6.24804)",
+          "818920107091404135498792311/127051949807674536755200000 (~6.44555)"
+        ]
+      },
+      "how": {
+        "Pnf": "ZTL, outer range",
+        "Qt": "ZTL, outer range",
+        "PinA": "ZTL, interval reading of the definition (sound, may be wide)",
+        "PinB": "ZTL, interval reading of the definition (sound, may be wide)"
+      },
+      "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)"
+    }
+  },
+  "objective": {
+    "minimize": "C.price + D.price + P.price*Lmain",
+    "value": "13880",
+    "unit": "EUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode"
+  },
+  "designs": [
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S2 tool B alone",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.116549805879 (an exact fraction of 66 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S2 tool B alone",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.0762548840038 (an exact fraction of 66 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.214975761424 (an exact fraction of 76 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S2 tool B alone",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.0586243058788 (an exact fraction of 68 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.0537340079523 (an exact fraction of 75 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S2 tool B alone",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.116549805879 (an exact fraction of 66 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.206552855658 (an exact fraction of 75 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D60, Qr=60, dpr=3/10, price=2500); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S2 tool B alone",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.0520779308788 (an exact fraction of 66 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.16720422698 (an exact fraction of 70 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S2 tool B alone",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.0762548840038 (an exact fraction of 66 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.0636734658371 (an exact fraction of 65 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.214975761424 (an exact fraction of 76 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D60, Qr=60, dpr=3/10, price=2500); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.169118480658 (an exact fraction of 73 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S2 tool B alone",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.0586243058788 (an exact fraction of 68 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.0537340079523 (an exact fraction of 75 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.103519574063 (an exact fraction of 68 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.206552855658 (an exact fraction of 75 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d50, d=50, price=21)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.0457705643349 (an exact fraction of 67 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D60, Qr=60, dpr=3/10, price=2500); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S2 tool B alone",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.0520779308788 (an exact fraction of 66 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.16720422698 (an exact fraction of 70 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D60, Qr=60, dpr=3/10, price=2500); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.0436172407294 (an exact fraction of 67 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d50, d=50, price=21)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.0085902926877 (an exact fraction of 68 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.0636734658371 (an exact fraction of 65 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D60, Qr=60, dpr=3/10, price=2500); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.169118480658 (an exact fraction of 73 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D60, Qr=60, dpr=3/10, price=2500); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d50, d=50, price=21)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R2 compressor capacity: 0.94 FAD >= QA+QB+leak (S3, upper ends)",
+      "by_at_witness": "23/25 (~0.92)",
+      "unit": "L/s",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.103519574063 (an exact fraction of 68 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K50, FAD=50, cutin=73/10, pout=42/5, price=10600); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D60, Qr=60, dpr=3/10, price=2500); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d50, d=50, price=21)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.0457705643349 (an exact fraction of 67 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K50, FAD=50, cutin=73/10, pout=42/5, price=10600); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K32, FAD=32, cutin=34/5, pout=8, price=6900); D=dryers(name=D60, Qr=60, dpr=3/10, price=2500); P=pipes(name=d50, d=50, price=21)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R2 compressor capacity: 0.94 FAD >= QA+QB+leak (S3, upper ends)",
+      "by_at_witness": "23/25 (~0.92)",
+      "unit": "L/s",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D60, Qr=60, dpr=3/10, price=2500); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool B minimum inlet pressure",
+      "by_at_witness": "~0.0436172407294 (an exact fraction of 67 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d40, d=40, price=14)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K50, FAD=50, cutin=73/10, pout=42/5, price=10600); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d50, d=50, price=21)",
+      "verdict": "REFUTED",
+      "mode": "S3 both tools",
+      "fails": "R1 tool A minimum inlet pressure",
+      "by_at_witness": "~0.0085902926877 (an exact fraction of 68 digits)",
+      "unit": "bar",
+      "failing_modes": [
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K50, FAD=50, cutin=73/10, pout=42/5, price=10600); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d25, d=25, price=6)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K50, FAD=50, cutin=73/10, pout=42/5, price=10600); D=dryers(name=D40, Qr=40, dpr=7/20, price=1450); P=pipes(name=d32, d=32, price=9)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40M, FAD=40, cutin=73/10, pout=42/5, price=8900); D=dryers(name=D30, Qr=30, dpr=2/5, price=1100); P=pipes(name=d50, d=50, price=21)",
+      "verdict": "REFUTED",
+      "mode": "S1 tool A alone",
+      "fails": "R3 no-flow protection vs tool A maximum inlet pressure",
+      "by_at_witness": "1/20 (~0.05)",
+      "unit": "bar",
+      "failing_modes": [
+        "S1 tool A alone",
+        "S2 tool B alone",
+        "S3 both tools"
+      ]
+    },
+    {
+      "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d50, d=50, price=21)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 47,
+    "EARNED": 1
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

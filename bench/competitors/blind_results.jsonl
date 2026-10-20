@@ -1,0 +1,36 @@
+{"result": "FOUND", "cost": "5651/2", "design": "C1=cables(type=C50, R20=387/1000, Iz30=190, price=14, S=50); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B40, In=40, price=48)", "checked": 568, "optimal": true, "undecided_cheaper": 0, "brick": "c02", "tool": "z3", "wall_s": 312.74, "at": "2026-10-18 19:30:20"}
+{"result": "BUDGET", "checked": 5, "undecided_cheaper": 5, "brick": "c02", "tool": "cvc5", "wall_s": 901.0, "at": "2026-10-18 19:40:09"}
+{"result": "FOUND", "cost": "5651/2", "design": "C1=cables(type=C50, R20=387/1000, Iz30=190, price=14, S=50); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B40, In=40, price=48)", "checked": 568, "optimal": false, "undecided_cheaper": 567, "brick": "c02", "tool": "dreal", "wall_s": 56.59, "at": "2026-10-18 19:26:04"}
+{"result": "NOT EXPRESSIBLE: exp", "checked": 1, "brick": "c03", "tool": "z3", "wall_s": 0.05, "at": "2026-10-18 19:25:08"}
+{"result": "BUDGET", "checked": 15, "undecided_cheaper": 15, "brick": "c03", "tool": "cvc5", "wall_s": 900.2, "at": "2026-10-18 19:40:08"}
+{"result": "BUDGET", "checked": 88, "undecided_cheaper": 88, "brick": "c03", "tool": "dreal", "wall_s": 947.04, "at": "2026-10-18 19:40:55"}
+{"result": "NOT EXPRESSIBLE: ln", "checked": 1, "brick": "c04", "tool": "z3", "wall_s": 0.01, "at": "2026-10-18 19:25:08"}
+{"result": "BUDGET", "checked": 15, "undecided_cheaper": 15, "brick": "c04", "tool": "cvc5", "wall_s": 900.14, "at": "2026-10-18 19:40:08"}
+{"result": "NONE PROVED", "checked": 20, "undecided_cheaper": 20, "brick": "c04", "tool": "dreal", "wall_s": 0.14, "at": "2026-10-18 19:25:08"}
+{"result": "NOT EXPRESSIBLE: non-integer power", "checked": 1, "brick": "c05", "tool": "z3", "wall_s": 0.11, "at": "2026-10-18 19:25:08"}
+{"result": "BUDGET", "checked": 5, "undecided_cheaper": 5, "brick": "c05", "tool": "cvc5", "wall_s": 900.25, "at": "2026-10-18 19:40:08"}
+{"result": "FOUND", "cost": "13880", "design": "C=compressors(name=K40, FAD=40, cutin=34/5, pout=8, price=8200); D=dryers(name=D50, Qr=50, dpr=3/10, price=1900); P=pipes(name=d50, d=50, price=21)", "checked": 48, "optimal": false, "undecided_cheaper": 47, "brick": "c05", "tool": "dreal", "wall_s": 1.63, "at": "2026-10-18 19:25:09"}
+{"result": "FOUND", "cost": "625", "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)", "checked": 37, "optimal": true, "undecided_cheaper": 0, "brick": "c08", "tool": "z3", "wall_s": 0.55, "at": "2026-10-18 19:25:08"}
+{"result": "FOUND", "cost": "625", "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)", "checked": 37, "optimal": false, "undecided_cheaper": 2, "brick": "c08", "tool": "cvc5", "wall_s": 152.87, "at": "2026-10-18 19:27:40"}
+{"result": "FOUND", "cost": "625", "design": "CY=cylinders(name=CY10, Vw=10, Pn=200, mass=14, price=165); NC=ncyl(n=1); R1=regulators(name=RB, acc=1/20, leak=3/20, pmin=10, price=140); R2=regulators(name=RC, acc=1/50, leak=1/20, pmin=10, price=320); CV=CV_none(name=none, kappa=0, pmin=0, price=0)", "checked": 37, "optimal": false, "undecided_cheaper": 36, "brick": "c08", "tool": "dreal", "wall_s": 0.49, "at": "2026-10-18 19:25:08"}
+{"result": "NOT EXPRESSIBLE: tan", "checked": 1, "brick": "c09", "tool": "z3", "wall_s": 0.01, "at": "2026-10-18 19:25:08"}
+{"result": "BUDGET", "checked": 15, "undecided_cheaper": 15, "brick": "c09", "tool": "cvc5", "wall_s": 900.21, "at": "2026-10-18 19:40:08"}
+{"result": "FOUND", "cost": "311", "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=9); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)", "checked": 67, "optimal": false, "undecided_cheaper": 66, "brick": "c09", "tool": "dreal", "wall_s": 0.58, "at": "2026-10-18 19:25:08"}
+{"result": "NOT EXPRESSIBLE: non-integer power", "wall": 0.0, "brick": "c01", "tool": "z3", "wall_s": 0.0, "at": "2026-10-18 19:25:08"}
+{"result": "UNDECIDED (TIMEOUT)", "wall": 60.01, "brick": "c01", "tool": "cvc5", "wall_s": 60.01, "at": "2026-10-18 19:26:08"}
+{"result": "HOLDS", "wall": 0.01, "brick": "c01", "tool": "dreal", "wall_s": 0.01, "at": "2026-10-18 19:25:08"}
+{"result": "HOLDS", "wall": 0.02, "brick": "c06", "tool": "z3", "wall_s": 0.02, "at": "2026-10-18 19:25:08"}
+{"result": "HOLDS", "wall": 0.13, "brick": "c06", "tool": "cvc5", "wall_s": 0.13, "at": "2026-10-18 19:25:08"}
+{"result": "UNDECIDED (DELTA-SAT)", "wall": 0.01, "brick": "c06", "tool": "dreal", "wall_s": 0.01, "at": "2026-10-18 19:25:08"}
+{"result": "stand REFUTED: no design to check (round B)", "brick": "c07", "tool": "z3", "wall_s": 0.0, "at": "2026-10-18 19:25:08"}
+{"result": "stand REFUTED: no design to check (round B)", "brick": "c07", "tool": "cvc5", "wall_s": 0.0, "at": "2026-10-18 19:25:08"}
+{"result": "stand REFUTED: no design to check (round B)", "brick": "c07", "tool": "dreal", "wall_s": 0.0, "at": "2026-10-18 19:25:08"}
+{"result": "NOT EXPRESSIBLE: exp", "wall": 0.0, "brick": "c10", "tool": "z3", "wall_s": 0.0, "at": "2026-10-18 19:25:08"}
+{"result": "UNDECIDED (TIMEOUT)", "wall": 60.04, "brick": "c10", "tool": "cvc5", "wall_s": 60.05, "at": "2026-10-18 19:26:08"}
+{"result": "HOLDS", "wall": 0.01, "brick": "c10", "tool": "dreal", "wall_s": 0.01, "at": "2026-10-18 19:25:08"}
+{"result": "stand REFUTED: no design to check (round B)", "brick": "c11", "tool": "z3", "wall_s": 0.0, "at": "2026-10-18 19:25:08"}
+{"result": "stand REFUTED: no design to check (round B)", "brick": "c11", "tool": "cvc5", "wall_s": 0.0, "at": "2026-10-18 19:25:08"}
+{"result": "stand REFUTED: no design to check (round B)", "brick": "c11", "tool": "dreal", "wall_s": 0.0, "at": "2026-10-18 19:25:08"}
+{"result": "NOT EXPRESSIBLE: exp", "wall": 0.0, "brick": "c12", "tool": "z3", "wall_s": 0.0, "at": "2026-10-18 19:25:08"}
+{"result": "UNDECIDED (TIMEOUT)", "wall": 60.01, "brick": "c12", "tool": "cvc5", "wall_s": 60.01, "at": "2026-10-18 19:26:08"}
+{"result": "UNDECIDED (DELTA-SAT)", "wall": 0.06, "brick": "c12", "tool": "dreal", "wall_s": 0.06, "at": "2026-10-18 19:25:08"}

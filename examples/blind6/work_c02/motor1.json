@@ -1,0 +1,55 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "M1 datasheet: running current, starting current = kls x 53 A",
+ "interface": {
+  "inputs": {},
+  "outputs": [
+   "Irun",
+   "Istart"
+  ]
+ },
+ "quantities": {
+  "Ir": {
+   "role": "given",
+   "range": [
+    "50",
+    "56"
+   ],
+   "unit": "A"
+  },
+  "kls": {
+   "role": "given",
+   "range": [
+    "5.8",
+    "6.4"
+   ],
+   "unit": ""
+  },
+  "Iref": {
+   "role": "given",
+   "value": "53",
+   "unit": "A"
+  },
+  "Irun": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Istart": {
+   "role": "derived",
+   "unit": "A"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "Irun == Ir",
+   "source": "datasheet"
+  },
+  {
+   "zfl": "Istart == kls*Iref",
+   "source": "datasheet: I_s = k_ls x base"
+  }
+ ],
+ "requirements": []
+}

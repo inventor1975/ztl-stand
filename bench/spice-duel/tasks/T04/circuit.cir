@@ -1,0 +1,9 @@
+Single-supply amplifier Vout = -16 Vin + 10.4 (TI SLYT120, Mancini 2002; all resistors and the 2.5 V reference 1 %; published: slope -16.32..-15.68, intercept 9.947..10.86); Vin = 0.4 V
+vin in 0 0.4
+vref ref 0 2.5
+rg in m 10k
+rf m out 160k
+r2 ref p 38.3k
+r1 p 0 12.4k
+e1 out 0 p m 1meg
+.end

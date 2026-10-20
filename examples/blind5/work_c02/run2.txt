@@ -1,0 +1,729 @@
+[stand] 1/72 designs, 0 s: 
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 72,
+  "failed_at_nominal": 64,
+  "judged": 8,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=400, uk=4, P0=650, Pk=4600, price=29/5, mass=1150); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~50099.4607343 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=400, uk=4, P0=650, Pk=4600, price=29/5, mass=1150); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~39906.460956 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=400, uk=4, P0=650, Pk=4600, price=29/5, mass=1150); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~36698.8360668 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=400, uk=4, P0=650, Pk=4600, price=29/5, mass=1150); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~34750.4611777 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=630, uk=4, P0=860, Pk=6500, price=37/5, mass=1650); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~19056.5984355 (an exact fraction of 130 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=630, uk=4, P0=860, Pk=6500, price=37/5, mass=1650); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~14192.8450153 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=630, uk=4, P0=860, Pk=6500, price=37/5, mass=1650); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~12836.932024 (an exact fraction of 130 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=630, uk=4, P0=860, Pk=6500, price=37/5, mass=1650); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~12198.3281786 (an exact fraction of 130 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=800, uk=6, P0=1000, Pk=7600, price=44/5, mass=2000); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~8318.77725982 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=800, uk=6, P0=1000, Pk=7600, price=44/5, mass=2000); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~5394.05996008 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=800, uk=6, P0=1000, Pk=7600, price=44/5, mass=2000); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~4711.88881021 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=800, uk=6, P0=1000, Pk=7600, price=44/5, mass=2000); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~4549.84266034 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1000, uk=6, P0=1150, Pk=9500, price=51/5, mass=2350); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~3321.02180786 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1000, uk=6, P0=1150, Pk=9500, price=51/5, mass=2350); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~1419.24796806 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1000, uk=6, P0=1150, Pk=9500, price=51/5, mass=2350); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~1092.51104817 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1000, uk=6, P0=1150, Pk=9500, price=51/5, mass=2350); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~1181.87412827 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1250, uk=6, P0=1350, Pk=11000, price=62/5, mass=2900); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~265.517777513 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1250, uk=6, P0=1350, Pk=11000, price=62/5, mass=2900); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~227.592196133 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1250, uk=6, P0=1350, Pk=11000, price=62/5, mass=2900); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~94.4836728046 (an exact fraction of 126 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1250, uk=6, P0=1350, Pk=11000, price=62/5, mass=2900); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~15.2086302187 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1600, uk=6, P0=1650, Pk=14000, price=31/2, mass=3600); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "600",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1600, uk=6, P0=1650, Pk=14000, price=31/2, mass=3600); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "600",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1600, uk=6, P0=1650, Pk=14000, price=31/2, mass=3600); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "600",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_S_standard(cls=S, Sn=1600, uk=6, P0=1650, Pk=14000, price=31/2, mass=3600); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "600",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=400, uk=4, P0=430, Pk=4600, price=69/10, mass=1240); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~48172.2607343 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=400, uk=4, P0=430, Pk=4600, price=69/10, mass=1240); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~37979.260956 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=400, uk=4, P0=430, Pk=4600, price=69/10, mass=1240); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~34771.6360668 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=400, uk=4, P0=430, Pk=4600, price=69/10, mass=1240); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~32823.2611777 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=630, uk=4, P0=600, Pk=6000, price=44/5, mass=1780); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~13431.0754789 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=630, uk=4, P0=600, Pk=6000, price=44/5, mass=1780); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~9109.91847566 (an exact fraction of 127 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=630, uk=4, P0=600, Pk=6000, price=44/5, mass=1780); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~7942.53725292 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=630, uk=4, P0=600, Pk=6000, price=44/5, mass=1780); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~7437.28754947 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=800, uk=6, P0=700, Pk=7000, price=21/2, mass=2160); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~3199.29484457 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=800, uk=6, P0=700, Pk=7000, price=21/2, mass=2160); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~678.371015864 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=800, uk=6, P0=700, Pk=7000, price=21/2, mass=2160); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~136.50285151 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=800, uk=6, P0=700, Pk=7000, price=21/2, mass=2160); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~73.6971871567 (an exact fraction of 129 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1000, uk=6, P0=770, Pk=9000, price=12, mass=2540); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R3 year-30 voltage drop <= 3.8 %, winter",
+      "by": "~0.0673408771975 (an exact fraction of 194 digits)",
+      "unit": "%"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1000, uk=6, P0=770, Pk=9000, price=12, mass=2540); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R3 year-30 voltage drop <= 3.8 %, winter",
+      "by": "~0.142712443845 (an exact fraction of 193 digits)",
+      "unit": "%"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1000, uk=6, P0=770, Pk=9000, price=12, mass=2540); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~31.667525237 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1000, uk=6, P0=770, Pk=9000, price=12, mass=2540); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R4 summer-night voltage rise",
+      "by": "~0.0443747639373 (an exact fraction of 126 digits)",
+      "unit": "%"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1250, uk=6, P0=950, Pk=10500, price=73/5, mass=3130); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "130",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1250, uk=6, P0=950, Pk=10500, price=73/5, mass=3130); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "130",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1250, uk=6, P0=950, Pk=10500, price=73/5, mass=3130); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "130",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1250, uk=6, P0=950, Pk=10500, price=73/5, mass=3130); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "130",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1600, uk=6, P0=1150, Pk=13500, price=18, mass=3890); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "890",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1600, uk=6, P0=1150, Pk=13500, price=18, mass=3890); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "890",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1600, uk=6, P0=1150, Pk=13500, price=18, mass=3890); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "890",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_L_lowloss(cls=L, Sn=1600, uk=6, P0=1150, Pk=13500, price=18, mass=3890); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "890",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=400, uk=4, P0=190, Pk=4800, price=42/5, mass=1380); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~49391.837288 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=400, uk=4, P0=190, Pk=4800, price=42/5, mass=1380); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~38660.4462149 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=400, uk=4, P0=190, Pk=4800, price=42/5, mass=1380); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~35265.7506784 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=400, uk=4, P0=190, Pk=4800, price=42/5, mass=1380); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~33185.0551419 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=630, uk=4, P0=260, Pk=6700, price=54/5, mass=1980); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~15139.7676182 (an exact fraction of 130 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=630, uk=4, P0=260, Pk=6700, price=54/5, mass=1980); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~10058.9756312 (an exact fraction of 128 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=630, uk=4, P0=260, Pk=6700, price=54/5, mass=1980); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~8627.64993243 (an exact fraction of 130 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=630, uk=4, P0=260, Pk=6700, price=54/5, mass=1980); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~7935.70443024 (an exact fraction of 130 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=800, uk=6, P0=300, Pk=7900, price=64/5, mass=2400); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~3432.51846745 (an exact fraction of 130 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=800, uk=6, P0=300, Pk=7900, price=64/5, mass=2400); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 year-1 annual loss energy",
+      "by": "~305.90443219 (an exact fraction of 130 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=800, uk=6, P0=300, Pk=7900, price=64/5, mass=2400); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R2 year-30 S <= 1.05 Sn, winter",
+      "by": "~38.7525739446 (an exact fraction of 57 digits)",
+      "unit": "kW"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=800, uk=6, P0=300, Pk=7900, price=64/5, mass=2400); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R2 year-30 S <= 1.05 Sn, winter",
+      "by": "~18.2076646212 (an exact fraction of 57 digits)",
+      "unit": "kW"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1000, uk=6, P0=340, Pk=9800, price=73/5, mass=2820); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R3 year-30 voltage drop <= 3.8 %, winter",
+      "by": "~0.12390734982 (an exact fraction of 195 digits)",
+      "unit": "%"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1000, uk=6, P0=340, Pk=9800, price=73/5, mass=2820); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R3 year-30 voltage drop <= 3.8 %, winter",
+      "by": "~0.203749085469 (an exact fraction of 194 digits)",
+      "unit": "%"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1000, uk=6, P0=340, Pk=9800, price=73/5, mass=2820); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "EARNED",
+      "objective_worst": {
+        "proved_at_most": "~141514.827352 (an exact fraction of 167 digits)",
+        "reached_at_least": "~131759.117456 (an exact fraction of 266 digits)"
+      }
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1000, uk=6, P0=340, Pk=9800, price=73/5, mass=2820); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R4 summer-night voltage rise",
+      "by": "~0.0368336543573 (an exact fraction of 126 digits)",
+      "unit": "%"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1250, uk=6, P0=400, Pk=11500, price=35/2, mass=3480); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "480",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1250, uk=6, P0=400, Pk=11500, price=35/2, mass=3480); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "480",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1250, uk=6, P0=400, Pk=11500, price=35/2, mass=3480); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "480",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1250, uk=6, P0=400, Pk=11500, price=35/2, mass=3480); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "480",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1600, uk=6, P0=480, Pk=14500, price=22, mass=4320); B=banks(name=none, Qc=0, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "1320",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1600, uk=6, P0=480, Pk=14500, price=22, mass=4320); B=banks(name=C100, Qc=100, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "1320",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1600, uk=6, P0=480, Pk=14500, price=22, mass=4320); B=banks(name=C150, Qc=150, price=17/10)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "1320",
+      "unit": "kg"
+    },
+    {
+      "design": "T=cls_A_amorphous(cls=A, Sn=1600, uk=6, P0=480, Pk=14500, price=22, mass=4320); B=banks(name=C200, Qc=200, price=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R5 mass",
+      "by": "1320",
+      "unit": "kg"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 71,
+    "EARNED": 1
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "Tot",
+    "case": "worst",
+    "value": "~141.514827352 (an exact fraction of 170 digits)",
+    "unit": "kEUR",
+    "value_is": "a proved upper bound of the worst case over the box",
+    "reached_at_least": "~131.759117456 (an exact fraction of 269 digits)",
+    "optimal": true,
+    "note": "its proved worst case is at or below the worst case every other earned design reaches at a corner of its box; the rest refuted, none open"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "T": {
+      "catalog": "cls_A_amorphous",
+      "Sn": {
+        "nominal": "1000",
+        "tolerance": "0"
+      },
+      "uk": {
+        "nominal": "6",
+        "tolerance": "0"
+      },
+      "P0": {
+        "nominal": "340",
+        "tolerance": "0"
+      },
+      "Pk": {
+        "nominal": "9800",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "73/5 (~14.6)",
+        "tolerance": "0"
+      },
+      "mass": {
+        "nominal": "2820",
+        "tolerance": "0"
+      },
+      "cls": "A"
+    },
+    "B": {
+      "catalog": "banks",
+      "Qc": {
+        "nominal": "150",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "17/10 (~1.7)",
+        "tolerance": "0"
+      },
+      "name": "C150"
+    }
+  },
+  "guaranteed": {
+    "E1": [
+      "419103363576985519684112641395333/18490000000000000000000000000 (~22666.5)",
+      "33144925314595400605361974480029/1050625000000000000000000000 (~31547.8)"
+    ],
+    "S30w": [
+      "394316225501973501/500000000000000 (~788.632)",
+      "195474180936436189/200000000000000 (~977.371)"
+    ],
+    "dU30w": [
+      "~2.41361259353 (an exact fraction of 93 digits)",
+      "~3.70777780312 (an exact fraction of 81 digits)"
+    ],
+    "S30sp": [
+      "18319326464828949/31250000000000 (~586.218)",
+      "367289771713118429/500000000000000 (~734.58)"
+    ],
+    "dU30sp": [
+      "~1.47228151964 (an exact fraction of 91 digits)",
+      "~2.50759806885 (an exact fraction of 94 digits)"
+    ],
+    "S30su": [
+      "477355506456590109/1000000000000000 (~477.356)",
+      "307983265247247359/500000000000000 (~615.967)"
+    ],
+    "dU30su": [
+      "~1.05924733045 (an exact fraction of 93 digits)",
+      "~2.00188352817 (an exact fraction of 92 digits)"
+    ],
+    "S30au": [
+      "32158804072372117/50000000000000 (~643.176)",
+      "200584512731318121/250000000000000 (~802.338)"
+    ],
+    "dU30au": [
+      "~1.84219455571 (an exact fraction of 92 digits)",
+      "~2.94182919474 (an exact fraction of 81 digits)"
+    ],
+    "dUn": [
+      "-132949763351239283147409/215000000000000000000000 (~-0.618371)",
+      "-227174154151/500000000000 (~-0.454348)"
+    ],
+    "Mass": [
+      "2820",
+      "2820"
+    ]
+  },
+  "guaranteed_unit": {
+    "E1": "kWh",
+    "S30w": "kW",
+    "dU30w": "%",
+    "S30sp": "kW",
+    "dU30sp": "%",
+    "S30su": "kW",
+    "dU30su": "%",
+    "S30au": "kW",
+    "dU30au": "%",
+    "dUn": "%",
+    "Mass": "kg"
+  },
+  "how": {
+    "E1": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~22666.4880247 (~22666.5)', '~31547.8170752 (~31547.8)']",
+    "S30w": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~788.632451004 (~788.632)', '~977.370904682 (~977.371)']",
+    "dU30w": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~2.41361259354 (~2.41361)', '~3.70777780308 (~3.70778)']",
+    "S30sp": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~586.218446875 (~586.218)', '~734.579543426 (~734.58)']",
+    "dU30sp": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~1.47228151964 (~1.47228)', '~2.50759806882 (~2.5076)']",
+    "S30su": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~477.355506457 (~477.356)', '~615.966530494 (~615.967)']",
+    "dU30su": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~1.05924733045 (~1.05925)', '~2.00188352814 (~2.00188)']",
+    "S30au": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~643.176081448 (~643.176)', '~802.338050925 (~802.338)']",
+    "dU30au": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~1.84219455572 (~1.84219)', '~2.9418291947 (~2.94183)']",
+    "dUn": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~-0.618370992321 (~-0.618371)', '~-0.454348308303 (~-0.454348)']",
+    "Mass": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "E1",
+      "op": "<=",
+      "value": "32000",
+      "why": "R1 year-1 annual loss energy"
+    },
+    {
+      "quantity": "S30w",
+      "op": "<=",
+      "value": "1.05*T.Sn",
+      "why": "R2 year-30 S <= 1.05 Sn, winter"
+    },
+    {
+      "quantity": "dU30w",
+      "op": "<=",
+      "value": "3.8",
+      "why": "R3 year-30 voltage drop <= 3.8 %, winter"
+    },
+    {
+      "quantity": "S30sp",
+      "op": "<=",
+      "value": "1.05*T.Sn",
+      "why": "R2 year-30 S <= 1.05 Sn, spring"
+    },
+    {
+      "quantity": "dU30sp",
+      "op": "<=",
+      "value": "3.8",
+      "why": "R3 year-30 voltage drop <= 3.8 %, spring"
+    },
+    {
+      "quantity": "S30su",
+      "op": "<=",
+      "value": "1.05*T.Sn",
+      "why": "R2 year-30 S <= 1.05 Sn, summer"
+    },
+    {
+      "quantity": "dU30su",
+      "op": "<=",
+      "value": "3.8",
+      "why": "R3 year-30 voltage drop <= 3.8 %, summer"
+    },
+    {
+      "quantity": "S30au",
+      "op": "<=",
+      "value": "1.05*T.Sn",
+      "why": "R2 year-30 S <= 1.05 Sn, autumn"
+    },
+    {
+      "quantity": "dU30au",
+      "op": "<=",
+      "value": "3.8",
+      "why": "R3 year-30 voltage drop <= 3.8 %, autumn"
+    },
+    {
+      "quantity": "dUn",
+      "op": ">=",
+      "value": "-0.8",
+      "why": "R4 summer-night voltage rise"
+    },
+    {
+      "quantity": "Mass",
+      "op": "<=",
+      "value": "Mmax",
+      "why": "R5 mass"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "Mass = 2820 by exact elimination (credit)",
+    "Lw -> [2086638699193783951954593969/577812500000000000000000, 5125] by [Lw == T__P0 + T__Pk * (pow(Pw, 2) + pow(Pw * sqrt(1 - pow(pfw, 2)) / pfw - B__Qc, 2)) / pow(T__Sn, 2) + kb * B__Qc], interval reading, sound, may be wider than the truth (credit)",
+    "LYw -> [11123536924910220050269209131686130243806000156791979794273278402675184200336661901948875741900901560779227453508541375422268482159534077744074843632158629071564491797/131890710348574429296140246245486907860461116079985883570455436153302799548202377566011553086179125166098217785629748144415884780755732208490371704101562500000000, 1873563608811539635626654802074635862060134616008009449240263297664269076680969571090259843041830089105992075820720809286196776761067605230394557771/12864877534369002862663214404382109757831709326017421195420825992547501054795893605456570259431940683736428354677627794444561004638671875000000] by [LYw == (1 - pow(1 / 1.03, 30)) / (1 - 1 / 1.03) / 1.03 * (T__P0 + kb * B__Qc) + T__Pk / pow(T__Sn, 2) * ((1 - pow(1.012 * 1.012 / 1.03, 30)) / (1 - 1.012 * 1.012 / 1.03) / 1.03 * (pow(Pw, 2) + pow(Pw * sqrt(1 - pow(pfw, 2)) / pfw, 2)) - 2 * ((1 - pow(1.012 / 1.03, 30)) / (1 - 1.012 / 1.03) / 1.03) * (Pw * sqrt(1 - pow(pfw, 2)) / pfw) * B__Qc + (1 - pow(1 / 1.03, 30)) / (1 - 1 / 1.03) / 1.03 * pow(B__Qc, 2))], interval reading, sound, may be wider than the truth (credit)",
+    "S30w -> [394316225501973501/500000000000, 195474180936436189/200000000000] by [S30w == sqrt(pow(pow(1.012, 29) * Pw, 2) + pow(pow(1.012, 29) * (Pw * sqrt(1 - pow(pfw, 2)) / pfw) - B__Qc, 2))], interval reading, sound, may be wider than the truth (credit)",
+    "dU30w -> [450097170999938695292860646073236925935438648874071066563063585850582319210939298694990230333/18648277366750676264928188174962997436523437500000000000000000000000000000000000000000000000000, 2572787679510958481036286025795003664779503104073529280103042157139673302736132363/69388939039072283776476979255676269531250000000000000000000000000000000000000000000] by [dU30w == pow(1.012, 29) * Pw / T__Sn * (T__Pk / T__Sn) + (pow(1.012, 29) * (Pw * sqrt(1 - pow(pfw, 2)) / pfw) - B__Qc) / T__Sn * sqrt(pow(T__uk, 2) - pow(T__Pk / T__Sn, 2))], interval reading, sound, may be wider than the truth (credit)",
+    "Lsp -> [465111165919011648277609/200000000000000000000, 107265941562514781970468880441/33620000000000000000000000] by [Lsp == T__P0 + T__Pk * (pow(Psp, 2) + pow(Psp * sqrt(1 - pow(pfsp, 2)) / pfsp - B__Qc, 2)) / pow(T__Sn, 2) + kb * B__Qc], interval reading, sound, may be wider than the truth (credit)"
+  ]
+}
+
+real	0m18.138s
+user	0m18.085s
+sys	0m0.029s

@@ -1,0 +1,226 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "largest",
+  "quantity": "Fneed",
+  "unit": "kN",
+  "proved": "491/20 (~24.55)",
+  "proved_means": "every Fneed in [0, 491/20 (~24.55)] kN works (EARNED on the whole range)",
+  "beyond": "123/5 (~24.6)",
+  "beyond_is": "REFUTED: the range [0, 123/5 (~24.6)] kN holds a concrete failing point (at_beyond)",
+  "precision": "1/20 (~0.05)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "BOLT=M12_8.8_93Nm(MA=93, Rp=640)",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "F": [
+            "1387798554723291057750000/56421950845988662428787 (~24.5968)",
+            "438252175175776263000000/9924491807664779832641 (~44.1587)"
+          ],
+          "sred": [
+            "~337.492298222 (an exact fraction of 45 digits)",
+            "640"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {
+      "BOLT": {
+        "catalog": "M12_8.8_93Nm",
+        "MA": {
+          "nominal": "93",
+          "tolerance": "1/20 (~0.05)"
+        },
+        "Rp": {
+          "nominal": "640",
+          "tolerance": "0"
+        }
+      }
+    },
+    "guaranteed": {
+      "F": [
+        "1387798554723291057750000/56421950845988662428787 (~24.5968)",
+        "438252175175776263000000/9924491807664779832641 (~44.1587)"
+      ],
+      "sred": [
+        "~337.492298222 (an exact fraction of 45 digits)",
+        "640"
+      ]
+    },
+    "guaranteed_unit": {
+      "F": "kN",
+      "sred": "MPa"
+    },
+    "guaranteed_ends": {
+      "sred": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+    },
+    "how": {
+      "F": "ZTL, outer range",
+      "sred": "ZTL, certificate checked exactly (1 pieces; found by the stand's search, the extreme may lie inside the box)"
+    },
+    "requirements": [
+      {
+        "quantity": "F",
+        "op": ">=",
+        "value": "Fneed",
+        "why": "clamp load must stay at or above the needed value"
+      },
+      {
+        "quantity": "sred",
+        "op": "<=",
+        "value": "nu*BOLT.Rp",
+        "why": "bolt not overloaded in tightening (reduced stress below yield)"
+      }
+    ],
+    "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "F -> [1387798554723291057750000000/56421950845988662428787, 438252175175776263000000000/9924491807664779832641] by [F == BOLT__MA/(P/(2*pi) + (0.5775*d2 + 0.5*Dkm)*mu)], interval reading, sound, may be wider than the truth (credit)",
+      "sred -> [267425249102141780227386048202625000000000000000000000/792389190836761353905404276120517075760451833, 53468226857866245490912286241000000000000000000000000/76025150254094033474196581920047006887313803] by [sred == F/(pi/4*d0*d0)*sqrt(1 + 3*(1.5*(d2/d0)*(P/(pi*d2) + 1.155*mu))*(1.5*(d2/d0)*(P/(pi*d2) + 1.155*mu)))], interval reading, sound, may be wider than the truth (credit)"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "BOLT=M12_8.8_93Nm(MA=93, Rp=640)",
+        "verdict": "REFUTED",
+        "fails": "clamp load must stay at or above the needed value",
+        "by_at_witness": "907180440150189990801/282109754229943312143935 (~0.0032157)",
+        "unit": "kN"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {
+      "BOLT": {
+        "catalog": "M12_8.8_93Nm",
+        "MA": {
+          "nominal": "93",
+          "tolerance": "1/20 (~0.05)"
+        },
+        "Rp": {
+          "nominal": "640",
+          "tolerance": "0"
+        }
+      }
+    },
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "BOLT.MA": "1767/20 (~88.35)",
+      "Fneed": "123/5 (~24.6)",
+      "mu": "6/25 (~0.24)"
+    },
+    "point_units": {
+      "BOLT.MA": "N*m",
+      "Fneed": "kN",
+      "mu": ""
+    },
+    "value_there": {
+      "F": "1387798554723291057750000/56421950845988662428787 (~24.5968)"
+    },
+    "unit": "kN",
+    "requirement": {
+      "quantity": "F",
+      "op": ">=",
+      "value": "Fneed",
+      "why": "clamp load must stay at or above the needed value"
+    },
+    "overshoot": "907180440150189990801/282109754229943312143935 (~0.0032157)",
+    "reasons": {
+      "spread_over_tolerances": [
+        "1387798554723291057750000/56421950845988662428787 (~24.5968)",
+        "438252175175776263000000/9924491807664779832641 (~44.1587)"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "mu",
+          "moves_it_by": "~15.3562813548 (an exact fraction of 46 digits)"
+        },
+        {
+          "quantity": "BOLT.MA",
+          "moves_it_by": "146084058391925374500000/56421950845988662428787 (~2.58914)"
+        },
+        {
+          "quantity": "pi",
+          "moves_it_by": "~6.07097464446e-16 (an exact fraction of 46 digits)"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+  },
+  "tries": [
+    {
+      "Fneed": "0",
+      "verdict": "EARNED"
+    },
+    {
+      "Fneed": "45",
+      "verdict": "REFUTED"
+    },
+    {
+      "Fneed": "45/2 (~22.5)",
+      "verdict": "EARNED"
+    },
+    {
+      "Fneed": "135/4 (~33.75)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Fneed": "281/10 (~28.1)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Fneed": "253/10 (~25.3)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Fneed": "239/10 (~23.9)",
+      "verdict": "EARNED"
+    },
+    {
+      "Fneed": "123/5 (~24.6)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Fneed": "97/4 (~24.25)",
+      "verdict": "EARNED"
+    },
+    {
+      "Fneed": "122/5 (~24.4)",
+      "verdict": "EARNED"
+    },
+    {
+      "Fneed": "49/2 (~24.5)",
+      "verdict": "EARNED"
+    },
+    {
+      "Fneed": "491/20 (~24.55)",
+      "verdict": "EARNED"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

@@ -1,0 +1,96 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 6,
+  "failed_at_nominal": 0,
+  "judged": 6,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "PKG=packages(label=SO14 narrow (published 125), Rth=125, price=2/5)",
+      "verdict": "REFUTED",
+      "fails": "maximum junction temperature 150 C used by the app note",
+      "by_at_witness": "1085/16 (~67.8125)",
+      "unit": "C"
+    },
+    {
+      "design": "PKG=packages(label=PDIP8 (published 100), Rth=100, price=1/2)",
+      "verdict": "REFUTED",
+      "fails": "maximum junction temperature 150 C used by the app note",
+      "by_at_witness": "165/4 (~41.25)",
+      "unit": "C"
+    },
+    {
+      "design": "PKG=packages(label=TO220 bare (published RthJA 50), Rth=50, price=3/5)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "PKG=packages(label=TO220 + hypothetical sink, RthJA 44 (boundary probe), Rth=44, price=1)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "PKG=packages(label=TO220 + hypothetical sink, RthJA 45 (boundary probe), Rth=45, price=3/2)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "PKG=packages(label=TO220 + AAVID 504222 + pad (my reading of the curve, +-20% assumed), Rth=13521/1000, price=2)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 2,
+    "EARNED": 4
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "PKG.price",
+    "value": "3/5 (~0.6)",
+    "unit": "USD",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "PKG": {
+      "catalog": "packages",
+      "Rth": {
+        "nominal": "50",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "3/5 (~0.6)",
+        "tolerance": "0"
+      },
+      "label": "TO220 bare (published RthJA 50)"
+    }
+  },
+  "guaranteed": {
+    "Tj": [
+      "-7881/200 (~-39.405)",
+      "1105/8 (~138.125)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Tj": "C"
+  },
+  "how": {
+    "Tj": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "Tj",
+      "op": "<=",
+      "value": "150",
+      "why": "maximum junction temperature 150 C used by the app note"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "P -> [119/10000, 17/16] by the system over its parameters, exact at the corners (credit)",
+    "Tj -> [-7881/200, 1105/8] by the system over its parameters, exact at the corners (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

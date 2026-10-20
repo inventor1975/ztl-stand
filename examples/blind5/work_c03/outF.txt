@@ -1,0 +1,184 @@
+[stand] 1/172 designs, 0 s: 
+[stand] 2/172 designs, 112 s: 1 REFUTED
+[stand] 3/172 designs, 228 s: 2 REFUTED
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "excluded_by_where": 788,
+  "designs_tried": 3,
+  "failed_at_nominal": 0,
+  "judged": 3,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "COL=collectors(model=T3, A=13/5, eta0=39/50, a1=6/5, a2=7/2000, price=21/20); N=modules(n=3); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~313.919188149 (an exact fraction of 154 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F3, A=5/2, eta0=81/100, a1=3, a2=3/250, price=17/25); N=modules(n=4); TANK=tanks(V=750, UA=311915179/100000000, price=374649/200000); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~116.423212298 (an exact fraction of 191 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F2, A=23/10, eta0=4/5, a1=17/5, a2=7/500, price=11/20); N=modules(n=5); TANK=tanks(V=750, UA=311915179/100000000, price=374649/200000); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 2,
+    "EARNED": 1
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "N.n*COL.price + TANK.price + INS.price",
+    "value": "924649/200000 (~4.62324)",
+    "unit": "kEUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "COL": {
+      "catalog": "collectors",
+      "A": {
+        "nominal": "23/10 (~2.3)",
+        "tolerance": "0"
+      },
+      "eta0": {
+        "nominal": "4/5 (~0.8)",
+        "tolerance": "0"
+      },
+      "a1": {
+        "nominal": "17/5 (~3.4)",
+        "tolerance": "0"
+      },
+      "a2": {
+        "nominal": "7/500 (~0.014)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "11/20 (~0.55)",
+        "tolerance": "0"
+      },
+      "model": "F2"
+    },
+    "N": {
+      "catalog": "modules",
+      "n": {
+        "nominal": "5",
+        "tolerance": "0"
+      }
+    },
+    "TANK": {
+      "catalog": "tanks",
+      "V": {
+        "nominal": "750",
+        "tolerance": "0"
+      },
+      "UA": {
+        "nominal": "311915179/100000000 (~3.11915)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "374649/200000 (~1.87325)",
+        "tolerance": "0"
+      }
+    },
+    "INS": {
+      "catalog": "insulation",
+      "f": {
+        "nominal": "1",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "kind": "none"
+    }
+  },
+  "guaranteed": {
+    "T_in_winter": [
+      "20310976071369610528354202171925/1267650600228229401496703205376 (~16.0225)",
+      "33515920379710703032835996982075/1267650600228229401496703205376 (~26.4394)"
+    ],
+    "T_in_spring": [
+      "22675766054427586077991991281275/633825300114114700748351602688 (~35.7761)",
+      "8057154033650445249168829257825/158456325028528675187087900672 (~50.8478)"
+    ],
+    "T_in_summer": [
+      "69779699451157518306407982292275/1267650600228229401496703205376 (~55.0465)",
+      "92397941041492134979476813190125/1267650600228229401496703205376 (~72.8891)"
+    ],
+    "T_in_autumn": [
+      "4884442507578007762119082875225/158456325028528675187087900672 (~30.8252)",
+      "55669128510888865006999150470675/1267650600228229401496703205376 (~43.9152)"
+    ],
+    "Eyear": [
+      "~697.999148199 (an exact fraction of 35 digits)",
+      "~3642.6804921 (an exact fraction of 35 digits)"
+    ]
+  },
+  "guaranteed_unit": {
+    "T_in_winter": "C",
+    "T_in_spring": "C",
+    "T_in_summer": "C",
+    "T_in_autumn": "C",
+    "Eyear": "kWh"
+  },
+  "how": {
+    "T_in_winter": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — unique root, monotone in every parameter: its range spans the corner roots (bracketed exactly); checker's own enclosure ['~16.0225349696 (~16.0225)', '~26.4393992901 (~26.4394)']",
+    "T_in_spring": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — unique root, monotone in every parameter: its range spans the corner roots (bracketed exactly); checker's own enclosure ['~35.7760506726 (~35.7761)', '~50.8477905959 (~50.8478)']",
+    "T_in_summer": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — unique root, monotone in every parameter: its range spans the corner roots (bracketed exactly); checker's own enclosure ['~55.0464768751 (~55.0465)', '~72.8891234105 (~72.8891)']",
+    "T_in_autumn": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — unique root, monotone in every parameter: its range spans the corner roots (bracketed exactly); checker's own enclosure ['~30.8251659042 (~30.8252)', '~43.91519911 (~43.9152)']",
+    "Eyear": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~697.999148199 (~697.999)', '~3642.6804921 (~3642.68)']"
+  },
+  "requirements": [
+    {
+      "quantity": "T_in_winter",
+      "op": "<=",
+      "value": "Tmax",
+      "why": "[winter] R2: tank <= 80 C in winter"
+    },
+    {
+      "quantity": "T_in_spring",
+      "op": "<=",
+      "value": "Tmax",
+      "why": "[spring] R2: tank <= 80 C in spring"
+    },
+    {
+      "quantity": "T_in_summer",
+      "op": "<=",
+      "value": "Tmax",
+      "why": "[summer] R2: tank <= 80 C in summer"
+    },
+    {
+      "quantity": "T_in_autumn",
+      "op": "<=",
+      "value": "Tmax",
+      "why": "[autumn] R2: tank <= 80 C in autumn"
+    },
+    {
+      "quantity": "Eyear",
+      "op": "<=",
+      "value": "Emax",
+      "why": "R1 annual back-up <= 3700 kWh"
+    }
+  ],
+  "rests_on": "ZTL disposition None: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "Bk_in_winter -> [123114478905066267792606575851864947/253530120045645880299340641075200, 234924152824645616971904241014446023/253530120045645880299340641075200] by [Bk_in_winter == cw * D * ifpos(T_in_winter - Tt, 0, Tt - T_in_winter)], interval reading, sound, may be wider than the truth (credit)",
+    "Bk_in_spring -> [-5926101757872704528416742437397109/31691265005705735037417580134400, 37389890371255228069280371752121449/126765060022822940149670320537600] by [Bk_in_spring == cw * D * ifpos(T_in_spring - Tt, 0, Tt - T_in_spring)], interval reading, sound, may be wider than the truth (credit)",
+    "Bk_in_summer -> [0, 0] by [Bk_in_summer == cw * D * ifpos(T_in_summer - Tt, 0, Tt - T_in_summer)], interval reading, sound, may be wider than the truth (credit)",
+    "Bk_in_autumn -> [7195602037863417446600458907416587/253530120045645880299340641075200, 14364657535970962176261205577882931/31691265005705735037417580134400] by [Bk_in_autumn == cw * D * ifpos(T_in_autumn - Tt, 0, Tt - T_in_autumn)], interval reading, sound, may be wider than the truth (credit)",
+    "Eyear -> [199084283813895063013633801139599025421/79228162514264337593543950336, 519485187627665027413251224684255043129/39614081257132168796771975168] by [Eyear == (90*dd)*(Bk_in_winter) + (92*dd)*(Bk_in_spring) + (92*dd)*(Bk_in_summer) + (91*dd)*(Bk_in_autumn)]"
+  ],
+  "modes_joined": "the modes winter, spring, summer, autumn judged as ONE brick (totals): a quantity Q of mode m is Q_in_m; a given no mode overrides is the same value in every mode"
+}

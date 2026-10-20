@@ -1,0 +1,55 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "k06 component STATIC: static head of the lift station (water level and force-main pressure ranges from the source)",
+ "interface": {
+  "inputs": {},
+  "outputs": [
+   "Hst"
+  ]
+ },
+ "quantities": {
+  "ELw": {
+   "role": "given",
+   "range": [
+    "4",
+    "6"
+   ],
+   "unit": "ft",
+   "why": "wet-well level EL 4.0 to 6.0"
+  },
+  "Pd": {
+   "role": "given",
+   "range": [
+    "9",
+    "13"
+   ],
+   "unit": "psi",
+   "why": "tie-in pressure 9 to 13 psi"
+  },
+  "ELc": {
+   "role": "given",
+   "value": "12",
+   "unit": "ft",
+   "why": "tie-in centerline EL 12.0"
+  },
+  "kh": {
+   "role": "given",
+   "value": "2.31",
+   "unit": "ft/psi",
+   "why": "1 psi = 2.31 ft"
+  },
+  "Hst": {
+   "role": "derived",
+   "unit": "ft"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "Hst == (ELc - ELw) + Pd*kh",
+   "source": "static head"
+  }
+ ],
+ "requirements": [],
+ "catalog": {}
+}

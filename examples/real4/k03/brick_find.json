@@ -1,0 +1,173 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "FIND: how far can the example's heat sink and ambient be pushed with the datasheet's own VIN/VOUT windows? largest Rhs, and largest Ta, each with the other at the example's value",
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "range": [
+    "6.5",
+    "9"
+   ],
+   "unit": "V",
+   "ground": "datasheet: VIN(max continuous) = 9 V in the example; 6.5 V = lower VIN of the VOUT line/load row and of the 5 V application"
+  },
+  "Vout": {
+   "role": "given",
+   "range": [
+    "4.9",
+    "5.1"
+   ],
+   "unit": "V",
+   "ground": "datasheet electrical characteristics, LT1083/4/5-5, 0 <= IOUT <= IFULLLOAD, 6.5 V <= VIN <= 20 V: MIN 4.900, MAX 5.100"
+  },
+  "Iout": {
+   "role": "given",
+   "value": "6",
+   "unit": "A",
+   "ground": "example"
+  },
+  "Ta": {
+   "role": "given",
+   "value": "0",
+   "unit": "C",
+   "ground": "placeholder (searched by find)"
+  },
+  "Rhs": {
+   "role": "given",
+   "value": "0",
+   "unit": "C/W",
+   "ground": "placeholder (searched by find)"
+  },
+  "Rcs": {
+   "role": "given",
+   "value": "0.2",
+   "unit": "C/W",
+   "ground": "example: P package with thermal compound"
+  },
+  "Rjc_c": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "C/W",
+   "ground": "datasheet thermal resistance, LT1083 P package, control circuitry"
+  },
+  "Rjc_p": {
+   "role": "given",
+   "value": "1.6",
+   "unit": "C/W",
+   "ground": "datasheet thermal resistance, LT1083 P package, power transistor"
+  },
+  "PD": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "Tj_c": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Tj_p": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Ta_fix": {
+   "role": "given",
+   "value": "75",
+   "unit": "C"
+  },
+  "Rhs_fix": {
+   "role": "given",
+   "value": "1",
+   "unit": "C/W"
+  },
+  "Tj_c2": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Tj_p2": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {},
+ "define": {
+  "PDd": "(Vin - Vout)*Iout"
+ },
+ "laws": [
+  {
+   "zfl": "PD == PDd",
+   "source": "linear regulator dissipation"
+  },
+  {
+   "zfl": "Tj_c == Ta_fix + PDd*(Rhs + Rcs + Rjc_c)",
+   "source": "series thermal path, control (heat sink searched)"
+  },
+  {
+   "zfl": "Tj_p == Ta_fix + PDd*(Rhs + Rcs + Rjc_p)",
+   "source": "series thermal path, power transistor (heat sink searched)"
+  },
+  {
+   "zfl": "Tj_c2 == Ta + PDd*(Rhs_fix + Rcs + Rjc_c)",
+   "source": "series thermal path, control (ambient searched)"
+  },
+  {
+   "zfl": "Tj_p2 == Ta + PDd*(Rhs_fix + Rcs + Rjc_p)",
+   "source": "series thermal path, power transistor (ambient searched)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tj_c",
+   "op": "<=",
+   "value": "125",
+   "why": "control section"
+  },
+  {
+   "quantity": "Tj_p",
+   "op": "<=",
+   "value": "150",
+   "why": "power transistor"
+  }
+ ],
+ "catalog": {},
+ "find": [
+  {
+   "largest": "Rhs",
+   "from": "0",
+   "to": "5",
+   "precision": "0.0001",
+   "requirements": [
+    {
+     "quantity": "Tj_c",
+     "op": "<=",
+     "value": "125",
+     "why": "control section"
+    },
+    {
+     "quantity": "Tj_p",
+     "op": "<=",
+     "value": "150",
+     "why": "power transistor"
+    }
+   ]
+  },
+  {
+   "largest": "Ta",
+   "from": "0",
+   "to": "150",
+   "precision": "0.01",
+   "requirements": [
+    {
+     "quantity": "Tj_c2",
+     "op": "<=",
+     "value": "125",
+     "why": "control section"
+    },
+    {
+     "quantity": "Tj_p2",
+     "op": "<=",
+     "value": "150",
+     "why": "power transistor"
+    }
+   ]
+  }
+ ]
+}

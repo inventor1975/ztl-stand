@@ -1,0 +1,395 @@
+[stand] 1/20 designs, 0 s: 
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 20,
+  "failed_at_nominal": 19,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "OWN=own_block(B=0); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "145700/91 (~1601.1)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=0); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "72900/91 (~801.099)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=0); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "9200/91 (~101.099)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=0); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "17000/13 (~1307.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=800); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "72900/91 (~801.099)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=800); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "100/91 (~1.0989)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=800); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "15700/13 (~1207.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=800); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "6600/13 (~507.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1600); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "100/91 (~1.0989)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1600); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "14400/13 (~1107.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1600); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "5300/13 (~407.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=1600); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "2150/11 (~195.455)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2400); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "14400/13 (~1107.69)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2400); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "4000/13 (~307.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=2400); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "1073/325 (~3.30154)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=2400); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "10307/325 (~31.7138)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=3200); T=tiers(name=T0, price=0, commit=0, cap=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+      "by": "4000/13 (~307.692)",
+      "unit": ""
+    },
+    {
+      "design": "OWN=own_block(B=3200); T=tiers(name=T1, price=59/5, commit=0, cap=800)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "28673/650 (~44.1123)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=3200); T=tiers(name=T2, price=48/5, commit=400, cap=1500)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "4853/65 (~74.6615)",
+      "unit": "kEUR"
+    },
+    {
+      "design": "OWN=own_block(B=3200); T=tiers(name=T3, price=42/5, commit=900, cap=2200)",
+      "verdict": "REFUTED",
+      "fails": "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+      "by": "2833/25 (~113.32)",
+      "unit": "kEUR"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 20
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "OWN": {
+      "catalog": "own_block",
+      "B": {
+        "nominal": "800",
+        "tolerance": "0"
+      }
+    },
+    "T": {
+      "catalog": "tiers",
+      "name": "T1",
+      "price": {
+        "nominal": "59/5 (~11.8)",
+        "tolerance": "0"
+      },
+      "commit": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "cap": {
+        "nominal": "800",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "I1": "2185",
+    "I2": "1930",
+    "I3": "2515",
+    "I4": "3465",
+    "u": "91/100 (~0.91)",
+    "Ps": "21"
+  },
+  "point_units": {
+    "I1": "",
+    "I2": "",
+    "I3": "",
+    "I4": "",
+    "u": "",
+    "Ps": "EUR"
+  },
+  "value_there": {
+    "M1": [
+      "-100/91 (~-1.0989)",
+      "-100/91 (~-1.0989)"
+    ]
+  },
+  "unit": "",
+  "requirement": {
+    "quantity": "M1",
+    "op": ">=",
+    "value": "0",
+    "why": "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+  },
+  "overshoot": "100/91 (~1.0989)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "-3225/11 (~-293.182)",
+      "0"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "I1",
+        "moves_it_by": "18600/91 (~204.396)"
+      },
+      {
+        "quantity": "u",
+        "moves_it_by": "1825/22 (~82.9545)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)"
+      ]
+    ],
+    "undecided_sets": [
+      [
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)"
+      ],
+      [
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+      ],
+      [
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)"
+      ],
+      [
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+      ],
+      [
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)"
+      ],
+      [
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+      ],
+      [
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)"
+      ],
+      [
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q4: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R3 building limit"
+      ],
+      [
+        "R1 Q1: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q2: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R1 Q3: B+F+S >= needed (F<=cap, S<=spot availability by construction)",
+        "R2 worst-case annual cost <= 355 kEUR (spot range top, inventory top, u bottom)",
+        "R3 building limit"
+      ]
+    ],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  }
+}

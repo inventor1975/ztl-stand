@@ -1,0 +1,54 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "L":   {"role": "given", "range": ["4.98", "5.02"], "unit": "m", "why": "span 5.00 m +-0.02 m"},
+  "wd":  {"role": "given", "value": "4", "tolerance": "0.1", "unit": "kN/m", "why": "dead load"},
+  "P":   {"role": "given", "value": "18", "tolerance": "0.15", "unit": "kN", "why": "central point load"},
+  "E":   {"role": "given", "value": "210", "tolerance": "0.02", "unit": "GPa", "why": "steel modulus"},
+  "g":   {"role": "given", "value": "9.81", "unit": "m*s^-2", "why": "gravity"},
+  "w":   {"role": "derived", "unit": "kN/m"},
+  "M":   {"role": "derived", "unit": "kN*m"},
+  "sigma": {"role": "derived", "unit": "MPa"},
+  "delta": {"role": "derived", "unit": "mm"},
+  "dm":  {"role": "derived", "unit": "mm"},
+  "f1sq": {"role": "derived", "unit": "s^-2"}
+ },
+ "slots": {"B": {"from": ["ipe"]}},
+ "define": {
+  "L2": "L*L",
+  "L3": "L*L*L",
+  "L4": "L*L*L*L",
+  "mu": "B.ms + wd/g",
+  "c1": "5*L4/(384*E*B.I)",
+  "c2": "P*L3/(48*E*B.I)"
+ },
+ "laws": [
+  {"zfl": "w == wd + B.ms*g", "source": "load per metre = dead load + self-weight"},
+  {"zfl": "M == w*L2/8 + P*L/4", "source": "max moment, simply supported beam, UDL + central point load"},
+  {"zfl": "sigma == M/B.W", "source": "bending stress sigma = M/W_el"},
+  {"zfl": "delta == w*c1 + c2", "source": "midspan deflection 5wL^4/(384EI) + PL^3/(48EI)"},
+  {"zfl": "dm == L/300 - delta", "source": "deflection margin to the L/300 limit"},
+  {"zfl": "f1sq == 3.1415*3.1415*E*B.I/(4*L4*mu)", "source": "f1^2 = pi^2 E I /(4 L^4 mu), sqrt-free form; pi taken as 3.1415 (below true pi, conservative)"}
+ ],
+ "requirements": [
+  {"quantity": "sigma", "op": "<=", "value": "2350/11", "why": "sigma <= fy/gamma = 235/1.10 MPa"},
+  {"quantity": "dm", "op": ">=", "value": "0", "why": "delta <= L/300"},
+  {"quantity": "f1sq", "op": ">=", "value": "64", "why": "f1 >= 8 Hz, as f1^2 >= 64 Hz^2"}
+ ],
+ "objective": {"minimize": "B.price", "why": "cheapest section per metre"},
+ "catalog": {
+  "ipe": {
+   "items": [
+    {"section": "IPE200", "I": {"value": "19430000",  "tolerance": "0.04"}, "W": {"value": "194000", "tolerance": "0.04"}, "ms": "22.4", "price": "36"},
+    {"section": "IPE220", "I": {"value": "27720000",  "tolerance": "0.04"}, "W": {"value": "252000", "tolerance": "0.04"}, "ms": "26.2", "price": "42"},
+    {"section": "IPE240", "I": {"value": "38920000",  "tolerance": "0.04"}, "W": {"value": "324000", "tolerance": "0.04"}, "ms": "30.7", "price": "49"},
+    {"section": "IPE270", "I": {"value": "57900000",  "tolerance": "0.04"}, "W": {"value": "429000", "tolerance": "0.04"}, "ms": "36.1", "price": "58"},
+    {"section": "IPE300", "I": {"value": "83560000",  "tolerance": "0.04"}, "W": {"value": "557000", "tolerance": "0.04"}, "ms": "42.2", "price": "68"}
+   ],
+   "fields": {
+    "I": {"unit": "mm^4"}, "W": {"unit": "mm^3"},
+    "ms": {"unit": "kg/m"}, "price": {"unit": "USD/m"}
+   }
+  }
+ }
+}

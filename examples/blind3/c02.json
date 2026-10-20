@@ -1,0 +1,701 @@
+{
+ "stand": "universal-stand/1",
+ "report": "all",
+ "quantities": {
+  "Aw": {
+   "role": "given",
+   "value": "142",
+   "unit": "m^2",
+   "why": "opaque wall area"
+  },
+  "Awin": {
+   "role": "given",
+   "value": "26",
+   "unit": "m^2",
+   "why": "window area"
+  },
+  "Ar": {
+   "role": "given",
+   "value": "90",
+   "unit": "m^2",
+   "why": "roof area"
+  },
+  "Af": {
+   "role": "given",
+   "value": "90",
+   "unit": "m^2",
+   "why": "floor area"
+  },
+  "Aenv": {
+   "role": "given",
+   "value": "348",
+   "unit": "m^2",
+   "why": "mean envelope area for average U"
+  },
+  "Vol": {
+   "role": "given",
+   "value": "225",
+   "unit": "m^3",
+   "why": "heated volume"
+  },
+  "Ur": {
+   "role": "given",
+   "range": [
+    "0.13",
+    "0.15"
+   ],
+   "unit": "W/(m^2*K)",
+   "why": "roof U 0.14 +-0.01"
+  },
+  "Uf": {
+   "role": "given",
+   "range": [
+    "0.27",
+    "0.33"
+   ],
+   "unit": "W/(m^2*K)",
+   "why": "floor U 0.30 +-0.03"
+  },
+  "bg": {
+   "role": "given",
+   "value": "0.6",
+   "unit": "",
+   "why": "ground correction factor b"
+  },
+  "Ubr": {
+   "role": "given",
+   "value": "0.05",
+   "unit": "W/(m^2*K)",
+   "why": "thermal bridge addition to wall U"
+  },
+  "Rsi": {
+   "role": "given",
+   "value": "0.13",
+   "unit": "m^2*K/W",
+   "why": "inside surface resistance"
+  },
+  "Rse": {
+   "role": "given",
+   "value": "0.04",
+   "unit": "m^2*K/W",
+   "why": "outside surface resistance"
+  },
+  "dpl": {
+   "role": "given",
+   "value": "15",
+   "unit": "mm",
+   "why": "plaster thickness"
+  },
+  "lpl": {
+   "role": "given",
+   "value": "0.70",
+   "unit": "W/(m*K)",
+   "why": "plaster lambda"
+  },
+  "dbr": {
+   "role": "given",
+   "value": "250",
+   "unit": "mm",
+   "why": "brick thickness"
+  },
+  "lbr": {
+   "role": "given",
+   "range": [
+    "0.57",
+    "0.67"
+   ],
+   "unit": "W/(m*K)",
+   "why": "brick lambda 0.62 +-0.05"
+  },
+  "dre": {
+   "role": "given",
+   "value": "10",
+   "unit": "mm",
+   "why": "render thickness"
+  },
+  "lre": {
+   "role": "given",
+   "value": "0.87",
+   "unit": "W/(m*K)",
+   "why": "render lambda"
+  },
+  "nac": {
+   "role": "given",
+   "range": [
+    "0.3",
+    "0.7"
+   ],
+   "unit": "1/h",
+   "why": "air change 0.5 +-0.2"
+  },
+  "cair": {
+   "role": "given",
+   "value": "0.34",
+   "unit": "Wh/(m^3*K)",
+   "why": "air volumetric heat capacity"
+  },
+  "Tin": {
+   "role": "given",
+   "value": "20",
+   "unit": "C",
+   "why": "indoor temperature"
+  },
+  "Tout": {
+   "role": "given",
+   "range": [
+    "-14",
+    "-10"
+   ],
+   "unit": "C",
+   "why": "design outdoor temperature"
+  },
+  "kcap": {
+   "role": "given",
+   "value": "0.015",
+   "unit": "1/C",
+   "why": "heat pump capacity slope per K below -7 C"
+  },
+  "Tnom": {
+   "role": "given",
+   "value": "-7",
+   "unit": "C",
+   "why": "HP nameplate outdoor temperature"
+  },
+  "DD": {
+   "role": "given",
+   "range": [
+    "3000",
+    "3600"
+   ],
+   "unit": "K*day",
+   "why": "heating degree-days 3300 (3000..3600)"
+  },
+  "Gain": {
+   "role": "given",
+   "range": [
+    "2500",
+    "3500"
+   ],
+   "unit": "kWh",
+   "why": "free heat gains 3000 +-500"
+  },
+  "lbr_n": {
+   "role": "given",
+   "value": "0.62",
+   "unit": "W/(m*K)",
+   "why": "brick lambda nominal (copy of lbr midpoint)"
+  },
+  "Urn": {
+   "role": "given",
+   "value": "0.14",
+   "unit": "W/(m^2*K)",
+   "why": "roof U nominal"
+  },
+  "Ufn": {
+   "role": "given",
+   "value": "0.30",
+   "unit": "W/(m^2*K)",
+   "why": "floor U nominal"
+  },
+  "nac_n": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "1/h",
+   "why": "air change nominal"
+  },
+  "DD_n": {
+   "role": "given",
+   "value": "3300",
+   "unit": "K*day",
+   "why": "degree-days nominal"
+  },
+  "Gain_n": {
+   "role": "given",
+   "value": "3000",
+   "unit": "kWh",
+   "why": "gains nominal"
+  },
+  "COP_n": {
+   "role": "given",
+   "value": "3.2",
+   "unit": "",
+   "why": "seasonal COP nominal (tolerance +-0.3 not needed: COP enters only the cost)"
+  },
+  "pel": {
+   "role": "given",
+   "value": "0.28",
+   "unit": "EUR/kWh",
+   "why": "electricity price"
+  },
+  "Uwb": {
+   "role": "derived",
+   "unit": "W/(m^2*K)"
+  },
+  "HT": {
+   "role": "derived",
+   "unit": "W/K"
+  },
+  "HV": {
+   "role": "derived",
+   "unit": "W/K"
+  },
+  "Htot": {
+   "role": "derived",
+   "unit": "W/K"
+  },
+  "Umean": {
+   "role": "derived",
+   "unit": "W/(m^2*K)"
+  },
+  "Pmargin": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "Eht": {
+   "role": "derived",
+   "unit": "kWh"
+  },
+  "Enet": {
+   "role": "derived",
+   "unit": "kWh"
+  }
+ },
+ "slots": {
+  "INS": {
+   "from": [
+    "ins"
+   ]
+  },
+  "WIN": {
+   "from": [
+    "win"
+   ]
+  },
+  "HP": {
+   "from": [
+    "hp"
+   ]
+  }
+ },
+ "define": {
+  "Rw": "Rsi + dpl/lpl + dbr/lbr + INS.x/INS.lam + dre/lre + Rse"
+ },
+ "computed": {
+  "Uwn": {
+   "value": "1/(Rsi + dpl/lpl + dbr/lbr_n + INS.x/INS.lam_n + dre/lre + Rse)",
+   "unit": "W/(m^2*K)"
+  },
+  "HTn": {
+   "value": "(Uwn + Ubr)*Aw + WIN.U_n*Awin + Urn*Ar + bg*Ufn*Af",
+   "unit": "W/K"
+  },
+  "Hn": {
+   "value": "HTn + nac_n*Vol*cair",
+   "unit": "W/K"
+  },
+  "En": {
+   "value": "Hn*DD_n - Gain_n",
+   "unit": "kWh"
+  },
+  "cost20": {
+   "value": "(INS.p0 + INS.p1*INS.x)*Aw + WIN.price*Awin + HP.price + 20*En/COP_n*pel",
+   "unit": "EUR"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Uwb == 1/Rw",
+   "source": "U = 1/sum R, layers inside to outside incl. surface resistances (no bridges)"
+  },
+  {
+   "zfl": "HT == (Uwb + Ubr)*Aw + WIN.U*Awin + Ur*Ar + bg*Uf*Af",
+   "source": "transmission loss H_T = sum U A (b on floor); wall incl. +0.05 bridges"
+  },
+  {
+   "zfl": "HV == nac*Vol*cair",
+   "source": "ventilation loss n V c_air"
+  },
+  {
+   "zfl": "Htot == HT + HV",
+   "source": "total specific heat loss"
+  },
+  {
+   "zfl": "Umean == HT/Aenv",
+   "source": "mean envelope U = H_T/348"
+  },
+  {
+   "zfl": "Pmargin == HP.Pnom*(1 + kcap*(Tout - Tnom)) - Htot*(Tin - Tout)",
+   "source": "HP capacity P_nom(1+0.015(T+7)) minus design heat loss"
+  },
+  {
+   "zfl": "Eht == Htot*DD",
+   "source": "annual heat: H * degree-days"
+  },
+  {
+   "zfl": "Enet == Eht - Gain",
+   "source": "net heating energy = heat minus free gains"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Uwb",
+   "op": "<=",
+   "value": "0.22",
+   "why": "wall U without bridges <= 0.22"
+  },
+  {
+   "quantity": "Umean",
+   "op": "<=",
+   "value": "0.35",
+   "why": "mean envelope U <= 0.35"
+  },
+  {
+   "quantity": "Pmargin",
+   "op": ">=",
+   "value": "0",
+   "why": "HP covers design heat loss at worst T and tolerance"
+  },
+  {
+   "quantity": "Enet",
+   "op": "<=",
+   "value": "9000",
+   "why": "net heating energy <= 9000 kWh/a at worst case"
+  }
+ ],
+ "objective": {
+  "minimize": "cost20",
+  "why": "lowest 20-year cost: investment + 20 y electricity at nominal"
+ },
+ "catalog": {
+  "ins": {
+   "items": [
+    {
+     "lam": {
+      "range": [
+       "0.033",
+       "0.039"
+      ]
+     },
+     "lam_n": "0.036",
+     "x": "80",
+     "p0": "25",
+     "p1": "0.11",
+     "type": "EPS 80"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.033",
+       "0.039"
+      ]
+     },
+     "lam_n": "0.036",
+     "x": "100",
+     "p0": "25",
+     "p1": "0.11",
+     "type": "EPS 100"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.033",
+       "0.039"
+      ]
+     },
+     "lam_n": "0.036",
+     "x": "120",
+     "p0": "25",
+     "p1": "0.11",
+     "type": "EPS 120"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.033",
+       "0.039"
+      ]
+     },
+     "lam_n": "0.036",
+     "x": "140",
+     "p0": "25",
+     "p1": "0.11",
+     "type": "EPS 140"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.033",
+       "0.039"
+      ]
+     },
+     "lam_n": "0.036",
+     "x": "160",
+     "p0": "25",
+     "p1": "0.11",
+     "type": "EPS 160"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.033",
+       "0.039"
+      ]
+     },
+     "lam_n": "0.036",
+     "x": "200",
+     "p0": "25",
+     "p1": "0.11",
+     "type": "EPS 200"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.037",
+       "0.043"
+      ]
+     },
+     "lam_n": "0.04",
+     "x": "80",
+     "p0": "30",
+     "p1": "0.13",
+     "type": "MW 80"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.037",
+       "0.043"
+      ]
+     },
+     "lam_n": "0.04",
+     "x": "100",
+     "p0": "30",
+     "p1": "0.13",
+     "type": "MW 100"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.037",
+       "0.043"
+      ]
+     },
+     "lam_n": "0.04",
+     "x": "120",
+     "p0": "30",
+     "p1": "0.13",
+     "type": "MW 120"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.037",
+       "0.043"
+      ]
+     },
+     "lam_n": "0.04",
+     "x": "140",
+     "p0": "30",
+     "p1": "0.13",
+     "type": "MW 140"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.037",
+       "0.043"
+      ]
+     },
+     "lam_n": "0.04",
+     "x": "160",
+     "p0": "30",
+     "p1": "0.13",
+     "type": "MW 160"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.037",
+       "0.043"
+      ]
+     },
+     "lam_n": "0.04",
+     "x": "180",
+     "p0": "30",
+     "p1": "0.13",
+     "type": "MW 180"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.037",
+       "0.043"
+      ]
+     },
+     "lam_n": "0.04",
+     "x": "200",
+     "p0": "30",
+     "p1": "0.13",
+     "type": "MW 200"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.022",
+       "0.026"
+      ]
+     },
+     "lam_n": "0.024",
+     "x": "60",
+     "p0": "28",
+     "p1": "0.26",
+     "type": "PIR 60"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.022",
+       "0.026"
+      ]
+     },
+     "lam_n": "0.024",
+     "x": "80",
+     "p0": "28",
+     "p1": "0.26",
+     "type": "PIR 80"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.022",
+       "0.026"
+      ]
+     },
+     "lam_n": "0.024",
+     "x": "100",
+     "p0": "28",
+     "p1": "0.26",
+     "type": "PIR 100"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.022",
+       "0.026"
+      ]
+     },
+     "lam_n": "0.024",
+     "x": "120",
+     "p0": "28",
+     "p1": "0.26",
+     "type": "PIR 120"
+    },
+    {
+     "lam": {
+      "range": [
+       "0.022",
+       "0.026"
+      ]
+     },
+     "lam_n": "0.024",
+     "x": "140",
+     "p0": "28",
+     "p1": "0.26",
+     "type": "PIR 140"
+    }
+   ],
+   "fields": {
+    "lam": {
+     "unit": "W/(m*K)"
+    },
+    "lam_n": {
+     "unit": "W/(m*K)"
+    },
+    "x": {
+     "unit": "mm"
+    },
+    "p0": {
+     "unit": "EUR/m^2"
+    },
+    "p1": {
+     "unit": "EUR/(m^2*mm)"
+    }
+   }
+  },
+  "win": {
+   "items": [
+    {
+     "U": {
+      "range": [
+       "1.20",
+       "1.40"
+      ]
+     },
+     "U_n": "1.30",
+     "price": "240",
+     "type": "W2"
+    },
+    {
+     "U": {
+      "range": [
+       "0.78",
+       "0.92"
+      ]
+     },
+     "U_n": "0.85",
+     "price": "340",
+     "type": "W3"
+    },
+    {
+     "U": {
+      "range": [
+       "0.65",
+       "0.75"
+      ]
+     },
+     "U_n": "0.70",
+     "price": "410",
+     "type": "W3K"
+    }
+   ],
+   "fields": {
+    "U": {
+     "unit": "W/(m^2*K)"
+    },
+    "U_n": {
+     "unit": "W/(m^2*K)"
+    },
+    "price": {
+     "unit": "EUR/m^2"
+    }
+   }
+  },
+  "hp": {
+   "items": [
+    {
+     "Pnom": "6",
+     "price": "3900",
+     "type": "HP6"
+    },
+    {
+     "Pnom": "8",
+     "price": "4800",
+     "type": "HP8"
+    },
+    {
+     "Pnom": "10",
+     "price": "5900",
+     "type": "HP10"
+    }
+   ],
+   "fields": {
+    "Pnom": {
+     "unit": "kW"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ }
+}

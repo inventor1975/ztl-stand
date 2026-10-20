@@ -1,0 +1,231 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "verdict": "EARNED",
+  "modes": [
+    "Base",
+    "Fall"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "design": {
+    "N1": {
+      "catalog": "cat_B1",
+      "x": {
+        "nominal": "31",
+        "tolerance": "0"
+      }
+    },
+    "N2": {
+      "catalog": "cat_B2",
+      "x": {
+        "nominal": "26",
+        "tolerance": "0"
+      }
+    },
+    "N3": {
+      "catalog": "cat_B3",
+      "x": {
+        "nominal": "1",
+        "tolerance": "0"
+      }
+    },
+    "N4": {
+      "catalog": "cat_B4",
+      "x": {
+        "nominal": "35",
+        "tolerance": "0"
+      }
+    },
+    "N5": {
+      "catalog": "cat_B5",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N6": {
+      "catalog": "cat_B6",
+      "x": {
+        "nominal": "67",
+        "tolerance": "0"
+      }
+    },
+    "N7": {
+      "catalog": "cat_B7",
+      "x": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    },
+    "N8": {
+      "catalog": "cat_B8",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N9": {
+      "catalog": "cat_B9",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N10": {
+      "catalog": "cat_B10",
+      "x": {
+        "nominal": "58",
+        "tolerance": "0"
+      }
+    },
+    "N11": {
+      "catalog": "cat_B11",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N12": {
+      "catalog": "cat_B12",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N13": {
+      "catalog": "cat_B13",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N14": {
+      "catalog": "cat_B14",
+      "x": {
+        "nominal": "4",
+        "tolerance": "0"
+      }
+    }
+  },
+  "per_mode": {
+    "Base": {
+      "guaranteed": {
+        "S1": [
+          "6900",
+          "6900"
+        ],
+        "S2": [
+          "7600",
+          "7600"
+        ],
+        "S3": [
+          "500",
+          "500"
+        ],
+        "S4": [
+          "440900",
+          "440900"
+        ],
+        "S5": [
+          "1100",
+          "1100"
+        ],
+        "S6": [
+          "100",
+          "100"
+        ],
+        "M2": [
+          "8157",
+          "8157"
+        ],
+        "C": [
+          "2271690",
+          "2271690"
+        ],
+        "DA": [
+          "-6379599999100004954375/6722214413787808 (~-949033)",
+          "-6379599999100004954375/6722214413787808 (~-949033)"
+        ],
+        "DB": [
+          "-1366137145227704704375/6722214413787808 (~-203227)",
+          "-1366137145227704704375/6722214413787808 (~-203227)"
+        ]
+      },
+      "how": {
+        "S1": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['6900', '6900']",
+        "S2": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['7600', '7600']",
+        "S3": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['500', '500']",
+        "S4": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['440900', '440900']",
+        "S5": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['1100', '1100']",
+        "S6": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['100', '100']",
+        "M2": "ZTL, outer range",
+        "C": "ZTL, outer range",
+        "DA": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['-6379599999100004954375/6722214413787808 (~-949033)', '-6379599999100004954375/6722214413787808 (~-949033)']",
+        "DB": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['-1366137145227704704375/6722214413787808 (~-203227)', '-1366137145227704704375/6722214413787808 (~-203227)']"
+      }
+    },
+    "Fall": {
+      "guaranteed": {
+        "S1": [
+          "6900",
+          "6900"
+        ],
+        "S2": [
+          "7600",
+          "7600"
+        ],
+        "S3": [
+          "500",
+          "500"
+        ],
+        "S4": [
+          "440900",
+          "440900"
+        ],
+        "S5": [
+          "1100",
+          "1100"
+        ],
+        "S6": [
+          "100",
+          "100"
+        ],
+        "M2": [
+          "8157",
+          "8157"
+        ],
+        "C": [
+          "2271690",
+          "2271690"
+        ]
+      },
+      "how": {
+        "S1": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['6900', '6900']",
+        "S2": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['7600', '7600']",
+        "S3": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['500', '500']",
+        "S4": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['440900', '440900']",
+        "S5": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['1100', '1100']",
+        "S6": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['100', '100']",
+        "M2": "ZTL, outer range",
+        "C": "ZTL, outer range"
+      }
+    }
+  },
+  "objective": {
+    "minimize": "N1.x*p_B1*face + N2.x*p_B2*face + N3.x*p_B3*face + N4.x*p_B4*face + N5.x*p_B5*face + N6.x*p_B6*face + N7.x*p_B7*face + N8.x*p_B8*face + N9.x*p_B9*face + N10.x*p_B10*face + N11.x*p_B11*face + N12.x*p_B12*face + N13.x*p_B13*face + N14.x*p_B14*face",
+    "value": "2271690",
+    "unit": "EUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode"
+  },
+  "designs": [
+    {
+      "design": "N1=cat_B1(x=31); N2=cat_B2(x=26); N3=cat_B3(x=1); N4=cat_B4(x=35); N5=cat_B5(x=0); N6=cat_B6(x=67); N7=cat_B7(x=3); N8=cat_B8(x=0); N9=cat_B9(x=0); N10=cat_B10(x=58); N11=cat_B11(x=0); N12=cat_B12(x=0); N13=cat_B13(x=0); N14=cat_B14(x=4)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  }
+}

@@ -1,0 +1,2792 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL d606f40",
+  "verdict": "EARNED",
+  "modes": [
+    "S1",
+    "S2",
+    "S3"
+  ],
+  "designs_tried": 568,
+  "undecided": 0,
+  "design": {
+    "C1": {
+      "catalog": "cables",
+      "R20": {
+        "nominal": "387/1000 (~0.387)",
+        "tolerance": "0"
+      },
+      "Iz30": {
+        "nominal": "190",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "14",
+        "tolerance": "0"
+      },
+      "type": "C50",
+      "S": {
+        "nominal": "50",
+        "tolerance": "0"
+      }
+    },
+    "C2": {
+      "catalog": "cables",
+      "R20": {
+        "nominal": "23/20 (~1.15)",
+        "tolerance": "0"
+      },
+      "Iz30": {
+        "nominal": "100",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "11/2 (~5.5)",
+        "tolerance": "0"
+      },
+      "type": "C16",
+      "S": {
+        "nominal": "16",
+        "tolerance": "0"
+      }
+    },
+    "B1": {
+      "catalog": "breakers",
+      "In": {
+        "nominal": "63",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "70",
+        "tolerance": "0"
+      },
+      "type": "B63"
+    },
+    "B2": {
+      "catalog": "breakers",
+      "In": {
+        "nominal": "40",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "48",
+        "tolerance": "0"
+      },
+      "type": "B40"
+    }
+  },
+  "per_mode": {
+    "S1": {
+      "guaranteed": {
+        "m4_1": [
+          "7/5 (~1.4)",
+          "8"
+        ],
+        "m5_1": [
+          "80",
+          "479/4 (~119.75)"
+        ],
+        "m6_1": [
+          "7117523367983/62500000000 (~113.88)",
+          "170820560831611/1500000000000 (~113.88)"
+        ],
+        "m4_2": [
+          "3/2 (~1.5)",
+          "7"
+        ],
+        "m5_2": [
+          "64",
+          "88"
+        ],
+        "m6_2": [
+          "331843335157/6250000000 (~53.0949)",
+          "7964240043769/150000000000 (~53.0949)"
+        ],
+        "Vt1": [
+          "1343315716938306419356293623591/3525390625000000000000000000 (~381.04)",
+          "7132942608239521643175926537/17626953125000000000000000 (~404.661)"
+        ],
+        "Vt2": [
+          "23844320531216752809088717369/62500000000000000000000000 (~381.509)",
+          "3166402202285240490921549767/7812500000000000000000000 (~405.299)"
+        ]
+      },
+      "how": {
+        "m4_1": "ZTL, exact at the corners",
+        "m5_1": "ZTL, exact at the corners",
+        "m6_1": "ZTL, interval reading of the definition (sound, may be wide)",
+        "m4_2": "ZTL, exact at the corners",
+        "m5_2": "ZTL, exact at the corners",
+        "m6_2": "ZTL, interval reading of the definition (sound, may be wide)",
+        "Vt1": "ZTL, interval reading of the definition (sound, may be wide)",
+        "Vt2": "ZTL, interval reading of the definition (sound, may be wide)"
+      },
+      "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)"
+    },
+    "S2": {
+      "guaranteed": {
+        "m4_1": [
+          "7/5 (~1.4)",
+          "8"
+        ],
+        "m5_1": [
+          "80",
+          "479/4 (~119.75)"
+        ],
+        "m6_1": [
+          "7117523367983/62500000000 (~113.88)",
+          "170820560831611/1500000000000 (~113.88)"
+        ],
+        "m4_2": [
+          "3/2 (~1.5)",
+          "7"
+        ],
+        "m5_2": [
+          "64",
+          "88"
+        ],
+        "m6_2": [
+          "331843335157/6250000000 (~53.0949)",
+          "7964240043769/150000000000 (~53.0949)"
+        ],
+        "Vt1": [
+          "93759344043812991775564398651/275421142578125000000000000 (~340.422)",
+          "3297776663513891644234036722249/8813476562500000000000000000 (~374.174)"
+        ],
+        "Vbus": [
+          "363193/1000 (~363.193)",
+          "98689/250 (~394.756)"
+        ]
+      },
+      "how": {
+        "m4_1": "ZTL, exact at the corners",
+        "m5_1": "ZTL, exact at the corners",
+        "m6_1": "ZTL, interval reading of the definition (sound, may be wide)",
+        "m4_2": "ZTL, exact at the corners",
+        "m5_2": "ZTL, exact at the corners",
+        "m6_2": "ZTL, interval reading of the definition (sound, may be wide)",
+        "Vt1": "ZTL, interval reading of the definition (sound, may be wide)",
+        "Vbus": "ZTL, exact at the corners"
+      },
+      "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)"
+    },
+    "S3": {
+      "guaranteed": {
+        "m4_1": [
+          "7/5 (~1.4)",
+          "8"
+        ],
+        "m5_1": [
+          "80",
+          "479/4 (~119.75)"
+        ],
+        "m6_1": [
+          "7117523367983/62500000000 (~113.88)",
+          "170820560831611/1500000000000 (~113.88)"
+        ],
+        "m4_2": [
+          "3/2 (~1.5)",
+          "7"
+        ],
+        "m5_2": [
+          "64",
+          "88"
+        ],
+        "m6_2": [
+          "331843335157/6250000000 (~53.0949)",
+          "7964240043769/150000000000 (~53.0949)"
+        ],
+        "Vt2": [
+          "542251231797086221531332173/1525878906250000000000000 (~355.37)",
+          "9402714291146996930662802701/24414062500000000000000000 (~385.135)"
+        ],
+        "Vbus": [
+          "46604/125 (~372.832)",
+          "50108/125 (~400.864)"
+        ]
+      },
+      "how": {
+        "m4_1": "ZTL, exact at the corners",
+        "m5_1": "ZTL, exact at the corners",
+        "m6_1": "ZTL, interval reading of the definition (sound, may be wide)",
+        "m4_2": "ZTL, exact at the corners",
+        "m5_2": "ZTL, exact at the corners",
+        "m6_2": "ZTL, interval reading of the definition (sound, may be wide)",
+        "Vt2": "ZTL, interval reading of the definition (sound, may be wide)",
+        "Vbus": "ZTL, exact at the corners"
+      },
+      "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)"
+    }
+  },
+  "objective": {
+    "minimize": "C1.price*L1 + C2.price*L2 + B1.price + B2.price",
+    "value": "5651/2 (~2825.5)",
+    "unit": "EUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode",
+    "ties": {
+      "same_objective": 1,
+      "first": [
+        {
+          "design": "C1=cables(type=C50, R20=387/1000, Iz30=190, price=14, S=50); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B63, In=63, price=70)",
+          "verdict": "REFUTED"
+        }
+      ],
+      "note": "these cost the same; \"not judged\" ones come after the earned design in the search, which stops at the first EARNED — \"report\": \"all\" judges them"
+    }
+  },
+  "designs": [
+    {
+      "design": "C1=cables(type=C50, R20=387/1000, Iz30=190, price=14, S=50); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~3.97658628734 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~3.97658628734 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~38.9765862873 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~38.9765862873 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~3.97658628734 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~3.97658628734 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~3.97658628734 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~3.97658628734 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~38.9765862873 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~10.7539114918 (an exact fraction of 127 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~3.97658628734 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~38.9765862873 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~38.9765862873 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~6.90506637487 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~3.97658628734 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~11.0481061998 (an exact fraction of 59 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~38.9765862873 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B50, In=50, price=58); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "83/10 (~8.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B50, In=50, price=58)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B125, In=125, price=160); B2=breakers(type=B125, In=125, price=160)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~31.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~11.0481061998 (an exact fraction of 59 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); C2=cables(type=C35, R20=131/250, Iz30=160, price=21/2, S=35); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B100, In=100, price=120); B2=breakers(type=B160, In=160, price=230)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 2: In <= Iz(38) of its cable",
+      "by_at_witness": "~66.9050663749 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C16, R20=23/20, Iz30=100, price=11/2, S=16); B1=breakers(type=B160, In=160, price=230); B2=breakers(type=B100, In=100, price=120)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R6 feeder 1: In <= Iz(38) of its cable",
+      "by_at_witness": "~38.9765862873 (an exact fraction of 60 digits)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B63, In=63, price=70); B2=breakers(type=B63, In=63, price=70)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B40, In=40, price=48); B2=breakers(type=B80, In=80, price=95)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R4 feeder 1: In >= 1.1 x highest running current",
+      "by_at_witness": "183/10 (~18.3)",
+      "unit": "A",
+      "failing_modes": [
+        "S1",
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "design": "C1=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); C2=cables(type=C25, R20=727/1000, Iz30=130, price=8, S=25); B1=breakers(type=B80, In=80, price=95); B2=breakers(type=B40, In=40, price=48)",
+      "verdict": "REFUTED",
+      "mode": "S1",
+      "fails": "R1 M1 running",
+      "by_at_witness": "~4.07711380282 (an exact fraction of 129 digits)",
+      "unit": "V",
+      "failing_modes": [
+        "S1",
+        "S2"
+      ]
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 567,
+    "EARNED": 1
+  },
+  "designs_not_listed": 368,
+  "listing": "earned first, then open, then refuted",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

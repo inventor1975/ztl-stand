@@ -1,0 +1,4 @@
+{
+  "verdict": "BRICK ERROR",
+  "why": "BrickError: laws[12]: 'PA.A*hf + Cd*Ao*sqrt(1.2*g*hf)*tf == Qinf*tf' is not a readable expression"
+}

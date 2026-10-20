@@ -1,0 +1,102 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 6,
+  "failed_at_nominal": 1,
+  "judged": 5,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "PKG=packages(label=SO14 narrow (published 125), Rth=125, price=2/5)",
+      "verdict": "REFUTED",
+      "fails": "maximum junction temperature 150 C used by the app note",
+      "by_at_witness": "711/64 (~11.1094)",
+      "unit": "C"
+    },
+    {
+      "design": "PKG=packages(label=PDIP8 (published 100), Rth=100, price=1/2)",
+      "verdict": "REFUTED",
+      "fails": "maximum junction temperature 150 C used by the app note",
+      "by_at_witness": "1177/10 (~117.7)",
+      "unit": "C"
+    },
+    {
+      "design": "PKG=packages(label=TO220 bare (published RthJA 50), Rth=50, price=3/5)",
+      "verdict": "REFUTED",
+      "fails": "maximum junction temperature 150 C used by the app note",
+      "by_at_witness": "527/20 (~26.35)",
+      "unit": "C"
+    },
+    {
+      "design": "PKG=packages(label=TO220 + hypothetical sink, RthJA 44 (boundary probe), Rth=71/2, price=1)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "PKG=packages(label=TO220 + hypothetical sink, RthJA 45 (boundary probe), Rth=36, price=3/2)",
+      "verdict": "REFUTED",
+      "fails": "maximum junction temperature 150 C used by the app note",
+      "by_at_witness": "193/250 (~0.772)",
+      "unit": "C"
+    },
+    {
+      "design": "PKG=packages(label=TO220 + AAVID 504222 + pad (my reading of the curve, +-20% assumed), Rth=13521/1000, price=2)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 4,
+    "EARNED": 2
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "PKG.price",
+    "value": "1",
+    "unit": "USD",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "PKG": {
+      "catalog": "packages",
+      "Rth": {
+        "nominal": "71/2 (~35.5)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "1",
+        "tolerance": "0"
+      },
+      "label": "TO220 + hypothetical sink, RthJA 44 (boundary probe)"
+    }
+  },
+  "guaranteed": {
+    "Tj": [
+      "684473/8000 (~85.5591)",
+      "299717/2000 (~149.858)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Tj": "C"
+  },
+  "how": {
+    "Tj": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "Tj",
+      "op": "<=",
+      "value": "150",
+      "why": "maximum junction temperature 150 C used by the app note"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "P -> [63/4000, 1827/1000] by the system over its parameters, exact at the corners (credit)",
+    "Tj -> [684473/8000, 299717/2000] by the system over its parameters, exact at the corners (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

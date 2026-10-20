@@ -1,0 +1,17 @@
+main rc=0 secs=595
+c11_noR4 rc=0 secs=91
+c11_noR1 rc=0 secs=75
+dbg_A rc=0 secs=65
+dbg_B rc=0 secs=89
+dbg_C rc=0 secs=64
+dbg_D rc=0 secs=6
+dbg_E rc=0 secs=54
+dbg_F rc=0 secs=0
+(killed stray find 500-680 run)
+dbg_F rc=0 secs=82
+c11_noR4_find rc=0 secs=86
+c11_noR1_find rc=0 secs=85
+c11_noR4_S631 rc=0 secs=221
+c11_noR4_S630 rc=0 secs=358
+c11_noR1_S646 rc=0 secs=188
+c11_noR1_S645 rc=0 secs=215

@@ -1,0 +1,118 @@
+{
+ "stand": "universal-stand/1",
+ "why": "compressor K40M",
+ "interface": {
+  "inputs": {
+   "Qt": {
+    "assume": [
+     "0",
+     "37.6"
+    ],
+    "bands": "arriving"
+   }
+  },
+  "outputs": [
+   "Pc",
+   "Pabs"
+  ]
+ },
+ "quantities": {
+  "Qt": {
+   "role": "given",
+   "value": "30",
+   "unit": "L/s"
+  },
+  "FAD": {
+   "role": "given",
+   "value": "40",
+   "unit": "L/s"
+  },
+  "facfad": {
+   "role": "given",
+   "range": [
+    "0.94",
+    "1.0"
+   ],
+   "unit": ""
+  },
+  "cutin": {
+   "role": "given",
+   "value": "7.3",
+   "unit": "bar"
+  },
+  "cutout": {
+   "role": "given",
+   "value": "8.4",
+   "unit": "bar"
+  },
+  "dtol": {
+   "role": "given",
+   "value": "0.15",
+   "unit": "bar"
+  },
+  "poff": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "bar"
+  },
+  "patm": {
+   "role": "given",
+   "value": "1.013",
+   "unit": "bar"
+  },
+  "Pc": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "Pabs": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "Pnf": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "Qcap": {
+   "role": "derived",
+   "unit": "L/s"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Pc == cutin - dtol",
+   "source": "outlet pressure = lowest cut-in"
+  },
+  {
+   "zfl": "Pabs == cutin - dtol - poff + patm",
+   "source": "p_abs of the pipe law"
+  },
+  {
+   "zfl": "Pnf == cutout + dtol",
+   "source": "no-flow pressure"
+  },
+  {
+   "zfl": "Qcap == Qt",
+   "source": "load on the compressor"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Qcap",
+   "op": "<=",
+   "value": "facfad*FAD",
+   "why": "R2 0.94 FAD >= total flow"
+  },
+  {
+   "quantity": "Pnf",
+   "op": "<=",
+   "value": "8.5",
+   "why": "R3 vs tool A max"
+  },
+  {
+   "quantity": "Pnf",
+   "op": "<=",
+   "value": "9.0",
+   "why": "R3 vs tool B max"
+  }
+ ]
+}

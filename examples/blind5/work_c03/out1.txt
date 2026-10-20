@@ -1,0 +1,211 @@
+[stand] 1/220 designs, 0 s: 
+[stand] 19/220 designs, 99 s: 18 REFUTED
+[stand] 20/220 designs, 202 s: 19 REFUTED
+[stand] 21/220 designs, 306 s: 20 REFUTED
+[stand] 23/220 designs, 413 s: 22 REFUTED
+[stand] 24/220 designs, 519 s: 23 REFUTED
+[stand] 25/220 designs, 627 s: 24 REFUTED
+[stand] 26/220 designs, 736 s: 25 REFUTED
+[stand] 27/220 designs, 852 s: 26 REFUTED
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "verdict": "OPEN",
+  "why": "stopped by a signal (a time limit) after 28 of 220 designs: only the designs listed were decided; the verdict over the rest, and optimality, are not known",
+  "designs_tried": 28,
+  "designs_total": 220,
+  "designs": [
+    {
+      "design": "COL=collectors(model=F1, A=2, eta0=19/25, a1=21/5, a2=2/125, price=21/50); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~1533.26892487 (an exact fraction of 82 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F1, A=2, eta0=19/25, a1=21/5, a2=2/125, price=21/50); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~1517.78404413 (an exact fraction of 83 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F2, A=23/10, eta0=4/5, a1=17/5, a2=7/500, price=11/20); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~801.763079659 (an exact fraction of 83 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=T2, A=3, eta0=19/25, a1=13/10, a2=1/250, price=23/20); N=modules(n=1); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~1848.96859337 (an exact fraction of 99 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F1, A=2, eta0=19/25, a1=21/5, a2=2/125, price=21/50); N=modules(n=3); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~373.981071292 (an exact fraction of 100 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F2, A=23/10, eta0=4/5, a1=17/5, a2=7/500, price=11/20); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~771.766192824 (an exact fraction of 83 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F3, A=5/2, eta0=81/100, a1=3, a2=3/250, price=17/25); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~369.284246673 (an exact fraction of 82 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=T2, A=3, eta0=19/25, a1=13/10, a2=1/250, price=23/20); N=modules(n=1); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~1837.93541126 (an exact fraction of 97 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F1, A=2, eta0=19/25, a1=21/5, a2=2/125, price=21/50); N=modules(n=3); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~352.881717557 (an exact fraction of 119 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F3, A=5/2, eta0=81/100, a1=3, a2=3/250, price=17/25); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~344.192814012 (an exact fraction of 84 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=T1, A=11/5, eta0=37/50, a1=7/5, a2=1/200, price=17/20); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~777.135669711 (an exact fraction of 83 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F1, A=2, eta0=19/25, a1=21/5, a2=2/125, price=21/50); N=modules(n=3); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~404.009435665 (an exact fraction of 98 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F3, A=5/2, eta0=81/100, a1=3, a2=3/250, price=17/25); N=modules(n=2); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~402.769752409 (an exact fraction of 82 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=T1, A=11/5, eta0=37/50, a1=7/5, a2=1/200, price=17/20); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~742.832647865 (an exact fraction of 85 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F1, A=2, eta0=19/25, a1=21/5, a2=2/125, price=21/50); N=modules(n=3); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~363.485259751 (an exact fraction of 99 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F3, A=5/2, eta0=81/100, a1=3, a2=3/250, price=17/25); N=modules(n=2); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~355.965749299 (an exact fraction of 84 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=T3, A=13/5, eta0=39/50, a1=6/5, a2=7/2000, price=21/20); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~37.9091183459 (an exact fraction of 101 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F2, A=23/10, eta0=4/5, a1=17/5, a2=7/500, price=11/20); N=modules(n=3); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~1238.35764011 (an exact fraction of 170 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F1, A=2, eta0=19/25, a1=21/5, a2=2/125, price=21/50); N=modules(n=4); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~1267.93580132 (an exact fraction of 187 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=T2, A=3, eta0=19/25, a1=13/10, a2=1/250, price=23/20); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~1205.15999323 (an exact fraction of 155 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=T3, A=13/5, eta0=39/50, a1=6/5, a2=7/2000, price=21/20); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~6.73629334677 (an exact fraction of 100 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F2, A=23/10, eta0=4/5, a1=17/5, a2=7/500, price=11/20); N=modules(n=3); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~1186.13014109 (an exact fraction of 171 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F1, A=2, eta0=19/25, a1=21/5, a2=2/125, price=21/50); N=modules(n=4); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~1220.91194058 (an exact fraction of 190 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F3, A=5/2, eta0=81/100, a1=3, a2=3/250, price=17/25); N=modules(n=3); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~833.735595498 (an exact fraction of 171 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=T2, A=3, eta0=19/25, a1=13/10, a2=1/250, price=23/20); N=modules(n=2); TANK=tanks(V=300, UA=9/5, price=9/10); INS=insulation(kind=upgrade, f=3/5, price=1/4)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~1158.2661632 (an exact fraction of 154 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=F1, A=2, eta0=19/25, a1=21/5, a2=2/125, price=21/50); N=modules(n=5); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~718.155746823 (an exact fraction of 172 digits)",
+      "unit": "kWh"
+    },
+    {
+      "design": "COL=collectors(model=T3, A=13/5, eta0=39/50, a1=6/5, a2=7/2000, price=21/20); N=modules(n=2); TANK=tanks(V=500, UA=244557933/100000000, price=1354321/1000000); INS=insulation(kind=none, f=1, price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 annual back-up <= 3700 kWh",
+      "by": "~64.728780871 (an exact fraction of 101 digits)",
+      "unit": "kWh"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 27
+  }
+}

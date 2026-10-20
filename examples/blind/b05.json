@@ -1,0 +1,227 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "P": {
+   "role": "given",
+   "value": "300",
+   "tolerance": "0.1",
+   "unit": "W",
+   "why": "cabinet load"
+  },
+  "V": {
+   "role": "given",
+   "range": [
+    "11.5",
+    "12.8"
+   ],
+   "unit": "V",
+   "why": "terminal voltage during discharge"
+  },
+  "H": {
+   "role": "given",
+   "value": "72000",
+   "unit": "s",
+   "why": "rated discharge time 20 h"
+  },
+  "Cf": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "effective capacity factor (warm); cold mode overrides"
+  },
+  "Ich": {
+   "role": "given",
+   "value": "15",
+   "tolerance": "0.05",
+   "unit": "A",
+   "why": "charger current"
+  },
+  "tw": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "tc": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "tch": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "M": {
+   "role": "derived",
+   "unit": "kg"
+  }
+ },
+ "slots": {
+  "BAT": {
+   "from": [
+    "batteries"
+   ]
+  }
+ },
+ "define": {
+  "I": "P/V",
+  "x": "Cf*BAT.C/(I*H)"
+ },
+ "laws": [
+  {
+   "zfl": "tw == H*(BAT.aw0 + BAT.aw1*x)",
+   "source": "Peukert lower bound: tangent to x^(k+0.02) (convex, x<1) at the warm worst point"
+  },
+  {
+   "zfl": "tc == H*(BAT.ac0 + BAT.ac1*x)",
+   "source": "Peukert lower bound: tangent to x^(k+0.02) (convex, x<1) at the cold worst point"
+  },
+  {
+   "zfl": "tch == 0.9*1.15*BAT.C/Ich",
+   "source": "recharge to 90% with 1.15 charge inefficiency"
+  },
+  {
+   "zfl": "M == BAT.mass",
+   "source": "datasheet mass"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "tch",
+   "op": "<=",
+   "value": "43200",
+   "why": "recharge time <= 12 h"
+  },
+  {
+   "quantity": "M",
+   "op": "<=",
+   "value": "45",
+   "why": "battery mass <= 45 kg"
+  }
+ ],
+ "objective": {
+  "minimize": "BAT.price",
+  "why": "cheapest battery"
+ },
+ "modes": {
+  "warm 25C": {
+   "quantities": {
+    "Cf": {
+     "value": "1"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "tw",
+     "op": ">=",
+     "value": "9000",
+     "why": "runtime >= 2.5 h"
+    }
+   ]
+  },
+  "cold -10C": {
+   "quantities": {
+    "Cf": {
+     "range": [
+      "0.77",
+      "0.83"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "tc",
+     "op": ">=",
+     "value": "9000",
+     "why": "runtime >= 2.5 h"
+    }
+   ]
+  }
+ },
+ "catalog": {
+  "batteries": {
+   "items": [
+    {
+     "C": {
+      "value": "360000",
+      "tolerance": "0.05"
+     },
+     "k": "1.15",
+     "aw1": "0.8613",
+     "aw0": "-0.02065",
+     "ac1": "0.82382",
+     "ac0": "-0.01521",
+     "mass": "29",
+     "price": "210",
+     "model": "B1"
+    },
+    {
+     "C": {
+      "value": "432000",
+      "tolerance": "0.05"
+     },
+     "k": "1.18",
+     "aw1": "0.86798",
+     "aw0": "-0.02865",
+     "ac1": "0.82436",
+     "ac0": "-0.02103",
+     "mass": "34",
+     "price": "245",
+     "model": "B2"
+    },
+    {
+     "C": {
+      "value": "540000",
+      "tolerance": "0.05"
+     },
+     "k": "1.2",
+     "aw1": "0.89771",
+     "aw0": "-0.04015",
+     "ac1": "0.84759",
+     "ac0": "-0.0292",
+     "mass": "41",
+     "price": "290",
+     "model": "B3"
+    },
+    {
+     "C": {
+      "value": "396000",
+      "tolerance": "0.05"
+     },
+     "k": "1.1",
+     "aw1": "0.9129",
+     "aw0": "-0.01781",
+     "ac1": "0.88461",
+     "ac0": "-0.01327",
+     "mass": "32",
+     "price": "330",
+     "model": "B4"
+    }
+   ],
+   "ground": "datasheet",
+   "fields": {
+    "C": {
+     "unit": "A*s"
+    },
+    "k": {
+     "unit": ""
+    },
+    "aw1": {
+     "unit": ""
+    },
+    "aw0": {
+     "unit": ""
+    },
+    "ac1": {
+     "unit": ""
+    },
+    "ac0": {
+     "unit": ""
+    },
+    "mass": {
+     "unit": "kg"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ }
+}

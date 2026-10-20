@@ -1,0 +1,49 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683 + the network certificate (ustand/znet.py)",
+  "verdict": "EARNED",
+  "network": {
+    "nodes": 4,
+    "branches": 5,
+    "free_branches": 4
+  },
+  "units": "checked: every branch one kind, the current's unit = the source's x a conductance",
+  "requirements": [
+    {
+      "requirement": {
+        "quantity": "I(b5)",
+        "op": "within",
+        "value": [
+          "-0.00005",
+          "0.00005"
+        ],
+        "unit": "uA",
+        "why": "detector current times Rm = offset bound"
+      },
+      "proved_range": [
+        "~-4.99995000551e-05 (an exact fraction of 41 digits)",
+        "~4.99995000551e-05 (an exact fraction of 41 digits)"
+      ],
+      "certificate": {
+        "max": {
+          "rounds": 2,
+          "free": 0,
+          "lam": "2/9999 (~0.00020002)"
+        },
+        "min": {
+          "rounds": 2,
+          "free": 0,
+          "lam": "2/9999 (~0.00020002)"
+        }
+      },
+      "verdict": "EARNED",
+      "found_inside": [
+        "-4.99995001e-05",
+        "4.99995001e-05"
+      ],
+      "found_inside_is": "the range the search reached at corners (floating point): the proved range's tightness"
+    }
+  ],
+  "rests_on": "the network certificate: znet.py checks every certificate exactly by the kernel's rules; it is in the stand, not yet in public ZTL, and NOT proved in Lean",
+  "checked_by": "the network certificate (work mode; --dev adds every corner solved exactly, small networks)"
+}

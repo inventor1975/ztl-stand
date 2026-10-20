@@ -1,0 +1,108 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "TM=TL(name=TL load-bank run, c=[4/5,22/25], td=[3/5,9/10], ct=8/5); CM=mon2(name=condition monitoring, k=[17/20,23/25], cm=11/5)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "U": [
+          "~0.00120589477478 (an exact fraction of 54 digits)",
+          "~0.00224994400297 (an exact fraction of 51 digits)"
+        ],
+        "tauq": [
+          "7881/10 (~788.1)",
+          "7881/10 (~788.1)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "verdict": "EARNED",
+  "design": {
+    "TM": {
+      "catalog": "TL",
+      "name": "TL load-bank run",
+      "c": {
+        "range": [
+          "4/5 (~0.8)",
+          "22/25 (~0.88)"
+        ]
+      },
+      "td": {
+        "range": [
+          "3/5 (~0.6)",
+          "9/10 (~0.9)"
+        ]
+      },
+      "ct": {
+        "nominal": "8/5 (~1.6)",
+        "tolerance": "0"
+      }
+    },
+    "CM": {
+      "catalog": "mon2",
+      "name": "condition monitoring",
+      "k": {
+        "range": [
+          "17/20 (~0.85)",
+          "23/25 (~0.92)"
+        ]
+      },
+      "cm": {
+        "nominal": "11/5 (~2.2)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "U": [
+      "~0.00120589477478 (an exact fraction of 54 digits)",
+      "~0.00224994400297 (an exact fraction of 51 digits)"
+    ],
+    "tauq": [
+      "7881/10 (~788.1)",
+      "7881/10 (~788.1)"
+    ]
+  },
+  "guaranteed_unit": {
+    "U": "",
+    "tauq": "h"
+  },
+  "how": {
+    "U": "ZTL, interval reading of the definition (sound, may be wide)",
+    "tauq": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "U",
+      "op": "<=",
+      "value": "Ulim",
+      "why": "R1: U <= 2.25e-3"
+    },
+    {
+      "quantity": "tauq",
+      "op": "<=",
+      "value": "Tov",
+      "why": "R2: tau <= Tov"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "tauq = 2837160 by exact elimination (credit)",
+    "lam1 -> [1540501186358323241239985004954171742281/6805647338418769269267492148635364229120000000000, 313011673002593697306935509352935334579/638029437976759618993827388934565396480000000000] by [lam1 == lam0*exp(B*(1/Tref - 1/T1))*pow(H1/Hn, 7/20)*CM__k], interval reading, sound, may be wider than the truth (credit)",
+    "U1 -> [12860989788988818898796580675298274836261199855503/11174022223766316793978563671540688643686400000000000, 18206005406469628306959779215716388298497293561/8729704862317434995295752868391163002880000000000] by [U1 == TM__c*lam1*tau/2 + (1 - TM__c)*lam1*Tov/2 + TM__td/tau], multilinear, exact at the corners (credit)",
+    "lam2 -> [1302252645230174319265690325659450198083/3402823669209384634633746074317682114560000000000, 112759786550111479051352630874627095619/132922799578491587290380706028034457600000000000] by [lam2 == lam0*exp(B*(1/Tref - 1/T2))*pow(H2/Hn, 7/20)*CM__k], interval reading, sound, may be wider than the truth (credit)",
+    "U2 -> [7934096477338321916693475546431437398298890426629/5587011111883158396989281835770344321843200000000000, 15132462226178703103902559505720166520123136763/5456065538948396872059845542744476876800000000000] by [U2 == TM__c*lam2*tau/2 + (1 - TM__c)*lam2*Tov/2 + TM__td/tau], multilinear, exact at the corners (credit)",
+    "lam3 -> [11393328231288891821884737468914641720233/54445178707350154154139937189082913832960000000000, 66575901467736750049/138350580552821637120000000000] by [lam3 == lam0*exp(B*(1/Tref - 1/T3))*pow(H3/Hn, 7/20)*CM__k], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

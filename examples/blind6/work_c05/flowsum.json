@@ -1,0 +1,57 @@
+{
+ "stand": "universal-stand/1",
+ "why": "S3: total flow = tool flows + leakage",
+ "interface": {
+  "inputs": {
+   "QA": {
+    "assume": [
+     "14",
+     "18"
+    ]
+   },
+   "QB": {
+    "assume": [
+     "8.5",
+     "10.5"
+    ]
+   },
+   "leak": {
+    "assume": [
+     "1.5",
+     "2.5"
+    ]
+   }
+  },
+  "outputs": [
+   "Qt"
+  ]
+ },
+ "quantities": {
+  "QA": {
+   "role": "given",
+   "value": "16",
+   "unit": "L/s"
+  },
+  "QB": {
+   "role": "given",
+   "value": "9",
+   "unit": "L/s"
+  },
+  "leak": {
+   "role": "given",
+   "value": "2",
+   "unit": "L/s"
+  },
+  "Qt": {
+   "role": "derived",
+   "unit": "L/s"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Qt == QA + QB + leak",
+   "source": "total flow"
+  }
+ ],
+ "requirements": []
+}

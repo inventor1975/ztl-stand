@@ -1,0 +1,141 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "verdict": "EARNED",
+  "modes": [
+    "heavy R2",
+    "bollard R1",
+    "light R4",
+    "heavy R3"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "design": {
+    "PR": {
+      "catalog": "propellers",
+      "D": {
+        "nominal": "29/20 (~1.45)",
+        "tolerance": "0"
+      },
+      "KT0": {
+        "nominal": "8/25 (~0.32)",
+        "tolerance": "0"
+      },
+      "J0": {
+        "nominal": "4/5 (~0.8)",
+        "tolerance": "0"
+      },
+      "KQ0": {
+        "nominal": "9/250 (~0.036)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "7100",
+        "tolerance": "0"
+      },
+      "grade": "P5"
+    },
+    "GR": {
+      "catalog": "gears",
+      "i": {
+        "nominal": "5",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "7500",
+        "tolerance": "0"
+      },
+      "grade": "G5"
+    }
+  },
+  "per_mode": {
+    "heavy R2": {
+      "guaranteed": {
+        "Vkn": [
+          "~9.12310194774 (an exact fraction of 37 digits)",
+          "~9.12310194795 (an exact fraction of 39 digits)"
+        ],
+        "Jm": [
+          "~0.373454571209 (an exact fraction of 39 digits)",
+          "~0.373454571218 (an exact fraction of 35 digits)"
+        ]
+      },
+      "how": {
+        "Vkn": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~9.12310194774 (~9.1231)', '~9.12310194795 (~9.1231)']",
+        "Jm": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.373454571209 (~0.373455)', '~0.373454571218 (~0.373455)']"
+      }
+    },
+    "bollard R1": {
+      "guaranteed": {
+        "Tnet": [
+          "13488323661666711306675493329410937/377789318629571617095680000000000 (~35.7033)",
+          "~35.7032954522 (an exact fraction of 34 digits)"
+        ],
+        "Jm": [
+          "4/5 (~0.8)",
+          "4/5 (~0.8)"
+        ]
+      },
+      "how": {
+        "Tnet": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~35.7032954521 (~35.7033)', '~35.7032954522 (~35.7033)']",
+        "Jm": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['4/5 (~0.8)', '4/5 (~0.8)']"
+      }
+    },
+    "light R4": {
+      "guaranteed": {
+        "N": [
+          "278726929638225/137438953472 (~2028.01)",
+          "557453859276975/274877906944 (~2028.01)"
+        ],
+        "Tip": [
+          "338583303476846895989576486471/10995116277760000000000000000 (~30.794)",
+          "338583303477165875418328644009/10995116277760000000000000000 (~30.794)"
+        ],
+        "Jm": [
+          "~0.307214968274 (an exact fraction of 38 digits)",
+          "~0.307214968284 (an exact fraction of 37 digits)"
+        ]
+      },
+      "how": {
+        "N": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — unique root (g strictly monotone in q over the hull); enclosure; checker's own enclosure ['278726929638225/137438953472 (~2028.01)', '557453859276975/274877906944 (~2028.01)']",
+        "Tip": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['338583303476846895989576486471/10995116277760000000000000000 (~30.794)', '338583303477165875418328644009/10995116277760000000000000000 (~30.794)']",
+        "Jm": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.307214968274 (~0.307215)', '~0.307214968284 (~0.307215)']"
+      }
+    },
+    "heavy R3": {
+      "guaranteed": {
+        "N": [
+          "550622502275625/274877906944 (~2003.15)",
+          "138897915544275/68719476736 (~2021.23)"
+        ],
+        "Jm": [
+          "~0.284656158267 (an exact fraction of 36 digits)",
+          "997228978763959180153123868741204/2259388346612493997284145505020485 (~0.441371)"
+        ]
+      },
+      "how": {
+        "N": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — enclosure: every root lies in the kept pieces (their hull); checker's own enclosure ['550622502275625/274877906944 (~2003.15)', '138897915544275/68719476736 (~2021.23)']",
+        "Jm": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.284656158267 (~0.284656)', '~0.441371214585 (~0.441371)']"
+      }
+    }
+  },
+  "objective": {
+    "minimize": "PR.price + GR.price",
+    "value": "14600",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode"
+  },
+  "designs": [
+    {
+      "design": "PR=propellers(grade=P5, D=29/20, KT0=8/25, J0=4/5, KQ0=9/250, price=7100); GR=gears(grade=G5, i=5, price=7500)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  }
+}
+
+real	1m40.923s
+user	1m27.478s
+sys	0m13.423s

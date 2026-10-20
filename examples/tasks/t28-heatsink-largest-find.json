@@ -1,0 +1,63 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "real round 1, r03 asked as the INVERSE question the source asks: the largest sink-to-air resistance that keeps Tj <= 175 C (LibreTexts, Fiore, Example 4.6.1; the source: case A 7.15 C/W, case B 1.525 C/W)",
+ "quantities": {
+  "Ta": {
+   "role": "given",
+   "unit": "C",
+   "why": "ambient air, source: 40 C",
+   "ground": "source Example",
+   "value": "40"
+  },
+  "Rjc": {
+   "role": "given",
+   "value": "1.5",
+   "unit": "C/W",
+   "ground": "TO-3 data sheet value quoted in the source"
+  },
+  "Rcs": {
+   "role": "given",
+   "value": "0.35",
+   "unit": "C/W",
+   "ground": "read off the maker's graph, 0.002 in mica + grease"
+  },
+  "PB": {
+   "role": "given",
+   "value": "40",
+   "unit": "W",
+   "why": "application B dissipation"
+  },
+  "TjB": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Rsa": {
+   "role": "given",
+   "value": "0",
+   "unit": "C/W",
+   "why": "the sink-to-air resistance searched (find)"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "TjB == Ta + PB*(Rjc + Rcs + Rsa)",
+   "source": "series thermal resistances (source eq. 8.10)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "TjB",
+   "op": "<=",
+   "value": "175",
+   "why": "max junction temperature, application B"
+  }
+ ],
+ "catalog": {},
+ "find": {
+  "largest": "Rsa",
+  "from": "0",
+  "to": "20",
+  "precision": "0.001"
+ }
+}

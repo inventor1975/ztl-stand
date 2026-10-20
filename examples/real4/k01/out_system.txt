@@ -1,0 +1,115 @@
+{
+  "verdict": "OPEN",
+  "why": "components: none of the 12 combinations of candidates was earned (a system cannot refute: its ranges enclose)",
+  "combinations": [
+    {
+      "design": {
+        "DIV": "RES=R +-5%",
+        "REF": "REF=Vref +-5%"
+      },
+      "verdict": "OPEN",
+      "cost": "2/1 (~2)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-5%",
+        "REF": "REF=Vref +-2%"
+      },
+      "verdict": "OPEN",
+      "cost": "3/1 (~3)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-1%",
+        "REF": "REF=Vref +-5%"
+      },
+      "verdict": "OPEN",
+      "cost": "3/1 (~3)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-5%",
+        "REF": "REF=Vref +-1%"
+      },
+      "verdict": "OPEN",
+      "cost": "4/1 (~4)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-1%",
+        "REF": "REF=Vref +-2%"
+      },
+      "verdict": "OPEN",
+      "cost": "4/1 (~4)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-0.5%",
+        "REF": "REF=Vref +-5%"
+      },
+      "verdict": "OPEN",
+      "cost": "4/1 (~4)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-5%",
+        "REF": "REF=Vref +-0.5%"
+      },
+      "verdict": "OPEN",
+      "cost": "5/1 (~5)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-1%",
+        "REF": "REF=Vref +-1%"
+      },
+      "verdict": "OPEN",
+      "cost": "5/1 (~5)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-0.5%",
+        "REF": "REF=Vref +-2%"
+      },
+      "verdict": "OPEN",
+      "cost": "5/1 (~5)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-1%",
+        "REF": "REF=Vref +-0.5%"
+      },
+      "verdict": "OPEN",
+      "cost": "6/1 (~6)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-0.5%",
+        "REF": "REF=Vref +-1%"
+      },
+      "verdict": "OPEN",
+      "cost": "6/1 (~6)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    },
+    {
+      "design": {
+        "DIV": "RES=R +-0.5%",
+        "REF": "REF=Vref +-0.5%"
+      },
+      "verdict": "OPEN",
+      "cost": "7/1 (~7)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a require"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

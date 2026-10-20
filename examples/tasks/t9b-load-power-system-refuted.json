@@ -1,0 +1,77 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "V": {
+   "role": "given",
+   "value": "5",
+   "unit": "V",
+   "ground": "psu"
+  },
+  "RL": {
+   "role": "given",
+   "range": [
+    "1",
+    "1000"
+   ],
+   "unit": "ohm",
+   "why": "any load the user may connect"
+  },
+  "P": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "I": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "VL": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {
+  "Rs": {
+   "from": [
+    "res_1pct"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "V - VL == I*Rs.R",
+   "source": "Ohm's law on the series resistor"
+  },
+  {
+   "zfl": "VL == I*RL",
+   "source": "Ohm's law on the load"
+  },
+  {
+   "zfl": "P == VL*I",
+   "source": "power into the load"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "P",
+   "op": "<=",
+   "value": "0.05",
+   "why": "a 0.05 W load, 1..1000 ohm: the nominal point and every corner pass, the peak inside fails (the same as t8b, written as a circuit)"
+  }
+ ],
+ "catalog": {
+  "res_1pct": {
+   "series": "E24",
+   "decades": [
+    10
+   ],
+   "ground": "datasheet",
+   "fields": {
+    "R": {
+     "series": true,
+     "tolerance": "0.01",
+     "unit": "ohm"
+    }
+   }
+  }
+ }
+}

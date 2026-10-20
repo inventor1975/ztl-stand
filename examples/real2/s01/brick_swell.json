@@ -1,0 +1,77 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "d": {
+   "role": "given",
+   "range": [
+    "2.90",
+    "3.10"
+   ],
+   "unit": "mm",
+   "why": "O-ring cross-section, tolerance range in the source's table"
+  },
+  "h": {
+   "role": "given",
+   "range": [
+    "2.20",
+    "2.30"
+   ],
+   "unit": "mm",
+   "why": "groove depth (assembled gland height), range in the source's table"
+  },
+  "w": {
+   "role": "given",
+   "range": [
+    "4.10",
+    "4.30"
+   ],
+   "unit": "mm",
+   "why": "groove width, range in the source's table"
+  },
+  "squeeze": {
+   "role": "derived",
+   "unit": "%"
+  },
+  "fill": {
+   "role": "derived",
+   "unit": "%"
+  },
+  "swell": {
+   "role": "given",
+   "range": [
+    "0",
+    "0.10"
+   ],
+   "unit": "",
+   "why": "source's illustration: 10% volume swell (an assumed case, not a tolerance)"
+  },
+  "fill_sw": {
+   "role": "derived",
+   "unit": "%"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "squeeze == 1 - h/d",
+   "source": "squeeze = (d - h)/d, the source's formula (section 4 and 11)"
+  },
+  {
+   "zfl": "fill == pi*d*d/(4*w*h)",
+   "source": "gland fill = O-ring area / groove area (round section pi d^2/4 over w*h); reproduces the source's nominal 74.8%"
+  },
+  {
+   "zfl": "fill_sw == fill*(1 + swell)",
+   "source": "volume swell scales the O-ring area (source's 10% swell remark)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "fill_sw",
+   "op": "<=",
+   "value": "90",
+   "why": "source: with 10% swell fill could exceed 90%; test whether 90% holds"
+  }
+ ],
+ "catalog": {}
+}

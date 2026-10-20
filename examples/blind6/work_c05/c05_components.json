@@ -1,0 +1,242 @@
+{
+ "stand": "universal-stand/1",
+ "why": "c05 as components, situation S3 only",
+ "components": {
+  "FS": {
+   "file": "flowsum.json"
+  },
+  "CP": {
+   "choose": [
+    {
+     "label": "K32",
+     "file": "cmp_K32.json",
+     "fields": {
+      "price": {
+       "value": "6900",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "K40",
+     "file": "cmp_K40.json",
+     "fields": {
+      "price": {
+       "value": "8200",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "K40M",
+     "file": "cmp_K40M.json",
+     "fields": {
+      "price": {
+       "value": "8900",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "K50",
+     "file": "cmp_K50.json",
+     "fields": {
+      "price": {
+       "value": "10600",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "K50H",
+     "file": "cmp_K50H.json",
+     "fields": {
+      "price": {
+       "value": "11800",
+       "unit": "EUR"
+      }
+     }
+    }
+   ]
+  },
+  "DR": {
+   "choose": [
+    {
+     "label": "D30",
+     "file": "dry_D30.json",
+     "fields": {
+      "price": {
+       "value": "1100",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "D40",
+     "file": "dry_D40.json",
+     "fields": {
+      "price": {
+       "value": "1450",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "D50",
+     "file": "dry_D50.json",
+     "fields": {
+      "price": {
+       "value": "1900",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "D60",
+     "file": "dry_D60.json",
+     "fields": {
+      "price": {
+       "value": "2500",
+       "unit": "EUR"
+      }
+     }
+    }
+   ]
+  },
+  "PI": {
+   "choose": [
+    {
+     "label": "d25",
+     "file": "pipe_d25.json",
+     "fields": {
+      "price": {
+       "value": "1080",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "d32",
+     "file": "pipe_d32.json",
+     "fields": {
+      "price": {
+       "value": "1620",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "d40",
+     "file": "pipe_d40.json",
+     "fields": {
+      "price": {
+       "value": "2520",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "d50",
+     "file": "pipe_d50.json",
+     "fields": {
+      "price": {
+       "value": "3780",
+       "unit": "EUR"
+      }
+     }
+    },
+    {
+     "label": "d63",
+     "file": "pipe_d63.json",
+     "fields": {
+      "price": {
+       "value": "5940",
+       "unit": "EUR"
+      }
+     }
+    }
+   ]
+  },
+  "HA": {
+   "file": "hose_A.json"
+  },
+  "HB": {
+   "file": "hose_B.json"
+  }
+ },
+ "connect": {
+  "FS.QA": "QA",
+  "FS.QB": "QB",
+  "FS.leak": "leak",
+  "CP.Qt": "FS.Qt",
+  "DR.Qt": "FS.Qt",
+  "PI.Q": "FS.Qt",
+  "PI.Pabs": "CP.Pabs",
+  "HA.Q": "QA",
+  "HA.Pabs": "CP.Pabs",
+  "HB.Q": "QB",
+  "HB.Pabs": "CP.Pabs"
+ },
+ "quantities": {
+  "QA": {
+   "role": "given",
+   "range": [
+    "14",
+    "18"
+   ],
+   "unit": "L/s"
+  },
+  "QB": {
+   "role": "given",
+   "range": [
+    "8.5",
+    "10.5"
+   ],
+   "unit": "L/s"
+  },
+  "leak": {
+   "role": "given",
+   "range": [
+    "1.5",
+    "2.5"
+   ],
+   "unit": "L/s"
+  },
+  "PinA": {
+   "role": "derived",
+   "unit": "bar"
+  },
+  "PinB": {
+   "role": "derived",
+   "unit": "bar"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "PinA == CP.Pc - DR.dp - PI.dp - HA.dp",
+   "source": "tool A inlet"
+  },
+  {
+   "zfl": "PinB == CP.Pc - DR.dp - PI.dp - HB.dp",
+   "source": "tool B inlet"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "PinA",
+   "op": ">=",
+   "value": "6.0",
+   "why": "R1 A"
+  },
+  {
+   "quantity": "PinB",
+   "op": ">=",
+   "value": "6.2",
+   "why": "R1 B"
+  }
+ ],
+ "objective": {
+  "minimize": "CP.price + DR.price + PI.price",
+  "unit": "EUR"
+ }
+}

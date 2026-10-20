@@ -1,0 +1,120 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "value": "5",
+   "unit": "V",
+   "ground": "psu"
+  },
+  "I": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Vout": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {
+  "R1": {
+   "from": [
+    "res_1pct",
+    "res_01pct"
+   ]
+  },
+  "R2": {
+   "from": [
+    "res_1pct",
+    "res_01pct"
+   ]
+  },
+  "R3": {
+   "from": [
+    "res_1pct",
+    "res_01pct"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vin - Vout == I*(R1.R + R3.R)",
+   "source": "Ohm, R1 and R3 in series"
+  },
+  {
+   "zfl": "Vout == I*R2.R",
+   "source": "Ohm, R2"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vout",
+   "op": "within",
+   "value": [
+    "3.29",
+    "3.31"
+   ],
+   "why": "2.5 V +-1%"
+  },
+  {
+   "quantity": "I",
+   "op": "<=",
+   "value": "0.0005",
+   "why": "draw <= 0.5 mA"
+  }
+ ],
+ "catalog": {
+  "res_1pct": {
+   "series": "E24",
+   "decades": [
+    1000,
+    10000
+   ],
+   "ground": "datasheet",
+   "fields": {
+    "R": {
+     "series": true,
+     "tolerance": "0.01",
+     "unit": "ohm"
+    },
+    "P": {
+     "value": "0.25",
+     "unit": "W",
+     "why": "power rating"
+    },
+    "price": {
+     "value": "0.01",
+     "unit": "USD"
+    }
+   }
+  },
+  "res_01pct": {
+   "series": "E24",
+   "decades": [
+    1000,
+    10000
+   ],
+   "ground": "datasheet",
+   "fields": {
+    "R": {
+     "series": true,
+     "tolerance": "0.001",
+     "unit": "ohm"
+    },
+    "P": {
+     "value": "0.25",
+     "unit": "W",
+     "why": "power rating"
+    },
+    "price": {
+     "value": "0.10",
+     "unit": "USD"
+    }
+   }
+  }
+ },
+ "objective": {
+  "minimize": "R1.price + R2.price + R3.price"
+ },
+ "note": "scale stress: 3 slots x 96 items = 884736 designs (step 5, 2026-10-10)"
+}

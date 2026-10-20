@@ -1,0 +1,86 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "modes": [
+    "heavy R2",
+    "bollard R1",
+    "light R4",
+    "heavy R3"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "designs": [
+    {
+      "design": "PR=propellers(grade=P3, D=13/10, KT0=19/50, J0=23/25, KQ0=21/500, price=5600); GR=gears(grade=G2, i=7/2, price=5200)",
+      "verdict": "REFUTED",
+      "mode": "heavy R2",
+      "fails": "R2 heavy speed >= 9 kn, unfavourable tolerances",
+      "by": "~0.285703411886 (an exact fraction of 105 digits)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "verdict": "REFUTED",
+  "why": "every design violates a requirement in at least one mode, at a concrete point",
+  "closest_design": {
+    "PR": {
+      "catalog": "propellers",
+      "D": {
+        "nominal": "13/10 (~1.3)",
+        "tolerance": "0"
+      },
+      "KT0": {
+        "nominal": "19/50 (~0.38)",
+        "tolerance": "0"
+      },
+      "J0": {
+        "nominal": "23/25 (~0.92)",
+        "tolerance": "0"
+      },
+      "KQ0": {
+        "nominal": "21/500 (~0.042)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "5600",
+        "tolerance": "0"
+      },
+      "grade": "P3"
+    },
+    "GR": {
+      "catalog": "gears",
+      "i": {
+        "nominal": "7/2 (~3.5)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "5200",
+        "tolerance": "0"
+      },
+      "grade": "G2"
+    }
+  },
+  "failing_mode": "heavy R2",
+  "its_violating_point": {
+    "pi": "6283185307179587/2000000000000000 (~3.14159)"
+  },
+  "value_there": {
+    "Vkn": [
+      "~8.71429658811 (an exact fraction of 105 digits)",
+      "~8.71429658811 (an exact fraction of 105 digits)"
+    ]
+  },
+  "requirement": {
+    "quantity": "Vkn",
+    "op": ">=",
+    "value": "9",
+    "why": "R2 heavy speed >= 9 kn, unfavourable tolerances"
+  },
+  "overshoot": "~0.285703411886 (an exact fraction of 105 digits)",
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "skipped": "9 requirements: subsets over 8 not enumerated"
+  }
+}

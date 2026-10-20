@@ -1,0 +1,188 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Price": {
+   "role": "given",
+   "value": "350000",
+   "unit": "EUR",
+   "why": "home price"
+  },
+  "D": {
+   "role": "given",
+   "range": [
+    "60000",
+    "75000"
+   ],
+   "unit": "EUR",
+   "why": "down payment"
+  },
+  "Inc": {
+   "role": "given",
+   "range": [
+    "5200",
+    "5800"
+   ],
+   "unit": "EUR",
+   "why": "net monthly income"
+  },
+  "Sav": {
+   "role": "given",
+   "value": "78000",
+   "unit": "EUR",
+   "why": "cash savings"
+  },
+  "A": {
+   "role": "derived",
+   "unit": "EUR"
+  },
+  "Fee": {
+   "role": "derived",
+   "unit": "EUR"
+  },
+  "Cash": {
+   "role": "derived",
+   "unit": "EUR"
+  },
+  "Tot": {
+   "role": "derived",
+   "unit": "EUR"
+  },
+  "Slack": {
+   "role": "derived",
+   "unit": "EUR"
+  },
+  "idx": {
+   "role": "given",
+   "range": [
+    "0.025",
+    "0.050"
+   ],
+   "unit": "",
+   "why": "the rate index, anywhere in 2.5..5.0% a year"
+  }
+ },
+ "slots": {
+  "M": {
+   "from": [
+    "mortgages"
+   ]
+  }
+ },
+ "define": {
+  "Pr": "Price - D",
+  "rate": "min(M.fixed + M.var*(idx + M.margin), M.cap)",
+  "r": "rate/12"
+ },
+ "laws": [
+  {
+   "zfl": "A == Pr*r*pow(1 + r, M.n)/(pow(1 + r, M.n) - 1)",
+   "source": "annuity A = P r (1+r)^n / ((1+r)^n - 1)"
+  },
+  {
+   "zfl": "Fee == M.fp*Pr + M.fx",
+   "source": "upfront fee = share of principal + fixed amount"
+  },
+  {
+   "zfl": "Slack == 35/100*Inc - A",
+   "source": "headroom of the payment under 35% of net monthly income"
+  },
+  {
+   "zfl": "Cash == D + Fee",
+   "source": "cash needed up front"
+  },
+  {
+   "zfl": "Tot == M.n*A + Fee",
+   "source": "total paid over the term"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Slack",
+   "op": ">=",
+   "value": "0",
+   "why": "payment <= 35% of net income, every allowed income"
+  },
+  {
+   "quantity": "Cash",
+   "op": "<=",
+   "value": "Sav",
+   "why": "down payment + fee <= cash savings"
+  }
+ ],
+ "catalog": {
+  "mortgages": {
+   "items": [
+    {
+     "fixed": "0.061",
+     "var": "0",
+     "margin": "0",
+     "cap": "1",
+     "n": "300",
+     "fp": "0.01",
+     "fx": "0",
+     "label": "L1"
+    },
+    {
+     "fixed": "0.056",
+     "var": "0",
+     "margin": "0",
+     "cap": "1",
+     "n": "360",
+     "fp": "0",
+     "fx": "2500",
+     "label": "L2"
+    },
+    {
+     "fixed": "0",
+     "var": "1",
+     "margin": "0.016",
+     "cap": "1",
+     "n": "300",
+     "fp": "0.005",
+     "fx": "0",
+     "label": "L3"
+    },
+    {
+     "fixed": "0",
+     "var": "1",
+     "margin": "0.012",
+     "cap": "0.060",
+     "n": "360",
+     "fp": "0.015",
+     "fx": "0",
+     "label": "L4"
+    }
+   ],
+   "ground": "lender offer sheet",
+   "fields": {
+    "fixed": {
+     "unit": ""
+    },
+    "var": {
+     "unit": ""
+    },
+    "margin": {
+     "unit": ""
+    },
+    "cap": {
+     "unit": ""
+    },
+    "n": {
+     "unit": ""
+    },
+    "fp": {
+     "unit": ""
+    },
+    "fx": {
+     "unit": "EUR"
+    }
+   }
+  }
+ },
+ "objective": {
+  "minimize": "Tot",
+  "case": "worst",
+  "why": "the worst-case total paid over every allowed down payment and index path (the blind author wrote it by hand with a Dmin quantity)"
+ },
+ "note": "b09/t14 with the worst-case objective (G11, 2026-10-10)"
+}

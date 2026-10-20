@@ -1,0 +1,107 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "k02 ADC component; vrec = reading in volts at the amp output, using the nominal Vref",
+ "interface": {
+  "inputs": {
+   "vo1": {
+    "assume": [
+     "-1/10",
+     "11/2"
+    ],
+    "bands": [
+     "-1/10",
+     "-1/200",
+     "1/200",
+     "496/100",
+     "504/100",
+     "11/2"
+    ]
+   }
+  },
+  "outputs": [
+   "vrec"
+  ]
+ },
+ "quantities": {
+  "oadc": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-45/10",
+    "45/10"
+   ]
+  },
+  "ores": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-1/2",
+    "1/2"
+   ]
+  },
+  "oinl": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-1",
+    "1"
+   ]
+  },
+  "Vref": {
+   "role": "given",
+   "unit": "V",
+   "value": "5",
+   "tolerance": "0.005"
+  },
+  "dVref": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-15/10000",
+    "15/10000"
+   ]
+  },
+  "eg": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "-22/20475",
+    "22/20475"
+   ]
+  },
+  "vo1": {
+   "role": "given",
+   "unit": "V",
+   "value": "0"
+  },
+  "code": {
+   "role": "derived",
+   "unit": ""
+  },
+  "vrec": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Vrefnom": {
+   "role": "given",
+   "unit": "V",
+   "value": "5"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "define": {
+  "Vrefe": "Vref*(1+dVref)"
+ },
+ "laws": [
+  {
+   "zfl": "code == 4095*vo1/Vrefe*(1+eg) + oadc + ores + oinl",
+   "source": "ADC: Kadc=(2^N-1)/Vref, gain error, offset+resolution+INL as LSB terms"
+  },
+  {
+   "zfl": "vrec == code*Vrefnom/4095",
+   "source": "reading in volts with nominal reference"
+  }
+ ],
+ "requirements": []
+}

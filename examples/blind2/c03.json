@@ -1,0 +1,72 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "f":     {"role": "given", "value": "18", "unit": "GHz", "ground": "problem statement"},
+  "F1":    {"role": "given", "value": "1", "unit": "GHz", "ground": "unit constant for log10"},
+  "D1":    {"role": "given", "value": "1", "unit": "km", "ground": "unit constant for log10"},
+  "Dc":    {"role": "given", "value": "35", "unit": "km", "ground": "rain-cell constant in d/(1+d/35)"},
+  "d":     {"role": "given", "range": ["4.6", "5.4"], "unit": "km", "why": "hop length, final mast positions"},
+  "Lmisc": {"role": "given", "range": ["1.0", "2.0"], "unit": "dB", "why": "pointing, radome, gas: 1.5 +-0.5"},
+  "Ltx":   {"role": "given", "range": ["0.7", "1.1"], "unit": "dB", "why": "tx cable 0.9 +-0.2"},
+  "Lrx":   {"role": "given", "range": ["0.7", "1.1"], "unit": "dB", "why": "rx cable 0.9 +-0.2"},
+  "gam":   {"role": "given", "range": ["0.4", "2.6"], "unit": "dB/km", "why": "rain attenuation (overridden by mode)"},
+  "Sens":  {"role": "given", "range": ["-67.5", "-64.5"], "unit": "dB", "why": "sensitivity incl. unit spread (overridden by mode); dBm written as dB"},
+  "Uspr":  {"role": "given", "value": "1.5", "unit": "dB", "why": "unit spread on received level"},
+  "Prx":    {"role": "derived", "unit": "dB", "why": "received level, dBm written as dB"},
+  "Margin": {"role": "derived", "unit": "dB"},
+  "PrxHi":  {"role": "derived", "unit": "dB"},
+  "EIRP":   {"role": "derived", "unit": "dB"}
+ },
+ "slots": {
+  "PT":  {"from": ["licenses"]},
+  "TXD": {"from": ["dishes"]},
+  "RXD": {"from": ["dishes"]}
+ },
+ "define": {
+  "FSPL":  "92.45 + 20*log10(f/F1) + 20*log10(d/D1)",
+  "Lrain": "gam*d/(1 + d/Dc)"
+ },
+ "laws": [
+  {"zfl": "Prx == PT.P + TXD.G + RXD.G - Ltx - Lrx - FSPL - Lmisc - Lrain", "source": "link budget"},
+  {"zfl": "Margin == Prx - Sens", "source": "fade margin = Prx - sensitivity"},
+  {"zfl": "PrxHi == Prx + Uspr", "source": "received level incl. +1.5 dB unit spread"},
+  {"zfl": "EIRP == PT.P + TXD.G - Ltx", "source": "EIRP definition"}
+ ],
+ "requirements": [
+  {"quantity": "EIRP", "op": "<=", "value": "40", "why": "regulatory EIRP <= 40 dBm"}
+ ],
+ "modes": {
+  "clear sky 256QAM": {
+   "quantities": {"gam": {"value": "0"}, "Sens": {"range": ["-67.5", "-64.5"]}},
+   "requirements": [
+    {"quantity": "Margin", "op": ">=", "value": "25", "why": "(a) clear-sky fade margin with 256QAM (-66 +-1.5 dBm)"},
+    {"quantity": "PrxHi", "op": "<=", "value": "-25", "why": "(d) receiver max input -25 dBm incl. unit spread"}
+   ]},
+  "worst rain 16QAM": {
+   "quantities": {"gam": {"range": ["0.4", "2.6"]}, "Sens": {"range": ["-79.5", "-76.5"]}},
+   "requirements": [
+    {"quantity": "Margin", "op": ">=", "value": "3", "why": "(b) rain margin with 16QAM (-78 +-1.5 dBm)"}
+   ]}
+ },
+ "objective": {"minimize": "PT.price + TXD.price + RXD.price", "why": "cheapest total"},
+ "report": "all",
+ "catalog": {
+  "licenses": {
+   "items": [
+    {"P": {"value": "18"}, "price": "0",    "grade": "18 dBm"},
+    {"P": {"value": "23"}, "price": "600",  "grade": "23 dBm"},
+    {"P": {"value": "27"}, "price": "1400", "grade": "27 dBm"}
+   ],
+   "fields": {"P": {"unit": "dB"}, "price": {"unit": "USD"}}
+  },
+  "dishes": {
+   "items": [
+    {"G": {"value": "33.5"}, "price": "350",  "grade": "0.3 m"},
+    {"G": {"value": "39.5"}, "price": "780",  "grade": "0.6 m"},
+    {"G": {"value": "43.0"}, "price": "1500", "grade": "0.9 m"},
+    {"G": {"value": "45.6"}, "price": "2800", "grade": "1.2 m"}
+   ],
+   "fields": {"G": {"unit": "dB"}, "price": {"unit": "USD"}}
+  }
+ }
+}

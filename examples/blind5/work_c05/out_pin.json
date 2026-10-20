@@ -1,0 +1,805 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "kE": {
+   "role": "given",
+   "value": "1.4815",
+   "unit": "m^3/(h*MW)",
+   "why": "evaporation per MW of heat load (problem statement)",
+   "ground": "problem"
+  },
+  "Dr": {
+   "role": "given",
+   "value": "0.023",
+   "unit": "m^3/h",
+   "why": "drift (problem statement)",
+   "ground": "problem"
+  },
+  "cu": {
+   "role": "given",
+   "value": "1",
+   "unit": "mg/L",
+   "why": "unit quantity to make concentrations dimensionless inside log10"
+  },
+  "Tu": {
+   "role": "given",
+   "value": "1",
+   "unit": "C",
+   "why": "unit quantity to make temperature dimensionless inside log10"
+  },
+  "Si_lim": {
+   "role": "given",
+   "value": "150",
+   "unit": "mg/L",
+   "why": "R1"
+  },
+  "Cl_lim": {
+   "role": "given",
+   "value": "400",
+   "unit": "mg/L",
+   "why": "R2"
+  },
+  "SO_lim": {
+   "role": "given",
+   "value": "1000",
+   "unit": "mg/L",
+   "why": "R3"
+  },
+  "disch": {
+   "role": "given",
+   "value": "0.90",
+   "unit": "EUR/m^3",
+   "why": "discharge cost"
+  },
+  "cacid": {
+   "role": "given",
+   "value": "0.12",
+   "unit": "EUR/kg",
+   "why": "acid price"
+  },
+  "kacid": {
+   "role": "given",
+   "value": "0.98",
+   "unit": "",
+   "why": "kg H2SO4 per kg alkalinity-as-CaCO3 neutralised"
+  },
+  "h_w": {
+   "role": "given",
+   "value": "2000",
+   "unit": "h",
+   "why": "season hours"
+  },
+  "Qtop_w": {
+   "role": "given",
+   "value": "1.2",
+   "unit": "MW",
+   "why": "top of Q range: the cost is evaluated at the worst case"
+  },
+  "Q_w": {
+   "role": "given",
+   "range": [
+    "0.9",
+    "1.2"
+   ],
+   "unit": "MW",
+   "why": "heat load, season w"
+  },
+  "T_w": {
+   "role": "given",
+   "range": [
+    "28",
+    "32"
+   ],
+   "unit": "C",
+   "why": "basin temperature, season w"
+  },
+  "h_m": {
+   "role": "given",
+   "value": "3200",
+   "unit": "h",
+   "why": "season hours"
+  },
+  "Qtop_m": {
+   "role": "given",
+   "value": "2.0",
+   "unit": "MW",
+   "why": "top of Q range: the cost is evaluated at the worst case"
+  },
+  "Q_m": {
+   "role": "given",
+   "range": [
+    "1.5",
+    "2.0"
+   ],
+   "unit": "MW",
+   "why": "heat load, season m"
+  },
+  "T_m": {
+   "role": "given",
+   "range": [
+    "30",
+    "34"
+   ],
+   "unit": "C",
+   "why": "basin temperature, season m"
+  },
+  "h_s": {
+   "role": "given",
+   "value": "2200",
+   "unit": "h",
+   "why": "season hours"
+  },
+  "Qtop_s": {
+   "role": "given",
+   "value": "2.8",
+   "unit": "MW",
+   "why": "top of Q range: the cost is evaluated at the worst case"
+  },
+  "Q_s": {
+   "role": "given",
+   "range": [
+    "2.2",
+    "2.8"
+   ],
+   "unit": "MW",
+   "why": "heat load, season s"
+  },
+  "T_s": {
+   "role": "given",
+   "range": [
+    "34",
+    "38"
+   ],
+   "unit": "C",
+   "why": "basin temperature, season s"
+  },
+  "M_w": {
+   "role": "derived",
+   "unit": "m^3/h",
+   "why": "make-up"
+  },
+  "N_w": {
+   "role": "derived",
+   "unit": "",
+   "why": "cycles"
+  },
+  "Si_w": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin SiO2"
+  },
+  "Cl_w": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin chloride"
+  },
+  "SO_w": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin sulphate"
+  },
+  "Alk_w": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin alkalinity"
+  },
+  "TDS_w": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "TDS_lsi"
+  },
+  "Ca_w": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin Ca"
+  },
+  "pH_w": {
+   "role": "derived",
+   "unit": "",
+   "why": "pH"
+  },
+  "LSI_w": {
+   "role": "derived",
+   "unit": "",
+   "why": "LSI"
+  },
+  "M_m": {
+   "role": "derived",
+   "unit": "m^3/h",
+   "why": "make-up"
+  },
+  "N_m": {
+   "role": "derived",
+   "unit": "",
+   "why": "cycles"
+  },
+  "Si_m": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin SiO2"
+  },
+  "Cl_m": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin chloride"
+  },
+  "SO_m": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin sulphate"
+  },
+  "Alk_m": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin alkalinity"
+  },
+  "TDS_m": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "TDS_lsi"
+  },
+  "Ca_m": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin Ca"
+  },
+  "pH_m": {
+   "role": "derived",
+   "unit": "",
+   "why": "pH"
+  },
+  "LSI_m": {
+   "role": "derived",
+   "unit": "",
+   "why": "LSI"
+  },
+  "M_s": {
+   "role": "derived",
+   "unit": "m^3/h",
+   "why": "make-up"
+  },
+  "N_s": {
+   "role": "derived",
+   "unit": "",
+   "why": "cycles"
+  },
+  "Si_s": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin SiO2"
+  },
+  "Cl_s": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin chloride"
+  },
+  "SO_s": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin sulphate"
+  },
+  "Alk_s": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin alkalinity"
+  },
+  "TDS_s": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "TDS_lsi"
+  },
+  "Ca_s": {
+   "role": "derived",
+   "unit": "mg/L",
+   "why": "basin Ca"
+  },
+  "pH_s": {
+   "role": "derived",
+   "unit": "",
+   "why": "pH"
+  },
+  "LSI_s": {
+   "role": "derived",
+   "unit": "",
+   "why": "LSI"
+  },
+  "Vyr": {
+   "role": "derived",
+   "unit": "m^3",
+   "why": "annual make-up"
+  }
+ },
+ "slots": {
+  "SRC": {
+   "from": [
+    "sources"
+   ]
+  },
+  "PROG": {
+   "from": [
+    "programmes"
+   ]
+  },
+  "ACID": {
+   "from": [
+    "acids"
+   ]
+  },
+  "BW": {
+   "from": [
+    "flow_w"
+   ]
+  },
+  "BM": {
+   "from": [
+    "flow_m"
+   ]
+  },
+  "BS": {
+   "from": [
+    "flow_s"
+   ]
+  }
+ },
+ "define": {
+  "E_w": "kE*Q_w",
+  "E_m": "kE*Q_m",
+  "E_s": "kE*Q_s"
+ },
+ "laws": [
+  {
+   "zfl": "M_w == E_w + BW.x + Dr",
+   "source": "M = E+B+D"
+  },
+  {
+   "zfl": "N_w == M_w/(BW.x + Dr)",
+   "source": "N = M/(B+D)"
+  },
+  {
+   "zfl": "Si_w == N_w*SRC.Si",
+   "source": "concentration"
+  },
+  {
+   "zfl": "Cl_w == N_w*SRC.Cl",
+   "source": "concentration"
+  },
+  {
+   "zfl": "SO_w == N_w*(SRC.SO4 + 0.96*ACID.r*SRC.Alk)",
+   "source": "concentration"
+  },
+  {
+   "zfl": "Alk_w == N_w*SRC.Alk*(1-ACID.r)",
+   "source": "concentration"
+  },
+  {
+   "zfl": "TDS_w == N_w*(SRC.TDS - 0.26*ACID.r*SRC.Alk)",
+   "source": "concentration"
+  },
+  {
+   "zfl": "Ca_w == N_w*SRC.Ca",
+   "source": "concentration"
+  },
+  {
+   "zfl": "pH_w == 5.9 + 0.95*log10(Alk_w/cu)",
+   "source": "empirical pH"
+  },
+  {
+   "zfl": "LSI_w == pH_w - (9.3 + (log10(TDS_w/cu) - 1)/10 + (-13.12*log10(T_w/Tu + 273) + 34.55) - (log10(Ca_w/cu) - 0.4 + log10(Alk_w/cu)))",
+   "source": "LSI = pH - pHs"
+  },
+  {
+   "zfl": "M_m == E_m + BM.x + Dr",
+   "source": "M = E+B+D"
+  },
+  {
+   "zfl": "N_m == M_m/(BM.x + Dr)",
+   "source": "N = M/(B+D)"
+  },
+  {
+   "zfl": "Si_m == N_m*SRC.Si",
+   "source": "concentration"
+  },
+  {
+   "zfl": "Cl_m == N_m*SRC.Cl",
+   "source": "concentration"
+  },
+  {
+   "zfl": "SO_m == N_m*(SRC.SO4 + 0.96*ACID.r*SRC.Alk)",
+   "source": "concentration"
+  },
+  {
+   "zfl": "Alk_m == N_m*SRC.Alk*(1-ACID.r)",
+   "source": "concentration"
+  },
+  {
+   "zfl": "TDS_m == N_m*(SRC.TDS - 0.26*ACID.r*SRC.Alk)",
+   "source": "concentration"
+  },
+  {
+   "zfl": "Ca_m == N_m*SRC.Ca",
+   "source": "concentration"
+  },
+  {
+   "zfl": "pH_m == 5.9 + 0.95*log10(Alk_m/cu)",
+   "source": "empirical pH"
+  },
+  {
+   "zfl": "LSI_m == pH_m - (9.3 + (log10(TDS_m/cu) - 1)/10 + (-13.12*log10(T_m/Tu + 273) + 34.55) - (log10(Ca_m/cu) - 0.4 + log10(Alk_m/cu)))",
+   "source": "LSI = pH - pHs"
+  },
+  {
+   "zfl": "M_s == E_s + BS.x + Dr",
+   "source": "M = E+B+D"
+  },
+  {
+   "zfl": "N_s == M_s/(BS.x + Dr)",
+   "source": "N = M/(B+D)"
+  },
+  {
+   "zfl": "Si_s == N_s*SRC.Si",
+   "source": "concentration"
+  },
+  {
+   "zfl": "Cl_s == N_s*SRC.Cl",
+   "source": "concentration"
+  },
+  {
+   "zfl": "SO_s == N_s*(SRC.SO4 + 0.96*ACID.r*SRC.Alk)",
+   "source": "concentration"
+  },
+  {
+   "zfl": "Alk_s == N_s*SRC.Alk*(1-ACID.r)",
+   "source": "concentration"
+  },
+  {
+   "zfl": "TDS_s == N_s*(SRC.TDS - 0.26*ACID.r*SRC.Alk)",
+   "source": "concentration"
+  },
+  {
+   "zfl": "Ca_s == N_s*SRC.Ca",
+   "source": "concentration"
+  },
+  {
+   "zfl": "pH_s == 5.9 + 0.95*log10(Alk_s/cu)",
+   "source": "empirical pH"
+  },
+  {
+   "zfl": "LSI_s == pH_s - (9.3 + (log10(TDS_s/cu) - 1)/10 + (-13.12*log10(T_s/Tu + 273) + 34.55) - (log10(Ca_s/cu) - 0.4 + log10(Alk_s/cu)))",
+   "source": "LSI = pH - pHs"
+  },
+  {
+   "zfl": "Vyr == h_w*(E_w + BW.x + Dr) + h_m*(E_m + BM.x + Dr) + h_s*(E_s + BS.x + Dr)",
+   "source": "sum over seasons of hours*M"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Si_w",
+   "op": "<=",
+   "value": "Si_lim",
+   "why": "R1, season w"
+  },
+  {
+   "quantity": "Cl_w",
+   "op": "<=",
+   "value": "Cl_lim",
+   "why": "R2, season w"
+  },
+  {
+   "quantity": "SO_w",
+   "op": "<=",
+   "value": "SO_lim",
+   "why": "R3, season w"
+  },
+  {
+   "quantity": "LSI_w",
+   "op": "<=",
+   "value": "PROG.Lmax",
+   "why": "R4, season w"
+  },
+  {
+   "quantity": "Si_m",
+   "op": "<=",
+   "value": "Si_lim",
+   "why": "R1, season m"
+  },
+  {
+   "quantity": "Cl_m",
+   "op": "<=",
+   "value": "Cl_lim",
+   "why": "R2, season m"
+  },
+  {
+   "quantity": "SO_m",
+   "op": "<=",
+   "value": "SO_lim",
+   "why": "R3, season m"
+  },
+  {
+   "quantity": "LSI_m",
+   "op": "<=",
+   "value": "PROG.Lmax",
+   "why": "R4, season m"
+  },
+  {
+   "quantity": "Si_s",
+   "op": "<=",
+   "value": "Si_lim",
+   "why": "R1, season s"
+  },
+  {
+   "quantity": "Cl_s",
+   "op": "<=",
+   "value": "Cl_lim",
+   "why": "R2, season s"
+  },
+  {
+   "quantity": "SO_s",
+   "op": "<=",
+   "value": "SO_lim",
+   "why": "R3, season s"
+  },
+  {
+   "quantity": "LSI_s",
+   "op": "<=",
+   "value": "PROG.Lmax",
+   "why": "R4, season s"
+  },
+  {
+   "quantity": "Vyr",
+   "op": "<=",
+   "value": "26000",
+   "why": "R5 annual make-up volume <= 26000 m3 (worst case: Q at top of range)"
+  }
+ ],
+ "objective": {
+  "minimize": "h_w*((kE*Qtop_w + BW.x + Dr)*(SRC.price + PROG.cost + ACID.r*SRC.Alkhi*kacid*cacid) + disch*BW.x) + h_m*((kE*Qtop_m + BM.x + Dr)*(SRC.price + PROG.cost + ACID.r*SRC.Alkhi*kacid*cacid) + disch*BM.x) + h_s*((kE*Qtop_s + BS.x + Dr)*(SRC.price + PROG.cost + ACID.r*SRC.Alkhi*kacid*cacid) + disch*BS.x)",
+  "unit": "kEUR",
+  "why": "annual cost at the worst case (Q and Alk_m at the top of their ranges)"
+ },
+ "catalog": {
+  "sources": {
+   "items": [
+    {
+     "name": "Town",
+     "Ca": {
+      "range": [
+       "60",
+       "80"
+      ]
+     },
+     "Alk": {
+      "range": [
+       "70",
+       "90"
+      ]
+     },
+     "Cl": {
+      "range": [
+       "20",
+       "30"
+      ]
+     },
+     "Si": {
+      "range": [
+       "8",
+       "12"
+      ]
+     },
+     "SO4": {
+      "range": [
+       "25",
+       "35"
+      ]
+     },
+     "TDS": {
+      "range": [
+       "220",
+       "280"
+      ]
+     },
+     "price": "1.90",
+     "Alkhi": "90"
+    },
+    {
+     "name": "Well",
+     "Ca": {
+      "range": [
+       "180",
+       "230"
+      ]
+     },
+     "Alk": {
+      "range": [
+       "200",
+       "240"
+      ]
+     },
+     "Cl": {
+      "range": [
+       "60",
+       "90"
+      ]
+     },
+     "Si": {
+      "range": [
+       "22",
+       "30"
+      ]
+     },
+     "SO4": {
+      "range": [
+       "80",
+       "110"
+      ]
+     },
+     "TDS": {
+      "range": [
+       "650",
+       "780"
+      ]
+     },
+     "price": "0.65",
+     "Alkhi": "240"
+    },
+    {
+     "name": "SoftWell",
+     "Ca": {
+      "range": [
+       "10",
+       "25"
+      ]
+     },
+     "Alk": {
+      "range": [
+       "200",
+       "240"
+      ]
+     },
+     "Cl": {
+      "range": [
+       "60",
+       "90"
+      ]
+     },
+     "Si": {
+      "range": [
+       "22",
+       "30"
+      ]
+     },
+     "SO4": {
+      "range": [
+       "80",
+       "110"
+      ]
+     },
+     "TDS": {
+      "range": [
+       "700",
+       "820"
+      ]
+     },
+     "price": "1.45",
+     "Alkhi": "240"
+    }
+   ],
+   "fields": {
+    "Ca": {
+     "unit": "mg/L"
+    },
+    "Alk": {
+     "unit": "mg/L"
+    },
+    "Cl": {
+     "unit": "mg/L"
+    },
+    "Si": {
+     "unit": "mg/L"
+    },
+    "SO4": {
+     "unit": "mg/L"
+    },
+    "TDS": {
+     "unit": "mg/L"
+    },
+    "price": {
+     "unit": "EUR/m^3"
+    },
+    "Alkhi": {
+     "unit": "mg/L"
+    }
+   }
+  },
+  "programmes": {
+   "items": [
+    {
+     "name": "none",
+     "Lmax": "0.5",
+     "cost": "0"
+    },
+    {
+     "name": "P1",
+     "Lmax": "1.3",
+     "cost": "0.12"
+    },
+    {
+     "name": "P2",
+     "Lmax": "1.9",
+     "cost": "0.22"
+    },
+    {
+     "name": "P3",
+     "Lmax": "2.5",
+     "cost": "0.38"
+    }
+   ],
+   "fields": {
+    "Lmax": {
+     "unit": ""
+    },
+    "cost": {
+     "unit": "EUR/m^3"
+    }
+   }
+  },
+  "acids": {
+   "items": [
+    {
+     "name": "0%",
+     "r": "0"
+    },
+    {
+     "name": "40%",
+     "r": "0.4"
+    },
+    {
+     "name": "70%",
+     "r": "0.7"
+    }
+   ],
+   "fields": {
+    "r": {
+     "unit": ""
+    }
+   }
+  },
+  "flow_w": {
+   "items": [
+    {
+     "x": "0.1645"
+    }
+   ],
+   "fields": {
+    "x": {
+     "unit": "m^3/h"
+    }
+   }
+  },
+  "flow_m": {
+   "items": [
+    {
+     "x": "0.2897"
+    }
+   ],
+   "fields": {
+    "x": {
+     "unit": "m^3/h"
+    }
+   }
+  },
+  "flow_s": {
+   "items": [
+    {
+     "x": "0.4148"
+    }
+   ],
+   "fields": {
+    "x": {
+     "unit": "m^3/h"
+    }
+   }
+  }
+ },
+ "report": "all"
+}

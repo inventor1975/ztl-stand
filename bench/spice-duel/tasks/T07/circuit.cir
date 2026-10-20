@@ -1,0 +1,10 @@
+* an adjustable regulator (LM317-like): Vout = Vref (1 + R2/R1) + Iadj R2
+* the reference sits between x and adj; E1 makes out follow x and supplies the load (the pass transistor's role)
+Vin vin 0 12
+Vref x adj 1.25
+E1 out 0 x 0 1
+Iadj vin adj 50u
+R1 out adj 240
+R2 adj 0 720
+Rload out 0 100
+.end

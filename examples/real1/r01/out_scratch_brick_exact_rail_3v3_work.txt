@@ -1,0 +1,46 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "verdict": "EARNED",
+  "modes": [
+    "rail_3v3"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "design": {
+    "REG": {
+      "catalog": "TPS79901",
+      "Vref": {
+        "nominal": "1193/1000 (~1.193)",
+        "tolerance": "1/100 (~0.01)"
+      },
+      "grade": "TPS79901 typ Vref, 1% device accuracy"
+    }
+  },
+  "per_mode": {
+    "rail_3v3": {
+      "guaranteed": {
+        "Vo": [
+          "325795139997579153/101000000000000000 (~3.22569)",
+          "111407713332493451/33000000000000000 (~3.37599)"
+        ]
+      },
+      "how": {
+        "Vo": "ZTL, outer range"
+      },
+      "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)"
+    }
+  },
+  "designs": [
+    {
+      "design": "REG=TPS79901(grade=TPS79901 typ Vref, 1% device accuracy, Vref=1193/1000)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+wall 0.05s

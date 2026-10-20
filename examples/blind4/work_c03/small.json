@@ -1,0 +1,483 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "ONECM": {
+   "role": "given",
+   "unit": "cm",
+   "value": "1",
+   "why": "unit length for alpha per 1 cm path"
+  },
+  "AGE": {
+   "role": "given",
+   "unit": "",
+   "value": "0.70",
+   "why": "end-of-life lamp output factor"
+  },
+  "FOUL": {
+   "role": "given",
+   "unit": "",
+   "value": "0.90",
+   "why": "sleeve fouling factor before wiping"
+  },
+  "VAL": {
+   "role": "given",
+   "unit": "",
+   "value": "0.7",
+   "why": "reactor validation factor"
+  },
+  "KK": {
+   "role": "given",
+   "unit": "cm^2/mJ",
+   "value": "0.23",
+   "why": "inactivation rate constant k"
+  },
+  "Pb": {
+   "role": "given",
+   "unit": "kW",
+   "value": "0.03",
+   "why": "ballast loss per chamber"
+  },
+  "Ce": {
+   "role": "given",
+   "unit": "EUR/kWh",
+   "value": "0.14",
+   "why": "electricity price"
+  },
+  "Hyr": {
+   "role": "given",
+   "unit": "h",
+   "value": "8760",
+   "why": "hours per year"
+  },
+  "Llife": {
+   "role": "given",
+   "unit": "h",
+   "value": "12000",
+   "why": "lamp life"
+  },
+  "Qp": {
+   "role": "given",
+   "unit": "m^3/h",
+   "value": "40",
+   "why": "Peak flow"
+  },
+  "UVTp": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0.68",
+    "0.80"
+   ],
+   "why": "Peak UVT per 1 cm (fraction)"
+  },
+  "Twp": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "8",
+    "14"
+   ],
+   "why": "Peak water temperature, degC as a plain number (f_T needs dimensionless T)"
+  },
+  "frp": {
+   "role": "given",
+   "unit": "",
+   "value": "0.10",
+   "why": "Peak fraction of year"
+  },
+  "alphap": {
+   "role": "derived",
+   "unit": "1/cm"
+  },
+  "attp": {
+   "role": "derived",
+   "unit": ""
+  },
+  "fTp": {
+   "role": "derived",
+   "unit": ""
+  },
+  "tp": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "Dp": {
+   "role": "derived",
+   "unit": "mJ/cm^2"
+  },
+  "LRp": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Qa": {
+   "role": "given",
+   "unit": "m^3/h",
+   "value": "24",
+   "why": "Average flow"
+  },
+  "UVTa": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0.76",
+    "0.86"
+   ],
+   "why": "Average UVT per 1 cm (fraction)"
+  },
+  "Twa": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "12",
+    "24"
+   ],
+   "why": "Average water temperature, degC as a plain number (f_T needs dimensionless T)"
+  },
+  "fra": {
+   "role": "given",
+   "unit": "",
+   "value": "0.60",
+   "why": "Average fraction of year"
+  },
+  "alphaa": {
+   "role": "derived",
+   "unit": "1/cm"
+  },
+  "atta": {
+   "role": "derived",
+   "unit": ""
+  },
+  "fTa": {
+   "role": "derived",
+   "unit": ""
+  },
+  "ta": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "Da": {
+   "role": "derived",
+   "unit": "mJ/cm^2"
+  },
+  "LRa": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Ql": {
+   "role": "given",
+   "unit": "m^3/h",
+   "value": "8",
+   "why": "Low flow"
+  },
+  "UVTl": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0.82",
+    "0.90"
+   ],
+   "why": "Low UVT per 1 cm (fraction)"
+  },
+  "Twl": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "22",
+    "30"
+   ],
+   "why": "Low water temperature, degC as a plain number (f_T needs dimensionless T)"
+  },
+  "frl": {
+   "role": "given",
+   "unit": "",
+   "value": "0.30",
+   "why": "Low fraction of year"
+  },
+  "alphal": {
+   "role": "derived",
+   "unit": "1/cm"
+  },
+  "attl": {
+   "role": "derived",
+   "unit": ""
+  },
+  "fTl": {
+   "role": "derived",
+   "unit": ""
+  },
+  "tl": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "Dl": {
+   "role": "derived",
+   "unit": "mJ/cm^2"
+  },
+  "LRl": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Pel": {
+   "role": "derived",
+   "unit": "kW"
+  }
+ },
+ "slots": {
+  "CH": {
+   "from": [
+    "chambers"
+   ]
+  },
+  "NN": {
+   "from": [
+    "counts"
+   ]
+  },
+  "DP": {
+   "from": [
+    "dimp"
+   ]
+  },
+  "DA": {
+   "from": [
+    "dima"
+   ]
+  },
+  "DL": {
+   "from": [
+    "diml"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "alphap == -ln(UVTp)/ONECM",
+   "source": "Beer-Lambert: alpha = -ln(UVT/100) per cm"
+  },
+  {
+   "zfl": "attp == exp(-alphap*(CH.R - CH.rq))",
+   "source": "attenuation from sleeve to wall"
+  },
+  {
+   "zfl": "fTp == min(min(0.88 + (0.08/6)*(Twp - 8), 0.96 + (0.04/6)*(Twp - 14)), min(1 - (0.03/6)*(Twp - 20), 0.97 - 0.01*(Twp - 26)))",
+   "source": "lamp output factor vs water temperature (concave piecewise-linear = min of its 4 segment lines, exact on 8..30 degC)"
+  },
+  {
+   "zfl": "tp == pi*(CH.R*CH.R - CH.rq*CH.rq)*CH.L/(Qp/NN.N)",
+   "source": "residence time t = V/(Q/n), V = pi (R^2 - rq^2) L"
+  },
+  {
+   "zfl": "Dp == VAL*(CH.Puv*DP.x*AGE*FOUL*fTp/(2*pi*CH.R*CH.L))*attp*tp",
+   "source": "fluence = 0.7 * I_wall * t, I_wall = Puv dim a f_foul f_T/(2 pi R L) exp(-alpha (R-rq))"
+  },
+  {
+   "zfl": "LRp == KK*Dp/ln(10)",
+   "source": "first-order inactivation: log-reduction = k D / ln10"
+  },
+  {
+   "zfl": "alphaa == -ln(UVTa)/ONECM",
+   "source": "Beer-Lambert: alpha = -ln(UVT/100) per cm"
+  },
+  {
+   "zfl": "atta == exp(-alphaa*(CH.R - CH.rq))",
+   "source": "attenuation from sleeve to wall"
+  },
+  {
+   "zfl": "fTa == min(min(0.88 + (0.08/6)*(Twa - 8), 0.96 + (0.04/6)*(Twa - 14)), min(1 - (0.03/6)*(Twa - 20), 0.97 - 0.01*(Twa - 26)))",
+   "source": "lamp output factor vs water temperature (concave piecewise-linear = min of its 4 segment lines, exact on 8..30 degC)"
+  },
+  {
+   "zfl": "ta == pi*(CH.R*CH.R - CH.rq*CH.rq)*CH.L/(Qa/NN.N)",
+   "source": "residence time t = V/(Q/n), V = pi (R^2 - rq^2) L"
+  },
+  {
+   "zfl": "Da == VAL*(CH.Puv*DA.x*AGE*FOUL*fTa/(2*pi*CH.R*CH.L))*atta*ta",
+   "source": "fluence = 0.7 * I_wall * t, I_wall = Puv dim a f_foul f_T/(2 pi R L) exp(-alpha (R-rq))"
+  },
+  {
+   "zfl": "LRa == KK*Da/ln(10)",
+   "source": "first-order inactivation: log-reduction = k D / ln10"
+  },
+  {
+   "zfl": "alphal == -ln(UVTl)/ONECM",
+   "source": "Beer-Lambert: alpha = -ln(UVT/100) per cm"
+  },
+  {
+   "zfl": "attl == exp(-alphal*(CH.R - CH.rq))",
+   "source": "attenuation from sleeve to wall"
+  },
+  {
+   "zfl": "fTl == min(min(0.88 + (0.08/6)*(Twl - 8), 0.96 + (0.04/6)*(Twl - 14)), min(1 - (0.03/6)*(Twl - 20), 0.97 - 0.01*(Twl - 26)))",
+   "source": "lamp output factor vs water temperature (concave piecewise-linear = min of its 4 segment lines, exact on 8..30 degC)"
+  },
+  {
+   "zfl": "tl == pi*(CH.R*CH.R - CH.rq*CH.rq)*CH.L/(Ql/NN.N)",
+   "source": "residence time t = V/(Q/n), V = pi (R^2 - rq^2) L"
+  },
+  {
+   "zfl": "Dl == VAL*(CH.Puv*DL.x*AGE*FOUL*fTl/(2*pi*CH.R*CH.L))*attl*tl",
+   "source": "fluence = 0.7 * I_wall * t, I_wall = Puv dim a f_foul f_T/(2 pi R L) exp(-alpha (R-rq))"
+  },
+  {
+   "zfl": "LRl == KK*Dl/ln(10)",
+   "source": "first-order inactivation: log-reduction = k D / ln10"
+  },
+  {
+   "zfl": "Pel == NN.N*(CH.kW*DP.x + Pb)",
+   "source": "electric power at the Peak dimming: n (kW100 dim + 0.03 kW)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "LRp",
+   "op": ">=",
+   "value": "4",
+   "why": "R1: 4-log in Peak regime, all UVT and T in the box"
+  },
+  {
+   "quantity": "LRa",
+   "op": ">=",
+   "value": "4",
+   "why": "R1: 4-log in Average regime, all UVT and T in the box"
+  },
+  {
+   "quantity": "LRl",
+   "op": ">=",
+   "value": "4",
+   "why": "R1: 4-log in Low regime, all UVT and T in the box"
+  },
+  {
+   "quantity": "Pel",
+   "op": "<=",
+   "value": "10",
+   "why": "R2: electrical connection <= 10 kW at the Peak dimming"
+  }
+ ],
+ "objective": {
+  "minimize": "NN.N*CH.price + 10*(Ce*Hyr*(frp*(NN.N*(CH.kW*DP.x + Pb))+fra*(NN.N*(CH.kW*DA.x + Pb))+frl*(NN.N*(CH.kW*DL.x + Pb))) + NN.N*CH.lamp*Hyr/Llife)",
+  "unit": "EUR",
+  "why": "10-year cost: chambers + 10 x (electricity + lamp replacement)"
+ },
+ "catalog": {
+  "chambers": {
+   "items": [
+    {
+     "R": {
+      "value": "5.0"
+     },
+     "rq": {
+      "value": "1.25"
+     },
+     "L": {
+      "value": "90"
+     },
+     "Puv": {
+      "value": "60"
+     },
+     "kW": {
+      "value": "0.22"
+     },
+     "price": "2100",
+     "lamp": "60",
+     "model": "U1"
+    },
+    {
+     "R": {
+      "value": "5.0"
+     },
+     "rq": {
+      "value": "1.25"
+     },
+     "L": {
+      "value": "150"
+     },
+     "Puv": {
+      "value": "110"
+     },
+     "kW": {
+      "value": "0.40"
+     },
+     "price": "2600",
+     "lamp": "110",
+     "model": "U2"
+    },
+    {
+     "R": {
+      "value": "7.5"
+     },
+     "rq": {
+      "value": "1.25"
+     },
+     "L": {
+      "value": "150"
+     },
+     "Puv": {
+      "value": "110"
+     },
+     "kW": {
+      "value": "0.40"
+     },
+     "price": "3100",
+     "lamp": "110",
+     "model": "U3"
+    }
+   ],
+   "ground": "problem statement chamber table",
+   "fields": {
+    "R": {
+     "unit": "cm"
+    },
+    "rq": {
+     "unit": "cm"
+    },
+    "L": {
+     "unit": "cm"
+    },
+    "Puv": {
+     "unit": "W"
+    },
+    "kW": {
+     "unit": "kW"
+    },
+    "price": {
+     "unit": "EUR"
+    },
+    "lamp": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "counts": {
+   "integers": {
+    "field": "N",
+    "from": "1",
+    "to": "12",
+    "unit": ""
+   }
+  },
+  "dimp": {
+   "continuous": {
+    "field": "x",
+    "from": "0.4",
+    "to": "1",
+    "unit": ""
+   }
+  },
+  "dima": {
+   "continuous": {
+    "field": "x",
+    "from": "0.4",
+    "to": "1",
+    "unit": ""
+   }
+  },
+  "diml": {
+   "continuous": {
+    "field": "x",
+    "from": "0.4",
+    "to": "1",
+    "unit": ""
+   }
+  }
+ }
+}

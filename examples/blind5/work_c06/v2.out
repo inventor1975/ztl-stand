@@ -1,0 +1,83 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 1,
+  "failed_at_nominal": 1,
+  "judged": 0,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "FB=widths(B=2); FD=depths(Df=3/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.381156674263 (an exact fraction of 251 digits)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "FB": {
+      "catalog": "widths",
+      "B": {
+        "nominal": "2",
+        "tolerance": "0"
+      }
+    },
+    "FD": {
+      "catalog": "depths",
+      "Df": {
+        "nominal": "3/2 (~1.5)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "pi": "6283185307179587/2000000000000000 (~3.14159)"
+  },
+  "point_units": {
+    "pi": ""
+  },
+  "value_there": {
+    "FS": [
+      "~2.61884332574 (an exact fraction of 249 digits)",
+      "~2.61884332574 (an exact fraction of 251 digits)"
+    ]
+  },
+  "unit": "",
+  "requirement": {
+    "quantity": "FS",
+    "op": ">=",
+    "value": "3",
+    "why": "R1"
+  },
+  "overshoot": "~0.381156674263 (an exact fraction of 251 digits)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "~2.61884332574 (an exact fraction of 250 digits)",
+      "~2.61884332574 (an exact fraction of 252 digits)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "pi",
+        "moves_it_by": "~6.6241871845e-15 (an exact fraction of 252 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  }
+}

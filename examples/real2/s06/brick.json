@@ -1,0 +1,139 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "s06: TC1264 SOT-223 datasheet thermal example (VIN 3.3V+-10%, VOUT 2.7V+-0.5%, 275 mA, TA 95, 59 C/W) PLUS my additions from the same datasheet: max supply current, max dropout table, load range -> low-end dropout check",
+ "quantities": {
+  "VIN": {
+   "role": "given",
+   "value": "3.3",
+   "tolerance": "0.1",
+   "unit": "V",
+   "ground": "TC1264 datasheet DS21375D sec 5.2 example: VINMAX = 3.3V +-10%"
+  },
+  "VOUT": {
+   "role": "given",
+   "value": "2.7",
+   "tolerance": "0.005",
+   "unit": "V",
+   "ground": "same example: VOUTMIN = 2.7V +-0.5% (the 0.995 factor)"
+  },
+  "TA": {
+   "role": "given",
+   "value": "95",
+   "unit": "C",
+   "ground": "same example: TAMAX = 95 C"
+  },
+  "THJA": {
+   "role": "given",
+   "value": "59",
+   "unit": "C/W",
+   "ground": "same example: 59 C/W, SOT-223 (Table 5-1, 100 sq mm row)"
+  },
+  "PD": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "Tj": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "IL": {
+   "role": "given",
+   "range": [
+    "0.0001",
+    "0.275"
+   ],
+   "unit": "A",
+   "ground": "example: ILOADMAX = 275 mA; lower end 0.1 mA = datasheet lowest specified load (my choice of lower end)"
+  },
+  "IDD": {
+   "role": "given",
+   "value": "130",
+   "unit": "uA",
+   "ground": "datasheet DC table, supply current, Max column (my addition to the example)"
+  },
+  "VR": {
+   "role": "given",
+   "value": "2.7",
+   "unit": "V",
+   "ground": "output voltage setting of the example"
+  },
+  "Iu": {
+   "role": "given",
+   "value": "1",
+   "unit": "mA",
+   "why": "unit for the table argument"
+  },
+  "VDO": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "mdrop": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "D0": {
+   "role": "given",
+   "value": "30",
+   "unit": "mV",
+   "ground": "datasheet DC table, dropout Max column (VR>=2.5V)"
+  },
+  "D1": {
+   "role": "given",
+   "value": "160",
+   "unit": "mV",
+   "ground": "datasheet DC table, dropout Max column (VR>=2.5V)"
+  },
+  "D2": {
+   "role": "given",
+   "value": "480",
+   "unit": "mV",
+   "ground": "datasheet DC table, dropout Max column (VR>=2.5V)"
+  },
+  "D3": {
+   "role": "given",
+   "value": "800",
+   "unit": "mV",
+   "ground": "datasheet DC table, dropout Max column (VR>=2.5V)"
+  },
+  "D4": {
+   "role": "given",
+   "value": "1300",
+   "unit": "mV",
+   "ground": "datasheet DC table, dropout Max column (VR>=2.5V)"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "PD == (VIN - VOUT)*IL + VIN*IDD",
+   "source": "datasheet Eq. 5-1 (worst-case dissipation), plus the quiescent term VIN*IDD (zero in the faithful brick)"
+  },
+  {
+   "zfl": "Tj == TA + THJA*PD",
+   "source": "datasheet Eq. 5-2 rearranged: PDmax = (TJmax - TAmax)/thetaJA"
+  },
+  {
+   "zfl": "VDO == table(IL/Iu, 0.1, D0, 100, D1, 300, D2, 500, D3, 800, D4)",
+   "source": "datasheet DC table, dropout voltage Max column, VR>=2.5V rows (100uA,100,300,500,800 mA); linear between rows = my interpolation"
+  },
+  {
+   "zfl": "mdrop == VIN - VR - VDO",
+   "source": "datasheet note 2: VIN >= VR + VDROPOUT must hold for regulation"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tj",
+   "op": "<=",
+   "value": "125",
+   "why": "TJMAX = 125 C, the example's limit (same as PD <= PDmax = 508 mW)"
+  },
+  {
+   "quantity": "mdrop",
+   "op": ">=",
+   "value": "0",
+   "why": "input must clear setpoint + dropout at the low end of the 3.3 V +-10% range"
+  }
+ ],
+ "catalog": {}
+}

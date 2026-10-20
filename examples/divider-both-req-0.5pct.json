@@ -1,0 +1,96 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "value": "5",
+   "unit": "V",
+   "ground": "psu"
+  },
+  "I": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Vout": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {
+  "R1": {
+   "from": [
+    "res_1pct_quarterW",
+    "res_0.1pct_quarterW"
+   ]
+  },
+  "R2": {
+   "from": [
+    "res_1pct_quarterW",
+    "res_0.1pct_quarterW"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vin - Vout == I*R1.R",
+   "source": "Ohm's law, R1"
+  },
+  {
+   "zfl": "Vout == I*R2.R",
+   "source": "Ohm's law, R2"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vout",
+   "op": "within",
+   "value": [
+    "2.4875",
+    "2.5125"
+   ],
+   "why": "2.5 V +-0.5%"
+  }
+ ],
+ "catalog": {
+  "res_1pct_quarterW": {
+   "series": "E24",
+   "decades": [
+    1000,
+    10000
+   ],
+   "ground": "datasheet",
+   "fields": {
+    "R": {
+     "series": true,
+     "tolerance": "0.01",
+     "unit": "ohm"
+    },
+    "P": {
+     "value": "0.25",
+     "unit": "W",
+     "why": "power rating"
+    }
+   }
+  },
+  "res_0.1pct_quarterW": {
+   "series": "E24",
+   "decades": [
+    1000,
+    10000
+   ],
+   "ground": "datasheet",
+   "fields": {
+    "R": {
+     "series": true,
+     "tolerance": "0.001",
+     "unit": "ohm"
+    },
+    "P": {
+     "value": "0.25",
+     "unit": "W",
+     "why": "power rating"
+    }
+   }
+  }
+ }
+}

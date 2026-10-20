@@ -1,0 +1,17 @@
+{"stand": "ztl-stand/1",
+ "why": "network + laws (v1, one way): real round 3 n02 as asked — the dissipated power P = ID^2 * RDS(on) defined by a law and injected into the MOSFET's thermal network; find the largest drain current that keeps Tj <= 175 C (DigiKey TechForum, 'A Thermal Management Example'; RDS(on) taken at its hot maximum, as the source does)",
+ "quantities": {
+  "ID":  {"role": "given", "value": "30", "unit": "A", "why": "searched by find"},
+  "RDS": {"role": "given", "range": ["0.0025", "0.006"], "unit": "ohm", "ground": "RDS(on) max 3.0 mohm x the hot factor ~2 (an upper range)"},
+  "P":   {"role": "derived", "unit": "W"},
+  "Ta":  {"role": "given", "value": "40", "unit": "C"},
+  "Rjc": {"role": "given", "range": ["0.3", "0.45"], "unit": "C/W"},
+  "Rcs": {"role": "given", "range": ["0.6", "0.8"], "unit": "C/W"},
+  "Rsa": {"role": "given", "range": ["6", "7"], "unit": "C/W"}},
+ "laws": [{"zfl": "P == ID*ID*RDS", "source": "conduction loss"}],
+ "network": {
+  "branches": {"jc": {"from": "j", "to": "c", "R": "Rjc"}, "cs": {"from": "c", "to": "s", "R": "Rcs"},
+               "sa": {"from": "s", "to": "amb", "R": "Rsa"}},
+  "source": {"into": "j", "from": "amb", "I": "P", "at": "Ta"}},
+ "requirements": [{"quantity": "V(j)", "op": "<=", "value": "175", "unit": "C"}],
+ "find": {"largest": "ID", "from": "0", "to": "100", "precision": "0.01"}}

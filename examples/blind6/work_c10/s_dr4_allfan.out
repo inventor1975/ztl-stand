@@ -1,0 +1,52 @@
+[stand] 1/4 designs, 0 s: 
+[stand] 1/4 designs, 31 s: 
+[stand] 1/4 designs, 65 s: 
+[stand] 1/4 designs, 102 s: 
+[stand] 1/4 designs, 133 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 4,
+  "notes": [],
+  "combinations_proved_without_mix": 4,
+  "verdict": "REFUTED",
+  "why": "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  "mixes": [
+    {
+      "design": "DRY=dryers(name=DR4, B=4, Tmax=85, price=26); FAN=fans(name=none, qa=0, price=0)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 13 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "DRY=dryers(name=DR4, B=4, Tmax=85, price=26); FAN=fans(name=F8, qa=8, price=12/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 14 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "DRY=dryers(name=DR4, B=4, Tmax=85, price=26); FAN=fans(name=F15, qa=15, price=41/10)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 14 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "DRY=dryers(name=DR4, B=4, Tmax=85, price=26); FAN=fans(name=F25, qa=25, price=15/2)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 19 pieces, each failing a requirement at one point of its data — no mix exists"
+    }
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1 throughput >= 0.8 t/h",
+        "R2 damage index <= 0.6"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	2m22.572s
+user	2m13.289s
+sys	0m9.266s

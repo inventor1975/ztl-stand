@@ -1,0 +1,217 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "DEVICE CHOICE from the datasheet's own table + continuous sink: which part allows the largest sink resistance at 6 A. LT1083CK uses the P example's 0.2 C/W interface (MY ASSUMPTION, source gives it only for P); LT1084/LT1085 are excluded by the current rating (where; a numeric bound was required, so only commercial grades).",
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "range": [
+    "6.5",
+    "9"
+   ],
+   "unit": "V",
+   "ground": "datasheet: VIN(max continuous) = 9 V in the example; 6.5 V = lower VIN of the VOUT line/load row and of the 5 V application"
+  },
+  "Vout": {
+   "role": "given",
+   "range": [
+    "4.9",
+    "5.1"
+   ],
+   "unit": "V",
+   "ground": "datasheet electrical characteristics, LT1083/4/5-5, 0 <= IOUT <= IFULLLOAD, 6.5 V <= VIN <= 20 V: MIN 4.900, MAX 5.100"
+  },
+  "Iout": {
+   "role": "given",
+   "value": "6",
+   "unit": "A",
+   "ground": "example"
+  },
+  "Ta": {
+   "role": "given",
+   "value": "75",
+   "unit": "C",
+   "ground": "example"
+  },
+  "PD": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "Tj_c": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Tj_p": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {
+  "DEV": {
+   "from": [
+    "parts"
+   ]
+  },
+  "HS": {
+   "from": [
+    "sink"
+   ]
+  }
+ },
+ "define": {
+  "PDd": "(Vin - Vout)*Iout"
+ },
+ "laws": [
+  {
+   "zfl": "PD == PDd",
+   "source": "linear regulator dissipation"
+  },
+  {
+   "zfl": "Tj_c == Ta + PDd*(HS.R + DEV.Rcs + DEV.Rjc_c)",
+   "source": "series thermal path, control"
+  },
+  {
+   "zfl": "Tj_p == Ta + PDd*(HS.R + DEV.Rcs + DEV.Rjc_p)",
+   "source": "series thermal path, power transistor"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tj_c",
+   "op": "<=",
+   "value": "125",
+   "why": "control, commercial grade"
+  },
+  {
+   "quantity": "Tj_p",
+   "op": "<=",
+   "value": "150",
+   "why": "power, commercial grade"
+  }
+ ],
+ "catalog": {
+  "sink": {
+   "continuous": {
+    "field": "R",
+    "from": "0",
+    "to": "5",
+    "unit": "C/W"
+   }
+  },
+  "parts": {
+   "items": [
+    {
+     "name": "LT1083CP",
+     "Rjc_c": {
+      "value": "0.5"
+     },
+     "Rjc_p": {
+      "value": "1.6"
+     },
+     "Rcs": {
+      "value": "0.2"
+     },
+     "Imax": {
+      "value": "7.5"
+     },
+     "Tc": {
+      "value": "125"
+     },
+     "Tp": {
+      "value": "150"
+     }
+    },
+    {
+     "name": "LT1083CK (Rcs assumed 0.2)",
+     "Rjc_c": {
+      "value": "0.6"
+     },
+     "Rjc_p": {
+      "value": "1.6"
+     },
+     "Rcs": {
+      "value": "0.2"
+     },
+     "Imax": {
+      "value": "7.5"
+     },
+     "Tc": {
+      "value": "125"
+     },
+     "Tp": {
+      "value": "150"
+     }
+    },
+    {
+     "name": "LT1084CP",
+     "Rjc_c": {
+      "value": "0.65"
+     },
+     "Rjc_p": {
+      "value": "2.3"
+     },
+     "Rcs": {
+      "value": "0.2"
+     },
+     "Imax": {
+      "value": "5"
+     },
+     "Tc": {
+      "value": "125"
+     },
+     "Tp": {
+      "value": "150"
+     }
+    },
+    {
+     "name": "LT1085CK",
+     "Rjc_c": {
+      "value": "0.9"
+     },
+     "Rjc_p": {
+      "value": "3.0"
+     },
+     "Rcs": {
+      "value": "0.2"
+     },
+     "Imax": {
+      "value": "3"
+     },
+     "Tc": {
+      "value": "125"
+     },
+     "Tp": {
+      "value": "150"
+     }
+    }
+   ],
+   "fields": {
+    "Rjc_c": {
+     "unit": "C/W"
+    },
+    "Rjc_p": {
+     "unit": "C/W"
+    },
+    "Rcs": {
+     "unit": "C/W"
+    },
+    "Imax": {
+     "unit": "A"
+    },
+    "Tc": {
+     "unit": "C"
+    },
+    "Tp": {
+     "unit": "C"
+    }
+   }
+  }
+ },
+ "objective": {
+  "minimize": "0 - HS.R",
+  "why": "largest allowed sink resistance = smallest/cheapest sink (assumes cost falls as R rises: my assumption, not the source's)"
+ },
+ "where": [
+  "DEV.Imax >= Iout"
+ ],
+ "report": "all"
+}

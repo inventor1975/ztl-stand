@@ -1,0 +1,1672 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "verdict": "EARNED",
+  "modes": [
+    "low river 0.85",
+    "high river 1.15"
+  ],
+  "designs_tried": 980,
+  "undecided": 0,
+  "design": {
+    "UP": {
+      "catalog": "pipes",
+      "D": {
+        "nominal": "277/1000 (~0.277)",
+        "tolerance": "0"
+      },
+      "C": {
+        "nominal": "140",
+        "tolerance": "0"
+      },
+      "hmax": {
+        "nominal": "100",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "45",
+        "tolerance": "0"
+      },
+      "grade": "H315-10"
+    },
+    "LO": {
+      "catalog": "pipes",
+      "D": {
+        "nominal": "29/100 (~0.29)",
+        "tolerance": "0"
+      },
+      "C": {
+        "nominal": "140",
+        "tolerance": "0"
+      },
+      "hmax": {
+        "nominal": "160",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "73",
+        "tolerance": "0"
+      },
+      "grade": "H355-16"
+    },
+    "TB": {
+      "catalog": "turbines",
+      "K2": {
+        "nominal": "81/160000 (~0.00050625)",
+        "tolerance": "0"
+      },
+      "phimin": {
+        "nominal": "1/5 (~0.2)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "58000",
+        "tolerance": "0"
+      },
+      "grade": "T1",
+      "e02": {
+        "nominal": "7/10 (~0.7)",
+        "tolerance": "0"
+      },
+      "e03": {
+        "nominal": "39/50 (~0.78)",
+        "tolerance": "0"
+      },
+      "e04": {
+        "nominal": "41/50 (~0.82)",
+        "tolerance": "0"
+      },
+      "e06": {
+        "nominal": "17/20 (~0.85)",
+        "tolerance": "0"
+      },
+      "e08": {
+        "nominal": "43/50 (~0.86)",
+        "tolerance": "0"
+      },
+      "e10": {
+        "nominal": "17/20 (~0.85)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "per_mode": {
+    "low river 0.85": {
+      "guaranteed": {
+        "MU": [
+          "48",
+          "48"
+        ],
+        "ML": [
+          "99/2 (~49.5)",
+          "99/2 (~49.5)"
+        ],
+        "E": [
+          "~523.758095989 (an exact fraction of 104 digits)",
+          "~523.75809599 (an exact fraction of 107 digits)"
+        ]
+      },
+      "how": {
+        "MU": "ZTL, outer range",
+        "ML": "ZTL, outer range",
+        "E": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~523.758095989 (~523.758)', '~523.75809599 (~523.758)']"
+      }
+    },
+    "high river 1.15": {
+      "guaranteed": {
+        "MU": [
+          "48",
+          "48"
+        ],
+        "ML": [
+          "99/2 (~49.5)",
+          "99/2 (~49.5)"
+        ],
+        "PPK": [
+          "~111.533132051 (an exact fraction of 76 digits)",
+          "~111.533132051 (an exact fraction of 73 digits)"
+        ],
+        "VU": [
+          "67745118918704986572265625/21063380737920537183387648 (~3.21625)",
+          "812941427026157379150390625/252760568855046365744463872 (~3.21625)"
+        ],
+        "VL": [
+          "2709804756748199462890625/923473690552003637280768 (~2.93436)",
+          "32517657081046295166015625/11081684286624040119959552 (~2.93436)"
+        ]
+      },
+      "how": {
+        "MU": "ZTL, outer range",
+        "ML": "ZTL, outer range",
+        "PPK": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~111.533132051 (~111.533)', '~111.533132051 (~111.533)']",
+        "VU": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['67745118918704986572265625/21063380737920537183387648 (~3.21625)', '812941427026157379150390625/252760568855046365744463872 (~3.21625)']",
+        "VL": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['2709804756748199462890625/923473690552003637280768 (~2.93436)', '32517657081046295166015625/11081684286624040119959552 (~2.93436)']"
+      }
+    }
+  },
+  "objective": {
+    "minimize": "UP.price*LU + LO.price*LL + TB.price",
+    "value": "81940",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode",
+    "ties": {
+      "same_objective": 1,
+      "first": [
+        "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)"
+      ],
+      "note": "these cost the same; they were not all judged — \"report\": \"all\" shows which pass"
+    }
+  },
+  "designs": [
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=S350, D=7/20, C=120, hmax=300, price=128); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=S350, D=7/20, C=120, hmax=300, price=128); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=S350, D=7/20, C=120, hmax=300, price=128); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=S350, D=7/20, C=120, hmax=300, price=128); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); LO=pipes(grade=S350, D=7/20, C=120, hmax=300, price=128); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); LO=pipes(grade=S350, D=7/20, C=120, hmax=300, price=128); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=S350, D=7/20, C=120, hmax=300, price=128); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=S350, D=7/20, C=120, hmax=300, price=128); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=S350, D=7/20, C=120, hmax=300, price=128); LO=pipes(grade=S350, D=7/20, C=120, hmax=300, price=128); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.01634904007 (an exact fraction of 391 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.61658867551 (an exact fraction of 376 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.27804630409 (an exact fraction of 371 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.42793528429 (an exact fraction of 411 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.90981086799 (an exact fraction of 332 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.9869392907 (an exact fraction of 354 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.97251049404 (an exact fraction of 392 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.586506873855 (an exact fraction of 351 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.74832579401 (an exact fraction of 372 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.31893101562 (an exact fraction of 298 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.19434764413 (an exact fraction of 294 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.2969076785 (an exact fraction of 371 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.36841844567 (an exact fraction of 355 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.08169209946 (an exact fraction of 375 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.60158856266 (an exact fraction of 280 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.75848385374 (an exact fraction of 334 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.71108409727 (an exact fraction of 335 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.44448079396 (an exact fraction of 331 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~4.40987159421 (an exact fraction of 318 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.12301430475 (an exact fraction of 313 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.84755106618 (an exact fraction of 280 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~3.76291197601 (an exact fraction of 316 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.68549026731 (an exact fraction of 374 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.32123291245 (an exact fraction of 333 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.14556650824 (an exact fraction of 253 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.55455658299 (an exact fraction of 332 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.0306641315154 (an exact fraction of 260 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.24892800811 (an exact fraction of 294 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~4.51963721889 (an exact fraction of 332 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.70246974965 (an exact fraction of 312 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~4.30405030357 (an exact fraction of 358 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.5821377499 (an exact fraction of 371 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.97889066424 (an exact fraction of 294 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.77697806191 (an exact fraction of 354 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~3.89718061195 (an exact fraction of 276 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.66072990455 (an exact fraction of 296 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.157329618975 (an exact fraction of 314 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.99415840838 (an exact fraction of 293 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.11585023464 (an exact fraction of 336 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.28407635451 (an exact fraction of 260 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~3.15313155803 (an exact fraction of 260 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.3684049291 (an exact fraction of 314 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.516206883487 (an exact fraction of 294 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.61753576787 (an exact fraction of 333 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~4.13224153322 (an exact fraction of 355 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.486080564217 (an exact fraction of 239 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.53664768222 (an exact fraction of 333 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.51251637833 (an exact fraction of 281 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~4.45930608223 (an exact fraction of 328 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.79533194374 (an exact fraction of 298 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.05480487851 (an exact fraction of 293 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.254212787609 (an exact fraction of 311 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.82897570913 (an exact fraction of 353 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.95740661506 (an exact fraction of 272 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.38943999105 (an exact fraction of 373 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.76214587949 (an exact fraction of 336 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~3.82317722158 (an exact fraction of 279 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.356864633533 (an exact fraction of 281 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.601623446343 (an exact fraction of 293 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.36477559789 (an exact fraction of 275 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.13549476695 (an exact fraction of 332 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.43703105574 (an exact fraction of 314 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.67328619291 (an exact fraction of 318 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.606045840276 (an exact fraction of 258 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.26132396737 (an exact fraction of 258 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.76418585404 (an exact fraction of 394 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~1.25774202428 (an exact fraction of 258 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); LO=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~3.07386794156 (an exact fraction of 261 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.34892606882 (an exact fraction of 313 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); LO=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.01221848823 (an exact fraction of 238 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.55009648124 (an exact fraction of 430 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.50111653348 (an exact fraction of 315 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.61442028628 (an exact fraction of 298 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.41638452232 (an exact fraction of 376 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.968018507424 (an exact fraction of 337 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.87331959971 (an exact fraction of 297 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.13487590472 (an exact fraction of 355 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.00089436787 (an exact fraction of 415 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.806157623782 (an exact fraction of 413 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.77328618546 (an exact fraction of 294 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.99296098626 (an exact fraction of 448 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.07132613408 (an exact fraction of 297 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~1.35741951994 (an exact fraction of 236 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.79565136854 (an exact fraction of 295 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H400-16, D=327/1000, C=140, hmax=160, price=92); LO=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity lower section at full turbine flow",
+      "by": "~4.54892314255 (an exact fraction of 334 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H315-10, D=277/1000, C=140, hmax=100, price=45); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~3.81559302911 (an exact fraction of 356 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H315-16, D=257/1000, C=140, hmax=160, price=58); LO=pipes(grade=S250, D=1/4, C=120, hmax=300, price=70); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~0.872135633001 (an exact fraction of 274 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T4, K2=441/250000, phimin=1/5, price=56000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.92185168496 (an exact fraction of 339 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H355-10, D=39/125, C=140, hmax=100, price=57); LO=pipes(grade=H355-16, D=29/100, C=140, hmax=160, price=73); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R2 grid connection limit 125 kW at factor 1.15",
+      "by": "~7.17425562909 (an exact fraction of 432 digits)",
+      "unit": "kW"
+    },
+    {
+      "design": "UP=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); LO=pipes(grade=H225-16, D=23/125, C=140, hmax=160, price=30); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~1.25500149311 (an exact fraction of 355 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=S300, D=3/10, C=120, hmax=300, price=95); LO=pipes(grade=H225-10, D=99/500, C=140, hmax=100, price=23); TB=turbines(grade=T3, K2=9/10000, phimin=1/5, price=42000, e02=11/20, e03=13/20, e04=18/25, e06=39/50, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    },
+    {
+      "design": "UP=pipes(grade=H200-10, D=22/125, C=140, hmax=100, price=18); LO=pipes(grade=H250-16, D=51/250, C=140, hmax=160, price=37); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "high river 1.15",
+      "fails": "R3 velocity upper section at full turbine flow",
+      "by": "~2.26745448581 (an exact fraction of 389 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "UP=pipes(grade=H200-16, D=163/1000, C=140, hmax=160, price=24); LO=pipes(grade=H250-10, D=11/50, C=140, hmax=100, price=29); TB=turbines(grade=T1, K2=81/160000, phimin=1/5, price=58000, e02=7/10, e03=39/50, e04=41/50, e06=17/20, ...)",
+      "verdict": "REFUTED",
+      "mode": "low river 0.85",
+      "fails": "R4 lower pipe allowable head >= 1.3 x 85 m",
+      "by": "21/2 (~10.5)",
+      "unit": "m"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 956,
+    "EARNED": 24
+  },
+  "designs_not_listed": 780,
+  "listing": "earned first, then open, then refuted"
+}

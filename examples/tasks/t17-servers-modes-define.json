@@ -1,0 +1,160 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "lam": {
+   "role": "given",
+   "range": [
+    "1620",
+    "1980"
+   ],
+   "unit": "1/s",
+   "why": "peak arrival rate 1800 req/s +-10%; upper end widened by 0.001 so the nominal (midpoint) never sits exactly on the M/M/1 pole mu = lambda_i"
+  },
+  "gw": {
+   "role": "given",
+   "range": [
+    "5",
+    "12"
+   ],
+   "unit": "ms",
+   "why": "gateway latency"
+  },
+  "db": {
+   "role": "given",
+   "range": [
+    "15",
+    "30"
+   ],
+   "unit": "ms",
+   "why": "database latency"
+  },
+  "T": {
+   "role": "derived",
+   "unit": "ms",
+   "why": "end-to-end p99"
+  },
+  "rho": {
+   "role": "derived",
+   "unit": "",
+   "why": "utilization per instance"
+  }
+ },
+ "slots": {
+  "INST": {
+   "from": [
+    "instance_types"
+   ]
+  },
+  "CNT": {
+   "from": [
+    "counts"
+   ]
+  }
+ },
+ "define": {
+  "Nact": "CNT.N"
+ },
+ "laws": [
+  {
+   "zfl": "T == gw + ln(100)/(INST.mu - lam/Nact) + db",
+   "source": "gateway + M/M/1 p99 + database",
+   "valid": "INST.mu > lam/Nact"
+  },
+  {
+   "zfl": "rho == lam/(Nact*INST.mu)",
+   "source": "M/M/1 utilization"
+  }
+ ],
+ "requirements": [],
+ "objective": {
+  "minimize": "INST.price*CNT.N",
+  "why": "lowest hourly cost, N instances of one type"
+ },
+ "catalog": {
+  "instance_types": {
+   "items": [
+    {
+     "mu": {
+      "value": "220",
+      "tolerance": "0.10"
+     },
+     "price": "0.17",
+     "type": "I1"
+    },
+    {
+     "mu": {
+      "value": "450",
+      "tolerance": "0.10"
+     },
+     "price": "0.34",
+     "type": "I2"
+    },
+    {
+     "mu": {
+      "value": "900",
+      "tolerance": "0.12"
+     },
+     "price": "0.68",
+     "type": "I3"
+    },
+    {
+     "mu": {
+      "value": "1700",
+      "tolerance": "0.12"
+     },
+     "price": "1.36",
+     "type": "I4"
+    }
+   ],
+   "ground": "problem statement catalog",
+   "fields": {
+    "mu": {
+     "unit": "1/s"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  },
+  "counts": {
+   "integers": {
+    "field": "N",
+    "from": "2",
+    "to": "12",
+    "unit": ""
+   }
+  }
+ },
+ "report": "all",
+ "modes": {
+  "normal": {
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "<=",
+     "value": "150",
+     "why": "normal: p99 <= 150 ms"
+    },
+    {
+     "quantity": "rho",
+     "op": "<=",
+     "value": "0.75",
+     "why": "normal: utilization <= 0.75"
+    }
+   ]
+  },
+  "degraded": {
+   "define": {
+    "Nact": "CNT.N - 1"
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "<=",
+     "value": "300",
+     "why": "one instance down: p99 <= 300 ms"
+    }
+   ]
+  }
+ }
+}

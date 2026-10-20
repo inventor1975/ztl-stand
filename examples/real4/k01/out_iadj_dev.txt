@@ -1,0 +1,1293 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "verdict": "EARNED",
+  "why": "several limits, each searched on its own; the verdict is the weakest of theirs",
+  "finds": [
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "Ra",
+      "unit": "ohm",
+      "proved": "330",
+      "proved_means": "every Ra in [0, 330] ohm works (EARNED on the whole range)",
+      "beyond": "331",
+      "beyond_is": "REFUTED: the range [0, 331] ohm holds a concrete failing point (at_beyond)",
+      "precision": "1",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "ea": [
+                "0",
+                "1/1000 (~0.001)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "ea": [
+            "0",
+            "1/1000 (~0.001)"
+          ]
+        },
+        "guaranteed_unit": {
+          "ea": ""
+        },
+        "how": {
+          "ea": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "ea",
+            "op": "<=",
+            "value": "0.001",
+            "why": "extra error from Iadj at most 0.001"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+        "judge_log": [
+          "eb = 1/3300000 by exact elimination (credit)",
+          "ec = 1/33000000 by exact elimination (credit)",
+          "ed = 1/330000000 by exact elimination (credit)",
+          "ee = 1/3300000 by exact elimination (credit)",
+          "ef = 1/3300000 by exact elimination (credit)",
+          "ea -> [0, 1/1000] by [ea == Ia*Ra/Vnom]"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "extra error from Iadj at most 0.001",
+            "by_at_witness": "1/330000 (~3.0303e-06)",
+            "unit": ""
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Ra": "331"
+        },
+        "point_units": {
+          "Ra": "ohm"
+        },
+        "value_there": {
+          "ea": "331/330000 (~0.00100303)"
+        },
+        "unit": "",
+        "requirement": {
+          "quantity": "ea",
+          "op": "<=",
+          "value": "0.001",
+          "why": "extra error from Iadj at most 0.001"
+        },
+        "overshoot": "1/330000 (~3.0303e-06)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "0",
+            "331/330000 (~0.00100303)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Ra",
+              "moves_it_by": "331/330000 (~0.00100303)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Ra": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "Ra": "1000000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "500000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "250000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "125000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "62500",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "31250",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "15625",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "7812",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "3906",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "1953",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "976",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "488",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "244",
+          "verdict": "EARNED"
+        },
+        {
+          "Ra": "366",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "305",
+          "verdict": "EARNED"
+        },
+        {
+          "Ra": "336",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "320",
+          "verdict": "EARNED"
+        },
+        {
+          "Ra": "328",
+          "verdict": "EARNED"
+        },
+        {
+          "Ra": "332",
+          "verdict": "REFUTED"
+        },
+        {
+          "Ra": "330",
+          "verdict": "EARNED"
+        },
+        {
+          "Ra": "331",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 0
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "Rb",
+      "unit": "ohm",
+      "proved": "3300",
+      "proved_means": "every Rb in [0, 3300] ohm works (EARNED on the whole range)",
+      "beyond": "3301",
+      "beyond_is": "REFUTED: the range [0, 3301] ohm holds a concrete failing point (at_beyond)",
+      "precision": "1",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "eb": [
+                "0",
+                "1/1000 (~0.001)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "eb": [
+            "0",
+            "1/1000 (~0.001)"
+          ]
+        },
+        "guaranteed_unit": {
+          "eb": ""
+        },
+        "how": {
+          "eb": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "eb",
+            "op": "<=",
+            "value": "0.001",
+            "why": "extra error from Iadj at most 0.001"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+        "judge_log": [
+          "ea = 1/330000 by exact elimination (credit)",
+          "ec = 1/33000000 by exact elimination (credit)",
+          "ed = 1/330000000 by exact elimination (credit)",
+          "ee = 1/3300000 by exact elimination (credit)",
+          "ef = 1/3300000 by exact elimination (credit)",
+          "eb -> [0, 1/1000] by [eb == Ib*Rb/Vnom]"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "extra error from Iadj at most 0.001",
+            "by_at_witness": "1/3300000 (~3.0303e-07)",
+            "unit": ""
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Rb": "3301"
+        },
+        "point_units": {
+          "Rb": "ohm"
+        },
+        "value_there": {
+          "eb": "3301/3300000 (~0.0010003)"
+        },
+        "unit": "",
+        "requirement": {
+          "quantity": "eb",
+          "op": "<=",
+          "value": "0.001",
+          "why": "extra error from Iadj at most 0.001"
+        },
+        "overshoot": "1/3300000 (~3.0303e-07)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "0",
+            "3301/3300000 (~0.0010003)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Rb",
+              "moves_it_by": "3301/3300000 (~0.0010003)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Rb": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "Rb": "1000000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "500000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "250000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "125000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "62500",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "31250",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "15625",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "7812",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "3906",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "1953",
+          "verdict": "EARNED"
+        },
+        {
+          "Rb": "2930",
+          "verdict": "EARNED"
+        },
+        {
+          "Rb": "3418",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "3174",
+          "verdict": "EARNED"
+        },
+        {
+          "Rb": "3296",
+          "verdict": "EARNED"
+        },
+        {
+          "Rb": "3357",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "3326",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "3311",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "3304",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "3300",
+          "verdict": "EARNED"
+        },
+        {
+          "Rb": "3302",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rb": "3301",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 1
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "Rc",
+      "unit": "ohm",
+      "proved": "33000",
+      "proved_means": "every Rc in [0, 33000] ohm works (EARNED on the whole range)",
+      "beyond": "33001",
+      "beyond_is": "REFUTED: the range [0, 33001] ohm holds a concrete failing point (at_beyond)",
+      "precision": "1",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "ec": [
+                "0",
+                "1/1000 (~0.001)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "ec": [
+            "0",
+            "1/1000 (~0.001)"
+          ]
+        },
+        "guaranteed_unit": {
+          "ec": ""
+        },
+        "how": {
+          "ec": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "ec",
+            "op": "<=",
+            "value": "0.001",
+            "why": "extra error from Iadj at most 0.001"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+        "judge_log": [
+          "ea = 1/330000 by exact elimination (credit)",
+          "eb = 1/3300000 by exact elimination (credit)",
+          "ed = 1/330000000 by exact elimination (credit)",
+          "ee = 1/3300000 by exact elimination (credit)",
+          "ef = 1/3300000 by exact elimination (credit)",
+          "ec -> [0, 1/1000] by [ec == Ic*Rc/Vnom]"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "extra error from Iadj at most 0.001",
+            "by_at_witness": "1/33000000 (~3.0303e-08)",
+            "unit": ""
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Rc": "33001"
+        },
+        "point_units": {
+          "Rc": "ohm"
+        },
+        "value_there": {
+          "ec": "33001/33000000 (~0.00100003)"
+        },
+        "unit": "",
+        "requirement": {
+          "quantity": "ec",
+          "op": "<=",
+          "value": "0.001",
+          "why": "extra error from Iadj at most 0.001"
+        },
+        "overshoot": "1/33000000 (~3.0303e-08)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "0",
+            "33001/33000000 (~0.00100003)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Rc",
+              "moves_it_by": "33001/33000000 (~0.00100003)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Rc": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "Rc": "1000000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "500000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "250000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "125000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "62500",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "31250",
+          "verdict": "EARNED"
+        },
+        {
+          "Rc": "46875",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "39062",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "35156",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "33203",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "32226",
+          "verdict": "EARNED"
+        },
+        {
+          "Rc": "32714",
+          "verdict": "EARNED"
+        },
+        {
+          "Rc": "32958",
+          "verdict": "EARNED"
+        },
+        {
+          "Rc": "33080",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "33019",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "32988",
+          "verdict": "EARNED"
+        },
+        {
+          "Rc": "33004",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "32996",
+          "verdict": "EARNED"
+        },
+        {
+          "Rc": "33000",
+          "verdict": "EARNED"
+        },
+        {
+          "Rc": "33002",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rc": "33001",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 2
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "Rd",
+      "unit": "ohm",
+      "proved": "330000",
+      "proved_means": "every Rd in [0, 330000] ohm works (EARNED on the whole range)",
+      "beyond": "330001",
+      "beyond_is": "REFUTED: the range [0, 330001] ohm holds a concrete failing point (at_beyond)",
+      "precision": "1",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "ed": [
+                "0",
+                "1/1000 (~0.001)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "ed": [
+            "0",
+            "1/1000 (~0.001)"
+          ]
+        },
+        "guaranteed_unit": {
+          "ed": ""
+        },
+        "how": {
+          "ed": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "ed",
+            "op": "<=",
+            "value": "0.001",
+            "why": "extra error from Iadj at most 0.001"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+        "judge_log": [
+          "ea = 1/330000 by exact elimination (credit)",
+          "eb = 1/3300000 by exact elimination (credit)",
+          "ec = 1/33000000 by exact elimination (credit)",
+          "ee = 1/3300000 by exact elimination (credit)",
+          "ef = 1/3300000 by exact elimination (credit)",
+          "ed -> [0, 1/1000] by [ed == Id*Rd/Vnom]"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "extra error from Iadj at most 0.001",
+            "by_at_witness": "1/330000000 (~3.0303e-09)",
+            "unit": ""
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Rd": "330001"
+        },
+        "point_units": {
+          "Rd": "ohm"
+        },
+        "value_there": {
+          "ed": "330001/330000000 (~0.001)"
+        },
+        "unit": "",
+        "requirement": {
+          "quantity": "ed",
+          "op": "<=",
+          "value": "0.001",
+          "why": "extra error from Iadj at most 0.001"
+        },
+        "overshoot": "1/330000000 (~3.0303e-09)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "0",
+            "330001/330000000 (~0.001)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Rd",
+              "moves_it_by": "330001/330000000 (~0.001)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Rd": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "1000000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rd": "500000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rd": "250000",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "375000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rd": "312500",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "343750",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rd": "328125",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "335938",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rd": "332032",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rd": "330078",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rd": "329102",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "329590",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "329834",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "329956",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "330017",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rd": "329986",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "330002",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rd": "329994",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "329998",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "330000",
+          "verdict": "EARNED"
+        },
+        {
+          "Rd": "330001",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 3
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "Re",
+      "unit": "ohm",
+      "proved": "16500",
+      "proved_means": "every Re in [0, 16500] ohm works (EARNED on the whole range)",
+      "beyond": "16501",
+      "beyond_is": "REFUTED: the range [0, 16501] ohm holds a concrete failing point (at_beyond)",
+      "precision": "1",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "ee": [
+                "0",
+                "1/200 (~0.005)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "ee": [
+            "0",
+            "1/200 (~0.005)"
+          ]
+        },
+        "guaranteed_unit": {
+          "ee": ""
+        },
+        "how": {
+          "ee": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "ee",
+            "op": "<=",
+            "value": "0.005",
+            "why": "extra error from Iadj at most 0.005"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+        "judge_log": [
+          "ea = 1/330000 by exact elimination (credit)",
+          "eb = 1/3300000 by exact elimination (credit)",
+          "ec = 1/33000000 by exact elimination (credit)",
+          "ed = 1/330000000 by exact elimination (credit)",
+          "ef = 1/3300000 by exact elimination (credit)",
+          "ee -> [0, 1/200] by [ee == Ie*Re/Vnom]"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "extra error from Iadj at most 0.005",
+            "by_at_witness": "1/3300000 (~3.0303e-07)",
+            "unit": ""
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Re": "16501"
+        },
+        "point_units": {
+          "Re": "ohm"
+        },
+        "value_there": {
+          "ee": "16501/3300000 (~0.0050003)"
+        },
+        "unit": "",
+        "requirement": {
+          "quantity": "ee",
+          "op": "<=",
+          "value": "0.005",
+          "why": "extra error from Iadj at most 0.005"
+        },
+        "overshoot": "1/3300000 (~3.0303e-07)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "0",
+            "16501/3300000 (~0.0050003)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Re",
+              "moves_it_by": "16501/3300000 (~0.0050003)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Re": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "Re": "1000000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "500000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "250000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "125000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "62500",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "31250",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "15625",
+          "verdict": "EARNED"
+        },
+        {
+          "Re": "23438",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "19532",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "17578",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "16602",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "16114",
+          "verdict": "EARNED"
+        },
+        {
+          "Re": "16358",
+          "verdict": "EARNED"
+        },
+        {
+          "Re": "16480",
+          "verdict": "EARNED"
+        },
+        {
+          "Re": "16541",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "16510",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "16495",
+          "verdict": "EARNED"
+        },
+        {
+          "Re": "16502",
+          "verdict": "REFUTED"
+        },
+        {
+          "Re": "16498",
+          "verdict": "EARNED"
+        },
+        {
+          "Re": "16500",
+          "verdict": "EARNED"
+        },
+        {
+          "Re": "16501",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 4
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "Rf",
+      "unit": "ohm",
+      "proved": "33000",
+      "proved_means": "every Rf in [0, 33000] ohm works (EARNED on the whole range)",
+      "beyond": "33001",
+      "beyond_is": "REFUTED: the range [0, 33001] ohm holds a concrete failing point (at_beyond)",
+      "precision": "1",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "ef": [
+                "0",
+                "1/100 (~0.01)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "ef": [
+            "0",
+            "1/100 (~0.01)"
+          ]
+        },
+        "guaranteed_unit": {
+          "ef": ""
+        },
+        "how": {
+          "ef": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "ef",
+            "op": "<=",
+            "value": "0.01",
+            "why": "extra error from Iadj at most 0.01"
+          }
+        ],
+        "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+        "judge_log": [
+          "ea = 1/330000 by exact elimination (credit)",
+          "eb = 1/3300000 by exact elimination (credit)",
+          "ec = 1/33000000 by exact elimination (credit)",
+          "ed = 1/330000000 by exact elimination (credit)",
+          "ee = 1/3300000 by exact elimination (credit)",
+          "ef -> [0, 1/100] by [ef == If*Rf/Vnom]"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "extra error from Iadj at most 0.01",
+            "by_at_witness": "1/3300000 (~3.0303e-07)",
+            "unit": ""
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "Rf": "33001"
+        },
+        "point_units": {
+          "Rf": "ohm"
+        },
+        "value_there": {
+          "ef": "33001/3300000 (~0.0100003)"
+        },
+        "unit": "",
+        "requirement": {
+          "quantity": "ef",
+          "op": "<=",
+          "value": "0.01",
+          "why": "extra error from Iadj at most 0.01"
+        },
+        "overshoot": "1/3300000 (~3.0303e-07)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "0",
+            "33001/3300000 (~0.0100003)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Rf",
+              "moves_it_by": "33001/3300000 (~0.0100003)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Rf": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "Rf": "1000000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "500000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "250000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "125000",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "62500",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "31250",
+          "verdict": "EARNED"
+        },
+        {
+          "Rf": "46875",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "39062",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "35156",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "33203",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "32226",
+          "verdict": "EARNED"
+        },
+        {
+          "Rf": "32714",
+          "verdict": "EARNED"
+        },
+        {
+          "Rf": "32958",
+          "verdict": "EARNED"
+        },
+        {
+          "Rf": "33080",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "33019",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "32988",
+          "verdict": "EARNED"
+        },
+        {
+          "Rf": "33004",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "32996",
+          "verdict": "EARNED"
+        },
+        {
+          "Rf": "33000",
+          "verdict": "EARNED"
+        },
+        {
+          "Rf": "33002",
+          "verdict": "REFUTED"
+        },
+        {
+          "Rf": "33001",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 5
+    }
+  ],
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

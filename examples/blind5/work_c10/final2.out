@@ -1,0 +1,161 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "verdict": "EARNED",
+  "modes": [
+    "winter",
+    "spring",
+    "summer",
+    "autumn"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "design": {
+    "AE": {
+      "catalog": "aer",
+      "name": "PW2",
+      "P": {
+        "nominal": "2",
+        "tolerance": "0"
+      },
+      "SAE": {
+        "nominal": "11/5 (~2.2)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "18/5 (~3.6)",
+        "tolerance": "0"
+      }
+    },
+    "OX": {
+      "catalog": "lox",
+      "name": "LOX",
+      "price": {
+        "nominal": "13/2 (~6.5)",
+        "tolerance": "0"
+      },
+      "rate": {
+        "nominal": "6000",
+        "tolerance": "0"
+      }
+    },
+    "N": {
+      "catalog": "cnt_N",
+      "k": {
+        "nominal": "10",
+        "tolerance": "0"
+      }
+    },
+    "MW": {
+      "catalog": "cnt_MW",
+      "k": {
+        "nominal": "1",
+        "tolerance": "0"
+      }
+    },
+    "MS": {
+      "catalog": "cnt_MS",
+      "k": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    },
+    "MU": {
+      "catalog": "cnt_MU",
+      "k": {
+        "nominal": "10",
+        "tolerance": "0"
+      }
+    },
+    "MA": {
+      "catalog": "cnt_MA",
+      "k": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    }
+  },
+  "per_mode": {
+    "winter": {
+      "guaranteed": {
+        "Css": [
+          "168203953034416534785957/29936432838439941418304 (~5.6187)",
+          "2455377640345240891866881/278804757058992435966870 (~8.8068)"
+        ],
+        "C2": [
+          "3",
+          "~13.1459738435 (an exact fraction of 61 digits)"
+        ]
+      },
+      "how": {
+        "Css": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~5.61870393651 (~5.6187)', '~8.80679966241 (~8.8068)']",
+        "C2": "ZTL, certificate checked exactly (2 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic"
+      }
+    },
+    "spring": {
+      "guaranteed": {
+        "Css": [
+          "220806039662927708966341/50548402217606447106806 (~4.36821)",
+          "1661457207461772327141927/235384340479999999929850 (~7.05849)"
+        ],
+        "C2": [
+          "3",
+          "~12.7330366202 (an exact fraction of 43 digits)"
+        ]
+      },
+      "how": {
+        "Css": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~4.36821007146 (~4.36821)', '~7.05848657593 (~7.05849)']",
+        "C2": "ZTL, certificate checked exactly (8 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic"
+      }
+    },
+    "summer": {
+      "guaranteed": {
+        "Css": [
+          "4",
+          "39199932511824252332941602/6331910480721025250538725 (~6.19085)"
+        ],
+        "C2": [
+          "3",
+          "~22.1493955657 (an exact fraction of 63 digits)"
+        ]
+      },
+      "how": {
+        "Css": "ZTL, certificate checked exactly (1 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic",
+        "C2": "ZTL, certificate checked exactly (862 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic"
+      }
+    },
+    "autumn": {
+      "guaranteed": {
+        "Css": [
+          "4",
+          "8290341059041674629489707/1122399999999999999508950 (~7.38626)"
+        ],
+        "C2": [
+          "3",
+          "~15.6591763665 (an exact fraction of 45 digits)"
+        ]
+      },
+      "how": {
+        "Css": "ZTL, certificate checked exactly (2 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic",
+        "C2": "ZTL, certificate checked exactly (20 pieces; found by the stand's search, the extreme may lie inside the box); the checker re-checked the same certificate from the laws with its own derivative and interval arithmetic"
+      }
+    }
+  },
+  "objective": {
+    "minimize": "cost",
+    "value": "109937/1250 (~87.9496)",
+    "unit": "kEUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode"
+  },
+  "excluded_by_where": 20475,
+  "designs": [
+    {
+      "design": "AE=aer(name=PW2, P=2, SAE=11/5, price=18/5); OX=lox(name=LOX, price=13/2, rate=6000); N=cnt_N(k=10); MW=cnt_MW(k=1); MS=cnt_MS(k=3); MU=cnt_MU(k=10); MA=cnt_MA(k=3)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  }
+}

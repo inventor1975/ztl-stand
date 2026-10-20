@@ -1,0 +1,280 @@
+{
+  "verdict": "OPEN",
+  "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point",
+  "refuted_inside_the_enclosures": {
+    "its_violating_point": {
+      "DIE_dTc": "15",
+      "DIE_dTp": "0",
+      "HS_dT": "30",
+      "REG_PD": "42/5 (~8.4)",
+      "TIM_dT": "6",
+      "Vin": "13/2 (~6.5)"
+    }
+  },
+  "components": {
+    "REG": {
+      "inputs": {
+        "Vin": {
+          "from": "Vin",
+          "arrives": [
+            "13/2",
+            "9/1"
+          ],
+          "assume": [
+            "13/2",
+            "9/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "Vin": [
+              "13/2",
+              "9/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "PD": [
+              "42/5",
+              "123/5"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "PD": [
+          "42/5",
+          "123/5"
+        ]
+      }
+    },
+    "DIE": {
+      "inputs": {
+        "P": {
+          "from": "REG.PD",
+          "arrives": [
+            "42/5",
+            "123/5"
+          ],
+          "assume": [
+            "0/1",
+            "30/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "P": [
+              "0/1",
+              "42/5"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dTc": [
+              "0/1",
+              "21/5"
+            ],
+            "dTp": [
+              "0/1",
+              "336/25"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "42/5",
+              "123/5"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dTc": [
+              "21/5",
+              "123/10"
+            ],
+            "dTp": [
+              "336/25",
+              "984/25"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "123/5",
+              "30/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dTc": [
+              "123/10",
+              "15/1"
+            ],
+            "dTp": [
+              "984/25",
+              "48/1"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "dTc": [
+          "0/1",
+          "15/1"
+        ],
+        "dTp": [
+          "0/1",
+          "48/1"
+        ]
+      }
+    },
+    "HS": {
+      "inputs": {
+        "P": {
+          "from": "REG.PD",
+          "arrives": [
+            "42/5",
+            "123/5"
+          ],
+          "assume": [
+            "0/1",
+            "30/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "P": [
+              "0/1",
+              "42/5"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "0/1",
+              "42/5"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "42/5",
+              "123/5"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "42/5",
+              "123/5"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "123/5",
+              "30/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "123/5",
+              "30/1"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "dT": [
+          "0/1",
+          "30/1"
+        ]
+      }
+    },
+    "TIM": {
+      "inputs": {
+        "P": {
+          "from": "REG.PD",
+          "arrives": [
+            "42/5",
+            "123/5"
+          ],
+          "assume": [
+            "0/1",
+            "30/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "P": [
+              "0/1",
+              "42/5"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "0/1",
+              "42/25"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "42/5",
+              "123/5"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "42/25",
+              "123/25"
+            ]
+          }
+        },
+        {
+          "band": {
+            "P": [
+              "123/5",
+              "30/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "dT": [
+              "123/25",
+              "6/1"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "dT": [
+          "0/1",
+          "6/1"
+        ]
+      }
+    }
+  },
+  "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

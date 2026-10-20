@@ -1,0 +1,497 @@
+{
+ "note": "J3 (2026-10-12): blind test 4 c05 with the surcharge height CONTINUOUS (the author's grid: N*0.01 m), drain A and spacings 0.9 / 1.1 pinned as the author's answer; the height enters through log10",
+ "stand": "universal-stand/1",
+ "quantities": {
+  "t": {
+   "role": "given",
+   "unit": "day",
+   "value": "210",
+   "why": "t_r: surcharge removed at 210 days"
+  },
+  "Hf": {
+   "role": "given",
+   "unit": "m",
+   "ground": "problem statement",
+   "value": "4",
+   "why": "permanent fill height"
+  },
+  "gam": {
+   "role": "given",
+   "unit": "kN/m^3",
+   "ground": "problem statement",
+   "value": "19",
+   "why": "fill unit weight"
+  },
+  "Hmax": {
+   "role": "given",
+   "unit": "m",
+   "ground": "problem statement",
+   "value": "13/2",
+   "why": "total fill limit for slope stability"
+  },
+  "Sres": {
+   "role": "given",
+   "unit": "m",
+   "ground": "problem statement",
+   "value": "3/100",
+   "why": "residual settlement allowed after removal (30 mm)"
+  },
+  "cs": {
+   "role": "given",
+   "unit": "EUR/m^3",
+   "ground": "problem statement",
+   "value": "15/2",
+   "why": "surcharge cost per m2 of footprint per m of height"
+  },
+  "cinst": {
+   "role": "given",
+   "unit": "EUR",
+   "ground": "problem statement",
+   "value": "4",
+   "why": "installation per drain"
+  },
+  "hstep": {
+   "role": "given",
+   "unit": "m",
+   "value": "1/100",
+   "why": "grid step of the surcharge height (discretisation of a continuous choice)"
+  },
+  "A1": {
+   "role": "given",
+   "unit": "m^2",
+   "ground": "site data",
+   "value": "6000",
+   "why": "zone 1 area"
+  },
+  "H1": {
+   "role": "given",
+   "unit": "m",
+   "ground": "site data",
+   "value": "8",
+   "why": "zone 1 clay thickness = PVD length"
+  },
+  "Cc1": {
+   "role": "given",
+   "unit": "",
+   "ground": "site data",
+   "value": "0.45"
+  },
+  "e01": {
+   "role": "given",
+   "unit": "",
+   "ground": "site data",
+   "value": "1.4"
+  },
+  "sg1": {
+   "role": "given",
+   "unit": "kPa",
+   "ground": "site data",
+   "value": "30",
+   "why": "zone 1 effective stress at mid-layer"
+  },
+  "cv1": {
+   "role": "given",
+   "unit": "m^2/day",
+   "range": [
+    "7/1825",
+    "3/365"
+   ],
+   "why": "zone 1 c_v, 1.4-3.0 / 1.8-4.5 m2/yr converted to m2/day (/365)"
+  },
+  "rch1": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "2",
+    "3"
+   ],
+   "why": "zone 1 c_h/c_v in 2..3"
+  },
+  "rk1": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "2",
+    "4"
+   ],
+   "why": "zone 1 k_h/k_s in 2..4"
+  },
+  "sm1": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "2",
+    "3"
+   ],
+   "why": "zone 1 smear ratio s=d_s/d_w in 2..3"
+  },
+  "S01": {
+   "role": "derived",
+   "unit": "m",
+   "why": "zone 1: permanent-load settlement"
+  },
+  "Ssur1": {
+   "role": "derived",
+   "unit": "m",
+   "why": "zone 1: settlement under surcharged load"
+  },
+  "Uv1": {
+   "role": "derived",
+   "unit": "",
+   "why": "zone 1: vertical degree of consolidation"
+  },
+  "F1": {
+   "role": "derived",
+   "unit": "",
+   "why": "zone 1: Hansbo drain-resistance factor"
+  },
+  "Ur1": {
+   "role": "derived",
+   "unit": "",
+   "why": "zone 1: radial degree"
+  },
+  "U1": {
+   "role": "derived",
+   "unit": "",
+   "why": "zone 1: combined degree"
+  },
+  "M1": {
+   "role": "derived",
+   "unit": "m",
+   "why": "zone 1: margin: U*S(sur) - (S0 - 30mm)"
+  },
+  "A2": {
+   "role": "given",
+   "unit": "m^2",
+   "ground": "site data",
+   "value": "9000",
+   "why": "zone 2 area"
+  },
+  "H2": {
+   "role": "given",
+   "unit": "m",
+   "ground": "site data",
+   "value": "5",
+   "why": "zone 2 clay thickness = PVD length"
+  },
+  "Cc2": {
+   "role": "given",
+   "unit": "",
+   "ground": "site data",
+   "value": "0.38"
+  },
+  "e02": {
+   "role": "given",
+   "unit": "",
+   "ground": "site data",
+   "value": "1.2"
+  },
+  "sg2": {
+   "role": "given",
+   "unit": "kPa",
+   "ground": "site data",
+   "value": "24",
+   "why": "zone 2 effective stress at mid-layer"
+  },
+  "cv2": {
+   "role": "given",
+   "unit": "m^2/day",
+   "range": [
+    "9/1825",
+    "9/730"
+   ],
+   "why": "zone 2 c_v, 1.4-3.0 / 1.8-4.5 m2/yr converted to m2/day (/365)"
+  },
+  "rch2": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "2",
+    "3"
+   ],
+   "why": "zone 2 c_h/c_v in 2..3"
+  },
+  "rk2": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "2",
+    "4"
+   ],
+   "why": "zone 2 k_h/k_s in 2..4"
+  },
+  "sm2": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "2",
+    "3"
+   ],
+   "why": "zone 2 smear ratio s=d_s/d_w in 2..3"
+  },
+  "S02": {
+   "role": "derived",
+   "unit": "m",
+   "why": "zone 2: permanent-load settlement"
+  },
+  "Ssur2": {
+   "role": "derived",
+   "unit": "m",
+   "why": "zone 2: settlement under surcharged load"
+  },
+  "Uv2": {
+   "role": "derived",
+   "unit": "",
+   "why": "zone 2: vertical degree of consolidation"
+  },
+  "F2": {
+   "role": "derived",
+   "unit": "",
+   "why": "zone 2: Hansbo drain-resistance factor"
+  },
+  "Ur2": {
+   "role": "derived",
+   "unit": "",
+   "why": "zone 2: radial degree"
+  },
+  "U2": {
+   "role": "derived",
+   "unit": "",
+   "why": "zone 2: combined degree"
+  },
+  "M2": {
+   "role": "derived",
+   "unit": "m",
+   "why": "zone 2: margin: U*S(sur) - (S0 - 30mm)"
+  }
+ },
+ "slots": {
+  "DR": {
+   "from": [
+    "drainA"
+   ]
+  },
+  "SP1": {
+   "from": [
+    "sp09"
+   ]
+  },
+  "SP2": {
+   "from": [
+    "sp11"
+   ]
+  },
+  "HS": {
+   "from": [
+    "hgrid"
+   ]
+  }
+ },
+ "define": {
+  "Tv1": "cv1*t/(H1*H1)",
+  "De1": "105/100*SP1.s",
+  "nn1": "De1/DR.dw",
+  "Tr1": "cv1*rch1*t/(De1*De1)",
+  "Tv2": "cv2*t/(H2*H2)",
+  "De2": "105/100*SP2.s",
+  "nn2": "De2/DR.dw",
+  "Tr2": "cv2*rch2*t/(De2*De2)",
+  "hs": "HS.h"
+ },
+ "laws": [
+  {
+   "zfl": "S01 == Cc1*H1/(1+e01)*log10((sg1+Hf*gam)/sg1)",
+   "source": "final settlement, log10 compression law, permanent load"
+  },
+  {
+   "zfl": "Ssur1 == Cc1*H1/(1+e01)*log10((sg1+(Hf+hs)*gam)/sg1)",
+   "source": "final settlement, log10 compression law, load incl. surcharge"
+  },
+  {
+   "zfl": "Uv1 == if(Tv1 < 1/5, 2*sqrt(Tv1/pi), 1 - 8/(pi*pi)*exp(-pi*pi*Tv1/4))",
+   "source": "vertical consolidation, Terzaghi (two branches)"
+  },
+  {
+   "zfl": "F1 == ln(nn1/sm1) + rk1*ln(sm1) - 3/4",
+   "source": "Hansbo with smear"
+  },
+  {
+   "zfl": "Ur1 == 1 - exp(-8*Tr1/F1)",
+   "source": "Hansbo radial consolidation"
+  },
+  {
+   "zfl": "U1 == 1 - (1-Uv1)*(1-Ur1)",
+   "source": "Carrillo combination"
+  },
+  {
+   "zfl": "M1 == U1*Ssur1 - S01 + Sres",
+   "source": "requirement margin: achieved settlement minus (permanent minus residual)"
+  },
+  {
+   "zfl": "S02 == Cc2*H2/(1+e02)*log10((sg2+Hf*gam)/sg2)",
+   "source": "final settlement, log10 compression law, permanent load"
+  },
+  {
+   "zfl": "Ssur2 == Cc2*H2/(1+e02)*log10((sg2+(Hf+hs)*gam)/sg2)",
+   "source": "final settlement, log10 compression law, load incl. surcharge"
+  },
+  {
+   "zfl": "Uv2 == if(Tv2 < 1/5, 2*sqrt(Tv2/pi), 1 - 8/(pi*pi)*exp(-pi*pi*Tv2/4))",
+   "source": "vertical consolidation, Terzaghi (two branches)"
+  },
+  {
+   "zfl": "F2 == ln(nn2/sm2) + rk2*ln(sm2) - 3/4",
+   "source": "Hansbo with smear"
+  },
+  {
+   "zfl": "Ur2 == 1 - exp(-8*Tr2/F2)",
+   "source": "Hansbo radial consolidation"
+  },
+  {
+   "zfl": "U2 == 1 - (1-Uv2)*(1-Ur2)",
+   "source": "Carrillo combination"
+  },
+  {
+   "zfl": "M2 == U2*Ssur2 - S02 + Sres",
+   "source": "requirement margin: achieved settlement minus (permanent minus residual)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "M1",
+   "op": ">=",
+   "value": "0",
+   "why": "zone 1: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s"
+  },
+  {
+   "quantity": "M2",
+   "op": ">=",
+   "value": "0",
+   "why": "zone 2: U*S(sur) >= S(perm) - 30 mm at t_r, all c_v, c_h/c_v, kh/ks, s"
+  }
+ ],
+ "objective": {
+  "minimize": "A1/(866/1000*SP1.s*SP1.s)*(H1*DR.pm + cinst) + A2/(866/1000*SP2.s*SP2.s)*(H2*DR.pm + cinst) + cs*(A1+A2)*hs",
+  "unit": "EUR",
+  "why": "total cost: drains (length*price + installation) + surcharge, both zones"
+ },
+ "catalog": {
+  "spacing": {
+   "ground": "problem statement",
+   "items": [
+    {
+     "s": "0.9"
+    },
+    {
+     "s": "1.0"
+    },
+    {
+     "s": "1.1"
+    },
+    {
+     "s": "1.2"
+    },
+    {
+     "s": "1.35"
+    },
+    {
+     "s": "1.5"
+    },
+    {
+     "s": "1.7"
+    },
+    {
+     "s": "1.9"
+    },
+    {
+     "s": "2.2"
+    },
+    {
+     "s": "2.5"
+    }
+   ],
+   "fields": {
+    "s": {
+     "unit": "m"
+    }
+   }
+  },
+  "drain": {
+   "ground": "problem statement",
+   "items": [
+    {
+     "name": "A",
+     "dw": "0.0663",
+     "pm": "0.55"
+    },
+    {
+     "name": "B",
+     "dw": "0.0780",
+     "pm": "0.70"
+    },
+    {
+     "name": "C",
+     "dw": "0.0900",
+     "pm": "0.95"
+    }
+   ],
+   "fields": {
+    "dw": {
+     "unit": "m"
+    },
+    "pm": {
+     "unit": "EUR/m"
+    }
+   }
+  },
+  "hgrid": {
+   "continuous": {
+    "field": "h",
+    "from": "0",
+    "to": "2.5",
+    "unit": "m"
+   }
+  },
+  "drainA": {
+   "items": [
+    {
+     "name": "A",
+     "dw": "0.0663",
+     "pm": "0.55"
+    }
+   ],
+   "fields": {
+    "dw": {
+     "unit": "m"
+    },
+    "pm": {
+     "unit": "EUR/m"
+    }
+   }
+  },
+  "sp09": {
+   "items": [
+    {
+     "s": "0.9"
+    }
+   ],
+   "fields": {
+    "s": {
+     "unit": "m"
+    }
+   }
+  },
+  "sp11": {
+   "items": [
+    {
+     "s": "1.1"
+    }
+   ],
+   "fields": {
+    "s": {
+     "unit": "m"
+    }
+   }
+  }
+ }
+}

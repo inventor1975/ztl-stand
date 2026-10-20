@@ -1,0 +1,99 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "NOMINAL point of the same worked example (VIN = 9 V, VOUT = 5 V, no uncertainty) to compare with the datasheet's printed 118 C and 142 C",
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "value": "9",
+   "unit": "V",
+   "ground": "example"
+  },
+  "Vout": {
+   "role": "given",
+   "value": "5",
+   "unit": "V",
+   "ground": "example"
+  },
+  "Iout": {
+   "role": "given",
+   "value": "6",
+   "unit": "A",
+   "ground": "example"
+  },
+  "Ta": {
+   "role": "given",
+   "value": "75",
+   "unit": "C",
+   "ground": "example"
+  },
+  "Rhs": {
+   "role": "given",
+   "value": "1",
+   "unit": "C/W",
+   "ground": "example: heat sink"
+  },
+  "Rcs": {
+   "role": "given",
+   "value": "0.2",
+   "unit": "C/W",
+   "ground": "example: P package with thermal compound"
+  },
+  "Rjc_c": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "C/W",
+   "ground": "datasheet thermal resistance, LT1083 P package, control circuitry"
+  },
+  "Rjc_p": {
+   "role": "given",
+   "value": "1.6",
+   "unit": "C/W",
+   "ground": "datasheet thermal resistance, LT1083 P package, power transistor"
+  },
+  "PD": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "Tj_c": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Tj_p": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {},
+ "define": {
+  "PDd": "(Vin - Vout)*Iout"
+ },
+ "laws": [
+  {
+   "zfl": "PD == PDd",
+   "source": "linear regulator dissipation PD = (VIN - VOUT)*IOUT (datasheet example)"
+  },
+  {
+   "zfl": "Tj_c == Ta + PDd*(Rhs + Rcs + Rjc_c)",
+   "source": "datasheet: TJ = TA + PD (heat sink + case-to-heat-sink + JC), control section"
+  },
+  {
+   "zfl": "Tj_p == Ta + PDd*(Rhs + Rcs + Rjc_p)",
+   "source": "same, power transistor"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tj_c",
+   "op": "<=",
+   "value": "125",
+   "why": "control section max operating junction temperature, commercial grade (Absolute Maximum Ratings)"
+  },
+  {
+   "quantity": "Tj_p",
+   "op": "<=",
+   "value": "150",
+   "why": "power transistor max operating junction temperature, commercial grade"
+  }
+ ],
+ "catalog": {}
+}

@@ -1,0 +1,36 @@
+{
+  "stand": "ztl-stand/1",
+  "quantities": {
+    "P":    {"role": "given", "value": "1.75",   "unit": "mm", "ground": "ISO 724 M12 coarse pitch (added by me)"},
+    "d2":   {"role": "given", "value": "10.863", "unit": "mm", "ground": "ISO 724 pitch diameter (added by me)"},
+    "d0":   {"role": "given", "value": "10.358", "unit": "mm", "ground": "VDI 2230 d0=(d2+d3)/2 (added by me)"},
+    "Dkm":  {"role": "given", "value": "15.065", "unit": "mm", "ground": "mean head-bearing diameter, ISO 4017 dw=16.63 and 13.5 mm hole (added by me)"},
+    "nu":   {"role": "given", "value": "1", "unit": "", "ground": "yield utilisation allowed; 1 = up to the yield point"},
+    "mu":   {"role": "given", "range": ["0.14", "0.24"], "unit": "", "ground": "Tab.3 class C: zinc-plated, no lubricant"},
+    "Fneed": {"role": "given", "value": "0", "unit": "kN", "ground": "searched by find"},
+    "F":    {"role": "derived", "unit": "kN"},
+    "sred": {"role": "derived", "unit": "MPa"}
+  },
+  "slots": {"BOLT": {"from": ["M12_8.8_93Nm"]}},
+  "define": {
+    "kfac": "P/(2*pi) + (0.5775*d2 + 0.5*Dkm)*mu",
+    "rt":   "1.5*(d2/d0)*(P/(pi*d2) + 1.155*mu)",
+    "As":   "pi/4*d0*d0"
+  },
+  "laws": [
+    {"zfl": "F == BOLT.MA/kfac", "source": "VDI 2230 torque-preload relation MA = F*(P/(2pi)+0.578*d2*mu_G+Dkm/2*mu_K), mu_K=mu_G"},
+    {"zfl": "sred == F/As*sqrt(1 + 3*rt*rt)", "source": "VDI 2230 reduced stress in tightening (tension + torsion)"}
+  ],
+  "requirements": [
+    {"quantity": "F", "op": ">=", "value": "Fneed", "why": "clamp load must stay at or above the needed value"},
+    {"quantity": "sred", "op": "<=", "value": "nu*BOLT.Rp", "why": "bolt not overloaded in tightening (reduced stress below yield)"}
+  ],
+  "catalog": {
+    "M12_8.8_93Nm": {
+      "items": [{"MA": {"value": "93"}, "Rp": {"value": "640"}}],
+      "fields": {"MA": {"unit": "N*m"}, "Rp": {"unit": "MPa"}},
+      "ground": "Wuerth Tab.5: M12 8.8 MA at mu=0.14 is 93 Nm; Rp0.2 min of 8.8 per ISO 898-1 (added by me)"
+    }
+  },
+  "find": {"largest": "Fneed", "from": "0", "to": "45", "precision": "0.05"}
+}

@@ -1,0 +1,361 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "rho_w": {
+   "role": "given",
+   "value": "12",
+   "unit": "ohm*m",
+   "why": "wet-season soil resistivity (half of life)"
+  },
+  "rho_d": {
+   "role": "given",
+   "value": "140",
+   "unit": "ohm*m",
+   "why": "dry-season soil resistivity (half of life)"
+  },
+  "Rc": {
+   "role": "given",
+   "value": "0.2",
+   "unit": "ohm",
+   "why": "cable and structure resistance in series"
+  },
+  "Vp": {
+   "role": "given",
+   "value": "0.85",
+   "unit": "V",
+   "why": "polarisation potential at I = Ip"
+  },
+  "beta": {
+   "role": "given",
+   "range": [
+    "0.12",
+    "0.18"
+   ],
+   "unit": "V",
+   "why": "Tafel slope, V per decade"
+  },
+  "Ip": {
+   "role": "given",
+   "range": [
+    "0.012",
+    "0.06"
+   ],
+   "unit": "A",
+   "why": "protection-current demand (protection mode); the life mode sets 0.030"
+  },
+  "Util": {
+   "role": "given",
+   "value": "0.9",
+   "unit": "",
+   "why": "utilisation factor"
+  },
+  "Esw": {
+   "role": "derived",
+   "unit": "V",
+   "why": "structure potential magnitude, wet",
+   "search": [
+    "0.3",
+    "1.9"
+   ]
+  },
+  "Esd": {
+   "role": "derived",
+   "unit": "V",
+   "why": "structure potential magnitude, dry",
+   "search": [
+    "0.3",
+    "1.9"
+   ]
+  },
+  "Iavg": {
+   "role": "derived",
+   "unit": "A",
+   "why": "time-average anode current"
+  },
+  "Life": {
+   "role": "derived",
+   "unit": "h",
+   "why": "anode life in hours"
+  },
+  "Cinst": {
+   "role": "given",
+   "value": "40",
+   "unit": "EUR",
+   "why": "install cost per anode"
+  },
+  "Iw": {
+   "role": "derived",
+   "unit": "A",
+   "why": "anode group current, wet"
+  },
+  "Id": {
+   "role": "derived",
+   "unit": "A",
+   "why": "anode group current, dry"
+  }
+ },
+ "slots": {
+  "AN": {
+   "from": [
+    "anodes"
+   ]
+  },
+  "CNT": {
+   "from": [
+    "counts"
+   ]
+  }
+ },
+ "define": {
+  "R1w": "rho_w/(2*pi*AN.L)*(ln(4*AN.L/AN.d) - 1)",
+  "R1d": "rho_d/(2*pi*AN.L)*(ln(4*AN.L/AN.d) - 1)",
+  "Rtw": "R1w/CNT.N*(1 + 0.15*ln(CNT.N)) + Rc",
+  "Rtd": "R1d/CNT.N*(1 + 0.15*ln(CNT.N)) + Rc"
+ },
+ "laws": [
+  {
+   "zfl": "AN.Ea - Esw == Rtw*Ip*pow(10, (Esw - Vp)/beta)",
+   "source": "circuit I*(Rgroup+Rc)=Ea-Es with Tafel I=Ip*10^((Es-0.85)/beta), wet (implicit in Es)"
+  },
+  {
+   "zfl": "AN.Ea - Esd == Rtd*Ip*pow(10, (Esd - Vp)/beta)",
+   "source": "same, dry (implicit in Es)"
+  },
+  {
+   "zfl": "Iw == (AN.Ea - Esw)/Rtw",
+   "source": "circuit equation, wet"
+  },
+  {
+   "zfl": "Id == (AN.Ea - Esd)/Rtd",
+   "source": "circuit equation, dry"
+  },
+  {
+   "zfl": "Iavg == 0.5*Iw + 0.5*Id",
+   "source": "each season is half of the life"
+  },
+  {
+   "zfl": "Life == CNT.N*AN.m*AN.cap*Util/Iavg",
+   "source": "Faraday: charge = n*m*capacity*utilisation, delivered at Iavg"
+  }
+ ],
+ "requirements": [],
+ "modes": {
+  "protection": {
+   "quantities": {
+    "Ip": {
+     "range": [
+      "0.012",
+      "0.06"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Esw",
+     "op": "within",
+     "value": [
+      "0.85",
+      "1.18"
+     ],
+     "why": "R1 wet: 0.85 <= Es <= 1.18 V"
+    },
+    {
+     "quantity": "Esd",
+     "op": "within",
+     "value": [
+      "0.85",
+      "1.18"
+     ],
+     "why": "R1 dry: 0.85 <= Es <= 1.18 V"
+    }
+   ]
+  },
+  "life": {
+   "quantities": {
+    "Ip": {
+     "value": "0.030"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Life",
+     "op": ">=",
+     "value": "262800",
+     "why": "R2: 30 years x 8760 h, worst case over cap, Ea, beta"
+    }
+   ]
+  }
+ },
+ "objective": {
+  "minimize": "CNT.N*(AN.price + Cinst)",
+  "why": "n*(price+40)"
+ },
+ "catalog": {
+  "anodes": {
+   "ground": "anode datasheet (fictional)",
+   "items": [
+    {
+     "m": "8",
+     "Ea": {
+      "range": [
+       "3/2",
+       "8/5"
+      ]
+     },
+     "cap": {
+      "range": [
+       "1012",
+       "1100"
+      ]
+     },
+     "L": "0.60",
+     "d": "0.15",
+     "price": "45",
+     "grade": "Mg-S-8"
+    },
+    {
+     "m": "17",
+     "Ea": {
+      "range": [
+       "3/2",
+       "8/5"
+      ]
+     },
+     "cap": {
+      "range": [
+       "1012",
+       "1100"
+      ]
+     },
+     "L": "1.00",
+     "d": "0.20",
+     "price": "78",
+     "grade": "Mg-S-17"
+    },
+    {
+     "m": "32",
+     "Ea": {
+      "range": [
+       "3/2",
+       "8/5"
+      ]
+     },
+     "cap": {
+      "range": [
+       "1012",
+       "1100"
+      ]
+     },
+     "L": "1.40",
+     "d": "0.25",
+     "price": "130",
+     "grade": "Mg-S-32"
+    },
+    {
+     "m": "8",
+     "Ea": {
+      "range": [
+       "17/10",
+       "9/5"
+      ]
+     },
+     "cap": {
+      "range": [
+       "1058",
+       "1150"
+      ]
+     },
+     "L": "0.60",
+     "d": "0.15",
+     "price": "52",
+     "grade": "Mg-H-8"
+    },
+    {
+     "m": "17",
+     "Ea": {
+      "range": [
+       "17/10",
+       "9/5"
+      ]
+     },
+     "cap": {
+      "range": [
+       "1058",
+       "1150"
+      ]
+     },
+     "L": "1.00",
+     "d": "0.20",
+     "price": "90",
+     "grade": "Mg-H-17"
+    },
+    {
+     "m": "12",
+     "Ea": {
+      "range": [
+       "21/20",
+       "23/20"
+      ]
+     },
+     "cap": {
+      "range": [
+       "3588/5",
+       "780"
+      ]
+     },
+     "L": "0.80",
+     "d": "0.12",
+     "price": "60",
+     "grade": "Zn-12"
+    },
+    {
+     "m": "25",
+     "Ea": {
+      "range": [
+       "21/20",
+       "23/20"
+      ]
+     },
+     "cap": {
+      "range": [
+       "3588/5",
+       "780"
+      ]
+     },
+     "L": "1.20",
+     "d": "0.16",
+     "price": "110",
+     "grade": "Zn-25"
+    }
+   ],
+   "fields": {
+    "m": {
+     "unit": "kg"
+    },
+    "Ea": {
+     "unit": "V"
+    },
+    "cap": {
+     "unit": "A*h/kg"
+    },
+    "L": {
+     "unit": "m"
+    },
+    "d": {
+     "unit": "m"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "counts": {
+   "integers": {
+    "field": "N",
+    "from": "1",
+    "to": "60",
+    "unit": ""
+   }
+  }
+ }
+}

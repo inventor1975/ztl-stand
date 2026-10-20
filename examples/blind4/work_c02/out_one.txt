@@ -1,0 +1,27 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "modes": [
+    "protection",
+    "life"
+  ],
+  "designs_tried": 1,
+  "undecided": 1,
+  "designs": [
+    {
+      "design": "AN=anodes(grade=Mg-S-32, m=32, Ea=[3/2,8/5], cap=[1012,1100], L=7/5, d=1/4, price=130); CNT=counts(N=4)",
+      "verdict": "OPEN",
+      "why": "undecided in: protection (R1 wet: 0.85 <= Es <= 1.18 V: Esw proved within [0.869143, 1.21577] V, which reaches past the bound, yet no corner violates it — the extreme may lie inside the box and no certificate decided it; R1 dry: 0.85 <= Es <= 1.18 V: Esd proved within [0.759256, 1.06436] V, which reaches past the bound, yet no corner violates it — the extreme may lie inside the box and no certificate decided it)"
+    }
+  ],
+  "designs_count": {
+    "OPEN": 1
+  },
+  "excluded_by_where": 419,
+  "verdict": "OPEN",
+  "why": "1 design(s) could not be decided in every mode and none was earned"
+}
+
+real	0m18.790s
+user	0m17.502s
+sys	0m1.266s

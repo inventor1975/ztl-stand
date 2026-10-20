@@ -1,0 +1,52 @@
+{
+ "stand": "universal-stand/1",
+ "why": "PARAMETERS: the adapter's feedback resistor chosen for the chain \u2014 the cheapest R1 that keeps it earned",
+ "components": {
+  "AD": {
+   "file": "adapter-divider.json"
+  },
+  "CH": {
+   "file": "charging-board.json"
+  },
+  "BT": {
+   "file": "battery-cell.json"
+  }
+ },
+ "connect": {
+  "AD.Vin": "Vmains",
+  "CH.Vin": "AD.Vout",
+  "BT.Vchg": "CH.Vchg"
+ },
+ "quantities": {
+  "Vmains": {
+   "role": "given",
+   "value": "230",
+   "tolerance": "0.08",
+   "unit": "V"
+  },
+  "Vend": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vend == BT.Vcell"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vend",
+   "op": "within",
+   "value": [
+    "4.1",
+    "4.25"
+   ],
+   "why": "the cell ends charged (>= 4.1 V), not overcharged (<= 4.25 V)"
+  }
+ ],
+ "objective": {
+  "minimize": "AD.cost",
+  "unit": "EUR"
+ }
+}

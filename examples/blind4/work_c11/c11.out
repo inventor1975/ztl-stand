@@ -1,0 +1,1549 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "designs_tried": 31860,
+  "failed_at_nominal": 31668,
+  "judged": 192,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "refuted_by_groups": 0,
+  "groups_pruned": 0,
+  "groups_read": 407,
+  "designs": [
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.4907543705 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.4907543705 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.4907543705 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4972235035 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4972235035 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.9015637775 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4972235035 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~8.60498593014 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.9015637775 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~8.60498593014 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.36343404328 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.9015637775 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~9.08998794012 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~8.60498593014 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.71518883827 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=7); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~5.65601082699 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.4907543705 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.36343404328 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~9.08998794012 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.71518883827 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=7); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~5.65601082699 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.4907543705 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.8747428917 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.36343404328 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4972235035 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.8747428917 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~9.08998794012 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~6.05154941038 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.71518883827 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=7); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~5.65601082699 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~3.02258423212 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.4907543705 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=8); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~1.65623390704 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4972235035 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4972235035 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~6.05154941038 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK4, mult=11/5, Tmax=132, price=19/10); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~3.02258423212 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=8); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~1.65623390704 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.8747428917 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4972235035 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.5775629285 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.36343404328 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK4, mult=11/5, Tmax=132, price=19/10); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4972235035 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.65653276676 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~8.60498593014 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.5775629285 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~6.05154941038 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.71518883827 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=7); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~1.80720607649 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.9015637775 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.36343404328 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~3.02258423212 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=8); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~1.65623390704 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~0.0792240826494 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4972235035 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=9); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L3",
+      "by": "~10.4119482198 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.65653276676 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~8.60498593014 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~8.60498593014 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.71518883827 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=7); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~1.80720607649 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK4, mult=11/5, Tmax=132, price=19/10); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.9015637775 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK4, mult=11/5, Tmax=132, price=19/10); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~0.0792240826494 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=9); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L3",
+      "by": "~10.4119482198 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.5775629285 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~8.60498593014 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.8985356997 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.36343404328 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK5, mult=6/5, Tmax=126, price=4/5); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.54499397006 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~9.08998794012 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.4907543705 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK4, mult=11/5, Tmax=132, price=19/10); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.65653276676 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~8.60498593014 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.62996964231 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=7); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~5.65601082699 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.36343404328 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.8985356997 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.71518883827 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=7); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~1.80720607649 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~3.02258423212 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.9015637775 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=8); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R3 packaging limit L2",
+      "by": "19/2 (~9.5)",
+      "unit": "C"
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK5, mult=6/5, Tmax=126, price=4/5); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.54499397006 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~9.08998794012 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~9.08998794012 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.4907543705 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~0.0792240826494 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=9); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L3",
+      "by": "~10.4119482198 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T126, Tset=126, dry=22); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.48570598058 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4985935712 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~8.60498593014 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=10); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L3",
+      "by": "~9.24490975641 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.71518883827 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.62996964231 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=7); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~5.65601082699 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=7); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~5.65601082699 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.82800541349 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.36343404328 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.36343404328 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~3.02258423212 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=8); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R3 packaging limit L2",
+      "by": "19/2 (~9.5)",
+      "unit": "C"
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK2, mult=7/5, Tmax=137, price=7/20); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.24861175175 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK4, mult=11/5, Tmax=132, price=19/10); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=5); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~9.08998794012 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=4); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK4, mult=11/5, Tmax=132, price=19/10); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~11.9621648827 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~6.20616211767 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK5, mult=6/5, Tmax=126, price=4/5); PL3=packL3(name=PK4, mult=11/5, Tmax=132, price=19/10); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T126, Tset=126, dry=22); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~8.48570598058 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.4985935712 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=10); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L3",
+      "by": "~9.24490975641 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=2); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~7.80230272891 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.71518883827 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=6); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~10.8985356997 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=7); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK2, mult=7/5, Tmax=137, price=7/20); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK3, mult=9/5, Tmax=135, price=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L2",
+      "by": "~5.65601082699 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T130, Tset=130, dry=20); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK2, mult=7/5, Tmax=137, price=7/20); PL4=packL4(name=PK5, mult=6/5, Tmax=126, price=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~5.71518883827 (an exact fraction of 63 digits)",
+      "unit": ""
+    },
+    {
+      "design": "TS=setpoints(lbl=T134, Tset=134, dry=18); H=hold(n=3); PL1=packL1(name=PK1, mult=1, Tmax=137, price=1/10); PL2=packL2(name=PK3, mult=9/5, Tmax=135, price=6/5); PL3=packL3(name=PK3, mult=9/5, Tmax=135, price=6/5); PL4=packL4(name=PK4, mult=11/5, Tmax=132, price=19/10)",
+      "verdict": "REFUTED",
+      "fails": "R1 log-reduction L1",
+      "by": "~1.08077699552 (an exact fraction of 63 digits)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 31860
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "designs_not_listed": 31660,
+  "listing": "earned first, then open, then refuted",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "TS": {
+      "catalog": "setpoints",
+      "Tset": {
+        "nominal": "121",
+        "tolerance": "0"
+      },
+      "dry": {
+        "nominal": "25",
+        "tolerance": "0"
+      },
+      "lbl": "T121"
+    },
+    "H": {
+      "catalog": "hold",
+      "n": {
+        "nominal": "54",
+        "tolerance": "0"
+      }
+    },
+    "PL1": {
+      "catalog": "packL1",
+      "mult": {
+        "nominal": "1",
+        "tolerance": "0"
+      },
+      "Tmax": {
+        "nominal": "137",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "1/10 (~0.1)",
+        "tolerance": "0"
+      },
+      "name": "PK1"
+    },
+    "PL2": {
+      "catalog": "packL2",
+      "mult": {
+        "nominal": "7/5 (~1.4)",
+        "tolerance": "0"
+      },
+      "Tmax": {
+        "nominal": "137",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "7/20 (~0.35)",
+        "tolerance": "0"
+      },
+      "name": "PK2"
+    },
+    "PL3": {
+      "catalog": "packL3",
+      "mult": {
+        "nominal": "11/5 (~2.2)",
+        "tolerance": "0"
+      },
+      "Tmax": {
+        "nominal": "132",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "19/10 (~1.9)",
+        "tolerance": "0"
+      },
+      "name": "PK4"
+    },
+    "PL4": {
+      "catalog": "packL4",
+      "mult": {
+        "nominal": "6/5 (~1.2)",
+        "tolerance": "0"
+      },
+      "Tmax": {
+        "nominal": "126",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "4/5 (~0.8)",
+        "tolerance": "0"
+      },
+      "name": "PK5"
+    }
+  },
+  "its_violating_point": {
+    "dT": "1/2 (~0.5)",
+    "T0": "125/2 (~62.5)"
+  },
+  "point_units": {
+    "dT": "C",
+    "T0": "C"
+  },
+  "value_there": {
+    "LRL3": [
+      "~11.992326232 (an exact fraction of 63 digits)",
+      "~11.992326232 (an exact fraction of 64 digits)"
+    ]
+  },
+  "unit": "",
+  "requirement": {
+    "quantity": "LRL3",
+    "op": ">=",
+    "value": "reqL3",
+    "why": "R1 log-reduction L3"
+  },
+  "overshoot": "~0.00767376804568 (an exact fraction of 64 digits)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "~8.95441957372 (an exact fraction of 65 digits)",
+      "~16.3049889267 (an exact fraction of 62 digits)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "dT",
+        "moves_it_by": "~5.47014571115 (an exact fraction of 64 digits)"
+      },
+      {
+        "quantity": "T0",
+        "moves_it_by": "~1.78658700066 (an exact fraction of 65 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "skipped": "13 requirements: subsets over 8 not enumerated"
+  }
+}

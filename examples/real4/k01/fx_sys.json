@@ -1,0 +1,36 @@
+{
+ "stand": "ztl-stand/1",
+ "components": {
+  "REF": {
+   "file": "fx_ref.json"
+  },
+  "DIV": {
+   "file": "fx_div.json"
+  }
+ },
+ "connect": {
+  "DIV.Vr": "REF.Vo"
+ },
+ "quantities": {
+  "Vend": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vend == DIV.Vout"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vend",
+   "op": "within",
+   "value": [
+    "3.201",
+    "3.399"
+   ],
+   "why": "3.3 V +-3 %"
+  }
+ ]
+}

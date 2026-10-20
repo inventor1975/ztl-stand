@@ -1,0 +1,805 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "t37 with every grain segment its own propellant batch and machining (burn rate, density, core, length, outer diameter) plus throat, expansion ratio and wall tolerances: 28 uncertain data. MEASURED 2026-10-16: EARNED APCP d25 Lg90 N2 Dt12 eps3 t2.0, 65.0122 EUR, optimal, 146 s on --jobs 16 (before: one design OPEN at 15 min)",
+ "quantities": {
+  "Pa": {
+   "role": "given",
+   "unit": "",
+   "why": "ambient pressure, MPa",
+   "range": [
+    "0.085",
+    "0.1013"
+   ]
+  },
+  "mair": {
+   "role": "given",
+   "unit": "",
+   "why": "airframe, kg",
+   "range": [
+    "2.28",
+    "2.52"
+   ]
+  },
+  "eta": {
+   "role": "given",
+   "unit": "",
+   "why": "nozzle efficiency",
+   "range": [
+    "0.92",
+    "0.97"
+   ]
+  },
+  "Sy": {
+   "role": "given",
+   "unit": "",
+   "why": "case yield, MPa",
+   "range": [
+    "220.8",
+    "259.2"
+   ]
+  },
+  "kc": {
+   "role": "given",
+   "unit": "",
+   "why": "c* factor",
+   "range": [
+    "0.96",
+    "1.04"
+   ]
+  },
+  "dDt": {
+   "role": "given",
+   "unit": "",
+   "why": "throat machining, mm",
+   "range": [
+    "-0.05",
+    "0.05"
+   ]
+  },
+  "keps": {
+   "role": "given",
+   "unit": "",
+   "why": "expansion ratio factor (exit diameter)",
+   "range": [
+    "0.98",
+    "1.02"
+   ]
+  },
+  "dt": {
+   "role": "given",
+   "unit": "",
+   "why": "wall, mm",
+   "range": [
+    "-0.1",
+    "0.1"
+   ]
+  },
+  "gg": {
+   "role": "given",
+   "unit": "",
+   "why": "",
+   "value": "9.81"
+  },
+  "Lr": {
+   "role": "given",
+   "unit": "",
+   "why": "",
+   "value": "1.8"
+  },
+  "ka1": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 1 burn-rate factor (its own batch)",
+   "range": [
+    "0.9",
+    "1.1"
+   ]
+  },
+  "kr1": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 1 density factor",
+   "range": [
+    "0.985",
+    "1.015"
+   ]
+  },
+  "dd1": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 1 core diameter error, mm",
+   "range": [
+    "-0.3",
+    "0.3"
+   ]
+  },
+  "dL1": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 1 length error, mm",
+   "range": [
+    "-0.5",
+    "0.5"
+   ]
+  },
+  "dD1": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 1 outer diameter error, mm",
+   "range": [
+    "-0.2",
+    "0.2"
+   ]
+  },
+  "ka2": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 2 burn-rate factor (its own batch)",
+   "range": [
+    "0.9",
+    "1.1"
+   ]
+  },
+  "kr2": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 2 density factor",
+   "range": [
+    "0.985",
+    "1.015"
+   ]
+  },
+  "dd2": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 2 core diameter error, mm",
+   "range": [
+    "-0.3",
+    "0.3"
+   ]
+  },
+  "dL2": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 2 length error, mm",
+   "range": [
+    "-0.5",
+    "0.5"
+   ]
+  },
+  "dD2": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 2 outer diameter error, mm",
+   "range": [
+    "-0.2",
+    "0.2"
+   ]
+  },
+  "ka3": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 3 burn-rate factor (its own batch)",
+   "range": [
+    "0.9",
+    "1.1"
+   ]
+  },
+  "kr3": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 3 density factor",
+   "range": [
+    "0.985",
+    "1.015"
+   ]
+  },
+  "dd3": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 3 core diameter error, mm",
+   "range": [
+    "-0.3",
+    "0.3"
+   ]
+  },
+  "dL3": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 3 length error, mm",
+   "range": [
+    "-0.5",
+    "0.5"
+   ]
+  },
+  "dD3": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 3 outer diameter error, mm",
+   "range": [
+    "-0.2",
+    "0.2"
+   ]
+  },
+  "ka4": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 4 burn-rate factor (its own batch)",
+   "range": [
+    "0.9",
+    "1.1"
+   ]
+  },
+  "kr4": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 4 density factor",
+   "range": [
+    "0.985",
+    "1.015"
+   ]
+  },
+  "dd4": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 4 core diameter error, mm",
+   "range": [
+    "-0.3",
+    "0.3"
+   ]
+  },
+  "dL4": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 4 length error, mm",
+   "range": [
+    "-0.5",
+    "0.5"
+   ]
+  },
+  "dD4": {
+   "role": "given",
+   "unit": "",
+   "why": "segment 4 outer diameter error, mm",
+   "range": [
+    "-0.2",
+    "0.2"
+   ]
+  },
+  "At": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "P": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "mp": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "q": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "mom": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Cf": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "F": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "It": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "sigma": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "CR": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "mc": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "mn": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "m0": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "tb": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "dv": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "TWR": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "vr": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "amaxg": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "SEP": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Cost": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "G": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "eps": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Ab1": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Ab2": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Ab3": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Ab4": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "V1": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "V2": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "V3": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "V4": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Me": {
+   "role": "derived",
+   "unit": "",
+   "why": "exit Mach, supersonic root",
+   "search": [
+    "1.0001",
+    "6"
+   ]
+  }
+ },
+ "slots": {
+  "PR": {
+   "from": [
+    "props"
+   ]
+  },
+  "GD": {
+   "from": [
+    "cores"
+   ]
+  },
+  "GL": {
+   "from": [
+    "lens"
+   ]
+  },
+  "GN": {
+   "from": [
+    "segs"
+   ]
+  },
+  "NT": {
+   "from": [
+    "throats"
+   ]
+  },
+  "NE": {
+   "from": [
+    "nozzles"
+   ]
+  },
+  "CT": {
+   "from": [
+    "walls"
+   ]
+  }
+ },
+ "catalog": {
+  "props": {
+   "items": [
+    {
+     "name": "KNSB",
+     "a": "8.26",
+     "n": "0.319",
+     "rho": "1841",
+     "cstar": "909",
+     "gamma": "1.137",
+     "price": "10"
+    },
+    {
+     "name": "KNDX",
+     "a": "8.88",
+     "n": "0.619",
+     "rho": "1879",
+     "cstar": "919",
+     "gamma": "1.131",
+     "price": "12"
+    },
+    {
+     "name": "APCP",
+     "a": "3.50",
+     "n": "0.400",
+     "rho": "1750",
+     "cstar": "1500",
+     "gamma": "1.21",
+     "price": "60"
+    }
+   ],
+   "fields": {
+    "a": {
+     "unit": ""
+    },
+    "n": {
+     "unit": ""
+    },
+    "rho": {
+     "unit": ""
+    },
+    "cstar": {
+     "unit": ""
+    },
+    "gamma": {
+     "unit": ""
+    },
+    "price": {
+     "unit": ""
+    }
+   }
+  },
+  "cores": {
+   "items": [
+    {
+     "d": "20"
+    },
+    {
+     "d": "25"
+    },
+    {
+     "d": "30"
+    }
+   ],
+   "fields": {
+    "d": {
+     "unit": ""
+    }
+   }
+  },
+  "lens": {
+   "items": [
+    {
+     "Lg": "90"
+    },
+    {
+     "Lg": "110"
+    },
+    {
+     "Lg": "130"
+    }
+   ],
+   "fields": {
+    "Lg": {
+     "unit": ""
+    }
+   }
+  },
+  "segs": {
+   "integers": {
+    "field": "N",
+    "from": "1",
+    "to": "4",
+    "unit": ""
+   }
+  },
+  "throats": {
+   "integers": {
+    "field": "Dt",
+    "from": "10",
+    "to": "20",
+    "unit": ""
+   }
+  },
+  "nozzles": {
+   "items": [
+    {
+     "eps": "3"
+    },
+    {
+     "eps": "5"
+    },
+    {
+     "eps": "8"
+    }
+   ],
+   "fields": {
+    "eps": {
+     "unit": ""
+    }
+   }
+  },
+  "walls": {
+   "items": [
+    {
+     "t": "2.0"
+    },
+    {
+     "t": "2.5"
+    },
+    {
+     "t": "3.0"
+    },
+    {
+     "t": "4.0"
+    }
+   ],
+   "fields": {
+    "t": {
+     "unit": ""
+    }
+   }
+  }
+ },
+ "computed": {
+  "s1": "min(1, max(0, GN.N - 0))",
+  "s2": "min(1, max(0, GN.N - 1))",
+  "s3": "min(1, max(0, GN.N - 2))",
+  "s4": "min(1, max(0, GN.N - 3))"
+ },
+ "laws": [
+  {
+   "zfl": "Ab1 == s1*(pi*(GD.d + dd1)*(GL.Lg + dL1) + 2*(pi/4)*((60 + dD1)*(60 + dD1) - (GD.d + dd1)*(GD.d + dd1)))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "V1 == s1*(pi/4)*((60 + dD1)*(60 + dD1) - (GD.d + dd1)*(GD.d + dd1))*(GL.Lg + dL1)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "Ab2 == s2*(pi*(GD.d + dd2)*(GL.Lg + dL2) + 2*(pi/4)*((60 + dD2)*(60 + dD2) - (GD.d + dd2)*(GD.d + dd2)))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "V2 == s2*(pi/4)*((60 + dD2)*(60 + dD2) - (GD.d + dd2)*(GD.d + dd2))*(GL.Lg + dL2)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "Ab3 == s3*(pi*(GD.d + dd3)*(GL.Lg + dL3) + 2*(pi/4)*((60 + dD3)*(60 + dD3) - (GD.d + dd3)*(GD.d + dd3)))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "V3 == s3*(pi/4)*((60 + dD3)*(60 + dD3) - (GD.d + dd3)*(GD.d + dd3))*(GL.Lg + dL3)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "Ab4 == s4*(pi*(GD.d + dd4)*(GL.Lg + dL4) + 2*(pi/4)*((60 + dD4)*(60 + dD4) - (GD.d + dd4)*(GD.d + dd4)))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "V4 == s4*(pi/4)*((60 + dD4)*(60 + dD4) - (GD.d + dd4)*(GD.d + dd4))*(GL.Lg + dL4)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "G == ka1*kr1*Ab1 + ka2*kr2*Ab2 + ka3*kr3*Ab3 + ka4*kr4*Ab4",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "At == (pi/4)*(NT.Dt + dDt)*(NT.Dt + dDt)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "P == pow((1/1000000000)*PR.rho*PR.cstar*kc*PR.a*G/At, 1/(1 - PR.n))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "mp == PR.rho*(kr1*V1 + kr2*V2 + kr3*V3 + kr4*V4)*(1/1000000000)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "eps == NE.eps*keps",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "NE.eps*keps == (1/Me)*pow((2/(PR.gamma + 1))*(1 + (PR.gamma - 1)/2*Me*Me), (PR.gamma + 1)/(2*(PR.gamma - 1)))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "q == 1/pow(1 + (PR.gamma - 1)/2*Me*Me, PR.gamma/(PR.gamma - 1))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "mom == sqrt(2*PR.gamma*PR.gamma/(PR.gamma - 1)*pow(2/(PR.gamma + 1), (PR.gamma + 1)/(PR.gamma - 1))*(1 - pow(q, (PR.gamma - 1)/PR.gamma)))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "Cf == mom + (q - Pa/P)*eps",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "F == eta*Cf*P*At",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "It == eta*Cf*PR.cstar*kc*mp",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "sigma == (sqrt(3)/2)*P*30/(CT.t + dt)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "CR == Sy/(1.5*sigma)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "mc == 2700*pi*(60 + CT.t + dt)*(CT.t + dt)*(GN.N*GL.Lg + 40)*(1/1000000000)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "mn == 0.08 + 0.02*eps",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "m0 == mair + mp + mc + mn",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "tb == It/F",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "dv == (It/mp)*ln(m0/(m0 - mp)) - gg*tb",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "TWR == F/(m0*gg)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "vr == sqrt(2*(F/m0 - gg)*Lr)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "amaxg == F/((m0 - mp)*gg)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "SEP == q*P/(0.4*Pa)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "Cost == PR.price*PR.rho*GN.N*(pi/4)*(3600 - GD.d*GD.d)*GL.Lg*(1/1000000000) + 8*2700*pi*(60 + CT.t)*CT.t*(GN.N*GL.Lg + 40)*(1/1000000000) + 10 + 3*NE.eps",
+   "source": "SPEC.md"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "P",
+   "op": "within",
+   "value": [
+    "2.0",
+    "7.0"
+   ],
+   "why": "R1"
+  },
+  {
+   "quantity": "F",
+   "op": "<=",
+   "value": "1500",
+   "why": "R2"
+  },
+  {
+   "quantity": "It",
+   "op": ">=",
+   "value": "1200",
+   "why": "R3"
+  },
+  {
+   "quantity": "CR",
+   "op": ">=",
+   "value": "1",
+   "why": "R4"
+  },
+  {
+   "quantity": "SEP",
+   "op": ">=",
+   "value": "1",
+   "why": "R5"
+  },
+  {
+   "quantity": "TWR",
+   "op": ">=",
+   "value": "5",
+   "why": "R6"
+  },
+  {
+   "quantity": "vr",
+   "op": ">=",
+   "value": "15",
+   "why": "R7"
+  },
+  {
+   "quantity": "amaxg",
+   "op": "<=",
+   "value": "25",
+   "why": "R8"
+  },
+  {
+   "quantity": "dv",
+   "op": ">=",
+   "value": "300",
+   "why": "R9"
+  }
+ ],
+ "objective": {
+  "minimize": "Cost",
+  "why": "price at nominal values"
+ }
+}

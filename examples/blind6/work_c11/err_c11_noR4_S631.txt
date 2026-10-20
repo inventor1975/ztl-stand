@@ -1,0 +1,6 @@
+[stand] 1/20 designs, 0 s: 
+[stand] 1/20 designs, 30 s: 
+[stand] 1/20 designs, 62 s: 
+[stand] 1/20 designs, 99 s: 
+[stand] 1/20 designs, 140 s: 
+[stand] 1/20 designs, 184 s: 

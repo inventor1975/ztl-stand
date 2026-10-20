@@ -1,0 +1,54 @@
+{
+ "stand": "universal-stand/1",
+ "why": "find over a system: the widest mains tolerance the chain still earns (the adapter's assume [200, 250] V is the wall)",
+ "components": {
+  "AD": {
+   "file": "adapter-5v.json"
+  },
+  "CH": {
+   "file": "charging-board.json"
+  },
+  "BT": {
+   "file": "battery-cell.json"
+  }
+ },
+ "connect": {
+  "AD.Vin": "Vmains",
+  "CH.Vin": "AD.Vout",
+  "BT.Vchg": "CH.Vchg"
+ },
+ "quantities": {
+  "Vmains": {
+   "role": "given",
+   "value": "230",
+   "tolerance": "0.08",
+   "unit": "V"
+  },
+  "Vend": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vend == BT.Vcell"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vend",
+   "op": "within",
+   "value": [
+    "4.1",
+    "4.25"
+   ],
+   "why": "the cell ends charged (>= 4.1 V), not overcharged (<= 4.25 V)"
+  }
+ ],
+ "find": {
+  "largest": "Vmains",
+  "from": "230",
+  "to": "270",
+  "precision": "0.1"
+ }
+}

@@ -1,0 +1,77 @@
+{
+ "note": "blind 6 problem 1: warehouse hoist, rope from a catalog + continuous drum diameter D (enters through pow(D/(24 d), 2.4))",
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "g":   {"role": "given", "value": "9.81", "unit": "m/s^2", "ground": "problem", "why": "g = 9.81 as stated (not g0)"},
+  "H":   {"role": "given", "value": "36", "unit": "m", "ground": "problem", "why": "lift height"},
+  "Lr":  {"role": "given", "value": "84", "unit": "m", "ground": "problem", "why": "rope bought in the one length 84 m"},
+  "Mb":  {"role": "given", "value": "60", "unit": "kg", "ground": "problem", "why": "lifting block mass"},
+  "mA":  {"role": "given", "range": ["400", "600"], "unit": "kg", "why": "class A payload"},
+  "mB":  {"role": "given", "range": ["900", "1100"], "unit": "kg", "why": "class B payload"},
+  "mC":  {"role": "given", "range": ["1200", "1300"], "unit": "kg", "why": "class C payload (proof test)"},
+  "nA":  {"role": "given", "value": "26000", "unit": "1/year", "ground": "problem", "why": "class A lifts per year"},
+  "nB":  {"role": "given", "value": "11000", "unit": "1/year", "ground": "problem", "why": "class B lifts per year"},
+  "nC":  {"role": "given", "value": "60", "unit": "1/year", "ground": "problem", "why": "class C lifts per year"},
+  "phi": {"role": "given", "range": ["0.10", "0.25"], "unit": "", "why": "dynamic factor, ONE value shared by all classes"},
+  "eta": {"role": "given", "range": ["0.95", "0.98"], "unit": "", "why": "reeving efficiency, ONE value shared by all classes"},
+  "kt":  {"role": "given", "range": ["0.88", "0.95"], "unit": "", "why": "termination efficiency (one rope, one value; worst case is its low end for every class)"},
+  "N0":  {"role": "given", "range": ["700000", "900000"], "unit": "", "why": "fatigue constant in lifts, shared"},
+  "Kd0": {"role": "given", "value": "0.5", "unit": "kEUR", "ground": "problem", "why": "drum price constant"},
+  "Kd1": {"role": "given", "value": "16", "unit": "kEUR/m^2", "ground": "problem", "why": "drum price coefficient on D^2"},
+
+  "FA":  {"role": "derived", "unit": "kN", "why": "tension in highest-loaded fall, class A"},
+  "FB":  {"role": "derived", "unit": "kN", "why": "class B"},
+  "FC":  {"role": "derived", "unit": "kN", "why": "class C"},
+  "rhoA": {"role": "derived", "unit": "", "why": "load ratio class A"},
+  "rhoB": {"role": "derived", "unit": "", "why": "load ratio class B"},
+  "rhoC": {"role": "derived", "unit": "", "why": "load ratio class C"},
+  "NA":  {"role": "derived", "unit": "", "why": "rope life in lifts, class A"},
+  "NB":  {"role": "derived", "unit": "", "why": "class B"},
+  "NC":  {"role": "derived", "unit": "", "why": "class C"},
+  "Dm":  {"role": "derived", "unit": "1/year", "why": "annual Miner damage"},
+  "SFC": {"role": "derived", "unit": "", "why": "static safety factor, class C"},
+  "Rdd": {"role": "derived", "unit": "", "why": "drum ratio D/d"}
+ },
+ "slots": {
+  "RP": {"from": ["ropes"]},
+  "DR": {"from": ["drum"]}
+ },
+ "define": {
+  "Dfac": "pow(DR.D/(24*RP.d), 2.4)"
+ },
+ "laws": [
+  {"zfl": "FA == g*((mA + Mb)/(2*eta) + RP.mu*H)*(1 + phi)", "source": "rope tension, highest-loaded fall (kN: the unit scaling replaces /1000)"},
+  {"zfl": "FB == g*((mB + Mb)/(2*eta) + RP.mu*H)*(1 + phi)", "source": "rope tension, class B"},
+  {"zfl": "FC == g*((mC + Mb)/(2*eta) + RP.mu*H)*(1 + phi)", "source": "rope tension, class C"},
+  {"zfl": "rhoA == FA/(kt*RP.MBF)", "source": "load ratio"},
+  {"zfl": "rhoB == FB/(kt*RP.MBF)", "source": "load ratio"},
+  {"zfl": "rhoC == FC/(kt*RP.MBF)", "source": "load ratio"},
+  {"zfl": "NA == N0*Dfac*pow(0.1/rhoA, 2.2)", "source": "rope life N_i = N0 (D/(24 d))^2.4 (0.10/rho_i)^2.2"},
+  {"zfl": "NB == N0*Dfac*pow(0.1/rhoB, 2.2)", "source": "rope life"},
+  {"zfl": "NC == N0*Dfac*pow(0.1/rhoC, 2.2)", "source": "rope life"},
+  {"zfl": "Dm == nA/NA + nB/NB + nC/NC", "source": "Miner's rule"},
+  {"zfl": "SFC == kt*RP.MBF/FC", "source": "static safety factor of class C"},
+  {"zfl": "Rdd == DR.D/RP.d", "source": "drum ratio"}
+ ],
+ "requirements": [
+  {"quantity": "Dm",  "op": "<=", "value": "0.1", "why": "R1 life >= 10 years, Dm <= 0.10 per year"},
+  {"quantity": "SFC", "op": ">=", "value": "5", "why": "R2 static safety factor class C >= 5"},
+  {"quantity": "RP.d", "op": "<=", "value": "14", "why": "R3 fairlead passes ropes up to 14 mm"},
+  {"quantity": "Rdd", "op": ">=", "value": "18", "why": "R4 D/d >= 18"}
+ ],
+ "objective": {"minimize": "RP.price*Lr + Kd0 + Kd1*DR.D*DR.D", "unit": "EUR", "why": "rope 84 m + drum with sheave"},
+ "catalog": {
+  "ropes": {
+   "ground": "problem statement table",
+   "items": [
+    {"name": "W-8",  "d": "8",  "MBF": "35",  "mu": "0.24", "price": "2.1"},
+    {"name": "W-10", "d": "10", "MBF": "55",  "mu": "0.37", "price": "3.2"},
+    {"name": "W-12", "d": "12", "MBF": "79",  "mu": "0.53", "price": "4.6"},
+    {"name": "W-14", "d": "14", "MBF": "108", "mu": "0.73", "price": "6.5"},
+    {"name": "W-16", "d": "16", "MBF": "141", "mu": "0.95", "price": "8.8"}
+   ],
+   "fields": {"d": {"unit": "mm"}, "MBF": {"unit": "kN"}, "mu": {"unit": "kg/m"}, "price": {"unit": "EUR/m"}}
+  },
+  "drum": {"continuous": {"field": "D", "from": "0.15", "to": "0.45", "unit": "m"}}
+ }
+}

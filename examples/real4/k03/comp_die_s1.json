@@ -1,0 +1,91 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "LT1083CP junction-to-case: control 0.5 and power transistor 1.6 C/W (datasheet)",
+ "interface": {
+  "inputs": {
+   "P": {
+    "assume": [
+     "0",
+     "30"
+    ],
+    "bands": [
+     "0",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7",
+     "8",
+     "9",
+     "10",
+     "11",
+     "12",
+     "13",
+     "14",
+     "15",
+     "16",
+     "17",
+     "18",
+     "19",
+     "20",
+     "21",
+     "22",
+     "23",
+     "24",
+     "25",
+     "26",
+     "27",
+     "28",
+     "29",
+     "30"
+    ]
+   }
+  },
+  "outputs": [
+   "dTc",
+   "dTp"
+  ]
+ },
+ "quantities": {
+  "P": {
+   "role": "given",
+   "value": "10",
+   "unit": "W"
+  },
+  "Rjc_c": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "C/W",
+   "ground": "datasheet"
+  },
+  "Rjc_p": {
+   "role": "given",
+   "value": "1.6",
+   "unit": "C/W",
+   "ground": "datasheet"
+  },
+  "dTc": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "dTp": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "dTc == P*Rjc_c",
+   "source": "thermal resistance"
+  },
+  {
+   "zfl": "dTp == P*Rjc_p",
+   "source": "thermal resistance"
+  }
+ ],
+ "requirements": [],
+ "catalog": {}
+}

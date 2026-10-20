@@ -1,0 +1,104 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "4-pole 115 V 60 Hz induction motor 5IK40GN-AWU: speed from a linear speed-torque line (assumption); rating = starting torque with safety factor 2",
+ "interface": {
+  "inputs": {
+   "TM": {
+    "assume": [
+     "0",
+     "361/160"
+    ],
+    "bands": [
+     "0",
+     "0.45",
+     "0.475",
+     "0.5",
+     "0.525",
+     "0.55",
+     "0.575",
+     "0.6",
+     "0.625",
+     "0.65",
+     "0.8",
+     "0.86875",
+     "1.2",
+     "361/160"
+    ]
+   }
+  },
+  "outputs": [
+   "NM"
+  ]
+ },
+ "quantities": {
+  "TM": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "lbf*in"
+  },
+  "N0": {
+   "role": "given",
+   "value": "1740",
+   "unit": "rpm"
+  },
+  "Nr": {
+   "role": "given",
+   "range": [
+    "1450",
+    "1550"
+   ],
+   "unit": "rpm"
+  },
+  "Tr": {
+   "role": "given",
+   "value": "361/160",
+   "unit": "lbf*in"
+  },
+  "Tst": {
+   "role": "given",
+   "value": "139/80",
+   "unit": "lbf*in"
+  },
+  "SF": {
+   "role": "given",
+   "value": "2",
+   "unit": ""
+  },
+  "phi": {
+   "role": "derived",
+   "unit": ""
+  },
+  "NM": {
+   "role": "derived",
+   "unit": "rpm"
+  },
+  "Tstart": {
+   "role": "derived",
+   "unit": "lbf*in"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "phi == TM/Tr",
+   "source": "share of rated torque"
+  },
+  {
+   "zfl": "NM == N0 - (N0 - Nr)*phi",
+   "source": "ASSUMPTION: linear speed-torque line"
+  },
+  {
+   "zfl": "Tstart == SF*TM",
+   "source": "tech ref: safety factor 2"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tstart",
+   "op": "<=",
+   "value": "Tst",
+   "why": "catalog starting torque 27.8 oz-in"
+  }
+ ]
+}

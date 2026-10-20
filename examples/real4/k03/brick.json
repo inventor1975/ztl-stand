@@ -1,0 +1,29 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "LT1083-5CP (TO-3P) on a 1 C/W heat sink, 6 A, VIN up to 9 V, TA 75 C: both junctions (control section, power transistor) must stay under their own limits. Datasheet 1083ffd, Applications Information, thermal example. Uncertainty = the datasheet's own VOUT window 4.9..5.1 V and VIN 6.5..9 V.",
+ "quantities": {
+  "Vin":  {"role": "given", "range": ["6.5", "9"], "unit": "V", "ground": "datasheet: VIN(max continuous) = 9 V in the example; 6.5 V = lower VIN of the VOUT line/load row and of the 5 V application"},
+  "Vout": {"role": "given", "range": ["4.9", "5.1"], "unit": "V", "ground": "datasheet electrical characteristics, LT1083/4/5-5, 0 <= IOUT <= IFULLLOAD, 6.5 V <= VIN <= 20 V: MIN 4.900, MAX 5.100"},
+  "Iout": {"role": "given", "value": "6", "unit": "A", "ground": "example"},
+  "Ta":   {"role": "given", "value": "75", "unit": "C", "ground": "example"},
+  "Rhs":  {"role": "given", "value": "1", "unit": "C/W", "ground": "example: heat sink"},
+  "Rcs":  {"role": "given", "value": "0.2", "unit": "C/W", "ground": "example: P package with thermal compound"},
+  "Rjc_c": {"role": "given", "value": "0.5", "unit": "C/W", "ground": "datasheet thermal resistance, LT1083 P package, control circuitry"},
+  "Rjc_p": {"role": "given", "value": "1.6", "unit": "C/W", "ground": "datasheet thermal resistance, LT1083 P package, power transistor"},
+  "PD":   {"role": "derived", "unit": "W"},
+  "Tj_c": {"role": "derived", "unit": "C"},
+  "Tj_p": {"role": "derived", "unit": "C"}
+ },
+ "slots": {},
+ "define": {"PDd": "(Vin - Vout)*Iout"},
+ "laws": [
+  {"zfl": "PD == PDd", "source": "linear regulator dissipation PD = (VIN - VOUT)*IOUT (datasheet example)"},
+  {"zfl": "Tj_c == Ta + PDd*(Rhs + Rcs + Rjc_c)", "source": "datasheet: TJ = TA + PD (heat sink + case-to-heat-sink + JC), control section"},
+  {"zfl": "Tj_p == Ta + PDd*(Rhs + Rcs + Rjc_p)", "source": "same, power transistor"}
+ ],
+ "requirements": [
+  {"quantity": "Tj_c", "op": "<=", "value": "125", "why": "control section max operating junction temperature, commercial grade (Absolute Maximum Ratings)"},
+  {"quantity": "Tj_p", "op": "<=", "value": "150", "why": "power transistor max operating junction temperature, commercial grade"}
+ ],
+ "catalog": {}
+}

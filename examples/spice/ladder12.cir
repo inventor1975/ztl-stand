@@ -1,0 +1,27 @@
+* a 12-node ladder (beyond the 6-unknown symbolic cap: zlin)
+Vs n0 0 10
+R0 n0 n1 100
+Rg0 n1 0 200
+R1 n1 n2 110
+Rg1 n2 0 210
+R2 n2 n3 120
+Rg2 n3 0 220
+R3 n3 n4 130
+Rg3 n4 0 230
+R4 n4 n5 140
+Rg4 n5 0 240
+R5 n5 n6 150
+Rg5 n6 0 250
+R6 n6 n7 160
+Rg6 n7 0 260
+R7 n7 n8 170
+Rg7 n8 0 270
+R8 n8 n9 180
+Rg8 n9 0 280
+R9 n9 n10 190
+Rg9 n10 0 290
+R10 n10 n11 200
+Rg10 n11 0 300
+R11 n11 n12 210
+Rg11 n12 0 310
+.end

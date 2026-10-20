@@ -1,0 +1,196 @@
+{
+ "stand": "universal-stand/1",
+ "report": "all",
+ "quantities": {
+  "mh": {
+   "role": "given",
+   "value": "2.0",
+   "tolerance": "0.03",
+   "unit": "kg/s",
+   "why": "oil flow 2.0 +-3%"
+  },
+  "cph": {
+   "role": "given",
+   "value": "2.1",
+   "unit": "kJ/(kg*K)",
+   "why": "oil cp"
+  },
+  "Thi": {
+   "role": "given",
+   "range": [
+    "93",
+    "97"
+   ],
+   "unit": "C",
+   "why": "oil inlet 95 +-2 K"
+  },
+  "mc": {
+   "role": "given",
+   "value": "1.6",
+   "tolerance": "0.05",
+   "unit": "kg/s",
+   "why": "water flow 1.6 +-5%"
+  },
+  "cpc": {
+   "role": "given",
+   "value": "4.18",
+   "unit": "kJ/(kg*K)",
+   "why": "water cp"
+  },
+  "Tci": {
+   "role": "given",
+   "range": [
+    "15",
+    "28"
+   ],
+   "unit": "C",
+   "why": "river water inlet"
+  },
+  "Rf": {
+   "role": "given",
+   "range": [
+    "0.0001",
+    "0.0006"
+   ],
+   "unit": "m^2*K/W",
+   "why": "total fouling resistance"
+  },
+  "m0": {
+   "role": "given",
+   "value": "2.0",
+   "unit": "kg/s",
+   "why": "reference oil flow for U and dp scaling"
+  },
+  "T80": {
+   "role": "given",
+   "value": "80",
+   "unit": "C",
+   "why": "reference oil mean temperature for clean U"
+  },
+  "Tho": {
+   "role": "derived",
+   "unit": "C",
+   "search": [
+    "15",
+    "97"
+   ],
+   "why": "oil outlet, from NTU balance with U at the mean oil temperature"
+  },
+  "Tco": {
+   "role": "derived",
+   "unit": "C",
+   "why": "water outlet"
+  },
+  "dp": {
+   "role": "derived",
+   "unit": "bar",
+   "why": "oil-side pressure drop at actual flow"
+  }
+ },
+ "slots": {
+  "HX": {
+   "from": [
+    "plates"
+   ]
+  }
+ },
+ "define": {
+  "Ch": "mh*cph",
+  "Cc": "mc*cpc",
+  "Cmin": "Ch",
+  "Cmax": "Cc",
+  "Cr": "Cmin/Cmax",
+  "Uce": "HX.Uc*pow((Thi + Tho)/(2*T80), 0.8)*pow(mh/m0, 0.5)",
+  "U": "1/(1/Uce + Rf)",
+  "NTU": "U*HX.A/Cmin",
+  "EPS": "(1 - exp(-NTU*(1 - Cr)))/(1 - Cr*exp(-NTU*(1 - Cr)))"
+ },
+ "laws": [
+  {
+   "zfl": "Thi - Tho == EPS*(Cmin/Ch)*(Thi - Tci)",
+   "valid": "Cc - Ch > 0",
+   "source": "effectiveness-NTU, counter-flow, Cr<1; U depends on oil mean temperature (Thi+Tho)/2 so Tho is an implicit root . Cmin=Ch (oil is the minimum-capacity stream), declared by 'valid' instead of min()/max() because min/max made the checker fail"
+  },
+  {
+   "zfl": "Tco == Tci + Ch*(Thi - Tho)/Cc",
+   "source": "heat balance, water side"
+  },
+  {
+   "zfl": "dp == HX.dp0*pow(mh/m0, 1.7)",
+   "source": "pressure drop scaling (m/2.0)^1.7"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tho",
+   "op": "<=",
+   "value": "62",
+   "why": "oil outlet <= 62 C"
+  },
+  {
+   "quantity": "Tco",
+   "op": "<=",
+   "value": "70",
+   "why": "water outlet <= 70 C (scaling)"
+  },
+  {
+   "quantity": "dp",
+   "op": "<=",
+   "value": "1.0",
+   "why": "oil-side pressure drop <= 1.0 bar"
+  }
+ ],
+ "objective": {
+  "minimize": "HX.price",
+  "why": "cheapest model that holds everywhere"
+ },
+ "catalog": {
+  "plates": {
+   "ground": "vendor catalog",
+   "items": [
+    {
+     "model": "HX-18",
+     "A": "3.2",
+     "Uc": "1150",
+     "dp0": "0.35",
+     "price": "1900"
+    },
+    {
+     "model": "HX-26",
+     "A": "4.6",
+     "Uc": "1100",
+     "dp0": "0.55",
+     "price": "2600"
+    },
+    {
+     "model": "HX-40",
+     "A": "7.0",
+     "Uc": "1050",
+     "dp0": "0.95",
+     "price": "3700"
+    },
+    {
+     "model": "HX-40T",
+     "A": "7.0",
+     "Uc": "1250",
+     "dp0": "1.30",
+     "price": "4400"
+    }
+   ],
+   "fields": {
+    "A": {
+     "unit": "m^2"
+    },
+    "Uc": {
+     "unit": "W/(m^2*K)"
+    },
+    "dp0": {
+     "unit": "bar"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,101 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "verdict": "EARNED",
+  "modes": [
+    "protection",
+    "life"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "design": {
+    "AN": {
+      "catalog": "anodes",
+      "m": {
+        "nominal": "32",
+        "tolerance": "0"
+      },
+      "Ea": {
+        "range": [
+          "3/2 (~1.5)",
+          "8/5 (~1.6)"
+        ]
+      },
+      "cap": {
+        "range": [
+          "1012",
+          "1100"
+        ]
+      },
+      "L": {
+        "nominal": "7/5 (~1.4)",
+        "tolerance": "0"
+      },
+      "d": {
+        "nominal": "1/4 (~0.25)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "130",
+        "tolerance": "0"
+      },
+      "grade": "Mg-S-32"
+    },
+    "CNT": {
+      "catalog": "counts",
+      "N": {
+        "nominal": "4",
+        "tolerance": "0"
+      }
+    }
+  },
+  "per_mode": {
+    "protection": {
+      "guaranteed": {
+        "Esw": [
+          "47583798459974525998518133017/49517601571415210995964968960 (~0.960947)",
+          "56019380929071005444668396491/49517601571415210995964968960 (~1.1313)"
+        ],
+        "Esd": [
+          "168808247294497629649186620987/198070406285660843983859875840 (~0.852264)",
+          "4834202558303102682466748321/4951760157141521099596496896 (~0.976259)"
+        ]
+      },
+      "how": {
+        "Esw": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — unique root, monotone in every parameter: its range spans the corner roots (bracketed exactly); checker's own enclosure ['47583798459974525998518133017/49517601571415210995964968960 (~0.960947)', '56019380929071005444668396491/49517601571415210995964968960 (~1.1313)']",
+        "Esd": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — unique root, monotone in every parameter: its range spans the corner roots (bracketed exactly); checker's own enclosure ['~0.852263851325 (~0.852264)', '4834202558303102682466748321/4951760157141521099596496896 (~0.976259)']"
+      }
+    },
+    "life": {
+      "guaranteed": {
+        "Life": [
+          "~366460.239218 (an exact fraction of 99 digits)",
+          "~551265.068765 (an exact fraction of 97 digits)"
+        ]
+      },
+      "how": {
+        "Life": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~366460.239218 (~366460)', '~551265.068765 (~551265)']"
+      }
+    }
+  },
+  "objective": {
+    "minimize": "CNT.N*(AN.price + Cinst)",
+    "value": "680",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode"
+  },
+  "excluded_by_where": 419,
+  "designs": [
+    {
+      "design": "AN=anodes(grade=Mg-S-32, m=32, Ea=[3/2,8/5], cap=[1012,1100], L=7/5, d=1/4, price=130); CNT=counts(N=4)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  }
+}
+
+real	0m3.606s
+user	0m3.564s
+sys	0m0.027s

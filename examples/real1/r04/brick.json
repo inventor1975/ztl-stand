@@ -1,0 +1,153 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "Fr": {
+   "role": "given",
+   "value": "4000",
+   "unit": "N",
+   "why": "radial load, source example 6"
+  },
+  "Fa": {
+   "role": "given",
+   "value": "2400",
+   "unit": "N",
+   "why": "axial load, source example 6"
+  },
+  "n": {
+   "role": "given",
+   "value": "1000",
+   "unit": "rpm",
+   "why": "speed"
+  },
+  "Lreq": {
+   "role": "given",
+   "value": "15000",
+   "unit": "h",
+   "why": "required L10h"
+  },
+  "Mrev": {
+   "role": "given",
+   "value": "1000000",
+   "unit": "",
+   "why": "10^6 revolutions, the unit of L10"
+  },
+  "Xf": {
+   "role": "given",
+   "value": "0.56",
+   "unit": "",
+   "why": "ISO 281 X when Fa/Fr > e (deep groove)"
+  },
+  "Pr": {
+   "role": "derived",
+   "unit": "N",
+   "why": "dynamic equivalent radial load"
+  },
+  "L10h": {
+   "role": "derived",
+   "unit": "h",
+   "why": "basic rating life, 90% reliability"
+  },
+  "zz": {
+   "role": "derived",
+   "unit": "",
+   "why": "f0*Fa/C0r"
+  },
+  "ee": {
+   "role": "derived",
+   "unit": "",
+   "why": "ISO e, interpolated"
+  },
+  "Yy": {
+   "role": "derived",
+   "unit": "",
+   "why": "ISO Y, interpolated"
+  }
+ },
+ "slots": {
+  "B": {
+   "from": [
+    "deep_groove_63"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "zz == B.f0*Fa/B.C0r",
+   "source": "catalogue: f0*Fa/C0r"
+  },
+  {
+   "zfl": "ee == table(zz, 0.172, 0.19, 0.345, 0.22, 0.689, 0.26, 1.03, 0.28, 1.38, 0.30, 2.07, 0.34, 3.45, 0.38, 5.17, 0.42, 6.89, 0.44)",
+   "source": "ISO 281 / vendor table of e, linear interpolation (the source interpolates proportionally)"
+  },
+  {
+   "zfl": "Yy == table(zz, 0.172, 2.30, 0.345, 1.99, 0.689, 1.71, 1.03, 1.55, 1.38, 1.45, 2.07, 1.31, 3.45, 1.15, 5.17, 1.04, 6.89, 1.00)",
+   "source": "ISO 281 / vendor table of Y, linear interpolation"
+  },
+  {
+   "zfl": "Pr == if(Fa > ee*Fr, Xf*Fr + Yy*Fa, Fr)",
+   "source": "P = X Fr + Y Fa if Fa/Fr > e, else Fr"
+  },
+  {
+   "zfl": "L10h == Mrev*pow(B.Cr/Pr, 3)/n",
+   "source": "basic rating life L10 = (C/P)^3 million rev (ball bearing)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "L10h",
+   "op": ">=",
+   "value": "Lreq",
+   "why": "required life 15000 h"
+  }
+ ],
+ "objective": {
+  "minimize": "B.bore",
+  "why": "smallest bearing that satisfies the life"
+ },
+ "report": "all",
+ "catalog": {
+  "deep_groove_63": {
+   "items": [
+    {
+     "bore": "35",
+     "Cr": "41.7",
+     "C0r": "19.3",
+     "f0": "13.2",
+     "name": "6307"
+    },
+    {
+     "bore": "40",
+     "Cr": "50.9",
+     "C0r": "24.0",
+     "f0": "13.2",
+     "name": "6308"
+    },
+    {
+     "bore": "45",
+     "Cr": "61.1",
+     "C0r": "29.5",
+     "f0": "13.3",
+     "name": "6309"
+    }
+   ],
+   "fields": {
+    "bore": {
+     "unit": "mm"
+    },
+    "Cr": {
+     "unit": "kN"
+    },
+    "C0r": {
+     "unit": "kN"
+    },
+    "f0": {
+     "unit": ""
+    },
+    "name": {
+     "unit": ""
+    }
+   },
+   "ground": "Koyo/JTEKT catalogue (6309 Cr inferred, see PROBLEM.md)"
+  }
+ }
+}

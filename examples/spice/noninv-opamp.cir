@@ -1,0 +1,6 @@
+Non-inverting amplifier, gain 10 (an op-amp as a VCVS with open-loop gain 1e5)
+V1 in 0 1
+E1 out 0 in fb 100k
+R1 fb 0 1k
+R2 out fb 9k
+.end

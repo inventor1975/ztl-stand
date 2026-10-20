@@ -1,0 +1,27 @@
+R-2R ladder DAC (voltage mode), 12 bits, code 2650 (0xA5A): the output is the MSB node, unloaded; every resistor and the reference 0.1%
+vref ref 0 10
+rterm n0 0 20k
+rb0 n0 0 20k
+rs0 n0 n1 10k
+rb1 n1 ref 20k
+rs1 n1 n2 10k
+rb2 n2 0 20k
+rs2 n2 n3 10k
+rb3 n3 ref 20k
+rs3 n3 n4 10k
+rb4 n4 ref 20k
+rs4 n4 n5 10k
+rb5 n5 0 20k
+rs5 n5 n6 10k
+rb6 n6 ref 20k
+rs6 n6 n7 10k
+rb7 n7 0 20k
+rs7 n7 n8 10k
+rb8 n8 0 20k
+rs8 n8 n9 10k
+rb9 n9 ref 20k
+rs9 n9 n10 10k
+rb10 n10 0 20k
+rs10 n10 n11 10k
+rb11 n11 ref 20k
+.end

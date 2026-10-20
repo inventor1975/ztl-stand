@@ -1,0 +1,412 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "verdict": "EARNED",
+  "modes": [
+    "protection",
+    "life"
+  ],
+  "designs_tried": 39,
+  "undecided": 0,
+  "design": {
+    "AN": {
+      "catalog": "anodes",
+      "m": {
+        "nominal": "32",
+        "tolerance": "0"
+      },
+      "Ea": {
+        "range": [
+          "3/2 (~1.5)",
+          "8/5 (~1.6)"
+        ]
+      },
+      "cap": {
+        "range": [
+          "1012",
+          "1100"
+        ]
+      },
+      "L": {
+        "nominal": "7/5 (~1.4)",
+        "tolerance": "0"
+      },
+      "d": {
+        "nominal": "1/4 (~0.25)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "130",
+        "tolerance": "0"
+      },
+      "grade": "Mg-S-32"
+    },
+    "CNT": {
+      "catalog": "counts",
+      "N": {
+        "nominal": "4",
+        "tolerance": "0"
+      }
+    }
+  },
+  "per_mode": {
+    "protection": {
+      "guaranteed": {
+        "Esw": [
+          "47583798459974525998518133017/49517601571415210995964968960 (~0.960947)",
+          "56019380929071005444668396491/49517601571415210995964968960 (~1.1313)"
+        ],
+        "Esd": [
+          "168808247294497629649186620987/198070406285660843983859875840 (~0.852264)",
+          "4834202558303102682466748321/4951760157141521099596496896 (~0.976259)"
+        ]
+      },
+      "how": {
+        "Esw": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — unique root, monotone in every parameter: its range spans the corner roots (bracketed exactly); checker's own enclosure ['47583798459974525998518133017/49517601571415210995964968960 (~0.960947)', '56019380929071005444668396491/49517601571415210995964968960 (~1.1313)']",
+        "Esd": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — unique root, monotone in every parameter: its range spans the corner roots (bracketed exactly); checker's own enclosure ['~0.852263851325 (~0.852264)', '4834202558303102682466748321/4951760157141521099596496896 (~0.976259)']"
+      }
+    },
+    "life": {
+      "guaranteed": {
+        "Life": [
+          "~366460.239218 (an exact fraction of 99 digits)",
+          "~551265.068765 (an exact fraction of 97 digits)"
+        ]
+      },
+      "how": {
+        "Life": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~366460.239218 (~366460)', '~551265.068765 (~551265)']"
+      }
+    }
+  },
+  "objective": {
+    "minimize": "CNT.N*(AN.price + Cinst)",
+    "value": "680",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode",
+    "ties": {
+      "same_objective": 1,
+      "first": [
+        "AN=anodes(grade=Mg-S-8, m=8, Ea=[3/2,8/5], cap=[1012,1100], L=3/5, d=3/20, price=45); CNT=counts(N=8)"
+      ],
+      "note": "these cost the same; they were not all judged — \"report\": \"all\" shows which pass"
+    }
+  },
+  "designs": [
+    {
+      "design": "AN=anodes(grade=Mg-S-8, m=8, Ea=[3/2,8/5], cap=[1012,1100], L=3/5, d=3/20, price=45); CNT=counts(N=1)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.00955807251427 (an exact fraction of 155 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-8, m=8, Ea=[17/10,9/5], cap=[1058,1150], L=3/5, d=3/20, price=52); CNT=counts(N=1)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0757647604313 (an exact fraction of 510 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Zn-12, m=12, Ea=[21/20,23/20], cap=[3588/5,780], L=4/5, d=3/25, price=60); CNT=counts(N=1)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0569056852826 (an exact fraction of 154 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-17, m=17, Ea=[3/2,8/5], cap=[1012,1100], L=1, d=1/5, price=78); CNT=counts(N=1)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0685996326079 (an exact fraction of 505 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-17, m=17, Ea=[17/10,9/5], cap=[1058,1150], L=1, d=1/5, price=90); CNT=counts(N=1)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0564942642493 (an exact fraction of 543 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Zn-25, m=25, Ea=[21/20,23/20], cap=[3588/5,780], L=6/5, d=4/25, price=110); CNT=counts(N=1)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0416549036335 (an exact fraction of 156 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-8, m=8, Ea=[3/2,8/5], cap=[1012,1100], L=3/5, d=3/20, price=45); CNT=counts(N=2)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0588385017293 (an exact fraction of 548 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-32, m=32, Ea=[3/2,8/5], cap=[1012,1100], L=7/5, d=1/4, price=130); CNT=counts(N=1)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0550131889798 (an exact fraction of 544 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-8, m=8, Ea=[17/10,9/5], cap=[1058,1150], L=3/5, d=3/20, price=52); CNT=counts(N=2)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0465927508222 (an exact fraction of 565 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Zn-12, m=12, Ea=[21/20,23/20], cap=[3588/5,780], L=4/5, d=3/25, price=60); CNT=counts(N=2)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0314969122904 (an exact fraction of 156 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-17, m=17, Ea=[3/2,8/5], cap=[1012,1100], L=1, d=1/5, price=78); CNT=counts(N=2)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0399410521367 (an exact fraction of 593 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-8, m=8, Ea=[3/2,8/5], cap=[1012,1100], L=3/5, d=3/20, price=45); CNT=counts(N=3)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0418842039712 (an exact fraction of 573 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-17, m=17, Ea=[17/10,9/5], cap=[1058,1150], L=1, d=1/5, price=90); CNT=counts(N=2)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0274139465427 (an exact fraction of 608 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-8, m=8, Ea=[17/10,9/5], cap=[1058,1150], L=3/5, d=3/20, price=52); CNT=counts(N=3)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0293866307841 (an exact fraction of 614 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Zn-12, m=12, Ea=[21/20,23/20], cap=[3588/5,780], L=4/5, d=3/25, price=60); CNT=counts(N=3)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0167221578456 (an exact fraction of 161 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Zn-25, m=25, Ea=[21/20,23/20], cap=[3588/5,780], L=6/5, d=4/25, price=110); CNT=counts(N=2)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0165833046564 (an exact fraction of 164 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-8, m=8, Ea=[3/2,8/5], cap=[1012,1100], L=3/5, d=3/20, price=45); CNT=counts(N=4)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0298196266966 (an exact fraction of 593 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-32, m=32, Ea=[3/2,8/5], cap=[1012,1100], L=7/5, d=1/4, price=130); CNT=counts(N=2)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0264498890758 (an exact fraction of 617 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-17, m=17, Ea=[3/2,8/5], cap=[1012,1100], L=1, d=1/5, price=78); CNT=counts(N=3)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0230722734845 (an exact fraction of 618 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-8, m=8, Ea=[17/10,9/5], cap=[1058,1150], L=3/5, d=3/20, price=52); CNT=counts(N=4)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.017136381596 (an exact fraction of 636 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-17, m=17, Ea=[17/10,9/5], cap=[1058,1150], L=1, d=1/5, price=90); CNT=counts(N=3)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0102827328327 (an exact fraction of 611 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Zn-12, m=12, Ea=[21/20,23/20], cap=[3588/5,780], L=4/5, d=3/25, price=60); CNT=counts(N=4)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.00631063041894 (an exact fraction of 175 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-8, m=8, Ea=[3/2,8/5], cap=[1012,1100], L=3/5, d=3/20, price=45); CNT=counts(N=5)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0204502844996 (an exact fraction of 608 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Zn-25, m=25, Ea=[21/20,23/20], cap=[3588/5,780], L=6/5, d=4/25, price=110); CNT=counts(N=3)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.00204520180822 (an exact fraction of 180 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-8, m=8, Ea=[17/10,9/5], cap=[1058,1150], L=3/5, d=3/20, price=52); CNT=counts(N=5)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.00761894980166 (an exact fraction of 622 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-17, m=17, Ea=[3/2,8/5], cap=[1012,1100], L=1, d=1/5, price=78); CNT=counts(N=4)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0110824051027 (an exact fraction of 615 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Zn-12, m=12, Ea=[21/20,23/20], cap=[3588/5,780], L=4/5, d=3/25, price=60); CNT=counts(N=5)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0667151847002 (an exact fraction of 495 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-8, m=8, Ea=[3/2,8/5], cap=[1012,1100], L=3/5, d=3/20, price=45); CNT=counts(N=6)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0127924439154 (an exact fraction of 617 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-32, m=32, Ea=[3/2,8/5], cap=[1012,1100], L=7/5, d=1/4, price=130); CNT=counts(N=3)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.00965793912278 (an exact fraction of 592 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-17, m=17, Ea=[17/10,9/5], cap=[1058,1150], L=1, d=1/5, price=90); CNT=counts(N=4)",
+      "verdict": "REFUTED",
+      "mode": "life",
+      "fails": "R2: 30 years x 8760 h, worst case over cap, Ea, beta",
+      "by": "~33924.5973718 (an exact fraction of 602 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-8, m=8, Ea=[17/10,9/5], cap=[1058,1150], L=3/5, d=3/20, price=52); CNT=counts(N=6)",
+      "verdict": "REFUTED",
+      "mode": "life",
+      "fails": "R2: 30 years x 8760 h, worst case over cap, Ea, beta",
+      "by": "~96550.666058 (an exact fraction of 608 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-17, m=17, Ea=[3/2,8/5], cap=[1012,1100], L=1, d=1/5, price=78); CNT=counts(N=5)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.00178125432808 (an exact fraction of 536 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-8, m=8, Ea=[3/2,8/5], cap=[1012,1100], L=3/5, d=3/20, price=45); CNT=counts(N=7)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.00631906399145 (an exact fraction of 597 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Zn-12, m=12, Ea=[21/20,23/20], cap=[3588/5,780], L=4/5, d=3/25, price=60); CNT=counts(N=6)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0598262214162 (an exact fraction of 490 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Zn-25, m=25, Ea=[21/20,23/20], cap=[3588/5,780], L=6/5, d=4/25, price=110); CNT=counts(N=4)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.0598763695954 (an exact fraction of 489 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-8, m=8, Ea=[17/10,9/5], cap=[1058,1150], L=3/5, d=3/20, price=52); CNT=counts(N=7)",
+      "verdict": "REFUTED",
+      "mode": "life",
+      "fails": "R2: 30 years x 8760 h, worst case over cap, Ea, beta",
+      "by": "~88645.8144098 (an exact fraction of 626 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-H-17, m=17, Ea=[17/10,9/5], cap=[1058,1150], L=1, d=1/5, price=90); CNT=counts(N=5)",
+      "verdict": "REFUTED",
+      "mode": "life",
+      "fails": "R2: 30 years x 8760 h, worst case over cap, Ea, beta",
+      "by": "~17417.5920476 (an exact fraction of 628 digits)",
+      "unit": "h"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-8, m=8, Ea=[3/2,8/5], cap=[1012,1100], L=3/5, d=3/20, price=45); CNT=counts(N=8)",
+      "verdict": "REFUTED",
+      "mode": "protection",
+      "fails": "R1 dry: 0.85 <= Es <= 1.18 V",
+      "by": "~0.000714525902649 (an exact fraction of 479 digits)",
+      "unit": "V"
+    },
+    {
+      "design": "AN=anodes(grade=Mg-S-32, m=32, Ea=[3/2,8/5], cap=[1012,1100], L=7/5, d=1/4, price=130); CNT=counts(N=4)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 38,
+    "EARNED": 1
+  }
+}
+
+real	1m42.048s
+user	1m41.890s
+sys	0m0.146s

@@ -1,0 +1,634 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL d606f40",
+  "designs_tried": 67,
+  "failed_at_nominal": 57,
+  "judged": 10,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=0); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "13/25 (~0.52)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=0); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "13/25 (~0.52)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=0); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "13/25 (~0.52)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=1); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.492043311321 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=1); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.484055685985 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=2); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.464086622643 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=3); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.436129933964 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=2); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.448111371969 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=1); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.468080435311 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=4); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.408173245286 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=3); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.412167057954 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=5); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.380216556607 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=6); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.352259867928 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=4); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.376222743939 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=2); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.416160870622 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=7); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.32430317925 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=5); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.340278429923 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=8); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.296346490571 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=9); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.268389801892 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=6); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.304334115908 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=3); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.364241305933 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=10); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.240433113214 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=7); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.268389801892 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=0); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "8/25 (~0.32)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=0); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "8/25 (~0.32)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=0); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "8/25 (~0.32)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=1); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.27207424798 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=8); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.232445487877 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=4); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.312321741245 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=1); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.258381175974 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=2); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.224148495959 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=9); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.196501173862 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=3); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.176222743939 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=2); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.196762351947 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=1); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.230995031962 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=4); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.128296991918 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=10); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.160556859846 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=5); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.260402176556 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=3); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.135143527921 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=5); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0803712398976 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=6); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0324454878771 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=4); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0735247038947 (an exact fraction of 64 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=2); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.141990063924 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=7); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.13295807443 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=6); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.208482611867 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=5); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0119058798683 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=8); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.100523513634 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=9); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0680889528387 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=6); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.109790531005 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=3); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0529850958859 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=0); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "11/50 (~0.22)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=10); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.035654392043 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=0); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "11/50 (~0.22)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=0); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "11/50 (~0.22)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=7); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.156563047178 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=1); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.162089716309 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=7); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0680889528387 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=1); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.145543920968 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=2); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.104179432617 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=8); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0263873746728 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=4); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.119057548375 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=3); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0462691489258 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=2); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0710878419364 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=1); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.112452330287 (an exact fraction of 67 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S3, LC=5000, STF=650, price=38); NS=counts(N=8); MT=mats(mat=M0 none, mu=[3/10,2/5], price=0)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.104643482489 (an exact fraction of 66 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S1, LC=1500, STF=350, price=12); NS=counts(N=4); MT=mats(mat=M2 premium, mu=[7/10,3/4], price=260)",
+      "verdict": "REFUTED",
+      "fails": "R1 forward holds",
+      "by_at_witness": "~0.0748785995855 (an exact fraction of 65 digits)",
+      "unit": ""
+    },
+    {
+      "design": "ST=straps(grade=S2, LC=2500, STF=450, price=19); NS=counts(N=9); MT=mats(mat=M1 rubber, mu=[11/20,13/20], price=140)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Mfwd": [
+          "0",
+          "756854982458544161852913976301101/662230726886131150724216442060800 (~1.14289)"
+        ],
+        "Mrear": [
+          "130031576607408928854443404454031/885109134665419472939350648422400 (~0.14691)",
+          "955524200524383507070178908919341/662230726886131150724216442060800 (~1.44289)"
+        ],
+        "Mside": [
+          "130031576607408928854443404454031/885109134665419472939350648422400 (~0.14691)",
+          "955524200524383507070178908919341/662230726886131150724216442060800 (~1.44289)"
+        ],
+        "NS_N_req": [
+          "9",
+          "9"
+        ],
+        "Tp": [
+          "765/2 (~382.5)",
+          "1035/2 (~517.5)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 66,
+    "EARNED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "NS.N*ST.price + MT.price",
+    "value": "311",
+    "unit": "EUR",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "ST": {
+      "catalog": "straps",
+      "LC": {
+        "nominal": "2500",
+        "tolerance": "0"
+      },
+      "STF": {
+        "nominal": "450",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "19",
+        "tolerance": "0"
+      },
+      "grade": "S2"
+    },
+    "NS": {
+      "catalog": "counts",
+      "N": {
+        "nominal": "9",
+        "tolerance": "0"
+      }
+    },
+    "MT": {
+      "catalog": "mats",
+      "mu": {
+        "range": [
+          "11/20 (~0.55)",
+          "13/20 (~0.65)"
+        ]
+      },
+      "price": {
+        "nominal": "140",
+        "tolerance": "0"
+      },
+      "mat": "M1 rubber"
+    }
+  },
+  "guaranteed": {
+    "Mfwd": [
+      "0",
+      "756854982458544161852913976301101/662230726886131150724216442060800 (~1.14289)"
+    ],
+    "Mrear": [
+      "130031576607408928854443404454031/885109134665419472939350648422400 (~0.14691)",
+      "955524200524383507070178908919341/662230726886131150724216442060800 (~1.44289)"
+    ],
+    "Mside": [
+      "130031576607408928854443404454031/885109134665419472939350648422400 (~0.14691)",
+      "955524200524383507070178908919341/662230726886131150724216442060800 (~1.44289)"
+    ],
+    "NS_N_req": [
+      "9",
+      "9"
+    ],
+    "Tp": [
+      "765/2 (~382.5)",
+      "1035/2 (~517.5)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Mfwd": "",
+    "Mrear": "",
+    "Mside": "",
+    "NS_N_req": "",
+    "Tp": "10N"
+  },
+  "guaranteed_ends": {
+    "Mfwd": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+  },
+  "how": {
+    "Mfwd": "ZTL, certificate checked exactly (11 pieces; found by the stand's search, the extreme may lie inside the box)",
+    "Mrear": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Mside": "ZTL, interval reading of the definition (sound, may be wide)",
+    "NS_N_req": "ZTL, outer range",
+    "Tp": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "Mfwd",
+      "op": ">=",
+      "value": "0",
+      "why": "R1 forward holds"
+    },
+    {
+      "quantity": "Mrear",
+      "op": ">=",
+      "value": "0",
+      "why": "R1 rearward holds"
+    },
+    {
+      "quantity": "Mside",
+      "op": ">=",
+      "value": "0",
+      "why": "R1 sideways holds"
+    },
+    {
+      "quantity": "NS_N_req",
+      "op": "<=",
+      "value": "10",
+      "why": "R2 at most 10 anchor pairs"
+    },
+    {
+      "quantity": "Tp",
+      "op": "<=",
+      "value": "ST.LC/2",
+      "why": "R3 1.15 STF <= 0.5 LC"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "NS_N_req = 9 by exact elimination (credit)",
+    "Tp -> [3825, 5175] by [Tp == f*ST__STF]",
+    "Fv -> [9989352255672768939862060546875/2900095460895869832697741312, 14496609015179398216241455078125/799409375767903368812429312] by [Fv == f*ST__STF*(tan(al)/sqrt(1 + tan(al)*tan(al)))*(1 + kf)], interval reading, sound, may be wider than the truth (credit)",
+    "Mfwd -> [-135501163792216913027361790072689/885109134665419472939350648422400, 756854982458544161852913976301101/662230726886131150724216442060800] by [Mfwd == MT__mu*(8/10 + NS__N*Fv/(m*g)) - 8/10], interval reading, sound, may be wider than the truth (credit)",
+    "Mrear -> [130031576607408928854443404454031/885109134665419472939350648422400, 955524200524383507070178908919341/662230726886131150724216442060800] by [Mrear == MT__mu*(8/10 + NS__N*Fv/(m*g)) - 5/10], interval reading, sound, may be wider than the truth (credit)",
+    "Mside -> [130031576607408928854443404454031/885109134665419472939350648422400, 955524200524383507070178908919341/662230726886131150724216442060800] by [Mside == MT__mu*(8/10 + NS__N*Fv/(m*g)) - 5/10], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

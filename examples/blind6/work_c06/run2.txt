@@ -1,0 +1,5 @@
+[stand] 1/36 designs, 0 s: 
+
+real	15m24.331s
+user	13m57.569s
+sys	1m26.741s

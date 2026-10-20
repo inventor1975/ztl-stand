@@ -1,0 +1,690 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "hw": {
+   "role": "given",
+   "value": "2184",
+   "unit": "h",
+   "why": "winter hours per year"
+  },
+  "Pw": {
+   "role": "given",
+   "range": [
+    "520",
+    "600"
+   ],
+   "unit": "kW",
+   "why": "winter active load, year 1"
+  },
+  "pfw": {
+   "role": "given",
+   "range": [
+    "0.80",
+    "0.86"
+   ],
+   "unit": "",
+   "why": "winter uncorrected power factor"
+  },
+  "hsp": {
+   "role": "given",
+   "value": "2208",
+   "unit": "h",
+   "why": "spring hours per year"
+  },
+  "Psp": {
+   "role": "given",
+   "range": [
+    "400",
+    "470"
+   ],
+   "unit": "kW",
+   "why": "spring active load, year 1"
+  },
+  "pfsp": {
+   "role": "given",
+   "range": [
+    "0.82",
+    "0.88"
+   ],
+   "unit": "",
+   "why": "spring uncorrected power factor"
+  },
+  "hsu": {
+   "role": "given",
+   "value": "2208",
+   "unit": "h",
+   "why": "summer hours per year"
+  },
+  "Psu": {
+   "role": "given",
+   "range": [
+    "330",
+    "400"
+   ],
+   "unit": "kW",
+   "why": "summer active load, year 1"
+  },
+  "pfsu": {
+   "role": "given",
+   "range": [
+    "0.82",
+    "0.88"
+   ],
+   "unit": "",
+   "why": "summer uncorrected power factor"
+  },
+  "hau": {
+   "role": "given",
+   "value": "2160",
+   "unit": "h",
+   "why": "autumn hours per year"
+  },
+  "Pau": {
+   "role": "given",
+   "range": [
+    "430",
+    "500"
+   ],
+   "unit": "kW",
+   "why": "autumn active load, year 1"
+  },
+  "pfau": {
+   "role": "given",
+   "range": [
+    "0.80",
+    "0.86"
+   ],
+   "unit": "",
+   "why": "autumn uncorrected power factor"
+  },
+  "Pn": {
+   "role": "given",
+   "range": [
+    "60",
+    "80"
+   ],
+   "unit": "kW",
+   "why": "summer night light load"
+  },
+  "pfn": {
+   "role": "given",
+   "range": [
+    "0.80",
+    "0.86"
+   ],
+   "unit": "",
+   "why": "summer night pf"
+  },
+  "Tar": {
+   "role": "given",
+   "range": [
+    "0.09",
+    "0.14"
+   ],
+   "unit": "EUR/kWh",
+   "why": "loss energy tariff, constant over 30 years"
+  },
+  "kb": {
+   "role": "given",
+   "value": "2.5",
+   "unit": "W/kW",
+   "why": "bank dissipation 2.5 W per kvar (kvar written as kW)"
+  },
+  "Mmax": {
+   "role": "given",
+   "value": "3000",
+   "unit": "kg",
+   "why": "floor loading"
+  },
+  "Lw": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "LYw": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "S30w": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "dU30w": {
+   "role": "derived",
+   "unit": "%"
+  },
+  "Lsp": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "LYsp": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "S30sp": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "dU30sp": {
+   "role": "derived",
+   "unit": "%"
+  },
+  "Lsu": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "LYsu": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "S30su": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "dU30su": {
+   "role": "derived",
+   "unit": "%"
+  },
+  "Lau": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "LYau": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "S30au": {
+   "role": "derived",
+   "unit": "kW"
+  },
+  "dU30au": {
+   "role": "derived",
+   "unit": "%"
+  },
+  "E1": {
+   "role": "derived",
+   "unit": "kWh"
+  },
+  "Ewt": {
+   "role": "derived",
+   "unit": "kWh"
+  },
+  "PV": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "Tot": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "Mass": {
+   "role": "derived",
+   "unit": "kg"
+  },
+  "dUn": {
+   "role": "derived",
+   "unit": "%"
+  }
+ },
+ "slots": {
+  "T": {
+   "from": [
+    "cls_S_standard",
+    "cls_L_lowloss",
+    "cls_A_amorphous"
+   ]
+  },
+  "B": {
+   "from": [
+    "banks"
+   ]
+  }
+ },
+ "define": {
+  "Qw": "Pw*sqrt(1 - pfw^2)/pfw",
+  "Qsp": "Psp*sqrt(1 - pfsp^2)/pfsp",
+  "Qsu": "Psu*sqrt(1 - pfsu^2)/pfsu",
+  "Qau": "Pau*sqrt(1 - pfau^2)/pfau",
+  "Qn": "Pn*sqrt(1 - pfn^2)/pfn",
+  "A0": "(1 - pow(1/1.03, 30))/(1 - 1/1.03)/1.03",
+  "A1": "(1 - pow(1.012/1.03, 30))/(1 - 1.012/1.03)/1.03",
+  "A2": "(1 - pow(1.012*1.012/1.03, 30))/(1 - 1.012*1.012/1.03)/1.03",
+  "g30": "pow(1.012, 29)",
+  "rr": "T.Pk/T.Sn",
+  "xx": "sqrt(T.uk^2 - rr^2)"
+ },
+ "laws": [
+  {
+   "zfl": "Lw == T.P0 + T.Pk*(Pw^2 + (Qw - B.Qc)^2)/T.Sn^2 + kb*B.Qc",
+   "source": "seasonal loss P0+Pk(S/Sn)^2+2.5Qc, year 1"
+  },
+  {
+   "zfl": "LYw == A0*(T.P0 + kb*B.Qc) + T.Pk/T.Sn^2*(A2*(Pw^2 + Qw^2) - 2*A1*Qw*B.Qc + A0*B.Qc^2)",
+   "source": "sum over y of (loss_y/1.03^y); S_y^2 = g^2(P^2+Q^2) - 2 g Q Qc + Qc^2, g=1.012^(y-1) (hand algebra)"
+  },
+  {
+   "zfl": "S30w == sqrt((g30*Pw)^2 + (g30*Qw - B.Qc)^2)",
+   "source": "S = sqrt(P^2+(Q-Qc)^2), year 30"
+  },
+  {
+   "zfl": "dU30w == g30*Pw/T.Sn*rr + (g30*Qw - B.Qc)/T.Sn*xx",
+   "source": "delta_U = p r + q x, year 30"
+  },
+  {
+   "zfl": "Lsp == T.P0 + T.Pk*(Psp^2 + (Qsp - B.Qc)^2)/T.Sn^2 + kb*B.Qc",
+   "source": "seasonal loss P0+Pk(S/Sn)^2+2.5Qc, year 1"
+  },
+  {
+   "zfl": "LYsp == A0*(T.P0 + kb*B.Qc) + T.Pk/T.Sn^2*(A2*(Psp^2 + Qsp^2) - 2*A1*Qsp*B.Qc + A0*B.Qc^2)",
+   "source": "sum over y of (loss_y/1.03^y); S_y^2 = g^2(P^2+Q^2) - 2 g Q Qc + Qc^2, g=1.012^(y-1) (hand algebra)"
+  },
+  {
+   "zfl": "S30sp == sqrt((g30*Psp)^2 + (g30*Qsp - B.Qc)^2)",
+   "source": "S = sqrt(P^2+(Q-Qc)^2), year 30"
+  },
+  {
+   "zfl": "dU30sp == g30*Psp/T.Sn*rr + (g30*Qsp - B.Qc)/T.Sn*xx",
+   "source": "delta_U = p r + q x, year 30"
+  },
+  {
+   "zfl": "Lsu == T.P0 + T.Pk*(Psu^2 + (Qsu - B.Qc)^2)/T.Sn^2 + kb*B.Qc",
+   "source": "seasonal loss P0+Pk(S/Sn)^2+2.5Qc, year 1"
+  },
+  {
+   "zfl": "LYsu == A0*(T.P0 + kb*B.Qc) + T.Pk/T.Sn^2*(A2*(Psu^2 + Qsu^2) - 2*A1*Qsu*B.Qc + A0*B.Qc^2)",
+   "source": "sum over y of (loss_y/1.03^y); S_y^2 = g^2(P^2+Q^2) - 2 g Q Qc + Qc^2, g=1.012^(y-1) (hand algebra)"
+  },
+  {
+   "zfl": "S30su == sqrt((g30*Psu)^2 + (g30*Qsu - B.Qc)^2)",
+   "source": "S = sqrt(P^2+(Q-Qc)^2), year 30"
+  },
+  {
+   "zfl": "dU30su == g30*Psu/T.Sn*rr + (g30*Qsu - B.Qc)/T.Sn*xx",
+   "source": "delta_U = p r + q x, year 30"
+  },
+  {
+   "zfl": "Lau == T.P0 + T.Pk*(Pau^2 + (Qau - B.Qc)^2)/T.Sn^2 + kb*B.Qc",
+   "source": "seasonal loss P0+Pk(S/Sn)^2+2.5Qc, year 1"
+  },
+  {
+   "zfl": "LYau == A0*(T.P0 + kb*B.Qc) + T.Pk/T.Sn^2*(A2*(Pau^2 + Qau^2) - 2*A1*Qau*B.Qc + A0*B.Qc^2)",
+   "source": "sum over y of (loss_y/1.03^y); S_y^2 = g^2(P^2+Q^2) - 2 g Q Qc + Qc^2, g=1.012^(y-1) (hand algebra)"
+  },
+  {
+   "zfl": "S30au == sqrt((g30*Pau)^2 + (g30*Qau - B.Qc)^2)",
+   "source": "S = sqrt(P^2+(Q-Qc)^2), year 30"
+  },
+  {
+   "zfl": "dU30au == g30*Pau/T.Sn*rr + (g30*Qau - B.Qc)/T.Sn*xx",
+   "source": "delta_U = p r + q x, year 30"
+  },
+  {
+   "zfl": "E1 == hw*Lw + hsp*Lsp + hsu*Lsu + hau*Lau",
+   "source": "annual loss energy year 1 = sum hours*W"
+  },
+  {
+   "zfl": "Ewt == hw*LYw + hsp*LYsp + hsu*LYsu + hau*LYau",
+   "source": "discounted loss energy sum_y E_y/1.03^y"
+  },
+  {
+   "zfl": "PV == Tar*Ewt",
+   "source": "present value of losses = tariff * discounted energy"
+  },
+  {
+   "zfl": "Tot == T.price + B.price + PV",
+   "source": "lifetime cost"
+  },
+  {
+   "zfl": "Mass == T.mass",
+   "source": "catalog mass"
+  },
+  {
+   "zfl": "dUn == Pn/T.Sn*rr + (Qn - B.Qc)/T.Sn*xx",
+   "source": "delta_U = p r + q x, summer night, year 1"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "E1",
+   "op": "<=",
+   "value": "32000",
+   "why": "R1 year-1 annual loss energy"
+  },
+  {
+   "quantity": "S30w",
+   "op": "<=",
+   "value": "1.05*T.Sn",
+   "why": "R2 year-30 S <= 1.05 Sn, winter"
+  },
+  {
+   "quantity": "dU30w",
+   "op": "<=",
+   "value": "3.8",
+   "why": "R3 year-30 voltage drop <= 3.8 %, winter"
+  },
+  {
+   "quantity": "S30sp",
+   "op": "<=",
+   "value": "1.05*T.Sn",
+   "why": "R2 year-30 S <= 1.05 Sn, spring"
+  },
+  {
+   "quantity": "dU30sp",
+   "op": "<=",
+   "value": "3.8",
+   "why": "R3 year-30 voltage drop <= 3.8 %, spring"
+  },
+  {
+   "quantity": "S30su",
+   "op": "<=",
+   "value": "1.05*T.Sn",
+   "why": "R2 year-30 S <= 1.05 Sn, summer"
+  },
+  {
+   "quantity": "dU30su",
+   "op": "<=",
+   "value": "3.8",
+   "why": "R3 year-30 voltage drop <= 3.8 %, summer"
+  },
+  {
+   "quantity": "S30au",
+   "op": "<=",
+   "value": "1.05*T.Sn",
+   "why": "R2 year-30 S <= 1.05 Sn, autumn"
+  },
+  {
+   "quantity": "dU30au",
+   "op": "<=",
+   "value": "3.8",
+   "why": "R3 year-30 voltage drop <= 3.8 %, autumn"
+  },
+  {
+   "quantity": "dUn",
+   "op": ">=",
+   "value": "-0.8",
+   "why": "R4 summer-night voltage rise"
+  },
+  {
+   "quantity": "Mass",
+   "op": "<=",
+   "value": "Mmax",
+   "why": "R5 mass"
+  }
+ ],
+ "objective": {
+  "minimize": "Tot",
+  "case": "worst",
+  "unit": "kEUR",
+  "why": "minimum worst-case lifetime cost"
+ },
+ "catalog": {
+  "cls_S_standard": {
+   "items": [
+    {
+     "Sn": "400",
+     "uk": "4",
+     "P0": "650",
+     "Pk": "4600",
+     "price": "5.8",
+     "mass": "1150",
+     "cls": "S"
+    },
+    {
+     "Sn": "630",
+     "uk": "4",
+     "P0": "860",
+     "Pk": "6500",
+     "price": "7.4",
+     "mass": "1650",
+     "cls": "S"
+    },
+    {
+     "Sn": "800",
+     "uk": "6",
+     "P0": "1000",
+     "Pk": "7600",
+     "price": "8.8",
+     "mass": "2000",
+     "cls": "S"
+    },
+    {
+     "Sn": "1000",
+     "uk": "6",
+     "P0": "1150",
+     "Pk": "9500",
+     "price": "10.2",
+     "mass": "2350",
+     "cls": "S"
+    },
+    {
+     "Sn": "1250",
+     "uk": "6",
+     "P0": "1350",
+     "Pk": "11000",
+     "price": "12.4",
+     "mass": "2900",
+     "cls": "S"
+    },
+    {
+     "Sn": "1600",
+     "uk": "6",
+     "P0": "1650",
+     "Pk": "14000",
+     "price": "15.5",
+     "mass": "3600",
+     "cls": "S"
+    }
+   ],
+   "ground": "fictional catalog of problem 2",
+   "fields": {
+    "Sn": {
+     "unit": "kW"
+    },
+    "uk": {
+     "unit": "%"
+    },
+    "P0": {
+     "unit": "W"
+    },
+    "Pk": {
+     "unit": "W"
+    },
+    "price": {
+     "unit": "kEUR"
+    },
+    "mass": {
+     "unit": "kg"
+    }
+   }
+  },
+  "cls_L_lowloss": {
+   "items": [
+    {
+     "Sn": "400",
+     "uk": "4",
+     "P0": "430",
+     "Pk": "4600",
+     "price": "6.9",
+     "mass": "1240",
+     "cls": "L"
+    },
+    {
+     "Sn": "630",
+     "uk": "4",
+     "P0": "600",
+     "Pk": "6000",
+     "price": "8.8",
+     "mass": "1780",
+     "cls": "L"
+    },
+    {
+     "Sn": "800",
+     "uk": "6",
+     "P0": "700",
+     "Pk": "7000",
+     "price": "10.5",
+     "mass": "2160",
+     "cls": "L"
+    },
+    {
+     "Sn": "1000",
+     "uk": "6",
+     "P0": "770",
+     "Pk": "9000",
+     "price": "12.0",
+     "mass": "2540",
+     "cls": "L"
+    },
+    {
+     "Sn": "1250",
+     "uk": "6",
+     "P0": "950",
+     "Pk": "10500",
+     "price": "14.6",
+     "mass": "3130",
+     "cls": "L"
+    },
+    {
+     "Sn": "1600",
+     "uk": "6",
+     "P0": "1150",
+     "Pk": "13500",
+     "price": "18.0",
+     "mass": "3890",
+     "cls": "L"
+    }
+   ],
+   "ground": "fictional catalog of problem 2",
+   "fields": {
+    "Sn": {
+     "unit": "kW"
+    },
+    "uk": {
+     "unit": "%"
+    },
+    "P0": {
+     "unit": "W"
+    },
+    "Pk": {
+     "unit": "W"
+    },
+    "price": {
+     "unit": "kEUR"
+    },
+    "mass": {
+     "unit": "kg"
+    }
+   }
+  },
+  "cls_A_amorphous": {
+   "items": [
+    {
+     "Sn": "400",
+     "uk": "4",
+     "P0": "190",
+     "Pk": "4800",
+     "price": "8.4",
+     "mass": "1380",
+     "cls": "A"
+    },
+    {
+     "Sn": "630",
+     "uk": "4",
+     "P0": "260",
+     "Pk": "6700",
+     "price": "10.8",
+     "mass": "1980",
+     "cls": "A"
+    },
+    {
+     "Sn": "800",
+     "uk": "6",
+     "P0": "300",
+     "Pk": "7900",
+     "price": "12.8",
+     "mass": "2400",
+     "cls": "A"
+    },
+    {
+     "Sn": "1000",
+     "uk": "6",
+     "P0": "340",
+     "Pk": "9800",
+     "price": "14.6",
+     "mass": "2820",
+     "cls": "A"
+    },
+    {
+     "Sn": "1250",
+     "uk": "6",
+     "P0": "400",
+     "Pk": "11500",
+     "price": "17.5",
+     "mass": "3480",
+     "cls": "A"
+    },
+    {
+     "Sn": "1600",
+     "uk": "6",
+     "P0": "480",
+     "Pk": "14500",
+     "price": "22.0",
+     "mass": "4320",
+     "cls": "A"
+    }
+   ],
+   "ground": "fictional catalog of problem 2",
+   "fields": {
+    "Sn": {
+     "unit": "kW"
+    },
+    "uk": {
+     "unit": "%"
+    },
+    "P0": {
+     "unit": "W"
+    },
+    "Pk": {
+     "unit": "W"
+    },
+    "price": {
+     "unit": "kEUR"
+    },
+    "mass": {
+     "unit": "kg"
+    }
+   }
+  },
+  "banks": {
+   "items": [
+    {
+     "Qc": "0",
+     "price": "0",
+     "name": "none"
+    },
+    {
+     "Qc": "100",
+     "price": "1.2",
+     "name": "C100"
+    },
+    {
+     "Qc": "150",
+     "price": "1.7",
+     "name": "C150"
+    },
+    {
+     "Qc": "200",
+     "price": "2.2",
+     "name": "C200"
+    }
+   ],
+   "fields": {
+    "Qc": {
+     "unit": "kW"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,153 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "real round 2, s03: eCircuit Center amp+ADC error budget",
+ "quantities": {
+  "dT": {
+   "role": "given",
+   "value": "30",
+   "unit": "C",
+   "why": "max temperature change from 25 C",
+   "ground": "eCircuit Center EBA, amp+ADC page (conditions)"
+  },
+  "Knom": {
+   "role": "given",
+   "value": "5",
+   "unit": "",
+   "why": "nominal amplifier gain",
+   "ground": "eCircuit Center EBA, amp+ADC page (conditions)"
+  },
+  "R1g": {
+   "role": "given",
+   "value": "10",
+   "unit": "kohm",
+   "why": "R1",
+   "ground": "eCircuit Center EBA, amp+ADC page (conditions)"
+  },
+  "R2g": {
+   "role": "given",
+   "value": "40",
+   "unit": "kohm",
+   "why": "R2",
+   "ground": "eCircuit Center EBA, amp+ADC page (conditions)"
+  },
+  "t1": {
+   "role": "given",
+   "range": [
+    "-0.001",
+    "0.001"
+   ],
+   "unit": "",
+   "why": "R1 tolerance",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "t2": {
+   "role": "given",
+   "range": [
+    "-0.001",
+    "0.001"
+   ],
+   "unit": "",
+   "why": "R2 tolerance",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "c1": {
+   "role": "given",
+   "range": [
+    "-100",
+    "100"
+   ],
+   "unit": "ppm/C",
+   "why": "R1 tempco",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "c2": {
+   "role": "given",
+   "range": [
+    "-100",
+    "100"
+   ],
+   "unit": "ppm/C",
+   "why": "R2 tempco",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "ga": {
+   "role": "given",
+   "range": [
+    "-0.0005",
+    "0.0005"
+   ],
+   "unit": "",
+   "why": "ADC gain tolerance 2 LSB/4095 = 0.05 %",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "gc": {
+   "role": "given",
+   "range": [
+    "-20",
+    "20"
+   ],
+   "unit": "ppm/C",
+   "why": "ADC gain tempco 0.08 LSB/C = 20 ppm/C",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "vt": {
+   "role": "given",
+   "range": [
+    "-1",
+    "1"
+   ],
+   "unit": "",
+   "why": "Vref tolerance sign/scale u"
+  },
+  "vc": {
+   "role": "given",
+   "range": [
+    "-50",
+    "50"
+   ],
+   "unit": "ppm/C",
+   "why": "Vref tempco",
+   "ground": "eCircuit Center EBA, amp+ADC page (device error table)"
+  },
+  "Eg": {
+   "role": "derived",
+   "unit": "",
+   "why": "relative gain error of the chain"
+  },
+  "vtm": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "Vref tolerance magnitude searched by find (source: 0.5 %; the source suggests trying 0.1 %)"
+  }
+ },
+ "slots": {},
+ "define": {
+  "R1T": "R1g*(1+t1)*(1+c1*dT)",
+  "R2T": "R2g*(1+t2)*(1+c2*dT)"
+ },
+ "laws": [
+  {
+   "zfl": "Eg == (1 + R2T/R1T)/Knom*(1+ga)*(1+gc*dT)/((1+vt*vtm)*(1+vc*dT)) - 1",
+   "source": "gain = (1+R2/R1) * Kadc, Kadc = 4095/Vref, each with tolerance and tempco; relative to nominal"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Eg",
+   "op": "within",
+   "value": [
+    "-0.01",
+    "0.01"
+   ],
+   "why": "gain error budget 1 % of reading, source"
+  }
+ ],
+ "catalog": {},
+ "find": {
+  "largest": "vtm",
+  "from": "0",
+  "to": "0.005",
+  "precision": "0.00001"
+ }
+}

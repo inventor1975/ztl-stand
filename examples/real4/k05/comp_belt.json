@@ -1,0 +1,60 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "belt + drum: friction load torque at the drum (gearhead output) shaft",
+ "interface": {
+  "inputs": {},
+  "outputs": [
+   "TL"
+  ]
+ },
+ "quantities": {
+  "Wf": {
+   "role": "given",
+   "value": "30",
+   "unit": "lbf"
+  },
+  "mu": {
+   "role": "given",
+   "value": "0.3",
+   "unit": ""
+  },
+  "Dd": {
+   "role": "given",
+   "value": "4",
+   "unit": "in"
+  },
+  "etab": {
+   "role": "given",
+   "value": "0.9",
+   "unit": ""
+  },
+  "F": {
+   "role": "derived",
+   "unit": "lbf"
+  },
+  "TL": {
+   "role": "derived",
+   "unit": "lbf*in"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "F == mu*Wf",
+   "source": "sliding friction"
+  },
+  {
+   "zfl": "TL == F*Dd/(2*etab)",
+   "source": "tech ref"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "TL",
+   "op": ">=",
+   "value": "0",
+   "why": "placeholder rating"
+  }
+ ]
+}

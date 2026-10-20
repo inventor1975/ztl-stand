@@ -1,0 +1,52 @@
+import json,sys
+# generator for the c09 brick (my own scratch; the brick itself is the JSON)
+def brick(find=False, daN="10N"):
+    q = {
+     "m":  {"role":"given","range":["7600","8400"],"unit":"kg","ground":"weighbridge + packaging","why":"uncertain cargo mass"},
+     "g":  {"role":"given","value":"9.81","unit":"m/s^2","ground":"problem statement"},
+     "f":  {"role":"given","range":["0.85","1.15"],"unit":"","why":"actual / nominal pre-tension"},
+     "al": {"role":"given","range":["62","75"],"unit":"deg","why":"strap angle to the deck"},
+     "kf": {"role":"given","range":["0.85","1.00"],"unit":"","why":"friction transfer around the corners"},
+     "Fv": {"role":"derived","unit":"N"},
+     "Tp": {"role":"derived","unit":daN},
+     "Mfwd":{"role":"derived","unit":""},
+     "Mrear":{"role":"derived","unit":""},
+     "Mside":{"role":"derived","unit":""},
+    }
+    d = {
+     "stand":"ztl-stand/1",
+     "quantities":q,
+     "define":{"sa":"tan(al)/sqrt(1 + tan(al)*tan(al))"},
+     "slots":{"ST":{"from":["straps"]},"NS":{"from":["counts"]},"MT":{"from":["mats"]}},
+     "laws":[
+      {"zfl":"Fv == f*ST.STF*sa*(1 + kf)","source":"clamping force of one strap, Fv = STF_actual sin(alpha)(1+kf)"},
+      {"zfl":"Tp == f*ST.STF","source":"actual pre-tension = f x nominal STF"},
+      {"zfl":"Mfwd == MT.mu*(8/10 + NS.N*Fv/(m*g)) - 8/10","source":"forward c=0.80: mu(0.8mg+nFv) >= c m g, divided by m g (m>0): margin Mfwd = mu(0.8 + nFv/(mg)) - c"},
+      {"zfl":"Mrear == MT.mu*(8/10 + NS.N*Fv/(m*g)) - 5/10","source":"rearward c=0.50, divided by m g"},
+      {"zfl":"Mside == MT.mu*(8/10 + NS.N*Fv/(m*g)) - 5/10","source":"sideways c=0.50, divided by m g"},
+     ],
+     "requirements":[
+      {"quantity":"Mfwd","op":">=","value":"0","why":"R1 forward holds"},
+      {"quantity":"Mrear","op":">=","value":"0","why":"R1 rearward holds"},
+      {"quantity":"Mside","op":">=","value":"0","why":"R1 sideways holds"},
+      {"quantity":"NS.N","op":"<=","value":"10","why":"R2 at most 10 anchor pairs"},
+      {"quantity":"Tp","op":"<=","value":"ST.LC/2","why":"R3 1.15 STF <= 0.5 LC"},
+     ],
+     "objective":{"minimize":"NS.N*ST.price + MT.price","why":"n straps + mat"},
+     "catalog":{
+      "straps":{"ground":"problem statement","fields":{"LC":{"unit":daN},"STF":{"unit":daN},"price":{"unit":"EUR"}},
+        "items":[{"LC":"1500","STF":"350","price":"12","grade":"S1"},
+                 {"LC":"2500","STF":"450","price":"19","grade":"S2"},
+                 {"LC":"5000","STF":"650","price":"38","grade":"S3"}]},
+      "counts":{"integers":{"field":"N","from":"0","to":"10","unit":""}},
+      "mats":{"ground":"problem statement","fields":{"mu":{"unit":""},"price":{"unit":"EUR"}},
+        "items":[{"mu":{"range":["0.30","0.40"]},"price":"0","mat":"M0 none"},
+                 {"mu":{"range":["0.55","0.65"]},"price":"140","mat":"M1 rubber"},
+                 {"mu":{"range":["0.70","0.75"]},"price":"260","mat":"M2 premium"}]},
+     }}
+    if find:
+        d["find"]={"largest":"m","from":"7600","to":"40000","precision":"1"}
+    return d
+if __name__=="__main__":
+    out=sys.argv[1]; find=len(sys.argv)>2 and sys.argv[2]=="find"
+    json.dump(brick(find),open(out,"w"),indent=1)

@@ -1,0 +1,97 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "same as brick.json, but L is the unknown: largest length that still works (not published in the source; hand value 22.4 km)",
+ "quantities": {
+  "a": {
+   "role": "given",
+   "range": [
+    "0.3",
+    "0.5"
+   ],
+   "unit": "dB/km",
+   "ground": "source Table 1, attenuation per km, 1310 nm, Min..Max"
+  },
+  "C": {
+   "role": "given",
+   "range": [
+    "0.4",
+    "1"
+   ],
+   "unit": "dB",
+   "ground": "source Table 1, per optical connector, Min..Max"
+  },
+  "J": {
+   "role": "given",
+   "range": [
+    "0.02",
+    "0.2"
+   ],
+   "unit": "dB",
+   "ground": "source Table 1, per joint (splice), Min..Max"
+  },
+  "L": {
+   "role": "given",
+   "value": "0",
+   "unit": "km",
+   "why": "placeholder for find"
+  },
+  "M": {
+   "role": "given",
+   "value": "3",
+   "unit": "dB",
+   "ground": "source: system margin 'around 3 dB'"
+  },
+  "Tx": {
+   "role": "given",
+   "range": [
+    "-3",
+    "0"
+   ],
+   "unit": "dB",
+   "why": "dBm, written as dB; source: card Tx -3 to 0 dBm at 1310 nm"
+  },
+  "Sens": {
+   "role": "given",
+   "range": [
+    "-27",
+    "-20"
+   ],
+   "unit": "dB",
+   "why": "dBm, written as dB; source: card Rx -20 to -27 dBm at 1310 nm"
+  },
+  "TA": {
+   "role": "derived",
+   "unit": "dB"
+  },
+  "Mg": {
+   "role": "derived",
+   "unit": "dB"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "TA == 2*C + 4*J + L*a + M",
+   "source": "source formula TA = n*C + c*J + L*a + M, n=2, c=4"
+  },
+  {
+   "zfl": "Mg == Tx - Sens - TA",
+   "source": "power budget minus total attenuation (source: budget = Tx - Rx sensitivity)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Mg",
+   "op": ">=",
+   "value": "0",
+   "why": "received power not below sensitivity: the link works"
+  }
+ ],
+ "catalog": {},
+ "find": {
+  "largest": "L",
+  "from": "0",
+  "to": "60",
+  "precision": "0.01"
+ }
+}

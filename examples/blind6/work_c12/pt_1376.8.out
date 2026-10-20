@@ -1,0 +1,165 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "TM=TL(name=TL load-bank run, c=[4/5,22/25], td=[3/5,9/10], ct=8/5); CM=mon2(name=condition monitoring, k=[17/20,23/25], cm=11/5)",
+      "verdict": "REFUTED",
+      "fails": "R1: U <= 2.25e-3",
+      "by_at_witness": "~7.13831341258e-09 (an exact fraction of 132 digits)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "TM": {
+      "catalog": "TL",
+      "name": "TL load-bank run",
+      "c": {
+        "range": [
+          "4/5 (~0.8)",
+          "22/25 (~0.88)"
+        ]
+      },
+      "td": {
+        "range": [
+          "3/5 (~0.6)",
+          "9/10 (~0.9)"
+        ]
+      },
+      "ct": {
+        "nominal": "8/5 (~1.6)",
+        "tolerance": "0"
+      }
+    },
+    "CM": {
+      "catalog": "mon2",
+      "name": "condition monitoring",
+      "k": {
+        "range": [
+          "17/20 (~0.85)",
+          "23/25 (~0.92)"
+        ]
+      },
+      "cm": {
+        "nominal": "11/5 (~2.2)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "CM.k": "23/25 (~0.92)",
+    "H1": "60",
+    "H2": "40",
+    "H3": "25",
+    "T1": "5703/20 (~285.15)",
+    "T2": "6103/20 (~305.15)",
+    "T3": "5863/20 (~293.15)",
+    "TM.c": "4/5 (~0.8)",
+    "TM.td": "9/10 (~0.9)",
+    "lam0": "3/1250000 (~2.4e-06)"
+  },
+  "point_units": {
+    "CM.k": "",
+    "H1": "h",
+    "H2": "h",
+    "H3": "h",
+    "T1": "K",
+    "T2": "K",
+    "T3": "K",
+    "TM.c": "",
+    "TM.td": "h",
+    "lam0": "1/h"
+  },
+  "value_there": {
+    "U": [
+      "~0.00225000713831 (an exact fraction of 132 digits)",
+      "~0.00225000713831 (an exact fraction of 134 digits)"
+    ]
+  },
+  "unit": "",
+  "requirement": {
+    "quantity": "U",
+    "op": "<=",
+    "value": "Ulim",
+    "why": "R1: U <= 2.25e-3"
+  },
+  "overshoot": "~7.13831341258e-09 (an exact fraction of 132 digits)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "~0.00112119292036 (an exact fraction of 136 digits)",
+      "~0.00225000713831 (an exact fraction of 134 digits)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "lam0",
+        "moves_it_by": "~0.000399079355758 (an exact fraction of 131 digits)"
+      },
+      {
+        "quantity": "TM.td",
+        "moves_it_by": "3/13768 (~0.000217897)"
+      },
+      {
+        "quantity": "T3",
+        "moves_it_by": "~0.000139770056067 (an exact fraction of 131 digits)"
+      },
+      {
+        "quantity": "T2",
+        "moves_it_by": "~0.00013666096312 (an exact fraction of 129 digits)"
+      },
+      {
+        "quantity": "CM.k",
+        "moves_it_by": "~0.000121458934361 (an exact fraction of 131 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "each_requirement": [
+    {
+      "requirement": {
+        "quantity": "U",
+        "op": "<=",
+        "value": "Ulim",
+        "why": "R1: U <= 2.25e-3"
+      },
+      "verdict": "REFUTED",
+      "overshoot": "~7.13831341258e-09 (an exact fraction of 132 digits)"
+    },
+    {
+      "requirement": {
+        "quantity": "tauq",
+        "op": "<=",
+        "value": "Tov",
+        "why": "R2: tau <= Tov"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "tauq": [
+          "6884/5 (~1376.8)",
+          "6884/5 (~1376.8)"
+        ]
+      }
+    }
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1: U <= 2.25e-3"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

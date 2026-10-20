@@ -1,0 +1,38 @@
+[stand] 1/9 designs, 0 s: 
+[stand] 1/9 designs, 175 s: 
+{
+  "verdict": "OPEN",
+  "stopped": "a stop asked from outside, mid-search: the bracket so far",
+  "find": "largest",
+  "quantity": "m",
+  "unit": "kg",
+  "stopped_at": "27200",
+  "proved": "24400",
+  "tries": [
+    {
+      "m": "7600",
+      "verdict": "EARNED"
+    },
+    {
+      "m": "30000",
+      "verdict": "REFUTED"
+    },
+    {
+      "m": "18800",
+      "verdict": "EARNED"
+    },
+    {
+      "m": "24400",
+      "verdict": "EARNED"
+    },
+    {
+      "m": "27200",
+      "verdict": "OPEN"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	17m25.101s
+user	16m34.683s
+sys	0m50.369s

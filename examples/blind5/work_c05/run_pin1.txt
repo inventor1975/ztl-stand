@@ -1,0 +1,533 @@
+[stand] 1/36 designs, 0 s: 
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 36,
+  "failed_at_nominal": 33,
+  "judged": 3,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=none, Lmax=1/2, cost=0); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=none, Lmax=1/2, cost=0); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=none, Lmax=1/2, cost=0); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=P1, Lmax=13/10, cost=3/25); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=P1, Lmax=13/10, cost=3/25); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=P1, Lmax=13/10, cost=3/25); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=P2, Lmax=19/10, cost=11/50); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=P2, Lmax=19/10, cost=11/50); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=P2, Lmax=19/10, cost=11/50); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=P3, Lmax=5/2, cost=19/50); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=P3, Lmax=5/2, cost=19/50); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Well, Ca=[180,230], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[650,780], price=13/20, ...); PROG=programmes(name=P3, Lmax=5/2, cost=19/50); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=none, Lmax=1/2, cost=0); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=none, Lmax=1/2, cost=0); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=none, Lmax=1/2, cost=0); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=P1, Lmax=13/10, cost=3/25); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=P1, Lmax=13/10, cost=3/25); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=P1, Lmax=13/10, cost=3/25); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=P2, Lmax=19/10, cost=11/50); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=P2, Lmax=19/10, cost=11/50); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=P2, Lmax=19/10, cost=11/50); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=P3, Lmax=5/2, cost=19/50); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=P3, Lmax=5/2, cost=19/50); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=SoftWell, Ca=[10,25], Alk=[200,240], Cl=[60,90], Si=[22,30], SO4=[80,110], TDS=[700,820], price=29/20, ...); PROG=programmes(name=P3, Lmax=5/2, cost=19/50); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R1, season w",
+      "by": "2293361643673/25184043620 (~91.0641)",
+      "unit": "mg/L"
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=none, Lmax=1/2, cost=0); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R4, season w",
+      "by": "~1.87926036641 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=none, Lmax=1/2, cost=0); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R4, season w",
+      "by": "~1.4481252343 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=none, Lmax=1/2, cost=0); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R4, season w",
+      "by": "~0.862252789069 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=P1, Lmax=13/10, cost=3/25); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R4, season w",
+      "by": "~1.07926036641 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=P1, Lmax=13/10, cost=3/25); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R4, season w",
+      "by": "~0.648125234296 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=P1, Lmax=13/10, cost=3/25); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R4, season w",
+      "by": "~0.0622527890688 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=P2, Lmax=19/10, cost=11/50); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R4, season w",
+      "by": "~0.479260366407 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=P2, Lmax=19/10, cost=11/50); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R4, season w",
+      "by": "~0.0481252342962 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=P2, Lmax=19/10, cost=11/50); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=P3, Lmax=5/2, cost=19/50); ACID=acids(name=0%, r=0); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "REFUTED",
+      "fails": "R4, season s",
+      "by": "~0.0146553377032 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=P3, Lmax=5/2, cost=19/50); ACID=acids(name=40%, r=2/5); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "SRC=sources(name=Town, Ca=[60,80], Alk=[70,90], Cl=[20,30], Si=[8,12], SO4=[25,35], TDS=[220,280], price=19/10, ...); PROG=programmes(name=P3, Lmax=5/2, cost=19/50); ACID=acids(name=70%, r=7/10); BW=flow_w(x=1105200/6695747); BM=flow_m(x=2840400/9788839); BS=flow_s(x=620400/1493939)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 33,
+    "EARNED": 3
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "h_w*((kE*Qtop_w + BW.x + Dr)*(SRC.price + PROG.cost + ACID.r*SRC.Alkhi*kacid*cacid) + disch*BW.x) + h_m*((kE*Qtop_m + BM.x + Dr)*(SRC.price + PROG.cost + ACID.r*SRC.Alkhi*kacid*cacid) + disch*BM.x) + h_s*((kE*Qtop_s + BS.x + Dr)*(SRC.price + PROG.cost + ACID.r*SRC.Alkhi*kacid*cacid) + disch*BS.x)",
+    "value": "1293033118697262466964179252209/23905792079209392159912109375 (~54.0887)",
+    "unit": "kEUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "SRC": {
+      "catalog": "sources",
+      "name": "Town",
+      "Ca": {
+        "range": [
+          "60",
+          "80"
+        ]
+      },
+      "Alk": {
+        "range": [
+          "70",
+          "90"
+        ]
+      },
+      "Cl": {
+        "range": [
+          "20",
+          "30"
+        ]
+      },
+      "Si": {
+        "range": [
+          "8",
+          "12"
+        ]
+      },
+      "SO4": {
+        "range": [
+          "25",
+          "35"
+        ]
+      },
+      "TDS": {
+        "range": [
+          "220",
+          "280"
+        ]
+      },
+      "price": {
+        "nominal": "19/10 (~1.9)",
+        "tolerance": "0"
+      },
+      "Alkhi": {
+        "nominal": "90",
+        "tolerance": "0"
+      }
+    },
+    "PROG": {
+      "catalog": "programmes",
+      "name": "P2",
+      "Lmax": {
+        "nominal": "19/10 (~1.9)",
+        "tolerance": "0"
+      },
+      "cost": {
+        "nominal": "11/50 (~0.22)",
+        "tolerance": "0"
+      }
+    },
+    "ACID": {
+      "catalog": "acids",
+      "name": "70%",
+      "r": {
+        "nominal": "7/10 (~0.7)",
+        "tolerance": "0"
+      }
+    },
+    "BW": {
+      "catalog": "flow_w",
+      "x": {
+        "nominal": "1105200/6695747 (~0.16506)",
+        "tolerance": "0"
+      }
+    },
+    "BM": {
+      "catalog": "flow_m",
+      "x": {
+        "nominal": "2840400/9788839 (~0.290167)",
+        "tolerance": "0"
+      }
+    },
+    "BS": {
+      "catalog": "flow_s",
+      "x": {
+        "nominal": "620400/1493939 (~0.415278)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Si_w": [
+      "407479057738/6296010905 (~64.7202)",
+      "789774071856/6296010905 (~125.44)"
+    ],
+    "Cl_w": [
+      "203739528869/1259202181 (~161.8)",
+      "394887035928/1259202181 (~313.601)"
+    ],
+    "SO_w": [
+      "366934891493069/629601090500 (~582.805)",
+      "157099225793356/157400272625 (~998.087)"
+    ],
+    "LSI_w": [
+      "442308787995254546109/461168601842738790400 (~0.959104)",
+      "198693552179883772989/115292150460684697600 (~1.72339)"
+    ],
+    "Si_m": [
+      "198550326118/3065543297 (~64.7684)",
+      "384838479048/3065543297 (~125.537)"
+    ],
+    "Cl_m": [
+      "496375815295/3065543297 (~161.921)",
+      "962096197620/3065543297 (~313.842)"
+    ],
+    "SO_m": [
+      "178794568669259/306554329700 (~583.239)",
+      "76550787457298/76638582425 (~998.854)"
+    ],
+    "LSI_m": [
+      "460135407845721334229/461168601842738790400 (~0.99776)",
+      "812387844440798317207/461168601842738790400 (~1.76159)"
+    ],
+    "Si_s": [
+      "220958239188/3273802985 (~67.4928)",
+      "411115101408/3273802985 (~125.577)"
+    ],
+    "Cl_s": [
+      "110479119594/654760597 (~168.732)",
+      "205557550704/654760597 (~313.943)"
+    ],
+    "SO_s": [
+      "99486447194397/163690149250 (~607.773)",
+      "81777645588408/81845074625 (~999.176)"
+    ],
+    "LSI_s": [
+      "6486697457095654249/5764607523034234880 (~1.12526)",
+      "42288452178846857227/23058430092136939520 (~1.83397)"
+    ],
+    "Vyr": [
+      "47223039043726572324705668/2447953108911041757175 (~19290.8)",
+      "59988820752324585763362432/2447953108911041757175 (~24505.7)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Si_w": "mg/L",
+    "Cl_w": "mg/L",
+    "SO_w": "mg/L",
+    "LSI_w": "",
+    "Si_m": "mg/L",
+    "Cl_m": "mg/L",
+    "SO_m": "mg/L",
+    "LSI_m": "",
+    "Si_s": "mg/L",
+    "Cl_s": "mg/L",
+    "SO_s": "mg/L",
+    "LSI_s": "",
+    "Vyr": "m^3"
+  },
+  "how": {
+    "Si_w": "ZTL, exact at the corners",
+    "Cl_w": "ZTL, exact at the corners",
+    "SO_w": "ZTL, exact at the corners",
+    "LSI_w": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.959104297708 (~0.959104)', '~1.72339184746 (~1.72339)']",
+    "Si_m": "ZTL, exact at the corners",
+    "Cl_m": "ZTL, exact at the corners",
+    "SO_m": "ZTL, exact at the corners",
+    "LSI_m": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.997759617648 (~0.99776)', '~1.76158533169 (~1.76159)']",
+    "Si_s": "ZTL, exact at the corners",
+    "Cl_s": "ZTL, exact at the corners",
+    "SO_s": "ZTL, exact at the corners",
+    "LSI_s": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~1.12526263604 (~1.12526)', '~1.83396926893 (~1.83397)']",
+    "Vyr": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "Si_w",
+      "op": "<=",
+      "value": "Si_lim",
+      "why": "R1, season w"
+    },
+    {
+      "quantity": "Cl_w",
+      "op": "<=",
+      "value": "Cl_lim",
+      "why": "R2, season w"
+    },
+    {
+      "quantity": "SO_w",
+      "op": "<=",
+      "value": "SO_lim",
+      "why": "R3, season w"
+    },
+    {
+      "quantity": "LSI_w",
+      "op": "<=",
+      "value": "PROG.Lmax",
+      "why": "R4, season w"
+    },
+    {
+      "quantity": "Si_m",
+      "op": "<=",
+      "value": "Si_lim",
+      "why": "R1, season m"
+    },
+    {
+      "quantity": "Cl_m",
+      "op": "<=",
+      "value": "Cl_lim",
+      "why": "R2, season m"
+    },
+    {
+      "quantity": "SO_m",
+      "op": "<=",
+      "value": "SO_lim",
+      "why": "R3, season m"
+    },
+    {
+      "quantity": "LSI_m",
+      "op": "<=",
+      "value": "PROG.Lmax",
+      "why": "R4, season m"
+    },
+    {
+      "quantity": "Si_s",
+      "op": "<=",
+      "value": "Si_lim",
+      "why": "R1, season s"
+    },
+    {
+      "quantity": "Cl_s",
+      "op": "<=",
+      "value": "Cl_lim",
+      "why": "R2, season s"
+    },
+    {
+      "quantity": "SO_s",
+      "op": "<=",
+      "value": "SO_lim",
+      "why": "R3, season s"
+    },
+    {
+      "quantity": "LSI_s",
+      "op": "<=",
+      "value": "PROG.Lmax",
+      "why": "R4, season s"
+    },
+    {
+      "quantity": "Vyr",
+      "op": "<=",
+      "value": "26000",
+      "why": "R5 annual make-up volume <= 26000 m3 (worst case: Q at top of range)"
+    }
+  ],
+  "rests_on": "ZTL disposition OPEN: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "parameter SRC__Alk enters the coefficients with rank > 1: the corners are not exact, not solved as a system (and 5 more)",
+    "M_w -> [203739528869/482093784000000, 16453626497/30130861500000] by [M_w == (kE*Q_w) + BW__x + Dr]",
+    "N_w -> [203739528869/25184043620, 65814505988/6296010905] by [N_w == M_w/(BW__x + Dr)]",
+    "Si_w -> [203739528869/3148005452500, 98721758982/787001363125] by [Si_w == N_w*SRC__Si], multilinear, exact at the corners (credit)",
+    "Cl_w -> [203739528869/1259202181000, 49360879491/157400272625] by [Cl_w == N_w*SRC__Cl], multilinear, exact at the corners (credit)",
+    "SO_w -> [366934891493069/629601090500000, 39274806448339/39350068156250] by [SO_w == N_w*(SRC__SO4 + 0.96*ACID__r*SRC__Alk)], multilinear, exact at the corners (credit)"
+  ]
+}

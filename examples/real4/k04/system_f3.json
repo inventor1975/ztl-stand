@@ -1,0 +1,121 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "TPS54331 output filter as a chain FB -> inductor stage -> output capacitor; smallest L",
+ "components": {
+  "FB": {
+   "file": "comp_fb.json"
+  },
+  "LS": {
+   "file": "comp_ls_f3.json"
+  },
+  "CO": {
+   "file": "comp_co.json"
+  }
+ },
+ "connect": {
+  "LS.Vin": "Vin",
+  "LS.Vo": "FB.Vo",
+  "LS.L": "Lsys",
+  "CO.ILPP": "LS.ILPP"
+ },
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "range": [
+    "7",
+    "28"
+   ],
+   "unit": "V"
+  },
+  "Lsys": {
+   "role": "given",
+   "value": "10",
+   "unit": "uH"
+  },
+  "Io": {
+   "role": "given",
+   "value": "3",
+   "unit": "A"
+  },
+  "Isat": {
+   "role": "given",
+   "value": "3.84",
+   "unit": "A"
+  },
+  "Irmsmax": {
+   "role": "given",
+   "value": "3.6",
+   "unit": "A"
+  },
+  "Kr": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Pk": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Rms": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Vrip": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Kr == LS.ILPP/Io"
+  },
+  {
+   "zfl": "Pk == LS.ILpk"
+  },
+  {
+   "zfl": "Rms == LS.ILrms"
+  },
+  {
+   "zfl": "Vrip == CO.Vopp"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Kr",
+   "op": "<=",
+   "value": "0.3",
+   "why": "KIND 0.3"
+  },
+  {
+   "quantity": "Pk",
+   "op": "<=",
+   "value": "Isat",
+   "why": "saturation"
+  },
+  {
+   "quantity": "Rms",
+   "op": "<=",
+   "value": "Irmsmax",
+   "why": "RMS rating"
+  },
+  {
+   "quantity": "Vrip",
+   "op": "<=",
+   "value": "0.03",
+   "why": "30 mV output ripple, datasheet Table 8-1"
+  }
+ ],
+ "find": {
+  "smallest": "Lsys",
+  "from": "1",
+  "to": "30",
+  "precision": "0.125",
+  "requirements": [
+   {
+    "quantity": "Pk",
+    "op": "<=",
+    "value": "Isat",
+    "why": "saturation"
+   }
+  ]
+ }
+}

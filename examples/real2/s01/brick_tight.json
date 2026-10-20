@@ -1,0 +1,75 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "d": {
+   "role": "given",
+   "range": [
+    "2.90",
+    "3.10"
+   ],
+   "unit": "mm",
+   "why": "O-ring cross-section, tolerance range in the source's table"
+  },
+  "h": {
+   "role": "given",
+   "range": [
+    "2.20",
+    "2.30"
+   ],
+   "unit": "mm",
+   "why": "groove depth (assembled gland height), range in the source's table"
+  },
+  "w": {
+   "role": "given",
+   "range": [
+    "4.10",
+    "4.30"
+   ],
+   "unit": "mm",
+   "why": "groove width, range in the source's table"
+  },
+  "squeeze": {
+   "role": "derived",
+   "unit": "%"
+  },
+  "fill": {
+   "role": "derived",
+   "unit": "%"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "squeeze == 1 - h/d",
+   "source": "squeeze = (d - h)/d, the source's formula (section 4 and 11)"
+  },
+  {
+   "zfl": "fill == pi*d*d/(4*w*h)",
+   "source": "gland fill = O-ring area / groove area (round section pi d^2/4 over w*h); reproduces the source's nominal 74.8%"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "squeeze",
+   "op": "within",
+   "value": [
+    "20",
+    "29.0"
+   ],
+   "why": "TEST: bound at the published rounded 29.0"
+  },
+  {
+   "quantity": "fill",
+   "op": "<=",
+   "value": "85",
+   "why": "source: the design stays below 85%"
+  },
+  {
+   "quantity": "fill",
+   "op": ">=",
+   "value": "60",
+   "why": "source: fill commonly designed within 60-85%"
+  }
+ ],
+ "catalog": {}
+}

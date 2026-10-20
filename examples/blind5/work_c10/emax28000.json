@@ -1,0 +1,474 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "T": {
+   "role": "given",
+   "range": [
+    "5",
+    "35"
+   ],
+   "unit": "C"
+  },
+  "W": {
+   "role": "given",
+   "range": [
+    "4000",
+    "19000"
+   ],
+   "unit": "kg"
+  },
+  "Tu": {
+   "role": "given",
+   "value": "1",
+   "unit": "C"
+  },
+  "Cu": {
+   "role": "given",
+   "value": "1",
+   "unit": "mg/L"
+  },
+  "Vp": {
+   "role": "given",
+   "value": "24000",
+   "unit": "m^3"
+  },
+  "rf": {
+   "role": "given",
+   "value": "0.30",
+   "unit": "g/(kg*h)"
+  },
+  "r0": {
+   "role": "given",
+   "value": "0.15",
+   "unit": "g/(m^3*h)"
+  },
+  "kd0": {
+   "role": "given",
+   "value": "0.015",
+   "unit": "1/h"
+  },
+  "Cstd": {
+   "role": "given",
+   "value": "9.09",
+   "unit": "mg/L"
+  },
+  "t2": {
+   "role": "given",
+   "value": "2",
+   "unit": "h"
+  },
+  "Css": {
+   "role": "derived",
+   "unit": "mg/L"
+  },
+  "C2": {
+   "role": "derived",
+   "unit": "mg/L"
+  },
+  "days_winter": {
+   "role": "given",
+   "value": "90",
+   "unit": ""
+  },
+  "hrs_winter": {
+   "role": "given",
+   "value": "12",
+   "unit": "h"
+  },
+  "days_spring": {
+   "role": "given",
+   "value": "92",
+   "unit": ""
+  },
+  "hrs_spring": {
+   "role": "given",
+   "value": "10",
+   "unit": "h"
+  },
+  "days_summer": {
+   "role": "given",
+   "value": "92",
+   "unit": ""
+  },
+  "hrs_summer": {
+   "role": "given",
+   "value": "8",
+   "unit": "h"
+  },
+  "days_autumn": {
+   "role": "given",
+   "value": "91",
+   "unit": ""
+  },
+  "hrs_autumn": {
+   "role": "given",
+   "value": "11",
+   "unit": "h"
+  },
+  "Emax": {
+   "role": "given",
+   "value": "28000",
+   "unit": "kWh"
+  },
+  "Pmax": {
+   "role": "given",
+   "value": "40",
+   "unit": "kW"
+  },
+  "pe": {
+   "role": "given",
+   "value": "0.16",
+   "unit": "EUR/kWh"
+  },
+  "yrs": {
+   "role": "given",
+   "value": "10",
+   "unit": ""
+  },
+  "Ey": {
+   "role": "derived",
+   "unit": "kWh"
+  },
+  "Load": {
+   "role": "derived",
+   "unit": "kW"
+  }
+ },
+ "slots": {
+  "AE": {
+   "from": [
+    "aer"
+   ]
+  },
+  "OX": {
+   "from": [
+    "lox"
+   ]
+  },
+  "N": {
+   "from": [
+    "cnt_N"
+   ]
+  },
+  "MW": {
+   "from": [
+    "cnt_MW"
+   ]
+  },
+  "MS": {
+   "from": [
+    "cnt_MS"
+   ]
+  },
+  "MU": {
+   "from": [
+    "cnt_MU"
+   ]
+  },
+  "MA": {
+   "from": [
+    "cnt_MA"
+   ]
+  }
+ },
+ "catalog": {
+  "aer": {
+   "items": [
+    {
+     "name": "PW2",
+     "P": {
+      "value": "2.0"
+     },
+     "SAE": {
+      "value": "2.2"
+     },
+     "price": "3.6"
+    },
+    {
+     "name": "PW37",
+     "P": {
+      "value": "3.7"
+     },
+     "SAE": {
+      "value": "2.0"
+     },
+     "price": "5.2"
+    },
+    {
+     "name": "PROP",
+     "P": {
+      "value": "1.5"
+     },
+     "SAE": {
+      "value": "1.7"
+     },
+     "price": "2.3"
+    },
+    {
+     "name": "DIFF",
+     "P": {
+      "value": "5.5"
+     },
+     "SAE": {
+      "value": "1.4"
+     },
+     "price": "6.8"
+    }
+   ],
+   "fields": {
+    "P": {
+     "unit": "kW"
+    },
+    "SAE": {
+     "unit": "kg/kWh"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "lox": {
+   "items": [
+    {
+     "name": "none",
+     "price": "0",
+     "rate": "0"
+    },
+    {
+     "name": "LOX",
+     "price": "6.5",
+     "rate": "6000"
+    }
+   ],
+   "fields": {
+    "price": {
+     "unit": "kEUR"
+    },
+    "rate": {
+     "unit": "g/h"
+    }
+   }
+  },
+  "cnt_MW": {
+   "integers": {
+    "field": "k",
+    "from": "1",
+    "to": "2",
+    "unit": ""
+   }
+  },
+  "cnt_MS": {
+   "integers": {
+    "field": "k",
+    "from": "2",
+    "to": "5",
+    "unit": ""
+   }
+  },
+  "cnt_MU": {
+   "integers": {
+    "field": "k",
+    "from": "6",
+    "to": "13",
+    "unit": ""
+   }
+  },
+  "cnt_MA": {
+   "integers": {
+    "field": "k",
+    "from": "2",
+    "to": "6",
+    "unit": ""
+   }
+  },
+  "cnt_N": {
+   "integers": {
+    "field": "k",
+    "from": "6",
+    "to": "13",
+    "unit": ""
+   }
+  }
+ },
+ "where": [
+  "N.k == max(max(MW.k, MS.k), max(MU.k, MA.k))",
+  "AE.name != \"PW2\" or OX.name != \"none\" or (MW.k >= 1 and MW.k <= 2)",
+  "AE.name != \"PW2\" or OX.name != \"LOX\" or (MW.k >= 1 and MW.k <= 2)",
+  "AE.name != \"PW37\" or OX.name != \"none\" or (MW.k >= 1 and MW.k <= 2)",
+  "AE.name != \"PW37\" or OX.name != \"LOX\" or (MW.k >= 1 and MW.k <= 2)",
+  "AE.name != \"PROP\" or OX.name != \"none\" or (MW.k >= 1 and MW.k <= 2)",
+  "AE.name != \"PROP\" or OX.name != \"LOX\" or (MW.k >= 1 and MW.k <= 2)",
+  "AE.name != \"DIFF\" or OX.name != \"none\" or (MW.k >= 1 and MW.k <= 2)",
+  "AE.name != \"DIFF\" or OX.name != \"LOX\" or (MW.k >= 1 and MW.k <= 2)",
+  "AE.name != \"PW2\" or OX.name != \"none\" or (MS.k >= 3 and MS.k <= 4)",
+  "AE.name != \"PW2\" or OX.name != \"LOX\" or (MS.k >= 3 and MS.k <= 4)",
+  "AE.name != \"PW37\" or OX.name != \"none\" or (MS.k >= 2 and MS.k <= 3)",
+  "AE.name != \"PW37\" or OX.name != \"LOX\" or (MS.k >= 2 and MS.k <= 3)",
+  "AE.name != \"PROP\" or OX.name != \"none\" or (MS.k >= 4 and MS.k <= 5)",
+  "AE.name != \"PROP\" or OX.name != \"LOX\" or (MS.k >= 4 and MS.k <= 5)",
+  "AE.name != \"DIFF\" or OX.name != \"none\" or (MS.k >= 2 and MS.k <= 3)",
+  "AE.name != \"DIFF\" or OX.name != \"LOX\" or (MS.k >= 2 and MS.k <= 3)",
+  "AE.name != \"PW2\" or OX.name != \"none\" or (MU.k >= 12 and MU.k <= 13)",
+  "AE.name != \"PW2\" or OX.name != \"LOX\" or (MU.k >= 10 and MU.k <= 11)",
+  "AE.name != \"PW37\" or OX.name != \"none\" or (MU.k >= 7 and MU.k <= 8)",
+  "AE.name != \"PW37\" or OX.name != \"LOX\" or (MU.k >= 6 and MU.k <= 7)",
+  "AE.name != \"PROP\" or OX.name != \"none\" or (MU.k >= 16 and MU.k <= 16)",
+  "AE.name != \"PROP\" or OX.name != \"LOX\" or (MU.k >= 16 and MU.k <= 16)",
+  "AE.name != \"DIFF\" or OX.name != \"none\" or (MU.k >= 7 and MU.k <= 8)",
+  "AE.name != \"DIFF\" or OX.name != \"LOX\" or (MU.k >= 6 and MU.k <= 7)",
+  "AE.name != \"PW2\" or OX.name != \"none\" or (MA.k >= 3 and MA.k <= 4)",
+  "AE.name != \"PW2\" or OX.name != \"LOX\" or (MA.k >= 3 and MA.k <= 4)",
+  "AE.name != \"PW37\" or OX.name != \"none\" or (MA.k >= 2 and MA.k <= 3)",
+  "AE.name != \"PW37\" or OX.name != \"LOX\" or (MA.k >= 2 and MA.k <= 3)",
+  "AE.name != \"PROP\" or OX.name != \"none\" or (MA.k >= 5 and MA.k <= 6)",
+  "AE.name != \"PROP\" or OX.name != \"LOX\" or (MA.k >= 5 and MA.k <= 6)",
+  "AE.name != \"DIFF\" or OX.name != \"none\" or (MA.k >= 2 and MA.k <= 3)",
+  "AE.name != \"DIFF\" or OX.name != \"LOX\" or (MA.k >= 2 and MA.k <= 3)"
+ ],
+ "computed": {
+  "Etot": {
+   "value": "days_winter*hrs_winter*MW.k*AE.P + days_spring*hrs_spring*MS.k*AE.P + days_summer*hrs_summer*MU.k*AE.P + days_autumn*hrs_autumn*MA.k*AE.P",
+   "unit": "kWh"
+  },
+  "cost": {
+   "value": "N.k*AE.price + OX.price + yrs*Etot*pe",
+   "unit": "kEUR"
+  }
+ },
+ "define": {
+  "Cs": "Cu*table(T/Tu, 5, 12.8, 10, 11.3, 15, 10.1, 20, 9.1, 25, 8.3, 30, 7.6, 35, 7.0)",
+  "kd": "kd0*pow(1.024, T/Tu - 20)",
+  "r": "rf*W*pow(1.08, T/Tu - 20)/Vp + r0*pow(1.065, T/Tu - 20)",
+  "ox": "OX.rate/Vp",
+  "mrun": "MW.k",
+  "a": "mrun*AE.P*AE.SAE*0.90*pow(1.024, T/Tu - 20)/(Cstd*Vp)",
+  "Cssd": "((kd + 0.95*a)*Cs - r)/(kd + a)"
+ },
+ "laws": [
+  {
+   "zfl": "Css == Cssd",
+   "source": "night steady state: r = kd(Cs-C) + aerator transfer/V, solved for C"
+  },
+  {
+   "zfl": "C2 == max(Cs - (r - ox)/kd + (Cssd - (Cs - (r - ox)/kd))*exp(-kd*t2), 0*Cu)",
+   "source": "closed form after 2 h power cut, floored at 0"
+  },
+  {
+   "zfl": "Ey == days_winter*hrs_winter*MW.k*AE.P + days_spring*hrs_spring*MS.k*AE.P + days_summer*hrs_summer*MU.k*AE.P + days_autumn*hrs_autumn*MA.k*AE.P",
+   "source": "annual aerator energy = sum over seasons of days * night hours * m_s * P"
+  },
+  {
+   "zfl": "Load == N.k*AE.P",
+   "source": "connected load n * P"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Css",
+   "op": ">=",
+   "value": "4.0",
+   "why": "R1: night DO >= 4.0 mg/L in every season, worst case"
+  },
+  {
+   "quantity": "C2",
+   "op": ">=",
+   "value": "3.0",
+   "why": "R2: DO >= 3.0 mg/L after the 2 h power cut, every season"
+  },
+  {
+   "quantity": "Ey",
+   "op": "<=",
+   "value": "Emax",
+   "why": "R3: annual aerator energy <= 31000 kWh"
+  },
+  {
+   "quantity": "Load",
+   "op": "<=",
+   "value": "Pmax",
+   "why": "R4: connected load <= 40 kW"
+  }
+ ],
+ "modes": {
+  "winter": {
+   "quantities": {
+    "T": {
+     "range": [
+      "8",
+      "11"
+     ]
+    },
+    "W": {
+     "range": [
+      "4000",
+      "5000"
+     ]
+    }
+   },
+   "define": {
+    "mrun": "MW.k"
+   }
+  },
+  "spring": {
+   "quantities": {
+    "T": {
+     "range": [
+      "16",
+      "19"
+     ]
+    },
+    "W": {
+     "range": [
+      "9000",
+      "11000"
+     ]
+    }
+   },
+   "define": {
+    "mrun": "MS.k"
+   }
+  },
+  "summer": {
+   "quantities": {
+    "T": {
+     "range": [
+      "26",
+      "30"
+     ]
+    },
+    "W": {
+     "range": [
+      "16000",
+      "19000"
+     ]
+    }
+   },
+   "define": {
+    "mrun": "MU.k"
+   }
+  },
+  "autumn": {
+   "quantities": {
+    "T": {
+     "range": [
+      "14",
+      "18"
+     ]
+    },
+    "W": {
+     "range": [
+      "14000",
+      "16500"
+     ]
+    }
+   },
+   "define": {
+    "mrun": "MA.k"
+   }
+  }
+ },
+ "objective": {
+  "minimize": "cost",
+  "unit": "kEUR",
+  "why": "10-year cost: installed prices + 10 y energy at 0.16 EUR/kWh"
+ }
+}

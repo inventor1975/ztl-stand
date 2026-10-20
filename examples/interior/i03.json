@@ -1,0 +1,129 @@
+{
+ "stand": "ztl-stand/1",
+ "title": "i03 — a machine on vibration mounts, speed anywhere in a band: transmissibility peaks at RESONANCE, inside the band",
+ "quantities": {
+  "m": {
+   "role": "given",
+   "value": "50",
+   "unit": "kg",
+   "why": "machine mass"
+  },
+  "f": {
+   "role": "given",
+   "range": [
+    "15",
+    "40"
+   ],
+   "unit": "Hz",
+   "why": "forcing frequency: the machine's speed range"
+  },
+  "fn": {
+   "role": "derived",
+   "unit": "Hz"
+  },
+  "r": {
+   "role": "derived",
+   "unit": ""
+  },
+  "T": {
+   "role": "derived",
+   "unit": ""
+  }
+ },
+ "slots": {
+  "MT": {
+   "from": [
+    "mounts"
+   ]
+  }
+ },
+ "catalog": {
+  "mounts": {
+   "ground": "illustrative mount table (stiffness +-10 %, damping ratio range)",
+   "fields": {
+    "k": {
+     "unit": "N/m",
+     "tolerance": "0.10"
+    },
+    "zeta": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "items": [
+    {
+     "name": "M15",
+     "k": "3000000",
+     "zeta": {
+      "range": [
+       "0.04",
+       "0.06"
+      ]
+     },
+     "price": "15"
+    },
+    {
+     "name": "M20",
+     "k": "1234000",
+     "zeta": {
+      "range": [
+       "0.04",
+       "0.06"
+      ]
+     },
+     "price": "20"
+    },
+    {
+     "name": "M25",
+     "k": "8000000",
+     "zeta": {
+      "range": [
+       "0.04",
+       "0.06"
+      ]
+     },
+     "price": "25"
+    },
+    {
+     "name": "M35",
+     "k": "100000",
+     "zeta": {
+      "range": [
+       "0.04",
+       "0.06"
+      ]
+     },
+     "price": "35"
+    }
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "fn == sqrt(MT.k/m)/(2*pi)",
+   "source": "natural frequency"
+  },
+  {
+   "zfl": "r == f/fn",
+   "source": "frequency ratio"
+  },
+  {
+   "zfl": "T == sqrt((1 + (2*MT.zeta*r)*(2*MT.zeta*r))/((1 - r*r)*(1 - r*r) + (2*MT.zeta*r)*(2*MT.zeta*r)))",
+   "source": "transmissibility of a damped single-degree system"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "T",
+   "op": "<=",
+   "value": "3",
+   "why": "at most 3x the force into the floor, at any speed"
+  }
+ ],
+ "objective": {
+  "minimize": "MT.price",
+  "unit": "EUR"
+ }
+}

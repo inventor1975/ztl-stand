@@ -1,0 +1,115 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL fd6593d",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "REFUTED",
+      "fails": "5 mV offset + 1% of 1 V reading (source's combined form)",
+      "by_at_witness": "6647884148905457/5090642920715625000 (~0.0013059)",
+      "unit": "V"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {},
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "R1": "9990",
+    "R2": "40040",
+    "Vref": "199/40 (~4.975)",
+    "dR1": "-3/1000 (~-0.003)",
+    "dR2": "3/1000 (~0.003)",
+    "dVref": "-3/2000 (~-0.0015)",
+    "eg": "22/20475 (~0.00107448)",
+    "ibn": "-1/25000000 (~-4e-08)",
+    "ibp": "1/25000000 (~4e-08)",
+    "oadc": "9/2 (~4.5)",
+    "oinl": "1",
+    "ores": "1/2 (~0.5)",
+    "voff": "1/2500 (~0.0004)"
+  },
+  "point_units": {
+    "R1": "ohm",
+    "R2": "ohm",
+    "Vref": "V",
+    "dR1": "",
+    "dR2": "",
+    "dVref": "",
+    "eg": "",
+    "ibn": "A",
+    "ibp": "A",
+    "oadc": "",
+    "oinl": "",
+    "ores": "",
+    "voff": "V"
+  },
+  "value_there": {
+    "Err": "10375940994954979/636330365089453125 (~0.0163059)"
+  },
+  "unit": "V",
+  "requirement": {
+    "quantity": "Err",
+    "op": "within",
+    "value": [
+      "-15/1000",
+      "15/1000"
+    ],
+    "why": "5 mV offset + 1% of 1 V reading (source's combined form)"
+  },
+  "overshoot": "6647884148905457/5090642920715625000 (~0.0013059)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "-2076202204100633779/129317099071707421875 (~-0.0160551)",
+      "10375940994954979/636330365089453125 (~0.0163059)"
+    ],
+    "window": [
+      "-3/200 (~-0.015)",
+      "3/200 (~0.015)"
+    ],
+    "verdict_on_window": "for this design the spread over its tolerances alone is wider than the window: centring cannot fix it, only tighter tolerances or another design",
+    "largest_contributors": [
+      {
+        "quantity": "Vref",
+        "moves_it_by": "1291547907802253708/127902403382980078125 (~0.0100979)"
+      },
+      {
+        "quantity": "dR2",
+        "moves_it_by": "11339272485596/2330880458203125 (~0.0048648)"
+      },
+      {
+        "quantity": "dR1",
+        "moves_it_by": "3627122752/745881746625 (~0.00486287)"
+      },
+      {
+        "quantity": "dVref",
+        "moves_it_by": "1291547907802253708/424856573758058203125 (~0.00303996)"
+      },
+      {
+        "quantity": "oadc",
+        "moves_it_by": "1/455 (~0.0021978)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "5 mV offset + 1% of 1 V reading (source's combined form)"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

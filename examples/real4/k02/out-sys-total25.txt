@@ -1,0 +1,114 @@
+{
+  "verdict": "OPEN",
+  "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point",
+  "refuted_inside_the_enclosures": {
+    "its_violating_point": {
+      "ADC_vrec_e": "-107867352890880551/863630860647022650 (~-0.1249)",
+      "AMP_vo1_e": "-39205102373581090883/1096857440756875000000 (~-0.0357431)"
+    }
+  },
+  "components": {
+    "AMP": {
+      "inputs": {
+        "vin": {
+          "from": "vin",
+          "arrives": [
+            "1/1",
+            "1/1"
+          ],
+          "assume": [
+            "0/1",
+            "1/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "vin": [
+              "99999/100000",
+              "1/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "vo1": [
+              "21784341426187/4388125000000",
+              "3134825018937509/622501875000000"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "vo1": [
+          "21784341426187/4388125000000",
+          "3134825018937509/622501875000000"
+        ]
+      },
+      "outputs_affine": {
+        "vo1": {
+          "slope": {
+            "vin": "4999335801/999841564"
+          },
+          "remainder": [
+            "-39205102373581090883/1096857440756875000000",
+            "11131780441390256546413/311201624146466250000000"
+          ]
+        }
+      }
+    },
+    "ADC": {
+      "inputs": {
+        "vo1": {
+          "from": "AMP.vo1",
+          "arrives": [
+            "21784341426187/4388125000000",
+            "3134825018937509/622501875000000"
+          ],
+          "assume": [
+            "-1/10",
+            "11/2"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "vo1": [
+              "124/25",
+              "126/25"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "vrec": [
+              "1620734462/329731857",
+              "2772634/545181"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "vrec": [
+          "1620734462/329731857",
+          "2772634/545181"
+        ]
+      },
+      "outputs_affine": {
+        "vrec": {
+          "slope": {
+            "vo1": "209544061/209535316"
+          },
+          "remainder": [
+            "-107867352890880551/863630860647022650",
+            "89606971068379/713966706951225"
+          ]
+        }
+      }
+    }
+  },
+  "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

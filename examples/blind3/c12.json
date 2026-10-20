@@ -1,0 +1,1177 @@
+{
+ "stand": "universal-stand/1",
+ "report": "all",
+ "quantities": {
+  "ME_mz": {
+   "role": "given",
+   "unit": "",
+   "value": "3350",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "ME_wh": {
+   "role": "given",
+   "unit": "",
+   "value": "3150",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "ME_sb": {
+   "role": "given",
+   "unit": "",
+   "value": "2450",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "ME_sf": {
+   "role": "given",
+   "unit": "",
+   "value": "1900",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "ME_fm": {
+   "role": "given",
+   "unit": "",
+   "value": "2900",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "ME_ol": {
+   "role": "given",
+   "unit": "",
+   "value": "8800",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "CP_mz": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "7.5",
+    "9.5"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_wh": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "10.5",
+    "12.5"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_sb": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "45",
+    "47"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_sf": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "35",
+    "37"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_fm": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "59",
+    "61"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_ol": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0",
+    "1"
+   ],
+   "why": "CP % +-1.0 absolute (lower end clamped at 0)"
+  },
+  "CP_ls": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0",
+    "1"
+   ],
+   "why": "CP % +-1.0 absolute (lower end clamped at 0)"
+  },
+  "CP_dp": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0",
+    "1"
+   ],
+   "why": "CP % +-1.0 absolute (lower end clamped at 0)"
+  },
+  "CP_ly": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "94",
+    "96"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_me": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "57",
+    "59"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "LY_mz": {
+   "role": "given",
+   "unit": "",
+   "value": "0.26",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "LY_wh": {
+   "role": "given",
+   "unit": "",
+   "value": "0.3",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "LY_sb": {
+   "role": "given",
+   "unit": "",
+   "value": "2.85",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "LY_sf": {
+   "role": "given",
+   "unit": "",
+   "value": "1.25",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "LY_fm": {
+   "role": "given",
+   "unit": "",
+   "value": "4.3",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "LY_ly": {
+   "role": "given",
+   "unit": "",
+   "value": "78",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "MC_mz": {
+   "role": "given",
+   "unit": "",
+   "value": "0.38",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "MC_wh": {
+   "role": "given",
+   "unit": "",
+   "value": "0.5",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "MC_sb": {
+   "role": "given",
+   "unit": "",
+   "value": "1.35",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "MC_sf": {
+   "role": "given",
+   "unit": "",
+   "value": "1.35",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "MC_fm": {
+   "role": "given",
+   "unit": "",
+   "value": "2.2",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "MC_me": {
+   "role": "given",
+   "unit": "",
+   "value": "99",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "moist": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "13",
+    "15"
+   ],
+   "why": "maize moisture %, table is for 14"
+  },
+  "p_sb": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "480",
+   "tolerance": "0.15",
+   "why": "soybean meal price +-15%"
+  },
+  "p_fm": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "1250",
+   "tolerance": "0.10",
+   "why": "fish meal price +-10%"
+  },
+  "ME": {
+   "role": "derived",
+   "unit": ""
+  },
+  "CP": {
+   "role": "derived",
+   "unit": ""
+  },
+  "LYS": {
+   "role": "derived",
+   "unit": ""
+  },
+  "MCY": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Ca": {
+   "role": "derived",
+   "unit": ""
+  },
+  "AP": {
+   "role": "derived",
+   "unit": ""
+  },
+  "D1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "D2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "FIB": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Cost": {
+   "role": "derived",
+   "unit": "EUR/t"
+  },
+  "p_mz": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "205",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_wh": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "220",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_sf": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "290",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_ol": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "980",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_ls": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "55",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_dp": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "520",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_ly": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "1900",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_me": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "3200",
+   "ground": "table",
+   "why": "table price"
+  },
+  "premix_cost": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "7",
+   "why": "premix 0.5% x 1400 EUR/t, per tonne of mix"
+  }
+ },
+ "slots": {
+  "MIX": {
+   "from": [
+    "recipes"
+   ]
+  }
+ },
+ "define": {
+  "S": "(100 - moist)/86"
+ },
+ "computed": {
+  "cost0": "(MIX.xmz*205+MIX.xwh*220+MIX.xsb*480+MIX.xsf*290+MIX.xfm*1250+MIX.xol*980+MIX.xls*55+MIX.xdp*520+MIX.xly*1900+MIX.xme*3200)/100+7"
+ },
+ "where": [
+  "MIX.xsf <= 10",
+  "MIX.xfm <= 5",
+  "MIX.xol <= 4",
+  "MIX.xly <= 2/5",
+  "MIX.xme <= 3/10",
+  "MIX.xmz + MIX.xwh >= 45",
+  "MIX.xmz+MIX.xwh+MIX.xsb+MIX.xsf+MIX.xfm+MIX.xol+MIX.xls+MIX.xdp+MIX.xly+MIX.xme == 496/5"
+ ],
+ "laws": [
+  {
+   "zfl": "ME == (MIX.xmz*ME_mz*S + MIX.xwh*ME_wh + MIX.xsb*ME_sb + MIX.xsf*ME_sf + MIX.xfm*ME_fm + MIX.xol*ME_ol)/100",
+   "source": "sum of inclusion x ME per kg of mix, kcal/kg; maize scaled by moisture"
+  },
+  {
+   "zfl": "CP == (MIX.xmz*CP_mz*S + MIX.xwh*CP_wh + MIX.xsb*CP_sb + MIX.xsf*CP_sf + MIX.xfm*CP_fm + MIX.xol*CP_ol + MIX.xls*CP_ls + MIX.xdp*CP_dp + MIX.xly*CP_ly + MIX.xme*CP_me)/100",
+   "source": "sum of inclusion x CP, % of mix"
+  },
+  {
+   "zfl": "LYS == (MIX.xmz*LY_mz*S + MIX.xwh*LY_wh + MIX.xsb*LY_sb + MIX.xsf*LY_sf + MIX.xfm*LY_fm + MIX.xly*LY_ly)/100",
+   "source": "sum of inclusion x Lys, % of mix"
+  },
+  {
+   "zfl": "MCY == (MIX.xmz*MC_mz*S + MIX.xwh*MC_wh + MIX.xsb*MC_sb + MIX.xsf*MC_sf + MIX.xfm*MC_fm + MIX.xme*MC_me)/100",
+   "source": "sum of inclusion x Met+Cys, % of mix"
+  },
+  {
+   "zfl": "Ca == (MIX.xmz*0.02*S + MIX.xwh*0.05 + MIX.xsb*0.3 + MIX.xsf*0.4 + MIX.xfm*5.0 + MIX.xls*38 + MIX.xdp*22)/100",
+   "source": "sum of inclusion x Ca, % of mix"
+  },
+  {
+   "zfl": "AP == (MIX.xmz*0.08*S + MIX.xwh*0.13 + MIX.xsb*0.2 + MIX.xsf*0.25 + MIX.xfm*2.8 + MIX.xdp*18)/100",
+   "source": "sum of inclusion x avP, % of mix"
+  },
+  {
+   "zfl": "D1 == Ca - 9/5*AP",
+   "source": "Ca:avP >= 1.8  <=>  Ca - 1.8 avP >= 0  (avP > 0)"
+  },
+  {
+   "zfl": "D2 == 12/5*AP - Ca",
+   "source": "Ca:avP <= 2.4  <=>  2.4 avP - Ca >= 0  (avP > 0)"
+  },
+  {
+   "zfl": "FIB == (MIX.xmz*2.2*S + MIX.xwh*2.5 + MIX.xsb*3.9 + MIX.xsf*18 + MIX.xfm*1.0)/100",
+   "source": "sum of inclusion x fibre, % of mix"
+  },
+  {
+   "zfl": "Cost == (MIX.xmz*p_mz + MIX.xwh*p_wh + MIX.xsb*p_sb + MIX.xsf*p_sf + MIX.xfm*p_fm + MIX.xol*p_ol + MIX.xls*p_ls + MIX.xdp*p_dp + MIX.xly*p_ly + MIX.xme*p_me)/100 + premix_cost",
+   "source": "price per tonne of mix; premix 0.5% x 1400 = 7 EUR/t; salt unpriced"
+  }
+ ],
+ "modes": {
+  "energy": {
+   "quantities": {
+    "CP_mz": {
+     "value": "17/2"
+    },
+    "CP_wh": {
+     "value": "23/2"
+    },
+    "CP_sb": {
+     "value": "46"
+    },
+    "CP_sf": {
+     "value": "36"
+    },
+    "CP_fm": {
+     "value": "60"
+    },
+    "CP_ol": {
+     "value": "1/2"
+    },
+    "CP_ls": {
+     "value": "1/2"
+    },
+    "CP_dp": {
+     "value": "1/2"
+    },
+    "CP_ly": {
+     "value": "95"
+    },
+    "CP_me": {
+     "value": "58"
+    },
+    "LY_mz": {
+     "value": "0.26"
+    },
+    "LY_wh": {
+     "value": "0.3"
+    },
+    "LY_sb": {
+     "value": "2.85"
+    },
+    "LY_sf": {
+     "value": "1.25"
+    },
+    "LY_fm": {
+     "value": "4.3"
+    },
+    "LY_ly": {
+     "value": "78"
+    },
+    "MC_mz": {
+     "value": "0.38"
+    },
+    "MC_wh": {
+     "value": "0.5"
+    },
+    "MC_sb": {
+     "value": "1.35"
+    },
+    "MC_sf": {
+     "value": "1.35"
+    },
+    "MC_fm": {
+     "value": "2.2"
+    },
+    "MC_me": {
+     "value": "99"
+    },
+    "p_sb": {
+     "value": "480"
+    },
+    "p_fm": {
+     "value": "1250"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "ME",
+     "op": ">=",
+     "value": "3000",
+     "why": "ME >= 3000 kcal/kg"
+    }
+   ]
+  },
+  "protein": {
+   "quantities": {
+    "ME_mz": {
+     "value": "3350"
+    },
+    "ME_wh": {
+     "value": "3150"
+    },
+    "ME_sb": {
+     "value": "2450"
+    },
+    "ME_sf": {
+     "value": "1900"
+    },
+    "ME_fm": {
+     "value": "2900"
+    },
+    "ME_ol": {
+     "value": "8800"
+    },
+    "LY_mz": {
+     "value": "0.26"
+    },
+    "LY_wh": {
+     "value": "0.3"
+    },
+    "LY_sb": {
+     "value": "2.85"
+    },
+    "LY_sf": {
+     "value": "1.25"
+    },
+    "LY_fm": {
+     "value": "4.3"
+    },
+    "LY_ly": {
+     "value": "78"
+    },
+    "MC_mz": {
+     "value": "0.38"
+    },
+    "MC_wh": {
+     "value": "0.5"
+    },
+    "MC_sb": {
+     "value": "1.35"
+    },
+    "MC_sf": {
+     "value": "1.35"
+    },
+    "MC_fm": {
+     "value": "2.2"
+    },
+    "MC_me": {
+     "value": "99"
+    },
+    "p_sb": {
+     "value": "480"
+    },
+    "p_fm": {
+     "value": "1250"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "CP",
+     "op": ">=",
+     "value": "19.5",
+     "why": "CP >= 19.5 %"
+    }
+   ]
+  },
+  "lysine": {
+   "quantities": {
+    "ME_mz": {
+     "value": "3350"
+    },
+    "ME_wh": {
+     "value": "3150"
+    },
+    "ME_sb": {
+     "value": "2450"
+    },
+    "ME_sf": {
+     "value": "1900"
+    },
+    "ME_fm": {
+     "value": "2900"
+    },
+    "ME_ol": {
+     "value": "8800"
+    },
+    "CP_mz": {
+     "value": "17/2"
+    },
+    "CP_wh": {
+     "value": "23/2"
+    },
+    "CP_sb": {
+     "value": "46"
+    },
+    "CP_sf": {
+     "value": "36"
+    },
+    "CP_fm": {
+     "value": "60"
+    },
+    "CP_ol": {
+     "value": "1/2"
+    },
+    "CP_ls": {
+     "value": "1/2"
+    },
+    "CP_dp": {
+     "value": "1/2"
+    },
+    "CP_ly": {
+     "value": "95"
+    },
+    "CP_me": {
+     "value": "58"
+    },
+    "MC_mz": {
+     "value": "0.38"
+    },
+    "MC_wh": {
+     "value": "0.5"
+    },
+    "MC_sb": {
+     "value": "1.35"
+    },
+    "MC_sf": {
+     "value": "1.35"
+    },
+    "MC_fm": {
+     "value": "2.2"
+    },
+    "MC_me": {
+     "value": "99"
+    },
+    "p_sb": {
+     "value": "480"
+    },
+    "p_fm": {
+     "value": "1250"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "LYS",
+     "op": ">=",
+     "value": "1.10",
+     "why": "Lys >= 1.10 %"
+    }
+   ]
+  },
+  "methcys": {
+   "quantities": {
+    "ME_mz": {
+     "value": "3350"
+    },
+    "ME_wh": {
+     "value": "3150"
+    },
+    "ME_sb": {
+     "value": "2450"
+    },
+    "ME_sf": {
+     "value": "1900"
+    },
+    "ME_fm": {
+     "value": "2900"
+    },
+    "ME_ol": {
+     "value": "8800"
+    },
+    "CP_mz": {
+     "value": "17/2"
+    },
+    "CP_wh": {
+     "value": "23/2"
+    },
+    "CP_sb": {
+     "value": "46"
+    },
+    "CP_sf": {
+     "value": "36"
+    },
+    "CP_fm": {
+     "value": "60"
+    },
+    "CP_ol": {
+     "value": "1/2"
+    },
+    "CP_ls": {
+     "value": "1/2"
+    },
+    "CP_dp": {
+     "value": "1/2"
+    },
+    "CP_ly": {
+     "value": "95"
+    },
+    "CP_me": {
+     "value": "58"
+    },
+    "LY_mz": {
+     "value": "0.26"
+    },
+    "LY_wh": {
+     "value": "0.3"
+    },
+    "LY_sb": {
+     "value": "2.85"
+    },
+    "LY_sf": {
+     "value": "1.25"
+    },
+    "LY_fm": {
+     "value": "4.3"
+    },
+    "LY_ly": {
+     "value": "78"
+    },
+    "p_sb": {
+     "value": "480"
+    },
+    "p_fm": {
+     "value": "1250"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "MCY",
+     "op": ">=",
+     "value": "0.85",
+     "why": "Met+Cys >= 0.85 %"
+    }
+   ]
+  },
+  "minerals_fibre": {
+   "quantities": {
+    "ME_mz": {
+     "value": "3350"
+    },
+    "ME_wh": {
+     "value": "3150"
+    },
+    "ME_sb": {
+     "value": "2450"
+    },
+    "ME_sf": {
+     "value": "1900"
+    },
+    "ME_fm": {
+     "value": "2900"
+    },
+    "ME_ol": {
+     "value": "8800"
+    },
+    "CP_mz": {
+     "value": "17/2"
+    },
+    "CP_wh": {
+     "value": "23/2"
+    },
+    "CP_sb": {
+     "value": "46"
+    },
+    "CP_sf": {
+     "value": "36"
+    },
+    "CP_fm": {
+     "value": "60"
+    },
+    "CP_ol": {
+     "value": "1/2"
+    },
+    "CP_ls": {
+     "value": "1/2"
+    },
+    "CP_dp": {
+     "value": "1/2"
+    },
+    "CP_ly": {
+     "value": "95"
+    },
+    "CP_me": {
+     "value": "58"
+    },
+    "LY_mz": {
+     "value": "0.26"
+    },
+    "LY_wh": {
+     "value": "0.3"
+    },
+    "LY_sb": {
+     "value": "2.85"
+    },
+    "LY_sf": {
+     "value": "1.25"
+    },
+    "LY_fm": {
+     "value": "4.3"
+    },
+    "LY_ly": {
+     "value": "78"
+    },
+    "MC_mz": {
+     "value": "0.38"
+    },
+    "MC_wh": {
+     "value": "0.5"
+    },
+    "MC_sb": {
+     "value": "1.35"
+    },
+    "MC_sf": {
+     "value": "1.35"
+    },
+    "MC_fm": {
+     "value": "2.2"
+    },
+    "MC_me": {
+     "value": "99"
+    },
+    "p_sb": {
+     "value": "480"
+    },
+    "p_fm": {
+     "value": "1250"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Ca",
+     "op": "within",
+     "value": [
+      "0.85",
+      "1.00"
+     ],
+     "why": "Ca 0.85..1.00 %"
+    },
+    {
+     "quantity": "AP",
+     "op": ">=",
+     "value": "0.42",
+     "why": "avP >= 0.42 %"
+    },
+    {
+     "quantity": "D1",
+     "op": ">=",
+     "value": "0",
+     "why": "Ca:avP >= 1.8"
+    },
+    {
+     "quantity": "D2",
+     "op": ">=",
+     "value": "0",
+     "why": "Ca:avP <= 2.4"
+    },
+    {
+     "quantity": "FIB",
+     "op": "<=",
+     "value": "5.0",
+     "why": "fibre <= 5.0 %"
+    }
+   ]
+  },
+  "price": {
+   "quantities": {
+    "ME_mz": {
+     "value": "3350"
+    },
+    "ME_wh": {
+     "value": "3150"
+    },
+    "ME_sb": {
+     "value": "2450"
+    },
+    "ME_sf": {
+     "value": "1900"
+    },
+    "ME_fm": {
+     "value": "2900"
+    },
+    "ME_ol": {
+     "value": "8800"
+    },
+    "CP_mz": {
+     "value": "17/2"
+    },
+    "CP_wh": {
+     "value": "23/2"
+    },
+    "CP_sb": {
+     "value": "46"
+    },
+    "CP_sf": {
+     "value": "36"
+    },
+    "CP_fm": {
+     "value": "60"
+    },
+    "CP_ol": {
+     "value": "1/2"
+    },
+    "CP_ls": {
+     "value": "1/2"
+    },
+    "CP_dp": {
+     "value": "1/2"
+    },
+    "CP_ly": {
+     "value": "95"
+    },
+    "CP_me": {
+     "value": "58"
+    },
+    "LY_mz": {
+     "value": "0.26"
+    },
+    "LY_wh": {
+     "value": "0.3"
+    },
+    "LY_sb": {
+     "value": "2.85"
+    },
+    "LY_sf": {
+     "value": "1.25"
+    },
+    "LY_fm": {
+     "value": "4.3"
+    },
+    "LY_ly": {
+     "value": "78"
+    },
+    "MC_mz": {
+     "value": "0.38"
+    },
+    "MC_wh": {
+     "value": "0.5"
+    },
+    "MC_sb": {
+     "value": "1.35"
+    },
+    "MC_sf": {
+     "value": "1.35"
+    },
+    "MC_fm": {
+     "value": "2.2"
+    },
+    "MC_me": {
+     "value": "99"
+    },
+    "moist": {
+     "value": "14"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Cost",
+     "op": "<=",
+     "value": "100000",
+     "why": "no price limit given: only to report the guaranteed (worst-case) cost range"
+    }
+   ]
+  }
+ },
+ "requirements": [],
+ "objective": {
+  "minimize": "cost0",
+  "why": "cheapest by table prices"
+ },
+ "catalog": {
+  "recipes": {
+   "items": [
+    {
+     "xmz": "59989/1000",
+     "xwh": "0",
+     "xsb": "16549/500",
+     "xsf": "0",
+     "xfm": "0",
+     "xol": "799/250",
+     "xls": "959/1000",
+     "xdp": "213/125",
+     "xly": "47/1000",
+     "xme": "207/1000",
+     "grid": "robust_cont_q0.001_m0.3"
+    },
+    {
+     "xmz": "6557/100",
+     "xwh": "0",
+     "xsb": "2981/100",
+     "xsf": "0",
+     "xfm": "0",
+     "xol": "83/100",
+     "xls": "49/50",
+     "xdp": "171/100",
+     "xly": "1/10",
+     "xme": "1/5",
+     "grid": "nominal_LP"
+    },
+    {
+     "xmz": "3107/50",
+     "xwh": "0",
+     "xsb": "3167/100",
+     "xsf": "0",
+     "xfm": "0",
+     "xol": "121/50",
+     "xls": "24/25",
+     "xdp": "173/100",
+     "xly": "7/100",
+     "xme": "21/100",
+     "grid": "lam0.5"
+    },
+    {
+     "xmz": "1519/25",
+     "xwh": "0",
+     "xsb": "812/25",
+     "xsf": "0",
+     "xfm": "0",
+     "xol": "3",
+     "xls": "24/25",
+     "xdp": "173/100",
+     "xly": "3/50",
+     "xme": "21/100",
+     "grid": "lam0.75"
+    },
+    {
+     "xmz": "6003/100",
+     "xwh": "0",
+     "xsb": "827/25",
+     "xsf": "0",
+     "xfm": "0",
+     "xol": "317/100",
+     "xls": "24/25",
+     "xdp": "17/10",
+     "xly": "1/20",
+     "xme": "21/100",
+     "grid": "robustLP_rounded_0.01_nomargin"
+    },
+    {
+     "xmz": "5987/100",
+     "xwh": "0",
+     "xsb": "3313/100",
+     "xsf": "0",
+     "xfm": "0",
+     "xol": "327/100",
+     "xls": "24/25",
+     "xdp": "171/100",
+     "xly": "1/20",
+     "xme": "21/100",
+     "grid": "robust_0.01_m1"
+    },
+    {
+     "xmz": "377/10",
+     "xwh": "9",
+     "xsb": "65/2",
+     "xsf": "10",
+     "xfm": "4",
+     "xol": "4",
+     "xls": "1",
+     "xdp": "1",
+     "xly": "0",
+     "xme": "0",
+     "grid": "step_nominal"
+    },
+    {
+     "xmz": "211/5",
+     "xwh": "3",
+     "xsb": "77/2",
+     "xsf": "11/2",
+     "xfm": "4",
+     "xol": "4",
+     "xls": "1",
+     "xdp": "1",
+     "xly": "0",
+     "xme": "0",
+     "grid": "step_lam0.25"
+    },
+    {
+     "xmz": "201/5",
+     "xwh": "5",
+     "xsb": "85/2",
+     "xsf": "1",
+     "xfm": "9/2",
+     "xol": "4",
+     "xls": "1",
+     "xdp": "1",
+     "xly": "0",
+     "xme": "0",
+     "grid": "step_lam0.5"
+    },
+    {
+     "xmz": "6003/100",
+     "xwh": "0",
+     "xsb": "16543/500",
+     "xsf": "0",
+     "xfm": "0",
+     "xol": "317/100",
+     "xls": "959/1000",
+     "xdp": "851/500",
+     "xly": "47/1000",
+     "xme": "103/500",
+     "grid": "cont_q0.001_m0.05_expect_fail"
+    },
+    {
+     "xmz": "60021/1000",
+     "xwh": "0",
+     "xsb": "4136/125",
+     "xsf": "0",
+     "xfm": "0",
+     "xol": "397/125",
+     "xls": "959/1000",
+     "xdp": "1703/1000",
+     "xly": "47/1000",
+     "xme": "103/500",
+     "grid": "cont_q0.001_m0.1_expect_fail"
+    },
+    {
+     "xmz": "30003/500",
+     "xwh": "0",
+     "xsb": "33093/1000",
+     "xsf": "0",
+     "xfm": "0",
+     "xol": "1593/500",
+     "xls": "959/1000",
+     "xdp": "1703/1000",
+     "xly": "47/1000",
+     "xme": "103/500",
+     "grid": "cont_q0.001_m0.2_expect_fail"
+    },
+    {
+     "xmz": "387/10",
+     "xwh": "13/2",
+     "xsb": "43",
+     "xsf": "0",
+     "xfm": "5",
+     "xol": "4",
+     "xls": "1",
+     "xdp": "1",
+     "xly": "0",
+     "xme": "0",
+     "grid": "step_best_effort_lam1"
+    }
+   ],
+   "fields": {
+    "xmz": {
+     "unit": ""
+    },
+    "xwh": {
+     "unit": ""
+    },
+    "xsb": {
+     "unit": ""
+    },
+    "xsf": {
+     "unit": ""
+    },
+    "xfm": {
+     "unit": ""
+    },
+    "xol": {
+     "unit": ""
+    },
+    "xls": {
+     "unit": ""
+    },
+    "xdp": {
+     "unit": ""
+    },
+    "xly": {
+     "unit": ""
+    },
+    "xme": {
+     "unit": ""
+    }
+   }
+  }
+ }
+}

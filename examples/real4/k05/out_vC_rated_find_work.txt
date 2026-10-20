@@ -1,0 +1,499 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "verdict": "EARNED",
+  "why": "several limits, each searched on its own; the verdict is the weakest of theirs",
+  "finds": [
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "ig",
+      "unit": "",
+      "proved": "241/5 (~48.2)",
+      "proved_means": "every ig in [45, 241/5 (~48.2)] works (EARNED on the whole range)",
+      "beyond": "4821/100 (~48.21)",
+      "beyond_is": "REFUTED: the range [45, 4821/100 (~48.21)] holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "V": [
+                "378033970763917/60000000000000 (~6.30057)",
+                "5410520681182423/750000000000000 (~7.21403)"
+              ],
+              "Tstart": [
+                "20000/19521 (~1.02454)",
+                "400/297 (~1.3468)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "V": [
+            "378033970763917/60000000000000 (~6.30057)",
+            "5410520681182423/750000000000000 (~7.21403)"
+          ],
+          "Tstart": [
+            "20000/19521 (~1.02454)",
+            "400/297 (~1.3468)"
+          ]
+        },
+        "guaranteed_unit": {
+          "V": "in/s",
+          "Tstart": "lbf*in"
+        },
+        "how": {
+          "V": "ZTL, outer range",
+          "Tstart": "outside ZTL: ZTL left it unbounded (a product of toleranced quantities); interval bound by the stand, every corner checked inside"
+        },
+        "requirements": [
+          {
+            "quantity": "V",
+            "op": "within",
+            "value": [
+              "6.3",
+              "7.7"
+            ],
+            "why": "7 in/s +-10 %"
+          },
+          {
+            "quantity": "Tstart",
+            "op": "<=",
+            "value": "Tst",
+            "why": "motor starting torque 27.8 oz-in (catalog) must cover the doubled torque"
+          }
+        ],
+        "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "F = 80067989074689/2000000000000 by exact elimination (credit)",
+          "TL = 1129848290276167/500000000000000 by exact elimination (credit)",
+          "V -> [48010314287017459/300000000000000000, 687136126510167721/3750000000000000000] by [V == pi*Dd*NM/ig], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "7 in/s +-10 %",
+            "by_at_witness": "10713045896003/14463000000000000 (~0.000740721)",
+            "unit": "in/s"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "NM": "1450",
+          "etag": "33/50 (~0.66)",
+          "ig": "4821/100 (~48.21)"
+        },
+        "point_units": {
+          "NM": "rpm",
+          "etag": "",
+          "ig": ""
+        },
+        "value_there": {
+          "V": "91106186954103997/14463000000000000 (~6.29926)"
+        },
+        "unit": "in/s",
+        "requirement": {
+          "quantity": "V",
+          "op": "within",
+          "value": [
+            "6.3",
+            "7.7"
+          ],
+          "why": "7 in/s +-10 %"
+        },
+        "overshoot": "10713045896003/14463000000000000 (~0.000740721)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "91106186954103997/14463000000000000 (~6.29926)",
+            "5410520681182423/750000000000000 (~7.21403)"
+          ],
+          "window": [
+            "63/10 (~6.3)",
+            "77/10 (~7.7)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "ig",
+              "moves_it_by": "9748362004089127679/21694500000000000000 (~0.449347)"
+            },
+            {
+              "quantity": "NM",
+              "moves_it_by": "3141592653589793/7231500000000000 (~0.434432)"
+            },
+            {
+              "quantity": "pi",
+              "moves_it_by": "29/14463000000000000 (~2.00512e-15)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+        "each_requirement": [
+          {
+            "requirement": {
+              "quantity": "V",
+              "op": "within",
+              "value": [
+                "6.3",
+                "7.7"
+              ],
+              "why": "7 in/s +-10 %"
+            },
+            "verdict": "REFUTED",
+            "overshoot": "10713045896003/14463000000000000 (~0.000740721)"
+          },
+          {
+            "requirement": {
+              "quantity": "Tstart",
+              "op": "<=",
+              "value": "Tst",
+              "why": "motor starting torque 27.8 oz-in (catalog) must cover the doubled torque"
+            },
+            "verdict": "EARNED",
+            "guaranteed": {
+              "Tstart": [
+                "400000/390501 (~1.02433)",
+                "400/297 (~1.3468)"
+              ]
+            }
+          }
+        ]
+      },
+      "tries": [
+        {
+          "ig": "45",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "80",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "125/2 (~62.5)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "215/4 (~53.75)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "2469/50 (~49.38)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "4719/100 (~47.19)",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "1207/25 (~48.28)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "2387/50 (~47.74)",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "4801/100 (~48.01)",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "2407/50 (~48.14)",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "4821/100 (~48.21)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "2409/50 (~48.18)",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "241/5 (~48.2)",
+          "verdict": "EARNED"
+        }
+      ],
+      "find_index": 0
+    },
+    {
+      "verdict": "EARNED",
+      "find": "smallest",
+      "quantity": "ig",
+      "unit": "",
+      "proved": "1054/25 (~42.16)",
+      "proved_means": "every ig in [1054/25 (~42.16), 45] works (EARNED on the whole range)",
+      "beyond": "843/20 (~42.15)",
+      "beyond_is": "REFUTED: the range [843/20 (~42.15), 45] holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "V": [
+                "91106186954103997/13500000000000000 (~6.74861)",
+                "523598775598299/68000000000000 (~7.69998)"
+              ],
+              "Tstart": [
+                "800/729 (~1.09739)",
+                "25000/17391 (~1.43753)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "V": [
+            "91106186954103997/13500000000000000 (~6.74861)",
+            "523598775598299/68000000000000 (~7.69998)"
+          ],
+          "Tstart": [
+            "800/729 (~1.09739)",
+            "25000/17391 (~1.43753)"
+          ]
+        },
+        "guaranteed_unit": {
+          "V": "in/s",
+          "Tstart": "lbf*in"
+        },
+        "how": {
+          "V": "ZTL, outer range",
+          "Tstart": "outside ZTL: ZTL left it unbounded (a product of toleranced quantities); interval bound by the stand, every corner checked inside"
+        },
+        "requirements": [
+          {
+            "quantity": "V",
+            "op": "within",
+            "value": [
+              "6.3",
+              "7.7"
+            ],
+            "why": "7 in/s +-10 %"
+          },
+          {
+            "quantity": "Tstart",
+            "op": "<=",
+            "value": "Tst",
+            "why": "motor starting torque 27.8 oz-in (catalog) must cover the doubled torque"
+          }
+        ],
+        "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "F = 80067989074689/2000000000000 by exact elimination (credit)",
+          "TL = 1129848290276167/500000000000000 by exact elimination (credit)",
+          "V -> [11570485743171207619/67500000000000000000, 66497044500983973/340000000000000000] by [V == pi*Dd*NM/ig], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "7 in/s +-10 %",
+            "by_at_witness": "1270681182423/702500000000000 (~0.0018088)",
+            "unit": "in/s"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "NM": "1550",
+          "etag": "33/50 (~0.66)",
+          "ig": "843/20 (~42.15)"
+        },
+        "point_units": {
+          "NM": "rpm",
+          "etag": "",
+          "ig": ""
+        },
+        "value_there": {
+          "V": "5410520681182423/702500000000000 (~7.70181)"
+        },
+        "unit": "in/s",
+        "requirement": {
+          "quantity": "V",
+          "op": "within",
+          "value": [
+            "6.3",
+            "7.7"
+          ],
+          "why": "7 in/s +-10 %"
+        },
+        "overshoot": "1270681182423/702500000000000 (~0.0018088)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "91106186954103997/13500000000000000 (~6.74861)",
+            "5410520681182423/702500000000000 (~7.70181)"
+          ],
+          "window": [
+            "63/10 (~6.3)",
+            "77/10 (~7.7)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "NM",
+              "moves_it_by": "174532925199433/351250000000000 (~0.496891)"
+            },
+            {
+              "quantity": "ig",
+              "moves_it_by": "102799892942466037/210750000000000000 (~0.487781)"
+            },
+            {
+              "quantity": "pi",
+              "moves_it_by": "31/12645000000000000 (~2.45156e-15)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+        "each_requirement": [
+          {
+            "requirement": {
+              "quantity": "V",
+              "op": "within",
+              "value": [
+                "6.3",
+                "7.7"
+              ],
+              "why": "7 in/s +-10 %"
+            },
+            "verdict": "REFUTED",
+            "overshoot": "1270681182423/702500000000000 (~0.0018088)"
+          },
+          {
+            "requirement": {
+              "quantity": "Tstart",
+              "op": "<=",
+              "value": "Tst",
+              "why": "motor starting torque 27.8 oz-in (catalog) must cover the doubled torque"
+            },
+            "verdict": "EARNED",
+            "guaranteed": {
+              "Tstart": [
+                "800/729 (~1.09739)",
+                "40000/27819 (~1.43787)"
+              ]
+            }
+          }
+        ]
+      },
+      "tries": [
+        {
+          "ig": "45",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "20",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "65/2 (~32.5)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "155/4 (~38.75)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "1047/25 (~41.88)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "1086/25 (~43.44)",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "2133/50 (~42.66)",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "4227/100 (~42.27)",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "1052/25 (~42.08)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "2109/50 (~42.18)",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "4213/100 (~42.13)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "1054/25 (~42.16)",
+          "verdict": "EARNED"
+        },
+        {
+          "ig": "2107/50 (~42.14)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ig": "843/20 (~42.15)",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 1
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

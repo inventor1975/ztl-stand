@@ -1,0 +1,94 @@
+{
+  "verdict": "OPEN",
+  "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point",
+  "refuted_inside_the_enclosures": {
+    "its_violating_point": {
+      "DIV_Vout_e": "-1062622/5666525 (~-0.187526)",
+      "REF_Vo_e": "10149/8000 (~1.26862)"
+    }
+  },
+  "components": {
+    "REF": {
+      "inputs": {},
+      "bands_used": [
+        {
+          "band": {},
+          "earned": true,
+          "outputs": {
+            "Vo": [
+              "10149/8000",
+              "10251/8000"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "Vo": [
+          "10149/8000",
+          "10251/8000"
+        ]
+      },
+      "outputs_affine": {
+        "Vo": {
+          "slope": {},
+          "remainder": [
+            "10149/8000",
+            "10251/8000"
+          ]
+        }
+      }
+    },
+    "DIV": {
+      "inputs": {
+        "Vr": {
+          "from": "REF.Vo",
+          "arrives": [
+            "10149/8000",
+            "10251/8000"
+          ],
+          "assume": [
+            "6/5",
+            "27/20"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "Vr": [
+              "249/200",
+              "261/200"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "Vout": [
+              "181687/56950",
+              "577071/169150"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "Vout": [
+          "181687/56950",
+          "577071/169150"
+        ]
+      },
+      "outputs_affine": {
+        "Vout": {
+          "slope": {
+            "Vr": "103532/39999"
+          },
+          "remainder": [
+            "-1062622/5666525",
+            "1071422/5666525"
+          ]
+        }
+      }
+    }
+  },
+  "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

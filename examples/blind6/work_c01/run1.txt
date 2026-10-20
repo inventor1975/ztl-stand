@@ -1,0 +1,76 @@
+[stand] 1/5 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 5,
+  "notes": [],
+  "combinations_proved_without_mix": 2,
+  "verdict": "EARNED",
+  "design": {
+    "RP": {
+      "catalog": "ropes",
+      "name": "W-10",
+      "d": {
+        "nominal": "10",
+        "tolerance": "0"
+      },
+      "MBF": {
+        "nominal": "55",
+        "tolerance": "0"
+      },
+      "mu": {
+        "nominal": "37/100 (~0.37)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "16/5 (~3.2)",
+        "tolerance": "0"
+      }
+    },
+    "DR": {
+      "catalog": "drum",
+      "D": "2059452/9738227 (~0.211481)"
+    }
+  },
+  "objective": {
+    "minimize": "RP.price*Lr + Kd0 + Kd1*DR.D*DR.D",
+    "value": "703845705482285476/474165325517645 (~1484.39)",
+    "unit": "EUR",
+    "lower_bound": "17524469532100987675739337/11805916207174113034240 (~1484.38)",
+    "gap": "~0.0085069424683 (an exact fraction of 36 digits)",
+    "lower_bound_is": "proved by ZTL: no mix in the continuous box costs less — zmin: the amounts' box of 3 combination(s) split in 26 pieces, 14 with the objective >= L, 12 failing a requirement at one point of its data; 2 combination(s) proved to have no mix at all (a split of the amounts, zmin)",
+    "optimal": false,
+    "optimal_means": "true only at a zero gap; otherwise the mix is PROVED to cost at most `gap` above the cheapest possible (blind test 4, c03: optimal false at a 0.00093 EUR gap)"
+  },
+  "guaranteed": {
+    "Dm": [
+      "~0.0271728035942 (an exact fraction of 80 digits)",
+      "~0.0999999898191 (an exact fraction of 79 digits)"
+    ],
+    "SFC": [
+      "1839200000/339746787 (~5.41344)",
+      "831250000/112649211 (~7.3791)"
+    ],
+    "RP_d_req": [
+      "10",
+      "10"
+    ],
+    "Rdd": [
+      "205945200/9738227 (~21.1481)",
+      "205945200/9738227 (~21.1481)"
+    ]
+  },
+  "how": {
+    "Dm": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide)",
+    "SFC": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide)",
+    "RP_d_req": "ZTL, outer range",
+    "Rdd": "ZTL, outer range"
+  },
+  "mix_verdict_checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	0m5.675s
+user	0m5.593s
+sys	0m0.065s

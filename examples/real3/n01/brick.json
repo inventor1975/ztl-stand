@@ -1,0 +1,86 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "published claim: offset <= 5 mV (0.1 % elements, 5 V)",
+ "quantities": {
+  "V": {
+   "role": "given",
+   "value": "5",
+   "unit": "V"
+  },
+  "R1": {
+   "role": "given",
+   "value": "10000",
+   "tolerance": "0.001",
+   "unit": "ohm"
+  },
+  "R2": {
+   "role": "given",
+   "value": "10000",
+   "tolerance": "0.001",
+   "unit": "ohm"
+  },
+  "R3": {
+   "role": "given",
+   "value": "10000",
+   "tolerance": "0.001",
+   "unit": "ohm"
+  },
+  "R4": {
+   "role": "given",
+   "value": "10000",
+   "tolerance": "0.001",
+   "unit": "ohm"
+  },
+  "Rm": {
+   "role": "given",
+   "value": "1000000000",
+   "unit": "ohm"
+  }
+ },
+ "network": {
+  "branches": {
+   "b1": {
+    "from": "a",
+    "to": "n1",
+    "R": "R1"
+   },
+   "b2": {
+    "from": "n1",
+    "to": "gnd",
+    "R": "R2"
+   },
+   "b3": {
+    "from": "a",
+    "to": "n2",
+    "R": "R3"
+   },
+   "b4": {
+    "from": "n2",
+    "to": "gnd",
+    "R": "R4"
+   },
+   "b5": {
+    "from": "n1",
+    "to": "n2",
+    "R": "Rm"
+   }
+  },
+  "source": {
+   "from": "a",
+   "to": "gnd",
+   "V": "V"
+  }
+ },
+ "requirements": [
+  {
+   "quantity": "I(b5)",
+   "op": "within",
+   "value": [
+    "-0.000005",
+    "0.000005"
+   ],
+   "unit": "uA",
+   "why": "detector current times Rm = offset bound"
+  }
+ ]
+}

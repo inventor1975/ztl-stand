@@ -1,0 +1,236 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "PL=plates(name=O100, d=100, price=3/5); PA=pondA(A=610); PH=pondH(H=2)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Qp1": [
+          "145240256537603083453840257677/10000000000000000000000000000000 (~0.014524)",
+          "1117680398091942564768951861/62500000000000000000000000000 (~0.0178829)"
+        ],
+        "Qp2": [
+          "346857286520607336719918230649/20000000000000000000000000000000 (~0.0173429)",
+          "3366557444291122036675878759/156250000000000000000000000000 (~0.021546)"
+        ],
+        "Qp3": [
+          "192709893829664827139390607923/10000000000000000000000000000000 (~0.019271)",
+          "188164524553651878067805733/7812500000000000000000000000 (~0.0240851)"
+        ],
+        "Qp4": [
+          "353337091684230410936919436567/20000000000000000000000000000000 (~0.0176669)",
+          "339312582381238196303622429/15625000000000000000000000000 (~0.021716)"
+        ],
+        "M4": [
+          "~1.04869196899 (an exact fraction of 65 digits)",
+          "~1.23337369699 (an exact fraction of 62 digits)"
+        ],
+        "Qp5": [
+          "424713398776664539304047846483/20000000000000000000000000000000 (~0.0212357)",
+          "1639668385524615383267666847/62500000000000000000000000000 (~0.0262347)"
+        ],
+        "M5": [
+          "~0.611604179036 (an exact fraction of 64 digits)",
+          "~0.892363699891 (an exact fraction of 61 digits)"
+        ],
+        "Qp6": [
+          "484686591896175395819731224833/20000000000000000000000000000000 (~0.0242343)",
+          "9286997887139569200613223433/312500000000000000000000000000 (~0.0297184)"
+        ],
+        "M6": [
+          "~0.218392893369 (an exact fraction of 63 digits)",
+          "~0.557461983339 (an exact fraction of 60 digits)"
+        ],
+        "PL_d_req": [
+          "100",
+          "100"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "objective": {
+    "minimize": "cp*PA.A*PH.H + PL.price",
+    "value": "147",
+    "unit": "kEUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "PL": {
+      "catalog": "plates",
+      "name": "O100",
+      "d": {
+        "nominal": "100",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "3/5 (~0.6)",
+        "tolerance": "0"
+      }
+    },
+    "PA": {
+      "catalog": "pondA",
+      "A": {
+        "nominal": "610",
+        "tolerance": "0"
+      }
+    },
+    "PH": {
+      "catalog": "pondH",
+      "H": {
+        "nominal": "2",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Qp1": [
+      "145240256537603083453840257677/10000000000000000000000000000000 (~0.014524)",
+      "1117680398091942564768951861/62500000000000000000000000000 (~0.0178829)"
+    ],
+    "Qp2": [
+      "346857286520607336719918230649/20000000000000000000000000000000 (~0.0173429)",
+      "3366557444291122036675878759/156250000000000000000000000000 (~0.021546)"
+    ],
+    "Qp3": [
+      "192709893829664827139390607923/10000000000000000000000000000000 (~0.019271)",
+      "188164524553651878067805733/7812500000000000000000000000 (~0.0240851)"
+    ],
+    "Qp4": [
+      "353337091684230410936919436567/20000000000000000000000000000000 (~0.0176669)",
+      "339312582381238196303622429/15625000000000000000000000000 (~0.021716)"
+    ],
+    "M4": [
+      "~1.04869196899 (an exact fraction of 65 digits)",
+      "~1.23337369699 (an exact fraction of 62 digits)"
+    ],
+    "Qp5": [
+      "424713398776664539304047846483/20000000000000000000000000000000 (~0.0212357)",
+      "1639668385524615383267666847/62500000000000000000000000000 (~0.0262347)"
+    ],
+    "M5": [
+      "~0.611604179036 (an exact fraction of 64 digits)",
+      "~0.892363699891 (an exact fraction of 61 digits)"
+    ],
+    "Qp6": [
+      "484686591896175395819731224833/20000000000000000000000000000000 (~0.0242343)",
+      "9286997887139569200613223433/312500000000000000000000000000 (~0.0297184)"
+    ],
+    "M6": [
+      "~0.218392893369 (an exact fraction of 63 digits)",
+      "~0.557461983339 (an exact fraction of 60 digits)"
+    ],
+    "PL_d_req": [
+      "100",
+      "100"
+    ]
+  },
+  "guaranteed_unit": {
+    "Qp1": "m^3/s",
+    "Qp2": "m^3/s",
+    "Qp3": "m^3/s",
+    "Qp4": "m^3/s",
+    "M4": "m",
+    "Qp5": "m^3/s",
+    "M5": "m",
+    "Qp6": "m^3/s",
+    "M6": "m",
+    "PL_d_req": "mm"
+  },
+  "how": {
+    "Qp1": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Qp2": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Qp3": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Qp4": "ZTL, interval reading of the definition (sound, may be wide)",
+    "M4": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Qp5": "ZTL, interval reading of the definition (sound, may be wide)",
+    "M5": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Qp6": "ZTL, interval reading of the definition (sound, may be wide)",
+    "M6": "ZTL, interval reading of the definition (sound, may be wide)",
+    "PL_d_req": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "Qp1",
+      "op": "<=",
+      "value": "0.025",
+      "why": "R1: 10-year Qpeak <= 25 L/s (storm 900s)"
+    },
+    {
+      "quantity": "Qp2",
+      "op": "<=",
+      "value": "0.025",
+      "why": "R1: 10-year Qpeak <= 25 L/s (storm 1800s)"
+    },
+    {
+      "quantity": "Qp3",
+      "op": "<=",
+      "value": "0.025",
+      "why": "R1: 10-year Qpeak <= 25 L/s (storm 3600s)"
+    },
+    {
+      "quantity": "Qp4",
+      "op": "<=",
+      "value": "0.045",
+      "why": "R2: 100-year Qpeak <= 45 L/s (storm 900s)"
+    },
+    {
+      "quantity": "M4",
+      "op": ">=",
+      "value": "fb",
+      "why": "R3: h <= H - 0.30 m (storm 900s)"
+    },
+    {
+      "quantity": "Qp5",
+      "op": "<=",
+      "value": "0.045",
+      "why": "R2: 100-year Qpeak <= 45 L/s (storm 1800s)"
+    },
+    {
+      "quantity": "M5",
+      "op": ">=",
+      "value": "fb",
+      "why": "R3: h <= H - 0.30 m (storm 1800s)"
+    },
+    {
+      "quantity": "Qp6",
+      "op": "<=",
+      "value": "0.045",
+      "why": "R2: 100-year Qpeak <= 45 L/s (storm 3600s)"
+    },
+    {
+      "quantity": "M6",
+      "op": ">=",
+      "value": "fb",
+      "why": "R3: h <= H - 0.30 m (storm 3600s)"
+    },
+    {
+      "quantity": "PL_d_req",
+      "op": ">=",
+      "value": "80",
+      "why": "R4: d >= 80 mm (clogging)"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "PL_d_req = 1/10 by exact elimination (credit)",
+    "s1 -> [2744286715154137600827563333713/3812500000000000000000000000000, 97989172644370103974590675371793/122000000000000000000000000000000] by [s1 == (sqrt((Cd*(pi*PL__d*PL__d/4)*sqrt(1.2*g)*t1)*(Cd*(pi*PL__d*PL__d/4)*sqrt(1.2*g)*t1) + 4*PA__A*(C*i1*Ac)*t1) - (Cd*(pi*PL__d*PL__d/4)*sqrt(1.2*g)*t1))/(2*PA__A)], interval reading, sound, may be wider than the truth (credit)",
+    "h1 -> [7531109574971486765489868525048272298487902888906174202366369/14535156250000000000000000000000000000000000000000000000000000, 9601877955528170315260929533430374144942621931005606798780034849/14884000000000000000000000000000000000000000000000000000000000000] by [h1 == s1*s1], interval reading, sound, may be wider than the truth (credit)",
+    "Qp1 -> [145240256537603083453840257677/10000000000000000000000000000000, 1117680398091942564768951861/62500000000000000000000000000] by [Qp1 == Cd*(pi*PL__d*PL__d/4)*sqrt(2*g*h1)], interval reading, sound, may be wider than the truth (credit)",
+    "s2 -> [1638450430591284475827563333713/1906250000000000000000000000000, 59030502671251453974590675371793/61000000000000000000000000000000] by [s2 == (sqrt((Cd*(pi*PL__d*PL__d/4)*sqrt(1.2*g)*t2)*(Cd*(pi*PL__d*PL__d/4)*sqrt(1.2*g)*t2) + 4*PA__A*(C*i2*Ac)*t2) - (Cd*(pi*PL__d*PL__d/4)*sqrt(1.2*g)*t2))/(2*PA__A)], interval reading, sound, may be wider than the truth (credit)",
+    "h2 -> [2684519813504765507693608831303273021472343082656174202366369/3633789062500000000000000000000000000000000000000000000000000, 3484600245620625043278480086433978657133717452105606798780034849/3721000000000000000000000000000000000000000000000000000000000000] by [h2 == s2*s2], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

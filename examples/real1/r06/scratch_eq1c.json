@@ -1,0 +1,231 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "Q": {
+   "role": "given",
+   "range": [
+    "37.85411784",
+    "227.12470704"
+   ],
+   "unit": "L/min",
+   "why": "plant flow 10 to 60 gpm (Table 2 columns), 1 US gal = 3.785411784 L"
+  },
+  "D": {
+   "role": "given",
+   "range": [
+    "1",
+    "3/2"
+   ],
+   "unit": "mg/L",
+   "why": "target dose as Cl2, 1.0 to 1.5 mg/L (doc Eq.1C example uses 1.3 and 1.5; Table 2 is per 1 mg/L)"
+  },
+  "wf": {
+   "role": "given",
+   "value": "0.125",
+   "unit": "",
+   "ground": "CA SWRCB DDW Feb 2018: 12.5% NaOCl w/w",
+   "tolerance": "0.04",
+   "why": "ASSUMED +-4% relative on the labelled trade strength (doc has none)"
+  },
+  "rho": {
+   "role": "given",
+   "value": "1.2",
+   "unit": "kg/L",
+   "ground": "same doc: specific gravity 1.2",
+   "tolerance": "0.02",
+   "why": "ASSUMED +-2% on specific gravity (doc has none)"
+  },
+  "Vw": {
+   "role": "given",
+   "value": "37854.11784",
+   "unit": "mL",
+   "ground": "doc: 10 gallons of water per batch"
+  },
+  "fCl": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "ground": "Eq.1C of the doc (omits the Cl2/NaOCl factor)"
+  },
+  "Qf": {
+   "role": "derived",
+   "unit": "mL/min",
+   "why": "metering-pump feed rate of the dilute solution"
+  }
+ },
+ "slots": {
+  "SOL": {
+   "from": [
+    "bleach"
+   ]
+  }
+ },
+ "define": {
+  "SW": "SOL.Vb*rho*wf/(Vw+SOL.Vb)"
+ },
+ "laws": [
+  {
+   "zfl": "Qf == D*Q/(fCl*SW)",
+   "source": "Cl2 mass balance: dose*flow = feed * strength(as NaOCl) * 0.9525; strength SW = NaOCl mass / (water + bleach volume)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Qf",
+   "op": ">=",
+   "value": "8",
+   "why": "ASSUMED metering pump minimum controllable output 8 mL/min (not in the doc)"
+  },
+  {
+   "quantity": "Qf",
+   "op": "<=",
+   "value": "100",
+   "why": "ASSUMED metering pump maximum output 100 mL/min (not in the doc)"
+  }
+ ],
+ "report": "all",
+ "catalog": {
+  "bleach": {
+   "ground": "CA SWRCB DDW Table 1/2 rows: volume of 12.5% NaOCl added to 10 gal water; 1 US fl oz = 29.5735295625 mL",
+   "items": [
+    {
+     "name": "4 oz",
+     "Vb": "118.2941182500"
+    },
+    {
+     "name": "8 oz",
+     "Vb": "236.5882365000"
+    },
+    {
+     "name": "12 oz",
+     "Vb": "354.8823547500"
+    },
+    {
+     "name": "16 oz",
+     "Vb": "473.1764730000"
+    },
+    {
+     "name": "20 oz",
+     "Vb": "591.4705912500"
+    },
+    {
+     "name": "24 oz",
+     "Vb": "709.7647095000"
+    },
+    {
+     "name": "28 oz",
+     "Vb": "828.0588277500"
+    },
+    {
+     "name": "32 oz",
+     "Vb": "946.3529460000"
+    },
+    {
+     "name": "36 oz",
+     "Vb": "1064.6470642500"
+    },
+    {
+     "name": "40 oz",
+     "Vb": "1182.9411825000"
+    },
+    {
+     "name": "44 oz",
+     "Vb": "1301.2353007500"
+    },
+    {
+     "name": "48 oz",
+     "Vb": "1419.5294190000"
+    },
+    {
+     "name": "58 oz",
+     "Vb": "1715.2647146250"
+    },
+    {
+     "name": "70 oz",
+     "Vb": "2070.1470693750"
+    },
+    {
+     "name": "82 oz",
+     "Vb": "2425.0294241250"
+    },
+    {
+     "name": "94 oz",
+     "Vb": "2779.9117788750"
+    },
+    {
+     "name": "106 oz",
+     "Vb": "3134.7941336250"
+    },
+    {
+     "name": "118 oz",
+     "Vb": "3489.6764883750"
+    },
+    {
+     "name": "130 oz",
+     "Vb": "3844.5588431250"
+    },
+    {
+     "name": "142 oz",
+     "Vb": "4199.4411978750"
+    },
+    {
+     "name": "154 oz",
+     "Vb": "4554.3235526250"
+    },
+    {
+     "name": "166 oz",
+     "Vb": "4909.2059073750"
+    },
+    {
+     "name": "178 oz",
+     "Vb": "5264.0882621250"
+    },
+    {
+     "name": "190 oz",
+     "Vb": "5618.9706168750"
+    },
+    {
+     "name": "204 oz",
+     "Vb": "6033.0000307500"
+    },
+    {
+     "name": "222 oz",
+     "Vb": "6565.3235628750"
+    },
+    {
+     "name": "240 oz",
+     "Vb": "7097.6470950000"
+    },
+    {
+     "name": "260 oz",
+     "Vb": "7689.1176862500"
+    },
+    {
+     "name": "282 oz",
+     "Vb": "8339.7353366250"
+    },
+    {
+     "name": "306 oz",
+     "Vb": "9049.5000461250"
+    },
+    {
+     "name": "330 oz",
+     "Vb": "9759.2647556250"
+    },
+    {
+     "name": "354 oz",
+     "Vb": "10469.0294651250"
+    },
+    {
+     "name": "384 oz",
+     "Vb": "11356.2353520000"
+    }
+   ],
+   "fields": {
+    "Vb": {
+     "unit": "mL"
+    }
+   }
+  }
+ }
+}

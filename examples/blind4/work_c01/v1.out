@@ -1,0 +1,1703 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "verdict": "EARNED",
+  "modes": [
+    "hot lane",
+    "cold lane"
+  ],
+  "designs_tried": 332,
+  "undecided": 0,
+  "design": {
+    "INS": {
+      "catalog": "insulation",
+      "name": "VIP-40",
+      "t": {
+        "nominal": "40",
+        "tolerance": "0"
+      },
+      "k": {
+        "range": [
+          "11/2000 (~0.0055)",
+          "19/2000 (~0.0095)"
+        ]
+      },
+      "price": {
+        "nominal": "68",
+        "tolerance": "0"
+      },
+      "rho": {
+        "nominal": "180",
+        "tolerance": "0"
+      }
+    },
+    "PCM": {
+      "catalog": "pcm",
+      "N": {
+        "nominal": "13",
+        "tolerance": "0"
+      }
+    }
+  },
+  "per_mode": {
+    "hot lane": {
+      "guaranteed": {
+        "Vmargin": [
+          "160671/5750 (~27.9428)",
+          "160671/5750 (~27.9428)"
+        ],
+        "Mtot": [
+          "135991/6250 (~21.7586)",
+          "135991/6250 (~21.7586)"
+        ],
+        "Tend": [
+          "5",
+          "140205195836320915137/18446744073709551616 (~7.60054)"
+        ]
+      },
+      "how": {
+        "Vmargin": "ZTL, outer range",
+        "Mtot": "ZTL, outer range",
+        "Tend": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['5', '~7.60053889597 (~7.60054)']"
+      }
+    },
+    "cold lane": {
+      "guaranteed": {
+        "Vmargin": [
+          "160671/5750 (~27.9428)",
+          "160671/5750 (~27.9428)"
+        ],
+        "Mtot": [
+          "135991/6250 (~21.7586)",
+          "135991/6250 (~21.7586)"
+        ],
+        "Tend": [
+          "59393982623107902655/18446744073709551616 (~3.21975)",
+          "5"
+        ]
+      },
+      "how": {
+        "Vmargin": "ZTL, outer range",
+        "Mtot": "ZTL, outer range",
+        "Tend": "outside ZTL: interval bound over ZTL's ranges (sound, may be wide); checker's own bound ['~3.21975424963 (~3.21975)', '5']"
+      }
+    }
+  },
+  "objective": {
+    "minimize": "INS.price + ppcm*m",
+    "value": "441/4 (~110.25)",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode",
+    "ties": {
+      "same_objective": 1,
+      "first": [
+        "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=29)"
+      ],
+      "note": "these cost the same; they were not all judged — \"report\": \"all\" shows which pass"
+    }
+  },
+  "designs": [
+    {
+      "design": "INS=insulation(name=VIP-40, t=40, k=[11/2000,19/2000], price=68, rho=180); PCM=pcm(N=13)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.9657604299 (an exact fraction of 63 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.7675230316 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.2662666703 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.8807879502 (an exact fraction of 63 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.9481405739 (an exact fraction of 63 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.4210894186 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.6785841015 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.3288221786 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.0395909913 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.8298547038 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.9243626585 (an exact fraction of 63 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.0073685728 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.5685156875 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.2468320401 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.117736194 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.7732804236 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.7648882666 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.8932440997 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.769951121 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.5378852777 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.4353996653 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.7984532188 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.8835866258 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.8687388137 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.4661183964 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.6841250129 (an exact fraction of 63 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.8535881541 (an exact fraction of 63 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.0601827303 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.0132428271 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.2775864082 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.2920477437 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.0366921957 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.5804878976 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.1174298431 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.5859341376 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.8042121223 (an exact fraction of 63 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.2804497823 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.4346630794 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.0937101767 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.7285856174 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~16.1164849102 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.2521642101 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.7270297349 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.4688474377 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.7439723016 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~16.4344816506 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.8038675829 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.8826922227 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.1096479714 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.1280588281 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.8834270855 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.2951651372 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.3315792621 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=7)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.6717850264 (an exact fraction of 63 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.5264345618 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.1229681438 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=7)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.6437342852 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.4372993485 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~14.0767787962 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.4743624574 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=7)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.8224551999 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=7)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.1730377433 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=8)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.5866435434 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~14.5607281017 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=7)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~16.3943692311 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=8)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.3763049681 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~16.7139723475 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~12.9681162113 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=7)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.0254276675 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=8)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.3098322034 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=8)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.9923286613 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=9)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.487630773 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~13.5419124486 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=8)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.620683091 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=9)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.080121179 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=7)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.9423664266 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~11.8075220392 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=8)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.5373962664 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=9)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.7584857475 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=9)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.7887533429 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=10)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.3739282186 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=7)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~12.4745631433 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=9)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~14.804657453 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=10)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.7551264484 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=8)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.125361207 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.8051517028 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=7)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~10.6003314153 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=9)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.0113050152 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=10)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.1698113575 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=10)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.5618019425 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=11)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.2448214137 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=8)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~11.3631997085 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=10)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~13.9491151005 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=11)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.401467589 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=9)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~14.2659437001 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.1010843618 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=8)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~9.35169432984 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=10)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.4484045043 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=11)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~16.5453641836 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=11)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.3111433147 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=12)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~21.099702368 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=9)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~10.2122244003 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=11)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~13.0569042389 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=12)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.0194708273 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=10)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~13.3671483553 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.3272302552 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=9)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~8.06652741517 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=11)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~16.8501142014 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=12)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.886818037 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=12)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.0366125275 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=13)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.9380694914 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=10)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~9.02587760976 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=12)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~12.1308584481 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=13)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.6096182519 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=11)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~12.4320085666 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~16.4872603102 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=10)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~6.74948248933 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=12)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~16.2179823014 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=13)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.1959297092 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=13)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.7381968923 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=14)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.7595254647 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=11)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~7.80820679896 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=13)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~11.1737649741 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=14)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.1725251823 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=12)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~11.4635181907 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.5852781234 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=11)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~5.4049281849 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=13)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.5536504378 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-30, t=30, k=[11/2000,19/2000], price=52, rho=180); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.1955510293 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=14)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~14.4745083275 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=14)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.4160212184 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=15)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.5637734953 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=12)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~6.56304626714 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=14)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~10.1883401628 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=15)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.7089188664 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=13)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~10.4646016568 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~14.6256567362 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=12)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~4.03694161978 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=14)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~14.858823105 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-30, t=30, k=[11/2000,19/2000], price=52, rho=180); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~13.9896555568 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=15)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~13.7243893818 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=15)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.0703328501 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=16)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.3506123501 (an exact fraction of 62 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=13)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~5.29400545577 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=15)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~9.17721092689 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=16)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.2196187626 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=14)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~9.43809134193 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~13.6129058171 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=13)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~2.64930763288 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=15)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~14.1352415096 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-30, t=30, k=[11/2000,19/2000], price=52, rho=180); PCM=pcm(N=2)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~12.7088865434 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=16)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~12.9474129967 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=16)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.7014869094 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=17)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~20.1199305098 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=14)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~4.00446388135 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=16)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~8.1429012497 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=17)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~16.7055185407 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=15)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~8.38671100901 (an exact fraction of 59 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=7)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~12.5515661688 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=14)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~1.2455235954 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=16)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~13.3846614893 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-30, t=30, k=[11/2000,19/2000], price=52, rho=180); PCM=pcm(N=3)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~11.3614388389 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=17)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~12.1454059986 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=17)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~18.3099320578 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=18)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.8716997375 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=15)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~2.69757112697 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=17)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~7.08782284678 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=18)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~16.1675698504 (an exact fraction of 59 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=16)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~7.31306424474 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=8)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~11.4461279563 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=15)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~2.82247582207 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=17)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~12.6088351055 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-30, t=30, k=[11/2000,19/2000], price=52, rho=180); PCM=pcm(N=4)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~9.95527843358 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=18)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~11.3201673305 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=18)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.8961969948 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=19)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.605968306 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=16)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~1.37625061815 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=18)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~6.0142692217 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=19)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.60676784 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=17)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~6.21962697493 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=9)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~10.3009689945 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=16)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~1.75411528924 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=18)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~11.8094955019 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-40, t=40, k=[11/2000,19/2000], price=68, rho=180); PCM=pcm(N=0)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~12.0694293759 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-30, t=30, k=[11/2000,19/2000], price=52, rho=180); PCM=pcm(N=5)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~8.49801796745 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=19)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~10.4734563867 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=19)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.4608778365 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-30, t=30, k=[7/200,41/1000], price=4, rho=20); PCM=pcm(N=20)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~19.3228540837 (an exact fraction of 59 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-55, t=55, k=[23/1000,27/1000], price=29/2, rho=40); PCM=pcm(N=17)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~0.0432061599092 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-60, t=60, k=[7/200,41/1000], price=17/2, rho=20); PCM=pcm(N=19)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~4.92441246327 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-40, t=40, k=[7/200,41/1000], price=11/2, rho=20); PCM=pcm(N=20)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~15.0241383608 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-45, t=45, k=[23/1000,27/1000], price=12, rho=40); PCM=pcm(N=18)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~5.10874326581 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-20, t=20, k=[11/2000,19/2000], price=38, rho=180); PCM=pcm(N=10)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~9.12030965892 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-80, t=80, k=[7/200,41/1000], price=16, rho=20); PCM=pcm(N=17)",
+      "verdict": "REFUTED",
+      "mode": "hot lane",
+      "fails": "R1 hot lane T(48h) <= 8 C",
+      "by": "~0.456558976034 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-35, t=35, k=[23/1000,27/1000], price=19/2, rho=40); PCM=pcm(N=19)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~10.9883446374 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-40, t=40, k=[11/2000,19/2000], price=68, rho=180); PCM=pcm(N=1)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~10.518086268 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=VIP-30, t=30, k=[11/2000,19/2000], price=52, rho=180); PCM=pcm(N=6)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~6.99683645863 (an exact fraction of 61 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=EPS-50, t=50, k=[7/200,41/1000], price=7, rho=20); PCM=pcm(N=20)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~9.60698386892 (an exact fraction of 60 digits)",
+      "unit": "C"
+    },
+    {
+      "design": "INS=insulation(name=PU-25, t=25, k=[23/1000,27/1000], price=7, rho=40); PCM=pcm(N=20)",
+      "verdict": "REFUTED",
+      "mode": "cold lane",
+      "fails": "R2 cold lane T(48h) >= 2 C",
+      "by": "~17.0046264605 (an exact fraction of 61 digits)",
+      "unit": "C"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 331,
+    "EARNED": 1
+  },
+  "designs_not_listed": 132,
+  "listing": "earned first, then open, then refuted"
+}

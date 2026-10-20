@@ -1,0 +1,63 @@
+{
+  "stand": "universal-stand/1",
+  "report": "all",
+  "quantities": {
+    "ET0_may": {"role": "given", "value": "4.2", "tolerance": "0.1", "unit": "mm/day", "why": "May ET0 +-10%"},
+    "ET0_jun": {"role": "given", "value": "5.6", "tolerance": "0.1", "unit": "mm/day"},
+    "ET0_jul": {"role": "given", "value": "6.8", "tolerance": "0.1", "unit": "mm/day", "why": "also the peak-period ET0"},
+    "ET0_aug": {"role": "given", "value": "6.1", "tolerance": "0.1", "unit": "mm/day"},
+    "S_may": {"role": "given", "value": "1133/100", "unit": "day", "ground": "sum of daily Kc over the 31 May days (days 1-31), computed outside the stand", "why": "Kc piecewise linear, summed per month"},
+    "S_jun": {"role": "given", "value": "1261/50", "unit": "day", "ground": "sum of daily Kc over the 30 June days (days 32-61), computed outside the stand"},
+    "S_jul": {"role": "given", "value": "713/20", "unit": "day", "ground": "sum of daily Kc over the 31 July days (days 62-92), computed outside the stand"},
+    "S_aug": {"role": "given", "value": "1057/40", "unit": "day", "ground": "sum of daily Kc over the 28 August days (days 93-120), computed outside the stand"},
+    "Rain": {"role": "given", "range": ["60", "180"], "unit": "mm", "why": "seasonal rainfall"},
+    "feff": {"role": "given", "range": ["0.7", "0.8"], "unit": "", "why": "effective fraction of rain"},
+    "Store": {"role": "given", "value": "40", "unit": "mm", "ground": "problem statement: readily available soil store, fully credited"},
+    "A": {"role": "given", "value": "120000", "unit": "m^2", "ground": "12 ha"},
+    "Lic": {"role": "given", "value": "0.65", "unit": "m", "ground": "licence 6500 m3/ha = 0.65 m3/m2"},
+    "Elim": {"role": "given", "value": "0.28", "unit": "kWh/m^2", "ground": "2800 kWh/ha = 0.28 kWh/m2"},
+    "Kcpk": {"role": "given", "value": "1.15", "unit": "", "ground": "peak crop coefficient"},
+    "Hrun": {"role": "given", "value": "18", "unit": "h/day", "ground": "pump may run at most 18 h/day"},
+    "Pel": {"role": "given", "value": "0.14", "unit": "USD/kWh", "ground": "electricity price"},
+    "Nyr": {"role": "given", "value": "10", "unit": "", "ground": "10 seasons"},
+    "Hnet": {"role": "derived", "unit": "mm", "why": "net irrigation depth, never negative"},
+    "Vg": {"role": "derived", "unit": "m^3", "why": "seasonal gross volume"},
+    "Qreq": {"role": "derived", "unit": "m^3/h", "why": "pump flow needed on the peak day"},
+    "Etot": {"role": "derived", "unit": "kWh", "why": "seasonal pump energy"},
+    "Cost10": {"role": "derived", "unit": "USD", "why": "capex + 10 seasons of electricity"}
+  },
+  "slots": {"SYS": {"from": ["systems"]}},
+  "define": {
+    "ETc": "ET0_may*S_may + ET0_jun*S_jun + ET0_jul*S_jul + ET0_aug*S_aug",
+    "Pe": "Rain*feff"
+  },
+  "laws": [
+    {"zfl": "Hnet == max(ETc - Pe - Store, 0)", "source": "seasonal water balance: net = crop demand - effective rain - usable soil store"},
+    {"zfl": "Vg == Hnet*A/SYS.eff", "source": "gross water = net / efficiency"},
+    {"zfl": "Qreq == Kcpk*ET0_jul*A/(SYS.eff*SYS.areafrac*Hrun)", "source": "peak day: 100% of demand, no rain, pump <= 18 h/day; furrow area fraction divides the usable rate"},
+    {"zfl": "Etot == SYS.kW*Vg/SYS.Q", "source": "pump runs at rated flow and listed power: hours = V/Q, energy = kW*hours"},
+    {"zfl": "Cost10 == SYS.capex + Nyr*Pel*Etot", "source": "capex + 10 seasons of electricity"}
+  ],
+  "requirements": [
+    {"quantity": "Vg", "op": "<=", "value": "Lic*A", "why": "water licence 6500 m3/ha"},
+    {"quantity": "Qreq", "op": "<=", "value": "SYS.Q", "why": "peak-demand delivery within 18 h/day"},
+    {"quantity": "Etot", "op": "<=", "value": "Elim*A", "why": "<= 2800 kWh/ha/season"}
+  ],
+  "objective": {"minimize": "Cost10", "case": "worst", "why": "lowest 10-year cost"},
+  "catalog": {
+    "systems": {
+      "ground": "problem statement catalog",
+      "items": [
+        {"combo": "drip+P1",      "eff": {"range": ["0.87", "0.93"]}, "Q": "70",  "kW": "11", "capex": "38000", "areafrac": "1"},
+        {"combo": "drip+P2",      "eff": {"range": ["0.87", "0.93"]}, "Q": "110", "kW": "15", "capex": "41000", "areafrac": "1"},
+        {"combo": "sprinkler+P2", "eff": {"range": ["0.70", "0.80"]}, "Q": "110", "kW": "15", "capex": "29000", "areafrac": "1"},
+        {"combo": "sprinkler+P3", "eff": {"range": ["0.70", "0.80"]}, "Q": "160", "kW": "22", "capex": "32000", "areafrac": "1"},
+        {"combo": "furrow+P3",    "eff": {"range": ["0.47", "0.63"]}, "Q": "160", "kW": "22", "capex": "14000", "areafrac": "0.8"}
+      ],
+      "fields": {
+        "eff": {"unit": ""}, "Q": {"unit": "m^3/h"}, "kW": {"unit": "kW"},
+        "capex": {"unit": "USD"}, "areafrac": {"unit": ""}
+      }
+    }
+  }
+}

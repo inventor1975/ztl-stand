@@ -1,0 +1,60 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683 + the network certificate (ustand/znet.py)",
+  "verdict": "REFUTED",
+  "network": {
+    "nodes": 4,
+    "branches": 5,
+    "free_branches": 4
+  },
+  "units": "checked: every branch one kind, the current's unit = the source's x a conductance",
+  "requirements": [
+    {
+      "requirement": {
+        "quantity": "I(b5)",
+        "op": "within",
+        "value": [
+          "-0.000004999",
+          "0.000004999"
+        ],
+        "unit": "uA",
+        "why": "detector current times Rm = offset bound"
+      },
+      "proved_range": [
+        "~-4.99995000065e-06 (an exact fraction of 41 digits)",
+        "~4.99995000073e-06 (an exact fraction of 41 digits)"
+      ],
+      "certificate": {
+        "max": {
+          "rounds": 2,
+          "free": 0,
+          "lam": "90071992637481319997000003/450359512827443412593400000000 (~0.0002)"
+        },
+        "min": {
+          "rounds": 2,
+          "free": 0,
+          "lam": "90071992637481319997000003/450359512827443412593400000000 (~0.0002)"
+        }
+      },
+      "verdict": "REFUTED",
+      "its_violating_point": {
+        "R1": "9990",
+        "R2": "10010",
+        "R3": "10010",
+        "R4": "9990"
+      },
+      "value_there": [
+        "~4.99995000037e-06 (an exact fraction of 41 digits)",
+        "~4.99995000073e-06 (an exact fraction of 41 digits)"
+      ],
+      "value_there_is": "the current at that point, enclosed exactly (two certificates on the point)",
+      "found_inside": [
+        "-4.99995e-06",
+        "4.99995e-06"
+      ],
+      "found_inside_is": "the range the search reached at corners (floating point): the proved range's tightness"
+    }
+  ],
+  "rests_on": "the network certificate: znet.py checks every certificate exactly by the kernel's rules; it is in the stand, not yet in public ZTL, and NOT proved in Lean",
+  "checked_by": "the network certificate (work mode; --dev adds every corner solved exactly, small networks)"
+}

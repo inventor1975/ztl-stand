@@ -1,0 +1,296 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "T": {
+   "role": "given",
+   "range": [
+    "253.15",
+    "333.15"
+   ],
+   "unit": "K"
+  },
+  "T0": {
+   "role": "given",
+   "value": "298.15",
+   "unit": "K",
+   "ground": "NTC model reference temperature 25 degC"
+  },
+  "Dk": {
+   "role": "given",
+   "value": "1",
+   "unit": "K",
+   "why": "safety margin in the slope bound: slope evaluated at T-1 K"
+  },
+  "E_R25": {
+   "role": "derived",
+   "unit": "K"
+  },
+  "E_B": {
+   "role": "derived",
+   "unit": "K"
+  },
+  "E_adc_lb": {
+   "role": "derived",
+   "unit": "K",
+   "why": "ADC error >= dx / max slope of x(T); max slope of x(T) <= B/(4 T^2) for ANY Rp, Rpar"
+  },
+  "E_rp_lb": {
+   "role": "derived",
+   "unit": "K",
+   "why": "pull-up tolerance error >= its value at Rpar = infinity limit g=0 (monotone in g)"
+  },
+  "Elb": {
+   "role": "derived",
+   "unit": "K",
+   "why": "lower bound of the total error, valid for every Rp, Rpar"
+  }
+ },
+ "slots": {
+  "NTC": {
+   "from": [
+    "ntc"
+   ]
+  },
+  "ADC": {
+   "from": [
+    "adc"
+   ]
+  },
+  "CL": {
+   "from": [
+    "cls"
+   ]
+  }
+ },
+ "define": {
+  "Dxa": "(ADC.tue + 1/2)*ADC.lsb",
+  "Du": "(1/T - 1/T0)",
+  "dR25p": "ln(1 + NTC.tR)",
+  "dR25m": "ln(1 - NTC.tR)",
+  "dBp": "NTC.B*NTC.tB*Du",
+  "dBm": "0 - NTC.B*NTC.tB*Du",
+  "dRpp": "0 - ln(1 + CL.t)",
+  "dRpm": "0 - ln(1 - CL.t)"
+ },
+ "laws": [
+  {
+   "zfl": "E_R25 == max(max((0 - T*T*(dR25p)/(NTC.B + T*(dR25p))), 0 - (0 - T*T*(dR25p)/(NTC.B + T*(dR25p)))), max((0 - T*T*(dR25m)/(NTC.B + T*(dR25m))), 0 - (0 - T*T*(dR25m)/(NTC.B + T*(dR25m)))))",
+   "source": "same as c07.json"
+  },
+  {
+   "zfl": "E_B == max(max((0 - T*T*(dBp)/(NTC.B + T*(dBp))), 0 - (0 - T*T*(dBp)/(NTC.B + T*(dBp)))), max((0 - T*T*(dBm)/(NTC.B + T*(dBm))), 0 - (0 - T*T*(dBm)/(NTC.B + T*(dBm)))))",
+   "source": "same as c07.json"
+  },
+  {
+   "zfl": "E_adc_lb == Dxa*4*(T - Dk)*(T - Dk)/NTC.B",
+   "source": "dx(x)/dT = x(1-x) * Rpar/(Rn+Rpar) * B/T^2 <= B/(4 T^2) (hand derivation)"
+  },
+  {
+   "zfl": "E_rp_lb == max(max((0 - T*T*(dRpp)/(NTC.B + T*(dRpp))), 0 - (0 - T*T*(dRpp)/(NTC.B + T*(dRpp)))), max((0 - T*T*(dRpm)/(NTC.B + T*(dRpm))), 0 - (0 - T*T*(dRpm)/(NTC.B + T*(dRpm)))))",
+   "source": "c07.json E_Rp at g = Rn/Rpar = 0 (|delta| grows with g)"
+  },
+  {
+   "zfl": "Elb == E_R25 + E_B + E_adc_lb + E_rp_lb",
+   "source": "sum of lower bounds"
+  }
+ ],
+ "requirements": [],
+ "modes": {
+  "wide": {
+   "quantities": {
+    "T": {
+     "range": [
+      "253.15",
+      "333.15"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Elb",
+     "op": "<=",
+     "value": "1",
+     "why": "R1 outer: lower bound of error must not exceed 1 K"
+    }
+   ]
+  },
+  "control": {
+   "quantities": {
+    "T": {
+     "range": [
+      "273.15",
+      "313.15"
+     ]
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Elb",
+     "op": "<=",
+     "value": "0.4",
+     "why": "R1 control band"
+    }
+   ]
+  }
+ },
+ "objective": {
+  "minimize": "NTC.price + ADC.price",
+  "why": "cheapest"
+ },
+ "report": "all",
+ "catalog": {
+  "ntc": {
+   "items": [
+    {
+     "R25": "10000",
+     "tR": "0.01",
+     "B": "3435",
+     "tB": "0.0075",
+     "dl": "2.0",
+     "price": "0.45",
+     "name": "N1"
+    },
+    {
+     "R25": "10000",
+     "tR": "0.01",
+     "B": "3950",
+     "tB": "0.01",
+     "dl": "2.0",
+     "price": "0.30",
+     "name": "N2"
+    },
+    {
+     "R25": "10000",
+     "tR": "0.05",
+     "B": "3380",
+     "tB": "0.02",
+     "dl": "2.0",
+     "price": "0.10",
+     "name": "N3"
+    },
+    {
+     "R25": "10000",
+     "tR": "0.002",
+     "B": "3977",
+     "tB": "0.003",
+     "dl": "2.0",
+     "price": "1.80",
+     "name": "N4"
+    },
+    {
+     "R25": "4700",
+     "tR": "0.01",
+     "B": "3480",
+     "tB": "0.01",
+     "dl": "2.0",
+     "price": "0.40",
+     "name": "N5"
+    },
+    {
+     "R25": "47000",
+     "tR": "0.03",
+     "B": "4050",
+     "tB": "0.01",
+     "dl": "1.5",
+     "price": "0.35",
+     "name": "N6"
+    },
+    {
+     "R25": "100000",
+     "tR": "0.01",
+     "B": "4250",
+     "tB": "0.01",
+     "dl": "1.5",
+     "price": "0.55",
+     "name": "N7"
+    }
+   ],
+   "ground": "problem statement NTC table",
+   "fields": {
+    "R25": {
+     "unit": "ohm"
+    },
+    "tR": {
+     "unit": ""
+    },
+    "B": {
+     "unit": "K"
+    },
+    "tB": {
+     "unit": ""
+    },
+    "dl": {
+     "unit": "mW/K"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "adc": {
+   "items": [
+    {
+     "lsb": "1/1024",
+     "tue": "3",
+     "price": "0.20",
+     "name": "A10"
+    },
+    {
+     "lsb": "1/4096",
+     "tue": "4",
+     "price": "0.50",
+     "name": "A12"
+    },
+    {
+     "lsb": "1/65536",
+     "tue": "12",
+     "price": "2.40",
+     "name": "A16"
+    }
+   ],
+   "ground": "problem statement ADC table",
+   "fields": {
+    "lsb": {
+     "unit": ""
+    },
+    "tue": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "cls": {
+   "items": [
+    {
+     "t": "0.01",
+     "cls": "1",
+     "price": "0.01"
+    },
+    {
+     "t": "0.005",
+     "cls": "0.5",
+     "price": "0.03"
+    },
+    {
+     "t": "0.001",
+     "cls": "0.1",
+     "price": "0.08"
+    }
+   ],
+   "ground": "resistor classes",
+   "fields": {
+    "t": {
+     "unit": ""
+    },
+    "cls": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ }
+}

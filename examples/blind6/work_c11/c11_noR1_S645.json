@@ -1,0 +1,374 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "f": {
+   "role": "given",
+   "unit": "",
+   "why": "renewal factor, ONE value for all three years",
+   "range": [
+    "1.00",
+    "1.08"
+   ]
+  },
+  "nS_n": {
+   "role": "given",
+   "unit": "",
+   "why": "number of small claims in normal year, any value",
+   "range": [
+    "20",
+    "26"
+   ]
+  },
+  "sS_n": {
+   "role": "given",
+   "unit": "kEUR",
+   "range": [
+    "2",
+    "8"
+   ],
+   "why": "severity of a small claim in normal year (independent copy per year)"
+  },
+  "nL_n": {
+   "role": "given",
+   "unit": "",
+   "why": "number of large claims in normal year, any value",
+   "range": [
+    "0",
+    "1"
+   ]
+  },
+  "sL_n": {
+   "role": "given",
+   "unit": "kEUR",
+   "range": [
+    "60",
+    "120"
+   ],
+   "why": "severity of a large claim in normal year (independent copy per year)"
+  },
+  "r_n": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "rp_n": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "T_n": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "nS_b": {
+   "role": "given",
+   "unit": "",
+   "why": "number of small claims in bad year, any value",
+   "range": [
+    "28",
+    "36"
+   ]
+  },
+  "sS_b": {
+   "role": "given",
+   "unit": "kEUR",
+   "range": [
+    "2",
+    "8"
+   ],
+   "why": "severity of a small claim in bad year (independent copy per year)"
+  },
+  "nL_b": {
+   "role": "given",
+   "unit": "",
+   "why": "number of large claims in bad year, any value",
+   "range": [
+    "2",
+    "3"
+   ]
+  },
+  "sL_b": {
+   "role": "given",
+   "unit": "kEUR",
+   "range": [
+    "60",
+    "120"
+   ],
+   "why": "severity of a large claim in bad year (independent copy per year)"
+  },
+  "r_b": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "rp_b": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "T_b": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "nS_c": {
+   "role": "given",
+   "unit": "",
+   "why": "number of small claims in catastrophe year, any value",
+   "range": [
+    "24",
+    "30"
+   ]
+  },
+  "sS_c": {
+   "role": "given",
+   "unit": "kEUR",
+   "range": [
+    "2",
+    "8"
+   ],
+   "why": "severity of a small claim in catastrophe year (independent copy per year)"
+  },
+  "nL_c": {
+   "role": "given",
+   "unit": "",
+   "why": "number of large claims in catastrophe year, any value",
+   "range": [
+    "1",
+    "2"
+   ]
+  },
+  "sL_c": {
+   "role": "given",
+   "unit": "kEUR",
+   "range": [
+    "60",
+    "120"
+   ],
+   "why": "severity of a large claim in catastrophe year (independent copy per year)"
+  },
+  "nC_c": {
+   "role": "given",
+   "unit": "",
+   "why": "catastrophic claims in catastrophe year (exactly)",
+   "value": "1"
+  },
+  "sC_c": {
+   "role": "given",
+   "unit": "kEUR",
+   "range": [
+    "800",
+    "1200"
+   ],
+   "why": "severity of a catastrophic claim in catastrophe year (independent copy per year)"
+  },
+  "r_c": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "rp_c": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "T_c": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "M3": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "D4": {
+   "role": "derived",
+   "unit": "kEUR"
+  },
+  "S": {
+   "role": "derived",
+   "unit": "kEUR"
+  }
+ },
+ "slots": {
+  "DED": {
+   "from": [
+    "deductibles"
+   ]
+  },
+  "SL": {
+   "from": [
+    "stoploss"
+   ]
+  },
+  "RES": {
+   "from": [
+    "reserve"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "r_n == nS_n*min(sS_n, DED.D) + nL_n*min(sL_n, DED.D)",
+   "source": "retained loss before stop-loss = sum over claims of min(severity, D) (normal year)"
+  },
+  {
+   "zfl": "rp_n == r_n - min(max(r_n - SL.A, 0), SL.lim)",
+   "source": "retained loss after stop-loss (normal year)"
+  },
+  {
+   "zfl": "T_n == f*DED.prem + SL.price + rp_n + RES.x/20",
+   "source": "total cost of a year = f*premium + SL price + r' + 5% of R (normal year)"
+  },
+  {
+   "zfl": "r_b == nS_b*min(sS_b, DED.D) + nL_b*min(sL_b, DED.D)",
+   "source": "retained loss before stop-loss = sum over claims of min(severity, D) (bad year)"
+  },
+  {
+   "zfl": "rp_b == r_b - min(max(r_b - SL.A, 0), SL.lim)",
+   "source": "retained loss after stop-loss (bad year)"
+  },
+  {
+   "zfl": "T_b == f*DED.prem + SL.price + rp_b + RES.x/20",
+   "source": "total cost of a year = f*premium + SL price + r' + 5% of R (bad year)"
+  },
+  {
+   "zfl": "r_c == nS_c*min(sS_c, DED.D) + nL_c*min(sL_c, DED.D) + nC_c*min(sC_c, DED.D)",
+   "source": "retained loss before stop-loss = sum over claims of min(severity, D) (catastrophe year)"
+  },
+  {
+   "zfl": "rp_c == r_c - min(max(r_c - SL.A, 0), SL.lim)",
+   "source": "retained loss after stop-loss (catastrophe year)"
+  },
+  {
+   "zfl": "T_c == f*DED.prem + SL.price + rp_c + RES.x/20",
+   "source": "total cost of a year = f*premium + SL price + r' + 5% of R (catastrophe year)"
+  },
+  {
+   "zfl": "M3 == rp_c - RES.x",
+   "source": "liquidity: r' minus reserve (R3 is M3 <= 40, the overdraft line)"
+  },
+  {
+   "zfl": "D4 == rp_b - rp_n",
+   "source": "budget stability: r'(bad) - r'(normal)"
+  },
+  {
+   "zfl": "S == T_n + T_b + T_c",
+   "source": "sum of the three scenario costs"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "T_b",
+   "op": "<=",
+   "value": "300",
+   "why": "R2 bad-year total cost <= 300 kEUR"
+  },
+  {
+   "quantity": "M3",
+   "op": "<=",
+   "value": "40",
+   "why": "R3 catastrophe-year r' <= R + 40 (overdraft line 40 kEUR)"
+  },
+  {
+   "quantity": "D4",
+   "op": "within",
+   "value": [
+    "-62",
+    "62"
+   ],
+   "why": "R4 |r'(bad) - r'(normal)| <= 62 kEUR"
+  },
+  {
+   "quantity": "S",
+   "op": "<=",
+   "value": "645",
+   "why": "R5 with the sum bound set to 645 by hand (outer bisection)"
+  }
+ ],
+ "objective": {
+  "minimize": "S",
+  "why": "continuous reserve needs a nominal objective (worst-case objective not available with continuous slots)"
+ },
+ "catalog": {
+  "deductibles": {
+   "ground": "premium table",
+   "fields": {
+    "D": {
+     "unit": "kEUR"
+    },
+    "prem": {
+     "unit": "kEUR"
+    }
+   },
+   "items": [
+    {
+     "name": "D5",
+     "D": "5",
+     "prem": "128"
+    },
+    {
+     "name": "D10",
+     "D": "10",
+     "prem": "104"
+    },
+    {
+     "name": "D20",
+     "D": "20",
+     "prem": "82"
+    },
+    {
+     "name": "D40",
+     "D": "40",
+     "prem": "63"
+    },
+    {
+     "name": "D80",
+     "D": "80",
+     "prem": "48"
+    }
+   ]
+  },
+  "stoploss": {
+   "ground": "stop-loss table (none = limit 0, price 0)",
+   "fields": {
+    "A": {
+     "unit": "kEUR"
+    },
+    "lim": {
+     "unit": "kEUR"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   },
+   "items": [
+    {
+     "name": "none",
+     "A": "0",
+     "lim": "0",
+     "price": "0"
+    },
+    {
+     "name": "SL60",
+     "A": "60",
+     "lim": "200",
+     "price": "16"
+    },
+    {
+     "name": "SL100",
+     "A": "100",
+     "lim": "200",
+     "price": "10"
+    },
+    {
+     "name": "SL160",
+     "A": "160",
+     "lim": "200",
+     "price": "6"
+    }
+   ]
+  },
+  "reserve": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "1000",
+    "unit": "kEUR"
+   }
+  }
+ },
+ "conflicts": false
+}

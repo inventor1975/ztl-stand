@@ -1,0 +1,116 @@
+{
+ "stand": "ztl-stand/1",
+ "title": "i02 — a simply supported beam, a point load ANYWHERE on the span: the moment peaks at mid-span, zero at the supports",
+ "quantities": {
+  "P": {
+   "role": "given",
+   "value": "20",
+   "tolerance": "0.05",
+   "unit": "kN",
+   "why": "the load, +-5 %"
+  },
+  "L": {
+   "role": "given",
+   "value": "6",
+   "unit": "m",
+   "why": "span"
+  },
+  "a": {
+   "role": "given",
+   "range": [
+    "0",
+    "6"
+   ],
+   "unit": "m",
+   "why": "the load's position: anywhere on the span"
+  },
+  "fy": {
+   "role": "given",
+   "value": "160",
+   "unit": "MPa",
+   "why": "allowable bending stress"
+  },
+  "M": {
+   "role": "derived",
+   "unit": "kN*m"
+  },
+  "sigma": {
+   "role": "derived",
+   "unit": "MPa"
+  }
+ },
+ "slots": {
+  "B": {
+   "from": [
+    "ipe"
+   ]
+  }
+ },
+ "catalog": {
+  "ipe": {
+   "ground": "IPE section table (W_y), prices illustrative",
+   "fields": {
+    "W": {
+     "unit": "cm^3"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "items": [
+    {
+     "name": "IPE140",
+     "W": "77.3",
+     "price": "90"
+    },
+    {
+     "name": "IPE160",
+     "W": "109",
+     "price": "110"
+    },
+    {
+     "name": "IPE180",
+     "W": "146",
+     "price": "135"
+    },
+    {
+     "name": "IPE200",
+     "W": "194",
+     "price": "160"
+    },
+    {
+     "name": "IPE220",
+     "W": "252",
+     "price": "190"
+    },
+    {
+     "name": "IPE240",
+     "W": "324",
+     "price": "225"
+    }
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "M == P*a*(L - a)/L",
+   "source": "statics: a point load at a on a simple span"
+  },
+  {
+   "zfl": "sigma == M/B.W",
+   "source": "bending stress"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "sigma",
+   "op": "<=",
+   "value": "160",
+   "why": "allowable stress, wherever the load stands"
+  }
+ ],
+ "objective": {
+  "minimize": "B.price",
+  "unit": "EUR"
+ }
+}

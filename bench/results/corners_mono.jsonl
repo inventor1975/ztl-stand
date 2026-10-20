@@ -1,0 +1,12 @@
+{"axis": "corners_mono", "size": 2, "wall_s": 0.08, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:52", "cpu": 2}
+{"axis": "corners_mono", "size": 4, "wall_s": 0.1, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:52", "cpu": 2}
+{"axis": "corners_mono", "size": 6, "wall_s": 0.1, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:52", "cpu": 2}
+{"axis": "corners_mono", "size": 8, "wall_s": 0.1, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 2}
+{"axis": "corners_mono", "size": 10, "wall_s": 0.1, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 2}
+{"axis": "corners_mono", "size": 12, "wall_s": 0.1, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 2}
+{"axis": "corners_mono", "size": 14, "wall_s": 0.1, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 2}
+{"axis": "corners_mono", "size": 16, "wall_s": 0.1, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 2}
+{"axis": "corners_mono", "size": 20, "wall_s": 0.11, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:53", "cpu": 2}
+{"axis": "corners_mono", "size": 32, "wall_s": 0.1, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 8}
+{"axis": "corners_mono", "size": 64, "wall_s": 0.14, "peak_mb": 19, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 8}
+{"axis": "corners_mono", "size": 128, "wall_s": 0.17, "peak_mb": 21, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 8}

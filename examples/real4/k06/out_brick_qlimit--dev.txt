@@ -1,0 +1,220 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "verdict": "EARNED",
+  "why": "several limits, each searched on its own; the verdict is the weakest of theirs",
+  "finds": [
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "Q",
+      "unit": "L/min",
+      "proved": "15133/10 (~1513.3)",
+      "proved_means": "every Q in [757, 15133/10 (~1513.3)] L/min works (EARNED on the whole range)",
+      "beyond": "7567/5 (~1513.4)",
+      "beyond_is": "REFUTED: the range [757, 7567/5 (~1513.4)] L/min holds a concrete failing point (at_beyond)",
+      "precision": "1/10 (~0.1)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "TDH": [
+                "~28.7141688814 (an exact fraction of 89 digits)",
+                "~45.1997678797 (an exact fraction of 90 digits)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "TDH": [
+            "~28.7141688814 (an exact fraction of 89 digits)",
+            "~45.1997678797 (an exact fraction of 90 digits)"
+          ]
+        },
+        "guaranteed_unit": {
+          "TDH": "ft"
+        },
+        "how": {
+          "TDH": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~28.7141688814 (~28.7142)', '~45.1997678797 (~45.1998)']"
+        },
+        "requirements": [
+          {
+            "quantity": "TDH",
+            "op": "<=",
+            "value": "Hp",
+            "why": "the pump must deliver 400 gpm against the highest head"
+          }
+        ],
+        "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+        "judge_log": [
+          "Hst -> [1020699/125000, 1448943/125000] by [Hst == (ELc - ELw) + Pd*kh]",
+          "HLm -> [5155482336425781250000000000000000000000000000/28703378500430403394286070654584111691082204341, 82411458395019531250000000000000000000000000000/114813514001721540484591134120238874867981494101] by [HLm == SK*(Q/(pi*D*D/4))*(Q/(pi*D*D/4))/(2*g)], interval reading, sound, may be wider than the truth (credit)",
+          "HLf -> [4034267489501383029941686480394889507847191/9915267715355356023398699895923671040000000, 41574997967879972681888163621328790575226217/28329336329586731348221486168014848000000000] by [HLf == (Lp/Lh*0.2083*pow(Cn/C, 1.852)*pow(Q/Qg, 1.852)/pow(D/Din, 4.8655)*Hu)], interval reading, sound, may be wider than the truth (credit)",
+          "TDH -> [2490856313379515932212083926088544273732992793689349783368504117043515707134347661489363011/284601682166942610821811777794865297153767141883645939054627030363303302604143984640000000, 44810581205729595506893375292426169240603034341591419005442100467203525303863081151630557917/3252590653336484893256248439565515741767696283644633568100491811985384884192411648000000000] by [TDH == Hst + HLm + HLf]"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL fd6593d",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "the pump must deliver 400 gpm against the highest head",
+            "by_at_witness": "~0.000668385062773 (an exact fraction of 169 digits)",
+            "unit": "ft"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "ELw": "4",
+          "Pd": "13",
+          "Q": "7567/5 (~1513.4)"
+        },
+        "point_units": {
+          "ELw": "ft",
+          "Pd": "psi",
+          "Q": "L/min"
+        },
+        "value_there": {
+          "TDH": [
+            "~45.2006683851 (an exact fraction of 169 digits)",
+            "~45.2006683851 (an exact fraction of 170 digits)"
+          ]
+        },
+        "unit": "ft",
+        "requirement": {
+          "quantity": "TDH",
+          "op": "<=",
+          "value": "Hp",
+          "why": "the pump must deliver 400 gpm against the highest head"
+        },
+        "overshoot": "~0.000668385062773 (an exact fraction of 169 digits)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "~28.7141688814 (an exact fraction of 172 digits)",
+            "~45.2006683851 (an exact fraction of 170 digits)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "Pd",
+              "moves_it_by": "231/25 (~9.24)"
+            },
+            {
+              "quantity": "Q",
+              "moves_it_by": "~5.24649950363 (an exact fraction of 230 digits)"
+            },
+            {
+              "quantity": "ELw",
+              "moves_it_by": "2"
+            },
+            {
+              "quantity": "pi",
+              "moves_it_by": "~1.49939875494e-15 (an exact fraction of 78 digits)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "Q": "757",
+          "verdict": "EARNED"
+        },
+        {
+          "Q": "3028",
+          "verdict": "REFUTED"
+        },
+        {
+          "Q": "3785/2 (~1892.5)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Q": "6624/5 (~1324.8)",
+          "verdict": "EARNED"
+        },
+        {
+          "Q": "8043/5 (~1608.6)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Q": "14667/10 (~1466.7)",
+          "verdict": "EARNED"
+        },
+        {
+          "Q": "7688/5 (~1537.6)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Q": "7511/5 (~1502.2)",
+          "verdict": "EARNED"
+        },
+        {
+          "Q": "15199/10 (~1519.9)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Q": "1511",
+          "verdict": "EARNED"
+        },
+        {
+          "Q": "7577/5 (~1515.4)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Q": "7566/5 (~1513.2)",
+          "verdict": "EARNED"
+        },
+        {
+          "Q": "15143/10 (~1514.3)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Q": "7569/5 (~1513.8)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Q": "3027/2 (~1513.5)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Q": "7567/5 (~1513.4)",
+          "verdict": "REFUTED"
+        },
+        {
+          "Q": "15133/10 (~1513.3)",
+          "verdict": "EARNED"
+        }
+      ],
+      "find_index": 0
+    }
+  ],
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

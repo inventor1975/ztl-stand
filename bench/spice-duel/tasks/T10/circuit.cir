@@ -1,0 +1,5 @@
+Power into a load: a 10 V source with a 50 ohm source resistance (1 %) into a load of 50 ohm (20 %); the question is the load's power
+vs src 0 10
+rs src out 50
+rload out 0 50
+.end

@@ -1,0 +1,274 @@
+{
+ "stand": "universal-stand/1",
+ "report": "all",
+ "quantities": {
+  "d": {
+   "role": "given",
+   "value": "50",
+   "unit": "mm",
+   "ground": "problem statement"
+  },
+  "D": {
+   "role": "given",
+   "value": "90",
+   "unit": "mm",
+   "ground": "problem statement"
+  },
+  "L": {
+   "role": "given",
+   "value": "80",
+   "unit": "mm",
+   "ground": "problem statement"
+  },
+  "Es": {
+   "role": "given",
+   "value": "210",
+   "unit": "GPa",
+   "ground": "problem statement"
+  },
+  "nus": {
+   "role": "given",
+   "value": "0.30",
+   "unit": "",
+   "ground": "problem statement"
+  },
+  "alphas": {
+   "role": "given",
+   "value": "0.0000115",
+   "unit": "1/C",
+   "ground": "problem statement"
+  },
+  "Rzs": {
+   "role": "given",
+   "value": "6.3",
+   "unit": "um",
+   "ground": "problem statement"
+  },
+  "Rzh": {
+   "role": "given",
+   "value": "10",
+   "unit": "um",
+   "ground": "problem statement"
+  },
+  "Tpeak": {
+   "role": "given",
+   "value": "800",
+   "tolerance": "0.1",
+   "unit": "N*m",
+   "ground": "problem statement"
+  },
+  "mu": {
+   "role": "given",
+   "range": [
+    "0.08",
+    "0.14"
+   ],
+   "unit": "",
+   "why": "lubrication"
+  },
+  "T": {
+   "role": "given",
+   "range": [
+    "-20",
+    "80"
+   ],
+   "unit": "C",
+   "why": "operating temperature, assembly at 20 C"
+  },
+  "clr": {
+   "role": "given",
+   "value": "20",
+   "unit": "um",
+   "ground": "problem statement: assembly clearance margin"
+  },
+  "dTmax": {
+   "role": "given",
+   "value": "230",
+   "unit": "C",
+   "ground": "problem statement: hub heating limit"
+  },
+  "p": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "Tcap": {
+   "role": "derived",
+   "unit": "N*m"
+  },
+  "sigt": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "dTa": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {
+  "HUB": {
+   "from": [
+    "hubs"
+   ]
+  },
+  "FIT": {
+   "from": [
+    "fits"
+   ]
+  }
+ },
+ "define": {
+  "Kc": "((D*D + d*d)/(D*D - d*d) + HUB.nu)/HUB.E + (1 - nus)/Es",
+  "Wc": "(D*D + d*d)/(D*D - d*d)",
+  "dE": "FIT.I - 0.4*(Rzs + Rzh) - d*(HUB.alpha - alphas)*(T - 20)"
+ },
+ "laws": [
+  {
+   "zfl": "p == dE/(d*Kc)",
+   "source": "thick-walled hub on solid shaft (Lame): effective interference = p d Kc; effective interference = nominal - roughness smoothing + thermal term"
+  },
+  {
+   "zfl": "Tcap == mu*p*pi*d*d*L/2",
+   "source": "friction torque capacity"
+  },
+  {
+   "zfl": "sigt == p*Wc",
+   "source": "hoop stress at hub bore"
+  },
+  {
+   "zfl": "dTa == (FIT.Imax + clr)/(d*HUB.alpha)",
+   "source": "hot-assembly temperature rise = clearance / (d alpha_h)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tcap",
+   "op": ">=",
+   "value": "2*Tpeak",
+   "why": "slip safety 2.0 against the +10% peak torque, worst mu, worst T, min interference"
+  },
+  {
+   "quantity": "sigt",
+   "op": "<=",
+   "value": "HUB.sig",
+   "why": "hoop stress at the bore <= allowable, max interference, coldest T"
+  },
+  {
+   "quantity": "dTa",
+   "op": "<=",
+   "value": "dTmax",
+   "why": "hub heating for assembly <= 230 K"
+  }
+ ],
+ "objective": {
+  "minimize": "HUB.price + FIT.price",
+  "why": "cheapest hub + machining"
+ },
+ "catalog": {
+  "hubs": {
+   "ground": "problem statement catalog",
+   "items": [
+    {
+     "name": "H-St C45",
+     "E": "210",
+     "nu": "0.30",
+     "alpha": "0.0000115",
+     "sig": "360",
+     "price": "60"
+    },
+    {
+     "name": "H-CI GG25",
+     "E": "110",
+     "nu": "0.26",
+     "alpha": "0.0000105",
+     "sig": "125",
+     "price": "35"
+    },
+    {
+     "name": "H-Al 7075",
+     "E": "71",
+     "nu": "0.33",
+     "alpha": "0.0000234",
+     "sig": "400",
+     "price": "75"
+    }
+   ],
+   "fields": {
+    "E": {
+     "unit": "GPa"
+    },
+    "nu": {
+     "unit": ""
+    },
+    "alpha": {
+     "unit": "1/C"
+    },
+    "sig": {
+     "unit": "MPa"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "fits": {
+   "ground": "ISO 286 for 50 mm, H7 hub bore (0..+25 um) vs shaft deviation",
+   "items": [
+    {
+     "name": "p6",
+     "I": {
+      "range": [
+       "1",
+       "42"
+      ]
+     },
+     "Imax": "42",
+     "price": "4"
+    },
+    {
+     "name": "r6",
+     "I": {
+      "range": [
+       "9",
+       "50"
+      ]
+     },
+     "Imax": "50",
+     "price": "5"
+    },
+    {
+     "name": "s6",
+     "I": {
+      "range": [
+       "18",
+       "59"
+      ]
+     },
+     "Imax": "59",
+     "price": "7"
+    },
+    {
+     "name": "u6",
+     "I": {
+      "range": [
+       "45",
+       "86"
+      ]
+     },
+     "Imax": "86",
+     "price": "11"
+    }
+   ],
+   "fields": {
+    "I": {
+     "unit": "um"
+    },
+    "Imax": {
+     "unit": "um"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ }
+}

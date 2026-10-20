@@ -1,0 +1,199 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "Ta": {
+   "role": "given",
+   "unit": "C",
+   "why": "ambient air, source: 40 C",
+   "ground": "source Example",
+   "range": [
+    "40",
+    "45"
+   ]
+  },
+  "Rjc": {
+   "role": "given",
+   "value": "1.5",
+   "unit": "C/W",
+   "ground": "TO-3 data sheet value quoted in the source"
+  },
+  "Rcs": {
+   "role": "given",
+   "value": "0.35",
+   "unit": "C/W",
+   "ground": "read off the maker's graph, 0.002 in mica + grease",
+   "tolerance": "0.15"
+  },
+  "PA": {
+   "role": "given",
+   "value": "15",
+   "unit": "W",
+   "why": "application A dissipation",
+   "tolerance": "0.05"
+  },
+  "PB": {
+   "role": "given",
+   "value": "40",
+   "unit": "W",
+   "why": "application B dissipation",
+   "tolerance": "0.05"
+  },
+  "TjA": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "TjB": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {
+  "HSA": {
+   "from": [
+    "sinks_A"
+   ]
+  },
+  "HSB": {
+   "from": [
+    "sinks_B"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "TjA == Ta + PA*(Rjc + Rcs + HSA.R)",
+   "source": "series thermal resistances (source eq. 8.10)"
+  },
+  {
+   "zfl": "TjB == Ta + PB*(Rjc + Rcs + HSB.R)",
+   "source": "series thermal resistances (source eq. 8.10)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "TjA",
+   "op": "<=",
+   "value": "175",
+   "why": "max junction temperature, application A"
+  },
+  {
+   "quantity": "TjB",
+   "op": "<=",
+   "value": "175",
+   "why": "max junction temperature, application B"
+  }
+ ],
+ "report": "all",
+ "catalog": {
+  "sinks_A": {
+   "items": [
+    {
+     "R": {
+      "value": "6.5"
+     },
+     "name": "A6.5"
+    },
+    {
+     "R": {
+      "value": "7.0"
+     },
+     "name": "A7.0"
+    },
+    {
+     "R": {
+      "value": "7.15"
+     },
+     "name": "A7.15"
+    },
+    {
+     "R": {
+      "value": "7.2"
+     },
+     "name": "A7.2"
+    },
+    {
+     "R": {
+      "value": "8.0"
+     },
+     "name": "A8.0"
+    },
+    {
+     "R": {
+      "value": "9.5"
+     },
+     "name": "A9.5"
+    },
+    {
+     "R": {
+      "value": "6.35"
+     },
+     "name": "A6.35"
+    },
+    {
+     "R": {
+      "value": "6.36"
+     },
+     "name": "A6.36"
+    }
+   ],
+   "ground": "invented list (not from the source)",
+   "fields": {
+    "R": {
+     "unit": "C/W"
+    }
+   }
+  },
+  "sinks_B": {
+   "items": [
+    {
+     "R": {
+      "value": "1.2"
+     },
+     "name": "B1.2"
+    },
+    {
+     "R": {
+      "value": "1.5"
+     },
+     "name": "B1.5"
+    },
+    {
+     "R": {
+      "value": "1.525"
+     },
+     "name": "B1.525"
+    },
+    {
+     "R": {
+      "value": "1.53"
+     },
+     "name": "B1.53"
+    },
+    {
+     "R": {
+      "value": "1.6"
+     },
+     "name": "B1.6"
+    },
+    {
+     "R": {
+      "value": "2.0"
+     },
+     "name": "B2.0"
+    },
+    {
+     "R": {
+      "value": "1.19"
+     },
+     "name": "B1.19"
+    }
+   ],
+   "ground": "invented list (not from the source)",
+   "fields": {
+    "R": {
+     "unit": "C/W"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,615 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "ME_mz": {
+   "role": "given",
+   "unit": "",
+   "value": "3350",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "ME_wh": {
+   "role": "given",
+   "unit": "",
+   "value": "3150",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "ME_sb": {
+   "role": "given",
+   "unit": "",
+   "value": "2450",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "ME_sf": {
+   "role": "given",
+   "unit": "",
+   "value": "1900",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "ME_fm": {
+   "role": "given",
+   "unit": "",
+   "value": "2900",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "ME_ol": {
+   "role": "given",
+   "unit": "",
+   "value": "8800",
+   "tolerance": "0.025",
+   "why": "ME table value +-2.5%"
+  },
+  "CP_mz": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "7.5",
+    "9.5"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_wh": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "10.5",
+    "12.5"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_sb": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "45",
+    "47"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_sf": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "35",
+    "37"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_fm": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "59",
+    "61"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_ol": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0",
+    "1"
+   ],
+   "why": "CP % +-1.0 absolute (lower end clamped at 0)"
+  },
+  "CP_ls": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0",
+    "1"
+   ],
+   "why": "CP % +-1.0 absolute (lower end clamped at 0)"
+  },
+  "CP_dp": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "0",
+    "1"
+   ],
+   "why": "CP % +-1.0 absolute (lower end clamped at 0)"
+  },
+  "CP_ly": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "94",
+    "96"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "CP_me": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "57",
+    "59"
+   ],
+   "why": "CP % +-1.0 absolute"
+  },
+  "LY_mz": {
+   "role": "given",
+   "unit": "",
+   "value": "0.26",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "LY_wh": {
+   "role": "given",
+   "unit": "",
+   "value": "0.3",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "LY_sb": {
+   "role": "given",
+   "unit": "",
+   "value": "2.85",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "LY_sf": {
+   "role": "given",
+   "unit": "",
+   "value": "1.25",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "LY_fm": {
+   "role": "given",
+   "unit": "",
+   "value": "4.3",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "LY_ly": {
+   "role": "given",
+   "unit": "",
+   "value": "78",
+   "tolerance": "0.03",
+   "why": "Lys % +-3% relative"
+  },
+  "MC_mz": {
+   "role": "given",
+   "unit": "",
+   "value": "0.38",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "MC_wh": {
+   "role": "given",
+   "unit": "",
+   "value": "0.5",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "MC_sb": {
+   "role": "given",
+   "unit": "",
+   "value": "1.35",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "MC_sf": {
+   "role": "given",
+   "unit": "",
+   "value": "1.35",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "MC_fm": {
+   "role": "given",
+   "unit": "",
+   "value": "2.2",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "MC_me": {
+   "role": "given",
+   "unit": "",
+   "value": "99",
+   "tolerance": "0.03",
+   "why": "Met+Cys % +-3% relative"
+  },
+  "moist": {
+   "role": "given",
+   "unit": "",
+   "range": [
+    "13",
+    "15"
+   ],
+   "why": "maize moisture %, table is for 14"
+  },
+  "p_sb": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "480",
+   "tolerance": "0.15",
+   "why": "soybean meal price +-15%"
+  },
+  "p_fm": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "1250",
+   "tolerance": "0.10",
+   "why": "fish meal price +-10%"
+  },
+  "ME": {
+   "role": "derived",
+   "unit": ""
+  },
+  "CP": {
+   "role": "derived",
+   "unit": ""
+  },
+  "LYS": {
+   "role": "derived",
+   "unit": ""
+  },
+  "MCY": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Ca": {
+   "role": "derived",
+   "unit": ""
+  },
+  "AP": {
+   "role": "derived",
+   "unit": ""
+  },
+  "D1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "D2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "FIB": {
+   "role": "derived",
+   "unit": ""
+  },
+  "p_mz": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "205",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_wh": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "220",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_sf": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "290",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_ol": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "980",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_ls": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "55",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_dp": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "520",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_ly": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "1900",
+   "ground": "table",
+   "why": "table price"
+  },
+  "p_me": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "3200",
+   "ground": "table",
+   "why": "table price"
+  },
+  "premix_cost": {
+   "role": "given",
+   "unit": "EUR/t",
+   "value": "7",
+   "why": "premix 0.5% x 1400 EUR/t, per tonne of mix"
+  },
+  "TOT": {
+   "role": "derived",
+   "unit": "",
+   "why": "sum of the ingredients, % of the mix (premix and salt make up the rest)"
+  },
+  "MW": {
+   "role": "derived",
+   "unit": "",
+   "why": "maize + wheat, %"
+  }
+ },
+ "slots": {
+  "MZ": {
+   "from": [
+    "ing_mz"
+   ]
+  },
+  "WH": {
+   "from": [
+    "ing_wh"
+   ]
+  },
+  "SB": {
+   "from": [
+    "ing_sb"
+   ]
+  },
+  "SF": {
+   "from": [
+    "ing_sf"
+   ]
+  },
+  "FM": {
+   "from": [
+    "ing_fm"
+   ]
+  },
+  "OL": {
+   "from": [
+    "ing_ol"
+   ]
+  },
+  "LS": {
+   "from": [
+    "ing_ls"
+   ]
+  },
+  "DP": {
+   "from": [
+    "ing_dp"
+   ]
+  },
+  "LY": {
+   "from": [
+    "ing_ly"
+   ]
+  },
+  "ME": {
+   "from": [
+    "ing_me"
+   ]
+  }
+ },
+ "catalog": {
+  "ing_mz": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "99.2",
+    "unit": ""
+   }
+  },
+  "ing_wh": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "99.2",
+    "unit": ""
+   }
+  },
+  "ing_sb": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "99.2",
+    "unit": ""
+   }
+  },
+  "ing_sf": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "10",
+    "unit": ""
+   }
+  },
+  "ing_fm": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "5",
+    "unit": ""
+   }
+  },
+  "ing_ol": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "4",
+    "unit": ""
+   }
+  },
+  "ing_ls": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "99.2",
+    "unit": ""
+   }
+  },
+  "ing_dp": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "99.2",
+    "unit": ""
+   }
+  },
+  "ing_ly": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "2/5",
+    "unit": ""
+   }
+  },
+  "ing_me": {
+   "continuous": {
+    "field": "x",
+    "from": "0",
+    "to": "3/10",
+    "unit": ""
+   }
+  }
+ },
+ "define": {
+  "S": "(100 - moist)/86"
+ },
+ "laws": [
+  {
+   "zfl": "ME == (MZ.x*ME_mz*S + WH.x*ME_wh + SB.x*ME_sb + SF.x*ME_sf + FM.x*ME_fm + OL.x*ME_ol)/100",
+   "source": "sum of inclusion x ME per kg of mix, kcal/kg; maize scaled by moisture"
+  },
+  {
+   "zfl": "CP == (MZ.x*CP_mz*S + WH.x*CP_wh + SB.x*CP_sb + SF.x*CP_sf + FM.x*CP_fm + OL.x*CP_ol + LS.x*CP_ls + DP.x*CP_dp + LY.x*CP_ly + ME.x*CP_me)/100",
+   "source": "sum of inclusion x CP, % of mix"
+  },
+  {
+   "zfl": "LYS == (MZ.x*LY_mz*S + WH.x*LY_wh + SB.x*LY_sb + SF.x*LY_sf + FM.x*LY_fm + LY.x*LY_ly)/100",
+   "source": "sum of inclusion x Lys, % of mix"
+  },
+  {
+   "zfl": "MCY == (MZ.x*MC_mz*S + WH.x*MC_wh + SB.x*MC_sb + SF.x*MC_sf + FM.x*MC_fm + ME.x*MC_me)/100",
+   "source": "sum of inclusion x Met+Cys, % of mix"
+  },
+  {
+   "zfl": "Ca == (MZ.x*0.02*S + WH.x*0.05 + SB.x*0.3 + SF.x*0.4 + FM.x*5.0 + LS.x*38 + DP.x*22)/100",
+   "source": "sum of inclusion x Ca, % of mix"
+  },
+  {
+   "zfl": "AP == (MZ.x*0.08*S + WH.x*0.13 + SB.x*0.2 + SF.x*0.25 + FM.x*2.8 + DP.x*18)/100",
+   "source": "sum of inclusion x avP, % of mix"
+  },
+  {
+   "zfl": "D1 == Ca - 9/5*AP",
+   "source": "Ca:avP >= 1.8  <=>  Ca - 1.8 avP >= 0  (avP > 0)"
+  },
+  {
+   "zfl": "D2 == 12/5*AP - Ca",
+   "source": "Ca:avP <= 2.4  <=>  2.4 avP - Ca >= 0  (avP > 0)"
+  },
+  {
+   "zfl": "FIB == (MZ.x*2.2*S + WH.x*2.5 + SB.x*3.9 + SF.x*18 + FM.x*1.0)/100",
+   "source": "sum of inclusion x fibre, % of mix"
+  },
+  {
+   "zfl": "TOT == MZ.x + WH.x + SB.x + SF.x + FM.x + OL.x + LS.x + DP.x + LY.x + ME.x",
+   "source": "the batch"
+  },
+  {
+   "zfl": "MW == MZ.x + WH.x",
+   "source": "cereal share"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "ME",
+   "op": ">=",
+   "value": "3000",
+   "why": "ME >= 3000 kcal/kg"
+  },
+  {
+   "quantity": "CP",
+   "op": ">=",
+   "value": "19.5",
+   "why": "CP >= 19.5 %"
+  },
+  {
+   "quantity": "LYS",
+   "op": ">=",
+   "value": "1.10",
+   "why": "Lys >= 1.10 %"
+  },
+  {
+   "quantity": "MCY",
+   "op": ">=",
+   "value": "0.85",
+   "why": "Met+Cys >= 0.85 %"
+  },
+  {
+   "quantity": "Ca",
+   "op": "within",
+   "value": [
+    "0.85",
+    "1.00"
+   ],
+   "why": "Ca 0.85..1.00 %"
+  },
+  {
+   "quantity": "AP",
+   "op": ">=",
+   "value": "0.42",
+   "why": "avP >= 0.42 %"
+  },
+  {
+   "quantity": "D1",
+   "op": ">=",
+   "value": "0",
+   "why": "Ca:avP >= 1.8"
+  },
+  {
+   "quantity": "D2",
+   "op": ">=",
+   "value": "0",
+   "why": "Ca:avP <= 2.4"
+  },
+  {
+   "quantity": "FIB",
+   "op": "<=",
+   "value": "5.0",
+   "why": "fibre <= 5.0 %"
+  },
+  {
+   "quantity": "TOT",
+   "op": "within",
+   "value": [
+    "99.2",
+    "99.2"
+   ],
+   "why": "the ten ingredients make 99.2 % (premix 0.5 %, salt 0.3 %)"
+  },
+  {
+   "quantity": "MW",
+   "op": ">=",
+   "value": "45",
+   "why": "maize + wheat at least 45 %"
+  }
+ ],
+ "objective": {
+  "minimize": "(MZ.x*205+WH.x*220+SB.x*480+SF.x*290+FM.x*1250+OL.x*980+LS.x*55+DP.x*520+LY.x*1900+ME.x*3200)/100+7",
+  "unit": "",
+  "why": "EUR per tonne at the table prices (premix included as the constant)"
+ },
+ "note": "blind-3 c12 with CONTINUOUS amounts: the cheapest robust mix over every mix, not among 13 candidates; every uncertain content over its full box (2026-10-10)"
+}

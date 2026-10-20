@@ -1,0 +1,659 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "fm": {
+   "role": "given",
+   "value": "20",
+   "unit": "kHz",
+   "ground": "problem statement: stopband check frequency"
+  },
+  "f0": {
+   "role": "derived",
+   "unit": "Hz"
+  },
+  "Q": {
+   "role": "derived",
+   "unit": ""
+  },
+  "D": {
+   "role": "derived",
+   "unit": "",
+   "why": "1/|H(j 2 pi fm)|^2"
+  },
+  "Att": {
+   "role": "derived",
+   "unit": "dB"
+  },
+  "gm": {
+   "role": "derived",
+   "unit": "Hz",
+   "why": "GBW - 150*f0"
+  },
+  "Rs": {
+   "role": "derived",
+   "unit": "ohm",
+   "why": "R1+R2, actual values"
+  },
+  "R1w": {
+   "role": "derived",
+   "unit": "ohm"
+  },
+  "R2w": {
+   "role": "derived",
+   "unit": "ohm"
+  }
+ },
+ "slots": {
+  "R1": {
+   "from": [
+    "res_1pct",
+    "res_01pct"
+   ]
+  },
+  "R2": {
+   "from": [
+    "res_1pct",
+    "res_01pct"
+   ]
+  },
+  "C1": {
+   "from": [
+    "cap_e12",
+    "cap_e24"
+   ]
+  },
+  "C2": {
+   "from": [
+    "cap_e12",
+    "cap_e24"
+   ]
+  },
+  "OA": {
+   "from": [
+    "opamps"
+   ]
+  }
+ },
+ "define": {
+  "Rn1": "R1.R*R1.kT",
+  "Rn2": "R2.R*R2.kT",
+  "Cn1": "C1.C*C1.kT",
+  "Cn2": "C2.C*C2.kT",
+  "P": "Rn1*Rn2*Cn1*Cn2",
+  "wm2": "(2*pi*fm)*(2*pi*fm)"
+ },
+ "laws": [
+  {
+   "zfl": "f0 == 1/(2*pi*sqrt(P))",
+   "source": "Sallen-Key unity-gain low-pass: f0 = 1/(2 pi sqrt(R1 R2 C1 C2))"
+  },
+  {
+   "zfl": "Q == sqrt(P)/(Cn2*(Rn1+Rn2))",
+   "source": "Sallen-Key unity-gain low-pass: Q = sqrt(R1R2C1C2)/(C2(R1+R2))"
+  },
+  {
+   "zfl": "D == (1 - wm2*P)*(1 - wm2*P) + wm2*Cn2*Cn2*(Rn1+Rn2)*(Rn1+Rn2)",
+   "source": "|H(jw)|^-2 = (1 - w^2 R1R2C1C2)^2 + w^2 C2^2 (R1+R2)^2, from H = 1/(1 + s C2(R1+R2) + s^2 R1R2C1C2)"
+  },
+  {
+   "zfl": "Att == 10*log10(D)",
+   "source": "attenuation in dB = 10 log10 of the power ratio"
+  },
+  {
+   "zfl": "gm == OA.GBW - 150*f0",
+   "source": "problem statement: GBW >= 150 f0 (finite-GBW effect ignored above that)"
+  },
+  {
+   "zfl": "Rs == Rn1 + Rn2",
+   "source": "series sum of the two resistors"
+  },
+  {
+   "zfl": "R1w == Rn1",
+   "source": "actual resistance of R1"
+  },
+  {
+   "zfl": "R2w == Rn2",
+   "source": "actual resistance of R2"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "f0",
+   "op": "within",
+   "value": [
+    "1920",
+    "2080"
+   ],
+   "why": "2.00 kHz +-4 %"
+  },
+  {
+   "quantity": "Q",
+   "op": "within",
+   "value": [
+    "0.64",
+    "0.78"
+   ],
+   "why": "Butterworth 0.707, window 0.64..0.78"
+  },
+  {
+   "quantity": "Att",
+   "op": ">=",
+   "value": "38",
+   "why": "attenuation at 20 kHz >= 38 dB"
+  },
+  {
+   "quantity": "gm",
+   "op": ">=",
+   "value": "0",
+   "why": "GBW >= 150 f0"
+  },
+  {
+   "quantity": "Rs",
+   "op": "<=",
+   "value": "220000",
+   "why": "noise / bias offset"
+  },
+  {
+   "quantity": "R1w",
+   "op": ">=",
+   "value": "2000",
+   "why": "do not load previous stage (worst-case actual R)"
+  },
+  {
+   "quantity": "R2w",
+   "op": ">=",
+   "value": "2000",
+   "why": "do not load previous stage (worst-case actual R)"
+  }
+ ],
+ "objective": {
+  "minimize": "R1.price+R2.price+C1.price+C2.price+OA.price",
+  "why": "cheapest bill of materials"
+ },
+ "catalog": {
+  "res_1pct": {
+   "ground": "datasheet",
+   "items": [
+    {
+     "R": {
+      "value": "11500",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "3991/4000",
+       "4009/4000"
+      ]
+     },
+     "price": "0.02",
+     "grade": "1% metal film"
+    },
+    {
+     "R": {
+      "value": "11800",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "3991/4000",
+       "4009/4000"
+      ]
+     },
+     "price": "0.02",
+     "grade": "1% metal film"
+    },
+    {
+     "R": {
+      "value": "16500",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "3991/4000",
+       "4009/4000"
+      ]
+     },
+     "price": "0.02",
+     "grade": "1% metal film"
+    },
+    {
+     "R": {
+      "value": "16900",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "3991/4000",
+       "4009/4000"
+      ]
+     },
+     "price": "0.02",
+     "grade": "1% metal film"
+    },
+    {
+     "R": {
+      "value": "34800",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "3991/4000",
+       "4009/4000"
+      ]
+     },
+     "price": "0.02",
+     "grade": "1% metal film"
+    },
+    {
+     "R": {
+      "value": "35700",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "3991/4000",
+       "4009/4000"
+      ]
+     },
+     "price": "0.02",
+     "grade": "1% metal film"
+    },
+    {
+     "R": {
+      "value": "36500",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "3991/4000",
+       "4009/4000"
+      ]
+     },
+     "price": "0.02",
+     "grade": "1% metal film"
+    },
+    {
+     "R": {
+      "value": "37400",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "3991/4000",
+       "4009/4000"
+      ]
+     },
+     "price": "0.02",
+     "grade": "1% metal film"
+    }
+   ],
+   "fields": {
+    "R": {
+     "unit": "ohm"
+    },
+    "kT": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  },
+  "res_01pct": {
+   "ground": "datasheet",
+   "items": [
+    {
+     "R": {
+      "value": "11500",
+      "tolerance": "0.001"
+     },
+     "kT": {
+      "range": [
+       "39973/40000",
+       "40027/40000"
+      ]
+     },
+     "price": "0.38",
+     "grade": "0.1% thin film"
+    },
+    {
+     "R": {
+      "value": "11800",
+      "tolerance": "0.001"
+     },
+     "kT": {
+      "range": [
+       "39973/40000",
+       "40027/40000"
+      ]
+     },
+     "price": "0.38",
+     "grade": "0.1% thin film"
+    },
+    {
+     "R": {
+      "value": "16500",
+      "tolerance": "0.001"
+     },
+     "kT": {
+      "range": [
+       "39973/40000",
+       "40027/40000"
+      ]
+     },
+     "price": "0.38",
+     "grade": "0.1% thin film"
+    },
+    {
+     "R": {
+      "value": "16900",
+      "tolerance": "0.001"
+     },
+     "kT": {
+      "range": [
+       "39973/40000",
+       "40027/40000"
+      ]
+     },
+     "price": "0.38",
+     "grade": "0.1% thin film"
+    },
+    {
+     "R": {
+      "value": "34800",
+      "tolerance": "0.001"
+     },
+     "kT": {
+      "range": [
+       "39973/40000",
+       "40027/40000"
+      ]
+     },
+     "price": "0.38",
+     "grade": "0.1% thin film"
+    },
+    {
+     "R": {
+      "value": "35700",
+      "tolerance": "0.001"
+     },
+     "kT": {
+      "range": [
+       "39973/40000",
+       "40027/40000"
+      ]
+     },
+     "price": "0.38",
+     "grade": "0.1% thin film"
+    },
+    {
+     "R": {
+      "value": "36500",
+      "tolerance": "0.001"
+     },
+     "kT": {
+      "range": [
+       "39973/40000",
+       "40027/40000"
+      ]
+     },
+     "price": "0.38",
+     "grade": "0.1% thin film"
+    },
+    {
+     "R": {
+      "value": "37400",
+      "tolerance": "0.001"
+     },
+     "kT": {
+      "range": [
+       "39973/40000",
+       "40027/40000"
+      ]
+     },
+     "price": "0.38",
+     "grade": "0.1% thin film"
+    }
+   ],
+   "fields": {
+    "R": {
+     "unit": "ohm"
+    },
+    "kT": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  },
+  "cap_e12": {
+   "ground": "datasheet",
+   "items": [
+    {
+     "C": {
+      "value": "1.0",
+      "tolerance": "0.05"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.09",
+     "grade": "C0G E12 5%"
+    },
+    {
+     "C": {
+      "value": "1.5",
+      "tolerance": "0.05"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.09",
+     "grade": "C0G E12 5%"
+    },
+    {
+     "C": {
+      "value": "2.2",
+      "tolerance": "0.05"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.09",
+     "grade": "C0G E12 5%"
+    },
+    {
+     "C": {
+      "value": "3.3",
+      "tolerance": "0.05"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.09",
+     "grade": "C0G E12 5%"
+    },
+    {
+     "C": {
+      "value": "4.7",
+      "tolerance": "0.05"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.09",
+     "grade": "C0G E12 5%"
+    },
+    {
+     "C": {
+      "value": "6.8",
+      "tolerance": "0.05"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.09",
+     "grade": "C0G E12 5%"
+    }
+   ],
+   "fields": {
+    "C": {
+     "unit": "nF"
+    },
+    "kT": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  },
+  "cap_e24": {
+   "ground": "datasheet",
+   "items": [
+    {
+     "C": {
+      "value": "1.0",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.26",
+     "grade": "C0G E24 1%"
+    },
+    {
+     "C": {
+      "value": "1.5",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.26",
+     "grade": "C0G E24 1%"
+    },
+    {
+     "C": {
+      "value": "2.2",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.26",
+     "grade": "C0G E24 1%"
+    },
+    {
+     "C": {
+      "value": "3.3",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.26",
+     "grade": "C0G E24 1%"
+    },
+    {
+     "C": {
+      "value": "4.7",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.26",
+     "grade": "C0G E24 1%"
+    },
+    {
+     "C": {
+      "value": "6.8",
+      "tolerance": "0.01"
+     },
+     "kT": {
+      "range": [
+       "19973/20000",
+       "20027/20000"
+      ]
+     },
+     "price": "0.26",
+     "grade": "C0G E24 1%"
+    }
+   ],
+   "fields": {
+    "C": {
+     "unit": "nF"
+    },
+    "kT": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  },
+  "opamps": {
+   "ground": "datasheet",
+   "items": [
+    {
+     "GBW": "3",
+     "price": "0.60",
+     "grade": "OA1"
+    },
+    {
+     "GBW": "10",
+     "price": "1.20",
+     "grade": "OA2"
+    },
+    {
+     "GBW": "50",
+     "price": "2.40",
+     "grade": "OA3"
+    }
+   ],
+   "fields": {
+    "GBW": {
+     "unit": "MHz"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ }
+}

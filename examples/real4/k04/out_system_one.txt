@@ -1,0 +1,708 @@
+{
+  "verdict": "EARNED",
+  "find": "smallest",
+  "quantity": "Lsys",
+  "unit": "uH",
+  "proved": "31/2 (~15.5)",
+  "proved_means": "every Lsys in [31/2 (~15.5), 30] uH works (EARNED on the whole range)",
+  "beyond": "15",
+  "beyond_is": "OPEN: the stand could not decide the range [15, 30] uH — the limit lies between 31/2 (~15.5) and 15, unproved",
+  "precision": "1/2 (~0.5)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL fd6593d",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "Pk": [
+            "38653/12825 (~3.01388)",
+            "214/57 (~3.75439)"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {},
+    "guaranteed": {
+      "Pk": [
+        "38653/12825 (~3.01388)",
+        "214/57 (~3.75439)"
+      ]
+    },
+    "guaranteed_unit": {
+      "Pk": "A"
+    },
+    "how": {
+      "Pk": "ZTL, exact at the corners"
+    },
+    "requirements": [
+      {
+        "quantity": "Pk",
+        "op": "<=",
+        "value": "Isat",
+        "why": "saturation"
+      }
+    ],
+    "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "FB_Vo -> [10808/3375, 1288/375] by the system over its parameters, exact at the corners (credit)",
+      "Kr -> [356/38475, 86/171] by the system over its parameters, exact at the corners (credit)",
+      "Pk -> [38653/12825, 214/57] by the system over its parameters, exact at the corners (credit)",
+      "Rms -> [37500133771/12500000000, 94732865549/31250000000] by the system over its parameters, exact at the corners (credit)",
+      "Vrip -> [0, 20983/2679000] by the system over its parameters, exact at the corners (credit)"
+    ],
+    "components": {
+      "FB": {
+        "inputs": {},
+        "bands_used": [
+          {
+            "band": {},
+            "earned": true,
+            "outputs": {
+              "Vo": [
+                "10808/3375",
+                "1288/375"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "Vo": [
+            "10808/3375",
+            "1288/375"
+          ]
+        },
+        "outputs_affine": {
+          "Vo": {
+            "slope": {},
+            "remainder": [
+              "10808/3375",
+              "1288/375"
+            ]
+          }
+        }
+      },
+      "LS": {
+        "inputs": {
+          "Vin": {
+            "from": "Vin",
+            "arrives": [
+              "7/1",
+              "28/1"
+            ],
+            "assume": [
+              "7/1",
+              "28/1"
+            ],
+            "inside": true
+          },
+          "Vo": {
+            "from": "FB.Vo",
+            "arrives": [
+              "10808/3375",
+              "1288/375"
+            ],
+            "assume": [
+              "16/5",
+              "86/25"
+            ],
+            "inside": true
+          },
+          "L": {
+            "from": "Lsys",
+            "arrives": [
+              "31/2",
+              "30/1"
+            ],
+            "assume": [
+              "1/1",
+              "30/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "L": [
+                "15/1",
+                "20/1"
+              ],
+              "Vin": [
+                "7/1",
+                "20/1"
+              ],
+              "Vo": [
+                "16/5",
+                "86/25"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "ILPP": [
+                "178/4275",
+                "86/57"
+              ],
+              "ILpk": [
+                "12914/4275",
+                "214/57"
+              ],
+              "ILrms": [
+                "3000024078727/1000000000000",
+                "94732865549/31250000000"
+              ]
+            }
+          },
+          {
+            "band": {
+              "L": [
+                "15/1",
+                "20/1"
+              ],
+              "Vin": [
+                "20/1",
+                "28/1"
+              ],
+              "Vo": [
+                "16/5",
+                "86/25"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "ILPP": [
+                "92/665",
+                "1333/1710"
+              ],
+              "ILpk": [
+                "2041/665",
+                "11593/3420"
+              ],
+              "ILrms": [
+                "3000265815699/1000000000000",
+                "3008428027979/1000000000000"
+              ]
+            }
+          },
+          {
+            "band": {
+              "L": [
+                "20/1",
+                "30/1"
+              ],
+              "Vin": [
+                "7/1",
+                "20/1"
+              ],
+              "Vo": [
+                "16/5",
+                "86/25"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "ILPP": [
+                "356/12825",
+                "43/38"
+              ],
+              "ILpk": [
+                "38653/12825",
+                "271/76"
+              ],
+              "ILrms": [
+                "37500133771/12500000000",
+                "603546382957/200000000000"
+              ]
+            }
+          },
+          {
+            "band": {
+              "L": [
+                "20/1",
+                "30/1"
+              ],
+              "Vin": [
+                "20/1",
+                "28/1"
+              ],
+              "Vo": [
+                "16/5",
+                "86/25"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "ILPP": [
+                "184/1995",
+                "1333/2280"
+              ],
+              "ILpk": [
+                "6077/1995",
+                "15013/4560"
+              ],
+              "ILrms": [
+                "1500059071609/500000000000",
+                "751185918637/250000000000"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "ILPP": [
+            "356/12825",
+            "86/57"
+          ],
+          "ILpk": [
+            "38653/12825",
+            "214/57"
+          ],
+          "ILrms": [
+            "37500133771/12500000000",
+            "94732865549/31250000000"
+          ]
+        }
+      },
+      "CO": {
+        "inputs": {
+          "ILPP": {
+            "from": "LS.ILPP",
+            "arrives": [
+              "356/12825",
+              "86/57"
+            ],
+            "assume": [
+              "0/1",
+              "4/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "ILPP": [
+                "0/1",
+                "1/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "Vopp": [
+                "0/1",
+                "20983/5358000"
+              ]
+            }
+          },
+          {
+            "band": {
+              "ILPP": [
+                "1/1",
+                "2/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "Vopp": [
+                "11831/4018500",
+                "20983/2679000"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "Vopp": [
+            "0/1",
+            "20983/2679000"
+          ]
+        }
+      }
+    },
+    "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)"
+  },
+  "at_beyond": {
+    "verdict": "OPEN",
+    "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point",
+    "refuted_inside_the_enclosures": {
+      "its_violating_point": {
+        "CO_Vopp": "0",
+        "FB_Vo_e": "10808/3375 (~3.20237)",
+        "LS_ILPP": "356/12825 (~0.0277583)",
+        "LS_ILpk": "899/228 (~3.94298)",
+        "LS_ILrms": "37500133771/12500000000 (~3.00001)",
+        "Lsys": "15",
+        "Vin": "7"
+      }
+    },
+    "components": {
+      "FB": {
+        "inputs": {},
+        "bands_used": [
+          {
+            "band": {},
+            "earned": true,
+            "outputs": {
+              "Vo": [
+                "10808/3375",
+                "1288/375"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "Vo": [
+            "10808/3375",
+            "1288/375"
+          ]
+        },
+        "outputs_affine": {
+          "Vo": {
+            "slope": {},
+            "remainder": [
+              "10808/3375",
+              "1288/375"
+            ]
+          }
+        }
+      },
+      "LS": {
+        "inputs": {
+          "Vin": {
+            "from": "Vin",
+            "arrives": [
+              "7/1",
+              "28/1"
+            ],
+            "assume": [
+              "7/1",
+              "28/1"
+            ],
+            "inside": true
+          },
+          "Vo": {
+            "from": "FB.Vo",
+            "arrives": [
+              "10808/3375",
+              "1288/375"
+            ],
+            "assume": [
+              "16/5",
+              "86/25"
+            ],
+            "inside": true
+          },
+          "L": {
+            "from": "Lsys",
+            "arrives": [
+              "15/1",
+              "30/1"
+            ],
+            "assume": [
+              "1/1",
+              "30/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "L": [
+                "12/1",
+                "15/1"
+              ],
+              "Vin": [
+                "7/1",
+                "20/1"
+              ],
+              "Vo": [
+                "16/5",
+                "86/25"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "ILPP": [
+                "712/12825",
+                "215/114"
+              ],
+              "ILpk": [
+                "38831/12825",
+                "899/228"
+              ],
+              "ILrms": [
+                "750010701623/250000000000",
+                "1524500352919/500000000000"
+              ]
+            }
+          },
+          {
+            "band": {
+              "L": [
+                "12/1",
+                "15/1"
+              ],
+              "Vin": [
+                "20/1",
+                "28/1"
+              ],
+              "Vo": [
+                "16/5",
+                "86/25"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "ILPP": [
+                "368/1995",
+                "1333/1368"
+              ],
+              "ILpk": [
+                "6169/1995",
+                "9541/2736"
+              ],
+              "ILrms": [
+                "3000472544963/1000000000000",
+                "602631686829/200000000000"
+              ]
+            }
+          },
+          {
+            "band": {
+              "L": [
+                "15/1",
+                "20/1"
+              ],
+              "Vin": [
+                "7/1",
+                "20/1"
+              ],
+              "Vo": [
+                "16/5",
+                "86/25"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "ILPP": [
+                "178/4275",
+                "86/57"
+              ],
+              "ILpk": [
+                "12914/4275",
+                "214/57"
+              ],
+              "ILrms": [
+                "3000024078727/1000000000000",
+                "94732865549/31250000000"
+              ]
+            }
+          },
+          {
+            "band": {
+              "L": [
+                "15/1",
+                "20/1"
+              ],
+              "Vin": [
+                "20/1",
+                "28/1"
+              ],
+              "Vo": [
+                "16/5",
+                "86/25"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "ILPP": [
+                "92/665",
+                "1333/1710"
+              ],
+              "ILpk": [
+                "2041/665",
+                "11593/3420"
+              ],
+              "ILrms": [
+                "3000265815699/1000000000000",
+                "3008428027979/1000000000000"
+              ]
+            }
+          },
+          {
+            "band": {
+              "L": [
+                "20/1",
+                "30/1"
+              ],
+              "Vin": [
+                "7/1",
+                "20/1"
+              ],
+              "Vo": [
+                "16/5",
+                "86/25"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "ILPP": [
+                "356/12825",
+                "43/38"
+              ],
+              "ILpk": [
+                "38653/12825",
+                "271/76"
+              ],
+              "ILrms": [
+                "37500133771/12500000000",
+                "603546382957/200000000000"
+              ]
+            }
+          },
+          {
+            "band": {
+              "L": [
+                "20/1",
+                "30/1"
+              ],
+              "Vin": [
+                "20/1",
+                "28/1"
+              ],
+              "Vo": [
+                "16/5",
+                "86/25"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "ILPP": [
+                "184/1995",
+                "1333/2280"
+              ],
+              "ILpk": [
+                "6077/1995",
+                "15013/4560"
+              ],
+              "ILrms": [
+                "1500059071609/500000000000",
+                "751185918637/250000000000"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "ILPP": [
+            "356/12825",
+            "215/114"
+          ],
+          "ILpk": [
+            "38653/12825",
+            "899/228"
+          ],
+          "ILrms": [
+            "37500133771/12500000000",
+            "1524500352919/500000000000"
+          ]
+        }
+      },
+      "CO": {
+        "inputs": {
+          "ILPP": {
+            "from": "LS.ILPP",
+            "arrives": [
+              "356/12825",
+              "215/114"
+            ],
+            "assume": [
+              "0/1",
+              "4/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "ILPP": [
+                "0/1",
+                "1/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "Vopp": [
+                "0/1",
+                "20983/5358000"
+              ]
+            }
+          },
+          {
+            "band": {
+              "ILPP": [
+                "1/1",
+                "2/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "Vopp": [
+                "11831/4018500",
+                "20983/2679000"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "Vopp": [
+            "0/1",
+            "20983/2679000"
+          ]
+        }
+      }
+    },
+    "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)"
+  },
+  "tries": [
+    {
+      "Lsys": "30",
+      "verdict": "EARNED"
+    },
+    {
+      "Lsys": "1",
+      "verdict": "OPEN"
+    },
+    {
+      "Lsys": "31/2 (~15.5)",
+      "verdict": "EARNED"
+    },
+    {
+      "Lsys": "8",
+      "verdict": "OPEN"
+    },
+    {
+      "Lsys": "12",
+      "verdict": "OPEN"
+    },
+    {
+      "Lsys": "14",
+      "verdict": "OPEN"
+    },
+    {
+      "Lsys": "15",
+      "verdict": "OPEN"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

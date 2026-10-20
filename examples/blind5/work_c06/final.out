@@ -1,0 +1,352 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "excluded_by_where": 5,
+  "designs_tried": 35,
+  "failed_at_nominal": 20,
+  "judged": 15,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "FB=widths(B=3/5); FD=depths(Df=1/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~2.34013235548 (an exact fraction of 312 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=3/5); FD=depths(Df=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~2.11013329899 (an exact fraction of 312 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=3/5); FD=depths(Df=1)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~1.96009789783 (an exact fraction of 312 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=4/5); FD=depths(Df=1/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~1.91028043625 (an exact fraction of 309 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=3/5); FD=depths(Df=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~1.82557563228 (an exact fraction of 314 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=4/5); FD=depths(Df=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~1.57827186816 (an exact fraction of 308 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=3/5); FD=depths(Df=3/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~1.65373318549 (an exact fraction of 314 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=1); FD=depths(Df=1/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~1.43636133261 (an exact fraction of 309 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=4/5); FD=depths(Df=1)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~1.38578984835 (an exact fraction of 310 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=4/5); FD=depths(Df=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~1.22424848277 (an exact fraction of 311 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=1); FD=depths(Df=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~1.04420967217 (an exact fraction of 311 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=6/5); FD=depths(Df=1/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.921054081238 (an exact fraction of 311 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=4/5); FD=depths(Df=3/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.991488557694 (an exact fraction of 311 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=1); FD=depths(Df=1)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.839036475809 (an exact fraction of 310 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=1); FD=depths(Df=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.642805970045 (an exact fraction of 312 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=6/5); FD=depths(Df=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.536856499618 (an exact fraction of 312 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=6/5); FD=depths(Df=1)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.301640134698 (an exact fraction of 313 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=3/2); FD=depths(Df=1/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.215903781801 (an exact fraction of 312 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=1); FD=depths(Df=3/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.364084952113 (an exact fraction of 311 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=6/5); FD=depths(Df=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.0791186416658 (an exact fraction of 313 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=3/2); FD=depths(Df=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.975453186963 (an exact fraction of 248 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=6/5); FD=depths(Df=3/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~1.11916733284 (an exact fraction of 250 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=9/5); FD=depths(Df=1/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.979144754915 (an exact fraction of 251 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=3/2); FD=depths(Df=1)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.875232428942 (an exact fraction of 250 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=3/2); FD=depths(Df=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.782248598663 (an exact fraction of 250 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=2); FD=depths(Df=1/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.696799051924 (an exact fraction of 249 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=9/5); FD=depths(Df=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.519875164029 (an exact fraction of 251 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=3/2); FD=depths(Df=3/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.654724526514 (an exact fraction of 249 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=9/5); FD=depths(Df=1)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.422547983167 (an exact fraction of 252 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=2); FD=depths(Df=4/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.215661676854 (an exact fraction of 247 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=9/5); FD=depths(Df=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.333424595025 (an exact fraction of 252 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=2); FD=depths(Df=1)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.123986136125 (an exact fraction of 248 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=9/5); FD=depths(Df=3/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.212993728699 (an exact fraction of 252 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=2); FD=depths(Df=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.0407284315924 (an exact fraction of 248 digits)",
+      "unit": ""
+    },
+    {
+      "design": "FB=widths(B=2); FD=depths(Df=3/2)",
+      "verdict": "REFUTED",
+      "fails": "R1",
+      "by": "~0.179551170545 (an exact fraction of 249 digits)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 35
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "FB": {
+      "catalog": "widths",
+      "B": {
+        "nominal": "2",
+        "tolerance": "0"
+      }
+    },
+    "FD": {
+      "catalog": "depths",
+      "Df": {
+        "nominal": "6/5 (~1.2)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "E": "10",
+    "Mabs": "8",
+    "N": "100",
+    "c": "0",
+    "gam": "35/2 (~17.5)",
+    "phid": "25",
+    "pi": "3141592653589793/1000000000000000 (~3.14159)",
+    "zw": "4/5 (~0.8)"
+  },
+  "point_units": {
+    "E": "MPa",
+    "Mabs": "kN*m/m",
+    "N": "kN/m",
+    "c": "kPa",
+    "gam": "kN/m^3",
+    "phid": "",
+    "pi": "",
+    "zw": "m"
+  },
+  "value_there": {
+    "FS": [
+      "~2.95927156841 (an exact fraction of 249 digits)",
+      "~2.95927156841 (an exact fraction of 248 digits)"
+    ]
+  },
+  "unit": "",
+  "requirement": {
+    "quantity": "FS",
+    "op": ">=",
+    "value": "3",
+    "why": "R1"
+  },
+  "overshoot": "~0.0407284315924 (an exact fraction of 248 digits)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "~2.4943677554 (an exact fraction of 250 digits)",
+      "~8.57010172266 (an exact fraction of 308 digits)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "phid",
+        "moves_it_by": "~1.86540711997 (an exact fraction of 250 digits)"
+      },
+      {
+        "quantity": "c",
+        "moves_it_by": "~1.0605000305 (an exact fraction of 241 digits)"
+      },
+      {
+        "quantity": "zw",
+        "moves_it_by": "~0.959940943592 (an exact fraction of 247 digits)"
+      },
+      {
+        "quantity": "gam",
+        "moves_it_by": "~0.427297986371 (an exact fraction of 260 digits)"
+      },
+      {
+        "quantity": "N",
+        "moves_it_by": "~0.255392093937 (an exact fraction of 259 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  }
+}

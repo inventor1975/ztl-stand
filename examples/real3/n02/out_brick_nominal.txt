@@ -1,0 +1,950 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "verdict": "EARNED",
+  "why": "several limits, each searched on its own; the verdict is the weakest of theirs",
+  "finds": [
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "ID_s2",
+      "unit": "A",
+      "proved": "2943/50 (~58.86)",
+      "proved_means": "every ID_s2 in [0, 2943/50 (~58.86)] A works (EARNED on the whole range)",
+      "beyond": "5887/100 (~58.87)",
+      "beyond_is": "REFUTED: the range [0, 5887/100 (~58.87)] A holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "Tj_s2": [
+                "40",
+                "87479790959/500000000 (~174.96)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "Tj_s2": [
+            "40",
+            "87479790959/500000000 (~174.96)"
+          ]
+        },
+        "guaranteed_unit": {
+          "Tj_s2": "C"
+        },
+        "how": {
+          "Tj_s2": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "Tj_s2",
+            "op": "<=",
+            "value": "175",
+            "why": "Tj max 175 C (forced air, grease, Tj<=175); published ID 58.9 A"
+          }
+        ],
+        "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "Tj_s3 = 40 by exact elimination (credit)",
+          "Tj_s4 = 40 by exact elimination (credit)",
+          "Tj_s5 = 40 by exact elimination (credit)",
+          "Tj_s6 = 40 by exact elimination (credit)",
+          "Tj_s2 -> [40, 87479790959/500000000] by [Tj_s2 == Ta + ID_s2*ID_s2*RDS_s2*(RJC_s2 + RINT_s2 + RSA_s2)], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "Tj max 175 C (forced air, grease, Tj<=175); published ID 58.9 A",
+            "by_at_witness": "10887279/2000000000 (~0.00544364)",
+            "unit": "C"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "ID_s2": "5887/100 (~58.87)"
+        },
+        "point_units": {
+          "ID_s2": "A"
+        },
+        "value_there": {
+          "Tj_s2": "350010887279/2000000000 (~175.005)"
+        },
+        "unit": "C",
+        "requirement": {
+          "quantity": "Tj_s2",
+          "op": "<=",
+          "value": "175",
+          "why": "Tj max 175 C (forced air, grease, Tj<=175); published ID 58.9 A"
+        },
+        "overshoot": "10887279/2000000000 (~0.00544364)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "40",
+            "350010887279/2000000000 (~175.005)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "ID_s2",
+              "moves_it_by": "270010887279/2000000000 (~135.005)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "ID_s2": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s2": "100",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s2": "50",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s2": "75",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s2": "125/2 (~62.5)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s2": "225/4 (~56.25)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s2": "2969/50 (~59.38)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s2": "2891/50 (~57.82)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s2": "293/5 (~58.6)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s2": "5899/100 (~58.99)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s2": "294/5 (~58.8)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s2": "589/10 (~58.9)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s2": "1177/20 (~58.85)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s2": "1472/25 (~58.88)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s2": "2943/50 (~58.86)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s2": "5887/100 (~58.87)",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 0
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "ID_s3",
+      "unit": "A",
+      "proved": "5159/100 (~51.59)",
+      "proved_means": "every ID_s3 in [0, 5159/100 (~51.59)] A works (EARNED on the whole range)",
+      "beyond": "258/5 (~51.6)",
+      "beyond_is": "REFUTED: the range [0, 258/5 (~51.6)] A holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "Tj_s3": [
+                "40",
+                "349958795183/2000000000 (~174.979)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "Tj_s3": [
+            "40",
+            "349958795183/2000000000 (~174.979)"
+          ]
+        },
+        "guaranteed_unit": {
+          "Tj_s3": "C"
+        },
+        "how": {
+          "Tj_s3": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "Tj_s3",
+            "op": "<=",
+            "value": "175",
+            "why": "Tj max 175 C (forced air, insulating pad, Tj<=175); published ID 51.6 A"
+          }
+        ],
+        "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "Tj_s2 = 40 by exact elimination (credit)",
+          "Tj_s4 = 40 by exact elimination (credit)",
+          "Tj_s5 = 40 by exact elimination (credit)",
+          "Tj_s6 = 40 by exact elimination (credit)",
+          "Tj_s3 -> [40, 349958795183/2000000000] by [Tj_s3 == Ta + ID_s3*ID_s3*RDS_s3*(RJC_s3 + RINT_s3 + RSA_s3)], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "Tj max 175 C (forced air, insulating pad, Tj<=175); published ID 51.6 A",
+            "by_at_witness": "39663/1250000 (~0.0317304)",
+            "unit": "C"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "ID_s3": "258/5 (~51.6)"
+        },
+        "point_units": {
+          "ID_s3": "A"
+        },
+        "value_there": {
+          "Tj_s3": "218789663/1250000 (~175.032)"
+        },
+        "unit": "C",
+        "requirement": {
+          "quantity": "Tj_s3",
+          "op": "<=",
+          "value": "175",
+          "why": "Tj max 175 C (forced air, insulating pad, Tj<=175); published ID 51.6 A"
+        },
+        "overshoot": "39663/1250000 (~0.0317304)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "40",
+            "218789663/1250000 (~175.032)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "ID_s3",
+              "moves_it_by": "168789663/1250000 (~135.032)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "ID_s3": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s3": "100",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "50",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s3": "75",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "125/2 (~62.5)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "225/4 (~56.25)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "1328/25 (~53.12)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "1289/25 (~51.56)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s3": "2617/50 (~52.34)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "1039/20 (~51.95)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "1294/25 (~51.76)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "2583/50 (~51.66)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "5161/100 (~51.61)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "2579/50 (~51.58)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s3": "258/5 (~51.6)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s3": "5159/100 (~51.59)",
+          "verdict": "EARNED"
+        }
+      ],
+      "find_index": 1
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "ID_s4",
+      "unit": "A",
+      "proved": "4859/100 (~48.59)",
+      "proved_means": "every ID_s4 in [0, 4859/100 (~48.59)] A works (EARNED on the whole range)",
+      "beyond": "243/5 (~48.6)",
+      "beyond_is": "REFUTED: the range [0, 243/5 (~48.6)] A holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "Tj_s4": [
+                "40",
+                "59985208303/400000000 (~149.963)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "Tj_s4": [
+            "40",
+            "59985208303/400000000 (~149.963)"
+          ]
+        },
+        "guaranteed_unit": {
+          "Tj_s4": "C"
+        },
+        "how": {
+          "Tj_s4": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "Tj_s4",
+            "op": "<=",
+            "value": "150",
+            "why": "Tj max 150 C (forced air, insulating pad, Tj<=150); published ID 48.6 A"
+          }
+        ],
+        "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "Tj_s2 = 40 by exact elimination (credit)",
+          "Tj_s3 = 40 by exact elimination (credit)",
+          "Tj_s5 = 40 by exact elimination (credit)",
+          "Tj_s6 = 40 by exact elimination (credit)",
+          "Tj_s4 -> [40, 59985208303/400000000] by [Tj_s4 == Ta + ID_s4*ID_s4*RDS_s4*(RJC_s4 + RINT_s4 + RSA_s4)], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "Tj max 150 C (forced air, insulating pad, Tj<=150); published ID 48.6 A",
+            "by_at_witness": "8287/1000000 (~0.008287)",
+            "unit": "C"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "ID_s4": "243/5 (~48.6)"
+        },
+        "point_units": {
+          "ID_s4": "A"
+        },
+        "value_there": {
+          "Tj_s4": "150008287/1000000 (~150.008)"
+        },
+        "unit": "C",
+        "requirement": {
+          "quantity": "Tj_s4",
+          "op": "<=",
+          "value": "150",
+          "why": "Tj max 150 C (forced air, insulating pad, Tj<=150); published ID 48.6 A"
+        },
+        "overshoot": "8287/1000000 (~0.008287)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "40",
+            "150008287/1000000 (~150.008)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "ID_s4",
+              "moves_it_by": "110008287/1000000 (~110.008)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "ID_s4": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s4": "100",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s4": "50",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s4": "25",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s4": "75/2 (~37.5)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s4": "175/4 (~43.75)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s4": "1172/25 (~46.88)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s4": "1211/25 (~48.44)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s4": "2461/50 (~49.22)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s4": "4883/100 (~48.83)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s4": "1216/25 (~48.64)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s4": "2427/50 (~48.54)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s4": "4859/100 (~48.59)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s4": "2431/50 (~48.62)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s4": "243/5 (~48.6)",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 2
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "ID_s5",
+      "unit": "A",
+      "proved": "3307/100 (~33.07)",
+      "proved_means": "every ID_s5 in [0, 3307/100 (~33.07)] A works (EARNED on the whole range)",
+      "beyond": "827/25 (~33.08)",
+      "beyond_is": "REFUTED: the range [0, 827/25 (~33.08)] A holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "Tj_s5": [
+                "40",
+                "59996529727/400000000 (~149.991)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "Tj_s5": [
+            "40",
+            "59996529727/400000000 (~149.991)"
+          ]
+        },
+        "guaranteed_unit": {
+          "Tj_s5": "C"
+        },
+        "how": {
+          "Tj_s5": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "Tj_s5",
+            "op": "<=",
+            "value": "150",
+            "why": "Tj max 150 C (natural conv, insulating pad, Tj<=150); published ID 33.1 A"
+          }
+        ],
+        "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "Tj_s2 = 40 by exact elimination (credit)",
+          "Tj_s3 = 40 by exact elimination (credit)",
+          "Tj_s4 = 40 by exact elimination (credit)",
+          "Tj_s6 = 40 by exact elimination (credit)",
+          "Tj_s5 -> [40, 59996529727/400000000] by [Tj_s5 == Ta + ID_s5*ID_s5*RDS_s5*(RJC_s5 + RINT_s5 + RSA_s5)], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "Tj max 150 C (natural conv, insulating pad, Tj<=150); published ID 33.1 A",
+            "by_at_witness": "1446367/25000000 (~0.0578547)",
+            "unit": "C"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "ID_s5": "827/25 (~33.08)"
+        },
+        "point_units": {
+          "ID_s5": "A"
+        },
+        "value_there": {
+          "Tj_s5": "3751446367/25000000 (~150.058)"
+        },
+        "unit": "C",
+        "requirement": {
+          "quantity": "Tj_s5",
+          "op": "<=",
+          "value": "150",
+          "why": "Tj max 150 C (natural conv, insulating pad, Tj<=150); published ID 33.1 A"
+        },
+        "overshoot": "1446367/25000000 (~0.0578547)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "40",
+            "3751446367/25000000 (~150.058)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "ID_s5",
+              "moves_it_by": "2751446367/25000000 (~110.058)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "ID_s5": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s5": "100",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s5": "50",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s5": "25",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s5": "75/2 (~37.5)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s5": "125/4 (~31.25)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s5": "1719/50 (~34.38)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s5": "1641/50 (~32.82)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s5": "168/5 (~33.6)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s5": "3321/100 (~33.21)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s5": "1651/50 (~33.02)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s5": "828/25 (~33.12)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s5": "3307/100 (~33.07)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s5": "331/10 (~33.1)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s5": "827/25 (~33.08)",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 3
+    },
+    {
+      "verdict": "EARNED",
+      "find": "largest",
+      "quantity": "ID_s6",
+      "unit": "A",
+      "proved": "618/25 (~24.72)",
+      "proved_means": "every ID_s6 in [0, 618/25 (~24.72)] A works (EARNED on the whole range)",
+      "beyond": "2473/100 (~24.73)",
+      "beyond_is": "REFUTED: the range [0, 2473/100 (~24.73)] A holds a concrete failing point (at_beyond)",
+      "precision": "1/100 (~0.01)",
+      "at_proved": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "EARNED",
+            "guaranteed": {
+              "Tj_s6": [
+                "40",
+                "2343658/15625 (~149.994)"
+              ]
+            }
+          }
+        ],
+        "designs_count": {
+          "EARNED": 1
+        },
+        "verdict": "EARNED",
+        "design": {},
+        "guaranteed": {
+          "Tj_s6": [
+            "40",
+            "2343658/15625 (~149.994)"
+          ]
+        },
+        "guaranteed_unit": {
+          "Tj_s6": "C"
+        },
+        "how": {
+          "Tj_s6": "ZTL, outer range"
+        },
+        "requirements": [
+          {
+            "quantity": "Tj_s6",
+            "op": "<=",
+            "value": "150",
+            "why": "Tj max 150 C (D2PAK on PCB, RthJA(PCB)=40 max, Tj<=150); published ID 24.7 A"
+          }
+        ],
+        "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+        "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+        "judge_log": [
+          "Tj_s2 = 40 by exact elimination (credit)",
+          "Tj_s3 = 40 by exact elimination (credit)",
+          "Tj_s4 = 40 by exact elimination (credit)",
+          "Tj_s5 = 40 by exact elimination (credit)",
+          "Tj_s6 -> [40, 2343658/15625] by [Tj_s6 == Ta + ID_s6*ID_s6*RDS_s6*RJA_s6], interval reading, sound, may be wider than the truth (credit)"
+        ]
+      },
+      "at_beyond": {
+        "stand": "ztl-stand/1",
+        "judge": "ZTL 2a24683",
+        "designs_tried": 1,
+        "failed_at_nominal": 0,
+        "judged": 1,
+        "undecided": 0,
+        "units": "checked: every law's dimensions agree",
+        "designs": [
+          {
+            "design": "",
+            "verdict": "REFUTED",
+            "fails": "Tj max 150 C (D2PAK on PCB, RthJA(PCB)=40 max, Tj<=150); published ID 24.7 A",
+            "by_at_witness": "41561/500000 (~0.083122)",
+            "unit": "C"
+          }
+        ],
+        "designs_count": {
+          "REFUTED": 1
+        },
+        "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+        "verdict": "REFUTED",
+        "why": "every design in the catalog violates a requirement at a concrete point",
+        "closest_design": {},
+        "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+        "its_violating_point": {
+          "ID_s6": "2473/100 (~24.73)"
+        },
+        "point_units": {
+          "ID_s6": "A"
+        },
+        "value_there": {
+          "Tj_s6": "75041561/500000 (~150.083)"
+        },
+        "unit": "C",
+        "requirement": {
+          "quantity": "Tj_s6",
+          "op": "<=",
+          "value": "150",
+          "why": "Tj max 150 C (D2PAK on PCB, RthJA(PCB)=40 max, Tj<=150); published ID 24.7 A"
+        },
+        "overshoot": "41561/500000 (~0.083122)",
+        "reasons": {
+          "spread_over_tolerances": [
+            "40",
+            "75041561/500000 (~150.083)"
+          ],
+          "largest_contributors": [
+            {
+              "quantity": "ID_s6",
+              "moves_it_by": "55041561/500000 (~110.083)"
+            }
+          ]
+        },
+        "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+      },
+      "tries": [
+        {
+          "ID_s6": "0",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s6": "100",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s6": "50",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s6": "25",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s6": "25/2 (~12.5)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s6": "75/4 (~18.75)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s6": "547/25 (~21.88)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s6": "586/25 (~23.44)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s6": "1211/50 (~24.22)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s6": "2461/100 (~24.61)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s6": "124/5 (~24.8)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s6": "247/10 (~24.7)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s6": "99/4 (~24.75)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s6": "618/25 (~24.72)",
+          "verdict": "EARNED"
+        },
+        {
+          "ID_s6": "1237/50 (~24.74)",
+          "verdict": "REFUTED"
+        },
+        {
+          "ID_s6": "2473/100 (~24.73)",
+          "verdict": "REFUTED"
+        }
+      ],
+      "find_index": 4
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+
+real	0m1.430s
+user	0m1.367s
+sys	0m0.053s

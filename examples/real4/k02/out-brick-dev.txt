@@ -1,0 +1,74 @@
+[stand] 1/1 designs, 0 s: 
+[stand] 1/1 designs, 41 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL fd6593d",
+  "modes": [
+    "offset_vin0",
+    "gain_only_vin1",
+    "total_vin1"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "designs": [
+    {
+      "design": "",
+      "verdict": "REFUTED",
+      "mode": "gain_only_vin1",
+      "fails": "gain budget 1% of reading (1 V), offsets zeroed (source)",
+      "by_at_witness": "9544219271/32449663782900 (~0.000294124)",
+      "unit": "V",
+      "failing_modes": [
+        "gain_only_vin1",
+        "total_vin1"
+      ]
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "verdict": "REFUTED",
+  "why": "every design violates a requirement in at least one mode, at a concrete point",
+  "closest_design": {},
+  "failing_mode": "gain_only_vin1",
+  "failing_modes": [
+    "gain_only_vin1",
+    "total_vin1"
+  ],
+  "its_violating_point": {
+    "R1": "9990",
+    "R2": "39960",
+    "Vref": "199/40 (~4.975)",
+    "dR1": "-3/1000 (~-0.003)",
+    "dR2": "3/1000 (~0.003)",
+    "dVref": "-3/2000 (~-0.0015)",
+    "eg": "-22/20475 (~-0.00107448)"
+  },
+  "value_there": {
+    "Err": "3340408571/324496637829 (~0.0102941)"
+  },
+  "requirement": {
+    "quantity": "Err",
+    "op": "within",
+    "value": [
+      "-1/100",
+      "1/100"
+    ],
+    "why": "gain budget 1% of reading (1 V), offsets zeroed (source)"
+  },
+  "overshoot": "9544219271/32449663782900 (~0.000294124)",
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "[gain_only_vin1] gain budget 1% of reading (1 V), offsets zeroed (source)"
+      ],
+      [
+        "[total_vin1] 5 mV offset + 1% of 1 V reading (source's combined form)"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted — a mode's own requirement is marked [mode]; the brick's apply in every mode"
+  },
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

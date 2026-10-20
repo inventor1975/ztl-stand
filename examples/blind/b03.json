@@ -1,0 +1,224 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "dz": {
+   "role": "given",
+   "range": [
+    "12",
+    "18"
+   ],
+   "unit": "m",
+   "why": "static lift, tank levels"
+  },
+  "D": {
+   "role": "given",
+   "range": [
+    "52",
+    "53"
+   ],
+   "unit": "mm",
+   "why": "inner diameter 52.5 +-0.5"
+  },
+  "L": {
+   "role": "given",
+   "value": "120",
+   "unit": "m"
+  },
+  "SK": {
+   "role": "given",
+   "range": [
+    "7.5",
+    "9.5"
+   ],
+   "unit": "",
+   "why": "total minor-loss coefficient 8.5 +-1.0"
+  },
+  "G": {
+   "role": "given",
+   "value": "9.81",
+   "unit": "m*s^-2"
+  },
+  "PI": {
+   "role": "given",
+   "range": [
+    "3.14159265",
+    "3.14159266"
+   ],
+   "unit": "",
+   "why": "pi enclosed"
+  },
+  "F": {
+   "role": "given",
+   "range": [
+    "0.0201",
+    "0.0257"
+   ],
+   "unit": "",
+   "why": "Swamee-Jain f, bounded OFFLINE by me over D 52..53 mm, nu 0.47e-6..1.31e-6, Q 6..20 m3/h (eps 0.045 mm); NOT computed by the stand"
+  },
+  "RHO": {
+   "role": "given",
+   "range": [
+    "983",
+    "998"
+   ],
+   "unit": "kg/m^3",
+   "why": "water density 60C..10C (correlation with nu/T lost)"
+  },
+  "Qsq": {
+   "role": "derived",
+   "unit": "m^6/s^2",
+   "why": "Q squared, operating flow squared"
+  },
+  "H": {
+   "role": "derived",
+   "unit": "m",
+   "why": "pump head at the operating point"
+  },
+  "Psq": {
+   "role": "derived",
+   "unit": "W^2",
+   "why": "shaft power squared"
+  }
+ },
+ "slots": {
+  "PUMP": {
+   "from": [
+    "pumps"
+   ]
+  }
+ },
+ "define": {
+  "AR": "PI*D*D/4",
+  "CS": "(F*L/D + SK)/(2*G*AR*AR)",
+  "KP": "RHO*RHO*G*G/(PUMP.eta*PUMP.eta)"
+ },
+ "laws": [
+  {
+   "zfl": "Qsq == (PUMP.H0 - dz)/(PUMP.a + CS)",
+   "source": "H_pump(Q)=H_sys(Q): H0 - a Q^2 = dz + CS Q^2, f frozen at its bound; V=Q/(pi D^2/4); H_sys = dz + (fL/D+SK)V^2/2g"
+  },
+  {
+   "zfl": "H == (PUMP.H0*CS + PUMP.a*dz)/(PUMP.a + CS)",
+   "source": "pump head at the operating point = H0 - a Q^2 with Q^2 substituted"
+  },
+  {
+   "zfl": "Psq == KP*Qsq*H*H",
+   "source": "P_shaft = rho g Q H / eta, squared"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Qsq",
+   "op": "within",
+   "value": [
+    "1/160000",
+    "49/3240000"
+   ],
+   "why": "9 <= Q <= 14 m3/h, squared, in (m3/s)^2"
+  },
+  {
+   "quantity": "Psq",
+   "op": "<=",
+   "value": "2250000",
+   "why": "P_shaft <= 1.5 kW, squared (W^2)"
+  }
+ ],
+ "objective": {
+  "minimize": "PUMP.price",
+  "why": "cheapest pump"
+ },
+ "catalog": {
+  "pumps": {
+   "ground": "vendor pump curve",
+   "items": [
+    {
+     "H0": {
+      "value": "28",
+      "tolerance": "0.03"
+     },
+     "a": {
+      "value": "972000",
+      "tolerance": "0.05"
+     },
+     "eta": {
+      "range": [
+       "0.52",
+       "0.58"
+      ]
+     },
+     "price": "420",
+     "grade": "P1"
+    },
+    {
+     "H0": {
+      "value": "32",
+      "tolerance": "0.03"
+     },
+     "a": {
+      "value": "1166400",
+      "tolerance": "0.05"
+     },
+     "eta": {
+      "range": [
+       "0.55",
+       "0.61"
+      ]
+     },
+     "price": "510",
+     "grade": "P2"
+    },
+    {
+     "H0": {
+      "value": "36",
+      "tolerance": "0.03"
+     },
+     "a": {
+      "value": "1425600",
+      "tolerance": "0.05"
+     },
+     "eta": {
+      "range": [
+       "0.59",
+       "0.65"
+      ]
+     },
+     "price": "640",
+     "grade": "P3"
+    },
+    {
+     "H0": {
+      "value": "40",
+      "tolerance": "0.03"
+     },
+     "a": {
+      "value": "1101600",
+      "tolerance": "0.05"
+     },
+     "eta": {
+      "range": [
+       "0.57",
+       "0.63"
+      ]
+     },
+     "price": "780",
+     "grade": "P4"
+    }
+   ],
+   "fields": {
+    "H0": {
+     "unit": "m"
+    },
+    "a": {
+     "unit": "m^-5*s^2"
+    },
+    "eta": {
+     "unit": ""
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,44 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "TPS54331 reference + feedback divider (datasheet Eq. 5, R5=10.2k, R6=3.24k)",
+ "interface": {
+  "inputs": {},
+  "outputs": [
+   "Vo"
+  ]
+ },
+ "quantities": {
+  "Vref": {
+   "role": "given",
+   "range": [
+    "0.772",
+    "0.828"
+   ],
+   "unit": "V",
+   "ground": "datasheet 6.5"
+  },
+  "R5": {
+   "role": "given",
+   "value": "10.2",
+   "unit": "kohm"
+  },
+  "R6": {
+   "role": "given",
+   "value": "3.24",
+   "unit": "kohm"
+  },
+  "Vo": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "Vo == Vref*(1 + R5/R6)",
+   "source": "datasheet Eq. 5"
+  }
+ ],
+ "requirements": [],
+ "catalog": {}
+}

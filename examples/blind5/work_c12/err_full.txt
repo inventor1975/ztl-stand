@@ -1,0 +1,10 @@
+[stand] 1/3780 designs, 0 s: 
+[stand] 62/3780 designs, 30 s: 61 REFUTED
+[stand] 115/3780 designs, 61 s: 114 REFUTED
+[stand] 167/3780 designs, 91 s: 166 REFUTED
+[stand] 221/3780 designs, 121 s: 220 REFUTED
+[stand] 272/3780 designs, 152 s: 271 REFUTED
+[stand] 324/3780 designs, 182 s: 323 REFUTED
+[stand] 375/3780 designs, 213 s: 374 REFUTED
+[stand] 425/3780 designs, 243 s: 424 REFUTED
+[stand] 475/3780 designs, 273 s: 474 REFUTED

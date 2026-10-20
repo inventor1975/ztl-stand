@@ -1,0 +1,120 @@
+{
+  "stand": "ztl-stand/1",
+  "quantities": {
+    "OD": {
+      "role": "given",
+      "value": "0.5",
+      "tolerance": "0.01",
+      "unit": "25.4mm",
+      "why": "1/2 in tube OD, tolerance +-0.005 in (datasheet p.3 ASTM A269 example)"
+    },
+    "S": {
+      "role": "given",
+      "value": "20000",
+      "unit": "6894.757293168Pa",
+      "ground": "datasheet",
+      "why": "maximum S value 20 000 psi, Table 4 text"
+    },
+    "Y": {
+      "role": "given",
+      "value": "0.4",
+      "unit": "",
+      "why": "B31.3 Table 304.1.1 coefficient (not in the datasheet)"
+    },
+    "T": {
+      "role": "given",
+      "range": [
+        "200",
+        "400"
+      ],
+      "unit": "",
+      "why": "service temperature in degF, between the datasheet's Table 1 knots 200 and 400 (interpolation is MY addition)"
+    },
+    "P": {
+      "role": "given",
+      "value": "3470",
+      "unit": "6894.757293168Pa",
+      "why": "design pressure psig (chosen by me to sit between the published-method limit 3468 and the exact limit 3473)"
+    },
+    "treq": {
+      "role": "derived",
+      "unit": "25.4mm"
+    },
+    "margin": {
+      "role": "derived",
+      "unit": "25.4mm"
+    }
+  },
+  "slots": {
+    "TUBE": {
+      "from": [
+        "w1_2"
+      ]
+    }
+  },
+  "define": {
+    "TF": "table(T, 100, 1, 200, 82/100, 400, 68/100, 600, 58/100)"
+  },
+  "laws": [
+    {
+      "zfl": "treq == P*OD/(2*(S*TF + P*Y))",
+      "source": "ASME B31.3 304.1.2, E=W=1, with Table 1 temperature factor applied to S (datasheet derives its factors from allowable stress)"
+    },
+    {
+      "zfl": "margin == TUBE.wall - treq",
+      "source": "actual minimum wall minus required thickness"
+    }
+  ],
+  "requirements": [
+    {
+      "quantity": "margin",
+      "op": ">=",
+      "value": "0",
+      "why": "the wall at its -10 % end still covers the pressure design thickness"
+    }
+  ],
+  "catalog": {
+    "w1_2": {
+      "items": [
+        {
+          "wall": {
+            "value": "0.035",
+            "tolerance": "0.1"
+          },
+          "name": "1/2x0.035"
+        },
+        {
+          "wall": {
+            "value": "0.049",
+            "tolerance": "0.1"
+          },
+          "name": "1/2x0.049"
+        },
+        {
+          "wall": {
+            "value": "0.065",
+            "tolerance": "0.1"
+          },
+          "name": "1/2x0.065"
+        },
+        {
+          "wall": {
+            "value": "0.083",
+            "tolerance": "0.1"
+          },
+          "name": "1/2x0.083"
+        }
+      ],
+      "fields": {
+        "wall": {
+          "unit": "25.4mm"
+        }
+      }
+    }
+  },
+  "report": "all",
+  "objective": {
+    "minimize": "TUBE.wall",
+    "why": "thinnest wall that works"
+  }
+}

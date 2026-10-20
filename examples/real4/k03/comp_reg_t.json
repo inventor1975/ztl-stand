@@ -1,0 +1,51 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "LT1083-5CP electrical side: dissipation PD = (VIN-VOUT)*IOUT with the datasheet's VOUT window",
+ "interface": {
+  "inputs": {
+   "Vin": {
+    "assume": [
+     "6.5",
+     "9"
+    ]
+   }
+  },
+  "outputs": [
+   "PD"
+  ]
+ },
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "value": "9",
+   "unit": "V"
+  },
+  "Vout": {
+   "role": "given",
+   "range": [
+    "4.9",
+    "5.1"
+   ],
+   "unit": "V",
+   "ground": "datasheet VOUT 4.900..5.100 V"
+  },
+  "Iout": {
+   "role": "given",
+   "value": "6",
+   "unit": "A"
+  },
+  "PD": {
+   "role": "derived",
+   "unit": "W"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "PD == (Vin - Vout)*Iout",
+   "source": "linear regulator dissipation"
+  }
+ ],
+ "requirements": [],
+ "catalog": {}
+}

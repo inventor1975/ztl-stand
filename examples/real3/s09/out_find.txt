@@ -1,0 +1,205 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "largest",
+  "quantity": "L",
+  "unit": "km",
+  "proved": "112/5 (~22.4)",
+  "proved_means": "every L in [0, 112/5 (~22.4)] km works (EARNED on the whole range)",
+  "beyond": "2241/100 (~22.41)",
+  "beyond_is": "REFUTED: the range [0, 2241/100 (~22.41)] km holds a concrete failing point (at_beyond)",
+  "precision": "1/100 (~0.01)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "Mg": [
+            "0",
+            "578/25 (~23.12)"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {},
+    "guaranteed": {
+      "Mg": [
+        "0",
+        "578/25 (~23.12)"
+      ]
+    },
+    "guaranteed_unit": {
+      "Mg": "dB"
+    },
+    "how": {
+      "Mg": "ZTL, exact at the corners"
+    },
+    "requirements": [
+      {
+        "quantity": "Mg",
+        "op": ">=",
+        "value": "0",
+        "why": "received power not below sensitivity: the link works"
+      }
+    ],
+    "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "Mg -> [0, 578/25] by the system over its parameters, exact at the corners (credit)",
+      "TA -> [97/25, 17] by the system over its parameters, exact at the corners (credit)"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "REFUTED",
+        "fails": "received power not below sensitivity: the link works",
+        "by_at_witness": "1/200 (~0.005)",
+        "unit": "dB"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {},
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "C": "1",
+      "J": "1/5 (~0.2)",
+      "L": "2241/100 (~22.41)",
+      "Sens": "-20",
+      "Tx": "-3",
+      "a": "1/2 (~0.5)"
+    },
+    "point_units": {
+      "C": "dB",
+      "J": "dB",
+      "L": "km",
+      "Sens": "dB",
+      "Tx": "dB",
+      "a": "dB/km"
+    },
+    "value_there": {
+      "Mg": "-1/200 (~-0.005)"
+    },
+    "unit": "dB",
+    "requirement": {
+      "quantity": "Mg",
+      "op": ">=",
+      "value": "0",
+      "why": "received power not below sensitivity: the link works"
+    },
+    "overshoot": "1/200 (~0.005)",
+    "reasons": {
+      "spread_over_tolerances": [
+        "-1/200 (~-0.005)",
+        "578/25 (~23.12)"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "L",
+          "moves_it_by": "2241/200 (~11.205)"
+        },
+        {
+          "quantity": "Sens",
+          "moves_it_by": "7"
+        },
+        {
+          "quantity": "a",
+          "moves_it_by": "2241/500 (~4.482)"
+        },
+        {
+          "quantity": "Tx",
+          "moves_it_by": "3"
+        },
+        {
+          "quantity": "C",
+          "moves_it_by": "6/5 (~1.2)"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+  },
+  "tries": [
+    {
+      "L": "0",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "60",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "30",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "15",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "45/2 (~22.5)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "75/4 (~18.75)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "1031/50 (~20.62)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "539/25 (~21.56)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "2203/100 (~22.03)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "1113/50 (~22.26)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "1119/50 (~22.38)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "561/25 (~22.44)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "2241/100 (~22.41)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "112/5 (~22.4)",
+      "verdict": "EARNED"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

@@ -1,0 +1,202 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "saw chain: PACK component -> BMS + constant-power controller in the system laws",
+ "components": {
+  "PK": {
+   "file": "pack.json"
+  }
+ },
+ "connect": {
+  "PK.Ta": "Ta"
+ },
+ "quantities": {
+  "Ta": {
+   "role": "given",
+   "value": "263.15",
+   "unit": "K",
+   "why": "ambient; -10 degC = 263.15 K (K because the exponential needs an absolute temperature)"
+  },
+  "P": {
+   "role": "given",
+   "range": [
+    "540",
+    "640"
+   ],
+   "unit": "W",
+   "why": "controller input power (constant-power load)"
+  },
+  "kb": {
+   "role": "given",
+   "range": [
+    "1.0",
+    "1.2"
+   ],
+   "unit": "",
+   "why": "BMS resistance / nominal"
+  },
+  "Rw": {
+   "role": "given",
+   "value": "4",
+   "unit": "mohm",
+   "why": "wiring and connector resistance, fixed"
+  },
+  "Rtot": {
+   "role": "derived",
+   "unit": "mohm"
+  },
+  "Vt": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "I": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Icell": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Vcell": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Runtime": {
+   "role": "derived",
+   "unit": "min"
+  },
+  "Imarg": {
+   "role": "derived",
+   "unit": "A"
+  }
+ },
+ "slots": {
+  "BMS": {
+   "from": [
+    "bms"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Rtot == PK.Rpk + BMS.R*kb + Rw",
+   "source": "series resistances"
+  },
+  {
+   "zfl": "Vt == (PK.V0 + sqrt(max(0, PK.V0*PK.V0 - 4*Rtot*P)))/2",
+   "source": "constant power load"
+  },
+  {
+   "zfl": "I == P/Vt",
+   "source": "constant power"
+  },
+  {
+   "zfl": "Icell == I/PK.NP.N",
+   "source": "parallel cells share current"
+  },
+  {
+   "zfl": "Vcell == PK.V0/5 - Icell*PK.Rc",
+   "source": "cell terminal voltage"
+  },
+  {
+   "zfl": "Runtime == PK.E/P",
+   "source": "energy/power"
+  },
+  {
+   "zfl": "Imarg == PK.Imaxc - Icell",
+   "source": "cell current limit margin"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vt",
+   "op": ">=",
+   "value": "14.2",
+   "why": "R1 controller shut-down threshold"
+  },
+  {
+   "quantity": "Runtime",
+   "op": ">=",
+   "value": "9",
+   "why": "R2"
+  },
+  {
+   "quantity": "I",
+   "op": "<=",
+   "value": "BMS.Irat",
+   "why": "R3 BMS rating"
+  },
+  {
+   "quantity": "Imarg",
+   "op": ">=",
+   "value": "0",
+   "why": "R4 cell current <= Imax(Tc)"
+  },
+  {
+   "quantity": "Vcell",
+   "op": ">=",
+   "value": "2.9",
+   "why": "R5 cell cut-off"
+  }
+ ],
+ "objective": {
+  "minimize": "PK.cost + BMS.price",
+  "unit": "EUR"
+ },
+ "catalog": {
+  "bms": {
+   "items": [
+    {
+     "Irat": {
+      "value": "30"
+     },
+     "R": {
+      "value": "9.0"
+     },
+     "price": "3.2",
+     "name": "M30"
+    },
+    {
+     "Irat": {
+      "value": "40"
+     },
+     "R": {
+      "value": "6.0"
+     },
+     "price": "4.5",
+     "name": "M40"
+    },
+    {
+     "Irat": {
+      "value": "60"
+     },
+     "R": {
+      "value": "3.5"
+     },
+     "price": "7.5",
+     "name": "M60"
+    },
+    {
+     "Irat": {
+      "value": "80"
+     },
+     "R": {
+      "value": "2.5"
+     },
+     "price": "11.0",
+     "name": "M80"
+    }
+   ],
+   "fields": {
+    "Irat": {
+     "unit": "A"
+    },
+    "R": {
+     "unit": "mohm"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,17 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "continuous": true,
+  "combinations": 1,
+  "notes": [],
+  "combinations_proved_without_mix": 1,
+  "verdict": "REFUTED",
+  "why": "ZTL proved (Farkas) that no mix in the box meets the requirements",
+  "mixes": [
+    {
+      "design": "",
+      "verdict": null,
+      "why": "proved by ZTL (zlp, Farkas): no mix in the box meets every requirement for every value of the data — the weighted sum of the requirements' margins is at most -3159.01 < 0 over the whole box"
+    }
+  ]
+}

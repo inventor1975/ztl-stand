@@ -1,0 +1,1383 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "R1_1": [
+          "1343315716938306419356293623591/3525390625000000000000000000 (~381.04)",
+          "7132942608239521643175926537/17626953125000000000000000 (~404.661)"
+        ],
+        "R1_2": [
+          "23844320531216752809088717369/62500000000000000000000000 (~381.509)",
+          "3166402202285240490921549767/7812500000000000000000000 (~405.299)"
+        ],
+        "R2_1": [
+          "93759344043812991775564398651/275421142578125000000000000 (~340.422)",
+          "3297776663513891644234036722249/8813476562500000000000000000 (~374.174)"
+        ],
+        "R2_2": [
+          "542251231797086221531332173/1525878906250000000000000 (~355.37)",
+          "9402714291146996930662802701/24414062500000000000000000 (~385.135)"
+        ],
+        "R3_S2": [
+          "363193/1000 (~363.193)",
+          "98689/250 (~394.756)"
+        ],
+        "R3_S3": [
+          "46604/125 (~372.832)",
+          "50108/125 (~400.864)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "objective": {
+    "minimize": "F1.cost + F2.cost",
+    "value": "2068",
+    "unit": "EUR",
+    "optimal": false,
+    "optimal_means": "among the candidates: true only when no cheaper combination is left undecided — a system cannot refute, so a cheaper one not earned stays OPEN"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "component F1": "C=#4, B=#3",
+    "component F2": "C=#1, B=#1",
+    "component M1": "motor1.json",
+    "component M2": "motor2.json",
+    "component T1": "tr.json",
+    "component T2": "tr.json",
+    "component T3": "tr.json"
+  },
+  "guaranteed": {
+    "R1_1": [
+      "1343315716938306419356293623591/3525390625000000000000000000 (~381.04)",
+      "7132942608239521643175926537/17626953125000000000000000 (~404.661)"
+    ],
+    "R1_2": [
+      "23844320531216752809088717369/62500000000000000000000000 (~381.509)",
+      "3166402202285240490921549767/7812500000000000000000000 (~405.299)"
+    ],
+    "R2_1": [
+      "93759344043812991775564398651/275421142578125000000000000 (~340.422)",
+      "3297776663513891644234036722249/8813476562500000000000000000 (~374.174)"
+    ],
+    "R2_2": [
+      "542251231797086221531332173/1525878906250000000000000 (~355.37)",
+      "9402714291146996930662802701/24414062500000000000000000 (~385.135)"
+    ],
+    "R3_S2": [
+      "363193/1000 (~363.193)",
+      "98689/250 (~394.756)"
+    ],
+    "R3_S3": [
+      "46604/125 (~372.832)",
+      "50108/125 (~400.864)"
+    ]
+  },
+  "guaranteed_unit": {
+    "R1_1": "V",
+    "R1_2": "V",
+    "R2_1": "V",
+    "R2_2": "V",
+    "R3_S2": "V",
+    "R3_S3": "V"
+  },
+  "how": {
+    "R1_1": "ZTL, exact at the corners",
+    "R1_2": "ZTL, exact at the corners",
+    "R2_1": "ZTL, exact at the corners",
+    "R2_2": "ZTL, exact at the corners",
+    "R3_S2": "ZTL, exact at the corners",
+    "R3_S3": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "R1_1",
+      "op": ">=",
+      "value": "380",
+      "why": "R1_1"
+    },
+    {
+      "quantity": "R1_2",
+      "op": ">=",
+      "value": "380",
+      "why": "R1_2"
+    },
+    {
+      "quantity": "R2_1",
+      "op": ">=",
+      "value": "340",
+      "why": "R2_1"
+    },
+    {
+      "quantity": "R2_2",
+      "op": ">=",
+      "value": "340",
+      "why": "R2_2"
+    },
+    {
+      "quantity": "R3_S2",
+      "op": ">=",
+      "value": "352",
+      "why": "R3_S2"
+    },
+    {
+      "quantity": "R3_S3",
+      "op": ">=",
+      "value": "352",
+      "why": "R3_S3"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "M1_Irun -> [50, 56] by the system over its parameters, exact at the corners (credit)",
+    "M1_Istart -> [1537/5, 1696/5] by the system over its parameters, exact at the corners (credit)",
+    "M2_Irun -> [30, 35] by the system over its parameters, exact at the corners (credit)",
+    "M2_Istart -> [928/5, 1024/5] by the system over its parameters, exact at the corners (credit)",
+    "R1_1 -> [1343315716938306419356293623591/3525390625000000000000000000, 7132942608239521643175926537/17626953125000000000000000] by the system over its parameters, exact at the corners (credit)",
+    "R1_2 -> [23844320531216752809088717369/62500000000000000000000000, 3166402202285240490921549767/7812500000000000000000000] by the system over its parameters, exact at the corners (credit)"
+  ],
+  "components": {
+    "M1": {
+      "inputs": {},
+      "bands_used": [
+        {
+          "band": {},
+          "earned": true,
+          "outputs": {
+            "Irun": [
+              "50/1",
+              "56/1"
+            ],
+            "Istart": [
+              "1537/5",
+              "1696/5"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "Irun": [
+          "50/1",
+          "56/1"
+        ],
+        "Istart": [
+          "1537/5",
+          "1696/5"
+        ]
+      },
+      "outputs_affine": {
+        "Irun": {
+          "slope": {},
+          "remainder": [
+            "50/1",
+            "56/1"
+          ]
+        },
+        "Istart": {
+          "slope": {},
+          "remainder": [
+            "1537/5",
+            "1696/5"
+          ]
+        }
+      }
+    },
+    "M2": {
+      "inputs": {},
+      "bands_used": [
+        {
+          "band": {},
+          "earned": true,
+          "outputs": {
+            "Irun": [
+              "30/1",
+              "35/1"
+            ],
+            "Istart": [
+              "928/5",
+              "1024/5"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "Irun": [
+          "30/1",
+          "35/1"
+        ],
+        "Istart": [
+          "928/5",
+          "1024/5"
+        ]
+      },
+      "outputs_affine": {
+        "Irun": {
+          "slope": {},
+          "remainder": [
+            "30/1",
+            "35/1"
+          ]
+        },
+        "Istart": {
+          "slope": {},
+          "remainder": [
+            "928/5",
+            "1024/5"
+          ]
+        }
+      }
+    },
+    "T1": {
+      "inputs": {
+        "Ia": {
+          "from": "M1.Irun",
+          "arrives": [
+            "50/1",
+            "56/1"
+          ],
+          "assume": [
+            "0/1",
+            "400/1"
+          ],
+          "inside": true
+        },
+        "Ib": {
+          "from": "M2.Irun",
+          "arrives": [
+            "30/1",
+            "35/1"
+          ],
+          "assume": [
+            "0/1",
+            "400/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "Ia": [
+              "50/1",
+              "56/1"
+            ],
+            "Ib": [
+              "30/1",
+              "35/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "Vbus": [
+              "77453/200",
+              "2051/5"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "Vbus": [
+          "77453/200",
+          "2051/5"
+        ]
+      }
+    },
+    "T2": {
+      "inputs": {
+        "Ia": {
+          "from": "M1.Istart",
+          "arrives": [
+            "1537/5",
+            "1696/5"
+          ],
+          "assume": [
+            "0/1",
+            "400/1"
+          ],
+          "inside": true
+        },
+        "Ib": {
+          "from": "M2.Irun",
+          "arrives": [
+            "30/1",
+            "35/1"
+          ],
+          "assume": [
+            "0/1",
+            "400/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "Ia": [
+              "1537/5",
+              "1696/5"
+            ],
+            "Ib": [
+              "30/1",
+              "35/1"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "Vbus": [
+              "363193/1000",
+              "98689/250"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "Vbus": [
+          "363193/1000",
+          "98689/250"
+        ]
+      }
+    },
+    "T3": {
+      "inputs": {
+        "Ia": {
+          "from": "M1.Irun",
+          "arrives": [
+            "50/1",
+            "56/1"
+          ],
+          "assume": [
+            "0/1",
+            "400/1"
+          ],
+          "inside": true
+        },
+        "Ib": {
+          "from": "M2.Istart",
+          "arrives": [
+            "928/5",
+            "1024/5"
+          ],
+          "assume": [
+            "0/1",
+            "400/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "Ia": [
+              "50/1",
+              "56/1"
+            ],
+            "Ib": [
+              "928/5",
+              "1024/5"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "Vbus": [
+              "46604/125",
+              "50108/125"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "Vbus": [
+          "46604/125",
+          "50108/125"
+        ]
+      }
+    },
+    "F1": {
+      "inputs": {
+        "L": {
+          "from": "L1",
+          "arrives": [
+            "160/1",
+            "160/1"
+          ],
+          "assume": [
+            "0/1",
+            "600/1"
+          ],
+          "inside": true
+        },
+        "Ir": {
+          "from": "M1.Irun",
+          "arrives": [
+            "50/1",
+            "56/1"
+          ],
+          "assume": [
+            "0/1",
+            "100/1"
+          ],
+          "inside": true
+        },
+        "Is": {
+          "from": "M1.Istart",
+          "arrives": [
+            "1537/5",
+            "1696/5"
+          ],
+          "assume": [
+            "0/1",
+            "400/1"
+          ],
+          "inside": true
+        },
+        "Vb1": {
+          "from": "T1.Vbus",
+          "arrives": [
+            "77453/200",
+            "2051/5"
+          ],
+          "assume": [
+            "300/1",
+            "420/1"
+          ],
+          "inside": true
+        },
+        "Vb2": {
+          "from": "T2.Vbus",
+          "arrives": [
+            "363193/1000",
+            "98689/250"
+          ],
+          "assume": [
+            "300/1",
+            "420/1"
+          ],
+          "inside": true
+        },
+        "Vb3": {
+          "from": "T3.Vbus",
+          "arrives": [
+            "46604/125",
+            "50108/125"
+          ],
+          "assume": [
+            "300/1",
+            "420/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "Ir": [
+              "50/1",
+              "56/1"
+            ],
+            "Is": [
+              "1537/5",
+              "1696/5"
+            ],
+            "L": [
+              "160/1",
+              "160/1"
+            ],
+            "Vb1": [
+              "77453/200",
+              "2051/5"
+            ],
+            "Vb2": [
+              "363193/1000",
+              "98689/250"
+            ],
+            "Vb3": [
+              "46604/125",
+              "50108/125"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "Vt1": [
+              "1343315716938306419356293623591/3525390625000000000000000000",
+              "7132942608239521643175926537/17626953125000000000000000"
+            ],
+            "Vt2": [
+              "93759344043812991775564398651/275421142578125000000000000",
+              "3297776663513891644234036722249/8813476562500000000000000000"
+            ],
+            "Vt3": [
+              "1292433754047681419356293623591/3525390625000000000000000000",
+              "6968377373864521643175926537/17626953125000000000000000"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "Vt1": [
+          "1343315716938306419356293623591/3525390625000000000000000000",
+          "7132942608239521643175926537/17626953125000000000000000"
+        ],
+        "Vt2": [
+          "93759344043812991775564398651/275421142578125000000000000",
+          "3297776663513891644234036722249/8813476562500000000000000000"
+        ],
+        "Vt3": [
+          "1292433754047681419356293623591/3525390625000000000000000000",
+          "6968377373864521643175926537/17626953125000000000000000"
+        ]
+      }
+    },
+    "F2": {
+      "inputs": {
+        "L": {
+          "from": "L2",
+          "arrives": [
+            "85/1",
+            "85/1"
+          ],
+          "assume": [
+            "0/1",
+            "600/1"
+          ],
+          "inside": true
+        },
+        "Ir": {
+          "from": "M2.Irun",
+          "arrives": [
+            "30/1",
+            "35/1"
+          ],
+          "assume": [
+            "0/1",
+            "100/1"
+          ],
+          "inside": true
+        },
+        "Is": {
+          "from": "M2.Istart",
+          "arrives": [
+            "928/5",
+            "1024/5"
+          ],
+          "assume": [
+            "0/1",
+            "400/1"
+          ],
+          "inside": true
+        },
+        "Vb1": {
+          "from": "T1.Vbus",
+          "arrives": [
+            "77453/200",
+            "2051/5"
+          ],
+          "assume": [
+            "300/1",
+            "420/1"
+          ],
+          "inside": true
+        },
+        "Vb2": {
+          "from": "T2.Vbus",
+          "arrives": [
+            "363193/1000",
+            "98689/250"
+          ],
+          "assume": [
+            "300/1",
+            "420/1"
+          ],
+          "inside": true
+        },
+        "Vb3": {
+          "from": "T3.Vbus",
+          "arrives": [
+            "46604/125",
+            "50108/125"
+          ],
+          "assume": [
+            "300/1",
+            "420/1"
+          ],
+          "inside": true
+        }
+      },
+      "bands_used": [
+        {
+          "band": {
+            "Ir": [
+              "30/1",
+              "35/1"
+            ],
+            "Is": [
+              "928/5",
+              "1024/5"
+            ],
+            "L": [
+              "85/1",
+              "85/1"
+            ],
+            "Vb1": [
+              "77453/200",
+              "2051/5"
+            ],
+            "Vb2": [
+              "363193/1000",
+              "98689/250"
+            ],
+            "Vb3": [
+              "46604/125",
+              "50108/125"
+            ]
+          },
+          "earned": true,
+          "outputs": {
+            "Vt1": [
+              "23844320531216752809088717369/62500000000000000000000000",
+              "3166402202285240490921549767/7812500000000000000000000"
+            ],
+            "Vt2": [
+              "22339820531216752809088717369/62500000000000000000000000",
+              "3045745952285240490921549767/7812500000000000000000000"
+            ],
+            "Vt3": [
+              "542251231797086221531332173/1525878906250000000000000",
+              "9402714291146996930662802701/24414062500000000000000000"
+            ]
+          }
+        }
+      ],
+      "outputs": {
+        "Vt1": [
+          "23844320531216752809088717369/62500000000000000000000000",
+          "3166402202285240490921549767/7812500000000000000000000"
+        ],
+        "Vt2": [
+          "22339820531216752809088717369/62500000000000000000000000",
+          "3045745952285240490921549767/7812500000000000000000000"
+        ],
+        "Vt3": [
+          "542251231797086221531332173/1525878906250000000000000",
+          "9402714291146996930662802701/24414062500000000000000000"
+        ]
+      }
+    }
+  },
+  "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)",
+  "combinations": [
+    {
+      "design": {
+        "F1": "C=#1, B=#1",
+        "F2": "C=#1, B=#1",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1196/1 (~1196)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#1",
+        "F2": "C=#1, B=#2",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1206/1 (~1206)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#2",
+        "F2": "C=#1, B=#1",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1206/1 (~1206)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#2",
+        "F2": "C=#1, B=#2",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1216/1 (~1216)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#1",
+        "F2": "C=#1, B=#3",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1218/1 (~1218)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#3",
+        "F2": "C=#1, B=#1",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1218/1 (~1218)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#2",
+        "F2": "C=#1, B=#3",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1228/1 (~1228)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#3",
+        "F2": "C=#1, B=#2",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1228/1 (~1228)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#3",
+        "F2": "C=#1, B=#3",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1240/1 (~1240)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#1",
+        "F2": "C=#1, B=#4",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1243/1 (~1243)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#4",
+        "F2": "C=#1, B=#1",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1243/1 (~1243)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#2",
+        "F2": "C=#1, B=#4",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1253/1 (~1253)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#4",
+        "F2": "C=#1, B=#2",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1253/1 (~1253)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#3",
+        "F2": "C=#1, B=#4",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1265/1 (~1265)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#4",
+        "F2": "C=#1, B=#3",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1265/1 (~1265)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#1",
+        "F2": "C=#1, B=#5",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1268/1 (~1268)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#5",
+        "F2": "C=#1, B=#1",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1268/1 (~1268)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#2",
+        "F2": "C=#1, B=#5",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1278/1 (~1278)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#5",
+        "F2": "C=#1, B=#2",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1278/1 (~1278)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#3",
+        "F2": "C=#1, B=#5",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1290/1 (~1290)",
+      "why": "components: component F2: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#4",
+        "F2": "C=#1, B=#4",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1290/1 (~1290)",
+      "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#5",
+        "F2": "C=#1, B=#3",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1290/1 (~1290)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#1",
+        "F2": "C=#1, B=#6",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1308/1 (~1308)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#6",
+        "F2": "C=#1, B=#1",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1308/1 (~1308)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#4",
+        "F2": "C=#1, B=#5",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1315/1 (~1315)",
+      "why": "components: component F2: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#5",
+        "F2": "C=#1, B=#4",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1315/1 (~1315)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#2",
+        "F2": "C=#1, B=#6",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1318/1 (~1318)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#6",
+        "F2": "C=#1, B=#2",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1318/1 (~1318)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#3",
+        "F2": "C=#1, B=#6",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1330/1 (~1330)",
+      "why": "components: component F2: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#6",
+        "F2": "C=#1, B=#3",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1330/1 (~1330)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#5",
+        "F2": "C=#1, B=#5",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1340/1 (~1340)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#4",
+        "F2": "C=#1, B=#6",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1355/1 (~1355)",
+      "why": "components: component F2: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#6",
+        "F2": "C=#1, B=#4",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1355/1 (~1355)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#1",
+        "F2": "C=#1, B=#7",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1378/1 (~1378)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#7",
+        "F2": "C=#1, B=#1",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1378/1 (~1378)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#5",
+        "F2": "C=#1, B=#6",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1380/1 (~1380)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#6",
+        "F2": "C=#1, B=#5",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1380/1 (~1380)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#2",
+        "F2": "C=#1, B=#7",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1388/1 (~1388)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#7",
+        "F2": "C=#1, B=#2",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1388/1 (~1388)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#3",
+        "F2": "C=#1, B=#7",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1400/1 (~1400)",
+      "why": "components: component F2: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#7",
+        "F2": "C=#1, B=#3",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1400/1 (~1400)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#6",
+        "F2": "C=#1, B=#6",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1420/1 (~1420)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#4",
+        "F2": "C=#1, B=#7",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1425/1 (~1425)",
+      "why": "components: component F2: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#7",
+        "F2": "C=#1, B=#4",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1425/1 (~1425)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#1",
+        "F2": "C=#2, B=#1",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1446/1 (~1446)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#2, B=#1",
+        "F2": "C=#1, B=#1",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1446/1 (~1446)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#5",
+        "F2": "C=#1, B=#7",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1450/1 (~1450)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#7",
+        "F2": "C=#1, B=#5",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1450/1 (~1450)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#1",
+        "F2": "C=#2, B=#2",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1456/1 (~1456)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    },
+    {
+      "design": {
+        "F1": "C=#1, B=#2",
+        "F2": "C=#2, B=#1",
+        "M1": "motor1.json",
+        "M2": "motor2.json",
+        "T1": "tr.json",
+        "T2": "tr.json",
+        "T3": "tr.json"
+      },
+      "verdict": "OPEN",
+      "cost": "1456/1 (~1456)",
+      "why": "components: component F1: a band its input touches has no guarantee (REFUTED: every design in the catalog violates a requirement at a concrete point)"
+    }
+  ],
+  "combinations_judged": "362 of 1764 (cheapest first; stopped at the first EARNED)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

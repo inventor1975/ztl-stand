@@ -1,0 +1,8 @@
+{"axis": "designs", "size": 100, "wall_s": 0.09, "peak_mb": 15, "verdict": "REFUTED", "stopped": false, "why": "every design in the catalog violates a requirement at a concrete point", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 4}
+{"axis": "designs", "size": 1000, "wall_s": 0.17, "peak_mb": 16, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 4}
+{"axis": "designs", "size": 10000, "wall_s": 0.52, "peak_mb": 17, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:49", "cpu": 4}
+{"axis": "designs", "size": 100000, "wall_s": 3.33, "peak_mb": 22, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:32:53", "cpu": 4}
+{"axis": "designs", "size": 1000000, "wall_s": 15.0, "peak_mb": 47, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:33:08", "cpu": 4}
+{"axis": "designs", "size": 10000000, "wall_s": 74.4, "peak_mb": 188, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:34:22", "cpu": 4}
+{"axis": "designs", "size": 30000000, "wall_s": 182.97, "peak_mb": 446, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "jobs": 1, "at": "2026-10-13 00:38:16", "cpu": "4"}
+{"axis": "designs", "size": 100000000, "wall_s": 438.38, "peak_mb": 1086, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "jobs": 1, "at": "2026-10-13 00:45:34", "cpu": "4"}

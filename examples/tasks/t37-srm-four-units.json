@@ -1,0 +1,544 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "solid rocket motor + rocket, four coupled units (grain/chamber, nozzle with an implicit exit Mach, case, flight); 14 256 designs, 7 uncertain data. MEASURED 2026-10-16: EARNED APCP d30 Lg90 N2 Dt12 eps3 t4.0, 62.9007 EUR, optimal, 111 s on --jobs 16 (a plain-Python corner scan agrees)",
+ "quantities": {
+  "Pa": {
+   "role": "given",
+   "unit": "",
+   "why": "ambient pressure, MPa",
+   "range": [
+    "0.085",
+    "0.1013"
+   ]
+  },
+  "mair": {
+   "role": "given",
+   "unit": "",
+   "why": "airframe mass, kg",
+   "range": [
+    "2.28",
+    "2.52"
+   ]
+  },
+  "eta": {
+   "role": "given",
+   "unit": "",
+   "why": "nozzle efficiency",
+   "range": [
+    "0.92",
+    "0.97"
+   ]
+  },
+  "Sy": {
+   "role": "given",
+   "unit": "",
+   "why": "case yield, MPa",
+   "range": [
+    "220.8",
+    "259.2"
+   ]
+  },
+  "D": {
+   "role": "given",
+   "unit": "",
+   "why": "grain outer diameter, mm",
+   "value": "60"
+  },
+  "gg": {
+   "role": "given",
+   "unit": "",
+   "why": "g0 of the spec, m/s2",
+   "value": "9.81"
+  },
+  "Lr": {
+   "role": "given",
+   "unit": "",
+   "why": "rail, m",
+   "value": "1.8"
+  },
+  "Ab": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "At": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Kn": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "P": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "mp": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "q": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "mom": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Cf": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "F": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "It": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "sigma": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "CR": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "mc": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "mn": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "m0": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "tb": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "dv": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "TWR": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "vr": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "amaxg": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "SEP": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Cost": {
+   "role": "derived",
+   "unit": "",
+   "why": ""
+  },
+  "Me": {
+   "role": "derived",
+   "unit": "",
+   "why": "exit Mach, the supersonic root",
+   "search": [
+    "1.0001",
+    "6"
+   ]
+  }
+ },
+ "slots": {
+  "PR": {
+   "from": [
+    "props"
+   ]
+  },
+  "GD": {
+   "from": [
+    "cores"
+   ]
+  },
+  "GL": {
+   "from": [
+    "lens"
+   ]
+  },
+  "GN": {
+   "from": [
+    "segs"
+   ]
+  },
+  "NT": {
+   "from": [
+    "throats"
+   ]
+  },
+  "NE": {
+   "from": [
+    "nozzles"
+   ]
+  },
+  "CT": {
+   "from": [
+    "walls"
+   ]
+  }
+ },
+ "catalog": {
+  "props": {
+   "items": [
+    {
+     "name": "KNSB",
+     "a": {
+      "value": "8.26",
+      "tolerance": "0.1"
+     },
+     "n": "0.319",
+     "rho": {
+      "value": "1841",
+      "tolerance": "0.015"
+     },
+     "cstar": {
+      "value": "909",
+      "tolerance": "0.04"
+     },
+     "gamma": "1.137",
+     "price": "10"
+    },
+    {
+     "name": "KNDX",
+     "a": {
+      "value": "8.88",
+      "tolerance": "0.1"
+     },
+     "n": "0.619",
+     "rho": {
+      "value": "1879",
+      "tolerance": "0.015"
+     },
+     "cstar": {
+      "value": "919",
+      "tolerance": "0.04"
+     },
+     "gamma": "1.131",
+     "price": "12"
+    },
+    {
+     "name": "APCP",
+     "a": {
+      "value": "3.50",
+      "tolerance": "0.1"
+     },
+     "n": "0.400",
+     "rho": {
+      "value": "1750",
+      "tolerance": "0.015"
+     },
+     "cstar": {
+      "value": "1500",
+      "tolerance": "0.04"
+     },
+     "gamma": "1.21",
+     "price": "60"
+    }
+   ],
+   "fields": {
+    "a": {
+     "unit": ""
+    },
+    "n": {
+     "unit": ""
+    },
+    "rho": {
+     "unit": ""
+    },
+    "cstar": {
+     "unit": ""
+    },
+    "gamma": {
+     "unit": ""
+    },
+    "price": {
+     "unit": ""
+    }
+   }
+  },
+  "cores": {
+   "items": [
+    {
+     "d": "20"
+    },
+    {
+     "d": "25"
+    },
+    {
+     "d": "30"
+    }
+   ],
+   "fields": {
+    "d": {
+     "unit": ""
+    }
+   }
+  },
+  "lens": {
+   "items": [
+    {
+     "Lg": "90"
+    },
+    {
+     "Lg": "110"
+    },
+    {
+     "Lg": "130"
+    }
+   ],
+   "fields": {
+    "Lg": {
+     "unit": ""
+    }
+   }
+  },
+  "segs": {
+   "integers": {
+    "field": "N",
+    "from": "1",
+    "to": "4",
+    "unit": ""
+   }
+  },
+  "throats": {
+   "integers": {
+    "field": "Dt",
+    "from": "10",
+    "to": "20",
+    "unit": ""
+   }
+  },
+  "nozzles": {
+   "items": [
+    {
+     "eps": "3"
+    },
+    {
+     "eps": "5"
+    },
+    {
+     "eps": "8"
+    }
+   ],
+   "fields": {
+    "eps": {
+     "unit": ""
+    }
+   }
+  },
+  "walls": {
+   "items": [
+    {
+     "t": "2.0"
+    },
+    {
+     "t": "2.5"
+    },
+    {
+     "t": "3.0"
+    },
+    {
+     "t": "4.0"
+    }
+   ],
+   "fields": {
+    "t": {
+     "unit": ""
+    }
+   }
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Ab == GN.N*(pi*GD.d*GL.Lg + 2*(pi/4)*(D*D - GD.d*GD.d))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "At == (pi/4)*NT.Dt*NT.Dt",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "Kn == Ab/At",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "P == pow(0.000000001*Kn*PR.rho*PR.cstar*PR.a, 1/(1 - PR.n))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "mp == PR.rho*GN.N*(pi/4)*(D*D - GD.d*GD.d)*GL.Lg*0.000000001",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "NE.eps == (1/Me)*pow((2/(PR.gamma + 1))*(1 + (PR.gamma - 1)/2*Me*Me), (PR.gamma + 1)/(2*(PR.gamma - 1)))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "q == 1/pow(1 + (PR.gamma - 1)/2*Me*Me, PR.gamma/(PR.gamma - 1))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "mom == sqrt(2*PR.gamma*PR.gamma/(PR.gamma - 1)*pow(2/(PR.gamma + 1), (PR.gamma + 1)/(PR.gamma - 1))*(1 - pow(q, (PR.gamma - 1)/PR.gamma)))",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "Cf == mom + (q - Pa/P)*NE.eps",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "F == eta*Cf*P*At",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "It == eta*Cf*PR.cstar*mp",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "sigma == (sqrt(3)/2)*P*30/CT.t",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "CR == Sy/(1.5*sigma)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "mc == 2700*pi*(60 + CT.t)*CT.t*(GN.N*GL.Lg + 40)*0.000000001",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "mn == 0.08 + 0.02*NE.eps",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "m0 == mair + mp + mc + mn",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "tb == It/F",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "dv == (It/mp)*ln(m0/(m0 - mp)) - gg*tb",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "TWR == F/(m0*gg)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "vr == sqrt(2*(F/m0 - gg)*Lr)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "amaxg == F/((m0 - mp)*gg)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "SEP == q*P/(0.4*Pa)",
+   "source": "SPEC.md"
+  },
+  {
+   "zfl": "Cost == PR.price*mp + 8*mc + 10 + 3*NE.eps",
+   "source": "SPEC.md"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "P",
+   "op": "within",
+   "value": [
+    "2.0",
+    "7.0"
+   ],
+   "why": "R1 chamber pressure"
+  },
+  {
+   "quantity": "F",
+   "op": "<=",
+   "value": "1500",
+   "why": "R2 peak thrust"
+  },
+  {
+   "quantity": "It",
+   "op": ">=",
+   "value": "1200",
+   "why": "R3 total impulse"
+  },
+  {
+   "quantity": "CR",
+   "op": ">=",
+   "value": "1",
+   "why": "R4 case: Sy >= 1.5 sigma"
+  },
+  {
+   "quantity": "SEP",
+   "op": ">=",
+   "value": "1",
+   "why": "R5 pe >= 0.4 Pa"
+  },
+  {
+   "quantity": "TWR",
+   "op": ">=",
+   "value": "5",
+   "why": "R6"
+  },
+  {
+   "quantity": "vr",
+   "op": ">=",
+   "value": "15",
+   "why": "R7 rail exit speed"
+  },
+  {
+   "quantity": "amaxg",
+   "op": "<=",
+   "value": "25",
+   "why": "R8 burnout acceleration"
+  },
+  {
+   "quantity": "dv",
+   "op": ">=",
+   "value": "300",
+   "why": "R9 delta-v"
+  }
+ ],
+ "objective": {
+  "minimize": "Cost",
+  "why": "the spec's price at nominal values"
+ }
+}

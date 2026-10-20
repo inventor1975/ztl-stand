@@ -1,0 +1,271 @@
+[stand] 1/20 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL fd6593d",
+  "designs_tried": 20,
+  "failed_at_nominal": 19,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "G=gearheads(name=5GN3KA, i=3, Tmax=11/2)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1865736112990288253/18000000000000000 (~103.652)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN3.6KA, i=18/5, Tmax=33/5)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1838016112990288253/21600000000000000 (~85.0933)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN5KA, i=5, Tmax=91/10)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1773336112990288253/30000000000000000 (~59.1112)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN6KA, i=6, Tmax=11)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1727136112990288253/36000000000000000 (~47.976)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN7.5KA, i=15/2, Tmax=14)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1657836112990288253/45000000000000000 (~36.8408)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN9KA, i=9, Tmax=16)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1588536112990288253/54000000000000000 (~29.4173)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN12.5KA, i=25/2, Tmax=23)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1426836112990288253/75000000000000000 (~19.0245)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN15KA, i=15, Tmax=27)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1311336112990288253/90000000000000000 (~14.5704)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN18KA, i=18, Tmax=33)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1172736112990288253/108000000000000000 (~10.8587)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN25KA, i=25, Tmax=41)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "849336112990288253/150000000000000000 (~5.66224)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN30KA, i=30, Tmax=49)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "618336112990288253/180000000000000000 (~3.4352)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN36KA, i=36, Tmax=59)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "341136112990288253/216000000000000000 (~1.57933)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN50KA, i=50, Tmax=74)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "3393813045896003/15000000000000000 (~0.226254)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN60KA, i=60, Tmax=87)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "263663887009711747/360000000000000000 (~0.7324)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN75KA, i=75, Tmax=87)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "830663887009711747/450000000000000000 (~1.84592)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN90KA, i=90, Tmax=87)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1397663887009711747/540000000000000000 (~2.58827)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN100KA, i=100, Tmax=87)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "1775663887009711747/600000000000000000 (~2.95944)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN120KA, i=120, Tmax=87)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "2531663887009711747/720000000000000000 (~3.5162)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN150KA, i=150, Tmax=87)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "3665663887009711747/900000000000000000 (~4.07296)",
+      "unit": "in/s"
+    },
+    {
+      "design": "G=gearheads(name=5GN180KA, i=180, Tmax=87)",
+      "verdict": "REFUTED",
+      "fails": "7 in/s +-10 %",
+      "by_at_witness": "4799663887009711747/1080000000000000000 (~4.44413)",
+      "unit": "in/s"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 20
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "G": {
+      "catalog": "gearheads",
+      "name": "5GN50KA",
+      "i": {
+        "nominal": "50",
+        "tolerance": "0"
+      },
+      "Tmax": {
+        "nominal": "74",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "NM": "1450",
+    "etag": "33/50 (~0.66)"
+  },
+  "point_units": {
+    "NM": "rpm",
+    "etag": ""
+  },
+  "value_there": {
+    "V": "91106186954103997/15000000000000000 (~6.07375)"
+  },
+  "unit": "in/s",
+  "requirement": {
+    "quantity": "V",
+    "op": "within",
+    "value": [
+      "6.3",
+      "7.7"
+    ],
+    "why": "7 in/s +-10 %"
+  },
+  "overshoot": "3393813045896003/15000000000000000 (~0.226254)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "91106186954103997/15000000000000000 (~6.07375)",
+      "45553093477052013/6250000000000000 (~7.28849)"
+    ],
+    "window": [
+      "63/10 (~6.3)",
+      "77/10 (~7.7)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "NM",
+        "moves_it_by": "91106186954103997/75000000000000000 (~1.21475)"
+      },
+      {
+        "quantity": "pi",
+        "moves_it_by": "29/15000000000000000 (~1.93333e-15)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "each_requirement": [
+    {
+      "requirement": {
+        "quantity": "V",
+        "op": "within",
+        "value": [
+          "6.3",
+          "7.7"
+        ],
+        "why": "7 in/s +-10 %"
+      },
+      "verdict": "REFUTED",
+      "overshoot": "3393813045896003/15000000000000000 (~0.226254)"
+    },
+    {
+      "requirement": {
+        "quantity": "Tstart",
+        "op": "<=",
+        "value": "Tst",
+        "why": "motor starting torque 27.8 oz-in (catalog) must cover the doubled torque"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Tstart": [
+          "80/81 (~0.987654)",
+          "40/33 (~1.21212)"
+        ]
+      }
+    },
+    {
+      "requirement": {
+        "quantity": "TL",
+        "op": "<=",
+        "value": "G.Tmax",
+        "why": "gearhead permissible torque (catalog table)"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "TL": [
+          "20",
+          "20"
+        ]
+      }
+    }
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "7 in/s +-10 %"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

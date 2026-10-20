@@ -1,0 +1,68 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "output capacitors 2 x 47 uF, ESR max 2 mOhm each (parallel 1 mOhm); standard ripple formula, NOT the datasheet's Eq. 13 (see report)",
+ "interface": {
+  "inputs": {
+   "ILPP": {
+    "assume": [
+     "0",
+     "10"
+    ],
+    "bands": [
+     "0",
+     "0.5",
+     "1",
+     "1.5",
+     "2",
+     "3",
+     "4",
+     "6",
+     "10"
+    ]
+   }
+  },
+  "outputs": [
+   "Vopp"
+  ]
+ },
+ "quantities": {
+  "ILPP": {
+   "role": "given",
+   "value": "1",
+   "unit": "A"
+  },
+  "fsw": {
+   "role": "given",
+   "range": [
+    "456",
+    "684"
+   ],
+   "unit": "kHz"
+  },
+  "Co": {
+   "role": "given",
+   "value": "94",
+   "unit": "uF",
+   "ground": "datasheet 8.2.2.6: two 47 uF"
+  },
+  "Resr": {
+   "role": "given",
+   "value": "1",
+   "unit": "mohm",
+   "ground": "datasheet 8.2.2.6: 2 mohm max each, two in parallel"
+  },
+  "Vopp": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {},
+ "laws": [
+  {
+   "zfl": "Vopp == ILPP*(1/(8*fsw*Co) + Resr)",
+   "source": "standard buck output ripple (capacitive part + ESR part)"
+  }
+ ],
+ "requirements": [],
+ "catalog": {}
+}

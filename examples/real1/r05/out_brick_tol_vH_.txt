@@ -1,0 +1,22 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 1,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "PUMP=pumps(grade=BYU slide pump, H0=200, c=1, eta=9/10)",
+      "verdict": "OPEN",
+      "why": "published 7.131 m/s +-3%: Vel proved within [6.68583, 7.64328] m/s, which reaches past the bound, yet no corner violates it — the extreme may lie inside the box and no certificate decided it; published 149.149 m +-3%: H proved within [141.58, 155.3] m, which reaches past the bound, yet no corner violates it — the extreme may lie inside the box and no certificate decided it"
+    }
+  ],
+  "designs_count": {
+    "OPEN": 1
+  },
+  "verdict": "OPEN",
+  "why": "1 design(s) could not be decided and none was earned",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

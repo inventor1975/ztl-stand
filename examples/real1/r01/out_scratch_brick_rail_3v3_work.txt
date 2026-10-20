@@ -1,0 +1,57 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "modes": [
+    "rail_3v3"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "designs": [
+    {
+      "design": "REG=TPS79901(grade=TPS79901 typ Vref, 1% device accuracy, Vref=1193/1000)",
+      "verdict": "REFUTED",
+      "mode": "rail_3v3",
+      "fails": "3.3 V rail, total accuracy bound",
+      "by_at_witness": "24793332493451/33000000000000000 (~0.000751313)",
+      "unit": "V"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "verdict": "REFUTED",
+  "why": "every design violates a requirement in at least one mode, at a concrete point",
+  "closest_design": {
+    "REG": {
+      "catalog": "TPS79901",
+      "Vref": {
+        "nominal": "1193/1000 (~1.193)",
+        "tolerance": "1/100 (~0.01)"
+      },
+      "grade": "TPS79901 typ Vref, 1% device accuracy"
+    }
+  },
+  "failing_mode": "rail_3v3",
+  "its_violating_point": {
+    "R1": "1783797150021/100000000 (~17838)",
+    "R2": "9900",
+    "REG.Vref": "120493/100000 (~1.20493)"
+  },
+  "value_there": {
+    "Vo": "111407713332493451/33000000000000000 (~3.37599)"
+  },
+  "requirement": {
+    "quantity": "Vo",
+    "op": "within",
+    "value": [
+      "80619/25000",
+      "84381/25000"
+    ],
+    "why": "3.3 V rail, total accuracy bound"
+  },
+  "overshoot": "24793332493451/33000000000000000 (~0.000751313)",
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+wall 0.05s

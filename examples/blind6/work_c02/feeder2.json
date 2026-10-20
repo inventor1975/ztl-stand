@@ -1,0 +1,383 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "one feeder: cable C + breaker B, three situations; ratings R4-R6 are its own requirements",
+ "interface": {
+  "inputs": {
+   "L": {
+    "assume": [
+     "0",
+     "600"
+    ],
+    "bands": "arriving"
+   },
+   "Ir": {
+    "assume": [
+     "0",
+     "100"
+    ],
+    "bands": "arriving"
+   },
+   "Is": {
+    "assume": [
+     "0",
+     "400"
+    ],
+    "bands": "arriving"
+   },
+   "Vb1": {
+    "assume": [
+     "300",
+     "420"
+    ],
+    "bands": "arriving"
+   },
+   "Vb2": {
+    "assume": [
+     "300",
+     "420"
+    ],
+    "bands": "arriving"
+   },
+   "Vb3": {
+    "assume": [
+     "300",
+     "420"
+    ],
+    "bands": "arriving"
+   }
+  },
+  "outputs": [
+   "Vt1",
+   "Vt2",
+   "Vt3"
+  ]
+ },
+ "quantities": {
+  "L": {
+   "role": "given",
+   "value": "100",
+   "unit": "m"
+  },
+  "Ir": {
+   "role": "given",
+   "value": "50",
+   "unit": "A"
+  },
+  "Is": {
+   "role": "given",
+   "value": "300",
+   "unit": "A"
+  },
+  "Vb1": {
+   "role": "given",
+   "value": "400",
+   "unit": "V"
+  },
+  "Vb2": {
+   "role": "given",
+   "value": "400",
+   "unit": "V"
+  },
+  "Vb3": {
+   "role": "given",
+   "value": "400",
+   "unit": "V"
+  },
+  "Tamb": {
+   "role": "given",
+   "unit": "C",
+   "value": "38"
+  },
+  "Tins": {
+   "role": "given",
+   "unit": "C",
+   "value": "90"
+  },
+  "Tcal": {
+   "role": "given",
+   "unit": "C",
+   "value": "30"
+  },
+  "dTr": {
+   "role": "given",
+   "unit": "C",
+   "value": "60"
+  },
+  "alpha": {
+   "role": "given",
+   "unit": "1/C",
+   "value": "0.00393"
+  },
+  "Tref": {
+   "role": "given",
+   "unit": "C",
+   "value": "20"
+  },
+  "Xp": {
+   "role": "given",
+   "unit": "mohm/m",
+   "value": "0.08"
+  },
+  "Vt1": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Vt2": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Vt3": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "dV1": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "dV2": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "dV3": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Iz": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "m4": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "m5": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "m6": {
+   "role": "derived",
+   "unit": "A"
+  }
+ },
+ "slots": {
+  "C": {
+   "from": [
+    "cables"
+   ]
+  },
+  "B": {
+   "from": [
+    "breakers"
+   ]
+  }
+ },
+ "define": {
+  "th": "Tamb + dTr*(Ir/C.Iz30)*(Ir/C.Iz30)",
+  "Rp": "C.R20*(1 + alpha*(th - Tref))"
+ },
+ "laws": [
+  {
+   "zfl": "dV1 == sqrt(3)*Ir*L*(Rp*0.85 + Xp*sqrt(1 - 0.85*0.85))",
+   "source": "3-phase cable drop, R'(theta)"
+  },
+  {
+   "zfl": "Vt1 == Vb1 - dV1",
+   "source": "terminal voltage = V_bus - dV"
+  },
+  {
+   "zfl": "dV2 == sqrt(3)*Ir*L*(Rp*0.85 + Xp*sqrt(1 - 0.85*0.85))",
+   "source": "3-phase cable drop, R'(theta)"
+  },
+  {
+   "zfl": "Vt2 == Vb2 - dV2",
+   "source": "terminal voltage = V_bus - dV"
+  },
+  {
+   "zfl": "dV3 == sqrt(3)*Is*L*(Rp*0.40 + Xp*sqrt(1 - 0.40*0.40))",
+   "source": "3-phase cable drop, R'(theta)"
+  },
+  {
+   "zfl": "Vt3 == Vb3 - dV3",
+   "source": "terminal voltage = V_bus - dV"
+  },
+  {
+   "zfl": "Iz == C.Iz30*sqrt((Tins - Tamb)/(Tins - Tcal))",
+   "source": "Iz(T) = Iz30 sqrt((90-T)/60)"
+  },
+  {
+   "zfl": "m4 == B.In - 1.1*Ir",
+   "source": "R4 margin"
+  },
+  {
+   "zfl": "m5 == 8*B.In - 1.25*Is",
+   "source": "R5 margin"
+  },
+  {
+   "zfl": "m6 == Iz - B.In",
+   "source": "R6 margin"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "m4",
+   "op": ">=",
+   "value": "0",
+   "why": "R4"
+  },
+  {
+   "quantity": "m5",
+   "op": ">=",
+   "value": "0",
+   "why": "R5"
+  },
+  {
+   "quantity": "m6",
+   "op": ">=",
+   "value": "0",
+   "why": "R6"
+  }
+ ],
+ "objective": {
+  "minimize": "C.price*L + B.price",
+  "unit": "EUR",
+  "why": "cable over its length + breaker"
+ },
+ "catalog": {
+  "cables": {
+   "items": [
+    {
+     "R20": {
+      "value": "1.150"
+     },
+     "Iz30": {
+      "value": "100"
+     },
+     "price": "5.5",
+     "type": "C16"
+    },
+    {
+     "R20": {
+      "value": "0.727"
+     },
+     "Iz30": {
+      "value": "130"
+     },
+     "price": "8.0",
+     "type": "C25"
+    },
+    {
+     "R20": {
+      "value": "0.524"
+     },
+     "Iz30": {
+      "value": "160"
+     },
+     "price": "10.5",
+     "type": "C35"
+    },
+    {
+     "R20": {
+      "value": "0.387"
+     },
+     "Iz30": {
+      "value": "190"
+     },
+     "price": "14.0",
+     "type": "C50"
+    },
+    {
+     "R20": {
+      "value": "0.268"
+     },
+     "Iz30": {
+      "value": "240"
+     },
+     "price": "19.0",
+     "type": "C70"
+    },
+    {
+     "R20": {
+      "value": "0.193"
+     },
+     "Iz30": {
+      "value": "290"
+     },
+     "price": "26.0",
+     "type": "C95"
+    }
+   ],
+   "fields": {
+    "R20": {
+     "unit": "mohm/m"
+    },
+    "Iz30": {
+     "unit": "A"
+    },
+    "price": {
+     "unit": "EUR/m"
+    }
+   }
+  },
+  "breakers": {
+   "items": [
+    {
+     "In": {
+      "value": "40"
+     },
+     "price": "48",
+     "type": "B40"
+    },
+    {
+     "In": {
+      "value": "50"
+     },
+     "price": "58",
+     "type": "B50"
+    },
+    {
+     "In": {
+      "value": "63"
+     },
+     "price": "70",
+     "type": "B63"
+    },
+    {
+     "In": {
+      "value": "80"
+     },
+     "price": "95",
+     "type": "B80"
+    },
+    {
+     "In": {
+      "value": "100"
+     },
+     "price": "120",
+     "type": "B100"
+    },
+    {
+     "In": {
+      "value": "125"
+     },
+     "price": "160",
+     "type": "B125"
+    },
+    {
+     "In": {
+      "value": "160"
+     },
+     "price": "230",
+     "type": "B160"
+    }
+   ],
+   "fields": {
+    "In": {
+     "unit": "A"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ }
+}

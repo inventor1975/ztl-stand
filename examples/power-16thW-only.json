@@ -1,0 +1,109 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "value": "5",
+   "unit": "V",
+   "ground": "psu"
+  },
+  "I": {
+   "role": "derived",
+   "unit": "A"
+  },
+  "Vout": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "P1": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "P2": {
+   "role": "derived",
+   "unit": "W"
+  }
+ },
+ "slots": {
+  "R1": {
+   "from": [
+    "res_1pct_16thW"
+   ]
+  },
+  "R2": {
+   "from": [
+    "res_1pct_16thW"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Vin - Vout == I*R1.R",
+   "source": "Ohm's law, R1"
+  },
+  {
+   "zfl": "Vout == I*R2.R",
+   "source": "Ohm's law, R2"
+  },
+  {
+   "zfl": "P1 == I*I*R1.R",
+   "source": "Joule heating, R1"
+  },
+  {
+   "zfl": "P2 == I*I*R2.R",
+   "source": "Joule heating, R2"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vout",
+   "op": "within",
+   "value": [
+    "2.475",
+    "2.525"
+   ],
+   "why": "2.5 V +-1%"
+  },
+  {
+   "quantity": "I",
+   "op": ">=",
+   "value": "0.024",
+   "why": "the load needs at least 24 mA through the divider"
+  },
+  {
+   "quantity": "P1",
+   "op": "<=",
+   "value": "R1.P",
+   "why": "R1 within its power rating"
+  },
+  {
+   "quantity": "P2",
+   "op": "<=",
+   "value": "R2.P",
+   "why": "R2 within its power rating"
+  }
+ ],
+ "catalog": {
+  "res_1pct_16thW": {
+   "series": "E24",
+   "decades": [
+    10,
+    100,
+    1000
+   ],
+   "ground": "datasheet",
+   "fields": {
+    "R": {
+     "series": true,
+     "tolerance": "0.01",
+     "unit": "ohm"
+    },
+    "P": {
+     "value": "1/16",
+     "unit": "W",
+     "why": "power rating"
+    }
+   }
+  }
+ }
+}

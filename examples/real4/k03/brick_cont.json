@@ -1,0 +1,118 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "CONTINUOUS heat sink: the sink-to-ambient resistance is any value in 0..5 C/W; the best (largest, i.e. smallest sink) that keeps both junctions legal for every VIN/VOUT in the datasheet windows. Cross-check of brick_find.json.",
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "range": [
+    "6.5",
+    "9"
+   ],
+   "unit": "V",
+   "ground": "datasheet: VIN(max continuous) = 9 V in the example; 6.5 V = lower VIN of the VOUT line/load row and of the 5 V application"
+  },
+  "Vout": {
+   "role": "given",
+   "range": [
+    "4.9",
+    "5.1"
+   ],
+   "unit": "V",
+   "ground": "datasheet electrical characteristics, LT1083/4/5-5, 0 <= IOUT <= IFULLLOAD, 6.5 V <= VIN <= 20 V: MIN 4.900, MAX 5.100"
+  },
+  "Iout": {
+   "role": "given",
+   "value": "6",
+   "unit": "A",
+   "ground": "example"
+  },
+  "Ta": {
+   "role": "given",
+   "value": "75",
+   "unit": "C",
+   "ground": "example"
+  },
+  "Rcs": {
+   "role": "given",
+   "value": "0.2",
+   "unit": "C/W",
+   "ground": "example: P package with thermal compound"
+  },
+  "Rjc_c": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "C/W",
+   "ground": "datasheet thermal resistance, LT1083 P package, control circuitry"
+  },
+  "Rjc_p": {
+   "role": "given",
+   "value": "1.6",
+   "unit": "C/W",
+   "ground": "datasheet thermal resistance, LT1083 P package, power transistor"
+  },
+  "PD": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "Tj_c": {
+   "role": "derived",
+   "unit": "C"
+  },
+  "Tj_p": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {
+  "HS": {
+   "from": [
+    "sink"
+   ]
+  }
+ },
+ "define": {
+  "PDd": "(Vin - Vout)*Iout"
+ },
+ "laws": [
+  {
+   "zfl": "PD == PDd",
+   "source": "linear regulator dissipation"
+  },
+  {
+   "zfl": "Tj_c == Ta + PDd*(HS.R + Rcs + Rjc_c)",
+   "source": "series thermal path, control"
+  },
+  {
+   "zfl": "Tj_p == Ta + PDd*(HS.R + Rcs + Rjc_p)",
+   "source": "series thermal path, power transistor"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tj_c",
+   "op": "<=",
+   "value": "125",
+   "why": "control section max operating junction temperature, commercial grade (Absolute Maximum Ratings)"
+  },
+  {
+   "quantity": "Tj_p",
+   "op": "<=",
+   "value": "150",
+   "why": "power transistor max operating junction temperature, commercial grade"
+  }
+ ],
+ "catalog": {
+  "sink": {
+   "continuous": {
+    "field": "R",
+    "from": "0",
+    "to": "5",
+    "unit": "C/W"
+   }
+  }
+ },
+ "objective": {
+  "minimize": "0 - HS.R",
+  "why": "largest allowed sink resistance = smallest/cheapest sink (assumes cost falls as R rises: my assumption, not the source's)"
+ }
+}

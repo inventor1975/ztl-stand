@@ -1,0 +1,13 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "verdict": "OPEN",
+  "why": "stopped by a signal (a time limit) after 1 of 1 designs: only the designs listed were decided; the verdict over the rest, and optimality, are not known",
+  "designs_tried": 1,
+  "designs_total": 1
+}
+
+real	5m0.129s
+user	4m45.056s
+sys	0m15.044s

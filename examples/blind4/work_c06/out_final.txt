@@ -1,0 +1,1534 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "excluded_by_where": 1215600,
+  "designs_tried": 9313,
+  "failed_at_nominal": 8946,
+  "judged": 367,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=3); M5=cnt(N=0); P=purge(p=109/10000)",
+      "verdict": "EARNED"
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2082593/70000 (~29.7513)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "3122779/210000 (~14.8704)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6243337/630000 (~9.91006)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "74299/10000 (~7.4299)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1247779/210000 (~5.9418)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "3118337/630000 (~4.94974)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2078151/490000 (~4.24112)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "779029/210000 (~3.70966)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6230011/1890000 (~3.2963)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "207593/70000 (~2.96561)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=11/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "889367/330000 (~2.69505)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "208527343/4917570000 (~0.0424046)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1555837/630000 (~2.46958)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "208434061/4926390000 (~0.0423097)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=13/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2073709/910000 (~2.2788)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "208340779/4935210000 (~0.0422152)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "3109453/1470000 (~2.11527)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "208247497/4944030000 (~0.042121)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1243337/630000 (~1.97355)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "41630843/990570000 (~0.0420272)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/625)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "32367/17500 (~1.84954)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "28060453/1429470000 (~0.01963)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "208060933/4961670000 (~0.0419336)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=17/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6212243/3570000 (~1.74012)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4674151/238490000 (~0.0195989)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "35897453/715470000 (~0.0501732)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "207967651/4970490000 (~0.0418405)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "443573/270000 (~1.64286)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "28029359/1432410000 (~0.019568)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "17940953/358470000 (~0.0500487)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "207874369/4979310000 (~0.0417476)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=19/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2069267/1330000 (~1.55584)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "80262859/4645410000 (~0.0172779)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "7003453/358470000 (~0.0195371)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "11955453/239470000 (~0.0499246)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "207781087/4988130000 (~0.0416551)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "310279/210000 (~1.47752)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "82222109/4466910000 (~0.0184069)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "40108109/2324910000 (~0.0172515)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1866551/95690000 (~0.0195062)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "8962703/179970000 (~0.0498011)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "41537561/999390000 (~0.0415629)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=21/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6203359/4410000 (~1.40666)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "20543867/1117830000 (~0.0183783)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "80169577/4654230000 (~0.0172251)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "13991359/718410000 (~0.0194755)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "7167053/144270000 (~0.0496781)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=11/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "207594523/5005770000 (~0.041471)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=11/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1033523/770000 (~1.34224)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "82128827/4475730000 (~0.0183498)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4832749/307072500 (~0.0157381)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "10015367/582330000 (~0.0171988)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "27967171/1438290000 (~0.0194447)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "5969953/120470000 (~0.0495555)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "207501241/5014590000 (~0.0413795)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=23/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6198917/4830000 (~1.28342)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "41041093/2240070000 (~0.0183213)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "77277343/4917570000 (~0.0157145)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "16015259/932610000 (~0.0171725)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1164651/59990000 (~0.0194141)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "35804171/724290000 (~0.0494335)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=13/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "207407959/5023410000 (~0.0412883)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "774587/630000 (~1.2295)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "16407109/896910000 (~0.0182929)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "38615351/2460990000 (~0.015691)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "40014827/2333730000 (~0.0171463)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "27936077/1441230000 (~0.0193835)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2236789/45360000 (~0.0493119)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "207314677/5032230000 (~0.0411974)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/400)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "11799/10000 (~1.1799)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "10248613/561120000 (~0.0182646)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "77184061/4926390000 (~0.0156675)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=7/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "79983013/4671870000 (~0.0171201)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2792053/144270000 (~0.019353)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "11924359/242410000 (~0.0491909)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "41444279/1008210000 (~0.0411068)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=13/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "3096127/2730000 (~1.13411)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=7/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "81942263/4493370000 (~0.0182363)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "3856871/246540000 (~0.015644)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "19984093/1169070000 (~0.017094)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=11/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "9301661/481390000 (~0.0193225)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "3575753/72870000 (~0.0490703)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/625)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "207128113/5049870000 (~0.0410165)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=27/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6190033/5670000 (~1.09172)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "40947811/2248890000 (~0.018208)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "114483343/13485570000 (~0.00848932)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "77090779/4935210000 (~0.0156206)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=9/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "79889731/4680690000 (~0.0170679)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6972359/361410000 (~0.0192921)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=11/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1881157/38430000 (~0.0489502)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=17/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "207034831/5058690000 (~0.0409266)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "515651/490000 (~1.05235)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=9/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "81848981/4502190000 (~0.0181798)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "114390061/13494390000 (~0.00847686)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "161505343/9201570000 (~0.0175519)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "38522069/2469810000 (~0.0155972)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/1000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "7984309/468510000 (~0.0170419)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=13/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "27873889/1447110000 (~0.0192618)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2977203/60970000 (~0.0488306)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "206941549/5067510000 (~0.0408369)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=29/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6185591/6090000 (~1.0157)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/1000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4090117/225330000 (~0.0181517)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "114296779/13503210000 (~0.00846442)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "161412061/9210390000 (~0.017525)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "76997497/4944030000 (~0.0155738)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=11/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "79796449/4689510000 (~0.0170159)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4643057/241430000 (~0.0192315)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=13/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "35710889/733110000 (~0.0487115)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=19/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "206848267/5076330000 (~0.0407476)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/1000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "618337/630000 (~0.981487)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=11/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "81755699/4511010000 (~0.0181236)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "35548781/4733190000 (~0.00751053)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "3086581/365190000 (~0.00845199)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "161318779/9219210000 (~0.0174981)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "9618857/618555000 (~0.0155505)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=3/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4984363/293370000 (~0.01699)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "5568559/290010000 (~0.0192013)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "17847671/367290000 (~0.0485929)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "41350997/1017030000 (~0.0406586)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "110564843/13842570000 (~0.00798731)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=31/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2060383/2170000 (~0.949485)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=3/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "40854529/2257710000 (~0.0180956)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "11839229/1578710000 (~0.00749931)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "22822043/2704170000 (~0.00843957)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "161225497/9228030000 (~0.0174713)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "15380843/990570000 (~0.0155273)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=13/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "79703167/4698330000 (~0.0169641)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/625)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1739203/90720000 (~0.0191711)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2378653/49070000 (~0.0484747)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=21/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "206661703/5093970000 (~0.0405699)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "110471561/13851390000 (~0.00797549)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "12386453/2857470000 (~0.00433476)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=2/625)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "55169/60000 (~0.919483)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=13/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "81662417/4519830000 (~0.0180676)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "35486593/4739070000 (~0.00748809)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "114016933/13529670000 (~0.00842718)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "32226443/1847370000 (~0.0174445)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=11/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "38428787/2478630000 (~0.015504)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=7/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "39828263/2351370000 (~0.0169383)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=17/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "9270567/484330000 (~0.019141)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/625)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4458031/92190000 (~0.048357)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=11/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "206568421/5102790000 (~0.0404815)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "110378279/13860210000 (~0.00796368)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6185453/1429470000 (~0.0043271)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=33/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6176707/6930000 (~0.8913)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=7/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2550493/141382500 (~0.0180397)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "6741151/714490000 (~0.00943491)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "33589531/4911690000 (~0.00683869)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "35455499/4742010000 (~0.00747689)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "113923651/13538490000 (~0.0084148)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "161038933/9245670000 (~0.0174178)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "76810933/4961670000 (~0.0154809)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=3/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "15921977/941430000 (~0.0169125)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "13898077/727230000 (~0.019111)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=17/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "35648701/738990000 (~0.0482398)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=23/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "206475139/5111610000 (~0.0403934)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "110284997/13869030000 (~0.00795189)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4118453/953470000 (~0.00431944)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=17/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1029081/1190000 (~0.864774)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=3/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "16313827/905730000 (~0.0180118)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "10103953/1072470000 (~0.0094212)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "33558437/4914630000 (~0.00682827)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2361627/316330000 (~0.00746571)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "113830369/13547310000 (~0.00840243)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "28060453/1429470000 (~0.01963)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "160945651/9254490000 (~0.0173911)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=13/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "19191073/1241520000 (~0.0154577)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/625)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "19890811/1177890000 (~0.0168868)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=19/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "27780607/1455930000 (~0.019081)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "138113/2870000 (~0.048123)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "206381857/5120430000 (~0.0403056)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "22038343/2775570000 (~0.00794011)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "33240859/8929410000 (~0.00372263)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "3084953/715470000 (~0.00431179)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1234453/1470000 (~0.839764)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=1/625)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "40761247/2266530000 (~0.017984)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "20192359/2146410000 (~0.0094075)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "11175781/1639190000 (~0.00681787)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "35393311/4747890000 (~0.00745453)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "113737087/13556130000 (~0.00839009)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "4674151/238490000 (~0.0195989)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1250)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "160852369/9263310000 (~0.0173645)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=2); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=7/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "76717651/4970490000 (~0.0154346)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=17/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "79516603/4715970000 (~0.0168611)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "462751/24290000 (~0.0190511)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=19/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "35617607/741930000 (~0.0480067)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/400)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "8251543/205170000 (~0.0402181)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=3/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "110098433/13886670000 (~0.00792835)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/5000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "16597109/4466910000 (~0.00371557)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=2); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "2464853/572670000 (~0.00430414)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1542511/1890000 (~0.816143)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=1); P=purge(p=17/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "81475853/4537470000 (~0.0179562)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=1/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "56751859/6787410000 (~0.00836134)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=1); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "1681401/178990000 (~0.00939383)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=3); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/2500)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "33496249/4920510000 (~0.00680748)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=0); M4=cnt(N=1); M5=cnt(N=0); P=purge(p=7/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "35362217/4750830000 (~0.00744338)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=1); M3=cnt(N=0); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=1/1000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "22728761/2712990000 (~0.00837775)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=0); M2=cnt(N=0); M3=cnt(N=2); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=3/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "28029359/1432410000 (~0.019568)",
+      "unit": ""
+    },
+    {
+      "design": "M1=cnt(N=1); M2=cnt(N=0); M3=cnt(N=1); M4=cnt(N=0); M5=cnt(N=0); P=purge(p=9/10000)",
+      "verdict": "REFUTED",
+      "fails": "R1 c_T <= 0.8 wt%",
+      "by": "160759087/9272130000 (~0.0173379)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 9312,
+    "EARNED": 1
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "designs_not_listed": 9113,
+  "listing": "earned first, then open, then refuted",
+  "objective": {
+    "minimize": "(M1.N*C1 + M2.N*C2 + M3.N*C3 + M4.N*C4 + M5.N*C5) + P.p*FH*hrs*price",
+    "value": "138060",
+    "unit": "EUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "M1": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "M2": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "M3": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "M4": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    },
+    "M5": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "P": {
+      "catalog": "purge",
+      "p": {
+        "nominal": "109/10000 (~0.0109)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "cT": [
+      "442577/100025625 (~0.00442464)",
+      "18902869/2400615000 (~0.00787418)"
+    ],
+    "cBi": [
+      "209039/40010250 (~0.00522464)",
+      "22103689/2400615000 (~0.00920751)"
+    ],
+    "cBo": [
+      "430487/64016400 (~0.00672464)",
+      "14652767/1200307500 (~0.0122075)"
+    ],
+    "cT2": [
+      "154/68125 (~0.00226055)",
+      "1087/272500 (~0.00398899)"
+    ]
+  },
+  "guaranteed_unit": {
+    "cT": "",
+    "cBi": "",
+    "cBo": "",
+    "cT2": ""
+  },
+  "how": {
+    "cT": "ZTL, exact at the corners",
+    "cBi": "ZTL, exact at the corners",
+    "cBo": "ZTL, exact at the corners",
+    "cT2": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "cT",
+      "op": "<=",
+      "value": "0.008",
+      "why": "R1 c_T <= 0.8 wt%"
+    },
+    {
+      "quantity": "cBi",
+      "op": "<=",
+      "value": "0.011",
+      "why": "R2 c_Bi <= 1.1 wt%"
+    },
+    {
+      "quantity": "cBo",
+      "op": "<=",
+      "value": "0.015",
+      "why": "R2 c_Bo <= 1.5 wt%"
+    },
+    {
+      "quantity": "cT2",
+      "op": "<=",
+      "value": "0.004",
+      "why": "R3 c_T2 <= 0.4 wt%"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: tolerances are the catalog's (datasheet) word",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "cAo -> [2570513/400102500, 26904919/2400615000] by the system over its parameters, exact at the corners (credit)",
+    "cAo2 -> [7501/3270000, 22067/5450000] by the system over its parameters, exact at the corners (credit)",
+    "cBi -> [209039/40010250, 22103689/2400615000] by the system over its parameters, exact at the corners (credit)",
+    "cBi2 -> [18589/8175000, 54677/13625000] by the system over its parameters, exact at the corners (credit)",
+    "cBo -> [430487/64016400, 14652767/1200307500] by the system over its parameters, exact at the corners (credit)",
+    "cBo2 -> [18589/8175000, 54677/13625000] by the system over its parameters, exact at the corners (credit)"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "AUDIT: both inputs of the difference stage wired to ONE source S. Truly Vo = G*(S - S) = 0 for every S.",
+ "components": {
+  "D": {
+   "file": "diff-amp.json"
+  }
+ },
+ "connect": {
+  "D.Vp": "S",
+  "D.Vn": "S"
+ },
+ "quantities": {
+  "S": {
+   "role": "given",
+   "range": [
+    "2",
+    "8"
+   ],
+   "unit": "V"
+  },
+  "Out": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Out == D.Vo",
+   "source": "wire"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Out",
+   "op": ">=",
+   "value": "1",
+   "why": "AUDIT: Out = G*(S - S) = 0 at every point, so this fails everywhere"
+  }
+ ]
+}

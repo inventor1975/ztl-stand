@@ -1,0 +1,14 @@
+{"stand": "ztl-stand/1",
+ "why": "network v2: real round 3 n01 as the source states it — the UNLOADED offset of a 4-resistor bridge, +-0.1 % resistors, 5 V excitation (Analog Dialogue 48-1: worst case TOL x VEX = 5 mV); before v2 the author needed a 1 Gohm detector to turn the voltage into a current",
+ "quantities": {
+  "VEX": {"role": "given", "value": "5", "unit": "V"},
+  "tol": {"role": "given", "value": "0.001", "unit": "", "why": "+-0.1 % resistors, one shared tolerance"},
+  "R1": {"role": "given", "value": "10000", "tolerance": "tol", "unit": "ohm"},
+  "R2": {"role": "given", "value": "10000", "tolerance": "tol", "unit": "ohm"},
+  "R3": {"role": "given", "value": "10000", "tolerance": "tol", "unit": "ohm"},
+  "R4": {"role": "given", "value": "10000", "tolerance": "tol", "unit": "ohm"}},
+ "network": {
+  "branches": {"b1": {"from": "exc", "to": "n1", "R": "R1"}, "b2": {"from": "n1", "to": "gnd", "R": "R2"},
+               "b3": {"from": "exc", "to": "n2", "R": "R3"}, "b4": {"from": "n2", "to": "gnd", "R": "R4"}},
+  "source": {"from": "exc", "to": "gnd", "V": "VEX"}},
+ "requirements": [{"quantity": "V(n1, n2)", "op": "within", "value": ["-5", "5"], "unit": "mV"}]}

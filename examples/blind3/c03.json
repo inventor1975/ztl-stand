@@ -1,0 +1,267 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "patm": {
+   "role": "given",
+   "value": "1.013",
+   "unit": "bar",
+   "ground": "problem statement: atmospheric pressure to add for gas-law work"
+  },
+  "p1": {
+   "role": "given",
+   "range": [
+    "105",
+    "115"
+   ],
+   "unit": "bar",
+   "why": "minimum system pressure 110 +-5 bar, gauge"
+  },
+  "p2": {
+   "role": "given",
+   "value": "210",
+   "unit": "bar",
+   "ground": "relief valve setting, gauge"
+  },
+  "Pvessel": {
+   "role": "given",
+   "value": "250",
+   "unit": "bar",
+   "ground": "maximum allowable pressure of the vessel"
+  },
+  "T": {
+   "role": "given",
+   "range": [
+    "263.15",
+    "333.15"
+   ],
+   "unit": "K",
+   "why": "fluid/ambient -10 ... +60 C"
+  },
+  "Tref": {
+   "role": "given",
+   "value": "293.15",
+   "unit": "K",
+   "ground": "pre-charge is set at 20 C"
+  },
+  "dVreq": {
+   "role": "given",
+   "value": "6.5",
+   "tolerance": "3/65",
+   "unit": "L",
+   "why": "6.5 +-0.3 L, i.e. 6.2 ... 6.8; design for the larger end"
+  },
+  "dVslow_req": {
+   "role": "given",
+   "value": "2.0",
+   "unit": "L",
+   "ground": "second case: 2.0 L over 5 minutes, isothermal"
+  },
+  "dVf": {
+   "role": "derived",
+   "unit": "L",
+   "why": "usable volume, fast (adiabatic, n=1.4)"
+  },
+  "dVs": {
+   "role": "derived",
+   "unit": "L",
+   "why": "usable volume, slow (isothermal, n=1, at 20 C)"
+  },
+  "rpre": {
+   "role": "derived",
+   "unit": "",
+   "why": "p0(T) gauge / p1 gauge"
+  },
+  "cr": {
+   "role": "derived",
+   "unit": "",
+   "why": "p2 abs / p0(T) abs"
+  },
+  "vmargin": {
+   "role": "derived",
+   "unit": "bar",
+   "why": "vessel max pressure minus relief pressure"
+  }
+ },
+ "slots": {
+  "ACC": {
+   "from": [
+    "accumulators"
+   ]
+  },
+  "PC": {
+   "from": [
+    "precharge"
+   ]
+  }
+ },
+ "define": {
+  "p1a": "p1 + patm",
+  "p2a": "p2 + patm",
+  "p0a20": "PC.p0 + patm",
+  "p0T": "(PC.p0 + patm)*T/Tref"
+ },
+ "laws": [
+  {
+   "zfl": "dVf == ACC.V0*(pow(p0T/p1a, 5/7) - pow(p0T/p2a, 5/7))",
+   "source": "p V^n = const, n = 1.4: dV = V0 p0^(1/n) (p1^(-1/n) - p2^(-1/n)), rewritten with pressure ratios"
+  },
+  {
+   "zfl": "dVs == ACC.V0*(p0a20/p1a - p0a20/p2a)",
+   "source": "isothermal, n = 1, p0 at 20 C"
+  },
+  {
+   "zfl": "rpre == (p0T - patm)/p1",
+   "source": "bladder protection rule 0.6 p1 <= p0(T) <= 0.9 p1, gauge pressures; p0(T) scaled in absolute terms"
+  },
+  {
+   "zfl": "cr == p2a/p0T",
+   "source": "maximum compression ratio p2/p0(T), absolute"
+  },
+  {
+   "zfl": "vmargin == Pvessel - p2",
+   "source": "vessel pressure limit"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "dVf",
+   "op": ">=",
+   "value": "dVreq",
+   "why": "fast stroke delivers the larger required volume at every T and p1"
+  },
+  {
+   "quantity": "rpre",
+   "op": "within",
+   "value": [
+    "0.6",
+    "0.9"
+   ],
+   "why": "bladder protection: 0.6 p1 <= p0(T) <= 0.9 p1 at every temperature"
+  },
+  {
+   "quantity": "cr",
+   "op": "<=",
+   "value": "4",
+   "why": "max compression ratio 4.0 at every temperature"
+  },
+  {
+   "quantity": "vmargin",
+   "op": ">=",
+   "value": "0",
+   "why": "250 bar vessel limit vs 210 bar relief"
+  },
+  {
+   "quantity": "dVs",
+   "op": ">=",
+   "value": "dVslow_req",
+   "why": "slow case 2.0 L isothermal at 20 C"
+  }
+ ],
+ "objective": {
+  "minimize": "ACC.price",
+  "why": "cheapest accumulator (price depends on size only)"
+ },
+ "catalog": {
+  "accumulators": {
+   "items": [
+    {
+     "V0": "10",
+     "price": "420",
+     "name": "A10"
+    },
+    {
+     "V0": "20",
+     "price": "560",
+     "name": "A20"
+    },
+    {
+     "V0": "32",
+     "price": "740",
+     "name": "A32"
+    },
+    {
+     "V0": "50",
+     "price": "1010",
+     "name": "A50"
+    },
+    {
+     "V0": "80",
+     "price": "1500",
+     "name": "A80"
+    }
+   ],
+   "fields": {
+    "V0": {
+     "unit": "L"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "ground": "catalog"
+  },
+  "precharge": {
+   "items": [
+    {
+     "p0": "60",
+     "name": "pc60"
+    },
+    {
+     "p0": "65",
+     "name": "pc65"
+    },
+    {
+     "p0": "70",
+     "name": "pc70"
+    },
+    {
+     "p0": "75",
+     "name": "pc75"
+    },
+    {
+     "p0": "80",
+     "name": "pc80"
+    },
+    {
+     "p0": "85",
+     "name": "pc85"
+    },
+    {
+     "p0": "90",
+     "name": "pc90"
+    },
+    {
+     "p0": "95",
+     "name": "pc95"
+    },
+    {
+     "p0": "100",
+     "name": "pc100"
+    },
+    {
+     "p0": "105",
+     "name": "pc105"
+    },
+    {
+     "p0": "110",
+     "name": "pc110"
+    },
+    {
+     "p0": "115",
+     "name": "pc115"
+    },
+    {
+     "p0": "120",
+     "name": "pc120"
+    }
+   ],
+   "fields": {
+    "p0": {
+     "unit": "bar"
+    }
+   },
+   "ground": "settable in 5 bar steps from 60 to 120 bar gauge at 20 C"
+  }
+ },
+ "report": "all"
+}

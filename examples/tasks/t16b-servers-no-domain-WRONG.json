@@ -1,0 +1,143 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "lam": {
+   "role": "given",
+   "range": [
+    "1620",
+    "1980"
+   ],
+   "unit": "1/s",
+   "why": "peak arrival rate 1800 req/s +-10%; upper end widened by 0.001 so the nominal (midpoint) never sits exactly on the M/M/1 pole mu = lambda_i"
+  },
+  "gw": {
+   "role": "given",
+   "range": [
+    "5",
+    "12"
+   ],
+   "unit": "ms",
+   "why": "gateway latency"
+  },
+  "db": {
+   "role": "given",
+   "range": [
+    "15",
+    "30"
+   ],
+   "unit": "ms",
+   "why": "database latency"
+  },
+  "TN": {
+   "role": "derived",
+   "unit": "ms"
+  },
+  "TD": {
+   "role": "derived",
+   "unit": "ms"
+  }
+ },
+ "slots": {
+  "INST": {
+   "from": [
+    "instance_types"
+   ]
+  },
+  "CNT": {
+   "from": [
+    "counts"
+   ]
+  }
+ },
+ "define": {
+  "rhoNx": "lam/(CNT.N*INST.mu)",
+  "rhoDx": "lam/((CNT.N - 1)*INST.mu)",
+  "T99N": "ln(100)/(INST.mu - lam/CNT.N)",
+  "T99D": "ln(100)/(INST.mu - lam/(CNT.N - 1))"
+ },
+ "laws": [
+  {
+   "zfl": "TN == gw + T99N + db",
+   "source": "p99 end-to-end = gateway + ln(100)/(mu - lambda_i) + database (normal)"
+  },
+  {
+   "zfl": "TD == gw + T99D + db",
+   "source": "p99 end-to-end = gateway + ln(100)/(mu - lambda_i) + database (degraded)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "TN",
+   "op": "<=",
+   "value": "150",
+   "why": "normal: end-to-end p99 <= 150 ms"
+  },
+  {
+   "quantity": "TD",
+   "op": "<=",
+   "value": "300",
+   "why": "degraded: end-to-end p99 <= 300 ms"
+  }
+ ],
+ "objective": {
+  "minimize": "INST.price*CNT.N",
+  "why": "lowest hourly cost, N instances of one type"
+ },
+ "catalog": {
+  "instance_types": {
+   "items": [
+    {
+     "mu": {
+      "value": "220",
+      "tolerance": "0.10"
+     },
+     "price": "0.17",
+     "type": "I1"
+    },
+    {
+     "mu": {
+      "value": "450",
+      "tolerance": "0.10"
+     },
+     "price": "0.34",
+     "type": "I2"
+    },
+    {
+     "mu": {
+      "value": "900",
+      "tolerance": "0.12"
+     },
+     "price": "0.68",
+     "type": "I3"
+    },
+    {
+     "mu": {
+      "value": "1700",
+      "tolerance": "0.12"
+     },
+     "price": "1.36",
+     "type": "I4"
+    }
+   ],
+   "ground": "problem statement catalog",
+   "fields": {
+    "mu": {
+     "unit": "1/s"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  },
+  "counts": {
+   "integers": {
+    "field": "N",
+    "from": "2",
+    "to": "12",
+    "unit": ""
+   }
+  }
+ },
+ "report": "all",
+ "note": "KEPT ON PURPOSE: the same model WITHOUT the law's domain \u2014 the stand 'earns' I1 x 2, where mu < lambda/N and the M/M/1 latency is negative. A formula outside its region is not a design."
+}

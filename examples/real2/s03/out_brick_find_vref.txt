@@ -1,0 +1,208 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "largest",
+  "quantity": "vtm",
+  "unit": "",
+  "proved": "47/50000 (~0.00094)",
+  "proved_means": "every vtm in [0, 47/50000 (~0.00094)] works (EARNED on the whole range)",
+  "beyond": "19/20000 (~0.00095)",
+  "beyond_is": "REFUTED: the range [0, 19/20000 (~0.00095)] holds a concrete failing point (at_beyond)",
+  "precision": "1/100000 (~1e-05)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "Eg": [
+            "-994824698333/100645418296423 (~-0.00988445)",
+            "331059565889/33119138568141 (~0.00999602)"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {},
+    "guaranteed": {
+      "Eg": [
+        "-994824698333/100645418296423 (~-0.00988445)",
+        "331059565889/33119138568141 (~0.00999602)"
+      ]
+    },
+    "guaranteed_unit": {
+      "Eg": ""
+    },
+    "how": {
+      "Eg": "ZTL, outer range"
+    },
+    "requirements": [
+      {
+        "quantity": "Eg",
+        "op": "within",
+        "value": [
+          "-0.01",
+          "0.01"
+        ],
+        "why": "gain error budget 1 % of reading, source"
+      }
+    ],
+    "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "Eg -> [-994824698333/100645418296423, 331059565889/33119138568141] by [Eg == (1 + (R2g*(1+t2)*(1+c2*dT))/(R1g*(1+t1)*(1+c1*dT)))/Knom*(1+ga)*(1+gc*dT)/((1+vt*vtm)*(1+vc*dT)) - 1], interval reading, sound, may be wider than the truth (credit)"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 2a24683",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "REFUTED",
+        "fails": "gain error budget 1 % of reading, source",
+        "by_at_witness": "279997567/45681113193300 (~6.12939e-06)",
+        "unit": ""
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {},
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "c1": "-100",
+      "c2": "100",
+      "ga": "1/2000 (~0.0005)",
+      "gc": "20",
+      "t1": "-1/1000 (~-0.001)",
+      "t2": "1/1000 (~0.001)",
+      "vc": "-50",
+      "vt": "-1",
+      "vtm": "19/20000 (~0.00095)"
+    },
+    "point_units": {
+      "c1": "ppm/C",
+      "c2": "ppm/C",
+      "ga": "",
+      "gc": "ppm/C",
+      "t1": "",
+      "t2": "",
+      "vc": "ppm/C",
+      "vt": "",
+      "vtm": ""
+    },
+    "value_there": {
+      "Eg": "4570911295/456811131933 (~0.0100061)"
+    },
+    "unit": "",
+    "requirement": {
+      "quantity": "Eg",
+      "op": "within",
+      "value": [
+        "-0.01",
+        "0.01"
+      ],
+      "why": "gain error budget 1 % of reading, source"
+    },
+    "overshoot": "279997567/45681113193300 (~6.12939e-06)",
+    "reasons": {
+      "spread_over_tolerances": [
+        "-398332082935/40258569522171 (~-0.00989434)",
+        "4570911295/456811131933 (~0.0100061)"
+      ],
+      "window": [
+        "-1/100 (~-0.01)",
+        "1/100 (~0.01)"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "c2",
+          "moves_it_by": "283530016/58565529735 (~0.00484124)"
+        },
+        {
+          "quantity": "c1",
+          "moves_it_by": "283530016/58565529735 (~0.00484124)"
+        },
+        {
+          "quantity": "vc",
+          "moves_it_by": "922764086456/304997565753933 (~0.00302548)"
+        },
+        {
+          "quantity": "vt",
+          "moves_it_by": "17532517642664/9144902050166727 (~0.00191719)"
+        },
+        {
+          "quantity": "t2",
+          "moves_it_by": "3693254624/2284055659665 (~0.00161697)"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)"
+  },
+  "tries": [
+    {
+      "vtm": "0",
+      "verdict": "EARNED"
+    },
+    {
+      "vtm": "1/200 (~0.005)",
+      "verdict": "REFUTED"
+    },
+    {
+      "vtm": "1/400 (~0.0025)",
+      "verdict": "REFUTED"
+    },
+    {
+      "vtm": "1/800 (~0.00125)",
+      "verdict": "REFUTED"
+    },
+    {
+      "vtm": "31/50000 (~0.00062)",
+      "verdict": "EARNED"
+    },
+    {
+      "vtm": "47/50000 (~0.00094)",
+      "verdict": "EARNED"
+    },
+    {
+      "vtm": "11/10000 (~0.0011)",
+      "verdict": "REFUTED"
+    },
+    {
+      "vtm": "51/50000 (~0.00102)",
+      "verdict": "REFUTED"
+    },
+    {
+      "vtm": "49/50000 (~0.00098)",
+      "verdict": "REFUTED"
+    },
+    {
+      "vtm": "3/3125 (~0.00096)",
+      "verdict": "REFUTED"
+    },
+    {
+      "vtm": "19/20000 (~0.00095)",
+      "verdict": "REFUTED"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

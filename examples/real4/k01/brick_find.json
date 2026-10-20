@@ -1,0 +1,93 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "AN-1378 Table 1, 3.3 V block, inverted: the LARGEST Vref tolerance that keeps Vout inside the table's worst-case error for 1 % resistors, and the LARGEST resistor tolerance for Vref +-1 %",
+ "quantities": {
+  "tv": {
+   "role": "given",
+   "value": "0.01",
+   "unit": ""
+  },
+  "tr": {
+   "role": "given",
+   "value": "0.01",
+   "unit": ""
+  },
+  "Vref": {
+   "role": "given",
+   "value": "1.275",
+   "tolerance": "tv",
+   "unit": "V"
+  },
+  "R1": {
+   "role": "given",
+   "value": "17000",
+   "tolerance": "tr",
+   "unit": "ohm"
+  },
+  "R2": {
+   "role": "given",
+   "value": "27000",
+   "tolerance": "tr",
+   "unit": "ohm"
+  },
+  "Vout": {
+   "role": "derived",
+   "unit": "V"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "Vout == Vref*(R1+R2)/R1",
+   "source": "AN-1378 Eq. 1"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vout",
+   "op": "within",
+   "value": [
+    "3.1914",
+    "3.4086"
+   ],
+   "why": "3.3 V +-3.29 % (Table 1: Vref +-2 %, R +-1 %)"
+  }
+ ],
+ "find": [
+  {
+   "largest": "tv",
+   "from": "0",
+   "to": "0.05",
+   "precision": "0.0001",
+   "requirements": [
+    {
+     "quantity": "Vout",
+     "op": "within",
+     "value": [
+      "3.1914",
+      "3.4086"
+     ],
+     "why": "3.3 V +-3.29 % (published error for Vref +-2 %, R +-1 %)"
+    }
+   ]
+  },
+  {
+   "largest": "tr",
+   "from": "0",
+   "to": "0.05",
+   "precision": "0.0001",
+   "requirements": [
+    {
+     "quantity": "Vout",
+     "op": "within",
+     "value": [
+      "3.2248",
+      "3.3752"
+     ],
+     "why": "3.3 V +-2.28 % (published error for Vref +-1 %, R +-1 %)"
+    }
+   ]
+  }
+ ]
+}

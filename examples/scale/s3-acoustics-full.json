@@ -1,0 +1,589 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "Vr": {
+   "role": "given",
+   "value": "345.6",
+   "tolerance": "0.02",
+   "unit": "m^3",
+   "why": "room volume 12x8x3.6, +-2%"
+  },
+  "Np": {
+   "role": "given",
+   "range": [
+    "10",
+    "60"
+   ],
+   "unit": "",
+   "why": "seated persons, any occupancy 10..60 (continuous superset of integers)"
+  },
+  "Stot": {
+   "role": "given",
+   "value": "336",
+   "unit": "m^2",
+   "ground": "geometry",
+   "why": "96+96+144"
+  },
+  "Sw": {
+   "role": "given",
+   "value": "120",
+   "unit": "m^2",
+   "ground": "geometry",
+   "why": "plaster wall area before panels = 144-20-4"
+  },
+  "Sf": {
+   "role": "given",
+   "value": "96",
+   "unit": "m^2"
+  },
+  "Sc": {
+   "role": "given",
+   "value": "96",
+   "unit": "m^2"
+  },
+  "Swin": {
+   "role": "given",
+   "value": "20",
+   "unit": "m^2"
+  },
+  "Sdoor": {
+   "role": "given",
+   "value": "4",
+   "unit": "m^2"
+  },
+  "Span": {
+   "role": "given",
+   "value": "0.72",
+   "unit": "m^2",
+   "why": "area of one panel"
+  },
+  "kS": {
+   "role": "given",
+   "value": "0.161",
+   "unit": "s/m",
+   "why": "Sabine constant"
+  },
+  "pA": {
+   "role": "given",
+   "value": "38",
+   "unit": "EUR"
+  },
+  "pB": {
+   "role": "given",
+   "value": "66",
+   "unit": "EUR"
+  },
+  "pC": {
+   "role": "given",
+   "value": "55",
+   "unit": "EUR"
+  },
+  "aFl": {
+   "role": "given",
+   "range": [
+    "0",
+    "1/25"
+   ],
+   "unit": ""
+  },
+  "aCe": {
+   "role": "given",
+   "range": [
+    "13/100",
+    "17/100"
+   ],
+   "unit": ""
+  },
+  "aPl": {
+   "role": "given",
+   "range": [
+    "0",
+    "1/25"
+   ],
+   "unit": ""
+  },
+  "aWi": {
+   "role": "given",
+   "range": [
+    "33/100",
+    "37/100"
+   ],
+   "unit": ""
+  },
+  "aDo": {
+   "role": "given",
+   "range": [
+    "3/25",
+    "4/25"
+   ],
+   "unit": ""
+  },
+  "aA": {
+   "role": "given",
+   "value": "0.12",
+   "tolerance": "0.1",
+   "unit": ""
+  },
+  "aB": {
+   "role": "given",
+   "value": "0.45",
+   "tolerance": "0.1",
+   "unit": ""
+  },
+  "aC": {
+   "role": "given",
+   "value": "0.20",
+   "tolerance": "0.1",
+   "unit": ""
+  },
+  "pers": {
+   "role": "given",
+   "value": "0.20",
+   "unit": "m^2",
+   "why": "absorption area per seated person"
+  },
+  "mair": {
+   "role": "given",
+   "value": "0",
+   "unit": "1/m",
+   "why": "air absorption exponent m"
+  },
+  "Asurf": {
+   "role": "derived",
+   "unit": "m^2"
+  },
+  "T": {
+   "role": "derived",
+   "unit": "s"
+  }
+ },
+ "slots": {
+  "NA": {
+   "from": [
+    "cnt"
+   ]
+  },
+  "NB": {
+   "from": [
+    "cnt"
+   ]
+  },
+  "NC": {
+   "from": [
+    "cnt"
+   ]
+  }
+ },
+ "catalog": {
+  "cnt": {
+   "integers": {
+    "field": "N",
+    "from": "0",
+    "to": "125",
+    "unit": ""
+   }
+  }
+ },
+ "where": [
+  "NA.N + NB.N + NC.N <= 125"
+ ],
+ "define": {
+  "Ntot": "NA.N + NB.N + NC.N"
+ },
+ "laws": [
+  {
+   "zfl": "Asurf == Sf*aFl + Sc*aCe + (Sw - Span*(NA.N+NB.N+NC.N))*aPl + Swin*aWi + Sdoor*aDo + Span*(NA.N*aA + NB.N*aB + NC.N*aC)",
+   "source": "A = sum alpha_i S_i; panels replace plaster wall"
+  },
+  {
+   "zfl": "T == if(Asurf/Stot <= 0.2, kS*Vr/(Asurf + Np*pers + 4*mair*Vr), kS*Vr/(0 - Stot*ln(1 - Asurf/Stot) + Np*pers + 4*mair*Vr))",
+   "source": "Sabine if mean alpha <= 0.2, Eyring otherwise"
+  }
+ ],
+ "requirements": [],
+ "modes": {
+  "125 Hz": {
+   "quantities": {
+    "aFl": {
+     "range": [
+      "0",
+      "1/25"
+     ]
+    },
+    "aCe": {
+     "range": [
+      "13/100",
+      "17/100"
+     ]
+    },
+    "aPl": {
+     "range": [
+      "0",
+      "1/25"
+     ]
+    },
+    "aWi": {
+     "range": [
+      "33/100",
+      "37/100"
+     ]
+    },
+    "aDo": {
+     "range": [
+      "3/25",
+      "4/25"
+     ]
+    },
+    "aA": {
+     "value": "0.12",
+     "tolerance": "0.1"
+    },
+    "aB": {
+     "value": "0.45",
+     "tolerance": "0.1"
+    },
+    "aC": {
+     "value": "0.20",
+     "tolerance": "0.1"
+    },
+    "pers": {
+     "value": "0.20"
+    },
+    "mair": {
+     "value": "0"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "within",
+     "value": [
+      "0.6",
+      "1.2"
+     ],
+     "why": "T window at 125 Hz"
+    }
+   ]
+  },
+  "250 Hz": {
+   "quantities": {
+    "aFl": {
+     "range": [
+      "0",
+      "1/25"
+     ]
+    },
+    "aCe": {
+     "range": [
+      "2/25",
+      "3/25"
+     ]
+    },
+    "aPl": {
+     "range": [
+      "0",
+      "1/25"
+     ]
+    },
+    "aWi": {
+     "range": [
+      "23/100",
+      "27/100"
+     ]
+    },
+    "aDo": {
+     "range": [
+      "2/25",
+      "3/25"
+     ]
+    },
+    "aA": {
+     "value": "0.45",
+     "tolerance": "0.1"
+    },
+    "aB": {
+     "value": "0.95",
+     "tolerance": "0.1"
+    },
+    "aC": {
+     "value": "0.55",
+     "tolerance": "0.1"
+    },
+    "pers": {
+     "value": "0.30"
+    },
+    "mair": {
+     "value": "0"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "within",
+     "value": [
+      "0.6",
+      "1.0"
+     ],
+     "why": "T window at 250 Hz"
+    }
+   ]
+  },
+  "500 Hz": {
+   "quantities": {
+    "aFl": {
+     "range": [
+      "1/100",
+      "1/20"
+     ]
+    },
+    "aCe": {
+     "range": [
+      "1/25",
+      "2/25"
+     ]
+    },
+    "aPl": {
+     "range": [
+      "1/100",
+      "1/20"
+     ]
+    },
+    "aWi": {
+     "range": [
+      "4/25",
+      "1/5"
+     ]
+    },
+    "aDo": {
+     "range": [
+      "1/25",
+      "2/25"
+     ]
+    },
+    "aA": {
+     "value": "0.90",
+     "tolerance": "0.1"
+    },
+    "aB": {
+     "value": "1.00",
+     "tolerance": "0.1"
+    },
+    "aC": {
+     "value": "0.80",
+     "tolerance": "0.1"
+    },
+    "pers": {
+     "value": "0.40"
+    },
+    "mair": {
+     "value": "0"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "within",
+     "value": [
+      "0.6",
+      "0.9"
+     ],
+     "why": "T window at 500 Hz"
+    }
+   ]
+  },
+  "1000 Hz": {
+   "quantities": {
+    "aFl": {
+     "range": [
+      "1/100",
+      "1/20"
+     ]
+    },
+    "aCe": {
+     "range": [
+      "1/50",
+      "3/50"
+     ]
+    },
+    "aPl": {
+     "range": [
+      "1/50",
+      "3/50"
+     ]
+    },
+    "aWi": {
+     "range": [
+      "1/10",
+      "7/50"
+     ]
+    },
+    "aDo": {
+     "range": [
+      "3/50",
+      "1/10"
+     ]
+    },
+    "aA": {
+     "value": "1.00",
+     "tolerance": "0.1"
+    },
+    "aB": {
+     "value": "1.00",
+     "tolerance": "0.1"
+    },
+    "aC": {
+     "value": "0.85",
+     "tolerance": "0.1"
+    },
+    "pers": {
+     "value": "0.45"
+    },
+    "mair": {
+     "value": "0"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "within",
+     "value": [
+      "0.6",
+      "0.9"
+     ],
+     "why": "T window at 1000 Hz"
+    }
+   ]
+  },
+  "2000 Hz": {
+   "quantities": {
+    "aFl": {
+     "range": [
+      "1/100",
+      "1/20"
+     ]
+    },
+    "aCe": {
+     "range": [
+      "1/50",
+      "3/50"
+     ]
+    },
+    "aPl": {
+     "range": [
+      "3/100",
+      "7/100"
+     ]
+    },
+    "aWi": {
+     "range": [
+      "1/20",
+      "9/100"
+     ]
+    },
+    "aDo": {
+     "range": [
+      "2/25",
+      "3/25"
+     ]
+    },
+    "aA": {
+     "value": "1.00",
+     "tolerance": "0.1"
+    },
+    "aB": {
+     "value": "1.00",
+     "tolerance": "0.1"
+    },
+    "aC": {
+     "value": "0.60",
+     "tolerance": "0.1"
+    },
+    "pers": {
+     "value": "0.50"
+    },
+    "mair": {
+     "value": "0.0010"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "within",
+     "value": [
+      "0.6",
+      "0.9"
+     ],
+     "why": "T window at 2000 Hz"
+    }
+   ]
+  },
+  "4000 Hz": {
+   "quantities": {
+    "aFl": {
+     "range": [
+      "0",
+      "1/25"
+     ]
+    },
+    "aCe": {
+     "range": [
+      "3/100",
+      "7/100"
+     ]
+    },
+    "aPl": {
+     "range": [
+      "3/100",
+      "7/100"
+     ]
+    },
+    "aWi": {
+     "range": [
+      "1/50",
+      "3/50"
+     ]
+    },
+    "aDo": {
+     "range": [
+      "2/25",
+      "3/25"
+     ]
+    },
+    "aA": {
+     "value": "1.00",
+     "tolerance": "0.1"
+    },
+    "aB": {
+     "value": "1.00",
+     "tolerance": "0.1"
+    },
+    "aC": {
+     "value": "0.40",
+     "tolerance": "0.1"
+    },
+    "pers": {
+     "value": "0.50"
+    },
+    "mair": {
+     "value": "0.0026"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "T",
+     "op": "within",
+     "value": [
+      "0.5",
+      "0.9"
+     ],
+     "why": "T window at 4000 Hz"
+    }
+   ]
+  }
+ },
+ "objective": {
+  "minimize": "NA.N*pA + NB.N*pB + NC.N*pC",
+  "why": "panel price"
+ },
+ "note": "blind-3 c11 over the FULL integer space 0..125 per panel type (2 M combinations; the author's runs were killed at 15 min) \u2014 group pruning (2026-10-10)"
+}

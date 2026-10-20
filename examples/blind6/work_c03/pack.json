@@ -1,0 +1,300 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "cell pack with optional heater: resistance, OCV, usable energy, cell current limit at the given ambient",
+ "interface": {
+  "inputs": {
+   "Ta": {
+    "assume": [
+     "233.15",
+     "313.15"
+    ],
+    "bands": "arriving"
+   }
+  },
+  "outputs": [
+   "Rpk",
+   "V0",
+   "Rc",
+   "E",
+   "Imaxc"
+  ]
+ },
+ "quantities": {
+  "Ta": {
+   "role": "given",
+   "value": "263.15",
+   "unit": "K"
+  },
+  "Tref": {
+   "role": "given",
+   "value": "298.15",
+   "unit": "K",
+   "why": "25 degC reference"
+  },
+  "Voc": {
+   "role": "given",
+   "range": [
+    "3.46",
+    "3.52"
+   ],
+   "unit": "V",
+   "why": "cell OCV at 20 % charge left"
+  },
+  "a": {
+   "role": "given",
+   "range": [
+    "1.00",
+    "1.10"
+   ],
+   "unit": "",
+   "why": "ageing factor on cell resistance"
+  },
+  "B": {
+   "role": "given",
+   "range": [
+    "2000",
+    "2400"
+   ],
+   "unit": "K",
+   "why": "temperature constant, one value for all cells"
+  },
+  "cf": {
+   "role": "given",
+   "range": [
+    "0.97",
+    "1.03"
+   ],
+   "unit": "",
+   "why": "actual / nominal capacity"
+  },
+  "kc": {
+   "role": "given",
+   "value": "0.007",
+   "unit": "1/K",
+   "why": "cold capacity slope"
+  },
+  "ki": {
+   "role": "given",
+   "value": "0.012",
+   "unit": "1/K",
+   "why": "cell current-limit slope"
+  },
+  "kfl": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "",
+   "why": "cold capacity factor floor"
+  },
+  "Vn": {
+   "role": "given",
+   "value": "3.6",
+   "unit": "V",
+   "why": "nominal cell voltage used for energy"
+  },
+  "dod": {
+   "role": "given",
+   "value": "0.8",
+   "unit": "",
+   "why": "usable fraction of the charge"
+  },
+  "V0": {
+   "role": "derived",
+   "unit": "V"
+  },
+  "Rc": {
+   "role": "derived",
+   "unit": "mohm"
+  },
+  "Rpk": {
+   "role": "derived",
+   "unit": "mohm"
+  },
+  "E": {
+   "role": "derived",
+   "unit": "Wh"
+  },
+  "Imaxc": {
+   "role": "derived",
+   "unit": "A"
+  }
+ },
+ "slots": {
+  "CELL": {
+   "from": [
+    "cells"
+   ]
+  },
+  "NP": {
+   "from": [
+    "np"
+   ]
+  },
+  "HT": {
+   "from": [
+    "heater"
+   ]
+  }
+ },
+ "define": {
+  "Tc": "Ta + HT.dTh",
+  "kT": "max(kfl, 1 - kc*(Tref - Tc))"
+ },
+ "laws": [
+  {
+   "zfl": "Rc == a*CELL.R25*exp(B*(1/Tc - 1/Tref))",
+   "source": "Arrhenius cell resistance"
+  },
+  {
+   "zfl": "Rpk == 5*Rc/NP.N",
+   "source": "5 series groups of Np parallel cells"
+  },
+  {
+   "zfl": "V0 == 5*Voc",
+   "source": "5 series groups"
+  },
+  {
+   "zfl": "E == 5*NP.N*CELL.Cap*cf*Vn*dod*kT - HT.Eh",
+   "source": "usable energy"
+  },
+  {
+   "zfl": "Imaxc == CELL.Imax25*(1 - ki*(Tref - Tc))",
+   "source": "cell current limit at temperature"
+  }
+ ],
+ "requirements": [],
+ "objective": {
+  "minimize": "5*NP.N*CELL.price + HT.price",
+  "unit": "EUR"
+ },
+ "catalog": {
+  "cells": {
+   "items": [
+    {
+     "Cap": {
+      "value": "1.5"
+     },
+     "R25": {
+      "value": "11"
+     },
+     "Imax25": {
+      "value": "30"
+     },
+     "price": "2.4",
+     "name": "P15"
+    },
+    {
+     "Cap": {
+      "value": "2.0"
+     },
+     "R25": {
+      "value": "16"
+     },
+     "Imax25": {
+      "value": "22"
+     },
+     "price": "2.0",
+     "name": "H20"
+    },
+    {
+     "Cap": {
+      "value": "2.5"
+     },
+     "R25": {
+      "value": "17"
+     },
+     "Imax25": {
+      "value": "20"
+     },
+     "price": "2.9",
+     "name": "H25"
+    },
+    {
+     "Cap": {
+      "value": "2.5"
+     },
+     "R25": {
+      "value": "24"
+     },
+     "Imax25": {
+      "value": "12"
+     },
+     "price": "1.7",
+     "name": "E25"
+    },
+    {
+     "Cap": {
+      "value": "3.0"
+     },
+     "R25": {
+      "value": "33"
+     },
+     "Imax25": {
+      "value": "9"
+     },
+     "price": "1.6",
+     "name": "E30"
+    }
+   ],
+   "fields": {
+    "Cap": {
+     "unit": "Ah"
+    },
+    "R25": {
+     "unit": "mohm"
+    },
+    "Imax25": {
+     "unit": "A"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  },
+  "np": {
+   "integers": {
+    "field": "N",
+    "from": "1",
+    "to": "4",
+    "unit": ""
+   }
+  },
+  "heater": {
+   "items": [
+    {
+     "dTh": {
+      "value": "0"
+     },
+     "Eh": {
+      "value": "0"
+     },
+     "price": "0",
+     "name": "none"
+    },
+    {
+     "dTh": {
+      "range": [
+       "9",
+       "13"
+      ]
+     },
+     "Eh": {
+      "value": "3.5"
+     },
+     "price": "4.5",
+     "name": "film"
+    }
+   ],
+   "fields": {
+    "dTh": {
+     "unit": "K"
+    },
+    "Eh": {
+     "unit": "Wh"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,437 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "H0": {
+   "role": "given",
+   "value": "1.5",
+   "unit": "m",
+   "why": "head of reach A: invert depth below ground"
+  },
+  "LA": {
+   "role": "given",
+   "value": "420",
+   "unit": "m",
+   "why": "reach A length"
+  },
+  "LB": {
+   "role": "given",
+   "value": "380",
+   "unit": "m",
+   "why": "reach B length"
+  },
+  "Dref": {
+   "role": "given",
+   "value": "200",
+   "unit": "mm",
+   "why": "reference diameter of the pipe price law (D/200)"
+  },
+  "Dm": {
+   "role": "given",
+   "value": "1000",
+   "unit": "mm",
+   "why": "trench diameter factor (1 + D/1000)"
+  },
+  "c0": {
+   "role": "given",
+   "value": "20",
+   "unit": "EUR/m",
+   "why": "trench price constant"
+  },
+  "c1": {
+   "role": "given",
+   "value": "28",
+   "unit": "EUR/m^2",
+   "why": "trench price per metre of mean depth"
+  },
+  "Dmax": {
+   "role": "given",
+   "value": "5",
+   "unit": "m",
+   "why": "outfall depth limit"
+  },
+  "hmax": {
+   "role": "given",
+   "value": "0.70",
+   "unit": "",
+   "why": "storm depth ratio limit"
+  },
+  "vmin": {
+   "role": "given",
+   "value": "0.60",
+   "unit": "m/s",
+   "why": "self-cleansing velocity"
+  },
+  "QAd": {
+   "role": "given",
+   "value": "6.5",
+   "unit": "L/s",
+   "why": "dry-weather daily peak, reach A"
+  },
+  "QAp": {
+   "role": "given",
+   "value": "22",
+   "unit": "L/s",
+   "why": "storm peak, reach A"
+  },
+  "QBd": {
+   "role": "given",
+   "value": "12",
+   "unit": "L/s",
+   "why": "dry-weather daily peak, reach B"
+  },
+  "QBp": {
+   "role": "given",
+   "value": "41",
+   "unit": "L/s",
+   "why": "storm peak, reach B"
+  },
+  "tAd": {
+   "role": "derived",
+   "unit": "",
+   "search": [
+    "0.01",
+    "3.8896"
+   ],
+   "why": "tan(theta/4) of the wetted segment, reach A dry peak (theta = 4 atan t, y/D = t^2/(1+t^2), sin theta = 4t(1-t^2)/(1+t^2)^2)"
+  },
+  "vAd": {
+   "role": "derived",
+   "unit": "m/s",
+   "why": "velocity Q/A_f, reach A dry"
+  },
+  "tAp": {
+   "role": "derived",
+   "unit": "",
+   "search": [
+    "0.01",
+    "3.8896"
+   ],
+   "why": "tan(theta/4) of the wetted segment, reach A storm peak (theta = 4 atan t, y/D = t^2/(1+t^2), sin theta = 4t(1-t^2)/(1+t^2)^2)"
+  },
+  "vAp": {
+   "role": "derived",
+   "unit": "m/s",
+   "why": "velocity Q/A_f, reach A storm"
+  },
+  "yA": {
+   "role": "derived",
+   "unit": "",
+   "why": "depth ratio y/D at storm peak, reach A"
+  },
+  "tBd": {
+   "role": "derived",
+   "unit": "",
+   "search": [
+    "0.01",
+    "3.8896"
+   ],
+   "why": "tan(theta/4) of the wetted segment, reach B dry peak (theta = 4 atan t, y/D = t^2/(1+t^2), sin theta = 4t(1-t^2)/(1+t^2)^2)"
+  },
+  "vBd": {
+   "role": "derived",
+   "unit": "m/s",
+   "why": "velocity Q/A_f, reach B dry"
+  },
+  "tBp": {
+   "role": "derived",
+   "unit": "",
+   "search": [
+    "0.01",
+    "3.8896"
+   ],
+   "why": "tan(theta/4) of the wetted segment, reach B storm peak (theta = 4 atan t, y/D = t^2/(1+t^2), sin theta = 4t(1-t^2)/(1+t^2)^2)"
+  },
+  "vBp": {
+   "role": "derived",
+   "unit": "m/s",
+   "why": "velocity Q/A_f, reach B storm"
+  },
+  "yB": {
+   "role": "derived",
+   "unit": "",
+   "why": "depth ratio y/D at storm peak, reach B"
+  },
+  "dend": {
+   "role": "derived",
+   "unit": "m",
+   "why": "invert depth at downstream end of B"
+  },
+  "dDia": {
+   "role": "derived",
+   "unit": "mm",
+   "why": "D_B - D_A"
+  }
+ },
+ "slots": {
+  "M": {
+   "from": [
+    "mats"
+   ]
+  },
+  "DA": {
+   "from": [
+    "diam"
+   ]
+  },
+  "SA": {
+   "from": [
+    "slope"
+   ]
+  },
+  "DB": {
+   "from": [
+    "diam"
+   ]
+  },
+  "SB": {
+   "from": [
+    "slope"
+   ]
+  }
+ },
+ "define": {
+  "thAd": "4*atan(tAd)",
+  "snAd": "4*tAd*(1 - tAd*tAd)/((1 + tAd*tAd)*(1 + tAd*tAd))",
+  "AfAd": "DA.D*DA.D/8*(thAd - snAd)",
+  "RhAd": "DA.D/4*(1 - snAd/thAd)",
+  "thAp": "4*atan(tAp)",
+  "snAp": "4*tAp*(1 - tAp*tAp)/((1 + tAp*tAp)*(1 + tAp*tAp))",
+  "AfAp": "DA.D*DA.D/8*(thAp - snAp)",
+  "RhAp": "DA.D/4*(1 - snAp/thAp)",
+  "thBd": "4*atan(tBd)",
+  "snBd": "4*tBd*(1 - tBd*tBd)/((1 + tBd*tBd)*(1 + tBd*tBd))",
+  "AfBd": "DB.D*DB.D/8*(thBd - snBd)",
+  "RhBd": "DB.D/4*(1 - snBd/thBd)",
+  "thBp": "4*atan(tBp)",
+  "snBp": "4*tBp*(1 - tBp*tBp)/((1 + tBp*tBp)*(1 + tBp*tBp))",
+  "AfBp": "DB.D*DB.D/8*(thBp - snBp)",
+  "RhBp": "DB.D/4*(1 - snBp/thBp)",
+  "costA": "LA*(M.k*DA.pf + (c0 + c1*(H0 + SA.S*LA/2))*(1 + DA.D/Dm))",
+  "costB": "LB*(M.k*DB.pf + (c0 + c1*(H0 + SA.S*LA + SB.S*LB/2))*(1 + DB.D/Dm))"
+ },
+ "laws": [
+  {
+   "zfl": "pow(QAd*M.n, 6) == pow(AfAd, 6)*pow(RhAd, 4)*pow(SA.S, 3)",
+   "source": "Manning (SI) Q = (1/n) A_f R^(2/3) S^(1/2), raised to the 6th power (all sides positive, same root): (Q n)^6 = A_f^6 R^4 S^3; partly full circular pipe, reach A dry peak; operating depth = root t"
+  },
+  {
+   "zfl": "vAd == QAd/AfAd",
+   "source": "continuity v = Q/A_f"
+  },
+  {
+   "zfl": "pow(QAp*M.n, 6) == pow(AfAp, 6)*pow(RhAp, 4)*pow(SA.S, 3)",
+   "source": "Manning (SI) Q = (1/n) A_f R^(2/3) S^(1/2), raised to the 6th power (all sides positive, same root): (Q n)^6 = A_f^6 R^4 S^3; partly full circular pipe, reach A storm peak; operating depth = root t"
+  },
+  {
+   "zfl": "vAp == QAp/AfAp",
+   "source": "continuity v = Q/A_f"
+  },
+  {
+   "zfl": "yA == tAp*tAp/(1 + tAp*tAp)",
+   "source": "y/D = (1 - cos(theta/2))/2 = t^2/(1+t^2) with t = tan(theta/4)"
+  },
+  {
+   "zfl": "pow(QBd*M.n, 6) == pow(AfBd, 6)*pow(RhBd, 4)*pow(SB.S, 3)",
+   "source": "Manning (SI) Q = (1/n) A_f R^(2/3) S^(1/2), raised to the 6th power (all sides positive, same root): (Q n)^6 = A_f^6 R^4 S^3; partly full circular pipe, reach B dry peak; operating depth = root t"
+  },
+  {
+   "zfl": "vBd == QBd/AfBd",
+   "source": "continuity v = Q/A_f"
+  },
+  {
+   "zfl": "pow(QBp*M.n, 6) == pow(AfBp, 6)*pow(RhBp, 4)*pow(SB.S, 3)",
+   "source": "Manning (SI) Q = (1/n) A_f R^(2/3) S^(1/2), raised to the 6th power (all sides positive, same root): (Q n)^6 = A_f^6 R^4 S^3; partly full circular pipe, reach B storm peak; operating depth = root t"
+  },
+  {
+   "zfl": "vBp == QBp/AfBp",
+   "source": "continuity v = Q/A_f"
+  },
+  {
+   "zfl": "yB == tBp*tBp/(1 + tBp*tBp)",
+   "source": "y/D = (1 - cos(theta/2))/2 = t^2/(1+t^2) with t = tan(theta/4)"
+  },
+  {
+   "zfl": "dend == H0 + SA.S*LA + SB.S*LB",
+   "source": "constant slope per reach: depth_down = depth_up + S*L; B starts where A ends"
+  },
+  {
+   "zfl": "dDia == DB.D - DA.D",
+   "source": "definition"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "vAd",
+   "op": ">=",
+   "value": "vmin",
+   "why": "R1 dry-weather velocity >= 0.60 m/s reach A"
+  },
+  {
+   "quantity": "yA",
+   "op": "<=",
+   "value": "hmax",
+   "why": "R2 storm depth ratio <= 0.70 reach A"
+  },
+  {
+   "quantity": "vAp",
+   "op": "<=",
+   "value": "M.vmax",
+   "why": "R3 storm velocity <= material maximum, reach A"
+  },
+  {
+   "quantity": "vBd",
+   "op": ">=",
+   "value": "vmin",
+   "why": "R1 dry-weather velocity >= 0.60 m/s reach B"
+  },
+  {
+   "quantity": "yB",
+   "op": "<=",
+   "value": "hmax",
+   "why": "R2 storm depth ratio <= 0.70 reach B"
+  },
+  {
+   "quantity": "vBp",
+   "op": "<=",
+   "value": "M.vmax",
+   "why": "R3 storm velocity <= material maximum, reach B"
+  },
+  {
+   "quantity": "dend",
+   "op": "<=",
+   "value": "Dmax",
+   "why": "R4 outfall depth <= 5.0 m"
+  },
+  {
+   "quantity": "dDia",
+   "op": ">=",
+   "value": "0",
+   "why": "R5 pipe never narrows downstream"
+  }
+ ],
+ "objective": {
+  "minimize": "(costA + costB)",
+  "unit": "kEUR",
+  "why": "total cost of both reaches (pipe + trench)"
+ },
+ "catalog": {
+  "mats": {
+   "ground": "problem statement material table",
+   "items": [
+    {
+     "name": "PVC",
+     "n": {
+      "range": [
+       "0.0095",
+       "0.0115"
+      ]
+     },
+     "k": "62",
+     "vmax": "3.0"
+    },
+    {
+     "name": "CONC",
+     "n": {
+      "range": [
+       "0.012",
+       "0.016"
+      ]
+     },
+     "k": "48",
+     "vmax": "1.5"
+    },
+    {
+     "name": "PE",
+     "n": {
+      "range": [
+       "0.013",
+       "0.017"
+      ]
+     },
+     "k": "55",
+     "vmax": "2.5"
+    }
+   ],
+   "fields": {
+    "n": {
+     "unit": "s*m^(-1/3)"
+    },
+    "k": {
+     "unit": "EUR/m"
+    },
+    "vmax": {
+     "unit": "m/s"
+    }
+   }
+  },
+  "diam": {
+   "ground": "problem statement diameter list; pf = (D/200 mm)^1.3 computed outside, 12 significant digits",
+   "items": [
+    {
+     "D": "200",
+     "pf": "1"
+    },
+    {
+     "D": "250",
+     "pf": "1.33654324999"
+    },
+    {
+     "D": "300",
+     "pf": "1.69402040319"
+    },
+    {
+     "D": "400",
+     "pf": "2.46228882669"
+    },
+    {
+     "D": "500",
+     "pf": "3.29095551084"
+    }
+   ],
+   "fields": {
+    "D": {
+     "unit": "mm"
+    },
+    "pf": {
+     "unit": ""
+    }
+   }
+  },
+  "slope": {
+   "ground": "problem statement slope list",
+   "items": [
+    {
+     "S": "0"
+    },
+    {
+     "S": "0.002"
+    },
+    {
+     "S": "0.0035"
+    },
+    {
+     "S": "0.005"
+    },
+    {
+     "S": "0.008"
+    },
+    {
+     "S": "0.012"
+    },
+    {
+     "S": "0.02"
+    }
+   ],
+   "fields": {
+    "S": {
+     "unit": ""
+    }
+   }
+  }
+ },
+ "where": [
+  "SA.S > 0 and SB.S > 0",
+  "DB.D >= DA.D",
+  "H0 + SA.S*LA + SB.S*LB <= Dmax"
+ ]
+}

@@ -1,0 +1,173 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 7606b70",
+  "designs_tried": 9,
+  "failed_at_nominal": 9,
+  "judged": 0,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach A",
+      "by": "~0.0527574620887 (an exact fraction of 99 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach A",
+      "by": "~0.0527574620887 (an exact fraction of 99 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=7/2000); DB=diam(D=200, pf=1); SB=slope(S=1/125)",
+      "verdict": "REFUTED",
+      "fails": "R2 storm depth ratio <= 0.70 reach A",
+      "by": "~0.0527574620887 (an exact fraction of 99 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~14.9475629475 (an exact fraction of 732 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~4.47001409098 (an exact fraction of 734 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/200); DB=diam(D=200, pf=1); SB=slope(S=1/125)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~0.335452658931 (an exact fraction of 732 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/125); DB=diam(D=200, pf=1); SB=slope(S=7/2000)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~14.9475629475 (an exact fraction of 732 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/125); DB=diam(D=200, pf=1); SB=slope(S=1/200)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~4.47001409098 (an exact fraction of 734 digits)",
+      "unit": ""
+    },
+    {
+      "design": "M=mats(name=PVC, n=[19/2000,23/2000], k=62, vmax=3); DA=diam(D=200, pf=1); SA=slope(S=1/125); DB=diam(D=200, pf=1); SB=slope(S=1/125)",
+      "verdict": "REFUTED",
+      "fails": "not surcharged: Q <= flow at y/D = 0.938, reach B storm",
+      "by": "~0.335452658931 (an exact fraction of 732 digits)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 9
+  },
+  "designs_by": "'by' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "M": {
+      "catalog": "mats",
+      "name": "PVC",
+      "n": {
+        "range": [
+          "19/2000 (~0.0095)",
+          "23/2000 (~0.0115)"
+        ]
+      },
+      "k": {
+        "nominal": "62",
+        "tolerance": "0"
+      },
+      "vmax": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    },
+    "DA": {
+      "catalog": "diam",
+      "D": {
+        "nominal": "200",
+        "tolerance": "0"
+      },
+      "pf": {
+        "nominal": "1",
+        "tolerance": "0"
+      }
+    },
+    "SA": {
+      "catalog": "slope",
+      "S": {
+        "nominal": "7/2000 (~0.0035)",
+        "tolerance": "0"
+      }
+    },
+    "DB": {
+      "catalog": "diam",
+      "D": {
+        "nominal": "200",
+        "tolerance": "0"
+      },
+      "pf": {
+        "nominal": "1",
+        "tolerance": "0"
+      }
+    },
+    "SB": {
+      "catalog": "slope",
+      "S": {
+        "nominal": "7/2000 (~0.0035)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "M.n": "21/2000 (~0.0105)"
+  },
+  "point_units": {
+    "M.n": "s*m^(-1/3)"
+  },
+  "value_there": {
+    "yA": [
+      "~0.752757462089 (an exact fraction of 98 digits)",
+      "~0.752757462089 (an exact fraction of 98 digits)"
+    ]
+  },
+  "unit": "",
+  "requirement": {
+    "quantity": "yA",
+    "op": "<=",
+    "value": "hmax",
+    "why": "R2 storm depth ratio <= 0.70 reach A"
+  },
+  "overshoot": "~0.0527574620887 (an exact fraction of 99 digits)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "~0.694463279502 (an exact fraction of 171 digits)",
+      "~0.822366842038 (an exact fraction of 130 digits)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "M.n",
+        "moves_it_by": "~0.127903562536 (an exact fraction of 601 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "skipped": "12 requirements: subsets over 8 not enumerated"
+  }
+}

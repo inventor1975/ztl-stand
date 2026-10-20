@@ -1,0 +1,93 @@
+{
+ "stand": "ztl-stand/1",
+ "report": "all",
+ "conflicts": false,
+ "quantities": {
+  "Ru": {
+   "role": "given",
+   "value": "1",
+   "unit": "kohm",
+   "ground": "unit constant"
+  },
+  "Rlo": {
+   "role": "given",
+   "value": "20",
+   "unit": "kohm",
+   "ground": "TPS25221 sec 7.3: RILIM recommended range 20..210 kohm"
+  },
+  "Rhi": {
+   "role": "given",
+   "value": "210",
+   "unit": "kohm",
+   "ground": "TPS25221 sec 7.3"
+  },
+  "Kmin": {
+   "role": "given",
+   "value": "56850",
+   "unit": "mA",
+   "ground": "TPS25221 eq.(1)"
+  },
+  "Kmax": {
+   "role": "given",
+   "value": "52640",
+   "unit": "mA",
+   "ground": "TPS25221 eq.(1)"
+  },
+  "IOSmin": {
+   "role": "derived",
+   "unit": "mA"
+  },
+  "IOSmax": {
+   "role": "derived",
+   "unit": "mA"
+  }
+ },
+ "slots": {
+  "RL": {
+   "from": [
+    "res_E96"
+   ]
+  }
+ },
+ "define": {
+  "Rk": "RL.R/Ru"
+ },
+ "where": [
+  "nominal(RL.R) >= Rlo and nominal(RL.R) <= Rhi"
+ ],
+ "laws": [
+  {
+   "zfl": "IOSmin == Kmin/pow(Rk, 1.033)",
+   "source": "TPS25221 eq.(1)"
+  },
+  {
+   "zfl": "IOSmax == Kmax/pow(Rk, 0.97)",
+   "source": "TPS25221 eq.(1)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "IOSmin",
+   "op": ">=",
+   "value": "1000",
+   "why": "sec 10.2.1.2.1: min current limit 1000 mA"
+  }
+ ],
+ "catalog": {
+  "res_E96": {
+   "series": "E96",
+   "decades": [
+    10,
+    100
+   ],
+   "ground": "1% E96 resistor (TPS25221 sec 10.2.1.2.3 assumes 1%)",
+   "fields": {
+    "R": {
+     "series": true,
+     "unit": "kohm",
+     "tolerance": "0.01"
+    }
+   }
+  }
+ }
+}

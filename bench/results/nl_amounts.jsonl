@@ -1,0 +1,10 @@
+{"axis": "nl_amounts", "size": 1, "wall_s": 0.3, "peak_mb": 75, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:05", "cpu": 8}
+{"axis": "nl_amounts", "size": 2, "wall_s": 4.5, "peak_mb": 77, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:10", "cpu": 8}
+{"axis": "nl_amounts", "size": 3, "wall_s": 22.85, "peak_mb": 85, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:30:33", "cpu": 8}
+{"axis": "nl_amounts", "size": 4, "wall_s": 29.75, "peak_mb": 85, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:31:02", "cpu": 8}
+{"axis": "nl_amounts", "size": 5, "wall_s": 37.57, "peak_mb": 86, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:31:40", "cpu": 8}
+{"axis": "nl_amounts", "size": 6, "wall_s": 51.34, "peak_mb": 87, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:33:40", "cpu": 14}
+{"axis": "nl_amounts", "size": 8, "wall_s": 68.91, "peak_mb": 87, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:34:49", "cpu": 14}
+{"axis": "nl_amounts", "size": 10, "wall_s": 107.12, "peak_mb": 88, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "at": "2026-10-13 00:36:36", "cpu": 14}
+{"axis": "nl_amounts", "size": 12, "wall_s": 131.09, "peak_mb": 91, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "jobs": 1, "at": "2026-10-13 01:30:17", "cpu": "8"}
+{"axis": "nl_amounts", "size": 16, "wall_s": 223.13, "peak_mb": 148, "verdict": "EARNED", "stopped": false, "why": "", "mode": "work", "jobs": 1, "at": "2026-10-13 01:34:00", "cpu": "8"}

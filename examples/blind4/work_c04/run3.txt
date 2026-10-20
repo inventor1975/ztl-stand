@@ -1,0 +1,230 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "verdict": "EARNED",
+  "modes": [
+    "heavy R2",
+    "bollard R1",
+    "light R4",
+    "heavy R3"
+  ],
+  "designs_tried": 12,
+  "undecided": 0,
+  "design": {
+    "PR": {
+      "catalog": "propellers",
+      "D": {
+        "nominal": "13/10 (~1.3)",
+        "tolerance": "0"
+      },
+      "KT0": {
+        "nominal": "19/50 (~0.38)",
+        "tolerance": "0"
+      },
+      "J0": {
+        "nominal": "23/25 (~0.92)",
+        "tolerance": "0"
+      },
+      "KQ0": {
+        "nominal": "21/500 (~0.042)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "5600",
+        "tolerance": "0"
+      },
+      "grade": "P3"
+    },
+    "GR": {
+      "catalog": "gears",
+      "i": {
+        "nominal": "9/2 (~4.5)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "6700",
+        "tolerance": "0"
+      },
+      "grade": "G4"
+    }
+  },
+  "per_mode": {
+    "heavy R2": {
+      "guaranteed": {
+        "Vkn": [
+          "~9.31810153998 (an exact fraction of 35 digits)",
+          "~9.31810154024 (an exact fraction of 37 digits)"
+        ],
+        "Jm": [
+          "~0.482823510141 (an exact fraction of 36 digits)",
+          "~0.482823510153 (an exact fraction of 34 digits)"
+        ]
+      },
+      "how": {
+        "Vkn": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~9.31810153998 (~9.3181)', '~9.31810154024 (~9.3181)']",
+        "Jm": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.482823510141 (~0.482824)', '~0.482823510153 (~0.482824)']"
+      }
+    },
+    "bollard R1": {
+      "guaranteed": {
+        "Tnet": [
+          "19749445122640389963178429728338603/544016618826583128617779200000000 (~36.303)",
+          "8777531165638262233434322921172307/241785163922925834941235200000000 (~36.303)"
+        ],
+        "Jm": [
+          "23/25 (~0.92)",
+          "23/25 (~0.92)"
+        ]
+      },
+      "how": {
+        "Tnet": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~36.3030180314 (~36.303)', '~36.3030180315 (~36.303)']",
+        "Jm": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['23/25 (~0.92)', '23/25 (~0.92)']"
+      }
+    },
+    "light R4": {
+      "guaranteed": {
+        "N": [
+          "557268552598425/274877906944 (~2027.33)",
+          "278634276299475/137438953472 (~2027.33)"
+        ],
+        "Tip": [
+          "303456537092770382674462698511/9895604649984000000000000000 (~30.6658)",
+          "8429348252584899005532087597/274877906944000000000000000 (~30.6658)"
+        ],
+        "Jm": [
+          "386220783342634174264214184367679/942802257328705995166206671844525 (~0.409652)",
+          "~0.409651950186 (an exact fraction of 35 digits)"
+        ]
+      },
+      "how": {
+        "N": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — unique root (g strictly monotone in q over the hull); enclosure; checker's own enclosure ['557268552598425/274877906944 (~2027.33)', '278634276299475/137438953472 (~2027.33)']",
+        "Tip": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['303456537092770382674462698511/9895604649984000000000000000 (~30.6658)', '8429348252584899005532087597/274877906944000000000000000 (~30.6658)']",
+        "Jm": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.409651950173 (~0.409652)', '~0.409651950186 (~0.409652)']"
+      }
+    },
+    "heavy R3": {
+      "guaranteed": {
+        "N": [
+          "137706527750175/68719476736 (~2003.89)",
+          "34711161736725/17179869184 (~2020.46)"
+        ],
+        "Jm": [
+          "25023702588045113368042826379199/65523821745630723831517130676525 (~0.381902)",
+          "4832415949354012011140586215653/8528974667508320886865434514175 (~0.566588)"
+        ]
+      },
+      "how": {
+        "N": "ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the kernel — enclosure: every root lies in the kept pieces (their hull); checker's own enclosure ['137706527750175/68719476736 (~2003.89)', '34711161736725/17179869184 (~2020.46)']",
+        "Jm": "ZTL, interval reading of the definition (sound, may be wide); checker's own bound ['~0.381902366519 (~0.381902)', '~0.566588146611 (~0.566588)']"
+      }
+    }
+  },
+  "objective": {
+    "minimize": "PR.price + GR.price",
+    "value": "12300",
+    "optimal": true,
+    "note": "every cheaper design was refuted in some mode"
+  },
+  "designs": [
+    {
+      "design": "PR=propellers(grade=P1, D=13/10, KT0=7/25, J0=31/50, KQ0=3/100, price=5200); GR=gears(grade=G1, i=3, price=4800)",
+      "verdict": "REFUTED",
+      "mode": "heavy R2",
+      "fails": "R2 heavy speed >= 9 kn, unfavourable tolerances",
+      "by": "~0.912278807519 (an exact fraction of 105 digits)",
+      "unit": ""
+    },
+    {
+      "design": "PR=propellers(grade=P2, D=13/10, KT0=33/100, J0=39/50, KQ0=9/250, price=5400); GR=gears(grade=G1, i=3, price=4800)",
+      "verdict": "REFUTED",
+      "mode": "heavy R2",
+      "fails": "R2 heavy speed >= 9 kn, unfavourable tolerances",
+      "by": "~1.08528522585 (an exact fraction of 93 digits)",
+      "unit": ""
+    },
+    {
+      "design": "PR=propellers(grade=P1, D=13/10, KT0=7/25, J0=31/50, KQ0=3/100, price=5200); GR=gears(grade=G2, i=7/2, price=5200)",
+      "verdict": "REFUTED",
+      "mode": "heavy R2",
+      "fails": "R2 heavy speed >= 9 kn, unfavourable tolerances",
+      "by": "~0.518731394192 (an exact fraction of 136 digits)",
+      "unit": ""
+    },
+    {
+      "design": "PR=propellers(grade=P3, D=13/10, KT0=19/50, J0=23/25, KQ0=21/500, price=5600); GR=gears(grade=G1, i=3, price=4800)",
+      "verdict": "REFUTED",
+      "mode": "bollard R1",
+      "fails": "R1 bollard pull >= 30 kN, unfavourable tolerances",
+      "by": "~13.5209491091 (an exact fraction of 169 digits)",
+      "unit": "kN"
+    },
+    {
+      "design": "PR=propellers(grade=P2, D=13/10, KT0=33/100, J0=39/50, KQ0=9/250, price=5400); GR=gears(grade=G2, i=7/2, price=5200)",
+      "verdict": "REFUTED",
+      "mode": "heavy R2",
+      "fails": "R2 heavy speed >= 9 kn, unfavourable tolerances",
+      "by": "~0.367674095451 (an exact fraction of 134 digits)",
+      "unit": ""
+    },
+    {
+      "design": "PR=propellers(grade=P3, D=13/10, KT0=19/50, J0=23/25, KQ0=21/500, price=5600); GR=gears(grade=G2, i=7/2, price=5200)",
+      "verdict": "REFUTED",
+      "mode": "heavy R2",
+      "fails": "R2 heavy speed >= 9 kn, unfavourable tolerances",
+      "by": "~0.285703411886 (an exact fraction of 105 digits)",
+      "unit": ""
+    },
+    {
+      "design": "PR=propellers(grade=P1, D=13/10, KT0=7/25, J0=31/50, KQ0=3/100, price=5200); GR=gears(grade=G3, i=4, price=5900)",
+      "verdict": "REFUTED",
+      "mode": "heavy R2",
+      "fails": "R2 heavy speed >= 9 kn, unfavourable tolerances",
+      "by": "~0.504597022107 (an exact fraction of 96 digits)",
+      "unit": ""
+    },
+    {
+      "design": "PR=propellers(grade=P2, D=13/10, KT0=33/100, J0=39/50, KQ0=9/250, price=5400); GR=gears(grade=G3, i=4, price=5900)",
+      "verdict": "REFUTED",
+      "mode": "light R4",
+      "fails": "R4 tip speed <= 32 m/s",
+      "by": "~2.18836310951 (an exact fraction of 59 digits)",
+      "unit": "m/s"
+    },
+    {
+      "design": "PR=propellers(grade=P3, D=13/10, KT0=19/50, J0=23/25, KQ0=21/500, price=5600); GR=gears(grade=G3, i=4, price=5900)",
+      "verdict": "REFUTED",
+      "mode": "heavy R3",
+      "fails": "R3 heavy engine rpm >= 1900, whole tolerance box",
+      "by": "~135.330186805 (an exact fraction of 61 digits)",
+      "unit": "rpm"
+    },
+    {
+      "design": "PR=propellers(grade=P1, D=13/10, KT0=7/25, J0=31/50, KQ0=3/100, price=5200); GR=gears(grade=G4, i=9/2, price=6700)",
+      "verdict": "REFUTED",
+      "mode": "heavy R2",
+      "fails": "R2 heavy speed >= 9 kn, unfavourable tolerances",
+      "by": "~1.1992367831 (an exact fraction of 96 digits)",
+      "unit": ""
+    },
+    {
+      "design": "PR=propellers(grade=P2, D=13/10, KT0=33/100, J0=39/50, KQ0=9/250, price=5400); GR=gears(grade=G4, i=9/2, price=6700)",
+      "verdict": "REFUTED",
+      "mode": "heavy R2",
+      "fails": "R2 heavy speed >= 9 kn, unfavourable tolerances",
+      "by": "~0.324232943575 (an exact fraction of 93 digits)",
+      "unit": ""
+    },
+    {
+      "design": "PR=propellers(grade=P3, D=13/10, KT0=19/50, J0=23/25, KQ0=21/500, price=5600); GR=gears(grade=G4, i=9/2, price=6700)",
+      "verdict": "EARNED"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 11,
+    "EARNED": 1
+  }
+}
+
+real	12m29.436s
+user	10m47.567s
+sys	1m41.815s

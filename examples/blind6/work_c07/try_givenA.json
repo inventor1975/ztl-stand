@@ -1,0 +1,176 @@
+{
+ "stand": "ztl-stand/1",
+ "note": "c07 stormwater detention pond, variant implicit",
+ "quantities": {
+  "Ac": {
+   "role": "given",
+   "value": "22000",
+   "unit": "m^2",
+   "ground": "problem statement",
+   "why": "paved catchment 2.2 ha"
+  },
+  "C": {
+   "role": "given",
+   "range": [
+    "0.70",
+    "0.80"
+   ],
+   "unit": "",
+   "why": "runoff coefficient, one value for all storms"
+  },
+  "Cd": {
+   "role": "given",
+   "range": [
+    "0.58",
+    "0.64"
+   ],
+   "unit": "",
+   "why": "orifice discharge coefficient, one value for all storms"
+  },
+  "g": {
+   "role": "given",
+   "value": "9.81",
+   "unit": "m/s^2",
+   "why": "g = 9.81 as the problem states (not g0)"
+  },
+  "cp": {
+   "role": "given",
+   "value": "0.12",
+   "unit": "kEUR/m^3",
+   "why": "pond price per m3 of plan area x depth"
+  },
+  "fb": {
+   "role": "given",
+   "value": "0.30",
+   "unit": "m",
+   "why": "freeboard"
+  },
+  "ta": {
+   "role": "given",
+   "value": "900",
+   "unit": "s",
+   "why": "storm duration 900 s"
+  },
+  "ia": {
+   "role": "given",
+   "range": [
+    "85",
+    "92"
+   ],
+   "unit": "mm/h",
+   "why": "10-year, 15 min intensity, independent"
+  },
+  "ha": {
+   "role": "derived",
+   "unit": "m",
+   "why": "water depth at end of storm 10y/900s",
+   "search": [
+    "0.01",
+    "12"
+   ]
+  },
+  "Qpa": {
+   "role": "derived",
+   "unit": "m^3/s",
+   "why": "peak outflow storm 10y/900s"
+  },
+  "AA": {
+   "role": "given",
+   "value": "300",
+   "unit": "m^2"
+  }
+ },
+ "slots": {
+  "PL": {
+   "from": [
+    "plates"
+   ]
+  },
+  "PH": {
+   "from": [
+    "pondH"
+   ]
+  }
+ },
+ "define": {
+  "Ao": "pi*PL.d*PL.d/4",
+  "Qina": "C*ia*Ac"
+ },
+ "laws": [
+  {
+   "zfl": "AA*ha + Cd*Ao*sqrt(1.2*g*ha)*ta == Qina*ta",
+   "source": "storage balance, storm 10y/900s (mean head 0.6 h)"
+  },
+  {
+   "zfl": "Qpa == Cd*Ao*sqrt(2*g*ha)",
+   "source": "orifice peak outflow"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Qpa",
+   "op": "<=",
+   "value": "0.025",
+   "why": "R1: 10-year Qpeak <= 25 L/s (storm 900s)"
+  },
+  {
+   "quantity": "PL.d",
+   "op": ">=",
+   "value": "80",
+   "why": "R4: d >= 80 mm (clogging)"
+  }
+ ],
+ "objective": {
+  "minimize": "PL.price",
+  "unit": "kEUR",
+  "why": "pond + plate price"
+ },
+ "catalog": {
+  "plates": {
+   "ground": "problem statement",
+   "items": [
+    {
+     "name": "O60",
+     "d": "60",
+     "price": "0.30"
+    },
+    {
+     "name": "O80",
+     "d": "80",
+     "price": "0.45"
+    },
+    {
+     "name": "O100",
+     "d": "100",
+     "price": "0.60"
+    },
+    {
+     "name": "O120",
+     "d": "120",
+     "price": "0.80"
+    },
+    {
+     "name": "O150",
+     "d": "150",
+     "price": "1.10"
+    }
+   ],
+   "fields": {
+    "d": {
+     "unit": "mm"
+    },
+    "price": {
+     "unit": "kEUR"
+    }
+   }
+  },
+  "pondH": {
+   "continuous": {
+    "field": "H",
+    "from": "0.8",
+    "to": "2.0",
+    "unit": "m"
+   }
+  }
+ }
+}

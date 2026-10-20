@@ -1,0 +1,38 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 7ef9b6f",
+  "continuous": true,
+  "combinations": 1,
+  "notes": [],
+  "combinations_proved_without_mix": 1,
+  "verdict": "REFUTED",
+  "why": "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  "mixes": [
+    {
+      "design": "EX=extractors(name=E4, N=4, eta=3/4, price=22); SV=solvents(name=SA, Kt=[360129809/100000000,61683903/12500000], cS=6/5); BD=beds(name=G2000, m=2000, price=5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 7 pieces, each failing a requirement at one point of its data — no mix exists"
+    }
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1 raffinate x_N <= 0.12 g/L"
+      ],
+      [
+        "R2 discharge <= 0.006 g/L"
+      ],
+      [
+        "R3 bed life >= 2 months"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}
+
+real	0m12.737s
+user	0m12.316s
+sys	0m0.404s

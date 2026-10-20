@@ -1,0 +1,105 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "",
+      "verdict": "REFUTED",
+      "fails": "gain error budget 1 % of reading, source",
+      "by_at_witness": "53214653/198105395500 (~0.000268618)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {},
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "c1": "-100",
+    "c2": "100",
+    "ga": "-1/2000 (~-0.0005)",
+    "gc": "-20",
+    "t1": "-1/1000 (~-0.001)",
+    "t2": "-1/1000 (~-0.001)",
+    "vc": "-50",
+    "vt": "-1/200 (~-0.005)"
+  },
+  "point_units": {
+    "c1": "ppm/C",
+    "c2": "ppm/C",
+    "ga": "",
+    "gc": "ppm/C",
+    "t1": "",
+    "t2": "",
+    "vc": "ppm/C",
+    "vt": ""
+  },
+  "value_there": {
+    "Eg": "508567152/49526348875 (~0.0102686)"
+  },
+  "unit": "",
+  "requirement": {
+    "quantity": "Eg",
+    "op": "within",
+    "value": [
+      "-0.01",
+      "0.01"
+    ],
+    "why": "gain error budget 1 % of reading, source"
+  },
+  "overshoot": "53214653/198105395500 (~0.000268618)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "-140306135416/10105365495225 (~-0.0138843)",
+      "46564978328/3298454835075 (~0.0141172)"
+    ],
+    "window": [
+      "-1/100 (~-0.01)",
+      "1/100 (~0.01)"
+    ],
+    "verdict_on_window": "for this design the spread over its tolerances alone is wider than the window: centring cannot fix it, only tighter tolerances or another design",
+    "largest_contributors": [
+      {
+        "quantity": "vt",
+        "moves_it_by": "100069832054/9954796123875 (~0.0100524)"
+      },
+      {
+        "quantity": "c2",
+        "moves_it_by": "239736072/49526348875 (~0.00484058)"
+      },
+      {
+        "quantity": "c1",
+        "moves_it_by": "239736072/49526348875 (~0.00484058)"
+      },
+      {
+        "quantity": "vc",
+        "moves_it_by": "300209496162/99201276796625 (~0.00302627)"
+      },
+      {
+        "quantity": "t2",
+        "moves_it_by": "80151760072/49476822526125 (~0.00161999)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "gain error budget 1 % of reading, source"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}

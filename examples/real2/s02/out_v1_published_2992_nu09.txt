@@ -1,0 +1,86 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 2a24683",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "BOLT=M12_8.8_93Nm(MA=93, Rp=640)",
+      "verdict": "REFUTED",
+      "fails": "clamp load must stay at or above the needed value",
+      "by_at_witness": "5682604634818175871732676/1410548771149716560719675 (~4.02865)",
+      "unit": "kN"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "BOLT": {
+      "catalog": "M12_8.8_93Nm",
+      "MA": {
+        "nominal": "93",
+        "tolerance": "0"
+      },
+      "Rp": {
+        "nominal": "640",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "mu": "6/25 (~0.24)"
+  },
+  "point_units": {
+    "mu": ""
+  },
+  "value_there": {
+    "F": "1460840583919253745000000/56421950845988662428787 (~25.8914)"
+  },
+  "unit": "kN",
+  "requirement": {
+    "quantity": "F",
+    "op": ">=",
+    "value": "Fneed",
+    "why": "clamp load must stay at or above the needed value"
+  },
+  "overshoot": "5682604634818175871732676/1410548771149716560719675 (~4.02865)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "1460840583919253745000000/56421950845988662428787 (~25.8914)",
+      "2921681167838508420000000/69471442653653458828487 (~42.0559)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "mu",
+        "moves_it_by": "~16.1645066892 (an exact fraction of 46 digits)"
+      },
+      {
+        "quantity": "pi",
+        "moves_it_by": "~6.39049962575e-16 (an exact fraction of 46 digits)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "clamp load must stay at or above the needed value"
+      ],
+      [
+        "bolt not overloaded in tightening (reduced stress below yield)"
+      ]
+    ],
+    "undecided_sets": [],
+    "how": "every subset of the requirements judged on the same catalog; a set is listed when the stand refutes it and no proper subset is refuted"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

@@ -1,0 +1,1142 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "face": {
+   "role": "given",
+   "value": "10000",
+   "unit": "EUR",
+   "why": "one lot = 10 kEUR face"
+  },
+  "y": {
+   "role": "given",
+   "value": "4/100",
+   "unit": "",
+   "why": "flat yield 4 % for the duration test"
+  },
+  "L1": {
+   "role": "given",
+   "value": "400000",
+   "unit": "EUR",
+   "why": "liability end of year 1"
+  },
+  "L2": {
+   "role": "given",
+   "value": "350000",
+   "unit": "EUR",
+   "why": "liability end of year 2"
+  },
+  "L3": {
+   "role": "given",
+   "value": "450000",
+   "unit": "EUR",
+   "why": "liability end of year 3"
+  },
+  "L4": {
+   "role": "given",
+   "value": "300000",
+   "unit": "EUR",
+   "why": "liability end of year 4"
+  },
+  "L5": {
+   "role": "given",
+   "value": "500000",
+   "unit": "EUR",
+   "why": "liability end of year 5"
+  },
+  "L6": {
+   "role": "given",
+   "value": "650000",
+   "unit": "EUR",
+   "why": "liability end of year 6"
+  },
+  "c_B1": {
+   "role": "given",
+   "value": "1/50",
+   "unit": "",
+   "why": "B1 coupon 2.0 % of face"
+  },
+  "m_B1": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B1 maturity (years)"
+  },
+  "e_B1": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B1 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B1": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B1 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B1": {
+   "role": "given",
+   "value": "1009/1000",
+   "unit": "",
+   "why": "B1 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B1": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B1 rated AA"
+  },
+  "c_B2": {
+   "role": "given",
+   "value": "3/100",
+   "unit": "",
+   "why": "B2 coupon 3.0 % of face"
+  },
+  "m_B2": {
+   "role": "given",
+   "value": "2",
+   "unit": "",
+   "why": "B2 maturity (years)"
+  },
+  "e_B2": {
+   "role": "given",
+   "value": "2",
+   "unit": "",
+   "why": "B2 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B2": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B2 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B2": {
+   "role": "given",
+   "value": "251/250",
+   "unit": "",
+   "why": "B2 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B2": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B2 rated AA"
+  },
+  "c_B3": {
+   "role": "given",
+   "value": "1/40",
+   "unit": "",
+   "why": "B3 coupon 2.5 % of face"
+  },
+  "m_B3": {
+   "role": "given",
+   "value": "3",
+   "unit": "",
+   "why": "B3 maturity (years)"
+  },
+  "e_B3": {
+   "role": "given",
+   "value": "3",
+   "unit": "",
+   "why": "B3 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B3": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B3 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B3": {
+   "role": "given",
+   "value": "99/100",
+   "unit": "",
+   "why": "B3 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B3": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B3 rated AAA"
+  },
+  "c_B4": {
+   "role": "given",
+   "value": "7/200",
+   "unit": "",
+   "why": "B4 coupon 3.5 % of face"
+  },
+  "m_B4": {
+   "role": "given",
+   "value": "3",
+   "unit": "",
+   "why": "B4 maturity (years)"
+  },
+  "e_B4": {
+   "role": "given",
+   "value": "3",
+   "unit": "",
+   "why": "B4 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B4": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B4 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B4": {
+   "role": "given",
+   "value": "253/250",
+   "unit": "",
+   "why": "B4 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B4": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B4 rated A"
+  },
+  "c_B5": {
+   "role": "given",
+   "value": "3/100",
+   "unit": "",
+   "why": "B5 coupon 3.0 % of face"
+  },
+  "m_B5": {
+   "role": "given",
+   "value": "4",
+   "unit": "",
+   "why": "B5 maturity (years)"
+  },
+  "e_B5": {
+   "role": "given",
+   "value": "4",
+   "unit": "",
+   "why": "B5 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B5": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B5 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B5": {
+   "role": "given",
+   "value": "491/500",
+   "unit": "",
+   "why": "B5 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B5": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B5 rated AAA"
+  },
+  "c_B6": {
+   "role": "given",
+   "value": "3/50",
+   "unit": "",
+   "why": "B6 coupon 6.0 % of face"
+  },
+  "m_B6": {
+   "role": "given",
+   "value": "4",
+   "unit": "",
+   "why": "B6 maturity (years)"
+  },
+  "e_B6": {
+   "role": "given",
+   "value": "4",
+   "unit": "",
+   "why": "B6 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B6": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B6 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B6": {
+   "role": "given",
+   "value": "201/200",
+   "unit": "",
+   "why": "B6 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B6": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B6 rated BBB"
+  },
+  "c_B7": {
+   "role": "given",
+   "value": "1/25",
+   "unit": "",
+   "why": "B7 coupon 4.0 % of face"
+  },
+  "m_B7": {
+   "role": "given",
+   "value": "5",
+   "unit": "",
+   "why": "B7 maturity (years)"
+  },
+  "e_B7": {
+   "role": "given",
+   "value": "5",
+   "unit": "",
+   "why": "B7 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B7": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B7 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B7": {
+   "role": "given",
+   "value": "1003/1000",
+   "unit": "",
+   "why": "B7 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B7": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B7 rated A"
+  },
+  "c_B8": {
+   "role": "given",
+   "value": "13/200",
+   "unit": "",
+   "why": "B8 coupon 6.5 % of face"
+  },
+  "m_B8": {
+   "role": "given",
+   "value": "5",
+   "unit": "",
+   "why": "B8 maturity (years)"
+  },
+  "e_B8": {
+   "role": "given",
+   "value": "5",
+   "unit": "",
+   "why": "B8 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B8": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B8 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B8": {
+   "role": "given",
+   "value": "26/25",
+   "unit": "",
+   "why": "B8 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B8": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B8 rated BBB"
+  },
+  "c_B9": {
+   "role": "given",
+   "value": "7/200",
+   "unit": "",
+   "why": "B9 coupon 3.5 % of face"
+  },
+  "m_B9": {
+   "role": "given",
+   "value": "6",
+   "unit": "",
+   "why": "B9 maturity (years)"
+  },
+  "e_B9": {
+   "role": "given",
+   "value": "6",
+   "unit": "",
+   "why": "B9 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B9": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B9 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B9": {
+   "role": "given",
+   "value": "987/1000",
+   "unit": "",
+   "why": "B9 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B9": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B9 rated AA"
+  },
+  "c_B10": {
+   "role": "given",
+   "value": "1/20",
+   "unit": "",
+   "why": "B10 coupon 5.0 % of face"
+  },
+  "m_B10": {
+   "role": "given",
+   "value": "6",
+   "unit": "",
+   "why": "B10 maturity (years)"
+  },
+  "e_B10": {
+   "role": "given",
+   "value": "6",
+   "unit": "",
+   "why": "B10 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B10": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B10 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B10": {
+   "role": "given",
+   "value": "103/100",
+   "unit": "",
+   "why": "B10 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B10": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B10 rated A"
+  },
+  "c_B11": {
+   "role": "given",
+   "value": "7/100",
+   "unit": "",
+   "why": "B11 coupon 7.0 % of face"
+  },
+  "m_B11": {
+   "role": "given",
+   "value": "6",
+   "unit": "",
+   "why": "B11 maturity (years)"
+  },
+  "e_B11": {
+   "role": "given",
+   "value": "6",
+   "unit": "",
+   "why": "B11 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B11": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B11 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B11": {
+   "role": "given",
+   "value": "27/25",
+   "unit": "",
+   "why": "B11 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B11": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B11 rated BBB"
+  },
+  "c_B12": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B12 coupon 0 % of face"
+  },
+  "m_B12": {
+   "role": "given",
+   "value": "2",
+   "unit": "",
+   "why": "B12 maturity (years)"
+  },
+  "e_B12": {
+   "role": "given",
+   "value": "2",
+   "unit": "",
+   "why": "B12 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B12": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B12 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B12": {
+   "role": "given",
+   "value": "479/500",
+   "unit": "",
+   "why": "B12 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B12": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B12 rated AA"
+  },
+  "c_B13": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B13 coupon 0 % of face"
+  },
+  "m_B13": {
+   "role": "given",
+   "value": "4",
+   "unit": "",
+   "why": "B13 maturity (years)"
+  },
+  "e_B13": {
+   "role": "given",
+   "value": "4",
+   "unit": "",
+   "why": "B13 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B13": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B13 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B13": {
+   "role": "given",
+   "value": "112/125",
+   "unit": "",
+   "why": "B13 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B13": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B13 rated A"
+  },
+  "c_B14": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B14 coupon 0 % of face"
+  },
+  "m_B14": {
+   "role": "given",
+   "value": "6",
+   "unit": "",
+   "why": "B14 maturity (years)"
+  },
+  "e_B14": {
+   "role": "given",
+   "value": "6",
+   "unit": "",
+   "why": "B14 last paying year: maturity (Fall mode: call year)"
+  },
+  "w_B14": {
+   "role": "given",
+   "value": "1",
+   "unit": "",
+   "why": "B14 share of cash flows paid (Stress mode: 1/2 for BBB)"
+  },
+  "p_B14": {
+   "role": "given",
+   "value": "823/1000",
+   "unit": "",
+   "why": "B14 price per 100 face",
+   "ground": "bond table"
+  },
+  "bbb_B14": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "B14 rated AAA"
+  },
+  "S1": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "cumulative cash received minus cumulative liabilities, through year 1"
+  },
+  "S2": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "cumulative cash received minus cumulative liabilities, through year 2"
+  },
+  "S3": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "cumulative cash received minus cumulative liabilities, through year 3"
+  },
+  "S4": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "cumulative cash received minus cumulative liabilities, through year 4"
+  },
+  "S5": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "cumulative cash received minus cumulative liabilities, through year 5"
+  },
+  "S6": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "cumulative cash received minus cumulative liabilities, through year 6"
+  },
+  "C": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "total purchase cost"
+  },
+  "CB": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "purchase cost of BBB bonds"
+  },
+  "M2": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "30 % of total cost minus BBB cost"
+  },
+  "DA": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "sum_t (t - Dl - 1/4) PV_t: R3 upper side, must be <= 0"
+  },
+  "DB": {
+   "role": "derived",
+   "unit": "EUR",
+   "why": "sum_t (Dl - 1/4 - t) PV_t: R3 lower side, must be <= 0"
+  }
+ },
+ "slots": {
+  "N1": {
+   "from": [
+    "cat_B1"
+   ]
+  },
+  "N2": {
+   "from": [
+    "cat_B2"
+   ]
+  },
+  "N3": {
+   "from": [
+    "cat_B3"
+   ]
+  },
+  "N4": {
+   "from": [
+    "cat_B4"
+   ]
+  },
+  "N5": {
+   "from": [
+    "cat_B5"
+   ]
+  },
+  "N6": {
+   "from": [
+    "cat_B6"
+   ]
+  },
+  "N7": {
+   "from": [
+    "cat_B7"
+   ]
+  },
+  "N8": {
+   "from": [
+    "cat_B8"
+   ]
+  },
+  "N9": {
+   "from": [
+    "cat_B9"
+   ]
+  },
+  "N10": {
+   "from": [
+    "cat_B10"
+   ]
+  },
+  "N11": {
+   "from": [
+    "cat_B11"
+   ]
+  },
+  "N12": {
+   "from": [
+    "cat_B12"
+   ]
+  },
+  "N13": {
+   "from": [
+    "cat_B13"
+   ]
+  },
+  "N14": {
+   "from": [
+    "cat_B14"
+   ]
+  }
+ },
+ "define": {
+  "df1": "1/((1+y))",
+  "df2": "1/((1+y)*(1+y))",
+  "df3": "1/((1+y)*(1+y)*(1+y))",
+  "df4": "1/((1+y)*(1+y)*(1+y)*(1+y))",
+  "df5": "1/((1+y)*(1+y)*(1+y)*(1+y)*(1+y))",
+  "df6": "1/((1+y)*(1+y)*(1+y)*(1+y)*(1+y)*(1+y))",
+  "cL1": "L1",
+  "cL2": "L1+L2",
+  "cL3": "L1+L2+L3",
+  "cL4": "L1+L2+L3+L4",
+  "cL5": "L1+L2+L3+L4+L5",
+  "cL6": "L1+L2+L3+L4+L5+L6",
+  "cum_B1_0": "0*face",
+  "cum_B1_1": "w_B1*face*(c_B1*min(1,e_B1) + if(e_B1 <= 1, 1, 0))",
+  "cum_B1_2": "w_B1*face*(c_B1*min(2,e_B1) + if(e_B1 <= 2, 1, 0))",
+  "cum_B1_3": "w_B1*face*(c_B1*min(3,e_B1) + if(e_B1 <= 3, 1, 0))",
+  "cum_B1_4": "w_B1*face*(c_B1*min(4,e_B1) + if(e_B1 <= 4, 1, 0))",
+  "cum_B1_5": "w_B1*face*(c_B1*min(5,e_B1) + if(e_B1 <= 5, 1, 0))",
+  "cum_B1_6": "w_B1*face*(c_B1*min(6,e_B1) + if(e_B1 <= 6, 1, 0))",
+  "cf_B1_1": "(cum_B1_1 - cum_B1_0)",
+  "cf_B1_2": "(cum_B1_2 - cum_B1_1)",
+  "cf_B1_3": "(cum_B1_3 - cum_B1_2)",
+  "cf_B1_4": "(cum_B1_4 - cum_B1_3)",
+  "cf_B1_5": "(cum_B1_5 - cum_B1_4)",
+  "cf_B1_6": "(cum_B1_6 - cum_B1_5)",
+  "cum_B2_0": "0*face",
+  "cum_B2_1": "w_B2*face*(c_B2*min(1,e_B2) + if(e_B2 <= 1, 1, 0))",
+  "cum_B2_2": "w_B2*face*(c_B2*min(2,e_B2) + if(e_B2 <= 2, 1, 0))",
+  "cum_B2_3": "w_B2*face*(c_B2*min(3,e_B2) + if(e_B2 <= 3, 1, 0))",
+  "cum_B2_4": "w_B2*face*(c_B2*min(4,e_B2) + if(e_B2 <= 4, 1, 0))",
+  "cum_B2_5": "w_B2*face*(c_B2*min(5,e_B2) + if(e_B2 <= 5, 1, 0))",
+  "cum_B2_6": "w_B2*face*(c_B2*min(6,e_B2) + if(e_B2 <= 6, 1, 0))",
+  "cf_B2_1": "(cum_B2_1 - cum_B2_0)",
+  "cf_B2_2": "(cum_B2_2 - cum_B2_1)",
+  "cf_B2_3": "(cum_B2_3 - cum_B2_2)",
+  "cf_B2_4": "(cum_B2_4 - cum_B2_3)",
+  "cf_B2_5": "(cum_B2_5 - cum_B2_4)",
+  "cf_B2_6": "(cum_B2_6 - cum_B2_5)",
+  "cum_B3_0": "0*face",
+  "cum_B3_1": "w_B3*face*(c_B3*min(1,e_B3) + if(e_B3 <= 1, 1, 0))",
+  "cum_B3_2": "w_B3*face*(c_B3*min(2,e_B3) + if(e_B3 <= 2, 1, 0))",
+  "cum_B3_3": "w_B3*face*(c_B3*min(3,e_B3) + if(e_B3 <= 3, 1, 0))",
+  "cum_B3_4": "w_B3*face*(c_B3*min(4,e_B3) + if(e_B3 <= 4, 1, 0))",
+  "cum_B3_5": "w_B3*face*(c_B3*min(5,e_B3) + if(e_B3 <= 5, 1, 0))",
+  "cum_B3_6": "w_B3*face*(c_B3*min(6,e_B3) + if(e_B3 <= 6, 1, 0))",
+  "cf_B3_1": "(cum_B3_1 - cum_B3_0)",
+  "cf_B3_2": "(cum_B3_2 - cum_B3_1)",
+  "cf_B3_3": "(cum_B3_3 - cum_B3_2)",
+  "cf_B3_4": "(cum_B3_4 - cum_B3_3)",
+  "cf_B3_5": "(cum_B3_5 - cum_B3_4)",
+  "cf_B3_6": "(cum_B3_6 - cum_B3_5)",
+  "cum_B4_0": "0*face",
+  "cum_B4_1": "w_B4*face*(c_B4*min(1,e_B4) + if(e_B4 <= 1, 1, 0))",
+  "cum_B4_2": "w_B4*face*(c_B4*min(2,e_B4) + if(e_B4 <= 2, 1, 0))",
+  "cum_B4_3": "w_B4*face*(c_B4*min(3,e_B4) + if(e_B4 <= 3, 1, 0))",
+  "cum_B4_4": "w_B4*face*(c_B4*min(4,e_B4) + if(e_B4 <= 4, 1, 0))",
+  "cum_B4_5": "w_B4*face*(c_B4*min(5,e_B4) + if(e_B4 <= 5, 1, 0))",
+  "cum_B4_6": "w_B4*face*(c_B4*min(6,e_B4) + if(e_B4 <= 6, 1, 0))",
+  "cf_B4_1": "(cum_B4_1 - cum_B4_0)",
+  "cf_B4_2": "(cum_B4_2 - cum_B4_1)",
+  "cf_B4_3": "(cum_B4_3 - cum_B4_2)",
+  "cf_B4_4": "(cum_B4_4 - cum_B4_3)",
+  "cf_B4_5": "(cum_B4_5 - cum_B4_4)",
+  "cf_B4_6": "(cum_B4_6 - cum_B4_5)",
+  "cum_B5_0": "0*face",
+  "cum_B5_1": "w_B5*face*(c_B5*min(1,e_B5) + if(e_B5 <= 1, 1, 0))",
+  "cum_B5_2": "w_B5*face*(c_B5*min(2,e_B5) + if(e_B5 <= 2, 1, 0))",
+  "cum_B5_3": "w_B5*face*(c_B5*min(3,e_B5) + if(e_B5 <= 3, 1, 0))",
+  "cum_B5_4": "w_B5*face*(c_B5*min(4,e_B5) + if(e_B5 <= 4, 1, 0))",
+  "cum_B5_5": "w_B5*face*(c_B5*min(5,e_B5) + if(e_B5 <= 5, 1, 0))",
+  "cum_B5_6": "w_B5*face*(c_B5*min(6,e_B5) + if(e_B5 <= 6, 1, 0))",
+  "cf_B5_1": "(cum_B5_1 - cum_B5_0)",
+  "cf_B5_2": "(cum_B5_2 - cum_B5_1)",
+  "cf_B5_3": "(cum_B5_3 - cum_B5_2)",
+  "cf_B5_4": "(cum_B5_4 - cum_B5_3)",
+  "cf_B5_5": "(cum_B5_5 - cum_B5_4)",
+  "cf_B5_6": "(cum_B5_6 - cum_B5_5)",
+  "cum_B6_0": "0*face",
+  "cum_B6_1": "w_B6*face*(c_B6*min(1,e_B6) + if(e_B6 <= 1, 1, 0))",
+  "cum_B6_2": "w_B6*face*(c_B6*min(2,e_B6) + if(e_B6 <= 2, 1, 0))",
+  "cum_B6_3": "w_B6*face*(c_B6*min(3,e_B6) + if(e_B6 <= 3, 1, 0))",
+  "cum_B6_4": "w_B6*face*(c_B6*min(4,e_B6) + if(e_B6 <= 4, 1, 0))",
+  "cum_B6_5": "w_B6*face*(c_B6*min(5,e_B6) + if(e_B6 <= 5, 1, 0))",
+  "cum_B6_6": "w_B6*face*(c_B6*min(6,e_B6) + if(e_B6 <= 6, 1, 0))",
+  "cf_B6_1": "(cum_B6_1 - cum_B6_0)",
+  "cf_B6_2": "(cum_B6_2 - cum_B6_1)",
+  "cf_B6_3": "(cum_B6_3 - cum_B6_2)",
+  "cf_B6_4": "(cum_B6_4 - cum_B6_3)",
+  "cf_B6_5": "(cum_B6_5 - cum_B6_4)",
+  "cf_B6_6": "(cum_B6_6 - cum_B6_5)",
+  "cum_B7_0": "0*face",
+  "cum_B7_1": "w_B7*face*(c_B7*min(1,e_B7) + if(e_B7 <= 1, 1, 0))",
+  "cum_B7_2": "w_B7*face*(c_B7*min(2,e_B7) + if(e_B7 <= 2, 1, 0))",
+  "cum_B7_3": "w_B7*face*(c_B7*min(3,e_B7) + if(e_B7 <= 3, 1, 0))",
+  "cum_B7_4": "w_B7*face*(c_B7*min(4,e_B7) + if(e_B7 <= 4, 1, 0))",
+  "cum_B7_5": "w_B7*face*(c_B7*min(5,e_B7) + if(e_B7 <= 5, 1, 0))",
+  "cum_B7_6": "w_B7*face*(c_B7*min(6,e_B7) + if(e_B7 <= 6, 1, 0))",
+  "cf_B7_1": "(cum_B7_1 - cum_B7_0)",
+  "cf_B7_2": "(cum_B7_2 - cum_B7_1)",
+  "cf_B7_3": "(cum_B7_3 - cum_B7_2)",
+  "cf_B7_4": "(cum_B7_4 - cum_B7_3)",
+  "cf_B7_5": "(cum_B7_5 - cum_B7_4)",
+  "cf_B7_6": "(cum_B7_6 - cum_B7_5)",
+  "cum_B8_0": "0*face",
+  "cum_B8_1": "w_B8*face*(c_B8*min(1,e_B8) + if(e_B8 <= 1, 1, 0))",
+  "cum_B8_2": "w_B8*face*(c_B8*min(2,e_B8) + if(e_B8 <= 2, 1, 0))",
+  "cum_B8_3": "w_B8*face*(c_B8*min(3,e_B8) + if(e_B8 <= 3, 1, 0))",
+  "cum_B8_4": "w_B8*face*(c_B8*min(4,e_B8) + if(e_B8 <= 4, 1, 0))",
+  "cum_B8_5": "w_B8*face*(c_B8*min(5,e_B8) + if(e_B8 <= 5, 1, 0))",
+  "cum_B8_6": "w_B8*face*(c_B8*min(6,e_B8) + if(e_B8 <= 6, 1, 0))",
+  "cf_B8_1": "(cum_B8_1 - cum_B8_0)",
+  "cf_B8_2": "(cum_B8_2 - cum_B8_1)",
+  "cf_B8_3": "(cum_B8_3 - cum_B8_2)",
+  "cf_B8_4": "(cum_B8_4 - cum_B8_3)",
+  "cf_B8_5": "(cum_B8_5 - cum_B8_4)",
+  "cf_B8_6": "(cum_B8_6 - cum_B8_5)",
+  "cum_B9_0": "0*face",
+  "cum_B9_1": "w_B9*face*(c_B9*min(1,e_B9) + if(e_B9 <= 1, 1, 0))",
+  "cum_B9_2": "w_B9*face*(c_B9*min(2,e_B9) + if(e_B9 <= 2, 1, 0))",
+  "cum_B9_3": "w_B9*face*(c_B9*min(3,e_B9) + if(e_B9 <= 3, 1, 0))",
+  "cum_B9_4": "w_B9*face*(c_B9*min(4,e_B9) + if(e_B9 <= 4, 1, 0))",
+  "cum_B9_5": "w_B9*face*(c_B9*min(5,e_B9) + if(e_B9 <= 5, 1, 0))",
+  "cum_B9_6": "w_B9*face*(c_B9*min(6,e_B9) + if(e_B9 <= 6, 1, 0))",
+  "cf_B9_1": "(cum_B9_1 - cum_B9_0)",
+  "cf_B9_2": "(cum_B9_2 - cum_B9_1)",
+  "cf_B9_3": "(cum_B9_3 - cum_B9_2)",
+  "cf_B9_4": "(cum_B9_4 - cum_B9_3)",
+  "cf_B9_5": "(cum_B9_5 - cum_B9_4)",
+  "cf_B9_6": "(cum_B9_6 - cum_B9_5)",
+  "cum_B10_0": "0*face",
+  "cum_B10_1": "w_B10*face*(c_B10*min(1,e_B10) + if(e_B10 <= 1, 1, 0))",
+  "cum_B10_2": "w_B10*face*(c_B10*min(2,e_B10) + if(e_B10 <= 2, 1, 0))",
+  "cum_B10_3": "w_B10*face*(c_B10*min(3,e_B10) + if(e_B10 <= 3, 1, 0))",
+  "cum_B10_4": "w_B10*face*(c_B10*min(4,e_B10) + if(e_B10 <= 4, 1, 0))",
+  "cum_B10_5": "w_B10*face*(c_B10*min(5,e_B10) + if(e_B10 <= 5, 1, 0))",
+  "cum_B10_6": "w_B10*face*(c_B10*min(6,e_B10) + if(e_B10 <= 6, 1, 0))",
+  "cf_B10_1": "(cum_B10_1 - cum_B10_0)",
+  "cf_B10_2": "(cum_B10_2 - cum_B10_1)",
+  "cf_B10_3": "(cum_B10_3 - cum_B10_2)",
+  "cf_B10_4": "(cum_B10_4 - cum_B10_3)",
+  "cf_B10_5": "(cum_B10_5 - cum_B10_4)",
+  "cf_B10_6": "(cum_B10_6 - cum_B10_5)",
+  "cum_B11_0": "0*face",
+  "cum_B11_1": "w_B11*face*(c_B11*min(1,e_B11) + if(e_B11 <= 1, 1, 0))",
+  "cum_B11_2": "w_B11*face*(c_B11*min(2,e_B11) + if(e_B11 <= 2, 1, 0))",
+  "cum_B11_3": "w_B11*face*(c_B11*min(3,e_B11) + if(e_B11 <= 3, 1, 0))",
+  "cum_B11_4": "w_B11*face*(c_B11*min(4,e_B11) + if(e_B11 <= 4, 1, 0))",
+  "cum_B11_5": "w_B11*face*(c_B11*min(5,e_B11) + if(e_B11 <= 5, 1, 0))",
+  "cum_B11_6": "w_B11*face*(c_B11*min(6,e_B11) + if(e_B11 <= 6, 1, 0))",
+  "cf_B11_1": "(cum_B11_1 - cum_B11_0)",
+  "cf_B11_2": "(cum_B11_2 - cum_B11_1)",
+  "cf_B11_3": "(cum_B11_3 - cum_B11_2)",
+  "cf_B11_4": "(cum_B11_4 - cum_B11_3)",
+  "cf_B11_5": "(cum_B11_5 - cum_B11_4)",
+  "cf_B11_6": "(cum_B11_6 - cum_B11_5)",
+  "cum_B12_0": "0*face",
+  "cum_B12_1": "w_B12*face*(c_B12*min(1,e_B12) + if(e_B12 <= 1, 1, 0))",
+  "cum_B12_2": "w_B12*face*(c_B12*min(2,e_B12) + if(e_B12 <= 2, 1, 0))",
+  "cum_B12_3": "w_B12*face*(c_B12*min(3,e_B12) + if(e_B12 <= 3, 1, 0))",
+  "cum_B12_4": "w_B12*face*(c_B12*min(4,e_B12) + if(e_B12 <= 4, 1, 0))",
+  "cum_B12_5": "w_B12*face*(c_B12*min(5,e_B12) + if(e_B12 <= 5, 1, 0))",
+  "cum_B12_6": "w_B12*face*(c_B12*min(6,e_B12) + if(e_B12 <= 6, 1, 0))",
+  "cf_B12_1": "(cum_B12_1 - cum_B12_0)",
+  "cf_B12_2": "(cum_B12_2 - cum_B12_1)",
+  "cf_B12_3": "(cum_B12_3 - cum_B12_2)",
+  "cf_B12_4": "(cum_B12_4 - cum_B12_3)",
+  "cf_B12_5": "(cum_B12_5 - cum_B12_4)",
+  "cf_B12_6": "(cum_B12_6 - cum_B12_5)",
+  "cum_B13_0": "0*face",
+  "cum_B13_1": "w_B13*face*(c_B13*min(1,e_B13) + if(e_B13 <= 1, 1, 0))",
+  "cum_B13_2": "w_B13*face*(c_B13*min(2,e_B13) + if(e_B13 <= 2, 1, 0))",
+  "cum_B13_3": "w_B13*face*(c_B13*min(3,e_B13) + if(e_B13 <= 3, 1, 0))",
+  "cum_B13_4": "w_B13*face*(c_B13*min(4,e_B13) + if(e_B13 <= 4, 1, 0))",
+  "cum_B13_5": "w_B13*face*(c_B13*min(5,e_B13) + if(e_B13 <= 5, 1, 0))",
+  "cum_B13_6": "w_B13*face*(c_B13*min(6,e_B13) + if(e_B13 <= 6, 1, 0))",
+  "cf_B13_1": "(cum_B13_1 - cum_B13_0)",
+  "cf_B13_2": "(cum_B13_2 - cum_B13_1)",
+  "cf_B13_3": "(cum_B13_3 - cum_B13_2)",
+  "cf_B13_4": "(cum_B13_4 - cum_B13_3)",
+  "cf_B13_5": "(cum_B13_5 - cum_B13_4)",
+  "cf_B13_6": "(cum_B13_6 - cum_B13_5)",
+  "cum_B14_0": "0*face",
+  "cum_B14_1": "w_B14*face*(c_B14*min(1,e_B14) + if(e_B14 <= 1, 1, 0))",
+  "cum_B14_2": "w_B14*face*(c_B14*min(2,e_B14) + if(e_B14 <= 2, 1, 0))",
+  "cum_B14_3": "w_B14*face*(c_B14*min(3,e_B14) + if(e_B14 <= 3, 1, 0))",
+  "cum_B14_4": "w_B14*face*(c_B14*min(4,e_B14) + if(e_B14 <= 4, 1, 0))",
+  "cum_B14_5": "w_B14*face*(c_B14*min(5,e_B14) + if(e_B14 <= 5, 1, 0))",
+  "cum_B14_6": "w_B14*face*(c_B14*min(6,e_B14) + if(e_B14 <= 6, 1, 0))",
+  "cf_B14_1": "(cum_B14_1 - cum_B14_0)",
+  "cf_B14_2": "(cum_B14_2 - cum_B14_1)",
+  "cf_B14_3": "(cum_B14_3 - cum_B14_2)",
+  "cf_B14_4": "(cum_B14_4 - cum_B14_3)",
+  "cf_B14_5": "(cum_B14_5 - cum_B14_4)",
+  "cf_B14_6": "(cum_B14_6 - cum_B14_5)",
+  "Dl": "(1*L1*df1+2*L2*df2+3*L3*df3+4*L4*df4+5*L5*df5+6*L6*df6)/(L1*df1+L2*df2+L3*df3+L4*df4+L5*df5+L6*df6)",
+  "Dlo": "Dl - 1/4",
+  "Dhi": "Dl + 1/4"
+ },
+ "laws": [
+  {
+   "zfl": "S1 == N1.x*cum_B1_1 + N2.x*cum_B2_1 + N3.x*cum_B3_1 + N4.x*cum_B4_1 + N5.x*cum_B5_1 + N6.x*cum_B6_1 + N7.x*cum_B7_1 + N8.x*cum_B8_1 + N9.x*cum_B9_1 + N10.x*cum_B10_1 + N11.x*cum_B11_1 + N12.x*cum_B12_1 + N13.x*cum_B13_1 + N14.x*cum_B14_1 - cL1",
+   "source": "surplus carried at 0 %, no borrowing: cumulative receipts minus cumulative liabilities"
+  },
+  {
+   "zfl": "S2 == N1.x*cum_B1_2 + N2.x*cum_B2_2 + N3.x*cum_B3_2 + N4.x*cum_B4_2 + N5.x*cum_B5_2 + N6.x*cum_B6_2 + N7.x*cum_B7_2 + N8.x*cum_B8_2 + N9.x*cum_B9_2 + N10.x*cum_B10_2 + N11.x*cum_B11_2 + N12.x*cum_B12_2 + N13.x*cum_B13_2 + N14.x*cum_B14_2 - cL2",
+   "source": "surplus carried at 0 %, no borrowing: cumulative receipts minus cumulative liabilities"
+  },
+  {
+   "zfl": "S3 == N1.x*cum_B1_3 + N2.x*cum_B2_3 + N3.x*cum_B3_3 + N4.x*cum_B4_3 + N5.x*cum_B5_3 + N6.x*cum_B6_3 + N7.x*cum_B7_3 + N8.x*cum_B8_3 + N9.x*cum_B9_3 + N10.x*cum_B10_3 + N11.x*cum_B11_3 + N12.x*cum_B12_3 + N13.x*cum_B13_3 + N14.x*cum_B14_3 - cL3",
+   "source": "surplus carried at 0 %, no borrowing: cumulative receipts minus cumulative liabilities"
+  },
+  {
+   "zfl": "S4 == N1.x*cum_B1_4 + N2.x*cum_B2_4 + N3.x*cum_B3_4 + N4.x*cum_B4_4 + N5.x*cum_B5_4 + N6.x*cum_B6_4 + N7.x*cum_B7_4 + N8.x*cum_B8_4 + N9.x*cum_B9_4 + N10.x*cum_B10_4 + N11.x*cum_B11_4 + N12.x*cum_B12_4 + N13.x*cum_B13_4 + N14.x*cum_B14_4 - cL4",
+   "source": "surplus carried at 0 %, no borrowing: cumulative receipts minus cumulative liabilities"
+  },
+  {
+   "zfl": "S5 == N1.x*cum_B1_5 + N2.x*cum_B2_5 + N3.x*cum_B3_5 + N4.x*cum_B4_5 + N5.x*cum_B5_5 + N6.x*cum_B6_5 + N7.x*cum_B7_5 + N8.x*cum_B8_5 + N9.x*cum_B9_5 + N10.x*cum_B10_5 + N11.x*cum_B11_5 + N12.x*cum_B12_5 + N13.x*cum_B13_5 + N14.x*cum_B14_5 - cL5",
+   "source": "surplus carried at 0 %, no borrowing: cumulative receipts minus cumulative liabilities"
+  },
+  {
+   "zfl": "S6 == N1.x*cum_B1_6 + N2.x*cum_B2_6 + N3.x*cum_B3_6 + N4.x*cum_B4_6 + N5.x*cum_B5_6 + N6.x*cum_B6_6 + N7.x*cum_B7_6 + N8.x*cum_B8_6 + N9.x*cum_B9_6 + N10.x*cum_B10_6 + N11.x*cum_B11_6 + N12.x*cum_B12_6 + N13.x*cum_B13_6 + N14.x*cum_B14_6 - cL6",
+   "source": "surplus carried at 0 %, no borrowing: cumulative receipts minus cumulative liabilities"
+  },
+  {
+   "zfl": "C == N1.x*p_B1*face + N2.x*p_B2*face + N3.x*p_B3*face + N4.x*p_B4*face + N5.x*p_B5*face + N6.x*p_B6*face + N7.x*p_B7*face + N8.x*p_B8*face + N9.x*p_B9*face + N10.x*p_B10*face + N11.x*p_B11*face + N12.x*p_B12*face + N13.x*p_B13*face + N14.x*p_B14*face",
+   "source": "cost of a lot = price/100 x 10 kEUR"
+  },
+  {
+   "zfl": "CB == N1.x*p_B1*face*bbb_B1 + N2.x*p_B2*face*bbb_B2 + N3.x*p_B3*face*bbb_B3 + N4.x*p_B4*face*bbb_B4 + N5.x*p_B5*face*bbb_B5 + N6.x*p_B6*face*bbb_B6 + N7.x*p_B7*face*bbb_B7 + N8.x*p_B8*face*bbb_B8 + N9.x*p_B9*face*bbb_B9 + N10.x*p_B10*face*bbb_B10 + N11.x*p_B11*face*bbb_B11 + N12.x*p_B12*face*bbb_B12 + N13.x*p_B13*face*bbb_B13 + N14.x*p_B14*face*bbb_B14",
+   "source": "BBB part of the cost"
+  },
+  {
+   "zfl": "M2 == 3/10*C - CB",
+   "source": "R2 margin"
+  },
+  {
+   "zfl": "DA == N1.x*(((1) - Dhi)*cf_B1_1*df1 + ((2) - Dhi)*cf_B1_2*df2 + ((3) - Dhi)*cf_B1_3*df3 + ((4) - Dhi)*cf_B1_4*df4 + ((5) - Dhi)*cf_B1_5*df5 + ((6) - Dhi)*cf_B1_6*df6) + N2.x*(((1) - Dhi)*cf_B2_1*df1 + ((2) - Dhi)*cf_B2_2*df2 + ((3) - Dhi)*cf_B2_3*df3 + ((4) - Dhi)*cf_B2_4*df4 + ((5) - Dhi)*cf_B2_5*df5 + ((6) - Dhi)*cf_B2_6*df6) + N3.x*(((1) - Dhi)*cf_B3_1*df1 + ((2) - Dhi)*cf_B3_2*df2 + ((3) - Dhi)*cf_B3_3*df3 + ((4) - Dhi)*cf_B3_4*df4 + ((5) - Dhi)*cf_B3_5*df5 + ((6) - Dhi)*cf_B3_6*df6) + N4.x*(((1) - Dhi)*cf_B4_1*df1 + ((2) - Dhi)*cf_B4_2*df2 + ((3) - Dhi)*cf_B4_3*df3 + ((4) - Dhi)*cf_B4_4*df4 + ((5) - Dhi)*cf_B4_5*df5 + ((6) - Dhi)*cf_B4_6*df6) + N5.x*(((1) - Dhi)*cf_B5_1*df1 + ((2) - Dhi)*cf_B5_2*df2 + ((3) - Dhi)*cf_B5_3*df3 + ((4) - Dhi)*cf_B5_4*df4 + ((5) - Dhi)*cf_B5_5*df5 + ((6) - Dhi)*cf_B5_6*df6) + N6.x*(((1) - Dhi)*cf_B6_1*df1 + ((2) - Dhi)*cf_B6_2*df2 + ((3) - Dhi)*cf_B6_3*df3 + ((4) - Dhi)*cf_B6_4*df4 + ((5) - Dhi)*cf_B6_5*df5 + ((6) - Dhi)*cf_B6_6*df6) + N7.x*(((1) - Dhi)*cf_B7_1*df1 + ((2) - Dhi)*cf_B7_2*df2 + ((3) - Dhi)*cf_B7_3*df3 + ((4) - Dhi)*cf_B7_4*df4 + ((5) - Dhi)*cf_B7_5*df5 + ((6) - Dhi)*cf_B7_6*df6) + N8.x*(((1) - Dhi)*cf_B8_1*df1 + ((2) - Dhi)*cf_B8_2*df2 + ((3) - Dhi)*cf_B8_3*df3 + ((4) - Dhi)*cf_B8_4*df4 + ((5) - Dhi)*cf_B8_5*df5 + ((6) - Dhi)*cf_B8_6*df6) + N9.x*(((1) - Dhi)*cf_B9_1*df1 + ((2) - Dhi)*cf_B9_2*df2 + ((3) - Dhi)*cf_B9_3*df3 + ((4) - Dhi)*cf_B9_4*df4 + ((5) - Dhi)*cf_B9_5*df5 + ((6) - Dhi)*cf_B9_6*df6) + N10.x*(((1) - Dhi)*cf_B10_1*df1 + ((2) - Dhi)*cf_B10_2*df2 + ((3) - Dhi)*cf_B10_3*df3 + ((4) - Dhi)*cf_B10_4*df4 + ((5) - Dhi)*cf_B10_5*df5 + ((6) - Dhi)*cf_B10_6*df6) + N11.x*(((1) - Dhi)*cf_B11_1*df1 + ((2) - Dhi)*cf_B11_2*df2 + ((3) - Dhi)*cf_B11_3*df3 + ((4) - Dhi)*cf_B11_4*df4 + ((5) - Dhi)*cf_B11_5*df5 + ((6) - Dhi)*cf_B11_6*df6) + N12.x*(((1) - Dhi)*cf_B12_1*df1 + ((2) - Dhi)*cf_B12_2*df2 + ((3) - Dhi)*cf_B12_3*df3 + ((4) - Dhi)*cf_B12_4*df4 + ((5) - Dhi)*cf_B12_5*df5 + ((6) - Dhi)*cf_B12_6*df6) + N13.x*(((1) - Dhi)*cf_B13_1*df1 + ((2) - Dhi)*cf_B13_2*df2 + ((3) - Dhi)*cf_B13_3*df3 + ((4) - Dhi)*cf_B13_4*df4 + ((5) - Dhi)*cf_B13_5*df5 + ((6) - Dhi)*cf_B13_6*df6) + N14.x*(((1) - Dhi)*cf_B14_1*df1 + ((2) - Dhi)*cf_B14_2*df2 + ((3) - Dhi)*cf_B14_3*df3 + ((4) - Dhi)*cf_B14_4*df4 + ((5) - Dhi)*cf_B14_5*df5 + ((6) - Dhi)*cf_B14_6*df6)",
+   "source": "Macaulay duration of portfolio <= Dl + 1/4  (D - Dl <= 1/4  <=>  sum PV_t (t - Dl - 1/4) <= 0)"
+  },
+  {
+   "zfl": "DB == N1.x*((Dlo - (1))*cf_B1_1*df1 + (Dlo - (2))*cf_B1_2*df2 + (Dlo - (3))*cf_B1_3*df3 + (Dlo - (4))*cf_B1_4*df4 + (Dlo - (5))*cf_B1_5*df5 + (Dlo - (6))*cf_B1_6*df6) + N2.x*((Dlo - (1))*cf_B2_1*df1 + (Dlo - (2))*cf_B2_2*df2 + (Dlo - (3))*cf_B2_3*df3 + (Dlo - (4))*cf_B2_4*df4 + (Dlo - (5))*cf_B2_5*df5 + (Dlo - (6))*cf_B2_6*df6) + N3.x*((Dlo - (1))*cf_B3_1*df1 + (Dlo - (2))*cf_B3_2*df2 + (Dlo - (3))*cf_B3_3*df3 + (Dlo - (4))*cf_B3_4*df4 + (Dlo - (5))*cf_B3_5*df5 + (Dlo - (6))*cf_B3_6*df6) + N4.x*((Dlo - (1))*cf_B4_1*df1 + (Dlo - (2))*cf_B4_2*df2 + (Dlo - (3))*cf_B4_3*df3 + (Dlo - (4))*cf_B4_4*df4 + (Dlo - (5))*cf_B4_5*df5 + (Dlo - (6))*cf_B4_6*df6) + N5.x*((Dlo - (1))*cf_B5_1*df1 + (Dlo - (2))*cf_B5_2*df2 + (Dlo - (3))*cf_B5_3*df3 + (Dlo - (4))*cf_B5_4*df4 + (Dlo - (5))*cf_B5_5*df5 + (Dlo - (6))*cf_B5_6*df6) + N6.x*((Dlo - (1))*cf_B6_1*df1 + (Dlo - (2))*cf_B6_2*df2 + (Dlo - (3))*cf_B6_3*df3 + (Dlo - (4))*cf_B6_4*df4 + (Dlo - (5))*cf_B6_5*df5 + (Dlo - (6))*cf_B6_6*df6) + N7.x*((Dlo - (1))*cf_B7_1*df1 + (Dlo - (2))*cf_B7_2*df2 + (Dlo - (3))*cf_B7_3*df3 + (Dlo - (4))*cf_B7_4*df4 + (Dlo - (5))*cf_B7_5*df5 + (Dlo - (6))*cf_B7_6*df6) + N8.x*((Dlo - (1))*cf_B8_1*df1 + (Dlo - (2))*cf_B8_2*df2 + (Dlo - (3))*cf_B8_3*df3 + (Dlo - (4))*cf_B8_4*df4 + (Dlo - (5))*cf_B8_5*df5 + (Dlo - (6))*cf_B8_6*df6) + N9.x*((Dlo - (1))*cf_B9_1*df1 + (Dlo - (2))*cf_B9_2*df2 + (Dlo - (3))*cf_B9_3*df3 + (Dlo - (4))*cf_B9_4*df4 + (Dlo - (5))*cf_B9_5*df5 + (Dlo - (6))*cf_B9_6*df6) + N10.x*((Dlo - (1))*cf_B10_1*df1 + (Dlo - (2))*cf_B10_2*df2 + (Dlo - (3))*cf_B10_3*df3 + (Dlo - (4))*cf_B10_4*df4 + (Dlo - (5))*cf_B10_5*df5 + (Dlo - (6))*cf_B10_6*df6) + N11.x*((Dlo - (1))*cf_B11_1*df1 + (Dlo - (2))*cf_B11_2*df2 + (Dlo - (3))*cf_B11_3*df3 + (Dlo - (4))*cf_B11_4*df4 + (Dlo - (5))*cf_B11_5*df5 + (Dlo - (6))*cf_B11_6*df6) + N12.x*((Dlo - (1))*cf_B12_1*df1 + (Dlo - (2))*cf_B12_2*df2 + (Dlo - (3))*cf_B12_3*df3 + (Dlo - (4))*cf_B12_4*df4 + (Dlo - (5))*cf_B12_5*df5 + (Dlo - (6))*cf_B12_6*df6) + N13.x*((Dlo - (1))*cf_B13_1*df1 + (Dlo - (2))*cf_B13_2*df2 + (Dlo - (3))*cf_B13_3*df3 + (Dlo - (4))*cf_B13_4*df4 + (Dlo - (5))*cf_B13_5*df5 + (Dlo - (6))*cf_B13_6*df6) + N14.x*((Dlo - (1))*cf_B14_1*df1 + (Dlo - (2))*cf_B14_2*df2 + (Dlo - (3))*cf_B14_3*df3 + (Dlo - (4))*cf_B14_4*df4 + (Dlo - (5))*cf_B14_5*df5 + (Dlo - (6))*cf_B14_6*df6)",
+   "source": "Macaulay duration of portfolio >= Dl - 1/4"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "S1",
+   "op": ">=",
+   "value": "0",
+   "why": "R1 cumulative cover through year 1"
+  },
+  {
+   "quantity": "S2",
+   "op": ">=",
+   "value": "0",
+   "why": "R1 cumulative cover through year 2"
+  },
+  {
+   "quantity": "S3",
+   "op": ">=",
+   "value": "0",
+   "why": "R1 cumulative cover through year 3"
+  },
+  {
+   "quantity": "S4",
+   "op": ">=",
+   "value": "0",
+   "why": "R1 cumulative cover through year 4"
+  },
+  {
+   "quantity": "S5",
+   "op": ">=",
+   "value": "0",
+   "why": "R1 cumulative cover through year 5"
+  },
+  {
+   "quantity": "S6",
+   "op": ">=",
+   "value": "0",
+   "why": "R1 cumulative cover through year 6"
+  },
+  {
+   "quantity": "M2",
+   "op": ">=",
+   "value": "0",
+   "why": "R2 BBB <= 30 % of purchase cost"
+  },
+  {
+   "quantity": "C",
+   "op": "<=",
+   "value": "2300000",
+   "why": "R4 budget 2300 kEUR"
+  }
+ ],
+ "modes": {
+  "Base": {
+   "quantities": {},
+   "requirements": [
+    {
+     "quantity": "DA",
+     "op": "<=",
+     "value": "0",
+     "why": "R3 duration <= liability duration + 0.25"
+    },
+    {
+     "quantity": "DB",
+     "op": "<=",
+     "value": "0",
+     "why": "R3 duration >= liability duration - 0.25"
+    }
+   ]
+  },
+  "Fall": {
+   "quantities": {
+    "e_B8": {
+     "value": "3"
+    },
+    "e_B11": {
+     "value": "3"
+    }
+   },
+   "requirements": []
+  }
+ },
+ "objective": {
+  "minimize": "N1.x*p_B1*face + N2.x*p_B2*face + N3.x*p_B3*face + N4.x*p_B4*face + N5.x*p_B5*face + N6.x*p_B6*face + N7.x*p_B7*face + N8.x*p_B8*face + N9.x*p_B9*face + N10.x*p_B10*face + N11.x*p_B11*face + N12.x*p_B12*face + N13.x*p_B13*face + N14.x*p_B14*face",
+  "unit": "EUR",
+  "why": "total purchase cost"
+ },
+ "catalog": {
+  "cat_B1": {
+   "integers": {
+    "field": "x",
+    "from": "31",
+    "to": "31",
+    "unit": ""
+   }
+  },
+  "cat_B2": {
+   "integers": {
+    "field": "x",
+    "from": "26",
+    "to": "26",
+    "unit": ""
+   }
+  },
+  "cat_B3": {
+   "integers": {
+    "field": "x",
+    "from": "1",
+    "to": "1",
+    "unit": ""
+   }
+  },
+  "cat_B4": {
+   "integers": {
+    "field": "x",
+    "from": "35",
+    "to": "35",
+    "unit": ""
+   }
+  },
+  "cat_B5": {
+   "integers": {
+    "field": "x",
+    "from": "0",
+    "to": "0",
+    "unit": ""
+   }
+  },
+  "cat_B6": {
+   "integers": {
+    "field": "x",
+    "from": "67",
+    "to": "67",
+    "unit": ""
+   }
+  },
+  "cat_B7": {
+   "integers": {
+    "field": "x",
+    "from": "3",
+    "to": "3",
+    "unit": ""
+   }
+  },
+  "cat_B8": {
+   "integers": {
+    "field": "x",
+    "from": "0",
+    "to": "0",
+    "unit": ""
+   }
+  },
+  "cat_B9": {
+   "integers": {
+    "field": "x",
+    "from": "0",
+    "to": "0",
+    "unit": ""
+   }
+  },
+  "cat_B10": {
+   "integers": {
+    "field": "x",
+    "from": "58",
+    "to": "58",
+    "unit": ""
+   }
+  },
+  "cat_B11": {
+   "integers": {
+    "field": "x",
+    "from": "0",
+    "to": "0",
+    "unit": ""
+   }
+  },
+  "cat_B12": {
+   "integers": {
+    "field": "x",
+    "from": "0",
+    "to": "0",
+    "unit": ""
+   }
+  },
+  "cat_B13": {
+   "integers": {
+    "field": "x",
+    "from": "0",
+    "to": "0",
+    "unit": ""
+   }
+  },
+  "cat_B14": {
+   "integers": {
+    "field": "x",
+    "from": "4",
+    "to": "4",
+    "unit": ""
+   }
+  }
+ }
+}

@@ -1,0 +1,186 @@
+{
+ "stand": "universal-stand/1",
+ "quantities": {
+  "lam": {
+   "role": "given",
+   "range": [
+    "1620",
+    "1980.001"
+   ],
+   "unit": "1/s",
+   "why": "peak arrival rate 1800 req/s +-10%; upper end widened by 0.001 so the nominal (midpoint) never sits exactly on the M/M/1 pole mu = lambda_i"
+  },
+  "dn": {
+   "role": "given",
+   "value": "0",
+   "unit": "",
+   "why": "instances down (the mode sets it: 0 normal, 1 degraded)"
+  },
+  "L100": {
+   "role": "given",
+   "range": [
+    "4.605170",
+    "4.605171"
+   ],
+   "unit": "",
+   "why": "ln(100), bracketed (irrational)"
+  },
+  "gw": {
+   "role": "given",
+   "range": [
+    "5",
+    "12"
+   ],
+   "unit": "ms",
+   "why": "gateway latency"
+  },
+  "db": {
+   "role": "given",
+   "range": [
+    "15",
+    "30"
+   ],
+   "unit": "ms",
+   "why": "database latency"
+  },
+  "rho": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Tend": {
+   "role": "derived",
+   "unit": "ms"
+  }
+ },
+ "slots": {
+  "INST": {
+   "from": [
+    "instance_types"
+   ]
+  },
+  "CNT": {
+   "from": [
+    "counts"
+   ]
+  }
+ },
+ "define": {
+  "lami": "lam/(CNT.N - dn)",
+  "rhod": "lam/((CNT.N - dn)*INST.mu)",
+  "T99d": "L100/(INST.mu - lam/(CNT.N - dn))"
+ },
+ "laws": [
+  {
+   "zfl": "rho == rhod",
+   "source": "M/M/1 utilization rho = lambda_i/mu, lambda_i = lambda/N_active"
+  },
+  {
+   "zfl": "Tend == gw + T99d + db",
+   "source": "end-to-end p99 taken as the sum gateway + M/M/1 T99 + database; T99 = ln(100)/(mu - lambda_i)"
+  }
+ ],
+ "requirements": [],
+ "objective": {
+  "minimize": "INST.price*CNT.N",
+  "why": "lowest hourly cost, N instances of one type"
+ },
+ "modes": {
+  "normal": {
+   "quantities": {
+    "dn": {
+     "value": "0"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "Tend",
+     "op": "<=",
+     "value": "150",
+     "why": "end-to-end p99 <= 150 ms"
+    },
+    {
+     "quantity": "rho",
+     "op": "<=",
+     "value": "0.75",
+     "why": "utilization <= 0.75"
+    }
+   ]
+  },
+  "degraded": {
+   "quantities": {
+    "dn": {
+     "value": "1"
+    }
+   },
+   "requirements": [
+    {
+     "quantity": "rho",
+     "op": "<=",
+     "value": "1",
+     "why": "rho < 1 (M/M/1 stability), strictness approximated by <="
+    },
+    {
+     "quantity": "Tend",
+     "op": "<=",
+     "value": "300",
+     "why": "end-to-end p99 <= 300 ms with one instance down"
+    }
+   ]
+  }
+ },
+ "catalog": {
+  "instance_types": {
+   "items": [
+    {
+     "mu": {
+      "value": "220",
+      "tolerance": "0.10"
+     },
+     "price": "0.17",
+     "type": "I1"
+    },
+    {
+     "mu": {
+      "value": "450",
+      "tolerance": "0.10"
+     },
+     "price": "0.34",
+     "type": "I2"
+    },
+    {
+     "mu": {
+      "value": "900",
+      "tolerance": "0.12"
+     },
+     "price": "0.68",
+     "type": "I3"
+    },
+    {
+     "mu": {
+      "value": "1700",
+      "tolerance": "0.12"
+     },
+     "price": "1.36",
+     "type": "I4"
+    }
+   ],
+   "ground": "problem statement catalog",
+   "fields": {
+    "mu": {
+     "unit": "1/s"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  },
+  "counts": {
+   "integers": {
+    "field": "N",
+    "from": "2",
+    "to": "12",
+    "unit": ""
+   }
+  }
+ }
+}

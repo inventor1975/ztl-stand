@@ -1,0 +1,5 @@
+Reference,Value,Tolerance
+Rb,470k,5%
+Rc,1k,5%
+Re,100,5%
+Q1,qmod,50%

@@ -1,0 +1,79 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "k06 SYSTEM: STATIC + FIT + PIPE; bands 1514..1515 L/min",
+ "components": {
+  "ST": {
+   "file": "static.json"
+  },
+  "FIT": {
+   "file": "fittings_fine.json"
+  },
+  "PIP": {
+   "file": "pipe_fine.json"
+  }
+ },
+ "connect": {
+  "FIT.Q": "Qsys",
+  "PIP.Q": "Qsys"
+ },
+ "quantities": {
+  "Qsys": {
+   "role": "given",
+   "value": "1514.1647136",
+   "unit": "L/min",
+   "why": "peak hour flow 400 gpm"
+  },
+  "Hp": {
+   "role": "given",
+   "value": "50",
+   "unit": "ft",
+   "why": "placeholder"
+  },
+  "Hl": {
+   "role": "given",
+   "value": "0",
+   "unit": "ft",
+   "why": "placeholder"
+  },
+  "TDH": {
+   "role": "derived",
+   "unit": "ft"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "TDH == ST.Hst + FIT.HLm + PIP.HLf",
+   "source": "total dynamic head"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "TDH",
+   "op": "<=",
+   "value": "Hp",
+   "why": "pump head covers the highest need"
+  }
+ ],
+ "find": [
+  {
+   "smallest": "Hp",
+   "from": "30",
+   "to": "60",
+   "precision": "0.01"
+  },
+  {
+   "largest": "Hl",
+   "from": "0",
+   "to": "60",
+   "precision": "0.01",
+   "requirements": [
+    {
+     "quantity": "TDH",
+     "op": ">=",
+     "value": "Hl",
+     "why": "lowest head the system can ask"
+    }
+   ]
+  }
+ ]
+}

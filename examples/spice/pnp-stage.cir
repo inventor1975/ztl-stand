@@ -1,0 +1,8 @@
+* a PNP stage: emitter to +12 V through Re, base to ground through Rb, collector load to ground
+Vcc vcc 0 12
+Re vcc e 100
+Rb b 0 470k
+Rc c 0 1k
+Q1 c b e qp
+.model qp PNP(BF=100 Vbe=0.65 Vcesat=0.2)
+.end

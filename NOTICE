@@ -1,0 +1,15 @@
+ztl-stand — a design stand on Zero-Trust Logic
+Copyright (c) 2026 Vitaly Reznik
+
+Dual-licensed under the Apache License 2.0 or the MIT License, at your option.
+See LICENSE-APACHE and LICENSE-MIT. Depends on ZTL (github.com/inventor1975/ZTL, Apache-2.0 OR MIT).
+
+Idea and direction: Vitaly Reznik. The code, the Lean proofs and the documents were built with Claude
+(Anthropic, an AI model) under his curation. This is stated in every published artifact of this project.
+
+ustand/znet.py, ustand/netsearch.py, ustand/network.py and lean/ZNet.lean — the network certificate: the method
+was developed by Vitaly Reznik (circuit stand, 2026-10-08/09), prompted by a question from Arkadiy Miteiko.
+
+Input: JSON "bricks" (quantities, laws, requirements, a factory catalogue). Output: a verdict in three — a
+realisation that provably meets the requirements, "impossible" with the bound and the reasons, or open, with
+witnesses. The judge is ZTL; whatever mathematics ZTL learns to prove, the stand inherits.

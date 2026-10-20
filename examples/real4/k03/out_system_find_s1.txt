@@ -1,0 +1,2063 @@
+{
+  "verdict": "EARNED",
+  "find": "largest",
+  "quantity": "Ta",
+  "unit": "C",
+  "proved": "80",
+  "proved_means": "every Ta in [0, 80] C works (EARNED on the whole range)",
+  "beyond": "8001/100 (~80.01)",
+  "beyond_is": "OPEN: the stand could not decide the range [0, 8001/100 (~80.01)] C — the limit lies between 80 and 8001/100 (~80.01), unproved",
+  "precision": "1/100 (~0.01)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL fd6593d",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "Tj_c": [
+            "68/5 (~13.6)",
+            "245/2 (~122.5)"
+          ],
+          "Tj_p": [
+            "112/5 (~22.4)",
+            "150"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {},
+    "guaranteed": {
+      "Tj_c": [
+        "68/5 (~13.6)",
+        "245/2 (~122.5)"
+      ],
+      "Tj_p": [
+        "112/5 (~22.4)",
+        "150"
+      ]
+    },
+    "guaranteed_unit": {
+      "Tj_c": "C",
+      "Tj_p": "C"
+    },
+    "how": {
+      "Tj_c": "ZTL, exact at the corners",
+      "Tj_p": "ZTL, exact at the corners"
+    },
+    "requirements": [
+      {
+        "quantity": "Tj_c",
+        "op": "<=",
+        "value": "125",
+        "why": "control section"
+      },
+      {
+        "quantity": "Tj_p",
+        "op": "<=",
+        "value": "150",
+        "why": "power transistor"
+      }
+    ],
+    "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "Tj_c -> [68/5, 245/2] by the system over its parameters, exact at the corners (credit)",
+      "Tj_p -> [112/5, 150] by the system over its parameters, exact at the corners (credit)"
+    ],
+    "components": {
+      "REG": {
+        "inputs": {
+          "Vin": {
+            "from": "Vin",
+            "arrives": [
+              "13/2",
+              "9/1"
+            ],
+            "assume": [
+              "13/2",
+              "9/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "Vin": [
+                "13/2",
+                "9/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "PD": [
+                "42/5",
+                "123/5"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "PD": [
+            "42/5",
+            "123/5"
+          ]
+        }
+      },
+      "DIE": {
+        "inputs": {
+          "P": {
+            "from": "REG.PD",
+            "arrives": [
+              "42/5",
+              "123/5"
+            ],
+            "assume": [
+              "0/1",
+              "30/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "P": [
+                "8/1",
+                "9/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "4/1",
+                "9/2"
+              ],
+              "dTp": [
+                "64/5",
+                "72/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "9/1",
+                "10/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "9/2",
+                "5/1"
+              ],
+              "dTp": [
+                "72/5",
+                "16/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "10/1",
+                "11/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "5/1",
+                "11/2"
+              ],
+              "dTp": [
+                "16/1",
+                "88/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "11/1",
+                "12/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "11/2",
+                "6/1"
+              ],
+              "dTp": [
+                "88/5",
+                "96/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "12/1",
+                "13/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "6/1",
+                "13/2"
+              ],
+              "dTp": [
+                "96/5",
+                "104/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "13/1",
+                "14/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "13/2",
+                "7/1"
+              ],
+              "dTp": [
+                "104/5",
+                "112/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "14/1",
+                "15/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "7/1",
+                "15/2"
+              ],
+              "dTp": [
+                "112/5",
+                "24/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "15/1",
+                "16/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "15/2",
+                "8/1"
+              ],
+              "dTp": [
+                "24/1",
+                "128/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "16/1",
+                "17/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "8/1",
+                "17/2"
+              ],
+              "dTp": [
+                "128/5",
+                "136/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "17/1",
+                "18/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "17/2",
+                "9/1"
+              ],
+              "dTp": [
+                "136/5",
+                "144/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "18/1",
+                "19/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "9/1",
+                "19/2"
+              ],
+              "dTp": [
+                "144/5",
+                "152/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "19/1",
+                "20/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "19/2",
+                "10/1"
+              ],
+              "dTp": [
+                "152/5",
+                "32/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "20/1",
+                "21/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "10/1",
+                "21/2"
+              ],
+              "dTp": [
+                "32/1",
+                "168/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "21/1",
+                "22/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "21/2",
+                "11/1"
+              ],
+              "dTp": [
+                "168/5",
+                "176/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "22/1",
+                "23/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "11/1",
+                "23/2"
+              ],
+              "dTp": [
+                "176/5",
+                "184/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "23/1",
+                "24/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "23/2",
+                "12/1"
+              ],
+              "dTp": [
+                "184/5",
+                "192/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "24/1",
+                "25/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "12/1",
+                "25/2"
+              ],
+              "dTp": [
+                "192/5",
+                "40/1"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "dTc": [
+            "4/1",
+            "25/2"
+          ],
+          "dTp": [
+            "64/5",
+            "40/1"
+          ]
+        }
+      },
+      "HS": {
+        "inputs": {
+          "P": {
+            "from": "REG.PD",
+            "arrives": [
+              "42/5",
+              "123/5"
+            ],
+            "assume": [
+              "0/1",
+              "30/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "P": [
+                "8/1",
+                "9/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "8/1",
+                "9/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "9/1",
+                "10/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "9/1",
+                "10/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "10/1",
+                "11/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "10/1",
+                "11/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "11/1",
+                "12/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "11/1",
+                "12/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "12/1",
+                "13/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "12/1",
+                "13/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "13/1",
+                "14/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "13/1",
+                "14/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "14/1",
+                "15/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "14/1",
+                "15/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "15/1",
+                "16/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "15/1",
+                "16/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "16/1",
+                "17/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "16/1",
+                "17/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "17/1",
+                "18/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "17/1",
+                "18/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "18/1",
+                "19/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "18/1",
+                "19/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "19/1",
+                "20/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "19/1",
+                "20/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "20/1",
+                "21/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "20/1",
+                "21/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "21/1",
+                "22/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "21/1",
+                "22/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "22/1",
+                "23/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "22/1",
+                "23/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "23/1",
+                "24/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "23/1",
+                "24/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "24/1",
+                "25/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "24/1",
+                "25/1"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "dT": [
+            "8/1",
+            "25/1"
+          ]
+        }
+      },
+      "TIM": {
+        "inputs": {
+          "P": {
+            "from": "REG.PD",
+            "arrives": [
+              "42/5",
+              "123/5"
+            ],
+            "assume": [
+              "0/1",
+              "30/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "P": [
+                "8/1",
+                "9/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "8/5",
+                "9/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "9/1",
+                "10/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "9/5",
+                "2/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "10/1",
+                "11/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "2/1",
+                "11/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "11/1",
+                "12/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "11/5",
+                "12/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "12/1",
+                "13/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "12/5",
+                "13/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "13/1",
+                "14/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "13/5",
+                "14/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "14/1",
+                "15/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "14/5",
+                "3/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "15/1",
+                "16/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "3/1",
+                "16/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "16/1",
+                "17/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "16/5",
+                "17/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "17/1",
+                "18/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "17/5",
+                "18/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "18/1",
+                "19/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "18/5",
+                "19/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "19/1",
+                "20/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "19/5",
+                "4/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "20/1",
+                "21/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "4/1",
+                "21/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "21/1",
+                "22/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "21/5",
+                "22/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "22/1",
+                "23/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "22/5",
+                "23/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "23/1",
+                "24/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "23/5",
+                "24/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "24/1",
+                "25/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "24/5",
+                "5/1"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "dT": [
+            "8/5",
+            "5/1"
+          ]
+        }
+      }
+    },
+    "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)"
+  },
+  "at_beyond": {
+    "verdict": "OPEN",
+    "why": "components: the system fails at a point of the components' guaranteed ranges, but those ranges enclose (they may be wider than what the components can produce): not a refutation. Finer bands, or the chain as one flat brick, decide it. The flat run said: every design in the catalog violates a requirement at a concrete point",
+    "refuted_inside_the_enclosures": {
+      "its_violating_point": {
+        "DIE_dTc": "25/2 (~12.5)",
+        "DIE_dTp": "40",
+        "HS_dT": "25",
+        "REG_PD": "123/5 (~24.6)",
+        "TIM_dT": "5",
+        "Ta": "8001/100 (~80.01)",
+        "Vin": "9"
+      }
+    },
+    "components": {
+      "REG": {
+        "inputs": {
+          "Vin": {
+            "from": "Vin",
+            "arrives": [
+              "13/2",
+              "9/1"
+            ],
+            "assume": [
+              "13/2",
+              "9/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "Vin": [
+                "13/2",
+                "9/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "PD": [
+                "42/5",
+                "123/5"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "PD": [
+            "42/5",
+            "123/5"
+          ]
+        }
+      },
+      "DIE": {
+        "inputs": {
+          "P": {
+            "from": "REG.PD",
+            "arrives": [
+              "42/5",
+              "123/5"
+            ],
+            "assume": [
+              "0/1",
+              "30/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "P": [
+                "8/1",
+                "9/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "4/1",
+                "9/2"
+              ],
+              "dTp": [
+                "64/5",
+                "72/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "9/1",
+                "10/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "9/2",
+                "5/1"
+              ],
+              "dTp": [
+                "72/5",
+                "16/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "10/1",
+                "11/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "5/1",
+                "11/2"
+              ],
+              "dTp": [
+                "16/1",
+                "88/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "11/1",
+                "12/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "11/2",
+                "6/1"
+              ],
+              "dTp": [
+                "88/5",
+                "96/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "12/1",
+                "13/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "6/1",
+                "13/2"
+              ],
+              "dTp": [
+                "96/5",
+                "104/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "13/1",
+                "14/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "13/2",
+                "7/1"
+              ],
+              "dTp": [
+                "104/5",
+                "112/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "14/1",
+                "15/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "7/1",
+                "15/2"
+              ],
+              "dTp": [
+                "112/5",
+                "24/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "15/1",
+                "16/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "15/2",
+                "8/1"
+              ],
+              "dTp": [
+                "24/1",
+                "128/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "16/1",
+                "17/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "8/1",
+                "17/2"
+              ],
+              "dTp": [
+                "128/5",
+                "136/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "17/1",
+                "18/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "17/2",
+                "9/1"
+              ],
+              "dTp": [
+                "136/5",
+                "144/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "18/1",
+                "19/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "9/1",
+                "19/2"
+              ],
+              "dTp": [
+                "144/5",
+                "152/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "19/1",
+                "20/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "19/2",
+                "10/1"
+              ],
+              "dTp": [
+                "152/5",
+                "32/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "20/1",
+                "21/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "10/1",
+                "21/2"
+              ],
+              "dTp": [
+                "32/1",
+                "168/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "21/1",
+                "22/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "21/2",
+                "11/1"
+              ],
+              "dTp": [
+                "168/5",
+                "176/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "22/1",
+                "23/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "11/1",
+                "23/2"
+              ],
+              "dTp": [
+                "176/5",
+                "184/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "23/1",
+                "24/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "23/2",
+                "12/1"
+              ],
+              "dTp": [
+                "184/5",
+                "192/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "24/1",
+                "25/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dTc": [
+                "12/1",
+                "25/2"
+              ],
+              "dTp": [
+                "192/5",
+                "40/1"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "dTc": [
+            "4/1",
+            "25/2"
+          ],
+          "dTp": [
+            "64/5",
+            "40/1"
+          ]
+        }
+      },
+      "HS": {
+        "inputs": {
+          "P": {
+            "from": "REG.PD",
+            "arrives": [
+              "42/5",
+              "123/5"
+            ],
+            "assume": [
+              "0/1",
+              "30/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "P": [
+                "8/1",
+                "9/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "8/1",
+                "9/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "9/1",
+                "10/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "9/1",
+                "10/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "10/1",
+                "11/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "10/1",
+                "11/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "11/1",
+                "12/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "11/1",
+                "12/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "12/1",
+                "13/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "12/1",
+                "13/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "13/1",
+                "14/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "13/1",
+                "14/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "14/1",
+                "15/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "14/1",
+                "15/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "15/1",
+                "16/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "15/1",
+                "16/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "16/1",
+                "17/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "16/1",
+                "17/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "17/1",
+                "18/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "17/1",
+                "18/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "18/1",
+                "19/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "18/1",
+                "19/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "19/1",
+                "20/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "19/1",
+                "20/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "20/1",
+                "21/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "20/1",
+                "21/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "21/1",
+                "22/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "21/1",
+                "22/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "22/1",
+                "23/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "22/1",
+                "23/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "23/1",
+                "24/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "23/1",
+                "24/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "24/1",
+                "25/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "24/1",
+                "25/1"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "dT": [
+            "8/1",
+            "25/1"
+          ]
+        }
+      },
+      "TIM": {
+        "inputs": {
+          "P": {
+            "from": "REG.PD",
+            "arrives": [
+              "42/5",
+              "123/5"
+            ],
+            "assume": [
+              "0/1",
+              "30/1"
+            ],
+            "inside": true
+          }
+        },
+        "bands_used": [
+          {
+            "band": {
+              "P": [
+                "8/1",
+                "9/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "8/5",
+                "9/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "9/1",
+                "10/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "9/5",
+                "2/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "10/1",
+                "11/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "2/1",
+                "11/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "11/1",
+                "12/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "11/5",
+                "12/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "12/1",
+                "13/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "12/5",
+                "13/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "13/1",
+                "14/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "13/5",
+                "14/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "14/1",
+                "15/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "14/5",
+                "3/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "15/1",
+                "16/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "3/1",
+                "16/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "16/1",
+                "17/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "16/5",
+                "17/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "17/1",
+                "18/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "17/5",
+                "18/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "18/1",
+                "19/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "18/5",
+                "19/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "19/1",
+                "20/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "19/5",
+                "4/1"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "20/1",
+                "21/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "4/1",
+                "21/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "21/1",
+                "22/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "21/5",
+                "22/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "22/1",
+                "23/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "22/5",
+                "23/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "23/1",
+                "24/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "23/5",
+                "24/5"
+              ]
+            }
+          },
+          {
+            "band": {
+              "P": [
+                "24/1",
+                "25/1"
+              ]
+            },
+            "earned": true,
+            "outputs": {
+              "dT": [
+                "24/5",
+                "5/1"
+              ]
+            }
+          }
+        ],
+        "outputs": {
+          "dT": [
+            "8/5",
+            "5/1"
+          ]
+        }
+      }
+    },
+    "components_note": "each component judged once per input band (its ratings EARNED there, its outputs' ranges proved); between components only ranges travel — a correlation through a shared source is not kept (sound, maybe wider than one flat brick)"
+  },
+  "tries": [
+    {
+      "Ta": "0",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "150",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "75",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "225/2 (~112.5)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "375/4 (~93.75)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "4219/50 (~84.38)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "7969/100 (~79.69)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "2051/25 (~82.04)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "4043/50 (~80.86)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "2007/25 (~80.28)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "3999/50 (~79.98)",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "8013/100 (~80.13)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "4003/50 (~80.06)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "4001/50 (~80.02)",
+      "verdict": "OPEN"
+    },
+    {
+      "Ta": "80",
+      "verdict": "EARNED"
+    },
+    {
+      "Ta": "8001/100 (~80.01)",
+      "verdict": "OPEN"
+    }
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

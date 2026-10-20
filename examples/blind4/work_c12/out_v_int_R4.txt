@@ -1,0 +1,142 @@
+{
+  "stand": "universal-stand/1",
+  "judge": "ZTL 5f645aa",
+  "modes": [
+    "Base",
+    "Stress",
+    "Fall"
+  ],
+  "designs_tried": 1,
+  "undecided": 0,
+  "designs": [
+    {
+      "design": "N1=cat_B1(x=32); N2=cat_B2(x=25); N3=cat_B3(x=0); N4=cat_B4(x=38); N5=cat_B5(x=24); N6=cat_B6(x=0); N7=cat_B7(x=45); N8=cat_B8(x=0); N9=cat_B9(x=0); N10=cat_B10(x=60); N11=cat_B11(x=0); N12=cat_B12(x=3); N13=cat_B13(x=0); N14=cat_B14(x=2)",
+      "verdict": "REFUTED",
+      "mode": "Base",
+      "fails": "R4 budget 2300 kEUR",
+      "by": "8670",
+      "unit": "EUR"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1
+  },
+  "verdict": "REFUTED",
+  "why": "every design violates a requirement in at least one mode, at a concrete point",
+  "closest_design": {
+    "N1": {
+      "catalog": "cat_B1",
+      "x": {
+        "nominal": "32",
+        "tolerance": "0"
+      }
+    },
+    "N2": {
+      "catalog": "cat_B2",
+      "x": {
+        "nominal": "25",
+        "tolerance": "0"
+      }
+    },
+    "N3": {
+      "catalog": "cat_B3",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N4": {
+      "catalog": "cat_B4",
+      "x": {
+        "nominal": "38",
+        "tolerance": "0"
+      }
+    },
+    "N5": {
+      "catalog": "cat_B5",
+      "x": {
+        "nominal": "24",
+        "tolerance": "0"
+      }
+    },
+    "N6": {
+      "catalog": "cat_B6",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N7": {
+      "catalog": "cat_B7",
+      "x": {
+        "nominal": "45",
+        "tolerance": "0"
+      }
+    },
+    "N8": {
+      "catalog": "cat_B8",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N9": {
+      "catalog": "cat_B9",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N10": {
+      "catalog": "cat_B10",
+      "x": {
+        "nominal": "60",
+        "tolerance": "0"
+      }
+    },
+    "N11": {
+      "catalog": "cat_B11",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N12": {
+      "catalog": "cat_B12",
+      "x": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    },
+    "N13": {
+      "catalog": "cat_B13",
+      "x": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    },
+    "N14": {
+      "catalog": "cat_B14",
+      "x": {
+        "nominal": "2",
+        "tolerance": "0"
+      }
+    }
+  },
+  "failing_mode": "Base",
+  "its_violating_point": {},
+  "value_there": {
+    "C": "2308670"
+  },
+  "requirement": {
+    "quantity": "C",
+    "op": "<=",
+    "value": "2300000",
+    "why": "R4 budget 2300 kEUR"
+  },
+  "overshoot": "8670",
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "minimal_conflicts": {
+    "skipped": "10 requirements: subsets over 8 not enumerated"
+  }
+}

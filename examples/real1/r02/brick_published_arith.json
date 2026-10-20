@@ -1,0 +1,147 @@
+{
+ "stand": "ztl-stand/1",
+ "report": "all",
+ "conflicts": false,
+ "quantities": {
+  "Vin": {
+   "role": "given",
+   "range": [
+    "7",
+    "12"
+   ],
+   "unit": "V",
+   "why": "input range; only the top (10 V / 12 V) is published, the bottom 7 V is my assumption"
+  },
+  "Vout": {
+   "role": "given",
+   "range": [
+    "4.8",
+    "4.8"
+   ],
+   "unit": "V",
+   "why": "only the minimum 4.8 V is published; 5.2 V top is my assumption"
+  },
+  "Iout": {
+   "role": "given",
+   "range": [
+    "0",
+    "0.25"
+   ],
+   "unit": "A",
+   "why": "load current up to 200 mA (published); 0 at the bottom is my assumption"
+  },
+  "IQ": {
+   "role": "given",
+   "range": [
+    "2.25",
+    "2.25"
+   ],
+   "unit": "mA",
+   "why": "quiescent current at 200 mA load, curve reads 2.25 mA at 25C and 1.7 mA at 125C"
+  },
+  "Ta": {
+   "role": "given",
+   "range": [
+    "85",
+    "85"
+   ],
+   "unit": "C",
+   "why": "ambient up to 85 C (published); -40 C bottom is my assumption"
+  },
+  "P": {
+   "role": "derived",
+   "unit": "W"
+  },
+  "Tj": {
+   "role": "derived",
+   "unit": "C"
+  }
+ },
+ "slots": {
+  "PKG": {
+   "from": [
+    "packages"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "P == (Vin - Vout)*Iout + Vin*IQ",
+   "source": "pass-element dissipation plus quiescent power (app note eq. 2)"
+  },
+  {
+   "zfl": "Tj == Ta + P*PKG.Rth",
+   "source": "junction-to-ambient thermal resistance (app note eq. 1/3/4)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Tj",
+   "op": "<=",
+   "value": "150",
+   "why": "maximum junction temperature 150 C used by the app note"
+  }
+ ],
+ "catalog": {
+  "packages": {
+   "items": [
+    {
+     "Rth": {
+      "value": "50"
+     },
+     "price": "0.6",
+     "label": "TO220 bare (published RthJA 50)"
+    },
+    {
+     "Rth": {
+      "value": "125"
+     },
+     "price": "0.4",
+     "label": "SO14 narrow (published 125)"
+    },
+    {
+     "Rth": {
+      "value": "100"
+     },
+     "price": "0.5",
+     "label": "PDIP8 (published 100)"
+    },
+    {
+     "Rth": {
+      "value": "13.521",
+      "tolerance": "0.2"
+     },
+     "price": "2.0",
+     "label": "TO220 + AAVID 504222 + pad (my reading of the curve, +-20% assumed)"
+    },
+    {
+     "Rth": {
+      "value": "35.5"
+     },
+     "price": "1.0",
+     "label": "TO220 + hypothetical sink, RthJA 44 (boundary probe)"
+    },
+    {
+     "Rth": {
+      "value": "36"
+     },
+     "price": "1.5",
+     "label": "TO220 + hypothetical sink, RthJA 45 (boundary probe)"
+    }
+   ],
+   "ground": "ON Semiconductor AN, Table 1 and heatsink figure",
+   "fields": {
+    "Rth": {
+     "unit": "C/W"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ },
+ "objective": {
+  "minimize": "PKG.price",
+  "why": "cheapest package/sink that holds Tj"
+ }
+}
