@@ -1949,6 +1949,10 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
             elif q in impl_how:
                 how[q] = (f"ZTL, implicit law: a root-exclusion certificate (searched by the stand) checked by the "
                           f"kernel — {impl_how[q]}" + _ck(q, dbound, back, "enclosure"))
+            elif q in defs and q in ztl_defs and any(l.startswith(f"{q} -> ") and "affine in the system" in l
+                                                     for l in log):
+                how[q] = ("ZTL, the definition read through the system's dependence on the data — each datum at the "
+                          "end its coefficient's sign picks, the rest by interval reading (sound)" + _ck(q, dbound, back))
             elif q in defs and q in ztl_defs:
                 how[q] = ("ZTL, interval reading of the definition (" + _wide(rng, q) + ")" + _ck(q, dbound, back))
             elif q in defs:
