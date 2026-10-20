@@ -2027,10 +2027,22 @@ def _each_requirement(b, design, reqs_given):
     from . import linsearch as _LS
     keep = (K.MAX_PIECES, _LS.MAX_PIECES)
     K.MAX_PIECES, _LS.MAX_PIECES = EACH_REQ_PIECES, EACH_REQ_PIECES
+    # IN PARALLEL with --jobs (2026-10-20, the bridge girder: 91 requirements, 836 of 842 s were this listing, row by
+    # row on one core while the verdict took 6 s). The rows are independent; the workers fork after the budget is
+    # set, compute them in order, and the list is the same as the serial one.
+    PL.STATE["each_req"] = (b, design, list(reqs_given))
     try:
-        return [_each_one(b, design, r) for r in reqs_given]
+        with PL.prefetch(_each_req_row, len(reqs_given)) as rows:
+            return list(rows)
     finally:
         K.MAX_PIECES, _LS.MAX_PIECES = keep
+        PL.STATE.pop("each_req", None)
+
+
+def _each_req_row(i):
+    """Row i of each_requirement (a worker's unit: module level, so the pool can call it)."""
+    b, design, reqs = PL.STATE["each_req"]
+    return _each_one(b, design, reqs[i])
 
 
 EACH_REQ_PIECES = 200       # each row of the listing after a REFUTED: a certificate search budget (pieces)
@@ -2161,11 +2173,22 @@ def _greedy_corner(laws, fixed, boxes, derived, reqs, violation):
         parts = ([hi - c] if c is not None else []) + ([a - lo] if a is not None else [])
         return max(parts) if parts else None
 
+    # ONE SOLUTION PER POINT, shared by every requirement's walk (2026-10-20, the bridge girder: 91 requirements x 2
+    # starts x 57 solutions = ~10 000 exact solutions of a 141-unknown system per design, 97 % of the time — and the
+    # walks share their start corners and their first steps). A point's solution does not depend on which
+    # requirement asked for it; the walk and its result are unchanged.
+    seen = {}
+
     def solve(pt):
+        k = tuple(pt[n] for n in names)
+        if k in seen:
+            return seen[k]
         try:
-            return C.solve_at(laws, dict(fixed, **pt), derived)
+            v = C.solve_at(laws, dict(fixed, **pt), derived)
         except (C.CheckError, ZeroDivisionError):
-            return None
+            v = None
+        seen[k] = v
+        return v
     import time as _time
     for r in reqs:
         for start in (0, 1):
@@ -2193,6 +2216,16 @@ def _greedy_corner(laws, fixed, boxes, derived, reqs, violation):
                 return pt, vals, hit
     return None
 
+
+def _certify_row(i):
+    """Requirement i of _certify (a worker's unit: module level, so the pool can call it)."""
+    one, reqs = PL.STATE["certify"]
+    return one(reqs[i])
+
+def _range_row(i):
+    """The proved range of unknown i (a worker's unit: module level, so the pool can call it)."""
+    core_laws, core_u, used, fixed, boxes = PL.STATE["ranges"]
+    return K.prove_linear_range(core_laws, core_u, used[i], fixed, boxes)
 
 def _wide(rng, q):
     """'sound, may be wide' — or, for a single value, that it is exact (real r05: said of a point)."""
@@ -2241,7 +2274,8 @@ def _certify(reqs, rng, cons, linear, defs, derived, fixed, boxes, laws, ranges,
         reqs = [r for r in reqs if r["quantity"] not in impl]   # its own range decides it: nothing to certify
     explicit = dict(W.explicit(linear, set(derived)), **defs)
     certified, shown = {}, {}       # (not `ranges`: that is ZTL's, the parameter — 2026-10-10 the
-    for r in reqs:                  #  shadowing switched the exact-range guard below off unnoticed)
+    def _one(r):                    #  shadowing switched the exact-range guard below off unnoticed)
+        certified, shown = {}, {}   # this requirement's rows only; merged below in order
         q = r["quantity"]
         a, c = cons[q]
         lo, hi = rng.get(q, (None, None))          # no range: ZTL refused it — both ends need a certificate
@@ -2250,9 +2284,9 @@ def _certify(reqs, rng, cons, linear, defs, derived, fixed, boxes, laws, ranges,
         claims = ([(">=", a)] if a is not None and (force or lo is None or lo < a) else []) + \
                  ([("<=", c)] if c is not None and (force or hi is None or hi > c) else [])
         if not claims:
-            continue        # already shown by the readings (a STRICT bound too: B.inside honours strictness)
+            return ("ok", certified, shown)        # already shown by the readings (a STRICT bound too: B.inside honours strictness)
         if r["op"] in ("<", ">"):
-            return {}       # a STRICT bound still to show: certificates prove <= and >= only. (It returned {}
+            return ("ret", {})       # a STRICT bound still to show: certificates prove <= and >= only. (It returned {}
                             # BEFORE looking whether anything was left to show — a law's domain "valid: > 0",
                             # already met, switched every certificate of the design off: blind test 2, c06)
         witness_only = False
@@ -2262,14 +2296,14 @@ def _certify(reqs, rng, cons, linear, defs, derived, fixed, boxes, laws, ranges,
             # A PROOF here would contradict ZTL's own exact range — that is a STAND FAULT.
             witness_only = True
         elif q in ranges and ranges[q][2] and not force:
-            return {}   # exact at the corners: nothing to certify — ZTL decides
+            return ("ret", {})   # exact at the corners: nothing to certify — ZTL decides
         lin_unknowns = [d for d in derived if d not in defs]
         if q in explicit:
             text, left = K.expression(q, explicit, set(derived))
         elif q in lin_unknowns:
             text, left = q, {q}         # a linear unknown with no law of its own: the system decides it
         else:
-            return {}
+            return ("ret", {})
         system = None
         if left:
             # Z6: linear unknowns inside — solved symbolically from the linear laws, so their
@@ -2311,8 +2345,18 @@ def _certify(reqs, rng, cons, linear, defs, derived, fixed, boxes, laws, ranges,
                     # truth: the unknowns' tie to the tolerances is not kept — the implicit quantities' rule, G6)
                     used = [u for u in core_u if re.search(rf"\b{re.escape(u)}\b", text)]
                     boxes2, why_u, nl_pieces = dict(boxes), None, 0
-                    for u in used:
-                        gr = K.prove_linear_range(core_laws, core_u, u, fixed, boxes)
+                    # EACH UNKNOWN'S RANGE IS ITS OWN PROOF — in parallel with --jobs (2026-10-20, the bridge girder: the
+                    # deflection reads 90 unknowns of a 141-unknown system, 92 % of a design's time, one by one). The
+                    # proofs are independent; they are read in order, the first refusal stops the reading as before.
+                    PL.STATE["ranges"] = (core_laws, core_u, list(used), fixed, boxes)
+                    try:
+                        with PL.prefetch(_range_row, len(used)) as grs:
+                            got_ranges = list(grs) if PL.JOBS[0] > 1 else None
+                    finally:
+                        PL.STATE.pop("ranges", None)
+                    for iu, u in enumerate(used):
+                        gr = got_ranges[iu] if got_ranges is not None else K.prove_linear_range(core_laws, core_u, u,
+                                                                                                fixed, boxes)
                         if "range" not in gr:
                             why_u = gr["open"]
                             break
@@ -2321,33 +2365,33 @@ def _certify(reqs, rng, cons, linear, defs, derived, fixed, boxes, laws, ranges,
                                 okc, whyc = C.check_linear_certificate(core_laws, fixed, boxes, core_u, u, op_u, bd_u,
                                                                        cert_u)
                                 if not okc:
-                                    return {"unconfirmed": f"{u} {op_u} {bd_u}: the checker could not re-check "
-                                                           f"zlin's certificate: {whyc}"}
+                                    return ("ret", {"unconfirmed": f"{u} {op_u} {bd_u}: the checker could not re-check "
+                                                           f"zlin's certificate: {whyc}"})
                         boxes2[u] = gr["range"]
                         nl_pieces += gr["pieces"]
                     if why_u is not None:
-                        return {"why": {q: f"it reads {len(core_u)} coupled linear unknowns nonlinearly, and a range "
-                                           f"of one could not be proved: {why_u}"}}
+                        return ("ret", {"why": {q: f"it reads {len(core_u)} coupled linear unknowns nonlinearly, and a range "
+                                           f"of one could not be proved: {why_u}"}})
                     for op, bound in claims:
                         got = K.prove(text, fixed, boxes2, op, bound)
                         if "proved" not in got:
                             # a failing point of the enlarged box is not a true point (the unknowns are not free)
-                            return {"why": {q: f"it reads {len(core_u)} coupled linear unknowns NONLINEARLY; their "
+                            return ("ret", {"why": {q: f"it reads {len(core_u)} coupled linear unknowns NONLINEARLY; their "
                                                f"proved ranges as boxes did not settle {q} {op} {bound} (the ranges lose "
                                                "the unknowns' tie to the tolerances) — a LINEAR expression of them is "
-                                               "certified exactly (zlin)"}}
+                                               "certified exactly (zlin)"}})
                         if MODE.DEV[0]:
                             okc, whyc = C.check_certificate([f"{q} == {text}"], fixed, boxes2, [q], q, op, bound,
                                                             got["cert"])
                             if not okc:
-                                return {"unconfirmed": f"{q} {op} {bound}: {whyc}"}
+                                return ("ret", {"unconfirmed": f"{q} {op} {bound}: {whyc}"})
                         nl_pieces += got["proved"]
                     certified[q] = {"pieces": nl_pieces, "system": True, "implicit": False, "split": 0,
                                     "linear": f"zlin: proved ranges of {', '.join(used)} ({len(core_u)} unknowns), "
                                               "then ZTL's certificate over them as boxes"}
                     shown[q] = ((max(lo, a) if lo is not None else a) if a is not None else lo,
                                 (min(hi, c) if hi is not None else c) if c is not None else hi)
-                    continue
+                    return ("ok", certified, shown)
                 # LARGE LINEAR SYSTEMS (2026-10-15, the curator's "да"): no symbolic solution — a certificate over the
                 # box, searched outside (linsearch) and checked exactly by the kernel module zlin
                 lin_pieces = 0
@@ -2357,34 +2401,34 @@ def _certify(reqs, rng, cons, linear, defs, derived, fixed, boxes, laws, ranges,
                         point = dict({n: (b0 + b1) / 2 for n, (b0, b1) in boxes.items()}, **got["witness"])
                         values = C.solve_at(all_laws, dict(fixed, **point), all_derived)     # the checker, exactly
                         if [rr for rr in reqs if B.violates(values[rr["quantity"]], _req_at(rr, dict(fixed, **point)))]:
-                            return {"witness": (point, values)}
-                        return {}
+                            return ("ret", {"witness": (point, values)})
+                        return ("ret", {})
                     if "proved" not in got:
-                        return {"why": {q: f"one of {len(core_u)} coupled linear unknowns: {got['open']}"}}
+                        return ("ret", {"why": {q: f"one of {len(core_u)} coupled linear unknowns: {got['open']}"}})
                     if MODE.DEV[0]:
                         # the checker, independently: the SAME certificate re-checked with its own means (no code
                         # shared with zlin) — and, up to 2^10 corners, every corner solved exactly as well
                         okc, whyc = C.check_linear_certificate(*_as_checked(got, lin_laws, bound, fixed, boxes, lin_u, q, op))
                         if not okc:
-                            return {"unconfirmed": f"{q} {op} {bound}: the checker could not re-check zlin's "
-                                                   f"certificate: {whyc}"}
+                            return ("ret", {"unconfirmed": f"{q} {op} {bound}: the checker could not re-check zlin's "
+                                                   f"certificate: {whyc}"})
                         free = [n for n, (b0, b1) in boxes.items() if b0 != b1]
                         if (1 << len(free)) <= DEV_LIN_CORNERS:
                             for corner in itertools.product(*[boxes[n] for n in free]):
                                 env = dict(fixed, **dict(zip(free, corner)))
                                 v = C.solve_at(all_laws, env, all_derived)[q]
                                 if op == "<=" and v > bound or op == ">=" and v < bound:
-                                    return {"fault": f"the kernel certified {q} {op} {bound} over the box, yet the "
-                                                     f"checker solves {q} = {v} at a corner"}
+                                    return ("ret", {"fault": f"the kernel certified {q} {op} {bound} over the box, yet the "
+                                                     f"checker solves {q} = {v} at a corner"})
                     lin_pieces += got["proved"]
                 certified[q] = {"pieces": lin_pieces, "system": True, "implicit": False, "split": 0,
                                 "linear": f"zlin: {len(core_u)} unknowns" + (", the requirement's expression as one more"
                                           if len(lin_u) > len(core_u) else "") + ", certificate checked exactly"}
                 shown[q] = ((max(lo, a) if lo is not None else a) if a is not None else lo,
                             (min(hi, c) if hi is not None else c) if c is not None else hi)
-                continue
+                return ("ok", certified, shown)
             if sol is None or left - set(sol):
-                return {}
+                return ("ret", {})
             # ZTL gets the TARGET with the unknowns still in it, and the laws: it solves them itself
             system = (text, core_laws, core_u)
             for u, t in sol.items():
@@ -2451,7 +2495,7 @@ def _certify(reqs, rng, cons, linear, defs, derived, fixed, boxes, laws, ranges,
                     values = C.solve_at(all_laws, dict(fixed, **point), all_derived)
                     pt_env = dict(fixed, **point)
                     if [rr for rr in reqs if B.violates(values[rr["quantity"]], _req_at(rr, pt_env))]:
-                        return {"witness": (point, values)}
+                        return ("ret", {"witness": (point, values)})
                     pre_split = None
                 if pre_split is not None:
                     tries = []
@@ -2471,7 +2515,7 @@ def _certify(reqs, rng, cons, linear, defs, derived, fixed, boxes, laws, ranges,
                     pt_env = dict(fixed, **point)
                     bad = [rr for rr in reqs if B.violates(values[rr["quantity"]], _req_at(rr, pt_env))]
                     if bad:
-                        return {"witness": (point, values)}
+                        return ("ret", {"witness": (point, values)})
                     continue                # the free box's corner, not a true point: try the roots
                 if "proved" in got:
                     break
@@ -2495,22 +2539,22 @@ def _certify(reqs, rng, cons, linear, defs, derived, fixed, boxes, laws, ranges,
                         point = dict({n: (b0 + b1) / 2 for n, (b0, b1) in boxes.items()}, **fb["witness"])
                         values = C.solve_at(all_laws, dict(fixed, **point), all_derived)
                         if [rr for rr in reqs if B.violates(values[rr["quantity"]], _req_at(rr, dict(fixed, **point)))]:
-                            return {"witness": (point, values)}
+                            return ("ret", {"witness": (point, values)})
                     if "proved" in fb:
                         if MODE.DEV[0]:
                             okc, whyc = C.check_linear_certificate(*_as_checked(fb, fb_laws, bound, fixed, boxes, fb_u, fb_t, op))
                             if not okc:
-                                return {"unconfirmed": f"{q} {op} {bound}: the checker could not re-check zlin's "
-                                                       f"certificate: {whyc}"}
+                                return ("ret", {"unconfirmed": f"{q} {op} {bound}: the checker could not re-check zlin's "
+                                                       f"certificate: {whyc}"})
                         pieces += fb["proved"]
                         continue                        # this claim proved; the next one
                 if split is None:
-                    return {}
+                    return ("ret", {})
                 got = {"proved": split["proved"], "split": split}
                 implicit = None
             if witness_only:
-                return {"fault": f"ZTL's exact range for {q} leaves {op} {bound}, yet its certificate check "
-                                 f"accepts {q} {op} {bound} over the whole box"}
+                return ("ret", {"fault": f"ZTL's exact range for {q} leaves {op} {bound}, yet its certificate check "
+                                 f"accepts {q} {op} {bound} over the whole box"})
             # J9: the checker re-checks the same certificate from the laws, with its own means
             if "split" in got:
                 # the checker re-checks each term's certificate on the term itself, from its own reading
@@ -2527,13 +2571,23 @@ def _certify(reqs, rng, cons, linear, defs, derived, fixed, boxes, laws, ranges,
                 agree, why = (True, None) if not MODE.DEV[0] else C.check_certificate(laws, fixed, boxes, derived, q, op, bound, got["cert"],
                                                  implicit={n: impl_g[n] for n in implicit} if implicit else None)
             if not agree:
-                return {"unconfirmed": f"{q} {op} {bound}: {why}"}
+                return ("ret", {"unconfirmed": f"{q} {op} {bound}: {why}"})
             pieces += got["proved"]
             as_roots = as_roots or bool(implicit)
             n_split = max(n_split, len(got["split"]["terms"]) if "split" in got else 0)
         certified[q] = {"pieces": pieces, "system": system is not None, "implicit": as_roots, "split": n_split}
         shown[q] = ((max(lo, a) if lo is not None else a) if a is not None else lo,
                     (min(hi, c) if hi is not None else c) if c is not None else hi)
+        return ("ok", certified, shown)
+    # The rows run IN ORDER, one by one: MEASURED on the bridge girder (2026-10-20), 90 of 91 rows took seconds and one
+    # (the deflection, reading 90 unknowns) took the rest — rows in parallel left 15 of 16 workers idle. The parallel
+    # work is inside a row instead: the unknowns' range proofs (below). The first early return wins, as before.
+    for r in reqs:
+        kind, *rest = _one(r)
+        if kind == "ret":
+            return rest[0]
+        certified.update(rest[0])
+        shown.update(rest[1])
     return {"certified": certified, "ranges": shown} if certified else {}
 
 

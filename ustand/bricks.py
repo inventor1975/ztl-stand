@@ -984,8 +984,12 @@ def load(path_or_dict) -> dict:
             except SyntaxError:
                 raise BrickError(f"requirement on {r['quantity']!r}: the bound {v!r} is not a number, a name or "
                                  "a readable expression")
+            # a FUNCTION's name is not a quantity: the bound reader (_ival) reads sqrt, min, exp, ... (found
+            # 2026-10-20 by the bridge girder: "min" in an EN 1993 buckling bound was refused here, read fine there)
+            calls = {id(c.func) for c in __import__("ast").walk(tree)
+                     if type(c).__name__ == "Call" and type(c.func).__name__ == "Name" and c.func.id in FUNCS}
             for node in __import__("ast").walk(tree):
-                if type(node).__name__ == "Name":
+                if type(node).__name__ == "Name" and id(node) not in calls:
                     n = node.id
                     if "__" in n:
                         if n.split("__")[0] not in (b.get("slots") or {}):

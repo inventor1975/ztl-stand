@@ -57,11 +57,30 @@ def sheet(fixed: dict, boxes: dict, derived, grounds: dict):
     return ", ".join(parts)
 
 
+_JUDGED = {}        # (claim, sheet) -> (ranges, log, disposition); see judge
+
+
 def judge(laws, fixed, boxes, derived, grounds):
-    """{name: (lo, hi, exact)} for every derived quantity ZTL narrowed, plus its log."""
+    """{name: (lo, hi, exact)} for every derived quantity ZTL narrowed, plus its log.
+
+    REMEMBERED per (laws, sheet) (2026-10-20, the bridge girder: after a REFUTED the listing judged each of 91
+    requirements alone, and each called ZTL on the SAME laws and the SAME sheet — 91 identical solutions of a
+    141-unknown system, 98 % of 148 s). The answer is a function of the text ZTL reads; a copy is handed out."""
     if not laws:                    # every law a definition (2026-10-10): nothing for the linear judge
         return {}, [], None
     claim = " & ".join(f"({law})" for law in laws)
+    key = (claim, sheet(fixed, boxes, derived, grounds))
+    hit = _JUDGED.get(key)
+    if hit is None:
+        hit = _judge(claim, fixed, boxes, derived, grounds)
+        if len(_JUDGED) > 256:
+            _JUDGED.clear()
+        _JUDGED[key] = hit
+    ranges, lines, disp = hit
+    return dict(ranges), list(lines), disp
+
+
+def _judge(claim, fixed, boxes, derived, grounds):
     try:
         r = solve_claim(claim, *parse_quantities(sheet(fixed, boxes, derived, grounds)))
     except ValueError as e:

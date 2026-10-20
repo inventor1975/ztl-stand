@@ -74,6 +74,13 @@ def _lin(node, env, unknowns):
 
 
 def _eq(law):
+    return _eq_parsed(law)
+
+
+@__import__("functools").lru_cache(maxsize=8192)
+def _eq_parsed(law):
+    """A law parsed once (2026-10-20: re-parsed at every exact solution, 7-13 % of the bridge girder's time). The
+    trees are read, never changed, by the callers."""
     tree = ast.parse(law, mode="eval").body
     if not (isinstance(tree, ast.Compare) and len(tree.ops) == 1 and isinstance(tree.ops[0], ast.Eq)):
         raise CheckError(f"a law must be one equality 'lhs == rhs': {law!r}")
@@ -241,6 +248,9 @@ def _val(node, env):
     raise CheckError(f"unsupported expression: {ast.dump(node)[:60]}")
 
 
+_ELIM = {}          # coefficient matrix -> (reduced matrix, the row operations T, rank, pivots); see solve_at
+
+
 def solve_at(laws, env, unknowns):
     """Exact values of every derived quantity at one point (env: name -> Fraction)."""
     unknowns = list(unknowns)
@@ -256,18 +266,34 @@ def solve_at(laws, env, unknowns):
             row[k] = row.get(k, 0) - v
         rows.append(row)
     n = len(lin_unknowns)
-    A = [[row.get(u, F(0)) for u in lin_unknowns] + [-row.get(1, F(0))] for row in rows]
-    r, piv = 0, []
-    for c in range(n):
-        p = next((i for i in range(r, len(A)) if A[i][c] != 0), None)
-        if p is None:
-            continue
-        A[r], A[p] = A[p], A[r]
-        for i in range(len(A)):
-            if i != r and A[i][c] != 0:
-                f = A[i][c] / A[r][c]
-                A[i] = [x - f * y for x, y in zip(A[i], A[r])]
-        piv.append(c); r += 1
+    M = tuple(tuple(row.get(u, F(0)) for u in lin_unknowns) for row in rows)
+    rhs = [-row.get(1, F(0)) for row in rows]
+    # THE ELIMINATION IS CACHED PER MATRIX (2026-10-20, the bridge girder: a 93-unknown truss whose matrix is the same
+    # at every point — only the loads, on the right, move — was 1080 fresh Gauss-Jordan eliminations, 136 of 156 s).
+    # The same row operations are recorded once as T (T·M = the reduced matrix) and applied to each right-hand side:
+    # exactly the arithmetic the elimination would do on that column, O(n^2) instead of O(n^3).
+    hit = _ELIM.get(M)
+    if hit is None:
+        m_ = len(M)
+        A = [list(M[i]) + [F(int(i == j)) for j in range(m_)] for i in range(m_)]
+        r, piv = 0, []
+        for c in range(n):
+            p = next((i for i in range(r, m_) if A[i][c] != 0), None)
+            if p is None:
+                continue
+            A[r], A[p] = A[p], A[r]
+            for i in range(m_):
+                if i != r and A[i][c] != 0:
+                    f = A[i][c] / A[r][c]
+                    A[i] = [x - f * y for x, y in zip(A[i], A[r])]
+            piv.append(c); r += 1
+        hit = ([row[:n] for row in A], [row[n:] for row in A], r, piv)
+        if len(_ELIM) >= 16:
+            _ELIM.pop(next(iter(_ELIM)))
+        _ELIM[M] = hit
+    R, Tm, r, piv = hit
+    tb = [sum((t * b for t, b in zip(trow, rhs) if t and b), F(0)) for trow in Tm]
+    A = [list(R[i]) + [tb[i]] for i in range(len(R))]
     # a SINGULAR point named (J11, blind test 4, c06, 2026-10-11: with purge p = 0 an impurity has no way out, no
     # steady state — the stand said only "the laws do not determine every derived quantity")
     free = [lin_unknowns[c] for c in range(n) if c not in piv]

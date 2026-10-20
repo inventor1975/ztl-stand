@@ -1,0 +1,2332 @@
+{
+ "stand": "ztl-stand/1",
+ "why": "Pratt truss bridge girder, 36 m, 45 bars \u2014 a measurement of what the stand carries, not a bridge design",
+ "quantities": {
+  "La": {
+   "role": "given",
+   "value": "3",
+   "unit": "m"
+  },
+  "Lb": {
+   "role": "given",
+   "value": "4",
+   "unit": "m"
+  },
+  "Lc": {
+   "role": "given",
+   "value": "5",
+   "unit": "m"
+  },
+  "fy": {
+   "role": "given",
+   "value": "355",
+   "unit": "MPa",
+   "ground": "EN 10219 S355"
+  },
+  "P1": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B1"
+  },
+  "P2": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B2"
+  },
+  "P3": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B3"
+  },
+  "P4": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B4"
+  },
+  "P5": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B5"
+  },
+  "P6": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B6"
+  },
+  "P7": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B7"
+  },
+  "P8": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B8"
+  },
+  "P9": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B9"
+  },
+  "P10": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B10"
+  },
+  "P11": {
+   "role": "given",
+   "value": "150",
+   "tolerance": "0.1",
+   "unit": "kN",
+   "why": "design load at deck node B11"
+  },
+  "E1": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 1 modulus"
+  },
+  "N1": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n1": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s1": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E2": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 2 modulus"
+  },
+  "N2": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n2": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s2": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E3": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 3 modulus"
+  },
+  "N3": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n3": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s3": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E4": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 4 modulus"
+  },
+  "N4": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n4": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s4": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E5": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 5 modulus"
+  },
+  "N5": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n5": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s5": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E6": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 6 modulus"
+  },
+  "N6": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n6": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s6": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E7": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 7 modulus"
+  },
+  "N7": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n7": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s7": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E8": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 8 modulus"
+  },
+  "N8": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n8": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s8": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E9": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 9 modulus"
+  },
+  "N9": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n9": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s9": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E10": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 10 modulus"
+  },
+  "N10": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n10": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s10": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E11": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 11 modulus"
+  },
+  "N11": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n11": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s11": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E12": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 12 modulus"
+  },
+  "N12": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n12": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s12": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E13": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 13 modulus"
+  },
+  "N13": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n13": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s13": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E14": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 14 modulus"
+  },
+  "N14": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n14": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s14": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E15": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 15 modulus"
+  },
+  "N15": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n15": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s15": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E16": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 16 modulus"
+  },
+  "N16": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n16": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s16": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E17": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 17 modulus"
+  },
+  "N17": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n17": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s17": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E18": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 18 modulus"
+  },
+  "N18": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n18": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s18": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E19": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 19 modulus"
+  },
+  "N19": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n19": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s19": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E20": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 20 modulus"
+  },
+  "N20": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n20": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s20": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E21": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 21 modulus"
+  },
+  "N21": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n21": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s21": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E22": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 22 modulus"
+  },
+  "N22": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n22": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s22": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E23": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 23 modulus"
+  },
+  "N23": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n23": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s23": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E24": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 24 modulus"
+  },
+  "N24": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n24": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s24": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E25": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 25 modulus"
+  },
+  "N25": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n25": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s25": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E26": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 26 modulus"
+  },
+  "N26": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n26": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s26": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E27": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 27 modulus"
+  },
+  "N27": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n27": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s27": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E28": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 28 modulus"
+  },
+  "N28": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n28": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s28": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E29": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 29 modulus"
+  },
+  "N29": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n29": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s29": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E30": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 30 modulus"
+  },
+  "N30": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n30": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s30": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E31": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 31 modulus"
+  },
+  "N31": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n31": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s31": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E32": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 32 modulus"
+  },
+  "N32": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n32": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s32": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E33": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 33 modulus"
+  },
+  "N33": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n33": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s33": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E34": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 34 modulus"
+  },
+  "N34": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n34": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s34": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E35": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 35 modulus"
+  },
+  "N35": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n35": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s35": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E36": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 36 modulus"
+  },
+  "N36": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n36": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s36": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E37": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 37 modulus"
+  },
+  "N37": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n37": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s37": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E38": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 38 modulus"
+  },
+  "N38": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n38": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s38": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E39": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 39 modulus"
+  },
+  "N39": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n39": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s39": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E40": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 40 modulus"
+  },
+  "N40": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n40": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s40": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E41": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 41 modulus"
+  },
+  "N41": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n41": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s41": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E42": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 42 modulus"
+  },
+  "N42": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n42": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s42": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E43": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 43 modulus"
+  },
+  "N43": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n43": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s43": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E44": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 44 modulus"
+  },
+  "N44": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n44": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s44": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "E45": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "bar 45 modulus"
+  },
+  "N45": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "n45": {
+   "role": "derived",
+   "unit": ""
+  },
+  "s45": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "Rx0": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "rx0": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Ry0": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "ry0": {
+   "role": "derived",
+   "unit": ""
+  },
+  "RyP": {
+   "role": "derived",
+   "unit": "kN"
+  },
+  "ryp": {
+   "role": "derived",
+   "unit": ""
+  },
+  "delta": {
+   "role": "derived",
+   "unit": "mm"
+  }
+ },
+ "slots": {
+  "BOT": {
+   "from": [
+    "shs"
+   ],
+   "why": "bottom chord"
+  },
+  "TOP": {
+   "from": [
+    "shs"
+   ],
+   "why": "top chord"
+  },
+  "VER": {
+   "from": [
+    "shs"
+   ],
+   "why": "verticals"
+  },
+  "END": {
+   "from": [
+    "shs"
+   ],
+   "why": "end posts"
+  },
+  "DIA": {
+   "from": [
+    "shs"
+   ],
+   "why": "diagonals"
+  }
+ },
+ "laws": [
+  {
+   "zfl": "1*N1 + (3/5)*N34 + Rx0 == 0",
+   "source": "equilibrium at B0, x"
+  },
+  {
+   "zfl": "1*n1 + (3/5)*n34 + rx0 == 0",
+   "source": "equilibrium at B0, x, unit load at mid-span"
+  },
+  {
+   "zfl": "(4/5)*N34 + Ry0 == 0",
+   "source": "equilibrium at B0, y"
+  },
+  {
+   "zfl": "(4/5)*n34 + ry0 == 0",
+   "source": "equilibrium at B0, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N1 + 1*N2 == 0",
+   "source": "equilibrium at B1, x"
+  },
+  {
+   "zfl": "-1*n1 + 1*n2 == 0",
+   "source": "equilibrium at B1, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N23 + (-1)*P1 == 0",
+   "source": "equilibrium at B1, y"
+  },
+  {
+   "zfl": "1*n23 == 0",
+   "source": "equilibrium at B1, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N2 + 1*N3 + (-3/5)*N36 == 0",
+   "source": "equilibrium at B2, x"
+  },
+  {
+   "zfl": "-1*n2 + 1*n3 + (-3/5)*n36 == 0",
+   "source": "equilibrium at B2, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N24 + (4/5)*N36 + (-1)*P2 == 0",
+   "source": "equilibrium at B2, y"
+  },
+  {
+   "zfl": "1*n24 + (4/5)*n36 == 0",
+   "source": "equilibrium at B2, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N3 + 1*N4 + (-3/5)*N37 == 0",
+   "source": "equilibrium at B3, x"
+  },
+  {
+   "zfl": "-1*n3 + 1*n4 + (-3/5)*n37 == 0",
+   "source": "equilibrium at B3, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N25 + (4/5)*N37 + (-1)*P3 == 0",
+   "source": "equilibrium at B3, y"
+  },
+  {
+   "zfl": "1*n25 + (4/5)*n37 == 0",
+   "source": "equilibrium at B3, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N4 + 1*N5 + (-3/5)*N38 == 0",
+   "source": "equilibrium at B4, x"
+  },
+  {
+   "zfl": "-1*n4 + 1*n5 + (-3/5)*n38 == 0",
+   "source": "equilibrium at B4, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N26 + (4/5)*N38 + (-1)*P4 == 0",
+   "source": "equilibrium at B4, y"
+  },
+  {
+   "zfl": "1*n26 + (4/5)*n38 == 0",
+   "source": "equilibrium at B4, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N5 + 1*N6 + (-3/5)*N39 == 0",
+   "source": "equilibrium at B5, x"
+  },
+  {
+   "zfl": "-1*n5 + 1*n6 + (-3/5)*n39 == 0",
+   "source": "equilibrium at B5, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N27 + (4/5)*N39 + (-1)*P5 == 0",
+   "source": "equilibrium at B5, y"
+  },
+  {
+   "zfl": "1*n27 + (4/5)*n39 == 0",
+   "source": "equilibrium at B5, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N6 + 1*N7 + (-3/5)*N40 + (3/5)*N41 == 0",
+   "source": "equilibrium at B6, x"
+  },
+  {
+   "zfl": "-1*n6 + 1*n7 + (-3/5)*n40 + (3/5)*n41 == 0",
+   "source": "equilibrium at B6, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N28 + (4/5)*N40 + (4/5)*N41 + (-1)*P6 == 0",
+   "source": "equilibrium at B6, y"
+  },
+  {
+   "zfl": "1*n28 + (4/5)*n40 + (4/5)*n41 + (-1) == 0",
+   "source": "equilibrium at B6, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N7 + 1*N8 + (3/5)*N42 == 0",
+   "source": "equilibrium at B7, x"
+  },
+  {
+   "zfl": "-1*n7 + 1*n8 + (3/5)*n42 == 0",
+   "source": "equilibrium at B7, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N29 + (4/5)*N42 + (-1)*P7 == 0",
+   "source": "equilibrium at B7, y"
+  },
+  {
+   "zfl": "1*n29 + (4/5)*n42 == 0",
+   "source": "equilibrium at B7, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N8 + 1*N9 + (3/5)*N43 == 0",
+   "source": "equilibrium at B8, x"
+  },
+  {
+   "zfl": "-1*n8 + 1*n9 + (3/5)*n43 == 0",
+   "source": "equilibrium at B8, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N30 + (4/5)*N43 + (-1)*P8 == 0",
+   "source": "equilibrium at B8, y"
+  },
+  {
+   "zfl": "1*n30 + (4/5)*n43 == 0",
+   "source": "equilibrium at B8, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N9 + 1*N10 + (3/5)*N44 == 0",
+   "source": "equilibrium at B9, x"
+  },
+  {
+   "zfl": "-1*n9 + 1*n10 + (3/5)*n44 == 0",
+   "source": "equilibrium at B9, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N31 + (4/5)*N44 + (-1)*P9 == 0",
+   "source": "equilibrium at B9, y"
+  },
+  {
+   "zfl": "1*n31 + (4/5)*n44 == 0",
+   "source": "equilibrium at B9, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N10 + 1*N11 + (3/5)*N45 == 0",
+   "source": "equilibrium at B10, x"
+  },
+  {
+   "zfl": "-1*n10 + 1*n11 + (3/5)*n45 == 0",
+   "source": "equilibrium at B10, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N32 + (4/5)*N45 + (-1)*P10 == 0",
+   "source": "equilibrium at B10, y"
+  },
+  {
+   "zfl": "1*n32 + (4/5)*n45 == 0",
+   "source": "equilibrium at B10, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N11 + 1*N12 == 0",
+   "source": "equilibrium at B11, x"
+  },
+  {
+   "zfl": "-1*n11 + 1*n12 == 0",
+   "source": "equilibrium at B11, x, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N33 + (-1)*P11 == 0",
+   "source": "equilibrium at B11, y"
+  },
+  {
+   "zfl": "1*n33 == 0",
+   "source": "equilibrium at B11, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N12 + (-3/5)*N35 == 0",
+   "source": "equilibrium at B12, x"
+  },
+  {
+   "zfl": "-1*n12 + (-3/5)*n35 == 0",
+   "source": "equilibrium at B12, x, unit load at mid-span"
+  },
+  {
+   "zfl": "(4/5)*N35 + RyP == 0",
+   "source": "equilibrium at B12, y"
+  },
+  {
+   "zfl": "(4/5)*n35 + ryp == 0",
+   "source": "equilibrium at B12, y, unit load at mid-span"
+  },
+  {
+   "zfl": "1*N13 + (-3/5)*N34 + (3/5)*N36 == 0",
+   "source": "equilibrium at T1, x"
+  },
+  {
+   "zfl": "1*n13 + (-3/5)*n34 + (3/5)*n36 == 0",
+   "source": "equilibrium at T1, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N23 + (-4/5)*N34 + (-4/5)*N36 == 0",
+   "source": "equilibrium at T1, y"
+  },
+  {
+   "zfl": "-1*n23 + (-4/5)*n34 + (-4/5)*n36 == 0",
+   "source": "equilibrium at T1, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N13 + 1*N14 + (3/5)*N37 == 0",
+   "source": "equilibrium at T2, x"
+  },
+  {
+   "zfl": "-1*n13 + 1*n14 + (3/5)*n37 == 0",
+   "source": "equilibrium at T2, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N24 + (-4/5)*N37 == 0",
+   "source": "equilibrium at T2, y"
+  },
+  {
+   "zfl": "-1*n24 + (-4/5)*n37 == 0",
+   "source": "equilibrium at T2, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N14 + 1*N15 + (3/5)*N38 == 0",
+   "source": "equilibrium at T3, x"
+  },
+  {
+   "zfl": "-1*n14 + 1*n15 + (3/5)*n38 == 0",
+   "source": "equilibrium at T3, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N25 + (-4/5)*N38 == 0",
+   "source": "equilibrium at T3, y"
+  },
+  {
+   "zfl": "-1*n25 + (-4/5)*n38 == 0",
+   "source": "equilibrium at T3, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N15 + 1*N16 + (3/5)*N39 == 0",
+   "source": "equilibrium at T4, x"
+  },
+  {
+   "zfl": "-1*n15 + 1*n16 + (3/5)*n39 == 0",
+   "source": "equilibrium at T4, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N26 + (-4/5)*N39 == 0",
+   "source": "equilibrium at T4, y"
+  },
+  {
+   "zfl": "-1*n26 + (-4/5)*n39 == 0",
+   "source": "equilibrium at T4, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N16 + 1*N17 + (3/5)*N40 == 0",
+   "source": "equilibrium at T5, x"
+  },
+  {
+   "zfl": "-1*n16 + 1*n17 + (3/5)*n40 == 0",
+   "source": "equilibrium at T5, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N27 + (-4/5)*N40 == 0",
+   "source": "equilibrium at T5, y"
+  },
+  {
+   "zfl": "-1*n27 + (-4/5)*n40 == 0",
+   "source": "equilibrium at T5, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N17 + 1*N18 == 0",
+   "source": "equilibrium at T6, x"
+  },
+  {
+   "zfl": "-1*n17 + 1*n18 == 0",
+   "source": "equilibrium at T6, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N28 == 0",
+   "source": "equilibrium at T6, y"
+  },
+  {
+   "zfl": "-1*n28 == 0",
+   "source": "equilibrium at T6, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N18 + 1*N19 + (-3/5)*N41 == 0",
+   "source": "equilibrium at T7, x"
+  },
+  {
+   "zfl": "-1*n18 + 1*n19 + (-3/5)*n41 == 0",
+   "source": "equilibrium at T7, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N29 + (-4/5)*N41 == 0",
+   "source": "equilibrium at T7, y"
+  },
+  {
+   "zfl": "-1*n29 + (-4/5)*n41 == 0",
+   "source": "equilibrium at T7, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N19 + 1*N20 + (-3/5)*N42 == 0",
+   "source": "equilibrium at T8, x"
+  },
+  {
+   "zfl": "-1*n19 + 1*n20 + (-3/5)*n42 == 0",
+   "source": "equilibrium at T8, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N30 + (-4/5)*N42 == 0",
+   "source": "equilibrium at T8, y"
+  },
+  {
+   "zfl": "-1*n30 + (-4/5)*n42 == 0",
+   "source": "equilibrium at T8, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N20 + 1*N21 + (-3/5)*N43 == 0",
+   "source": "equilibrium at T9, x"
+  },
+  {
+   "zfl": "-1*n20 + 1*n21 + (-3/5)*n43 == 0",
+   "source": "equilibrium at T9, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N31 + (-4/5)*N43 == 0",
+   "source": "equilibrium at T9, y"
+  },
+  {
+   "zfl": "-1*n31 + (-4/5)*n43 == 0",
+   "source": "equilibrium at T9, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N21 + 1*N22 + (-3/5)*N44 == 0",
+   "source": "equilibrium at T10, x"
+  },
+  {
+   "zfl": "-1*n21 + 1*n22 + (-3/5)*n44 == 0",
+   "source": "equilibrium at T10, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N32 + (-4/5)*N44 == 0",
+   "source": "equilibrium at T10, y"
+  },
+  {
+   "zfl": "-1*n32 + (-4/5)*n44 == 0",
+   "source": "equilibrium at T10, y, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N22 + (3/5)*N35 + (-3/5)*N45 == 0",
+   "source": "equilibrium at T11, x"
+  },
+  {
+   "zfl": "-1*n22 + (3/5)*n35 + (-3/5)*n45 == 0",
+   "source": "equilibrium at T11, x, unit load at mid-span"
+  },
+  {
+   "zfl": "-1*N33 + (-4/5)*N35 + (-4/5)*N45 == 0",
+   "source": "equilibrium at T11, y"
+  },
+  {
+   "zfl": "-1*n33 + (-4/5)*n35 + (-4/5)*n45 == 0",
+   "source": "equilibrium at T11, y, unit load at mid-span"
+  },
+  {
+   "zfl": "s1 == N1/BOT.A",
+   "source": "stress, bar 1 (BOT)"
+  },
+  {
+   "zfl": "s2 == N2/BOT.A",
+   "source": "stress, bar 2 (BOT)"
+  },
+  {
+   "zfl": "s3 == N3/BOT.A",
+   "source": "stress, bar 3 (BOT)"
+  },
+  {
+   "zfl": "s4 == N4/BOT.A",
+   "source": "stress, bar 4 (BOT)"
+  },
+  {
+   "zfl": "s5 == N5/BOT.A",
+   "source": "stress, bar 5 (BOT)"
+  },
+  {
+   "zfl": "s6 == N6/BOT.A",
+   "source": "stress, bar 6 (BOT)"
+  },
+  {
+   "zfl": "s7 == N7/BOT.A",
+   "source": "stress, bar 7 (BOT)"
+  },
+  {
+   "zfl": "s8 == N8/BOT.A",
+   "source": "stress, bar 8 (BOT)"
+  },
+  {
+   "zfl": "s9 == N9/BOT.A",
+   "source": "stress, bar 9 (BOT)"
+  },
+  {
+   "zfl": "s10 == N10/BOT.A",
+   "source": "stress, bar 10 (BOT)"
+  },
+  {
+   "zfl": "s11 == N11/BOT.A",
+   "source": "stress, bar 11 (BOT)"
+  },
+  {
+   "zfl": "s12 == N12/BOT.A",
+   "source": "stress, bar 12 (BOT)"
+  },
+  {
+   "zfl": "s13 == N13/TOP.A",
+   "source": "stress, bar 13 (TOP)"
+  },
+  {
+   "zfl": "s14 == N14/TOP.A",
+   "source": "stress, bar 14 (TOP)"
+  },
+  {
+   "zfl": "s15 == N15/TOP.A",
+   "source": "stress, bar 15 (TOP)"
+  },
+  {
+   "zfl": "s16 == N16/TOP.A",
+   "source": "stress, bar 16 (TOP)"
+  },
+  {
+   "zfl": "s17 == N17/TOP.A",
+   "source": "stress, bar 17 (TOP)"
+  },
+  {
+   "zfl": "s18 == N18/TOP.A",
+   "source": "stress, bar 18 (TOP)"
+  },
+  {
+   "zfl": "s19 == N19/TOP.A",
+   "source": "stress, bar 19 (TOP)"
+  },
+  {
+   "zfl": "s20 == N20/TOP.A",
+   "source": "stress, bar 20 (TOP)"
+  },
+  {
+   "zfl": "s21 == N21/TOP.A",
+   "source": "stress, bar 21 (TOP)"
+  },
+  {
+   "zfl": "s22 == N22/TOP.A",
+   "source": "stress, bar 22 (TOP)"
+  },
+  {
+   "zfl": "s23 == N23/VER.A",
+   "source": "stress, bar 23 (VER)"
+  },
+  {
+   "zfl": "s24 == N24/VER.A",
+   "source": "stress, bar 24 (VER)"
+  },
+  {
+   "zfl": "s25 == N25/VER.A",
+   "source": "stress, bar 25 (VER)"
+  },
+  {
+   "zfl": "s26 == N26/VER.A",
+   "source": "stress, bar 26 (VER)"
+  },
+  {
+   "zfl": "s27 == N27/VER.A",
+   "source": "stress, bar 27 (VER)"
+  },
+  {
+   "zfl": "s28 == N28/VER.A",
+   "source": "stress, bar 28 (VER)"
+  },
+  {
+   "zfl": "s29 == N29/VER.A",
+   "source": "stress, bar 29 (VER)"
+  },
+  {
+   "zfl": "s30 == N30/VER.A",
+   "source": "stress, bar 30 (VER)"
+  },
+  {
+   "zfl": "s31 == N31/VER.A",
+   "source": "stress, bar 31 (VER)"
+  },
+  {
+   "zfl": "s32 == N32/VER.A",
+   "source": "stress, bar 32 (VER)"
+  },
+  {
+   "zfl": "s33 == N33/VER.A",
+   "source": "stress, bar 33 (VER)"
+  },
+  {
+   "zfl": "s34 == N34/END.A",
+   "source": "stress, bar 34 (END)"
+  },
+  {
+   "zfl": "s35 == N35/END.A",
+   "source": "stress, bar 35 (END)"
+  },
+  {
+   "zfl": "s36 == N36/DIA.A",
+   "source": "stress, bar 36 (DIA)"
+  },
+  {
+   "zfl": "s37 == N37/DIA.A",
+   "source": "stress, bar 37 (DIA)"
+  },
+  {
+   "zfl": "s38 == N38/DIA.A",
+   "source": "stress, bar 38 (DIA)"
+  },
+  {
+   "zfl": "s39 == N39/DIA.A",
+   "source": "stress, bar 39 (DIA)"
+  },
+  {
+   "zfl": "s40 == N40/DIA.A",
+   "source": "stress, bar 40 (DIA)"
+  },
+  {
+   "zfl": "s41 == N41/DIA.A",
+   "source": "stress, bar 41 (DIA)"
+  },
+  {
+   "zfl": "s42 == N42/DIA.A",
+   "source": "stress, bar 42 (DIA)"
+  },
+  {
+   "zfl": "s43 == N43/DIA.A",
+   "source": "stress, bar 43 (DIA)"
+  },
+  {
+   "zfl": "s44 == N44/DIA.A",
+   "source": "stress, bar 44 (DIA)"
+  },
+  {
+   "zfl": "s45 == N45/DIA.A",
+   "source": "stress, bar 45 (DIA)"
+  },
+  {
+   "zfl": "delta == -(N1*n1*La/(E1*BOT.A) + N2*n2*La/(E2*BOT.A) + N3*n3*La/(E3*BOT.A) + N4*n4*La/(E4*BOT.A) + N5*n5*La/(E5*BOT.A) + N6*n6*La/(E6*BOT.A) + N7*n7*La/(E7*BOT.A) + N8*n8*La/(E8*BOT.A) + N9*n9*La/(E9*BOT.A) + N10*n10*La/(E10*BOT.A) + N11*n11*La/(E11*BOT.A) + N12*n12*La/(E12*BOT.A) + N13*n13*La/(E13*TOP.A) + N14*n14*La/(E14*TOP.A) + N15*n15*La/(E15*TOP.A) + N16*n16*La/(E16*TOP.A) + N17*n17*La/(E17*TOP.A) + N18*n18*La/(E18*TOP.A) + N19*n19*La/(E19*TOP.A) + N20*n20*La/(E20*TOP.A) + N21*n21*La/(E21*TOP.A) + N22*n22*La/(E22*TOP.A) + N23*n23*Lb/(E23*VER.A) + N24*n24*Lb/(E24*VER.A) + N25*n25*Lb/(E25*VER.A) + N26*n26*Lb/(E26*VER.A) + N27*n27*Lb/(E27*VER.A) + N28*n28*Lb/(E28*VER.A) + N29*n29*Lb/(E29*VER.A) + N30*n30*Lb/(E30*VER.A) + N31*n31*Lb/(E31*VER.A) + N32*n32*Lb/(E32*VER.A) + N33*n33*Lb/(E33*VER.A) + N34*n34*Lc/(E34*END.A) + N35*n35*Lc/(E35*END.A) + N36*n36*Lc/(E36*DIA.A) + N37*n37*Lc/(E37*DIA.A) + N38*n38*Lc/(E38*DIA.A) + N39*n39*Lc/(E39*DIA.A) + N40*n40*Lc/(E40*DIA.A) + N41*n41*Lc/(E41*DIA.A) + N42*n42*Lc/(E42*DIA.A) + N43*n43*Lc/(E43*DIA.A) + N44*n44*Lc/(E44*DIA.A) + N45*n45*Lc/(E45*DIA.A))",
+   "source": "virtual work: mid-span deflection (positive up)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "s1",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 1 (BOT, B0-B1): stress within fy"
+  },
+  {
+   "quantity": "N1",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E1*BOT.I))))))*BOT.A*fy",
+   "why": "bar 1 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s2",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 2 (BOT, B1-B2): stress within fy"
+  },
+  {
+   "quantity": "N2",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E2*BOT.I))))))*BOT.A*fy",
+   "why": "bar 2 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s3",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 3 (BOT, B2-B3): stress within fy"
+  },
+  {
+   "quantity": "N3",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E3*BOT.I))))))*BOT.A*fy",
+   "why": "bar 3 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s4",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 4 (BOT, B3-B4): stress within fy"
+  },
+  {
+   "quantity": "N4",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E4*BOT.I))))))*BOT.A*fy",
+   "why": "bar 4 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s5",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 5 (BOT, B4-B5): stress within fy"
+  },
+  {
+   "quantity": "N5",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E5*BOT.I))))))*BOT.A*fy",
+   "why": "bar 5 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s6",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 6 (BOT, B5-B6): stress within fy"
+  },
+  {
+   "quantity": "N6",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E6*BOT.I))))))*BOT.A*fy",
+   "why": "bar 6 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s7",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 7 (BOT, B6-B7): stress within fy"
+  },
+  {
+   "quantity": "N7",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E7*BOT.I))))))*BOT.A*fy",
+   "why": "bar 7 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s8",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 8 (BOT, B7-B8): stress within fy"
+  },
+  {
+   "quantity": "N8",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E8*BOT.I))))))*BOT.A*fy",
+   "why": "bar 8 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s9",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 9 (BOT, B8-B9): stress within fy"
+  },
+  {
+   "quantity": "N9",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E9*BOT.I))))))*BOT.A*fy",
+   "why": "bar 9 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s10",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 10 (BOT, B9-B10): stress within fy"
+  },
+  {
+   "quantity": "N10",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E10*BOT.I))))))*BOT.A*fy",
+   "why": "bar 10 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s11",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 11 (BOT, B10-B11): stress within fy"
+  },
+  {
+   "quantity": "N11",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E11*BOT.I))))))*BOT.A*fy",
+   "why": "bar 11 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s12",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 12 (BOT, B11-B12): stress within fy"
+  },
+  {
+   "quantity": "N12",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I))))*(0.5*(1 + 0.49*(sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I)) - 0.2) + sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I)))) - sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I))*sqrt(BOT.A*fy*La*La/(pi*pi*E12*BOT.I))))))*BOT.A*fy",
+   "why": "bar 12 (BOT): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s13",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 13 (TOP, T1-T2): stress within fy"
+  },
+  {
+   "quantity": "N13",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I))))*(0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I)))) - sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E13*TOP.I))))))*TOP.A*fy",
+   "why": "bar 13 (TOP): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s14",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 14 (TOP, T2-T3): stress within fy"
+  },
+  {
+   "quantity": "N14",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I))))*(0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I)))) - sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E14*TOP.I))))))*TOP.A*fy",
+   "why": "bar 14 (TOP): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s15",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 15 (TOP, T3-T4): stress within fy"
+  },
+  {
+   "quantity": "N15",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I))))*(0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I)))) - sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E15*TOP.I))))))*TOP.A*fy",
+   "why": "bar 15 (TOP): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s16",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 16 (TOP, T4-T5): stress within fy"
+  },
+  {
+   "quantity": "N16",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I))))*(0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I)))) - sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E16*TOP.I))))))*TOP.A*fy",
+   "why": "bar 16 (TOP): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s17",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 17 (TOP, T5-T6): stress within fy"
+  },
+  {
+   "quantity": "N17",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I))))*(0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I)))) - sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E17*TOP.I))))))*TOP.A*fy",
+   "why": "bar 17 (TOP): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s18",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 18 (TOP, T6-T7): stress within fy"
+  },
+  {
+   "quantity": "N18",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I))))*(0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I)))) - sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E18*TOP.I))))))*TOP.A*fy",
+   "why": "bar 18 (TOP): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s19",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 19 (TOP, T7-T8): stress within fy"
+  },
+  {
+   "quantity": "N19",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I))))*(0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I)))) - sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E19*TOP.I))))))*TOP.A*fy",
+   "why": "bar 19 (TOP): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s20",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 20 (TOP, T8-T9): stress within fy"
+  },
+  {
+   "quantity": "N20",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I))))*(0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I)))) - sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E20*TOP.I))))))*TOP.A*fy",
+   "why": "bar 20 (TOP): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s21",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 21 (TOP, T9-T10): stress within fy"
+  },
+  {
+   "quantity": "N21",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I))))*(0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I)))) - sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E21*TOP.I))))))*TOP.A*fy",
+   "why": "bar 21 (TOP): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s22",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 22 (TOP, T10-T11): stress within fy"
+  },
+  {
+   "quantity": "N22",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I))))*(0.5*(1 + 0.49*(sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I)) - 0.2) + sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I)))) - sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I))*sqrt(TOP.A*fy*La*La/(pi*pi*E22*TOP.I))))))*TOP.A*fy",
+   "why": "bar 22 (TOP): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s23",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 23 (VER, B1-T1): stress within fy"
+  },
+  {
+   "quantity": "N23",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E23*VER.I))))))*VER.A*fy",
+   "why": "bar 23 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s24",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 24 (VER, B2-T2): stress within fy"
+  },
+  {
+   "quantity": "N24",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E24*VER.I))))))*VER.A*fy",
+   "why": "bar 24 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s25",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 25 (VER, B3-T3): stress within fy"
+  },
+  {
+   "quantity": "N25",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E25*VER.I))))))*VER.A*fy",
+   "why": "bar 25 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s26",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 26 (VER, B4-T4): stress within fy"
+  },
+  {
+   "quantity": "N26",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E26*VER.I))))))*VER.A*fy",
+   "why": "bar 26 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s27",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 27 (VER, B5-T5): stress within fy"
+  },
+  {
+   "quantity": "N27",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E27*VER.I))))))*VER.A*fy",
+   "why": "bar 27 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s28",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 28 (VER, B6-T6): stress within fy"
+  },
+  {
+   "quantity": "N28",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E28*VER.I))))))*VER.A*fy",
+   "why": "bar 28 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s29",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 29 (VER, B7-T7): stress within fy"
+  },
+  {
+   "quantity": "N29",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E29*VER.I))))))*VER.A*fy",
+   "why": "bar 29 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s30",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 30 (VER, B8-T8): stress within fy"
+  },
+  {
+   "quantity": "N30",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E30*VER.I))))))*VER.A*fy",
+   "why": "bar 30 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s31",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 31 (VER, B9-T9): stress within fy"
+  },
+  {
+   "quantity": "N31",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E31*VER.I))))))*VER.A*fy",
+   "why": "bar 31 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s32",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 32 (VER, B10-T10): stress within fy"
+  },
+  {
+   "quantity": "N32",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E32*VER.I))))))*VER.A*fy",
+   "why": "bar 32 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s33",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 33 (VER, B11-T11): stress within fy"
+  },
+  {
+   "quantity": "N33",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I))))*(0.5*(1 + 0.49*(sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I)) - 0.2) + sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I)))) - sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I))*sqrt(VER.A*fy*Lb*Lb/(pi*pi*E33*VER.I))))))*VER.A*fy",
+   "why": "bar 33 (VER): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s34",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 34 (END, B0-T1): stress within fy"
+  },
+  {
+   "quantity": "N34",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I)) - 0.2) + sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I))*sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I)) - 0.2) + sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I))*sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I))))*(0.5*(1 + 0.49*(sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I)) - 0.2) + sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I))*sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I)))) - sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I))*sqrt(END.A*fy*Lc*Lc/(pi*pi*E34*END.I))))))*END.A*fy",
+   "why": "bar 34 (END): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s35",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 35 (END, B12-T11): stress within fy"
+  },
+  {
+   "quantity": "N35",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I)) - 0.2) + sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I))*sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I)) - 0.2) + sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I))*sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I))))*(0.5*(1 + 0.49*(sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I)) - 0.2) + sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I))*sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I)))) - sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I))*sqrt(END.A*fy*Lc*Lc/(pi*pi*E35*END.I))))))*END.A*fy",
+   "why": "bar 35 (END): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s36",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 36 (DIA, T1-B2): stress within fy"
+  },
+  {
+   "quantity": "N36",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I))))*(0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I)))) - sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E36*DIA.I))))))*DIA.A*fy",
+   "why": "bar 36 (DIA): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s37",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 37 (DIA, T2-B3): stress within fy"
+  },
+  {
+   "quantity": "N37",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I))))*(0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I)))) - sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E37*DIA.I))))))*DIA.A*fy",
+   "why": "bar 37 (DIA): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s38",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 38 (DIA, T3-B4): stress within fy"
+  },
+  {
+   "quantity": "N38",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I))))*(0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I)))) - sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E38*DIA.I))))))*DIA.A*fy",
+   "why": "bar 38 (DIA): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s39",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 39 (DIA, T4-B5): stress within fy"
+  },
+  {
+   "quantity": "N39",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I))))*(0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I)))) - sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E39*DIA.I))))))*DIA.A*fy",
+   "why": "bar 39 (DIA): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s40",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 40 (DIA, T5-B6): stress within fy"
+  },
+  {
+   "quantity": "N40",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I))))*(0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I)))) - sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E40*DIA.I))))))*DIA.A*fy",
+   "why": "bar 40 (DIA): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s41",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 41 (DIA, T7-B6): stress within fy"
+  },
+  {
+   "quantity": "N41",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I))))*(0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I)))) - sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E41*DIA.I))))))*DIA.A*fy",
+   "why": "bar 41 (DIA): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s42",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 42 (DIA, T8-B7): stress within fy"
+  },
+  {
+   "quantity": "N42",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I))))*(0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I)))) - sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E42*DIA.I))))))*DIA.A*fy",
+   "why": "bar 42 (DIA): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s43",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 43 (DIA, T9-B8): stress within fy"
+  },
+  {
+   "quantity": "N43",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I))))*(0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I)))) - sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E43*DIA.I))))))*DIA.A*fy",
+   "why": "bar 43 (DIA): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s44",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 44 (DIA, T10-B9): stress within fy"
+  },
+  {
+   "quantity": "N44",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I))))*(0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I)))) - sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E44*DIA.I))))))*DIA.A*fy",
+   "why": "bar 44 (DIA): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "s45",
+   "op": "within",
+   "value": [
+    "-355",
+    "355"
+   ],
+   "why": "bar 45 (DIA, T11-B10): stress within fy"
+  },
+  {
+   "quantity": "N45",
+   "op": ">=",
+   "value": "-(min(1, 1/((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I)))) + sqrt((0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I))))*(0.5*(1 + 0.49*(sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I)) - 0.2) + sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I)))) - sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I))*sqrt(DIA.A*fy*Lc*Lc/(pi*pi*E45*DIA.I))))))*DIA.A*fy",
+   "why": "bar 45 (DIA): flexural buckling, EN 1993-1-1 curve c"
+  },
+  {
+   "quantity": "delta",
+   "op": ">=",
+   "value": "-97.2",
+   "why": "mid-span deflection <= L/500 = 72 mm under characteristic loads (factored / 1.35)"
+  }
+ ],
+ "objective": {
+  "minimize": "BOT.A*36 + TOP.A*30 + VER.A*44 + END.A*10 + DIA.A*50",
+  "why": "least steel (A x total length)"
+ },
+ "conflicts": false,
+ "catalog": {
+  "shs": {
+   "ground": "idealised sharp-corner SHS, computed from b and t",
+   "items": [
+    {
+     "name": "SHS 100x6 (sharp corners)",
+     "A": "2256",
+     "I": "3335872"
+    },
+    {
+     "name": "SHS 120x8 (sharp corners)",
+     "A": "3584",
+     "I": "22593536/3"
+    },
+    {
+     "name": "SHS 150x8 (sharp corners)",
+     "A": "4544",
+     "I": "45958016/3"
+    },
+    {
+     "name": "SHS 160x10 (sharp corners)",
+     "A": "6000",
+     "I": "22600000"
+    },
+    {
+     "name": "SHS 180x10 (sharp corners)",
+     "A": "6800",
+     "I": "98600000/3"
+    },
+    {
+     "name": "SHS 200x10 (sharp corners)",
+     "A": "7600",
+     "I": "137560000/3"
+    },
+    {
+     "name": "SHS 220x12 (sharp corners)",
+     "A": "9984",
+     "I": "72230912"
+    },
+    {
+     "name": "SHS 250x12 (sharp corners)",
+     "A": "11424",
+     "I": "108124352"
+    }
+   ],
+   "fields": {
+    "A": {
+     "unit": "mm^2"
+    },
+    "I": {
+     "unit": "mm^4"
+    }
+   }
+  }
+ }
+}
