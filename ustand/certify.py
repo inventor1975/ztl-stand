@@ -106,6 +106,8 @@ def solve_linear(linear_laws, unknowns):
     for law in linear_laws:
         names |= set(re.findall(r"[A-Za-z_]\w*", law)) - set(fns)
     syms = dict({n: sp.Symbol(n) for n in names}, **fns)
+    if any(u not in syms for u in unknowns):
+        return None                                  # an unknown occurs in no law: this system cannot determine it
     for law in linear_laws:
         l, r = law.split("==")
         eqs.append(sp.sympify(l, locals=syms, rational=True) - sp.sympify(r, locals=syms, rational=True))
