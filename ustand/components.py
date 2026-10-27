@@ -248,6 +248,30 @@ def _family_build(brick, cname):
     return out
 
 
+def check_files(raw, base):
+    """A component may name its brick by a file only INSIDE the system brick's own folder: relative, no "..", not
+    leaving the folder through a link. A system given as data (base None: a dict, e.g. from a web app) has no folder,
+    so it gives its components inline ({"brick": {...}}). Checked once, on the outermost run, before absolutize
+    (security review, 2026-10-27: a brick from anyone could otherwise make the stand read any JSON file on the
+    machine and echo its fields in an error)."""
+    if not isinstance(raw, dict) or not isinstance(raw.get("components"), dict):
+        return
+    root = os.path.realpath(base) if base is not None else None
+    for cname, spec in raw["components"].items():
+        cands = spec.get("choose") if isinstance(spec, dict) else None
+        for cand in (cands if isinstance(cands, list) else [spec]):
+            f = cand.get("file") if isinstance(cand, dict) else None
+            if not isinstance(f, str):
+                continue
+            if root is None:
+                raise B.BrickError(f"component {cname}: a brick given as data has no folder to read {f!r} from — "
+                                   f"give the component inline, {{\"brick\": {{...}}}}")
+            full = os.path.realpath(os.path.join(root, f))
+            if os.path.isabs(f) or ".." in f.replace("\\", "/").split("/") or \
+                    os.path.commonpath([root, full]) != root:
+                raise B.BrickError(f"component {cname}: {f!r} must be a file inside the system brick's own folder")
+
+
 def absolutize(raw, base):
     """A copy of the system whose component files are absolute paths (2026-10-12: `find` judges copies of the brick
     as dicts, and a dict has no directory of its own to read relative files from)."""

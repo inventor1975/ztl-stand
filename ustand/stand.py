@@ -1051,6 +1051,10 @@ def run(b, conflicts=True) -> dict:
     _DEPTH[0] += 1
     try:
         raw = b if isinstance(b, dict) else json.load(open(b, encoding="utf-8"))
+        if top and isinstance(raw, dict) and raw.get("components"):
+            from . import components as CM  # component files only inside the brick's own folder (components.py)
+            import os as _os
+            CM.check_files(raw, _os.path.dirname(_os.path.abspath(b)) if isinstance(b, str) else None)
         if isinstance(b, str) and isinstance(raw, dict) and raw.get("components"):
             from . import components as CM  # its component files resolved from ITS directory, once
             import os as _os
