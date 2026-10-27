@@ -17,6 +17,7 @@ import math
 from fractions import Fraction as F
 
 from .lp import _FLOAT_FN
+from . import safeexpr as SX
 
 FN = dict(_FLOAT_FN, pi=math.pi)
 
@@ -31,8 +32,8 @@ def _compile(laws):
         if not lhs.isidentifier():
             return None
         try:
-            tree = ast.parse(rhs, mode="eval").body
-        except SyntaxError:
+            tree = SX.check(rhs).body             # only arithmetic over names runs (safeexpr.py says why)
+        except (SyntaxError, SX.UnsafeExpression):
             return None
         if isinstance(tree, ast.Call) and getattr(tree.func, "id", None) == "implicit" and len(tree.args) == 4:
             ph = tree.args[0].id

@@ -936,6 +936,24 @@ def _optional_slots(b):
     b["catalog"] = cat
 
 
+def _safe_texts(b):
+    """every law and objective a brick brings must be arithmetic over names before anything reads it: some of them
+    are later evaluated with Python (components.py, fwitness.py), and a brick may come from anyone (safeexpr.py)"""
+    from . import safeexpr as SX
+    texts = [("law", t) for t in (b.get("laws") or []) if isinstance(t, str)]
+    texts += [("define " + k, v) for k, v in (b.get("define") or {}).items() if isinstance(v, str)]
+    obj = (b.get("objective") or {}).get("minimize")
+    if isinstance(obj, str):
+        texts.append(("objective", obj))
+    for what, t in texts:
+        try:
+            SX.check(compile_expr(t, b.get("define")))
+        except SX.UnsafeExpression as e:
+            raise BrickError(f"{what} {t[:120]!r}: {e} — a brick's expressions are arithmetic over names only")
+        except SyntaxError:
+            pass                                    # unreadable text is the readers' own error, said there
+
+
 def load(path_or_dict) -> dict:
     import copy as _copy
     b = _copy.deepcopy(path_or_dict) if isinstance(path_or_dict, dict) \
@@ -946,6 +964,7 @@ def load(path_or_dict) -> dict:
     _shape(b)
     _optional_slots(b)
     _direct_requirements(b)
+    _safe_texts(b)
     qs = b.get("quantities") or {}
     cat = b.get("catalog") or {}
     for name, q in qs.items():

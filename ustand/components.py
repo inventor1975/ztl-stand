@@ -53,6 +53,7 @@ import re
 from fractions import Fraction as F
 
 from . import bricks as B
+from . import safeexpr as SX
 from . import units as U
 
 _CACHE = {}      # sha256 of (component brick, input ranges) -> the stand's answer, reduced
@@ -237,7 +238,7 @@ def _family_build(brick, cname):
                     if q.get("role") == "given" and "range" not in q and B.num(q.get("tolerance", "0")) == 0:
                         env.setdefault(n, B.num(q["value"]))
                 text = B.compile_expr(obj["minimize"], brick.get("define"))
-                cost = (F(eval(compile(text, "<cost>", "eval"), {"__builtins__": {}}, env)),
+                cost = (F(eval(SX.compile_checked(text, "<cost>"), {"__builtins__": {}}, env)),
                         obj.get("unit", "") if isinstance(obj.get("unit", ""), str) else "")
             except Exception:                            # noqa: BLE001 — no cost field, said by its absence
                 cost = None
@@ -729,7 +730,7 @@ def _cost(flat):
         names = {x.id for x in _ast.walk(_ast.parse(text, mode="eval")) if isinstance(x, _ast.Name)}
         if not names <= set(env):
             return None
-        return F(eval(compile(text, "<objective>", "eval"), {"__builtins__": {}}, env))
+        return F(eval(SX.compile_checked(text, "<objective>"), {"__builtins__": {}}, env))
     except Exception:                                    # noqa: BLE001 — an ordering, never a verdict
         return None
 
