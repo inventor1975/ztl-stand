@@ -1,0 +1,532 @@
+{
+ "stand": "ztl-stand/1",
+ "title": "Elevated steel water tower: 100 m3 tank on one tubular shaft, square footing; water empty..full, wind 22..28 m/s",
+ "quantities": {
+  "H": {
+   "role": "given",
+   "value": "20",
+   "unit": "m",
+   "why": "shaft height, ground to tank floor"
+  },
+  "Dt": {
+   "role": "given",
+   "value": "6",
+   "unit": "m",
+   "why": "tank diameter"
+  },
+  "Ht": {
+   "role": "given",
+   "value": "3.6",
+   "unit": "m",
+   "why": "tank height (about 100 m3)"
+  },
+  "mw": {
+   "role": "given",
+   "range": [
+    "0",
+    "100"
+   ],
+   "unit": "t",
+   "why": "water in the tank: empty to full"
+  },
+  "mtank": {
+   "role": "given",
+   "value": "14",
+   "tolerance": "0.05",
+   "unit": "t",
+   "why": "tank steel, roof and fittings, +-5 %"
+  },
+  "vb": {
+   "role": "given",
+   "range": [
+    "22",
+    "28"
+   ],
+   "unit": "m/s",
+   "why": "design wind speed at tank height (site range)"
+  },
+  "rho_a": {
+   "role": "given",
+   "value": "1.25",
+   "unit": "kg/m^3",
+   "why": "air density"
+  },
+  "Cd": {
+   "role": "given",
+   "value": "0.8",
+   "tolerance": "0.125",
+   "unit": "1",
+   "why": "drag coefficient of a cylinder, 0.7..0.9"
+  },
+  "E": {
+   "role": "given",
+   "value": "210",
+   "tolerance": "0.005",
+   "unit": "GPa",
+   "why": "steel modulus"
+  },
+  "fy": {
+   "role": "given",
+   "value": "355",
+   "unit": "MPa",
+   "why": "S355 yield strength"
+  },
+  "gc": {
+   "role": "given",
+   "value": "24",
+   "unit": "kN/m^3",
+   "why": "reinforced concrete unit weight"
+  },
+  "hf": {
+   "role": "given",
+   "value": "1.2",
+   "unit": "m",
+   "why": "footing thickness"
+  },
+  "qa": {
+   "role": "given",
+   "range": [
+    "150",
+    "250"
+   ],
+   "unit": "kPa",
+   "why": "allowable soil pressure: site survey range"
+  },
+  "sigma": {
+   "role": "derived",
+   "unit": "MPa"
+  },
+  "ub": {
+   "role": "derived",
+   "unit": "1"
+  },
+  "delta": {
+   "role": "derived",
+   "unit": "mm"
+  },
+  "pmax": {
+   "role": "derived",
+   "unit": "kPa"
+  },
+  "kern": {
+   "role": "derived",
+   "unit": "kN*m"
+  }
+ },
+ "slots": {
+  "S": {
+   "from": [
+    "chs"
+   ]
+  },
+  "F": {
+   "from": [
+    "footing"
+   ]
+  }
+ },
+ "catalog": {
+  "chs": {
+   "ground": "circular hollow sections, properties computed from D and t (idealised), D/t <= 59; prices illustrative",
+   "fields": {
+    "D": {
+     "unit": "mm"
+    },
+    "A": {
+     "unit": "cm^2"
+    },
+    "I": {
+     "unit": "cm^4"
+    },
+    "W": {
+     "unit": "cm^3"
+    },
+    "m": {
+     "unit": "kg/m"
+    },
+    "pm": {
+     "unit": "EUR/m"
+    }
+   },
+   "items": [
+    {
+     "name": "CHS508x10",
+     "D": "508",
+     "A": "156.451",
+     "I": "48520.3",
+     "W": "1910.25",
+     "m": "122.814",
+     "pm": "271.87"
+    },
+    {
+     "name": "CHS508x12.5",
+     "D": "508",
+     "A": "194.582",
+     "I": "59755.4",
+     "W": "2352.58",
+     "m": "152.747",
+     "pm": "325.74"
+    },
+    {
+     "name": "CHS508x16",
+     "D": "508",
+     "A": "247.306",
+     "I": "74909",
+     "W": "2949.18",
+     "m": "194.135",
+     "pm": "400.24"
+    },
+    {
+     "name": "CHS508x20",
+     "D": "508",
+     "A": "306.619",
+     "I": "91427.8",
+     "W": "3599.52",
+     "m": "240.696",
+     "pm": "484.05"
+    },
+    {
+     "name": "CHS508x25",
+     "D": "508",
+     "A": "379.347",
+     "I": "110918",
+     "W": "4366.86",
+     "m": "297.788",
+     "pm": "586.82"
+    },
+    {
+     "name": "CHS610x12.5",
+     "D": "610",
+     "A": "234.638",
+     "I": "104755",
+     "W": "3434.58",
+     "m": "184.191",
+     "pm": "392.54"
+    },
+    {
+     "name": "CHS610x16",
+     "D": "610",
+     "A": "298.577",
+     "I": "131781",
+     "W": "4320.7",
+     "m": "234.383",
+     "pm": "482.89"
+    },
+    {
+     "name": "CHS610x20",
+     "D": "610",
+     "A": "370.708",
+     "I": "161490",
+     "W": "5294.74",
+     "m": "291.006",
+     "pm": "584.81"
+    },
+    {
+     "name": "CHS610x25",
+     "D": "610",
+     "A": "459.458",
+     "I": "196906",
+     "W": "6455.95",
+     "m": "360.675",
+     "pm": "710.21"
+    },
+    {
+     "name": "CHS711x12.5",
+     "D": "711",
+     "A": "274.3",
+     "I": "167343",
+     "W": "4707.26",
+     "m": "215.326",
+     "pm": "458.69"
+    },
+    {
+     "name": "CHS711x16",
+     "D": "711",
+     "A": "349.345",
+     "I": "211040",
+     "W": "5936.42",
+     "m": "274.236",
+     "pm": "564.72"
+    },
+    {
+     "name": "CHS711x20",
+     "D": "711",
+     "A": "434.168",
+     "I": "259351",
+     "W": "7295.38",
+     "m": "340.822",
+     "pm": "684.58"
+    },
+    {
+     "name": "CHS711x25",
+     "D": "711",
+     "A": "538.783",
+     "I": "317357",
+     "W": "8927.07",
+     "m": "422.945",
+     "pm": "832.4"
+    },
+    {
+     "name": "CHS813x16",
+     "D": "813",
+     "A": "400.616",
+     "I": "318222",
+     "W": "7828.33",
+     "m": "314.484",
+     "pm": "647.37"
+    },
+    {
+     "name": "CHS813x20",
+     "D": "813",
+     "A": "498.257",
+     "I": "391909",
+     "W": "9641.07",
+     "m": "391.131",
+     "pm": "785.34"
+    },
+    {
+     "name": "CHS813x25",
+     "D": "813",
+     "A": "618.894",
+     "I": "480857",
+     "W": "11829.2",
+     "m": "485.832",
+     "pm": "955.8"
+    },
+    {
+     "name": "CHS914x16",
+     "D": "914",
+     "A": "451.384",
+     "I": "455142",
+     "W": "9959.34",
+     "m": "354.336",
+     "pm": "729.21"
+    },
+    {
+     "name": "CHS914x20",
+     "D": "914",
+     "A": "561.717",
+     "I": "561461",
+     "W": "12285.8",
+     "m": "440.948",
+     "pm": "885.11"
+    },
+    {
+     "name": "CHS914x25",
+     "D": "914",
+     "A": "698.219",
+     "I": "690317",
+     "W": "15105.4",
+     "m": "548.102",
+     "pm": "1078"
+    },
+    {
+     "name": "CHS1016x20",
+     "D": "1016",
+     "A": "625.805",
+     "I": "776324",
+     "W": "15282",
+     "m": "491.257",
+     "pm": "985.86"
+    },
+    {
+     "name": "CHS1016x25",
+     "D": "1016",
+     "A": "778.33",
+     "I": "956087",
+     "W": "18820.6",
+     "m": "610.989",
+     "pm": "1201.4"
+    },
+    {
+     "name": "CHS1220x25",
+     "D": "1220",
+     "A": "938.551",
+     "I": "1.67608e+06",
+     "W": "27476.7",
+     "m": "736.762",
+     "pm": "1448.2"
+    }
+   ]
+  },
+  "footing": {
+   "ground": "square pad footings, 1.2 m thick; prices illustrative",
+   "fields": {
+    "B": {
+     "unit": "m"
+    },
+    "price": {
+     "unit": "EUR"
+    }
+   },
+   "items": [
+    {
+     "name": "F2.5",
+     "B": "2.5",
+     "price": "1581.25"
+    },
+    {
+     "name": "F3.0",
+     "B": "3",
+     "price": "2277.00"
+    },
+    {
+     "name": "F3.5",
+     "B": "3.5",
+     "price": "3099.25"
+    },
+    {
+     "name": "F4.0",
+     "B": "4",
+     "price": "4048.00"
+    },
+    {
+     "name": "F4.5",
+     "B": "4.5",
+     "price": "5123.25"
+    },
+    {
+     "name": "F5.0",
+     "B": "5",
+     "price": "6325.00"
+    },
+    {
+     "name": "F5.5",
+     "B": "5.5",
+     "price": "7653.25"
+    },
+    {
+     "name": "F6.0",
+     "B": "6",
+     "price": "9108.00"
+    },
+    {
+     "name": "F6.5",
+     "B": "6.5",
+     "price": "10689.25"
+    },
+    {
+     "name": "F7.0",
+     "B": "7",
+     "price": "12397.00"
+    },
+    {
+     "name": "F7.5",
+     "B": "7.5",
+     "price": "14231.25"
+    },
+    {
+     "name": "F8.0",
+     "B": "8",
+     "price": "16192.00"
+    },
+    {
+     "name": "F8.5",
+     "B": "8.5",
+     "price": "18279.25"
+    },
+    {
+     "name": "F9.0",
+     "B": "9",
+     "price": "20493.00"
+    },
+    {
+     "name": "F9.5",
+     "B": "9.5",
+     "price": "22833.25"
+    },
+    {
+     "name": "F10.0",
+     "B": "10",
+     "price": "25300.00"
+    },
+    {
+     "name": "F10.5",
+     "B": "10.5",
+     "price": "27893.25"
+    },
+    {
+     "name": "F11.0",
+     "B": "11",
+     "price": "30613.00"
+    },
+    {
+     "name": "F11.5",
+     "B": "11.5",
+     "price": "33459.25"
+    },
+    {
+     "name": "F12.0",
+     "B": "12",
+     "price": "36432.00"
+    }
+   ]
+  }
+ },
+ "define": {
+  "q": "rho_a*vb*vb/2",
+  "Ft": "q*Cd*Dt*Ht",
+  "Fs": "q*Cd*S.D*H",
+  "Mb": "Ft*(H + Ht/2) + Fs*H/2",
+  "Nk": "(mw + mtank + S.m*H)*g0",
+  "Wf": "gc*F.B*F.B*hf"
+ },
+ "laws": [
+  {
+   "zfl": "sigma == 1.35*Nk/S.A + 1.5*Mb/S.W",
+   "source": "axial + bending stress at the shaft base, factored"
+  },
+  {
+   "zfl": "ub == 3*1.35*Nk*4*H*H/(pi*pi*E*S.I)",
+   "source": "Euler, free-standing cantilever (effective length 2H), safety 3"
+  },
+  {
+   "zfl": "delta == Ft*H*H*H/(3*E*S.I) + Fs*H*H*H/(8*E*S.I)",
+   "source": "cantilever sway: tank force at the top, shaft wind uniform"
+  },
+  {
+   "zfl": "pmax == (Nk + Wf)/(F.B*F.B) + 6*Mb/(F.B*F.B*F.B)",
+   "source": "edge soil pressure, resultant within the kern"
+  },
+  {
+   "zfl": "kern == (Nk + Wf)*F.B/6 - Mb",
+   "source": "resultant inside the middle third: no uplift"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "sigma",
+   "op": "<=",
+   "value": "fy/1.1",
+   "why": "steel resistance, gamma_M = 1.1"
+  },
+  {
+   "quantity": "ub",
+   "op": "<=",
+   "value": "1",
+   "why": "Euler load at least 3x the factored weight"
+  },
+  {
+   "quantity": "delta",
+   "op": "<=",
+   "value": "H/150",
+   "why": "sway limit at the tank floor"
+  },
+  {
+   "quantity": "pmax",
+   "op": "<=",
+   "value": "qa",
+   "why": "soil pressure within the allowable"
+  },
+  {
+   "quantity": "kern",
+   "op": ">=",
+   "value": "0",
+   "why": "no uplift under any wind, tank empty or full"
+  }
+ ],
+ "objective": {
+  "minimize": "S.pm*H + F.price",
+  "unit": "EUR"
+ }
+}

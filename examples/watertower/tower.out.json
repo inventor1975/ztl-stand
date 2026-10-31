@@ -1,0 +1,835 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 0897d54",
+  "designs_tried": 96,
+  "failed_at_nominal": 85,
+  "judged": 11,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "S=chs(name=CHS508x10, D=508, A=156451/1000, I=485203/10, W=7641/4, m=61407/500, pm=27187/100); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~3.19941882907 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x10, D=508, A=156451/1000, I=485203/10, W=7641/4, m=61407/500, pm=27187/100); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~3.19941882907 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x12.5, D=508, A=97291/500, I=298777/5, W=117629/50, m=152747/1000, pm=16287/50); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~2.44056891849 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x10, D=508, A=156451/1000, I=485203/10, W=7641/4, m=61407/500, pm=27187/100); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~3.19941882907 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x12.5, D=508, A=97291/500, I=298777/5, W=117629/50, m=152747/1000, pm=16287/50); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~2.44056891849 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x12.5, D=610, A=117319/500, I=104755, W=171729/50, m=184191/1000, pm=19627/50); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.981010338123 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x10, D=508, A=156451/1000, I=485203/10, W=7641/4, m=61407/500, pm=27187/100); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~3.19941882907 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x16, D=508, A=123653/500, I=74909, W=147459/50, m=38827/200, pm=10006/25); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.77844465091 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x12.5, D=508, A=97291/500, I=298777/5, W=117629/50, m=152747/1000, pm=16287/50); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~2.44056891849 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x12.5, D=610, A=117319/500, I=104755, W=171729/50, m=184191/1000, pm=19627/50); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.981010338123 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x16, D=508, A=123653/500, I=74909, W=147459/50, m=38827/200, pm=10006/25); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.77844465091 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x10, D=508, A=156451/1000, I=485203/10, W=7641/4, m=61407/500, pm=27187/100); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~3.19941882907 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x12.5, D=508, A=97291/500, I=298777/5, W=117629/50, m=152747/1000, pm=16287/50); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~2.44056891849 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x12.5, D=711, A=2743/10, I=167343, W=235363/50, m=107663/500, pm=45869/100); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.251501143831 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x12.5, D=610, A=117319/500, I=104755, W=171729/50, m=184191/1000, pm=19627/50); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.981010338123 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x16, D=508, A=123653/500, I=74909, W=147459/50, m=38827/200, pm=10006/25); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.77844465091 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x16, D=610, A=298577/1000, I=131781, W=43207/10, m=234383/1000, pm=48289/100); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.598094894073 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x20, D=508, A=306619/1000, I=457139/5, W=89988/25, m=30087/125, pm=9681/20); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.30767513162 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x12.5, D=711, A=2743/10, I=167343, W=235363/50, m=107663/500, pm=45869/100); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.251501143831 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x12.5, D=508, A=97291/500, I=298777/5, W=117629/50, m=152747/1000, pm=16287/50); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~2.44056891849 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x10, D=508, A=156451/1000, I=485203/10, W=7641/4, m=61407/500, pm=27187/100); F=footing(name=F5.0, B=5, price=6325)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~3.19941882907 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x12.5, D=610, A=117319/500, I=104755, W=171729/50, m=184191/1000, pm=19627/50); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.981010338123 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x16, D=610, A=298577/1000, I=131781, W=43207/10, m=234383/1000, pm=48289/100); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.598094894073 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x20, D=508, A=306619/1000, I=457139/5, W=89988/25, m=30087/125, pm=9681/20); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.30767513162 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x16, D=508, A=123653/500, I=74909, W=147459/50, m=38827/200, pm=10006/25); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.77844465091 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x12.5, D=711, A=2743/10, I=167343, W=235363/50, m=107663/500, pm=45869/100); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.251501143831 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x16, D=610, A=298577/1000, I=131781, W=43207/10, m=234383/1000, pm=48289/100); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.598094894073 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x20, D=508, A=306619/1000, I=457139/5, W=89988/25, m=30087/125, pm=9681/20); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.30767513162 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x12.5, D=508, A=97291/500, I=298777/5, W=117629/50, m=152747/1000, pm=16287/50); F=footing(name=F5.0, B=5, price=6325)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~2.44056891849 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x16, D=711, A=69869/200, I=211040, W=296821/50, m=68559/250, pm=14118/25); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.00948803291239 (an exact fraction of 35 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x12.5, D=610, A=117319/500, I=104755, W=171729/50, m=184191/1000, pm=19627/50); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.981010338123 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x10, D=508, A=156451/1000, I=485203/10, W=7641/4, m=61407/500, pm=27187/100); F=footing(name=F5.5, B=11/2, price=30613/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~3.19941882907 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x16, D=508, A=123653/500, I=74909, W=147459/50, m=38827/200, pm=10006/25); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.77844465091 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x12.5, D=711, A=2743/10, I=167343, W=235363/50, m=107663/500, pm=45869/100); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.251501143831 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x20, D=610, A=92677/250, I=161490, W=264737/50, m=145503/500, pm=58481/100); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.325597259888 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x25, D=508, A=379347/1000, I=110918, W=218343/50, m=74447/250, pm=29341/50); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.933740042551 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x16, D=711, A=69869/200, I=211040, W=296821/50, m=68559/250, pm=14118/25); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.00948803291239 (an exact fraction of 35 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x16, D=610, A=298577/1000, I=131781, W=43207/10, m=234383/1000, pm=48289/100); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.598094894073 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x20, D=508, A=306619/1000, I=457139/5, W=89988/25, m=30087/125, pm=9681/20); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.30767513162 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x20, D=610, A=92677/250, I=161490, W=264737/50, m=145503/500, pm=58481/100); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.325597259888 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x25, D=508, A=379347/1000, I=110918, W=218343/50, m=74447/250, pm=29341/50); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.933740042551 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x12.5, D=508, A=97291/500, I=298777/5, W=117629/50, m=152747/1000, pm=16287/50); F=footing(name=F5.5, B=11/2, price=30613/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~2.44056891849 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x12.5, D=610, A=117319/500, I=104755, W=171729/50, m=184191/1000, pm=19627/50); F=footing(name=F5.0, B=5, price=6325)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.981010338123 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x12.5, D=711, A=2743/10, I=167343, W=235363/50, m=107663/500, pm=45869/100); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.251501143831 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x16, D=508, A=123653/500, I=74909, W=147459/50, m=38827/200, pm=10006/25); F=footing(name=F5.0, B=5, price=6325)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.77844465091 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x16, D=711, A=69869/200, I=211040, W=296821/50, m=68559/250, pm=14118/25); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.00948803291239 (an exact fraction of 35 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS813x16, D=813, A=50077/125, I=318222, W=782833/100, m=78621/250, pm=64737/100); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "soil pressure within the allowable",
+      "by_at_witness": "23604072593/1562500000 (~15.1066)",
+      "unit": "kPa"
+    },
+    {
+      "design": "S=chs(name=CHS508x10, D=508, A=156451/1000, I=485203/10, W=7641/4, m=61407/500, pm=27187/100); F=footing(name=F6.0, B=6, price=9108)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~3.19941882907 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x16, D=610, A=298577/1000, I=131781, W=43207/10, m=234383/1000, pm=48289/100); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.598094894073 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x20, D=610, A=92677/250, I=161490, W=264737/50, m=145503/500, pm=58481/100); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.325597259888 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x20, D=508, A=306619/1000, I=457139/5, W=89988/25, m=30087/125, pm=9681/20); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.30767513162 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x25, D=508, A=379347/1000, I=110918, W=218343/50, m=74447/250, pm=29341/50); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.933740042551 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS813x16, D=813, A=50077/125, I=318222, W=782833/100, m=78621/250, pm=64737/100); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.15802267541 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x20, D=711, A=54271/125, I=259351, W=364769/50, m=170411/500, pm=34229/50); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "soil pressure within the allowable",
+      "by_at_witness": "42141020663/3125000000 (~13.4851)",
+      "unit": "kPa"
+    },
+    {
+      "design": "S=chs(name=CHS711x16, D=711, A=69869/200, I=211040, W=296821/50, m=68559/250, pm=14118/25); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.00948803291239 (an exact fraction of 35 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x12.5, D=711, A=2743/10, I=167343, W=235363/50, m=107663/500, pm=45869/100); F=footing(name=F5.0, B=5, price=6325)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.251501143831 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x12.5, D=610, A=117319/500, I=104755, W=171729/50, m=184191/1000, pm=19627/50); F=footing(name=F5.5, B=11/2, price=30613/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.981010338123 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x12.5, D=508, A=97291/500, I=298777/5, W=117629/50, m=152747/1000, pm=16287/50); F=footing(name=F6.0, B=6, price=9108)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~2.44056891849 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x16, D=508, A=123653/500, I=74909, W=147459/50, m=38827/200, pm=10006/25); F=footing(name=F5.5, B=11/2, price=30613/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.77844465091 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x20, D=610, A=92677/250, I=161490, W=264737/50, m=145503/500, pm=58481/100); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.325597259888 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x25, D=508, A=379347/1000, I=110918, W=218343/50, m=74447/250, pm=29341/50); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.933740042551 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x25, D=610, A=229729/500, I=196906, W=129119/20, m=14427/40, pm=71021/100); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.10886843852 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x20, D=711, A=54271/125, I=259351, W=364769/50, m=170411/500, pm=34229/50); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.427144952471 (an exact fraction of 39 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x16, D=610, A=298577/1000, I=131781, W=43207/10, m=234383/1000, pm=48289/100); F=footing(name=F5.0, B=5, price=6325)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.598094894073 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x20, D=508, A=306619/1000, I=457139/5, W=89988/25, m=30087/125, pm=9681/20); F=footing(name=F5.0, B=5, price=6325)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.30767513162 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS813x16, D=813, A=50077/125, I=318222, W=782833/100, m=78621/250, pm=64737/100); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.15802267541 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x10, D=508, A=156451/1000, I=485203/10, W=7641/4, m=61407/500, pm=27187/100); F=footing(name=F6.5, B=13/2, price=42757/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~3.19941882907 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS914x16, D=914, A=56423/125, I=455142, W=497967/50, m=44292/125, pm=72921/100); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "soil pressure within the allowable",
+      "by_at_witness": "3668205709/195312500 (~18.7812)",
+      "unit": "kPa"
+    },
+    {
+      "design": "S=chs(name=CHS711x16, D=711, A=69869/200, I=211040, W=296821/50, m=68559/250, pm=14118/25); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.00948803291239 (an exact fraction of 35 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x25, D=610, A=229729/500, I=196906, W=129119/20, m=14427/40, pm=71021/100); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.10886843852 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x20, D=711, A=54271/125, I=259351, W=364769/50, m=170411/500, pm=34229/50); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.427144952471 (an exact fraction of 39 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x20, D=610, A=92677/250, I=161490, W=264737/50, m=145503/500, pm=58481/100); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.325597259888 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x12.5, D=711, A=2743/10, I=167343, W=235363/50, m=107663/500, pm=45869/100); F=footing(name=F5.5, B=11/2, price=30613/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.251501143831 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x25, D=508, A=379347/1000, I=110918, W=218343/50, m=74447/250, pm=29341/50); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.933740042551 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS914x16, D=914, A=56423/125, I=455142, W=497967/50, m=44292/125, pm=72921/100); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "soil pressure within the allowable",
+      "by_at_witness": "45827988461/1125000000 (~40.736)",
+      "unit": "kPa"
+    },
+    {
+      "design": "S=chs(name=CHS610x12.5, D=610, A=117319/500, I=104755, W=171729/50, m=184191/1000, pm=19627/50); F=footing(name=F6.0, B=6, price=9108)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.981010338123 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS813x16, D=813, A=50077/125, I=318222, W=782833/100, m=78621/250, pm=64737/100); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.15802267541 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x16, D=508, A=123653/500, I=74909, W=147459/50, m=38827/200, pm=10006/25); F=footing(name=F6.0, B=6, price=9108)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.77844465091 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x12.5, D=508, A=97291/500, I=298777/5, W=117629/50, m=152747/1000, pm=16287/50); F=footing(name=F6.5, B=13/2, price=42757/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~2.44056891849 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS813x20, D=813, A=498257/1000, I=391909, W=964107/100, m=391131/1000, pm=39267/50); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "soil pressure within the allowable",
+      "by_at_witness": "109449296423/6250000000 (~17.5119)",
+      "unit": "kPa"
+    },
+    {
+      "design": "S=chs(name=CHS610x25, D=610, A=229729/500, I=196906, W=129119/20, m=14427/40, pm=71021/100); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.10886843852 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x16, D=610, A=298577/1000, I=131781, W=43207/10, m=234383/1000, pm=48289/100); F=footing(name=F5.5, B=11/2, price=30613/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.598094894073 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x20, D=508, A=306619/1000, I=457139/5, W=89988/25, m=30087/125, pm=9681/20); F=footing(name=F5.5, B=11/2, price=30613/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~1.30767513162 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x16, D=711, A=69869/200, I=211040, W=296821/50, m=68559/250, pm=14118/25); F=footing(name=F5.0, B=5, price=6325)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.00948803291239 (an exact fraction of 35 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS914x16, D=914, A=56423/125, I=455142, W=497967/50, m=44292/125, pm=72921/100); F=footing(name=F3.5, B=7/2, price=12397/4)",
+      "verdict": "REFUTED",
+      "fails": "soil pressure within the allowable",
+      "by_at_witness": "1433111923/218750000 (~6.55137)",
+      "unit": "kPa"
+    },
+    {
+      "design": "S=chs(name=CHS711x20, D=711, A=54271/125, I=259351, W=364769/50, m=170411/500, pm=34229/50); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.427144952471 (an exact fraction of 39 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x10, D=508, A=156451/1000, I=485203/10, W=7641/4, m=61407/500, pm=27187/100); F=footing(name=F7.0, B=7, price=12397)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~3.19941882907 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS813x20, D=813, A=498257/1000, I=391909, W=964107/100, m=391131/1000, pm=39267/50); F=footing(name=F3.0, B=3, price=2277)",
+      "verdict": "REFUTED",
+      "fails": "soil pressure within the allowable",
+      "by_at_witness": "365285921423/9000000000 (~40.5873)",
+      "unit": "kPa"
+    },
+    {
+      "design": "S=chs(name=CHS610x20, D=610, A=92677/250, I=161490, W=264737/50, m=145503/500, pm=58481/100); F=footing(name=F5.0, B=5, price=6325)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.325597259888 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS508x25, D=508, A=379347/1000, I=110918, W=218343/50, m=74447/250, pm=29341/50); F=footing(name=F5.0, B=5, price=6325)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.933740042551 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS813x16, D=813, A=50077/125, I=318222, W=782833/100, m=78621/250, pm=64737/100); F=footing(name=F4.5, B=9/2, price=20493/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.15802267541 (an exact fraction of 38 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x25, D=711, A=538783/1000, I=317357, W=892707/100, m=84589/200, pm=4162/5); F=footing(name=F2.5, B=5/2, price=6325/4)",
+      "verdict": "REFUTED",
+      "fails": "soil pressure within the allowable",
+      "by_at_witness": "20077814337/1250000000 (~16.0623)",
+      "unit": "kPa"
+    },
+    {
+      "design": "S=chs(name=CHS610x25, D=610, A=229729/500, I=196906, W=129119/20, m=14427/40, pm=71021/100); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.10886843852 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS711x12.5, D=711, A=2743/10, I=167343, W=235363/50, m=107663/500, pm=45869/100); F=footing(name=F6.0, B=6, price=9108)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.251501143831 (an exact fraction of 37 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS610x12.5, D=610, A=117319/500, I=104755, W=171729/50, m=184191/1000, pm=19627/50); F=footing(name=F6.5, B=13/2, price=42757/4)",
+      "verdict": "REFUTED",
+      "fails": "Euler load at least 3x the factored weight",
+      "by_at_witness": "~0.981010338123 (an exact fraction of 36 digits)",
+      "unit": "1"
+    },
+    {
+      "design": "S=chs(name=CHS914x16, D=914, A=56423/125, I=455142, W=497967/50, m=44292/125, pm=72921/100); F=footing(name=F4.0, B=4, price=4048)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "sigma": [
+          "502495184681699083/18731194694000000 (~26.8266)",
+          "1482334329331440333/18731194694000000 (~79.1372)"
+        ],
+        "ub": [
+          "~0.136650436777 (an exact fraction of 37 digits)",
+          "~0.824530226461 (an exact fraction of 39 digits)"
+        ],
+        "delta": [
+          "2295370000/137225313 (~16.727)",
+          "531160000/15095543 (~35.1865)"
+        ],
+        "pmax": [
+          "108543817211/2000000000 (~54.2719)",
+          "260941132211/2000000000 (~130.471)"
+        ],
+        "kern": [
+          "28539513461/187500000 (~152.211)",
+          "180936828461/187500000 (~964.996)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 95,
+    "EARNED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "S.pm*H + F.price",
+    "value": "93161/5 (~18632.2)",
+    "unit": "EUR",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "S": {
+      "catalog": "chs",
+      "name": "CHS914x16",
+      "D": {
+        "nominal": "914",
+        "tolerance": "0"
+      },
+      "A": {
+        "nominal": "56423/125 (~451.384)",
+        "tolerance": "0"
+      },
+      "I": {
+        "nominal": "455142",
+        "tolerance": "0"
+      },
+      "W": {
+        "nominal": "497967/50 (~9959.34)",
+        "tolerance": "0"
+      },
+      "m": {
+        "nominal": "44292/125 (~354.336)",
+        "tolerance": "0"
+      },
+      "pm": {
+        "nominal": "72921/100 (~729.21)",
+        "tolerance": "0"
+      }
+    },
+    "F": {
+      "catalog": "footing",
+      "name": "F4.0",
+      "B": {
+        "nominal": "4",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "4048",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "sigma": [
+      "502495184681699083/18731194694000000 (~26.8266)",
+      "1482334329331440333/18731194694000000 (~79.1372)"
+    ],
+    "ub": [
+      "~0.136650436777 (an exact fraction of 37 digits)",
+      "~0.824530226461 (an exact fraction of 39 digits)"
+    ],
+    "delta": [
+      "2295370000/137225313 (~16.727)",
+      "531160000/15095543 (~35.1865)"
+    ],
+    "pmax": [
+      "108543817211/2000000000 (~54.2719)",
+      "260941132211/2000000000 (~130.471)"
+    ],
+    "kern": [
+      "28539513461/187500000 (~152.211)",
+      "180936828461/187500000 (~964.996)"
+    ]
+  },
+  "guaranteed_unit": {
+    "sigma": "MPa",
+    "ub": "1",
+    "delta": "mm",
+    "pmax": "kPa",
+    "kern": "kN*m"
+  },
+  "how": {
+    "sigma": "ZTL, outer range",
+    "ub": "ZTL, outer range",
+    "delta": "ZTL, outer range",
+    "pmax": "ZTL, outer range",
+    "kern": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "sigma",
+      "op": "<=",
+      "value": "fy/1.1",
+      "why": "steel resistance, gamma_M = 1.1"
+    },
+    {
+      "quantity": "ub",
+      "op": "<=",
+      "value": "1",
+      "why": "Euler load at least 3x the factored weight"
+    },
+    {
+      "quantity": "delta",
+      "op": "<=",
+      "value": "H/150",
+      "why": "sway limit at the tank floor"
+    },
+    {
+      "quantity": "pmax",
+      "op": "<=",
+      "value": "qa",
+      "why": "soil pressure within the allowable"
+    },
+    {
+      "quantity": "kern",
+      "op": ">=",
+      "value": "0",
+      "why": "no uplift under any wind, tank empty or full"
+    }
+  ],
+  "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "every corner of the tolerance box recomputed exactly and inside; exact ranges equal; definitions bounded by the checker's own interval arithmetic",
+  "judge_log": [
+    "sigma -> [502495184681699083/18731194694, 1482334329331440333/18731194694] by [sigma == 1.35*((mw + mtank + S__m*H)*g0)/S__A + 1.5*(((rho_a*vb*vb/2)*Cd*Dt*Ht)*(H + Ht/2) + ((rho_a*vb*vb/2)*Cd*S__D*H)*H/2)/S__W], interval reading, sound, may be wider than the truth (credit)",
+    "ub -> [571215507680000000000000000000000000/4180122077548350105078739720090251057, 122844315876480000000000000000000000000/148987037629633637255309458078089742007] by [ub == 3*1.35*((mw + mtank + S__m*H)*g0)*4*H*H/(pi*pi*E*S__I)], interval reading, sound, may be wider than the truth (credit)",
+    "delta -> [2295370/137225313, 531160/15095543] by [delta == ((rho_a*vb*vb/2)*Cd*Dt*Ht)*H*H*H/(3*E*S__I) + ((rho_a*vb*vb/2)*Cd*S__D*H)*H*H*H/(8*E*S__I)], interval reading, sound, may be wider than the truth (credit)",
+    "pmax -> [108543817211/2000000, 260941132211/2000000] by [pmax == (((mw + mtank + S__m*H)*g0) + (gc*F__B*F__B*hf))/(F__B*F__B) + 6*(((rho_a*vb*vb/2)*Cd*Dt*Ht)*(H + Ht/2) + ((rho_a*vb*vb/2)*Cd*S__D*H)*H/2)/(F__B*F__B*F__B)], interval reading, sound, may be wider than the truth (credit)",
+    "kern -> [28539513461/187500, 180936828461/187500] by [kern == (((mw + mtank + S__m*H)*g0) + (gc*F__B*F__B*hf))*F__B/6 - (((rho_a*vb*vb/2)*Cd*Dt*Ht)*(H + Ht/2) + ((rho_a*vb*vb/2)*Cd*S__D*H)*H/2)], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL + the independent checker (dev mode)"
+}
