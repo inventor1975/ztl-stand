@@ -2238,10 +2238,27 @@ check("truss: the 20-floor cantilever (101 bars, 81 unknowns) at its nominal poi
       abs(float(_v20["U_42_X"]) - 18208.5) < 0.05 and abs(float(_v20["U_42_Y"]) + 806.663) < 0.002,
       (float(_v20["U_42_X"]), float(_v20["U_42_Y"])))
 _tr12 = (_TRD / "cantilever12.txt").read_text()
-_r12 = TR.judge(_tr12, "0.5%", [TR._req("U(26,X) <= 10000")])
+_r12 = TR.judge(_tr12, "0.5%", [TR._req("U(26,X) <= 10000")], energy=False)   # the box path, on purpose
 check("truss: 12 floors, every modulus +-0.5 %: a bound on the top corner EARNED in ONE piece (the rescaled system; "
       "unscaled the kernel's beta was 1.2 and the search split 256 pieces)",
       _r12["verdict"] == "EARNED" and "(1 pieces" in json.dumps(_r12.get("how")), json.dumps(_r12)[:300])
+# THE ENERGY-NORM PATH (ZTL zenergy, 2026-10-31): the 20-floor benchmark decided in a fraction of a second, against the
+# exact range proved on 2026-10-16 (UX in [18117.870011, 18299.962368], 8.5 min per end on the box path)
+_re = TR.judge(_tr20, "0.5%", [TR._req("U(42,X) <= 18300"), TR._req("U(42,X) >= 18116")])
+check("truss energy path: 20 floors, +-0.5 %: U(42,X) <= 18300 and >= 18116 EARNED by zenergy, the proved range "
+      "containing the exact one of 2026-10-16",
+      _re["verdict"] == "EARNED" and "zenergy" in _re.get("path", "")
+      and float(F(_re["requirements"][0]["proved_range"][0].split()[0])) <= 18117.870011
+      and float(F(_re["requirements"][0]["proved_range"][1].split()[0])) >= 18299.962368, json.dumps(_re)[:300])
+_rr = TR.judge(_tr20, "0.5%", [TR._req("U(42,X) <= 18299")])
+check("truss energy path: U(42,X) <= 18299 REFUTED at a vertex solved exactly — the witness IS the exact maximum of "
+      "2026-10-16 (18299.962368)",
+      _rr["verdict"] == "REFUTED"
+      and abs(float(F(_rr["requirements"][0]["witness_value"].split()[0])) - 18299.962368) < 1e-6, json.dumps(_rr)[:300])
+_ro, _rows = TR.judge_energy(_tr20, "0.5%", [TR._req("U(42,X) >= 18117")])
+check("truss energy path: a bound inside the first-order slack (>= 18117, the exact low end 18117.87) is NOT decided "
+      "there — None, so the box path takes it (no guess)",
+      _ro is None and _rows[0]["verdict"] == "OPEN", json.dumps(_rows)[:300])
 _lw = ["2*x + y == 3", "x - y == 0"]
 _sc = {"v": {"x": F(1, 4), "y": F(2)}, "w": [F(8), F(1, 2)]}
 _rl = K._rescale(_lw, _sc)

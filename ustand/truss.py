@@ -176,7 +176,94 @@ def _req(text):
     return n, d, m.group(2), _num(m.group(3), text)
 
 
-def judge(text, tol, requirements):
+def energy_system(text, tol):
+    """The deck as ZTL zenergy's class: K(p) = sum_k p_k (E A / L) g_k g_k^T, p_k in [1 - t, 1 + t] (each bar's
+    modulus, independently), g_k the bar's elongation row over the free displacements; f the forces."""
+    nodes, bars, forces, supports, ex, area = read_deck(text)
+    t = F(0) if tol in (None, "0", 0) else tolerance(tol) if isinstance(tol, str) else F(tol)
+    free = [(n, d) for n in sorted(nodes) for d in "XY" if (n, d) not in supports]
+    dof = {nd: i for i, nd in enumerate(free)}
+    parts = []
+    for k, (a, b) in enumerate(bars, 1):
+        dx, dy = nodes[b][0] - nodes[a][0], nodes[b][1] - nodes[a][1]
+        L = _sqrt(dx * dx + dy * dy)
+        if not L:
+            raise TrussError(f"bar {k} ({a}-{b}): its length is irrational or zero — not exact (version 1)")
+        c = {"X": dx / L, "Y": dy / L}
+        g = {}
+        for n, sg in ((b, 1), (a, -1)):
+            for d in "XY":
+                if (n, d) in dof and c[d] != 0:
+                    g[dof[(n, d)]] = g.get(dof[(n, d)], F(0)) + sg * c[d]
+        parts.append({"t": t, "terms": [(ex * area / L, g)]})
+    f = [F(0)] * len(free)
+    for (n, d), v in forces.items():
+        if (n, d) in dof:
+            f[dof[(n, d)]] += v
+    return parts, f, dof
+
+
+def _show(q):
+    """An exact rational as the stand writes them: the fraction, and its decimal for the reader."""
+    q = F(q)
+    return str(q) if q.denominator == 1 else f"{q} (~{float(q):.12g})"
+
+
+def judge_energy(text, tol, requirements):
+    """The first path (2026-10-31): ZTL zenergy bounds each required displacement in the energy norm — no box
+    splitting, the conditioning drops out. EARNED when every proved range meets its requirement; REFUTED when the
+    first-order vertex (a real point of the box, solved exactly) violates one; None when it decides nothing (the
+    caller then takes the old path)."""
+    from . import judge_ztl  # noqa: F401  (puts ZTL on the path)
+    import zenergy as ZE
+    parts, f, dof = energy_system(text, tol)
+    n = len(dof)
+    rows, all_ok = [], True
+    for (nd, d, op, v) in requirements:
+        if (nd, d) not in dof:
+            raise TrussError(f"U({nd},{d}): not a free displacement of this truss")
+        e = [F(0)] * n
+        e[dof[(nd, d)]] = F(1)
+        r = ZE.certify_output(parts, f, e, n)
+        row = {"requirement": f"U({nd},{d}) {op} {v}", "nominal": _show(r["nominal"]),
+               "proved_range": [_show(r["lo"]), _show(r["hi"])],
+               "first_order": _show(r["first"]), "rest": _show(r["rest"])}
+        ok = r["hi"] <= v if op == "<=" else r["lo"] >= v
+        if not ok:
+            all_ok = False
+            up = op == "<="                                   # the side that could violate
+            ps = [1 + (p["t"] if (sl > 0) == up and sl != 0 else -p["t"] if sl != 0 else 0)
+                  for p, sl in zip(parts, r["slopes"])]
+            w = ZE.value_at(parts, f, e, n, ps)
+            row["witness_value"] = _show(w)
+            if (w > v) if up else (w < v):
+                row["verdict"] = "REFUTED"
+                row["witness_moduli"] = {f"E{k}": _show(p_ * ps_) for k, (p_, ps_) in
+                                         enumerate(((1, x) for x in ps), 1) if ps_ != 1}
+            else:
+                row["verdict"] = "OPEN"
+        else:
+            row["verdict"] = "EARNED"
+        rows.append(row)
+    verdicts = [r["verdict"] for r in rows]
+    if "REFUTED" in verdicts:
+        verdict = "REFUTED"
+    elif all(x == "EARNED" for x in verdicts):
+        verdict = "EARNED"
+    else:
+        return None, rows
+    return {"verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
+            "requirements": rows, "unknowns": n, "moduli": len(parts),
+            "checked_by": "ZTL zenergy: every exact solve checked by its exact residual; the rest's lemma is "
+                          "proved on paper (Lean pending); the stand's independent checker does not re-check this "
+                          "path yet"}, rows
+
+
+def judge(text, tol, requirements, energy=True):
+    if energy and requirements:
+        out, _ = judge_energy(text, tol, requirements)
+        if out is not None:
+            return out
     bk = to_brick(text, tol, requirements)
     return _run(bk, bk["requirements"])
 
@@ -202,7 +289,7 @@ def main(argv):
         if ranges:
             out = {t: range_of(text, tol, t, progress=_progress) for t in ranges}   # each end to stderr at once
         else:
-            out = judge(text, tol, reqs)
+            out = judge(text, tol, reqs, energy="--no-energy" not in argv)
     except (B.BrickError, SpiceError, OSError, ValueError, IndexError) as e:
         out = {"verdict": "BRICK ERROR", "why": f"{e}"}
     print(json.dumps(out, indent=1, ensure_ascii=False))
