@@ -167,7 +167,7 @@ def judge(text, tol, requirements):
             raise FrameError(f"{_name(nd, d)}: not a free displacement of this frame")
         e = [F(0)] * n
         e[dof[(nd, d)]] = F(1)
-        r = ZE.certify_output(parts, f, e, n)
+        r = ZE.certify(parts, f, e, n)       # exact solves up to 600 unknowns, the floating path above
         row = {"requirement": f"{_name(nd, d)} {op} {v}", "nominal": _show(r["nominal"]),
                "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)],
                "first_order": _show(r["first"]), "rest": _show(r["rest"])}
@@ -177,16 +177,22 @@ def judge(text, tol, requirements):
             up = op == "<="
             ps = [1 + (p["t"] if (sl > 0) == up and sl != 0 else -p["t"] if sl != 0 else 0)
                   for p, sl in zip(parts, r["slopes"])]
-            w = ZE.value_at(parts, f, e, n, ps)
+            if n <= 600:
+                w = wl = wh = ZE.value_at(parts, f, e, n, ps)
+            else:                                     # the floating path at the vertex: its whole enclosure must cross
+                wl, wh = ZE.value_enclosure_fp(parts, f, e, n, ps)
+                w = wh if up else wl
             row["witness_value"] = _show(w)
-            row["verdict"] = "REFUTED" if ((w > v) if up else (w < v)) else "OPEN"
+            row["verdict"] = "REFUTED" if ((wl > v) if up else (wh < v)) else "OPEN"
         rows.append(row)
     vs = [r["verdict"] for r in rows]
     verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
     return {"verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
             "requirements": rows, "unknowns": n, "elements": len(parts),
-            "checked_by": "ZTL zenergy: every exact solve checked by its exact residual; the bound's algebra is ZTL "
-                          "lean/ZNet.lean step 4 with lean/ZEnergy.lean target_first_grouped (zero axioms)"}
+            "checked_by": "ZTL zenergy: exact solves up to 600 unknowns (residual checked), above them float solves with "
+                          "exact residuals and lambda_min(K0) proved by an interval LDL^T in fixed point; the bound's "
+                          "algebra is ZTL lean/ZNet.lean step 4 with lean/ZEnergy.lean target_first_grouped (zero "
+                          "axioms); the floating path's error assembly is on paper (Lean next)"}
 
 
 def range_of(text, tol, target):
@@ -196,7 +202,7 @@ def range_of(text, tol, target):
     nd, d = _target(target)
     e = [F(0)] * len(dof)
     e[dof[(nd, d)]] = F(1)
-    r = ZE.certify_output(parts, f, e, len(dof))
+    r = ZE.certify(parts, f, e, len(dof))
     return {"target": target, "nominal": _show(r["nominal"]), "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)],
             "note": "an enclosure (first order exact + a proved rest), not the exact range"}
 

@@ -2278,6 +2278,17 @@ _fr2 = FRM.judge(_fr, "0.5%", [FRM._req("U(9,Y) >= -0.012762")])
 check("frame: +-0.5 % on every element's modulus — tip >= -0.0127623 EARNED (the extreme is -4/315/0.995 = "
       "-0.01276222...); >= -0.012762 REFUTED at a vertex solved exactly (the witness IS that extreme)",
       _fe["verdict"] == "EARNED" and _fr2["verdict"] == "REFUTED", (_fe["verdict"], _fr2["verdict"]))
+# THE FLOATING PATH (2026-11-01): above 600 unknowns float solves, exact residuals, lambda_min proved in fixed point
+import subprocess as _sp
+_f408 = _sp.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.parent / "examples" / "frame" / "gen_frame.py"),
+                 "40", "8"], capture_output=True, text=True, check=True).stdout
+_fn = F(FRM.range_of(_f408, "0", "U(361,X)")["nominal"].split()[0])
+_fe1 = FRM.judge(_f408, "0.5%", [(361, "X", "<=", _fn * F(102, 100))])
+_fe2 = FRM.judge(_f408, "0.5%", [(361, "X", "<=", _fn * F(1003, 1000))])
+check("frame, floating path: a 40-storey x 8-bay frame (1080 unknowns) — roof sway <= nominal + 2 % EARNED, "
+      "<= nominal + 0.3 % REFUTED (the whole enclosure at the vertex is beyond it)",
+      _fe1["verdict"] == "EARNED" and _fe2["verdict"] == "REFUTED" and _fe1["unknowns"] == 1080,
+      (_fe1["verdict"], _fe2["verdict"]))
 _lw = ["2*x + y == 3", "x - y == 0"]
 _sc = {"v": {"x": F(1, 4), "y": F(2)}, "w": [F(8), F(1, 2)]}
 _rl = K._rescale(_lw, _sc)
