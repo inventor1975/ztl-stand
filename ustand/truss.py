@@ -254,9 +254,9 @@ def judge_energy(text, tol, requirements):
         return None, rows
     return {"verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
             "requirements": rows, "unknowns": n, "moduli": len(parts),
-            "checked_by": "ZTL zenergy: every exact solve checked by its exact residual; the rest's lemma is "
-                          "proved on paper (Lean pending); the stand's independent checker does not re-check this "
-                          "path yet"}, rows
+            "checked_by": "ZTL zenergy: every exact solve checked by its exact residual; the bound's algebra is "
+                          "ZTL lean/ZNet.lean step 4 (target_identity, target_first, target_second; zero axioms); "
+                          "the stand's independent checker does not re-check this path yet"}, rows
 
 
 def judge(text, tol, requirements, energy=True):
