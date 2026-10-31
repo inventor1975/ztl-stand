@@ -189,10 +189,11 @@ def judge(text, tol, requirements):
     verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
     return {"verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
             "requirements": rows, "unknowns": n, "elements": len(parts),
-            "checked_by": "ZTL zenergy: exact solves up to 600 unknowns (residual checked), above them float solves with "
-                          "exact residuals and lambda_min(K0) proved by an interval LDL^T in fixed point; the bound's "
-                          "algebra is ZTL lean/ZNet.lean step 4 with lean/ZEnergy.lean target_first_grouped (zero "
-                          "axioms); the floating path's error assembly is on paper (Lean next)"}
+            "checked_by": "ZTL zenergy: exact solves up to 600 unknowns (residual checked); above them float solves with "
+                          "exact residuals and lambda_min(K0) proved by a floating Cholesky — PREMISE: IEEE 754 "
+                          "binary64 and LAPACK (Higham Thm 10.3, cited, not in Lean; ZTL KNOWN-LIMITS.md); the "
+                          "bound's algebra is ZTL lean/ZNet.lean step 4 with lean/ZEnergy.lean target_first_grouped "
+                          "(zero axioms); the floating path's error assembly is on paper (Lean next)"}
 
 
 def range_of(text, tol, target):
