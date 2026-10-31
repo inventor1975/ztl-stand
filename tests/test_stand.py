@@ -2259,6 +2259,25 @@ _ro, _rows = TR.judge_energy(_tr20, "0.5%", [TR._req("U(42,X) >= 18117")])
 check("truss energy path: a bound inside the first-order slack (>= 18117, the exact low end 18117.87) is NOT decided "
       "there — None, so the box path takes it (no guess)",
       _ro is None and _rows[0]["verdict"] == "OPEN", json.dumps(_rows)[:300])
+# A PLANE FRAME (ustand/frame.py, 2026-11-01): BEAM3 elements as three rank-one terms sharing E (ZTL zenergy +
+# lean/ZEnergy.lean). The element against the textbook's exact answers, then a requirement under +-0.5 %.
+from ustand import frame as FRM
+_fr = (pathlib.Path(__file__).resolve().parent.parent / "examples" / "frame" / "cantilever8.txt").read_text()
+_fv = FRM.range_of(_fr, "0", "U(9,Y)")["nominal"]
+_fa = FRM.range_of(_fr, "0", "ROT(9)")["nominal"]
+check("frame: a cantilever in 8 elements reproduces P L^3 / 3EI and P L^2 / 2EI EXACTLY (-4/315 m, -1/210 rad)",
+      _fv.startswith("-4/315") and _fa.startswith("-1/210"), (_fv, _fa))
+_inc = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5"]
+                 + [f"N, {k+1}, {3*k/8}, {4*k/8}" for k in range(9)] + [f"E, {k+1}, {k+2}" for k in range(8)]
+                 + ["D, 1, UX, 0", "D, 1, UY, 0", "D, 1, ROTZ, 0", "F, 9, FX, -8000", "F, 9, FY, 6000"])
+check("frame: the same cantilever inclined 3-4-5, load across it — UX, UY, ROT exactly -5/252, 5/336, 5/672",
+      [FRM.range_of(_inc, "0", t)["nominal"].split()[0] for t in ("U(9,X)", "U(9,Y)", "ROT(9)")]
+      == ["-5/252", "5/336", "5/672"])
+_fe = FRM.judge(_fr, "0.5%", [FRM._req("U(9,Y) >= -0.0127623")])
+_fr2 = FRM.judge(_fr, "0.5%", [FRM._req("U(9,Y) >= -0.012762")])
+check("frame: +-0.5 % on every element's modulus — tip >= -0.0127623 EARNED (the extreme is -4/315/0.995 = "
+      "-0.01276222...); >= -0.012762 REFUTED at a vertex solved exactly (the witness IS that extreme)",
+      _fe["verdict"] == "EARNED" and _fr2["verdict"] == "REFUTED", (_fe["verdict"], _fr2["verdict"]))
 _lw = ["2*x + y == 3", "x - y == 0"]
 _sc = {"v": {"x": F(1, 4), "y": F(2)}, "w": [F(8), F(1, 2)]}
 _rl = K._rescale(_lw, _sc)

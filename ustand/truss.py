@@ -203,10 +203,23 @@ def energy_system(text, tol):
     return parts, f, dof
 
 
-def _show(q):
-    """An exact rational as the stand writes them: the fraction, and its decimal for the reader."""
+def _show(q, side=0):
+    """An exact rational as the stand writes them: the fraction, and its decimal for the reader. A fraction too long
+    to print (exact solves on large systems reach thousands of digits) is rounded OUTWARD to 30 significant digits —
+    side -1 down, +1 up, 0 to nearest for a nominal — so a printed proved range is still a proved range; the
+    verdict was decided on the exact value before rounding."""
     q = F(q)
-    return str(q) if q.denominator == 1 else f"{q} (~{float(q):.12g})"
+    if q.denominator == 1 and q.numerator.bit_length() < 3000:
+        return str(q)
+    if max(q.numerator.bit_length(), q.denominator.bit_length()) > 3000:
+        import math
+        e = math.floor(math.log10(abs(q))) if q else 0
+        scale = F(10) ** (29 - e)
+        x = q * scale
+        n = math.floor(x) if side < 0 else math.ceil(x) if side > 0 else round(x)
+        r = F(n) / scale
+        return f"{r} (~{float(r):.12g}, rounded {'down' if side < 0 else 'up' if side > 0 else 'to nearest'})"
+    return f"{q} (~{float(q):.12g})"
 
 
 def judge_energy(text, tol, requirements):
@@ -226,7 +239,7 @@ def judge_energy(text, tol, requirements):
         e[dof[(nd, d)]] = F(1)
         r = ZE.certify_output(parts, f, e, n)
         row = {"requirement": f"U({nd},{d}) {op} {v}", "nominal": _show(r["nominal"]),
-               "proved_range": [_show(r["lo"]), _show(r["hi"])],
+               "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)],
                "first_order": _show(r["first"]), "rest": _show(r["rest"])}
         ok = r["hi"] <= v if op == "<=" else r["lo"] >= v
         if not ok:

@@ -1,0 +1,4 @@
+{"storeys": 3, "bays": 2, "unknowns": 27, "elements": 15, "verdict": "EARNED", "nominal": 0.007109369362690287, "proved_hi_rel_pct": 0.5028600138271777, "nominal_s": 0.01, "judge_s": 0.01}
+{"storeys": 10, "bays": 4, "unknowns": 150, "elements": 90, "verdict": "EARNED", "nominal": 0.04368056392897337, "proved_hi_rel_pct": 0.5032996585362159, "nominal_s": 0.29, "judge_s": 0.29}
+{"storeys": 20, "bays": 6, "unknowns": 420, "elements": 260, "verdict": "EARNED", "nominal": 0.12169038155533643, "proved_hi_rel_pct": 0.5229192812448824, "nominal_s": 6.93, "judge_s": 6.9}
+{"storeys": 40, "bays": 8, "unknowns": 1080, "elements": 680, "verdict": "EARNED", "nominal": 0.39128926567160865, "proved_hi_rel_pct": 0.5452136047908063, "nominal_s": 154.98, "judge_s": 151.06}
