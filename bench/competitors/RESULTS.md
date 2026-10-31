@@ -200,3 +200,11 @@ not applied by the stand's catalog reader (k read exact) — the resonance is in
   mix, the hardest ends) — search side, where any point of the box keeps a certificate sound. Now chosen in floats
   (the exact choice where the floats cannot read a row). **c11 with its complete conflict list 217 -> 28 s**;
   c01 c06 c07 c10 c12: values, bounds and conflict lists identical. Suite 307 ok.
+
+## Rerun on ZTL with IF STABLE (2026-10-31, stand abee4f8, ZTL 0897d54)
+The judge gained EARNED/REFUTED IF STABLE on 2026-10-29 (ZTL 1ae8a5c). Rerun of the stand rows on 24 cores (round 1:
+`duel.py --tools stand --jobs 12` -> `results_stand3_20261031.jsonl`; the 12 blind bricks one process each ->
+`blind_rerun_20261031/`), compared with the 2026-10-19 rows:
+* Round 1: **74 of 74 verdicts identical** (total wall 283 s -> 144 s).
+* Blind bricks: **12 of 12 identical** — verdict, objective value and optimality flag; c11 233 -> 38 s, c07 79 -> 53 s,
+  the rest within load noise. The stand test suite on the same ZTL: 307 ok, 0 failed.

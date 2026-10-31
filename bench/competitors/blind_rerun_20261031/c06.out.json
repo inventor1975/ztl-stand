@@ -1,0 +1,98 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 0897d54",
+  "continuous": true,
+  "combinations": 18,
+  "notes": [],
+  "combinations_proved_without_mix": 14,
+  "verdict": "EARNED",
+  "design": {
+    "EX": {
+      "catalog": "extractors",
+      "name": "E3H",
+      "N": {
+        "nominal": "3",
+        "tolerance": "0"
+      },
+      "eta": {
+        "nominal": "23/25 (~0.92)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "20",
+        "tolerance": "0"
+      }
+    },
+    "SV": {
+      "catalog": "solvents",
+      "name": "SC",
+      "Kt": {
+        "range": [
+          "76657557/8000000 (~9.58219)",
+          "9409873113/500000000 (~18.8197)"
+        ]
+      },
+      "cS": {
+        "nominal": "9/2 (~4.5)",
+        "tolerance": "0"
+      }
+    },
+    "BD": {
+      "catalog": "beds",
+      "name": "G1200",
+      "m": {
+        "nominal": "1200",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "16/5 (~3.2)",
+        "tolerance": "0"
+      }
+    },
+    "SS": {
+      "catalog": "flow",
+      "x": "12409200/9026443 (~1.37476)"
+    }
+  },
+  "objective": {
+    "minimize": "EX.price + BD.price + Yrs*Hyr*SS.x*SV.cS",
+    "value": "12215347388/45132215 (~270.657)",
+    "unit": "kEUR",
+    "lower_bound": "23248883053469/85899345920 (~270.653)",
+    "gap": "670493430442125/155073109936832512 (~0.00432372)",
+    "lower_bound_is": "proved by ZTL: no mix in the continuous box costs less — zmin: the amounts' box of 4 combination(s) split in 61 pieces, 25 with the objective >= L, 36 failing a requirement at one point of its data; 14 combination(s) proved to have no mix at all (a split of the amounts, zmin)",
+    "optimal": false,
+    "optimal_means": "true only at a zero gap; otherwise the mix is PROVED to cost at most `gap` above the cheapest possible (blind test 4, c03: optimal false at a 0.00093 EUR gap)"
+  },
+  "guaranteed": {
+    "xN": [
+      "~0.00910987488313 (an exact fraction of 47 digits)",
+      "~0.0508146771755 (an exact fraction of 41 digits)"
+    ],
+    "Dis": [
+      "~0.000364394995325 (an exact fraction of 47 digits)",
+      "~0.00508146771755 (an exact fraction of 41 digits)"
+    ],
+    "Life": [
+      "~2.24906898239 (an exact fraction of 41 digits)",
+      "~17.5633586688 (an exact fraction of 46 digits)"
+    ],
+    "SS_x_req": [
+      "12409200/9026443 (~1.37476)",
+      "12409200/9026443 (~1.37476)"
+    ],
+    "y1": [
+      "~6.65232168733 (an exact fraction of 43 digits)",
+      "~8.4998980597 (an exact fraction of 50 digits)"
+    ]
+  },
+  "how": {
+    "xN": "ZTL, exact at the corners and the critical points of a shared parameter",
+    "Dis": "ZTL, exact at the corners and the critical points of a shared parameter",
+    "Life": "ZTL, interval reading of the definition (sound, may be wide)",
+    "SS_x_req": "ZTL, outer range",
+    "y1": "ZTL, exact at the corners and the critical points of a shared parameter"
+  },
+  "mix_verdict_checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

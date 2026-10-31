@@ -1,0 +1,78 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 0897d54",
+  "continuous": true,
+  "combinations": 5,
+  "notes": [],
+  "combinations_proved_without_mix": 5,
+  "verdict": "REFUTED",
+  "why": "ZTL proved (a split of the amounts, zmin) that no mix in the box meets the requirements",
+  "mixes": [
+    {
+      "design": "PL=plates(name=O60, d=60, price=3/10)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 1 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "PL=plates(name=O80, d=80, price=9/20)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 5 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "PL=plates(name=O100, d=100, price=3/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 5 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "PL=plates(name=O120, d=120, price=4/5)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 1 pieces, each failing a requirement at one point of its data — no mix exists"
+    },
+    {
+      "design": "PL=plates(name=O150, d=150, price=11/10)",
+      "verdict": null,
+      "why": "proved by ZTL (zmin): the amounts' box split in 1 pieces, each failing a requirement at one point of its data — no mix exists"
+    }
+  ],
+  "_core": [
+    0,
+    1,
+    6,
+    8,
+    9
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "R1: 10-year Qpeak <= 25 L/s (storm 900s)",
+        "R3: h <= H - 0.30 m (storm 3600s)"
+      ],
+      [
+        "R1: 10-year Qpeak <= 25 L/s (storm 1800s)",
+        "R3: h <= H - 0.30 m (storm 3600s)"
+      ],
+      [
+        "R1: 10-year Qpeak <= 25 L/s (storm 3600s)",
+        "R3: h <= H - 0.30 m (storm 3600s)"
+      ],
+      [
+        "R2: 100-year Qpeak <= 45 L/s (storm 900s)",
+        "R3: h <= H - 0.30 m (storm 3600s)"
+      ],
+      [
+        "R2: 100-year Qpeak <= 45 L/s (storm 1800s)",
+        "R3: h <= H - 0.30 m (storm 3600s)"
+      ],
+      [
+        "R2: 100-year Qpeak <= 45 L/s (storm 3600s)",
+        "R3: h <= H - 0.30 m (storm 3600s)"
+      ]
+    ],
+    "undecided_sets": [],
+    "complete": true,
+    "subset_runs": 20,
+    "subsets_inferred": 517,
+    "how": "first one minimal set by deletion (each requirement dropped in turn while the rest stays refuted), then every subset by size, smallest first; a subset of an EARNED set is EARNED and a superset of a REFUTED one REFUTED without a run (monotone: one design holds the smaller set), within a budget of 40 subset runs"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
