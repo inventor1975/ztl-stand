@@ -1,0 +1,14 @@
+VEIP-CORES: no --cores declared for: python3 bench/stage0/scale_truss.py 10 20 40 80 160 320 --margins 2,1 --jobs 12 --limit 1800  (declare it; the watchdog only checks declared jobs)
+k=  10 unknowns=   41 moduli=   51 margin=2.0% EARNED       23.3s
+k=  10 unknowns=   41 moduli=   51 margin=1.0% EARNED       22.6s
+k=  20 unknowns=   81 moduli=  101 margin=2.0% EARNED        6.8s
+k=  20 unknowns=   81 moduli=  101 margin=1.0% EARNED      126.8s
+k=  40 unknowns=  161 moduli=  201 margin=2.0% TIMEOUT    1800.3s
+k=  40 unknowns=  161 moduli=  201 margin=1.0% ERROR       909.3s
+k=  80 unknowns=  321 moduli=  401 margin=2.0% OPEN       1797.3s
+k=  80 unknowns=  321 moduli=  401 margin=1.0% ERROR       909.5s
+k= 160 unknowns=  641 moduli=  801 margin=2.0% TIMEOUT    1800.0s
+k= 160 unknowns=  641 moduli=  801 margin=1.0% ERROR       909.0s
+k= 320 unknowns= 1281 moduli= 1601 margin=2.0% TIMEOUT    1800.0s
+k= 320 unknowns= 1281 moduli= 1601 margin=1.0% ERROR       909.0s
+rc=0
