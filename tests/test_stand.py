@@ -2324,6 +2324,17 @@ check("plate, floating path: a clamped 40 x 12 plate (1040 unknowns) under tip s
       "(UY < 0) EARNED, >= 1.003 x nominal REFUTED (the whole enclosure at the vertex is beyond it)",
       _pe1["verdict"] == "EARNED" and _pe2["verdict"] == "REFUTED" and _pe1["unknowns"] == 1040,
       (_pe1["verdict"], _pe2["verdict"]))
+# PLATE STRESSES (2026-11-01): sigma = E p_k D0 B u per element — the patch test exact in every element, then
+# with tolerances: von Mises EARNED by its convexity (8 corners), a component REFUTED at a witness vertex
+_pst = [PLT.stress_output(_pt, "0", k, c) for k in (1, 7, 16) for c in ("XX", "YY", "XY")]
+check("plate stresses: the PATCH TEST — sigma_xx = 10, sigma_yy = sigma_xy = 0 EXACTLY (nominal and both ends) in "
+      "elements 1, 7, 16",
+      [(r["nominal"], r["lo"], r["hi"]) for r in _pst] ==
+      [(F(10), F(10), F(10)), (F(0), F(0), F(0)), (F(0), F(0), F(0))] * 3, [r["nominal"] for r in _pst])
+_psr = PLT.judge_stress(_pt, "0.5%", [("VM", 3, None, "<=", F(11)), ("S", 2, "XX", ">=", F(1001, 100))])
+check("plate stresses, +-0.5 % on every modulus: VM(3) <= 11 EARNED (convex: the corners of the components' box); "
+      "S(2,XX) >= 10.01 REFUTED at a witness vertex solved exactly",
+      [r["verdict"] for r in _psr["requirements"]] == ["EARNED", "REFUTED"], json.dumps(_psr)[:300])
 _lw = ["2*x + y == 3", "x - y == 0"]
 _sc = {"v": {"x": F(1, 4), "y": F(2)}, "w": [F(8), F(1, 2)]}
 _rl = K._rescale(_lw, _sc)

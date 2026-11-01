@@ -157,12 +157,20 @@ def d0_ldl(nu):
 
 def energy_system(text, tol):
     """K(p) = sum_e p_e (three rank-one terms of triangle e), p_e in [1 - t, 1 + t]; f the loads."""
+    parts, f, dof, _, _ = energy_system_full(text, tol)
+    return parts, f, dof
+
+
+def energy_system_full(text, tol):
+    """energy_system, plus for every element (1-based) its part index (None if every DOF is supported) and its
+    strain rows over the free DOFs, and the deck's (E, nu) — what the stresses need (2026-11-01)."""
     nodes, elems, loads, supports, ex, nu, th = read_deck(text)
     t = F(0) if tol in (None, "0", 0) else tolerance(tol) if isinstance(tol, str) else F(tol)
     free = [(n, d) for n in sorted(nodes) for d in "XY" if (n, d) not in supports]
     dof = {nd: k for k, nd in enumerate(free)}
     ldl = [(dk, lk) for dk, lk in d0_ldl(nu) if dk != 0]
     parts = []
+    emap = {}
     for k, (n1, n2, n3) in enumerate(elems, 1):
         (x1, y1), (x2, y2), (x3, y3) = nodes[n1], nodes[n2], nodes[n3]
         a2 = (x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1)
@@ -180,6 +188,7 @@ def energy_system(text, tol):
                 [((ns[i], "Y"), c[i] / a2) for i in range(3)],
                 [((ns[i], "X"), c[i] / a2) for i in range(3)] + [((ns[i], "Y"), b[i] / a2) for i in range(3)]]
         area = a2 / 2
+        emap[k] = {"part": None, "rows": [{dof[nd]: v for nd, v in r if v and nd in dof} for r in rows]}
         terms = []
         for dk, lk in ldl:
             g = {}
@@ -193,6 +202,7 @@ def energy_system(text, tol):
             if g:
                 terms.append((ex * th * area * dk, g))
         if terms:
+            emap[k]["part"] = len(parts)
             parts.append({"t": t, "terms": terms})
     f = [F(0)] * len(free)
     for (n, d), v in loads.items():
@@ -200,7 +210,112 @@ def energy_system(text, tol):
             raise PlateError(f"a load at node {n}, which does not exist")
         if (n, d) in dof:
             f[dof[(n, d)]] += v
-    return parts, f, dof
+    for k in emap:
+        emap[k]["t"] = t
+    return parts, f, dof, emap, (ex, nu)
+
+
+# ----------------------------------------------------------------------------------------------------------------
+# STRESSES (2026-11-01). In element k, sigma = E p_k D0 B u: the bracket is a LINEAR output of u (zenergy proves its
+# range), times the element's own factor p_k in [1 - t, 1 + t] — an interval product, sound (it forgets that p_k
+# also moves the bracket; that only widens). Von Mises: sigma_vm^2 = sx^2 - sx sy + sy^2 + 3 txy^2 is CONVEX in
+# (sx, sy, txy), so over the box of the three components its maximum is at a corner — the 8 corners are checked
+# exactly. (The joint box of the components forgets their correlation: sound, possibly wide.)
+
+_COMP = {"XX": 0, "YY": 1, "XY": 2}
+
+
+def _d0(nu):
+    k = 1 / (1 - nu * nu)
+    return [[k, k * nu, F(0)], [k * nu, k, F(0)], [F(0), F(0), k * (1 - nu) / 2]]
+
+
+def stress_output(text, tol, k, comp, ctx=None):
+    """[lo, hi] proved for sigma_comp of element k; nominal; and what a witness needs."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    parts, f, dof, emap, (ex, nu) = ctx or energy_system_full(text, tol)
+    if k not in emap:
+        raise PlateError(f"S({k},{comp}): no element {k}")
+    n = len(dof)
+    D0 = _d0(nu)
+    c = _COMP[comp]
+    e = [F(0)] * n
+    for r in range(3):
+        if D0[c][r]:
+            for i, v in emap[k]["rows"][r].items():
+                e[i] += D0[c][r] * v
+    t = emap[k]["t"]
+    if not any(e):
+        z = F(0)
+        return {"lo": z, "hi": z, "nominal": z, "w": None, "e": e}
+    w = ZE.certify(parts, f, e, n)
+    cands = [ex * pk * wv for pk in (1 - t, 1 + t) for wv in (w["lo"], w["hi"])]
+    return {"lo": min(cands), "hi": max(cands), "nominal": ex * w["nominal"], "w": w, "e": e}
+
+
+def _stress_target(text):
+    import re
+    m = re.match(r"^\s*S\(\s*(\d+)\s*,\s*(XX|YY|XY)\s*\)\s*$", text, re.I)
+    if m:
+        return ("S", int(m.group(1)), m.group(2).upper())
+    m = re.match(r"^\s*VM\(\s*(\d+)\s*\)\s*$", text, re.I)
+    if m:
+        return ("VM", int(m.group(1)), None)
+    return None
+
+
+def judge_stress(text, tol, requirements):
+    """Requirements on stresses: ("S", k, comp, op, v) or ("VM", k, None, "<=", v). EARNED when the proved range
+    meets each; a component is REFUTED at the witness vertex of its bracket (solved exactly, or its floating
+    enclosure wholly beyond); von Mises undecided stays OPEN — never guessed."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    ctx = energy_system_full(text, tol)
+    parts, f, dof, emap, (ex, nu) = ctx
+    n = len(dof)
+    rows = []
+    for kind, k, comp, op, v in requirements:
+        if kind == "S":
+            r = stress_output(text, tol, k, comp, ctx)
+            row = {"requirement": f"S({k},{comp}) {op} {v}", "nominal": _show(r["nominal"]),
+                   "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)]}
+            if (r["hi"] <= v) if op == "<=" else (r["lo"] >= v):
+                row["verdict"] = "EARNED"
+            elif r["w"] is None:
+                row["verdict"] = "REFUTED" if ((r["lo"] > v) if op == "<=" else (r["hi"] < v)) else "OPEN"
+            else:
+                up = op == "<="
+                pk = emap[k]["part"]
+                t = emap[k]["t"]
+                # push the bracket w toward the violation, and the element's own factor too (sign of w at the end)
+                ps = [1 + (pp["t"] if (sl > 0) == up and sl != 0 else -pp["t"] if sl != 0 else 0)
+                      for pp, sl in zip(parts, r["w"]["slopes"])]
+                if n <= 600:
+                    wl = wh = ZE.value_at(parts, f, r["e"], n, ps)
+                else:
+                    wl, wh = ZE.value_enclosure_fp(parts, f, r["e"], n, ps)
+                pkv = ps[pk] if pk is not None else F(1)
+                sl, sh = sorted([ex * pkv * wl, ex * pkv * wh])
+                row["witness_value"] = _show(sh if up else sl)
+                row["verdict"] = "REFUTED" if ((sl > v) if up else (sh < v)) else "OPEN"
+        else:
+            comps = [stress_output(text, tol, k, c, ctx) for c in ("XX", "YY", "XY")]
+            best = F(0)
+            for sx in (comps[0]["lo"], comps[0]["hi"]):
+                for sy in (comps[1]["lo"], comps[1]["hi"]):
+                    for txy in (comps[2]["lo"], comps[2]["hi"]):
+                        best = max(best, sx * sx - sx * sy + sy * sy + 3 * txy * txy)
+            nom = [c["nominal"] for c in comps]
+            vm2n = nom[0] ** 2 - nom[0] * nom[1] + nom[1] ** 2 + 3 * nom[2] ** 2
+            row = {"requirement": f"VM({k}) <= {v}", "nominal_vm_squared": _show(vm2n),
+                   "proved_max_vm_squared": _show(best, 1)}
+            row["verdict"] = "EARNED" if (v >= 0 and best <= v * v) else ("REFUTED" if v < 0 else "OPEN")
+        rows.append(row)
+    vs = [r["verdict"] for r in rows]
+    verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
+    return {"verdict": verdict, "path": "stresses: zenergy on the strain bracket, times the element's factor",
+            "requirements": rows, "unknowns": n}
 
 
 def _target(text):
@@ -209,6 +324,20 @@ def _target(text):
     if not m:
         raise PlateError(f"{text!r}: a target is U(node,X) or U(node,Y)")
     return int(m.group(1)), m.group(2).upper()
+
+
+def _sreq(text):
+    """A stress requirement: S(k,XX|YY|XY) <= | >= value, or VM(k) <= value; None if it is not one."""
+    import re
+    m = re.match(r"^\s*((?:S|VM)\([^)]*\))\s*(<=|>=)\s*(\S+)\s*$", text, re.I)
+    if not m:
+        return None
+    t = _stress_target(m.group(1))
+    if t is None:
+        raise PlateError(f"{text!r}: a stress target is S(element,XX|YY|XY) or VM(element)")
+    if t[0] == "VM" and m.group(2) != "<=":
+        raise PlateError(f"{text!r}: von Mises takes an upper bound only (VM(k) <= value)")
+    return t[0], t[1], t[2], m.group(2), _num(m.group(3), text)
 
 
 def _req(text):
@@ -259,8 +388,8 @@ def judge(text, tol, requirements):
             "element": "CST (constant-strain triangle), plane stress",
             "requirements": rows, "unknowns": n, "elements": len(parts),
             "checked_by": "ZTL zenergy: exact solves up to 600 unknowns (residual checked); above them float solves with "
-                          "exact residuals and lambda_min(K0) proved by a floating Cholesky — PREMISE: IEEE 754 "
-                          "binary64 and LAPACK (Higham Thm 10.3, cited, not in Lean; ZTL KNOWN-LIMITS.md); the "
+                          "exact residuals and lambda_min(K0) proved by a floating Cholesky — PREMISE: the machine obeys "
+                          "IEEE 754's rounding model (Higham Thm 10.3, any summation order, proved in lean/ZHigham.lean); the "
                           "bound's algebra is ZTL lean/ZNet.lean step 4 with lean/ZEnergy.lean target_first_grouped "
                           "(zero axioms); the floating path's error assembly is lean/ZFloatPath.lean"}
 
@@ -287,9 +416,28 @@ def main(argv):
     try:
         text = open(argv[0], encoding="utf-8").read()
         tol = argv[argv.index("--tol") + 1] if "--tol" in argv else "0"
-        reqs = [_req(argv[i + 1]) for i, a in enumerate(argv) if a == "--req"]
+        raw = [argv[i + 1] for i, a in enumerate(argv) if a == "--req"]
+        sreqs = [r for r in (_sreq(x) for x in raw) if r is not None]
+        reqs = [_req(x) for x in raw if _sreq(x) is None]
         ranges = [argv[i + 1] for i, a in enumerate(argv) if a == "--range"]
-        out = {t: range_of(text, tol, t) for t in ranges} if ranges else judge(text, tol, reqs)
+        if ranges:
+            out = {}
+            for t in ranges:
+                st = _stress_target(t)
+                if st and st[0] == "S":
+                    r = stress_output(text, tol, st[1], st[2])
+                    out[t] = {"nominal": _show(r["nominal"]), "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)]}
+                else:
+                    out[t] = range_of(text, tol, t)
+        elif sreqs and not reqs:
+            out = judge_stress(text, tol, sreqs)
+        else:
+            out = judge(text, tol, reqs)
+            if sreqs:
+                so = judge_stress(text, tol, sreqs)
+                out["requirements"] += so["requirements"]
+                vs = [r["verdict"] for r in out["requirements"]]
+                out["verdict"] = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
     except (B.BrickError, OSError, ValueError, IndexError) as e:
         out = {"verdict": "BRICK ERROR", "why": f"{e}"}
     print(json.dumps(out, indent=1, ensure_ascii=False))
