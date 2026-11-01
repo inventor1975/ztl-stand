@@ -17,8 +17,19 @@ ok = fail = 0
 EX = pathlib.Path(__file__).resolve().parent.parent / "examples"
 
 
+import os as _os_t, time as _time_t
+_TIMES = [_os_t.environ.get("USTAND_TIMES"), _time_t.time()]   # USTAND_TIMES=1: write tests/.check_times.tsv —
+if _TIMES[0]:                                                 # the seconds before each check, what run_parallel
+    open(pathlib.Path(__file__).resolve().parent / ".check_times.tsv", "w").close()   # balances its shards by
+
+
 def check(name, cond, why=""):
     global ok, fail
+    if _TIMES[0]:
+        _now = _time_t.time()
+        with open(pathlib.Path(__file__).resolve().parent / ".check_times.tsv", "a", encoding="utf-8") as _f:
+            _f.write(f"{_now - _TIMES[1]:.2f}\t{name}\n")
+        _TIMES[1] = _now
     if cond:
         ok += 1; print(f"  OK   {name}")
     else:
@@ -2365,6 +2376,11 @@ check("continuum, ADAPTIVE: from 8 x 2 (32 triangles, width 1.45 %) four refinem
       _ad_rows[-1]["width_pct"] < 0.21 and _ad_rows[-1]["elements"] <= 72 and _ad_lo <= _ad_hi
       and HC.setup(_ad_deck)["clamped"],
       [(r["elements"], round(r["width_pct"], 3)) for r in _ad_rows])
+from ustand import plate as _PLs
+_scp = _PLs.judge(_hc_deck(2), "0", [(27, "Y", ">=", F(-1, 1000))])
+check("every plate verdict SAYS its level: 'U(27,Y) >= -1 mm' is EARNED for the 8 x 2 MESH (-0.73 mm) while the "
+      "plate itself deflects ~-1.34 mm — so the output carries scope MESH and points to the continuum path",
+      _scp["verdict"] == "EARNED" and _scp["scope"] == "MESH" and "hypercircle" in _scp["scope_note"], _scp.get("scope"))
 check("continuum: the exact admissibility check is not decoration — any FREE Airy value gives an admissible tau "
       "(accepted), a moved boundary value or one sub-triangle's sign flip is REJECTED",
       not _hc_rejects(HC.tau_pieces(_hS, _hd2, _hi)) and _hc_rejects(HC.tau_pieces(_hS, _hd3, _hi))
