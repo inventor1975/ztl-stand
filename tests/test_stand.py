@@ -2479,6 +2479,21 @@ check("member buckling (EN 1993-1-1 6.3.1, curve b, fy 355): the cantilever colu
       _bk1["verdict"] == "EARNED" and 0.99 < _u1 < 0.9915 and _bk2["verdict"] == "REFUTED"
       and _bk3["verdict"] == "EARNED" and all(c["members"] == [] for c in _bk3["cases"])
       and len(_bk1["cases"]) == 2, (_bk1["verdict"], _u1, _bk2["verdict"], _bk3))
+# EN 1993-1-1 6.3.3 (6.61), Annex B, in-plane (2026-11-01, the curator's "Ок" to: out-of-plane restrained, elastic
+# resistance, C_my = 1, N_cr = alpha_cr N_Ed, sway imperfection both ways)
+_ci = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2"]
+                 + [f"N, {k+1}, 0, {F(4*k, 16)}" for k in range(17)] + [f"E, {k+1}, {k+2}" for k in range(16)]
+                 + ["D, 1, UX, 0", "D, 1, UY, 0", "D, 1, ROTZ, 0", "F, 17, FY, -800000", "F, 17, FX, 5000"])
+_ji = FRM.judge_interaction(_ci, "0", F(355 * 10**6), "b")
+_ui = [float(F(c["members"][0]["utilisation_max"].split()[0])) for c in _ji["cases"]]
+_mi = sorted(F(c["members"][0]["M_Ed_max"].split()[0]) for c in _ji["cases"])
+_nh = 800000 / (0.01 * 355e6) * (0.5 * (1 + 0.34 * (_lb - 0.2) + _lb * _lb) + _math.sqrt((0.5 * (1 + 0.34 * (_lb - 0.2) + _lb * _lb)) ** 2 - _lb * _lb))
+_uh = _nh + (1 + 0.6 * _nh) * 36000 / (8e-4 * 355e6)
+check("member interaction (EN 6.3.3 (6.61), in-plane): the 16-element cantilever column is ONE member; the base "
+      "moment is exactly (H + phi P) L = 36 kN m one way and 4 kN m the other; the proved utilisation 0.6174 just "
+      "above the hand value 0.6173 (the continuum alpha_cr bound's margin)",
+      FRM.members(_ci) == [list(range(1, 17))] and _mi == [4000, 36000] and _uh < max(_ui) < _uh * 1.001
+      and _ji["verdict"] == "EARNED", (_ui, _uh, _mi))
 # THE FLOATING PATH (2026-11-01): above 600 unknowns float solves, exact residuals, lambda_min proved in fixed point
 import subprocess as _sp
 _f408 = _sp.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.parent / "examples" / "frame" / "gen_frame.py"),

@@ -21,7 +21,10 @@ with its modulus anywhere in E (1 +- t) is a part of three terms — the case le
             lower bound for every modulus in the box, a proved upper bound at the nominal moduli (a witness mode)
     python3 -m ustand.frame deck.txt --tol 0.5% --buckling 355e6 b [1.0]        EN 1993-1-1 6.3.1 for every compressed
             member, fy, curve a0|a|b|c|d, gamma_M1; N_cr,i = alpha_cr |N_Ed,i|; EARNED / REFUTED (nominal) / OPEN
-    --jobs N   outputs spread over N processes (stresses, stability, buckling)
+    python3 -m ustand.frame deck.txt --tol 0.5% --interaction 355e6 b [1.0]     EN 1993-1-1 6.3.3 (6.61), Annex B,
+            in-plane: every compressed member (a chain of collinear elements between joints); out-of-plane restraint
+            and section class 1-3 ASSUMED and said
+    --jobs N   outputs spread over N processes (stresses, stability, buckling, interaction)
 
 THE DECK (the subset read; anything else is REFUSED aloud):
     N, id, x, y                  a node
@@ -37,8 +40,8 @@ WHAT IT DOES NOT DO (yet), said: the box path (zlin) is not wired for frames —
 decide comes back OPEN, not guessed; no shear deformation (Timoshenko); second order only by EN 5.2.2's amplification (alpha_cr >= 3;
 below, OPEN — no geometrically nonlinear solve yet); gravity is taken along Y for the imperfection's equivalent
 forces (5.3.2(7)); stability is LINEAR buckling of the Euler-Bernoulli CONTINUUM (each member's
-inner deflection bounded by its clamped Euler load; no imperfections, no plasticity); member buckling is 6.3.1 under axial
-force only — the 6.3.3 bending-axial interaction, out-of-plane and lateral-torsional buckling are NOT checked.
+inner deflection bounded by its clamped Euler load; no imperfections, no plasticity); member buckling: 6.3.1 (axial) and 6.3.3
+(6.61) in-plane interaction; out-of-plane and lateral-torsional buckling are NOT checked (no out-of-plane data).
 The proved ranges are for the MODEL (the mesh): discretization error is not bounded (bench/stage0/plate_convergence).
 """
 from __future__ import annotations
@@ -670,6 +673,135 @@ def judge_members(text, tol, checks, jobs=1, order=2, phi=PHI0):
             "not_checked": "member buckling (use --buckling), 6.3.3 interaction"}
 
 
+def members(text):
+    """MEMBERS for EN's member checks: maximal chains of collinear elements whose inner nodes join exactly two
+    elements and carry no support (an element alone is a member). [(element ids in order)]."""
+    nodes, elems, loads, supports, ex, sec = read_deck(text)
+    at = {}
+    for k, (i, j) in enumerate(elems, 1):
+        at.setdefault(i, []).append(k)
+        at.setdefault(j, []).append(k)
+    sup = {n for (n, _) in supports}
+    def inner(n):
+        if n in sup or len(at[n]) != 2:
+            return False
+        (i1, j1), (i2, j2) = (elems[at[n][0] - 1], elems[at[n][1] - 1])
+        a = [p for p in (i1, j1) if p != n][0]
+        b = [p for p in (i2, j2) if p != n][0]
+        (xa, ya), (xn, yn), (xb, yb) = nodes[a], nodes[n], nodes[b]
+        return (xn - xa) * (yb - yn) - (yn - ya) * (xb - xn) == 0 and (xn - xa) * (xb - xn) + (yn - ya) * (yb - yn) > 0
+    seen, out = set(), []
+    for k in range(1, len(elems) + 1):
+        if k in seen:
+            continue
+        chain = [k]
+        seen.add(k)
+        for direction in (0, 1):
+            cur = k
+            end = elems[k - 1][1 - direction] if direction == 0 else elems[k - 1][0]
+            end = elems[k - 1][1] if direction == 0 else elems[k - 1][0]
+            while inner(end):
+                nxt = [e for e in at[end] if e != cur][0]
+                if nxt in seen:
+                    break
+                seen.add(nxt)
+                chain = chain + [nxt] if direction == 0 else [nxt] + chain
+                i2, j2 = elems[nxt - 1]
+                end = j2 if i2 == end else i2
+                cur = nxt
+        out.append(chain)
+    return out
+
+
+def judge_interaction_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
+    """EN 1993-1-1 6.3.3, formula (6.61), Annex B (Method 2), IN-PLANE, for every compressed member (one load case).
+    ASSUMED (said in the output): the member is restrained out of plane (no flexural buckling about z, no
+    lateral-torsional buckling: chi_z = chi_LT = 1 — then (6.62) is milder than (6.61)); the section is class 1-3, its
+    resistance taken ELASTIC (M_Rk = W_el fy, W_el = I/(h/2): safe for class 1-2). Bounds, each proved over the box:
+      n = N_Ed/(chi_y N_Rk/gamma_M1) <= gamma_M1/H  (H = alpha_cr g(lb) as in judge_buckling, N_cr = alpha_cr N_Ed);
+      k_yy <= C_my (1 + 0.6 n)  (Table B.1's cap); C_my <= 1 (Table B.3's largest value: any moment shape, sway or not);
+      M_y,Ed <= the largest proved |M| at the member's element ends (nodal loads: the moment is linear in each element).
+    EARNED when n + k_yy M gamma_M1/M_Rk <= 1; OPEN otherwise (no refutation)."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
+    if curve not in CURVES:
+        raise FrameError(f"{curve!r}: a buckling curve is one of {', '.join(CURVES)}")
+    a = CURVES[curve]
+    _curve_premises(a)
+    ctx = energy_system_full(text, tol)
+    parts, f, dof, emap, (_, _, _, h) = ctx
+    if h is None:
+        raise FrameError("the interaction check needs the section height: R, 1, area, izz, height")
+    n = len(dof)
+    st = stability_lower(text, tol, jobs=jobs)
+    lam = st.get("lam_low")
+    if st.get("lam_est") is None or lam is None:
+        return {"verdict": "EARNED", "why": "no compressed member under these loads", "members": []}
+    # end moments M = E p (I/L)(+-b + 3c).u at both ends of every element: scaled outputs, all at once
+    es, keys = [], []
+    for k in emap:
+        m = emap[k]
+        for end, sb in (("I", 1), ("J", -1)):
+            g = {}
+            for i, v in m["b"].items():
+                g[i] = g.get(i, F(0)) + izz / m["L"] * sb * v
+            for i, v in m["c"].items():
+                g[i] = g.get(i, F(0)) + izz / m["L"] * 3 * v
+            e = [F(0)] * n
+            for i, v in g.items():
+                e[i] = v
+            if any(e):
+                es.append(e)
+                keys.append(k)
+    rs = ZE.certify_many(parts, f, es, n, jobs=jobs, scale=[emap[k]["part"] for k in keys])
+    Mmax = {}
+    for k, r in zip(keys, rs):
+        Mmax[k] = max(Mmax.get(k, F(0)), abs(ex * r["lo"]), abs(ex * r["hi"]))
+    Wel = izz / (h / 2)
+    MRk = Wel * fy
+    rows = []
+    for mem in members(text):
+        nlo = min(st["Nlo"].get(k, F(0)) for k in mem)
+        if nlo >= 0:
+            continue
+        N = -nlo
+        lb_lo = _sqrt_down(area * fy / (lam * N))
+        H = lam * _g_lower(lb_lo, a)
+        if H <= 0:
+            rows.append({"member": mem, "verdict": "OPEN", "why": "no positive buckling resistance proved"})
+            continue
+        nn = gamma_m1 / H
+        M = max(Mmax.get(k, F(0)) for k in mem)
+        Cmy = F(1)
+        kyy = Cmy * (1 + F(3, 5) * nn)
+        U = nn + kyy * M * gamma_m1 / MRk
+        rows.append({"member": mem, "N_Ed_max": _show(N, 1), "M_Ed_max": _show(M, 1), "n_max": _show(nn, 1),
+                     "k_yy_max": _show(kyy, 1), "utilisation_max": _show(U, 1),
+                     "verdict": "EARNED" if U <= 1 else "OPEN"})
+    vs = [r["verdict"] for r in rows]
+    return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN", "members": rows,
+            "alpha_cr_proved_lower": _show(lam, -1)}
+
+
+def judge_interaction(text, tol, fy, curve, gamma_m1=F(1), jobs=1, phi=None):
+    """judge_interaction_case on EN's global-analysis load cases (sway imperfection +-phi, both ways)."""
+    phi = PHI0 if phi is None else phi
+    signs = [1, -1] if with_imperfection(text, phi, 1) != text else [0]
+    cases = []
+    for sg in signs:
+        r = judge_interaction_case(with_imperfection(text, phi, sg) if sg else text, tol, fy, curve, gamma_m1, jobs)
+        r["imperfection"] = f"{'+' if sg > 0 else '-' if sg < 0 else ''}{phi if sg else 0}"
+        cases.append(r)
+    vs = [c["verdict"] for c in cases]
+    return {**SCOPE_BEAM, "verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
+            "path": "EN 1993-1-1 6.3.3 (6.61), Annex B, in-plane; N_cr,i = alpha_cr N_Ed,i; first-order moments with "
+                    "the sway imperfection", "cases": cases,
+            "assumed": "members restrained out of plane (chi_z = chi_LT = 1); section class 1-3 with ELASTIC "
+                       "resistance; C_my = 1 (Table B.3's largest)",
+            "not_checked": "out-of-plane and lateral-torsional buckling (need out-of-plane data); class 4 sections"}
+
+
 def _judge_members_1(text, tol, checks, jobs=1):
     """checks: [(k, limit)] — |sigma| <= limit at every extreme fibre of element k (EN 1993-1-1 6.2.1(7),
     limit = fy / gamma_M0). EARNED when every fibre's proved range is inside [-limit, limit]; REFUTED when a
@@ -806,6 +938,14 @@ def main(argv):
                               "note": "linear buckling; the lower bound holds for every modulus in the box, the upper one at the "
                                       "nominal moduli (a witness mode); no imperfections, no plasticity",
                               **({"why": r["why"]} if "why" in r else {})}, indent=1, ensure_ascii=False))
+            return 0
+        if "--interaction" in argv:                   # EN 6.3.3 (6.61), in-plane: --interaction fy curve [gamma_M1]
+            i = argv.index("--interaction")
+            fy = _num(argv[i + 1], "fy")
+            curve = argv[i + 2]
+            gm1 = _num(argv[i + 3], "gamma_M1") if len(argv) > i + 3 and not argv[i + 3].startswith("--") else F(1)
+            jobs = int(argv[argv.index("--jobs") + 1]) if "--jobs" in argv else 1
+            print(json.dumps(judge_interaction(text, tol, fy, curve, gm1, jobs=jobs), indent=1, ensure_ascii=False))
             return 0
         if "--buckling" in argv:                      # EN 6.3.1 per member: --buckling fy curve [gamma_M1]
             i = argv.index("--buckling")
