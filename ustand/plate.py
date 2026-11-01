@@ -249,9 +249,15 @@ def stress_output(text, tol, k, comp, ctx=None):
     if not any(e):
         z = F(0)
         return {"lo": z, "hi": z, "nominal": z, "w": None, "e": e}
-    w = ZE.certify(parts, f, e, n)
-    cands = [ex * pk * wv for pk in (1 - t, 1 + t) for wv in (w["lo"], w["hi"])]
-    return {"lo": min(cands), "hi": max(cands), "nominal": ex * w["nominal"], "w": w, "e": e}
+    pk = emap[k]["part"]
+    if pk is None:                                   # every DOF of the element supported: no stress moves
+        w = ZE.certify(parts, f, e, n)
+        cands = [ex * q * wv for q in (1 - t, 1 + t) for wv in (w["lo"], w["hi"])]
+        return {"lo": min(cands), "hi": max(cands), "nominal": ex * w["nominal"], "w": w, "e": e}
+    # the element's own factor merged into the exact first order (ZTL zenergy.certify_scaled, 2026-11-01)
+    sc = ZE.certify_scaled(parts, f, e, n, pk)
+    lo, hi = sorted([ex * sc["lo"], ex * sc["hi"]])
+    return {"lo": lo, "hi": hi, "nominal": ex * sc["nominal"], "w": sc["base"], "e": e}
 
 
 def _stress_target(text):
