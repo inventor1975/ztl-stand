@@ -16,7 +16,11 @@ energy, f(v) = int t.v the load's work; f(u) = a(u, u) = ||sigma||^2_{C^-1}):
          ones): int tau : eps(u) = f(u) (Green), so f(u) = (tau, sigma)_{C^-1} <= ||tau|| ||sigma||  =>
          f(u) <= ||tau||^2_{C^-1}.
   Moduli in the box: a_E <= (1 + t) a_E0 and ||.||_{C_E^-1} <= ||.||_{C_E0^-1} / (1 - t), pointwise.
-PREMISES (named, not proved here): linear plane-stress elasticity is the model; Green's formula (the weak form).
+PROVED IN LEAN (ZTL lean/ZHypercircle.lean, zero axioms, 2026-11-01): everything after the premises, in an abstract
+energy space — `cs` (Cauchy-Schwarz without roots), `lower` (f(v)^2 <= f(u) a(v,v)), `upper` (f(u) <= ||tau||^2),
+`polarise` / `output_bracket` (outputs), `lower_box` / `upper_box` (the moduli's box).
+PREMISES (named, not proved there or here): linear plane-stress elasticity is the model (the weak form
+a(u, v) = f(v)); Green's formula ((tau, sigma) = f(u) for an equilibrated tau) — Sobolev-space facts.
 
 tau, exactly: an Airy function phi (sigma_xx = phi_yy, sigma_yy = phi_xx, sigma_xy = -phi_xy: divergence-free for
 ANY phi) in the Hsieh-Clough-Tocher C1 macro-element on the plate's own triangles (each split at its centroid into
