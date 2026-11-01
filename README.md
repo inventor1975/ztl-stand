@@ -62,10 +62,29 @@ The first version (2026-10-09) was linear-only and named no conflicts; both have
 with functions, implicit laws, continuous amounts, certificates for an extreme inside the box, `minimal_conflicts`,
 optimality). The current limits are in SPEC.md §7 and GAPS.md.
 
+## Structures (2026-10/11): ANSYS-style decks judged by ZTL zenergy
+
+Every verdict says its LEVEL (`scope` in the output) — a proof about a mesh is not a proof about a plate.
+
+| Module | Deck | Proved, for every modulus in E(1 ± t) |
+|---|---|---|
+| `ustand.truss` | LINK1/LINK180 bars | displacements; `verdict` second order (the joints' P-delta, bars straight), `verdict_first_order` linear |
+| `ustand.frame` | BEAM3 + `QLOAD` (uniform per length) | displacements and member stresses in SECOND-order theory of the Euler-Bernoulli continuum (`verdict`) and by EN 1993-1-1 5.2.2 (`verdict_en_method`); the critical load factor bracketed (`--stability`); EN 6.3.1 (`--buckling`), 6.3.3 (6.61) in-plane (`--interaction`); sway imperfection ±1/200 both ways |
+| `ustand.plate` | CST triangles | displacements and stresses of the MESH (scope MESH) |
+| `ustand.hypercircle` | plate + `TRAC` | the CONTINUUM plate: compliance, mean deflection, any boundary-segment average (Prager–Synge, τ checked exactly) |
+| `ustand.adapt` | as hypercircle | refinement where the hypercircle's exact local error is large |
+
+Named premises (said in the outputs): linear elasticity, Green's formula, IEEE 754 for the floating Cholesky,
+second-order axial forces from the first-order analysis, straight truss bars, out-of-plane restraint for 6.3.3.
+Not yet: second order with member loads (OPEN, said), out-of-plane/LT buckling, plate buckling.
+The algebra of every bound is in ZTL's Lean (zero axioms): ZNet, ZEnergy, ZRound, ZHigham, ZFloatPath, ZStability,
+ZChi, ZHypercircle.
+
 ## Run
 
     python3 -m ustand.stand examples/divider-1pct-req-1pct.json
-    python3 -m tests.test_stand            # USTAND GREEN
+    PYTHONPATH=. python3 -m tests.run_parallel --jobs 24     # USTAND GREEN — the suite on 24 cores (~10 min)
+    PYTHONPATH=. python3 tests/test_stand.py                 # the same, one core (~21 min)
 
 The examples are a 5 V → 2.5 V divider from the E24 series:
 
