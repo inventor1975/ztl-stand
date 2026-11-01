@@ -32,6 +32,8 @@ loaded/free edge — before ||tau||^2 is used.
 
 THE DECK: plate.py's, plus the continuum's loads, which nodal forces cannot fix (a corner node's force splits
 between two edges in any way):
+    python3 -m ustand.hypercircle deck.txt --tol 0.5%                       the proved compliance bracket
+    python3 -m ustand.hypercircle deck.txt --tol 0.5% --req "MEAN <= 0.00135"   a requirement on C or MEAN
     TRAC, n1, n2, Fx, Fy        a uniform traction on the boundary segment n1-n2 with resultant (Fx, Fy);
                                 the deck's F at every free degree of freedom must be its consistent load (checked)
 Version 1: the loaded/free boundary is one connected arc, the rest CLAMPED (UX and UY on whole edges); a point
@@ -473,7 +475,101 @@ def check_admissible(S, pieces):
     return {"sub_triangles": divs, "interior_edges": inner, "boundary_edges": outer}
 
 
-def compliance_bounds(text, tol="0"):
+def lower_lst(S):
+    """The LOWER bound's admissible field, one order up (2026-11-01): quadratic (6-node) triangles on the same mesh,
+    zero on the clamped edges (corner and mid-side values), solved in floating point, rounded to dyadics; then
+    f(v) EXACT (Simpson along each loaded segment: exact for the quadratic trace under a uniform traction) and a(v,v)
+    EXACT (the strain is linear in a triangle: the three edge midpoints integrate its square exactly).
+    Returns (f(v), a(v,v)) at the nominal modulus."""
+    import numpy as np
+    import scipy.sparse as sp
+    import scipy.sparse.linalg as sla
+    nodes, tris, ex, nu, th = S["nodes"], S["tris"], S["ex"], S["nu"], S["th"]
+    clamped = S["clamped"]
+    pts = {n: ("n", n) for n in nodes}
+    for key in S["edges"]:
+        pts[("m", key)] = ("m", key)
+    fixed = {n for key in clamped for n in key} | {("m", key) for key in clamped}
+    ids = {}
+    for p_ in sorted(pts, key=str):
+        if p_ in fixed:
+            continue
+        ids[(p_, 0)] = len(ids)
+        ids[(p_, 1)] = len(ids)
+    def loc(tr):
+        a, b, c = tr
+        mids = [("m", (min(b, c), max(b, c))), ("m", (min(c, a), max(c, a))), ("m", (min(a, b), max(a, b)))]
+        return [a, b, c] + mids                         # N1 N2 N3, then N23 N31 N12
+    s_ = 1 / (1 - nu * nu)
+    D = [[s_, s_ * nu, F(0)], [s_ * nu, s_, F(0)], [F(0), F(0), s_ * (1 - nu) / 2]]
+    def grads(P, L):
+        (x1, y1), (x2, y2), (x3, y3) = P
+        a2 = (x2 - x1) * (y3 - y1) - (x3 - x1) * (y2 - y1)
+        dL = [((y2 - y3) / a2, (x3 - x2) / a2), ((y3 - y1) / a2, (x1 - x3) / a2), ((y1 - y2) / a2, (x2 - x1) / a2)]
+        g = [((4 * L[i] - 1) * dL[i][0], (4 * L[i] - 1) * dL[i][1]) for i in range(3)]
+        for (i, j) in ((1, 2), (2, 0), (0, 1)):
+            g.append((4 * (L[j] * dL[i][0] + L[i] * dL[j][0]), 4 * (L[j] * dL[i][1] + L[i] * dL[j][1])))
+        return g, a2 / 2
+    QP = [(F(0), F(1, 2), F(1, 2)), (F(1, 2), F(0), F(1, 2)), (F(1, 2), F(1, 2), F(0))]
+    def bmat(g):
+        # rows eps_xx, eps_yy, gamma_xy over [u1 v1 u2 v2 ... u6 v6]
+        r0, r1, r2 = [], [], []
+        for gx, gy in g:
+            r0 += [gx, F(0)]; r1 += [F(0), gy]; r2 += [gy, gx]
+        return [r0, r1, r2]
+    Df = np.array([[float(x) for x in r] for r in D])
+    rows, cols, data = [], [], []
+    elem_info = []
+    for tr in tris:
+        P = [nodes[n] for n in tr]
+        L6 = loc(tr)
+        gl = [ids.get((L6[i], c)) for i in range(6) for c in range(2)]
+        Bs = []
+        Ke = np.zeros((12, 12))
+        for L in QP:
+            g, area = grads(P, L)
+            Bm = bmat(g)
+            Bs.append(Bm)
+            Bf = np.array([[float(x) for x in r] for r in Bm])
+            Ke += float(area / 3) * (Bf.T @ Df @ Bf)
+        Ke *= float(ex * th)
+        elem_info.append((gl, Bs, area))
+        for p_ in range(12):
+            if gl[p_] is None:
+                continue
+            for q in range(12):
+                if gl[q] is None:
+                    continue
+                rows.append(gl[p_]); cols.append(gl[q]); data.append(Ke[p_, q])
+    N = len(ids)
+    K = sp.csr_matrix((data, (rows, cols)), shape=(N, N))
+    fvec = np.zeros(N)
+    loads = []                                          # (dof list [a, m, b] per component, resultant)
+    for (a, b), (fx, fy) in S["trac"].items():
+        key = (a, b)
+        for c, fc in ((0, fx), (1, fy)):
+            if not fc:
+                continue
+            trip = [ids.get((a, c)), ids.get((("m", key), c)), ids.get((b, c))]
+            loads.append((trip, fc))
+            for w, d in zip((F(1, 6), F(4, 6), F(1, 6)), trip):
+                if d is not None:
+                    fvec[d] += float(fc * w)
+    v = sla.spsolve(K.tocsc(), fvec)
+    vq = [F(float(x)) for x in v]
+    fv = F(0)
+    for trip, fc in loads:
+        fv += fc * sum(w * vq[d] for w, d in zip((F(1, 6), F(4, 6), F(1, 6)), trip) if d is not None)
+    av = F(0)
+    for gl, Bs, area in elem_info:
+        ve = [vq[d] if d is not None else F(0) for d in gl]
+        for Bm in Bs:
+            eps = [sum(b * x for b, x in zip(r, ve) if b and x) for r in Bm]
+            av += area / 3 * sum(eps[i] * D[i][j] * eps[j] for i in range(3) for j in range(3) if D[i][j])
+    return fv, av * ex * th
+
+
+def compliance_bounds(text, tol="0", lower_field="lst"):
     """The PROVED bracket [lower, upper] on the continuum's compliance f(u) for every modulus field in the box."""
     import numpy as np
     import scipy.sparse.linalg as sla
@@ -481,15 +577,20 @@ def compliance_bounds(text, tol="0"):
     import zenergy as ZE
     S = setup(text, tol)
     t = S["t"]
-    # LOWER: the CST solution v, rounded; f(v)^2 / a(v, v), exact
-    parts, f, dof, emap, _ = energy_system_full(S["plate"], "0")
-    n = len(dof)
-    K0 = ZE.matrix(parts, n)
-    A = ZE._float_matrix(K0, n)
-    vf = sla.spsolve(A.tocsc(), np.array([float(x) for x in f]))
-    v = [F(float(x)) for x in vf]
-    fv = sum(a * b for a, b in zip(f, v))
-    av = sum(a * b for a, b in zip(v, ZE._kmul(K0, v, n)))
+    # LOWER: an admissible field v, rounded; f(v)^2 / a(v, v), exact — quadratic triangles (lower_lst), or the
+    # CST solution itself (lower="cst")
+    if lower_field == "cst":
+        parts, f, dof, emap, _ = energy_system_full(S["plate"], "0")
+        n = len(dof)
+        K0 = ZE.matrix(parts, n)
+        A = ZE._float_matrix(K0, n)
+        vf = sla.spsolve(A.tocsc(), np.array([float(x) for x in f]))
+        v = [F(float(x)) for x in vf]
+        fv = sum(a * b for a, b in zip(f, v))
+        av = sum(a * b for a, b in zip(v, ZE._kmul(K0, v, n)))
+    else:
+        n = None
+        fv, av = lower_lst(S)
     if fv <= 0 or av <= 0:
         raise HCError("the loads do no work on the mesh solution: nothing to bound")
     lower = fv * fv / av / (1 + t)
@@ -506,12 +607,56 @@ def compliance_bounds(text, tol="0"):
     return {"lower": lower, "upper": upper, "check": chk, "unknowns_fe": n, "airy_dofs": len(idx)}
 
 
+def judge(text, tol, requirements):
+    """Requirements on the CONTINUUM: ("C" | "MEAN", "<=" | ">=", v). C the compliance (N m); MEAN = C / |R|, the
+    traction-weighted mean displacement ALONG the load (R the resultant), defined when every TRAC resultant points
+    the same way. EARNED when the proved bracket is inside, REFUTED when it is wholly outside (then for EVERY modulus
+    field in the box), OPEN otherwise."""
+    r = compliance_bounds(text, tol)
+    S = setup(text, tol)
+    lo, hi = r["lower"], r["upper"]
+    rows = []
+    for tgt, op, v in requirements:
+        a, b = lo, hi
+        if tgt == "MEAN":
+            fs = [fv for fv in S["trac"].values() if fv != (0, 0)]
+            if not fs or any(f1[0] * f2[1] != f1[1] * f2[0] or f1[0] * f2[0] + f1[1] * f2[1] <= 0
+                             for f1 in fs for f2 in fs):
+                raise HCError("MEAN needs every TRAC resultant in one direction (else use C)")
+            R2 = sum(f[0] for f in fs) ** 2 + sum(f[1] for f in fs) ** 2
+            from .truss import _sqrt
+            R = _sqrt(R2)
+            if R is None:
+                raise HCError("MEAN: the resultant's length is irrational — use C")
+            a, b = lo / R, hi / R
+        ok = (b <= v) if op == "<=" else (a >= v)
+        bad = (a > v) if op == "<=" else (b < v)
+        rows.append({"requirement": f"{tgt} {op} {v}", "proved_range": [_show(a, -1), _show(b, 1)],
+                     "verdict": "EARNED" if ok else "REFUTED" if bad else "OPEN"})
+    vs = [x["verdict"] for x in rows]
+    return {"verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN",
+            "path": "the continuum (hypercircle): kinematic field from below, exactly checked equilibrated stress "
+                    "from above", "requirements": rows, "admissibility_checked": r["check"],
+            "premises": "linear plane-stress elasticity; Green's formula"}
+
+
 def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
         print(__doc__)
         return 2
+    import re
     text = open(argv[0], encoding="utf-8").read()
     tol = argv[argv.index("--tol") + 1] if "--tol" in argv else "0"
+    reqs = []
+    for i, a in enumerate(argv):
+        if a == "--req":
+            m = re.match(r"^\s*(C|MEAN)\s*(<=|>=)\s*(\S+)\s*$", argv[i + 1])
+            if not m:
+                raise HCError(f"{argv[i + 1]!r}: a requirement is C or MEAN, <= or >=, a value")
+            reqs.append((m.group(1), m.group(2), _num(m.group(3), argv[i + 1])))
+    if reqs:
+        print(json.dumps(judge(text, tol, reqs), indent=1, ensure_ascii=False))
+        return 0
     r = compliance_bounds(text, tol)
     print(json.dumps({"compliance_proved": [_show(r["lower"], -1), _show(r["upper"], 1)],
                       "admissibility_checked": r["check"]}, indent=1))

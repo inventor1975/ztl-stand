@@ -2300,7 +2300,8 @@ def _hc_deck(k):
     return _sp_hc.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.parent / "examples" / "plate" /
                        "gen_plate.py"), str(4 * k), str(k), "--load", "shear", "--h", str(F(1, k))],
                       capture_output=True, text=True, check=True).stdout
-_hc2, _hc4 = HC.compliance_bounds(_hc_deck(2)), HC.compliance_bounds(_hc_deck(4))
+_hc2, _hc4 = HC.compliance_bounds(_hc_deck(2), lower_field="cst"), HC.compliance_bounds(_hc_deck(4), lower_field="cst")
+_hq4 = HC.compliance_bounds(_hc_deck(4))
 check("continuum compliance (clamped 4 x 1 m plate, uniform tip shear, 10 kN): proved brackets [7.33, 13.49] on "
       "8 x 2 and [11.00, 13.39] N m on 16 x 4 — the finer one inside the coarser, the tau of each passing the exact "
       "admissibility check (div, every interior edge, every loaded/free edge)",
@@ -2322,6 +2323,15 @@ _hd2 = dict(_hd); _hd2[_free[len(_free) // 2]] += F(12345, 7)        # a FREE va
 _bnd_dof = _hi[(next(iter(HC.prescribed(_hS)[0])), 1)]
 _hd3 = dict(_hd); _hd3[_bnd_dof] += F(1, 3)                          # a PRESCRIBED boundary value moved: not
 _flip = [(k, s, G, ([-x for x in c] if i == 0 else c), q) for i, (k, s, G, c, q) in enumerate(_hp)]
+check("continuum, the lower side one order up (quadratic triangles, exact energy): 16 x 4 brackets the compliance "
+      "in [13.3427, 13.3873] N m — width 0.33 % against 17.8 % with the CST field, inside the CST bracket",
+      _hc4["lower"] < _hq4["lower"] <= _hq4["upper"] == _hc4["upper"]
+      and (_hq4["upper"] - _hq4["lower"]) / _hq4["upper"] < F(34, 10000),
+      [float(_hq4["lower"]), float(_hq4["upper"])])
+_hj = [HC.judge(_hc_deck(4), "0.5%", [("MEAN", "<=", F(v))])["verdict"] for v in ("0.00136", "0.00134", "0.0013")]
+check("continuum requirements, +-0.5 % on every modulus (any field): the tip's mean deflection <= 1.36 mm EARNED, "
+      "<= 1.34 mm OPEN (inside the bracket), <= 1.30 mm REFUTED — for the plate, not the mesh",
+      _hj == ["EARNED", "OPEN", "REFUTED"], _hj)
 check("continuum: the exact admissibility check is not decoration — any FREE Airy value gives an admissible tau "
       "(accepted), a moved boundary value or one sub-triangle's sign flip is REJECTED",
       not _hc_rejects(HC.tau_pieces(_hS, _hd2, _hi)) and _hc_rejects(HC.tau_pieces(_hS, _hd3, _hi))
