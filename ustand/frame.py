@@ -373,6 +373,13 @@ def stability_upper(text, tol="0"):
 CURVES = {"a0": F(13, 100), "a": F(21, 100), "b": F(34, 100), "c": F(49, 100), "d": F(76, 100)}   # EN 1993-1-1 Table 6.1
 
 
+def _curve_premises(a, lb0=F(1, 5)):
+    """The premises of ZChi.chi_curves_monotone, checked exactly — the monotonicity the bounds rest on is a theorem
+    only where these hold."""
+    if not (a > 0 and lb0 >= 0 and (a + 4 * lb0) * lb0 <= 2):
+        raise FrameError(f"imperfection factor {a}: outside ZChi's premises (0 < a, (a + 4 lb0) lb0 <= 2)")
+
+
 def _sqrt_down(q, bits=64):
     from math import isqrt
     S = 1 << bits
@@ -383,8 +390,10 @@ def _g_lower(lb_lo, a):
     """A lower bound on g(lb) = chi(lb) lb^2 at any lb >= lb_lo (EN 1993-1-1 6.3.1.2: chi = 1/(Phi + sqrt(Phi^2 - lb^2)),
     Phi = (1 + a (lb - 0.2) + lb^2)/2; chi = 1 up to lb = 0.2). g is strictly increasing in lb: below 0.2 it is lb^2;
     above, g = Phi - sqrt(Phi^2 - lb^2) and g' > 0 <=> 2uw + w^2 > 4 lb^2 with u = lb^2 - 1 + a/5, w = 2 + a(lb - 2/5),
-    which is a lb (2 lb (lb - 0.4) + 2 + a (lb - 0.4)) > 0 (ARGUED by hand, 2026-11-01; MEASURED on a 20000-point
-    grid lb in (0, 6] for all five curves: every step positive)."""
+    which is a lb (2 lb (lb - 0.4) + 2 + a (lb - 0.4)) > 0. PROVED in ZTL lean/ZChi.lean `chi_curves_monotone`
+    (zero axioms, 2026-11-01): g = chi lb^2 and R = 1/chi are the roots of t^2 - 2 Phi t + lb^2; g does not fall and
+    chi does not rise for lb >= 0.2, given 0 < a, 0 <= lb0 and (a + 4 lb0) lb0 <= 2 (checked: _curve_premises).
+    Also MEASURED on a 20000-point grid lb in (0, 6] for all five curves: every step positive."""
     if lb_lo <= F(1, 5):
         return lb_lo * lb_lo
     ph = (1 + a * (lb_lo - F(1, 5)) + lb_lo * lb_lo) / 2
@@ -417,6 +426,7 @@ def judge_buckling(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
     if curve not in CURVES:
         raise FrameError(f"{curve!r}: a buckling curve is one of {', '.join(CURVES)}")
     a = CURVES[curve]
+    _curve_premises(a)
     st = stability_lower(text, tol, jobs=jobs)
     lam = st.get("lam_low")
     if st.get("lam_est") is None:
