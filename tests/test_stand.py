@@ -2433,13 +2433,15 @@ check("PHYSICAL second order (the curator's '(а)', ZTL zenergy.certify_general)
       _so6["verdict"] == "EARNED")
 _g5p = FRM.with_imperfection(_g5, FRM.PHI0, 1)
 _soc = FRM.second_order_case(_g5p, "0", [(96, F(10) ** 12)])
-_hi96 = max(abs(F(x.split()[0])) for fb in _soc["checks"][0]["fibres"] for x in fb["proved_range"])
+_hi96 = F(_soc["checks"][0]["sigma_abs_max"].split()[0])
 _en96 = FRM.judge_members(_g5, "0", [(96, F(10) ** 12)])
 _en96 = max(F(c["checks"][0]["amplified_peak"].split()[0]) for c in _en96["cases"] if "amplified_peak" in c["checks"][0])
-check("physical second order vs EN on member 96 (loads x5, nominal moduli): proved peak |sigma| in a 0.13 % bracket "
-      "around 220.9 MPa (the float P-delta value), above EN's amplified 219.5 MPa — the code's approximation falls "
+check("physical second order vs EN on member 96 (loads x5, nominal moduli): the proved |sigma| bound — N and both "
+      "end moments, the continuum member's end-moment correction, NO interior maximum (psi <= cos 2phi proved) — is "
+      "221.03 MPa, just above the float P-delta 220.9 and above EN's amplified 219.5: the code's approximation falls "
       "short there, the stand no longer does",
-      220.8e6 < float(_hi96) < 221.1e6 and _hi96 > _en96, (float(_hi96), float(_en96)))
+      220.9e6 < float(_hi96) < 221.1e6 and _hi96 > _en96
+      and _soc["checks"][0]["interior"].startswith("none"), (float(_hi96), float(_en96)))
 # STABILITY (2026-11-01): a proved lower bound on the critical load factor for every modulus in the box —
 # K(p) + lam K_G(N(p)) >= (1 - T) K0 + lam sum N_lo G_e, one matrix proved positive definite (pd_ieee)
 import math as _math
@@ -2472,6 +2474,19 @@ check("frame stability is proved for the CONTINUUM, not the Hermite model: a can
       "258.98",
       float(_c1fe) > _eul and float(_c1co) < _eul and float(_c1co) > 0.995 * _eul and float(_c1co) < float(_c2co) < _eul,
       (float(_c1fe), float(_c1co), float(_c2co), _eul))
+_bcd = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2", "N, 1, 0, 0", "N, 2, 0, 4", "E, 1, 2",
+                  "D, 1, UX, 0", "D, 1, UY, 0", "D, 2, UX, 0", "F, 2, FY, -3000000", "F, 1, MZ, 20000", "F, 2, MZ, -20000"])
+_bck = _math.sqrt(3e6 / (210e9 * 8e-5))
+_bcx = 3e6 / 0.01 + 20000 / _math.cos(_bck * 2) / (8e-5 / 0.1)          # exact: P/A + M/cos(kL/2)/W = 337.67 MPa
+_bc1 = FRM.second_order_case(_bcd, "0", [(1, F(10) ** 12)])["checks"][0]
+_bc2 = FRM.second_order_case(FRM.subdivide(_bcd, 2), "0", [(1, F(10) ** 12), (2, F(10) ** 12)])["checks"]
+_s1 = float(F(_bc1["sigma_abs_max"].split()[0]))
+_s2 = max(float(F(c["sigma_abs_max"].split()[0])) for c in _bc2)
+check("second order INSIDE a member: a pinned beam-column (P 3 MN, equal end moments 20 kN m, single curvature) peaks "
+      "at mid-length, 337.67 MPa exactly (M/cos(kL/2)); the ends alone would say 325 MPa (UNSAFE, 3.8 %) — the proved "
+      "bound covers the interior: 352.8 MPa on one element (m(1+psi)/(2cos^2 phi)), 340.6 on two, always >= exact",
+      _bcx < _s2 < _s1 and _s1 < 1.05 * _bcx and _s2 < 1.01 * _bcx and _bc1["interior"].startswith("bounded"),
+      (_s1, _s2, _bcx))
 # MEMBER BUCKLING (2026-11-01): EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i| — the proved alpha_cr lower bound
 # and the proved |N| upper bound give a proved upper bound on the utilisation (H rises with alpha_cr, falls with |N|)
 def _colP(P):

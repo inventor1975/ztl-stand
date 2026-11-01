@@ -688,7 +688,7 @@ def second_order_case(text, tol, checks, jobs=1):
                                           f"buckle under these loads", "checks": []}
     Nlo, Nhi = st["Nlo"], st["Nhi"]
     A0 = ZE.matrix(parts, n)
-    gparts, cterms = [], []
+    gparts, cterms, cqd = [], [], {}
     Elo = (1 - T) * ex
     for k, (i, j) in enumerate(elems, 1):
         L = emap[k]["L"]
@@ -714,33 +714,86 @@ def second_order_case(text, tol, checks, jobs=1):
         if P * kk >= 1:
             return {"verdict": "OPEN", "why": f"element {k} could buckle between its nodes: subdivide", "checks": []}
         cq = max(P * P * kk / (1 - P * kk), max(F(0), Nhi.get(k, F(0))))
+        cqd[k] = cq
         if cq:
             for d, l in _psd_terms(Qloc):
                 g = _glob(i, j, c_, s_, dof, l)
                 if g:
                     cterms.append((cq * d, g))
+    # outputs per checked element: N = E p (A/L) a.u, M_I, M_J = E p (I/L)(+-b + 3c).u (top fibre: N/A + M/W);
+    # and f.u (the energy bound for the end moments' continuum correction)
     es, items = [], []
+    def vec(g):
+        e = [F(0)] * n
+        for i_, v in g.items():
+            e[i_] = v
+        return e
     for kchk, lim in checks:
-        for end, side, g in fibre_vectors(emap, kchk, h):
-            e = [F(0)] * n
-            for i_, v in g.items():
-                e[i_] = v
-            items.append((kchk, lim, end, side))
-            es.append(e)
+        m = emap[kchk]
+        es.append(vec({i_: area / m["L"] * v for i_, v in m["a"].items()})); items.append((kchk, "N"))
+        for end, sb in (("I", 1), ("J", -1)):
+            g = {}
+            for i_, v in m["b"].items():
+                g[i_] = g.get(i_, F(0)) + izz / m["L"] * sb * v
+            for i_, v in m["c"].items():
+                g[i_] = g.get(i_, F(0)) + izz / m["L"] * 3 * v
+            es.append(vec(g)); items.append((kchk, end))
+    es.append(list(f)); items.append((None, "f"))
     rs = ZE.certify_general_many(A0, parts + gparts, cterms, f, es, n)
-    rows = {}
-    for (kchk, lim, end, side), r in zip(items, rs):
-        lo_, hi_ = min(ex * (1 - T) * r["lo"], ex * (1 + T) * r["lo"]), max(ex * (1 - T) * r["hi"], ex * (1 + T) * r["hi"])
-        row = rows.setdefault(kchk, {"check": f"|SIG({kchk})| <= {lim}", "fibres": [], "ok": True, "bad": False})
-        row["fibres"].append({"end": end, "side": side, "proved_range": [_show(lo_, -1), _show(hi_, 1)]})
-        row["ok"] &= (-lim <= lo_ and hi_ <= lim)
-        row["bad"] |= (lo_ > lim or hi_ < -lim)
-        row["theta"] = _show(r["theta"], 1)
+    theta = rs[0]["theta"]
+    fu_hi = rs[-1]["hi"]
+    unC = ZE._sqrt_up(theta * max(fu_hi, F(0)) / (1 - theta))     # ||u||_C <= sqrt(theta) ||u||_A0, A >= (1-theta)A0
+    rng = {}
+    for (kchk, what), r in zip(items, rs):
+        if kchk is not None:
+            rng[(kchk, what)] = (min(ex * (1 - T) * r["lo"], ex * (1 + T) * r["lo"]),
+                                 max(ex * (1 - T) * r["hi"], ex * (1 + T) * r["hi"]))
+    W = izz / (h / 2)
     out = []
-    for kchk, row in rows.items():
-        row["verdict"] = "EARNED" if row.pop("ok") else "REFUTED" if row.pop("bad") else "OPEN"
-        row.pop("bad", None)
-        out.append(row)
+    for kchk, lim in checks:
+        L = emap[kchk]["L"]
+        Nl, Nh = rng[(kchk, "N")]
+        corr = ZE._sqrt_up(cqd.get(kchk, F(0)) * 4 * L / 30) * unC     # |e_theta' D_e u| <= sqrt(C_e,thth) ||u||_C
+        Ml = {e_: (rng[(kchk, e_)][0] - corr, rng[(kchk, e_)][1] + corr) for e_ in ("I", "J")}
+        mend = max(max(abs(a_), abs(b_)) for a_, b_ in Ml.values())
+        # interior: M'' + k^2 M = 0 in a compressed member (k^2 = P/EI); max |M| <= m (1 + psi)/(2 cos^2 phi),
+        # phi = kL/2, and NO interior maximum when psi <= cos(2 phi) (>= 1 - 2 phi^2); in tension none at all
+        P = max(F(0), -Nl)
+        interior = "none (tension)" if P == 0 else None
+        mint = mend
+        if P:
+            phi2 = L * L * P / (4 * (1 - T) * ex * izz)
+            (al, ah), (bl, bh) = Ml["I"], Ml["J"]
+            if (al > 0 and bh < 0) or (ah < 0 and bl > 0):
+                psi = F(0)                                         # opposite signs: psi <= 0
+            elif (al > 0 and bl > 0) or (ah < 0 and bh < 0):
+                A_ = (min(abs(al), abs(ah)), max(abs(al), abs(ah)))
+                B_ = (min(abs(bl), abs(bh)), max(abs(bl), abs(bh)))
+                psi = min(F(1), min(A_[1], B_[1]) / max(A_[0], B_[0]))
+            else:
+                psi = F(1)
+            if psi <= 1 - 2 * phi2:
+                interior = "none (psi <= cos 2phi)"
+            elif phi2 < 2:
+                c2 = (1 - phi2 / 2) ** 2
+                mint = max(mend, mend * (1 + psi) / (2 * c2))
+                interior = "bounded by m (1 + psi)/(2 cos^2 phi)"
+            else:
+                return {"verdict": "OPEN", "why": f"element {kchk}: too slender between its nodes (subdivide)",
+                        "checks": []}
+        hi_abs = max(abs(Nl), abs(Nh)) / area + mint / W
+        # REFUTED: an end fibre beyond the limit for every point of the box (independent intervals: safe)
+        bad = False
+        for e_ in ("I", "J"):
+            ml, mh = Ml[e_]
+            top = (Nl / area + ml / W, Nh / area + mh / W)
+            bot = (Nl / area - mh / W, Nh / area - ml / W)
+            bad |= any(lo_ > lim or hi_ < -lim for lo_, hi_ in (top, bot))
+        out.append({"check": f"|SIG({kchk})| <= {lim}", "sigma_abs_max": _show(hi_abs, 1),
+                    "N_range": [_show(Nl, -1), _show(Nh, 1)],
+                    "M_ends": {e_: [_show(a_, -1), _show(b_, 1)] for e_, (a_, b_) in Ml.items()},
+                    "end_moment_correction": _show(corr, 1), "interior": interior, "theta": _show(theta, 1),
+                    "verdict": "EARNED" if hi_abs <= lim else "REFUTED" if bad else "OPEN"})
     vs = [r["verdict"] for r in out]
     return {"verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
             "checks": out, "alpha_cr_proved_lower": _show(lam, -1) if lam else None}
