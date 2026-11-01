@@ -181,6 +181,38 @@ def fibre_vectors(emap, k, h):
     return out
 
 
+def fibre_ranges_many(text, tol, ks, ctx=None, jobs=1):
+    """fibre_ranges for many elements at once: every fibre's output in ONE ZTL zenergy.certify_many call (the shared
+    work once, the outputs over `jobs` processes) — results equal fibre_ranges' (2026-11-01)."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    parts, f, dof, emap, (ex, area, izz, h) = ctx or energy_system_full(text, tol)
+    if h is None:
+        raise FrameError("member stresses need the section height: R, 1, area, izz, height")
+    n = len(dof)
+    items, es = [], []
+    for k in ks:
+        if k not in emap:
+            raise FrameError(f"SIG({k}): no element {k}")
+        for end, side, g in fibre_vectors(emap, k, h):
+            e = [F(0)] * n
+            for i, v in g.items():
+                e[i] = v
+            items.append((k, end, side, e))
+            if any(e):
+                es.append(e)
+    rs = iter(ZE.certify_many(parts, f, es, n, jobs=jobs))
+    out = {k: [] for k in ks}
+    for k, end, side, e in items:
+        if not any(e):
+            out[k].append({"end": end, "side": side, "lo": F(0), "hi": F(0), "nominal": F(0), "e": e, "sc": None})
+            continue
+        sc = ZE.scaled_from(next(rs), parts, emap[k]["part"])
+        lo, hi = sorted([ex * sc["lo"], ex * sc["hi"]])
+        out[k].append({"end": end, "side": side, "lo": lo, "hi": hi, "nominal": ex * sc["nominal"], "e": e, "sc": sc})
+    return out
+
+
 def fibre_ranges(text, tol, k, ctx=None):
     from . import judge_ztl  # noqa: F401
     import zenergy as ZE
@@ -204,7 +236,7 @@ def fibre_ranges(text, tol, k, ctx=None):
     return res
 
 
-def judge_members(text, tol, checks):
+def judge_members(text, tol, checks, jobs=1):
     """checks: [(k, limit)] — |sigma| <= limit at every extreme fibre of element k (EN 1993-1-1 6.2.1(7),
     limit = fy / gamma_M0). EARNED when every fibre's proved range is inside [-limit, limit]; REFUTED when a
     fibre's witness vertex (solved exactly, or its floating enclosure) is wholly outside; OPEN otherwise."""
@@ -214,8 +246,9 @@ def judge_members(text, tol, checks):
     parts, f, dof, emap, (ex, area, izz, h) = ctx
     n = len(dof)
     rows = []
+    allfr = fibre_ranges_many(text, tol, [k for k, _ in checks], ctx, jobs)
     for k, lim in checks:
-        fr = fibre_ranges(text, tol, k, ctx)
+        fr = allfr[k]
         ok = all(-lim <= r["lo"] and r["hi"] <= lim for r in fr)
         row = {"check": f"|SIG({k})| <= {lim}", "fibres": [{"end": r["end"], "side": r["side"],
                "nominal": _show(r["nominal"]), "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)]} for r in fr]}
@@ -337,7 +370,8 @@ def main(argv):
                 if not m:
                     raise FrameError(f"{x!r}: a member check is SIG(element) <= limit (|sigma| at every fibre)")
                 checks.append((int(m.group(1)), _num(m.group(2), x)))
-            print(json.dumps(judge_members(text, tol, checks), indent=1, ensure_ascii=False))
+            jobs = int(argv[argv.index("--jobs") + 1]) if "--jobs" in argv else 1
+            print(json.dumps(judge_members(text, tol, checks, jobs=jobs), indent=1, ensure_ascii=False))
             return 0
         reqs = [_req(x) for x in raw]
         ranges = [argv[i + 1] for i, a in enumerate(argv) if a == "--range"]
