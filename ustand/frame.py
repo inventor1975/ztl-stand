@@ -331,15 +331,17 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
             ks.append(k)
     rs = ZE.certify_many(parts, f, es, n, jobs=jobs, scale=[emap[k]["part"] for k in ks])
     Nlo = {k: F(0) for k in emap}
+    Nhi = {k: F(0) for k in emap}
     Nnom = {k: F(0) for k in emap}
     for k, sc in zip(ks, rs):
         fac = ex * area / emap[k]["L"]
         Nlo[k] = min(fac * sc["lo"], fac * sc["hi"])
+        Nhi[k] = max(fac * sc["lo"], fac * sc["hi"])
         Nnom[k] = fac * sc["nominal"]
     if all(v >= 0 for v in Nlo.values()):
         # no member compressed anywhere in the box: K_G(N(p)) >= 0, so K(p) + lam K_G > 0 for every lam >= 0
         return {"lam_low": None, "why": "no compressed member: no buckling under these loads", "lam_est": None,
-                "unknowns": n, "T": T, "Nlo": Nlo, "Nnom": Nnom}
+                "unknowns": n, "T": T, "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
     K0 = ZE.matrix(parts, n)                      # lower triangle
     # THE CONTINUUM, not the Hermite model (2026-11-01, MEASURED: one element per member put the FE "lower bound"
     # 0.72 % ABOVE Euler's exact load). Inside a member w = w_H + eta (eta, eta' = 0 at both ends); EI int w_H" eta"
@@ -422,7 +424,7 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
             hi = mid
         if hi - lo <= rel * hi:
             break
-    return {"lam_low": lo, "lam_est": lam_est, "unknowns": n, "T": T, "Nlo": Nlo, "Nnom": Nnom}
+    return {"lam_low": lo, "lam_est": lam_est, "unknowns": n, "T": T, "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
 
 
 def stability_upper(text, tol="0"):
@@ -624,6 +626,126 @@ def with_imperfection(text, phi, sign):
     return text.rstrip("\n") + "\n" + "\n".join(extra) + "\n" if extra else text
 
 
+def _psd_terms(Ml):
+    """A symmetric positive SEMIdefinite 4 x 4 (exact) as rank-one terms [(d, l)], d > 0 — LDL^T with zero pivots
+    skipped (their column must then vanish); checked to reproduce Ml exactly."""
+    n = 4
+    A = [list(r) for r in Ml]
+    out = []
+    for j in range(n):
+        d = A[j][j]
+        if d < 0:
+            raise FrameError("internal: a local form is not PSD")
+        if d == 0:
+            if any(A[i][j] for i in range(n)):
+                raise FrameError("internal: a zero pivot with a nonzero column (not PSD)")
+            continue
+        l = [A[i][j] / d if i >= j else F(0) for i in range(n)]
+        out.append((d, l))
+        for a in range(n):
+            for b in range(n):
+                A[a][b] -= d * l[a] * l[b]
+    for a in range(n):
+        for b in range(n):
+            if sum(d * l[a] * l[b] for d, l in out) != Ml[a][b]:
+                raise FrameError("internal: the rank-one terms do not reproduce the local form")
+    return out
+
+
+def _glob(i, j, c, s, dof, l):
+    """A local (v_i, th_i, v_j, th_j) vector on the global DOFs (v = -s ux + c uy)."""
+    g = {}
+    for (nd, v) in (((i, "X"), -s * l[0]), ((i, "Y"), c * l[0]), ((i, "R"), l[1]),
+                    ((j, "X"), -s * l[2]), ((j, "Y"), c * l[2]), ((j, "R"), l[3])):
+        if v and nd in dof:
+            g[dof[nd]] = g.get(dof[nd], F(0)) + v
+    return {k: v for k, v in g.items() if v}
+
+
+def second_order_case(text, tol, checks, jobs=1):
+    """PHYSICAL SECOND ORDER (2026-11-01, the curator's "(а)"): member stresses of the frame under its loads, with
+    every modulus in the box, in second-order theory with the axial forces of the first-order analysis (a NAMED
+    model premise; MEASURED on the 12x6 frame: iterating N moves the result by 0.02 %), each member the Euler-
+    Bernoulli CONTINUUM. The system (K(p) + K_G(N) - D) u = f is ZTL zenergy.certify_general's:
+      A0 = K0 + sum_e N_mid,e G_e;  parts: each element's stiffness, radius t; each G_e, radius (N_hi - N_lo)/2;
+      D in [0, C], C = sum_e max(P_hi^2 k/(1 - P_hi k), N_hi+) Q_e (the continuum correction, both signs of N);
+    theta proved, first order exact per part, the rest theta^2/(1 - theta). Requires the proved alpha_cr > 1.
+    sigma = E p_k (g.u): the element's own factor taken as an interval (no correlation kept: safe).
+    LEAN (ZTL lean/ZHypercircle.lean, zero axioms): |Delta(w,w)| <= M(w,w) <= theta A0(w,w) gives `rest_bound`'s
+    hypotheses with t = theta; `perturb_identity` / `perturb_split` the first order + rest; `cs_weak` the D term."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
+    st = stability_lower(text, tol, jobs=jobs)
+    parts, f, dof, emap, (_, _, _, h) = energy_system_full(text, tol)
+    if h is None:
+        raise FrameError("member stresses need the section height: R, 1, area, izz, height")
+    n = len(dof)
+    T = max((p["t"] for p in parts), default=F(0))
+    lam = st.get("lam_low")
+    if st.get("lam_est") is not None and (lam is None or lam <= 1):
+        return {"verdict": "OPEN", "why": f"the critical factor is not proved above 1 (proved {lam}): the frame may "
+                                          f"buckle under these loads", "checks": []}
+    Nlo, Nhi = st["Nlo"], st["Nhi"]
+    A0 = ZE.matrix(parts, n)
+    gparts, cterms = [], []
+    Elo = (1 - T) * ex
+    for k, (i, j) in enumerate(elems, 1):
+        L = emap[k]["L"]
+        c_, s_ = (nodes[j][0] - nodes[i][0]) / L, (nodes[j][1] - nodes[i][1]) / L
+        Gloc = [[F(v) / (30 * L) for v in r] for r in [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L],
+                                                        [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
+        Bloc = [[F(v) / L for v in r] for r in [[1, 0, -1, 0], [0, 0, 0, 0], [-1, 0, 1, 0], [0, 0, 0, 0]]]
+        Qloc = [[Gloc[a][b] - Bloc[a][b] for b in range(4)] for a in range(4)]
+        Gt = [(d, _glob(i, j, c_, s_, dof, l)) for d, l in _psd_terms(Gloc)]
+        Gt = [(d, g) for d, g in Gt if g]
+        mid = (Nlo.get(k, F(0)) + Nhi.get(k, F(0))) / 2
+        rad = (Nhi.get(k, F(0)) - Nlo.get(k, F(0))) / 2
+        for d, g in Gt:
+            items = list(g.items())
+            for a, ga in items:
+                for b, gb in items:
+                    if a >= b:
+                        A0[(a, b)] = A0.get((a, b), F(0)) + mid * d * ga * gb
+        if rad and Gt:
+            gparts.append({"t": rad, "terms": Gt})
+        P = max(F(0), -Nlo.get(k, F(0)))
+        kk = L * L / (4 * PI2_LO * Elo * izz)
+        if P * kk >= 1:
+            return {"verdict": "OPEN", "why": f"element {k} could buckle between its nodes: subdivide", "checks": []}
+        cq = max(P * P * kk / (1 - P * kk), max(F(0), Nhi.get(k, F(0))))
+        if cq:
+            for d, l in _psd_terms(Qloc):
+                g = _glob(i, j, c_, s_, dof, l)
+                if g:
+                    cterms.append((cq * d, g))
+    es, items = [], []
+    for kchk, lim in checks:
+        for end, side, g in fibre_vectors(emap, kchk, h):
+            e = [F(0)] * n
+            for i_, v in g.items():
+                e[i_] = v
+            items.append((kchk, lim, end, side))
+            es.append(e)
+    rs = ZE.certify_general_many(A0, parts + gparts, cterms, f, es, n)
+    rows = {}
+    for (kchk, lim, end, side), r in zip(items, rs):
+        lo_, hi_ = min(ex * (1 - T) * r["lo"], ex * (1 + T) * r["lo"]), max(ex * (1 - T) * r["hi"], ex * (1 + T) * r["hi"])
+        row = rows.setdefault(kchk, {"check": f"|SIG({kchk})| <= {lim}", "fibres": [], "ok": True, "bad": False})
+        row["fibres"].append({"end": end, "side": side, "proved_range": [_show(lo_, -1), _show(hi_, 1)]})
+        row["ok"] &= (-lim <= lo_ and hi_ <= lim)
+        row["bad"] |= (lo_ > lim or hi_ < -lim)
+        row["theta"] = _show(r["theta"], 1)
+    out = []
+    for kchk, row in rows.items():
+        row["verdict"] = "EARNED" if row.pop("ok") else "REFUTED" if row.pop("bad") else "OPEN"
+        row.pop("bad", None)
+        out.append(row)
+    vs = [r["verdict"] for r in out]
+    return {"verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
+            "checks": out, "alpha_cr_proved_lower": _show(lam, -1) if lam else None}
+
+
 def judge_members(text, tol, checks, jobs=1, order=2, phi=PHI0):
     """Member stress checks |sigma| <= limit (EN 1993-1-1 6.2.1(7)) with the GLOBAL ANALYSIS EN asks for
     (2026-11-01, the curator's "максимальное устранение ошибок"): the loads plus the sway imperfection phi (5.3.2,
@@ -667,8 +789,25 @@ def judge_members(text, tol, checks, jobs=1, order=2, phi=PHI0):
                       "alpha_cr_proved_lower": _show(lam, -1) if lam is not None else None,
                       "second_order": mode, "amplification": _show(amp, 1) if amp else None, "checks": rows})
     vs = [r["verdict"] for c in cases for r in c["checks"]]
-    verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN"
-    return {**SCOPE_BEAM, "verdict": verdict, "path": "member stresses: zenergy.certify_scaled on every extreme fibre; EN global "
+    verdict_en = "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN"
+    # THE PHYSICAL VERDICT (the curator's "(а)", 2026-11-01): second-order theory itself, proved
+    phys = []
+    for sg in signs:
+        deck = with_imperfection(text, phi, sg) if sg else text
+        try:
+            pc = second_order_case(deck, tol, checks, jobs=jobs)
+        except (ArithmeticError, FrameError) as ex_:
+            pc = {"verdict": "OPEN", "why": str(ex_), "checks": []}
+        pc["imperfection"] = f"{'+' if sg > 0 else '-' if sg < 0 else ''}{phi if sg else 0}"
+        phys.append(pc)
+    pv = [c["verdict"] for c in phys]
+    verdict = "REFUTED" if "REFUTED" in pv else "EARNED" if all(v == "EARNED" for v in pv) else "OPEN"
+    return {**SCOPE_BEAM, "verdict": verdict, "verdict_en_method": verdict_en, "second_order_cases": phys,
+            "verdict_note": "verdict: second-order theory (axial forces from the first-order analysis, a named "
+                            "premise), every member the Euler-Bernoulli continuum, proved by ZTL "
+                            "zenergy.certify_general; verdict_en_method: EN 5.2.2(5B)'s amplification (the code's "
+                            "approximation), the 'cases' below",
+            "path": "member stresses: zenergy.certify_scaled on every extreme fibre; EN global "
             "analysis: sway imperfection +-phi and second order by the proved alpha_cr", "cases": cases,
             "second_order_note": "EN 5.2.2(5B)'s amplification is the CODE's approximation of second-order theory: "
                                  "MEASURED 2026-11-01 (12x6 frame, loads x5/x10/x12) it falls short of linear P-delta "

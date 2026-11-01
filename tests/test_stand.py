@@ -2419,14 +2419,27 @@ _amp = F(_c4["amplification"].split()[0])
 _alo = F(_c4["alpha_cr_proved_lower"].split()[0])
 check("EN global analysis, loads x5 (alpha_cr ~7.56): first order EARNS |sigma| <= 300 MPa (peak ~286 MPa), the "
       "amplified check (x 1/(1 - 1/alpha_cr,low) = 1.152, peak ~329 MPa) leaves it OPEN, and EARNS 340 MPa",
-      _so3["verdict"] == "EARNED" and _so4["verdict"] == "OPEN" and _so5["verdict"] == "EARNED"
+      _so3["verdict"] == "EARNED" and _so4["verdict_en_method"] == "OPEN" and _so5["verdict_en_method"] == "EARNED"
       and _c4["second_order"] == "amplified" and _amp == 1 / (1 - 1 / _alo) and 1.15 < float(_amp) < 1.155,
-      (_so3["verdict"], _so4["verdict"], _so5["verdict"], float(_amp)))
+      (_so3["verdict"], _so4["verdict_en_method"], _so5["verdict_en_method"], float(_amp)))
 _so6 = FRM.judge_members(_scale_loads(_g126, 15), "0.5%", [(1, F(10) ** 12)])
 check("EN global analysis, loads x15 (alpha_cr ~2.52 < 3): the amplification is not allowed — OPEN even with a "
       "limit of 10^12, said, never guessed",
-      _so6["verdict"] == "OPEN" and all(c["second_order"] == "not allowed" for c in _so6["cases"]),
+      _so6["verdict_en_method"] == "OPEN" and all(c["second_order"] == "not allowed" for c in _so6["cases"]),
       [c["second_order"] for c in _so6["cases"]])
+check("PHYSICAL second order (the curator's '(а)', ZTL zenergy.certify_general): where EN's amplification is not "
+      "allowed (loads x15, alpha_cr 2.52 < 3) the frame is still judged — EARNED for 10^12 — and at loads x5 the "
+      "proved bound of member 96 (EN under-amplifies it, MEASURED) lies ABOVE the EN-amplified value",
+      _so6["verdict"] == "EARNED")
+_g5p = FRM.with_imperfection(_g5, FRM.PHI0, 1)
+_soc = FRM.second_order_case(_g5p, "0", [(96, F(10) ** 12)])
+_hi96 = max(abs(F(x.split()[0])) for fb in _soc["checks"][0]["fibres"] for x in fb["proved_range"])
+_en96 = FRM.judge_members(_g5, "0", [(96, F(10) ** 12)])
+_en96 = max(F(c["checks"][0]["amplified_peak"].split()[0]) for c in _en96["cases"] if "amplified_peak" in c["checks"][0])
+check("physical second order vs EN on member 96 (loads x5, nominal moduli): proved peak |sigma| in a 0.13 % bracket "
+      "around 220.9 MPa (the float P-delta value), above EN's amplified 219.5 MPa — the code's approximation falls "
+      "short there, the stand no longer does",
+      220.8e6 < float(_hi96) < 221.1e6 and _hi96 > _en96, (float(_hi96), float(_en96)))
 # STABILITY (2026-11-01): a proved lower bound on the critical load factor for every modulus in the box —
 # K(p) + lam K_G(N(p)) >= (1 - T) K0 + lam sum N_lo G_e, one matrix proved positive definite (pd_ieee)
 import math as _math
