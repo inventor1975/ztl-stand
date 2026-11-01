@@ -36,7 +36,8 @@ Lengths must be rational (an irrational length is refused: the stiffness would n
 WHAT IT DOES NOT DO (yet), said: the box path (zlin) is not wired for frames — a requirement the energy path cannot
 decide comes back OPEN, not guessed; no shear deformation (Timoshenko); second order only by EN 5.2.2's amplification (alpha_cr >= 3;
 below, OPEN — no geometrically nonlinear solve yet); gravity is taken along Y for the imperfection's equivalent
-forces (5.3.2(7)); stability is LINEAR buckling (no imperfections, no plasticity); member buckling is 6.3.1 under axial
+forces (5.3.2(7)); stability is LINEAR buckling of the Euler-Bernoulli CONTINUUM (each member's
+inner deflection bounded by its clamped Euler load; no imperfections, no plasticity); member buckling is 6.3.1 under axial
 force only — the 6.3.3 bending-axial interaction, out-of-plane and lateral-torsional buckling are NOT checked.
 The proved ranges are for the MODEL (the mesh): discretization error is not bounded (bench/stage0/plate_convergence).
 """
@@ -111,6 +112,29 @@ def read_deck(text):
             if n not in nodes:
                 raise FrameError(f"element {i}-{j}: node {n} does not exist")
     return nodes, elems, loads, supports, ex, sec
+
+
+def subdivide(text, n):
+    """The deck with every element split into n equal elements (new nodes at rational points; loads, supports, the
+    section and the material unchanged). Each original element k becomes elements n(k-1)+1 .. nk (2026-11-01: the
+    Hermite beam is exact for nodal loads in statics, NOT for buckling — measured with this)."""
+    if n == 1:
+        return text
+    nodes, elems, loads, supports, ex, sec = read_deck(text)
+    keep = [ln for ln in text.splitlines() if not ln.split("!")[0].strip().upper().startswith(("E,", "E "))]
+    nxt = max(nodes) + 1
+    out_e = []
+    for (i, j) in elems:
+        chain = [i]
+        for k in range(1, n):
+            x = nodes[i][0] + (nodes[j][0] - nodes[i][0]) * F(k, n)
+            y = nodes[i][1] + (nodes[j][1] - nodes[i][1]) * F(k, n)
+            keep.append(f"N, {nxt}, {x}, {y}")
+            chain.append(nxt)
+            nxt += 1
+        chain.append(j)
+        out_e += [f"E, {a}, {b}" for a, b in zip(chain, chain[1:])]
+    return "\n".join(keep + out_e) + "\n"
 
 
 def energy_system(text, tol):
@@ -234,6 +258,26 @@ def fibre_ranges_many(text, tol, ks, ctx=None, jobs=1):
 # so ONE matrix proved positive definite (ZTL zenergy.pd_ieee) proves lambda < lambda_cr at every p. Linear
 # buckling (no imperfections, no plasticity); the load factor scales the given loads.
 
+PI2_LO = F(98695, 10000)          # < pi^2 = 9.8696044...: the continuum correction is conservative with it
+
+
+def _beam_form(i, j, c, s, dof, Gl):
+    """A local 4 x 4 form over (v_i, th_i, v_j, th_j) on the global DOFs, lower triangle (a >= b)."""
+    loc = [[((i, "X"), -s), ((i, "Y"), c)], [((i, "R"), F(1))], [((j, "X"), -s), ((j, "Y"), c)], [((j, "R"), F(1))]]
+    out = {}
+    for a in range(4):
+        for b in range(4):
+            if not Gl[a][b]:
+                continue
+            for (na, va) in loc[a]:
+                for (nb, vb) in loc[b]:
+                    if va and vb and na in dof and nb in dof:
+                        key = (dof[na], dof[nb])
+                        if key[0] >= key[1]:
+                            out[key] = out.get(key, F(0)) + Gl[a][b] * va * vb
+    return out
+
+
 def _geo_entries(nodes_xy, i, j, L, c, s, dof):
     """G_e over global DOFs as {(row, col): value} (both triangles), the local v = -s ux + c uy."""
     G = [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L], [-36, -3 * L, 36, -3 * L],
@@ -252,9 +296,11 @@ def _geo_entries(nodes_xy, i, j, L, c, s, dof):
     return out
 
 
-def stability_lower(text, tol, jobs=1, rel=F(1, 1000)):
-    """A proved lam_low with lam_low < lambda_cr for every modulus in the box; and the float estimate of the
-    nominal lambda_cr for the reader. Bisection on lambda, every accepted step proved by pd_ieee. Why one matrix
+def stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
+    """A proved lam_low with lam_low < lambda_cr for every modulus in the box — of the CONTINUUM frame (Euler-Bernoulli
+    members), not of its Hermite model (model="continuum", the default since 2026-11-01; model="fe" is the model's
+    own, which one element per member can put ABOVE the true load); and the float estimate of the nominal
+    lambda_cr for the reader. Bisection on lambda, every accepted step proved by pd_ieee. Why one matrix
     covers the whole box: ZTL lean/ZStability.lean `stability_lower` (zero axioms) -- with K_P, G_e PSD,
     p_P >= 1 - T and N_e >= N_lo,e, x'((1-T)K0 + lam sum N_lo G)x <= x'(K(p) + lam K_G(N(p)))x for every x."""
     from . import judge_ztl  # noqa: F401
@@ -286,6 +332,23 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000)):
         return {"lam_low": None, "why": "no compressed member: no buckling under these loads", "lam_est": None,
                 "unknowns": n, "T": T, "Nlo": Nlo, "Nnom": Nnom}
     K0 = ZE.matrix(parts, n)                      # lower triangle
+    # THE CONTINUUM, not the Hermite model (2026-11-01, MEASURED: one element per member put the FE "lower bound"
+    # 0.72 % ABOVE Euler's exact load). Inside a member w = w_H + eta (eta, eta' = 0 at both ends); EI int w_H" eta"
+    # = 0 (w_H is cubic); int eta'^2 <= (L/2pi)^2 int eta"^2 (the clamped member's Euler load) — so, as forms,
+    #   compression P:  K_exact(-P) >= K_E - P G - P^2 k/(1 - P k) Q,   k = L^2/(4 pi^2 E I),  Q = G - b b^T/L,
+    #   tension N:      K_exact(N)  >= K_E + N b b^T / L,
+    # b = (-1, 0, 1, 0) on (v_i, th_i, v_j, th_j) (Q = int (w_H' - mean)^2). pi^2 from below, E at (1 - T) E0.
+    Elo = (1 - T) * ex
+    Gl, Ql, Bl, kk = {}, {}, {}, {}
+    for k, (i, j) in enumerate(elems, 1):
+        L = emap[k]["L"]
+        c_, s_ = (nodes[j][0] - nodes[i][0]) / L, (nodes[j][1] - nodes[i][1]) / L
+        Gloc = [[F(v) / (30 * L) for v in r] for r in [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L],
+                                                        [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
+        Bloc = [[F(v) / L for v in r] for r in [[1, 0, -1, 0], [0, 0, 0, 0], [-1, 0, 1, 0], [0, 0, 0, 0]]]
+        Qloc = [[Gloc[a][b] - Bloc[a][b] for b in range(4)] for a in range(4)]
+        Gl[k], Bl[k], Ql[k] = (_beam_form(i, j, c_, s_, dof, X) for X in (Gloc, Bloc, Qloc))
+        kk[k] = L * L / (4 * PI2_LO * Elo * izz)
     Gsum, Gnom = {}, {}
     for k, (i, j) in enumerate(elems, 1):
         L = emap[k]["L"]
@@ -305,8 +368,23 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000)):
         lam_est = None
     def proved(lam):
         M = {key: (1 - T) * v for key, v in K0.items()}
-        for key, v in Gsum.items():
-            M[key] = M.get(key, F(0)) + lam * v
+        if model == "fe":
+            for key, v in Gsum.items():
+                M[key] = M.get(key, F(0)) + lam * v
+        else:
+            for k in Gl:
+                if Nlo[k] < 0:
+                    P = -lam * Nlo[k]
+                    if P * kk[k] >= 1:
+                        return False                  # the member itself could buckle between its nodes: subdivide
+                    cq = P * P * kk[k] / (1 - P * kk[k])
+                    for key, v in Gl[k].items():
+                        M[key] = M.get(key, F(0)) - P * v
+                    for key, v in Ql[k].items():
+                        M[key] = M.get(key, F(0)) - cq * v
+                elif Nlo[k] > 0:
+                    for key, v in Bl[k].items():
+                        M[key] = M.get(key, F(0)) + lam * Nlo[k] * v
         Mf = ZE._float_matrix(M, n)
         try:
             mu = float(sla.eigsh(Mf, k=1, sigma=0, which="LM", return_eigenvectors=False, v0=np.ones(n))[0])

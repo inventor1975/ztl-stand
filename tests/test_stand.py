@@ -2432,6 +2432,17 @@ check("frame stability, the other side by a WITNESS (the float mode, exact from 
       float(_st0["lam_low"]) < float(_su0["lam_high"]) < _eul * 1.00001
       and float(_su0["lam_high"]) / float(_st0["lam_low"]) < 1.0005 and float(_su0["lam_high"]) > _eul,
       (float(_st0["lam_low"]), float(_su0["lam_high"]), _eul))
+_col1 = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2", "N, 1, 0, 0", "N, 2, 0, 4", "E, 1, 2",
+                   "D, 1, UX, 0", "D, 1, UY, 0", "D, 1, ROTZ, 0", "F, 2, FY, -10000"])
+_c1fe = FRM.stability_lower(_col1, "0", model="fe")["lam_low"]
+_c1co = FRM.stability_lower(_col1, "0")["lam_low"]
+_c2co = FRM.stability_lower(FRM.subdivide(_col1, 2), "0")["lam_low"]
+check("frame stability is proved for the CONTINUUM, not the Hermite model: a cantilever in ONE element — the FE "
+      "model's 'lower bound' 260.94 sits 0.72 % ABOVE Euler's exact 259.077 (the error found 2026-11-01); the "
+      "continuum bound (int eta'^2 <= (L/2pi)^2 int eta''^2 inside each member) is 257.99, below it; two elements: "
+      "258.98",
+      float(_c1fe) > _eul and float(_c1co) < _eul and float(_c1co) > 0.995 * _eul and float(_c1co) < float(_c2co) < _eul,
+      (float(_c1fe), float(_c1co), float(_c2co), _eul))
 # MEMBER BUCKLING (2026-11-01): EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i| — the proved alpha_cr lower bound
 # and the proved |N| upper bound give a proved upper bound on the utilisation (H rises with alpha_cr, falls with |N|)
 def _colP(P):
