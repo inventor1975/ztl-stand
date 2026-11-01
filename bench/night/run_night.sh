@@ -21,8 +21,8 @@ echo "$(stamp) 5 stand suite, 24 shards, compared with the sequential run" >> "$
 ( cd "$STAND" && PYTHONPATH=. ~/bin/heavy -m 18G --cores 24 python3 -m tests.run_parallel --jobs 24 \
     --compare "$LOG/04_stand_sequential.log" ) > "$LOG/05_stand_parallel.log" 2>&1
 
-echo "$(stamp) 6 randomised battery x30" >> "$LOG/00_timeline.txt"
-( cd "$STAND" && PYTHONPATH=. ~/bin/heavy -m 18G --cores 22 python3 bench/night/verify_all.py --jobs 22 --scale 30 ) \
+echo "$(stamp) 6 randomised battery x100" >> "$LOG/00_timeline.txt"
+( cd "$STAND" && PYTHONPATH=. ~/bin/heavy -m 18G --cores 22 python3 bench/night/verify_all.py --jobs 22 --scale 100 ) \
     > "$LOG/06_battery.log" 2>&1
 
 echo "$(stamp) 7 stage-0 benchmarks" >> "$LOG/00_timeline.txt"
