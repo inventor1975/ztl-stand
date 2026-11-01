@@ -768,7 +768,12 @@ def output_bounds_box(text, tol, segs, comp):
     t ||u_0||/(1 - t) — zenergy's first order + rest, for the continuum). I from the hypercircle CENTRES
     s^ = (tau + sigma(v))/2, |sigma - s^| = |tau - sigma(v)|/2 exactly (Prager-Synge): I <= I^ + r_u ||sigma_z|| +
     ||s^_u|| r_z, I^ = sum over sub-triangles of sqrt(|T| int_T (s^_u : C^-1 s^_z)^2) (Cauchy-Schwarz per piece).
-    J(u_0) itself: the nominal polarisation bracket (t = 0)."""
+    J(u_0) itself: the nominal polarisation bracket (t = 0).
+    PROVED (ZTL lean/ZHypercircle.lean, zero axioms): the identity J(u_E) - J(u_0) = -d(u_E, z_0)
+    (`perturb_identity`), the split into first order + rest (`perturb_split`), and the rest's bound
+    (1 - t)^2 d(u_E - u_0, z_0)^2 <= t^4 a(u_0,u_0) a(z_0,z_0) (`rest_bound`, through `form_cs`). NAMED PREMISES (integral
+    inequalities, as Green's formula): |d(u_0, z_0)| <= t int |sigma(u_0) : C^-1 sigma(z_0)| and the bound of that integral
+    through the hypercircle centres (pointwise triangle inequality, Cauchy-Schwarz)."""
     S = setup(text, tol)
     t = S["t"]
     nom = output_bounds(text, "0", segs, comp)
