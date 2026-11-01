@@ -1,0 +1,4 @@
+{"nx": 44, "ny": 22, "unknowns": 2024, "elements": 1936, "verdict": "EARNED", "nominal": -0.0004164165323685033, "proved_lo_rel_pct": 0.5027205465815809, "nominal_s": 0.56, "judge_s": 0.31}
+{"nx": 100, "ny": 50, "unknowns": 10200, "elements": 10000, "verdict": "EARNED", "nominal": -0.0009536364377995698, "proved_lo_rel_pct": 0.502799387193642, "nominal_s": 1.74, "judge_s": 1.75}
+{"nx": 200, "ny": 100, "unknowns": 40400, "elements": 40000, "verdict": "EARNED", "nominal": -0.001910775863650386, "proved_lo_rel_pct": 0.5028466633645534, "nominal_s": 17.61, "judge_s": 7.18}
+{"nx": 316, "ny": 158, "unknowns": 100488, "elements": 99856, "verdict": "EARNED", "nominal": -0.0030205304378487082, "proved_lo_rel_pct": 0.5028748580009568, "nominal_s": 19.09, "judge_s": 18.79}

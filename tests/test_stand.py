@@ -2289,6 +2289,41 @@ check("frame, floating path: a 40-storey x 8-bay frame (1080 unknowns) — roof 
       "<= nominal + 0.3 % REFUTED (the whole enclosure at the vertex is beyond it)",
       _fe1["verdict"] == "EARNED" and _fe2["verdict"] == "REFUTED" and _fe1["unknowns"] == 1080,
       (_fe1["verdict"], _fe2["verdict"]))
+# A PLANE-STRESS PLATE (ustand/plate.py, 2026-11-01): the constant-strain triangle as three rank-one terms sharing E
+# (D0 split by its exact LDL^T). First the PATCH TEST — the element's acceptance: a uniform tension must be reproduced
+# EXACTLY at every node (u_x = sigma x / E, u_y = -nu sigma y / E); then a requirement under +-0.5 %; then the
+# floating path.
+from ustand import plate as PLT
+def _load_gen_plate():                            # by its path: no sys.path change (hidden state for the shards)
+    import importlib.util as ilu
+    spec = ilu.spec_from_file_location("gen_plate", pathlib.Path(__file__).resolve().parent.parent / "examples"
+                                       / "plate" / "gen_plate.py")
+    mod = ilu.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+_GP = _load_gen_plate()
+_pt = _GP.deck(4, 2, "tension", "roller", h="1", E="200", nu="1/4", th="1", p="10")   # 0<=x<=4, 0<=y<=2
+_pv = [PLT.range_of(_pt, "0", t)["nominal"].split()[0] for t in ("U(15,X)", "U(15,Y)", "U(8,X)", "U(8,Y)",
+                                                               "U(12,X)", "U(12,Y)")]
+check("plate: the PATCH TEST — uniform tension 10 on a 4 x 2 plate (E 200, nu 1/4), CST: u_x = sigma x/E, "
+      "u_y = -nu sigma y/E EXACTLY at (4,2), (2,1), (1,2): 1/5, -1/40, 1/10, -1/80, 1/20, -1/40",
+      _pv == ["1/5", "-1/40", "1/10", "-1/80", "1/20", "-1/40"], _pv)
+_ps = _GP.deck(8, 2, "shear")                     # clamped, tip shear 1 MPa, 48 unknowns; tip corner node 27
+_pe = PLT.judge(_ps, "0.5%", [PLT._req("U(27,Y) >= -0.00014723")])
+_pr = PLT.judge(_ps, "0.5%", [PLT._req("U(27,Y) >= -0.000147")])
+check("plate: +-0.5 % on every element's modulus, clamped 8 x 2 under tip shear (nominal -1.46488e-4) — tip "
+      ">= -0.00014723 EARNED (just below the proved low end -1.472236895e-4); >= -0.000147 REFUTED at a vertex "
+      "solved exactly (the witness is nominal/0.995 = -1.472236768e-4)",
+      _pe["verdict"] == "EARNED" and _pr["verdict"] == "REFUTED" and _pe["unknowns"] == 48,
+      (_pe["verdict"], _pr["verdict"]))
+_pb = _GP.deck(40, 12, "shear")                   # 1040 unknowns: the floating path; tip corner node 41*13 = 533
+_pn = F(PLT.range_of(_pb, "0", "U(533,Y)")["nominal"].split()[0])
+_pe1 = PLT.judge(_pb, "0.5%", [(533, "Y", ">=", _pn * F(102, 100))])
+_pe2 = PLT.judge(_pb, "0.5%", [(533, "Y", ">=", _pn * F(1003, 1000))])
+check("plate, floating path: a clamped 40 x 12 plate (1040 unknowns) under tip shear — tip >= 1.02 x nominal "
+      "(UY < 0) EARNED, >= 1.003 x nominal REFUTED (the whole enclosure at the vertex is beyond it)",
+      _pe1["verdict"] == "EARNED" and _pe2["verdict"] == "REFUTED" and _pe1["unknowns"] == 1040,
+      (_pe1["verdict"], _pe2["verdict"]))
 _lw = ["2*x + y == 3", "x - y == 0"]
 _sc = {"v": {"x": F(1, 4), "y": F(2)}, "w": [F(8), F(1, 2)]}
 _rl = K._rescale(_lw, _sc)
