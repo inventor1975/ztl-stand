@@ -2353,6 +2353,18 @@ check("continuum, an output near the clamp (top edge, first 3 segments, UX) with
       _obp["lower"] <= _obx["lower"] <= _obx["nominal"][0] <= _obx["nominal"][1] <= _obx["upper"] <= _obp["upper"]
       and (_obx["nominal"][1] - _obx["nominal"][0]) / _obx["nominal"][1] > F(7, 100),
       [float(x) for x in (_obp["lower"], _obx["lower"], _obx["upper"], _obp["upper"])])
+# ADAPTIVE REFINEMENT (2026-11-01, ustand/adapt.py): the hypercircle's exact local error marks, LEPP bisects, the
+# bounds are proved again on each mesh
+from ustand import adapt as AD
+_ad_rows, _ad_deck = AD.adapt(_hc_deck(2), "0", steps=4, log=lambda *_: None)
+_ad_lo = max(r["lower"] for r in _ad_rows)
+_ad_hi = min(r["upper"] for r in _ad_rows)
+check("continuum, ADAPTIVE: from 8 x 2 (32 triangles, width 1.45 %) four refinements where ||tau - sigma(v)|| is "
+      "largest reach width < 0.21 % with <= 72 triangles (uniform 16 x 4 = 128 triangles: 0.33 %); every mesh's "
+      "bracket holds the true value, so they all overlap",
+      _ad_rows[-1]["width_pct"] < 0.21 and _ad_rows[-1]["elements"] <= 72 and _ad_lo <= _ad_hi
+      and HC.setup(_ad_deck)["clamped"],
+      [(r["elements"], round(r["width_pct"], 3)) for r in _ad_rows])
 check("continuum: the exact admissibility check is not decoration — any FREE Airy value gives an admissible tau "
       "(accepted), a moved boundary value or one sub-triangle's sign flip is REJECTED",
       not _hc_rejects(HC.tau_pieces(_hS, _hd2, _hi)) and _hc_rejects(HC.tau_pieces(_hS, _hd3, _hi))
