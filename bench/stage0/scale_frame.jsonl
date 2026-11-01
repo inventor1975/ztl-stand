@@ -2,3 +2,6 @@
 {"storeys": 10, "bays": 4, "unknowns": 150, "elements": 90, "verdict": "EARNED", "nominal": 0.04368056392897337, "proved_hi_rel_pct": 0.5032996585362159, "nominal_s": 0.29, "judge_s": 0.29}
 {"storeys": 20, "bays": 6, "unknowns": 420, "elements": 260, "verdict": "EARNED", "nominal": 0.12169038155533643, "proved_hi_rel_pct": 0.5229192812448824, "nominal_s": 6.93, "judge_s": 6.9}
 {"storeys": 40, "bays": 8, "unknowns": 1080, "elements": 680, "verdict": "EARNED", "nominal": 0.39128926567160865, "proved_hi_rel_pct": 0.5452136047908063, "nominal_s": 154.98, "judge_s": 151.06}
+{"storeys": 40, "bays": 8, "unknowns": 1080, "elements": 680, "verdict": "EARNED", "nominal": 0.39128926567160865, "proved_hi_rel_pct": 0.5452136048396339, "nominal_s": 0.29, "judge_s": 0.09}
+{"storeys": 100, "bays": 24, "unknowns": 7500, "elements": 4900, "verdict": "EARNED", "nominal": 0.8373845574107711, "proved_hi_rel_pct": 0.7254147461851268, "nominal_s": 0.72, "judge_s": 0.72}
+{"storeys": 250, "bays": 48, "unknowns": 36750, "elements": 24250, "verdict": "EARNED", "nominal": 2.784005975070462, "proved_hi_rel_pct": 1.1812600662963968, "nominal_s": 3.81, "judge_s": 3.85}
