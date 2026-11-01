@@ -318,6 +318,58 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000)):
     return {"lam_low": lo, "lam_est": lam_est, "unknowns": n, "T": T, "Nlo": Nlo, "Nnom": Nnom}
 
 
+def stability_upper(text, tol="0"):
+    """A proved UPPER bound on the critical load factor at the NOMINAL moduli, by a witness: the float buckling mode
+    x (dyadic, exact from here on) with x'K0x + lam sum_e N_hi,e x'G_e x <= 0, N_hi,e >= N_e proved by one solve
+    (zenergy.enclose_linear) and x'G_e x >= 0 — so K0 + lam K_G(N) is not positive definite and lambda_cr <= lam
+    (ZTL lean/ZStability.lean `witness_upper`, zero axioms). Nominal only: the box's moduli are not used."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    import numpy as np
+    import scipy.sparse.linalg as sla
+    nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
+    parts, f, dof, emap, _ = energy_system_full(text, tol)
+    n = len(dof)
+    nom = [{"t": 0, "terms": p["terms"]} for p in parts]
+    ks = [k for k in emap if any(emap[k]["a"].values())]
+    encl = ZE.enclose_linear(nom, f, n, [emap[k]["a"] for k in ks])
+    Nlo, Nhi, Nmid, Ge = {}, {}, {}, {}
+    for k, (lo, hi) in zip(ks, encl):
+        fac = ex * area / emap[k]["L"]
+        Nlo[k], Nhi[k], Nmid[k] = fac * lo, fac * hi, fac * (lo + hi) / 2
+    K0 = ZE.matrix(nom, n)
+    Gnom = {}
+    for k, (i, j) in enumerate(elems, 1):
+        L = emap[k]["L"]
+        dx, dy = nodes[j][0] - nodes[i][0], nodes[j][1] - nodes[i][1]
+        Ge[k] = _geo_entries(nodes, i, j, L, dx / L, dy / L, dof)
+        for (a, b), v in Ge[k].items():
+            if a >= b:
+                Gnom[(a, b)] = Gnom.get((a, b), F(0)) + Nmid.get(k, F(0)) * v
+    A = ZE._float_matrix(K0, n)
+    Bm = ZE._float_matrix(Gnom, n)
+    try:
+        vals, vecs = sla.eigsh(-Bm, k=1, M=A, which="LA", v0=np.ones(n))
+    except Exception:
+        return {"lam_high": None, "why": "no buckling mode found"}
+    if vals[0] <= 0:
+        return {"lam_high": None, "why": "no compressed member: no buckling under these loads"}
+    x = [F(float(v)) for v in vecs[:, 0]]
+    qK = sum(a * b for a, b in zip(x, ZE._kmul(K0, x, n)))
+    den = F(0)
+    for k, G in Ge.items():
+        if k not in Nhi:
+            continue
+        g = sum(v * x[a] * x[b] for (a, b), v in G.items())        # both triangles: the full form, >= 0
+        den -= Nhi[k] * g
+    if den <= 0:
+        return {"lam_high": None, "why": "the witness does not load the mode in compression"}
+    lam = qK / den                                       # x'K0x + lam sum N_hi g = 0 <= 0: not positive definite
+    S = 1 << 64
+    lam = F(-((-lam.numerator * S) // lam.denominator), S)  # rounded UP: still not PD there (form <= 0 beyond)
+    return {"lam_high": lam, "lam_est": float(1 / vals[0]), "Nlo": Nlo, "Nhi": Nhi, "unknowns": n}
+
+
 CURVES = {"a0": F(13, 100), "a": F(21, 100), "b": F(34, 100), "c": F(49, 100), "d": F(76, 100)}   # EN 1993-1-1 Table 6.1
 
 
@@ -344,14 +396,23 @@ def _g_lower(lb_lo, a):
     return max(F(0), ph - up)
 
 
+def _g_upper(lb_hi, a):
+    """An upper bound on g(lb) at any lb <= lb_hi (g increasing; see _g_lower)."""
+    if lb_hi <= F(1, 5):
+        return lb_hi * lb_hi
+    ph = (1 + a * (lb_hi - F(1, 5)) + lb_hi * lb_hi) / 2
+    return ph - _sqrt_down(ph * ph - lb_hi * lb_hi)
+
+
 def judge_buckling(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
     """EN 1993-1-1 6.3.1 flexural buckling of every compressed member, N_Ed <= chi A fy / gamma_M1, with the member's
     elastic critical force taken from the frame's critical factor, N_cr,i = alpha_cr |N_Ed,i| (lb_i^2 = A fy / N_cr,i).
     The check is gamma_M1 <= H = alpha_cr g(lb_i), g = chi lb^2; H grows with alpha_cr (dH/dalpha = -lb^3 chi'/2 >= 0)
     and falls with |N| (g increasing, lb falling in |N|), so the proved alpha_cr lower bound and the proved |N| upper
-    bound give a proved lower bound on H for every modulus in the box. EARNED when every member clears it; OPEN
-    otherwise (no refutation: an upper bound on alpha_cr is not proved). Axial force only: the bending interaction
-    of 6.3.3 is NOT checked, nor out-of-plane or lateral-torsional buckling."""
+    bound give a proved lower bound on H for every modulus in the box. EARNED when every member clears it. REFUTED
+    when a member fails at the NOMINAL moduli (a point of the box): H <= alpha_cr,hi g(lb_hi) with alpha_cr,hi
+    from stability_upper's witness and |N| >= |N|_lo from one proved solve. OPEN otherwise. Axial force only: the
+    bending interaction of 6.3.3 is NOT checked, nor out-of-plane or lateral-torsional buckling."""
     nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
     if curve not in CURVES:
         raise FrameError(f"{curve!r}: a buckling curve is one of {', '.join(CURVES)}")
@@ -360,6 +421,8 @@ def judge_buckling(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
     lam = st.get("lam_low")
     if st.get("lam_est") is None:
         return {"verdict": "EARNED", "why": "no compressed member under these loads", "members": []}
+    su = stability_upper(text, "0")
+    lam_hi = su.get("lam_high")
     rows, worst = [], F(0)
     for k in sorted(st["Nlo"]):
         nlo = st["Nlo"][k]
@@ -374,11 +437,20 @@ def judge_buckling(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
         u = gamma_m1 / H if H > 0 else None
         if u is not None:
             worst = max(worst, u)
-        rows.append({"member": k, "N_max": _show(nhi, 1), "lambda_bar_min": _show(lb_lo, -1),
-                     "utilisation_max": _show(u, 1) if u is not None else None,
-                     "verdict": "EARNED" if u is not None and u <= 1 else "OPEN"})
+        row = {"member": k, "N_max": _show(nhi, 1), "lambda_bar_min": _show(lb_lo, -1),
+               "utilisation_max": _show(u, 1) if u is not None else None,
+               "verdict": "EARNED" if u is not None and u <= 1 else "OPEN"}
+        nn = su.get("Nhi", {}).get(k)                  # nominal N upper bound: compressed there if < 0
+        if row["verdict"] == "OPEN" and lam_hi and nn is not None and nn < 0:
+            lb_hi = _sqrt_down(area * fy / (lam_hi * -nn)) + F(1, 1 << 64)     # sqrt rounded up
+            Hh = lam_hi * _g_upper(lb_hi, a)
+            if gamma_m1 > Hh:
+                row["verdict"] = "REFUTED"
+                row["at_nominal_utilisation_min"] = _show(gamma_m1 / Hh, -1)
+        rows.append(row)
     vs = [r["verdict"] for r in rows]
-    return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
+    return {"verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
+            "alpha_cr_nominal_proved_upper": _show(lam_hi, 1) if lam_hi else None,
             "path": "EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i|; alpha_cr and |N| proved over the box",
             "alpha_cr_proved_lower": _show(lam, -1) if lam else None, "alpha_cr_nominal_estimate": st.get("lam_est"),
             "utilisation_max": _show(worst, 1), "members": rows,
@@ -536,9 +608,13 @@ def main(argv):
         if "--stability" in argv:                     # a proved lower bound on the critical load factor
             jobs = int(argv[argv.index("--jobs") + 1]) if "--jobs" in argv else 1
             r = stability_lower(text, tol, jobs=jobs)
+            ru = stability_upper(text, "0")
             print(json.dumps({"lambda_cr_proved_lower": _show(r["lam_low"], -1) if r.get("lam_low") is not None
                               else None, "lambda_cr_nominal_estimate": r.get("lam_est"),
-                              "note": "linear buckling, every modulus in the box; no imperfections, no plasticity",
+                              "lambda_cr_nominal_proved_upper": _show(ru["lam_high"], 1) if ru.get("lam_high")
+                              else None,
+                              "note": "linear buckling; the lower bound holds for every modulus in the box, the upper one at the "
+                                      "nominal moduli (a witness mode); no imperfections, no plasticity",
                               **({"why": r["why"]} if "why" in r else {})}, indent=1, ensure_ascii=False))
             return 0
         if "--buckling" in argv:                      # EN 6.3.1 per member: --buckling fy curve [gamma_M1]

@@ -2306,6 +2306,13 @@ check("frame stability: a cantilever column (16 elements) — the proved lower b
       "by about 0.5 % (the softest steel), never above Euler",
       0.998 * _eul < float(_st0["lam_low"]) < _eul and 0.993 * _eul < float(_st5["lam_low"]) < 0.996 * _eul,
       (float(_st0["lam_low"]), float(_st5["lam_low"]), _eul))
+_su0 = FRM.stability_upper(_col)
+check("frame stability, the other side by a WITNESS (the float mode, exact from there on: x'K0x + lam sum N_hi "
+      "x'G x <= 0): the critical factor is bracketed, proved lower <= Euler-FE <= proved upper, the bracket within "
+      "0.05 %, and the upper bound sits a hair above Euler (the FE model is stiffer than the continuum)",
+      float(_st0["lam_low"]) < float(_su0["lam_high"]) < _eul * 1.00001
+      and float(_su0["lam_high"]) / float(_st0["lam_low"]) < 1.0005 and float(_su0["lam_high"]) > _eul,
+      (float(_st0["lam_low"]), float(_su0["lam_high"]), _eul))
 # MEMBER BUCKLING (2026-11-01): EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i| — the proved alpha_cr lower bound
 # and the proved |N| upper bound give a proved upper bound on the utilisation (H rises with alpha_cr, falls with |N|)
 def _colP(P):
@@ -2321,8 +2328,9 @@ _bk3 = FRM.judge_buckling(_colP(int(_Nb)), "0", F(355 * 10**6), "b")
 _u1 = float(F(_bk1["utilisation_max"].split()[0]))
 check("member buckling (EN 1993-1-1 6.3.1, curve b, fy 355): the cantilever column at 0.99 of the hand N_b,Rd = "
       "1.755 MN is EARNED with a proved utilisation just above 0.99 (the alpha_cr bound's 0.1 % gap), at 1.01 it is "
-      "OPEN, and a column in tension has nothing to buckle",
-      _bk1["verdict"] == "EARNED" and 0.99 < _u1 < 0.9915 and _bk2["verdict"] == "OPEN"
+      "REFUTED at the nominal moduli (the witness's alpha_cr upper bound), and a column in tension has nothing to "
+      "buckle",
+      _bk1["verdict"] == "EARNED" and 0.99 < _u1 < 0.9915 and _bk2["verdict"] == "REFUTED"
       and _bk3["verdict"] == "EARNED" and _bk3["members"] == [], (_bk1["verdict"], _u1, _bk2["verdict"], _bk3))
 # THE FLOATING PATH (2026-11-01): above 600 unknowns float solves, exact residuals, lambda_min proved in fixed point
 import subprocess as _sp
