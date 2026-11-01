@@ -243,7 +243,9 @@ def _geo_entries(nodes_xy, i, j, L, c, s, dof):
 
 def stability_lower(text, tol, jobs=1, rel=F(1, 1000)):
     """A proved lam_low with lam_low < lambda_cr for every modulus in the box; and the float estimate of the
-    nominal lambda_cr for the reader. Bisection on lambda, every accepted step proved by pd_ieee."""
+    nominal lambda_cr for the reader. Bisection on lambda, every accepted step proved by pd_ieee. Why one matrix
+    covers the whole box: ZTL lean/ZStability.lean `stability_lower` (zero axioms) -- with K_P, G_e PSD,
+    p_P >= 1 - T and N_e >= N_lo,e, x'((1-T)K0 + lam sum N_lo G)x <= x'(K(p) + lam K_G(N(p)))x for every x."""
     from . import judge_ztl  # noqa: F401
     import zenergy as ZE
     import numpy as np
