@@ -338,6 +338,7 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
     #   compression P:  K_exact(-P) >= K_E - P G - P^2 k/(1 - P k) Q,   k = L^2/(4 pi^2 E I),  Q = G - b b^T/L,
     #   tension N:      K_exact(N)  >= K_E + N b b^T / L,
     # b = (-1, 0, 1, 0) on (v_i, th_i, v_j, th_j) (Q = int (w_H' - mean)^2). pi^2 from below, E at (1 - T) E0.
+    # The algebra: ZTL lean/ZHypercircle.lean `beam_correction` (zero axioms); the Poincare inequality: a premise.
     Elo = (1 - T) * ex
     Gl, Ql, Bl, kk = {}, {}, {}, {}
     for k, (i, j) in enumerate(elems, 1):
