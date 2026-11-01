@@ -276,20 +276,112 @@ def judge_energy(text, tol, requirements):
                           "the stand's independent checker does not re-check this path yet"}, rows
 
 
-SCOPE_TRUSS = {"scope": "TRUSS (pin-jointed bars, linear)",
-               "scope_note": "proved for the linear truss (small displacements, every bar elastic and straight). NOT "
-                             "checked: a compressed bar's buckling (the deck gives no second moment), geometric "
-                             "nonlinearity, joint fixity."}
+SCOPE_TRUSS = {"scope": "TRUSS (pin-jointed bars)",
+               "scope_note": "verdict: second-order theory of the truss (the joints' P-delta: each bar's string "
+                             "stiffness N/L across it; axial forces of the first-order analysis, a named premise), "
+                             "every bar elastic and STRAIGHT; verdict_first_order: linear. NOT checked: a compressed "
+                             "bar's own buckling between its joints (the deck gives no second moment), joint fixity."}
+
+
+def second_order(text, tol, targets, at=None):
+    """PHYSICAL SECOND ORDER for a truss (2026-11-01, the frames' "(а)" carried over): (K(p) + K_G(N)) u = f,
+    K_G = sum_k N_k (1/L_k) h_k h_k^T (h_k the bar's transverse relative displacement), N_k in its proved range;
+    ZTL zenergy.certify_general (theta proved; bars straight, so no continuum correction). at = a vertex p: the
+    moduli fixed there (a witness). Returns {(node, dir): (lo, hi)}, or raises ArithmeticError (theta >= 1: the
+    truss may buckle)."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    nodes, bars, forces, supports, ex, area = read_deck(text)
+    parts, f, dof = energy_system(text, tol)
+    n = len(dof)
+    if at is not None:
+        parts = [{"t": F(0), "terms": [(F(w) * pp, g) for w, g in p_["terms"]]} for p_, pp in zip(parts, at)]
+    es = []
+    for p_ in parts:
+        g = p_["terms"][0][1]
+        e = [F(0)] * n
+        for i, v in g.items():
+            e[i] = v
+        es.append(e)
+    if at is None:
+        rs = ZE.certify_many(parts, f, es, n, scale=list(range(len(parts))))
+    else:
+        rs = [{"lo": a, "hi": b} for a, b in (
+            (ZE.value_at(parts, f, e, n, [F(1)] * len(parts)),) * 2 if n <= ZE.EXACT_UP_TO
+            else ZE.value_enclosure_fp(parts, f, e, n, [F(1)] * len(parts)) for e in es)]
+    A0 = ZE.matrix(parts, n)
+    gparts = []
+    for k, ((a, b), r) in enumerate(zip(bars, rs)):
+        dx, dy = nodes[b][0] - nodes[a][0], nodes[b][1] - nodes[a][1]
+        L = _sqrt(dx * dx + dy * dy)
+        c, s_ = dx / L, dy / L
+        fac = ex * area / L if at is None else 1          # at a vertex the parts already carry E A / L * p
+        if at is not None:
+            fac = parts[k]["terms"][0][0]
+        Nlo, Nhi = sorted([fac * r["lo"], fac * r["hi"]])
+        h = {}
+        for nd, sg in ((b, 1), (a, -1)):
+            for d, comp in (("X", -s_), ("Y", c)):
+                if (nd, d) in dof and comp:
+                    h[dof[(nd, d)]] = h.get(dof[(nd, d)], F(0)) + sg * comp
+        if not h:
+            continue
+        mid, rad = (Nlo + Nhi) / 2, (Nhi - Nlo) / 2
+        items = list(h.items())
+        for i, gi in items:
+            for j, gj in items:
+                if i >= j:
+                    A0[(i, j)] = A0.get((i, j), F(0)) + mid / L * gi * gj
+        if rad:
+            gparts.append({"t": rad, "terms": [(1 / L, h)]})
+    outs = []
+    for (nd, d) in targets:
+        e = [F(0)] * n
+        e[dof[(nd, d)]] = F(1)
+        outs.append(e)
+    res = ZE.certify_general_many(A0, parts + gparts, [], f, outs, n)
+    return {t: (r["lo"], r["hi"]) for t, r in zip(targets, res)}
 
 
 def judge(text, tol, requirements, energy=True):
+    out = None
     if energy and requirements:
-        out, _ = judge_energy(text, tol, requirements)
-        if out is not None:
-            return {**SCOPE_TRUSS, **out} if isinstance(out, dict) else out
-    bk = to_brick(text, tol, requirements)
-    out = _run(bk, bk["requirements"])
-    return {**SCOPE_TRUSS, **out} if isinstance(out, dict) else out
+        out, rows = judge_energy(text, tol, requirements)
+    if out is None:
+        bk = to_brick(text, tol, requirements)
+        out = _run(bk, bk["requirements"])
+    if not isinstance(out, dict) or not requirements:
+        return {**SCOPE_TRUSS, **out} if isinstance(out, dict) else out
+    # THE PHYSICAL VERDICT: second order (the first-order one kept beside it)
+    try:
+        so = second_order(text, tol, [(nd, d) for (nd, d, op, v) in requirements])
+    except ArithmeticError as ex_:
+        return {**SCOPE_TRUSS, **out, "verdict_first_order": out.get("verdict"), "verdict": "OPEN",
+                "second_order": {"why": str(ex_)}}
+    pv, srows = [], []
+    for (nd, d, op, v) in requirements:
+        lo, hi = so[(nd, d)]
+        vv = "EARNED" if ((hi <= v) if op == "<=" else (lo >= v)) else \
+            "REFUTED" if ((lo > v) if op == "<=" else (hi < v)) else "OPEN"
+        srow = {"requirement": f"U({nd},{d}) {op} {v}", "proved_range": [_show(lo, -1), _show(hi, 1)], "verdict": vv}
+        if vv == "OPEN":                                   # a physical witness at the first-order vertex
+            fo = next((r for r in out.get("requirements", []) if r.get("requirement") == srow["requirement"]), None)
+            mod = (fo or {}).get("witness_moduli")
+            if mod is not None:
+                parts, _, _ = energy_system(text, tol)
+                ps = [F(mod.get(f"E{k}", "1").split()[0]) for k in range(1, len(parts) + 1)]
+                try:
+                    wl, wh = second_order(text, tol, [(nd, d)], at=ps)[(nd, d)]
+                    srow["witness_range"] = [_show(wl, -1), _show(wh, 1)]
+                    if (wl > v) if op == "<=" else (wh < v):
+                        vv = srow["verdict"] = "REFUTED"
+                except ArithmeticError:
+                    pass
+        srows.append(srow)
+        pv.append(vv)
+    verdict = "REFUTED" if "REFUTED" in pv else "EARNED" if all(x == "EARNED" for x in pv) else "OPEN"
+    return {**SCOPE_TRUSS, **out, "verdict_first_order": out.get("verdict"), "verdict": verdict,
+            "second_order": srows}
 
 
 def range_of(text, tol, target, steps=40, progress=None):

@@ -64,7 +64,8 @@ SCOPE_MESH = {"scope": "MESH",
               "scope_note": "proved for the finite-element MODEL (the CST mesh), NOT for the plate: the mesh is stiffer "
                             "than the continuum (MEASURED: -45 % tip deflection on 8 x 2). A point value of the 2D "
                             "continuum is not bounded at all; for the plate itself use ustand.hypercircle "
-                            "(compliance C, MEAN, AVG over boundary segments) — proved for the continuum."}
+                            "(compliance C, MEAN, AVG over boundary segments) — proved for the continuum. NOT "
+                            "checked: the plate's buckling under in-plane compression (membrane model, linear)."}
 
 
 def read_deck(text):

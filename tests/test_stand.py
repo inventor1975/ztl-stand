@@ -2252,20 +2252,24 @@ _tr12 = (_TRD / "cantilever12.txt").read_text()
 _r12 = TR.judge(_tr12, "0.5%", [TR._req("U(26,X) <= 10000")], energy=False)   # the box path, on purpose
 check("truss: 12 floors, every modulus +-0.5 %: a bound on the top corner EARNED in ONE piece (the rescaled system; "
       "unscaled the kernel's beta was 1.2 and the search split 256 pieces)",
-      _r12["verdict"] == "EARNED" and "(1 pieces" in json.dumps(_r12.get("how")), json.dumps(_r12)[:300])
+      _r12["verdict_first_order"] == "EARNED" and "(1 pieces" in json.dumps(_r12.get("how")), json.dumps(_r12)[:300])
 # THE ENERGY-NORM PATH (ZTL zenergy, 2026-10-31): the 20-floor benchmark decided in a fraction of a second, against the
 # exact range proved on 2026-10-16 (UX in [18117.870011, 18299.962368], 8.5 min per end on the box path)
 _re = TR.judge(_tr20, "0.5%", [TR._req("U(42,X) <= 18300"), TR._req("U(42,X) >= 18116")])
 check("truss energy path: 20 floors, +-0.5 %: U(42,X) <= 18300 and >= 18116 EARNED by zenergy, the proved range "
       "containing the exact one of 2026-10-16",
-      _re["verdict"] == "EARNED" and "zenergy" in _re.get("path", "")
+      _re["verdict_first_order"] == "EARNED" and "zenergy" in _re.get("path", "")
       and float(F(_re["requirements"][0]["proved_range"][0].split()[0])) <= 18117.870011
       and float(F(_re["requirements"][0]["proved_range"][1].split()[0])) >= 18299.962368, json.dumps(_re)[:300])
 _rr = TR.judge(_tr20, "0.5%", [TR._req("U(42,X) <= 18299")])
 check("truss energy path: U(42,X) <= 18299 REFUTED at a vertex solved exactly — the witness IS the exact maximum of "
       "2026-10-16 (18299.962368)",
-      _rr["verdict"] == "REFUTED"
+      _rr["verdict_first_order"] == "REFUTED"
       and abs(float(F(_rr["requirements"][0]["witness_value"].split()[0])) - 18299.962368) < 1e-6, json.dumps(_rr)[:300])
+check("the same benchmark PHYSICALLY: it is a linear-algebra test (E = A = 1, unit loads — the top moves 18208 units "
+      "on a truss 15 high), so second order is not small there: theta < 1 is NOT proved and the physical verdict is "
+      "OPEN, with the reason — the linear verdicts above are the benchmark's own (verdict_first_order)",
+      _re["verdict"] == "OPEN" and "theta" in json.dumps(_re.get("second_order")), json.dumps(_re.get("second_order"))[:200])
 _ro, _rows = TR.judge_energy(_tr20, "0.5%", [TR._req("U(42,X) >= 18117")])
 check("truss energy path: a bound inside the first-order slack (>= 18117, the exact low end 18117.87) is NOT decided "
       "there — None, so the box path takes it (no guess)",
