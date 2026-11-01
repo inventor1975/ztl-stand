@@ -263,11 +263,10 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000)):
         if any(e):
             es.append(e)
             ks.append(k)
-    rs = ZE.certify_many(parts, f, es, n, jobs=jobs)
+    rs = ZE.certify_many(parts, f, es, n, jobs=jobs, scale=[emap[k]["part"] for k in ks])
     Nlo = {k: F(0) for k in emap}
     Nnom = {k: F(0) for k in emap}
-    for k, r in zip(ks, rs):
-        sc = ZE.scaled_from(r, parts, emap[k]["part"])
+    for k, sc in zip(ks, rs):
         fac = ex * area / emap[k]["L"]
         Nlo[k] = min(fac * sc["lo"], fac * sc["hi"])
         Nnom[k] = fac * sc["nominal"]
