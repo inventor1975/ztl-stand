@@ -670,6 +670,10 @@ def judge_members(text, tol, checks, jobs=1, order=2, phi=PHI0):
     verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN"
     return {**SCOPE_BEAM, "verdict": verdict, "path": "member stresses: zenergy.certify_scaled on every extreme fibre; EN global "
             "analysis: sway imperfection +-phi and second order by the proved alpha_cr", "cases": cases,
+            "second_order_note": "EN 5.2.2(5B)'s amplification is the CODE's approximation of second-order theory: "
+                                 "MEASURED 2026-11-01 (12x6 frame, loads x5/x10/x12) it falls short of linear P-delta "
+                                 "in 6 of 156 members by up to 0.6/1.4/1.8 % — compliant with EN, not a physical "
+                                 "second-order bound",
             "not_checked": "member buckling (use --buckling), 6.3.3 interaction"}
 
 
