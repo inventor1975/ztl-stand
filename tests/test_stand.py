@@ -2344,6 +2344,15 @@ check("continuum, ANY boundary output by polarisation (J(u) = [C(s f + J/s) - C(
       and abs(float(_ob2["upper"]) + float(_hq4["lower"]) / 10**4) < 1e-12
       and abs(float(_ob2["lower"]) + float(_hq4["upper"]) / 10**4) < 1e-12,
       ([float(_ob1["lower"]), float(_ob1["upper"])], [float(_ob2["lower"]), float(_ob2["upper"])]))
+_obx = HC.output_bounds_box(_hc_deck(4), "0.5%", [(69, 70), (70, 71), (71, 72)], "X")
+_obp = HC.output_bounds(_hc_deck(4), "0.5%", [(69, 70), (70, 71), (71, 72)], "X")
+check("continuum, an output near the clamp (top edge, first 3 segments, UX) with +-0.5 % moduli: the first-order "
+      "perturbation from the hypercircle centres, intersected with polarisation, is no wider than polarisation "
+      "alone and contains the nominal bracket; the width is mostly the NOMINAL one (~7.3 %: the clamped corner's "
+      "singular stress, the mesh's share), not the box's",
+      _obp["lower"] <= _obx["lower"] <= _obx["nominal"][0] <= _obx["nominal"][1] <= _obx["upper"] <= _obp["upper"]
+      and (_obx["nominal"][1] - _obx["nominal"][0]) / _obx["nominal"][1] > F(7, 100),
+      [float(x) for x in (_obp["lower"], _obx["lower"], _obx["upper"], _obp["upper"])])
 check("continuum: the exact admissibility check is not decoration — any FREE Airy value gives an admissible tau "
       "(accepted), a moved boundary value or one sub-triangle's sign flip is REJECTED",
       not _hc_rejects(HC.tau_pieces(_hS, _hd2, _hi)) and _hc_rejects(HC.tau_pieces(_hS, _hd3, _hi))

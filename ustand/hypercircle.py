@@ -600,6 +600,7 @@ def _lst_solve(S, ids, lu, elem_info, D):
         for Bm in Bs:
             eps = [sum(b * x for b, x in zip(r, ve) if b and x) for r in Bm]
             av += area / 3 * sum(eps[i] * D[i][j] * eps[j] for i in range(3) for j in range(3) if D[i][j])
+    S["_v"] = (vq, elem_info, D)                        # the field itself, for the box's first order
     return fv, av * ex * th
 
 
@@ -704,6 +705,109 @@ def output_bounds(text, tol, segs, comp):
     return {"lower": lo, "upper": hi, "s": sq, "checks": [c1, c2], "length": Ltot}
 
 
+def _cinner(S, a, b):
+    """The complementary-energy density's bilinear form (per unit area, thickness included, nominal E)."""
+    nu = S["nu"]
+    return S["th"] / S["ex"] * (a[0] * b[0] + a[1] * b[1] - nu * (a[0] * b[1] + a[1] * b[0]) + 2 * (1 + nu) * a[2] * b[2])
+
+
+def _fields(S, tmap):
+    """For the load tmap: per sub-triangle (in tau_pieces' order) the stresses of tau and of the kinematic field v at
+    the sub-triangle's three vertices (A, B, G) — both linear there — and the bracket. Exact."""
+    S2 = dict(S)
+    S2["trac"] = tmap
+    S2["_cache"] = S.setdefault("_cache", {})
+    fv, av = lower_lst(S2)
+    vq, elem_info, D = S2["_v"]
+    lower = fv * fv / av if av > 0 and fv > 0 else F(0)
+    adof, idx = airy_field(S2)
+    pieces = tau_pieces(S2, adof, idx)
+    chk = check_admissible(S2, pieces)
+    ex = S["ex"]
+    out, energy = [], F(0)
+    for (k, s_, G, c, (qa, qb)) in pieces:
+        gl, Bs, area = elem_info[k]
+        ve = [vq[d] if d is not None else F(0) for d in gl]
+        mid = [[sum(b * x for b, x in zip(r, ve) if b and x) for r in Bm] for Bm in Bs]   # strain at m23, m31, m12
+        vert = [[mid[1][q] + mid[2][q] - mid[0][q] for q in range(3)],                   # at P1 = m12 + m31 - m23
+                [mid[2][q] + mid[0][q] - mid[1][q] for q in range(3)],                   # at P2
+                [mid[0][q] + mid[1][q] - mid[2][q] for q in range(3)]]                   # at P3
+        gc = [(mid[0][q] + mid[1][q] + mid[2][q]) / 3 for q in range(3)]
+        sv = lambda e: [ex * sum(D[i][j] * e[j] for j in range(3)) for i in range(3)]
+        i1, i2 = [(1, 2), (2, 0), (0, 1)][s_]
+        sig_v = [sv(vert[i1]), sv(vert[i2]), sv(gc)]
+        sig_t = [list(_stress(c, qa[0], qa[1])), list(_stress(c, qb[0], qb[1])), list(_stress(c, F(0), F(0)))]
+        tri_area = abs(qa[0] * qb[1] - qa[1] * qb[0]) / 2
+        out.append((sig_t, sig_v, tri_area))
+        Gm = _sub_energy_gram(qa, qb, S["nu"])
+        energy += sum(c[i] * Gm[i][j] * c[j] for i in range(10) for j in range(10) if c[i] and c[j] and Gm[i][j])
+    return out, (lower, S["th"] * energy / S["ex"]), chk
+
+
+def _quad_sq_int(S, vals, mids, area):
+    """int over a triangle of q^2, q quadratic with vertex values vals and edge-midpoint values mids (m01, m12, m20)
+    — exact, through Bernstein coefficients (each degree-4 basis function integrates to area/15)."""
+    b = {(2, 0, 0): vals[0], (0, 2, 0): vals[1], (0, 0, 2): vals[2],
+         (1, 1, 0): 2 * mids[0] - (vals[0] + vals[1]) / 2, (0, 1, 1): 2 * mids[1] - (vals[1] + vals[2]) / 2,
+         (1, 0, 1): 2 * mids[2] - (vals[2] + vals[0]) / 2}
+    from math import comb
+    def mc(a):
+        return F(comb(sum(a), a[0]) * comb(sum(a) - a[0], a[1]))
+    four = {}
+    for a1, c1 in b.items():
+        for a2, c2 in b.items():
+            a = (a1[0] + a2[0], a1[1] + a2[1], a1[2] + a2[2])
+            four[a] = four.get(a, F(0)) + c1 * c2 * mc(a1) * mc(a2) / mc(a)
+    return area * sum(four.values()) / 15
+
+
+def output_bounds_box(text, tol, segs, comp):
+    """A linear output over the modulus box WITHOUT losing the correlation (2026-11-01): for every field E in E0(1 +- t),
+        |J(u_E) - J(u_0)| <= t I + t^2/(1 - t) ||u_0|| ||z_0||,     I = int |sigma(u_0) : C0^-1 sigma(z_0)|,
+    (J(u_E) - J(u_0) = -d(u_E, z_0), d the energy's perturbation; the second-order part through ||u_E - u_0|| <=
+    t ||u_0||/(1 - t) — zenergy's first order + rest, for the continuum). I from the hypercircle CENTRES
+    s^ = (tau + sigma(v))/2, |sigma - s^| = |tau - sigma(v)|/2 exactly (Prager-Synge): I <= I^ + r_u ||sigma_z|| +
+    ||s^_u|| r_z, I^ = sum over sub-triangles of sqrt(|T| int_T (s^_u : C^-1 s^_z)^2) (Cauchy-Schwarz per piece).
+    J(u_0) itself: the nominal polarisation bracket (t = 0)."""
+    S = setup(text, tol)
+    t = S["t"]
+    nom = output_bounds(text, "0", segs, comp)
+    # the dual load J, as output_bounds builds it
+    nodes = S["nodes"]
+    from .truss import _sqrt
+    lens = [((min(a, b), max(a, b)), _sqrt((nodes[b][0] - nodes[a][0]) ** 2 + (nodes[b][1] - nodes[a][1]) ** 2))
+            for a, b in segs]
+    Ltot = sum(L for _, L in lens)
+    J = {key: ((L / Ltot, F(0)) if comp == "X" else (F(0), L / Ltot)) for key, L in lens}
+    fu, (cu_lo, cu_hi), _ = _fields(S, S["trac"])
+    fz, (cz_lo, cz_hi), _ = _fields(S, J)
+    from . import judge_ztl  # noqa: F401
+    from zenergy import _sqrt_up
+    ru2 = rz2 = su2 = F(0)
+    Ihat = F(0)
+    for (tu, vu, ar), (tz, vz, _) in zip(fu, fz):
+        cu = [[(a + b) / 2 for a, b in zip(tu[i], vu[i])] for i in range(3)]
+        cz = [[(a + b) / 2 for a, b in zip(tz[i], vz[i])] for i in range(3)]
+        du = [[a - b for a, b in zip(tu[i], vu[i])] for i in range(3)]
+        dz = [[a - b for a, b in zip(tz[i], vz[i])] for i in range(3)]
+        m = lambda X, i, j: [(a + b) / 2 for a, b in zip(X[i], X[j])]
+        def sq(X):                                       # int of the linear field's C^-1 square: edge midpoints
+            ms = [m(X, 0, 1), m(X, 1, 2), m(X, 2, 0)]
+            return ar / 3 * sum(_cinner(S, y, y) for y in ms)
+        ru2 += sq(du); rz2 += sq(dz); su2 += sq(cu)
+        vals = [_cinner(S, cu[i], cz[i]) for i in range(3)]
+        mids = [_cinner(S, m(cu, 0, 1), m(cz, 0, 1)), _cinner(S, m(cu, 1, 2), m(cz, 1, 2)), _cinner(S, m(cu, 2, 0), m(cz, 2, 0))]
+        Ihat += _sqrt_up(ar * _quad_sq_int(S, vals, mids, ar))
+    ru, rz = _sqrt_up(ru2) / 2, _sqrt_up(rz2) / 2
+    I = Ihat + ru * _sqrt_up(cz_hi) + _sqrt_up(su2) * rz
+    delta = t * I + (t * t / (1 - t) * _sqrt_up(cu_hi) * _sqrt_up(cz_hi) if t else F(0))
+    pol = output_bounds(text, tol, segs, comp) if t else nom     # polarisation with the box: also sound
+    lo, hi = max(nom["lower"] - delta, pol["lower"]), min(nom["upper"] + delta, pol["upper"])
+    return {"lower": lo, "upper": hi, "nominal": [nom["lower"], nom["upper"]], "first_order": t * I, "I_hat": Ihat,
+            "radii": (ru, rz), "by_perturbation": [nom["lower"] - delta, nom["upper"] + delta],
+            "by_polarisation": [pol["lower"], pol["upper"]]}
+
+
 def judge(text, tol, requirements):
     """Requirements on the CONTINUUM: ("C" | "MEAN", "<=" | ">=", v). C the compliance (N m); MEAN = C / |R|, the
     traction-weighted mean displacement ALONG the load (R the resultant), defined when every TRAC resultant points
@@ -751,13 +855,16 @@ def main(argv):
             if not m:
                 raise HCError(f"{argv[i + 1]!r}: AVG(X|Y: n1-n2 n3-n4 ...) <= | >= value")
             segs = [tuple(int(x) for x in sg.split("-")) for sg in re.split(r"[ ,]+", m.group(2).strip())]
-            r = output_bounds(text, tol, segs, m.group(1).upper())
+            r = output_bounds_box(text, tol, segs, m.group(1).upper())
             v = _num(m.group(4), argv[i + 1])
             ok = r["upper"] <= v if m.group(3) == "<=" else r["lower"] >= v
             bad = r["lower"] > v if m.group(3) == "<=" else r["upper"] < v
             print(json.dumps({"requirement": argv[i + 1], "proved_range": [_show(r["lower"], -1), _show(r["upper"], 1)],
                               "verdict": "EARNED" if ok else "REFUTED" if bad else "OPEN",
-                              "path": "polarisation of two bracketed compliances (hypercircle)",
+                              "path": "polarisation of two bracketed compliances (hypercircle); the modulus box by the "
+                                      "first-order perturbation from the hypercircle centres, intersected with "
+                                      "polarisation's own box bound (both sound)",
+                              "nominal_range": [_show(r["nominal"][0], -1), _show(r["nominal"][1], 1)],
                               "premises": "linear plane-stress elasticity; Green's formula"}, indent=1))
             return 0
         if a == "--req":
