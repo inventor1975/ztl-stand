@@ -34,6 +34,8 @@ THE DECK: plate.py's, plus the continuum's loads, which nodal forces cannot fix 
 between two edges in any way):
     python3 -m ustand.hypercircle deck.txt --tol 0.5%                       the proved compliance bracket
     python3 -m ustand.hypercircle deck.txt --tol 0.5% --req "MEAN <= 0.00135"   a requirement on C or MEAN
+    python3 -m ustand.hypercircle deck.txt --tol 0.5% --req "AVG(X: 69-70 70-71) <= 2e-4"   the mean of u_x (or u_y)
+            over boundary segments (loaded/free ones), by polarisation of two bracketed compliances
     TRAC, n1, n2, Fx, Fy        a uniform traction on the boundary segment n1-n2 with resultant (Fx, Fy);
                                 the deck's F at every free degree of freedom must be its consistent load (checked)
 Version 1: the loaded/free boundary is one connected arc, the rest CLAMPED (UX and UY on whole edges); a point
@@ -378,6 +380,18 @@ def airy_field(S):
     for key, v in edge.items():
         fixed[idx[("e", key)]] = v
     N = len(idx)
+    C = S.setdefault("_cache", {})
+    if "airy" in C:
+        free, fx, keep, lu, Kfp = C["airy"]
+        xp = np.array([float(fixed[i]) for i in fx])
+        rhs = -(Kfp @ xp) if len(fx) else np.zeros(len(free))
+        sol = np.zeros(len(free))
+        if keep.any():
+            sol[keep] = lu.solve(rhs[keep])
+        out = dict(fixed)
+        for i, v in zip(free, sol):
+            out[int(i)] = F(float(v))
+        return out, idx
     rows, cols, data = [], [], []
     for k in range(len(S["tris"])):
         tr, keys, Kl = _elem_gram(S, k)
@@ -396,9 +410,11 @@ def airy_field(S):
     diag = Kff.diagonal()
     keep = diag > 0
     sol = np.zeros(len(free))
+    lu = None
     if keep.any():
-        Kk = Kff[keep][:, keep].tocsc()
-        sol[keep] = sla.spsolve(Kk, rhs[keep])
+        lu = sla.splu(Kff[keep][:, keep].tocsc())
+        sol[keep] = lu.solve(rhs[keep])
+    C["airy"] = (free, fx, keep, lu, K[free][:, fx] if len(fx) else None)
     out = dict(fixed)
     for i, v in zip(free, sol):
         out[int(i)] = F(float(v))
@@ -517,6 +533,11 @@ def lower_lst(S):
         for gx, gy in g:
             r0 += [gx, F(0)]; r1 += [F(0), gy]; r2 += [gy, gx]
         return [r0, r1, r2]
+    C = S.setdefault("_cache", {})
+    if "lst" in C:
+        ids, lu, elem_info = C["lst"]
+        N = len(ids)
+        return _lst_solve(S, ids, lu, elem_info, D)
     Df = np.array([[float(x) for x in r] for r in D])
     rows, cols, data = [], [], []
     elem_info = []
@@ -543,6 +564,15 @@ def lower_lst(S):
                 rows.append(gl[p_]); cols.append(gl[q]); data.append(Ke[p_, q])
     N = len(ids)
     K = sp.csr_matrix((data, (rows, cols)), shape=(N, N))
+    lu = sla.splu(K.tocsc())
+    C["lst"] = (ids, lu, elem_info)
+    return _lst_solve(S, ids, lu, elem_info, D)
+
+
+def _lst_solve(S, ids, lu, elem_info, D):
+    import numpy as np
+    ex, th = S["ex"], S["th"]
+    N = len(ids)
     fvec = np.zeros(N)
     loads = []                                          # (dof list [a, m, b] per component, resultant)
     for (a, b), (fx, fy) in S["trac"].items():
@@ -555,7 +585,7 @@ def lower_lst(S):
             for w, d in zip((F(1, 6), F(4, 6), F(1, 6)), trip):
                 if d is not None:
                     fvec[d] += float(fc * w)
-    v = sla.spsolve(K.tocsc(), fvec)
+    v = lu.solve(fvec)
     vq = [F(float(x)) for x in v]
     fv = F(0)
     for trip, fc in loads:
@@ -607,6 +637,69 @@ def compliance_bounds(text, tol="0", lower_field="lst"):
     return {"lower": lower, "upper": upper, "check": chk, "unknowns_fe": n, "airy_dofs": len(idx)}
 
 
+def bracket(S, tmap):
+    """[lower, upper] on the compliance of the plate under the boundary load tmap {(a, b): (Fx, Fy)} at the NOMINAL
+    modulus, each side by its own theorem, tau checked exactly. Factorisations cached in S."""
+    S2 = dict(S)
+    S2["trac"] = tmap
+    S2["_cache"] = S.setdefault("_cache", {})
+    fv, av = lower_lst(S2)
+    lower = fv * fv / av if av > 0 and fv > 0 else F(0)
+    adof, idx = airy_field(S2)
+    pieces = tau_pieces(S2, adof, idx)
+    chk = check_admissible(S2, pieces)
+    energy = F(0)
+    for (k, s_, G, c, (qa, qb)) in pieces:
+        Gm = _sub_energy_gram(qa, qb, S["nu"])
+        energy += sum(c[i] * Gm[i][j] * c[j] for i in range(10) for j in range(10) if c[i] and c[j] and Gm[i][j])
+    return lower, S["th"] * energy / S["ex"], chk
+
+
+def output_bounds(text, tol, segs, comp):
+    """A LINEAR OUTPUT of the continuum: J(u) = the mean of u_comp (comp X or Y) over the boundary segments segs
+    [(a, b)] (weights: lengths; the segments on the loaded/free arc). By polarisation, for any s > 0,
+        J(u) = a(u, z) = (1/4) [ C(s f + J/s) - C(s f - J/s) ],     C(g) the compliance under the load g,
+    and each C is bracketed (bracket); with every modulus field in the box, C_E in [C_lo/(1+t), C_hi/(1-t)]. s is
+    chosen to balance the two problems (s^2 ~ ||z|| / ||u||, from the brackets' own lower values) — any s is sound."""
+    S = setup(text, tol)
+    t = S["t"]
+    nodes = S["nodes"]
+    arc_keys = {key for (_, _, key) in S["arc"]}
+    lens = []
+    for a, b in segs:
+        key = (min(a, b), max(a, b))
+        if key not in arc_keys:
+            raise HCError(f"segment {a}-{b}: not on the loaded/free boundary (on a clamped edge the displacement "
+                          f"is zero; inside, not a boundary output in version 1)")
+        from .truss import _sqrt
+        L = _sqrt((nodes[b][0] - nodes[a][0]) ** 2 + (nodes[b][1] - nodes[a][1]) ** 2)
+        if L is None:
+            raise HCError(f"segment {a}-{b}: an irrational length — version 1 weighs by rational lengths")
+        lens.append((key, L))
+    Ltot = sum(L for _, L in lens)
+    J = {}
+    for key, L in lens:
+        w = L / Ltot
+        J[key] = (w, F(0)) if comp == "X" else (F(0), w)
+    f = S["trac"]
+    def comb(sf, sj):
+        out = {}
+        for key in set(f) | set(J):
+            a = f.get(key, (F(0), F(0)))
+            b = J.get(key, (F(0), F(0)))
+            out[key] = (sf * a[0] + sj * b[0], sf * a[1] + sj * b[1])
+        return out
+    cf, _, _ = bracket(S, f)
+    cj, _, _ = bracket(S, J)
+    s2 = (cj / cf) if cf > 0 else F(1)
+    sq = F(round(float(s2) ** 0.25 * 2 ** 20), 2 ** 20) or F(1)      # s = (cJ/cf)^(1/4), dyadic
+    pl, ph, c1 = bracket(S, comb(sq, 1 / sq))
+    ml, mh, c2 = bracket(S, comb(sq, -1 / sq))
+    lo = (pl / (1 + t) - mh / (1 - t)) / 4
+    hi = (ph / (1 - t) - ml / (1 + t)) / 4
+    return {"lower": lo, "upper": hi, "s": sq, "checks": [c1, c2], "length": Ltot}
+
+
 def judge(text, tol, requirements):
     """Requirements on the CONTINUUM: ("C" | "MEAN", "<=" | ">=", v). C the compliance (N m); MEAN = C / |R|, the
     traction-weighted mean displacement ALONG the load (R the resultant), defined when every TRAC resultant points
@@ -649,6 +742,20 @@ def main(argv):
     tol = argv[argv.index("--tol") + 1] if "--tol" in argv else "0"
     reqs = []
     for i, a in enumerate(argv):
+        if a == "--req" and argv[i + 1].strip().upper().startswith("AVG"):
+            m = re.match(r"^\s*AVG\(\s*([XY])\s*:\s*([0-9\- ,]+)\)\s*(<=|>=)\s*(\S+)\s*$", argv[i + 1], re.I)
+            if not m:
+                raise HCError(f"{argv[i + 1]!r}: AVG(X|Y: n1-n2 n3-n4 ...) <= | >= value")
+            segs = [tuple(int(x) for x in sg.split("-")) for sg in re.split(r"[ ,]+", m.group(2).strip())]
+            r = output_bounds(text, tol, segs, m.group(1).upper())
+            v = _num(m.group(4), argv[i + 1])
+            ok = r["upper"] <= v if m.group(3) == "<=" else r["lower"] >= v
+            bad = r["lower"] > v if m.group(3) == "<=" else r["upper"] < v
+            print(json.dumps({"requirement": argv[i + 1], "proved_range": [_show(r["lower"], -1), _show(r["upper"], 1)],
+                              "verdict": "EARNED" if ok else "REFUTED" if bad else "OPEN",
+                              "path": "polarisation of two bracketed compliances (hypercircle)",
+                              "premises": "linear plane-stress elasticity; Green's formula"}, indent=1))
+            return 0
         if a == "--req":
             m = re.match(r"^\s*(C|MEAN)\s*(<=|>=)\s*(\S+)\s*$", argv[i + 1])
             if not m:

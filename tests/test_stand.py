@@ -2332,6 +2332,18 @@ _hj = [HC.judge(_hc_deck(4), "0.5%", [("MEAN", "<=", F(v))])["verdict"] for v in
 check("continuum requirements, +-0.5 % on every modulus (any field): the tip's mean deflection <= 1.36 mm EARNED, "
       "<= 1.34 mm OPEN (inside the bracket), <= 1.30 mm REFUTED — for the plate, not the mesh",
       _hj == ["EARNED", "OPEN", "REFUTED"], _hj)
+_nid4 = lambda i, j: j * 17 + i + 1                                    # 16 x 4 mesh
+_top4 = [(_nid4(i, 4), _nid4(i + 1, 4)) for i in range(16)]
+_tip4 = [(_nid4(16, j), _nid4(16, j + 1)) for j in range(4)]
+_ob1 = HC.output_bounds(_hc_deck(4), "0", _top4, "X")
+_ob2 = HC.output_bounds(_hc_deck(4), "0", _tip4, "Y")
+check("continuum, ANY boundary output by polarisation (J(u) = [C(s f + J/s) - C(s f - J/s)]/4, each C bracketed): "
+      "the top edge's mean UX in [0.16022, 0.16091] mm on 16 x 4; the tip's mean UY by the same road equals minus "
+      "the compliance bracket over P (the output IS the load there) — a consistency the two roads must meet",
+      0.16021e-3 < float(_ob1["lower"]) < float(_ob1["upper"]) < 0.16092e-3
+      and abs(float(_ob2["upper"]) + float(_hq4["lower"]) / 10**4) < 1e-12
+      and abs(float(_ob2["lower"]) + float(_hq4["upper"]) / 10**4) < 1e-12,
+      ([float(_ob1["lower"]), float(_ob1["upper"])], [float(_ob2["lower"]), float(_ob2["upper"])]))
 check("continuum: the exact admissibility check is not decoration — any FREE Airy value gives an admissible tau "
       "(accepted), a moved boundary value or one sub-triangle's sign flip is REJECTED",
       not _hc_rejects(HC.tau_pieces(_hS, _hd2, _hi)) and _hc_rejects(HC.tau_pieces(_hS, _hd3, _hi))
