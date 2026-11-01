@@ -2304,9 +2304,10 @@ check("the same PHYSICALLY (second order, continuum members): the 1e-7-wide marg
 _frh = _fr.replace("R, 1, 0.01, 8e-5", "R, 1, 0.01, 8e-5, 0.2")
 _fib = FRM.fibre_ranges(_frh, "0", 1)
 check("frame member stresses: the cantilever's root fibre +-50 MPa and the first element's far end +-43.75 MPa "
-      "EXACTLY (M = P L (h/2)/I; M = P 3.5 m)",
+      "EXACTLY (M = P L (h/2)/I; M = P 3.5 m) — TOP the physical +y fibre at BOTH ends (hogging: tension on top; the "
+      "J end's label was swapped before 2026-11-01)",
       [(r["end"], r["side"], r["nominal"]) for r in _fib] ==
-      [("I", "TOP", F(50000000)), ("I", "BOT", F(-50000000)), ("J", "TOP", F(-43750000)), ("J", "BOT", F(43750000))],
+      [("I", "TOP", F(50000000)), ("I", "BOT", F(-50000000)), ("J", "TOP", F(43750000)), ("J", "BOT", F(-43750000))],
       [(r["end"], r["side"], r["nominal"]) for r in _fib])
 _fm1 = FRM.judge_members(_frh, "0.5%", [(1, F(51) * 10**6)])
 _fm2 = FRM.judge_members(_frh, "0.5%", [(1, F(49) * 10**6)])
@@ -2494,9 +2495,50 @@ _s1 = float(F(_bc1["sigma_abs_max"].split()[0]))
 _s2 = max(float(F(c["sigma_abs_max"].split()[0])) for c in _bc2)
 check("second order INSIDE a member: a pinned beam-column (P 3 MN, equal end moments 20 kN m, single curvature) peaks "
       "at mid-length, 337.67 MPa exactly (M/cos(kL/2)); the ends alone would say 325 MPa (UNSAFE, 3.8 %) — the proved "
-      "bound covers the interior: 352.8 MPa on one element (m(1+psi)/(2cos^2 phi)), 340.6 on two, always >= exact",
-      _bcx < _s2 < _s1 and _s1 < 1.05 * _bcx and _s2 < 1.01 * _bcx and _bc1["interior"].startswith("bounded"),
+      "bound covers the interior: 369.2 MPa on one element (beam-column bound with the continuum end-moment margin), "
+      "341.5 on two, always >= exact",
+      _bcx < _s2 < _s1 and _s1 < 1.10 * _bcx and _s2 < 1.015 * _bcx and _bc1["interior"].startswith("bounded"),
       (_s1, _s2, _bcx))
+# MEMBER LOADS (2026-11-01, the curator's "п.3"): QLOAD, elem, FX|FY, q — uniform per length, global direction.
+# Consistent nodal loads (exact at the nodes for Euler-Bernoulli), the exact inner "bubble" for stresses and moments.
+_qss = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2", "N, 1, 0, 0", "N, 2, 2, 0", "N, 3, 4, 0",
+                   "E, 1, 2", "E, 2, 3", "D, 1, UX, 0", "D, 1, UY, 0", "D, 3, UY, 0", "QLOAD, 1, FY, -10000",
+                   "QLOAD, 2, FY, -10000"])
+_qmid = F(FRM.range_of(_qss, "0", "U(2,Y)")["nominal"].split()[0])
+_qss1 = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2", "N, 1, 0, 0", "N, 2, 4, 0", "E, 1, 2",
+                    "D, 1, UX, 0", "D, 1, UY, 0", "D, 2, UY, 0", "QLOAD, 1, FY, -10000"])
+_qr1 = FRM._judge_members_1(_qss1, "0", [(1, F(10) ** 12)])["checks"][0]
+_qca = _qss1.replace("D, 2, UY, 0", "D, 1, ROTZ, 0")
+_qr2 = FRM._judge_members_1(_qca, "0", [(1, F(10) ** 12)])["checks"][0]
+check("member load, statics and stresses EXACT: a simply supported 4 m beam under 10 kN/m — mid deflection 5qL^4/384EI "
+      "= -1/504 m exactly (2 elements, and after subdividing); one element: zero stress at both supports, the peak "
+      "qL^2/8/W = 25 MPa found INSIDE the element; as a cantilever: 100 MPa at the root (qL^2/2/W), 0 at the tip",
+      _qmid == F(-1, 504) and F(FRM.range_of(FRM.subdivide(_qss, 3), "0", "U(2,Y)")["nominal"].split()[0]) == _qmid
+      and all(F(fb["nominal"].split()[0]) == 0 for fb in _qr1["fibres"]) and F(_qr1["peak_along_element"].split()[0]) == 25 * 10**6
+      and F(_qr2["peak_along_element"].split()[0]) == 10**8
+      and [F(fb["nominal"].split()[0]) for fb in _qr2["fibres"] if fb["end"] == "J"] == [0, 0],
+      (_qmid, _qr1["peak_along_element"], _qr2["peak_along_element"]))
+_qsw = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2"]
+                  + [f"N, {k+1}, 0, {F(4*k, 16)}" for k in range(17)] + [f"E, {k+1}, {k+2}" for k in range(16)]
+                  + ["D, 1, UX, 0", "D, 1, UY, 0", "D, 1, ROTZ, 0"] + [f"QLOAD, {k+1}, FY, -10000" for k in range(16)])
+_qsl = float(FRM.stability_lower(_qsw, "0")["lam_low"])
+_qsx = 7.8373 * 210e9 * 8e-5 / (10000 * 4 ** 3)                     # q_cr L = 7.8373 EI / L^2 (Greenhill)
+check("member load, stability: a cantilever column under its own weight (an AXIAL member load, N linear along each "
+      "element: G split exactly into N_a G_a + N_b G_b) — the proved lower bound 205.55 just under Greenhill's "
+      "7.8373 EI/(q L^3) = 205.73",
+      0.998 * _qsx < _qsl < _qsx, (_qsl, _qsx))
+_qbc = _qss1 + "\nF, 2, FX, -100000"
+_qbi = FRM.judge_interaction(_qbc, "0", F(355 * 10**6), "b")["cases"][0]["members"][0]
+try:
+    FRM.read_deck(_qss1 + "\nSFBEAM, 1, 1, PRES, 10000"); _qsf = False
+except FRM.FrameError as _e:
+    _qsf = "QLOAD" in str(_e)
+_qso = FRM.second_order_case(_qss1, "0", [(1, F(10) ** 12)])
+check("member load in EN 6.3.3: M_Ed is the span's qL^2/8 = 20 kN m (inside the element), C_my 1 for a loaded member; "
+      "ANSYS's SFBEAM is refused with a pointer to QLOAD (its face/sign conventions are easy to get silently wrong); "
+      "physical second order with member loads says OPEN, with the reason (not yet)",
+      F(_qbi["M_Ed_max"].split()[0]) == 20000 and _qbi["C_my"] == "1" and _qsf and _qso["verdict"] == "OPEN"
+      and "QLOAD" in _qso["why"], (_qbi["M_Ed_max"], _qbi["C_my"], _qsf, _qso.get("why")))
 # MEMBER BUCKLING (2026-11-01): EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i| — the proved alpha_cr lower bound
 # and the proved |N| upper bound give a proved upper bound on the utilisation (H rises with alpha_cr, falls with |N|)
 def _colP(P):

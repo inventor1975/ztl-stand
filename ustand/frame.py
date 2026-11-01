@@ -32,6 +32,9 @@ THE DECK (the subset read; anything else is REFUSED aloud):
     MP, EX, 1, value             Young's modulus (nominal)
     R, 1, area, izz[, height]    the section: area, second moment, and (for stresses) the height
     F, node, FX|FY|MZ, value     a nodal force or moment
+    QLOAD, elem, FX|FY, q        a uniform load per unit LENGTH of the element, in a global direction (the stand's
+                                 own command; ANSYS's SFBEAM is refused). Exact: consistent nodal loads + the inner
+                                 solution (stresses and moments along the element, the peak found inside)
     D, node, UX|UY|ROTZ, 0       a support (zero displacement or rotation)
     /PREP7, ET (BEAM3 / 3), MAT, REAL, TYPE, comments (!) — read and skipped.
 Lengths must be rational (an irrational length is refused: the stiffness would not be exact).
@@ -63,6 +66,36 @@ SCOPE_BEAM = {"scope": "FRAME (Euler-Bernoulli members)",
               "scope_note": "proved for the frame in Euler-Bernoulli beam theory: the Hermite element is exact for "
                             "nodal loads in statics, and buckling carries each member's continuum correction. Not "
                             "covered: shear deformation, joint flexibility, imperfections beyond EN's phi, plasticity."}
+
+
+def _qload_lines(text):
+    """QLOAD, elem, FX|FY, q — a uniform load per unit LENGTH of the element, in a global direction (the stand's own
+    command, 2026-11-01: ANSYS's SFBEAM is face-and-sign dependent; a silent sign error is worse than a refusal)."""
+    out = []
+    for ln, raw in enumerate(text.splitlines(), 1):
+        line = raw.split("!")[0].strip()
+        f = [x.strip() for x in (line.split(",") if "," in line else line.split())] if line else []
+        if f and f[0].upper() == "QLOAD":
+            if len(f) != 4 or f[2].upper() not in ("FX", "FY"):
+                raise FrameError(f"line {ln}: QLOAD, elem, FX|FY, q (per unit length, global direction)")
+            out.append((int(f[1]), f[2].upper()[1], _num(f[3], f"line {ln}")))
+    return out
+
+
+def read_qloads(text):
+    """{element: (a, w, L)}: the element's uniform load per length resolved along it (a, local x) and across it
+    (w, local y = (-s, c)), and its length."""
+    nodes, elems, loads, supports, ex, sec = read_deck(text)
+    out = {}
+    for k, d, q in _qload_lines(text):
+        i, j = elems[k - 1]
+        dx, dy = nodes[j][0] - nodes[i][0], nodes[j][1] - nodes[i][1]
+        L = _sqrt(dx * dx + dy * dy)
+        c, s_ = dx / L, dy / L
+        qx, qy = (q, F(0)) if d == "X" else (F(0), q)
+        a0, w0, _ = out.get(k, (F(0), F(0), L))
+        out[k] = (a0 + qx * c + qy * s_, w0 - qx * s_ + qy * c, L)
+    return out
 
 
 def read_deck(text):
@@ -110,8 +143,13 @@ def read_deck(text):
         elif cmd in ("MAT", "REAL", "TYPE"):
             if len(f) > 1 and f[1] not in ("1", ""):
                 raise FrameError(f"{where}: {cmd},{f[1]} — one material and one real constant only")
+        elif cmd == "QLOAD":
+            continue                                   # read below (_qload_lines): its consistent nodal loads
+        elif cmd == "SFBEAM":
+            raise FrameError(f"{where}: SFBEAM is not read (its face and sign conventions are easy to get silently "
+                             f"wrong) — write QLOAD, elem, FX|FY, q (per unit length, global direction)")
         else:
-            raise FrameError(f"{where}: {f[0]} — not read (only N E MP R F D ET MAT REAL TYPE)")
+            raise FrameError(f"{where}: {f[0]} — not read (only N E MP R F D ET MAT REAL TYPE QLOAD)")
     if not nodes or not elems:
         raise FrameError("no nodes or no elements")
     if ex is None or sec is None:
@@ -120,6 +158,23 @@ def read_deck(text):
         for n in (i, j):
             if n not in nodes:
                 raise FrameError(f"element {i}-{j}: node {n} does not exist")
+    # member loads: their CONSISTENT nodal loads (Hermite: exact at the nodes for an Euler-Bernoulli member):
+    # the resultant split in halves, and +-w L^2/12 end moments (w across the element, local y = (-s, c))
+    for k, d, q in _qload_lines(text):
+        if not 1 <= k <= len(elems):
+            raise FrameError(f"QLOAD on element {k}: no such element")
+        i, j = elems[k - 1]
+        dx, dy = nodes[j][0] - nodes[i][0], nodes[j][1] - nodes[i][1]
+        L = _sqrt(dx * dx + dy * dy)
+        if not L:
+            raise FrameError(f"QLOAD on element {k}: its length is irrational — not exact")
+        c, s_ = dx / L, dy / L
+        qx, qy = (q, F(0)) if d == "X" else (F(0), q)
+        w = -qx * s_ + qy * c
+        for n, mz in ((i, w * L * L / 12), (j, -w * L * L / 12)):
+            for key, v in (((n, "X"), qx * L / 2), ((n, "Y"), qy * L / 2), ((n, "R"), mz)):
+                if v:
+                    loads[key] = loads.get(key, F(0)) + v
     return nodes, elems, loads, supports, ex, sec
 
 
@@ -130,7 +185,9 @@ def subdivide(text, n):
     if n == 1:
         return text
     nodes, elems, loads, supports, ex, sec = read_deck(text)
-    keep = [ln for ln in text.splitlines() if not ln.split("!")[0].strip().upper().startswith(("E,", "E "))]
+    keep = [ln for ln in text.splitlines()
+            if not ln.split("!")[0].strip().upper().startswith(("E,", "E ", "QLOAD"))]
+    keep += [f"QLOAD, {n * (k - 1) + m}, F{d}, {q}" for k, d, q in _qload_lines(text) for m in range(1, n + 1)]
     nxt = max(nodes) + 1
     out_e = []
     for (i, j) in elems:
@@ -212,15 +269,18 @@ def fibre_vectors(emap, k, h):
     m = emap[k]
     L, a, b, c = m["L"], m["a"], m["b"], m["c"]
     out = []
+    # TOP = the physical fibre at local +y at BOTH ends (2026-11-01: the J end used to carry the opposite label —
+    # harmless for |sigma| checks, wrong for curvature signs): sigma_top = N/A + M/W with M = E I/L (b + 3c).u at I
+    # and E I/L (b - 3c).u at J (one sign convention: single curvature = same sign at both ends)
     for end, sb in (("I", 1), ("J", -1)):
         for side, sg in (("TOP", 1), ("BOT", -1)):
             g = {}
             for i, v in a.items():
                 g[i] = g.get(i, F(0)) + v / L
             for i, v in b.items():
-                g[i] = g.get(i, F(0)) + sg * (h / 2) / L * sb * v
+                g[i] = g.get(i, F(0)) + sg * (h / 2) / L * v
             for i, v in c.items():
-                g[i] = g.get(i, F(0)) + sg * (h / 2) / L * 3 * v
+                g[i] = g.get(i, F(0)) + sg * (h / 2) / L * 3 * sb * v
             out.append((end, side, {i: v for i, v in g.items() if v}))
     return out
 
@@ -247,14 +307,48 @@ def fibre_ranges_many(text, tol, ks, ctx=None, jobs=1):
                 es.append(e)
     rs = iter(ZE.certify_many(parts, f, es, n, jobs=jobs))
     out = {k: [] for k in ks}
+    qd = read_qloads(text)
     for k, end, side, e in items:
+        bub, kap = _bubble(qd, k, end, side, area, izz, h)
         if not any(e):
-            out[k].append({"end": end, "side": side, "lo": F(0), "hi": F(0), "nominal": F(0), "e": e, "sc": None})
+            out[k].append({"end": end, "side": side, "lo": bub, "hi": bub, "nominal": bub, "e": e, "sc": None,
+                           "bub": bub, "kappa": kap})
             continue
         sc = ZE.scaled_from(next(rs), parts, emap[k]["part"])
         lo, hi = sorted([ex * sc["lo"], ex * sc["hi"]])
-        out[k].append({"end": end, "side": side, "lo": lo, "hi": hi, "nominal": ex * sc["nominal"], "e": e, "sc": sc})
+        out[k].append({"end": end, "side": side, "lo": lo + bub, "hi": hi + bub, "nominal": ex * sc["nominal"] + bub,
+                       "e": e, "sc": sc, "bub": bub, "kappa": kap})
     return out
+
+
+def _bubble(qd, k, end, side, area, izz, h):
+    """A member load's exact INNER solution (it vanishes, with its slope, at both nodes): at an end fibre its stress
+    (added to the Hermite part), and kappa, the fibre's parabola across the element: sigma(s) = linear between the
+    ends + kappa s (1 - s). Axial load a: N_b = a (L - 2x)/2 (linear); transverse w: M_b = w (6x^2 - 6Lx + L^2)/12,
+    top fibre (local +y) -M_b (h/2)/I. kappa_top = w L^2 (h/2)/(2 I), kappa_bot = -kappa_top."""
+    if k not in qd:
+        return F(0), F(0)
+    a, w, L = qd[k]
+    s_ = F(0) if end == "I" else F(1)
+    sg = 1 if side == "TOP" else -1
+    axial = a * L * (1 - 2 * s_) / (2 * area)
+    bend = -sg * (h / 2) * w * L * L * (6 * s_ * s_ - 6 * s_ + 1) / (12 * izz)
+    return axial + bend, sg * w * L * L * (h / 2) / (2 * izz)
+
+
+def _side_peak(Ar, Br, kappa):
+    """max over s in [0, 1] of |sigma(s)|, sigma between (1-s) A_lo + s B_lo + kappa s(1-s) and the same with the highs
+    (A, B the end ranges): each envelope a parabola — its ends and, inside, its vertex."""
+    best = F(0)
+    for a_, b_ in ((Ar[0], Br[0]), (Ar[1], Br[1])):
+        cands = [F(0), F(1)]
+        if kappa:
+            sv = (kappa + b_ - a_) / (2 * kappa)
+            if 0 < sv < 1:
+                cands.append(sv)
+        for s_ in cands:
+            best = max(best, abs((1 - s_) * a_ + s_ * b_ + kappa * s_ * (1 - s_)))
+    return best
 
 
 # ----------------------------------------------------------------------------------------------------------------
@@ -266,6 +360,23 @@ def fibre_ranges_many(text, tol, ks, ctx=None, jobs=1):
 #   K(p) + lambda K_G(N(p))  >=  (1 - T) K0 + lambda sum_e N_lo,e G_e        (Loewner: K(p) >= (1 - T) K0, G_e >= 0)
 # so ONE matrix proved positive definite (ZTL zenergy.pd_ieee) proves lambda < lambda_cr at every p. Linear
 # buckling (no imperfections, no plasticity); the load factor scales the given loads.
+
+def _geo_split(L):
+    """The consistent geometric stiffness for a LINEAR axial force N(x) = N_a (1 - s) + N_b s: N_a G_a + N_b G_b,
+    G_a = int (1 - s) N'^T N' dx, G_b = int s N'^T N' dx (Hermite cubics, exact rationals; G_a + G_b = G)."""
+    # N_i'(s) as polynomial coefficients in s (d/dx = (1/L) d/ds)
+    d = [[F(0), F(-6) / L, F(6) / L], [F(1), F(-4), F(3)], [F(0), F(6) / L, F(-6) / L], [F(0), F(-2), F(3)]]
+    def mul(p, q):
+        r = [F(0)] * (len(p) + len(q) - 1)
+        for i, a in enumerate(p):
+            for j, b in enumerate(q):
+                r[i + j] += a * b
+        return r
+    integ = lambda p: sum(c / (i + 1) for i, c in enumerate(p))
+    Ga = [[L * integ(mul(mul(d[i], d[j]), [F(1), F(-1)])) for j in range(4)] for i in range(4)]
+    Gb = [[L * integ(mul(mul(d[i], d[j]), [F(0), F(1)])) for j in range(4)] for i in range(4)]
+    return Ga, Gb
+
 
 PI2_LO = F(98695, 10000)          # < pi^2 = 9.8696044...: the continuum correction is conservative with it
 
@@ -350,6 +461,14 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
         Nlo[k] = min(fac * sc["lo"], fac * sc["hi"])
         Nhi[k] = max(fac * sc["lo"], fac * sc["hi"])
         Nnom[k] = fac * sc["nominal"]
+    Nnodes_lo = dict(Nlo)
+    qax = {}
+    for k, (a_, w_, L_) in read_qloads(text).items():
+        # an axial member load: N(x) = N_nodes + a (L - 2x)/2 — the whole element's range
+        Nlo[k] = Nlo.get(k, F(0)) - abs(a_) * L_ / 2
+        Nhi[k] = Nhi.get(k, F(0)) + abs(a_) * L_ / 2
+        if a_:
+            qax[k] = a_ * L_ / 2
     if all(v >= 0 for v in Nlo.values()):
         # no member compressed anywhere in the box: K_G(N(p)) >= 0, so K(p) + lam K_G > 0 for every lam >= 0
         return {"lam_low": None, "why": "no compressed member: no buckling under these loads", "lam_est": None,
@@ -363,7 +482,7 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
     # b = (-1, 0, 1, 0) on (v_i, th_i, v_j, th_j) (Q = int (w_H' - mean)^2). pi^2 from below, E at (1 - T) E0.
     # The algebra: ZTL lean/ZHypercircle.lean `beam_correction` (zero axioms); the Poincare inequality: a premise.
     Elo = (1 - T) * ex
-    Gl, Ql, Bl, kk = {}, {}, {}, {}
+    Gl, Ql, Bl, kk, Gal, Gbl = {}, {}, {}, {}, {}, {}
     for k, (i, j) in enumerate(elems, 1):
         L = emap[k]["L"]
         c_, s_ = (nodes[j][0] - nodes[i][0]) / L, (nodes[j][1] - nodes[i][1]) / L
@@ -373,6 +492,9 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
         Qloc = [[Gloc[a][b] - Bloc[a][b] for b in range(4)] for a in range(4)]
         Gl[k], Bl[k], Ql[k] = (_beam_form(i, j, c_, s_, dof, X) for X in (Gloc, Bloc, Qloc))
         kk[k] = L * L / (4 * PI2_LO * Elo * izz)
+        if k in qax:
+            Ga_, Gb_ = _geo_split(L)
+            Gal[k], Gbl[k] = _beam_form(i, j, c_, s_, dof, Ga_), _beam_form(i, j, c_, s_, dof, Gb_)
     Gsum, Gnom = {}, {}
     for k, (i, j) in enumerate(elems, 1):
         L = emap[k]["L"]
@@ -397,7 +519,22 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
                 M[key] = M.get(key, F(0)) + lam * v
         else:
             for k in Gl:
-                if Nlo[k] < 0:
+                if k in qax and Nlo[k] < 0:
+                    # LINEAR N along the element (an axial member load): the geometric part exactly split,
+                    # N_a = N_nodes + aL/2 at I, N_b = N_nodes - aL/2 at J, each from below; the continuum
+                    # correction with the largest compression and G (not Q: the mean trick needs constant N)
+                    Na, Nb = Nnodes_lo.get(k, F(0)) + qax[k], Nnodes_lo.get(k, F(0)) - qax[k]
+                    P = -lam * Nlo[k]
+                    if P * kk[k] >= 1:
+                        return False
+                    cq = P * P * kk[k] / (1 - P * kk[k])
+                    for key, v in Gal[k].items():
+                        M[key] = M.get(key, F(0)) + lam * Na * v
+                    for key, v in Gbl[k].items():
+                        M[key] = M.get(key, F(0)) + lam * Nb * v
+                    for key, v in Gl[k].items():
+                        M[key] = M.get(key, F(0)) - cq * v
+                elif Nlo[k] < 0:
                     P = -lam * Nlo[k]
                     if P * kk[k] >= 1:
                         return False                  # the member itself could buckle between its nodes: subdivide
@@ -690,6 +827,10 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     from . import judge_ztl  # noqa: F401
     import zenergy as ZE
     nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
+    if _qload_lines(text):
+        return {"verdict": "OPEN", "why": "member loads (QLOAD) in second order: not yet (the exact member's fixed-end "
+                                          "loads under compression differ from the Hermite ones) — first order and "
+                                          "EN's method judge them", "checks": [], "disp": {}}
     st = stability_lower(text, tol, jobs=jobs)
     parts, f, dof, emap, (_, _, _, h) = energy_system_full(text, tol)
     if h is None and checks:
@@ -767,9 +908,9 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
         for end, sb in (("I", 1), ("J", -1)):
             g = {}
             for i_, v in m["b"].items():
-                g[i_] = g.get(i_, F(0)) + izz / m["L"] * sb * v
+                g[i_] = g.get(i_, F(0)) + izz / m["L"] * v
             for i_, v in m["c"].items():
-                g[i_] = g.get(i_, F(0)) + izz / m["L"] * 3 * v
+                g[i_] = g.get(i_, F(0)) + izz / m["L"] * 3 * sb * v
             es.append(vec(g)); items.append((kchk, end))
     for (nd, d) in disp:                              # nodal displacements (second order, the continuum frame)
         es.append(vec({dof[(nd, d)]: F(1)})); items.append((("U", nd, d), "U"))
@@ -811,9 +952,18 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
             if psi <= 1 - 2 * phi2:
                 interior = "none (psi <= cos 2phi)"
             elif phi2 < 2:
-                c2 = (1 - phi2 / 2) ** 2
-                mint = max(mend, mend * (1 + psi) / (2 * c2))
-                interior = "bounded by m (1 + psi)/(2 cos^2 phi)"
+                c_lo = 1 - phi2 / 2                         # cos phi >= 1 - phi^2/2
+                b1 = mend * (1 + psi) / (2 * c_lo * c_lo)
+                # tighter: an interior extremum of A cos + B sin is sqrt(A^2 + B^2), A = (M0 + ML)/(2 cos phi),
+                # B = (ML - M0)/(2 sin phi); sin phi >= phi (1 - phi^2/6) with phi from below
+                ph_lo = _sqrt_down(phi2)
+                s_lo = ph_lo * (1 - ph_lo * ph_lo / 6)
+                (al, ah), (bl, bh) = Ml["I"], Ml["J"]
+                msum = max(abs(al + bl), abs(ah + bh), abs(al + bh), abs(ah + bl))
+                mdif = max(abs(bh - al), abs(ah - bl))
+                b2 = ZE._sqrt_up((msum / (2 * c_lo)) ** 2 + (mdif / (2 * s_lo)) ** 2) if s_lo > 0 else b1
+                mint = max(mend, min(b1, b2))
+                interior = "bounded (beam-column: min of m(1+psi)/(2cos^2 phi) and sqrt(A^2 + B^2))"
             else:
                 return {"verdict": "OPEN", "why": f"element {kchk}: too slender between its nodes (subdivide)",
                         "checks": []}
@@ -862,7 +1012,8 @@ def judge_members(text, tol, checks, jobs=1, order=2, phi=PHI0):
         rows = []
         for row in r1["checks"]:
             lim = F(row["check"].split("<=")[1].strip())
-            peak = max(max(abs(F(x.split()[0])) for x in fb["proved_range"]) for fb in row["fibres"])
+            peak = max(max(max(abs(F(x.split()[0])) for x in fb["proved_range"]) for fb in row["fibres"]),
+                       F(row.get("peak_along_element", "0").split()[0]))
             r = {"check": row["check"], "first_order": row["verdict"], "first_order_peak": _show(peak, 1)}
             if mode in ("no compression", "first order allowed"):
                 r["verdict"] = row["verdict"]
@@ -997,9 +1148,9 @@ def judge_interaction_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
         for end, sb in (("I", 1), ("J", -1)):
             g = {}
             for i, v in m["b"].items():
-                g[i] = g.get(i, F(0)) + izz / m["L"] * sb * v
+                g[i] = g.get(i, F(0)) + izz / m["L"] * v
             for i, v in m["c"].items():
-                g[i] = g.get(i, F(0)) + izz / m["L"] * 3 * v
+                g[i] = g.get(i, F(0)) + izz / m["L"] * 3 * sb * v
             e = [F(0)] * n
             for i, v in g.items():
                 e[i] = v
@@ -1008,9 +1159,21 @@ def judge_interaction_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
                 keys.append(k)
     rs = ZE.certify_many(parts, f, es, n, jobs=jobs, scale=[emap[k]["part"] for k in keys])
     Mmax, Mend = {}, {}
+    qd = read_qloads(text)
+    Wel_ = izz / (h / 2)
     for k, r in zip(keys, rs):
-        Mmax[k] = max(Mmax.get(k, F(0)), abs(ex * r["lo"]), abs(ex * r["hi"]))
-        Mend.setdefault(k, []).append(sorted([ex * r["lo"], ex * r["hi"]]))
+        end = "I" if len(Mend.get(k, [])) == 0 else "J"
+        bub = _bubble(qd, k, end, "TOP", area, izz, h)[0] * Wel_ if k in qd else F(0)
+        if k in qd:                                     # the bending part only: the axial part is not a moment
+            a_, w_, L_ = qd[k]
+            bub -= a_ * L_ * (1 if end == "I" else -1) / (2 * area) * Wel_
+        Mend.setdefault(k, []).append(sorted([ex * r["lo"] + bub, ex * r["hi"] + bub]))
+    for k in Mend:
+        if len(Mend[k]) == 2:
+            kap = _bubble(qd, k, "I", "TOP", area, izz, h)[1] * Wel_ if k in qd else F(0)
+            Mmax[k] = _side_peak(Mend[k][0], Mend[k][1], kap)
+        else:
+            Mmax[k] = max(max(abs(x) for x in m_) for m_ in Mend[k])
     Wel = izz / (h / 2)
     MRk = Wel * fy
     rows = []
@@ -1026,7 +1189,7 @@ def judge_interaction_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
             continue
         nn = gamma_m1 / H
         M = max(Mmax.get(k, F(0)) for k in mem)
-        Cmy = _cmy_upper(Mend.get(mem[0])) if len(mem) == 1 else F(1)
+        Cmy = _cmy_upper(Mend.get(mem[0])) if len(mem) == 1 and not any(k in qd for k in mem) else F(1)
         kyy = Cmy * (1 + F(3, 5) * nn)
         U = nn + kyy * M * gamma_m1 / MRk
         rows.append({"member": mem, "N_Ed_max": _show(N, 1), "M_Ed_max": _show(M, 1), "n_max": _show(nn, 1),
@@ -1070,8 +1233,15 @@ def _judge_members_1(text, tol, checks, jobs=1):
     for k, lim in checks:
         fr = allfr[k]
         ok = all(-lim <= r["lo"] and r["hi"] <= lim for r in fr)
+        inner = F(0)
+        for side in ("TOP", "BOT"):
+            A_ = next(r for r in fr if r["end"] == "I" and r["side"] == side)
+            B_ = next(r for r in fr if r["end"] == "J" and r["side"] == side)
+            inner = max(inner, _side_peak((A_["lo"], A_["hi"]), (B_["lo"], B_["hi"]), A_["kappa"]))
+        ok = ok and inner <= lim
         row = {"check": f"|SIG({k})| <= {lim}", "fibres": [{"end": r["end"], "side": r["side"],
-               "nominal": _show(r["nominal"]), "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)]} for r in fr]}
+               "nominal": _show(r["nominal"]), "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)]} for r in fr],
+               "peak_along_element": _show(inner, 1)}
         if ok:
             row["verdict"] = "EARNED"
         else:
@@ -1089,7 +1259,7 @@ def _judge_members_1(text, tol, checks, jobs=1):
                     wl = wh = ZE.value_at(parts, f, worst["e"], n, ps)
                 else:
                     wl, wh = ZE.value_enclosure_fp(parts, f, worst["e"], n, ps)
-                lo_, hi_ = sorted([ex * ps[pk] * wl, ex * ps[pk] * wh])
+                lo_, hi_ = sorted([ex * ps[pk] * wl + worst["bub"], ex * ps[pk] * wh + worst["bub"]])
                 row["witness"] = {"end": worst["end"], "side": worst["side"], "value": _show(hi_ if up else lo_)}
                 if (lo_ > lim) if up else (hi_ < -lim):
                     row["verdict"] = "REFUTED"
