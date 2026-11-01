@@ -76,7 +76,7 @@ Every verdict says its LEVEL (`scope` in the output) — a proof about a mesh is
 
 Named premises (said in the outputs): linear elasticity, Green's formula, IEEE 754 for the floating Cholesky,
 second-order axial forces from the first-order analysis, straight truss bars, out-of-plane restraint for 6.3.3.
-Not yet: second order with member loads (OPEN, said), out-of-plane/LT buckling, plate buckling.
+Not yet: second order with AXIAL member loads (OPEN, said; transverse ones are in), out-of-plane/LT buckling, plate buckling.
 The algebra of every bound is in ZTL's Lean (zero axioms): ZNet, ZEnergy, ZRound, ZHigham, ZFloatPath, ZStability,
 ZChi, ZHypercircle.
 

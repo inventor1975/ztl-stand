@@ -827,10 +827,11 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     from . import judge_ztl  # noqa: F401
     import zenergy as ZE
     nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
-    if _qload_lines(text):
-        return {"verdict": "OPEN", "why": "member loads (QLOAD) in second order: not yet (the exact member's fixed-end "
-                                          "loads under compression differ from the Hermite ones) — first order and "
-                                          "EN's method judge them", "checks": [], "disp": {}}
+    qd = read_qloads(text)
+    if any(a_ for a_, w_, L_ in qd.values()):
+        return {"verdict": "OPEN", "why": "an AXIAL member load (QLOAD along an element) in second order: not yet "
+                                          "(N varies along the member) — first order and EN's method judge it",
+                "checks": [], "disp": {}}
     st = stability_lower(text, tol, jobs=jobs)
     parts, f, dof, emap, (_, _, _, h) = energy_system_full(text, tol)
     if h is None and checks:
@@ -916,8 +917,27 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
         es.append(vec({dof[(nd, d)]: F(1)})); items.append((("U", nd, d), "U"))
     es.append(list(f)); items.append((None, "f"))
     rs = ZE.certify_general_many(A0, parts + gparts, cterms, f, es, n)
-    dranges = {key: (r["lo"], r["hi"]) for (key, what), r in zip(items, rs) if what == "U"}
     theta = rs[0]["theta"]
+    # TRANSVERSE MEMBER LOADS in second order (2026-11-01, v2): inside a member the load couples to the nodal motion
+    # through the condensed inner field — a load correction g with |g.d| <= sum_e ||d||_{C_e} r_e,
+    #   r_e^2 = sup_eta (int q eta)^2 / a(eta, eta) <= q^2 L^5 / (720 E I (1 - P k))   (eta, eta' = 0 at both ends;
+    #   L^5/720: the clamped beam's compliance under a uniform load; a(eta) >= (1 - P k) E I |eta''|^2, Poincare);
+    # its response on any output: |e.u_g| <= ||y||_C R <= sqrt(theta) ||y||_A0 /(1 - theta) R, R = sqrt(sum r_e^2)
+    Elo2 = (1 - T) * ex
+    re2 = {}
+    for k, (a_, w_, L_) in qd.items():
+        if w_:
+            P_ = max(F(0), -Nlo.get(k, F(0)))
+            kk_ = L_ * L_ / (4 * PI2_LO * Elo2 * izz)
+            re2[k] = w_ * w_ * L_ ** 5 / (720 * Elo2 * izz * (1 - P_ * kk_))
+    Rq = ZE._sqrt_up(sum(re2.values())) if re2 else F(0)
+    if Rq:
+        sth = ZE._sqrt_up(theta)
+        for r in rs:
+            extra = sth * (r["ny_t"] + r["ey"]) / (1 - theta) * Rq
+            r["lo"] -= extra
+            r["hi"] += extra
+    dranges = {key: (r["lo"], r["hi"]) for (key, what), r in zip(items, rs) if what == "U"}
     fu_hi = rs[-1]["hi"]
     unC = ZE._sqrt_up(theta * max(fu_hi, F(0)) / (1 - theta))     # ||u||_C <= sqrt(theta) ||u||_A0, A >= (1-theta)A0
     rng = {}
@@ -930,15 +950,34 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     for kchk, lim in checks:
         L = emap[kchk]["L"]
         Nl, Nh = rng[(kchk, "N")]
-        corr = ZE._sqrt_up(cqd.get(kchk, F(0)) * 4 * L / 30) * unC     # |e_theta' D_e u| <= sqrt(C_e,thth) ||u||_C
-        Ml = {e_: (rng[(kchk, e_)][0] - corr, rng[(kchk, e_)][1] + corr) for e_ in ("I", "J")}
+        cth = ZE._sqrt_up(cqd.get(kchk, F(0)) * 4 * L / 30)
+        corr = cth * unC                                          # |e_theta' D_e u| <= sqrt(C_e,thth) ||u||_C
+        if kchk in re2:                                           # the member load's own end-moment correction
+            corr += cth * ZE._sqrt_up(re2[kchk])
+        mb = -qd[kchk][1] * L * L / 12 if kchk in qd else F(0)     # the P = 0 inner solution's end moment (both ends)
+        Ml = {e_: (rng[(kchk, e_)][0] + mb - corr, rng[(kchk, e_)][1] + mb + corr) for e_ in ("I", "J")}
         mend = max(max(abs(a_), abs(b_)) for a_, b_ in Ml.values())
         # interior: M'' + k^2 M = 0 in a compressed member (k^2 = P/EI); max |M| <= m (1 + psi)/(2 cos^2 phi),
         # phi = kL/2, and NO interior maximum when psi <= cos(2 phi) (>= 1 - 2 phi^2); in tension none at all
         P = max(F(0), -Nl)
         interior = "none (tension)" if P == 0 else None
         mint = mend
-        if P:
+        wq = qd[kchk][1] if kchk in qd else F(0)
+        if wq:
+            # a transversely loaded member: M = M_lin + m, m'' +- k^2 m = -q -+ k^2 M_lin, m = 0 at the ends; the
+            # Dirichlet Green function is positive, its integral <= (L^2/8)/(1 - k^2 L^2/8) in compression
+            # (sec phi - 1 <= (phi^2/2)/(1 - phi^2/2)), <= L^2/8 in tension
+            if P:
+                k2 = P / ((1 - T) * ex * izz)
+                if k2 * L * L / 8 >= 1:
+                    return {"verdict": "OPEN", "why": f"element {kchk}: too slender between its nodes (subdivide)",
+                            "checks": []}
+                mint = mend + (abs(wq) + k2 * mend) * (L * L / 8) / (1 - k2 * L * L / 8)
+            if Nh > 0:                                          # tension possible too (a range through zero: both)
+                kt = Nh / ((1 - T) * ex * izz)
+                mint = max(mint, mend + (abs(wq) + kt * mend) * L * L / 8)
+            interior = "bounded (member load: the Dirichlet Green function's bound)"
+        elif P:
             phi2 = L * L * P / (4 * (1 - T) * ex * izz)
             (al, ah), (bl, bh) = Ml["I"], Ml["J"]
             if (al > 0 and bh < 0) or (ah < 0 and bl > 0):

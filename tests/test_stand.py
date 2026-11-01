@@ -2552,10 +2552,10 @@ try:
     FRM.read_deck(_qss1 + "\nSFBEAM, 1, 1, PRES, 10000"); _qsf = False
 except FRM.FrameError as _e:
     _qsf = "QLOAD" in str(_e)
-_qso = FRM.second_order_case(_qss1, "0", [(1, F(10) ** 12)])
+_qso = FRM.second_order_case(_qsw, "0", [(1, F(10) ** 12)])      # an AXIAL member load: second order not yet
 check("member load in EN 6.3.3: M_Ed is the span's qL^2/8 = 20 kN m (inside the element), C_my 1 for a loaded member; "
       "ANSYS's SFBEAM is refused with a pointer to QLOAD (its face/sign conventions are easy to get silently wrong); "
-      "physical second order with member loads says OPEN, with the reason (not yet)",
+      "physical second order with an AXIAL member load says OPEN, with the reason (not yet)",
       F(_qbi["M_Ed_max"].split()[0]) == 20000 and _qbi["C_my"] == "1" and _qsf and _qso["verdict"] == "OPEN"
       and "QLOAD" in _qso["why"], (_qbi["M_Ed_max"], _qbi["C_my"], _qsf, _qso.get("why")))
 # SIGN CONVENTION, checked directly (2026-11-01: a swapped J-end label once passed every test by coincidence)
@@ -2566,6 +2566,25 @@ check("sign convention: a UNIFORM sagging moment (20 kN m) gives the same physic
       "-25 MPa (compression) and BOT +25 MPa at BOTH ends; single curvature reads as the same sign at I and J",
       _umf[("I", "TOP")] == _umf[("J", "TOP")] == -25 * 10**6 and _umf[("I", "BOT")] == _umf[("J", "BOT")] == 25 * 10**6,
       _umf)
+# SECOND ORDER WITH TRANSVERSE MEMBER LOADS (v2): the inner field condensed — a load correction bounded by
+# ||d||_C r_e (r_e^2 <= q^2 L^5/(720 EI (1 - Pk))), the inside by the Dirichlet Green function
+_v2P, _v2q = 1500000, 10000
+_v2k = _math.sqrt(_v2P / (210e9 * 8e-5))
+_v2M = _v2q / _v2k ** 2 * (1 / _math.cos(_v2k * 2) - 1)
+_v2s = _v2P / 0.01 + _v2M / (8e-5 / 0.1)                          # exact: 179.352 MPa
+_v2w = _v2q / (210e9 * 8e-5 * _v2k ** 4) * (1 / _math.cos(_v2k * 2) - 1) - _v2q * 16 / (8 * 210e9 * 8e-5 * _v2k ** 2)
+_v2d = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2", "N, 1, 0, 0", "N, 2, 4, 0", "E, 1, 2",
+                   "D, 1, UX, 0", "D, 1, UY, 0", "D, 2, UY, 0", f"F, 2, FX, -{_v2P}", f"QLOAD, 1, FY, -{_v2q}"])
+_v2r1 = FRM.second_order_case(_v2d, "0", [(1, F(10) ** 12)])
+_v2r8 = FRM.second_order_case(FRM.subdivide(_v2d, 8), "0", [(k, F(10) ** 12) for k in range(1, 9)], disp=[(6, "Y")])
+_v2s1 = float(F(_v2r1["checks"][0]["sigma_abs_max"].split()[0]))
+_v2s8 = max(float(F(c["sigma_abs_max"].split()[0])) for c in _v2r8["checks"])
+_v2u = [float(x) for x in _v2r8["disp"][("U", 6, "Y")]]
+check("second order WITH a transverse member load (v2): a pinned beam-column, P 1.5 MN, q 10 kN/m — exact max |sigma| "
+      "179.352 MPa (P/A + (q/k^2)(sec(kL/2) - 1)/W): proved 187.2 on one element, 179.88 on eight, always above; the "
+      "mid deflection -2.32109 mm exact inside the proved [-2.321093, -2.321057] mm",
+      _v2s < _v2s8 < _v2s1 < 1.05 * _v2s and _v2s8 < 1.005 * _v2s and _v2u[0] <= -_v2w <= _v2u[1],
+      (_v2s1, _v2s8, _v2s, _v2u, -_v2w))
 # MEMBER BUCKLING (2026-11-01): EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i| — the proved alpha_cr lower bound
 # and the proved |N| upper bound give a proved upper bound on the utilisation (H rises with alpha_cr, falls with |N|)
 def _colP(P):
