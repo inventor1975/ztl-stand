@@ -344,6 +344,18 @@ def _sub_energy_gram(Qa, Qb, nu):
     return Gm
 
 
+def _sub_energy(c, qa, qb, nu):
+    """int [sxx^2 + syy^2 - 2 nu sxx syy + 2(1+nu) sxy^2] dA over the sub-triangle (qa, qb, origin) of the Airy cubic c
+    — the same exact number as c^T _sub_energy_gram c (the midpoint rule is exact for the quadratic density), without
+    the 10 x 10 matrix (MEASURED 2026-11-01: the Gram matrices were 80 % of a 64 x 16 plate's time)."""
+    area = abs(qa[0] * qb[1] - qa[1] * qb[0]) / 2
+    tot = F(0)
+    for (x, y) in (((qa[0] + qb[0]) / 2, (qa[1] + qb[1]) / 2), (qa[0] / 2, qa[1] / 2), (qb[0] / 2, qb[1] / 2)):
+        sxx, syy, sxy = _stress(c, x, y)
+        tot += sxx * sxx + syy * syy - 2 * nu * sxx * syy + 2 * (1 + nu) * sxy * sxy
+    return tot * area / 3
+
+
 _GRAM = {}
 
 
@@ -636,8 +648,7 @@ def compliance_bounds(text, tol="0", lower_field="lst"):
     th, ex, nu = S["th"], S["ex"], S["nu"]
     energy = F(0)
     for (k, s, G, c, (qa, qb)) in pieces:
-        Gm = _sub_energy_gram(qa, qb, nu)
-        energy += sum(c[i] * Gm[i][j] * c[j] for i in range(10) for j in range(10) if c[i] and c[j] and Gm[i][j])
+        energy += _sub_energy(c, qa, qb, nu)
     upper = th * energy / ex / (1 - t)
     return {"lower": lower, "upper": upper, "check": chk, "unknowns_fe": n, "airy_dofs": len(idx)}
 
@@ -655,8 +666,7 @@ def bracket(S, tmap):
     chk = check_admissible(S2, pieces)
     energy = F(0)
     for (k, s_, G, c, (qa, qb)) in pieces:
-        Gm = _sub_energy_gram(qa, qb, S["nu"])
-        energy += sum(c[i] * Gm[i][j] * c[j] for i in range(10) for j in range(10) if c[i] and c[j] and Gm[i][j])
+        energy += _sub_energy(c, qa, qb, S["nu"])
     return lower, S["th"] * energy / S["ex"], chk
 
 
@@ -739,8 +749,7 @@ def _fields(S, tmap):
         sig_t = [list(_stress(c, qa[0], qa[1])), list(_stress(c, qb[0], qb[1])), list(_stress(c, F(0), F(0)))]
         tri_area = abs(qa[0] * qb[1] - qa[1] * qb[0]) / 2
         out.append((sig_t, sig_v, tri_area))
-        Gm = _sub_energy_gram(qa, qb, S["nu"])
-        energy += sum(c[i] * Gm[i][j] * c[j] for i in range(10) for j in range(10) if c[i] and c[j] and Gm[i][j])
+        energy += _sub_energy(c, qa, qb, S["nu"])
     return out, (lower, S["th"] * energy / S["ex"]), chk
 
 
