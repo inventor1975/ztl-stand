@@ -2306,6 +2306,24 @@ check("frame stability: a cantilever column (16 elements) — the proved lower b
       "by about 0.5 % (the softest steel), never above Euler",
       0.998 * _eul < float(_st0["lam_low"]) < _eul and 0.993 * _eul < float(_st5["lam_low"]) < 0.996 * _eul,
       (float(_st0["lam_low"]), float(_st5["lam_low"]), _eul))
+# MEMBER BUCKLING (2026-11-01): EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i| — the proved alpha_cr lower bound
+# and the proved |N| upper bound give a proved upper bound on the utilisation (H rises with alpha_cr, falls with |N|)
+def _colP(P):
+    return "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2"]
+                     + [f"N, {k+1}, 0, {F(4*k, 16)}" for k in range(17)] + [f"E, {k+1}, {k+2}" for k in range(16)]
+                     + ["D, 1, UX, 0", "D, 1, UY, 0", "D, 1, ROTZ, 0", f"F, 17, FY, {P}"])
+_lb = _math.sqrt(0.01 * 355e6 / (_eul * 10000))                 # hand: lambda_bar = 1.17058, curve b
+_ph = 0.5 * (1 + 0.34 * (_lb - 0.2) + _lb * _lb)
+_Nb = 0.01 * 355e6 / (_ph + _math.sqrt(_ph * _ph - _lb * _lb))   # chi A fy = 1754938 N
+_bk1 = FRM.judge_buckling(_colP(-int(_Nb * 0.99)), "0", F(355 * 10**6), "b")
+_bk2 = FRM.judge_buckling(_colP(-int(_Nb * 1.01)), "0", F(355 * 10**6), "b")
+_bk3 = FRM.judge_buckling(_colP(int(_Nb)), "0", F(355 * 10**6), "b")
+_u1 = float(F(_bk1["utilisation_max"].split()[0]))
+check("member buckling (EN 1993-1-1 6.3.1, curve b, fy 355): the cantilever column at 0.99 of the hand N_b,Rd = "
+      "1.755 MN is EARNED with a proved utilisation just above 0.99 (the alpha_cr bound's 0.1 % gap), at 1.01 it is "
+      "OPEN, and a column in tension has nothing to buckle",
+      _bk1["verdict"] == "EARNED" and 0.99 < _u1 < 0.9915 and _bk2["verdict"] == "OPEN"
+      and _bk3["verdict"] == "EARNED" and _bk3["members"] == [], (_bk1["verdict"], _u1, _bk2["verdict"], _bk3))
 # THE FLOATING PATH (2026-11-01): above 600 unknowns float solves, exact residuals, lambda_min proved in fixed point
 import subprocess as _sp
 _f408 = _sp.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.parent / "examples" / "frame" / "gen_frame.py"),

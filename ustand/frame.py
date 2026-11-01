@@ -315,7 +315,74 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000)):
             hi = mid
         if hi - lo <= rel * hi:
             break
-    return {"lam_low": lo, "lam_est": lam_est, "unknowns": n, "T": T}
+    return {"lam_low": lo, "lam_est": lam_est, "unknowns": n, "T": T, "Nlo": Nlo, "Nnom": Nnom}
+
+
+CURVES = {"a0": F(13, 100), "a": F(21, 100), "b": F(34, 100), "c": F(49, 100), "d": F(76, 100)}   # EN 1993-1-1 Table 6.1
+
+
+def _sqrt_down(q, bits=64):
+    from math import isqrt
+    S = 1 << bits
+    return F(isqrt(q.numerator * S * S // q.denominator), S)
+
+
+def _g_lower(lb_lo, a):
+    """A lower bound on g(lb) = chi(lb) lb^2 at any lb >= lb_lo (EN 1993-1-1 6.3.1.2: chi = 1/(Phi + sqrt(Phi^2 - lb^2)),
+    Phi = (1 + a (lb - 0.2) + lb^2)/2; chi = 1 up to lb = 0.2). g is strictly increasing in lb: below 0.2 it is lb^2;
+    above, g = Phi - sqrt(Phi^2 - lb^2) and g' > 0 <=> 2uw + w^2 > 4 lb^2 with u = lb^2 - 1 + a/5, w = 2 + a(lb - 2/5),
+    which is a lb (2 lb (lb - 0.4) + 2 + a (lb - 0.4)) > 0 (ARGUED by hand, 2026-11-01; MEASURED on a 20000-point
+    grid lb in (0, 6] for all five curves: every step positive)."""
+    if lb_lo <= F(1, 5):
+        return lb_lo * lb_lo
+    ph = (1 + a * (lb_lo - F(1, 5)) + lb_lo * lb_lo) / 2
+    d = ph * ph - lb_lo * lb_lo
+    S = 1 << 64
+    from math import isqrt
+    r = isqrt(d.numerator * S * S // d.denominator)
+    up = F(r + 1, S)                               # sqrt(d) <= up
+    return max(F(0), ph - up)
+
+
+def judge_buckling(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
+    """EN 1993-1-1 6.3.1 flexural buckling of every compressed member, N_Ed <= chi A fy / gamma_M1, with the member's
+    elastic critical force taken from the frame's critical factor, N_cr,i = alpha_cr |N_Ed,i| (lb_i^2 = A fy / N_cr,i).
+    The check is gamma_M1 <= H = alpha_cr g(lb_i), g = chi lb^2; H grows with alpha_cr (dH/dalpha = -lb^3 chi'/2 >= 0)
+    and falls with |N| (g increasing, lb falling in |N|), so the proved alpha_cr lower bound and the proved |N| upper
+    bound give a proved lower bound on H for every modulus in the box. EARNED when every member clears it; OPEN
+    otherwise (no refutation: an upper bound on alpha_cr is not proved). Axial force only: the bending interaction
+    of 6.3.3 is NOT checked, nor out-of-plane or lateral-torsional buckling."""
+    nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
+    if curve not in CURVES:
+        raise FrameError(f"{curve!r}: a buckling curve is one of {', '.join(CURVES)}")
+    a = CURVES[curve]
+    st = stability_lower(text, tol, jobs=jobs)
+    lam = st.get("lam_low")
+    if st.get("lam_est") is None:
+        return {"verdict": "EARNED", "why": "no compressed member under these loads", "members": []}
+    rows, worst = [], F(0)
+    for k in sorted(st["Nlo"]):
+        nlo = st["Nlo"][k]
+        if nlo >= 0:
+            continue                                  # never compressed anywhere in the box
+        nhi = -nlo                                    # |N| upper bound
+        if not lam or lam <= 0:
+            rows.append({"member": k, "N_max": _show(nhi, 1), "verdict": "OPEN"})
+            continue
+        lb_lo = _sqrt_down(area * fy / (lam * nhi))
+        H = lam * _g_lower(lb_lo, a)
+        u = gamma_m1 / H if H > 0 else None
+        if u is not None:
+            worst = max(worst, u)
+        rows.append({"member": k, "N_max": _show(nhi, 1), "lambda_bar_min": _show(lb_lo, -1),
+                     "utilisation_max": _show(u, 1) if u is not None else None,
+                     "verdict": "EARNED" if u is not None and u <= 1 else "OPEN"})
+    vs = [r["verdict"] for r in rows]
+    return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
+            "path": "EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i|; alpha_cr and |N| proved over the box",
+            "alpha_cr_proved_lower": _show(lam, -1) if lam else None, "alpha_cr_nominal_estimate": st.get("lam_est"),
+            "utilisation_max": _show(worst, 1), "members": rows,
+            "not_checked": "6.3.3 bending-axial interaction; out-of-plane and lateral-torsional buckling"}
 
 
 def fibre_ranges(text, tol, k, ctx=None):
@@ -473,6 +540,14 @@ def main(argv):
                               else None, "lambda_cr_nominal_estimate": r.get("lam_est"),
                               "note": "linear buckling, every modulus in the box; no imperfections, no plasticity",
                               **({"why": r["why"]} if "why" in r else {})}, indent=1, ensure_ascii=False))
+            return 0
+        if "--buckling" in argv:                      # EN 6.3.1 per member: --buckling fy curve [gamma_M1]
+            i = argv.index("--buckling")
+            fy = _num(argv[i + 1], "fy")
+            curve = argv[i + 2]
+            gm1 = _num(argv[i + 3], "gamma_M1") if len(argv) > i + 3 and not argv[i + 3].startswith("--") else F(1)
+            jobs = int(argv[argv.index("--jobs") + 1]) if "--jobs" in argv else 1
+            print(json.dumps(judge_buckling(text, tol, fy, curve, gm1, jobs=jobs), indent=1, ensure_ascii=False))
             return 0
         raw = [argv[i + 1] for i, a in enumerate(argv) if a == "--req"]
         sig = [x for x in raw if _re.match(r"^\s*SIG\(", x, _re.I)]
