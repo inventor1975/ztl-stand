@@ -2494,6 +2494,12 @@ check("member interaction (EN 6.3.3 (6.61), in-plane): the 16-element cantilever
       "above the hand value 0.6173 (the continuum alpha_cr bound's margin)",
       FRM.members(_ci) == [list(range(1, 17))] and _mi == [4000, 36000] and _uh < max(_ui) < _uh * 1.001
       and _ji["verdict"] == "EARNED", (_ui, _uh, _mi))
+check("EN Table B.3's C_my from PROVED end moments: opposite signs (double curvature) -> 0.9; single curvature with "
+      "|small|/|large| <= 0.9 -> 0.96; ratio 0.5 -> the sway floor 0.9; a range through zero -> 1 (nothing proved)",
+      FRM._cmy_upper([[F(5), F(6)], [F(-4), F(-3)]]) == F(9, 10)
+      and FRM._cmy_upper([[F(10), F(10)], [F(9), F(9)]]) == F(3, 5) + F(2, 5) * F(9, 10)
+      and FRM._cmy_upper([[F(10), F(10)], [F(5), F(5)]]) == F(9, 10)
+      and FRM._cmy_upper([[F(-1), F(6)], [F(3), F(4)]]) == 1)
 # THE FLOATING PATH (2026-11-01): above 600 unknowns float solves, exact residuals, lambda_min proved in fixed point
 import subprocess as _sp
 _f408 = _sp.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.parent / "examples" / "frame" / "gen_frame.py"),

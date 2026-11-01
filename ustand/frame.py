@@ -717,13 +717,33 @@ def members(text):
     return out
 
 
+def _cmy_upper(ends):
+    """An upper bound on EN 1993-1-1 Table B.3's C_my for a member of ONE element (the moment linear between its
+    ends), from the proved end-moment ranges [[lo, hi] at I, [lo, hi] at J] (same-sign = single curvature):
+    max(0.9, 0.6 + 0.4 psi_max) — 0.9 covers a sway buckling mode. psi_max <= 0 when the ends are proved of opposite
+    sign; else psi = |small|/|large| <= min(the highs)/max(the lows), at most 1. Anything unproved: 1."""
+    if not ends or len(ends) != 2:
+        return F(1)
+    (al, ah), (bl, bh) = ends
+    if (al > 0 and bh < 0) or (ah < 0 and bl > 0):
+        psi = F(0)
+    elif (al > 0 and bl > 0) or (ah < 0 and bh < 0):
+        A = (min(abs(al), abs(ah)), max(abs(al), abs(ah)))
+        B = (min(abs(bl), abs(bh)), max(abs(bl), abs(bh)))
+        psi = min(F(1), min(A[1], B[1]) / max(A[0], B[0]))
+    else:
+        psi = F(1)
+    return max(F(9, 10), F(3, 5) + F(2, 5) * psi)
+
+
 def judge_interaction_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
     """EN 1993-1-1 6.3.3, formula (6.61), Annex B (Method 2), IN-PLANE, for every compressed member (one load case).
     ASSUMED (said in the output): the member is restrained out of plane (no flexural buckling about z, no
     lateral-torsional buckling: chi_z = chi_LT = 1 — then (6.62) is milder than (6.61)); the section is class 1-3, its
     resistance taken ELASTIC (M_Rk = W_el fy, W_el = I/(h/2): safe for class 1-2). Bounds, each proved over the box:
       n = N_Ed/(chi_y N_Rk/gamma_M1) <= gamma_M1/H  (H = alpha_cr g(lb) as in judge_buckling, N_cr = alpha_cr N_Ed);
-      k_yy <= C_my (1 + 0.6 n)  (Table B.1's cap); C_my <= 1 (Table B.3's largest value: any moment shape, sway or not);
+      k_yy <= C_my (1 + 0.6 n)  (Table B.1's cap); C_my: one-element members from the proved end-moment signs and
+      ratio (_cmy_upper, >= 0.9 for a sway mode), longer members 1 (Table B.3's largest);
       M_y,Ed <= the largest proved |M| at the member's element ends (nodal loads: the moment is linear in each element).
     EARNED when n + k_yy M gamma_M1/M_Rk <= 1; OPEN otherwise (no refutation)."""
     from . import judge_ztl  # noqa: F401
@@ -759,9 +779,10 @@ def judge_interaction_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
                 es.append(e)
                 keys.append(k)
     rs = ZE.certify_many(parts, f, es, n, jobs=jobs, scale=[emap[k]["part"] for k in keys])
-    Mmax = {}
+    Mmax, Mend = {}, {}
     for k, r in zip(keys, rs):
         Mmax[k] = max(Mmax.get(k, F(0)), abs(ex * r["lo"]), abs(ex * r["hi"]))
+        Mend.setdefault(k, []).append(sorted([ex * r["lo"], ex * r["hi"]]))
     Wel = izz / (h / 2)
     MRk = Wel * fy
     rows = []
@@ -777,10 +798,11 @@ def judge_interaction_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
             continue
         nn = gamma_m1 / H
         M = max(Mmax.get(k, F(0)) for k in mem)
-        Cmy = F(1)
+        Cmy = _cmy_upper(Mend.get(mem[0])) if len(mem) == 1 else F(1)
         kyy = Cmy * (1 + F(3, 5) * nn)
         U = nn + kyy * M * gamma_m1 / MRk
         rows.append({"member": mem, "N_Ed_max": _show(N, 1), "M_Ed_max": _show(M, 1), "n_max": _show(nn, 1),
+                     "C_my": _show(Cmy, 1),
                      "k_yy_max": _show(kyy, 1), "utilisation_max": _show(U, 1),
                      "verdict": "EARNED" if U <= 1 else "OPEN"})
     vs = [r["verdict"] for r in rows]
@@ -802,7 +824,7 @@ def judge_interaction(text, tol, fy, curve, gamma_m1=F(1), jobs=1, phi=None):
             "path": "EN 1993-1-1 6.3.3 (6.61), Annex B, in-plane; N_cr,i = alpha_cr N_Ed,i; first-order moments with "
                     "the sway imperfection", "cases": cases,
             "assumed": "members restrained out of plane (chi_z = chi_LT = 1); section class 1-3 with ELASTIC "
-                       "resistance; C_my = 1 (Table B.3's largest)",
+                       "resistance; C_my from the proved end moments (>= 0.9, sway), 1 for multi-element members",
             "not_checked": "out-of-plane and lateral-torsional buckling (need out-of-plane data); class 4 sections"}
 
 
