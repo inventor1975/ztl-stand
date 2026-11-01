@@ -15,7 +15,8 @@ with its modulus anywhere in E (1 +- t) is a part of three terms — the case le
     python3 -m ustand.frame deck.txt --tol 0.5% --range "U(12,Y)"               the proved enclosure (not exact)
             U(node,X|Y) a displacement, ROT(node) a rotation
     python3 -m ustand.frame deck.txt --tol 0.5% --req "SIG(3) <= 235e6"         member stress, EN 1993-1-1 6.2.1(7):
-            |sigma| at both extreme fibres of both ends of element 3 (needs the section height in R)
+            |sigma| at both extreme fibres of both ends of element 3 (needs the section height in R), on EN's global
+            analysis: sway imperfection +-1/200 and second order by the proved alpha_cr (--first-order: without)
     python3 -m ustand.frame deck.txt --tol 0.5% --stability                     the critical load factor: a proved
             lower bound for every modulus in the box, a proved upper bound at the nominal moduli (a witness mode)
     python3 -m ustand.frame deck.txt --tol 0.5% --buckling 355e6 b [1.0]        EN 1993-1-1 6.3.1 for every compressed
@@ -33,8 +34,9 @@ THE DECK (the subset read; anything else is REFUSED aloud):
 Lengths must be rational (an irrational length is refused: the stiffness would not be exact).
 
 WHAT IT DOES NOT DO (yet), said: the box path (zlin) is not wired for frames — a requirement the energy path cannot
-decide comes back OPEN, not guessed; no shear deformation (Timoshenko); stresses are first-order (no P-delta
-amplification); stability is LINEAR buckling (no imperfections, no plasticity); member buckling is 6.3.1 under axial
+decide comes back OPEN, not guessed; no shear deformation (Timoshenko); second order only by EN 5.2.2's amplification (alpha_cr >= 3;
+below, OPEN — no geometrically nonlinear solve yet); gravity is taken along Y for the imperfection's equivalent
+forces (5.3.2(7)); stability is LINEAR buckling (no imperfections, no plasticity); member buckling is 6.3.1 under axial
 force only — the 6.3.3 bending-axial interaction, out-of-plane and lateral-torsional buckling are NOT checked.
 The proved ranges are for the MODEL (the mesh): discretization error is not bounded (bench/stage0/plate_convergence).
 """
@@ -279,6 +281,10 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000)):
         fac = ex * area / emap[k]["L"]
         Nlo[k] = min(fac * sc["lo"], fac * sc["hi"])
         Nnom[k] = fac * sc["nominal"]
+    if all(v >= 0 for v in Nlo.values()):
+        # no member compressed anywhere in the box: K_G(N(p)) >= 0, so K(p) + lam K_G > 0 for every lam >= 0
+        return {"lam_low": None, "why": "no compressed member: no buckling under these loads", "lam_est": None,
+                "unknowns": n, "T": T, "Nlo": Nlo, "Nnom": Nnom}
     K0 = ZE.matrix(parts, n)                      # lower triangle
     Gsum, Gnom = {}, {}
     for k, (i, j) in enumerate(elems, 1):
@@ -312,9 +318,14 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000)):
     if lam_est is None:
         return {"lam_low": None, "why": "no compressed member: no buckling under these loads", "lam_est": None}
     lo, hi = F(0), F(lam_est) * F(11, 10)
-    if not proved(lo + F(lam_est) / 1000):
+    start = F(lam_est) / 1000
+    for _ in range(20):                           # a noisy estimate (members barely compressed): step down
+        if proved(start):
+            break
+        hi, start = start, start / 10
+    else:
         return {"lam_low": F(0), "lam_est": lam_est, "why": "not even a small factor proved"}
-    lo = F(lam_est) / 1000
+    lo = start
     for _ in range(40):
         mid = (lo + hi) / 2
         if proved(mid):
@@ -421,7 +432,23 @@ def _g_upper(lb_hi, a):
     return ph - _sqrt_down(ph * ph - lb_hi * lb_hi)
 
 
-def judge_buckling(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
+def judge_buckling(text, tol, fy, curve, gamma_m1=F(1), jobs=1, phi=None):
+    """judge_buckling_case on the EN global-analysis load cases: the deck plus the sway imperfection +-phi (5.3.2,
+    phi0 = 1/200 bounds it), both directions (2026-11-01). REFUTED if a case is, EARNED if every case is."""
+    phi = PHI0 if phi is None else phi
+    signs = [1, -1] if with_imperfection(text, phi, 1) != text else [0]
+    cases = []
+    for sg in signs:
+        r = judge_buckling_case(with_imperfection(text, phi, sg) if sg else text, tol, fy, curve, gamma_m1, jobs)
+        r["imperfection"] = f"{'+' if sg > 0 else '-' if sg < 0 else ''}{phi if sg else 0}"
+        cases.append(r)
+    vs = [c["verdict"] for c in cases]
+    return {"verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
+            "path": cases[0].get("path"), "cases": cases,
+            "not_checked": "6.3.3 bending-axial interaction; out-of-plane and lateral-torsional buckling"}
+
+
+def judge_buckling_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
     """EN 1993-1-1 6.3.1 flexural buckling of every compressed member, N_Ed <= chi A fy / gamma_M1, with the member's
     elastic critical force taken from the frame's critical factor, N_cr,i = alpha_cr |N_Ed,i| (lb_i^2 = A fy / N_cr,i).
     The check is gamma_M1 <= H = alpha_cr g(lb_i), g = chi lb^2; H grows with alpha_cr (dH/dalpha = -lb^3 chi'/2 >= 0)
@@ -498,7 +525,67 @@ def fibre_ranges(text, tol, k, ctx=None):
     return res
 
 
-def judge_members(text, tol, checks, jobs=1):
+PHI0 = F(1, 200)        # EN 1993-1-1 5.3.2(3): phi = phi0 alpha_h alpha_m, alpha_h, alpha_m <= 1 -> phi0 bounds it
+
+
+def with_imperfection(text, phi, sign):
+    """The deck plus EN 1993-1-1 5.3.2(7)'s equivalent horizontal forces for a global sway imperfection phi: at every
+    node with a vertical load V, a horizontal sign * phi * |V| (gravity along Y; the whole structure tilted by phi)."""
+    nodes, elems, loads, supports, ex, sec = read_deck(text)
+    extra = [f"F, {nd}, FX, {sign * phi * abs(v)}" for (nd, d), v in sorted(loads.items()) if d == "Y" and v]
+    return text.rstrip("\n") + "\n" + "\n".join(extra) + "\n" if extra else text
+
+
+def judge_members(text, tol, checks, jobs=1, order=2, phi=PHI0):
+    """Member stress checks |sigma| <= limit (EN 1993-1-1 6.2.1(7)) with the GLOBAL ANALYSIS EN asks for
+    (2026-11-01, the curator's "максимальное устранение ошибок"): the loads plus the sway imperfection phi (5.3.2,
+    both directions, phi0 = 1/200 bounds phi from above), and second-order effects by the proved critical factor:
+      alpha_cr,low >= 10  first-order analysis is allowed (5.2.1(3)): the first-order verdicts stand, REFUTED too;
+      3 <= alpha_cr,low < 10  every proved fibre range amplified by 1/(1 - 1/alpha_cr,low) (5.2.2(5B) amplifies the
+            sway effects; amplifying ALL of sigma is on the safe side, and alpha_cr,low <= alpha_cr makes the factor an
+            upper bound): EARNED when inside the limit; never REFUTED (sway and non-sway parts may have opposite signs
+            at a fibre, so first-order failure does not prove second-order failure) — OPEN;
+      alpha_cr,low < 3  the amplification is not allowed: OPEN, a second-order analysis is needed.
+    order=1: the first-order check alone, no imperfection (the earlier behaviour)."""
+    if order == 1:
+        return _judge_members_1(text, tol, checks, jobs)
+    signs = [1, -1] if with_imperfection(text, phi, 1) != text else [0]
+    cases = []
+    for sg in signs:
+        deck = with_imperfection(text, phi, sg) if sg else text
+        r1 = _judge_members_1(deck, tol, checks, jobs)
+        st = stability_lower(deck, tol, jobs=jobs)
+        lam = st.get("lam_low")
+        none = st.get("lam_est") is None
+        amp = F(1) if none else (1 / (1 - 1 / lam) if lam and lam >= 3 else None)
+        mode = "no compression" if none else "first order allowed" if lam >= 10 else "amplified" if amp else \
+            "not allowed"
+        rows = []
+        for row in r1["checks"]:
+            lim = F(row["check"].split("<=")[1].strip())
+            peak = max(max(abs(F(x.split()[0])) for x in fb["proved_range"]) for fb in row["fibres"])
+            r = {"check": row["check"], "first_order": row["verdict"], "first_order_peak": _show(peak, 1)}
+            if mode in ("no compression", "first order allowed"):
+                r["verdict"] = row["verdict"]
+            elif mode == "amplified":
+                r["amplified_peak"] = _show(peak * amp, 1)
+                r["verdict"] = "EARNED" if peak * amp <= lim else "OPEN"
+            else:
+                r["verdict"] = "OPEN"
+            if "witness" in row:
+                r["first_order_witness"] = row["witness"]
+            rows.append(r)
+        cases.append({"imperfection": f"{'+' if sg > 0 else '-' if sg < 0 else ''}{phi if sg else 0}",
+                      "alpha_cr_proved_lower": _show(lam, -1) if lam is not None else None,
+                      "second_order": mode, "amplification": _show(amp, 1) if amp else None, "checks": rows})
+    vs = [r["verdict"] for c in cases for r in c["checks"]]
+    verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN"
+    return {"verdict": verdict, "path": "member stresses: zenergy.certify_scaled on every extreme fibre; EN global "
+            "analysis: sway imperfection +-phi and second order by the proved alpha_cr", "cases": cases,
+            "not_checked": "member buckling (use --buckling), 6.3.3 interaction"}
+
+
+def _judge_members_1(text, tol, checks, jobs=1):
     """checks: [(k, limit)] — |sigma| <= limit at every extreme fibre of element k (EN 1993-1-1 6.2.1(7),
     limit = fy / gamma_M0). EARNED when every fibre's proved range is inside [-limit, limit]; REFUTED when a
     fibre's witness vertex (solved exactly, or its floating enclosure) is wholly outside; OPEN otherwise."""
@@ -653,7 +740,8 @@ def main(argv):
                     raise FrameError(f"{x!r}: a member check is SIG(element) <= limit (|sigma| at every fibre)")
                 checks.append((int(m.group(1)), _num(m.group(2), x)))
             jobs = int(argv[argv.index("--jobs") + 1]) if "--jobs" in argv else 1
-            print(json.dumps(judge_members(text, tol, checks, jobs=jobs), indent=1, ensure_ascii=False))
+            order = 1 if "--first-order" in argv else 2
+            print(json.dumps(judge_members(text, tol, checks, jobs=jobs, order=order), indent=1, ensure_ascii=False))
             return 0
         reqs = [_req(x) for x in raw]
         ranges = [argv[i + 1] for i, a in enumerate(argv) if a == "--range"]

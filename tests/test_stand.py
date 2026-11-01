@@ -2292,6 +2292,41 @@ _fm2 = FRM.judge_members(_frh, "0.5%", [(1, F(49) * 10**6)])
 check("frame member check (EN 1993-1-1 6.2.1(7) elastic), +-0.5 % on every modulus: |sigma| <= 51 MPa EARNED in "
       "the root element, <= 49 MPa REFUTED at a witness (exactly 50 MPa: determinate)",
       _fm1["verdict"] == "EARNED" and _fm2["verdict"] == "REFUTED", (_fm1["verdict"], _fm2["verdict"]))
+# EN GLOBAL ANALYSIS for member stresses (2026-11-01, "максимальное устранение ошибок"): sway imperfection +-1/200
+# both ways, second order by the proved alpha_cr (>= 10 first order allowed; 3..10 amplified; < 3 OPEN)
+import re as _re_so
+_g126 = _sp_so = None
+import subprocess as _sp_so
+_g126 = _sp_so.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.parent / "examples" / "frame" /
+                    "gen_frame.py"), "12", "6"], capture_output=True, text=True, check=True).stdout
+def _scale_loads(t, k):
+    return _re_so.sub(r"^(F, *\d+, *F[XY], *)(\S+)$", lambda m: m.group(1) + str(F(m.group(2)) * k), t, flags=_re_so.M)
+_so1 = FRM.judge_members(_g126, "0.5%", [(1, F(10) ** 12)], order=1)
+_so2 = FRM.judge_members(_g126, "0.5%", [(1, F(10) ** 12)])
+_pk1 = max(abs(F(x.split()[0])) for fb in _so1["checks"][0]["fibres"] for x in fb["proved_range"])
+_pk2 = [F(c["checks"][0]["first_order_peak"].split()[0]) for c in _so2["cases"]]
+check("EN global analysis: the 12x6 frame's sway imperfection (1/200, both ways) raises element 1's proved peak "
+      "stress from ~55.0 MPa to ~57.1 MPa (+3.9 %) one way, lowers it the other — without it the check was on the "
+      "UNSAFE side; alpha_cr >= 10: first order allowed (EN 5.2.1(3))",
+      54 * 10**6 < _pk1 < 56 * 10**6 and max(_pk2) > _pk1 * F(103, 100) and min(_pk2) < _pk1 and
+      all(c["second_order"] == "first order allowed" for c in _so2["cases"]), (float(_pk1), [float(x) for x in _pk2]))
+_g5 = _scale_loads(_g126, 5)
+_so3 = FRM.judge_members(_g5, "0.5%", [(1, F(300) * 10**6)], order=1)
+_so4 = FRM.judge_members(_g5, "0.5%", [(1, F(300) * 10**6)])
+_so5 = FRM.judge_members(_g5, "0.5%", [(1, F(340) * 10**6)])
+_c4 = _so4["cases"][0]
+_amp = F(_c4["amplification"].split()[0])
+_alo = F(_c4["alpha_cr_proved_lower"].split()[0])
+check("EN global analysis, loads x5 (alpha_cr ~7.56): first order EARNS |sigma| <= 300 MPa (peak ~286 MPa), the "
+      "amplified check (x 1/(1 - 1/alpha_cr,low) = 1.152, peak ~329 MPa) leaves it OPEN, and EARNS 340 MPa",
+      _so3["verdict"] == "EARNED" and _so4["verdict"] == "OPEN" and _so5["verdict"] == "EARNED"
+      and _c4["second_order"] == "amplified" and _amp == 1 / (1 - 1 / _alo) and 1.15 < float(_amp) < 1.155,
+      (_so3["verdict"], _so4["verdict"], _so5["verdict"], float(_amp)))
+_so6 = FRM.judge_members(_scale_loads(_g126, 15), "0.5%", [(1, F(10) ** 12)])
+check("EN global analysis, loads x15 (alpha_cr ~2.52 < 3): the amplification is not allowed — OPEN even with a "
+      "limit of 10^12, said, never guessed",
+      _so6["verdict"] == "OPEN" and all(c["second_order"] == "not allowed" for c in _so6["cases"]),
+      [c["second_order"] for c in _so6["cases"]])
 # STABILITY (2026-11-01): a proved lower bound on the critical load factor for every modulus in the box —
 # K(p) + lam K_G(N(p)) >= (1 - T) K0 + lam sum N_lo G_e, one matrix proved positive definite (pd_ieee)
 import math as _math
@@ -2325,13 +2360,14 @@ _Nb = 0.01 * 355e6 / (_ph + _math.sqrt(_ph * _ph - _lb * _lb))   # chi A fy = 17
 _bk1 = FRM.judge_buckling(_colP(-int(_Nb * 0.99)), "0", F(355 * 10**6), "b")
 _bk2 = FRM.judge_buckling(_colP(-int(_Nb * 1.01)), "0", F(355 * 10**6), "b")
 _bk3 = FRM.judge_buckling(_colP(int(_Nb)), "0", F(355 * 10**6), "b")
-_u1 = float(F(_bk1["utilisation_max"].split()[0]))
+_u1 = max(float(F(c["utilisation_max"].split()[0])) for c in _bk1["cases"])
 check("member buckling (EN 1993-1-1 6.3.1, curve b, fy 355): the cantilever column at 0.99 of the hand N_b,Rd = "
       "1.755 MN is EARNED with a proved utilisation just above 0.99 (the alpha_cr bound's 0.1 % gap), at 1.01 it is "
       "REFUTED at the nominal moduli (the witness's alpha_cr upper bound), and a column in tension has nothing to "
       "buckle",
       _bk1["verdict"] == "EARNED" and 0.99 < _u1 < 0.9915 and _bk2["verdict"] == "REFUTED"
-      and _bk3["verdict"] == "EARNED" and _bk3["members"] == [], (_bk1["verdict"], _u1, _bk2["verdict"], _bk3))
+      and _bk3["verdict"] == "EARNED" and all(c["members"] == [] for c in _bk3["cases"])
+      and len(_bk1["cases"]) == 2, (_bk1["verdict"], _u1, _bk2["verdict"], _bk3))
 # THE FLOATING PATH (2026-11-01): above 600 unknowns float solves, exact residuals, lambda_min proved in fixed point
 import subprocess as _sp
 _f408 = _sp.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.parent / "examples" / "frame" / "gen_frame.py"),
