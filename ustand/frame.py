@@ -533,7 +533,7 @@ def judge_buckling(text, tol, fy, curve, gamma_m1=F(1), jobs=1, phi=None):
     vs = [c["verdict"] for c in cases]
     return {**SCOPE_BEAM, "verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
             "path": cases[0].get("path"), "cases": cases,
-            "not_checked": "6.3.3 bending-axial interaction; out-of-plane and lateral-torsional buckling"}
+            "not_checked": "6.3.3 bending-axial interaction HERE (run --interaction); out-of-plane and lateral-torsional buckling"}
 
 
 def judge_buckling_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
@@ -544,7 +544,7 @@ def judge_buckling_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
     bound give a proved lower bound on H for every modulus in the box. EARNED when every member clears it. REFUTED
     when a member fails at the NOMINAL moduli (a point of the box): H <= alpha_cr,hi g(lb_hi) with alpha_cr,hi
     from stability_upper's witness and |N| >= |N|_lo from one proved solve. OPEN otherwise. Axial force only: the
-    bending interaction of 6.3.3 is NOT checked, nor out-of-plane or lateral-torsional buckling."""
+    bending interaction of 6.3.3 is judge_interaction's; out-of-plane and lateral-torsional buckling are not checked."""
     nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
     if curve not in CURVES:
         raise FrameError(f"{curve!r}: a buckling curve is one of {', '.join(CURVES)}")
@@ -587,7 +587,7 @@ def judge_buckling_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
             "path": "EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i|; alpha_cr and |N| proved over the box",
             "alpha_cr_proved_lower": _show(lam, -1) if lam else None, "alpha_cr_nominal_estimate": st.get("lam_est"),
             "utilisation_max": _show(worst, 1), "members": rows,
-            "not_checked": "6.3.3 bending-axial interaction; out-of-plane and lateral-torsional buckling"}
+            "not_checked": "6.3.3 bending-axial interaction HERE (run --interaction); out-of-plane and lateral-torsional buckling"}
 
 
 def fibre_ranges(text, tol, k, ctx=None):
