@@ -121,8 +121,10 @@ def read_deck(text):
         elif cmd in ("MAT", "REAL", "TYPE"):
             if len(f) > 1 and f[1] not in ("1", ""):
                 raise PlateError(f"{where}: {cmd},{f[1]} — one material and one real constant only")
+        elif cmd == "TRAC":
+            continue                                   # the continuum's load: ustand/hypercircle.py reads it
         else:
-            raise PlateError(f"{where}: {f[0]} — not read (only N E MP R F D ET MAT REAL TYPE)")
+            raise PlateError(f"{where}: {f[0]} — not read (only N E MP R F D ET MAT REAL TYPE TRAC)")
     if not nodes or not elems:
         raise PlateError("no nodes or no elements")
     if ex is None or nu is None or th is None:

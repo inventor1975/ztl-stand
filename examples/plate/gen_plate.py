@@ -62,6 +62,11 @@ def deck(nx, ny, load="tension", support="clamped", h="1/10", E="200e9", nu="3/1
             L.append(f"F, {nid(nx, j)}, FX, {_dec(fj)}")
         else:
             L.append(f"F, {nid(nx, j)}, FY, {_dec(-fj)}")
+    # the continuum's load (ustand/hypercircle.py): the same uniform traction, segment by segment (resultants)
+    seg = p * th * h
+    for j in range(ny):
+        fx, fy = (seg, 0) if load == "tension" else (0, -seg)
+        L.append(f"TRAC, {nid(nx, j)}, {nid(nx, j + 1)}, {_dec(fx)}, {_dec(fy)}")
     return "\n".join(L)
 
 

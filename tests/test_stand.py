@@ -2292,6 +2292,47 @@ _fm2 = FRM.judge_members(_frh, "0.5%", [(1, F(49) * 10**6)])
 check("frame member check (EN 1993-1-1 6.2.1(7) elastic), +-0.5 % on every modulus: |sigma| <= 51 MPa EARNED in "
       "the root element, <= 49 MPa REFUTED at a witness (exactly 50 MPa: determinate)",
       _fm1["verdict"] == "EARNED" and _fm2["verdict"] == "REFUTED", (_fm1["verdict"], _fm2["verdict"]))
+# THE CONTINUUM, NOT THE MESH (2026-11-01, ustand/hypercircle.py): the compliance of the elastic plate itself,
+# bracketed by Cauchy-Schwarz twice — the mesh solution from below, an exactly CHECKED equilibrated stress from above
+from ustand import hypercircle as HC
+import subprocess as _sp_hc
+def _hc_deck(k):
+    return _sp_hc.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.parent / "examples" / "plate" /
+                       "gen_plate.py"), str(4 * k), str(k), "--load", "shear", "--h", str(F(1, k))],
+                      capture_output=True, text=True, check=True).stdout
+_hc2, _hc4 = HC.compliance_bounds(_hc_deck(2)), HC.compliance_bounds(_hc_deck(4))
+check("continuum compliance (clamped 4 x 1 m plate, uniform tip shear, 10 kN): proved brackets [7.33, 13.49] on "
+      "8 x 2 and [11.00, 13.39] N m on 16 x 4 — the finer one inside the coarser, the tau of each passing the exact "
+      "admissibility check (div, every interior edge, every loaded/free edge)",
+      _hc2["lower"] <= _hc4["lower"] <= _hc4["upper"] <= _hc2["upper"] and 7.3 < float(_hc2["lower"]) < 7.4
+      and 13.38 < float(_hc4["upper"]) < 13.39 and _hc2["check"]["boundary_edges"] == 18,
+      ([float(_hc2["lower"]), float(_hc2["upper"])], [float(_hc4["lower"]), float(_hc4["upper"])]))
+_hS = HC.setup(_hc_deck(2))
+_hd, _hi = HC.airy_field(_hS)
+_hp = HC.tau_pieces(_hS, _hd, _hi)
+def _hc_rejects(pieces):
+    try:
+        HC.check_admissible(_hS, pieces)
+        return False
+    except HC.HCError:
+        return True
+_free = [i for i in _hd if ("e", None) != i and i not in
+         {_hi[(n, c)] for n in HC.prescribed(_hS)[0] for c in range(3)} | {_hi[("e", k)] for k in HC.prescribed(_hS)[1]}]
+_hd2 = dict(_hd); _hd2[_free[len(_free) // 2]] += F(12345, 7)        # a FREE value moved: still admissible
+_bnd_dof = _hi[(next(iter(HC.prescribed(_hS)[0])), 1)]
+_hd3 = dict(_hd); _hd3[_bnd_dof] += F(1, 3)                          # a PRESCRIBED boundary value moved: not
+_flip = [(k, s, G, ([-x for x in c] if i == 0 else c), q) for i, (k, s, G, c, q) in enumerate(_hp)]
+check("continuum: the exact admissibility check is not decoration — any FREE Airy value gives an admissible tau "
+      "(accepted), a moved boundary value or one sub-triangle's sign flip is REJECTED",
+      not _hc_rejects(HC.tau_pieces(_hS, _hd2, _hi)) and _hc_rejects(HC.tau_pieces(_hS, _hd3, _hi))
+      and _hc_rejects(_flip))
+_hcb = _hc_deck(2).replace("TRAC, 18, 27, 0, -5000", "TRAC, 18, 27, 0, -4000")
+try:
+    HC.setup(_hcb); _hc_ref = False
+except HC.HCError:
+    _hc_ref = True
+check("continuum: a TRAC whose consistent load is not the deck's nodal force is refused (the FE model and the "
+      "continuum must carry the same load)", _hc_ref and "TRAC, 18, 27, 0, -5000" in _hc_deck(2))
 # EN GLOBAL ANALYSIS for member stresses (2026-11-01, "максимальное устранение ошибок"): sway imperfection +-1/200
 # both ways, second order by the proved alpha_cr (>= 10 first order allowed; 3..10 amplified; < 3 OPEN)
 import re as _re_so
