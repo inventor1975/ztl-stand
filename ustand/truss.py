@@ -276,13 +276,20 @@ def judge_energy(text, tol, requirements):
                           "the stand's independent checker does not re-check this path yet"}, rows
 
 
+SCOPE_TRUSS = {"scope": "TRUSS (pin-jointed bars, linear)",
+               "scope_note": "proved for the linear truss (small displacements, every bar elastic and straight). NOT "
+                             "checked: a compressed bar's buckling (the deck gives no second moment), geometric "
+                             "nonlinearity, joint fixity."}
+
+
 def judge(text, tol, requirements, energy=True):
     if energy and requirements:
         out, _ = judge_energy(text, tol, requirements)
         if out is not None:
-            return out
+            return {**SCOPE_TRUSS, **out} if isinstance(out, dict) else out
     bk = to_brick(text, tol, requirements)
-    return _run(bk, bk["requirements"])
+    out = _run(bk, bk["requirements"])
+    return {**SCOPE_TRUSS, **out} if isinstance(out, dict) else out
 
 
 def range_of(text, tol, target, steps=40, progress=None):
