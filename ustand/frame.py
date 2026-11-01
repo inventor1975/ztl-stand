@@ -305,7 +305,19 @@ def _geo_entries(nodes_xy, i, j, L, c, s, dof):
     return out
 
 
+_STAB = {}
+
+
 def stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
+    """Cached: the same deck, tolerance, precision and model give the same proved result (the float steps are
+    deterministic, eigsh starts from ones) — the second-order checks ask for it again and again."""
+    key = (text, str(tol), rel, model)
+    if key not in _STAB:
+        _STAB[key] = _stability_lower(text, tol, jobs, rel, model)
+    return _STAB[key]
+
+
+def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
     """A proved lam_low with lam_low < lambda_cr for every modulus in the box — of the CONTINUUM frame (Euler-Bernoulli
     members), not of its Hermite model (model="continuum", the default since 2026-11-01; model="fe" is the model's
     own, which one element per member can put ABOVE the true load); and the float estimate of the nominal
@@ -406,7 +418,8 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
             return False
         return ZE.pd_ieee(n, M, F(mu) * F(9, 10)) is not None
     if lam_est is None:
-        return {"lam_low": None, "why": "no compressed member: no buckling under these loads", "lam_est": None}
+        return {"lam_low": None, "why": "no compressed member: no buckling under these loads", "lam_est": None,
+                "unknowns": n, "T": T, "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
     lo, hi = F(0), F(lam_est) * F(11, 10)
     start = F(lam_est) / 1000
     for _ in range(20):                           # a noisy estimate (members barely compressed): step down
@@ -414,7 +427,8 @@ def stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
             break
         hi, start = start, start / 10
     else:
-        return {"lam_low": F(0), "lam_est": lam_est, "why": "not even a small factor proved"}
+        return {"lam_low": F(0), "lam_est": lam_est, "why": "not even a small factor proved", "unknowns": n, "T": T,
+                "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
     lo = start
     for _ in range(40):
         mid = (lo + hi) / 2
@@ -662,7 +676,7 @@ def _glob(i, j, c, s, dof, l):
     return {k: v for k, v in g.items() if v}
 
 
-def second_order_case(text, tol, checks, jobs=1):
+def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     """PHYSICAL SECOND ORDER (2026-11-01, the curator's "(а)"): member stresses of the frame under its loads, with
     every modulus in the box, in second-order theory with the axial forces of the first-order analysis (a NAMED
     model premise; MEASURED on the 12x6 frame: iterating N moves the result by 0.02 %), each member the Euler-
@@ -678,7 +692,7 @@ def second_order_case(text, tol, checks, jobs=1):
     nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
     st = stability_lower(text, tol, jobs=jobs)
     parts, f, dof, emap, (_, _, _, h) = energy_system_full(text, tol)
-    if h is None:
+    if h is None and checks:
         raise FrameError("member stresses need the section height: R, 1, area, izz, height")
     n = len(dof)
     T = max((p["t"] for p in parts), default=F(0))
@@ -687,6 +701,25 @@ def second_order_case(text, tol, checks, jobs=1):
         return {"verdict": "OPEN", "why": f"the critical factor is not proved above 1 (proved {lam}): the frame may "
                                           f"buckle under these loads", "checks": []}
     Nlo, Nhi = st["Nlo"], st["Nhi"]
+    if at is not None:
+        # ONE POINT of the box (a witness): every modulus fixed at p = at; the axial forces there enclosed (exact
+        # solve up to EXACT_UP_TO unknowns, the floating path's enclosure above); D in [0, C] stays unknown
+        parts = [{"t": F(0), "terms": [(F(w) * pp, g) for w, g in p_["terms"]]} for p_, pp in zip(parts, at)]
+        T = F(0)
+        Nlo, Nhi = {}, {}
+        for k in emap:
+            e = [F(0)] * n
+            for i_, v in emap[k]["a"].items():
+                e[i_] = v
+            if not any(e):
+                Nlo[k] = Nhi[k] = F(0)
+                continue
+            if n <= ZE.EXACT_UP_TO:
+                a_ = b_ = ZE.value_at(parts, f, e, n, [F(1)] * len(parts))
+            else:
+                a_, b_ = ZE.value_enclosure_fp(parts, f, e, n, [F(1)] * len(parts))
+            fac = ex * area / emap[k]["L"]
+            Nlo[k], Nhi[k] = min(fac * a_, fac * b_), max(fac * a_, fac * b_)
     A0 = ZE.matrix(parts, n)
     gparts, cterms, cqd = [], [], {}
     Elo = (1 - T) * ex
@@ -738,17 +771,20 @@ def second_order_case(text, tol, checks, jobs=1):
             for i_, v in m["c"].items():
                 g[i_] = g.get(i_, F(0)) + izz / m["L"] * 3 * v
             es.append(vec(g)); items.append((kchk, end))
+    for (nd, d) in disp:                              # nodal displacements (second order, the continuum frame)
+        es.append(vec({dof[(nd, d)]: F(1)})); items.append((("U", nd, d), "U"))
     es.append(list(f)); items.append((None, "f"))
     rs = ZE.certify_general_many(A0, parts + gparts, cterms, f, es, n)
+    dranges = {key: (r["lo"], r["hi"]) for (key, what), r in zip(items, rs) if what == "U"}
     theta = rs[0]["theta"]
     fu_hi = rs[-1]["hi"]
     unC = ZE._sqrt_up(theta * max(fu_hi, F(0)) / (1 - theta))     # ||u||_C <= sqrt(theta) ||u||_A0, A >= (1-theta)A0
     rng = {}
     for (kchk, what), r in zip(items, rs):
-        if kchk is not None:
+        if kchk is not None and what != "U":
             rng[(kchk, what)] = (min(ex * (1 - T) * r["lo"], ex * (1 + T) * r["lo"]),
                                  max(ex * (1 - T) * r["hi"], ex * (1 + T) * r["hi"]))
-    W = izz / (h / 2)
+    W = izz / (h / 2) if h else None
     out = []
     for kchk, lim in checks:
         L = emap[kchk]["L"]
@@ -796,7 +832,7 @@ def second_order_case(text, tol, checks, jobs=1):
                     "verdict": "EARNED" if hi_abs <= lim else "REFUTED" if bad else "OPEN"})
     vs = [r["verdict"] for r in out]
     return {"verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
-            "checks": out, "alpha_cr_proved_lower": _show(lam, -1) if lam else None}
+            "checks": out, "alpha_cr_proved_lower": _show(lam, -1) if lam else None, "disp": dranges}
 
 
 def judge_members(text, tol, checks, jobs=1, order=2, phi=PHI0):
@@ -1112,11 +1148,50 @@ def judge(text, tol, requirements):
                 wl, wh = ZE.value_enclosure_fp(parts, f, e, n, ps)
                 w = wh if up else wl
             row["witness_value"] = _show(w)
+            row["_vertex"] = ps
             row["verdict"] = "REFUTED" if ((wl > v) if up else (wh < v)) else "OPEN"
         rows.append(row)
     vs = [r["verdict"] for r in rows]
-    verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
-    return {**SCOPE_BEAM, "verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
+    verdict1 = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
+    # THE PHYSICAL VERDICT (2026-11-01): the displacements in second-order theory (axial forces of the first-order
+    # analysis, a named premise), every member the Euler-Bernoulli continuum — compression makes them LARGER than
+    # first order says. No imperfection here (the deck's loads as given).
+    try:
+        so = second_order_case(text, tol, [], disp=[(nd, d) for (nd, d, op, v) in requirements])
+    except (ArithmeticError, FrameError) as ex_:
+        so = {"verdict": "OPEN", "why": str(ex_), "disp": {}}
+    pv = []
+    for row, (nd, d, op, v) in zip(rows, requirements):
+        rr = so.get("disp", {}).get(("U", nd, d))
+        if rr is None:
+            row["second_order"] = {"verdict": "OPEN", "why": so.get("why", "not proved")}
+            pv.append("OPEN")
+            continue
+        lo2, hi2 = rr
+        vv = "EARNED" if ((hi2 <= v) if op == "<=" else (lo2 >= v)) else \
+            "REFUTED" if ((lo2 > v) if op == "<=" else (hi2 < v)) else "OPEN"
+        row["second_order"] = {"proved_range": [_show(lo2, -1), _show(hi2, 1)], "verdict": vv}
+        if vv == "OPEN" and row.get("_vertex") is not None:
+            # the physical WITNESS: the first-order vertex p, second order there with D in [0, C] unknown
+            try:
+                sw = second_order_case(text, tol, [], disp=[(nd, d)], at=row["_vertex"])
+                wr = sw.get("disp", {}).get(("U", nd, d))
+            except (ArithmeticError, FrameError):
+                wr = None
+            if wr is not None:
+                wl2, wh2 = wr
+                row["second_order"]["witness_range"] = [_show(wl2, -1), _show(wh2, 1)]
+                if (wl2 > v) if op == "<=" else (wh2 < v):
+                    vv = "REFUTED"
+                    row["second_order"]["verdict"] = vv
+        pv.append(vv)
+    verdict = "REFUTED" if "REFUTED" in pv else "EARNED" if all(x == "EARNED" for x in pv) else "OPEN"
+    for row in rows:
+        row.pop("_vertex", None)
+    return {**SCOPE_BEAM, "verdict": verdict, "verdict_first_order": verdict1,
+            "verdict_note": "verdict: second-order theory of the continuum frame (ZTL zenergy.certify_general); "
+                            "verdict_first_order: first-order (each row's proved_range)",
+            "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
             "requirements": rows, "unknowns": n, "elements": len(parts),
             "checked_by": "ZTL zenergy: exact solves up to ZTL zenergy.EXACT_UP_TO unknowns (120; residual checked); above them float solves with "
                           "exact residuals and lambda_min(K0) proved by a floating Cholesky — PREMISE: IEEE 754 "

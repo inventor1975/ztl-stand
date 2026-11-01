@@ -2286,9 +2286,15 @@ check("frame: the same cantilever inclined 3-4-5, load across it — UX, UY, ROT
       == ["-5/252", "5/336", "5/672"])
 _fe = FRM.judge(_fr, "0.5%", [FRM._req("U(9,Y) >= -0.0127623")])
 _fr2 = FRM.judge(_fr, "0.5%", [FRM._req("U(9,Y) >= -0.012762")])
-check("frame: +-0.5 % on every element's modulus — tip >= -0.0127623 EARNED (the extreme is -4/315/0.995 = "
-      "-0.01276222...); >= -0.012762 REFUTED at a vertex solved exactly (the witness IS that extreme)",
-      _fe["verdict"] == "EARNED" and _fr2["verdict"] == "REFUTED", (_fe["verdict"], _fr2["verdict"]))
+check("frame: +-0.5 % on every element's modulus — in FIRST order tip >= -0.0127623 EARNED (the extreme is "
+      "-4/315/0.995 = -0.01276222...); >= -0.012762 REFUTED at a vertex solved exactly (the witness IS that extreme)",
+      _fe["verdict_first_order"] == "EARNED" and _fr2["verdict_first_order"] == "REFUTED",
+      (_fe["verdict_first_order"], _fr2["verdict_first_order"]))
+check("the same PHYSICALLY (second order, continuum members): the 1e-7-wide margin of 'EARNED' is beyond the "
+      "second-order bound's own width — OPEN, said; the refutation stands on a physical WITNESS: the first-order "
+      "vertex, second order there with D in [0, C] unknown, enclosed exactly (theta = 0: nothing else moves)",
+      _fe["verdict"] == "OPEN" and _fr2["verdict"] == "REFUTED"
+      and "witness_range" in _fr2["requirements"][0]["second_order"], (_fe["verdict"], _fr2["verdict"]))
 # MEMBER STRESSES (2026-11-01): sigma = N/A +- M (h/2)/I at both fibres of both ends, each E p_k (g.u) through
 # ZTL zenergy.certify_scaled; the cantilever is statically determinate, so the stress does not move with E
 _frh = _fr.replace("R, 1, 0.01, 8e-5", "R, 1, 0.01, 8e-5, 0.2")
@@ -2535,10 +2541,15 @@ _f408 = _sp.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.par
 _fn = F(FRM.range_of(_f408, "0", "U(361,X)")["nominal"].split()[0])
 _fe1 = FRM.judge(_f408, "0.5%", [(361, "X", "<=", _fn * F(102, 100))])
 _fe2 = FRM.judge(_f408, "0.5%", [(361, "X", "<=", _fn * F(1003, 1000))])
-check("frame, floating path: a 40-storey x 8-bay frame (1080 unknowns) — roof sway <= nominal + 2 % EARNED, "
-      "<= nominal + 0.3 % REFUTED (the whole enclosure at the vertex is beyond it)",
-      _fe1["verdict"] == "EARNED" and _fe2["verdict"] == "REFUTED" and _fe1["unknowns"] == 1080,
-      (_fe1["verdict"], _fe2["verdict"]))
+check("frame, floating path: a 40-storey x 8-bay frame (1080 unknowns) — in FIRST order roof sway <= nominal + 2 % "
+      "EARNED, <= nominal + 0.3 % REFUTED (the whole enclosure at the vertex is beyond it)",
+      _fe1["verdict_first_order"] == "EARNED" and _fe2["verdict_first_order"] == "REFUTED" and _fe1["unknowns"] == 1080,
+      (_fe1["verdict_first_order"], _fe2["verdict_first_order"]))
+_so408 = F(_fe1["requirements"][0]["second_order"]["proved_range"][0].split()[0])
+check("the same frame PHYSICALLY (second order, continuum members): 'roof sway <= first-order nominal + 2 %' — "
+      "EARNED by first order — is REFUTED: alpha_cr ~10.35 makes the real sway >= 7.4 % larger (proved lower end above "
+      "the limit). A first-order displacement verdict on a compressed frame was on the UNSAFE side",
+      _fe1["verdict"] == "REFUTED" and _so408 > _fn * F(107, 100), (float(_so408 / _fn),))
 # A PLANE-STRESS PLATE (ustand/plate.py, 2026-11-01): the constant-strain triangle as three rank-one terms sharing E
 # (D0 split by its exact LDL^T). First the PATCH TEST — the element's acceptance: a uniform tension must be reproduced
 # EXACTLY at every node (u_x = sigma x / E, u_y = -nu sigma y / E); then a requirement under +-0.5 %; then the
