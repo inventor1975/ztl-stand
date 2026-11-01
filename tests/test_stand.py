@@ -2292,6 +2292,20 @@ _fm2 = FRM.judge_members(_frh, "0.5%", [(1, F(49) * 10**6)])
 check("frame member check (EN 1993-1-1 6.2.1(7) elastic), +-0.5 % on every modulus: |sigma| <= 51 MPa EARNED in "
       "the root element, <= 49 MPa REFUTED at a witness (exactly 50 MPa: determinate)",
       _fm1["verdict"] == "EARNED" and _fm2["verdict"] == "REFUTED", (_fm1["verdict"], _fm2["verdict"]))
+# STABILITY (2026-11-01): a proved lower bound on the critical load factor for every modulus in the box —
+# K(p) + lam K_G(N(p)) >= (1 - T) K0 + lam sum N_lo G_e, one matrix proved positive definite (pd_ieee)
+import math as _math
+_col = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2"]
+                 + [f"N, {k+1}, 0, {F(4*k, 16)}" for k in range(17)] + [f"E, {k+1}, {k+2}" for k in range(16)]
+                 + ["D, 1, UX, 0", "D, 1, UY, 0", "D, 1, ROTZ, 0", "F, 17, FY, -10000"])
+_eul = _math.pi ** 2 * 210e9 * 8e-5 / (4 * 16) / 10000         # pi^2 EI / (4 L^2) / P = 259.0771
+_st0 = FRM.stability_lower(_col, "0")
+_st5 = FRM.stability_lower(_col, "0.5%")
+check("frame stability: a cantilever column (16 elements) — the proved lower bound on the critical factor lies "
+      "just below Euler's pi^2 EI/(4 L^2)/P = 259.077 (within 0.2 %), and with +-0.5 % on every modulus it drops "
+      "by about 0.5 % (the softest steel), never above Euler",
+      0.998 * _eul < float(_st0["lam_low"]) < _eul and 0.993 * _eul < float(_st5["lam_low"]) < 0.996 * _eul,
+      (float(_st0["lam_low"]), float(_st5["lam_low"]), _eul))
 # THE FLOATING PATH (2026-11-01): above 600 unknowns float solves, exact residuals, lambda_min proved in fixed point
 import subprocess as _sp
 _f408 = _sp.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.parent / "examples" / "frame" / "gen_frame.py"),

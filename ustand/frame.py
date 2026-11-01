@@ -213,6 +213,109 @@ def fibre_ranges_many(text, tol, ks, ctx=None, jobs=1):
     return out
 
 
+# ----------------------------------------------------------------------------------------------------------------
+# STABILITY (2026-11-01): a PROVED lower bound on the elastic critical load factor, for every modulus in the box.
+# The consistent geometric stiffness of a beam, G_e = int N_v'^T N_v' dx over Hermite cubics (local v, th):
+#   (1/(30 L)) [[36, 3L, -36, 3L], [3L, 4L^2, -3L, -L^2], [-36, -3L, 36, -3L], [3L, -L^2, -3L, 4L^2]],
+# is positive SEMIdefinite (a Gram matrix), and K_G = sum_e N_e G_e (N_e tension positive). If N_e(p) >= N_lo,e over
+# the box (each a proved range: ZTL zenergy.certify_many on the axial outputs), then for lambda >= 0
+#   K(p) + lambda K_G(N(p))  >=  (1 - T) K0 + lambda sum_e N_lo,e G_e        (Loewner: K(p) >= (1 - T) K0, G_e >= 0)
+# so ONE matrix proved positive definite (ZTL zenergy.pd_ieee) proves lambda < lambda_cr at every p. Linear
+# buckling (no imperfections, no plasticity); the load factor scales the given loads.
+
+def _geo_entries(nodes_xy, i, j, L, c, s, dof):
+    """G_e over global DOFs as {(row, col): value} (both triangles), the local v = -s ux + c uy."""
+    G = [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L], [-36, -3 * L, 36, -3 * L],
+         [3 * L, -L * L, -3 * L, 4 * L * L]]
+    loc = [[((i, "X"), -s), ((i, "Y"), c)], [((i, "R"), F(1))], [((j, "X"), -s), ((j, "Y"), c)], [((j, "R"), F(1))]]
+    out = {}
+    for a in range(4):
+        for b in range(4):
+            if not G[a][b]:
+                continue
+            for (na, va) in loc[a]:
+                for (nb, vb) in loc[b]:
+                    if va and vb and na in dof and nb in dof:
+                        key = (dof[na], dof[nb])
+                        out[key] = out.get(key, F(0)) + F(G[a][b]) / (30 * L) * va * vb
+    return out
+
+
+def stability_lower(text, tol, jobs=1, rel=F(1, 1000)):
+    """A proved lam_low with lam_low < lambda_cr for every modulus in the box; and the float estimate of the
+    nominal lambda_cr for the reader. Bisection on lambda, every accepted step proved by pd_ieee."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    import numpy as np
+    import scipy.sparse.linalg as sla
+    nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
+    parts, f, dof, emap, _ = energy_system_full(text, tol)
+    n = len(dof)
+    T = max((p["t"] for p in parts), default=F(0))
+    # axial forces N_e = (E A / L) p_e (a.u): scaled outputs, all at once
+    es, ks = [], []
+    for k in emap:
+        e = [F(0)] * n
+        for i, v in emap[k]["a"].items():
+            e[i] = v
+        if any(e):
+            es.append(e)
+            ks.append(k)
+    rs = ZE.certify_many(parts, f, es, n, jobs=jobs)
+    Nlo = {k: F(0) for k in emap}
+    Nnom = {k: F(0) for k in emap}
+    for k, r in zip(ks, rs):
+        sc = ZE.scaled_from(r, parts, emap[k]["part"])
+        fac = ex * area / emap[k]["L"]
+        Nlo[k] = min(fac * sc["lo"], fac * sc["hi"])
+        Nnom[k] = fac * sc["nominal"]
+    K0 = ZE.matrix(parts, n)                      # lower triangle
+    Gsum, Gnom = {}, {}
+    for k, (i, j) in enumerate(elems, 1):
+        L = emap[k]["L"]
+        dx, dy = nodes[j][0] - nodes[i][0], nodes[j][1] - nodes[i][1]
+        ge = _geo_entries(nodes, i, j, L, dx / L, dy / L, dof)
+        for (a, b), v in ge.items():
+            if a >= b:
+                Gsum[(a, b)] = Gsum.get((a, b), F(0)) + Nlo[k] * v
+                Gnom[(a, b)] = Gnom.get((a, b), F(0)) + Nnom[k] * v
+    # float estimate of the nominal lambda_cr: K0 v = -lam K_G v
+    A = ZE._float_matrix(K0, n)
+    Bm = ZE._float_matrix(Gnom, n)
+    try:
+        vals = sla.eigsh(-Bm, k=1, M=A, which="LA", return_eigenvectors=False, v0=np.ones(n))
+        lam_est = float(1 / vals[0]) if vals[0] > 0 else None
+    except Exception:
+        lam_est = None
+    def proved(lam):
+        M = {key: (1 - T) * v for key, v in K0.items()}
+        for key, v in Gsum.items():
+            M[key] = M.get(key, F(0)) + lam * v
+        Mf = ZE._float_matrix(M, n)
+        try:
+            mu = float(sla.eigsh(Mf, k=1, sigma=0, which="LM", return_eigenvectors=False, v0=np.ones(n))[0])
+        except Exception:
+            return False
+        if mu <= 0:
+            return False
+        return ZE.pd_ieee(n, M, F(mu) * F(9, 10)) is not None
+    if lam_est is None:
+        return {"lam_low": None, "why": "no compressed member: no buckling under these loads", "lam_est": None}
+    lo, hi = F(0), F(lam_est) * F(11, 10)
+    if not proved(lo + F(lam_est) / 1000):
+        return {"lam_low": F(0), "lam_est": lam_est, "why": "not even a small factor proved"}
+    lo = F(lam_est) / 1000
+    for _ in range(40):
+        mid = (lo + hi) / 2
+        if proved(mid):
+            lo = mid
+        else:
+            hi = mid
+        if hi - lo <= rel * hi:
+            break
+    return {"lam_low": lo, "lam_est": lam_est, "unknowns": n, "T": T}
+
+
 def fibre_ranges(text, tol, k, ctx=None):
     from . import judge_ztl  # noqa: F401
     import zenergy as ZE
@@ -361,6 +464,14 @@ def main(argv):
         text = open(argv[0], encoding="utf-8").read()
         tol = argv[argv.index("--tol") + 1] if "--tol" in argv else "0"
         import re as _re
+        if "--stability" in argv:                     # a proved lower bound on the critical load factor
+            jobs = int(argv[argv.index("--jobs") + 1]) if "--jobs" in argv else 1
+            r = stability_lower(text, tol, jobs=jobs)
+            print(json.dumps({"lambda_cr_proved_lower": _show(r["lam_low"], -1) if r.get("lam_low") is not None
+                              else None, "lambda_cr_nominal_estimate": r.get("lam_est"),
+                              "note": "linear buckling, every modulus in the box; no imperfections, no plasticity",
+                              **({"why": r["why"]} if "why" in r else {})}, indent=1, ensure_ascii=False))
+            return 0
         raw = [argv[i + 1] for i, a in enumerate(argv) if a == "--req"]
         sig = [x for x in raw if _re.match(r"^\s*SIG\(", x, _re.I)]
         if sig:                                       # member stress checks: SIG(k) <= limit
