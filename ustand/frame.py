@@ -14,20 +14,29 @@ with its modulus anywhere in E (1 +- t) is a part of three terms — the case le
     python3 -m ustand.frame deck.txt --tol 0.5% --req "U(12,Y) >= -0.0251"     a requirement
     python3 -m ustand.frame deck.txt --tol 0.5% --range "U(12,Y)"               the proved enclosure (not exact)
             U(node,X|Y) a displacement, ROT(node) a rotation
+    python3 -m ustand.frame deck.txt --tol 0.5% --req "SIG(3) <= 235e6"         member stress, EN 1993-1-1 6.2.1(7):
+            |sigma| at both extreme fibres of both ends of element 3 (needs the section height in R)
+    python3 -m ustand.frame deck.txt --tol 0.5% --stability                     the critical load factor: a proved
+            lower bound for every modulus in the box, a proved upper bound at the nominal moduli (a witness mode)
+    python3 -m ustand.frame deck.txt --tol 0.5% --buckling 355e6 b [1.0]        EN 1993-1-1 6.3.1 for every compressed
+            member, fy, curve a0|a|b|c|d, gamma_M1; N_cr,i = alpha_cr |N_Ed,i|; EARNED / REFUTED (nominal) / OPEN
+    --jobs N   outputs spread over N processes (stresses, stability, buckling)
 
 THE DECK (the subset read; anything else is REFUSED aloud):
     N, id, x, y                  a node
     E, i, j                      an element between nodes i and j (one material, one real constant)
     MP, EX, 1, value             Young's modulus (nominal)
-    R, 1, area, izz              the section: area and second moment
+    R, 1, area, izz[, height]    the section: area, second moment, and (for stresses) the height
     F, node, FX|FY|MZ, value     a nodal force or moment
     D, node, UX|UY|ROTZ, 0       a support (zero displacement or rotation)
     /PREP7, ET (BEAM3 / 3), MAT, REAL, TYPE, comments (!) — read and skipped.
 Lengths must be rational (an irrational length is refused: the stiffness would not be exact).
 
 WHAT IT DOES NOT DO (yet), said: the box path (zlin) is not wired for frames — a requirement the energy path cannot
-decide comes back OPEN, not guessed; no shear deformation (Timoshenko), no second-order (P-delta) effects, no member
-checks (stress, buckling) — displacements and rotations only.
+decide comes back OPEN, not guessed; no shear deformation (Timoshenko); stresses are first-order (no P-delta
+amplification); stability is LINEAR buckling (no imperfections, no plasticity); member buckling is 6.3.1 under axial
+force only — the 6.3.3 bending-axial interaction, out-of-plane and lateral-torsional buckling are NOT checked.
+The proved ranges are for the MODEL (the mesh): discretization error is not bounded (bench/stage0/plate_convergence).
 """
 from __future__ import annotations
 
