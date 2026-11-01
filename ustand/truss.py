@@ -237,7 +237,7 @@ def judge_energy(text, tol, requirements):
             raise TrussError(f"U({nd},{d}): not a free displacement of this truss")
         e = [F(0)] * n
         e[dof[(nd, d)]] = F(1)
-        r = ZE.certify(parts, f, e, n)       # exact solves up to 600 unknowns, the floating path above
+        r = ZE.certify(parts, f, e, n)       # exact solves up to ZE.EXACT_UP_TO unknowns, the floating path above
         row = {"requirement": f"U({nd},{d}) {op} {v}", "nominal": _show(r["nominal"]),
                "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)],
                "first_order": _show(r["first"]), "rest": _show(r["rest"])}
@@ -247,7 +247,7 @@ def judge_energy(text, tol, requirements):
             up = op == "<="                                   # the side that could violate
             ps = [1 + (p["t"] if (sl > 0) == up and sl != 0 else -p["t"] if sl != 0 else 0)
                   for p, sl in zip(parts, r["slopes"])]
-            if n <= 600:
+            if n <= ZE.EXACT_UP_TO:
                 w = wl = wh = ZE.value_at(parts, f, e, n, ps)
             else:                                     # the floating path at the vertex: its whole enclosure must cross
                 wl, wh = ZE.value_enclosure_fp(parts, f, e, n, ps)

@@ -265,7 +265,7 @@ def judge_members(text, tol, checks, jobs=1):
                 ps = [1 + (pp["t"] if (s_ > 0) == up and s_ != 0 else -pp["t"] if s_ != 0 else 0)
                       for pp, s_ in zip(parts, sl)]
                 ps[pk] = 1 + parts[pk]["t"]
-                if n <= 600:
+                if n <= ZE.EXACT_UP_TO:
                     wl = wh = ZE.value_at(parts, f, worst["e"], n, ps)
                 else:
                     wl, wh = ZE.value_enclosure_fp(parts, f, worst["e"], n, ps)
@@ -312,7 +312,7 @@ def judge(text, tol, requirements):
             raise FrameError(f"{_name(nd, d)}: not a free displacement of this frame")
         e = [F(0)] * n
         e[dof[(nd, d)]] = F(1)
-        r = ZE.certify(parts, f, e, n)       # exact solves up to 600 unknowns, the floating path above
+        r = ZE.certify(parts, f, e, n)       # exact solves up to ZE.EXACT_UP_TO unknowns, the floating path above
         row = {"requirement": f"{_name(nd, d)} {op} {v}", "nominal": _show(r["nominal"]),
                "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)],
                "first_order": _show(r["first"]), "rest": _show(r["rest"])}
@@ -322,7 +322,7 @@ def judge(text, tol, requirements):
             up = op == "<="
             ps = [1 + (p["t"] if (sl > 0) == up and sl != 0 else -p["t"] if sl != 0 else 0)
                   for p, sl in zip(parts, r["slopes"])]
-            if n <= 600:
+            if n <= ZE.EXACT_UP_TO:
                 w = wl = wh = ZE.value_at(parts, f, e, n, ps)
             else:                                     # the floating path at the vertex: its whole enclosure must cross
                 wl, wh = ZE.value_enclosure_fp(parts, f, e, n, ps)
@@ -334,7 +334,7 @@ def judge(text, tol, requirements):
     verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
     return {"verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
             "requirements": rows, "unknowns": n, "elements": len(parts),
-            "checked_by": "ZTL zenergy: exact solves up to 600 unknowns (residual checked); above them float solves with "
+            "checked_by": "ZTL zenergy: exact solves up to ZTL zenergy.EXACT_UP_TO unknowns (120; residual checked); above them float solves with "
                           "exact residuals and lambda_min(K0) proved by a floating Cholesky — PREMISE: IEEE 754 "
                           "binary64 and LAPACK (Higham Thm 10.3, cited, not in Lean; ZTL KNOWN-LIMITS.md); the "
                           "bound's algebra is ZTL lean/ZNet.lean step 4 with lean/ZEnergy.lean target_first_grouped "

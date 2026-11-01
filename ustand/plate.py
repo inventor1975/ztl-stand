@@ -297,7 +297,7 @@ def judge_stress(text, tol, requirements):
                 # push the bracket w toward the violation, and the element's own factor too (sign of w at the end)
                 ps = [1 + (pp["t"] if (sl > 0) == up and sl != 0 else -pp["t"] if sl != 0 else 0)
                       for pp, sl in zip(parts, r["w"]["slopes"])]
-                if n <= 600:
+                if n <= ZE.EXACT_UP_TO:
                     wl = wh = ZE.value_at(parts, f, r["e"], n, ps)
                 else:
                     wl, wh = ZE.value_enclosure_fp(parts, f, r["e"], n, ps)
@@ -370,7 +370,7 @@ def judge(text, tol, requirements):
             raise PlateError(f"{_name(nd, d)}: not a free displacement of this plate")
         e = [F(0)] * n
         e[dof[(nd, d)]] = F(1)
-        r = ZE.certify(parts, f, e, n)       # exact solves up to 600 unknowns, the floating path above
+        r = ZE.certify(parts, f, e, n)       # exact solves up to ZE.EXACT_UP_TO unknowns, the floating path above
         row = {"requirement": f"{_name(nd, d)} {op} {v}", "nominal": _show(r["nominal"]),
                "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)],
                "first_order": _show(r["first"]), "rest": _show(r["rest"])}
@@ -380,7 +380,7 @@ def judge(text, tol, requirements):
             up = op == "<="
             ps = [1 + (p["t"] if (sl > 0) == up and sl != 0 else -p["t"] if sl != 0 else 0)
                   for p, sl in zip(parts, r["slopes"])]
-            if n <= 600:
+            if n <= ZE.EXACT_UP_TO:
                 w = wl = wh = ZE.value_at(parts, f, e, n, ps)
             else:                                     # the floating path at the vertex: its whole enclosure must cross
                 wl, wh = ZE.value_enclosure_fp(parts, f, e, n, ps)
@@ -393,7 +393,7 @@ def judge(text, tol, requirements):
     return {"verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
             "element": "CST (constant-strain triangle), plane stress",
             "requirements": rows, "unknowns": n, "elements": len(parts),
-            "checked_by": "ZTL zenergy: exact solves up to 600 unknowns (residual checked); above them float solves with "
+            "checked_by": "ZTL zenergy: exact solves up to ZTL zenergy.EXACT_UP_TO unknowns (120; residual checked); above them float solves with "
                           "exact residuals and lambda_min(K0) proved by a floating Cholesky — PREMISE: the machine obeys "
                           "IEEE 754's rounding model (Higham Thm 10.3, any summation order, proved in lean/ZHigham.lean); the "
                           "bound's algebra is ZTL lean/ZNet.lean step 4 with lean/ZEnergy.lean target_first_grouped "
