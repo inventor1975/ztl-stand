@@ -2445,14 +2445,33 @@ check("PHYSICAL second order (the curator's '(а)', ZTL zenergy.certify_general)
 _g5p = FRM.with_imperfection(_g5, FRM.PHI0, 1)
 _soc = FRM.second_order_case(_g5p, "0", [(96, F(10) ** 12)])
 _hi96 = F(_soc["checks"][0]["sigma_abs_max"].split()[0])
+# the near-continuum (every member in 8 elements, float P-delta) must lie under the proved bound of the 1-element model
+import numpy as _np_x, scipy.sparse as _sp_x, scipy.sparse.linalg as _sla_x
+import zenergy as _ZE_x
+def _float_so(deck):
+    nodes, elems, loads, supports, ex, (area, izz) = FRM.read_deck(deck)
+    parts, f, dof, emap, (_, _, _, h) = FRM.energy_system_full(deck, "0")
+    n = len(dof); K0 = _ZE_x._float_matrix(_ZE_x.matrix(parts, n), n); fv = _np_x.array([float(x) for x in f])
+    u1 = _sla_x.spsolve(K0.tocsc(), fv)
+    N = {k: float(ex * area / emap[k]["L"]) * sum(float(v) * u1[i] for i, v in emap[k]["a"].items()) for k in emap}
+    rr, cc, dd = [], [], []
+    for k, (i, j) in enumerate(elems, 1):
+        L = emap[k]["L"]; c, s_ = (nodes[j][0] - nodes[i][0]) / L, (nodes[j][1] - nodes[i][1]) / L
+        for (a, b), v in FRM._geo_entries(nodes, i, j, L, c, s_, dof).items():
+            rr.append(a); cc.append(b); dd.append(N[k] * float(v))
+    u = _sla_x.spsolve((K0 + _sp_x.csr_matrix((dd, (rr, cc)), shape=(n, n))).tocsc(), fv)
+    return {k: max(abs(float(ex) * sum(float(v) * u[i] for i, v in g.items())) for _, _, g in FRM.fibre_vectors(emap, k, h))
+            for k in emap}
+_s8 = _float_so(FRM.subdivide(_g5p, 8))
+_fine96 = max(_s8[8 * 95 + q] for q in range(1, 9))
 _en96 = FRM.judge_members(_g5, "0", [(96, F(10) ** 12)])
 _en96 = max(F(c["checks"][0]["amplified_peak"].split()[0]) for c in _en96["cases"] if "amplified_peak" in c["checks"][0])
 check("physical second order vs EN on member 96 (loads x5, nominal moduli): the proved |sigma| bound — N and both "
       "end moments, the continuum member's end-moment correction, NO interior maximum (psi <= cos 2phi proved) — is "
       "221.03 MPa, just above the float P-delta 220.9 and above EN's amplified 219.5: the code's approximation falls "
-      "short there, the stand no longer does",
-      220.9e6 < float(_hi96) < 221.1e6 and _hi96 > _en96
-      and _soc["checks"][0]["interior"].startswith("none"), (float(_hi96), float(_en96)))
+      "short there, the stand no longer does — and above the near-continuum (8 elements per member) 220.83",
+      220.9e6 < float(_hi96) < 221.1e6 and _hi96 > _en96 and float(_hi96) >= _fine96
+      and _soc["checks"][0]["interior"].startswith("none"), (float(_hi96), float(_en96), _fine96))
 # STABILITY (2026-11-01): a proved lower bound on the critical load factor for every modulus in the box —
 # K(p) + lam K_G(N(p)) >= (1 - T) K0 + lam sum N_lo G_e, one matrix proved positive definite (pd_ieee)
 import math as _math
@@ -2539,6 +2558,14 @@ check("member load in EN 6.3.3: M_Ed is the span's qL^2/8 = 20 kN m (inside the 
       "physical second order with member loads says OPEN, with the reason (not yet)",
       F(_qbi["M_Ed_max"].split()[0]) == 20000 and _qbi["C_my"] == "1" and _qsf and _qso["verdict"] == "OPEN"
       and "QLOAD" in _qso["why"], (_qbi["M_Ed_max"], _qbi["C_my"], _qsf, _qso.get("why")))
+# SIGN CONVENTION, checked directly (2026-11-01: a swapped J-end label once passed every test by coincidence)
+_um = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2", "N, 1, 0, 0", "N, 2, 4, 0", "E, 1, 2",
+                  "D, 1, UX, 0", "D, 1, UY, 0", "D, 2, UY, 0", "F, 1, MZ, -20000", "F, 2, MZ, 20000"])
+_umf = {(r["end"], r["side"]): r["nominal"] for r in FRM.fibre_ranges(_um, "0", 1)}
+check("sign convention: a UNIFORM sagging moment (20 kN m) gives the same physical stress along the beam — TOP "
+      "-25 MPa (compression) and BOT +25 MPa at BOTH ends; single curvature reads as the same sign at I and J",
+      _umf[("I", "TOP")] == _umf[("J", "TOP")] == -25 * 10**6 and _umf[("I", "BOT")] == _umf[("J", "BOT")] == 25 * 10**6,
+      _umf)
 # MEMBER BUCKLING (2026-11-01): EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i| — the proved alpha_cr lower bound
 # and the proved |N| upper bound give a proved upper bound on the utilisation (H rises with alpha_cr, falls with |N|)
 def _colP(P):
