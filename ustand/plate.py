@@ -60,6 +60,13 @@ class PlateError(B.BrickError):
     pass
 
 
+SCOPE_MESH = {"scope": "MESH",
+              "scope_note": "proved for the finite-element MODEL (the CST mesh), NOT for the plate: the mesh is stiffer "
+                            "than the continuum (MEASURED: -45 % tip deflection on 8 x 2). A point value of the 2D "
+                            "continuum is not bounded at all; for the plate itself use ustand.hypercircle "
+                            "(compliance C, MEAN, AVG over boundary segments) — proved for the continuum."}
+
+
 def read_deck(text):
     nodes, elems, loads, supports = {}, [], {}, set()
     ex = nu = th = None
@@ -326,7 +333,7 @@ def judge_stress(text, tol, requirements):
         rows.append(row)
     vs = [r["verdict"] for r in rows]
     verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
-    return {"verdict": verdict, "path": "stresses: zenergy on the strain bracket, times the element's factor",
+    return {**SCOPE_MESH, "verdict": verdict, "path": "stresses: zenergy on the strain bracket, times the element's factor",
             "requirements": rows, "unknowns": n}
 
 
@@ -396,7 +403,7 @@ def judge(text, tol, requirements):
         rows.append(row)
     vs = [r["verdict"] for r in rows]
     verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
-    return {"verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
+    return {**SCOPE_MESH, "verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
             "element": "CST (constant-strain triangle), plane stress",
             "requirements": rows, "unknowns": n, "elements": len(parts),
             "checked_by": "ZTL zenergy: exact solves up to ZTL zenergy.EXACT_UP_TO unknowns (120; residual checked); above them float solves with "
@@ -416,7 +423,7 @@ def range_of(text, tol, target):
     e = [F(0)] * len(dof)
     e[dof[(nd, d)]] = F(1)
     r = ZE.certify(parts, f, e, len(dof))
-    return {"target": target, "nominal": _show(r["nominal"]), "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)],
+    return {**SCOPE_MESH, "target": target, "nominal": _show(r["nominal"]), "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)],
             "unknowns": len(dof),
             "note": "an enclosure (first order exact + a proved rest), not the exact range"}
 

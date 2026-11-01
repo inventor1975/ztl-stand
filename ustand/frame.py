@@ -56,6 +56,12 @@ class FrameError(B.BrickError):
     pass
 
 
+SCOPE_BEAM = {"scope": "FRAME (Euler-Bernoulli members)",
+              "scope_note": "proved for the frame in Euler-Bernoulli beam theory: the Hermite element is exact for "
+                            "nodal loads in statics, and buckling carries each member's continuum correction. Not "
+                            "covered: shear deformation, joint flexibility, imperfections beyond EN's phi, plasticity."}
+
+
 def read_deck(text):
     nodes, elems, loads, supports = {}, [], {}, set()
     ex = sec = None
@@ -522,7 +528,7 @@ def judge_buckling(text, tol, fy, curve, gamma_m1=F(1), jobs=1, phi=None):
         r["imperfection"] = f"{'+' if sg > 0 else '-' if sg < 0 else ''}{phi if sg else 0}"
         cases.append(r)
     vs = [c["verdict"] for c in cases]
-    return {"verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
+    return {**SCOPE_BEAM, "verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
             "path": cases[0].get("path"), "cases": cases,
             "not_checked": "6.3.3 bending-axial interaction; out-of-plane and lateral-torsional buckling"}
 
@@ -573,7 +579,7 @@ def judge_buckling_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
                 row["at_nominal_utilisation_min"] = _show(gamma_m1 / Hh, -1)
         rows.append(row)
     vs = [r["verdict"] for r in rows]
-    return {"verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
+    return {**SCOPE_BEAM, "verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
             "alpha_cr_nominal_proved_upper": _show(lam_hi, 1) if lam_hi else None,
             "path": "EN 1993-1-1 6.3.1 with N_cr,i = alpha_cr |N_Ed,i|; alpha_cr and |N| proved over the box",
             "alpha_cr_proved_lower": _show(lam, -1) if lam else None, "alpha_cr_nominal_estimate": st.get("lam_est"),
@@ -659,7 +665,7 @@ def judge_members(text, tol, checks, jobs=1, order=2, phi=PHI0):
                       "second_order": mode, "amplification": _show(amp, 1) if amp else None, "checks": rows})
     vs = [r["verdict"] for c in cases for r in c["checks"]]
     verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN"
-    return {"verdict": verdict, "path": "member stresses: zenergy.certify_scaled on every extreme fibre; EN global "
+    return {**SCOPE_BEAM, "verdict": verdict, "path": "member stresses: zenergy.certify_scaled on every extreme fibre; EN global "
             "analysis: sway imperfection +-phi and second order by the proved alpha_cr", "cases": cases,
             "not_checked": "member buckling (use --buckling), 6.3.3 interaction"}
 
@@ -760,7 +766,7 @@ def judge(text, tol, requirements):
         rows.append(row)
     vs = [r["verdict"] for r in rows]
     verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
-    return {"verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
+    return {**SCOPE_BEAM, "verdict": verdict, "path": "energy norm (ZTL zenergy): first order exact + a proved rest",
             "requirements": rows, "unknowns": n, "elements": len(parts),
             "checked_by": "ZTL zenergy: exact solves up to ZTL zenergy.EXACT_UP_TO unknowns (120; residual checked); above them float solves with "
                           "exact residuals and lambda_min(K0) proved by a floating Cholesky — PREMISE: IEEE 754 "
