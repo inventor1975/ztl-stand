@@ -104,11 +104,28 @@ def read_deck(text):
 
 def energy_system(text, tol):
     """K(p) = sum_e p_e (three rank-one terms of element e), p_e in [1 - t, 1 + t]; f the loads."""
+    parts, f, dof, _, _ = energy_system_full(text, tol)
+    return parts, f, dof
+
+
+def read_height(text):
+    """The section's HEIGHT, BEAM3's third real constant (R, 1, area, izz, height) — None if not given."""
+    for raw in text.splitlines():
+        line = raw.split("!")[0].strip()
+        fl = [x.strip() for x in (line.split(",") if "," in line else line.split())]
+        if fl and fl[0].upper() == "R" and len(fl) > 4 and fl[4]:
+            return _num(fl[4], "R")
+    return None
+
+
+def energy_system_full(text, tol):
+    """energy_system, plus per element its part index and rows (a, b, c) and length, and (E, A, I, h)."""
     nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
     t = F(0) if tol in (None, "0", 0) else tolerance(tol) if isinstance(tol, str) else F(tol)
     free = [(n, d) for n in sorted(nodes) for d in "XYR" if (n, d) not in supports]
     dof = {nd: k for k, nd in enumerate(free)}
     parts = []
+    emap = {}
     for k, (i, j) in enumerate(elems, 1):
         dx, dy = nodes[j][0] - nodes[i][0], nodes[j][1] - nodes[i][1]
         L = _sqrt(dx * dx + dy * dy)
@@ -127,12 +144,107 @@ def energy_system(text, tol):
         b = row([((i, "R"), F(1)), ((j, "R"), F(-1))])
         cc = row([((i, "R"), F(1)), ((j, "R"), F(1)),
                   ((j, "X"), 2 * s / L), ((j, "Y"), -2 * c / L), ((i, "X"), -2 * s / L), ((i, "Y"), 2 * c / L)])
+        emap[k] = {"part": len(parts), "a": a, "b": b, "c": cc, "L": L, "t": t}
         parts.append({"t": t, "terms": [(ex * area / L, a), (ex * izz / L, b), (3 * ex * izz / L, cc)]})
     f = [F(0)] * len(free)
     for (n, d), v in loads.items():
         if (n, d) in dof:
             f[dof[(n, d)]] += v
-    return parts, f, dof
+    return parts, f, dof, emap, (ex, area, izz, read_height(text))
+
+
+# ----------------------------------------------------------------------------------------------------------------
+# MEMBER STRESSES (2026-11-01). At an end of element k: N = (E A / L)(a.u) and the end moments
+# M_i = (E I / L)((b + 3c).u), M_j = (E I / L)((-b + 3c).u) (the textbook 4th + 2th - 6psi: b = th_i - th_j,
+# c = th_i + th_j - 2psi). An extreme fibre carries sigma = N/A +- M (h/2)/I = E p_k (g.u),
+#   g = a/L +- (h/2)/L (+-b + 3c),
+# an output scaled by the element's own factor — ZTL zenergy.certify_scaled. Both fibres at both ends are
+# checked, so the sign convention of the moment does not matter. The check is EN 1993-1-1 6.2.1(7)'s elastic,
+# conservative one: |sigma| <= fy / gamma_M0 at every fibre. NOT here: member buckling (6.3 needs buckling lengths
+# from a stability analysis), shear, lateral-torsional buckling.
+
+def fibre_vectors(emap, k, h):
+    """The four fibre functionals of element k: (end, side, g) with sigma = E p_k (g.u)."""
+    m = emap[k]
+    L, a, b, c = m["L"], m["a"], m["b"], m["c"]
+    out = []
+    for end, sb in (("I", 1), ("J", -1)):
+        for side, sg in (("TOP", 1), ("BOT", -1)):
+            g = {}
+            for i, v in a.items():
+                g[i] = g.get(i, F(0)) + v / L
+            for i, v in b.items():
+                g[i] = g.get(i, F(0)) + sg * (h / 2) / L * sb * v
+            for i, v in c.items():
+                g[i] = g.get(i, F(0)) + sg * (h / 2) / L * 3 * v
+            out.append((end, side, {i: v for i, v in g.items() if v}))
+    return out
+
+
+def fibre_ranges(text, tol, k, ctx=None):
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    parts, f, dof, emap, (ex, area, izz, h) = ctx or energy_system_full(text, tol)
+    if h is None:
+        raise FrameError("member stresses need the section height: R, 1, area, izz, height")
+    if k not in emap:
+        raise FrameError(f"SIG({k}): no element {k}")
+    n = len(dof)
+    res = []
+    for end, side, g in fibre_vectors(emap, k, h):
+        e = [F(0)] * n
+        for i, v in g.items():
+            e[i] = v
+        if not any(e):
+            res.append({"end": end, "side": side, "lo": F(0), "hi": F(0), "nominal": F(0), "e": e, "sc": None})
+            continue
+        sc = ZE.certify_scaled(parts, f, e, n, emap[k]["part"])
+        lo, hi = sorted([ex * sc["lo"], ex * sc["hi"]])
+        res.append({"end": end, "side": side, "lo": lo, "hi": hi, "nominal": ex * sc["nominal"], "e": e, "sc": sc})
+    return res
+
+
+def judge_members(text, tol, checks):
+    """checks: [(k, limit)] — |sigma| <= limit at every extreme fibre of element k (EN 1993-1-1 6.2.1(7),
+    limit = fy / gamma_M0). EARNED when every fibre's proved range is inside [-limit, limit]; REFUTED when a
+    fibre's witness vertex (solved exactly, or its floating enclosure) is wholly outside; OPEN otherwise."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    ctx = energy_system_full(text, tol)
+    parts, f, dof, emap, (ex, area, izz, h) = ctx
+    n = len(dof)
+    rows = []
+    for k, lim in checks:
+        fr = fibre_ranges(text, tol, k, ctx)
+        ok = all(-lim <= r["lo"] and r["hi"] <= lim for r in fr)
+        row = {"check": f"|SIG({k})| <= {lim}", "fibres": [{"end": r["end"], "side": r["side"],
+               "nominal": _show(r["nominal"]), "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)]} for r in fr]}
+        if ok:
+            row["verdict"] = "EARNED"
+        else:
+            row["verdict"] = "OPEN"
+            worst = max((r for r in fr if r["sc"] is not None), key=lambda r: abs(r["nominal"]), default=None)
+            if worst is not None:
+                up = worst["nominal"] >= 0
+                pk = emap[k]["part"]
+                sl = worst["sc"]["base"]["slopes"]
+                # push the bracket outward; the element's own factor up (|sigma| grows with p_k for this sign)
+                ps = [1 + (pp["t"] if (s_ > 0) == up and s_ != 0 else -pp["t"] if s_ != 0 else 0)
+                      for pp, s_ in zip(parts, sl)]
+                ps[pk] = 1 + parts[pk]["t"]
+                if n <= 600:
+                    wl = wh = ZE.value_at(parts, f, worst["e"], n, ps)
+                else:
+                    wl, wh = ZE.value_enclosure_fp(parts, f, worst["e"], n, ps)
+                lo_, hi_ = sorted([ex * ps[pk] * wl, ex * ps[pk] * wh])
+                row["witness"] = {"end": worst["end"], "side": worst["side"], "value": _show(hi_ if up else lo_)}
+                if (lo_ > lim) if up else (hi_ < -lim):
+                    row["verdict"] = "REFUTED"
+        rows.append(row)
+    vs = [r["verdict"] for r in rows]
+    verdict = "REFUTED" if "REFUTED" in vs else "EARNED" if all(x == "EARNED" for x in vs) else "OPEN"
+    return {"verdict": verdict, "path": "member stresses: zenergy.certify_scaled on every extreme fibre",
+            "checks": rows, "unknowns": n}
 
 
 def _target(text):
@@ -215,7 +327,19 @@ def main(argv):
     try:
         text = open(argv[0], encoding="utf-8").read()
         tol = argv[argv.index("--tol") + 1] if "--tol" in argv else "0"
-        reqs = [_req(argv[i + 1]) for i, a in enumerate(argv) if a == "--req"]
+        import re as _re
+        raw = [argv[i + 1] for i, a in enumerate(argv) if a == "--req"]
+        sig = [x for x in raw if _re.match(r"^\s*SIG\(", x, _re.I)]
+        if sig:                                       # member stress checks: SIG(k) <= limit
+            checks = []
+            for x in sig:
+                m = _re.match(r"^\s*SIG\(\s*(\d+)\s*\)\s*<=\s*(\S+)\s*$", x, _re.I)
+                if not m:
+                    raise FrameError(f"{x!r}: a member check is SIG(element) <= limit (|sigma| at every fibre)")
+                checks.append((int(m.group(1)), _num(m.group(2), x)))
+            print(json.dumps(judge_members(text, tol, checks), indent=1, ensure_ascii=False))
+            return 0
+        reqs = [_req(x) for x in raw]
         ranges = [argv[i + 1] for i, a in enumerate(argv) if a == "--range"]
         out = {t: range_of(text, tol, t) for t in ranges} if ranges else judge(text, tol, reqs)
     except (B.BrickError, OSError, ValueError, IndexError) as e:

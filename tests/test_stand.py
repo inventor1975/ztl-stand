@@ -2278,6 +2278,20 @@ _fr2 = FRM.judge(_fr, "0.5%", [FRM._req("U(9,Y) >= -0.012762")])
 check("frame: +-0.5 % on every element's modulus — tip >= -0.0127623 EARNED (the extreme is -4/315/0.995 = "
       "-0.01276222...); >= -0.012762 REFUTED at a vertex solved exactly (the witness IS that extreme)",
       _fe["verdict"] == "EARNED" and _fr2["verdict"] == "REFUTED", (_fe["verdict"], _fr2["verdict"]))
+# MEMBER STRESSES (2026-11-01): sigma = N/A +- M (h/2)/I at both fibres of both ends, each E p_k (g.u) through
+# ZTL zenergy.certify_scaled; the cantilever is statically determinate, so the stress does not move with E
+_frh = _fr.replace("R, 1, 0.01, 8e-5", "R, 1, 0.01, 8e-5, 0.2")
+_fib = FRM.fibre_ranges(_frh, "0", 1)
+check("frame member stresses: the cantilever's root fibre +-50 MPa and the first element's far end +-43.75 MPa "
+      "EXACTLY (M = P L (h/2)/I; M = P 3.5 m)",
+      [(r["end"], r["side"], r["nominal"]) for r in _fib] ==
+      [("I", "TOP", F(50000000)), ("I", "BOT", F(-50000000)), ("J", "TOP", F(-43750000)), ("J", "BOT", F(43750000))],
+      [(r["end"], r["side"], r["nominal"]) for r in _fib])
+_fm1 = FRM.judge_members(_frh, "0.5%", [(1, F(51) * 10**6)])
+_fm2 = FRM.judge_members(_frh, "0.5%", [(1, F(49) * 10**6)])
+check("frame member check (EN 1993-1-1 6.2.1(7) elastic), +-0.5 % on every modulus: |sigma| <= 51 MPa EARNED in "
+      "the root element, <= 49 MPa REFUTED at a witness (exactly 50 MPa: determinate)",
+      _fm1["verdict"] == "EARNED" and _fm2["verdict"] == "REFUTED", (_fm1["verdict"], _fm2["verdict"]))
 # THE FLOATING PATH (2026-11-01): above 600 unknowns float solves, exact residuals, lambda_min proved in fixed point
 import subprocess as _sp
 _f408 = _sp.run([sys.executable, str(pathlib.Path(__file__).resolve().parent.parent / "examples" / "frame" / "gen_frame.py"),

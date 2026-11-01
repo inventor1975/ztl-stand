@@ -5,7 +5,7 @@ every beam-column joint. (2026-11-01, ztl-stand stage 1: frames.)
 import sys
 ns, nb = int(sys.argv[1]), int(sys.argv[2])
 nid = lambda f, c: f * (nb + 1) + c + 1
-L = ["/PREP7", "ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5"]
+L = ["/PREP7", "ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2"]
 for f in range(ns + 1):
     for c in range(nb + 1):
         L.append(f"N, {nid(f, c)}, {5 * c}, {3 * f}")
