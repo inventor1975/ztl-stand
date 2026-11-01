@@ -1,0 +1,383 @@
+"""THE NIGHT BATTERY (2026-11-01, the curator: "на ночь запустить серию тестов, что бы все проверить, что только
+можно"). Randomised cross-checks of every proved bound against an INDEPENDENT answer — float P-delta on a fine mesh
+(8 elements per member), closed forms, exact solves — counting violations (must be 0); then the same checks with a
+bound deliberately broken (MUTATION) — they must find violations, or the check proves nothing.
+
+    PYTHONPATH=. python3 bench/night/verify_all.py [--jobs 22] [--scale 1] [--only A,B,...]
+
+  A  beam-columns (random P, q, end moments, 1/2/4 elements): physical second-order stress and deflection bounds vs
+     the fine-mesh float solution
+  B  random frames (storeys, bays, lateral/vertical loads, transverse member loads on beams, tol 0 or 0.5 %):
+     second-order member stresses and roof sway vs the fine-mesh float P-delta at the nominal moduli
+  C  random frames: the continuum's proved lambda_cr lower bound <= the fine-mesh float lambda_cr
+  D  random trusses: second-order displacement bounds vs float P-delta (bars straight: the same model)
+  E  ZTL zenergy.certify_general on random second-order systems: every vertex / interior point / D inside
+  F  plates: hypercircle brackets of a coarse and a 4x finer mesh must overlap, lower <= upper
+  M  mutations of A/B: the interior and the end-moment corrections dropped (the old "ends only" check that once read
+     325 MPa for 337.67): violations EXPECTED — or the check cannot see a broken bound
+Writes bench/night/REPORT.json and REPORT.md.
+"""
+import json
+import math
+import multiprocessing as mp
+import pathlib
+import random
+import sys
+import time
+from fractions import Fraction as F
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(ROOT))
+
+from ustand import frame as FRM  # noqa: E402
+from ustand import judge_ztl  # noqa: E402,F401
+import zenergy as ZE  # noqa: E402
+
+E0, A0_, I0, H0 = 210e9, 0.01, 8e-5, 0.2
+
+
+def float_second_order(deck):
+    """Float P-delta (axial forces from first order) of a frame deck: per element its max fibre |sigma| at the ends
+    (with the member-load inner solution added), and every free nodal displacement."""
+    import numpy as np
+    import scipy.sparse as sp
+    import scipy.sparse.linalg as sla
+    nodes, elems, loads, supports, ex, (area, izz) = FRM.read_deck(deck)
+    parts, f, dof, emap, (_, _, _, h) = FRM.energy_system_full(deck, "0")
+    n = len(dof)
+    K0 = ZE._float_matrix(ZE.matrix(parts, n), n)
+    fv = np.array([float(x) for x in f])
+    u1 = sla.spsolve(K0.tocsc(), fv)
+    N = {k: float(ex * area / emap[k]["L"]) * sum(float(v) * u1[i] for i, v in emap[k]["a"].items()) for k in emap}
+    rr, cc, dd = [], [], []
+    for k, (i, j) in enumerate(elems, 1):
+        L = emap[k]["L"]
+        c, s_ = (nodes[j][0] - nodes[i][0]) / L, (nodes[j][1] - nodes[i][1]) / L
+        for (a, b), v in FRM._geo_entries(nodes, i, j, L, c, s_, dof).items():
+            rr.append(a); cc.append(b); dd.append(N[k] * float(v))
+    u = sla.spsolve((K0 + sp.csr_matrix((dd, (rr, cc)), shape=(n, n))).tocsc(), fv)
+    qd = FRM.read_qloads(deck)
+    sig = {}
+    for k in emap:
+        best = 0.0
+        for end, side, g in FRM.fibre_vectors(emap, k, h):
+            b = float(FRM._bubble(qd, k, end, side, area, izz, h)[0]) if h else 0.0
+            best = max(best, abs(float(ex) * sum(float(v) * u[i] for i, v in g.items()) + b))
+        sig[k] = best
+    disp = {nd: float(u[i]) for nd, i in dof.items()}
+    return sig, disp, N
+
+
+def beam_column_case(seed):
+    rng = random.Random(seed)
+    L = rng.choice([2, 3, 4, 5, 6])
+    Pe = math.pi ** 2 * E0 * I0 / L ** 2
+    P = int(Pe * rng.uniform(0, 0.6))
+    q = rng.choice([0, 1]) * rng.randint(-20000, 20000)
+    M1, M2 = rng.randint(-50000, 50000), rng.randint(-50000, 50000)
+    nsub = rng.choice([1, 2, 4])
+    deck = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2", "N, 1, 0, 0", f"N, 2, {L}, 0",
+                      "E, 1, 2", "D, 1, UX, 0", "D, 1, UY, 0", "D, 2, UY, 0", f"F, 2, FX, -{P}", f"F, 1, MZ, {M1}",
+                      f"F, 2, MZ, {M2}"] + ([f"QLOAD, 1, FY, {q}"] if q else []))
+    d = FRM.subdivide(deck, nsub)
+    r = FRM.second_order_case(d, "0", [(k, F(10) ** 15) for k in range(1, nsub + 1)])
+    if not r.get("checks"):
+        return {"checked": 0, "skipped": 1, "why": r.get("why")}
+    fine_sig, _, _ = float_second_order(FRM.subdivide(deck, 64))
+    ref = max(fine_sig.values())
+    bound = max(float(F(c["sigma_abs_max"].split()[0])) for c in r["checks"])
+    bad = ref > bound * (1 + 1e-9) + 1.0
+    return {"checked": 1, "violations": int(bad), "example": None if not bad else
+            {"seed": seed, "L": L, "P": P, "q": q, "M": [M1, M2], "nsub": nsub, "ref": ref, "bound": bound}}
+
+
+def random_frame(rng, with_q=True):
+    ns, nb = rng.randint(2, 6), rng.randint(1, 4)
+    nid = lambda f_, c_: f_ * (nb + 1) + c_ + 1
+    H, B = rng.choice([3, 4]), rng.choice([4, 5, 6])
+    L_ = ["/PREP7", "ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2"]
+    for f_ in range(ns + 1):
+        for c_ in range(nb + 1):
+            L_.append(f"N, {nid(f_, c_)}, {B * c_}, {H * f_}")
+    el = []
+    for f_ in range(ns):
+        for c_ in range(nb + 1):
+            el.append((nid(f_, c_), nid(f_ + 1, c_)))
+    beams = []
+    for f_ in range(1, ns + 1):
+        for c_ in range(nb):
+            el.append((nid(f_, c_), nid(f_, c_ + 1)))
+            beams.append(len(el))
+    L_ += [f"E, {a}, {b}" for a, b in el]
+    for c_ in range(nb + 1):
+        L_ += [f"D, {nid(0, c_)}, UX, 0", f"D, {nid(0, c_)}, UY, 0", f"D, {nid(0, c_)}, ROTZ, 0"]
+    scale = rng.choice([1, 2, 4, 8])
+    for f_ in range(1, ns + 1):
+        L_.append(f"F, {nid(f_, 0)}, FX, {rng.randint(0, 15000) * scale}")
+        for c_ in range(nb + 1):
+            L_.append(f"F, {nid(f_, c_)}, FY, -{rng.randint(5000, 30000) * scale}")
+    if with_q:
+        for k in beams:
+            if rng.random() < 0.5:
+                L_.append(f"QLOAD, {k}, FY, -{rng.randint(2000, 15000) * scale}")
+    return "\n".join(L_), len(el), nid(ns, 0)
+
+
+def frame_case(seed):
+    rng = random.Random(seed)
+    deck, ne, roof = random_frame(rng)
+    tol = rng.choice(["0", "0.5%"])
+    checks = [(k, F(10) ** 15) for k in range(1, ne + 1)]
+    try:
+        r = FRM.second_order_case(deck, tol, checks, disp=[(roof, "X")])
+    except Exception as ex_:
+        return {"checked": 0, "skipped": 1, "why": f"{type(ex_).__name__}: {ex_}"[:200]}
+    if not r.get("checks"):
+        return {"checked": 0, "skipped": 1, "why": r.get("why")}
+    fine_sig, fine_disp, _ = float_second_order(FRM.subdivide(deck, 8))
+    viol, n_chk, ex_ = 0, 0, None
+    for c in r["checks"]:
+        k = int(c["check"].split("(")[1].split(")")[0])
+        ref = max(fine_sig[8 * (k - 1) + q] for q in range(1, 9))
+        b = float(F(c["sigma_abs_max"].split()[0]))
+        n_chk += 1
+        if ref > b * (1 + 1e-9) + 1.0:
+            viol += 1
+            ex_ = ex_ or {"seed": seed, "member": k, "ref": ref, "bound": b}
+    lo, hi = (float(x) for x in r["disp"][("U", roof, "X")])
+    n_chk += 1
+    d_ref = fine_disp[(roof, "X")]
+    if not (lo - 1e-12 - 1e-9 * abs(d_ref) <= d_ref <= hi + 1e-12 + 1e-9 * abs(d_ref)):
+        viol += 1
+        ex_ = ex_ or {"seed": seed, "roof": [lo, hi], "ref": d_ref}
+    return {"checked": n_chk, "violations": viol, "example": ex_}
+
+
+def stability_case(seed):
+    import numpy as np
+    import scipy.sparse as sp
+    import scipy.sparse.linalg as sla
+    rng = random.Random(seed)
+    deck, ne, roof = random_frame(rng, with_q=rng.random() < 0.5)
+    st = FRM.stability_lower(deck, "0")
+    if st.get("lam_low") is None or not st.get("lam_est"):
+        return {"checked": 0, "skipped": 1}
+    fine = FRM.subdivide(deck, 8)
+    nodes, elems, loads, supports, ex, (area, izz) = FRM.read_deck(fine)
+    parts, f, dof, emap, _ = FRM.energy_system_full(fine, "0")
+    n = len(dof)
+    K0 = ZE._float_matrix(ZE.matrix(parts, n), n)
+    u1 = sla.spsolve(K0.tocsc(), np.array([float(x) for x in f]))
+    qd = FRM.read_qloads(fine)
+    rr, cc, dd = [], [], []
+    for k, (i, j) in enumerate(elems, 1):
+        L = emap[k]["L"]
+        c, s_ = (nodes[j][0] - nodes[i][0]) / L, (nodes[j][1] - nodes[i][1]) / L
+        N = float(ex * area / L) * sum(float(v) * u1[i_] for i_, v in emap[k]["a"].items())
+        for (a, b), v in FRM._geo_entries(nodes, i, j, L, c, s_, dof).items():
+            rr.append(a); cc.append(b); dd.append(N * float(v))
+    G = sp.csr_matrix((dd, (rr, cc)), shape=(n, n))
+    lam_fine = float(1 / sla.eigsh(-G, k=1, M=K0, which="LA", return_eigenvectors=False, v0=np.ones(n))[0])
+    lo = float(st["lam_low"])
+    bad = lo > lam_fine * (1 + 1e-6)
+    return {"checked": 1, "violations": int(bad), "example": None if not bad else {"seed": seed, "lo": lo, "fine": lam_fine}}
+
+
+def truss_case(seed):
+    import numpy as np
+    import scipy.sparse as sp
+    import scipy.sparse.linalg as sla
+    from ustand import truss as TR
+    rng = random.Random(seed)
+    nf = rng.randint(2, 8)
+    L_ = ["/PREP7", "ET, 1, LINK1", "MP, EX, 1, 200e9", "R, 1, 0.002"]
+    nid = lambda f_, c_: 2 * f_ + c_ + 1
+    for f_ in range(nf + 1):
+        for c_ in range(2):
+            L_.append(f"N, {nid(f_, c_)}, {3 * c_}, {4 * f_}")
+    bars = []
+    for f_ in range(nf):
+        diag = (nid(f_, 0), nid(f_ + 1, 1)) if rng.random() < .5 else (nid(f_, 1), nid(f_ + 1, 0))
+        bars += [(nid(f_, 0), nid(f_ + 1, 0)), (nid(f_, 1), nid(f_ + 1, 1)), (nid(f_ + 1, 0), nid(f_ + 1, 1)), diag]
+    bars = [b for b in dict.fromkeys(tuple(sorted(b)) for b in bars) if b[0] != b[1]]
+    L_ += [f"E, {a}, {b}" for a, b in bars]
+    L_ += [f"D, {nid(0, c_)}, UX, 0" for c_ in range(2)] + [f"D, {nid(0, c_)}, UY, 0" for c_ in range(2)]
+    top = nid(nf, 0)
+    L_ += [f"F, {top}, FX, {rng.randint(1000, 50000)}", f"F, {top}, FY, -{rng.randint(10000, 400000)}",
+           f"F, {nid(nf, 1)}, FY, -{rng.randint(10000, 400000)}"]
+    deck = "\n".join(L_)
+    try:
+        so = TR.second_order(deck, "0", [(top, "X")])
+    except Exception as ex_:
+        return {"checked": 0, "skipped": 1, "why": str(ex_)[:120]}
+    nodes, bars_, forces, supports, ex, area = TR.read_deck(deck)
+    parts, f, dof = TR.energy_system(deck, "0")
+    n = len(dof)
+    K0 = ZE._float_matrix(ZE.matrix(parts, n), n)
+    fv = np.array([float(x) for x in f])
+    u1 = sla.spsolve(K0.tocsc(), fv)
+    rr, cc, dd = [], [], []
+    for (a, b), p in zip(bars_, parts):
+        w, g = p["terms"][0]
+        N = float(w) * sum(float(v) * u1[i] for i, v in g.items())
+        dx, dy = nodes[b][0] - nodes[a][0], nodes[b][1] - nodes[a][1]
+        L = math.hypot(float(dx), float(dy))
+        c, s_ = float(dx) / L, float(dy) / L
+        h = {}
+        for nd, sg in ((b, 1), (a, -1)):
+            for d, comp in (("X", -s_), ("Y", c)):
+                if (nd, d) in dof and comp:
+                    h[dof[(nd, d)]] = h.get(dof[(nd, d)], 0.0) + sg * comp
+        for i, gi in h.items():
+            for j, gj in h.items():
+                rr.append(i); cc.append(j); dd.append(N / L * gi * gj)
+    u = sla.spsolve((K0 + sp.csr_matrix((dd, (rr, cc)), shape=(n, n))).tocsc(), fv)
+    ref = u[dof[(top, "X")]]
+    lo, hi = (float(x) for x in so[(top, "X")])
+    bad = not (lo - 1e-12 - 1e-9 * abs(ref) <= ref <= hi + 1e-12 + 1e-9 * abs(ref))
+    return {"checked": 1, "violations": int(bad), "example": None if not bad else {"seed": seed, "ref": ref, "lo": lo, "hi": hi}}
+
+
+def general_case(seed):
+    import itertools
+    rng = random.Random(seed)
+    n = rng.randint(3, 7)
+    def rpart(m):
+        out = []
+        for _ in range(m):
+            idx = rng.sample(range(n), rng.randint(1, min(3, n)))
+            out.append((F(rng.randint(1, 9), rng.randint(1, 4)), {i: F(rng.randint(-3, 3) or 1) for i in idx}))
+        return out
+    Kp = [rpart(2) for _ in range(rng.randint(2, 5))]
+    Gp = [rpart(1) for _ in range(rng.randint(1, 4))]
+    A0 = ZE.matrix([{"t": 0, "terms": t} for t in Kp], n)
+    for t_ in Gp:
+        n0 = F(-rng.randint(0, 3), 10)
+        for key, v in ZE.matrix([{"t": 0, "terms": t_}], n).items():
+            A0[key] = A0.get(key, F(0)) + n0 * v
+    parts = [{"t": F(rng.choice([1, 3, 5]), 100), "terms": t} for t in Kp] + \
+            [{"t": F(rng.randint(0, 3), 100), "terms": t} for t in Gp]
+    Ct = [(w / 50, g) for w, g in rpart(1)]
+    f = [F(rng.randint(-5, 5)) for _ in range(n)]
+    e = [F(rng.randint(-3, 3)) for _ in range(n)]
+    try:
+        r = ZE.certify_general(A0, parts, Ct, f, e, n)
+    except ArithmeticError:
+        return {"checked": 0, "skipped": 1}
+    Cm = ZE.matrix([{"t": 0, "terms": Ct}], n)
+    Pm = [ZE.matrix([{"t": 0, "terms": p["terms"]}], n) for p in parts]
+    pts = [([s_ * p["t"] for s_, p in zip(sg, parts)], df) for sg in itertools.islice(
+        itertools.product((-1, 1), repeat=len(parts)), 64) for df in (F(0), F(1))]
+    pts += [([p["t"] * F(rng.randint(-100, 100), 100) for p in parts], F(rng.randint(0, 100), 100)) for _ in range(20)]
+    viol = 0
+    for ds, df in pts:
+        A = dict(A0)
+        for d, P in zip(ds, Pm):
+            for key, v in P.items():
+                A[key] = A.get(key, F(0)) + d * v
+        for key, v in Cm.items():
+            A[key] = A.get(key, F(0)) - df * v
+        try:
+            L, dd = ZE.ldl(n, A)
+        except ValueError:
+            viol += 1
+            continue
+        val = sum(a * b for a, b in zip(e, ZE.solve(L, dd, f)))
+        viol += not (r["lo"] <= val <= r["hi"])
+    return {"checked": len(pts), "violations": viol, "example": None if not viol else {"seed": seed}}
+
+
+def plate_case(seed):
+    import subprocess
+    from ustand import hypercircle as HC
+    rng = random.Random(seed)
+    k = rng.choice([1, 2])
+    aspect = rng.choice([2, 3, 4])
+    load = rng.choice(["shear", "tension"])
+    def deck(kk):
+        return subprocess.run([sys.executable, str(ROOT / "examples/plate/gen_plate.py"), str(aspect * kk), str(kk),
+                               "--load", load, "--h", str(F(1, kk))], capture_output=True, text=True, check=True).stdout
+    try:
+        a = HC.compliance_bounds(deck(k))
+        b = HC.compliance_bounds(deck(4 * k))
+    except Exception as ex_:
+        return {"checked": 0, "skipped": 1, "why": str(ex_)[:120]}
+    bad = not (a["lower"] <= a["upper"] and b["lower"] <= b["upper"] and a["lower"] <= b["upper"] and b["lower"] <= a["upper"])
+    return {"checked": 1, "violations": int(bad), "example": None if not bad else {"seed": seed}}
+
+
+def mutate():
+    """Break the second-order stress bound the way it once was broken: the member's interior and the continuum's
+    end-moment corrections dropped ("ends only, Hermite moments" — 325 instead of 337.67 MPa on a beam-column)."""
+    FRM._MUTANT["ends_only"] = True
+    def restore():
+        FRM._MUTANT.clear()
+    return restore
+
+
+SWEEPS = {"A": (beam_column_case, 400), "B": (frame_case, 120), "C": (stability_case, 120), "D": (truss_case, 200),
+          "E": (general_case, 600), "F": (plate_case, 24)}
+
+
+def _run(args):
+    key, seed, mutated = args
+    restore = mutate() if mutated else None
+    fn = SWEEPS[key][0]
+    t0 = time.time()
+    try:
+        r = fn(seed)
+    except Exception as ex_:
+        r = {"checked": 0, "errors": 1, "why": f"{type(ex_).__name__}: {ex_}"[:200], "seed": seed}
+    finally:
+        if restore:
+            restore()
+    r["seconds"] = time.time() - t0
+    return key + ("-MUT" if mutated else ""), r
+
+
+def main(argv):
+    jobs = int(argv[argv.index("--jobs") + 1]) if "--jobs" in argv else 22
+    scale = float(argv[argv.index("--scale") + 1]) if "--scale" in argv else 1.0
+    only = argv[argv.index("--only") + 1].split(",") if "--only" in argv else list(SWEEPS) + ["M"]
+    tasks = []
+    for key, (fn, count) in SWEEPS.items():
+        if key in only:
+            tasks += [(key, 1000 + s, False) for s in range(int(count * scale))]
+    if "M" in only:
+        tasks += [("A", 900000 + s, True) for s in range(int(200 * scale))]
+        tasks += [("B", 900000 + s, True) for s in range(int(30 * scale))]
+    random.Random(7).shuffle(tasks)
+    t0 = time.time()
+    agg = {}
+    with mp.get_context("fork").Pool(jobs) as pool:
+        for i, (key, r) in enumerate(pool.imap_unordered(_run, tasks, chunksize=1), 1):
+            a = agg.setdefault(key, {"cases": 0, "checked": 0, "violations": 0, "skipped": 0, "errors": 0,
+                                     "seconds": 0.0, "examples": [], "why": []})
+            a["cases"] += 1
+            for fld in ("checked", "violations", "skipped", "errors"):
+                a[fld] += r.get(fld, 0)
+            a["seconds"] += r["seconds"]
+            if r.get("example") and len(a["examples"]) < 5:
+                a["examples"].append(r["example"])
+            if r.get("why") and len(a["why"]) < 5:
+                a["why"].append(r["why"])
+            if i % 50 == 0:
+                print(f"{i}/{len(tasks)} done, {time.time() - t0:.0f} s", flush=True)
+    out = ROOT / "bench/night"
+    (out / "REPORT.json").write_text(json.dumps(agg, indent=1, default=str))
+    lines = ["# Night battery report", "", f"wall {time.time() - t0:.0f} s, {jobs} processes", "",
+             "| sweep | cases | checked | violations | skipped | errors | cpu s |", "|---|---|---|---|---|---|---|"]
+    for key in sorted(agg):
+        a = agg[key]
+        lines.append(f"| {key} | {a['cases']} | {a['checked']} | {a['violations']} | {a['skipped']} | {a['errors']} | "
+                     f"{a['seconds']:.0f} |")
+    lines += ["", "Violations must be 0 in A-F and > 0 in the -MUT rows (the check can see a broken bound).", ""]
+    for key in sorted(agg):
+        if agg[key]["examples"] or agg[key]["why"]:
+            lines.append(f"- {key}: examples {agg[key]['examples'][:3]}; notes {agg[key]['why'][:3]}")
+    (out / "REPORT.md").write_text("\n".join(lines) + "\n")
+    print("\n".join(lines))
+
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

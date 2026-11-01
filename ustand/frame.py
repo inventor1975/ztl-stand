@@ -417,6 +417,7 @@ def _geo_entries(nodes_xy, i, j, L, c, s, dof):
 
 
 _STAB = {}
+_MUTANT = {}       # TEST-ONLY sabotage switches (bench/night/verify_all.py's mutation runs); empty = the real bounds
 
 
 def stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
@@ -1006,6 +1007,8 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
             else:
                 return {"verdict": "OPEN", "why": f"element {kchk}: too slender between its nodes (subdivide)",
                         "checks": []}
+        if _MUTANT.get("ends_only"):                   # sabotage: the old "ends only, Hermite moments" check
+            mint = max(max(abs(a_ + corr), abs(b_ - corr)) for a_, b_ in Ml.values())
         hi_abs = max(abs(Nl), abs(Nh)) / area + mint / W
         # REFUTED: an end fibre beyond the limit for every point of the box (independent intervals: safe)
         bad = False
