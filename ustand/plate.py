@@ -18,6 +18,8 @@ part of ZTL zenergy (lean/ZEnergy.lean `target_first_grouped`, as the frame's be
     python3 -m ustand.plate deck.txt --tol 0.5% --req "U(42,Y) >= -0.0251"     a requirement
     python3 -m ustand.plate deck.txt --tol 0.5% --range "U(42,Y)"               the proved enclosure (not exact)
             U(node,X|Y) a displacement
+    python3 -m ustand.plate deck.txt --tol 0.5% --req "VM(17) <= 235e6"         a stress: S(k,XX|YY|XY) <=|>= v,
+            or VM(k) <= v (von Mises), in element k
 
 THE DECK (the subset read; anything else is REFUSED aloud):
     N, id, x, y                  a node
@@ -33,11 +35,13 @@ Coordinates, E, nu and thickness must be rational (decimals are read exactly).
 
 WHAT IT DOES NOT DO, said: membrane (in-plane) action only — no bending, no plates in bending (Kirchhoff/Mindlin),
 no shells, no 3D; no plane strain; no meshing or geometry beyond the structured rectangles of
-examples/plate/gen_plate.py (the deck gives the triangles); one material, one thickness; no stresses or member
-checks — displacements only; the box path (zlin) is not wired for plates — a requirement the energy path cannot
+examples/plate/gen_plate.py (the deck gives the triangles); one material, one thickness; stresses are the CST's
+constant per-element values (S(k,XX|YY|XY), von Mises VM(k) by convexity over the 8 corners of the component box);
+the box path (zlin) is not wired for plates — a requirement the energy path cannot
 decide comes back OPEN, not guessed. The CST is the crudest membrane element: it passes the patch test (constant
 strain is exact) but is stiff in bending-dominated fields — the stand proves the DISCRETE model's displacements, not
-the continuum's.
+the continuum's (MEASURED, bench/stage0/plate_convergence: a clamped 4 x 1 m plate's tip is -45 % on 8 x 2
+squares, -0.1 % on 256 x 64 — far beyond a +-0.5 % tolerance on coarse meshes).
 """
 from __future__ import annotations
 
