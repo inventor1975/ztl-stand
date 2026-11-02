@@ -2854,5 +2854,59 @@ check("3D conduction judged by ZTL: a homogeneous 2 S/m box meets s_eff >= 1.9 E
       "s_eff >= 2.1 is refuted on credit (inputs unearned)",
       _jd["verdict"] == "EARNED" and _jr["verdict"] == "ON CREDIT (toward F)", (_jd["verdict"], _jr["verdict"]))
 
+# SPACE FRAMES (2026-11-02, the 3D phase, track 2, version 1: first order)
+from ustand import frame3d as _F3
+_E3, _nu3, _A3, _Iz3, _Iy3, _J3, _L3 = F(210 * 10 ** 9), F(3, 10), F(1, 100), F(8, 10 ** 5), F(3, 10 ** 5), F(5, 10 ** 5), F(4)
+_G3 = _E3 / (2 * (1 + _nu3))
+_cant3 = f"""ET, 1, BEAM4
+MP, EX, 1, {_E3}
+MP, PRXY, 1, 0.3
+R, 1, {_A3}, {_Iz3}, {_Iy3}, 0, 0, 0, 0, {_J3}
+N, 1, 0, 0, 0
+N, 2, 4, 0, 0
+E, 1, 2
+D, 1, ALL, 0
+F, 2, FY, 1000
+F, 2, FZ, -2000
+F, 2, MX, 500
+"""
+_ex3 = {"U(2,Y)": F(1000) * _L3 ** 3 / (3 * _E3 * _Iz3), "U(2,Z)": F(-2000) * _L3 ** 3 / (3 * _E3 * _Iy3),
+        "U(2,RX)": F(500) * _L3 / (_G3 * _J3)}
+_got3 = {t: _F3.range_of(_cant3, "0", t)["lo"] for t in _ex3}
+check("space frame: a cantilever along X under FY, FZ and a torque — the tip displacements are EXACTLY "
+      "P L^3/(3 E I_z), Q L^3/(3 E I_y) and T L/(G J) (six rank-one terms per member, exact local axes)",
+      all(_got3[t] == _ex3[t] for t in _ex3), {t: (str(_got3[t]), str(_ex3[t])) for t in _ex3})
+_d2p = """ET, 1, BEAM3
+MP, EX, 1, 210e9
+R, 1, 0.01, 8e-5
+N, 1, 0, 0
+N, 2, 0, 3
+N, 3, 4, 3
+N, 4, 4, 0
+E, 1, 2
+E, 2, 3
+E, 3, 4
+D, 1, UX, 0
+D, 1, UY, 0
+D, 1, ROTZ, 0
+D, 4, UX, 0
+D, 4, UY, 0
+D, 4, ROTZ, 0
+F, 2, FX, 10000
+F, 3, FY, -20000
+"""
+_d3p = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0, 0, 0, 0, 5e-5\n"
+        "N, 1, 0, 0, 0\nN, 2, 0, 3, 0\nN, 3, 4, 3, 0\nN, 4, 4, 0, 0\nE, 1, 2\nE, 2, 3\nE, 3, 4\n"
+        "D, 1, ALL, 0\nD, 4, ALL, 0\n" + "".join(f"D, {n}, UZ, 0\nD, {n}, ROTX, 0\nD, {n}, ROTY, 0\n" for n in (2, 3))
+        + "F, 2, FX, 10000\nF, 3, FY, -20000\n")
+_pairs3 = [(FRM.range_of(_d2p, "0.5%", a)["proved_range"], _F3.range_of(_d3p, "0.5%", b)["proved_range"])
+           for a, b in (("U(2,X)", "U(2,X)"), ("U(3,Y)", "U(3,Y)"), ("ROT(3)", "U(3,RZ)"))]
+check("space frame: a 2D portal frame laid in the XY plane with the out-of-plane motion restrained gives the 2D "
+      "frame's PROVED ranges bit for bit (+-0.5 % moduli; sway, vertical deflection, rotation)",
+      all(a == b for a, b in _pairs3), _pairs3)
+_jv = _F3.judge(_cant3, "0.5%", "U(2,Z)", ge="-0.0069")
+check("space frame judged by ZTL: the cantilever's tip deflection under FZ stays above -6.9 mm for every modulus "
+      "within +-0.5 % — EARNED", _jv.get("verdict") == "EARNED", _jv)
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

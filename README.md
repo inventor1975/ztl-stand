@@ -73,6 +73,7 @@ Every verdict says its LEVEL (`scope` in the output) — a proof about a mesh is
 | `ustand.plate` | CST triangles | displacements and stresses of the MESH (scope MESH) |
 | `ustand.hypercircle` | plate + `TRAC` | the CONTINUUM plate: compliance, mean deflection, any boundary-segment average (Prager–Synge, τ checked exactly) |
 | `ustand.adapt` | as hypercircle | refinement where the hypercircle's exact local error is large |
+| `ustand.frame3d` | BEAM4 (12 DOF per member, N x y z) | **3D phase, track 2, version 1**: SPACE FRAMES — every displacement as a proved range for every modulus in the box, FIRST ORDER; exact against the cantilever formulas in two planes and torsion, bit-identical to the 2D frame for a plane frame laid in 3D |
 | `ustand.conduction3d` | a 3D voxel map (`.npy`) + phase conductivities | **the stand's 3D phase, track 1 (2026-11-02)**: the CONTINUUM conductance of the volume (ionic, electrical, thermal), two-sided and proved — upper from any piecewise-linear potential, lower from a face-flux field made EXACTLY conservative in integers (insulators of any topology allowed); `s_eff >= need` judged by ZTL |
 
 Named premises (said in the outputs): linear elasticity, Green's formula, IEEE 754 for the floating Cholesky,
