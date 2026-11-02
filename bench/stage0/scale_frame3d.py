@@ -12,7 +12,7 @@ sys.path.insert(0, str(ROOT))
 from ustand import frame3d as F3
 
 
-def gen(ns, bx, by, B=6, C=5, H=4, lumped=False):
+def gen(ns, bx, by, B=6, C=5, H=4, lumped=False, graded=True):
     nid = lambda f_, a_, b_: f_ * (bx + 1) * (by + 1) + b_ * (bx + 1) + a_ + 1
     L = ["ET, 1, BEAM4", "MP, EX, 1, 210e9", "MP, PRXY, 1, 0.3",
          "R, 1, 0.0149, 2.52e-4, 0.92e-4, 0.3, 0.3, 0, 0, 2.9e-6",          # columns, an HEB 300-like section
@@ -21,11 +21,19 @@ def gen(ns, bx, by, B=6, C=5, H=4, lumped=False):
         for b_ in range(by + 1):
             for a_ in range(bx + 1):
                 L.append(f"N, {nid(f_, a_, b_)}, {B * a_}, {C * b_}, {H * f_}")
-    el, beams = [], []
+    el, beams, seen = [], [], set()
     for f_ in range(ns):
+        # HEAVIER COLUMNS below (2026-11-02: one HEB 300 for 20 storeys put alpha_cr under 1): section factor c =
+        # the storeys carried / 2 (at least 1) — area x c, inertias x c^2 (a deeper section), its own REAL id
+        cfac = max(1, (ns - f_) // 2)
+        rid = 10 + cfac
+        if rid not in seen:
+            seen.add(rid)
+            L.append(f"R, {rid}, {0.0149 * cfac:.6g}, {2.52e-4 * cfac * cfac:.6g}, {0.92e-4 * cfac * cfac:.6g}, "
+                     f"{0.3 * cfac:.6g}, {0.3 * cfac:.6g}, 0, 0, {2.9e-6 * cfac * cfac:.6g}")
         for b_ in range(by + 1):
             for a_ in range(bx + 1):
-                el.append((nid(f_, a_, b_), nid(f_ + 1, a_, b_), 1))
+                el.append((nid(f_, a_, b_), nid(f_ + 1, a_, b_), rid if graded else 1))
     for f_ in range(1, ns + 1):
         for b_ in range(by + 1):
             for a_ in range(bx):
@@ -64,7 +72,7 @@ def main(argv):
     for sz in sizes:
         ns, bx, by = map(int, sz.split("x"))
         text, roof, ne = gen(ns, bx, by)
-        row = {"size": sz, "members": ne, "date": time.strftime("%Y-%m-%d %H:%M")}
+        row = {"size": sz, "members": ne, "date": time.strftime("%Y-%m-%d %H:%M"), "columns": "graded"}
         t0 = time.time()
         r = F3.range_of(text, "0.5%", f"U({roof},X)")
         row["first_order_s"] = round(time.time() - t0, 1)
@@ -89,10 +97,10 @@ def main(argv):
             print(f"   second order sway {row['sway2_mm']} mm  {row['second_order_s']} s", flush=True)
         if "en" not in skip:
             t0 = time.time()
-            en = F3.judge_interaction(gen(ns, bx, by, lumped=True)[0], "0.5%", F(355) * 10 ** 6, "b", "c")
+            en = F3.judge_interaction(text, "0.5%", F(355) * 10 ** 6, "b", "c")
             row["en_s"] = round(time.time() - t0, 1)
             u_ = en.get("utilisation_max")
-            row["en_verdict"], row["en_loads"] = en.get("verdict"), "lumped"
+            row["en_verdict"], row["en_loads"] = en.get("verdict"), "QLOAD on the beams"
             row["en_util"] = float(u_.split("~")[1].rstrip(")")) if u_ and "~" in u_ else u_
             print(f"   EN 6.3.3 {row['en_verdict']} util {row['en_util']}  {row['en_s']} s", flush=True)
         out.write(json.dumps(row) + "\n"); out.flush()

@@ -2911,7 +2911,7 @@ _d3q = _d3p.replace("R, 1, 0.01, 8e-5, 3e-5, 0, 0, 0, 0, 5e-5", "R, 1, 0.01, 8e-
 _vq = lambda x: F(x.split()[0])
 _m2q = {r_["member"][0]: _vq(r_["M_Ed_max"]) for r_ in FRM.judge_interaction_case(_d2q, "0", F(355) * 10 ** 6, "b")
         ["members"] if "M_Ed_max" in r_}
-_m3q = {r_["member"]: _vq(r_["M_a_max"]) for r_ in _F3.judge_interaction(_d3q, "0", F(355) * 10 ** 6, "b", "c")
+_m3q = {r_["member"]: _vq(r_["M_a_max"]) for r_ in _F3.judge_interaction(_d3q, "0", F(355) * 10 ** 6, "b", "c", phi=0)
         ["members"] if "M_a_max" in r_}
 check("space frame EN 6.3.3 WITH A MEMBER LOAD (2026-11-02; it refused QLOAD before): the plane portal laid in 3D, "
       "its compressed beam carrying a uniform load — the peak moment of every compressed member equals the 2D frame's "
@@ -3163,7 +3163,13 @@ check("space frame EN 5.3.2 SWAY IMPERFECTION: every combination becomes four (+
 
 _ia3 = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0.1, 0.2, 0, 0, 5e-5\n" + _bn3 + _be3
          + "D, 1, ALL, 0\nF, 9, FZ, -200000\nF, 9, MX, 2000\nF, 9, MY, 3000\n")
-_ir3 = _F3.judge_interaction(_ia3, "0", F(235) * 10 ** 6, "b", "c")
+_ir3 = _F3.judge_interaction(_ia3, "0", F(235) * 10 ** 6, "b", "c", phi=0)
+_ir3i = _F3.judge_interaction(_ia3, "0", F(235) * 10 ** 6, "b", "c")
+check("space frame EN 6.3.3 with EN 5.3.2's sway imperfection BY DEFAULT (2026-11-02, as the 2D frame): four cases "
+      "(+-phi along X and Y), each judged; the utilisation is not below the bare loads'",
+      "imperfection" in _ir3i and len({m_["case"] for m_ in _ir3i["members"]}) == 4
+      and F(_ir3i["utilisation_max"].split()[0]) >= F(_ir3["utilisation_max"].split()[0]),
+      (_ir3i.get("imperfection"), _ir3i["utilisation_max"], _ir3["utilisation_max"]))
 _iw3 = max(_ir3["members"], key=lambda x: F(x["u_6_62"].split()[0]))
 def _chi(lb, a):
     ph = 0.5 * (1 + a * (lb - 0.2) + lb * lb)

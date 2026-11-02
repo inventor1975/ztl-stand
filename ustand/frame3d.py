@@ -1294,7 +1294,7 @@ def judge_buckling(text, tol, fy, curve_y, curve_z, gamma_m1=F(1), case=None):
                            "6.3.3 interaction"}
 
 
-def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None):
+def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None, phi=None):
     """EN 1993-1-1 6.3.3, formulas (6.61) AND (6.62), Annex B Method 2, BIAXIAL, every compressed member of a space
     frame. Axis a = bending in the x'-y' plane (about z', I_z, W_a = I_z/(TKY/2)), axis b = in the x'-z' plane (about y',
     I_y, W_b = I_y/(TKZ/2)); curve_z / curve_y the buckling curves for those planes.
@@ -1310,6 +1310,20 @@ def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None)
     from . import judge_ztl  # noqa: F401
     from .frame import CURVES, _curve_premises, _sqrt_down, _g_lower, _side_peak
     import zenergy as ZE
+    # EN 5.3.2's global sway imperfection, +-phi along X and along Y, each case judged (2026-11-02: as the 2D frame's
+    # judge_interaction; phi = 0 for the bare loads). The conservative side: four cases instead of one.
+    phi = PHI0 if phi is None else F(phi)
+    if phi:
+        texti = with_imperfections(text, phi)
+        if case is None:
+            r = judge_interaction(texti, tol, fy, curve_z, curve_y, gamma_m1, None, 0)
+        else:
+            parts_ = [judge_interaction(texti, tol, fy, curve_z, curve_y, gamma_m1, f"{case}{t}{ax}", 0)
+                      for ax in "XY" for t in "+-"]
+            r = dict(parts_[0], members=[m for p_ in parts_ for m in p_["members"]],
+                     verdict="EARNED" if all(p_["verdict"] == "EARNED" for p_ in parts_) else "OPEN",
+                     utilisation_max=max(parts_, key=lambda p_: F(p_["utilisation_max"].split()[0]))["utilisation_max"])
+        return dict(r, imperfection=f"EN 5.3.2 sway, +-{phi} along X and along Y (each judged)")
     for cv in (curve_z, curve_y):
         if cv not in CURVES:
             raise Frame3DError(f"{cv!r}: a buckling curve is one of {', '.join(CURVES)}")
