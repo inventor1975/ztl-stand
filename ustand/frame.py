@@ -973,12 +973,11 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
     qd = read_qloads(text)
     qax2 = {k: a_ * L_ / 2 for k, (a_, w_, L_) in qd.items() if a_}
-    if qax2 and (checks or any(qd[k][1] for k in qax2)):
-        # DISPLACEMENTS with axial member loads are in (2026-11-02); member stresses (the end moments and the interior
-        # bounds assume a constant N) and a member carrying both an axial and a transverse load are not yet
-        return {"verdict": "OPEN", "why": "an AXIAL member load (QLOAD along an element) in second order: "
-                                          "displacements only, on members without a transverse load (stresses and "
-                                          "combined loads not yet) — first order and EN's method judge it",
+    if any(qd[k][1] for k in qax2):
+        # DISPLACEMENTS (2026-11-02) and member STRESSES (2026-11-03) with axial member loads are in; a member carrying
+        # both an axial and a transverse load is not yet (its inner load correction assumes a constant N)
+        return {"verdict": "OPEN", "why": "a member with BOTH an axial and a transverse member load (QLOAD oblique to "
+                                          "the element) in second order: not yet — first order and EN's method judge it",
                 "checks": [], "disp": {}}
     st = stability_lower(text, tol, jobs=jobs)
     parts, f, dof, emap, (_, _, _, h) = energy_system_full(text, tol)
@@ -1110,6 +1109,16 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
                                                         [-36, -3 * L_, 36, -3 * L_], [3 * L_, -L_ * L_, -3 * L_, 4 * L_ * L_]]]
         for end, row in (("I", Gl_[1]), ("J", Gl_[3])):
             es.append(vec(_glob(ii, jj, c_g, s_g, dof, row))); items.append((kchk, "G" + end))
+        if kchk in qax2:
+            # an AXIAL member load (2026-11-03): the geometric part of the end moment is N_a (G_a u)_th + N_b (G_b u)_th
+            # (N linear); the interior bound needs the end slopes v'(0), v'(L) — the nodal rotations themselves
+            Ga_, Gb_ = _geo_split(L_)
+            for nm, Gx in (("A", Ga_), ("B", Gb_)):
+                for end, row in (("I", Gx[1]), ("J", Gx[3])):
+                    es.append(vec(_glob(ii, jj, c_g, s_g, dof, row))); items.append((kchk, "G" + nm + end))
+            for end, nd_ in (("I", ii), ("J", jj)):
+                if (nd_, "R") in dof:
+                    es.append(vec({dof[(nd_, "R")]: F(1)})); items.append((kchk, "R" + end))
     for (nd, d) in disp:                              # nodal displacements (second order, the continuum frame)
         es.append(vec({dof[(nd, d)]: F(1)})); items.append((("U", nd, d), "U"))
     es.append(list(f)); items.append((None, "f"))
@@ -1146,8 +1155,8 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     unC = ZE._sqrt_up(theta * max(fu_hi, F(0)) / (1 - theta))     # ||u||_C <= sqrt(theta) ||u||_A0, A >= (1-theta)A0
     rng = {}
     for (kchk, what), r in zip(items, rs):
-        if kchk is not None and what in ("GI", "GJ"):
-            rng[(kchk, what)] = (r["lo"], r["hi"])            # (G u)_th: not scaled by the modulus
+        if kchk is not None and what in ("GI", "GJ", "GAI", "GAJ", "GBI", "GBJ", "RI", "RJ"):
+            rng[(kchk, what)] = (r["lo"], r["hi"])            # (G u)_th and rotations: not scaled by the modulus
         elif kchk is not None and what != "U":
             rng[(kchk, what)] = (min(ex * (1 - T) * r["lo"], ex * (1 + T) * r["lo"]),
                                  max(ex * (1 - T) * r["hi"], ex * (1 + T) * r["hi"]))
@@ -1166,10 +1175,22 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
         nl_, nh_ = Nlo.get(kchk, F(0)), Nhi.get(kchk, F(0))
         if _MUTANT.get("no_geo_moment"):              # sabotage (tests only): the pre-2026-11-02 K_E-row moment
             nl_ = nh_ = F(0)
+        qa_ = qax2.get(kchk)
+        if qa_ is not None:
+            # N(x) = N_mid + qa (1 - 2x/L): the first-order (stability's) range of N_mid, its widening undone
+            wd_ = abs(qa_) if at is None else F(0)
+            nm_lo, nm_hi = nl_ + wd_, nh_ - wd_
+            if _MUTANT.get("axial_const_moment"):     # sabotage (tests only): N_mid G instead of N_a G_a + N_b G_b
+                geo = [("G", (nm_lo, nm_hi))]
+            else:
+                geo = [("GA", (nm_lo + qa_, nm_hi + qa_)), ("GB", (nm_lo - qa_, nm_hi - qa_))]
+        else:
+            geo = [("G", (nl_, nh_))]
         for e_, sg_ in (("I", 1), ("J", -1)):
-            gl_, gh_ = rng[(kchk, "G" + e_)]
-            prods = [sg_ * a_ * b_ for a_ in (nl_, nh_) for b_ in (gl_, gh_)]
-            Ml[e_] = (Ml[e_][0] + min(prods), Ml[e_][1] + max(prods))
+            for gname, (n_lo, n_hi) in geo:
+                gl_, gh_ = rng[(kchk, gname + e_)]
+                prods = [sg_ * a_ * b_ for a_ in (n_lo, n_hi) for b_ in (gl_, gh_)]
+                Ml[e_] = (Ml[e_][0] + min(prods), Ml[e_][1] + max(prods))
         mend = max(max(abs(a_), abs(b_)) for a_, b_ in Ml.values())
         # interior: M'' + k^2 M = 0 in a compressed member (k^2 = P/EI); max |M| <= m (1 + psi)/(2 cos^2 phi),
         # phi = kL/2, and NO interior maximum when psi <= cos(2 phi) (>= 1 - 2 phi^2); in tension none at all
@@ -1177,7 +1198,27 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
         interior = "none (tension)" if P == 0 else None
         mint = mend
         wq = qd[kchk][1] if kchk in qd else F(0)
-        if wq:
+        if qa_ is not None:
+            # an AXIAL member load (2026-11-03): (EI v'')'' = (N v')', so with M = EI v'' and N' = -a = -2 qa/L
+            #   M'' = N' v' + (N/EI) M;  m = M - M_lin vanishes at both ends, so |m| <= (L^2/8) max|m''| (Dirichlet);
+            #   |M| <= mend + |m|,  |v'(x)| <= Theta + (L/2) max|M|/EI  (v'(0), v'(L) = the nodal rotations, Theta their
+            #   bound; integrate the curvature from the nearer end) — linear in max|m|:
+            #   max|m| (1 - beta) <= beta mend + (L^2/8) |a| Theta,  beta = (L^2/8)(max|N| + |a| L/2)/EI_lo
+            # (both signs of N: no sign of the Green function is used). EI at its lowest (1 - T) E I: beta grows.
+            EIl = (1 - T) * ex * izz
+            nabs = max(abs(nm_lo - abs(qa_)), abs(nm_hi + abs(qa_)))
+            a_abs = 2 * abs(qa_) / L
+            th = max((max(abs(rng[(kchk, "R" + e_)][0]), abs(rng[(kchk, "R" + e_)][1]))
+                      for e_ in ("I", "J") if (kchk, "R" + e_) in rng), default=F(0))
+            if _MUTANT.get("axial_no_slope"):        # sabotage (tests only): the N' v' term dropped
+                a_abs = F(0)
+            beta = (L * L / 8) * (nabs + a_abs * L / 2) / EIl
+            if beta >= 1:
+                return {"verdict": "OPEN", "why": f"element {kchk}: too slender between its nodes for the axial-load "
+                                                  f"interior bound (subdivide)", "checks": []}
+            mint = mend + (beta * mend + (L * L / 8) * a_abs * th) / (1 - beta)
+            interior = "bounded (axial member load: Dirichlet bound on M'' = N'v' + (N/EI)M)"
+        elif wq:
             # a transversely loaded member: M = M_lin + m, m'' +- k^2 m = -q -+ k^2 M_lin, m = 0 at the ends; the
             # Dirichlet Green function is positive, its integral <= (L^2/8)/(1 - k^2 L^2/8) in compression
             # (sec phi - 1 <= (phi^2/2)/(1 - phi^2/2)), <= L^2/8 in tension
@@ -1222,13 +1263,15 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
                         "checks": []}
         if _MUTANT.get("ends_only"):                   # sabotage: the old "ends only, Hermite moments" check
             mint = max(max(abs(a_ + corr), abs(b_ - corr)) for a_, b_ in Ml.values())
-        hi_abs = max(abs(Nl), abs(Nh)) / area + mint / W
+        qn = abs(qa_) if qa_ is not None else F(0)       # N along an axially loaded member: N_mid -+ |qa|
+        hi_abs = max(abs(Nl - qn), abs(Nh + qn)) / area + mint / W
         # REFUTED: an end fibre beyond the limit for every point of the box (independent intervals: safe)
         bad = False
         for e_ in ("I", "J"):
             ml, mh = Ml[e_]
-            top = (Nl / area + ml / W, Nh / area + mh / W)
-            bot = (Nl / area - mh / W, Nh / area - ml / W)
+            sh = (qa_ if e_ == "I" else -qa_) if qa_ is not None else F(0)
+            top = ((Nl + sh) / area + ml / W, (Nh + sh) / area + mh / W)
+            bot = ((Nl + sh) / area - mh / W, (Nh + sh) / area - ml / W)
             bad |= any(lo_ > lim or hi_ < -lim for lo_, hi_ in (top, bot))
         out.append({"check": f"|SIG({kchk})| <= {lim}", "sigma_abs_max": _show(hi_abs, 1),
                     "N_range": [_show(Nl, -1), _show(Nh, 1)],

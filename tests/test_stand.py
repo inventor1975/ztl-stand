@@ -2568,12 +2568,52 @@ try:
     FRM.read_deck(_qss1 + "\nSFBEAM, 1, 1, PRES, 10000"); _qsf = False
 except FRM.FrameError as _e:
     _qsf = "QLOAD" in str(_e)
-_qso = FRM.second_order_case(_qsw, "0", [(1, F(10) ** 12)])      # an AXIAL member load: second order not yet
+_qso = FRM.second_order_case(_qss1 + "\nQLOAD, 1, FX, -1000", "0", [(1, F(10) ** 12)])   # oblique: axial AND transverse
 check("member load in EN 6.3.3: M_Ed is the span's qL^2/8 = 20 kN m (inside the element), C_my 1 for a loaded member; "
       "ANSYS's SFBEAM is refused with a pointer to QLOAD (its face/sign conventions are easy to get silently wrong); "
-      "physical second order with an AXIAL member load says OPEN, with the reason (not yet)",
+      "physical second order on a member with BOTH an axial and a transverse load says OPEN, with the reason (not yet)",
       F(_qbi["M_Ed_max"].split()[0]) == 20000 and _qbi["C_my"] == "1" and _qsf and _qso["verdict"] == "OPEN"
-      and "QLOAD" in _qso["why"], (_qbi["M_Ed_max"], _qbi["C_my"], _qsf, _qso.get("why")))
+      and "BOTH" in _qso["why"], (_qbi["M_Ed_max"], _qbi["C_my"], _qsf, _qso.get("why")))
+# SECOND-ORDER STRESSES WITH AN AXIAL MEMBER LOAD (2026-11-03): a 4 m cantilever column, self-weight 100 kN/m, tip 10 kN
+# sideways, 4 elements. Reference: EI th'' = N th - H, N = -q (L - x), by an independent finite-difference solve (400001
+# points, scipy; MEASURED 2026-11-03): M = 42002.761 (base), 31619.047 (x = 1), 20874.802 (x = 2) N m. Both sides: each
+# end-moment bracket holds the reference; the mutant N_mid G (not N_a G_a + N_b G_b) misses it.
+def _axso(mut=None):
+    FRM._MUTANT.clear()
+    if mut:
+        FRM._MUTANT[mut] = True
+    try:
+        d = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2"]
+                      + [f"N, {k+1}, 0, {k}" for k in range(5)] + [f"E, {k+1}, {k+2}" for k in range(4)]
+                      + ["D, 1, UX, 0", "D, 1, UY, 0", "D, 1, ROTZ, 0", "F, 5, FX, 10000"]
+                      + [f"QLOAD, {k+1}, FY, -100000" for k in range(4)])
+        return FRM.second_order_case(d, "0", [(k + 1, F(10) ** 12) for k in range(4)])
+    finally:
+        FRM._MUTANT.clear()
+def _axin(r):
+    refs = {(1, "I"): 42002.761, (1, "J"): 31619.047, (2, "I"): 31619.047, (2, "J"): 20874.802}
+    out = []
+    for (k, e_), m in refs.items():
+        lo, hi = sorted(abs(float(F(v.split()[0]))) for v in r["checks"][k - 1]["M_ends"][e_])
+        out.append(lo - 0.01 <= m <= hi + 0.01)
+    return out
+_axr, _axm = _axso(), _axso("axial_const_moment")
+check("second-order STRESSES with an AXIAL member load (a self-weight cantilever column + a tip load): every end-moment "
+      "bracket holds the independent continuum reference (42002.761, 31619.047, 20874.802 N m) with half-width < 0.01 %; "
+      "the mutant N_mid G (the geometric moment without the split) misses it; the verdict is decided (not OPEN)",
+      all(_axin(_axr)) and not all(_axin(_axm)) and _axr["verdict"] in ("EARNED", "REFUTED"),
+      (_axin(_axr), _axin(_axm), _axr["verdict"]))
+# the interior: a pinned column (self-weight 150 kN/m, 600 kN on top, end moments 20 kN m in single curvature, 2
+# elements) — |M| peaks INSIDE (1.119 x the ends); the reference sigma max per element (scipy solve_bvp, MEASURED):
+# 145.000 MPa (element 1, the base fibre) and 117.942 MPa (element 2, interior). The proved bound must not be lower.
+_axp = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2", "N, 1, 0, 0", "N, 2, 0, 2", "N, 3, 0, 4",
+                  "E, 1, 2", "E, 2, 3", "D, 1, UX, 0", "D, 1, UY, 0", "D, 3, UX, 0", "QLOAD, 1, FY, -150000",
+                  "QLOAD, 2, FY, -150000", "F, 3, FY, -600000", "F, 1, MZ, 20000", "F, 3, MZ, -20000"])
+_axq = FRM.second_order_case(_axp, "0", [(1, F(10) ** 12), (2, F(10) ** 12)])["checks"]
+_axs = [float(F(c["sigma_abs_max"].split()[0])) for c in _axq]
+check("second-order stresses with an axial member load, an INTERIOR maximum (pinned column, single curvature): the proved "
+      "sigma bound per element is not below the reference (145.000 / 117.942 MPa) and within 5 %",
+      145.000e6 <= _axs[0] <= 1.05 * 145.000e6 and 117.942e6 <= _axs[1] <= 1.05 * 117.942e6, _axs)
 # SIGN CONVENTION, checked directly (2026-11-01: a swapped J-end label once passed every test by coincidence)
 _um = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2", "N, 1, 0, 0", "N, 2, 4, 0", "E, 1, 2",
                   "D, 1, UX, 0", "D, 1, UY, 0", "D, 2, UY, 0", "F, 1, MZ, -20000", "F, 2, MZ, 20000"])

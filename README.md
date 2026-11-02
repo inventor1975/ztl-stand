@@ -83,9 +83,11 @@ theorem (Higham over any summation tree, ZTL lean/ZHigham); without it, the band
 
 Named premises (said in the outputs): linear elasticity, Green's formula, IEEE 754 for the floating Cholesky,
 second-order axial forces from the first-order analysis, straight truss bars, out-of-plane restraint for 6.3.3.
-Axial member loads: stability and second-order DISPLACEMENTS (2D and 3D, since 2026-11-02). Not yet: second-order
-STRESSES with axial member loads and a member carrying both an axial and a transverse load (OPEN / refused, said),
-out-of-plane/LT buckling, plate buckling.
+Axial member loads: stability and second-order DISPLACEMENTS (2D and 3D, since 2026-11-02); second-order member
+STRESSES in 2D (2026-11-03: end moments with N_a G_a + N_b G_b, brackets < 0.01 % around an independent continuum
+solve; the interior by a Dirichlet bound on M'' = N'v' + (N/EI)M, MEASURED 3-29 % above the reference on 1-2 elements
+per member, 0.07-0.18 % on 8-16). Not yet: those stresses in 3D, a member carrying both an axial and a transverse load
+(OPEN / refused, said), plate buckling. Lateral-torsional buckling: member level, 3D (`judge_ltb`, DESIGN-LTB.md).
 3D phase: track 1 (conduction) in; track 2 (space frames, 6 DOF per node) and track 3 (3D elasticity) next. Measured
 (conduction3d, 2026-11-02): 16^3 random 50 % electrolyte in 0.5 s; voxel edge/corner contacts make the bracket close
 slowly under uniform refinement (3D checkerboard: ratio 2.3 -> 1.4 at x4) — adaptive refinement is the next step.
