@@ -1,0 +1,22 @@
+! REDTEAM: pin-ended strut by RELEASE, true alpha_cr = 2, lateral load at mid-span
+ET, 1, BEAM4
+MP, EX, 1, 210e9
+MP, PRXY, 1, 0.3
+R, 1, 0.01, 8e-5, 8e-5, 0.2, 0.2, 0, 0, 5e-5
+N, 1, 0, 0, 0
+N, 2, 6, 0, 0
+N, 3, 12, 0, 0
+E, 1, 2
+E, 2, 3
+D, 1, ALL, 0
+D, 3, UY, 0
+D, 3, UZ, 0
+D, 3, ROTX, 0
+D, 3, ROTY, 0
+D, 3, ROTZ, 0
+D, 2, UZ, 0
+D, 2, ROTX, 0
+RELEASE, 1, I, MZ, MY
+RELEASE, 2, J, MZ, MY
+F, 3, FX, -575727
+F, 2, FY, 5000

@@ -1,0 +1,17 @@
+! REDTEAM: a pin-ended strut (RELEASE at both member ends), end nodes rotationally held
+ET, 1, BEAM4
+MP, EX, 1, 210e9
+MP, PRXY, 1, 0.3
+R, 1, 0.01, 8e-5, 8e-5, 0.2, 0.2, 0, 0, 5e-5
+N, 1, 0, 0, 0
+N, 2, 12, 0, 0
+E, 1, 2
+D, 1, ALL, 0
+D, 2, UY, 0
+D, 2, UZ, 0
+D, 2, ROTX, 0
+D, 2, ROTY, 0
+D, 2, ROTZ, 0
+RELEASE, 1, I, MZ, MY
+RELEASE, 1, J, MZ, MY
+F, 2, FX, -1300000

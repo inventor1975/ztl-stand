@@ -1,0 +1,18 @@
+! REDTEAM: a column fixed at its base, held laterally at its top, with a HINGE at its top end (RELEASE, both bending
+! axes). The top node's rotations are held by supports (e.g. a stiff floor), but the column's own end rotation is free:
+! the column is FIXED-PINNED, P_cr = 20.19 EI/L^2 (Euler, effective length 0.6992 L).
+ET, 1, BEAM4
+MP, EX, 1, 210e9
+MP, PRXY, 1, 0.3
+R, 1, 0.01, 8e-5, 8e-5, 0.2, 0.2, 0, 0, 5e-5
+N, 1, 0, 0, 0
+N, 2, 0, 0, 4
+E, 1, 2
+D, 1, ALL, 0
+D, 2, UX, 0
+D, 2, UY, 0
+D, 2, ROTX, 0
+D, 2, ROTY, 0
+D, 2, ROTZ, 0
+RELEASE, 1, J, MZ, MY
+F, 2, FZ, -10000000
