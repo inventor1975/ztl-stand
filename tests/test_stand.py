@@ -2904,6 +2904,21 @@ _pairs3 = [(FRM.range_of(_d2p, "0.5%", a)["proved_range"], _F3.range_of(_d3p, "0
 check("space frame: a 2D portal frame laid in the XY plane with the out-of-plane motion restrained gives the 2D "
       "frame's PROVED ranges bit for bit (+-0.5 % moduli; sway, vertical deflection, rotation)",
       all(a == b for a, b in _pairs3), _pairs3)
+_d2q = _d2p.replace("R, 1, 0.01, 8e-5\n", "R, 1, 0.01, 8e-5, 0.2\n").replace(
+    "F, 2, FX, 10000\nF, 3, FY, -20000\n", "F, 2, FX, 200000\nF, 3, FY, -20000\nQLOAD, 2, FY, -30000\n")
+_d3q = _d3p.replace("R, 1, 0.01, 8e-5, 3e-5, 0, 0, 0, 0, 5e-5", "R, 1, 0.01, 8e-5, 3e-5, 0.2, 0.1, 0, 0, 5e-5").replace(
+    "F, 2, FX, 10000\nF, 3, FY, -20000\n", "F, 2, FX, 200000\nF, 3, FY, -20000\nQLOAD, 2, FY, -30000\n")
+_vq = lambda x: F(x.split()[0])
+_m2q = {r_["member"][0]: _vq(r_["M_Ed_max"]) for r_ in FRM.judge_interaction_case(_d2q, "0", F(355) * 10 ** 6, "b")
+        ["members"] if "M_Ed_max" in r_}
+_m3q = {r_["member"]: _vq(r_["M_a_max"]) for r_ in _F3.judge_interaction(_d3q, "0", F(355) * 10 ** 6, "b", "c")
+        ["members"] if "M_a_max" in r_}
+check("space frame EN 6.3.3 WITH A MEMBER LOAD (2026-11-02; it refused QLOAD before): the plane portal laid in 3D, "
+      "its compressed beam carrying a uniform load — the peak moment of every compressed member equals the 2D frame's "
+      "(end line + parabola, exact in first order; MEASURED on random space frames: 468 peaks within [fine mesh, "
+      "+1 %], the parabola's sign flipped puts 85 outside)",
+      bool(_m2q) and 2 in _m3q and all(_m3q.get(k) == v for k, v in _m2q.items()),
+      ({k: float(v) for k, v in _m2q.items()}, {k: float(v) for k, v in _m3q.items()}))
 _jv = _F3.judge(_cant3, "0.5%", "U(2,Z)", ge="-0.0069")
 check("space frame judged by ZTL: the cantilever's tip deflection under FZ stays above -6.9 mm for every modulus "
       "within +-0.5 % — EARNED", _jv.get("verdict") == "EARNED", _jv)

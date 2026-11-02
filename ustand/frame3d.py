@@ -1308,9 +1308,8 @@ def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None)
     PREMISES (said): no lateral-torsional / torsional buckling (chi_LT = 1, members not susceptible to torsional
     deformation), class 1-3, no member loads (QLOAD refuses, as stability)."""
     from . import judge_ztl  # noqa: F401
-    from .frame import CURVES, _curve_premises, _sqrt_down, _g_lower
+    from .frame import CURVES, _curve_premises, _sqrt_down, _g_lower, _side_peak
     import zenergy as ZE
-    _no_qload(text, "the interaction check")
     for cv in (curve_z, curve_y):
         if cv not in CURVES:
             raise Frame3DError(f"{cv!r}: a buckling curve is one of {', '.join(CURVES)}")
@@ -1339,10 +1338,25 @@ def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None)
     for c, rs in zip(names, rs_all):
         st = stability_lower(text, tol, c)
         lam = st.get("lam_low")
-        Mx = {}
+        # MEMBER LOADS (2026-11-02, the 2D frame's way): first order, the moment along a member is EXACTLY the line
+        # between its end moments plus kappa s (1 - s); each end moment = the K_E row + the clamped-beam moment, signed
+        # as second_order_stress (-w L^2/12 in plane a = (v, th_z), +w L^2/12 in plane b — its outputs flipped), kappa
+        # the opposite way (+w L^2/2, -w L^2/2: a clamped beam's +-w L^2/24 at midspan); the peak by _side_peak. An
+        # axial member load bends nothing in first order (its N range is stability_lower's, widened).
+        qmap = _qloads(text).get(c, {})
+        ends = {}
         for (k, plane), r in zip(items, rs):
             ex = emap[k]["p"].ex
-            Mx[(k, plane)] = max(Mx.get((k, plane), F(0)), abs(ex * r["lo"]), abs(ex * r["hi"]))
+            ends.setdefault((k, plane), []).append(sorted([ex * r["lo"], ex * r["hi"]]))
+        Mx = {}
+        for (k, plane), (eI, eJ) in ends.items():
+            xp_, yp_, zp_ = emap[k]["axes"]
+            L_ = emap[k]["L"]
+            qk = qmap.get(k)
+            w = sum(qk[t] * (yp_ if plane == "a" else zp_)[t] for t in range(3)) if qk else F(0)
+            mb = (-w if plane == "a" else w) * L_ * L_ / 12
+            kap = (w if plane == "a" else -w) * L_ * L_ / 2
+            Mx[(k, plane)] = _side_peak([eI[0] + mb, eI[1] + mb], [eJ[0] + mb, eJ[1] + mb], kap)
         for k in ks:
             nlo = st.get("Nlo", {}).get(k, F(0))
             if nlo >= 0:
@@ -1373,7 +1387,7 @@ def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None)
     vs = [r["verdict"] for r in rows]
     return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN", "utilisation_max": _show(worst, 1),
             "members": rows, "path": "EN 1993-1-1 6.3.3 (6.61) and (6.62), Annex B Method 2, biaxial, C_m = 1",
-            "premises": "no lateral-torsional / torsional buckling; class 1-3 (elastic resistance); no member loads"}
+            "premises": "no lateral-torsional / torsional buckling; class 1-3 (elastic resistance)"}
 
 
 def main(argv):
