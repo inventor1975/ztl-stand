@@ -5,3 +5,8 @@
 {"storeys": 40, "bays": 8, "unknowns": 1080, "elements": 680, "verdict": "EARNED", "nominal": 0.39128926567160865, "proved_hi_rel_pct": 0.5452136048396339, "nominal_s": 0.29, "judge_s": 0.09}
 {"storeys": 100, "bays": 24, "unknowns": 7500, "elements": 4900, "verdict": "EARNED", "nominal": 0.8373845574107711, "proved_hi_rel_pct": 0.7254147461851268, "nominal_s": 0.72, "judge_s": 0.72}
 {"storeys": 250, "bays": 48, "unknowns": 36750, "elements": 24250, "verdict": "EARNED", "nominal": 2.784005975070462, "proved_hi_rel_pct": 1.1812600662963968, "nominal_s": 3.81, "judge_s": 3.85}
+{"storeys": 40, "bays": 8, "unknowns": 1080, "elements": 680, "verdict": "REFUTED", "nominal": 0.39128926567160865, "proved_hi_rel_pct": 0.5452136048396339, "nominal_s": 0.41, "judge_s": 363.77}
+{"storeys": 100, "bays": 24, "unknowns": 7500, "elements": 4900, "verdict": "REFUTED", "nominal": 0.8373845574107711, "proved_hi_rel_pct": 0.7254147461851268, "nominal_s": 0.72, "judge_s": 18190.97}
+{"storeys": 40, "bays": 8, "unknowns": 1080, "elements": 680, "verdict": "REFUTED", "nominal": 0.39128926567160865, "proved_hi_rel_pct": 0.5452136048396339, "nominal_s": 0.3, "judge_s": 3.23}
+{"storeys": 100, "bays": 24, "unknowns": 7500, "elements": 4900, "verdict": "REFUTED", "nominal": 0.8373845574107711, "proved_hi_rel_pct": 0.7254147461851268, "nominal_s": 0.73, "judge_s": 104.74}
+{"storeys": 250, "bays": 48, "unknowns": 36750, "elements": 24250, "verdict": "REFUTED", "nominal": 2.784005975070462, "proved_hi_rel_pct": 1.1812600662963968, "nominal_s": 4.0, "judge_s": 2402.67}
