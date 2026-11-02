@@ -420,6 +420,9 @@ _STAB = {}
 _MUTANT = {}       # TEST-ONLY sabotage switches (bench/night/verify_all.py's mutation runs); empty = the real bounds
 
 
+FLOAT_BUILD = True              # stability's step matrices in floats with a proved distance (False: exact fractions)
+
+
 def _dy(x, up):
     """x rounded to a dyadic rational with 64 significant bits, UP or DOWN (2026-11-02, the night battery: exact
     coefficients built from the PROVED member forces (Nlo, Nhi carry huge denominators) were summed over members into
@@ -453,6 +456,7 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
     from . import judge_ztl  # noqa: F401
     import zenergy as ZE
     import numpy as np
+    import scipy.sparse as sp
     import scipy.sparse.linalg as sla
     nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
     parts, f, dof, emap, _ = energy_system_full(text, tol)
@@ -570,13 +574,100 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
         if mu <= 0:
             return False
         return ZE.pd_ieee(n, M, F(mu) * F(9, 10)) is not None
+    # THE SAME MATRIX BUILT IN FLOATS (2026-11-02, "оптимизируй далее": building it in exact fractions cost 7.5 s a
+    # bisection step on 36750 unknowns). Every member matrix is precomputed as (key index, float value) arrays; a
+    # step's coefficients are rounded to FLOATS in the safe direction (_fl: exactly representable, so the only new
+    # error is the summation's), M_f = sum coef * matrix by np.bincount (any order), and the distance to the exact
+    # M of `proved` is bounded entry by entry: |M_f - M| <= gamma_m (sum |coef| |m| + |1 - T| |K0|), gamma_m with m the
+    # most contributions to one entry + 4 (the matrix entries' own rounding, Higham 3.5, any order; premise IEEE
+    # 754 as pd_ieee). ZTL zenergy.pd_ieee_float takes that bound. `proved` (exact) stays the reference (tests).
+    keys = list(K0)
+    kidx = {key: i for i, key in enumerate(keys)}
+    def _arr(mat):
+        ix = []
+        for key in mat:
+            if key not in kidx:
+                kidx[key] = len(keys)
+                keys.append(key)
+            ix.append(kidx[key])
+        return np.array(ix, dtype=np.int64), np.array([float(v) for v in mat.values()])
+    mats = {}
+    for k in Gl:
+        mats[(k, "G")] = _arr(Gl[k]); mats[(k, "Q")] = _arr(Ql[k]); mats[(k, "B")] = _arr(Bl[k])
+        if k in Gal:
+            mats[(k, "Ga")] = _arr(Gal[k]); mats[(k, "Gb")] = _arr(Gbl[k])
+    if model == "fe":
+        for key in Gsum:
+            if key not in kidx:
+                kidx[key] = len(keys); keys.append(key)
+    K0i = np.array([kidx[key] for key in K0], dtype=np.int64)
+    K0v = np.array([float(v) for v in K0.values()])
+    nk_ = len(keys)
+    cnt = np.bincount(np.concatenate([K0i] + [ix for ix, _ in mats.values()]), minlength=nk_)
+    m_ = int(cnt.max()) + 4
+    u_ = F(1, 2 ** 53)
+    gam = m_ * u_ / (1 - m_ * u_)
+    rr = np.array([a for a, b in keys], dtype=np.int64)
+    cc = np.array([b for a, b in keys], dtype=np.int64)
+    offd = (rr != cc).astype(float)
+
+    def _fl(x, up):
+        """x as a float rounded in the stated direction (exact as a float, on the safe side of x)."""
+        import math
+        v = float(x)
+        if up and F(v) < x:
+            v = math.nextafter(v, math.inf)
+        elif not up and F(v) > x:
+            v = math.nextafter(v, -math.inf)
+        return v
+
+    def proved_f(lam):
+        a0 = _fl(1 - T, False)                  # (1 - T) K0, K0 PSD: rounded down
+        slots = []
+        if model == "fe" or not FLOAT_BUILD:
+            return proved(lam)
+        for k in Gl:
+            if k in qax and Nlo[k] < 0:
+                Na, Nb = Nnodes_lo.get(k, F(0)) + qax[k], Nnodes_lo.get(k, F(0)) - qax[k]
+                P = -lam * Nlo[k]
+                if P * kk[k] >= 1:
+                    return False
+                cq = P * P * kk[k] / (1 - P * kk[k])
+                slots += [((k, "Ga"), _fl(lam * Na, False)), ((k, "Gb"), _fl(lam * Nb, False)),
+                          ((k, "G"), -_fl(cq, True))]
+            elif Nlo[k] < 0:
+                P = -lam * Nlo[k]
+                if P * kk[k] >= 1:
+                    return False
+                cq = P * P * kk[k] / (1 - P * kk[k])
+                slots += [((k, "G"), -_fl(P, True)), ((k, "Q"), -_fl(cq, True))]
+            elif Nlo[k] > 0:
+                slots.append(((k, "B"), _fl(lam * Nlo[k], False)))
+        ix = [K0i] + [mats[sk][0] for sk, _ in slots]
+        vv = [a0 * K0v] + [c * mats[sk][1] for sk, c in slots]
+        av = [abs(a0) * np.abs(K0v)] + [abs(c) * np.abs(mats[sk][1]) for sk, c in slots]
+        ixc = np.concatenate(ix)
+        Mv = np.bincount(ixc, weights=np.concatenate(vv), minlength=nk_)
+        Ma = np.bincount(ixc, weights=np.concatenate(av), minlength=nk_)
+        dl = Ma * float(gam) * 1.0000001
+        d2 = F(float(np.sum(dl * dl * (1 + offd)))) * (1 + 4 * gam) + F(nk_, 2 ** 1000)
+        sym_r = np.concatenate([rr, cc[offd > 0]]); sym_c = np.concatenate([cc, rr[offd > 0]])
+        sym_v = np.concatenate([Mv, Mv[offd > 0]])
+        Mf = sp.csc_matrix((sym_v, (sym_r, sym_c)), shape=(n, n))
+        try:
+            mu = float(sla.eigsh(Mf, k=1, sigma=0, which="LM", return_eigenvectors=False, v0=np.ones(n))[0])
+        except Exception:
+            return False
+        if mu <= 0:
+            return False
+        return ZE.pd_ieee_float(n, rr, cc, Mv, d2, F(mu) * F(9, 10)) is not None
     if lam_est is None:
         return {"lam_low": None, "why": "no compressed member: no buckling under these loads", "lam_est": None,
                 "unknowns": n, "T": T, "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
     lo, hi = F(0), F(lam_est) * F(11, 10)
     start = F(lam_est) / 1000
     for _ in range(20):                           # a noisy estimate (members barely compressed): step down
-        if proved(start):
+        if proved_f(start):
             break
         hi, start = start, start / 10
     else:
@@ -585,7 +676,7 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
     lo = start
     for _ in range(40):
         mid = (lo + hi) / 2
-        if proved(mid):
+        if proved_f(mid):
             lo = mid
         else:
             hi = mid

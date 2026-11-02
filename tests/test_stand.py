@@ -2493,6 +2493,22 @@ check("frame stability, the other side by a WITNESS (the float mode, exact from 
       float(_st0["lam_low"]) < float(_su0["lam_high"]) < _eul * 1.00001
       and float(_su0["lam_high"]) / float(_st0["lam_low"]) < 1.0005 and float(_su0["lam_high"]) > _eul,
       (float(_st0["lam_low"]), float(_su0["lam_high"]), _eul))
+# the step matrices built in FLOATS with a proved distance (2026-11-02) give the same lower bound as the exact build
+_fb = []
+_gen = _sp_so.run([sys.executable, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                                "examples", "frame", "gen_frame.py"), "6", "3"],
+                  capture_output=True, text=True, check=True).stdout
+for _deck, _tol in ((_col, "0.5%"), (_gen, "0.5%")):
+    FRM._STAB.clear(); FRM.FLOAT_BUILD = True
+    _lf = FRM.stability_lower(_deck, _tol)["lam_low"]
+    FRM._STAB.clear(); FRM.FLOAT_BUILD = False
+    _le = FRM.stability_lower(_deck, _tol)["lam_low"]
+    FRM._STAB.clear(); FRM.FLOAT_BUILD = True
+    _fb.append((float(_lf), float(_le)))
+check("frame stability, the bisection's matrices built in FLOATS with a proved entrywise distance (ZTL "
+      "pd_ieee_float) give the same proved lower bound as the exact-fraction build, on a column and a 6x3 frame "
+      "(within 1e-9: the float build is a different proof of the same thing, not a different answer)",
+      all(abs(a - b) <= 1e-9 * b for a, b in _fb), _fb)
 _col1 = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2", "N, 1, 0, 0", "N, 2, 0, 4", "E, 1, 2",
                    "D, 1, UX, 0", "D, 1, UY, 0", "D, 1, ROTZ, 0", "F, 2, FY, -10000"])
 _c1fe = FRM.stability_lower(_col1, "0", model="fe")["lam_low"]
