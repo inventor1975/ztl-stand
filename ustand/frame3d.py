@@ -805,7 +805,7 @@ def second_order_disp(text, tol, targets, case=None):
     n = len(dof)
     T = max((p["t"] for p in parts), default=F(0))
     A0 = ZE.matrix(parts, n)
-    gparts, cterms, cqd = [], [], {}
+    gparts, cterms, cqd, cgrp = [], [], {}, {}
     for k, (i, j) in enumerate(elems, 1):
         if k not in Nlo:
             continue
@@ -834,6 +834,7 @@ def second_order_disp(text, tol, targets, case=None):
                     g = _glob3(i, j, vax, rax, sg, dof, l)
                     if g:
                         cterms.append((_dy(cq * d, True), g))
+                        cgrp.setdefault((k, plane), []).append(cterms[-1])
         if _MUTANT.get("no_geo"):                          # sabotage (tests only): first-order stiffness
             Gt = []
         for d, g in Gt:
@@ -851,30 +852,38 @@ def second_order_disp(text, tol, targets, case=None):
         if (nd, d) in dof:
             e[dof[(nd, d)]] = F(1)
         es.append(e)
-    extra = _EXTRA.pop("outputs", [])
-    rs = ZE.certify_general_many(A0, parts + gparts, cterms, fs[names[0]], es + extra + [list(fs[names[0]])], n)
     # TRANSVERSE MEMBER LOADS in second order (the 2D frame's v2, per plane): inside a member the load couples to the
     # nodal motion through the condensed inner field, |g.d| <= sum_e ||d||_{C_e} r_e with
-    # r_e^2 <= w^2 L^5 / (720 E I (1 - P k)) per plane; on any output |e.u_g| <= sqrt(theta)(||y~|| + e_y)/(1-theta) R
+    # r_e^2 <= w^2 L^5 / (720 E I (1 - P k)) per member and plane; the response on an output, y = A^-1 e:
+    #   |e.u_g| = |y.g| <= sum_e ||y~||_{C_e} r_e + ||y - y~||_C R,   R = sqrt(sum r_e^2),
+    #   ||y - y~||_C <= sqrt(theta) ||y - y~||_A0 <= sqrt(theta) (e_y + theta/(1 - theta) ||y0||_A0)
+    # (C <= theta A0; y - y0 = -A^-1 Delta y0, A >= (1 - theta) A0). PER MEMBER since 2026-11-02: the old global
+    # sqrt(theta) ||y||_A0 R / (1 - theta) made ~93 % of a loaded frame's end-moment brackets (MEASURED, sweep G).
     qs = _qloads(text).get(names[0], {})
-    re2 = F(0)
+    re2 = {}
     for k, q in qs.items():
         i, j = elems[k - 1]
         pk = props[k]
         L, xp, yp, zp = _axes(nodes[i], nodes[j], pk.theta)
         P = max(F(0), -Nlo.get(k, F(0)))
-        for axis, I in ((yp, pk.izz), (zp, pk.iyy)):
+        for plane, axis, I in (("y", yp, pk.izz), ("z", zp, pk.iyy)):
             w = sum(q[t] * axis[t] for t in range(3))
-            if w:
+            if w and (k, plane) in cgrp:                   # no C_e (cq = 0): the member load does not couple
                 Elo = (1 - T) * pk.ex
                 kk = L * L / (4 * PI2_LO * Elo * I)
-                re2 += w * w * L ** 5 / (720 * Elo * I * (1 - P * kk))
-    if re2:
-        Rq = ZE._sqrt_up(re2)
+                re2[(k, plane)] = w * w * L ** 5 / (720 * Elo * I * (1 - P * kk))
+    keys = sorted(re2)
+    extra = _EXTRA.pop("outputs", [])
+    rs = ZE.certify_general_many(A0, parts + gparts, cterms, fs[names[0]], es + extra + [list(fs[names[0]])], n,
+                                 cgroups=[cgrp[key] for key in keys] if keys else None)
+    if keys:
+        Rq = ZE._sqrt_up(sum(re2.values()))
+        rq = [ZE._sqrt_up(re2[key]) for key in keys]
         th = rs[0]["theta"]
         sth = ZE._sqrt_up(th)
         for r in rs:
-            ex_ = sth * (r["ny_t"] + r["ey"]) / (1 - th) * Rq
+            ny = r["ny_t"] + r["ey"]
+            ex_ = sum(c * q_ for c, q_ in zip(r["c_groups"], rq)) + sth * (r["ey"] + th / (1 - th) * ny) * Rq
             r["lo"] -= ex_
             r["hi"] += ex_
     # OUTWARD to 64-bit dyadics (2026-11-02, the night battery's sweep G: the proved outputs came back with up to 3361
@@ -974,13 +983,18 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
             for plane, I, axis in (("y", izz, yp_), ("z", iyy, zp_)):
                 cth = ZE._sqrt_up(X["cq"].get((k, plane), F(0)) * 4 * L / 30)
                 corr = cth * unC
-                w = abs(sum(qk[t] * axis[t] for t in range(3)))
+                ws = sum(qk[t] * axis[t] for t in range(3))
+                w = abs(ws)
+                mb = F(0)
                 if w:
-                    # the member load: its clamped-beam end moment |w| L^2/12 (sign-free widening) and the 2D frame's
-                    # own-load end correction sqrt(C_thth) r_e, r_e^2 <= w^2 L^5/(720 E I (1 - P k))
+                    # the member load: the P = 0 inner solution's end moment, EXACT and signed (as the 2D frame's mb;
+                    # both ends; -w L^2/12 in the (v, th_z) plane, +w L^2/12 in the (w, phi) plane — its outputs carry
+                    # the flipped sign; the sign-free |w| L^2/12 widening before 2026-11-02 doubled loaded brackets), and
+                    # the own-load end correction sqrt(C_thth) r_e, r_e^2 <= w^2 L^5/(720 E I (1 - P k))
+                    mb = (-ws if plane == "y" else ws) * L * L / 12
                     kk_ = L * L / (4 * PI2_LO * (1 - T) * ex * I)
-                    corr += w * L * L / 12 + cth * ZE._sqrt_up(w * w * L ** 5 / (720 * (1 - T) * ex * I * (1 - P * kk_)))
-                Ml = {e_: (rng[(k, plane + e_)][0] - corr, rng[(k, plane + e_)][1] + corr) for e_ in ("I", "J")}
+                    corr += cth * ZE._sqrt_up(w * w * L ** 5 / (720 * (1 - T) * ex * I * (1 - P * kk_)))
+                Ml = {e_: (rng[(k, plane + e_)][0] + mb - corr, rng[(k, plane + e_)][1] + mb + corr) for e_ in ("I", "J")}
                 # + N (G u) at I, - N (G u) at J in the (v, th_z) plane; the (w, phi) plane's output is -(K_E u)_phi,
                 # so there the signs flip. N in [N_lo, N_hi] (the axial forces of the geometric stiffness).
                 pl_s = 1 if plane == "y" else -1

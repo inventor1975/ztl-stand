@@ -13,7 +13,7 @@ the cure is algebraic multigrid (pyamg, pending the curator's OK to install). Op
 edge/corner contacts (they make the bracket close slowly), anisotropic phases (tensor conductivity), sub-volume
 sweeps over a large tomogram.
 
-## Track 2 — space frames (`ustand/frame3d.py`, NEXT)
+## Track 2 — space frames (`ustand/frame3d.py`, IN — status at the end of the section)
 
 The road to industrial buildings (3D models, 10^4–10^5 unknowns, tens to hundreds of load combinations).
 1. **Element.** 3D Euler–Bernoulli beam, 12 DOF (UX UY UZ ROTX ROTY ROTZ per node), ANSYS BEAM4-style deck
@@ -33,6 +33,17 @@ The road to industrial buildings (3D models, 10^4–10^5 unknowns, tens to hundr
 5. **EN 1993-1-1:** 6.3.1 about both axes; 6.3.3 biaxial interaction (k_yy, k_yz, k_zy, k_zz, Annex B) — after 4.
 Tests: cantilever under biaxial tip load and torque (exact), a portal space frame against an independent float
 solve, a 2D frame embedded in 3D giving the 2D frame's ranges, Euler columns about the weak and strong axes.
+
+**Status 2026-11-02.** IN: items 1-5, plus materials/sections by id, end releases, transverse member loads (QLOAD;
+first and second order), load cases and combinations, EN 5.3.2 sway imperfections. The night battery's sweep G
+checks random space frames against an INDEPENDENT numpy FE (`bench/night/frame3d_ref.py`, Przemieniecki 12x12 +
+consistent geometric matrix, 8 elements per member): first order at the nodes, second-order displacements, member
+stresses and end moments from BOTH sides, the stability bracket. It found a crash (fractions past 4300 digits —
+fixed by outward dyadic rounding) and showed the second-order brackets of loaded frames too wide to see a dropped
+N (G u) (2/10 frames); the member-load correction made PER MEMBER (zenergy `c_groups`) and the exact signed
+fixed-end moment cut the stress bracket from 1.6 to 0.4 sigma (median, MEASURED) and the sabotage is caught on
+8/10. OPEN: axial member loads in second order and stability (refused, named); torsional / flexural-torsional /
+lateral-torsional buckling (a stated premise — Wagner terms not in); size: measured only up to tens of members.
 
 ## Track 3 — 3D elasticity (LATER)
 

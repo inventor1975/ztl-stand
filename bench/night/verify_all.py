@@ -16,9 +16,13 @@ bound deliberately broken (MUTATION) — they must find violations, or the check
   M  mutations of A/B: the interior and the end-moment corrections dropped (the old "ends only" check that once read
      325 MPa for 337.67); A-MUTG: the end moment's geometric part N (G u) dropped (the K_E-row moment fixed
      2026-11-02); B-MUTG the same on frames — violations EXPECTED, or the check cannot see a broken bound.
-     MEASURED 2026-11-02: B-MUT (ends only) is NOT visible on these random frames (0 of 2085: their interior peaks do
-     not exceed the ends, the continuum correction is tiny); the 22 it "caught" before were an artefact of the old
-     reference, which shared the K_E-row moment. A sees that sabotage (beam-columns), B-MUTG sees the missing N (G u).
+     MEASURED 2026-11-02: B-MUT (ends only) was NOT visible on these random frames (0 of 2085) while the member-load
+     correction was global; the 22 it "caught" before that were an artefact of the old reference, which shared the
+     K_E-row moment. With the correction PER MEMBER (same day) the brackets are narrow enough: B-MUT 10, B-MUTG 176
+     (was 13) of x1.
+  G  random SPACE frames (2026-11-02) vs bench/night/frame3d_ref.py, an independent numpy FE: first order at the
+     nodes, second-order displacements, member stresses and end moments both sides, the stability bracket; loads
+     scaled to lambda_ref in [1.3, 3]. G-MUTG3 drops frame3d's geometric stiffness, G-MUTM3 the end moment's N (G u).
   A and B also check BOTH SIDES since 2026-11-02 (B: the 8-element mesh's end moments, with the geometric part): every proved end-moment interval must contain an INDEPENDENT numpy FE
      reference (K_E - P G rows, 64 elements) — the old stress check shared the stand's K_E-row formula
 Writes bench/night/REPORT.json and REPORT.md.

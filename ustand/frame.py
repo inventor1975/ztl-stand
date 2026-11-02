@@ -970,7 +970,7 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
             fac = ex * area / emap[k]["L"]
             Nlo[k], Nhi[k] = min(fac * a_, fac * b_), max(fac * a_, fac * b_)
     A0 = ZE.matrix(parts, n)
-    gparts, cterms, cqd = [], [], {}
+    gparts, cterms, cqd, cgrp = [], [], {}, {}
     Elo = (1 - T) * ex
     for k, (i, j) in enumerate(elems, 1):
         L = emap[k]["L"]
@@ -1003,6 +1003,7 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
                 g = _glob(i, j, c_, s_, dof, l)
                 if g:
                     cterms.append((_dy(cq * d, True), g))   # C only needs to bound D from above
+                    cgrp.setdefault(k, []).append(cterms[-1])
     # outputs per checked element: N = E p (A/L) a.u, M_I, M_J = E p (I/L)(+-b + 3c).u (top fibre: N/A + M/W);
     # and f.u (the energy bound for the end moments' continuum correction)
     es, items = [], []
@@ -1034,25 +1035,32 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     for (nd, d) in disp:                              # nodal displacements (second order, the continuum frame)
         es.append(vec({dof[(nd, d)]: F(1)})); items.append((("U", nd, d), "U"))
     es.append(list(f)); items.append((None, "f"))
-    rs = ZE.certify_general_many(A0, parts + gparts, cterms, f, es, n)
-    theta = rs[0]["theta"]
     # TRANSVERSE MEMBER LOADS in second order (2026-11-01, v2): inside a member the load couples to the nodal motion
     # through the condensed inner field — a load correction g with |g.d| <= sum_e ||d||_{C_e} r_e,
     #   r_e^2 = sup_eta (int q eta)^2 / a(eta, eta) <= q^2 L^5 / (720 E I (1 - P k))   (eta, eta' = 0 at both ends;
     #   L^5/720: the clamped beam's compliance under a uniform load; a(eta) >= (1 - P k) E I |eta''|^2, Poincare);
-    # its response on any output: |e.u_g| <= ||y||_C R <= sqrt(theta) ||y||_A0 /(1 - theta) R, R = sqrt(sum r_e^2)
+    # its response on an output, y = A^-1 e (PER MEMBER since 2026-11-02, the space frame's measurement: the old
+    # global sqrt(theta) ||y||_A0 R /(1 - theta) was ~93 % of a loaded frame's end-moment brackets):
+    #   |e.u_g| <= sum_e ||y~||_{C_e} r_e + sqrt(theta) (e_y + theta/(1 - theta) ||y0||_A0) R,  R = sqrt(sum r_e^2)
+    # (zenergy certify_general_many's c_groups; the bound is in its self-test)
     Elo2 = (1 - T) * ex
     re2 = {}
     for k, (a_, w_, L_) in qd.items():
-        if w_:
+        if w_ and k in cgrp:                              # no C_e (cq = 0): the member load does not couple
             P_ = max(F(0), -Nlo.get(k, F(0)))
             kk_ = L_ * L_ / (4 * PI2_LO * Elo2 * izz)
             re2[k] = w_ * w_ * L_ ** 5 / (720 * Elo2 * izz * (1 - P_ * kk_))
+    keys = sorted(re2)
+    rs = ZE.certify_general_many(A0, parts + gparts, cterms, f, es, n,
+                                 cgroups=[cgrp[k] for k in keys] if keys else None)
+    theta = rs[0]["theta"]
     Rq = ZE._sqrt_up(sum(re2.values())) if re2 else F(0)
     if Rq:
         sth = ZE._sqrt_up(theta)
+        rq = [ZE._sqrt_up(re2[k]) for k in keys]
         for r in rs:
-            extra = sth * (r["ny_t"] + r["ey"]) / (1 - theta) * Rq
+            extra = sum(c * q_ for c, q_ in zip(r["c_groups"], rq)) + \
+                sth * (r["ey"] + theta / (1 - theta) * (r["ny_t"] + r["ey"])) * Rq
             r["lo"] -= extra
             r["hi"] += extra
     dranges = {key: (r["lo"], r["hi"]) for (key, what), r in zip(items, rs) if what == "U"}
