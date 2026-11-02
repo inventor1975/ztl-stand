@@ -1078,6 +1078,8 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
         Ml = {e_: (rng[(kchk, e_)][0] + mb - corr, rng[(kchk, e_)][1] + mb + corr) for e_ in ("I", "J")}
         # + N (G u)_th at I, - N (G u)_th at J (the outputs are +(K_E u)_thi and -(K_E u)_thj), N in [N_lo, N_hi]
         nl_, nh_ = Nlo.get(kchk, F(0)), Nhi.get(kchk, F(0))
+        if _MUTANT.get("no_geo_moment"):              # sabotage (tests only): the pre-2026-11-02 K_E-row moment
+            nl_ = nh_ = F(0)
         for e_, sg_ in (("I", 1), ("J", -1)):
             gl_, gh_ = rng[(kchk, "G" + e_)]
             prods = [sg_ * a_ * b_ for a_ in (nl_, nh_) for b_ in (gl_, gh_)]

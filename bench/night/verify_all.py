@@ -14,7 +14,13 @@ bound deliberately broken (MUTATION) — they must find violations, or the check
   E  ZTL zenergy.certify_general on random second-order systems: every vertex / interior point / D inside
   F  plates: hypercircle brackets of a coarse and a 4x finer mesh must overlap, lower <= upper
   M  mutations of A/B: the interior and the end-moment corrections dropped (the old "ends only" check that once read
-     325 MPa for 337.67): violations EXPECTED — or the check cannot see a broken bound
+     325 MPa for 337.67); A-MUTG: the end moment's geometric part N (G u) dropped (the K_E-row moment fixed
+     2026-11-02); B-MUTG the same on frames — violations EXPECTED, or the check cannot see a broken bound.
+     MEASURED 2026-11-02: B-MUT (ends only) is NOT visible on these random frames (0 of 2085: their interior peaks do
+     not exceed the ends, the continuum correction is tiny); the 22 it "caught" before were an artefact of the old
+     reference, which shared the K_E-row moment. A sees that sabotage (beam-columns), B-MUTG sees the missing N (G u).
+  A and B also check BOTH SIDES since 2026-11-02 (B: the 8-element mesh's end moments, with the geometric part): every proved end-moment interval must contain an INDEPENDENT numpy FE
+     reference (K_E - P G rows, 64 elements) — the old stress check shared the stand's K_E-row formula
 Writes bench/night/REPORT.json and REPORT.md.
 """
 import json
@@ -57,15 +63,71 @@ def float_second_order(deck):
             rr.append(a); cc.append(b); dd.append(N[k] * float(v))
     u = sla.spsolve((K0 + sp.csr_matrix((dd, (rr, cc)), shape=(n, n))).tocsc(), fv)
     qd = FRM.read_qloads(deck)
-    sig = {}
-    for k in emap:
+    sig, MOM = {}, {}
+    for k, (i, j) in enumerate(elems, 1):
+        L = emap[k]["L"]
+        c, s_ = (nodes[j][0] - nodes[i][0]) / L, (nodes[j][1] - nodes[i][1]) / L
+        Gl = [[F(v) / (30 * L) for v in r] for r in [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L],
+                                                       [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
+        # the end moment's geometric part (2026-11-02): + N (G u)_th at I, - N (G u)_th at J — the reference used to
+        # share the stand's K_E-row formula
+        dM = {"I": N[k] * sum(float(v) * u[ii] for ii, v in FRM._glob(i, j, c, s_, dof, Gl[1]).items()),
+              "J": -N[k] * sum(float(v) * u[ii] for ii, v in FRM._glob(i, j, c, s_, dof, Gl[3]).items())}
         best = 0.0
         for end, side, g in FRM.fibre_vectors(emap, k, h):
             b = float(FRM._bubble(qd, k, end, side, area, izz, h)[0]) if h else 0.0
-            best = max(best, abs(float(ex) * sum(float(v) * u[i] for i, v in g.items()) + b))
+            dm = dM[end] * (1 if side == "TOP" else -1) * float(h / 2 / izz) if h else 0.0
+            best = max(best, abs(float(ex) * sum(float(v) * u[ii] for ii, v in g.items()) + b + dm))
         sig[k] = best
+        # the end moments themselves, in the stand's convention (+(K_E + N G) row at I, -row at J, + the member
+        # load's clamped end moment -w L^2/12): the two-sided reference (2026-11-02)
+        m_ = emap[k]
+        mb = -float(qd[k][1]) * float(L) ** 2 / 12 if k in qd else 0.0
+        for end, sb in (("I", 1), ("J", -1)):
+            mv = 0.0
+            for ii, v in m_["b"].items():
+                mv += float(izz / L * v) * u[ii]
+            for ii, v in m_["c"].items():
+                mv += float(izz / L * 3 * sb * v) * u[ii]
+            MOM[(k, end)] = float(ex) * mv + dM[end] + mb
     disp = {nd: float(u[i]) for nd, i in dof.items()}
+    _LAST_MOM.clear(); _LAST_MOM.update(MOM)
     return sig, disp, N
+
+
+_LAST_MOM = {}          # float_second_order's end moments of its last call (the two-sided frame check)
+
+
+def ref_end_moments(L, P, q, M1, M2, nfine=64):
+    """An INDEPENDENT reference for the beam-column's internal end moments (2026-11-02): a numpy Hermite FE with the
+    geometric matrix (K_E - P G), consistent loads, nfine elements; the end moment of an element is the
+    ((K_E - P G) u_e - f_e) row — at its I end +row th_i, at its J end -row th_j (the stand's sign convention). The
+    sweep A used to compare stresses from the SAME K_E-row formula as the stand, which hid the missing N (G u) term."""
+    import numpy as np
+    h = L / nfine
+    EI = 210e9 * 8e-5
+    ke = EI / h ** 3 * np.array([[12, 6 * h, -12, 6 * h], [6 * h, 4 * h * h, -6 * h, 2 * h * h],
+                                 [-12, -6 * h, 12, -6 * h], [6 * h, 2 * h * h, -6 * h, 4 * h * h]])
+    kg = P / (30 * h) * np.array([[36, 3 * h, -36, 3 * h], [3 * h, 4 * h * h, -3 * h, -h * h],
+                                  [-36, -3 * h, 36, -3 * h], [3 * h, -h * h, -3 * h, 4 * h * h]])
+    fe = q * np.array([h / 2, h * h / 12, h / 2, -h * h / 12])
+    nd = 2 * (nfine + 1)
+    K = np.zeros((nd, nd)); f = np.zeros(nd)
+    for e in range(nfine):
+        ix = [2 * e, 2 * e + 1, 2 * e + 2, 2 * e + 3]
+        K[np.ix_(ix, ix)] += ke - kg
+        f[ix] += fe
+    f[1] += M1; f[2 * nfine + 1] += M2
+    free = [i for i in range(nd) if i not in (0, 2 * nfine)]
+    u = np.zeros(nd)
+    u[free] = np.linalg.solve(K[np.ix_(free, free)], f[free])
+    MI, MJ = {}, {}
+    for e in range(nfine):
+        ix = [2 * e, 2 * e + 1, 2 * e + 2, 2 * e + 3]
+        r = (ke - kg) @ u[ix] - fe
+        MI[e] = r[1]
+        MJ[e + 1] = -r[3]
+    return MI, MJ, h
 
 
 def beam_column_case(seed):
@@ -85,10 +147,26 @@ def beam_column_case(seed):
         return {"checked": 0, "skipped": 1, "why": r.get("why")}
     fine_sig, _, _ = float_second_order(FRM.subdivide(deck, 64))
     ref = max(fine_sig.values())
+    MI0, MJ0, _ = ref_end_moments(L, P, q, M1, M2)
+    ref = max(ref, P / 0.01 + max(max(abs(v) for v in MI0.values()), max(abs(v) for v in MJ0.values())) / (8e-5 / 0.1))
     bound = max(float(F(c["sigma_abs_max"].split()[0])) for c in r["checks"])
     bad = ref > bound * (1 + 1e-9) + 1.0
-    return {"checked": 1, "violations": int(bad), "example": None if not bad else
-            {"seed": seed, "L": L, "P": P, "q": q, "M": [M1, M2], "nsub": nsub, "ref": ref, "bound": bound}}
+    # BOTH SIDES (2026-11-02): every proved end-moment interval must CONTAIN the independent reference
+    MI, MJ, h = ref_end_moments(L, P, q, M1, M2)
+    per = 64 // nsub
+    mref = max(max(abs(v) for v in MI.values()), max(abs(v) for v in MJ.values()), 1.0)
+    tol = 1e-4 * mref + 1.0
+    n_m, bad_m, ex_m = 0, 0, None
+    for c in r["checks"]:
+        k = int(c["check"].split("(")[1].split(")")[0])
+        for end, refv in (("I", MI[(k - 1) * per]), ("J", MJ[k * per])):
+            lo_, hi_ = (float(F(x.split()[0])) for x in c["M_ends"][end])
+            n_m += 1
+            if not (lo_ - tol <= refv <= hi_ + tol):
+                bad_m += 1
+                ex_m = ex_m or {"seed": seed, "elem": k, "end": end, "ref": refv, "proved": [lo_, hi_]}
+    return {"checked": 1 + n_m, "violations": int(bad) + bad_m, "example": (None if not bad else
+            {"seed": seed, "L": L, "P": P, "q": q, "M": [M1, M2], "nsub": nsub, "ref": ref, "bound": bound}) or ex_m}
 
 
 def random_frame(rng, with_q=True):
@@ -135,7 +213,21 @@ def frame_case(seed):
     if not r.get("checks"):
         return {"checked": 0, "skipped": 1, "why": r.get("why")}
     fine_sig, fine_disp, _ = float_second_order(FRM.subdivide(deck, 8))
+    fmom = dict(_LAST_MOM)
     viol, n_chk, ex_ = 0, 0, None
+    # BOTH SIDES (2026-11-02): the proved end-moment intervals must contain the fine mesh's end moments (the coarse
+    # element k is fine elements 8(k-1)+1 .. 8k); tolerance MEASURED on the fixed code (see the commit)
+    for c in r["checks"]:
+        k = int(c["check"].split("(")[1].split(")")[0])
+        mk = max(abs(fmom[(8 * (k - 1) + 1, "I")]), abs(fmom[(8 * k, "J")]), 1.0)
+        for end, refv in (("I", fmom[(8 * (k - 1) + 1, "I")]), ("J", fmom[(8 * k, "J")])):
+            lo_, hi_ = (float(F(x.split()[0])) for x in c["M_ends"][end])
+            n_chk += 1
+            tol_m = MOM_TOL * mk + 1.0
+            if not (lo_ - tol_m <= refv <= hi_ + tol_m):
+                viol += 1
+                ex_ = ex_ or {"seed": seed, "member": k, "end": end, "ref": refv, "proved": [lo_, hi_]}
+            DIST.append(max(0.0, lo_ - refv, refv - hi_) / mk)
     for c in r["checks"]:
         k = int(c["check"].split("(")[1].split(")")[0])
         ref = max(fine_sig[8 * (k - 1) + q] for q in range(1, 9))
@@ -306,13 +398,21 @@ def plate_case(seed):
     return {"checked": 1, "violations": int(bad), "example": None if not bad else {"seed": seed}}
 
 
-def mutate():
+def mutate(kind=True):
     """Break the second-order stress bound the way it once was broken: the member's interior and the continuum's
-    end-moment corrections dropped ("ends only, Hermite moments" — 325 instead of 337.67 MPa on a beam-column)."""
-    FRM._MUTANT["ends_only"] = True
+    end-moment corrections dropped ("ends only, Hermite moments" — 325 instead of 337.67 MPa on a beam-column); or
+    (kind "geo") the end moment's geometric part N (G u) dropped (the K_E-row moment fixed on 2026-11-02)."""
+    if kind == "geo":
+        FRM._MUTANT["no_geo_moment"] = True
+    else:
+        FRM._MUTANT["ends_only"] = True
     def restore():
         FRM._MUTANT.clear()
     return restore
+
+
+MOM_TOL = 1e-3          # relative to the member's end moments; MEASURED 2026-11-02 on the fixed code: 0 excess in 1954 checks (40 frames); the no-G mutation exceeds by up to 4.6 %
+DIST = []
 
 
 SWEEPS = {"A": (beam_column_case, 400), "B": (frame_case, 120), "C": (stability_case, 120), "D": (truss_case, 200),
@@ -321,7 +421,7 @@ SWEEPS = {"A": (beam_column_case, 400), "B": (frame_case, 120), "C": (stability_
 
 def _run(args):
     key, seed, mutated = args
-    restore = mutate() if mutated else None
+    restore = mutate(mutated) if mutated else None
     fn = SWEEPS[key][0]
     t0 = time.time()
     try:
@@ -332,7 +432,7 @@ def _run(args):
         if restore:
             restore()
     r["seconds"] = time.time() - t0
-    return key + ("-MUT" if mutated else ""), r
+    return key + ("-MUTG" if mutated == "geo" else "-MUT" if mutated else ""), r
 
 
 def main(argv):
@@ -346,6 +446,8 @@ def main(argv):
     if "M" in only:
         tasks += [("A", 900000 + s, True) for s in range(int(200 * scale))]
         tasks += [("B", 900000 + s, True) for s in range(int(30 * scale))]
+        tasks += [("A", 950000 + s, "geo") for s in range(int(200 * scale))]
+        tasks += [("B", 950000 + s, "geo") for s in range(int(30 * scale))]
     random.Random(7).shuffle(tasks)
     t0 = time.time()
     agg = {}
