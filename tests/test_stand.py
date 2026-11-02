@@ -2946,5 +2946,26 @@ check("space frame LOAD CASES: a combination (LCOMB 1.35 G + 1.05 Q + 1.5 W) is 
       _comb["ULS2"][2] == _lin and _jc["verdict"] == "REFUTED" and _jc["refuted_in"] == ["ULS2"],
       (str(_comb["ULS2"][2]), str(_lin), _jc.get("verdict"), _jc.get("refuted_in")))
 
+_cs3 = """ET, 1, BEAM4
+MP, EX, 1, 210e9
+MP, PRXY, 1, 0.3
+R, 1, 0.01, 8e-5, 3e-5, 0.2, 0.1, 0, 0, 5e-5
+N, 1, 0, 0, 0
+N, 2, 4, 0, 0
+E, 1, 2
+D, 1, ALL, 0
+F, 2, FY, 1000
+F, 2, FZ, -2000
+F, 2, FX, 5000
+"""
+_sl, _sh = _F3.stresses(_cs3, "0", [1])["BASE"][1]
+_sx = F(5000) / F(1, 100) + F(4000) * F(1, 20) / F(8, 10 ** 5) + F(8000) * F(1, 10) / F(3, 10 ** 5)
+_js = _F3.judge_stress(_cs3, "0.5%", F(235) * 10 ** 6)
+_js2 = _F3.judge_stress(_cs3, "0.5%", F(29) * 10 ** 6)
+check("space frame STRESSES: a cantilever under axial + biaxial tip loads — the largest corner stress at the root is "
+      "EXACTLY N/A + M_z (TKY/2)/I_z + M_y (TKZ/2)/I_y = 29.667 MPa; |sigma| <= 235 MPa EARNED, <= 29 MPa REFUTED",
+      _sl == _sh == _sx and _js["verdict"] == "EARNED" and _js2["verdict"] == "REFUTED",
+      (float(_sl), float(_sx), _js["verdict"], _js2["verdict"]))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

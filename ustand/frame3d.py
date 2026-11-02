@@ -277,6 +277,88 @@ def judge(text, tol, target, le=None, ge=None):
     return out
 
 
+def fibre_vectors(emap, k, tky, tkz):
+    """The 8 corner functionals of element k: (end, (sy, sz), g) with sigma = E p_k (g.u) at the section corner
+    y' = sy TKY/2, z' = sz TKZ/2 (a rectangle's corners bound every fibre of a section inside that box):
+        sigma = N/A + E/L (b_z +- 3 c_z).u y' - E/L (b_y +- 3 c_y).u z'      (+ at I, - at J; the x'-z' plane's
+    curvature is -dth_y/dx — every sign combination of y', z' is checked, so the |sigma| check does not depend on it)."""
+    m = emap[k]
+    L = m["L"]
+    out = []
+    for end, sb in (("I", 1), ("J", -1)):
+        for sy in (1, -1):
+            for sz in (1, -1):
+                g = {}
+                def add(vec, c):
+                    for i, v in vec.items():
+                        g[i] = g.get(i, F(0)) + c * v
+                add(m["a"], 1 / L)
+                add(m["bz"], sy * (tky / 2) / L)
+                add(m["cz"], sy * (tky / 2) / L * 3 * sb)
+                add(m["by"], -sz * (tkz / 2) / L)
+                add(m["cy"], -sz * (tkz / 2) / L * 3 * sb)
+                out.append((end, (sy, sz), {i: v for i, v in g.items() if v}))
+    return out
+
+
+def stresses(text, tol, ks=None):
+    """{case: {k: (lo, hi) of the largest |sigma| over the 8 corners}} — proved, every modulus in the box, every load
+    case (first order). sigma = E p_k (g.u): an output scaled by the element's own modulus factor (ZTL)."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    if not tky or not tkz:
+        raise Frame3DError("member stresses need TKY and TKZ (the section's depths along y' and z')")
+    parts, fs, dof, emap = energy_system(text, tol)
+    ks = sorted(emap) if ks is None else ks
+    es, idx = [], []
+    for k in ks:
+        for end, corner, g in fibre_vectors(emap, k, tky, tkz):
+            e = [F(0)] * len(dof)
+            for i, v in g.items():
+                e[i] = v
+            es.append(e)
+            idx.append(k)
+    names = list(fs)
+    scale = [emap[k]["part"] for k in idx]
+    rs = ZE.certify_cases(parts, [fs[c] for c in names], es, len(dof), scale=scale)
+    out = {}
+    for c, rc in zip(names, rs):
+        per = {}
+        for k, r in zip(idx, rc):
+            lo, hi = ex * r["lo"], ex * r["hi"]
+            mx_hi = max(abs(lo), abs(hi))
+            mx_lo = F(0) if lo <= 0 <= hi else min(abs(lo), abs(hi))
+            a, b = per.get(k, (F(0), F(0)))
+            per[k] = (max(a, mx_lo), max(b, mx_hi))
+        out[c] = per
+    return out
+
+
+def judge_stress(text, tol, fy, gamma_m0=F(1), ks=None):
+    """|sigma| <= fy / gamma_M0 at every corner of every checked member in every load case — EN 1993-1-1 6.2.1(7)'s
+    elastic check (first order, version 1: no buckling, no shear/torsion stress). Judged by ZTL as one conjunction."""
+    from . import judge_ztl  # noqa: F401
+    from znumjudge import parse_quantities, judge_sheet_claim
+    st = stresses(text, tol, ks)
+    lim = F(fy) / F(gamma_m0)
+    fr = lambda x: f"{x.numerator}/{x.denominator}"
+    qs, atoms, worst = [], [], (None, None, F(0))
+    for c, per in st.items():
+        for k, (lo, hi) in per.items():
+            nm = f"s{len(qs)}"
+            qs.append(f"{nm}=[{fr(lo)},{fr(hi)}] earned:frame3d-energy-path")
+            atoms.append(f"{nm} <= {fr(lim)}")
+            if hi > worst[2]:
+                worst = (c, k, hi)
+    q, m = parse_quantities(", ".join(qs))
+    res = judge_sheet_claim(" & ".join(atoms), q, m)
+    return {"verdict": res["disposition"] + (f" ({res['polarity']})" if res.get("polarity") else ""),
+            "limit": _show(lim), "worst": {"case": worst[0], "element": worst[1], "max_abs_sigma_upper": _show(worst[2], 1)},
+            "note": "FIRST ORDER elastic check |sigma| <= fy/gamma_M0 at the 8 section corners of every member, every "
+                    "load case; NOT here: buckling, shear and torsion stresses, second order"}
+
+
 def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
         print(__doc__)
