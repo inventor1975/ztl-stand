@@ -1,0 +1,42 @@
+{"seed": 100, "tol": "0", "members": 12, "t_stand": 1.9, "status": "checked", "checks": 14, "violations": 0, "first": [], "lam": [11.515498525676227, 12.347626954884163]}
+{"seed": 101, "tol": "0.5%", "members": 13, "t_stand": 1.2, "status": "checked", "checks": 80, "violations": 0, "first": [], "lam": [1.322399974147057, 1.4192621618781247]}
+{"seed": 102, "tol": "0", "members": 24, "t_stand": 3.4, "status": "open", "why": "the critical factor is not proved above 1 (second order: theta < 1 not proved: the perturbations are not small against A0): the frame may buckle under these loa"}
+{"seed": 103, "tol": "0.5%", "members": 19, "t_stand": 2.7, "status": "open", "why": "the critical factor is not proved above 1 (second order: theta < 1 not proved: the perturbations are not small against A0): the frame may buckle under these loa"}
+{"seed": 104, "tol": "0", "members": 8, "t_stand": 0.4, "status": "checked", "checks": 10, "violations": 0, "first": [], "lam": [8.126311236079445, 10.073420601669097]}
+{"seed": 105, "tol": "0.5%", "members": 20, "t_stand": 5.9, "status": "checked", "checks": 122, "violations": 0, "first": [], "lam": [19.02301776254226, 20.51129406540007]}
+{"seed": 106, "tol": "0", "members": 13, "t_stand": 1.2, "status": "checked", "checks": 15, "violations": 0, "first": [], "lam": [1.176984835746742, 1.2684731260476185]}
+{"seed": 107, "tol": "0.5%", "members": 24, "t_stand": 3.9, "status": "open", "why": "the critical factor is not proved above 1 (second order: theta < 1 not proved: the perturbations are not small against A0): the frame may buckle under these loa"}
+{"seed": 108, "tol": "0", "members": 24, "t_stand": 3.4, "status": "open", "why": "the critical factor is not proved above 1 (second order: theta < 1 not proved: the perturbations are not small against A0): the frame may buckle under these loa"}
+{"seed": 109, "tol": "0.5%", "members": 13, "t_stand": 1.8, "status": "open", "why": "element 5: too slender between its nodes for the axial-load interior bound (subdivide)"}
+{"seed": 110, "tol": "0", "members": 38, "t_stand": 0.7, "status": "open", "why": "the critical factor is not proved above 1 (second order: theta < 1 not proved: the perturbations are not small against A0): the frame may buckle under these loa"}
+{"seed": 111, "tol": "0.5%", "members": 8, "t_stand": 0.4, "status": "checked", "checks": 50, "violations": 0, "first": [], "lam": [7.695218797631767, 10.333845040837078]}
+{"seed": 112, "tol": "0", "members": 38, "t_stand": 5.6, "status": "checked", "checks": 40, "violations": 0, "first": [], "lam": [1.4421864704540637, 1.4642858897773685]}
+{"seed": 113, "tol": "0.5%", "members": 16, "t_stand": 2.1, "status": "checked", "checks": 98, "violations": 0, "first": [], "lam": [1.9883710338027252, 2.781095089966581]}
+{"seed": 114, "tol": "0", "members": 24, "t_stand": 5.6, "status": "checked", "checks": 26, "violations": 0, "first": [], "lam": [1.5984686388468714, 1.6228726306549444]}
+{"seed": 115, "tol": "0.5%", "members": 19, "t_stand": 4.1, "status": "checked", "checks": 116, "violations": 0, "first": [], "lam": [13.906896289220303, 14.883136144381812]}
+{"seed": 116, "tol": "0", "members": 26, "t_stand": 6.5, "status": "checked", "checks": 28, "violations": 0, "first": [], "lam": [2.621458688115642, 3.36018735420819]}
+{"seed": 117, "tol": "0.5%", "members": 13, "t_stand": 1.7, "status": "checked", "checks": 80, "violations": 0, "first": [], "lam": [1.7347532430505164, 1.8255399782913757]}
+{"seed": 118, "tol": "0", "members": 38, "t_stand": 5.2, "status": "checked", "checks": 40, "violations": 0, "first": [], "lam": [2.2282174815974902, 2.26569598729664]}
+{"seed": 119, "tol": "0.5%", "members": 19, "t_stand": 3.9, "status": "checked", "checks": 116, "violations": 0, "first": [], "lam": [2.5602184214299966, 2.620553344511955]}
+{"seed": 120, "tol": "0", "members": 19, "t_stand": 3.9, "status": "checked", "checks": 21, "violations": 0, "first": [], "lam": [7.079236031549437, 7.438009340229784]}
+{"seed": 121, "tol": "0.5%", "members": 12, "t_stand": 1.3, "status": "checked", "checks": 74, "violations": 0, "first": [], "lam": [2.9154595614567653, 3.0240653599893097]}
+{"seed": 122, "tol": "0", "members": 13, "t_stand": 1.0, "status": "checked", "checks": 15, "violations": 0, "first": [], "lam": [7.817623751212052, 10.801898896190364]}
+{"seed": 123, "tol": "0.5%", "members": 8, "t_stand": 0.4, "status": "checked", "checks": 50, "violations": 0, "first": [], "lam": [2.4677067675859714, 3.1986791002513995]}
+{"seed": 124, "tol": "0", "members": 38, "t_stand": 5.2, "status": "checked", "checks": 40, "violations": 0, "first": [], "lam": [12.54409419200542, 13.198710223211805]}
+{"seed": 125, "tol": "0.5%", "members": 8, "t_stand": 0.5, "status": "checked", "checks": 50, "violations": 0, "first": [], "lam": [6.863071505181152, 8.716013495179904]}
+{"seed": 126, "tol": "0", "members": 19, "t_stand": 3.9, "status": "checked", "checks": 21, "violations": 0, "first": [], "lam": [9.821735582873332, 10.493299954811466]}
+{"seed": 127, "tol": "0.5%", "members": 16, "t_stand": 2.0, "status": "checked", "checks": 98, "violations": 0, "first": [], "lam": [5.971537612859992, 7.744977492354092]}
+{"seed": 128, "tol": "0", "members": 8, "t_stand": 0.4, "status": "open", "why": "element 3: too slender between its nodes for the axial-load interior bound (subdivide)"}
+{"seed": 129, "tol": "0.5%", "members": 38, "t_stand": 0.7, "status": "open", "why": "the critical factor is not proved above 1 (second order: theta < 1 not proved: the perturbations are not small against A0): the frame may buckle under these loa"}
+{"seed": 130, "tol": "0", "members": 19, "t_stand": 3.9, "status": "checked", "checks": 21, "violations": 0, "first": [], "lam": [2.075140657057377, 2.1160942346738962]}
+{"seed": 131, "tol": "0.5%", "members": 13, "t_stand": 0.9, "status": "checked", "checks": 80, "violations": 0, "first": [], "lam": [8.263533147369097, 11.03221495492397]}
+{"seed": 132, "tol": "0", "members": 19, "t_stand": 3.6, "status": "checked", "checks": 21, "violations": 0, "first": [], "lam": [2.357912918180034, 2.4040061319975656]}
+{"seed": 133, "tol": "0.5%", "members": 19, "t_stand": 3.8, "status": "checked", "checks": 116, "violations": 0, "first": [], "lam": [1.4775225613685061, 1.5083656247006472]}
+{"seed": 134, "tol": "0", "members": 38, "t_stand": 5.5, "status": "checked", "checks": 40, "violations": 0, "first": [], "lam": [2.6304979283710663, 2.668084539294465]}
+{"seed": 135, "tol": "0.5%", "members": 13, "t_stand": 0.6, "status": "open", "why": "the critical factor is not proved above 1 (second order: theta < 1 not proved: the perturbations are not small against A0): the frame may buckle under these loa"}
+{"seed": 136, "tol": "0", "members": 19, "t_stand": 4.2, "status": "checked", "checks": 21, "violations": 0, "first": [], "lam": [2.6376546978127893, 2.679258435486494]}
+{"seed": 137, "tol": "0.5%", "members": 12, "t_stand": 1.2, "status": "checked", "checks": 74, "violations": 0, "first": [], "lam": [7.205263343308317, 7.647559450059737]}
+{"seed": 138, "tol": "0", "members": 12, "t_stand": 1.1, "status": "checked", "checks": 14, "violations": 0, "first": [], "lam": [6.875938924158967, 7.2723199995623204]}
+{"seed": 139, "tol": "0.5%", "members": 24, "t_stand": 5.6, "status": "checked", "checks": 146, "violations": 0, "first": [], "lam": [3.5905438531375644, 3.7664750553163793]}
+{"seed": 140, "tol": "0", "members": 12, "t_stand": 1.3, "status": "checked", "checks": 14, "violations": 0, "first": [], "lam": [2.2532991765709536, 2.2841725759486566]}
+{"seed": 141, "tol": "0.5%", "members": 13, "t_stand": 1.2, "status": "checked", "checks": 80, "violations": 0, "first": [], "lam": [2.3289240822789767, 2.5224042513269866]}

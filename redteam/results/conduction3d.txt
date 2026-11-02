@@ -1,0 +1,2 @@
+{"mutant": false, "exact_cases": 320, "exact_violations": 0, "first_exact": [], "overlap_cases": 40, "overlap_violations": 0, "first_overlap": []}
+{"mutant": true, "exact_cases": 320, "exact_violations": 320, "first_exact": [{"case": "uniform", "shape": [5, 4, 4], "refine": 1, "lo": 3.2999999999978114, "up": 3.201000000002064, "exact": 3.3}, {"case": "uniform", "shape": [5, 4, 4], "refine": 2, "lo": 3.2999999999829814, "up": 3.201000000016393, "exact": 3.3}], "overlap_cases": 40, "overlap_violations": 10, "first_overlap": [{"V": [[[1, 2], [1

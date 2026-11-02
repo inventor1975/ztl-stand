@@ -1,0 +1,2 @@
+{"mutant": false, "cases": 60, "violations": 0, "first": [], "verdicts": {"EARNED": 29, "REFUTED": 31}}
+{"mutant": true, "cases": 40, "violations": 40, "first": [{"t": 0, "L": 6, "curve": "d", "P": 1845463, "u_exact": 0.9746621574589182, "u_stand": 0.9455894097293828, "verdict": "EARNED"}, {"t": 1, "L": 3, "curve": "a", "P": 3590129, "u_exact": 1.073312229171902, "u_stand": 1.0411381361988694, "verdic

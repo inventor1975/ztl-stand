@@ -1,0 +1,14 @@
+! REDTEAM: a cantilever column whose only vertical load is a MEMBER load (QLOAD FY: its self-weight / a wall load).
+! EN 1993-1-1 5.3.2(7): the sway imperfection's equivalent horizontal force phi V acts for EVERY vertical load; the
+! 3D frame (frame3d.with_imperfections) takes each QLOAD FZ's half at either end node; the 2D frame takes nodal F only.
+ET, 1, BEAM3
+MP, EX, 1, 210e9
+R, 1, 0.01, 8e-5, 0.2
+N, 1, 0, 0
+N, 2, 0, 6
+E, 1, 2
+D, 1, UX, 0
+D, 1, UY, 0
+D, 1, ROTZ, 0
+QLOAD, 1, FY, -200000
+F, 2, FX, 3000.0

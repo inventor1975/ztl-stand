@@ -185,3 +185,132 @@ def solve(text, moduli=None, ns=64, order=2):
                     "N1_mean": float(np.mean([N1[e] for e in es])), "L": L})
     disp = {nid: u[3 * idx[nid]:3 * idx[nid] + 3].copy() for nid in nodes}
     return res, disp
+
+
+def buckling(text, moduli=None, ns=32):
+    """The linear critical load factor of the continuum frame (N from the first-order analysis): the smallest lam > 0
+    with K + lam K_G(N1) singular; ns Hermite sub-elements per member, piecewise-constant N per sub-element."""
+    import scipy.linalg as la
+    nodes, elems, loads, sups, qloads, (E, A, I, h) = parse(text)
+    # reuse solve()'s machinery by a first-order call that also returns the matrices
+    res = _matrices(text, moduli, ns)
+    K, KG = res
+    th = la.eigh(-KG, K, eigvals_only=True)
+    th = th[th > 1e-14]
+    return float(1 / th.max()) if len(th) else None
+
+
+def _matrices(text, moduli, ns):
+    """(K, K_G(N1)) dense on the free DOFs (the same model as solve())."""
+    nodes, elems, loads, sups, qloads, (E, A, I, h) = parse(text)
+    m = len(elems)
+    moduli = [1.0] * m if moduli is None else list(moduli)
+    pos = {nid: np.array(xy) for nid, xy in nodes.items()}
+    nxt = max(nodes) + 1
+    subs = []
+    for (i, j) in elems:
+        ids = [i]
+        for s in range(1, ns):
+            pos[nxt] = pos[i] + (pos[j] - pos[i]) * s / ns
+            ids.append(nxt); nxt += 1
+        ids.append(j)
+        subs.append(list(zip(ids[:-1], ids[1:])))
+    idx = {nid: k for k, nid in enumerate(sorted(pos))}
+    ndof = 3 * len(idx)
+    fixed = {3 * idx[nid] + {"UX": 0, "UY": 1, "ROTZ": 2}[d] for nid, d in sups}
+    free = np.array([d for d in range(ndof) if d not in fixed])
+    f = np.zeros(ndof)
+    for nid, d, v in loads:
+        f[3 * idx[nid] + {"FX": 0, "FY": 1, "MZ": 2}[d]] += v
+    q_of = {}
+    for k, d, q in qloads:
+        gx, gy = q_of.get(k, (0.0, 0.0))
+        q_of[k] = (gx + q, gy) if d == "FX" else (gx, gy + q)
+    els = []
+    for k, sl in enumerate(subs):
+        gx, gy = q_of.get(k + 1, (0.0, 0.0))
+        for (a, b) in sl:
+            d = pos[b] - pos[a]; l = float(np.hypot(*d)); c, s = d[0] / l, d[1] / l
+            ax, w = gx * c + gy * s, -gx * s + gy * c
+            fl = np.array([ax * l / 2, w * l / 2, w * l * l / 12, ax * l / 2, w * l / 2, -w * l * l / 12])
+            T = np.zeros((6, 6)); R = np.array([[c, s, 0], [-s, c, 0], [0, 0, 1]]); T[:3, :3] = R; T[3:, 3:] = R
+            dofs = [3 * idx[a], 3 * idx[a] + 1, 3 * idx[a] + 2, 3 * idx[b], 3 * idx[b] + 1, 3 * idx[b] + 2]
+            f[dofs] += T.T @ fl
+            EA, EI = E * moduli[k] * A, E * moduli[k] * I
+            ke = np.zeros((6, 6)); ke[0, 0] = ke[3, 3] = EA / l; ke[0, 3] = ke[3, 0] = -EA / l
+            bb = EI / l ** 3 * np.array([[12, 6 * l, -12, 6 * l], [6 * l, 4 * l * l, -6 * l, 2 * l * l],
+                                         [-12, -6 * l, 12, -6 * l], [6 * l, 2 * l * l, -6 * l, 4 * l * l]])
+            gg = 1 / (30 * l) * np.array([[36, 3 * l, -36, 3 * l], [3 * l, 4 * l * l, -3 * l, -l * l],
+                                          [-36, -3 * l, 36, -3 * l], [3 * l, -l * l, -3 * l, 4 * l * l]])
+            ix = [1, 2, 4, 5]
+            kb = np.zeros((6, 6)); kg = np.zeros((6, 6))
+            for r_ in range(4):
+                for c_ in range(4):
+                    kb[ix[r_], ix[c_]] = bb[r_, c_]; kg[ix[r_], ix[c_]] = gg[r_, c_]
+            els.append((dofs, T, ke + kb, kg, fl))
+    K = np.zeros((ndof, ndof))
+    for dofs, T, ke, kg, fl in els:
+        K[np.ix_(dofs, dofs)] += T.T @ ke @ T
+    Kf = K[np.ix_(free, free)]
+    u = np.zeros(ndof); u[free] = np.linalg.solve(Kf, f[free])
+    KG = np.zeros((ndof, ndof))
+    for dofs, T, ke, kg, fl in els:
+        fe = ke @ (T @ u[dofs]) - fl
+        N = (-fe[0] + fe[3]) / 2
+        KG[np.ix_(dofs, dofs)] += N * (T.T @ kg @ T)
+    return Kf, KG[np.ix_(free, free)]
+
+
+def _matrices_sparse(text, ns):
+    """(K, K_G(N1)) sparse on the free DOFs (as _matrices, for large frames)."""
+    nodes, elems, loads, sups, qloads, (E, A, I, h) = parse(text)
+    pos = {nid: np.array(xy) for nid, xy in nodes.items()}
+    nxt = max(nodes) + 1
+    els = []
+    for (i, j) in elems:
+        ids = [i]
+        for s in range(1, ns):
+            pos[nxt] = pos[i] + (pos[j] - pos[i]) * s / ns
+            ids.append(nxt); nxt += 1
+        ids.append(j)
+        els += list(zip(ids[:-1], ids[1:]))
+    idx = {nid: k for k, nid in enumerate(sorted(pos))}
+    ndof = 3 * len(idx)
+    fixed = {3 * idx[nid] + {"UX": 0, "UY": 1, "ROTZ": 2}[d] for nid, d in sups}
+    free = np.array([d for d in range(ndof) if d not in fixed])
+    f = np.zeros(ndof)
+    for nid, d, v in loads:
+        f[3 * idx[nid] + {"FX": 0, "FY": 1, "MZ": 2}[d]] += v
+    data = []
+    for (a, b) in els:
+        d = pos[b] - pos[a]; l = float(np.hypot(*d)); c, s = d[0] / l, d[1] / l
+        T = np.zeros((6, 6)); R = np.array([[c, s, 0], [-s, c, 0], [0, 0, 1]]); T[:3, :3] = R; T[3:, 3:] = R
+        ke = np.zeros((6, 6)); ke[0, 0] = ke[3, 3] = E * A / l; ke[0, 3] = ke[3, 0] = -E * A / l
+        bb = E * I / l ** 3 * np.array([[12, 6 * l, -12, 6 * l], [6 * l, 4 * l * l, -6 * l, 2 * l * l],
+                                        [-12, -6 * l, 12, -6 * l], [6 * l, 2 * l * l, -6 * l, 4 * l * l]])
+        gg = 1 / (30 * l) * np.array([[36, 3 * l, -36, 3 * l], [3 * l, 4 * l * l, -3 * l, -l * l],
+                                      [-36, -3 * l, 36, -3 * l], [3 * l, -l * l, -3 * l, 4 * l * l]])
+        ix = [1, 2, 4, 5]
+        kg = np.zeros((6, 6))
+        for r_ in range(4):
+            for c_ in range(4):
+                ke[ix[r_], ix[c_]] += bb[r_, c_]; kg[ix[r_], ix[c_]] = gg[r_, c_]
+        dofs = [3 * idx[a], 3 * idx[a] + 1, 3 * idx[a] + 2, 3 * idx[b], 3 * idx[b] + 1, 3 * idx[b] + 2]
+        data.append((dofs, T, ke, kg))
+
+    def asm(mats):
+        rr, cc, vv = [], [], []
+        for (dofs, T, ke, kg), M in zip(data, mats):
+            Mg = T.T @ M @ T
+            for r_ in range(6):
+                for c_ in range(6):
+                    rr.append(dofs[r_]); cc.append(dofs[c_]); vv.append(Mg[r_, c_])
+        return sp.csr_matrix((vv, (rr, cc)), shape=(ndof, ndof))[free][:, free].tocsc()
+    K = asm([d[2] for d in data])
+    u = np.zeros(ndof); u[free] = sla.spsolve(K, f[free])
+    Ns = []
+    for (dofs, T, ke, kg) in data:
+        fe = ke @ (T @ u[dofs])
+        Ns.append((-fe[0] + fe[3]) / 2)
+    KG = asm([N * d[3] for N, d in zip(Ns, data)])
+    return K, KG
