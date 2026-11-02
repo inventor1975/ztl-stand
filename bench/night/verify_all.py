@@ -34,6 +34,7 @@ from fractions import Fraction as F
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "bench/night"))
 
 from ustand import frame as FRM  # noqa: E402
 from ustand import judge_ztl  # noqa: E402,F401
@@ -245,6 +246,141 @@ def frame_case(seed):
     return {"checked": n_chk, "violations": viol, "example": ex_}
 
 
+def random_space_frame(rng, scale=None):
+    """storeys x bays in X x bays in Y, columns (THETA 0 or 90) and beams in X and Y, two sections, vertical + lateral
+    nodal loads, transverse QLOAD on some beams; fixed bases. scale multiplies every load (integer loads: a float scale
+    is rounded per load)."""
+    ns, bx, by = rng.randint(1, 3), rng.randint(1, 2), rng.randint(1, 2)
+    H, B, C = rng.choice([3, 4]), rng.choice([4, 5, 6]), rng.choice([3, 4, 5])
+    nid = lambda f_, a_, b_: f_ * (bx + 1) * (by + 1) + b_ * (bx + 1) + a_ + 1
+    th = rng.choice([0, 90])
+    L_ = ["ET, 1, BEAM4", "MP, EX, 1, 210e9", "MP, PRXY, 1, 0.3",
+          f"R, 1, 0.006, {rng.choice([4, 6, 8])}e-5, {rng.choice([1, 2, 3])}e-5, 0.2, 0.2, {th}, 0, 5e-6",
+          f"R, 2, 0.004, {rng.choice([3, 5])}e-5, 1e-5, 0.24, 0.12, 0, 0, 2e-6"]
+    for f_ in range(ns + 1):
+        for b_ in range(by + 1):
+            for a_ in range(bx + 1):
+                L_.append(f"N, {nid(f_, a_, b_)}, {B * a_}, {C * b_}, {H * f_}")
+    el, beams = [], []
+    for f_ in range(ns):
+        for b_ in range(by + 1):
+            for a_ in range(bx + 1):
+                el.append((nid(f_, a_, b_), nid(f_ + 1, a_, b_), 1))
+    for f_ in range(1, ns + 1):
+        for b_ in range(by + 1):
+            for a_ in range(bx):
+                el.append((nid(f_, a_, b_), nid(f_, a_ + 1, b_), 2)); beams.append(len(el))
+        for a_ in range(bx + 1):
+            for b_ in range(by):
+                el.append((nid(f_, a_, b_), nid(f_, a_, b_ + 1), 2)); beams.append(len(el))
+    for k, (a, b, r_) in enumerate(el, 1):
+        L_ += [f"REAL, {r_}", f"E, {a}, {b}"]
+    for b_ in range(by + 1):
+        for a_ in range(bx + 1):
+            L_.append(f"D, {nid(0, a_, b_)}, ALL, 0")
+    scale = rng.choice([1, 2, 4, 8]) if scale is None else scale
+    for f_ in range(1, ns + 1):
+        L_.append(f"F, {nid(f_, 0, 0)}, FX, {round(rng.randint(0, 8000) * scale)}")
+        L_.append(f"F, {nid(f_, 0, 0)}, FY, {round(rng.randint(0, 8000) * scale)}")
+        for b_ in range(by + 1):
+            for a_ in range(bx + 1):
+                L_.append(f"F, {nid(f_, a_, b_)}, FZ, -{round(rng.randint(5000, 30000) * scale)}")
+    for k in beams:
+        if rng.random() < 0.4:
+            L_.append(f"QLOAD, {k}, FZ, -{round(rng.randint(1000, 8000) * scale)}")
+    return "\n".join(L_), nid(ns, bx, by)
+
+
+def space_frame_case(seed):
+    """sweep G (2026-11-02): ustand.frame3d against bench/night/frame3d_ref.py — an independent numpy space-frame FE
+    (12 x 12 Przemieniecki beam + consistent geometric matrix, 8 elements per member). First order at the nodes
+    (tight), second-order displacement brackets and per-member max|sigma| brackets BOTH SIDES (lo <= ref <= hi),
+    the stability bracket lambda_low <= lambda_ref(4 el.) and lambda_ref <= lambda_high (1e-9)."""
+    import frame3d_ref as RF
+    from ustand import frame3d as F3
+    # the loads scaled to a target lambda_ref in [1.3, 3]: far from buckling the geometric part of the end moment
+    # (2-3 %) hides inside the proved interval (~25 % wide) and the G-MUTM3 sabotage is invisible (MEASURED 2026-11-02)
+    deck, top = random_space_frame(random.Random(seed), 1)
+    nodes, elems, loads, supports, props = F3.read_deck(deck)
+    lam1 = RF.solve(nodes, elems, props, {k: v for k, v in loads["BASE"].items() if not isinstance(k[0], tuple)},
+                    supports, F3._qloads(deck).get("BASE", {}), m=4, buckling=True)
+    rng = random.Random(seed + 7)
+    deck, top = random_space_frame(random.Random(seed), lam1 / rng.uniform(1.3, 3.0) if lam1 else 1)
+    tol = rng.choice(["0", "0.5%"])
+    nodes, elems, loads, supports, props = F3.read_deck(deck)
+    ld = loads["BASE"]
+    nl = {k: v for k, v in ld.items() if not isinstance(k[0], tuple)}
+    ql = F3._qloads(deck).get("BASE", {})
+    T = [f"U({top},X)", f"U({top},Y)", f"U({top},Z)", f"U({top},RZ)"]
+    viol, n_chk, ex_ = 0, 0, None
+    r1 = RF.solve(nodes, elems, props, nl, supports, ql)
+    for t in T:
+        nd, dd = F3._target(t)
+        r = F3.range_of(deck, tol, t)
+        lo, hi, ref = float(r["lo"]), float(r["hi"]), r1[(nd, dd)]
+        n_chk += 1
+        slack = 1e-9 * max(abs(ref), abs(lo), abs(hi)) + 1e-15
+        if not (lo - slack <= ref <= hi + slack):
+            viol += 1
+            ex_ = ex_ or {"seed": seed, "first": t, "proved": [lo, hi], "ref": ref}
+    st = F3.stability_lower(deck, tol)
+    lam_ref = RF.solve(nodes, elems, props, nl, supports, ql, m=4, buckling=True)
+    if lam_ref is not None and st.get("lam_low") is not None:
+        n_chk += 1
+        if float(st["lam_low"]) > lam_ref * (1 + 1e-9):
+            viol += 1
+            ex_ = ex_ or {"seed": seed, "lam_low": float(st["lam_low"]), "ref": lam_ref}
+        if tol == "0":
+            su = F3.stability_upper(deck)
+            if su.get("lam_high") is not None:
+                n_chk += 1
+                if float(su["lam_high"]) < lam_ref * (1 - 1e-9):
+                    viol += 1
+                    ex_ = ex_ or {"seed": seed, "lam_high": float(su["lam_high"]), "ref": lam_ref}
+    if lam_ref is None or lam_ref <= 1.2:
+        return {"checked": n_chk, "violations": viol, "example": ex_, "why": f"lambda_ref {lam_ref}: no 2nd order"}
+    r2 = F3.second_order_disp(deck, tol, T)["BASE"]
+    if r2.get("verdict") == "OPEN":
+        return {"checked": n_chk, "violations": viol, "example": ex_, "skipped": 1, "why": r2["why"]}
+    u2, fr = RF.solve(nodes, elems, props, nl, supports, ql, m=8, second=True, forces=True)
+    for t in T:
+        nd, dd = F3._target(t)
+        lo, hi = float(r2[t][0]), float(r2[t][1])
+        ref = u2[(nd, dd)]
+        n_chk += 1
+        slack = 1e-9 * max(abs(ref), abs(lo), abs(hi)) + 1e-15
+        if not (lo - slack <= ref <= hi + slack):
+            viol += 1
+            ex_ = ex_ or {"seed": seed, "second": t, "proved": [lo, hi], "ref": ref}
+    rs = F3.second_order_stress(deck, tol, 10 ** 12)
+    for row in rs.get("members", []):
+        k = row["element"]
+        p = props[k]
+        sig = max(abs(N) / float(p.area) + max(abs(a), abs(b)) * float(p.tky) / 2 / float(p.izz)
+                  + max(abs(c), abs(d)) * float(p.tkz) / 2 / float(p.iyy) for (N, a, b, c, d) in fr[k])
+        lo, hi = (float(F(x.split()[0])) for x in row["sigma_abs"])
+        n_chk += 1
+        if not (lo * (1 - 1e-6) - 1.0 <= sig <= hi * (1 + 1e-6) + 1.0):
+            viol += 1
+            ex_ = ex_ or {"seed": seed, "member": k, "sigma": [lo, sig, hi]}
+        DIST3.append((hi - lo) / max(sig, 1.0))
+        # BOTH SIDES on the end moments (the stress bracket is too wide to see a dropped N (G u)): the stand's end
+        # moments are the internal moment, Przemieniecki's J-end force is its negative
+        f0, f1 = fr[k][0], fr[k][-1]
+        ref_m = {("y", "I"): f0[1], ("y", "J"): -f1[2], ("z", "I"): f0[3], ("z", "J"): -f1[4]}
+        mk = max(abs(v) for v in ref_m.values()) + 1.0
+        for (pl, e_), rv in ref_m.items():
+            a_, b_ = (float(F(x.split()[0])) for x in row["M_ends"][pl][e_])
+            n_chk += 1
+            if not (a_ - MOM_TOL * mk - 1.0 <= rv <= b_ + MOM_TOL * mk + 1.0):
+                viol += 1
+                ex_ = ex_ or {"seed": seed, "member": k, "end": pl + e_, "proved": [a_, b_], "ref": rv}
+    return {"checked": n_chk, "violations": viol, "example": ex_}
+
+
+DIST3 = []
+
+
 def stability_case(seed):
     import numpy as np
     import scipy.sparse as sp
@@ -401,7 +537,12 @@ def plate_case(seed):
 def mutate(kind=True):
     """Break the second-order stress bound the way it once was broken: the member's interior and the continuum's
     end-moment corrections dropped ("ends only, Hermite moments" — 325 instead of 337.67 MPa on a beam-column); or
-    (kind "geo") the end moment's geometric part N (G u) dropped (the K_E-row moment fixed on 2026-11-02)."""
+    (kind "geo") the end moment's geometric part N (G u) dropped (the K_E-row moment fixed on 2026-11-02); "geo3" /
+    "geom3" the same breaks in ustand.frame3d (the whole geometric stiffness / the moment's N (G u))."""
+    if kind in ("geo3", "geom3"):
+        from ustand import frame3d as F3
+        F3._MUTANT["no_geo" if kind == "geo3" else "no_geo_moment"] = True
+        return F3._MUTANT.clear
     if kind == "geo":
         FRM._MUTANT["no_geo_moment"] = True
     else:
@@ -416,7 +557,7 @@ DIST = []
 
 
 SWEEPS = {"A": (beam_column_case, 400), "B": (frame_case, 120), "C": (stability_case, 120), "D": (truss_case, 200),
-          "E": (general_case, 600), "F": (plate_case, 24)}
+          "E": (general_case, 600), "F": (plate_case, 24), "G": (space_frame_case, 60)}
 
 
 def _run(args):
@@ -432,7 +573,8 @@ def _run(args):
         if restore:
             restore()
     r["seconds"] = time.time() - t0
-    return key + ("-MUTG" if mutated == "geo" else "-MUT" if mutated else ""), r
+    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3"}.get(mutated, "-MUT" if mutated else "")
+    return key + tag, r
 
 
 def main(argv):
@@ -448,6 +590,8 @@ def main(argv):
         tasks += [("B", 900000 + s, True) for s in range(int(30 * scale))]
         tasks += [("A", 950000 + s, "geo") for s in range(int(200 * scale))]
         tasks += [("B", 950000 + s, "geo") for s in range(int(30 * scale))]
+        tasks += [("G", 960000 + s, "geo3") for s in range(int(20 * scale))]
+        tasks += [("G", 970000 + s, "geom3") for s in range(int(20 * scale))]
     random.Random(7).shuffle(tasks)
     t0 = time.time()
     agg = {}

@@ -3212,6 +3212,14 @@ for _ne in (4, 8):
     _g2.append((_ne, _mj[0] <= _mx <= _mj[1], _mj, _mx))
 check("2D frame, the same fix: the proved end moment at the midspan node of the loaded beam-column CONTAINS the exact "
       "moment (q/k^2)(sec(kL/2) - 1) — before, the K_E-row moment missed it by 52 N m", all(t_[1] for t_ in _g2), _g2)
+_r3d = _F3.second_order_disp(_d3s, "0.5%", ["U(2,X)", "U(3,X)"])["BASE"]
+_X3d = _F3._EXTRA.get("last") or {}
+_dy_ok = lambda x: x == 0 or (x.denominator & (x.denominator - 1) == 0 and abs(x.numerator).bit_length() <= 70)
+check("space frame second order: the proved outputs, N_lo/N_hi and cq are OUTWARD-rounded 64-bit dyadics (the night "
+      "battery's sweep G, 2026-11-02: they came back with up to 3361 digits and second_order_stress crashed past 4300)",
+      all(_dy_ok(v) for t_ in _r3d.values() for v in t_[:2])
+      and all(_dy_ok(v) for v in list(_X3d.get("Nlo", {}).values()) + list(_X3d.get("Nhi", {}).values())
+              + list(_X3d.get("cq", {}).values())), _r3d)
 
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

@@ -778,6 +778,9 @@ def _glob3(i, j, vax, rax, rsign, dof, l):
     return {a: v for a, v in g.items() if v}
 
 
+_MUTANT = {}       # TEST-ONLY sabotage switches (bench/night/verify_all.py sweep G); empty = the real bounds
+
+
 def second_order_disp(text, tol, targets, case=None):
     """PHYSICAL SECOND ORDER displacements of a space frame (one load case, or every case): the 2D frame's
     second_order_case for displacements in both bending planes —
@@ -831,6 +834,8 @@ def second_order_disp(text, tol, targets, case=None):
                     g = _glob3(i, j, vax, rax, sg, dof, l)
                     if g:
                         cterms.append((_dy(cq * d, True), g))
+        if _MUTANT.get("no_geo"):                          # sabotage (tests only): first-order stiffness
+            Gt = []
         for d, g in Gt:
             items = list(g.items())
             for a, ga in items:
@@ -872,6 +877,14 @@ def second_order_disp(text, tol, targets, case=None):
             ex_ = sth * (r["ny_t"] + r["ey"]) / (1 - th) * Rq
             r["lo"] -= ex_
             r["hi"] += ex_
+    # OUTWARD to 64-bit dyadics (2026-11-02, the night battery's sweep G: the proved outputs came back with up to 3361
+    # digits, N_lo/N_hi 567, cq 1141, and second_order_stress's corner sums passed 4300 digits — a crash). Wider
+    # intervals stay true; a lower bound computed from them stays a lower bound.
+    for r in rs:
+        r["lo"], r["hi"] = _dy(r["lo"], False), _dy(r["hi"], True)
+    Nlo = {k: _dy(v, False) for k, v in Nlo.items()}
+    Nhi = {k: _dy(v, True) for k, v in Nhi.items()}
+    cqd = {k: _dy(v, True) for k, v in cqd.items()}
     _EXTRA["last"] = {"rs": rs[len(es):], "theta": rs[0]["theta"], "cq": cqd, "Nlo": Nlo, "Nhi": Nhi, "T": T,
                       "lam": lam, "emap": emap, "dof": dof, "n": n}
     return {names[0]: {tg: (r["lo"], r["hi"], r["nominal"]) for tg, r in zip(targets, rs)}}
@@ -886,8 +899,10 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
     sqrt(C_thth) ||u||_C (||u||_C <= sqrt(theta f.u/(1 - theta))); the interior maximum per plane by the
     beam-column bounds (none in tension, none if psi <= 1 - 2 phi^2, else min of m(1 + psi)/(2 cos^2 phi) and
     sqrt(A^2 + B^2)); the corner stress bounded by |N|/A + M_z,max (TKY/2)/I_z + M_y,max (TKZ/2)/I_y (the two planes'
-    maxima added: safe even if they peak at different points). Judged by ZTL over [a proved lower bound of max|sigma|
-    (the end corners), its upper bound]. Premises as second_order_disp; no member loads."""
+    maxima added: safe even if they peak at different points). Transverse member loads (QLOAD): the clamped-beam end
+    moment w L^2/12 sign-free, the own-load end correction, the interior by the Dirichlet Green function. Judged by
+    ZTL over [a proved lower bound of max|sigma| (the end corners), its upper bound]. Premises as second_order_disp;
+    no AXIAL member loads in second order."""
     from . import judge_ztl  # noqa: F401
     from .frame import _sqrt_down, PI2_LO
     import zenergy as ZE
@@ -971,6 +986,8 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                 pl_s = 1 if plane == "y" else -1
                 nl_, nh_ = X["Nlo"].get(k, F(0)), X["Nhi"].get(k, F(0))
                 for e_, es_ in (("I", 1), ("J", -1)):
+                    if _MUTANT.get("no_geo_moment"):           # sabotage (tests only): the K_E-row moment alone
+                        break
                     gl_, gh_ = rng[(k, plane + "G" + e_)]
                     prods = [pl_s * es_ * a_ * b_ for a_ in (nl_, nh_) for b_ in (gl_, gh_)]
                     Ml[e_] = (Ml[e_][0] + min(prods), Ml[e_][1] + max(prods))
@@ -1026,14 +1043,16 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
             nm = f"s{len(qs)}"
             qs.append(f"{nm}=[{fr(lo_abs)},{fr(hi_abs)}] earned:frame3d-second-order")
             atoms.append(f"{nm} <= {fr(lim)}")
-            rows.append({"case": c, "element": k, "sigma_abs": [_show(lo_abs, -1), _show(hi_abs, 1)]})
+            rows.append({"case": c, "element": k, "sigma_abs": [_show(lo_abs, -1), _show(hi_abs, 1)],
+                         "M_ends": {pl: {e_: (_show(a_, -1), _show(b_, 1)) for e_, (a_, b_) in Mends[pl].items()}
+                                    for pl in Mends}})
     q, m = parse_quantities(", ".join(qs))
     r = judge_sheet_claim(" & ".join(atoms), q, m)
     worst = max(rows, key=lambda x: F(x["sigma_abs"][1].split()[0]))
     return {"verdict": r["disposition"] + (f" ({r['polarity']})" if r.get("polarity") else ""), "limit": _show(lim),
             "worst": worst, "members": rows,
             "note": "PHYSICAL SECOND ORDER (continuum members, both planes); premises: first-order axial forces, no "
-                    "torsional / flexural-torsional buckling, no member loads"}
+                    "torsional / flexural-torsional buckling, no axial member loads"}
 
 
 _SU = {}
