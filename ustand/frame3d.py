@@ -623,6 +623,33 @@ def _form3(i, j, vax, rax, rsign, dof, M4):
     return out
 
 
+def _axial_ranges(text, c, parts, fs, dof, emap, nodes, elems, props):
+    """Every member's proved axial-force range in load case c (first order, the box's moduli): (Nlo, Nhi, Nnom,
+    Nnodes_lo, qax). AXIAL member loads (2026-11-02): N(x) = N_mean + a (L/2 - x), a = q . x', the range widened by
+    |a| L/2 (Nnodes_lo: the mean's lower end; qax[k] = a L/2)."""
+    import zenergy as ZE
+    n = len(dof)
+    ks = [k for k in emap if emap[k]["a"]]
+    rs = ZE.certify_many(parts, fs[c], [dict(emap[k]["a"]) for k in ks], n, scale=[emap[k]["part"] for k in ks])
+    Nlo, Nhi, Nnom = {}, {}, {}
+    for k, r in zip(ks, rs):
+        fac = props[k].ex * props[k].area / emap[k]["L"]
+        Nlo[k] = min(fac * r["lo"], fac * r["hi"])
+        Nhi[k] = max(fac * r["lo"], fac * r["hi"])
+        Nnom[k] = fac * r["nominal"]
+    Nnodes_lo, qax = dict(Nlo), {}
+    for k, q in _qloads(text).get(c, {}).items():
+        i, j = elems[k - 1]
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], props[k].theta)
+        a_ = sum(q[t] * xp[t] for t in range(3))
+        if a_:
+            qax[k] = a_ * L / 2
+            Nlo[k] = Nlo.get(k, F(0)) - abs(qax[k])
+            Nhi[k] = Nhi.get(k, F(0)) + abs(qax[k])
+            Nnom[k] = Nnom.get(k, F(0))
+    return Nlo, Nhi, Nnom, Nnodes_lo, qax
+
+
 def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     """A PROVED lower bound on the critical load factor of ONE load case (or the smallest over all cases) — the 2D
     frame's continuum stability (frame.stability_lower) in both bending planes of every member:
@@ -644,29 +671,9 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
         res = [stability_lower(text, tol, c, rel) for c in names]
         best = min((r for r in res if r.get("lam_low") is not None), key=lambda r: r["lam_low"], default=res[0])
         return dict(best, cases={c: r.get("lam_low") for c, r in zip(names, res)})
-    f = fs[names[0]]
     n = len(dof)
     T = max((p["t"] for p in parts), default=F(0))
-    ks = [k for k in emap if emap[k]["a"]]
-    rs = ZE.certify_many(parts, f, [dict(emap[k]["a"]) for k in ks], n, scale=[emap[k]["part"] for k in ks])
-    Nlo, Nhi, Nnom = {}, {}, {}
-    for k, r in zip(ks, rs):
-        fac = props[k].ex * props[k].area / emap[k]["L"]
-        Nlo[k] = min(fac * r["lo"], fac * r["hi"])
-        Nhi[k] = max(fac * r["lo"], fac * r["hi"])
-        Nnom[k] = fac * r["nominal"]
-    # AXIAL member loads (2026-11-02, the 2D frame's split ported): N(x) = N_mean + a (L/2 - x) along the member,
-    # a = q . x'; the box's N range widened by |a| L/2; the geometric form exactly N_a G_a + N_b G_b
-    Nnodes_lo, qax = dict(Nlo), {}
-    for k, q in _qloads(text).get(names[0], {}).items():
-        i, j = elems[k - 1]
-        L, xp, yp, zp = _axes(nodes[i], nodes[j], props[k].theta)
-        a_ = sum(q[t] * xp[t] for t in range(3))
-        if a_:
-            qax[k] = a_ * L / 2
-            Nlo[k] = Nlo.get(k, F(0)) - abs(qax[k])
-            Nhi[k] = Nhi.get(k, F(0)) + abs(qax[k])
-            Nnom[k] = Nnom.get(k, F(0))
+    Nlo, Nhi, Nnom, Nnodes_lo, qax = _axial_ranges(text, names[0], parts, fs, dof, emap, nodes, elems, props)
     base = {"case": names[0], "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
     if all(v >= 0 for v in Nlo.values()):
         return dict(base, lam_low=None, why="no compressed member: no buckling under these loads")
@@ -849,11 +856,10 @@ def second_order_disp(text, tol, targets, case=None):
                 raise Frame3DError(f"second order: member {k} carries an AXIAL and a transverse member load — not "
                                    f"yet (axial alone is in)")
             qax3[k] = a_ * L / 2
-    st = stability_lower(text, tol, names[0])
-    lam = st.get("lam_low")
-    if st.get("lam_est") is not None and (lam is None or lam <= 1):   # an early exit only (certify_general proves)
-        return {names[0]: {"verdict": "OPEN", "why": f"the critical factor is not proved above 1 ({lam})"}}
-    Nlo, Nhi = st["Nlo"], st["Nhi"]
+    # the axial forces only (2026-11-02, the size bench: the stability bisection here was HALF of the time; it is not
+    # needed — certify_general proves A > 0 over the whole box itself, theta < 1, or the frame may buckle: OPEN)
+    Nlo, Nhi, _nn, _nl, _qa = _axial_ranges(text, names[0], parts, fs, dof, emap, nodes, elems, props)
+    lam = None
     n = len(dof)
     T = max((p["t"] for p in parts), default=F(0))
     A0 = ZE.matrix(parts, n)
@@ -961,8 +967,12 @@ def second_order_disp(text, tol, targets, case=None):
                 re2[(k, plane)] = w * w * L ** 5 / (720 * Elo * I * (1 - P * kk))
     keys = sorted(re2)
     extra = _EXTRA.pop("outputs", [])
-    rs = ZE.certify_general_many(A0, parts + gparts, cterms, fs[names[0]], es + extra + [list(fs[names[0]])], n,
-                                 cgroups=[cgrp[key] for key in keys] if keys else None)
+    try:
+        rs = ZE.certify_general_many(A0, parts + gparts, cterms, fs[names[0]], es + extra + [list(fs[names[0]])], n,
+                                     cgroups=[cgrp[key] for key in keys] if keys else None)
+    except ArithmeticError as ex_:
+        return {names[0]: {"verdict": "OPEN", "why": f"the critical factor is not proved above 1 (second order: "
+                                                     f"{ex_}): the frame may buckle under these loads"}}
     if keys:
         Rq = ZE._sqrt_up(sum(re2.values()))
         rq = [ZE._sqrt_up(re2[key]) for key in keys]
