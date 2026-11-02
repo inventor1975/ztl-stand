@@ -47,7 +47,17 @@ fix of the same day — the split's witness and the clip); second-order DISPLACE
 k/(1-Pk) G); second-order STRESSES with them and combined axial + transverse member loads refused (named); torsional / flexural-torsional /
 lateral-torsional buckling (a stated premise — Wagner terms not in); size: measured only up to tens of members.
 
-## Track 3 — 3D elasticity (LATER)
+## Track 3 — 3D elasticity
+
+**Version 1 IN (2026-11-03, the curator's choice (A)): ONE-SIDED.** `ustand/elastic3d.py` — a proved UPPER bound on
+the apparent Young's modulus of a voxel sample (smooth grips on x = 0 / x = nx, other faces free): P1 displacements on
+Kuhn tetrahedra, minimum potential energy; the energy summed in binary64 with Higham's bound; the moduli's box at
+(E_hi, nu_lo) for mu and (E_hi, nu_hi) for lambda. MEASURED: homogeneous, Voigt (laminate along x, equal nu), Reuss
+(laminate across x, nu = 0) each from above within ~1e-12 (the rounding raise); a 70 % solid random 6^3 sample 119.3
+-> 104.7 -> 98.3 under refinement x1, x2, x3 (the bound converges from above; voxel edge contacts are stiff on the
+coarse mesh); 32^3 in 30 s. "E_app <= need" EARNED / OPEN; "E_app >= need" REFUTED / OPEN.
+
+The LOWER bound (the original plan below) is the open half:
 
 The hypercircle in 3D: a P1/P2 displacement field (lower bound of compliance), an EXACTLY equilibrated stress field
 (upper) — in 2D it came from the Airy function (HCT); in 3D there is no scalar Airy function, so the equilibrated

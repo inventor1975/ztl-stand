@@ -88,7 +88,9 @@ STRESSES in 2D (2026-11-03: end moments with N_a G_a + N_b G_b, brackets < 0.01 
 solve; the interior by a Dirichlet bound on M'' = N'v' + (N/EI)M, MEASURED 3-29 % above the reference on 1-2 elements
 per member, 0.07-0.18 % on 8-16; in 3D per bending plane, the same brackets), also with a transverse load on the same
 member (2026-11-03; battery sweep J: 1614 checks vs solve_bvp, 0 violations). Not yet: plate buckling. Lateral-torsional buckling: member level, 3D (`judge_ltb`, DESIGN-LTB.md).
-3D phase: track 1 (conduction) in; track 2 (space frames, 6 DOF per node) and track 3 (3D elasticity) next. Measured
+3D phase: track 1 (conduction) in; track 2 (space frames, 6 DOF per node) in; track 3 (3D elasticity) version 1 in
+(2026-11-03): `python3 -m ustand.elastic3d volume.npy --e 1:200e9 --nu 1:0.3 --need-max 150e9` — a proved UPPER bound
+on a voxel sample's apparent modulus (one-sided; DESIGN-3D.md). Measured
 (conduction3d, 2026-11-02): 16^3 random 50 % electrolyte in 0.5 s; voxel edge/corner contacts make the bracket close
 slowly under uniform refinement (3D checkerboard: ratio 2.3 -> 1.4 at x4) — adaptive refinement is the next step.
 Solver: smoothed-aggregation multigrid if `pyamg` is installed (optional; 64^3 voxels 141 s -> 22 s), Jacobi CG

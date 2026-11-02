@@ -3500,5 +3500,37 @@ check("space frame EN 6.3.3 WITH chi_LT (curve_lt): the fork-supported beam-colu
       "torsional buckling is above the one without it, the premise 'no lateral-torsional buckling' gone from the output",
       _fS(_iL) > _fS(_iN) and "no lateral-torsional" not in _iL["premises"], (_fS(_iN), _fS(_iL), _iL["premises"]))
 
+# 3D ELASTICITY, track 3 version 1 (2026-11-03, the curator's choice (A)): a PROVED UPPER bound on the apparent modulus
+# of a voxel sample (P1 on Kuhn tetrahedra, minimum potential energy). Exact cases, MEASURED: the homogeneous box gives
+# E (the linear field is in the space), a laminate along x Voigt's mean (same nu), a laminate across x with nu = 0
+# Reuss's — each from above within the rounding raise (~1e-12); dyadic refinement (Kuhn nested) never raises it.
+from ustand import elastic3d as _EL3     # noqa: E402
+import numpy as _np_el                   # noqa: E402
+_P3 = lambda E, nu: {"E": [F(E)], "nu": [F(nu)]}
+_eh = float(_EL3.upper(_np_el.ones((4, 3, 5), int), {1: _P3(200, "0.3")})[0])
+_Vp = _np_el.ones((4, 4, 4), int); _Vp[:, :2, :] = 2
+_ep = float(_EL3.upper(_Vp, {1: _P3(200, "0.25"), 2: _P3(70, "0.25")})[0])
+_Vs = _np_el.ones((4, 3, 3), int); _Vs[:2] = 2
+_es = float(_EL3.upper(_Vs, {1: _P3(200, 0), 2: _P3(70, 0)})[0])
+_rs = 1 / (0.5 / 200 + 0.5 / 70)
+_Vr = (_np_el.random.default_rng(1).random((5, 5, 5)) < 0.7).astype(int)
+_er = [float(_EL3.upper(_Vr, {0: _P3(0, 0), 1: _P3(200, "0.3")}, refine=k)[0]) for k in (1, 2)]
+_EL3._MUTANT["e_low"] = True
+try:
+    _em = float(_EL3.upper(_np_el.ones((3, 3, 3), int), {1: {"E": [F(190), F(210)], "nu": [F("0.3")]}})[0])
+finally:
+    _EL3._MUTANT.clear()
+_eb = _EL3.judge(_np_el.ones((3, 3, 3), int), {1: {"E": [F(190), F(210)], "nu": [F("0.3")], "earned": True}},
+                 need_max=211, need_min=215)
+_eo = _EL3.judge(_np_el.ones((3, 3, 3), int), {1: {"E": [F(190), F(210)], "nu": [F("0.3")], "earned": True}},
+                 need_max=209, need_min=200)
+check("3D ELASTICITY (upper bound on the apparent modulus): homogeneous = E, laminate along x = Voigt 135, across x "
+      "(nu 0) = Reuss 103.70, each from above within 1e-9; a porous sample's bound does not rise under refinement; "
+      "the box E 190..210 bounded at 210 (the sabotage 'low end' gives 190 — below the box's true 210); verdicts: "
+      "<= 211 EARNED, >= 215 REFUTED, <= 209 and >= 200 OPEN (one-sided: no lower bound in version 1)",
+      200 <= _eh <= 200 * (1 + 1e-9) and 135 <= _ep <= 135 * (1 + 1e-9) and _rs <= _es <= _rs * (1 + 1e-9)
+      and _er[1] <= _er[0] and _em < 210 and _eb["verdict_max"] == "EARNED" and _eb["verdict_min"] == "REFUTED"
+      and _eo["verdict_max"] == "OPEN" and _eo["verdict_min"] == "OPEN", (_eh, _ep, _es, _er, _em, _eb, _eo))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")
