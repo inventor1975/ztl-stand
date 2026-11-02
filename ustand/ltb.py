@@ -120,6 +120,9 @@ def _resid_form(h, N, Mp):
             for i in range(4)]
 
 
+_MUTANT = {}       # TEST-ONLY sabotage switches (bench/night/verify_all.py sweep I); empty = the real bound
+
+
 def _correction(h, sec, lam, Nlo, Nhi, Mbar, Mp):
     """the per-sub-element PSD correction C (8 x 8) for the whole box, or None when it cannot be built.
     Inner energy >= 1/2 x' H x over x = (a, b) = (|eta_v''|, |eta_phi''|) (EI_w > 0) or (a, c) = (|eta_v''|,
@@ -131,6 +134,8 @@ def _correction(h, sec, lam, Nlo, Nhi, Mbar, Mp):
     lower bound 0.072 for an exact 0.905)."""
     from zenergy import _sqrt_up
     from .frame import _sqrt_down
+    if _MUTANT.get("no_corr"):                       # sabotage (tests only): the Hermite model alone
+        return [[F(0)] * 8 for _ in range(8)]
     EI, GJ, EIw, i02 = sec
     fx = _sub_forms(h)
     k1sq = h * h / (4 * PI2_LO)                      # >= (h / 2pi)^2

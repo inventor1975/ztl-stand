@@ -25,6 +25,9 @@ bound deliberately broken (MUTATION) — they must find violations, or the check
      scaled to lambda_ref in [1.3, 3]. G-MUTG3 drops frame3d's geometric stiffness, G-MUTM3 the end moment's N (G u).
   H  2D frames with AXIAL member loads on the columns (2026-11-02): lambda_low <= lambda_fine <= lambda_high;
      H-MUTA restores the old witness (N_mean G for a linear N — a false upper bound for a self-weight column).
+  I  one member's lateral-torsional / torsional critical factor (ustand.ltb, 2026-11-02) vs bench/night/ltb_ref.py:
+     the lower bound over a box below the fine mesh at points inside it, the witness above; I-MUTL drops the
+     continuum correction.
   A and B also check BOTH SIDES since 2026-11-02 (B: the 8-element mesh's end moments, with the geometric part): every proved end-moment interval must contain an INDEPENDENT numpy FE
      reference (K_E - P G rows, 64 elements) — the old stress check shared the stand's K_E-row formula
 Writes bench/night/REPORT.json and REPORT.md.
@@ -492,6 +495,54 @@ def _axial_check(seed, deck):
     return {"checked": n_chk, "violations": viol, "example": ex_}
 
 
+def ltb_case(seed):
+    """sweep I (2026-11-02): ustand.ltb's member critical factor against bench/night/ltb_ref.py (Gauss-quadrature
+    Hermite elements, 96 per member, nothing shared): random doubly symmetric sections (I_w = 0 sometimes), spans,
+    end moments, member-load parabolas, compressions; the lower bound over a BOX of moments and axial forces must stay
+    below the reference at random points inside it, the upper witness (point boxes) above. I-MUT drops the continuum
+    correction (two sub-elements, where the Hermite model alone is measurably above the continuum)."""
+    import ltb_ref as RL
+    from ustand import ltb as LTB
+    rng = random.Random(seed)
+    mutated = bool(LTB._MUTANT)
+    L = F(rng.randint(3, 10))
+    E = F(210 * 10 ** 9); G = E / F(26, 10)
+    Iz = F(rng.randint(2, 40), 10 ** 6); Iy = Iz * rng.randint(3, 15); A = F(rng.randint(3, 15), 1000)
+    J = F(rng.randint(5, 50), 10 ** 8); Iw = F(0) if rng.random() < 0.2 else F(rng.randint(1, 30), 10 ** 8)
+    sec = (E * Iz, G * J, E * Iw, (Iy + Iz) / A)
+    Mc = 10 ** 5
+    MA, MB = F(rng.randint(-Mc, Mc)), F(rng.randint(-Mc, Mc))
+    kap = F(rng.choice([0, rng.randint(-Mc, Mc)]))
+    Ne = float(E * Iz) * 9.8696 / float(L) ** 2
+    N = F(-int(rng.uniform(0, 0.5) * Ne)) if rng.random() < 0.7 else F(0)
+    box = rng.random() < 0.4
+    r = F(rng.randint(0, Mc // 20)) if box else F(0)
+    rn = F(int(abs(N) / 20)) if box else F(0)
+    m = 2 if mutated else rng.choice([2, 4, 8])
+    lo = LTB.alpha_lower(L, sec, (N - rn, min(N + rn, F(0))), (MA - r, MA + r), (MB - r, MB + r), kap, m=m,
+                         rel=F(1, 10 ** 5))
+    viol, n_chk, ex_ = 0, 0, None
+    pts = [(MA, MB, N)] + [(MA + r * F(rng.uniform(-1, 1)), MB + r * F(rng.uniform(-1, 1)),
+                            min(N + rn * F(rng.uniform(-1, 1)), F(0))) for _ in range(3 if box else 0)]
+    for a_, b_, n_ in pts:
+        ref = RL.alpha(float(L), *(float(x) for x in sec), float(a_), float(b_), float(kap), float(n_))
+        if ref is None or lo is None:
+            continue
+        n_chk += 1
+        if float(lo) > ref * (1 + 1e-6):
+            viol += 1
+            ex_ = ex_ or {"seed": seed, "lo": float(lo), "ref": ref, "m": m}
+    if not box and not mutated:
+        hi = LTB.alpha_upper(L, sec, MA, MB, kap, N, m=8)
+        ref = RL.alpha(float(L), *(float(x) for x in sec), float(MA), float(MB), float(kap), float(N))
+        if hi is not None and ref is not None:
+            n_chk += 1
+            if float(hi) < ref * (1 - 1e-4):          # the fine mesh is itself an upper approximation (1e-4)
+                viol += 1
+                ex_ = ex_ or {"seed": seed, "hi": float(hi), "ref": ref}
+    return {"checked": n_chk, "violations": viol, "example": ex_}
+
+
 def truss_case(seed):
     import numpy as np
     import scipy.sparse as sp
@@ -623,6 +674,10 @@ def mutate(kind=True):
     if kind == "axial":
         FRM._MUTANT["axial_mean"] = True
         return FRM._MUTANT.clear
+    if kind == "ltb":
+        from ustand import ltb as LTB
+        LTB._MUTANT["no_corr"] = True
+        return LTB._MUTANT.clear
     if kind in ("geo3", "geom3"):
         from ustand import frame3d as F3
         F3._MUTANT["no_geo" if kind == "geo3" else "no_geo_moment"] = True
@@ -641,7 +696,7 @@ DIST = []
 
 
 SWEEPS = {"A": (beam_column_case, 400), "B": (frame_case, 120), "C": (stability_case, 120), "D": (truss_case, 200),
-          "E": (general_case, 600), "F": (plate_case, 24), "G": (space_frame_case, 60), "H": (axial_case, 120)}
+          "E": (general_case, 600), "F": (plate_case, 24), "G": (space_frame_case, 60), "H": (axial_case, 120), "I": (ltb_case, 150)}
 
 
 def _run(args):
@@ -657,7 +712,8 @@ def _run(args):
         if restore:
             restore()
     r["seconds"] = time.time() - t0
-    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3", "axial": "-MUTA"}.get(mutated, "-MUT" if mutated else "")
+    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3", "axial": "-MUTA", "ltb": "-MUTL"}.get(
+        mutated, "-MUT" if mutated else "")
     return key + tag, r
 
 
@@ -677,6 +733,7 @@ def main(argv):
         tasks += [("G", 960000 + s, "geo3") for s in range(int(20 * scale))]
         tasks += [("G", 970000 + s, "geom3") for s in range(int(20 * scale))]
         tasks += [("H", 980000 + s, "axial") for s in range(int(60 * scale))]
+        tasks += [("I", 990000 + s, "ltb") for s in range(int(60 * scale))]
     random.Random(7).shuffle(tasks)
     t0 = time.time()
     agg = {}
