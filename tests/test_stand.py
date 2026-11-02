@@ -3053,5 +3053,30 @@ check("space frame STABILITY bracketed: proved lower (continuum) <= Euler's weak
       float(_sl3["lam_low"]) <= _ew <= float(_su3["lam_high"]) and float(_su3["lam_high"]) / float(_sl3["lam_low"]) < 1.0005,
       (float(_sl3["lam_low"]), _ew, float(_su3["lam_high"])))
 
+_ms3 = """ET, 1, BEAM4
+MP, EX, 1, 210e9
+MP, PRXY, 1, 0.3
+MP, EX, 2, 70e9
+MP, PRXY, 2, 0.33
+R, 1, 0.02, 2e-4, 1e-4, 0, 0, 0, 0, 1e-4
+R, 2, 0.01, 8e-5, 3e-5, 0, 0, 0, 0, 5e-5
+N, 1, 0, 0, 0
+N, 2, 3, 0, 0
+N, 3, 4, 0, 0
+MAT, 1
+REAL, 1
+E, 1, 2
+MAT, 2
+REAL, 2
+E, 2, 3
+D, 1, ALL, 0
+F, 3, FY, 1000
+"""
+_ms3x = F(1000) * (F(4) ** 3 - F(1) ** 3) / (3 * F(210 * 10 ** 9) * F(2, 10 ** 4)) + F(1000) * F(1) ** 3 / (3 * F(70 * 10 ** 9) * F(8, 10 ** 5))
+_ms3r = _F3.range_of(_ms3, "0", "U(3,Y)")["lo"]
+check("space frame, SEVERAL MATERIALS AND SECTIONS (MAT / REAL as ANSYS): a two-segment cantilever (steel, larger "
+      "section at the root; aluminium, smaller at the tip) — the tip deflection is EXACTLY P (L^3 - b^3)/(3 E1 I1) + "
+      "P b^3/(3 E2 I2)", _ms3r == _ms3x, (str(_ms3r), str(_ms3x)))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

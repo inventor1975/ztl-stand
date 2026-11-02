@@ -7,7 +7,8 @@ frame's energy path one dimension up.
 Deck (version 1):
     ET, 1, BEAM4
     MP, EX, 1, 210e9          MP, PRXY, 1, 0.3          (G = E / (2 (1 + nu)))
-    R, 1, AREA, IZZ, IYY, TKZ, TKY, THETA, ISTRN, IXX    (IXX = the torsion constant J; THETA 0 or 90 only)
+    R, id, AREA, IZZ, IYY, TKZ, TKY, THETA, ISTRN, IXX   (IXX = the torsion constant J; THETA 0 or 90 only)
+    MAT, id    REAL, id   (the current material and section for the E lines that follow)
     N, id, x, y, z            E, i, j
     D, n, UX|UY|UZ|ROTX|ROTY|ROTZ|ALL, 0                 F, n, FX|FY|FZ|MX|MY|MZ, value
 LOCAL AXES (stated, as ANSYS BEAM4 with THETA = 0): x' from I to J; y' horizontal (parallel to the global XY plane),
@@ -23,6 +24,8 @@ terms only H^2 appears, so the stiffness is exact for any orientation; version 1
 along the axes, or with a rational horizontal projection — every building grid), so that every output functional
 is exact too, and refuses otherwise.
 One part per element (E and G scale together with the modulus factor p in the box).
+MATERIALS AND SECTIONS: `MP, EX|PRXY, id, value` and `R, id, ...` define them by id; `MAT, id` and `REAL, id` set the
+current pair and every `E` takes it (as ANSYS; default 1).
 LOAD CASES: `LC, name` opens a case (F lines before any LC form case BASE); `LCOMB, name, case, factor, ...` builds a
 combination; with LCOMB lines the combinations are judged, otherwise the cases. A requirement must hold in EVERY one
 (one ZTL conjunction); all share one factorization and one proved lambda_min (ZTL certify_cases).
@@ -47,11 +50,15 @@ class Frame3DError(B.BrickError):
     pass
 
 
+from collections import namedtuple   # noqa: E402
+Props = namedtuple("Props", "ex nu area izz iyy tkz tky theta ixx")   # one member's material and section
+
+
 def read_deck(text):
     nodes, elems, supports = {}, [], set()
     cases, combos, cur = {"BASE": {}}, {}, "BASE"
     loads = cases["BASE"]
-    ex = nu = sec = None
+    mats, reals, cur_m, cur_r = {}, {}, 1, 1
     for ln, raw in enumerate(text.splitlines(), 1):
         line = raw.split("!")[0].strip()
         if not line or line.startswith("/"):
@@ -62,15 +69,13 @@ def read_deck(text):
             vals = [(_num(f[k], where) if len(f) > k and f[k] else F(0)) for k in (2, 3, 4)]
             nodes[int(f[1])] = tuple(vals)
         elif cmd == "E":
-            elems.append((int(f[1]), int(f[2])))
+            elems.append((int(f[1]), int(f[2]), cur_m, cur_r))
         elif cmd == "MP":
-            prop, v = f[1].upper(), _num(f[3], where)
+            prop, mid, v = f[1].upper(), int(f[2]) if f[2] else 1, _num(f[3], where)
             if prop == "EX":
-                if ex is not None and v != ex:
-                    raise Frame3DError(f"{where}: a second EX — one material only (version 1)")
-                ex = v
+                mats.setdefault(mid, {})["EX"] = v
             elif prop in ("PRXY", "NUXY"):
-                nu = v
+                mats.setdefault(mid, {})["PRXY"] = v
             else:
                 raise Frame3DError(f"{where}: MP {f[1]} — only EX and PRXY are read")
         elif cmd == "R":
@@ -82,10 +87,10 @@ def read_deck(text):
             ixx = _num(f[9], where)
             if theta not in (0, 90):
                 raise Frame3DError(f"{where}: THETA {theta} — 0 or 90 only (version 1: exact local axes)")
-            s = (area, izz, iyy, tkz, tky, theta, ixx)
-            if sec is not None and s != sec:
-                raise Frame3DError(f"{where}: a second real constant — one section only (version 1)")
-            sec = s
+            rid = int(f[1]) if f[1] else 1
+            if rid in reals and reals[rid] != (area, izz, iyy, tkz, tky, theta, ixx):
+                raise Frame3DError(f"{where}: real constant set {rid} given twice, differently")
+            reals[rid] = (area, izz, iyy, tkz, tky, theta, ixx)
         elif cmd == "F":
             d = f[2].upper()
             if d not in _F_OF:
@@ -112,19 +117,28 @@ def read_deck(text):
         elif cmd == "ET":
             if f[2].upper() not in ("BEAM4", "4"):
                 raise Frame3DError(f"{where}: element type {f[2]} — only BEAM4 (3D beam)")
-        elif cmd in ("MAT", "REAL", "TYPE"):
+        elif cmd == "MAT":
+            cur_m = int(f[1])
+        elif cmd == "REAL":
+            cur_r = int(f[1])
+        elif cmd == "TYPE":
             if len(f) > 1 and f[1] not in ("1", ""):
-                raise Frame3DError(f"{where}: {cmd},{f[1]} — one material and one real constant only")
+                raise Frame3DError(f"{where}: TYPE,{f[1]} — one element type (BEAM4) only")
         else:
             raise Frame3DError(f"{where}: {f[0]} — not read (only N E MP R F D ET MAT REAL TYPE LC LCOMB)")
     if not nodes or not elems:
         raise Frame3DError("no nodes or no elements")
-    if ex is None or sec is None or nu is None:
-        raise Frame3DError("MP,EX, MP,PRXY and R are needed (modulus, Poisson ratio, section)")
-    for i, j in elems:
+    props = {}
+    for k, (i, j, m, r) in enumerate(elems, 1):
         for n in (i, j):
             if n not in nodes:
                 raise Frame3DError(f"element {i}-{j}: node {n} does not exist")
+        if m not in mats or "EX" not in mats[m] or "PRXY" not in mats[m]:
+            raise Frame3DError(f"element {k}: material {m} needs MP,EX and MP,PRXY")
+        if r not in reals:
+            raise Frame3DError(f"element {k}: real constant set {r} is not defined (R, {r}, ...)")
+        props[k] = Props(mats[m]["EX"], mats[m]["PRXY"], *reals[r])
+    elems = [(i, j) for i, j, _, _ in elems]
     if not cases["BASE"] and len(cases) > 1:
         del cases["BASE"]
     for name, terms in combos.items():
@@ -141,7 +155,7 @@ def read_deck(text):
             judged[name] = tot
     else:
         judged = cases
-    return nodes, elems, judged, supports, ex, nu, sec
+    return nodes, elems, judged, supports, props
 
 
 def _axes(pi, pj, theta):
@@ -171,14 +185,16 @@ def _axes(pi, pj, theta):
 
 
 def energy_system(text, tol):
-    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    nodes, elems, loads, supports, props = read_deck(text)
     t = F(0) if tol in (None, "0", 0) else tolerance(tol) if isinstance(tol, str) else F(tol)
-    G = ex / (2 * (1 + nu))
     free = [(n, d) for n in sorted(nodes) for d in DIRS if (n, d) not in supports]
     dof = {nd: k for k, nd in enumerate(free)}
     parts, emap = [], {}
     for k, (i, j) in enumerate(elems, 1):
-        L, xp, yp, zp = _axes(nodes[i], nodes[j], theta)
+        pk = props[k]
+        ex, area, izz, iyy, ixx = pk.ex, pk.area, pk.izz, pk.iyy, pk.ixx
+        G = ex / (2 * (1 + pk.nu))
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], pk.theta)
 
         def row(pairs):
             g = {}
@@ -202,7 +218,7 @@ def energy_system(text, tol):
         cz = row(proj(i, zp, True) + proj(j, zp, True) + sc(proj(j, yp, False), -2 / L) + sc(proj(i, yp, False), 2 / L))
         by = row(proj(i, yp, True) + neg(proj(j, yp, True)))
         cy = row(proj(i, yp, True) + proj(j, yp, True) + sc(proj(j, zp, False), 2 / L) + sc(proj(i, zp, False), -2 / L))
-        emap[k] = {"part": len(parts), "L": L, "a": a, "t": tt, "bz": bz, "cz": cz, "by": by, "cy": cy}
+        emap[k] = {"part": len(parts), "L": L, "a": a, "t": tt, "bz": bz, "cz": cz, "by": by, "cy": cy, "p": pk}
         parts.append({"t": t, "terms": [(ex * area / L, a), (G * ixx / L, tt), (ex * izz / L, bz),
                                         (3 * ex * izz / L, cz), (ex * iyy / L, by), (3 * ex * iyy / L, cy)]})
     fs = {}
@@ -306,14 +322,14 @@ def stresses(text, tol, ks=None):
     case (first order). sigma = E p_k (g.u): an output scaled by the element's own modulus factor (ZTL)."""
     from . import judge_ztl  # noqa: F401
     import zenergy as ZE
-    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
-    if not tky or not tkz:
-        raise Frame3DError("member stresses need TKY and TKZ (the section's depths along y' and z')")
     parts, fs, dof, emap = energy_system(text, tol)
     ks = sorted(emap) if ks is None else ks
     es, idx = [], []
     for k in ks:
-        for end, corner, g in fibre_vectors(emap, k, tky, tkz):
+        pk = emap[k]["p"]
+        if not pk.tky or not pk.tkz:
+            raise Frame3DError(f"member {k}: stresses need TKY and TKZ (the section's depths along y' and z')")
+        for end, corner, g in fibre_vectors(emap, k, pk.tky, pk.tkz):
             e = [F(0)] * len(dof)
             for i, v in g.items():
                 e[i] = v
@@ -326,7 +342,7 @@ def stresses(text, tol, ks=None):
     for c, rc in zip(names, rs):
         per = {}
         for k, r in zip(idx, rc):
-            lo, hi = ex * r["lo"], ex * r["hi"]
+            lo, hi = emap[k]["p"].ex * r["lo"], emap[k]["p"].ex * r["hi"]
             mx_hi = max(abs(lo), abs(hi))
             mx_lo = F(0) if lo <= 0 <= hi else min(abs(lo), abs(hi))
             a, b = per.get(k, (F(0), F(0)))
@@ -394,7 +410,7 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     import numpy as np
     import scipy.sparse as sp
     import scipy.sparse.linalg as sla
-    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
     if len(names) > 1:
@@ -408,20 +424,21 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     rs = ZE.certify_many(parts, f, [dict(emap[k]["a"]) for k in ks], n, scale=[emap[k]["part"] for k in ks])
     Nlo, Nhi, Nnom = {}, {}, {}
     for k, r in zip(ks, rs):
-        fac = ex * area / emap[k]["L"]
+        fac = props[k].ex * props[k].area / emap[k]["L"]
         Nlo[k] = min(fac * r["lo"], fac * r["hi"])
         Nhi[k] = max(fac * r["lo"], fac * r["hi"])
         Nnom[k] = fac * r["nominal"]
     base = {"case": names[0], "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
     if all(v >= 0 for v in Nlo.values()):
         return dict(base, lam_low=None, why="no compressed member: no buckling under these loads")
-    Elo = (1 - T) * ex
     K0 = ZE.matrix(parts, n)
     forms = {}                                      # (k, plane) -> (G, Q, B, kk)
     for k, (i, j) in enumerate(elems, 1):
         if k not in Nlo:
             continue
-        L, xp, yp, zp = _axes(nodes[i], nodes[j], theta)
+        pk = props[k]
+        Elo, izz, iyy = (1 - T) * pk.ex, pk.izz, pk.iyy
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], pk.theta)
         Gloc = [[F(v) / (30 * L) for v in r] for r in [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L],
                                                         [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
         Bloc = [[F(v) / L for v in r] for r in [[1, 0, -1, 0], [0, 0, 0, 0], [-1, 0, 1, 0], [0, 0, 0, 0]]]
@@ -431,7 +448,7 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
                 (L * L / (4 * PI2_LO * Elo * I),)
     # nominal estimate: K0 v = -lam K_G(N_nom) v
     Gn = {}
-    for (k, plane), (G, Q, B, kk) in forms.items():
+    for (k, plane), (G, Q, Bf, kk) in forms.items():
         for key, v in G.items():
             Gn[key] = Gn.get(key, F(0)) + Nnom[k] * v
     A = ZE._float_matrix(K0, n)
@@ -474,7 +491,7 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     def proved(lam):
         a0 = _fl(1 - T, False)
         ix, vv, av = [K0i], [a0 * K0v], [abs(a0) * np.abs(K0v)]
-        for (k, plane), (G, Q, B, kk) in forms.items():
+        for (k, plane), (G, Q, Bf, kk) in forms.items():
             (Gi, Gv), (Qi, Qv), (Bi, Bv) = arrs[(k, plane)]
             if Nlo[k] < 0:
                 P = -lam * Nlo[k]
@@ -544,7 +561,7 @@ def second_order_disp(text, tol, targets, case=None):
     from . import judge_ztl  # noqa: F401
     from .frame import PI2_LO, _psd_terms, _dy
     import zenergy as ZE
-    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
     if len(names) > 1:
@@ -556,13 +573,14 @@ def second_order_disp(text, tol, targets, case=None):
     Nlo, Nhi = st["Nlo"], st["Nhi"]
     n = len(dof)
     T = max((p["t"] for p in parts), default=F(0))
-    Elo = (1 - T) * ex
     A0 = ZE.matrix(parts, n)
     gparts, cterms, cqd = [], [], {}
     for k, (i, j) in enumerate(elems, 1):
         if k not in Nlo:
             continue
-        L, xp, yp, zp = _axes(nodes[i], nodes[j], theta)
+        pk = props[k]
+        Elo, izz, iyy = (1 - T) * pk.ex, pk.izz, pk.iyy
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], pk.theta)
         Gloc = [[F(v) / (30 * L) for v in r] for r in [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L],
                                                         [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
         Bloc = [[F(v) / L for v in r] for r in [[1, 0, -1, 0], [0, 0, 0, 0], [-1, 0, 1, 0], [0, 0, 0, 0]]]
@@ -572,14 +590,14 @@ def second_order_disp(text, tol, targets, case=None):
         rad = _dy((Nhi[k] - Nlo[k]) / 2 + abs(mid0 - mid), True)
         Gt = []
         P = max(F(0), -Nlo[k])
-        for (vax, rax, sg, I) in ((yp, zp, 1, izz), (zp, yp, -1, iyy)):
+        for (plane, vax, rax, sg, I) in (("y", yp, zp, 1, izz), ("z", zp, yp, -1, iyy)):
             terms = [(d, _glob3(i, j, vax, rax, sg, dof, l)) for d, l in _psd_terms(Gloc)]
             Gt += [(d, g) for d, g in terms if g]
             kk = L * L / (4 * PI2_LO * Elo * I)
             if P * kk >= 1:
                 return {names[0]: {"verdict": "OPEN", "why": f"element {k} could buckle between its nodes: subdivide"}}
             cq = max(P * P * kk / (1 - P * kk), max(F(0), Nhi[k]))
-            cqd[(k, "y" if I is izz and vax is yp else "z")] = cq
+            cqd[(k, plane)] = cq
             if cq:
                 for d, l in _psd_terms(Qloc):
                     g = _glob3(i, j, vax, rax, sg, dof, l)
@@ -622,9 +640,6 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
     from .frame import _sqrt_down
     import zenergy as ZE
     from znumjudge import parse_quantities, judge_sheet_claim
-    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
-    if not tky or not tkz:
-        raise Frame3DError("member stresses need TKY and TKZ")
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
     ks = sorted(emap) if ks is None else ks
@@ -642,6 +657,9 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
         for k in ks:
             m = emap[k]
             L = m["L"]
+            area, izz, iyy = m["p"].area, m["p"].izz, m["p"].iyy
+            if not m["p"].tky or not m["p"].tkz:
+                raise Frame3DError(f"member {k}: stresses need TKY and TKZ")
             outs.append(vec({i_: area / L * v for i_, v in m["a"].items()})); items.append((k, "N"))
             for plane, (bb, cc, I) in (("y", ("bz", "cz", izz)), ("z", ("by", "cy", iyy))):
                 for end, sb in (("I", 1), ("J", -1)):
@@ -661,10 +679,13 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
         unC = ZE._sqrt_up(th * max(fu_hi, F(0)) / (1 - th))
         rng = {}
         for (k, what), r in zip(items, rs[:-1]):
+            ex = emap[k]["p"].ex
             rng[(k, what)] = (min(ex * (1 - T) * r["lo"], ex * (1 + T) * r["lo"]),
                               max(ex * (1 - T) * r["hi"], ex * (1 + T) * r["hi"]))
         for k in ks:
             L = emap[k]["L"]
+            pk = emap[k]["p"]
+            ex, area, izz, iyy, tky, tkz = pk.ex, pk.area, pk.izz, pk.iyy, pk.tky, pk.tkz
             Nl, Nh = rng[(k, "N")]
             P = max(F(0), -Nl)
             mmax, Mends = {}, {}
@@ -733,7 +754,7 @@ def stability_upper(text, case=None):
     import zenergy as ZE
     import numpy as np
     import scipy.sparse.linalg as sla
-    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, "0")
     c = list(fs)[0] if case is None else case
     f = fs[c]
@@ -743,14 +764,14 @@ def stability_upper(text, case=None):
     encl = ZE.enclose_linear(nom, f, n, [emap[k]["a"] for k in ks])
     Nhi, Nmid = {}, {}
     for k, (lo, hi) in zip(ks, encl):
-        fac = ex * area / emap[k]["L"]
+        fac = props[k].ex * props[k].area / emap[k]["L"]
         Nhi[k], Nmid[k] = fac * hi, fac * (lo + hi) / 2
     K0 = ZE.matrix(nom, n)
     Ge, Gn = {}, {}
     for k, (i, j) in enumerate(elems, 1):
         if k not in Nhi:
             continue
-        L, xp, yp, zp = _axes(nodes[i], nodes[j], theta)
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], props[k].theta)
         Gloc = [[F(v) / (30 * L) for v in r] for r in [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L],
                                                         [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
         G = {}
@@ -794,7 +815,7 @@ def judge_buckling(text, tol, fy, curve_y, curve_z, gamma_m1=F(1), case=None):
     above by stability_upper's witness, |N| from below); OPEN otherwise.
     NOT here: 5.3.2 sway imperfections, torsional / flexural-torsional / lateral-torsional buckling, 6.3.3."""
     from .frame import CURVES, _curve_premises, _sqrt_down, _g_lower
-    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    nodes, elems, loads, supports, props = read_deck(text)
     for cv in (curve_y, curve_z):
         if cv not in CURVES:
             raise Frame3DError(f"{cv!r}: a buckling curve is one of {', '.join(CURVES)}")
@@ -814,6 +835,7 @@ def judge_buckling(text, tol, fy, curve_y, curve_z, gamma_m1=F(1), case=None):
             if not lam or lam <= 0:
                 rows.append({"case": c, "member": k, "N_max": _show(nhi, 1), "verdict": "OPEN"})
                 continue
+            area = props[k].area
             lb_lo = _sqrt_down(area * F(fy) / (lam * nhi))
             H = lam * _g_lower(lb_lo, a)
             u = F(gamma_m1) / H if H > 0 else None
