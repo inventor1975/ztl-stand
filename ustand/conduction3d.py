@@ -67,11 +67,11 @@ class Mesh:
             v1 = v0 + self.off[a]
             v2 = v1 + self.off[b]
             v3 = v2 + self.off[c]
-            tv.append(np.stack([v0, v1, v2, v3], axis=1))
-            tvox.append(np.arange(len(base)))
+            tv.append(np.stack([v0, v1, v2, v3], axis=1).astype(np.int32))
+            tvox.append(np.arange(len(base), dtype=np.int32))
             p = np.zeros((4, 3), dtype=np.int64)
             p[1] = EYE[a]; p[2] = EYE[a] + EYE[b]; p[3] = EYE[a] + EYE[b] + EYE[c]
-            tcoord.append(np.broadcast_to(self.vox[:, None, :] + p[None, :, :], (len(base), 4, 3)))
+            tcoord.append((self.vox[:, None, :] + p[None, :, :]).astype(np.int16))
         self.tv = np.concatenate(tv)                     # (nt, 4) node ids, Kuhn order
         self.tvox = np.concatenate(tvox)                 # voxel index of each tet
         self.tp = np.concatenate(tcoord)                 # (nt, 4, 3) integer vertex coordinates
@@ -120,19 +120,23 @@ def _faces(M):
     """Global faces: id per (tet, local face f = the face opposite local vertex f), the outward sign of the global
     orientation, the global area normal (integer x 2), and each face's two tets."""
     nt = M.nt
-    tri = np.stack([np.sort(np.delete(M.tv, f, axis=1), axis=1) for f in range(4)], axis=1)   # (nt, 4, 3)
+    tri = np.stack([np.sort(np.delete(M.tv, f, axis=1), axis=1) for f in range(4)], axis=1)   # (nt, 4, 3) int32
     key = (tri[..., 0].astype(np.int64) * M.nn + tri[..., 1]) * M.nn + tri[..., 2]
     uniq, inv = np.unique(key.ravel(), return_inverse=True)
-    fid = inv.reshape(nt, 4)
+    del key
+    fid = inv.reshape(nt, 4).astype(np.int32)
+    del inv
     nf = len(uniq)
+    del uniq
     # global orientation: n = (B - A) x (C - A) for the sorted vertices (A < B < C)
     def coords(n):
-        return np.stack([M.X[n], M.Y[n], M.Z[n]], axis=-1).astype(np.int64)
+        return np.stack([M.X[n], M.Y[n], M.Z[n]], axis=-1).astype(np.int32)
     A_, B_, C_ = coords(tri[..., 0]), coords(tri[..., 1]), coords(tri[..., 2])
     nrm2 = np.cross(B_ - A_, C_ - A_)                                       # twice the area normal
     opp = M.tp                                                              # vertex f opposite face f
     cen3 = A_ + B_ + C_                                                     # 3 x face centroid
-    out = np.sign(np.einsum("tfk,tfk->tf", nrm2, cen3 - 3 * opp)).astype(np.int64)   # +1: global normal outward
+    out = np.sign(np.einsum("tfk,tfk->tf", nrm2, cen3 - 3 * opp.astype(np.int32))).astype(np.int8)   # +1: outward
+    del cen3
     first = np.full(nf, -1); second = np.full(nf, -1)
     flat_t = np.repeat(np.arange(nt), 4)
     order = np.argsort(fid.ravel(), kind="stable")
@@ -143,8 +147,9 @@ def _faces(M):
     has2 = np.r_[np.diff(sf) == 0, False]
     second[sf[has2]] = st[np.where(has2)[0] + 1]
     # the global normal per face (take it from the first tet's copy)
-    gn = np.zeros((nf, 3), dtype=np.int64)
+    gn = np.zeros((nf, 3), dtype=np.int32)
     gn[fid.ravel()] = nrm2.reshape(-1, 3)
+    del nrm2
     # boundary face classes
     x0 = (A_[..., 0] == 0) & (B_[..., 0] == 0) & (C_[..., 0] == 0)
     x1 = (A_[..., 0] == M.nx) & (B_[..., 0] == M.nx) & (C_[..., 0] == M.nx)
@@ -278,11 +283,12 @@ def _exact_and_energy(M, sig, Fc, q, open_f, nI, t1, t2, elec, te):
             continue
         f = pface[t] if parent[t] >= 0 else root_face[t]
         loc = int(np.argmax(fid[t] == f))
-        Q[f] -= out[t, loc] * rt                          # t's outward flux through f drops by rt
+        so = int(out[t, loc])                            # int8 table: never multiply it unconverted (NumPy 2 keeps int8)
+        Q[f] -= so * int(rt)                              # t's outward flux through f drops by rt
         R[t] = 0
         if parent[t] >= 0:
             ploc = int(np.argmax(fid[parent[t]] == f))
-            R[parent[t]] -= out[parent[t], ploc] * out[t, loc] * rt
+            R[parent[t]] -= int(out[parent[t], ploc]) * so * int(rt)
     # exact checks: conservation everywhere, zero on closed faces
     Rchk = np.zeros(M.nt, dtype=np.int64)
     for f in range(4):
@@ -345,26 +351,32 @@ def _mixed_flux(M, sig, Fc):
         P = P - P.mean(axis=0)
         G = np.linalg.inv(P.T @ P)
         Bs.append(P @ G @ G @ P.T)
-    Bt = np.stack(Bs)[np.arange(M.nt) // nvox]                     # (nt, 4, 4)
-    K = (0.75 * sig)[:, None, None] * Bt                             # A_T^+ = (3 s / 4) B
     lamD = np.full(nf, np.nan)
     lamD[Fc["x0"]] = 0.0
     lamD[Fc["x1"]] = -1.0
     dir_ = ~np.isnan(lamD)
     free = np.where(~dir_)[0]
-    col = np.full(nf, -1); col[free] = np.arange(len(free))
+    col = np.full(nf, -1, dtype=np.int64); col[free] = np.arange(len(free))
     rows, cols, vals = [], [], []
     rhs = np.zeros(len(free))
-    Ka = K[act]; fa = fid[act]
-    for a in range(4):
-        ca = col[fa[:, a]]
-        for b in range(4):
-            cb = col[fa[:, b]]
+    # one Kuhn type at a time (2026-11-02: the full (nt, 4, 4) arrays were the memory peak)
+    for ty in range(6):
+        blk = np.arange(ty * nvox, (ty + 1) * nvox)
+        blk = blk[cond[blk]]
+        if not len(blk):
+            continue
+        sg = 0.75 * sig[blk]
+        fa = fid[blk]
+        for a in range(4):
+            ca = col[fa[:, a]]
             okr = ca >= 0
-            both = okr & (cb >= 0)
-            rows.append(ca[both]); cols.append(cb[both]); vals.append(Ka[both, a, b])
-            dirb = okr & (cb < 0)
-            np.add.at(rhs, ca[dirb], -Ka[dirb, a, b] * lamD[fa[dirb, b]])
+            for b in range(4):
+                kab = sg * Bs[ty][a, b]
+                cb = col[fa[:, b]]
+                both = okr & (cb >= 0)
+                rows.append(ca[both].astype(np.int32)); cols.append(cb[both].astype(np.int32)); vals.append(kab[both])
+                dirb = okr & (cb < 0)
+                np.add.at(rhs, ca[dirb], -kab[dirb] * lamD[fa[dirb, b]])
     S = sp.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(len(free), len(free)))
     dg = S.diagonal().copy()
     S = S + sp.diags(np.where(dg == 0, 1.0, 0.0))
@@ -372,12 +384,18 @@ def _mixed_flux(M, sig, Fc):
     lam_f = _spd_solve(S, rhs, dg)
     lam = np.where(dir_, lamD, 0.0)
     lam[free] = lam_f
-    Qloc = np.einsum("tab,tb->ta", K, lam[fid])                     # outward fluxes per tet
-    # one number per face, in the global orientation: the mean of the two tets' (sign-corrected) values
+    # outward fluxes per tet, one Kuhn type at a time; one number per face in the global orientation: the mean of
+    # the two tets' (sign-corrected) values
     qn = np.zeros(nf); cnt = np.zeros(nf)
-    for f in range(4):
-        np.add.at(qn, fid[act, f], out[act, f] * Qloc[act, f])
-        np.add.at(cnt, fid[act, f], 1.0)
+    for ty in range(6):
+        blk = np.arange(ty * nvox, (ty + 1) * nvox)
+        blk = blk[cond[blk]]
+        if not len(blk):
+            continue
+        Ql = (0.75 * sig[blk])[:, None] * (lam[fid[blk]] @ Bs[ty].T)
+        for f in range(4):
+            np.add.at(qn, fid[blk, f], out[blk, f] * Ql[:, f])
+            np.add.at(cnt, fid[blk, f], 1.0)
     return np.where(cnt > 0, qn / np.maximum(cnt, 1), 0.0)
 
 
