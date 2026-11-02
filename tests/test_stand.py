@@ -3091,13 +3091,27 @@ _rl = [(_F3.range_of(_bm3 + "D, 3, ALL, 0\nRELEASE, 1, I, MZ, MY\nRELEASE, 2, J,
                      "QLOAD, 2, FZ, -500\n", "0", "U(2,Z)")["lo"], F(-500) * 5 * 256 / (384 * _E3x * _Iy3x))]
 _qref = False
 try:
-    _F3.stresses(_bm3 + "QLOAD, 1, FY, -500\n", "0")
+    _F3.stability_lower(_bm3 + "QLOAD, 1, FY, -500\n", "0")
 except _F3.Frame3DError:
     _qref = True
 check("space frame END RELEASES and MEMBER LOADS: hinges by RELEASE (the member's own end rotation) and QLOAD's "
       "consistent nodal loads give EXACTLY P L^3/(48EI) (pinned, point load), q L^4/(8EI) (cantilever), q L^4/(384EI) "
-      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); member stresses with QLOAD refuse (not yet), said",
+      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); stability with QLOAD refuses (not yet), said",
       all(a == b for a, b in _rl) and _qref, [(str(a), str(b)) for a, b in _rl])
+
+_qs3 = []
+for _ne in (1, 4):
+    _qd = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0.1, 0.2, 0, 0, 5e-5\n"
+           + "".join(f"N, {k + 1}, {F(4 * k, _ne)}, 0, 0\n" for k in range(_ne + 1))
+           + "".join(f"E, {k + 1}, {k + 2}\n" for k in range(_ne)) + "D, 1, ALL, 0\n"
+           + "".join(f"QLOAD, {k + 1}, FY, -500\n" for k in range(_ne)))
+    _qst = _F3.stresses(_qd, "0")["BASE"]
+    _qs3.append((max(v[0] for v in _qst.values()), max(v[1] for v in _qst.values())))
+_qx3 = F(500) * 16 / 2 * F(1, 10) / F(8, 10 ** 5)
+check("space frame STRESSES WITH MEMBER LOADS: a cantilever under a uniform load — the exact root stress "
+      "(q L^2/2)(TKY/2)/I_z = 5 MPa lies in the proved max |sigma| (Hermite end moments + the clamped beam's own "
+      "moment <= |w| L^2/12), and the lower bound closes as the member is subdivided (1 -> 4 elements)",
+      all(lo <= _qx3 <= hi for lo, hi in _qs3) and _qs3[1][0] > _qs3[0][0], [(float(a), float(b)) for a, b in _qs3])
 
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

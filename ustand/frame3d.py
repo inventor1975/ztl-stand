@@ -404,7 +404,8 @@ def stresses(text, tol, ks=None):
     case (first order). sigma = E p_k (g.u): an output scaled by the element's own modulus factor (ZTL)."""
     from . import judge_ztl  # noqa: F401
     import zenergy as ZE
-    _no_qload(text, "member stresses")
+    if _has_qload(text):
+        return _stresses_q(text, tol, ks)
     parts, fs, dof, emap = energy_system(text, tol)
     ks = sorted(emap) if ks is None else ks
     es, idx = [], []
@@ -430,6 +431,90 @@ def stresses(text, tol, ks=None):
             mx_lo = F(0) if lo <= 0 <= hi else min(abs(lo), abs(hi))
             a, b = per.get(k, (F(0), F(0)))
             per[k] = (max(a, mx_lo), max(b, mx_hi))
+        out[c] = per
+    return out
+
+
+def _qloads(text):
+    """{case: {elem: (q_x, q_y, q_z)}} — the uniform member loads of every judged case / combination."""
+    nodes, elems, loads, supports, props = read_deck(text)
+    out = {}
+    for c, ld in loads.items():
+        per = {}
+        for (n, d), v in ld.items():
+            if isinstance(n, tuple) and n[0] == "Q":
+                q = list(per.get(n[1], (F(0), F(0), F(0))))
+                q["XYZ".index(d)] += v
+                per[n[1]] = tuple(q)
+        out[c] = per
+    return out
+
+
+def _stresses_q(text, tol, ks=None):
+    """Member stresses WITH uniform member loads (first order): the member's true moment is the Hermite part (linear
+    between the end moments M = E p (I/L)(b +- 3c).u) plus the clamped-clamped beam's own moment under the load, whose
+    size never exceeds |w| L^2/12; so per plane max |M| <= max |M_end| + |w| L^2/12 and, at the ends,
+    |M| >= |M_end| - |w| L^2/12 (no sign convention needed); the axial force |N(x)| <= |N_FE| + |q_axial| L/2. The
+    corner bound |N|/A + M_z,max (TKY/2)/I_z + M_y,max (TKZ/2)/I_y (planes' maxima added: safe)."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    parts, fs, dof, emap = energy_system(text, tol)
+    qs = _qloads(text)
+    ks = sorted(emap) if ks is None else ks
+    n = len(dof)
+    es, items, scale = [], [], []
+    for k in ks:
+        m = emap[k]
+        pk, L = m["p"], m["L"]
+        if not pk.tky or not pk.tkz:
+            raise Frame3DError(f"member {k}: stresses need TKY and TKZ")
+        def vec(g):
+            e = [F(0)] * n
+            for i_, v in g.items():
+                e[i_] = v
+            return e
+        es.append(vec({i_: pk.area / L * v for i_, v in m["a"].items()})); items.append((k, "N")); scale.append(m["part"])
+        for plane, (bb, cc, I) in (("y", ("bz", "cz", pk.izz)), ("z", ("by", "cy", pk.iyy))):
+            for end, sb in (("I", 1), ("J", -1)):
+                g = {}
+                for i_, v in m[bb].items():
+                    g[i_] = g.get(i_, F(0)) + I / L * v
+                for i_, v in m[cc].items():
+                    g[i_] = g.get(i_, F(0)) + I / L * 3 * sb * v
+                es.append(vec(g)); items.append((k, plane + end)); scale.append(m["part"])
+    names = list(fs)
+    rs = ZE.certify_cases(parts, [fs[c] for c in names], es, n, scale=scale)
+    out = {}
+    for c, rc in zip(names, rs):
+        rng = {}
+        for (k, what), r in zip(items, rc):
+            ex = emap[k]["p"].ex
+            rng[(k, what)] = (ex * r["lo"], ex * r["hi"])
+        per = {}
+        for k in ks:
+            m = emap[k]
+            pk, L = m["p"], m["L"]
+            xp, yp, zp = m["axes"]
+            q = qs[c].get(k, (F(0), F(0), F(0)))
+            qa = abs(sum(q[t] * xp[t] for t in range(3)))
+            wy = abs(sum(q[t] * yp[t] for t in range(3)))
+            wz = abs(sum(q[t] * zp[t] for t in range(3)))
+            Nl, Nh = rng[(k, "N")]
+            nmax = max(abs(Nl), abs(Nh)) + qa * L / 2
+            mx, mlo = {}, {}
+            for plane, w in (("y", wy), ("z", wz)):
+                ends = [rng[(k, plane + e)] for e in ("I", "J")]
+                mend = max(max(abs(a), abs(b)) for a, b in ends)
+                mx[plane] = mend + w * L * L / 12
+                mlo[plane] = max(max(F(0), min(abs(a), abs(b)) if not (a <= 0 <= b) else F(0)) for a, b in ends) \
+                    - w * L * L / 12
+            hi = nmax / pk.area + mx["y"] * (pk.tky / 2) / pk.izz + mx["z"] * (pk.tkz / 2) / pk.iyy
+            # a proved lower bound of max |sigma|: one plane's end moment alone, the other plane and N ignored
+            # would not bound the corner; keep it simple and safe: the larger single-plane bending stress minus |N|/A
+            nmin = F(0) if Nl <= 0 <= Nh else min(abs(Nl), abs(Nh))
+            lo = max(F(0), max(mlo["y"] * (pk.tky / 2) / pk.izz, mlo["z"] * (pk.tkz / 2) / pk.iyy) - nmax / pk.area,
+                     nmin / pk.area - qa * L / 2 / pk.area if nmin else F(0))
+            per[k] = (lo, hi)
         out[c] = per
     return out
 
