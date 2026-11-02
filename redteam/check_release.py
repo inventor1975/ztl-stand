@@ -66,4 +66,13 @@ closed = 5000 / (2 * Pc * k) * (math.tan(k * 6) - k * 6)        # pin-pin beam-c
 out["c_second_order_disp"] = {"deck": "redteam/decks/rel-strut-second-order.txt", "proved": [plo, phi_],
                               "reference_n400": float(v[len(v) // 2]), "reference_n800": float(v2[len(v2) // 2]),
                               "closed_form": closed, "upper_end_below_truth_by": closed / phi_ - 1}
+# (d) the same strut's member stress: the PROVED LOWER bound of max |sigma| lies above the true maximum, so a limit
+#     between them gives a FALSE REFUTED
+rs = F3.second_order_stress(t, "0", 91.7e6)
+Mmid = 5000 / (2 * k) * math.tan(k * 6)
+true_sig = Pc / A + Mmid / (8e-5 / 0.1)
+out["d_second_order_stress"] = {"deck": "redteam/decks/rel-strut-second-order.txt", "limit": 91.7e6,
+                                "verdict": rs["verdict"], "proved_sigma_abs": rs["worst"]["sigma_abs"],
+                                "true_max_sigma_closed_form": true_sig, "true_verdict": "passes" if true_sig <= 91.7e6
+                                else "fails"}
 print(json.dumps(out, indent=1, default=str))
