@@ -3043,9 +3043,15 @@ _uk = 10000 / (1 / (_phk + _math.sqrt(_phk ** 2 - _lbk ** 2)) * 0.01 * 235e6)
 _ua = float(F(_bk3a["utilisation_max"].split()[0]))
 check("space frame EN 6.3.1: the cantilever column (weak axis, curve b the worse of a/b) — the proved utilisation "
       "at 10 kN lies just above the hand value N_Ed/(chi A fy) = 0.013188 (within 0.1 %, EARNED); at 800 kN it is "
-      "1.055 and the check does not pass (OPEN: version 1 has no refutation witness)",
-      _bk3a["verdict"] == "EARNED" and _uk <= _ua <= _uk * 1.001 and _bk3b["verdict"] == "OPEN",
+      "1.055 and the check is REFUTED at the nominal moduli (alpha_cr from above by the witness)",
+      _bk3a["verdict"] == "EARNED" and _uk <= _ua <= _uk * 1.001 and _bk3b["verdict"] == "REFUTED",
       (_ua, _uk, _bk3a["verdict"], _bk3b["verdict"]))
+_su3 = _F3.stability_upper(_bk3 + "F, 17, FZ, -10000\n")
+_sl3 = _F3.stability_lower(_bk3 + "F, 17, FZ, -10000\n", "0")
+check("space frame STABILITY bracketed: proved lower (continuum) <= Euler's weak-axis load <= proved upper (the "
+      "Hermite mode as a witness), the bracket within 0.05 %",
+      float(_sl3["lam_low"]) <= _ew <= float(_su3["lam_high"]) and float(_su3["lam_high"]) / float(_sl3["lam_low"]) < 1.0005,
+      (float(_sl3["lam_low"]), _ew, float(_su3["lam_high"])))
 
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

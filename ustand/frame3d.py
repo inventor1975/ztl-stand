@@ -721,13 +721,77 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                     "torsional / flexural-torsional buckling, no member loads"}
 
 
+_SU = {}
+
+
+def stability_upper(text, case=None):
+    """A proved UPPER bound on the critical factor at the NOMINAL moduli by a WITNESS (the 2D frame's
+    stability_upper, both planes): the float buckling mode x (dyadic, exact from here on) with
+    x'K0x + lam sum_e N_hi,e x'(G_y + G_z)_e x <= 0 — the Hermite field is an admissible continuum field, N_hi >= N
+    proved by one solve (ZTL enclose_linear), x'G x >= 0 — so lam_cr <= lam (ZTL lean ZStability `witness_upper`)."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    import numpy as np
+    import scipy.sparse.linalg as sla
+    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    parts, fs, dof, emap = energy_system(text, "0")
+    c = list(fs)[0] if case is None else case
+    f = fs[c]
+    n = len(dof)
+    nom = [{"t": 0, "terms": p["terms"]} for p in parts]
+    ks = [k for k in emap if emap[k]["a"]]
+    encl = ZE.enclose_linear(nom, f, n, [emap[k]["a"] for k in ks])
+    Nhi, Nmid = {}, {}
+    for k, (lo, hi) in zip(ks, encl):
+        fac = ex * area / emap[k]["L"]
+        Nhi[k], Nmid[k] = fac * hi, fac * (lo + hi) / 2
+    K0 = ZE.matrix(nom, n)
+    Ge, Gn = {}, {}
+    for k, (i, j) in enumerate(elems, 1):
+        if k not in Nhi:
+            continue
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], theta)
+        Gloc = [[F(v) / (30 * L) for v in r] for r in [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L],
+                                                        [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
+        G = {}
+        for (vax, rax, sg) in ((yp, zp, 1), (zp, yp, -1)):
+            for key, v in _form3(i, j, vax, rax, sg, dof, Gloc).items():
+                G[key] = G.get(key, F(0)) + v
+        Ge[k] = G
+        for key, v in G.items():
+            Gn[key] = Gn.get(key, F(0)) + Nmid[k] * v
+    A = ZE._float_matrix(K0, n)
+    Bm = ZE._float_matrix(Gn, n)
+    try:
+        vals, vecs = sla.eigsh(-Bm, k=1, M=A, which="LA", v0=np.ones(n))
+    except Exception:
+        return {"lam_high": None, "why": "no buckling mode found"}
+    if vals[0] <= 0:
+        return {"lam_high": None, "why": "no compressed member: no buckling under these loads"}
+    x = [F(float(v)) for v in vecs[:, 0]]
+    qK = sum(a * b for a, b in zip(x, ZE._kmul(K0, x, n)))
+    den = F(0)
+    for k, G in Ge.items():
+        g = F(0)
+        for (a, b), v in G.items():                 # lower triangle -> the full form
+            g += v * x[a] * x[b] * (1 if a == b else 2)
+        den -= Nhi[k] * g
+    if den <= 0:
+        return {"lam_high": None, "why": "the witness does not load the mode in compression"}
+    lam = qK / den
+    S = 1 << 64
+    lam = F(-((-lam.numerator * S) // lam.denominator), S)
+    return {"lam_high": lam, "lam_est": float(1 / vals[0]), "Nhi": Nhi, "case": c}
+
+
 def judge_buckling(text, tol, fy, curve_y, curve_z, gamma_m1=F(1), case=None):
     """EN 1993-1-1 6.3.1 flexural buckling of every compressed member of a SPACE frame, N_Ed <= chi A fy / gamma_M1,
     N_cr,i = alpha_cr |N_Ed,i| with alpha_cr the PROVED lower bound of the 3D stability (every mode, both axes), and
     chi on the WORSE of the two members' curves (the larger imperfection factor: chi lower — safe). The 2D frame's
     argument (frame.judge_buckling_case): the check is gamma_M1 <= alpha_cr g(lb), g = chi lb^2 increasing (ZTL lean
     ZChi `chi_curves_monotone`), so the proved alpha_cr from below and |N| from above give a proved lower bound.
-    EARNED when every member clears it in every case; otherwise OPEN (version 1: no refutation witness yet).
+    EARNED when every member clears it in every case; REFUTED when a member fails at the NOMINAL moduli (alpha_cr from
+    above by stability_upper's witness, |N| from below); OPEN otherwise.
     NOT here: 5.3.2 sway imperfections, torsional / flexural-torsional / lateral-torsional buckling, 6.3.3."""
     from .frame import CURVES, _curve_premises, _sqrt_down, _g_lower
     nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
@@ -755,11 +819,23 @@ def judge_buckling(text, tol, fy, curve_y, curve_z, gamma_m1=F(1), case=None):
             u = F(gamma_m1) / H if H > 0 else None
             if u is not None:
                 worst = max(worst, u)
-            rows.append({"case": c, "member": k, "N_max": _show(nhi, 1), "lambda_bar_min": _show(lb_lo, -1),
-                         "alpha_cr_proved_lower": _show(lam, -1), "utilisation_max": _show(u, 1) if u else None,
-                         "verdict": "EARNED" if u is not None and u <= 1 else "OPEN"})
+            row = {"case": c, "member": k, "N_max": _show(nhi, 1), "lambda_bar_min": _show(lb_lo, -1),
+                   "alpha_cr_proved_lower": _show(lam, -1), "utilisation_max": _show(u, 1) if u else None,
+                   "verdict": "EARNED" if u is not None and u <= 1 else "OPEN"}
+            if row["verdict"] == "OPEN":            # REFUTED at the nominal moduli (a point of the box): the witness
+                su = _SU.get((text, c)) or _SU.setdefault((text, c), stability_upper(text, c))
+                lam_hi, nn = su.get("lam_high"), su.get("Nhi", {}).get(k)
+                from .frame import _g_upper
+                if lam_hi and nn is not None and nn < 0:
+                    lb_hi = _sqrt_down(area * F(fy) / (lam_hi * -nn)) + F(1, 1 << 64)
+                    Hh = lam_hi * _g_upper(lb_hi, a)
+                    if F(gamma_m1) > Hh:
+                        row["verdict"] = "REFUTED"
+                        row["at_nominal_utilisation_min"] = _show(F(gamma_m1) / Hh, -1)
+            rows.append(row)
     vs = [r["verdict"] for r in rows]
-    return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN", "utilisation_max": _show(worst, 1),
+    return {"verdict": "REFUTED" if "REFUTED" in vs else "EARNED" if all(v == "EARNED" for v in vs) else "OPEN",
+            "utilisation_max": _show(worst, 1),
             "members": rows, "path": "EN 1993-1-1 6.3.1, N_cr,i = alpha_cr |N_Ed,i|, alpha_cr from the 3D stability",
             "not_checked": "5.3.2 sway imperfections; torsional, flexural-torsional and lateral-torsional buckling; "
                            "6.3.3 interaction"}
