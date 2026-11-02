@@ -2908,5 +2908,43 @@ _jv = _F3.judge(_cant3, "0.5%", "U(2,Z)", ge="-0.0069")
 check("space frame judged by ZTL: the cantilever's tip deflection under FZ stays above -6.9 mm for every modulus "
       "within +-0.5 % — EARNED", _jv.get("verdict") == "EARNED", _jv)
 
+_lc3 = """ET, 1, BEAM4
+MP, EX, 1, 210e9
+MP, PRXY, 1, 0.3
+R, 1, 0.01, 8e-5, 3e-5, 0, 0, 0, 0, 5e-5
+N, 1, 0, 0, 0
+N, 2, 0, 0, 3
+N, 3, 4, 0, 3
+N, 4, 4, 0, 0
+N, 5, 4, 4, 3
+N, 6, 4, 4, 0
+E, 1, 2
+E, 2, 3
+E, 3, 4
+E, 3, 5
+E, 5, 6
+D, 1, ALL, 0
+D, 4, ALL, 0
+D, 6, ALL, 0
+LC, G
+F, 3, FZ, -20000
+F, 5, FZ, -20000
+LC, Q
+F, 3, FZ, -15000
+LC, W
+F, 2, FX, 8000
+F, 5, FY, 6000
+"""
+_basic = _F3.ranges(_lc3, "0", "U(5,Y)")
+_comb = _F3.ranges(_lc3 + "LCOMB, ULS2, G, 1.35, Q, 1.05, W, 1.5\n", "0", "U(5,Y)")
+_lin = F(135, 100) * _basic["G"][2] + F(105, 100) * _basic["Q"][2] + F(15, 10) * _basic["W"][2]
+_jc = _F3.judge(_lc3 + "LCOMB, ULS1, G, 1.35, Q, 1.5\nLCOMB, ULS2, G, 1.35, Q, 1.05, W, 1.5\n", "0.5%", "U(5,Y)",
+                le="0.0001")
+check("space frame LOAD CASES: a combination (LCOMB 1.35 G + 1.05 Q + 1.5 W) is EXACTLY the combination of the "
+      "cases' displacements (first order, exact path); a requirement must hold in every combination — the wind "
+      "combination breaks U(5,Y) <= 0.1 mm, the gravity one does not, and the verdict names it",
+      _comb["ULS2"][2] == _lin and _jc["verdict"] == "REFUTED" and _jc["refuted_in"] == ["ULS2"],
+      (str(_comb["ULS2"][2]), str(_lin), _jc.get("verdict"), _jc.get("refuted_in")))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

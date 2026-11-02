@@ -23,6 +23,9 @@ terms only H^2 appears, so the stiffness is exact for any orientation; version 1
 along the axes, or with a rational horizontal projection — every building grid), so that every output functional
 is exact too, and refuses otherwise.
 One part per element (E and G scale together with the modulus factor p in the box).
+LOAD CASES: `LC, name` opens a case (F lines before any LC form case BASE); `LCOMB, name, case, factor, ...` builds a
+combination; with LCOMB lines the combinations are judged, otherwise the cases. A requirement must hold in EVERY one
+(one ZTL conjunction); all share one factorization and one proved lambda_min (ZTL certify_cases).
 NOT YET (said): second order and stability in 3D, member stresses / EN checks, member loads, rigid offsets.
 """
 from __future__ import annotations
@@ -45,7 +48,9 @@ class Frame3DError(B.BrickError):
 
 
 def read_deck(text):
-    nodes, elems, loads, supports = {}, [], {}, set()
+    nodes, elems, supports = {}, [], set()
+    cases, combos, cur = {"BASE": {}}, {}, "BASE"
+    loads = cases["BASE"]
     ex = nu = sec = None
     for ln, raw in enumerate(text.splitlines(), 1):
         line = raw.split("!")[0].strip()
@@ -95,6 +100,15 @@ def read_deck(text):
                 if dd is None:
                     raise Frame3DError(f"{where}: support {f[2]} — UX UY UZ ROTX ROTY ROTZ ALL only")
                 supports.add((int(f[1]), dd))
+        elif cmd == "LC":
+            cur = f[1].strip()
+            if cur in cases and cases[cur]:
+                raise Frame3DError(f"{where}: load case {cur} given twice")
+            loads = cases.setdefault(cur, {})
+        elif cmd == "LCOMB":
+            if len(f) < 4 or len(f) % 2:
+                raise Frame3DError(f"{where}: LCOMB, name, case, factor[, case, factor ...]")
+            combos[f[1].strip()] = [(f[k].strip(), _num(f[k + 1], where)) for k in range(2, len(f), 2)]
         elif cmd == "ET":
             if f[2].upper() not in ("BEAM4", "4"):
                 raise Frame3DError(f"{where}: element type {f[2]} — only BEAM4 (3D beam)")
@@ -102,7 +116,7 @@ def read_deck(text):
             if len(f) > 1 and f[1] not in ("1", ""):
                 raise Frame3DError(f"{where}: {cmd},{f[1]} — one material and one real constant only")
         else:
-            raise Frame3DError(f"{where}: {f[0]} — not read (only N E MP R F D ET MAT REAL TYPE)")
+            raise Frame3DError(f"{where}: {f[0]} — not read (only N E MP R F D ET MAT REAL TYPE LC LCOMB)")
     if not nodes or not elems:
         raise Frame3DError("no nodes or no elements")
     if ex is None or sec is None or nu is None:
@@ -111,7 +125,23 @@ def read_deck(text):
         for n in (i, j):
             if n not in nodes:
                 raise Frame3DError(f"element {i}-{j}: node {n} does not exist")
-    return nodes, elems, loads, supports, ex, nu, sec
+    if not cases["BASE"] and len(cases) > 1:
+        del cases["BASE"]
+    for name, terms in combos.items():
+        for c, _ in terms:
+            if c not in cases:
+                raise Frame3DError(f"LCOMB {name}: no load case {c}")
+    judged = {}
+    if combos:                                          # the combinations are what is judged
+        for name, terms in combos.items():
+            tot = {}
+            for c, fac in terms:
+                for key, v in cases[c].items():
+                    tot[key] = tot.get(key, F(0)) + fac * v
+            judged[name] = tot
+    else:
+        judged = cases
+    return nodes, elems, judged, supports, ex, nu, sec
 
 
 def _axes(pi, pj, theta):
@@ -175,11 +205,14 @@ def energy_system(text, tol):
         emap[k] = {"part": len(parts), "L": L, "a": a, "t": tt, "bz": bz, "cz": cz, "by": by, "cy": cy}
         parts.append({"t": t, "terms": [(ex * area / L, a), (G * ixx / L, tt), (ex * izz / L, bz),
                                         (3 * ex * izz / L, cz), (ex * iyy / L, by), (3 * ex * iyy / L, cy)]})
-    f = [F(0)] * len(free)
-    for (n, d), v in loads.items():
-        if (n, d) in dof:
-            f[dof[(n, d)]] += v
-    return parts, f, dof, emap
+    fs = {}
+    for name, ld in loads.items():
+        f = [F(0)] * len(free)
+        for (n, d), v in ld.items():
+            if (n, d) in dof:
+                f[dof[(n, d)]] += v
+        fs[name] = f
+    return parts, fs, dof, emap
 
 
 def _target(s):
@@ -193,40 +226,54 @@ def _target(s):
     return int(n), d
 
 
-def range_of(text, tol, target):
-    """A proved range of one displacement for every modulus in the box (first order)."""
+def ranges(text, tol, target):
+    """{case: (lo, hi, nominal)} — a proved range of one displacement for every load case / combination, every
+    modulus in the box (first order); all cases share one factor and one proved lambda_min (ZTL certify_cases)."""
     from . import judge_ztl  # noqa: F401
     import zenergy as ZE
-    parts, f, dof, _ = energy_system(text, tol)
+    parts, fs, dof, _ = energy_system(text, tol)
     nd, d = _target(target)
+    names = list(fs)
     if (nd, d) not in dof:
-        return {"target": target, "nominal": "0", "proved_range": ["0", "0"], "note": "a supported direction"}
+        return {c: (F(0), F(0), F(0)) for c in names}
     e = [F(0)] * len(dof)
     e[dof[(nd, d)]] = F(1)
-    r = ZE.certify(parts, f, e, len(dof))
-    return {"target": target, "nominal": _show(r["nominal"]), "lo": r["lo"], "hi": r["hi"],
-            "proved_range": [_show(r["lo"], -1), _show(r["hi"], 1)],
+    rs = ZE.certify_cases(parts, [fs[c] for c in names], [e], len(dof))
+    return {c: (r[0]["lo"], r[0]["hi"], r[0]["nominal"]) for c, r in zip(names, rs)}
+
+
+def range_of(text, tol, target):
+    """One load case (or the first): a proved range of one displacement for every modulus in the box."""
+    rs = ranges(text, tol, target)
+    c, (lo, hi, nom) = next(iter(rs.items()))
+    return {"target": target, "case": c, "nominal": _show(nom), "lo": lo, "hi": hi,
+            "proved_range": [_show(lo, -1), _show(hi, 1)],
             "note": "FIRST ORDER (version 1): an enclosure for every modulus in the box"}
 
 
 def judge(text, tol, target, le=None, ge=None):
-    """A displacement requirement judged by ZTL over the proved range."""
+    """A displacement requirement for EVERY load case / combination, judged by ZTL as one conjunction."""
     from . import judge_ztl as J  # noqa: F401
     from znumjudge import parse_quantities, judge_sheet_claim
-    r = range_of(text, tol, target)
-    lo, hi = r.get("lo", F(0)), r.get("hi", F(0))
+    rs = ranges(text, tol, target)
     fr = lambda x: f"{x.numerator}/{x.denominator}"
-    q, m = parse_quantities(f"u=[{fr(lo)},{fr(hi)}] earned:frame3d-energy-path")
-    claims = []
-    if le is not None:
-        claims.append(f"u <= {fr(F(le))}")
-    if ge is not None:
-        claims.append(f"u >= {fr(F(ge))}")
-    out = dict(r)
-    out.pop("lo", None); out.pop("hi", None)
-    if claims:
-        res = judge_sheet_claim(" & ".join(claims), q, m)
+    qs, atoms = [], []
+    for k, (c, (lo, hi, _)) in enumerate(rs.items()):
+        qs.append(f"u{k}=[{fr(lo)},{fr(hi)}] earned:frame3d-energy-path")
+        if le is not None:
+            atoms.append(f"u{k} <= {fr(F(le))}")
+        if ge is not None:
+            atoms.append(f"u{k} >= {fr(F(ge))}")
+    out = {"target": target, "cases": {c: [_show(lo, -1), _show(hi, 1)] for c, (lo, hi, _) in rs.items()},
+           "note": "FIRST ORDER (version 1); every load case / combination; one factor and one proved lambda_min"}
+    if atoms:
+        q, m = parse_quantities(", ".join(qs))
+        res = judge_sheet_claim(" & ".join(atoms), q, m)
         out["verdict"] = res["disposition"] + (f" ({res['polarity']})" if res.get("polarity") else "")
+        if le is not None or ge is not None:
+            bad = [c for c, (lo, hi, _) in rs.items()
+                   if (le is not None and lo > F(le)) or (ge is not None and hi < F(ge))]
+            out["refuted_in"] = bad
     return out
 
 
