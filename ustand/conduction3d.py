@@ -1,0 +1,436 @@
+"""conduction3d — PROVED two-sided bounds on the conductance of a 3D voxel volume (ionic, electrical or thermal
+conduction), judged by ZTL. The stand's 3D phase, track 1 (2026-11-02, the curator: "делать глобально").
+
+    python3 -m ustand.conduction3d volume.npy --s 0:0 --s 1:6.11e-3 [--need 1e-3] [--refine 2]
+
+The quantity: the conductance G of the box [0,nx] x [0,ny] x [0,nz] (voxel units), electrodes on x = 0 and x = nx,
+the four other faces insulated; s_eff = G nx / (ny nz) (in the units of the phase conductivities). Linear conduction
+is the model (the premise); the voxel map IS the sample (each voxel one phase).
+
+UPPER (Dirichlet): G <= E(u) = sum_T s_T |grad u|^2 |T| for ANY continuous piecewise-linear u with u = 0 / 1 on the
+  electrodes. Kuhn tetrahedra (6 per voxel): the barycentric gradients are integer, |grad u|^2 is the sum of squared
+  differences along the Kuhn path. The float solve only chooses u.
+LOWER (Thomson): 1/G <= E*(J) = sum_T |J_T|^2 / s_T |T| for ANY divergence-free J with zero normal flux on the
+  insulated faces and total current 1 (J = 0 where s = 0). J is built from FACE FLUXES (lowest Raviart-Thomas):
+  one number per triangular face, shared by the two tetrahedra (normal continuity by construction); a tetrahedron
+  whose outward face fluxes sum to EXACTLY 0 carries the constant field J_T = -2 sum_f Q_f p_f (p_f the vertex
+  opposite face f, |T| = 1/6) — divergence-free inside, and across every face. Exactness by INTEGERS: the fluxes are
+  rounded to a dyadic grid and conservation is restored exactly by pushing each tetrahedron's residual along a
+  spanning forest to the electrodes; faces of insulators and of the insulated faces are 0. Total current I = the
+  exact net inflow at x = 0; then G >= I^2 / E*(J). Insulating clusters of any topology are no obstacle (the flux
+  simply does not enter them); conducting islands not connected to the electrodes carry 0.
+ROUNDING (premise, as ZTL zenergy.pd_ieee): IEEE 754 binary64, round to nearest. A sum of N nonnegative computed
+  terms is raised by (1 + 3 gamma_N) (Higham 3.5, any order) plus N 2^-1000 for underflow; a field component
+  computed from exact inputs carries gamma_8 times its absolute sum.
+"""
+from __future__ import annotations
+
+import itertools
+import json
+import sys
+from fractions import Fraction as F
+
+import numpy as np
+import scipy.sparse as sp
+import scipy.sparse.linalg as sla
+
+U = 2.0 ** -53
+PERMS = list(itertools.permutations(range(3)))
+EYE = np.eye(3, dtype=np.int64)
+
+
+def _gam(N):
+    return N * U / (1 - N * U)
+
+
+def _up(sum_float, nterms):
+    """Rigorous upper bound (Fraction) on the true value of a computed sum of nonnegative terms."""
+    g = _gam(nterms + 16)
+    return F(float(sum_float)) * (1 + 3 * F(g)) + F(nterms, 2 ** 1000)
+
+
+class Mesh:
+    """Kuhn tetrahedra of an nx x ny x nz voxel box."""
+
+    def __init__(self, V):
+        self.V = np.asarray(V)
+        nx, ny, nz = self.V.shape
+        self.nx, self.ny, self.nz = nx, ny, nz
+        self.off = (1, nx + 1, (nx + 1) * (ny + 1))
+        I, J, K = np.meshgrid(np.arange(nx), np.arange(ny), np.arange(nz), indexing="ij")
+        self.vox = np.stack([I.ravel(), J.ravel(), K.ravel()], axis=1)
+        base = self.vox[:, 0] * self.off[0] + self.vox[:, 1] * self.off[1] + self.vox[:, 2] * self.off[2]
+        self.nn = (nx + 1) * (ny + 1) * (nz + 1)
+        tv, tvox, tcoord = [], [], []
+        for (a, b, c) in PERMS:
+            v0 = base
+            v1 = v0 + self.off[a]
+            v2 = v1 + self.off[b]
+            v3 = v2 + self.off[c]
+            tv.append(np.stack([v0, v1, v2, v3], axis=1))
+            tvox.append(np.arange(len(base)))
+            p = np.zeros((4, 3), dtype=np.int64)
+            p[1] = EYE[a]; p[2] = EYE[a] + EYE[b]; p[3] = EYE[a] + EYE[b] + EYE[c]
+            tcoord.append(np.broadcast_to(self.vox[:, None, :] + p[None, :, :], (len(base), 4, 3)))
+        self.tv = np.concatenate(tv)                     # (nt, 4) node ids, Kuhn order
+        self.tvox = np.concatenate(tvox)                 # voxel index of each tet
+        self.tp = np.concatenate(tcoord)                 # (nt, 4, 3) integer vertex coordinates
+        self.nt = len(self.tv)
+        nid = np.arange(self.nn)
+        self.X = nid % (nx + 1)
+        self.Y = (nid // (nx + 1)) % (ny + 1)
+        self.Z = nid // ((nx + 1) * (ny + 1))
+
+    def sigma(self, s):
+        ph = self.V[self.vox[:, 0], self.vox[:, 1], self.vox[:, 2]]
+        table = np.zeros(int(ph.max()) + 1)
+        for k, v in s.items():
+            if k < len(table):
+                table[k] = float(v)
+        return table[ph][self.tvox]                      # per tet
+
+
+# --------------------------------------------------------------------------------------------- UPPER (potential)
+def upper(M, sig, rtol=1e-12):
+    nt, nn, X = M.nt, M.nn, M.X
+    w = sig / 6.0
+    rows, cols, vals = [], [], []
+    for (p, q) in ((0, 1), (1, 2), (2, 3)):
+        a, b = M.tv[:, p], M.tv[:, q]
+        rows += [a, b, a, b]; cols += [a, b, b, a]; vals += [w, w, -w, -w]
+    A = sp.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(nn, nn))
+    fixed = (X == 0) | (X == M.nx)
+    ub = np.where(X == M.nx, 1.0, 0.0)
+    free = np.where(~fixed)[0]
+    Af = A[free][:, free]
+    rhs = -(A[free][:, np.where(fixed)[0]] @ ub[fixed])
+    d = Af.diagonal().copy()
+    zero = d == 0
+    Af = Af + sp.diags(zero.astype(float))
+    d[zero] = 1.0
+    sol, _ = sla.cg(Af, rhs, M=sp.diags(1.0 / d), rtol=rtol, maxiter=50000)
+    u = ub.copy()
+    u[free] = sol
+    g2 = sum((u[M.tv[:, q]] - u[M.tv[:, p]]) ** 2 for p, q in ((0, 1), (1, 2), (2, 3)))
+    return _up(float(np.sum(sig * g2)) / 6.0, 4 * nt), u
+
+
+# --------------------------------------------------------------------------------------------- LOWER (face fluxes)
+def _faces(M):
+    """Global faces: id per (tet, local face f = the face opposite local vertex f), the outward sign of the global
+    orientation, the global area normal (integer x 2), and each face's two tets."""
+    nt = M.nt
+    tri = np.stack([np.sort(np.delete(M.tv, f, axis=1), axis=1) for f in range(4)], axis=1)   # (nt, 4, 3)
+    key = (tri[..., 0].astype(np.int64) * M.nn + tri[..., 1]) * M.nn + tri[..., 2]
+    uniq, inv = np.unique(key.ravel(), return_inverse=True)
+    fid = inv.reshape(nt, 4)
+    nf = len(uniq)
+    # global orientation: n = (B - A) x (C - A) for the sorted vertices (A < B < C)
+    def coords(n):
+        return np.stack([M.X[n], M.Y[n], M.Z[n]], axis=-1).astype(np.int64)
+    A_, B_, C_ = coords(tri[..., 0]), coords(tri[..., 1]), coords(tri[..., 2])
+    nrm2 = np.cross(B_ - A_, C_ - A_)                                       # twice the area normal
+    opp = M.tp                                                              # vertex f opposite face f
+    cen3 = A_ + B_ + C_                                                     # 3 x face centroid
+    out = np.sign(np.einsum("tfk,tfk->tf", nrm2, cen3 - 3 * opp)).astype(np.int64)   # +1: global normal outward
+    first = np.full(nf, -1); second = np.full(nf, -1)
+    flat_t = np.repeat(np.arange(nt), 4)
+    order = np.argsort(fid.ravel(), kind="stable")
+    sf = fid.ravel()[order]
+    st = flat_t[order]
+    starts = np.r_[0, np.where(np.diff(sf))[0] + 1]
+    first[sf[starts]] = st[starts]
+    has2 = np.r_[np.diff(sf) == 0, False]
+    second[sf[has2]] = st[np.where(has2)[0] + 1]
+    # the global normal per face (take it from the first tet's copy)
+    gn = np.zeros((nf, 3), dtype=np.int64)
+    gn[fid.ravel()] = nrm2.reshape(-1, 3)
+    # boundary face classes
+    x0 = (A_[..., 0] == 0) & (B_[..., 0] == 0) & (C_[..., 0] == 0)
+    x1 = (A_[..., 0] == M.nx) & (B_[..., 0] == M.nx) & (C_[..., 0] == M.nx)
+    lat = np.zeros_like(x0)
+    for ax, top in ((1, M.ny), (2, M.nz)):
+        for v in (0, top):
+            lat |= (A_[..., ax] == v) & (B_[..., ax] == v) & (C_[..., ax] == v)
+    fx0 = np.zeros(nf, bool); fx1 = np.zeros(nf, bool); flat_ = np.zeros(nf, bool)
+    fx0[fid[x0]] = True; fx1[fid[x1]] = True; flat_[fid[lat]] = True
+    return {"fid": fid, "out": out, "first": first, "second": second, "gn": gn, "nf": nf,
+            "x0": fx0, "x1": fx1, "lat": flat_}
+
+
+def lower(M, sig, u):
+    """G_lower from a flux built out of u, made EXACTLY conservative in integers."""
+    Fc = _faces(M)
+    fid, out, first, second, gn, nf = Fc["fid"], Fc["out"], Fc["first"], Fc["second"], Fc["gn"], Fc["nf"]
+    cond = sig > 0
+    if MIXED:
+        q = _mixed_flux(M, sig, Fc)
+        open_f = ~_closed(M, Fc, cond)
+        nI = np.where(open_f & (second >= 0))[0]
+        t1, t2 = first[nI], second[nI]
+        elec = open_f & (second < 0) & (Fc["x0"] | Fc["x1"])
+        te = first[elec]
+        return _exact_and_energy(M, sig, Fc, q, open_f, nI, t1, t2, elec, te)
+    # 1. flux from the potential: J_T = s grad u (Kuhn: grad u = sum_k (u_k - u_{k-1}) e_{axis_k}); face flux
+    #    q_f = J . (area normal) averaged over the face's conducting tets, 0 on insulator faces and lateral faces
+    gu = np.zeros((M.nt, 3))
+    for k in range(3):
+        d = M.tp[:, k + 1] - M.tp[:, k]                  # unit axis vector of path step k
+        gu += d * (u[M.tv[:, k + 1]] - u[M.tv[:, k]])[:, None]
+    J = sig[:, None] * gu
+    qn = np.zeros(nf)
+    cnt = np.zeros(nf)
+    for f in range(4):
+        cf = cond
+        np.add.at(qn, fid[cf, f], 0.5 * np.einsum("tk,tk->t", J[cf], gn[fid[cf, f]]))
+        np.add.at(cnt, fid[cf, f], 1.0)
+    q = np.where(cnt > 0, qn / np.maximum(cnt, 1), 0.0)
+    ins_face = np.zeros(nf, bool)
+    for f in range(4):
+        ins_face[fid[~cond, f]] = True
+    q[ins_face | Fc["lat"]] = 0.0
+    open_f = ~(ins_face | Fc["lat"])                       # faces that may carry flux
+    # 2. conservation by a dual-graph correction: q_f += c_f (p_T1 - p_T2) on interior open faces (electrode faces
+    #    to ground), L p = -residual
+    def residual(qq):
+        r = np.zeros(M.nt)
+        for f in range(4):
+            r += out[:, f] * qq[fid[:, f]]
+        return r
+    r = residual(q)
+    inner = open_f & (second >= 0)
+    elec = open_f & (second < 0) & (Fc["x0"] | Fc["x1"])
+    t1, t2 = first[inner], second[inner]
+    # orientation of the global normal relative to tet t1 (outward from t1?)
+    def outsign(t, f):
+        loc = np.argmax(fid[t] == f[:, None], axis=1)
+        return out[t, loc]
+    s1 = outsign(t1, np.where(inner)[0])
+    ccoef = 1.0
+    nI = np.where(inner)[0]
+    rows = np.r_[t1, t2, t1, t2]
+    cols = np.r_[t1, t2, t2, t1]
+    vals = np.r_[np.full(len(t1), ccoef), np.full(len(t1), ccoef), np.full(len(t1), -ccoef), np.full(len(t1), -ccoef)]
+    te = first[elec]
+    rows = np.r_[rows, te]; cols = np.r_[cols, te]; vals = np.r_[vals, np.full(len(te), ccoef)]
+    L = sp.csr_matrix((vals, (rows, cols)), shape=(M.nt, M.nt))
+    act = np.where(cond)[0]
+    Lc = L[act][:, act] + sp.identity(len(act)) * 1e-12
+    pc, _ = sla.cg(Lc, -r[act], rtol=1e-12, maxiter=50000)
+    p = np.zeros(M.nt)
+    p[act] = pc
+    # an inner face's flux along the global normal: adding c (p_t1 - p_t2) to t1's OUTWARD flux
+    q[nI] += s1 * ccoef * (p[t1] - p[t2])
+    eS = outsign(te, np.where(elec)[0])
+    q[np.where(elec)[0]] += eS * ccoef * p[te]
+    return _exact_and_energy(M, sig, Fc, q, open_f, nI, t1, t2, elec, te)
+
+
+def _closed(M, Fc, cond):
+    """Faces that carry no flux: the insulated faces and every face of an insulating tetrahedron."""
+    closed = Fc["lat"].copy()
+    for f in range(4):
+        closed[Fc["fid"][~cond, f]] = True
+    return closed
+
+
+def _exact_and_energy(M, sig, Fc, q, open_f, nI, t1, t2, elec, te):
+    fid, out, gn = Fc["fid"], Fc["out"], Fc["gn"]
+    cond = sig > 0
+    # 3. integers: dyadic grid, then EXACT conservation along a spanning forest rooted at the electrodes
+    scale = 2.0 ** (36 - max(0, int(np.ceil(np.log2(max(1.0, float(np.abs(q).max())))))))
+    Q = np.round(q * scale).astype(np.int64)
+    Q[~open_f] = 0
+    R = np.zeros(M.nt, dtype=np.int64)
+    for f in range(4):
+        R += out[:, f] * Q[fid[:, f]]
+    # BFS over conducting tets through open inner faces, from tets holding an electrode face
+    nbr_t = np.r_[t1, t2]; nbr_u = np.r_[t2, t1]; nbr_f = np.r_[nI, nI]
+    G_ = sp.csr_matrix((nbr_f + 1, (nbr_t, nbr_u)), shape=(M.nt, M.nt))
+    root_face = np.full(M.nt, -1)
+    root_face[te] = np.where(elec)[0]
+    parent = np.full(M.nt, -2)
+    pface = np.full(M.nt, -1)
+    roots = np.where(root_face >= 0)[0]
+    parent[roots] = -1
+    order = list(roots)
+    head = 0
+    indptr, indices, data = G_.indptr, G_.indices, G_.data
+    while head < len(order):
+        t = order[head]; head += 1
+        for k in range(indptr[t], indptr[t + 1]):
+            v = indices[k]
+            if parent[v] == -2 and cond[v]:
+                parent[v] = t
+                pface[v] = data[k] - 1
+                order.append(v)
+    # islands (conducting, unreached): zero every flux touching them
+    island = cond & (parent == -2)
+    if island.any():
+        for f in range(4):
+            Q[fid[island, f]] = 0
+        R = np.zeros(M.nt, dtype=np.int64)
+        for f in range(4):
+            R += out[:, f] * Q[fid[:, f]]
+    for t in reversed(order):                           # push residuals to the root, exactly
+        rt = R[t]
+        if rt == 0:
+            continue
+        f = pface[t] if parent[t] >= 0 else root_face[t]
+        loc = int(np.argmax(fid[t] == f))
+        Q[f] -= out[t, loc] * rt                          # t's outward flux through f drops by rt
+        R[t] = 0
+        if parent[t] >= 0:
+            ploc = int(np.argmax(fid[parent[t]] == f))
+            R[parent[t]] -= out[parent[t], ploc] * out[t, loc] * rt
+    # exact checks: conservation everywhere, zero on closed faces
+    Rchk = np.zeros(M.nt, dtype=np.int64)
+    for f in range(4):
+        Rchk += out[:, f] * Q[fid[:, f]]
+    assert np.all(Rchk[cond] == 0), "conservation not exact"
+    assert np.all(Q[~open_f] == 0), "flux through a closed face"
+    # total current: net inflow at x = 0 (global normal of an x = 0 face: its sign relative to -x)
+    fx0 = np.where(Fc["x0"])[0]
+    I_int = int(np.sum(-np.sign(gn[fx0, 0]) * Q[fx0]))          # flux along -x through the x = 0 faces ... sign
+    I = F(I_int) / F(scale)
+    if I == 0:
+        return F(0), "no current path between the electrodes"
+    # the field per tet: J_T = -2 sum_f Q_out,f p_f ; energy with rounding bounds
+    Qf = Q.astype(np.float64) / scale                            # exact (|Q| < 2^53)
+    Jt = np.zeros((M.nt, 3)); Ja = np.zeros((M.nt, 3))
+    for f in range(4):
+        qo = out[:, f] * Qf[fid[:, f]]
+        Jt += -2.0 * qo[:, None] * M.tp[:, f]
+        Ja += 2.0 * np.abs(qo)[:, None] * np.abs(M.tp[:, f])
+    assert np.all(Jt[~cond] == 0.0), "flux in an insulator"
+    Jb = np.abs(Jt) + 2 * _gam(8) * Ja
+    w = np.where(cond, 1.0 / np.where(cond, sig, 1.0), 0.0) / 6.0
+    E = _up(float(np.sum(w * (Jb * Jb).sum(axis=1))) * (1 + 4 * U), 4 * M.nt)
+    return I * I / E, "ok"
+
+
+
+
+MIXED = True        # the lower bound's flux from the hybridized mixed problem (False: from the potential, averaged)
+
+
+def _mixed_flux(M, sig, Fc):
+    """The lowest-order Raviart-Thomas flux of the MIXED problem (2026-11-02), hybridized: on each conducting tet
+    the outward face fluxes Q = A_T^+ lam_T, A_T = (4/(3 s)) P P^T (P the centred vertex coordinates; A_T's kernel is
+    the constant vector, so sum Q = 0 holds), lam the face traces (= -u: 0 / -1 on the electrodes, free elsewhere,
+    multipliers on closed faces). The SPD system: sum_T (A_T^+ lam_T)_f = 0 on every free face. Floats only CHOOSE the
+    flux; _exact_and_energy makes it exactly admissible and bounds its energy."""
+    fid, out, nf = Fc["fid"], Fc["out"], Fc["nf"]
+    cond = sig > 0
+    act = np.where(cond)[0]
+    # per Kuhn type: B = P (P^T P)^-2 P^T with P centred; the 6 types repeat in blocks of nvox
+    nvox = len(M.vox)
+    Bs = []
+    for k in range(6):
+        P = M.tp[k * nvox].astype(float)
+        P = P - P.mean(axis=0)
+        G = np.linalg.inv(P.T @ P)
+        Bs.append(P @ G @ G @ P.T)
+    Bt = np.stack(Bs)[np.arange(M.nt) // nvox]                     # (nt, 4, 4)
+    K = (0.75 * sig)[:, None, None] * Bt                             # A_T^+ = (3 s / 4) B
+    lamD = np.full(nf, np.nan)
+    lamD[Fc["x0"]] = 0.0
+    lamD[Fc["x1"]] = -1.0
+    dir_ = ~np.isnan(lamD)
+    free = np.where(~dir_)[0]
+    col = np.full(nf, -1); col[free] = np.arange(len(free))
+    rows, cols, vals = [], [], []
+    rhs = np.zeros(len(free))
+    Ka = K[act]; fa = fid[act]
+    for a in range(4):
+        ca = col[fa[:, a]]
+        for b in range(4):
+            cb = col[fa[:, b]]
+            okr = ca >= 0
+            both = okr & (cb >= 0)
+            rows.append(ca[both]); cols.append(cb[both]); vals.append(Ka[both, a, b])
+            dirb = okr & (cb < 0)
+            np.add.at(rhs, ca[dirb], -Ka[dirb, a, b] * lamD[fa[dirb, b]])
+    S = sp.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(len(free), len(free)))
+    dg = S.diagonal().copy()
+    S = S + sp.diags(np.where(dg == 0, 1.0, 0.0))
+    dg[dg == 0] = 1.0
+    lam_f, _ = sla.cg(S, rhs, M=sp.diags(1.0 / dg), rtol=1e-12, maxiter=100000)
+    lam = np.where(dir_, lamD, 0.0)
+    lam[free] = lam_f
+    Qloc = np.einsum("tab,tb->ta", K, lam[fid])                     # outward fluxes per tet
+    # one number per face, in the global orientation: the mean of the two tets' (sign-corrected) values
+    qn = np.zeros(nf); cnt = np.zeros(nf)
+    for f in range(4):
+        np.add.at(qn, fid[act, f], out[act, f] * Qloc[act, f])
+        np.add.at(cnt, fid[act, f], 1.0)
+    return np.where(cnt > 0, qn / np.maximum(cnt, 1), 0.0)
+
+
+def bounds(V, s, refine=1):
+    V = np.asarray(V)
+    if refine > 1:
+        V = np.repeat(np.repeat(np.repeat(V, refine, 0), refine, 1), refine, 2)
+    M = Mesh(V)
+    sig = M.sigma(s)
+    up, u = upper(M, sig)
+    lo, note = lower(M, sig, u)
+    k = refine
+    # conductance of the refined box in refined voxel units = k x that in original units (G = s A / L, h -> h/k)
+    return lo / k, up / k, note, M
+
+
+def s_eff(V, s, refine=1):
+    nx, ny, nz = np.asarray(V).shape
+    lo, up, note, _ = bounds(V, s, refine)
+    g = F(nx, ny * nz)
+    return lo * g, up * g, note
+
+
+def judge(V, phases, need, refine=1):
+    """s_eff >= need, by ZTL: the proved bracket at the conductivity box's ends (G is non-decreasing in every
+    phase conductivity), provenance the weakest input's. phases: {id: {"s": [lo, hi] | [v], "earned": bool}}."""
+    from . import judge_ztl  # noqa: F401
+    from znumjudge import parse_quantities, judge_sheet_claim
+    lo, _, note = s_eff(V, {k: F(p["s"][0]) for k, p in phases.items()}, refine)
+    _, up, _ = s_eff(V, {k: F(p["s"][-1]) for k, p in phases.items()}, refine)
+    used = set(np.unique(np.asarray(V)).tolist())
+    prov = "earned:conduction3d" if all(phases[k].get("earned") for k in used if k in phases) else "credit"
+    f = lambda x: f"{x.numerator}/{x.denominator}"
+    qs, mk = parse_quantities(f"seff=[{f(lo)},{f(up)}] {prov}")
+    nd = F(need)
+    r = judge_sheet_claim(f"seff >= {f(nd)}", qs, mk)
+    return {"lower": float(lo), "upper": float(up), "note": note,
+            "verdict": r["disposition"] + (f" ({r['polarity']})" if r.get("polarity") else ""),
+            "premise": "linear conduction; the voxel map is the sample; electrodes x = 0 / x = nx, other faces "
+                       "insulated; IEEE 754 rounding (bounded)"}
+
+
+def main(argv):
+    if not argv or argv[0] in ("-h", "--help"):
+        print(__doc__)
+        return 2
+    V = np.load(argv[0])
+    s, need, refine = {}, None, 1
+    i = 1
+    while i < len(argv):
+        if argv[i] == "--s":
+            k, v = argv[i + 1].split(":")
+            s[int(k)] = {"s": [v] if "," not in v else v.split(","), "earned": False}
+            i += 2
+        elif argv[i] == "--need":
+            need = argv[i + 1]; i += 2
+        elif argv[i] == "--refine":
+            refine = int(argv[i + 1]); i += 2
+        else:
+            raise SystemExit(f"unknown argument {argv[i]}")
+    if need is None:
+        lo, up, note = s_eff(V, {k: F(p["s"][0]) for k, p in s.items()}, refine)
+        print(json.dumps({"s_eff_lower": float(lo), "s_eff_upper": float(up), "note": note}))
+    else:
+        print(json.dumps(judge(V, s, need, refine)))
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

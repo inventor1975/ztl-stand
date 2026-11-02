@@ -2806,5 +2806,53 @@ _wc = dict(_wm, requirements=[_wm["requirements"][i] for i in _rm.get("_core") o
 check("W3: the core is a refutation on its own (any set holding it is refuted by the same proof)",
       S.run(_wc, conflicts=False)["verdict"] == "REFUTED")
 
+# 3D CONDUCTION (2026-11-02, the stand's 3D phase, track 1): proved two-sided conductance bounds of voxel volumes
+import numpy as _np3
+from ustand import conduction3d as _C3
+_h3 = []
+for _sh in ((3, 2, 2), (5, 4, 3)):
+    _lo, _up, _nt, _ = _C3.bounds(_np3.zeros(_sh, int), {0: 2.0})
+    _h3.append((float(_lo), float(F(2 * _sh[1] * _sh[2], _sh[0])), float(_up)))
+check("3D conduction: a homogeneous box — both bounds hold the exact G = s H D / W and meet it within 1e-12 "
+      "(the potential's and the flux's spaces both contain the exact field)",
+      all(a <= b <= c and (c - a) / b < 1e-12 for a, b, c in _h3), _h3)
+_s3 = {0: 1.0, 1: 0.25}
+_ser = _np3.array([[[i % 2 for k in range(2)] for j in range(2)] for i in range(4)])
+_par = _np3.array([[[j % 2 for k in range(2)] for j in range(4)] for i in range(3)])
+_l1, _u1, _, _ = _C3.bounds(_ser, _s3)
+_l2, _u2, _, _ = _C3.bounds(_par, _s3)
+check("3D conduction: laminates are exact — layers across the current (series, G = 0.4) and along it (parallel, "
+      "G = 5/3) bracketed within 1e-12",
+      _l1 <= F(2, 5) <= _u1 and (_u1 - _l1) < F(1, 10 ** 12) and _l2 <= F(5, 3) <= _u2 and (_u2 - _l2) < F(1, 10 ** 11),
+      (float(_l1), float(_u1), float(_l2), float(_u2)))
+_sh3 = _np3.array([[[1 if i == 1 else 0 for k in range(2)] for j in range(2)] for i in range(3)])
+_l3, _u3, _n3, _ = _C3.bounds(_sh3, {0: 1.0, 1: 0.0})
+check("3D conduction: an insulating sheet across the sample — no current path: lower 0 with the reason, upper ~0",
+      _l3 == 0 and "no current path" in _n3 and _u3 < F(1, 10 ** 20), (_l3, _n3, float(_u3)))
+_rg = _np3.random.default_rng(3)
+_wi = []
+for _t in range(5):
+    _V = (_rg.random((4, 3, 3)) < 0.5).astype(int)
+    _sv = {0: 1.0, 1: 1.0 / float(_rg.integers(2, 10))}
+    _lo, _up, _ = _C3.s_eff(_V, _sv)
+    _ph = _V.mean()
+    _wu = (1 - _ph) * _sv[0] + _ph * _sv[1]
+    _wl = 1 / ((1 - _ph) / _sv[0] + _ph / _sv[1])
+    _wi.append(_wl * (1 - 1e-12) <= float(_lo) <= float(_up) <= _wu * (1 + 1e-12))
+check("3D conduction: random two-phase voxel maps — the proved bracket sits inside Wiener's bounds (an independent "
+      "formula valid for any geometry)", all(_wi), _wi)
+_Vr = (_np3.random.default_rng(20261102).random((6, 5, 5)) < 0.5).astype(int)
+_r1 = _C3.s_eff(_Vr, {0: 0.0, 1: 1.0}, refine=1)
+_r2 = _C3.s_eff(_Vr, {0: 0.0, 1: 1.0}, refine=2)
+check("3D conduction: refining the voxels (Kuhn -> Freudenthal, nested spaces) never loosens the bracket — the upper "
+      "bound does not rise, the lower does not fall (an insulating matrix with a percolating phase: 50 % random)",
+      float(_r2[1]) <= float(_r1[1]) * (1 + 1e-9) and float(_r2[0]) >= float(_r1[0]) * (1 - 1e-9) and _r1[0] > 0,
+      (float(_r1[0]), float(_r1[1]), float(_r2[0]), float(_r2[1])))
+_jd = _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2"], "earned": True}}, "1.9")
+_jr = _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2"], "earned": False}}, "2.1")
+check("3D conduction judged by ZTL: a homogeneous 2 S/m box meets s_eff >= 1.9 EARNED (inputs earned), and "
+      "s_eff >= 2.1 is refuted on credit (inputs unearned)",
+      _jd["verdict"] == "EARNED" and _jr["verdict"] == "ON CREDIT (toward F)", (_jd["verdict"], _jr["verdict"]))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

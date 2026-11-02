@@ -73,10 +73,14 @@ Every verdict says its LEVEL (`scope` in the output) — a proof about a mesh is
 | `ustand.plate` | CST triangles | displacements and stresses of the MESH (scope MESH) |
 | `ustand.hypercircle` | plate + `TRAC` | the CONTINUUM plate: compliance, mean deflection, any boundary-segment average (Prager–Synge, τ checked exactly) |
 | `ustand.adapt` | as hypercircle | refinement where the hypercircle's exact local error is large |
+| `ustand.conduction3d` | a 3D voxel map (`.npy`) + phase conductivities | **the stand's 3D phase, track 1 (2026-11-02)**: the CONTINUUM conductance of the volume (ionic, electrical, thermal), two-sided and proved — upper from any piecewise-linear potential, lower from a face-flux field made EXACTLY conservative in integers (insulators of any topology allowed); `s_eff >= need` judged by ZTL |
 
 Named premises (said in the outputs): linear elasticity, Green's formula, IEEE 754 for the floating Cholesky,
 second-order axial forces from the first-order analysis, straight truss bars, out-of-plane restraint for 6.3.3.
 Not yet: second order with AXIAL member loads (OPEN, said; transverse ones are in), out-of-plane/LT buckling, plate buckling.
+3D phase: track 1 (conduction) in; track 2 (space frames, 6 DOF per node) and track 3 (3D elasticity) next. Measured
+(conduction3d, 2026-11-02): 16^3 random 50 % electrolyte in 0.5 s; voxel edge/corner contacts make the bracket close
+slowly under uniform refinement (3D checkerboard: ratio 2.3 -> 1.4 at x4) — adaptive refinement is the next step.
 The algebra of every bound is in ZTL's Lean (zero axioms): ZNet, ZEnergy, ZRound, ZHigham, ZFloatPath, ZStability,
 ZChi, ZHypercircle.
 
