@@ -200,21 +200,6 @@ def _has_qload(text):
     return any(raw.split("!")[0].strip().upper().startswith("QLOAD") for raw in text.splitlines())
 
 
-def _no_axial_qload(text, what):
-    """Transverse member loads leave the axial force constant along the member; an AXIAL component makes N vary —
-    stability and second-order DISPLACEMENTS take it (G_a/G_b split, 2026-11-02); second-order STRESSES not yet."""
-    if not _has_qload(text):
-        return
-    nodes, elems, loads, supports, props = read_deck(text)
-    for c, per in _qloads(text).items():
-        for k, q in per.items():
-            i, j = elems[k - 1]
-            L, xp, yp, zp = _axes(nodes[i], nodes[j], props[k].theta)
-            if sum(q[t] * xp[t] for t in range(3)):
-                raise Frame3DError(f"{what}: member {k} carries an AXIAL member load (QLOAD along it) — N varies along "
-                                   f"the member, not yet in 3D (transverse member loads are in)")
-
-
 def _no_qload(text, what):
     if _has_qload(text):
         raise Frame3DError(f"{what} with member loads (QLOAD) is not yet in version 1 — displacements are exact with "
@@ -1012,12 +997,13 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
     maxima added: safe even if they peak at different points). Transverse member loads (QLOAD): the clamped-beam end
     moment w L^2/12 sign-free, the own-load end correction, the interior by the Dirichlet Green function. Judged by
     ZTL over [a proved lower bound of max|sigma| (the end corners), its upper bound]. Premises as second_order_disp;
-    no AXIAL member loads in second order."""
+    AXIAL member loads (2026-11-03, the 2D frame's derivation per plane): end moments with N_a G_a + N_b G_b, the
+    interior by a Dirichlet bound on M'' = N'v' + (N/EI)M (the end slopes: the nodal rotations); a member with both an
+    axial and a transverse load is refused (second_order_disp)."""
     from . import judge_ztl  # noqa: F401
     from .frame import _sqrt_down, PI2_LO
     import zenergy as ZE
     from znumjudge import parse_quantities, judge_sheet_claim
-    _no_axial_qload(text, "second-order stresses")       # the end moments / interior bounds assume a constant N
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
     ks = sorted(emap) if ks is None else ks
@@ -1032,6 +1018,12 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                 e[i_] = v
             return e
         outs, items = [], []
+        qax3 = {}                                          # axial member loads in this case: qa = a L/2
+        for k_, q_ in _qloads(text).get(c, {}).items():
+            xq_ = emap[k_]["axes"][0]
+            a_ = sum(q_[t] * xq_[t] for t in range(3))
+            if a_:
+                qax3[k_] = a_ * emap[k_]["L"] / 2
         for k in ks:
             m = emap[k]
             L = m["L"]
@@ -1056,6 +1048,17 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                 # at each end in the plane's own coordinates (v, th_z) or (w, phi = -th_y), unscaled
                 for end, row in (("I", Gl_[1]), ("J", Gl_[3])):
                     outs.append(vec(_glob3(ii, jj, vax, rax, sg, dof, row))); items.append((k, plane + "G" + end))
+                if k in qax3:
+                    # an AXIAL member load: the geometric moment split (G_a, G_b rows) and the plane's end slopes
+                    from .frame import _geo_split
+                    Ga_, Gb_ = _geo_split(L)
+                    for nm_, Gx in (("A", Ga_), ("B", Gb_)):
+                        for end, row in (("I", Gx[1]), ("J", Gx[3])):
+                            outs.append(vec(_glob3(ii, jj, vax, rax, sg, dof, row)))
+                            items.append((k, plane + "G" + nm_ + end))
+                    for end, row in (("I", [0, 1, 0, 0]), ("J", [0, 0, 0, 1])):
+                        outs.append(vec(_glob3(ii, jj, vax, rax, sg, dof, [F(v) for v in row])))
+                        items.append((k, plane + "R" + end))
         _EXTRA["outputs"] = outs
         res = second_order_disp(text, tol, [], c)[c]
         if isinstance(res, dict) and res.get("verdict") == "OPEN":
@@ -1068,8 +1071,8 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
         rng = {}
         for (k, what), r in zip(items, rs[:-1]):
             ex = emap[k]["p"].ex
-            if "G" in what:
-                rng[(k, what)] = (r["lo"], r["hi"])     # (G u)_th: not scaled by the modulus
+            if "G" in what or "R" in what:
+                rng[(k, what)] = (r["lo"], r["hi"])     # (G u)_th and the end slopes: not scaled by the modulus
                 continue
             rng[(k, what)] = (min(ex * (1 - T) * r["lo"], ex * (1 + T) * r["lo"]),
                               max(ex * (1 - T) * r["hi"], ex * (1 + T) * r["hi"]))
@@ -1101,16 +1104,38 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                 # so there the signs flip. N in [N_lo, N_hi] (the axial forces of the geometric stiffness).
                 pl_s = 1 if plane == "y" else -1
                 nl_, nh_ = X["Nlo"].get(k, F(0)), X["Nhi"].get(k, F(0))
+                qa_ = qax3.get(k)
+                if qa_ is not None:
+                    # N(x) = N_mid + qa (1 - 2x/L): N_mid's range is the widened one with |qa| taken back
+                    nm_lo, nm_hi = nl_ + abs(qa_), nh_ - abs(qa_)
+                    geo = [("G", (nm_lo, nm_hi))] if _MUTANT.get("axial_const_moment") else \
+                        [("GA", (nm_lo + qa_, nm_hi + qa_)), ("GB", (nm_lo - qa_, nm_hi - qa_))]
+                else:
+                    geo = [("G", (nl_, nh_))]
                 for e_, es_ in (("I", 1), ("J", -1)):
                     if _MUTANT.get("no_geo_moment"):           # sabotage (tests only): the K_E-row moment alone
                         break
-                    gl_, gh_ = rng[(k, plane + "G" + e_)]
-                    prods = [pl_s * es_ * a_ * b_ for a_ in (nl_, nh_) for b_ in (gl_, gh_)]
-                    Ml[e_] = (Ml[e_][0] + min(prods), Ml[e_][1] + max(prods))
+                    for gname, (n_lo, n_hi) in geo:
+                        gl_, gh_ = rng[(k, plane + gname + e_)]
+                        prods = [pl_s * es_ * a_ * b_ for a_ in (n_lo, n_hi) for b_ in (gl_, gh_)]
+                        Ml[e_] = (Ml[e_][0] + min(prods), Ml[e_][1] + max(prods))
                 Mends[plane] = Ml
                 mend = max(max(abs(a_), abs(b_)) for a_, b_ in Ml.values())
                 mint = mend
-                if w:
+                if qa_ is not None:
+                    # the 2D frame's interior bound (frame.second_order_case), per plane: M'' = N'v' + (N/EI) M,
+                    # max|m| (1 - beta) <= beta mend + (L^2/8)|a| Theta, beta = (L^2/8)(max|N| + |a| L/2)/EI_lo
+                    EIl = (1 - T) * ex * I
+                    nabs = max(abs(nm_lo - abs(qa_)), abs(nm_hi + abs(qa_)))
+                    a_abs = 2 * abs(qa_) / L
+                    thb = max(max(abs(rng[(k, plane + "R" + e_)][0]), abs(rng[(k, plane + "R" + e_)][1]))
+                              for e_ in ("I", "J"))
+                    beta = (L * L / 8) * (nabs + a_abs * L / 2) / EIl
+                    if beta >= 1:
+                        return {"verdict": "OPEN", "why": f"element {k}: too slender between its nodes for the "
+                                                          f"axial-load interior bound (subdivide)"}
+                    mint = mend + (beta * mend + (L * L / 8) * a_abs * thb) / (1 - beta)
+                elif w:
                     # M = M_lin + m, m'' +- k^2 m = -q -+ k^2 M_lin, m = 0 at the ends: the Dirichlet Green function is
                     # positive, its integral <= (L^2/8)/(1 - k^2 L^2/8) in compression, <= L^2/8 in tension (2D frame)
                     if P:
@@ -1146,15 +1171,17 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                         b2 = ZE._sqrt_up((msum / (2 * c_lo)) ** 2 + (mdif / (2 * s_lo)) ** 2) if s_lo > 0 else b1
                         mint = max(mend, min(b1, b2))
                 mmax[plane] = mint
-            hi_abs = max(abs(Nl), abs(Nh)) / area + mmax["y"] * (tky / 2) / izz + mmax["z"] * (tkz / 2) / iyy
+            qn = abs(qax3[k]) if k in qax3 else F(0)       # N along an axially loaded member: N_mid -+ |qa|
+            hi_abs = max(abs(Nl - qn), abs(Nh + qn)) / area + mmax["y"] * (tky / 2) / izz + mmax["z"] * (tkz / 2) / iyy
             lo_abs = F(0)                                   # a proved lower bound of max |sigma|: the end corners
             for e_ in ("I", "J"):
+                sh = (qax3[k] if e_ == "I" else -qax3[k]) if k in qax3 else F(0)
                 (yl, yh), (zl, zh) = Mends["y"][e_], Mends["z"][e_]
                 for sy in (1, -1):
                     for sz in (1, -1):
                         ys = sorted((sy * yl * (tky / 2) / izz, sy * yh * (tky / 2) / izz))
                         zs = sorted((-sz * zl * (tkz / 2) / iyy, -sz * zh * (tkz / 2) / iyy))
-                        a_, b_ = Nl / area + ys[0] + zs[0], Nh / area + ys[1] + zs[1]
+                        a_, b_ = (Nl + sh) / area + ys[0] + zs[0], (Nh + sh) / area + ys[1] + zs[1]
                         lo_abs = max(lo_abs, F(0) if a_ <= 0 <= b_ else min(abs(a_), abs(b_)))
             nm = f"s{len(qs)}"
             qs.append(f"{nm}=[{fr(lo_abs)},{fr(hi_abs)}] earned:frame3d-second-order")
@@ -1168,7 +1195,7 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
     return {"verdict": r["disposition"] + (f" ({r['polarity']})" if r.get("polarity") else ""), "limit": _show(lim),
             "worst": worst, "members": rows,
             "note": "PHYSICAL SECOND ORDER (continuum members, both planes); premises: first-order axial forces, no "
-                    "torsional / flexural-torsional buckling, no axial member loads"}
+                    "torsional / flexural-torsional buckling; axial member loads by the Dirichlet interior bound"}
 
 
 _SU = {}

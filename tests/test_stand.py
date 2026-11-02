@@ -3146,14 +3146,45 @@ _rl = [(_F3.range_of(_bm3 + "D, 3, ALL, 0\nRELEASE, 1, I, MZ, MY\nRELEASE, 2, J,
                      "QLOAD, 2, FZ, -500\n", "0", "U(2,Z)")["lo"], F(-500) * 5 * 256 / (384 * _E3x * _Iy3x))]
 _qref = False
 try:
-    _F3.second_order_stress(_bm3 + "QLOAD, 1, FX, -500\n", "0", F(10) ** 12)   # AXIAL load: 2nd-order STRESSES not yet
+    _F3.second_order_stress(_bm3 + "QLOAD, 1, FX, -500\nQLOAD, 1, FY, -500\n", "0", F(10) ** 12)   # axial AND transverse
 except _F3.Frame3DError:
     _qref = True
 check("space frame END RELEASES and MEMBER LOADS: hinges by RELEASE (the member's own end rotation) and QLOAD's "
       "consistent nodal loads give EXACTLY P L^3/(48EI) (pinned, point load), q L^4/(8EI) (cantilever), q L^4/(384EI) "
-      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); second-order STRESSES with an AXIAL QLOAD refuse (not yet), "
-      "said (stability and second-order displacements take it since 2026-11-02)",
+      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); second order on a member with BOTH an axial and a transverse "
+      "QLOAD refuses (not yet), said",
       all(a == b for a, b in _rl) and _qref, [(str(a), str(b)) for a, b in _rl])
+# SECOND-ORDER STRESSES WITH AN AXIAL MEMBER LOAD in 3D (2026-11-03): the 2D test's self-weight cantilever column stood
+# along Z, the tip load along X and then along Y (each bending plane once); the 2D continuum reference (MEASURED,
+# finite differences): M = 42002.761 (base), 31619.047, 20874.802 N m. Both sides; the mutants N_mid G and "no
+# geometric moment" miss the reference.
+def _ax3(dirn, mut=None):
+    _F3._MUTANT.clear()
+    if mut:
+        _F3._MUTANT[mut] = True
+    try:
+        d = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 8e-5, 0.2, 0.2, 0, 0, 5e-5\n"
+             + "".join(f"N, {k + 1}, 0, 0, {k}\n" for k in range(5)) + "".join(f"E, {k + 1}, {k + 2}\n" for k in range(4))
+             + f"D, 1, ALL, 0\nF, 5, {dirn}, 10000\n" + "".join(f"QLOAD, {k + 1}, FZ, -100000\n" for k in range(4)))
+        r = _F3.second_order_stress(d, "0", F(10) ** 12)
+    finally:
+        _F3._MUTANT.clear()
+    hits = []
+    for (k, e_), m in {(1, "I"): 42002.761, (1, "J"): 31619.047, (2, "I"): 31619.047, (2, "J"): 20874.802}.items():
+        row = r["members"][k - 1]["M_ends"]
+        for pl in row:
+            lo, hi = sorted(abs(float(F(v.split()[0]))) for v in row[pl][e_])
+            if hi > 1000:
+                hits.append(lo - 0.01 <= m <= hi + 0.01)
+    return r, hits
+_a3x, _a3y = _ax3("FX"), _ax3("FY")
+_a3m = [_ax3(d_, m_)[1] for d_ in ("FX", "FY") for m_ in ("axial_const_moment", "no_geo_moment")]
+_a3s = [float(F(v.split()[0])) for v in _a3x[0]["members"][0]["sigma_abs"]]
+check("space frame second-order STRESSES with an AXIAL member load (a self-weight column along Z, tip load along X, "
+      "then Y): every end-moment bracket holds the 2D continuum reference, in each bending plane; the base's exact "
+      "sigma 40 + 52.503 = 92.503 MPa lies in the proved [lo, hi]; both mutants miss the reference",
+      all(_a3x[1]) and all(_a3y[1]) and len(_a3x[1]) == len(_a3y[1]) == 4 and _a3s[0] <= 92.5035e6 <= _a3s[1]
+      and not any(all(h) for h in _a3m), (_a3x[1], _a3y[1], _a3s, _a3m))
 
 _qs3 = []
 for _ne in (1, 4):
