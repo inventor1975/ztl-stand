@@ -1127,7 +1127,7 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
         if w_ and k in cgrp:                              # no C_e (cq = 0): the member load does not couple
             P_ = max(F(0), -Nlo.get(k, F(0)))
             kk_ = L_ * L_ / (4 * PI2_LO * Elo2 * izz)
-            re2[k] = w_ * w_ * L_ ** 5 / (720 * Elo2 * izz * (1 - P_ * kk_))
+            re2[k] = _dy(w_ * w_ * L_ ** 5 / (720 * Elo2 * izz * (1 - P_ * kk_)), True)     # UP: 64-bit (cost)
     keys = sorted(re2)
     rs = ZE.certify_general_many(A0, parts + gparts, cterms, f, es, n,
                                  cgroups=[cgrp[k] for k in keys] if keys else None)
@@ -1137,7 +1137,7 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
         sth = ZE._sqrt_up(theta)
         rq = [ZE._sqrt_up(re2[k]) for k in keys]
         for r in rs:
-            extra = sum(c * q_ for c, q_ in zip(r["c_groups"], rq)) + \
+            extra = sum((_dy(c * q_, True) for c, q_ in zip(r["c_groups"], rq)), F(0)) + \
                 sth * (r["ey"] + theta / (1 - theta) * (r["ny_t"] + r["ey"])) * Rq
             r["lo"] -= extra
             r["hi"] += extra

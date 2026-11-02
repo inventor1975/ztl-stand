@@ -29,6 +29,10 @@ bound deliberately broken (MUTATION) — they must find violations, or the check
      reference (K_E - P G rows, 64 elements) — the old stress check shared the stand's K_E-row formula
 Writes bench/night/REPORT.json and REPORT.md.
 """
+import os
+for _v in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS"):
+    os.environ.setdefault(_v, "1")      # one BLAS thread per process (2026-11-02: 22 processes x BLAS threads put the
+                                        # load average at 323 and the suite's timed tests over their limit)
 import json
 import math
 import multiprocessing as mp

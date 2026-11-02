@@ -964,7 +964,7 @@ def second_order_disp(text, tol, targets, case=None):
             if w and (k, plane) in cgrp:                   # no C_e (cq = 0): the member load does not couple
                 Elo = (1 - T) * pk.ex
                 kk = L * L / (4 * PI2_LO * Elo * I)
-                re2[(k, plane)] = w * w * L ** 5 / (720 * Elo * I * (1 - P * kk))
+                re2[(k, plane)] = _dy(w * w * L ** 5 / (720 * Elo * I * (1 - P * kk)), True)   # UP: 64-bit (cost)
     keys = sorted(re2)
     extra = _EXTRA.pop("outputs", [])
     try:
@@ -980,7 +980,8 @@ def second_order_disp(text, tol, targets, case=None):
         sth = ZE._sqrt_up(th)
         for r in rs:
             ny = r["ny_t"] + r["ey"]
-            ex_ = sum(c * q_ for c, q_ in zip(r["c_groups"], rq)) + sth * (r["ey"] + th / (1 - th) * ny) * Rq
+            ex_ = sum((_dy(c * q_, True) for c, q_ in zip(r["c_groups"], rq)), F(0)) + \
+                sth * (r["ey"] + th / (1 - th) * ny) * Rq             # each term rounded UP (2026-11-02: the cost)
             r["lo"] -= ex_
             r["hi"] += ex_
     # OUTWARD to 64-bit dyadics (2026-11-02, the night battery's sweep G: the proved outputs came back with up to 3361
