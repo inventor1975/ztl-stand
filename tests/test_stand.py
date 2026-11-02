@@ -3145,5 +3145,24 @@ check("space frame EN 5.3.2 SWAY IMPERFECTION: every combination becomes four (+
       sorted(_imr) == ["ULS+X", "ULS+Y", "ULS-X", "ULS-Y"] and _imr["ULS+X"][2] - _imb == _imi,
       (sorted(_imr), str(_imr["ULS+X"][2] - _imb), str(_imi)))
 
+_ia3 = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0.1, 0.2, 0, 0, 5e-5\n" + _bn3 + _be3
+         + "D, 1, ALL, 0\nF, 9, FZ, -200000\nF, 9, MX, 2000\nF, 9, MY, 3000\n")
+_ir3 = _F3.judge_interaction(_ia3, "0", F(235) * 10 ** 6, "b", "c")
+_iw3 = max(_ir3["members"], key=lambda x: F(x["u_6_62"].split()[0]))
+def _chi(lb, a):
+    ph = 0.5 * (1 + a * (lb - 0.2) + lb * lb)
+    return 1 / (ph + _math.sqrt(ph * ph - lb * lb))
+_ilb = _math.sqrt(0.01 * 235e6 / (_math.pi ** 2 * 210e9 * 3e-5 / 64))
+_ina, _inb = 200e3 / (_chi(_ilb, 0.34) * 2.35e6), 200e3 / (_chi(_ilb, 0.49) * 2.35e6)
+_ima, _imb = 2000 / (8e-4 * 235e6), 3000 / (6e-4 * 235e6)
+_iu1 = _ina + (1 + 0.6 * _ina) * _ima + (1 + 0.6 * _inb) * _imb
+_iu2 = _inb + 0.8 * (1 + 0.6 * _ina) * _ima + (1 + 0.6 * _inb) * _imb
+_ip1, _ip2 = float(F(_iw3["u_6_61"].split()[0])), float(F(_iw3["u_6_62"].split()[0]))
+check("space frame EN 6.3.3 BIAXIAL (Annex B Method 2, C_m = 1): a cantilever column under 200 kN and end moments "
+      "about both axes — the proved (6.61) and (6.62) utilisations sit just above the hand values 0.30096 / 0.32109 "
+      "(within 0.1 %: alpha_cr proved from below), EARNED",
+      _ir3["verdict"] == "EARNED" and _iu1 <= _ip1 <= _iu1 * 1.001 and _iu2 <= _ip2 <= _iu2 * 1.001,
+      (_ip1, _iu1, _ip2, _iu2))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

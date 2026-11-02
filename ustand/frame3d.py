@@ -1077,6 +1077,88 @@ def judge_buckling(text, tol, fy, curve_y, curve_z, gamma_m1=F(1), case=None):
                            "6.3.3 interaction"}
 
 
+def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None):
+    """EN 1993-1-1 6.3.3, formulas (6.61) AND (6.62), Annex B Method 2, BIAXIAL, every compressed member of a space
+    frame. Axis a = bending in the x'-y' plane (about z', I_z, W_a = I_z/(TKY/2)), axis b = in the x'-z' plane (about y',
+    I_y, W_b = I_y/(TKZ/2)); curve_z / curve_y the buckling curves for those planes.
+      n_a = N_Ed/(chi_a N_Rk/gamma_M1) <= gamma_M1/H_a, H_a = alpha_cr g_a(lb), N_cr = alpha_cr N_Ed (as judge_buckling;
+      the same lb for both axes: alpha_cr is the frame's lowest mode, so N_cr is from below for either);
+      k_aa <= C_m (1 + 0.6 n_a), k_bb <= C_m (1 + 0.6 n_b) (Table B.1's caps, elastic class 3); k_ab = k_bb,
+      k_ba = 0.8 k_aa; C_m = 1 (Table B.3's largest); M_Rk = W_el fy (elastic: safe for class 1-2);
+      M_Ed per plane = the largest proved |M| at the member's ends (nodal loads: linear along the member).
+    (6.61): n_a + k_aa M_a/M_a,Rk + k_ab M_b/M_b,Rk <= 1;  (6.62): n_b + k_ba M_a/M_a,Rk + k_bb M_b/M_b,Rk <= 1
+    (the M/M_Rk terms with gamma_M1). EARNED when both hold for every member in every case; OPEN otherwise.
+    PREMISES (said): no lateral-torsional / torsional buckling (chi_LT = 1, members not susceptible to torsional
+    deformation), class 1-3, no member loads (QLOAD refuses, as stability)."""
+    from . import judge_ztl  # noqa: F401
+    from .frame import CURVES, _curve_premises, _sqrt_down, _g_lower
+    import zenergy as ZE
+    _no_qload(text, "the interaction check")
+    for cv in (curve_z, curve_y):
+        if cv not in CURVES:
+            raise Frame3DError(f"{cv!r}: a buckling curve is one of {', '.join(CURVES)}")
+    aa, ab = CURVES[curve_z], CURVES[curve_y]
+    _curve_premises(aa); _curve_premises(ab)
+    parts, fs, dof, emap = energy_system(text, tol)
+    n = len(dof)
+    names = list(fs) if case is None else [case]
+    ks = sorted(emap)
+    es, items, scale = [], [], []
+    for k in ks:
+        m = emap[k]
+        pk, L = m["p"], m["L"]
+        if not pk.tky or not pk.tkz:
+            raise Frame3DError(f"member {k}: the interaction check needs TKY and TKZ")
+        for plane, (bb, cc, I) in (("a", ("bz", "cz", pk.izz)), ("b", ("by", "cy", pk.iyy))):
+            for end, sb in (("I", 1), ("J", -1)):
+                e = [F(0)] * n
+                for i_, v in m[bb].items():
+                    e[i_] += I / L * v
+                for i_, v in m[cc].items():
+                    e[i_] += I / L * 3 * sb * v
+                es.append(e); items.append((k, plane)); scale.append(m["part"])
+    rs_all = ZE.certify_cases(parts, [fs[c] for c in names], es, n, scale=scale)
+    rows, worst = [], F(0)
+    for c, rs in zip(names, rs_all):
+        st = stability_lower(text, tol, c)
+        lam = st.get("lam_low")
+        Mx = {}
+        for (k, plane), r in zip(items, rs):
+            ex = emap[k]["p"].ex
+            Mx[(k, plane)] = max(Mx.get((k, plane), F(0)), abs(ex * r["lo"]), abs(ex * r["hi"]))
+        for k in ks:
+            nlo = st.get("Nlo", {}).get(k, F(0))
+            if nlo >= 0:
+                continue
+            N = -nlo
+            pk = emap[k]["p"]
+            if not lam or lam <= 0:
+                rows.append({"case": c, "member": k, "verdict": "OPEN", "why": "alpha_cr not proved positive"})
+                continue
+            lb = _sqrt_down(pk.area * F(fy) / (lam * N))
+            Ha, Hb = lam * _g_lower(lb, aa), lam * _g_lower(lb, ab)
+            if Ha <= 0 or Hb <= 0:
+                rows.append({"case": c, "member": k, "verdict": "OPEN", "why": "no positive buckling resistance"})
+                continue
+            g = F(gamma_m1)
+            na, nb = g / Ha, g / Hb
+            kaa, kbb = 1 + F(3, 5) * na, 1 + F(3, 5) * nb
+            kab, kba = kbb, F(4, 5) * kaa
+            ma = Mx[(k, "a")] * g / ((pk.izz / (pk.tky / 2)) * F(fy))
+            mb = Mx[(k, "b")] * g / ((pk.iyy / (pk.tkz / 2)) * F(fy))
+            u1 = na + kaa * ma + kab * mb
+            u2 = nb + kba * ma + kbb * mb
+            u = max(u1, u2)
+            worst = max(worst, u)
+            rows.append({"case": c, "member": k, "N_Ed_max": _show(N, 1), "M_a_max": _show(Mx[(k, "a")], 1),
+                         "M_b_max": _show(Mx[(k, "b")], 1), "u_6_61": _show(u1, 1), "u_6_62": _show(u2, 1),
+                         "verdict": "EARNED" if u <= 1 else "OPEN"})
+    vs = [r["verdict"] for r in rows]
+    return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN", "utilisation_max": _show(worst, 1),
+            "members": rows, "path": "EN 1993-1-1 6.3.3 (6.61) and (6.62), Annex B Method 2, biaxial, C_m = 1",
+            "premises": "no lateral-torsional / torsional buckling; class 1-3 (elastic resistance); no member loads"}
+
+
 def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
         print(__doc__)
