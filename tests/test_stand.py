@@ -2981,5 +2981,24 @@ check("space frame STABILITY: a vertical cantilever column (16 elements) — the
       "Euler load and equals the 2D frame's bound for the same column (within 1e-6)",
       0.999 * _ew < _s3a < _ew and _s3b < _es and abs(_s3b - _c2d) <= 1e-6 * _c2d, (_s3a, _ew, _s3b, _c2d, _es))
 
+_bn3 = "".join(f"N, {k + 1}, 0, 0, {F(4 * k, 8)}\n" for k in range(9))
+_be3 = "".join(f"E, {k + 1}, {k + 2}\n" for k in range(8))
+_bcol3 = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0, 0, 0, 0, 5e-5\n" + _bn3 + _be3
+          + "D, 1, ALL, 0\nF, 9, FZ, -50000\nF, 9, FX, 1000\n")
+_kb3 = _math.sqrt(50000 / (210e9 * 3e-5))
+_xb3 = 1000 / (50000 * _kb3) * (_math.tan(_kb3 * 4) - _kb3 * 4)          # the exact beam-column tip deflection
+_rb3 = _F3.second_order_disp(_bcol3, "0", ["U(9,X)"])["BASE"]["U(9,X)"]
+_d2s = _d2p.replace("F, 3, FY, -20000", "F, 2, FY, -300000\nF, 3, FY, -300000")
+_d3s = _d3p.replace("F, 3, FY, -20000", "F, 2, FY, -300000\nF, 3, FY, -300000")
+_r2s = FRM.second_order_case(_d2s, "0.5%", [], disp=[(2, "X")])["disp"][("U", 2, "X")]
+_r3s = _F3.second_order_disp(_d3s, "0.5%", ["U(2,X)"])["BASE"]["U(2,X)"]
+check("space frame SECOND ORDER (physical, the continuum members): a cantilever column under 50 kN axial and 1 kN "
+      "lateral — the exact beam-column deflection H (tan kL - kL)/(P k) = 3.5676 mm lies inside the proved range "
+      "(5 % above first order); a plane portal laid in 3D gives the 2D module's second-order range (within 1e-12)",
+      float(_rb3[0]) <= _xb3 <= float(_rb3[1])
+      and abs(float(_r3s[0]) - float(_r2s[0])) <= 1e-12 * abs(float(_r2s[0]))
+      and abs(float(_r3s[1]) - float(_r2s[1])) <= 1e-12 * abs(float(_r2s[1])),
+      (float(_rb3[0]), _xb3, float(_rb3[1]), float(_r3s[0]), float(_r2s[0])))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

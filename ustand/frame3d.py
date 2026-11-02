@@ -406,13 +406,15 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     T = max((p["t"] for p in parts), default=F(0))
     ks = [k for k in emap if emap[k]["a"]]
     rs = ZE.certify_many(parts, f, [dict(emap[k]["a"]) for k in ks], n, scale=[emap[k]["part"] for k in ks])
-    Nlo, Nnom = {}, {}
+    Nlo, Nhi, Nnom = {}, {}, {}
     for k, r in zip(ks, rs):
         fac = ex * area / emap[k]["L"]
         Nlo[k] = min(fac * r["lo"], fac * r["hi"])
+        Nhi[k] = max(fac * r["lo"], fac * r["hi"])
         Nnom[k] = fac * r["nominal"]
+    base = {"case": names[0], "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
     if all(v >= 0 for v in Nlo.values()):
-        return {"case": names[0], "lam_low": None, "why": "no compressed member: no buckling under these loads"}
+        return dict(base, lam_low=None, why="no compressed member: no buckling under these loads")
     Elo = (1 - T) * ex
     K0 = ZE.matrix(parts, n)
     forms = {}                                      # (k, plane) -> (G, Q, B, kk)
@@ -439,7 +441,7 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     except Exception:
         lam_est = None
     if not lam_est or lam_est <= 0:
-        return {"case": names[0], "lam_low": None, "why": "no buckling mode found at the nominal forces"}
+        return dict(base, lam_low=None, why="no buckling mode found at the nominal forces")
     keys = list(K0)
     kidx = {key: q for q, key in enumerate(keys)}
     def _arr(mat):
@@ -504,7 +506,7 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
             break
         hi, start = start, start / 10
     else:
-        return {"case": names[0], "lam_low": F(0), "lam_est": lam_est, "why": "not even a small factor proved"}
+        return dict(base, lam_low=F(0), lam_est=lam_est, why="not even a small factor proved")
     lo = start
     for _ in range(40):
         mid = (lo + hi) / 2
@@ -514,8 +516,91 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
             hi = mid
         if hi - lo <= rel * hi:
             break
-    return {"case": names[0], "lam_low": lo, "lam_est": lam_est, "unknowns": n,
-            "premise": "doubly symmetric sections; torsional and flexural-torsional buckling NOT checked"}
+    return dict(base, lam_low=lo, lam_est=lam_est, unknowns=n,
+                premise="doubly symmetric sections; torsional and flexural-torsional buckling NOT checked")
+
+
+def _glob3(i, j, vax, rax, rsign, dof, l):
+    """A local 4-vector over (v_i, r_i, v_j, r_j) as a global row."""
+    g = {}
+    for (n, ax, rot, sg), c in zip(((i, vax, False, 1), (i, rax, True, rsign), (j, vax, False, 1), (j, rax, True, rsign)), l):
+        if not c:
+            continue
+        names = ("RX", "RY", "RZ") if rot else ("X", "Y", "Z")
+        for q in range(3):
+            if ax[q] and (n, names[q]) in dof:
+                g[dof[(n, names[q])]] = g.get(dof[(n, names[q])], F(0)) + c * sg * ax[q]
+    return {a: v for a, v in g.items() if v}
+
+
+def second_order_disp(text, tol, targets, case=None):
+    """PHYSICAL SECOND ORDER displacements of a space frame (one load case, or every case): the 2D frame's
+    second_order_case for displacements in both bending planes —
+        A0 = K0 + sum_members N_mid (G_y + G_z);  parts: the stiffness (radius t), each member's G_y + G_z (radius
+        (N_hi - N_lo)/2);  D in [0, C], C = sum_members sum_planes max(P^2 k/(1 - P k), N_hi+) Q_plane;
+    ZTL zenergy.certify_general (theta proved, first order + rest). Requires the proved critical factor > 1.
+    PREMISES (stated): axial forces from the first-order analysis; doubly symmetric sections, no torsional /
+    flexural-torsional buckling; Euler-Bernoulli members."""
+    from . import judge_ztl  # noqa: F401
+    from .frame import PI2_LO, _psd_terms, _dy
+    import zenergy as ZE
+    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    parts, fs, dof, emap = energy_system(text, tol)
+    names = list(fs) if case is None else [case]
+    if len(names) > 1:
+        return {c: second_order_disp(text, tol, targets, c)[c] for c in names}
+    st = stability_lower(text, tol, names[0])
+    lam = st.get("lam_low")
+    if st.get("lam_est") is not None and (lam is None or lam <= 1):
+        return {names[0]: {"verdict": "OPEN", "why": f"the critical factor is not proved above 1 ({lam})"}}
+    Nlo, Nhi = st["Nlo"], st["Nhi"]
+    n = len(dof)
+    T = max((p["t"] for p in parts), default=F(0))
+    Elo = (1 - T) * ex
+    A0 = ZE.matrix(parts, n)
+    gparts, cterms = [], []
+    for k, (i, j) in enumerate(elems, 1):
+        if k not in Nlo:
+            continue
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], theta)
+        Gloc = [[F(v) / (30 * L) for v in r] for r in [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L],
+                                                        [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
+        Bloc = [[F(v) / L for v in r] for r in [[1, 0, -1, 0], [0, 0, 0, 0], [-1, 0, 1, 0], [0, 0, 0, 0]]]
+        Qloc = [[Gloc[a][b] - Bloc[a][b] for b in range(4)] for a in range(4)]
+        mid0 = (Nlo[k] + Nhi[k]) / 2
+        mid = _dy(mid0, False)
+        rad = _dy((Nhi[k] - Nlo[k]) / 2 + abs(mid0 - mid), True)
+        Gt = []
+        P = max(F(0), -Nlo[k])
+        for (vax, rax, sg, I) in ((yp, zp, 1, izz), (zp, yp, -1, iyy)):
+            terms = [(d, _glob3(i, j, vax, rax, sg, dof, l)) for d, l in _psd_terms(Gloc)]
+            Gt += [(d, g) for d, g in terms if g]
+            kk = L * L / (4 * PI2_LO * Elo * I)
+            if P * kk >= 1:
+                return {names[0]: {"verdict": "OPEN", "why": f"element {k} could buckle between its nodes: subdivide"}}
+            cq = max(P * P * kk / (1 - P * kk), max(F(0), Nhi[k]))
+            if cq:
+                for d, l in _psd_terms(Qloc):
+                    g = _glob3(i, j, vax, rax, sg, dof, l)
+                    if g:
+                        cterms.append((_dy(cq * d, True), g))
+        for d, g in Gt:
+            items = list(g.items())
+            for a, ga in items:
+                for b, gb in items:
+                    if a >= b:
+                        A0[(a, b)] = A0.get((a, b), F(0)) + mid * d * ga * gb
+        if rad and Gt:
+            gparts.append({"t": rad, "terms": Gt})
+    es = []
+    for tg in targets:
+        nd, d = _target(tg)
+        e = [F(0)] * n
+        if (nd, d) in dof:
+            e[dof[(nd, d)]] = F(1)
+        es.append(e)
+    rs = ZE.certify_general_many(A0, parts + gparts, cterms, fs[names[0]], es, n)
+    return {names[0]: {tg: (r["lo"], r["hi"], r["nominal"]) for tg, r in zip(targets, rs)}}
 
 
 def main(argv):
