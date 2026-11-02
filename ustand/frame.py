@@ -740,7 +740,7 @@ def stability_upper(text, tol="0"):
     # continuum's (a false upper bound possible) and a column in mean tension had "no buckling"
     qax, Gab = {}, {}
     for k, (a_, w_, L_) in read_qloads(text).items():
-        if a_:
+        if a_ and not _MUTANT.get("axial_mean"):          # sabotage (tests only): the pre-2026-11-02 N_mean witness
             i, j = elems[k - 1]
             c_, s_ = (nodes[j][0] - nodes[i][0]) / L_, (nodes[j][1] - nodes[i][1]) / L_
             Ga_, Gb_ = _geo_split(L_)

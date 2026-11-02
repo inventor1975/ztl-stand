@@ -23,6 +23,8 @@ bound deliberately broken (MUTATION) — they must find violations, or the check
   G  random SPACE frames (2026-11-02) vs bench/night/frame3d_ref.py, an independent numpy FE: first order at the
      nodes, second-order displacements, member stresses and end moments both sides, the stability bracket; loads
      scaled to lambda_ref in [1.3, 3]. G-MUTG3 drops frame3d's geometric stiffness, G-MUTM3 the end moment's N (G u).
+  H  2D frames with AXIAL member loads on the columns (2026-11-02): lambda_low <= lambda_fine <= lambda_high;
+     H-MUTA restores the old witness (N_mean G for a linear N — a false upper bound for a self-weight column).
   A and B also check BOTH SIDES since 2026-11-02 (B: the 8-element mesh's end moments, with the geometric part): every proved end-moment interval must contain an INDEPENDENT numpy FE
      reference (K_E - P G rows, 64 elements) — the old stress check shared the stand's K_E-row formula
 Writes bench/night/REPORT.json and REPORT.md.
@@ -415,6 +417,77 @@ def stability_case(seed):
     return {"checked": 1, "violations": int(bad), "example": None if not bad else {"seed": seed, "lo": lo, "fine": lam_fine}}
 
 
+def axial_case(seed):
+    """sweep H (2026-11-02): 2D frames with AXIAL member loads on the columns (down: self-weight; up: a pull) —
+    lambda_low <= lambda_fine <= lambda_high, the fine mesh 16 elements per member with each sub-element's N at its
+    middle (the linear N's own variation O(h^2): tolerance 1e-3). H-MUTA: the stability witness with N_mean G."""
+    import numpy as np
+    import scipy.sparse as sp
+    import scipy.sparse.linalg as sla
+    rng = random.Random(seed)
+    if rng.random() < 1 / 3:
+        # a single column (the path's own case): fixed base, tip load, self-weight or a pull, 1-4 elements
+        Lc, me = rng.choice([3, 4, 6]), rng.choice([1, 2, 4])
+        top = "" if rng.random() < 0.5 else "D, 2, UX, 0\n"
+        deck = (f"ET, 1, BEAM3\nMP, EX, 1, 210e9\nR, 1, 0.01, 8e-5, 0.2\nN, 1, 0, 0\nN, 2, 0, {Lc}\nE, 1, 2\n"
+                f"D, 1, UX, 0\nD, 1, UY, 0\nD, 1, ROTZ, 0\n{top}F, 2, FY, -{rng.randint(0, 200) * 1000}\nF, 2, FX, 1\n"
+                f"QLOAD, 1, FY, {rng.choice([-1, 1]) * rng.randint(10, 300) * 1000}")
+        if me > 1:
+            deck = FRM.subdivide(deck, me)
+        return _axial_check(seed, deck)
+    deck, ne, roof = random_frame(rng, with_q=rng.random() < 0.5)
+    if rng.random() < 0.5:                       # the member loads alone carry the columns (self-weight-like)
+        deck = "\n".join(ln for ln in deck.splitlines() if not (ln.startswith("F,") and "FY" in ln))
+    nd_, el_ = FRM.read_deck(deck)[:2]
+    cols = [k for k, (i, j) in enumerate(el_, 1) if nd_[i][0] == nd_[j][0]]
+    for k in cols:
+        if rng.random() < 0.7:
+            deck += f"\nQLOAD, {k}, FY, {rng.choice([-1, 1]) * rng.randint(2000, 40000) * rng.choice([1, 4])}"
+    return _axial_check(seed, deck)
+
+
+def _axial_check(seed, deck):
+    import numpy as np
+    import scipy.sparse as sp
+    import scipy.sparse.linalg as sla
+    st = FRM.stability_lower(deck, "0")
+    su = FRM.stability_upper(deck)
+    if st.get("lam_low") is None:
+        return {"checked": 0, "skipped": 1, "why": st.get("why")}
+    fine = FRM.subdivide(deck, 16)
+    nodes, elems, loads, supports, ex, (area, izz) = FRM.read_deck(fine)
+    parts, f, dof, emap, _ = FRM.energy_system_full(fine, "0")
+    n = len(dof)
+    K0 = ZE._float_matrix(ZE.matrix(parts, n), n)
+    u1 = sla.spsolve(K0.tocsc(), np.array([float(x) for x in f]))
+    rr, cc, dd = [], [], []
+    for k, (i, j) in enumerate(elems, 1):
+        L = emap[k]["L"]
+        c, s_ = (nodes[j][0] - nodes[i][0]) / L, (nodes[j][1] - nodes[i][1]) / L
+        N = float(ex * area / L) * sum(float(v) * u1[i_] for i_, v in emap[k]["a"].items())
+        for (a, b), v in FRM._geo_entries(nodes, i, j, L, c, s_, dof).items():
+            rr.append(a); cc.append(b); dd.append(N * float(v))
+    G = sp.csr_matrix((dd, (rr, cc)), shape=(n, n))
+    try:
+        mu = float(sla.eigsh(-G, k=1, M=K0, which="LA", return_eigenvectors=False, v0=np.ones(n))[0])
+    except Exception as ex_:
+        return {"checked": 0, "skipped": 1, "why": f"fine eigsh: {ex_}"[:120]}
+    if mu <= 0:
+        return {"checked": 0, "skipped": 1, "why": "the fine mesh has no buckling mode"}
+    lam_fine = 1 / mu
+    lo, hi = float(st["lam_low"]), su.get("lam_high")
+    viol, n_chk, ex_ = 0, 1, None
+    if lo > lam_fine * (1 + 1e-3):
+        viol += 1
+        ex_ = {"seed": seed, "lo": lo, "fine": lam_fine}
+    if hi is not None:
+        n_chk += 1
+        if float(hi) < lam_fine * (1 - 1e-3):
+            viol += 1
+            ex_ = ex_ or {"seed": seed, "hi": float(hi), "fine": lam_fine}
+    return {"checked": n_chk, "violations": viol, "example": ex_}
+
+
 def truss_case(seed):
     import numpy as np
     import scipy.sparse as sp
@@ -543,6 +616,9 @@ def mutate(kind=True):
     end-moment corrections dropped ("ends only, Hermite moments" — 325 instead of 337.67 MPa on a beam-column); or
     (kind "geo") the end moment's geometric part N (G u) dropped (the K_E-row moment fixed on 2026-11-02); "geo3" /
     "geom3" the same breaks in ustand.frame3d (the whole geometric stiffness / the moment's N (G u))."""
+    if kind == "axial":
+        FRM._MUTANT["axial_mean"] = True
+        return FRM._MUTANT.clear
     if kind in ("geo3", "geom3"):
         from ustand import frame3d as F3
         F3._MUTANT["no_geo" if kind == "geo3" else "no_geo_moment"] = True
@@ -561,7 +637,7 @@ DIST = []
 
 
 SWEEPS = {"A": (beam_column_case, 400), "B": (frame_case, 120), "C": (stability_case, 120), "D": (truss_case, 200),
-          "E": (general_case, 600), "F": (plate_case, 24), "G": (space_frame_case, 60)}
+          "E": (general_case, 600), "F": (plate_case, 24), "G": (space_frame_case, 60), "H": (axial_case, 120)}
 
 
 def _run(args):
@@ -577,7 +653,7 @@ def _run(args):
         if restore:
             restore()
     r["seconds"] = time.time() - t0
-    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3"}.get(mutated, "-MUT" if mutated else "")
+    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3", "axial": "-MUTA"}.get(mutated, "-MUT" if mutated else "")
     return key + tag, r
 
 
@@ -596,6 +672,7 @@ def main(argv):
         tasks += [("B", 950000 + s, "geo") for s in range(int(30 * scale))]
         tasks += [("G", 960000 + s, "geo3") for s in range(int(20 * scale))]
         tasks += [("G", 970000 + s, "geom3") for s in range(int(20 * scale))]
+        tasks += [("H", 980000 + s, "axial") for s in range(int(60 * scale))]
     random.Random(7).shuffle(tasks)
     t0 = time.time()
     agg = {}
