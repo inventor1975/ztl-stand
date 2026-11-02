@@ -47,3 +47,13 @@ Upper bound: the Hermite field itself (admissible), the frames' witness.
 6.3.2.2: lambda_LT = sqrt(W fy / M_cr), M_cr = alpha_LT M_Ed; chi_LT by curves (6.3.2.2 general case first; the
 rolled-section case 6.3.2.3 later). 6.3.3: chi_LT into (6.61)/(6.62) with k_ij of Annex B for members susceptible to
 torsional deformation.
+
+## Status 2026-11-02 (MEASURED)
+IN: `ustand/ltb.py` (both I_w > 0 — Hermite twist — and I_w = 0 — linear twist), `frame3d.judge_ltb` (EN 6.3.2),
+`judge_interaction(curve_lt=...)` (chi_LT, Table B.2 k_zy <= 1), the night battery's sweep I and I-MUTL.
+Both sides against exact formulas: uniform moment (I_w > 0 and = 0), torsional / flexural columns; against a
+96-element fine mesh: moment gradients, member-load parabolas, N + M, boxes.
+Cost (24 cores, 0.5 % moduli, I_w = 0 as the generator gives): 160 members 9.7 s, 1330 members 76 s — after the
+caches, the outward 64-bit inputs and the pool (before: 108 s and 975 s).
+OPEN: axial member loads (refused, named); single-symmetric sections (Wagner) and load height; global frame
+lateral-torsional modes (the joint-moment question) — version 1 is member level with forks.
