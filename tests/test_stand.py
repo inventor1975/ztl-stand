@@ -3177,5 +3177,41 @@ check("space frame SECOND ORDER WITH A MEMBER LOAD: a pinned beam-column under 1
       "(the member-load correction r_e^2 <= w^2 L^5/(720 EI (1 - Pk)) per plane); 10.7 % above first order",
       float(_tr3[0]) <= _tx3 <= float(_tr3[1]), (float(_tr3[0]), _tx3, float(_tr3[1])))
 
+# THE GEOMETRIC END-MOMENT TERM (2026-11-02): a beam-column under 1 MN and a uniform transverse load — the proved
+# stress range must CONTAIN the exact peak from BOTH sides (before the fix the K_E-row moment put the lower bound 0.05 MPa
+# above the exact value: the omitted N (G u)_th was 52 N m)
+_gt = []
+for _pl, _dl, _I, _W, _rr in (("y", "FY", 8e-5, 8e-4, ("UZ", "ROTY")), ("z", "FZ", 3e-5, 6e-4, ("UY", "ROTZ"))):
+    for _ne in (4, 8):
+        _gd = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0.1, 0.2, 0, 0, 5e-5\n"
+               + "".join(f"N, {k + 1}, {F(4 * k, _ne)}, 0, 0\n" for k in range(_ne + 1))
+               + "".join(f"E, {k + 1}, {k + 2}\n" for k in range(_ne))
+               + f"D, 1, UX, 0\nD, 1, UY, 0\nD, 1, UZ, 0\nD, 1, ROTX, 0\nD, {_ne + 1}, UY, 0\nD, {_ne + 1}, UZ, 0\n"
+               + "".join(f"D, {k + 1}, {_rr[0]}, 0\nD, {k + 1}, {_rr[1]}, 0\n" for k in range(1, _ne))
+               + f"F, {_ne + 1}, FX, -1000000\n" + "".join(f"QLOAD, {k + 1}, {_dl}, -5000\n" for k in range(_ne)))
+        _k2 = 1e6 / (210e9 * _I)
+        _gx = 1e6 / 0.01 + 5000 / _k2 * (1 / _math.cos(_math.sqrt(_k2) * 2) - 1) / _W
+        _gr = _F3.second_order_stress(_gd, "0", F(1000) * 10 ** 6)
+        _gl = max(float(F(m_["sigma_abs"][0].split()[0])) for m_ in _gr["members"])
+        _gh = max(float(F(m_["sigma_abs"][1].split()[0])) for m_ in _gr["members"])
+        _gt.append((_pl, _ne, _gl <= _gx <= _gh, _gl, _gx, _gh))
+check("space frame SECOND-ORDER STRESS WITH A MEMBER LOAD, both planes: the exact beam-column peak lies INSIDE the "
+      "proved range from both sides (the end moment is the (K_E + N G) row; the plane x'-z' with its flipped sign)",
+      all(t_[2] for t_ in _gt), _gt)
+_g2 = []
+for _ne in (4, 8):
+    _gd2 = ("ET, 1, BEAM3\nMP, EX, 1, 210e9\nR, 1, 0.01, 8e-5, 0.2\n"
+            + "".join(f"N, {k + 1}, {F(4 * k, _ne)}, 0\n" for k in range(_ne + 1))
+            + "".join(f"E, {k + 1}, {k + 2}\n" for k in range(_ne))
+            + f"D, 1, UX, 0\nD, 1, UY, 0\nD, {_ne + 1}, UY, 0\nF, {_ne + 1}, FX, -1000000\n"
+            + "".join(f"QLOAD, {k + 1}, FY, -5000\n" for k in range(_ne)))
+    _gc = FRM.second_order_case(_gd2, "0", [(k + 1, F(10) ** 12) for k in range(_ne)])["checks"]
+    _mj = [float(F(x.split()[0])) for x in _gc[_ne // 2 - 1]["M_ends"]["J"]]
+    _k2 = 1e6 / (210e9 * 8e-5)
+    _mx = -5000 / _k2 * (1 / _math.cos(_math.sqrt(_k2) * 2) - 1)
+    _g2.append((_ne, _mj[0] <= _mx <= _mj[1], _mj, _mx))
+check("2D frame, the same fix: the proved end moment at the midspan node of the loaded beam-column CONTAINS the exact "
+      "moment (q/k^2)(sec(kL/2) - 1) — before, the K_E-row moment missed it by 52 N m", all(t_[1] for t_ in _g2), _g2)
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

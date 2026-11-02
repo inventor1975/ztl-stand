@@ -889,10 +889,9 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
     maxima added: safe even if they peak at different points). Judged by ZTL over [a proved lower bound of max|sigma|
     (the end corners), its upper bound]. Premises as second_order_disp; no member loads."""
     from . import judge_ztl  # noqa: F401
-    from .frame import _sqrt_down
+    from .frame import _sqrt_down, PI2_LO
     import zenergy as ZE
     from znumjudge import parse_quantities, judge_sheet_claim
-    _no_qload(text, "second-order member stresses")
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
     ks = sorted(emap) if ks is None else ks
@@ -914,7 +913,12 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
             if not m["p"].tky or not m["p"].tkz:
                 raise Frame3DError(f"member {k}: stresses need TKY and TKZ")
             outs.append(vec({i_: area / L * v for i_, v in m["a"].items()})); items.append((k, "N"))
-            for plane, (bb, cc, I) in (("y", ("bz", "cz", izz)), ("z", ("by", "cy", iyy))):
+            ii, jj = m["ij"]
+            xp_, yp_, zp_ = m["axes"]
+            Gl_ = [[F(v) / (30 * L) for v in r] for r in [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L],
+                                                           [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
+            for plane, (bb, cc, I), (vax, rax, sg) in (("y", ("bz", "cz", izz), (yp_, zp_, 1)),
+                                                        ("z", ("by", "cy", iyy), (zp_, yp_, -1))):
                 for end, sb in (("I", 1), ("J", -1)):
                     g = {}
                     for i_, v in m[bb].items():
@@ -922,17 +926,25 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                     for i_, v in m[cc].items():
                         g[i_] = g.get(i_, F(0)) + I / L * 3 * sb * v
                     outs.append(vec(g)); items.append((k, plane + end))
+                # the GEOMETRIC part of the end moment (2026-11-02): the (K_E + N G) row, not K_E's alone — the G row
+                # at each end in the plane's own coordinates (v, th_z) or (w, phi = -th_y), unscaled
+                for end, row in (("I", Gl_[1]), ("J", Gl_[3])):
+                    outs.append(vec(_glob3(ii, jj, vax, rax, sg, dof, row))); items.append((k, plane + "G" + end))
         _EXTRA["outputs"] = outs
         res = second_order_disp(text, tol, [], c)[c]
         if isinstance(res, dict) and res.get("verdict") == "OPEN":
             return {"verdict": "OPEN", "why": res["why"], "case": c}
         X = _EXTRA.pop("last")
         rs, th, T = X["rs"], X["theta"], X["T"]
+        qmap = _qloads(text).get(c, {})
         fu_hi = rs[-1]["hi"]
         unC = ZE._sqrt_up(th * max(fu_hi, F(0)) / (1 - th))
         rng = {}
         for (k, what), r in zip(items, rs[:-1]):
             ex = emap[k]["p"].ex
+            if "G" in what:
+                rng[(k, what)] = (r["lo"], r["hi"])     # (G u)_th: not scaled by the modulus
+                continue
             rng[(k, what)] = (min(ex * (1 - T) * r["lo"], ex * (1 + T) * r["lo"]),
                               max(ex * (1 - T) * r["hi"], ex * (1 + T) * r["hi"]))
         for k in ks:
@@ -942,14 +954,43 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
             Nl, Nh = rng[(k, "N")]
             P = max(F(0), -Nl)
             mmax, Mends = {}, {}
-            for plane, I in (("y", izz), ("z", iyy)):
+            xp_, yp_, zp_ = emap[k]["axes"]
+            qk = qmap.get(k, (F(0), F(0), F(0)))
+            for plane, I, axis in (("y", izz, yp_), ("z", iyy, zp_)):
                 cth = ZE._sqrt_up(X["cq"].get((k, plane), F(0)) * 4 * L / 30)
                 corr = cth * unC
+                w = abs(sum(qk[t] * axis[t] for t in range(3)))
+                if w:
+                    # the member load: its clamped-beam end moment |w| L^2/12 (sign-free widening) and the 2D frame's
+                    # own-load end correction sqrt(C_thth) r_e, r_e^2 <= w^2 L^5/(720 E I (1 - P k))
+                    kk_ = L * L / (4 * PI2_LO * (1 - T) * ex * I)
+                    corr += w * L * L / 12 + cth * ZE._sqrt_up(w * w * L ** 5 / (720 * (1 - T) * ex * I * (1 - P * kk_)))
                 Ml = {e_: (rng[(k, plane + e_)][0] - corr, rng[(k, plane + e_)][1] + corr) for e_ in ("I", "J")}
+                # + N (G u) at I, - N (G u) at J in the (v, th_z) plane; the (w, phi) plane's output is -(K_E u)_phi,
+                # so there the signs flip. N in [N_lo, N_hi] (the axial forces of the geometric stiffness).
+                pl_s = 1 if plane == "y" else -1
+                nl_, nh_ = X["Nlo"].get(k, F(0)), X["Nhi"].get(k, F(0))
+                for e_, es_ in (("I", 1), ("J", -1)):
+                    gl_, gh_ = rng[(k, plane + "G" + e_)]
+                    prods = [pl_s * es_ * a_ * b_ for a_ in (nl_, nh_) for b_ in (gl_, gh_)]
+                    Ml[e_] = (Ml[e_][0] + min(prods), Ml[e_][1] + max(prods))
                 Mends[plane] = Ml
                 mend = max(max(abs(a_), abs(b_)) for a_, b_ in Ml.values())
                 mint = mend
-                if P:
+                if w:
+                    # M = M_lin + m, m'' +- k^2 m = -q -+ k^2 M_lin, m = 0 at the ends: the Dirichlet Green function is
+                    # positive, its integral <= (L^2/8)/(1 - k^2 L^2/8) in compression, <= L^2/8 in tension (2D frame)
+                    if P:
+                        k2 = P / ((1 - T) * ex * I)
+                        if k2 * L * L / 8 >= 1:
+                            return {"verdict": "OPEN", "why": f"element {k}: too slender between its nodes (subdivide)"}
+                        mint = mend + (w + k2 * mend) * (L * L / 8) / (1 - k2 * L * L / 8)
+                    if Nh > 0:
+                        kt = Nh / ((1 - T) * ex * I)
+                        mint = max(mint, mend + (w + kt * mend) * L * L / 8)
+                    if not P and not Nh > 0:
+                        mint = mend + w * L * L / 8
+                elif P:
                     phi2 = L * L * P / (4 * (1 - T) * ex * I)
                     (al, ah), (bl, bh) = Ml["I"], Ml["J"]
                     if (al > 0 and bh < 0) or (ah < 0 and bl > 0):

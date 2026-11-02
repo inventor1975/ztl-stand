@@ -1021,6 +1021,16 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
             for i_, v in m["c"].items():
                 g[i_] = g.get(i_, F(0)) + izz / m["L"] * 3 * sb * v
             es.append(vec(g)); items.append((kchk, end))
+        # THE GEOMETRIC PART OF THE END MOMENT (2026-11-02, found by frame3d's beam-column under a member load: the
+        # end moment was the K_E row alone; in second order it is the (K_E + N G) row — the omitted N (G u)_th was
+        # 52 N m of 11 kN m there, and its sign can make an UPPER bound false): the G row at each end, unscaled
+        ii, jj = elems[kchk - 1]
+        L_ = m["L"]
+        c_g, s_g = (nodes[jj][0] - nodes[ii][0]) / L_, (nodes[jj][1] - nodes[ii][1]) / L_
+        Gl_ = [[F(v) / (30 * L_) for v in r] for r in [[36, 3 * L_, -36, 3 * L_], [3 * L_, 4 * L_ * L_, -3 * L_, -L_ * L_],
+                                                        [-36, -3 * L_, 36, -3 * L_], [3 * L_, -L_ * L_, -3 * L_, 4 * L_ * L_]]]
+        for end, row in (("I", Gl_[1]), ("J", Gl_[3])):
+            es.append(vec(_glob(ii, jj, c_g, s_g, dof, row))); items.append((kchk, "G" + end))
     for (nd, d) in disp:                              # nodal displacements (second order, the continuum frame)
         es.append(vec({dof[(nd, d)]: F(1)})); items.append((("U", nd, d), "U"))
     es.append(list(f)); items.append((None, "f"))
@@ -1050,7 +1060,9 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     unC = ZE._sqrt_up(theta * max(fu_hi, F(0)) / (1 - theta))     # ||u||_C <= sqrt(theta) ||u||_A0, A >= (1-theta)A0
     rng = {}
     for (kchk, what), r in zip(items, rs):
-        if kchk is not None and what != "U":
+        if kchk is not None and what in ("GI", "GJ"):
+            rng[(kchk, what)] = (r["lo"], r["hi"])            # (G u)_th: not scaled by the modulus
+        elif kchk is not None and what != "U":
             rng[(kchk, what)] = (min(ex * (1 - T) * r["lo"], ex * (1 + T) * r["lo"]),
                                  max(ex * (1 - T) * r["hi"], ex * (1 + T) * r["hi"]))
     W = izz / (h / 2) if h else None
@@ -1064,6 +1076,12 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
             corr += cth * ZE._sqrt_up(re2[kchk])
         mb = -qd[kchk][1] * L * L / 12 if kchk in qd else F(0)     # the P = 0 inner solution's end moment (both ends)
         Ml = {e_: (rng[(kchk, e_)][0] + mb - corr, rng[(kchk, e_)][1] + mb + corr) for e_ in ("I", "J")}
+        # + N (G u)_th at I, - N (G u)_th at J (the outputs are +(K_E u)_thi and -(K_E u)_thj), N in [N_lo, N_hi]
+        nl_, nh_ = Nlo.get(kchk, F(0)), Nhi.get(kchk, F(0))
+        for e_, sg_ in (("I", 1), ("J", -1)):
+            gl_, gh_ = rng[(kchk, "G" + e_)]
+            prods = [sg_ * a_ * b_ for a_ in (nl_, nh_) for b_ in (gl_, gh_)]
+            Ml[e_] = (Ml[e_][0] + min(prods), Ml[e_][1] + max(prods))
         mend = max(max(abs(a_), abs(b_)) for a_, b_ in Ml.values())
         # interior: M'' + k^2 M = 0 in a compressed member (k^2 = P/EI); max |M| <= m (1 + psi)/(2 cos^2 phi),
         # phi = kL/2, and NO interior maximum when psi <= cos(2 phi) (>= 1 - 2 phi^2); in tension none at all
