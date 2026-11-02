@@ -3000,5 +3000,38 @@ check("space frame SECOND ORDER (physical, the continuum members): a cantilever 
       and abs(float(_r3s[1]) - float(_r2s[1])) <= 1e-12 * abs(float(_r2s[1])),
       (float(_rb3[0]), _xb3, float(_rb3[1]), float(_r3s[0]), float(_r2s[0])))
 
+_bcs3 = """ET, 1, BEAM4
+MP, EX, 1, 210e9
+MP, PRXY, 1, 0.3
+R, 1, 0.01, 8e-5, 3e-5, 0.1, 0.2, 0, 0, 5e-5
+N, 1, 0, 0, 0
+N, 2, 2, 0, 0
+N, 3, 4, 0, 0
+E, 1, 2
+E, 2, 3
+D, 1, UX, 0
+D, 1, UY, 0
+D, 1, UZ, 0
+D, 1, ROTX, 0
+D, 3, UY, 0
+D, 3, UZ, 0
+D, 2, UZ, 0
+D, 2, ROTY, 0
+D, 1, ROTY, 0
+D, 3, ROTY, 0
+F, 3, FX, -3000000
+F, 1, MZ, 20000
+F, 3, MZ, -20000
+"""
+_s3a = _F3.second_order_stress(_bcs3, "0", F(400) * 10 ** 6)
+_s3b = _F3.second_order_stress(_bcs3, "0", F(330) * 10 ** 6)
+_s3lo = float(F(_s3a["worst"]["sigma_abs"][0].split()[0]))
+_s3hi = float(F(_s3a["worst"]["sigma_abs"][1].split()[0]))
+check("space frame SECOND-ORDER STRESSES: the pinned beam-column (3 MN, end moments 20 kN m, single curvature) — "
+      "the exact peak P/A + M/cos(kL/2)/W = 337.67 MPa lies inside the proved max |sigma| (end-moment continuum "
+      "correction, beam-column interior bound); fy 400 EARNED, fy 330 REFUTED (the proved lower bound exceeds it)",
+      _s3lo * 1e-6 <= _bcx * 1e-6 <= _s3hi * 1e-6 and _s3a["verdict"] == "EARNED" and _s3b["verdict"] == "REFUTED",
+      (_s3lo, _bcx, _s3hi, _s3a["verdict"], _s3b["verdict"]))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

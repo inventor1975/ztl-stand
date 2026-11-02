@@ -558,7 +558,7 @@ def second_order_disp(text, tol, targets, case=None):
     T = max((p["t"] for p in parts), default=F(0))
     Elo = (1 - T) * ex
     A0 = ZE.matrix(parts, n)
-    gparts, cterms = [], []
+    gparts, cterms, cqd = [], [], {}
     for k, (i, j) in enumerate(elems, 1):
         if k not in Nlo:
             continue
@@ -579,6 +579,7 @@ def second_order_disp(text, tol, targets, case=None):
             if P * kk >= 1:
                 return {names[0]: {"verdict": "OPEN", "why": f"element {k} could buckle between its nodes: subdivide"}}
             cq = max(P * P * kk / (1 - P * kk), max(F(0), Nhi[k]))
+            cqd[(k, "y" if I is izz and vax is yp else "z")] = cq
             if cq:
                 for d, l in _psd_terms(Qloc):
                     g = _glob3(i, j, vax, rax, sg, dof, l)
@@ -599,8 +600,125 @@ def second_order_disp(text, tol, targets, case=None):
         if (nd, d) in dof:
             e[dof[(nd, d)]] = F(1)
         es.append(e)
-    rs = ZE.certify_general_many(A0, parts + gparts, cterms, fs[names[0]], es, n)
+    extra = _EXTRA.pop("outputs", [])
+    rs = ZE.certify_general_many(A0, parts + gparts, cterms, fs[names[0]], es + extra + [list(fs[names[0]])], n)
+    _EXTRA["last"] = {"rs": rs[len(es):], "theta": rs[0]["theta"], "cq": cqd, "Nlo": Nlo, "Nhi": Nhi, "T": T,
+                      "lam": lam, "emap": emap, "dof": dof, "n": n}
     return {names[0]: {tg: (r["lo"], r["hi"], r["nominal"]) for tg, r in zip(targets, rs)}}
+
+
+_EXTRA = {}
+
+
+def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
+    """|sigma| <= fy/gamma_M0 for every member in PHYSICAL SECOND ORDER (the 2D frame's second_order_case, both
+    planes): end moments M = E p (I/L)(b +- 3c).u per plane, each widened by the continuum correction
+    sqrt(C_thth) ||u||_C (||u||_C <= sqrt(theta f.u/(1 - theta))); the interior maximum per plane by the
+    beam-column bounds (none in tension, none if psi <= 1 - 2 phi^2, else min of m(1 + psi)/(2 cos^2 phi) and
+    sqrt(A^2 + B^2)); the corner stress bounded by |N|/A + M_z,max (TKY/2)/I_z + M_y,max (TKZ/2)/I_y (the two planes'
+    maxima added: safe even if they peak at different points). Judged by ZTL over [a proved lower bound of max|sigma|
+    (the end corners), its upper bound]. Premises as second_order_disp; no member loads."""
+    from . import judge_ztl  # noqa: F401
+    from .frame import _sqrt_down
+    import zenergy as ZE
+    from znumjudge import parse_quantities, judge_sheet_claim
+    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    if not tky or not tkz:
+        raise Frame3DError("member stresses need TKY and TKZ")
+    parts, fs, dof, emap = energy_system(text, tol)
+    names = list(fs) if case is None else [case]
+    ks = sorted(emap) if ks is None else ks
+    lim = F(fy) / F(gamma_m0)
+    n = len(dof)
+    fr = lambda x: f"{x.numerator}/{x.denominator}"
+    qs, atoms, rows = [], [], []
+    for c in names:
+        def vec(g):
+            e = [F(0)] * n
+            for i_, v in g.items():
+                e[i_] = v
+            return e
+        outs, items = [], []
+        for k in ks:
+            m = emap[k]
+            L = m["L"]
+            outs.append(vec({i_: area / L * v for i_, v in m["a"].items()})); items.append((k, "N"))
+            for plane, (bb, cc, I) in (("y", ("bz", "cz", izz)), ("z", ("by", "cy", iyy))):
+                for end, sb in (("I", 1), ("J", -1)):
+                    g = {}
+                    for i_, v in m[bb].items():
+                        g[i_] = g.get(i_, F(0)) + I / L * v
+                    for i_, v in m[cc].items():
+                        g[i_] = g.get(i_, F(0)) + I / L * 3 * sb * v
+                    outs.append(vec(g)); items.append((k, plane + end))
+        _EXTRA["outputs"] = outs
+        res = second_order_disp(text, tol, [], c)[c]
+        if isinstance(res, dict) and res.get("verdict") == "OPEN":
+            return {"verdict": "OPEN", "why": res["why"], "case": c}
+        X = _EXTRA.pop("last")
+        rs, th, T = X["rs"], X["theta"], X["T"]
+        fu_hi = rs[-1]["hi"]
+        unC = ZE._sqrt_up(th * max(fu_hi, F(0)) / (1 - th))
+        rng = {}
+        for (k, what), r in zip(items, rs[:-1]):
+            rng[(k, what)] = (min(ex * (1 - T) * r["lo"], ex * (1 + T) * r["lo"]),
+                              max(ex * (1 - T) * r["hi"], ex * (1 + T) * r["hi"]))
+        for k in ks:
+            L = emap[k]["L"]
+            Nl, Nh = rng[(k, "N")]
+            P = max(F(0), -Nl)
+            mmax, Mends = {}, {}
+            for plane, I in (("y", izz), ("z", iyy)):
+                cth = ZE._sqrt_up(X["cq"].get((k, plane), F(0)) * 4 * L / 30)
+                corr = cth * unC
+                Ml = {e_: (rng[(k, plane + e_)][0] - corr, rng[(k, plane + e_)][1] + corr) for e_ in ("I", "J")}
+                Mends[plane] = Ml
+                mend = max(max(abs(a_), abs(b_)) for a_, b_ in Ml.values())
+                mint = mend
+                if P:
+                    phi2 = L * L * P / (4 * (1 - T) * ex * I)
+                    (al, ah), (bl, bh) = Ml["I"], Ml["J"]
+                    if (al > 0 and bh < 0) or (ah < 0 and bl > 0):
+                        psi = F(0)
+                    elif (al > 0 and bl > 0) or (ah < 0 and bh < 0):
+                        A_ = (min(abs(al), abs(ah)), max(abs(al), abs(ah)))
+                        B_ = (min(abs(bl), abs(bh)), max(abs(bl), abs(bh)))
+                        psi = min(F(1), min(A_[1], B_[1]) / max(A_[0], B_[0]))
+                    else:
+                        psi = F(1)
+                    if psi > 1 - 2 * phi2:
+                        if phi2 >= 2:
+                            return {"verdict": "OPEN", "why": f"element {k}: too slender between its nodes (subdivide)"}
+                        c_lo = 1 - phi2 / 2
+                        b1 = mend * (1 + psi) / (2 * c_lo * c_lo)
+                        ph_lo = _sqrt_down(phi2)
+                        s_lo = ph_lo * (1 - ph_lo * ph_lo / 6)
+                        msum = max(abs(al + bl), abs(ah + bh), abs(al + bh), abs(ah + bl))
+                        mdif = max(abs(bh - al), abs(ah - bl))
+                        b2 = ZE._sqrt_up((msum / (2 * c_lo)) ** 2 + (mdif / (2 * s_lo)) ** 2) if s_lo > 0 else b1
+                        mint = max(mend, min(b1, b2))
+                mmax[plane] = mint
+            hi_abs = max(abs(Nl), abs(Nh)) / area + mmax["y"] * (tky / 2) / izz + mmax["z"] * (tkz / 2) / iyy
+            lo_abs = F(0)                                   # a proved lower bound of max |sigma|: the end corners
+            for e_ in ("I", "J"):
+                (yl, yh), (zl, zh) = Mends["y"][e_], Mends["z"][e_]
+                for sy in (1, -1):
+                    for sz in (1, -1):
+                        ys = sorted((sy * yl * (tky / 2) / izz, sy * yh * (tky / 2) / izz))
+                        zs = sorted((-sz * zl * (tkz / 2) / iyy, -sz * zh * (tkz / 2) / iyy))
+                        a_, b_ = Nl / area + ys[0] + zs[0], Nh / area + ys[1] + zs[1]
+                        lo_abs = max(lo_abs, F(0) if a_ <= 0 <= b_ else min(abs(a_), abs(b_)))
+            nm = f"s{len(qs)}"
+            qs.append(f"{nm}=[{fr(lo_abs)},{fr(hi_abs)}] earned:frame3d-second-order")
+            atoms.append(f"{nm} <= {fr(lim)}")
+            rows.append({"case": c, "element": k, "sigma_abs": [_show(lo_abs, -1), _show(hi_abs, 1)]})
+    q, m = parse_quantities(", ".join(qs))
+    r = judge_sheet_claim(" & ".join(atoms), q, m)
+    worst = max(rows, key=lambda x: F(x["sigma_abs"][1].split()[0]))
+    return {"verdict": r["disposition"] + (f" ({r['polarity']})" if r.get("polarity") else ""), "limit": _show(lim),
+            "worst": worst, "members": rows,
+            "note": "PHYSICAL SECOND ORDER (continuum members, both planes); premises: first-order axial forces, no "
+                    "torsional / flexural-torsional buckling, no member loads"}
 
 
 def main(argv):
