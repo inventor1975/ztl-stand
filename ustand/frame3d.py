@@ -197,6 +197,21 @@ def _has_qload(text):
     return any(raw.split("!")[0].strip().upper().startswith("QLOAD") for raw in text.splitlines())
 
 
+def _no_axial_qload(text, what):
+    """Transverse member loads leave the axial force constant along the member (the stability machinery's premise);
+    an AXIAL component makes N vary — not yet in 3D (the 2D frame splits G for it)."""
+    if not _has_qload(text):
+        return
+    nodes, elems, loads, supports, props = read_deck(text)
+    for c, per in _qloads(text).items():
+        for k, q in per.items():
+            i, j = elems[k - 1]
+            L, xp, yp, zp = _axes(nodes[i], nodes[j], props[k].theta)
+            if sum(q[t] * xp[t] for t in range(3)):
+                raise Frame3DError(f"{what}: member {k} carries an AXIAL member load (QLOAD along it) — N varies along "
+                                   f"the member, not yet in 3D (transverse member loads are in)")
+
+
 def _no_qload(text, what):
     if _has_qload(text):
         raise Frame3DError(f"{what} with member loads (QLOAD) is not yet in version 1 — displacements are exact with "
@@ -622,7 +637,7 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     import numpy as np
     import scipy.sparse as sp
     import scipy.sparse.linalg as sla
-    _no_qload(text, "stability")
+    _no_axial_qload(text, "stability")
     nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
@@ -833,6 +848,30 @@ def second_order_disp(text, tol, targets, case=None):
         es.append(e)
     extra = _EXTRA.pop("outputs", [])
     rs = ZE.certify_general_many(A0, parts + gparts, cterms, fs[names[0]], es + extra + [list(fs[names[0]])], n)
+    # TRANSVERSE MEMBER LOADS in second order (the 2D frame's v2, per plane): inside a member the load couples to the
+    # nodal motion through the condensed inner field, |g.d| <= sum_e ||d||_{C_e} r_e with
+    # r_e^2 <= w^2 L^5 / (720 E I (1 - P k)) per plane; on any output |e.u_g| <= sqrt(theta)(||y~|| + e_y)/(1-theta) R
+    qs = _qloads(text).get(names[0], {})
+    re2 = F(0)
+    for k, q in qs.items():
+        i, j = elems[k - 1]
+        pk = props[k]
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], pk.theta)
+        P = max(F(0), -Nlo.get(k, F(0)))
+        for axis, I in ((yp, pk.izz), (zp, pk.iyy)):
+            w = sum(q[t] * axis[t] for t in range(3))
+            if w:
+                Elo = (1 - T) * pk.ex
+                kk = L * L / (4 * PI2_LO * Elo * I)
+                re2 += w * w * L ** 5 / (720 * Elo * I * (1 - P * kk))
+    if re2:
+        Rq = ZE._sqrt_up(re2)
+        th = rs[0]["theta"]
+        sth = ZE._sqrt_up(th)
+        for r in rs:
+            ex_ = sth * (r["ny_t"] + r["ey"]) / (1 - th) * Rq
+            r["lo"] -= ex_
+            r["hi"] += ex_
     _EXTRA["last"] = {"rs": rs[len(es):], "theta": rs[0]["theta"], "cq": cqd, "Nlo": Nlo, "Nhi": Nhi, "T": T,
                       "lam": lam, "emap": emap, "dof": dof, "n": n}
     return {names[0]: {tg: (r["lo"], r["hi"], r["nominal"]) for tg, r in zip(targets, rs)}}
@@ -853,6 +892,7 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
     from .frame import _sqrt_down
     import zenergy as ZE
     from znumjudge import parse_quantities, judge_sheet_claim
+    _no_qload(text, "second-order member stresses")
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
     ks = sorted(emap) if ks is None else ks
@@ -967,7 +1007,7 @@ def stability_upper(text, case=None):
     import zenergy as ZE
     import numpy as np
     import scipy.sparse.linalg as sla
-    _no_qload(text, "stability")
+    _no_axial_qload(text, "stability")
     nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, "0")
     c = list(fs)[0] if case is None else case

@@ -3091,12 +3091,12 @@ _rl = [(_F3.range_of(_bm3 + "D, 3, ALL, 0\nRELEASE, 1, I, MZ, MY\nRELEASE, 2, J,
                      "QLOAD, 2, FZ, -500\n", "0", "U(2,Z)")["lo"], F(-500) * 5 * 256 / (384 * _E3x * _Iy3x))]
 _qref = False
 try:
-    _F3.stability_lower(_bm3 + "QLOAD, 1, FY, -500\n", "0")
+    _F3.stability_lower(_bm3 + "QLOAD, 1, FX, -500\n", "0")        # an AXIAL member load: N varies — not yet
 except _F3.Frame3DError:
     _qref = True
 check("space frame END RELEASES and MEMBER LOADS: hinges by RELEASE (the member's own end rotation) and QLOAD's "
       "consistent nodal loads give EXACTLY P L^3/(48EI) (pinned, point load), q L^4/(8EI) (cantilever), q L^4/(384EI) "
-      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); stability with QLOAD refuses (not yet), said",
+      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); stability with an AXIAL QLOAD refuses (not yet), said",
       all(a == b for a, b in _rl) and _qref, [(str(a), str(b)) for a, b in _rl])
 
 _qs3 = []
@@ -3163,6 +3163,19 @@ check("space frame EN 6.3.3 BIAXIAL (Annex B Method 2, C_m = 1): a cantilever co
       "(within 0.1 %: alpha_cr proved from below), EARNED",
       _ir3["verdict"] == "EARNED" and _iu1 <= _ip1 <= _iu1 * 1.001 and _iu2 <= _ip2 <= _iu2 * 1.001,
       (_ip1, _iu1, _ip2, _iu2))
+
+_tq3 = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0.1, 0.2, 0, 0, 5e-5\n"
+         + "".join(f"N, {k + 1}, {F(4 * k, 4)}, 0, 0\n" for k in range(5)) + "".join(f"E, {k + 1}, {k + 2}\n" for k in range(4))
+         + "D, 1, UX, 0\nD, 1, UY, 0\nD, 1, UZ, 0\nD, 1, ROTX, 0\nD, 5, UY, 0\nD, 5, UZ, 0\n"
+         + "".join(f"D, {k + 1}, UZ, 0\nD, {k + 1}, ROTY, 0\n" for k in range(1, 4))
+         + "F, 5, FX, -1000000\n" + "".join(f"QLOAD, {k + 1}, FY, -5000\n" for k in range(4)))
+_tu3 = _math.sqrt(1e6 / (210e9 * 8e-5)) * 2
+_tx3 = -5 * 5000 * 256 / (384 * 210e9 * 8e-5) * 12 * (2 / _math.cos(_tu3) - 2 - _tu3 ** 2) / (5 * _tu3 ** 4)
+_tr3 = _F3.second_order_disp(_tq3, "0", ["U(3,Y)"])["BASE"]["U(3,Y)"]
+check("space frame SECOND ORDER WITH A MEMBER LOAD: a pinned beam-column under 1 MN and a uniform transverse load — "
+      "Timoshenko's exact midspan deflection (5qL^4/384EI)(12(2 sec u - 2 - u^2)/(5u^4)) lies inside the proved range "
+      "(the member-load correction r_e^2 <= w^2 L^5/(720 EI (1 - Pk)) per plane); 10.7 % above first order",
+      float(_tr3[0]) <= _tx3 <= float(_tr3[1]), (float(_tr3[0]), _tx3, float(_tr3[1])))
 
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")
