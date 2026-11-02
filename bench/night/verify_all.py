@@ -28,6 +28,8 @@ bound deliberately broken (MUTATION) — they must find violations, or the check
   I  one member's lateral-torsional / torsional critical factor (ustand.ltb, 2026-11-02) vs bench/night/ltb_ref.py:
      the lower bound over a box below the fine mesh at points inside it, the witness above; I-MUTL drops the
      continuum correction.
+  J  second-order member STRESSES with an AXIAL member load (2026-11-03): one random column vs a solve_bvp continuum
+     reference, end moments both sides and |sigma| from above; J-MUTA: the geometric moment with N_mid G.
   A and B also check BOTH SIDES since 2026-11-02 (B: the 8-element mesh's end moments, with the geometric part): every proved end-moment interval must contain an INDEPENDENT numpy FE
      reference (K_E - P G rows, 64 elements) — the old stress check shared the stand's K_E-row formula
 Writes bench/night/REPORT.json and REPORT.md.
@@ -495,6 +497,76 @@ def _axial_check(seed, deck):
     return {"checked": n_chk, "violations": viol, "example": ex_}
 
 
+def axial_stress_case(seed):
+    """sweep J (2026-11-03): second-order member STRESSES with an AXIAL member load (frame.second_order_case) on one
+    random column, vertical, 1/2/4/8 elements: a cantilever (tip loads H, P) or a pinned member (end moments M_a,
+    M_b, top load P); the axial load down (self-weight) or up (a pull). Reference: scipy solve_bvp on the continuum,
+    nothing shared — theta' = M/EI, M' = C + N theta, C' = 0, v' = theta, N(x) = F_y + q_y (L - x) (tension +; the
+    nodal moments enter as M(0) = -M_a, M(L) = M_b). Both sides: every proved end-moment interval holds the reference
+    (one global sign for the member), every proved |sigma| bound is not below the reference's max over its element.
+    J-MUTA: the end moment's geometric part with N_mid G (not N_a G_a + N_b G_b)."""
+    import numpy as np
+    from scipy.integrate import solve_bvp
+    rng = random.Random(seed)
+    Lc, ne = rng.choice([2, 3, 4, 6]), rng.choice([1, 2, 4, 8])
+    E, A, I, h = 210e9, 0.01, 8e-5, 0.2
+    EI = E * I
+    qy = rng.choice([-1, -1, 1]) * rng.randint(5, 250) * 1000
+    P = rng.randint(0, 600) * 1000
+    cant = rng.random() < 0.5
+    H = rng.randint(1, 40) * 1000 if cant else 0
+    Ma = 0 if cant else rng.choice([-1, 1]) * rng.randint(5, 60) * 1000
+    Mb = 0 if cant else rng.choice([-1, 1]) * rng.randint(0, 60) * 1000
+    deck = (f"ET, 1, BEAM3\nMP, EX, 1, 210e9\nR, 1, {A}, {I}, {h}\nN, 1, 0, 0\nN, 2, 0, {Lc}\nE, 1, 2\n"
+            + ("D, 1, UX, 0\nD, 1, UY, 0\nD, 1, ROTZ, 0\n" if cant else "D, 1, UX, 0\nD, 1, UY, 0\nD, 2, UX, 0\n")
+            + f"F, 2, FY, -{P}\n" + (f"F, 2, FX, {H}\n" if H else "")
+            + (f"F, 1, MZ, {Ma}\n" if Ma else "") + (f"F, 2, MZ, {Mb}\n" if Mb else "") + f"QLOAD, 1, FY, {qy}")
+    if ne > 1:
+        deck = FRM.subdivide(deck, ne)
+    r = FRM.second_order_case(deck, "0", [(k + 1, F(10) ** 12) for k in range(ne)])
+    if not r.get("checks"):
+        return {"checked": 0, "skipped": 1, "why": (r.get("why") or "")[:100]}
+    Nf = lambda x: -P + qy * (Lc - x)
+    def f(x, y):
+        return np.vstack([y[1], y[2] / EI, y[3] + Nf(x) * y[1], 0 * y[3]])
+    if cant:
+        bc = lambda ya, yb: np.array([ya[0], ya[1], yb[2], ya[3] - H])
+    else:
+        bc = lambda ya, yb: np.array([ya[0], yb[0], ya[2] + Ma, yb[2] - Mb])
+    x0 = np.linspace(0, Lc, 401)
+    sol = solve_bvp(f, bc, x0, np.zeros((4, x0.size)), tol=1e-9, max_nodes=100000)
+    if not sol.success:
+        return {"checked": 0, "skipped": 1, "why": "reference bvp did not converge"}
+    xx = np.linspace(0, Lc, 20001)
+    M = sol.sol(xx)[2]
+    sig = np.abs(Nf(xx)) / A + np.abs(M) / (I / (h / 2))
+    mref = max(np.abs(M).max(), 1.0)
+    viol, n_chk, ex_ = 0, 0, None
+    best = None
+    for sg in (1, -1):                          # one global sign for the member's end moments
+        bad = []
+        for k, c in enumerate(r["checks"]):
+            for e_, xe in (("I", Lc * k / ne), ("J", Lc * (k + 1) / ne)):
+                m = sg * float(sol.sol(xe)[2])
+                lo, hi = (float(F(v.split()[0])) for v in c["M_ends"][e_])
+                if not (lo - 1e-6 * mref <= m <= hi + 1e-6 * mref) and not (lo - 1e-6 * mref <= -m <= hi + 1e-6 * mref):
+                    bad.append((k + 1, e_, m, lo, hi))
+        if best is None or len(bad) < len(best):
+            best = bad
+    n_chk += 2 * ne
+    if best:
+        viol += len(best)
+        ex_ = {"seed": seed, "moment": best[0]}
+    for k, c in enumerate(r["checks"]):
+        hi = float(F(c["sigma_abs_max"].split()[0]))
+        seg = (xx >= Lc * k / ne - 1e-12) & (xx <= Lc * (k + 1) / ne + 1e-12)
+        n_chk += 1
+        if hi < sig[seg].max() * (1 - 1e-6):
+            viol += 1
+            ex_ = ex_ or {"seed": seed, "elem": k + 1, "sigma_bound": hi, "ref": float(sig[seg].max())}
+    return {"checked": n_chk, "violations": viol, "example": ex_}
+
+
 def ltb_case(seed):
     """sweep I (2026-11-02): ustand.ltb's member critical factor against bench/night/ltb_ref.py (Gauss-quadrature
     Hermite elements, 96 per member, nothing shared): random doubly symmetric sections (I_w = 0 sometimes), spans,
@@ -674,6 +746,9 @@ def mutate(kind=True):
     if kind == "axial":
         FRM._MUTANT["axial_mean"] = True
         return FRM._MUTANT.clear
+    if kind == "axialm":
+        FRM._MUTANT["axial_const_moment"] = True
+        return FRM._MUTANT.clear
     if kind == "ltb":
         from ustand import ltb as LTB
         LTB._MUTANT["no_corr"] = True
@@ -696,7 +771,8 @@ DIST = []
 
 
 SWEEPS = {"A": (beam_column_case, 400), "B": (frame_case, 120), "C": (stability_case, 120), "D": (truss_case, 200),
-          "E": (general_case, 600), "F": (plate_case, 24), "G": (space_frame_case, 60), "H": (axial_case, 120), "I": (ltb_case, 150)}
+          "E": (general_case, 600), "F": (plate_case, 24), "G": (space_frame_case, 60), "H": (axial_case, 120), "I": (ltb_case, 150),
+          "J": (axial_stress_case, 150)}
 
 
 def _run(args):
@@ -712,7 +788,7 @@ def _run(args):
         if restore:
             restore()
     r["seconds"] = time.time() - t0
-    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3", "axial": "-MUTA", "ltb": "-MUTL"}.get(
+    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3", "axial": "-MUTA", "ltb": "-MUTL", "axialm": "-MUTA"}.get(
         mutated, "-MUT" if mutated else "")
     return key + tag, r
 
@@ -734,6 +810,7 @@ def main(argv):
         tasks += [("G", 970000 + s, "geom3") for s in range(int(20 * scale))]
         tasks += [("H", 980000 + s, "axial") for s in range(int(60 * scale))]
         tasks += [("I", 990000 + s, "ltb") for s in range(int(60 * scale))]
+        tasks += [("J", 991000 + s, "axialm") for s in range(int(60 * scale))]
     random.Random(7).shuffle(tasks)
     t0 = time.time()
     agg = {}
