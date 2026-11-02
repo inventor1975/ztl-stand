@@ -3350,6 +3350,18 @@ _ncr = min(_mlt.pi ** 2 * float(_Elt * _Izl) / 36,
            (float(_Glt * _Jl) + _mlt.pi ** 2 * float(_Elt * _Iwl) / 36) / float(_seclt[3]))
 _l2 = _LTB.alpha_lower(F(6), _seclt, (F(-100000), F(-100000)), (F(0), F(0)), (F(0), F(0)), F(0))
 _h2 = _LTB.alpha_upper(F(6), _seclt, F(0), F(0), F(0), F(-100000))
+_secw0 = (_Elt * _Izl, _Glt * _Jl, F(0), (_Iyl + _Izl) / _Al)              # I_w = 0: the LINEAR-twist branch
+_l3 = _LTB.alpha_lower(F(6), _secw0, (F(0), F(0)), (_Mlt, _Mlt), (_Mlt, _Mlt), F(0))
+_h3 = _LTB.alpha_upper(F(6), _secw0, _Mlt, _Mlt, F(0), F(0))
+_mcr0 = _mlt.pi / 6 * _mlt.sqrt(float(_Elt * _Izl * _Glt * _Jl))
+_secX = (_Elt * F("8e-5"), _Glt * F("2e-7"), F(0), F("16e-5") / F("5e-3"))   # torsion governs (cruciform-like)
+_l4 = _LTB.alpha_lower(F(6), _secX, (F(-100000), F(-100000)), (F(0), F(0)), (F(0), F(0)), F(0))
+_h4 = _LTB.alpha_upper(F(6), _secX, F(0), F(0), F(0), F(-100000))
+_ntX = float(_Glt * F("2e-7")) / float(_secX[3]) / 100000
+check("LATERAL-TORSIONAL with NO warping stiffness (I_w = 0: linear twist, 2026-11-02 — the Hermite branch proved "
+      "nothing there): uniform moment (pi/L) sqrt(E I_z G J) and a torsion-governed column G J / i0^2, both sides",
+      float(_l3) <= _mcr0 / 100000 <= float(_h3) and 0.99 * _ntX <= float(_l4) <= _ntX <= float(_h4) * (1 + 1e-12),
+      (float(_l3), _mcr0 / 100000, float(_h3), float(_l4), _ntX, float(_h4)))
 _keep_corr = _LTB._correction
 _LTB._correction = lambda *a: [[F(0)] * 8 for _ in range(8)]            # MUTATION: the continuum correction dropped
 _l1m = _LTB.alpha_lower(F(6), _seclt, (F(0), F(0)), (_Mlt, _Mlt), (_Mlt, _Mlt), F(0), m=2, rel=F(1, 10 ** 6))

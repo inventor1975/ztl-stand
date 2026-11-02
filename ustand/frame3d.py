@@ -1445,6 +1445,30 @@ def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None,
                          else "no lateral-torsional / torsional buckling") + "; class 1-3 (elastic resistance)"}
 
 
+def _ltb_one(args):
+    from . import ltb as LTB
+    try:
+        from threadpoolctl import threadpool_limits
+        with threadpool_limits(1):
+            return LTB.alpha_lower(*args[:6], m=args[6])
+    except ImportError:
+        return LTB.alpha_lower(*args[:6], m=args[6])
+
+
+def _ltb_many(tasks, jobs=None):
+    """ustand.ltb.alpha_lower for many members: a fork pool from 8 tasks (one BLAS thread each), in order"""
+    import os
+    jobs = jobs or min(len(tasks), max(1, (os.cpu_count() or 2) - 2), 22)
+    if len(tasks) < 8 or jobs < 2:
+        return [_ltb_one(t) for t in tasks]
+    import multiprocessing as mp
+    with mp.get_context("fork").Pool(jobs) as pool:
+        out = pool.map(_ltb_one, tasks, chunksize=max(1, len(tasks) // (4 * jobs)))
+        pool.close()
+        pool.join()
+    return out
+
+
 def judge_ltb(text, tol, fy, curve_lt, gamma_m1=F(1), case=None, m=8, ks=None, phi=None):
     """EN 1993-1-1 6.3.2 LATERAL-TORSIONAL BUCKLING of every member (2026-11-02, DESIGN-LTB.md, version 1):
     M_Ed <= chi_LT W_y fy / gamma_M1 with M_cr = alpha_LT M_Ed, alpha_LT the PROVED lower bound of the member's own
@@ -1457,7 +1481,6 @@ def judge_ltb(text, tol, fy, curve_lt, gamma_m1=F(1), case=None, m=8, ks=None, p
     restraint there, warping free); doubly symmetric section, loads at the shear centre; I_w from R's 11th value
     (0 = none, the conservative side). EARNED when every member clears it; OPEN otherwise."""
     from . import judge_ztl  # noqa: F401
-    from . import ltb as LTB
     from .frame import CURVES, _curve_premises, _sqrt_down, _g_lower, _side_peak
     import zenergy as ZE
     phi = PHI0 if phi is None else F(phi)
@@ -1498,7 +1521,7 @@ def judge_ltb(text, tol, fy, curve_lt, gamma_m1=F(1), case=None, m=8, ks=None, p
                 e[i_] += I / L * 3 * sb * v
             es.append(e); items.append(k); scale.append(mm["part"])
     rs_all = ZE.certify_cases(parts, [fs[c] for c in names], es, n, scale=scale)
-    rows, worst = [], F(0)
+    rows, worst, todo = [], F(0), []
     for c, rs in zip(names, rs_all):
         Nlo, Nhi, _nn, _nl, qax = _axial_ranges(text, c, parts, fs, dof, emap, nodes, elems, props)
         qmap = _qloads(text).get(c, {})
@@ -1525,25 +1548,29 @@ def judge_ltb(text, tol, fy, curve_lt, gamma_m1=F(1), case=None, m=8, ks=None, p
             Elo = (1 - T) * pk.ex
             sec = (Elo * Iweak, Elo / (2 * (1 + pk.nu)) * pk.ixx, Elo * pk.iw, (pk.iyy + pk.izz) / pk.area)
             Nr = (min(Nlo.get(k, F(0)), F(0)), min(Nhi.get(k, F(0)), F(0)))   # tension ignored: the safe side
-            alpha = LTB.alpha_lower(L, sec, Nr, MAr, MBr, kap, m=m)
-            Med = _side_peak(list(MAr), list(MBr), kap)
-            if alpha is None or not Med:
-                rows.append({"case": c, "member": k, "verdict": "EARNED", "why": "no bending, no compression"})
-                continue
-            if alpha <= 0:
-                rows.append({"case": c, "member": k, "verdict": "OPEN", "why": "alpha_LT not proved positive"})
-                continue
-            W = Istr / (tk / 2)
-            lb = _sqrt_down(W * F(fy) / (alpha * Med))
-            g = _g_lower(lb, a_lt)
-            if g <= 0:
-                rows.append({"case": c, "member": k, "verdict": "OPEN", "why": "no positive resistance proved"})
-                continue
-            u = F(gamma_m1) / (alpha * g)
-            worst = max(worst, u)
-            rows.append({"case": c, "member": k, "alpha_LT_low": _show(alpha, -1), "M_Ed_max": _show(Med, 1),
-                         "lambda_LT_bound": _show(lb, -1),
-                         "utilisation": _show(u, 1), "verdict": "EARNED" if u <= 1 else "OPEN"})
+            todo.append((c, k, (L, sec, Nr, MAr, MBr, kap, m), (MAr, MBr, kap, pl, pk)))
+    # the members' bounds side by side (2026-11-02: ~0.5 s each after ltb's caches; a fork pool, one BLAS thread each)
+    alphas = _ltb_many([t[2] for t in todo])
+    for (c, k, _args, (MAr, MBr, kap, pl, pk)), alpha in zip(todo, alphas):
+        Istr, tk = (pk.izz, pk.tky) if pl == "a" else (pk.iyy, pk.tkz)
+        Med = _side_peak(list(MAr), list(MBr), kap)
+        if alpha is None or not Med:
+            rows.append({"case": c, "member": k, "verdict": "EARNED", "why": "no bending, no compression"})
+            continue
+        if alpha <= 0:
+            rows.append({"case": c, "member": k, "verdict": "OPEN", "why": "alpha_LT not proved positive"})
+            continue
+        W = Istr / (tk / 2)
+        lb = _sqrt_down(W * F(fy) / (alpha * Med))
+        g = _g_lower(lb, a_lt)
+        if g <= 0:
+            rows.append({"case": c, "member": k, "verdict": "OPEN", "why": "no positive resistance proved"})
+            continue
+        u = F(gamma_m1) / (alpha * g)
+        worst = max(worst, u)
+        rows.append({"case": c, "member": k, "alpha_LT_low": _show(alpha, -1), "M_Ed_max": _show(Med, 1),
+                     "lambda_LT_bound": _show(lb, -1),
+                     "utilisation": _show(u, 1), "verdict": "EARNED" if u <= 1 else "OPEN"})
     vs = [r_["verdict"] for r_ in rows]
     return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN", "utilisation_max": _show(worst, 1),
             "members": rows, "path": "EN 1993-1-1 6.3.2.2 (general case), M_cr = alpha_LT M_Ed, alpha_LT proved "

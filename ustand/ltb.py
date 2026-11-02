@@ -48,7 +48,45 @@ def _gram(A, B, h, w=None):
     return [[h * _pint(_pmul(_pmul(a, b), w) if w else _pmul(a, b)) for b in B] for a in A]
 
 
+_CACHE = {}
+
+
 def _sub_forms(h):
+    """the sub-element's exact forms — CACHED by h (2026-11-02: recomputed per vertex and bisection step they were
+    nearly all of a member's 6.7 s, MEASURED)"""
+    key = ("forms", h)
+    if key not in _CACHE:
+        _CACHE[key] = _sub_forms_raw(h)
+    return _CACHE[key]
+
+
+def _phi_forms(h, lin):
+    """the twist's basis: Hermite (phi, phi' per node) or, with no warping stiffness (I_w = 0), LINEAR (phi only; the
+    phi' slots carry zero shapes and are fixed): pure St Venant torsion, phi_L' constant, so G J int phi_L' eta' = 0"""
+    if not lin:
+        return _sub_forms(h)
+    key = ("lin", h)
+    if key not in _CACHE:
+        N = [[F(1), F(-1)], [F(0)], [F(0), F(1)], [F(0)]]
+        d = [[F(-1) / h], [F(0)], [F(1) / h], [F(0)]]
+        G = _gram(d, d, h)
+        mvec = [h * _pint(p) for p in d]
+        Q = [[G[i][j] - mvec[i] * mvec[j] / h for j in range(4)] for i in range(4)]
+        _CACHE[key] = {"N": N, "d": d, "G": G, "Q": Q, "Mass": _gram(N, N, h)}
+    return _CACHE[key]
+
+
+def _coupling(h, Mp, lin=False):
+    """h int M N_phi B_v for M = sum_k c_k s^k (k <= 2): sum_k c_k T_k, T_k = h int s^k N_phi B_v (cached by h)"""
+    key = ("T", h, lin)
+    if key not in _CACHE:
+        fx = _sub_forms(h)
+        _CACHE[key] = [_gram(_phi_forms(h, lin)["N"], fx["dd"], h, [F(0)] * k + [F(1)]) for k in range(3)]
+    T = _CACHE[key]
+    return [[sum((Mp[k] * T[k][a][b] for k in range(len(Mp)) if Mp[k]), F(0)) for b in range(4)] for a in range(4)]
+
+
+def _sub_forms_raw(h):
     N, d, dd = _shapes(h)
     G = _gram(d, d, h)
     mvec = [h * _pint(p) for p in d]
@@ -72,16 +110,18 @@ def _assemble(L, m, sec, lam, MA, MB, kap, N, corr=None):
     EI, GJ, EIw, i02 = sec
     h = L / m
     fx = _sub_forms(h)
-    fixed = {0, 2, 4 * m, 4 * m + 2}
+    lin = not EIw
+    fp = _phi_forms(h, lin)
+    fixed = {0, 2, 4 * m, 4 * m + 2} | ({4 * k + 3 for k in range(m + 1)} if lin else set())
     free = [q for q in range(4 * (m + 1)) if q not in fixed]
     pos = {q: i for i, q in enumerate(free)}
     K = {}
     for e in range(m):
         Mp = _moment_poly(F(e, m), F(1, m), MA, MB, kap)
         Kvv = [[EI * fx["Bend"][a][b] + lam * N * fx["G"][a][b] for b in range(4)] for a in range(4)]
-        Kpp = [[GJ * fx["G"][a][b] + EIw * fx["Bend"][a][b] + lam * N * i02 * fx["G"][a][b] for b in range(4)]
+        Kpp = [[GJ * fp["G"][a][b] + EIw * fx["Bend"][a][b] + lam * N * i02 * fp["G"][a][b] for b in range(4)]
                for a in range(4)]
-        Kpv = _gram(fx["N"], fx["dd"], h, Mp)                  # int M N_phi B_v
+        Kpv = _coupling(h, Mp, lin)                             # int M N_phi B_v
         loc = [[F(0)] * 8 for _ in range(8)]
         for a in range(4):
             for b in range(4):
@@ -107,6 +147,13 @@ def _assemble(L, m, sec, lam, MA, MB, kap, N, corr=None):
 
 
 def _resid_form(h, N, Mp):
+    key = ("R", h, tuple(Mp), tuple(tuple(n_) for n_ in N))
+    if key not in _CACHE:
+        _CACHE[key] = _resid_form_raw(h, N, Mp)
+    return _CACHE[key]
+
+
+def _resid_form_raw(h, N, Mp):
     """|| M phi_H - (its L2 projection on linear functions) ||^2 as a form on phi's 4 nodal values (exact): the clamped
     bubble's eta'' is orthogonal to 1 and x (eta' = 0 at both ends), so only this residual meets it"""
     basis = [[F(1)], [F(0), F(1)]]
@@ -145,16 +192,22 @@ def _correction(h, sec, lam, Nlo, Nhi, Mbar, Mp):
     Nmax = lam * max(abs(Nlo), abs(Nhi))
     gjn = max(abs(GJ + lam * Nlo * i02), abs(GJ + lam * Nhi * i02))
     Da = EI - P * k1sq
-    fx = dict(fx, Resid=_resid_form(h, fx["N"], Mp))
+    lin = not EIw
+    fp = _phi_forms(h, lin)
+    fx = dict(fx, Resid=_resid_form(h, fp["N"], Mp), Qphi=fp["Q"])
     ta = [(lam * lam, "Resid", "phi"), (Nmax * Nmax * k1sq, "Q", "v")]   # M itself inside Resid (this vertex)
-    if EIw > 0:
+    if lin:
+        # LINEAR twist (I_w = 0, 2026-11-02): eta_phi only vanishes at the ends; G J int phi_L' eta' = 0 = N i0^2
+        # int phi_L' eta' (phi_L' constant, int eta' = 0); |eta_phi| <= h/pi |eta_phi'|; variable c = |eta_phi'|
+        Db = GJ - P * i02
+        tb = [(lam * lam * Mbar * Mbar * k2sq, "Bend", "v")]
+        m_ = lam * Mbar * _sqrt_up(k2sq)
+    elif EIw > 0:
         Db = EIw + min(F(0), GJ - P * i02) * k1sq    # G J - P i0^2 >= 0 dropped; < 0 through |eta'| <= k1 |eta''|
-        tb = [(lam * lam * Mbar * Mbar * k0 * k0, "Bend", "v"), (gjn * gjn * k1sq, "Q", "phi")]
+        tb = [(lam * lam * Mbar * Mbar * k0 * k0, "Bend", "v"), (gjn * gjn * k1sq, "Qphi", "phi")]
         m_ = lam * Mbar * k0
     else:
-        Db = GJ - P * i02                            # the variable is |eta_phi'|
-        tb = [(lam * lam * Mbar * Mbar * k2sq, "Bend", "v"), (gjn * gjn, "Q", "phi")]
-        m_ = lam * Mbar * _sqrt_up(k2sq)
+        raise AssertionError("unreachable: I_w = 0 is the linear branch")
     if Da <= 0 or Db <= 0:
         return None
     rho = m_ / _sqrt_down(Da * Db) if m_ else F(0)
@@ -190,6 +243,12 @@ def alpha_lower(L, sec, Nr, MAr, MBr, kap, m=8, rel=F(1, 1000)):
     N in Nr, M_A in MAr, M_B in MBr (closed ranges); sec = (E I_weak, G J, E I_w, i0^2). None if nothing compressed
     or bent (no mode); 0 if nothing is proved."""
     from . import judge_ztl  # noqa: F401
+    # OUTWARD to 64-bit dyadics (2026-11-02: a frame's proved ranges arrive with up to 1148 digits, 3 s a member):
+    # the M and N ranges widened, the stiffnesses down, i0^2 up (compression: the critical factor falls with i0^2)
+    MAr = (_dy(MAr[0], False), _dy(MAr[1], True))
+    MBr = (_dy(MBr[0], False), _dy(MBr[1], True))
+    Nr = (_dy(Nr[0], False), min(_dy(Nr[1], True), F(0)) if Nr[1] <= 0 else _dy(Nr[1], True))
+    sec = (_dy(sec[0], False), _dy(sec[1], False), _dy(sec[2], False), _dy(sec[3], True))
     Nlo, Nhi = Nr
     if Nlo >= 0 and not any(MAr) and not any(MBr) and not kap:
         return None
