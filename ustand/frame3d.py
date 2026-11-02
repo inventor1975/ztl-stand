@@ -840,9 +840,8 @@ def second_order_disp(text, tol, targets, case=None):
         L, xp, yp, zp = _axes(nodes[i], nodes[j], props[k].theta)
         a_ = sum(q[t] * xp[t] for t in range(3))
         if a_:
-            if any(sum(q[t] * ax[t] for t in range(3)) for ax in (yp, zp)):
-                raise Frame3DError(f"second order: member {k} carries an AXIAL and a transverse member load — not "
-                                   f"yet (axial alone is in)")
+            # with a transverse load too (2026-11-03): its coupling through C_e (the axial branch's cq G) holds for any
+            # N(x) with D <= C — the 2D frame's derivation (frame.second_order_case)
             qax3[k] = a_ * L / 2
     # the axial forces only (2026-11-02, the size bench: the stability bisection here was HALF of the time; it is not
     # needed — certify_general proves A > 0 over the whole box itself, theta < 1, or the frame may buckle: OPEN)
@@ -899,6 +898,7 @@ def second_order_disp(text, tol, targets, case=None):
                         g = _glob3(i, j, vax, rax, sg, dof, l)
                         if g:
                             cterms.append((_dy(cq * d, True), g))
+                            cgrp.setdefault((k, plane), []).append(cterms[-1])   # a transverse load couples here
             continue
         Gt = []
         P = max(F(0), -Nlo[k])
@@ -998,8 +998,8 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
     moment w L^2/12 sign-free, the own-load end correction, the interior by the Dirichlet Green function. Judged by
     ZTL over [a proved lower bound of max|sigma| (the end corners), its upper bound]. Premises as second_order_disp;
     AXIAL member loads (2026-11-03, the 2D frame's derivation per plane): end moments with N_a G_a + N_b G_b, the
-    interior by a Dirichlet bound on M'' = N'v' + (N/EI)M (the end slopes: the nodal rotations); a member with both an
-    axial and a transverse load is refused (second_order_disp)."""
+    interior by a Dirichlet bound on M'' = N'v' + (N/EI)M + w (the end slopes: the nodal rotations); a transverse load
+    on the same member couples through C_e as on any member."""
     from . import judge_ztl  # noqa: F401
     from .frame import _sqrt_down, PI2_LO
     import zenergy as ZE
@@ -1098,7 +1098,12 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                     # the own-load end correction sqrt(C_thth) r_e, r_e^2 <= w^2 L^5/(720 E I (1 - P k))
                     mb = (-ws if plane == "y" else ws) * L * L / 12
                     kk_ = L * L / (4 * PI2_LO * (1 - T) * ex * I)
-                    corr += cth * ZE._sqrt_up(w * w * L ** 5 / (720 * (1 - T) * ex * I * (1 - P * kk_)))
+                    # the member's LARGEST compression (2026-11-03: with an axial member load N varies, N_mid -+ |qa|;
+                    # r_e grows with P, so the mean's P would make it too small): the widened first-order range too
+                    Pr = max(P, -X["Nlo"].get(k, F(0)), -(Nl - abs(qax3.get(k, F(0)))), F(0))
+                    if Pr * kk_ >= 1:
+                        return {"verdict": "OPEN", "why": f"element {k}: too slender between its nodes (subdivide)"}
+                    corr += cth * ZE._sqrt_up(w * w * L ** 5 / (720 * (1 - T) * ex * I * (1 - Pr * kk_)))
                 Ml = {e_: (rng[(k, plane + e_)][0] + mb - corr, rng[(k, plane + e_)][1] + mb + corr) for e_ in ("I", "J")}
                 # + N (G u) at I, - N (G u) at J in the (v, th_z) plane; the (w, phi) plane's output is -(K_E u)_phi,
                 # so there the signs flip. N in [N_lo, N_hi] (the axial forces of the geometric stiffness).
@@ -1134,7 +1139,7 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                     if beta >= 1:
                         return {"verdict": "OPEN", "why": f"element {k}: too slender between its nodes for the "
                                                           f"axial-load interior bound (subdivide)"}
-                    mint = mend + (beta * mend + (L * L / 8) * a_abs * thb) / (1 - beta)
+                    mint = mend + (beta * mend + (L * L / 8) * (a_abs * thb + w)) / (1 - beta)   # + |w|: M'' gains w
                 elif w:
                     # M = M_lin + m, m'' +- k^2 m = -q -+ k^2 M_lin, m = 0 at the ends: the Dirichlet Green function is
                     # positive, its integral <= (L^2/8)/(1 - k^2 L^2/8) in compression, <= L^2/8 in tension (2D frame)

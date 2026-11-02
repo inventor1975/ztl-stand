@@ -2568,17 +2568,14 @@ try:
     FRM.read_deck(_qss1 + "\nSFBEAM, 1, 1, PRES, 10000"); _qsf = False
 except FRM.FrameError as _e:
     _qsf = "QLOAD" in str(_e)
-_qso = FRM.second_order_case(_qss1 + "\nQLOAD, 1, FX, -1000", "0", [(1, F(10) ** 12)])   # oblique: axial AND transverse
 check("member load in EN 6.3.3: M_Ed is the span's qL^2/8 = 20 kN m (inside the element), C_my 1 for a loaded member; "
-      "ANSYS's SFBEAM is refused with a pointer to QLOAD (its face/sign conventions are easy to get silently wrong); "
-      "physical second order on a member with BOTH an axial and a transverse load says OPEN, with the reason (not yet)",
-      F(_qbi["M_Ed_max"].split()[0]) == 20000 and _qbi["C_my"] == "1" and _qsf and _qso["verdict"] == "OPEN"
-      and "BOTH" in _qso["why"], (_qbi["M_Ed_max"], _qbi["C_my"], _qsf, _qso.get("why")))
+      "ANSYS's SFBEAM is refused with a pointer to QLOAD (its face/sign conventions are easy to get silently wrong)",
+      F(_qbi["M_Ed_max"].split()[0]) == 20000 and _qbi["C_my"] == "1" and _qsf, (_qbi["M_Ed_max"], _qbi["C_my"], _qsf))
 # SECOND-ORDER STRESSES WITH AN AXIAL MEMBER LOAD (2026-11-03): a 4 m cantilever column, self-weight 100 kN/m, tip 10 kN
 # sideways, 4 elements. Reference: EI th'' = N th - H, N = -q (L - x), by an independent finite-difference solve (400001
 # points, scipy; MEASURED 2026-11-03): M = 42002.761 (base), 31619.047 (x = 1), 20874.802 (x = 2) N m. Both sides: each
 # end-moment bracket holds the reference; the mutant N_mid G (not N_a G_a + N_b G_b) misses it.
-def _axso(mut=None):
+def _axso(mut=None, qx=0):
     FRM._MUTANT.clear()
     if mut:
         FRM._MUTANT[mut] = True
@@ -2586,12 +2583,13 @@ def _axso(mut=None):
         d = "\n".join(["ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2"]
                       + [f"N, {k+1}, 0, {k}" for k in range(5)] + [f"E, {k+1}, {k+2}" for k in range(4)]
                       + ["D, 1, UX, 0", "D, 1, UY, 0", "D, 1, ROTZ, 0", "F, 5, FX, 10000"]
-                      + [f"QLOAD, {k+1}, FY, -100000" for k in range(4)])
+                      + [f"QLOAD, {k+1}, FY, -100000" for k in range(4)]
+                      + ([f"QLOAD, {k+1}, FX, {qx}" for k in range(4)] if qx else []))
         return FRM.second_order_case(d, "0", [(k + 1, F(10) ** 12) for k in range(4)])
     finally:
         FRM._MUTANT.clear()
-def _axin(r):
-    refs = {(1, "I"): 42002.761, (1, "J"): 31619.047, (2, "I"): 31619.047, (2, "J"): 20874.802}
+def _axin(r, refs=None):
+    refs = refs or {(1, "I"): 42002.761, (1, "J"): 31619.047, (2, "I"): 31619.047, (2, "J"): 20874.802}
     out = []
     for (k, e_), m in refs.items():
         lo, hi = sorted(abs(float(F(v.split()[0]))) for v in r["checks"][k - 1]["M_ends"][e_])
@@ -2603,6 +2601,14 @@ check("second-order STRESSES with an AXIAL member load (a self-weight cantilever
       "the mutant N_mid G (the geometric moment without the split) misses it; the verdict is decided (not OPEN)",
       all(_axin(_axr)) and not all(_axin(_axm)) and _axr["verdict"] in ("EARNED", "REFUTED"),
       (_axin(_axr), _axin(_axm), _axr["verdict"]))
+# BOTH an axial and a transverse member load (2026-11-03): the same column with q_x = 10 kN/m across it; reference
+# (scipy solve_bvp, tol 1e-10, MEASURED): M = 125202.969 (base), 79116.122, 42144.797 N m (first order 120 kN m)
+_axc = _axso(qx=10000)
+_axcr = {(1, "I"): 125202.969, (1, "J"): 79116.122, (2, "I"): 79116.122, (2, "J"): 42144.797}
+check("second-order stresses with BOTH an axial and a transverse member load: every end-moment bracket holds the "
+      "continuum reference (125202.969, 79116.122, 42144.797 N m); the mutant N_mid G misses it",
+      all(_axin(_axc, _axcr)) and not all(_axin(_axso("axial_const_moment", 10000), _axcr))
+      and _axc["verdict"] in ("EARNED", "REFUTED"), (_axin(_axc, _axcr), _axc["verdict"]))
 # the interior: a pinned column (self-weight 150 kN/m, 600 kN on top, end moments 20 kN m in single curvature, 2
 # elements) — |M| peaks INSIDE (1.119 x the ends); the reference sigma max per element (scipy solve_bvp, MEASURED):
 # 145.000 MPa (element 1, the base fibre) and 117.942 MPa (element 2, interior). The proved bound must not be lower.
@@ -3144,33 +3150,28 @@ _rl = [(_F3.range_of(_bm3 + "D, 3, ALL, 0\nRELEASE, 1, I, MZ, MY\nRELEASE, 2, J,
         F(-500) * 256 / (384 * _E3x * _Iy3x)),
        (_F3.range_of(_bm3 + "D, 3, ALL, 0\nRELEASE, 1, I, MZ, MY\nRELEASE, 2, J, MZ, MY\nQLOAD, 1, FZ, -500\n"
                      "QLOAD, 2, FZ, -500\n", "0", "U(2,Z)")["lo"], F(-500) * 5 * 256 / (384 * _E3x * _Iy3x))]
-_qref = False
-try:
-    _F3.second_order_stress(_bm3 + "QLOAD, 1, FX, -500\nQLOAD, 1, FY, -500\n", "0", F(10) ** 12)   # axial AND transverse
-except _F3.Frame3DError:
-    _qref = True
 check("space frame END RELEASES and MEMBER LOADS: hinges by RELEASE (the member's own end rotation) and QLOAD's "
       "consistent nodal loads give EXACTLY P L^3/(48EI) (pinned, point load), q L^4/(8EI) (cantilever), q L^4/(384EI) "
-      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); second order on a member with BOTH an axial and a transverse "
-      "QLOAD refuses (not yet), said",
-      all(a == b for a, b in _rl) and _qref, [(str(a), str(b)) for a, b in _rl])
+      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z)",
+      all(a == b for a, b in _rl), [(str(a), str(b)) for a, b in _rl])
 # SECOND-ORDER STRESSES WITH AN AXIAL MEMBER LOAD in 3D (2026-11-03): the 2D test's self-weight cantilever column stood
 # along Z, the tip load along X and then along Y (each bending plane once); the 2D continuum reference (MEASURED,
 # finite differences): M = 42002.761 (base), 31619.047, 20874.802 N m. Both sides; the mutants N_mid G and "no
 # geometric moment" miss the reference.
-def _ax3(dirn, mut=None):
+def _ax3(dirn, mut=None, qx=0, refs=None):
     _F3._MUTANT.clear()
     if mut:
         _F3._MUTANT[mut] = True
     try:
         d = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 8e-5, 0.2, 0.2, 0, 0, 5e-5\n"
              + "".join(f"N, {k + 1}, 0, 0, {k}\n" for k in range(5)) + "".join(f"E, {k + 1}, {k + 2}\n" for k in range(4))
-             + f"D, 1, ALL, 0\nF, 5, {dirn}, 10000\n" + "".join(f"QLOAD, {k + 1}, FZ, -100000\n" for k in range(4)))
+             + f"D, 1, ALL, 0\nF, 5, {dirn}, 10000\n" + "".join(f"QLOAD, {k + 1}, FZ, -100000\n" for k in range(4))
+             + "".join(f"QLOAD, {k + 1}, {dirn}, {qx}\n" for k in range(4) if qx))
         r = _F3.second_order_stress(d, "0", F(10) ** 12)
     finally:
         _F3._MUTANT.clear()
     hits = []
-    for (k, e_), m in {(1, "I"): 42002.761, (1, "J"): 31619.047, (2, "I"): 31619.047, (2, "J"): 20874.802}.items():
+    for (k, e_), m in (refs or {(1, "I"): 42002.761, (1, "J"): 31619.047, (2, "I"): 31619.047, (2, "J"): 20874.802}).items():
         row = r["members"][k - 1]["M_ends"]
         for pl in row:
             lo, hi = sorted(abs(float(F(v.split()[0]))) for v in row[pl][e_])
@@ -3185,6 +3186,15 @@ check("space frame second-order STRESSES with an AXIAL member load (a self-weigh
       "sigma 40 + 52.503 = 92.503 MPa lies in the proved [lo, hi]; both mutants miss the reference",
       all(_a3x[1]) and all(_a3y[1]) and len(_a3x[1]) == len(_a3y[1]) == 4 and _a3s[0] <= 92.5035e6 <= _a3s[1]
       and not any(all(h) for h in _a3m), (_a3x[1], _a3y[1], _a3s, _a3m))
+_a3cr = {(1, "I"): 125202.969, (1, "J"): 79116.122, (2, "I"): 79116.122, (2, "J"): 42144.797}
+_a3c = [_ax3(d_, None, 10000, _a3cr) for d_ in ("FX", "FY")]
+_a3cm = _ax3("FX", "axial_const_moment", 10000, _a3cr)[1]
+_a3cs = [float(F(v.split()[0])) for v in _a3c[0][0]["members"][0]["sigma_abs"]]
+check("space frame second-order stresses with BOTH an axial and a transverse member load (the 2D test's column, q 10 "
+      "kN/m across it, along X then Y): the end-moment brackets hold the 2D continuum reference (125202.969, 79116.122, "
+      "42144.797 N m); the base's exact sigma 40 + 156.504 = 196.504 MPa in the proved [lo, hi]; N_mid G misses",
+      all(all(h) and len(h) == 4 for _, h in _a3c) and _a3cs[0] <= 196.5037e6 <= _a3cs[1] and not all(_a3cm),
+      ([h for _, h in _a3c], _a3cs, _a3cm))
 
 _qs3 = []
 for _ne in (1, 4):

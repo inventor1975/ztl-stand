@@ -500,8 +500,8 @@ def _axial_check(seed, deck):
 def axial_stress_case(seed):
     """sweep J (2026-11-03): second-order member STRESSES with an AXIAL member load (frame.second_order_case) on one
     random column, vertical, 1/2/4/8 elements: a cantilever (tip loads H, P) or a pinned member (end moments M_a,
-    M_b, top load P); the axial load down (self-weight) or up (a pull). Reference: scipy solve_bvp on the continuum,
-    nothing shared — theta' = M/EI, M' = C + N theta, C' = 0, v' = theta, N(x) = F_y + q_y (L - x) (tension +; the
+    M_b, top load P); the axial load down (self-weight) or up (a pull); half the cases a transverse load q_x too. Reference: scipy solve_bvp on the continuum,
+    nothing shared — theta' = M/EI, M' = C + N theta, C' = q_v (= -q_x), v' = theta, N(x) = F_y + q_y (L - x) (tension +; the
     nodal moments enter as M(0) = -M_a, M(L) = M_b). Both sides: every proved end-moment interval holds the reference
     (one global sign for the member), every proved |sigma| bound is not below the reference's max over its element.
     J-MUTA: the end moment's geometric part with N_mid G (not N_a G_a + N_b G_b)."""
@@ -517,10 +517,12 @@ def axial_stress_case(seed):
     H = rng.randint(1, 40) * 1000 if cant else 0
     Ma = 0 if cant else rng.choice([-1, 1]) * rng.randint(5, 60) * 1000
     Mb = 0 if cant else rng.choice([-1, 1]) * rng.randint(0, 60) * 1000
+    qx = rng.choice([-1, 1]) * rng.randint(1, 30) * 1000 if rng.random() < 0.5 else 0   # a transverse load too
     deck = (f"ET, 1, BEAM3\nMP, EX, 1, 210e9\nR, 1, {A}, {I}, {h}\nN, 1, 0, 0\nN, 2, 0, {Lc}\nE, 1, 2\n"
             + ("D, 1, UX, 0\nD, 1, UY, 0\nD, 1, ROTZ, 0\n" if cant else "D, 1, UX, 0\nD, 1, UY, 0\nD, 2, UX, 0\n")
             + f"F, 2, FY, -{P}\n" + (f"F, 2, FX, {H}\n" if H else "")
-            + (f"F, 1, MZ, {Ma}\n" if Ma else "") + (f"F, 2, MZ, {Mb}\n" if Mb else "") + f"QLOAD, 1, FY, {qy}")
+            + (f"F, 1, MZ, {Ma}\n" if Ma else "") + (f"F, 2, MZ, {Mb}\n" if Mb else "") + f"QLOAD, 1, FY, {qy}"
+            + (f"\nQLOAD, 1, FX, {qx}" if qx else ""))
     if ne > 1:
         deck = FRM.subdivide(deck, ne)
     r = FRM.second_order_case(deck, "0", [(k + 1, F(10) ** 12) for k in range(ne)])
@@ -528,13 +530,15 @@ def axial_stress_case(seed):
         return {"checked": 0, "skipped": 1, "why": (r.get("why") or "")[:100]}
     Nf = lambda x: -P + qy * (Lc - x)
     def f(x, y):
-        return np.vstack([y[1], y[2] / EI, y[3] + Nf(x) * y[1], 0 * y[3]])
+        return np.vstack([y[1], y[2] / EI, y[3] + Nf(x) * y[1], 0 * y[3] - qx])   # C' = q_v, v = -u_x
     if cant:
-        bc = lambda ya, yb: np.array([ya[0], ya[1], yb[2], ya[3] - H])
+        bc = lambda ya, yb: np.array([ya[0], ya[1], yb[2], yb[3] - H])
     else:
         bc = lambda ya, yb: np.array([ya[0], yb[0], ya[2] + Ma, yb[2] - Mb])
-    x0 = np.linspace(0, Lc, 401)
-    sol = solve_bvp(f, bc, x0, np.zeros((4, x0.size)), tol=1e-9, max_nodes=100000)
+    x0 = np.linspace(0, Lc, 4001)
+    sol = solve_bvp(f, bc, x0, np.zeros((4, x0.size)), tol=1e-9, max_nodes=1000000)
+    if not sol.success:                          # a linear problem: retry looser before skipping (named)
+        sol = solve_bvp(f, bc, x0, np.zeros((4, x0.size)), tol=1e-7, max_nodes=1000000)
     if not sol.success:
         return {"checked": 0, "skipped": 1, "why": "reference bvp did not converge"}
     xx = np.linspace(0, Lc, 20001)

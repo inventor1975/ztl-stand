@@ -973,12 +973,11 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
     qd = read_qloads(text)
     qax2 = {k: a_ * L_ / 2 for k, (a_, w_, L_) in qd.items() if a_}
-    if any(qd[k][1] for k in qax2):
-        # DISPLACEMENTS (2026-11-02) and member STRESSES (2026-11-03) with axial member loads are in; a member carrying
-        # both an axial and a transverse load is not yet (its inner load correction assumes a constant N)
-        return {"verdict": "OPEN", "why": "a member with BOTH an axial and a transverse member load (QLOAD oblique to "
-                                          "the element) in second order: not yet — first order and EN's method judge it",
-                "checks": [], "disp": {}}
+    # DISPLACEMENTS (2026-11-02) and member STRESSES (2026-11-03) with axial member loads; a member with BOTH an axial
+    # and a transverse load (2026-11-03): the condensed member, w = w_H(d) + eta_q - eta_d, gives the end moment
+    #   ((K - D) d)_th - f_cons,th + gamma_th,  gamma_th = n(N_th, eta_q),  |gamma_th| <= sqrt(D_thth) r_e
+    # (a(eta_q, eta_q) = r_e^2 = sup (int q eta)^2 / a(eta, eta)), for ANY N(x) with D <= C — so the transverse load's
+    # coupling (C_e group, r_e with P = the member's largest compression) applies to the axial branch unchanged
     st = stability_lower(text, tol, jobs=jobs)
     parts, f, dof, emap, (_, _, _, h) = energy_system_full(text, tol)
     if h is None and checks:
@@ -1055,6 +1054,7 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
                     g = _glob(i, j, c_, s_, dof, l)
                     if g:
                         cterms.append((_dy(cq * d, True), g))
+                        cgrp.setdefault(k, []).append(cterms[-1])    # a transverse load on it couples through C_e
             continue
         Gt = [(d, _glob(i, j, c_, s_, dof, l)) for d, l in _psd_terms(Gloc)]
         Gt = [(d, g) for d, g in Gt if g]
@@ -1216,7 +1216,8 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
             if beta >= 1:
                 return {"verdict": "OPEN", "why": f"element {kchk}: too slender between its nodes for the axial-load "
                                                   f"interior bound (subdivide)", "checks": []}
-            mint = mend + (beta * mend + (L * L / 8) * a_abs * th) / (1 - beta)
+            # a transverse load w on the same member: (EI v'')'' - (N v')' = w, so M'' gains w: |m''| + |w|
+            mint = mend + (beta * mend + (L * L / 8) * (a_abs * th + abs(wq))) / (1 - beta)
             interior = "bounded (axial member load: Dirichlet bound on M'' = N'v' + (N/EI)M)"
         elif wq:
             # a transversely loaded member: M = M_lin + m, m'' +- k^2 m = -q -+ k^2 M_lin, m = 0 at the ends; the
