@@ -313,6 +313,50 @@ def energy_system(text, tol):
     return parts, fs, dof, emap
 
 
+PHI0 = F(1, 200)        # EN 1993-1-1 5.3.2(3): phi = phi0 alpha_h alpha_m with alpha_h, alpha_m <= 1 -> phi0 bounds it
+
+
+def with_imperfections(text, phi=PHI0):
+    """The deck with EN 1993-1-1 5.3.2(7)'s global sway imperfection as equivalent horizontal forces, in each
+    horizontal direction SEPARATELY and both signs: every judged load case / combination c becomes four explicit cases
+    c+X, c-X, c+Y, c-Y, each carrying c's loads plus +-phi |V| along X or Y at every node with a vertical load V
+    (gravity along Z: the nodal FZ plus each QLOAD FZ's half at either end node). A text transform: every function of
+    this module judges the result unchanged (all four in one conjunction)."""
+    nodes, elems, loads, supports, props = read_deck(text)
+    keep = []
+    for raw in text.splitlines():
+        head = raw.split("!")[0].strip().split(",")[0].strip().upper()
+        if head not in ("F", "QLOAD", "LC", "LCOMB"):
+            keep.append(raw)
+    out = []
+    for c, ld in loads.items():
+        vert = {}
+        lines = []
+        for (n, d), v in sorted(ld.items(), key=str):
+            if not v:
+                continue
+            if isinstance(n, tuple) and n[0] == "Q":
+                k = n[1]
+                lines.append(f"QLOAD, {k}, F{d}, {v}")
+                if d == "Z":
+                    i, j = elems[k - 1]
+                    pi, pj = nodes[i], nodes[j]
+                    L = _sqrt(sum((pj[t] - pi[t]) ** 2 for t in range(3)))
+                    for nd in (i, j):
+                        vert[nd] = vert.get(nd, F(0)) + v * L / 2
+                continue
+            name = {"X": "FX", "Y": "FY", "Z": "FZ", "RX": "MX", "RY": "MY", "RZ": "MZ"}[d]
+            lines.append(f"F, {n}, {name}, {v}")
+            if d == "Z":
+                vert[n] = vert.get(n, F(0)) + v
+        for ax in ("X", "Y"):
+            for sg, tag in ((1, "+"), (-1, "-")):
+                out.append(f"LC, {c}{tag}{ax}")
+                out += lines
+                out += [f"F, {nd}, F{ax}, {sg * phi * abs(V)}" for nd, V in sorted(vert.items()) if V]
+    return "\n".join(keep + out) + "\n"
+
+
 def _target(s):
     s = s.strip().upper()
     if not (s.startswith("U(") and s.endswith(")")):

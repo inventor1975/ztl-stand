@@ -3113,5 +3113,37 @@ check("space frame STRESSES WITH MEMBER LOADS: a cantilever under a uniform load
       "moment <= |w| L^2/12), and the lower bound closes as the member is subdivided (1 -> 4 elements)",
       all(lo <= _qx3 <= hi for lo, hi in _qs3) and _qs3[1][0] > _qs3[0][0], [(float(a), float(b)) for a, b in _qs3])
 
+_im3 = """ET, 1, BEAM4
+MP, EX, 1, 210e9
+MP, PRXY, 1, 0.3
+R, 1, 0.01, 8e-5, 3e-5, 0.1, 0.2, 0, 0, 5e-5
+N, 1, 0, 0, 0
+N, 2, 0, 0, 3
+N, 3, 4, 0, 3
+N, 4, 4, 0, 0
+E, 1, 2
+E, 2, 3
+E, 3, 4
+D, 1, ALL, 0
+D, 4, ALL, 0
+LC, G
+F, 2, FZ, -100000
+QLOAD, 2, FZ, -5000
+LC, W
+F, 2, FX, 3000
+LCOMB, ULS, G, 1.35, W, 1.5
+"""
+_imt = _F3.with_imperfections(_im3)
+_imr = _F3.ranges(_imt, "0", "U(2,X)")
+_imb = _F3.ranges(_im3, "0", "U(2,X)")["ULS"][2]
+_imV2, _imV3 = F(135000) + F(5000) * F(135, 100) * 2, F(5000) * F(135, 100) * 2
+_imo = ("\n".join(l for l in _im3.splitlines() if not l.startswith(("F,", "QLOAD", "LC", "LCOMB")))
+        + f"\nF, 2, FX, {_imV2 / 200}\nF, 3, FX, {_imV3 / 200}\n")
+_imi = _F3.ranges(_imo, "0", "U(2,X)")["BASE"][2]
+check("space frame EN 5.3.2 SWAY IMPERFECTION: every combination becomes four (+-X, +-Y, separately); ULS+X minus "
+      "ULS is EXACTLY the response to the equivalent forces phi |V| (nodal FZ and the QLOAD's end shares, phi = 1/200)",
+      sorted(_imr) == ["ULS+X", "ULS+Y", "ULS-X", "ULS-Y"] and _imr["ULS+X"][2] - _imb == _imi,
+      (sorted(_imr), str(_imr["ULS+X"][2] - _imb), str(_imi)))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")
