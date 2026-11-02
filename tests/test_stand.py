@@ -3033,5 +3033,19 @@ check("space frame SECOND-ORDER STRESSES: the pinned beam-column (3 MN, end mome
       _s3lo * 1e-6 <= _bcx * 1e-6 <= _s3hi * 1e-6 and _s3a["verdict"] == "EARNED" and _s3b["verdict"] == "REFUTED",
       (_s3lo, _bcx, _s3hi, _s3a["verdict"], _s3b["verdict"]))
 
+_bk3 = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0, 0, 0, 0, 5e-5\n" + _cn3 + _ce3
+         + "D, 1, ALL, 0\n")
+_bk3a = _F3.judge_buckling(_bk3 + "F, 17, FZ, -10000\n", "0", F(235) * 10 ** 6, "a", "b")
+_bk3b = _F3.judge_buckling(_bk3 + "F, 17, FZ, -800000\n", "0", F(235) * 10 ** 6, "a", "b")
+_lbk = _math.sqrt(0.01 * 235e6 / (_math.pi ** 2 * 210e9 * 3e-5 / 64))
+_phk = 0.5 * (1 + 0.34 * (_lbk - 0.2) + _lbk ** 2)
+_uk = 10000 / (1 / (_phk + _math.sqrt(_phk ** 2 - _lbk ** 2)) * 0.01 * 235e6)
+_ua = float(F(_bk3a["utilisation_max"].split()[0]))
+check("space frame EN 6.3.1: the cantilever column (weak axis, curve b the worse of a/b) — the proved utilisation "
+      "at 10 kN lies just above the hand value N_Ed/(chi A fy) = 0.013188 (within 0.1 %, EARNED); at 800 kN it is "
+      "1.055 and the check does not pass (OPEN: version 1 has no refutation witness)",
+      _bk3a["verdict"] == "EARNED" and _uk <= _ua <= _uk * 1.001 and _bk3b["verdict"] == "OPEN",
+      (_ua, _uk, _bk3a["verdict"], _bk3b["verdict"]))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

@@ -721,6 +721,50 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                     "torsional / flexural-torsional buckling, no member loads"}
 
 
+def judge_buckling(text, tol, fy, curve_y, curve_z, gamma_m1=F(1), case=None):
+    """EN 1993-1-1 6.3.1 flexural buckling of every compressed member of a SPACE frame, N_Ed <= chi A fy / gamma_M1,
+    N_cr,i = alpha_cr |N_Ed,i| with alpha_cr the PROVED lower bound of the 3D stability (every mode, both axes), and
+    chi on the WORSE of the two members' curves (the larger imperfection factor: chi lower — safe). The 2D frame's
+    argument (frame.judge_buckling_case): the check is gamma_M1 <= alpha_cr g(lb), g = chi lb^2 increasing (ZTL lean
+    ZChi `chi_curves_monotone`), so the proved alpha_cr from below and |N| from above give a proved lower bound.
+    EARNED when every member clears it in every case; otherwise OPEN (version 1: no refutation witness yet).
+    NOT here: 5.3.2 sway imperfections, torsional / flexural-torsional / lateral-torsional buckling, 6.3.3."""
+    from .frame import CURVES, _curve_premises, _sqrt_down, _g_lower
+    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    for cv in (curve_y, curve_z):
+        if cv not in CURVES:
+            raise Frame3DError(f"{cv!r}: a buckling curve is one of {', '.join(CURVES)}")
+    a = max(CURVES[curve_y], CURVES[curve_z])
+    _curve_premises(a)
+    _, fs, _, _ = energy_system(text, tol)
+    names = list(fs) if case is None else [case]
+    rows, worst = [], F(0)
+    for c in names:
+        st = stability_lower(text, tol, c)
+        lam = st.get("lam_low")
+        for k in sorted(st.get("Nlo", {})):
+            nlo = st["Nlo"][k]
+            if nlo >= 0:
+                continue
+            nhi = -nlo
+            if not lam or lam <= 0:
+                rows.append({"case": c, "member": k, "N_max": _show(nhi, 1), "verdict": "OPEN"})
+                continue
+            lb_lo = _sqrt_down(area * F(fy) / (lam * nhi))
+            H = lam * _g_lower(lb_lo, a)
+            u = F(gamma_m1) / H if H > 0 else None
+            if u is not None:
+                worst = max(worst, u)
+            rows.append({"case": c, "member": k, "N_max": _show(nhi, 1), "lambda_bar_min": _show(lb_lo, -1),
+                         "alpha_cr_proved_lower": _show(lam, -1), "utilisation_max": _show(u, 1) if u else None,
+                         "verdict": "EARNED" if u is not None and u <= 1 else "OPEN"})
+    vs = [r["verdict"] for r in rows]
+    return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN", "utilisation_max": _show(worst, 1),
+            "members": rows, "path": "EN 1993-1-1 6.3.1, N_cr,i = alpha_cr |N_Ed,i|, alpha_cr from the 3D stability",
+            "not_checked": "5.3.2 sway imperfections; torsional, flexural-torsional and lateral-torsional buckling; "
+                           "6.3.3 interaction"}
+
+
 def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
         print(__doc__)
