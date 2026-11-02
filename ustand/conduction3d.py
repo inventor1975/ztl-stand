@@ -108,7 +108,7 @@ def upper(M, sig, rtol=1e-12):
     zero = d == 0
     Af = Af + sp.diags(zero.astype(float))
     d[zero] = 1.0
-    sol, _ = sla.cg(Af, rhs, M=sp.diags(1.0 / d), rtol=rtol, maxiter=50000)
+    sol = _spd_solve(Af, rhs, d, rtol)
     u = ub.copy()
     u[free] = sol
     g2 = sum((u[M.tv[:, q]] - u[M.tv[:, p]]) ** 2 for p, q in ((0, 1), (1, 2), (2, 3)))
@@ -314,6 +314,20 @@ def _exact_and_energy(M, sig, Fc, q, open_f, nI, t1, t2, elec, te):
 MIXED = True        # the lower bound's flux from the hybridized mixed problem (False: from the potential, averaged)
 
 
+def _spd_solve(S, rhs, dg, rtol=1e-10):
+    """CG preconditioned by smoothed-aggregation algebraic multigrid when pyamg is installed (2026-11-02, MEASURED:
+    Jacobi CG took 2108 iterations, 85 % of the lower bound's time at 40^3), Jacobi otherwise. The solve only CHOOSES
+    the flux; admissibility and the bound are made exact afterwards, so its accuracy changes the width, never the
+    truth."""
+    try:
+        import pyamg
+        ml = pyamg.smoothed_aggregation_solver(S.tocsr(), symmetry="symmetric", max_coarse=500)
+        return ml.solve(rhs, tol=rtol, accel="cg", maxiter=500)
+    except ImportError:
+        x, _ = sla.cg(S, rhs, M=sp.diags(1.0 / dg), rtol=rtol, maxiter=100000)
+        return x
+
+
 def _mixed_flux(M, sig, Fc):
     """The lowest-order Raviart-Thomas flux of the MIXED problem (2026-11-02), hybridized: on each conducting tet
     the outward face fluxes Q = A_T^+ lam_T, A_T = (4/(3 s)) P P^T (P the centred vertex coordinates; A_T's kernel is
@@ -355,7 +369,7 @@ def _mixed_flux(M, sig, Fc):
     dg = S.diagonal().copy()
     S = S + sp.diags(np.where(dg == 0, 1.0, 0.0))
     dg[dg == 0] = 1.0
-    lam_f, _ = sla.cg(S, rhs, M=sp.diags(1.0 / dg), rtol=1e-12, maxiter=100000)
+    lam_f = _spd_solve(S, rhs, dg)
     lam = np.where(dir_, lamD, 0.0)
     lam[free] = lam_f
     Qloc = np.einsum("tab,tb->ta", K, lam[fid])                     # outward fluxes per tet

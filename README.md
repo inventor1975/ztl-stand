@@ -81,6 +81,8 @@ Not yet: second order with AXIAL member loads (OPEN, said; transverse ones are i
 3D phase: track 1 (conduction) in; track 2 (space frames, 6 DOF per node) and track 3 (3D elasticity) next. Measured
 (conduction3d, 2026-11-02): 16^3 random 50 % electrolyte in 0.5 s; voxel edge/corner contacts make the bracket close
 slowly under uniform refinement (3D checkerboard: ratio 2.3 -> 1.4 at x4) — adaptive refinement is the next step.
+Solver: smoothed-aggregation multigrid if `pyamg` is installed (optional; 64^3 voxels 141 s -> 22 s), Jacobi CG
+otherwise — the solver only chooses the fields, the bounds stay proved either way.
 The algebra of every bound is in ZTL's Lean (zero axioms): ZNet, ZEnergy, ZRound, ZHigham, ZFloatPath, ZStability,
 ZChi, ZHypercircle.
 
