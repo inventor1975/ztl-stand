@@ -57,7 +57,17 @@ Kuhn tetrahedra, minimum potential energy; the energy summed in binary64 with Hi
 -> 104.7 -> 98.3 under refinement x1, x2, x3 (the bound converges from above; voxel edge contacts are stiff on the
 coarse mesh); 32^3 in 30 s. "E_app <= need" EARNED / OPEN; "E_app >= need" REFUTED / OPEN.
 
-The LOWER bound (the original plan below) is the open half:
+The LOWER bound (the original plan below) is the open half. **Spike (B), 2026-11-03, FLOAT ONLY (not a proof):**
+symmetric stresses linear on each Kuhn tetrahedron (24 numbers per tet), divergence-free per tet, normal traction
+continuous at the three vertices of every inner face, zero in pores, traction-free on free faces, smooth grips;
+||tau||^2_{C^-1} minimised with resultant 1 (a quasi-definite KKT, scipy spsolve). MEASURED lower / upper (E 200,
+nu 0.3): homogeneous 3^3 200 / 200; one central pore 3^3 181.72 / 191.32 (gap 5.3 %), refined x2 184.15 / 189.20
+(2.7 %); random 80 % solid 4^3 126.27 / 161.07 (27.6 %), x2 133.85 / 152.83 (14.2 %) — the space is rich, the gap
+halves per refinement: GO on the approximation. NOT solved: EXACTNESS (the constraints hold to 1e-15 in floats; a
+proof needs them exact — conduction3d pushed one residual per tet along a spanning forest; here a tet's 24 numbers
+meet 39 conditions given its face tractions, so a push needs elements whose inside realises ANY equilibrated face
+traction: Krizek's composite tetrahedron / a Johnson-Mercier-type split — the next design step) and COST (62208
+unknowns took 93 s with a direct solve).
 
 The hypercircle in 3D: a P1/P2 displacement field (lower bound of compliance), an EXACTLY equilibrated stress field
 (upper) — in 2D it came from the Airy function (HCT); in 3D there is no scalar Airy function, so the equilibrated
