@@ -461,10 +461,8 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
     # axial forces N_e = (E A / L) p_e (a.u): scaled outputs, all at once
     es, ks = [], []
     for k in emap:
-        e = [F(0)] * n
-        for i, v in emap[k]["a"].items():
-            e[i] = v
-        if any(e):
+        e = {i: v for i, v in emap[k]["a"].items() if v}     # sparse (ZTL certify_many reads a dict as given)
+        if e:
             es.append(e)
             ks.append(k)
     rs = ZE.certify_many(parts, f, es, n, jobs=jobs, scale=[emap[k]["part"] for k in ks])
