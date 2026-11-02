@@ -198,8 +198,8 @@ def _has_qload(text):
 
 
 def _no_axial_qload(text, what):
-    """Transverse member loads leave the axial force constant along the member (the stability machinery's premise);
-    an AXIAL component makes N vary — not yet in 3D (the 2D frame splits G for it)."""
+    """Transverse member loads leave the axial force constant along the member; an AXIAL component makes N vary —
+    stability takes it (G_a/G_b split, 2026-11-02); SECOND ORDER not yet (in 2D neither)."""
     if not _has_qload(text):
         return
     nodes, elems, loads, supports, props = read_deck(text)
@@ -632,12 +632,11 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     pd_ieee_float, the matrix built in floats with a proved distance). PREMISE (stated): doubly symmetric sections,
     no torsional / flexural-torsional / lateral-torsional buckling (Wagner terms not in); Euler-Bernoulli members."""
     from . import judge_ztl  # noqa: F401
-    from .frame import PI2_LO, _dy
+    from .frame import PI2_LO, _dy, _geo_split
     import zenergy as ZE
     import numpy as np
     import scipy.sparse as sp
     import scipy.sparse.linalg as sla
-    _no_axial_qload(text, "stability")
     nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
@@ -656,11 +655,23 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
         Nlo[k] = min(fac * r["lo"], fac * r["hi"])
         Nhi[k] = max(fac * r["lo"], fac * r["hi"])
         Nnom[k] = fac * r["nominal"]
+    # AXIAL member loads (2026-11-02, the 2D frame's split ported): N(x) = N_mean + a (L/2 - x) along the member,
+    # a = q . x'; the box's N range widened by |a| L/2; the geometric form exactly N_a G_a + N_b G_b
+    Nnodes_lo, qax = dict(Nlo), {}
+    for k, q in _qloads(text).get(names[0], {}).items():
+        i, j = elems[k - 1]
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], props[k].theta)
+        a_ = sum(q[t] * xp[t] for t in range(3))
+        if a_:
+            qax[k] = a_ * L / 2
+            Nlo[k] = Nlo.get(k, F(0)) - abs(qax[k])
+            Nhi[k] = Nhi.get(k, F(0)) + abs(qax[k])
+            Nnom[k] = Nnom.get(k, F(0))
     base = {"case": names[0], "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
     if all(v >= 0 for v in Nlo.values()):
         return dict(base, lam_low=None, why="no compressed member: no buckling under these loads")
     K0 = ZE.matrix(parts, n)
-    forms = {}                                      # (k, plane) -> (G, Q, B, kk)
+    forms, gab = {}, {}                             # (k, plane) -> (G, Q, B, kk); -> (G_a, G_b) with a member load
     for k, (i, j) in enumerate(elems, 1):
         if k not in Nlo:
             continue
@@ -671,14 +682,23 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
                                                         [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
         Bloc = [[F(v) / L for v in r] for r in [[1, 0, -1, 0], [0, 0, 0, 0], [-1, 0, 1, 0], [0, 0, 0, 0]]]
         Qloc = [[Gloc[a][b] - Bloc[a][b] for b in range(4)] for a in range(4)]
+        if k in qax:
+            Ga_, Gb_ = _geo_split(L)
         for plane, (vax, rax, sg, I) in (("y", (yp, zp, 1, izz)), ("z", (zp, yp, -1, iyy))):
             forms[(k, plane)] = tuple(_form3(i, j, vax, rax, sg, dof, X) for X in (Gloc, Qloc, Bloc)) + \
                 (L * L / (4 * PI2_LO * Elo * I),)
-    # nominal estimate: K0 v = -lam K_G(N_nom) v
+            if k in qax:
+                gab[(k, plane)] = (_form3(i, j, vax, rax, sg, dof, Ga_), _form3(i, j, vax, rax, sg, dof, Gb_))
+    # nominal estimate: K0 v = -lam K_G(N_nom) v, the linear N of a member load included
     Gn = {}
     for (k, plane), (G, Q, Bf, kk) in forms.items():
         for key, v in G.items():
             Gn[key] = Gn.get(key, F(0)) + Nnom[k] * v
+        if (k, plane) in gab:
+            for key, v in gab[(k, plane)][0].items():
+                Gn[key] = Gn.get(key, F(0)) + qax[k] * v
+            for key, v in gab[(k, plane)][1].items():
+                Gn[key] = Gn.get(key, F(0)) - qax[k] * v
     A = ZE._float_matrix(K0, n)
     Bm = ZE._float_matrix(Gn, n)
     try:
@@ -702,10 +722,12 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
             ix.append(kidx[key])
         return np.array(ix, dtype=np.int64), np.array([float(v) for v in mat.values()])
     arrs = {kp: tuple(_arr(m) for m in fq[:3]) for kp, fq in forms.items()}
+    arrs_ab = {kp: tuple(_arr(m) for m in ab) for kp, ab in gab.items()}
     K0i = np.array([kidx[key] for key in K0], dtype=np.int64)
     K0v = np.array([float(v) for v in K0.values()])
     nk_ = len(keys)
-    cnt = np.bincount(np.concatenate([K0i] + [a[0] for t3 in arrs.values() for a in t3]), minlength=nk_)
+    cnt = np.bincount(np.concatenate([K0i] + [a[0] for t3 in list(arrs.values()) + list(arrs_ab.values())
+                                          for a in t3]), minlength=nk_)
     m_ = int(cnt.max()) + 4
     u_ = F(1, 2 ** 53)
     gam = m_ * u_ / (1 - m_ * u_)
@@ -726,7 +748,20 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
         ix, vv, av = [K0i], [a0 * K0v], [abs(a0) * np.abs(K0v)]
         for (k, plane), (G, Q, Bf, kk) in forms.items():
             (Gi, Gv), (Qi, Qv), (Bi, Bv) = arrs[(k, plane)]
-            if Nlo[k] < 0:
+            if (k, plane) in arrs_ab and Nlo[k] < 0:
+                # the LINEAR N (the 2D frame's branch): N_a G_a + N_b G_b from below, CLIPPED at 0 when the tension
+                # end outweighs the compression (the cross term needs max|N|), the continuum correction P^2 k/(1-Pk) G
+                (Ai, Av), (Bbi, Bbv) = arrs_ab[(k, plane)]
+                Na, Nb = Nnodes_lo.get(k, F(0)) + qax[k], Nnodes_lo.get(k, F(0)) - qax[k]
+                if Nhi[k] > -Nlo[k]:
+                    Na, Nb = min(Na, F(0)), min(Nb, F(0))
+                P = -lam * Nlo[k]
+                if P * kk >= 1:
+                    return False
+                ca, cb, cG = _fl(lam * Na, False), _fl(lam * Nb, False), -_fl(P * P * kk / (1 - P * kk), True)
+                ix += [Ai, Bbi, Gi]; vv += [ca * Av, cb * Bbv, cG * Gv]
+                av += [abs(ca) * np.abs(Av), abs(cb) * np.abs(Bbv), abs(cG) * np.abs(Gv)]
+            elif Nlo[k] < 0:
                 P = -lam * Nlo[k]
                 if P * kk >= 1:
                     return False
@@ -798,6 +833,7 @@ def second_order_disp(text, tol, targets, case=None):
     from . import judge_ztl  # noqa: F401
     from .frame import PI2_LO, _psd_terms, _dy
     import zenergy as ZE
+    _no_axial_qload(text, "second order")
     nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
@@ -1087,7 +1123,7 @@ def stability_upper(text, case=None):
     import zenergy as ZE
     import numpy as np
     import scipy.sparse.linalg as sla
-    _no_axial_qload(text, "stability")
+    from .frame import _geo_split
     nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, "0")
     c = list(fs)[0] if case is None else case
@@ -1101,7 +1137,8 @@ def stability_upper(text, case=None):
         fac = props[k].ex * props[k].area / emap[k]["L"]
         Nhi[k], Nmid[k] = fac * hi, fac * (lo + hi) / 2
     K0 = ZE.matrix(nom, n)
-    Ge, Gn = {}, {}
+    Ge, Gn, qax, Gd = {}, {}, {}, {}
+    qs = _qloads(text).get(c, {})
     for k, (i, j) in enumerate(elems, 1):
         if k not in Nhi:
             continue
@@ -1115,6 +1152,18 @@ def stability_upper(text, case=None):
         Ge[k] = G
         for key, v in G.items():
             Gn[key] = Gn.get(key, F(0)) + Nmid[k] * v
+        a_ = sum(qk[t] * xp[t] for t in range(3)) if (qk := qs.get(k)) else F(0)
+        if a_:
+            # an AXIAL member load: the Hermite field's form is N_mean G + (aL/2)(G_a - G_b) (the 2D witness's fix)
+            Ga_, Gb_ = _geo_split(L)
+            D = [[Ga_[r][q_] - Gb_[r][q_] for q_ in range(4)] for r in range(4)]
+            Dk = {}
+            for (vax, rax, sg) in ((yp, zp, 1), (zp, yp, -1)):
+                for key, v in _form3(i, j, vax, rax, sg, dof, D).items():
+                    Dk[key] = Dk.get(key, F(0)) + v
+            qax[k], Gd[k] = a_ * L / 2, Dk
+            for key, v in Dk.items():
+                Gn[key] = Gn.get(key, F(0)) + qax[k] * v
     A = ZE._float_matrix(K0, n)
     Bm = ZE._float_matrix(Gn, n)
     try:
@@ -1122,7 +1171,7 @@ def stability_upper(text, case=None):
     except Exception:
         return {"lam_high": None, "why": "no buckling mode found"}
     if vals[0] <= 0:
-        return {"lam_high": None, "why": "no compressed member: no buckling under these loads"}
+        return {"lam_high": None, "why": "the estimate found no buckling mode: no upper bound"}
     x = [F(float(v)) for v in vecs[:, 0]]
     qK = sum(a * b for a, b in zip(x, ZE._kmul(K0, x, n)))
     den = F(0)
@@ -1131,6 +1180,8 @@ def stability_upper(text, case=None):
         for (a, b), v in G.items():                 # lower triangle -> the full form
             g += v * x[a] * x[b] * (1 if a == b else 2)
         den -= Nhi[k] * g
+    for k, Dk in Gd.items():
+        den -= qax[k] * sum(v * x[a] * x[b] * (1 if a == b else 2) for (a, b), v in Dk.items())
     if den <= 0:
         return {"lam_high": None, "why": "the witness does not load the mode in compression"}
     lam = qK / den

@@ -3091,12 +3091,13 @@ _rl = [(_F3.range_of(_bm3 + "D, 3, ALL, 0\nRELEASE, 1, I, MZ, MY\nRELEASE, 2, J,
                      "QLOAD, 2, FZ, -500\n", "0", "U(2,Z)")["lo"], F(-500) * 5 * 256 / (384 * _E3x * _Iy3x))]
 _qref = False
 try:
-    _F3.stability_lower(_bm3 + "QLOAD, 1, FX, -500\n", "0")        # an AXIAL member load: N varies — not yet
+    _F3.second_order_disp(_bm3 + "QLOAD, 1, FX, -500\n", "0", ["U(2,Y)"])   # AXIAL member load: second order not yet
 except _F3.Frame3DError:
     _qref = True
 check("space frame END RELEASES and MEMBER LOADS: hinges by RELEASE (the member's own end rotation) and QLOAD's "
       "consistent nodal loads give EXACTLY P L^3/(48EI) (pinned, point load), q L^4/(8EI) (cantilever), q L^4/(384EI) "
-      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); stability with an AXIAL QLOAD refuses (not yet), said",
+      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); SECOND ORDER with an AXIAL QLOAD refuses (not yet), said "
+      "(stability takes it since 2026-11-02)",
       all(a == b for a, b in _rl) and _qref, [(str(a), str(b)) for a, b in _rl])
 
 _qs3 = []
@@ -3249,6 +3250,19 @@ check("2D STABILITY WITH AN AXIAL MEMBER LOAD, both sides (2026-11-02): a column
       "elements. The old code: an upper bound 13.05 (and 20.05 on four elements) for a self-weight column whose "
       "lambda_cr is 20.57 (the witness took N_mean G for a linear N), and 'no buckling' for the columns in mean tension",
       all(t_[3] for t_ in _axr), _axr)
+_ax3 = []
+_ref3 = _ax_ref(0, -100000, I=3e-5)                    # the weak axis (I = 3e-5) of the 2D fine mesh
+for _th in (0, 90):
+    _d3a = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\n"
+            f"R, 1, 0.01, 8e-5, 3e-5, 0.2, 0.1, {_th}, 0, 5e-5\nN, 1, 0, 0, 0\nN, 2, 0, 0, 4\nE, 1, 2\n"
+            "D, 1, ALL, 0\nD, 2, ROTZ, 0\nF, 2, FX, 1\nQLOAD, 1, FZ, -100000\n")
+    _l3 = _F3.stability_lower(_d3a, "0").get("lam_low")
+    _h3 = _F3.stability_upper(_d3a).get("lam_high")
+    _ax3.append((_th, _l3 is not None and _h3 is not None and 0 < float(_l3) <= _ref3 <= float(_h3),
+                 _l3 and float(_l3), _ref3, _h3 and float(_h3)))
+check("SPACE frame stability with an AXIAL member load (2026-11-02, the 2D split ported): a column under self-weight, "
+      "THETA 0 and 90 — lambda_low <= the fine mesh's lambda_cr about the weak axis <= lambda_high (it was refused)",
+      all(t_[1] for t_ in _ax3), _ax3)
 _r3d = _F3.second_order_disp(_d3s, "0.5%", ["U(2,X)", "U(3,X)"])["BASE"]
 _X3d = _F3._EXTRA.get("last") or {}
 _dy_ok = lambda x: x == 0 or (x.denominator & (x.denominator - 1) == 0 and abs(x.numerator).bit_length() <= 70)
