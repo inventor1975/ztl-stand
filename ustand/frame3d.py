@@ -1308,7 +1308,7 @@ def judge_buckling(text, tol, fy, curve_y, curve_z, gamma_m1=F(1), case=None):
                            "6.3.3 interaction"}
 
 
-def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None, phi=None):
+def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None, phi=None, curve_lt=None):
     """EN 1993-1-1 6.3.3, formulas (6.61) AND (6.62), Annex B Method 2, BIAXIAL, every compressed member of a space
     frame. Axis a = bending in the x'-y' plane (about z', I_z, W_a = I_z/(TKY/2)), axis b = in the x'-z' plane (about y',
     I_y, W_b = I_y/(TKZ/2)); curve_z / curve_y the buckling curves for those planes.
@@ -1330,9 +1330,9 @@ def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None,
     if phi:
         texti = with_imperfections(text, phi)
         if case is None:
-            r = judge_interaction(texti, tol, fy, curve_z, curve_y, gamma_m1, None, 0)
+            r = judge_interaction(texti, tol, fy, curve_z, curve_y, gamma_m1, None, 0, curve_lt)
         else:
-            parts_ = [judge_interaction(texti, tol, fy, curve_z, curve_y, gamma_m1, f"{case}{t}{ax}", 0)
+            parts_ = [judge_interaction(texti, tol, fy, curve_z, curve_y, gamma_m1, f"{case}{t}{ax}", 0, curve_lt)
                       for ax in "XY" for t in "+-"]
             r = dict(parts_[0], members=[m for p_ in parts_ for m in p_["members"]],
                      verdict="EARNED" if all(p_["verdict"] == "EARNED" for p_ in parts_) else "OPEN",
@@ -1362,6 +1362,15 @@ def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None,
                     e[i_] += I / L * 3 * sb * v
                 es.append(e); items.append((k, plane)); scale.append(m["part"])
     rs_all = ZE.certify_cases(parts, [fs[c] for c in names], es, n, scale=scale)
+    ultb = None
+    if curve_lt is not None:                           # chi_LT per member and case (judge_ltb, no imperfection again)
+        ultb = {}
+        for c in names:
+            for r_ in judge_ltb(text, tol, fy, curve_lt, gamma_m1, c, phi=0)["members"]:
+                if r_.get("utilisation") is not None:
+                    ultb[(c, r_["member"])] = F(r_["utilisation"].split()[0])
+                elif r_.get("why") == "no bending, no compression":
+                    ultb[(c, r_["member"])] = F(0)
     rows, worst = [], F(0)
     for c, rs in zip(names, rs_all):
         st = stability_lower(text, tol, c)
@@ -1401,21 +1410,39 @@ def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None,
                 continue
             g = F(gamma_m1)
             na, nb = g / Ha, g / Hb
-            kaa, kbb = 1 + F(3, 5) * na, 1 + F(3, 5) * nb
-            kab, kba = kbb, F(4, 5) * kaa
             ma = Mx[(k, "a")] * g / ((pk.izz / (pk.tky / 2)) * F(fy))
             mb = Mx[(k, "b")] * g / ((pk.iyy / (pk.tkz / 2)) * F(fy))
-            u1 = na + kaa * ma + kab * mb
-            u2 = nb + kba * ma + kbb * mb
+            # EN's y is the STRONG axis (2026-11-02: the planes were tied to y = a, z = b — a member with I_y > I_z got
+            # k_yz = k_zz and k_zy = 0.8 k_yy on the wrong axes): (6.61) n_y + k_yy m_y/chi_LT + k_yz m_z,
+            # (6.62) n_z + k_zy m_y/chi_LT + k_zz m_z; Table B.1 k_yz = k_zz, k_zy = 0.8 k_yy; with lateral-torsional
+            # buckling (curve_lt given) chi_LT from judge_ltb and Table B.2's k_zy <= 1 (1 - positive, or 0.6 + lb_z)
+            if pk.izz >= pk.iyy:
+                ny, nz, my, mz, sp = na, nb, ma, mb, "a"
+            else:
+                ny, nz, my, mz, sp = nb, na, mb, ma, "b"
+            kyy, kzz = 1 + F(3, 5) * ny, 1 + F(3, 5) * nz
+            kyz, kzy = kzz, F(4, 5) * kyy
+            if ultb is not None:
+                ul = ultb.get((c, k))
+                if ul is None:
+                    rows.append({"case": c, "member": k, "verdict": "OPEN", "why": "lateral-torsional buckling not "
+                                                                                    "proved (see judge_ltb)"})
+                    continue
+                my = ul                                # gamma M_y,Ed / (chi_LT W_y fy), judge_ltb's upper bound
+                kzy = F(1)
+            u1 = ny + kyy * my + kyz * mz
+            u2 = nz + kzy * my + kzz * mz
             u = max(u1, u2)
             worst = max(worst, u)
             rows.append({"case": c, "member": k, "N_Ed_max": _show(N, 1), "M_a_max": _show(Mx[(k, "a")], 1),
-                         "M_b_max": _show(Mx[(k, "b")], 1), "u_6_61": _show(u1, 1), "u_6_62": _show(u2, 1),
-                         "verdict": "EARNED" if u <= 1 else "OPEN"})
+                         "M_b_max": _show(Mx[(k, "b")], 1), "strong_axis_plane": sp, "u_6_61": _show(u1, 1),
+                         "u_6_62": _show(u2, 1), "verdict": "EARNED" if u <= 1 else "OPEN"})
     vs = [r["verdict"] for r in rows]
     return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN", "utilisation_max": _show(worst, 1),
-            "members": rows, "path": "EN 1993-1-1 6.3.3 (6.61) and (6.62), Annex B Method 2, biaxial, C_m = 1",
-            "premises": "no lateral-torsional / torsional buckling; class 1-3 (elastic resistance)"}
+            "members": rows, "path": "EN 1993-1-1 6.3.3 (6.61) and (6.62), Annex B Method 2, biaxial, C_m = 1"
+                                     + (", chi_LT by 6.3.2 (judge_ltb), Table B.2 k_zy <= 1" if ultb is not None else ""),
+            "premises": ("forks at the member ends for lateral-torsional buckling (judge_ltb's)" if ultb is not None
+                         else "no lateral-torsional / torsional buckling") + "; class 1-3 (elastic resistance)"}
 
 
 def judge_ltb(text, tol, fy, curve_lt, gamma_m1=F(1), case=None, m=8, ks=None, phi=None):

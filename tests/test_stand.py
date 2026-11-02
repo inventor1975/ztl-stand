@@ -3386,5 +3386,26 @@ check("EN 6.3.2 LATERAL-TORSIONAL BUCKLING in a space frame (judge_ltb): a fork-
       _rl["verdict"] == "EARNED" and _ul <= _us <= _ul * 1.001 and _mc["M_Ed_max"].startswith("30000")
       and 7.6 < float(F(_mc["alpha_LT_low"].split()[0])) < 7.9, (_us, _ul, _mc))
 
+# EN 6.3.3's y is the member's STRONG axis (2026-11-02): with I_y > I_z the old code tied y to plane a and read
+# u = 0.950 (EARNED) where (6.61) gives 1.023 — the symmetric twin (I_z, I_y, the curves and MX/MY swapped) must agree
+_bnS = "".join(f"N, {k + 1}, 0, 0, {F(k, 2)}\n" for k in range(9))
+_beS = "".join(f"E, {k + 1}, {k + 2}\n" for k in range(8))
+_dS1 = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 3e-5, 8e-5, 0.2, 0.2, 0, 0, 5e-5\n" + _bnS + _beS
+        + "D, 1, ALL, 0\nF, 9, FZ, -400000\nF, 9, MX, 20000\nF, 9, MY, 1000\n")
+_dS2 = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0.2, 0.2, 0, 0, 5e-5\n" + _bnS + _beS
+        + "D, 1, ALL, 0\nF, 9, FZ, -400000\nF, 9, MX, 1000\nF, 9, MY, 20000\n")
+_uS1 = _F3.judge_interaction(_dS1, "0", F(235) * 10 ** 6, "a", "d", phi=0)
+_uS2 = _F3.judge_interaction(_dS2, "0", F(235) * 10 ** 6, "d", "a", phi=0)
+_fS = lambda r_: float(F(r_["utilisation_max"].split()[0]))
+check("space frame EN 6.3.3: y is each member's STRONG axis — a member with I_y > I_z and its twin with the axes, curves "
+      "and moments swapped give the same utilisation, 1.0234 > 1: OPEN (the old plane-a-is-y code said 0.950, EARNED)",
+      abs(_fS(_uS1) - _fS(_uS2)) <= 1e-9 and _fS(_uS1) > 1 and _uS1["verdict"] == "OPEN", (_fS(_uS1), _fS(_uS2)))
+_dLc = _dlt + "F, 2, FX, -100000\nF, 1, MY, 30000\nF, 2, MY, -30000\n"
+_iN = _F3.judge_interaction(_dLc, "0", F(355) * 10 ** 6, "b", "b", phi=0)
+_iL = _F3.judge_interaction(_dLc, "0", F(355) * 10 ** 6, "b", "b", phi=0, curve_lt="b")
+check("space frame EN 6.3.3 WITH chi_LT (curve_lt): the fork-supported beam-column — the utilisation with lateral-"
+      "torsional buckling is above the one without it, the premise 'no lateral-torsional buckling' gone from the output",
+      _fS(_iL) > _fS(_iN) and "no lateral-torsional" not in _iL["premises"], (_fS(_iN), _fS(_iL), _iL["premises"]))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")
