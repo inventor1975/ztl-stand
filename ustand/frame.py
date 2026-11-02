@@ -420,6 +420,20 @@ _STAB = {}
 _MUTANT = {}       # TEST-ONLY sabotage switches (bench/night/verify_all.py's mutation runs); empty = the real bounds
 
 
+def _dy(x, up):
+    """x rounded to a dyadic rational with 64 significant bits, UP or DOWN (2026-11-02, the night battery: exact
+    coefficients built from the PROVED member forces (Nlo, Nhi carry huge denominators) were summed over members into
+    matrix entries of > 4300 digits — the 40x8 frame took 364 s (0.1 s before the continuum work), 85 % in Fraction
+    gcd). Callers round in the SAFE direction only: a coefficient that ADDS a PSD member matrix down, one that
+    SUBTRACTS it up, a centre moved by its rounding with the difference added to its radius (rounded up)."""
+    if x == 0:
+        return x
+    e = abs(x.numerator).bit_length() - x.denominator.bit_length() - 64
+    q = x / F(2) ** e if e >= 0 else x * F(2) ** (-e)
+    m = -((-q.numerator) // q.denominator) if up else q.numerator // q.denominator
+    return F(m) * F(2) ** e if e >= 0 else F(m, 2 ** (-e))
+
+
 def stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
     """Cached: the same deck, tolerance, precision and model give the same proved result (the float steps are
     deterministic, eigsh starts from ones) — the second-order checks ask for it again and again."""
@@ -529,24 +543,27 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
                     if P * kk[k] >= 1:
                         return False
                     cq = P * P * kk[k] / (1 - P * kk[k])
+                    ca, cb, cq = _dy(lam * Na, False), _dy(lam * Nb, False), _dy(cq, True)
                     for key, v in Gal[k].items():
-                        M[key] = M.get(key, F(0)) + lam * Na * v
+                        M[key] = M.get(key, F(0)) + ca * v
                     for key, v in Gbl[k].items():
-                        M[key] = M.get(key, F(0)) + lam * Nb * v
+                        M[key] = M.get(key, F(0)) + cb * v
                     for key, v in Gl[k].items():
                         M[key] = M.get(key, F(0)) - cq * v
                 elif Nlo[k] < 0:
                     P = -lam * Nlo[k]
                     if P * kk[k] >= 1:
                         return False                  # the member itself could buckle between its nodes: subdivide
-                    cq = P * P * kk[k] / (1 - P * kk[k])
+                    cq = _dy(P * P * kk[k] / (1 - P * kk[k]), True)
+                    P = _dy(P, True)
                     for key, v in Gl[k].items():
                         M[key] = M.get(key, F(0)) - P * v
                     for key, v in Ql[k].items():
                         M[key] = M.get(key, F(0)) - cq * v
                 elif Nlo[k] > 0:
+                    cb = _dy(lam * Nlo[k], False)
                     for key, v in Bl[k].items():
-                        M[key] = M.get(key, F(0)) + lam * Nlo[k] * v
+                        M[key] = M.get(key, F(0)) + cb * v
         Mf = ZE._float_matrix(M, n)
         try:
             mu = float(sla.eigsh(Mf, k=1, sigma=0, which="LM", return_eigenvectors=False, v0=np.ones(n))[0])
@@ -875,8 +892,9 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
         Qloc = [[Gloc[a][b] - Bloc[a][b] for b in range(4)] for a in range(4)]
         Gt = [(d, _glob(i, j, c_, s_, dof, l)) for d, l in _psd_terms(Gloc)]
         Gt = [(d, g) for d, g in Gt if g]
-        mid = (Nlo.get(k, F(0)) + Nhi.get(k, F(0))) / 2
-        rad = (Nhi.get(k, F(0)) - Nlo.get(k, F(0))) / 2
+        mid0 = (Nlo.get(k, F(0)) + Nhi.get(k, F(0))) / 2
+        mid = _dy(mid0, False)                         # the centre moved by its rounding ...
+        rad = _dy((Nhi.get(k, F(0)) - Nlo.get(k, F(0))) / 2 + abs(mid0 - mid), True)    # ... and the radius covers it
         for d, g in Gt:
             items = list(g.items())
             for a, ga in items:
@@ -895,7 +913,7 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
             for d, l in _psd_terms(Qloc):
                 g = _glob(i, j, c_, s_, dof, l)
                 if g:
-                    cterms.append((cq * d, g))
+                    cterms.append((_dy(cq * d, True), g))   # C only needs to bound D from above
     # outputs per checked element: N = E p (A/L) a.u, M_I, M_J = E p (I/L)(+-b + 3c).u (top fibre: N/A + M/W);
     # and f.u (the energy bound for the end moments' continuum correction)
     es, items = [], []
