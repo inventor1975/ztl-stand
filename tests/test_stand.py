@@ -3364,5 +3364,27 @@ check("LATERAL-TORSIONAL BUCKLING, one member between forks, BOTH SIDES: uniform
       and float(_l1m) > _mcr / 100000,
       (float(_l1), _mcr / 100000, float(_h1), float(_l2), _ncr / 100000, float(_h2), float(_l1m)))
 
+# EN 6.3.2 in the SPACE FRAME (frame3d.judge_ltb): a fork-supported IPE 300-like beam (strong axis = I_y, gravity in z')
+_dlt = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 8/27\n"
+        "R, 1, 5.38e-3, 6.04e-6, 8.356e-5, 0.3, 0.15, 0, 0, 2.01e-7, 1.26e-7\nN, 1, 0, 0, 0\nN, 2, 6, 0, 0\nE, 1, 2\n"
+        "D, 1, UX, 0\nD, 1, UY, 0\nD, 1, UZ, 0\nD, 1, ROTX, 0\nD, 2, UY, 0\nD, 2, UZ, 0\nD, 2, ROTX, 0\n")
+_rl = _F3.judge_ltb(_dlt + "F, 1, MY, 50000\nF, 2, MY, -50000\n", "0", F(355) * 10 ** 6, "b", phi=0)
+_Gl = 210e9 / (2 * (1 + 8 / 27))
+_mcl = _mlt.pi / 6 * _mlt.sqrt(210e9 * 6.04e-6 * _Gl * 2.01e-7 * (1 + _mlt.pi ** 2 * 210e9 * 1.26e-7 / (_Gl * 2.01e-7 * 36)))
+_Wl = 8.356e-5 / 0.15
+_lbl = _mlt.sqrt(_Wl * 355e6 / _mcl)
+_phl = 0.5 * (1 + 0.34 * (_lbl - 0.2) + _lbl ** 2)
+_ul = 50000 / (_Wl * 355e6 / (_phl + _mlt.sqrt(_phl ** 2 - _lbl ** 2)))
+_us = float(F(_rl["utilisation_max"].split()[0]))
+_rc = _F3.judge_ltb(_dlt.replace("D, 1, ROTX, 0\n", "D, 1, ROTX, 0\nD, 1, ROTY, 0\n").replace(
+    "D, 2, ROTX, 0\n", "D, 2, ROTX, 0\nD, 2, ROTY, 0\n") + "QLOAD, 1, FZ, -10000\n", "0", F(355) * 10 ** 6, "b", phi=0)
+_mc = _rc["members"][0]
+check("EN 6.3.2 LATERAL-TORSIONAL BUCKLING in a space frame (judge_ltb): a fork-supported beam under uniform moment — "
+      "the proved utilisation is at or above the hand EN value with the exact M_cr (curve b), within 0.1 %; the same "
+      "beam clamped in bending under a uniform load: M_Ed = w L^2/12 exactly and alpha_LT ~ 7.77 (C1 ~ 2.58 — a "
+      "clamped beam's diagram; the parabola's sign wrong would give a near-uniform diagram, alpha ~ 3-4)",
+      _rl["verdict"] == "EARNED" and _ul <= _us <= _ul * 1.001 and _mc["M_Ed_max"].startswith("30000")
+      and 7.6 < float(F(_mc["alpha_LT_low"].split()[0])) < 7.9, (_us, _ul, _mc))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

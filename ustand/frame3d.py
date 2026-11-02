@@ -7,7 +7,8 @@ frame's energy path one dimension up.
 Deck (version 1):
     ET, 1, BEAM4
     MP, EX, 1, 210e9          MP, PRXY, 1, 0.3          (G = E / (2 (1 + nu)))
-    R, id, AREA, IZZ, IYY, TKZ, TKY, THETA, ISTRN, IXX   (IXX = the torsion constant J; THETA 0 or 90 only)
+    R, id, AREA, IZZ, IYY, TKZ, TKY, THETA, ISTRN, IXX [, IW]   (IXX = the torsion constant J; IW the warping
+                                                         constant, for lateral-torsional buckling; THETA 0 or 90)
     MAT, id    REAL, id   (the current material and section for the E lines that follow)
     N, id, x, y, z            E, i, j
     D, n, UX|UY|UZ|ROTX|ROTY|ROTZ|ALL, 0                 F, n, FX|FY|FZ|MX|MY|MZ, value
@@ -55,7 +56,8 @@ class Frame3DError(B.BrickError):
 
 
 from collections import namedtuple   # noqa: E402
-Props = namedtuple("Props", "ex nu area izz iyy tkz tky theta ixx")   # one member's material and section
+Props = namedtuple("Props", "ex nu area izz iyy tkz tky theta ixx iw", defaults=(F(0),))   # material + section; iw:
+# the warping constant I_w (R's 11th value, optional: 0 is the conservative side for lateral-torsional buckling)
 
 
 def read_deck(text):
@@ -90,12 +92,13 @@ def read_deck(text):
             tkz, tky = (_num(f[k], where) if f[k] else F(0) for k in (5, 6))
             theta = _num(f[7], where) if f[7] else F(0)
             ixx = _num(f[9], where)
+            iw = _num(f[10], where) if len(f) > 10 and f[10] else F(0)
             if theta not in (0, 90):
                 raise Frame3DError(f"{where}: THETA {theta} — 0 or 90 only (version 1: exact local axes)")
             rid = int(f[1]) if f[1] else 1
-            if rid in reals and reals[rid] != (area, izz, iyy, tkz, tky, theta, ixx):
+            if rid in reals and reals[rid] != (area, izz, iyy, tkz, tky, theta, ixx, iw):
                 raise Frame3DError(f"{where}: real constant set {rid} given twice, differently")
-            reals[rid] = (area, izz, iyy, tkz, tky, theta, ixx)
+            reals[rid] = (area, izz, iyy, tkz, tky, theta, ixx, iw)
         elif cmd == "F":
             d = f[2].upper()
             if d not in _F_OF:
@@ -1413,6 +1416,113 @@ def judge_interaction(text, tol, fy, curve_z, curve_y, gamma_m1=F(1), case=None,
     return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN", "utilisation_max": _show(worst, 1),
             "members": rows, "path": "EN 1993-1-1 6.3.3 (6.61) and (6.62), Annex B Method 2, biaxial, C_m = 1",
             "premises": "no lateral-torsional / torsional buckling; class 1-3 (elastic resistance)"}
+
+
+def judge_ltb(text, tol, fy, curve_lt, gamma_m1=F(1), case=None, m=8, ks=None, phi=None):
+    """EN 1993-1-1 6.3.2 LATERAL-TORSIONAL BUCKLING of every member (2026-11-02, DESIGN-LTB.md, version 1):
+    M_Ed <= chi_LT W_y fy / gamma_M1 with M_cr = alpha_LT M_Ed, alpha_LT the PROVED lower bound of the member's own
+    lateral-torsional / torsional critical factor (ustand.ltb: the member between FORKS, its first-order strong-axis
+    moment — end moments, the clamped-beam moment and a member load's parabola — and its compression over the box;
+    moduli at (1 - T)); chi_LT by 6.3.2.2 (the general case, lambda_LT,0 = 0.2), W_y elastic. The utilisation
+    gamma_M1 M_Ed / (chi_LT(lb) W fy) with lb^2 = W fy / (alpha M_Ed) rises with M_Ed and falls with alpha
+    (g = chi lb^2 increasing, ZTL lean ZChi): alpha_LT,low and M_Ed,high give its upper bound. EN 5.3.2's sway
+    imperfection by default (as judge_interaction). PREMISES (said): forks at the member ends (lateral and torsional
+    restraint there, warping free); doubly symmetric section, loads at the shear centre; I_w from R's 11th value
+    (0 = none, the conservative side). EARNED when every member clears it; OPEN otherwise."""
+    from . import judge_ztl  # noqa: F401
+    from . import ltb as LTB
+    from .frame import CURVES, _curve_premises, _sqrt_down, _g_lower, _side_peak
+    import zenergy as ZE
+    phi = PHI0 if phi is None else F(phi)
+    if phi:
+        texti = with_imperfections(text, phi)
+        names_i = list(energy_system(texti, tol)[1]) if case is None else \
+            [f"{case}{t}{ax}" for ax in "XY" for t in "+-"]
+        parts_ = [judge_ltb(texti, tol, fy, curve_lt, gamma_m1, c, m, ks, 0) for c in names_i]
+        worst = max((F(p_["utilisation_max"].split()[0]) for p_ in parts_ if p_.get("utilisation_max")), default=None)
+        return {"verdict": "EARNED" if all(p_["verdict"] == "EARNED" for p_ in parts_) else "OPEN",
+                "utilisation_max": _show(worst, 1) if worst is not None else None,
+                "members": [r_ for p_ in parts_ for r_ in p_["members"]],
+                "imperfection": f"EN 5.3.2 sway, +-{phi} along X and along Y (each judged)",
+                "path": parts_[0]["path"], "premises": parts_[0]["premises"]}
+    if curve_lt not in CURVES:
+        raise Frame3DError(f"{curve_lt!r}: a buckling curve is one of {', '.join(CURVES)}")
+    a_lt = CURVES[curve_lt]
+    _curve_premises(a_lt)
+    nodes, elems, loads, supports, props = read_deck(text)
+    parts, fs, dof, emap = energy_system(text, tol)
+    n = len(dof)
+    T = max((p["t"] for p in parts), default=F(0))
+    names = list(fs) if case is None else [case]
+    ks = sorted(emap) if ks is None else ks
+    es, items, scale, strong = [], [], [], {}
+    for k in ks:
+        mm = emap[k]
+        pk, L = mm["p"], mm["L"]
+        if not pk.tky or not pk.tkz:
+            raise Frame3DError(f"member {k}: the lateral-torsional check needs TKY and TKZ")
+        strong[k] = "a" if pk.izz >= pk.iyy else "b"
+        bb, cc, I = ("bz", "cz", pk.izz) if strong[k] == "a" else ("by", "cy", pk.iyy)
+        for end, sb in (("I", 1), ("J", -1)):
+            e = [F(0)] * n
+            for i_, v in mm[bb].items():
+                e[i_] += I / L * v
+            for i_, v in mm[cc].items():
+                e[i_] += I / L * 3 * sb * v
+            es.append(e); items.append(k); scale.append(mm["part"])
+    rs_all = ZE.certify_cases(parts, [fs[c] for c in names], es, n, scale=scale)
+    rows, worst = [], F(0)
+    for c, rs in zip(names, rs_all):
+        Nlo, Nhi, _nn, _nl, qax = _axial_ranges(text, c, parts, fs, dof, emap, nodes, elems, props)
+        qmap = _qloads(text).get(c, {})
+        ends = {}
+        for k, r in zip(items, rs):
+            ex = emap[k]["p"].ex
+            ends.setdefault(k, []).append(sorted([ex * r["lo"], ex * r["hi"]]))
+        for k in ks:
+            pk, L = emap[k]["p"], emap[k]["L"]
+            if k in qax:
+                rows.append({"case": c, "member": k, "verdict": "OPEN",
+                             "why": "an axial member load (N varies): not in version 1"})
+                continue
+            xp_, yp_, zp_ = emap[k]["axes"]
+            pl = strong[k]
+            qk = qmap.get(k)
+            w = sum(qk[t] * (yp_ if pl == "a" else zp_)[t] for t in range(3)) if qk else F(0)
+            mb = (-w if pl == "a" else w) * L * L / 12
+            kap = (w if pl == "a" else -w) * L * L / 2
+            (iL, iH), (jL, jH) = ends[k]
+            MAr, MBr = (iL + mb, iH + mb), (jL + mb, jH + mb)
+            Iweak = pk.iyy if pl == "a" else pk.izz
+            Istr, tk = (pk.izz, pk.tky) if pl == "a" else (pk.iyy, pk.tkz)
+            Elo = (1 - T) * pk.ex
+            sec = (Elo * Iweak, Elo / (2 * (1 + pk.nu)) * pk.ixx, Elo * pk.iw, (pk.iyy + pk.izz) / pk.area)
+            Nr = (min(Nlo.get(k, F(0)), F(0)), min(Nhi.get(k, F(0)), F(0)))   # tension ignored: the safe side
+            alpha = LTB.alpha_lower(L, sec, Nr, MAr, MBr, kap, m=m)
+            Med = _side_peak(list(MAr), list(MBr), kap)
+            if alpha is None or not Med:
+                rows.append({"case": c, "member": k, "verdict": "EARNED", "why": "no bending, no compression"})
+                continue
+            if alpha <= 0:
+                rows.append({"case": c, "member": k, "verdict": "OPEN", "why": "alpha_LT not proved positive"})
+                continue
+            W = Istr / (tk / 2)
+            lb = _sqrt_down(W * F(fy) / (alpha * Med))
+            g = _g_lower(lb, a_lt)
+            if g <= 0:
+                rows.append({"case": c, "member": k, "verdict": "OPEN", "why": "no positive resistance proved"})
+                continue
+            u = F(gamma_m1) / (alpha * g)
+            worst = max(worst, u)
+            rows.append({"case": c, "member": k, "alpha_LT_low": _show(alpha, -1), "M_Ed_max": _show(Med, 1),
+                         "lambda_LT_bound": _show(lb, -1),
+                         "utilisation": _show(u, 1), "verdict": "EARNED" if u <= 1 else "OPEN"})
+    vs = [r_["verdict"] for r_ in rows]
+    return {"verdict": "EARNED" if all(v == "EARNED" for v in vs) else "OPEN", "utilisation_max": _show(worst, 1),
+            "members": rows, "path": "EN 1993-1-1 6.3.2.2 (general case), M_cr = alpha_LT M_Ed, alpha_LT proved "
+                                     "per member (ustand.ltb)",
+            "premises": "forks at the member ends (lateral + torsional restraint, warping free); doubly symmetric "
+                        "section; loads at the shear centre; elastic W_y"}
 
 
 def main(argv):
