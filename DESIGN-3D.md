@@ -43,7 +43,8 @@ fixed by outward dyadic rounding) and showed the second-order brackets of loaded
 N (G u) (2/10 frames); the member-load correction made PER MEMBER (zenergy `c_groups`) and the exact signed
 fixed-end moment cut the stress bracket from 1.6 to 0.4 sigma (median, MEASURED) and the sabotage is caught on
 8/10. Axial member loads: stability IN (lower and upper, both sides against the independent FE; with the 2D
-fix of the same day — the split's witness and the clip); second order OPEN (refused, named, in 2D too); torsional / flexural-torsional /
+fix of the same day — the split's witness and the clip); second-order DISPLACEMENTS in (2D and 3D, D <= Nmax^2
+k/(1-Pk) G); second-order STRESSES with them and combined axial + transverse member loads refused (named); torsional / flexural-torsional /
 lateral-torsional buckling (a stated premise — Wagner terms not in); size: measured only up to tens of members.
 
 ## Track 3 — 3D elasticity (LATER)

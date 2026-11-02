@@ -199,7 +199,7 @@ def _has_qload(text):
 
 def _no_axial_qload(text, what):
     """Transverse member loads leave the axial force constant along the member; an AXIAL component makes N vary —
-    stability takes it (G_a/G_b split, 2026-11-02); SECOND ORDER not yet (in 2D neither)."""
+    stability and second-order DISPLACEMENTS take it (G_a/G_b split, 2026-11-02); second-order STRESSES not yet."""
     if not _has_qload(text):
         return
     nodes, elems, loads, supports, props = read_deck(text)
@@ -831,14 +831,24 @@ def second_order_disp(text, tol, targets, case=None):
     PREMISES (stated): axial forces from the first-order analysis; doubly symmetric sections, no torsional /
     flexural-torsional buckling; Euler-Bernoulli members."""
     from . import judge_ztl  # noqa: F401
-    from .frame import PI2_LO, _psd_terms, _dy
+    from .frame import PI2_LO, _psd_terms, _dy, _geo_split
     import zenergy as ZE
-    _no_axial_qload(text, "second order")
     nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
     if len(names) > 1:
         return {c: second_order_disp(text, tol, targets, c)[c] for c in names}
+    # AXIAL member loads (2026-11-02, as the 2D frame): displacements only, members without a transverse load
+    qax3 = {}
+    for k, q in _qloads(text).get(names[0], {}).items():
+        i, j = elems[k - 1]
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], props[k].theta)
+        a_ = sum(q[t] * xp[t] for t in range(3))
+        if a_:
+            if any(sum(q[t] * ax[t] for t in range(3)) for ax in (yp, zp)):
+                raise Frame3DError(f"second order: member {k} carries an AXIAL and a transverse member load — not "
+                                   f"yet (axial alone is in)")
+            qax3[k] = a_ * L / 2
     st = stability_lower(text, tol, names[0])
     lam = st.get("lam_low")
     if st.get("lam_est") is not None and (lam is None or lam <= 1):   # an early exit only (certify_general proves)
@@ -861,6 +871,41 @@ def second_order_disp(text, tol, targets, case=None):
         mid0 = (Nlo[k] + Nhi[k]) / 2
         mid = _dy(mid0, False)
         rad = _dy((Nhi[k] - Nlo[k]) / 2 + abs(mid0 - mid), True)
+        if k in qax3:
+            # an AXIAL member load: N_a G_a + N_b G_b per plane with N_a, N_b intervals (the mean N: stability widened
+            # Nlo/Nhi by |a| L/2); D in [0, C], C = Nmax^2 k/(1 - P k) G (the 2D frame's derivation)
+            qa = qax3[k]
+            nn_lo, nn_hi = Nlo[k] + abs(qa), Nhi[k] - abs(qa)
+            Ga_, Gb_ = _geo_split(L)
+            P = max(F(0), -Nlo[k])
+            nmax = max(-Nlo[k], Nhi[k], F(0))
+            for (plane, vax, rax, sg, I) in (("y", yp, zp, 1, izz), ("z", zp, yp, -1, iyy)):
+                for (lo_, hi_), Gx in (((nn_lo + qa, nn_hi + qa), Ga_), ((nn_lo - qa, nn_hi - qa), Gb_)):
+                    Gt = [(d, g) for d, g in ((d, _glob3(i, j, vax, rax, sg, dof, l)) for d, l in _psd_terms(Gx)) if g]
+                    if _MUTANT.get("no_geo"):
+                        Gt = []
+                    m0 = (lo_ + hi_) / 2
+                    mm = _dy(m0, False)
+                    rr_ = _dy((hi_ - lo_) / 2 + abs(m0 - mm), True)
+                    for d, g in Gt:
+                        items = list(g.items())
+                        for a, ga in items:
+                            for b, gb in items:
+                                if a >= b:
+                                    A0[(a, b)] = A0.get((a, b), F(0)) + mm * d * ga * gb
+                    if rr_ and Gt:
+                        gparts.append({"t": rr_, "terms": Gt})
+                kk = L * L / (4 * PI2_LO * Elo * I)
+                if P * kk >= 1:
+                    return {names[0]: {"verdict": "OPEN", "why": f"element {k} could buckle between its nodes: subdivide"}}
+                cq = nmax * nmax * kk / (1 - P * kk)
+                cqd[(k, plane)] = cq
+                if cq:
+                    for d, l in _psd_terms(Gloc):
+                        g = _glob3(i, j, vax, rax, sg, dof, l)
+                        if g:
+                            cterms.append((_dy(cq * d, True), g))
+            continue
         Gt = []
         P = max(F(0), -Nlo[k])
         for (plane, vax, rax, sg, I) in (("y", yp, zp, 1, izz), ("z", zp, yp, -1, iyy)):
@@ -958,6 +1003,7 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
     from .frame import _sqrt_down, PI2_LO
     import zenergy as ZE
     from znumjudge import parse_quantities, judge_sheet_claim
+    _no_axial_qload(text, "second-order stresses")       # the end moments / interior bounds assume a constant N
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
     ks = sorted(emap) if ks is None else ks

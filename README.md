@@ -78,7 +78,9 @@ Every verdict says its LEVEL (`scope` in the output) — a proof about a mesh is
 
 Named premises (said in the outputs): linear elasticity, Green's formula, IEEE 754 for the floating Cholesky,
 second-order axial forces from the first-order analysis, straight truss bars, out-of-plane restraint for 6.3.3.
-Not yet: second order with AXIAL member loads (OPEN, said; transverse ones are in), out-of-plane/LT buckling, plate buckling.
+Axial member loads: stability and second-order DISPLACEMENTS (2D and 3D, since 2026-11-02). Not yet: second-order
+STRESSES with axial member loads and a member carrying both an axial and a transverse load (OPEN / refused, said),
+out-of-plane/LT buckling, plate buckling.
 3D phase: track 1 (conduction) in; track 2 (space frames, 6 DOF per node) and track 3 (3D elasticity) next. Measured
 (conduction3d, 2026-11-02): 16^3 random 50 % electrolyte in 0.5 s; voxel edge/corner contacts make the bracket close
 slowly under uniform refinement (3D checkerboard: ratio 2.3 -> 1.4 at x4) — adaptive refinement is the next step.

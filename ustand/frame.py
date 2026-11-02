@@ -972,9 +972,13 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     import zenergy as ZE
     nodes, elems, loads, supports, ex, (area, izz) = read_deck(text)
     qd = read_qloads(text)
-    if any(a_ for a_, w_, L_ in qd.values()):
-        return {"verdict": "OPEN", "why": "an AXIAL member load (QLOAD along an element) in second order: not yet "
-                                          "(N varies along the member) — first order and EN's method judge it",
+    qax2 = {k: a_ * L_ / 2 for k, (a_, w_, L_) in qd.items() if a_}
+    if qax2 and (checks or any(qd[k][1] for k in qax2)):
+        # DISPLACEMENTS with axial member loads are in (2026-11-02); member stresses (the end moments and the interior
+        # bounds assume a constant N) and a member carrying both an axial and a transverse load are not yet
+        return {"verdict": "OPEN", "why": "an AXIAL member load (QLOAD along an element) in second order: "
+                                          "displacements only, on members without a transverse load (stresses and "
+                                          "combined loads not yet) — first order and EN's method judge it",
                 "checks": [], "disp": {}}
     st = stability_lower(text, tol, jobs=jobs)
     parts, f, dof, emap, (_, _, _, h) = energy_system_full(text, tol)
@@ -1017,6 +1021,42 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
                                                         [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
         Bloc = [[F(v) / L for v in r] for r in [[1, 0, -1, 0], [0, 0, 0, 0], [-1, 0, 1, 0], [0, 0, 0, 0]]]
         Qloc = [[Gloc[a][b] - Bloc[a][b] for b in range(4)] for a in range(4)]
+        if k in qax2:
+            # an AXIAL member load (2026-11-02): N linear, N_a G_a + N_b G_b (both PSD) with N_a, N_b intervals;
+            # D in [0, C], C = Nmax^2 k/(1 - P k) G — the cross term 2 int N w_H' eta' needs max|N| (no mean trick:
+            # N varies), the inner energy (1/k - P)|eta'|^2; D >= 0 since eta = 0 is admissible
+            qa = qax2[k]
+            nn_lo = Nlo.get(k, F(0)) + (abs(qa) if at is None else 0)       # the mean N (stability widened it)
+            nn_hi = Nhi.get(k, F(0)) - (abs(qa) if at is None else 0)
+            Ga_, Gb_ = _geo_split(L)
+            for (lo_, hi_), Gx in (((nn_lo + qa, nn_hi + qa), Ga_), ((nn_lo - qa, nn_hi - qa), Gb_)):
+                Gt = [(d, g) for d, g in ((d, _glob(i, j, c_, s_, dof, l)) for d, l in _psd_terms(Gx)) if g]
+                mid0 = (lo_ + hi_) / 2
+                mid = _dy(mid0, False)
+                rad = _dy((hi_ - lo_) / 2 + abs(mid0 - mid), True)
+                for d, g in Gt:
+                    items = list(g.items())
+                    for a, ga in items:
+                        for b, gb in items:
+                            if a >= b:
+                                A0[(a, b)] = A0.get((a, b), F(0)) + mid * d * ga * gb
+                if rad and Gt:
+                    gparts.append({"t": rad, "terms": Gt})
+            m_lo, m_hi = nn_lo - abs(qa), nn_hi + abs(qa)
+            P = max(F(0), -m_lo)
+            kk = L * L / (4 * PI2_LO * Elo * izz)
+            if P * kk >= 1:
+                return {"verdict": "OPEN", "why": f"element {k} could buckle between its nodes: subdivide",
+                        "checks": []}
+            nmax = max(-m_lo, m_hi, F(0))
+            cq = nmax * nmax * kk / (1 - P * kk)
+            cqd[k] = cq
+            if cq:
+                for d, l in _psd_terms(Gloc):
+                    g = _glob(i, j, c_, s_, dof, l)
+                    if g:
+                        cterms.append((_dy(cq * d, True), g))
+            continue
         Gt = [(d, _glob(i, j, c_, s_, dof, l)) for d, l in _psd_terms(Gloc)]
         Gt = [(d, g) for d, g in Gt if g]
         mid0 = (Nlo.get(k, F(0)) + Nhi.get(k, F(0))) / 2

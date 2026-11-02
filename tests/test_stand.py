@@ -3091,13 +3091,13 @@ _rl = [(_F3.range_of(_bm3 + "D, 3, ALL, 0\nRELEASE, 1, I, MZ, MY\nRELEASE, 2, J,
                      "QLOAD, 2, FZ, -500\n", "0", "U(2,Z)")["lo"], F(-500) * 5 * 256 / (384 * _E3x * _Iy3x))]
 _qref = False
 try:
-    _F3.second_order_disp(_bm3 + "QLOAD, 1, FX, -500\n", "0", ["U(2,Y)"])   # AXIAL member load: second order not yet
+    _F3.second_order_stress(_bm3 + "QLOAD, 1, FX, -500\n", "0", F(10) ** 12)   # AXIAL load: 2nd-order STRESSES not yet
 except _F3.Frame3DError:
     _qref = True
 check("space frame END RELEASES and MEMBER LOADS: hinges by RELEASE (the member's own end rotation) and QLOAD's "
       "consistent nodal loads give EXACTLY P L^3/(48EI) (pinned, point load), q L^4/(8EI) (cantilever), q L^4/(384EI) "
-      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); SECOND ORDER with an AXIAL QLOAD refuses (not yet), said "
-      "(stability takes it since 2026-11-02)",
+      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); second-order STRESSES with an AXIAL QLOAD refuse (not yet), "
+      "said (stability and second-order displacements take it since 2026-11-02)",
       all(a == b for a, b in _rl) and _qref, [(str(a), str(b)) for a, b in _rl])
 
 _qs3 = []
@@ -3250,6 +3250,37 @@ check("2D STABILITY WITH AN AXIAL MEMBER LOAD, both sides (2026-11-02): a column
       "elements. The old code: an upper bound 13.05 (and 20.05 on four elements) for a self-weight column whose "
       "lambda_cr is 20.57 (the witness took N_mean G for a linear N), and 'no buckling' for the columns in mean tension",
       all(t_[3] for t_ in _axr), _axr)
+def _ax_so_ref(P, q, H, m=256, L=4.0, E=210e9, I=8e-5):
+    """the same fine mesh, second order: (K + G(N_1)) u = f, the tip's lateral displacement"""
+    h = L / m
+    nd = 2 * (m + 1)
+    K, G = _np_ax.zeros((nd, nd)), _np_ax.zeros((nd, nd))
+    ke = E * I / h ** 3 * _np_ax.array([[12, 6 * h, -12, 6 * h], [6 * h, 4 * h * h, -6 * h, 2 * h * h],
+                                        [-12, -6 * h, 12, -6 * h], [6 * h, 2 * h * h, -6 * h, 4 * h * h]])
+    ge = 1 / (30 * h) * _np_ax.array([[36, 3 * h, -36, 3 * h], [3 * h, 4 * h * h, -3 * h, -h * h],
+                                      [-36, -3 * h, 36, -3 * h], [3 * h, -h * h, -3 * h, 4 * h * h]])
+    for e in range(m):
+        K[2 * e:2 * e + 4, 2 * e:2 * e + 4] += ke
+        G[2 * e:2 * e + 4, 2 * e:2 * e + 4] += (-P + q * (L - (e + 0.5) * h)) * ge
+    f_ = _np_ax.zeros(nd)
+    f_[-2] = H
+    return _np_ax.linalg.solve((K + G)[2:, 2:], f_[2:])[-2]
+
+
+_axs = []
+for _P, _q, _H in ((0, -200000, 5000), (100000, 150000, 3000), (300000, -100000, 2000)):
+    _dso = ("ET, 1, BEAM3\nMP, EX, 1, 210e9\nR, 1, 0.01, 8e-5, 0.2\nN, 1, 0, 0\nN, 2, 0, 4\nE, 1, 2\n"
+            f"D, 1, UX, 0\nD, 1, UY, 0\nD, 1, ROTZ, 0\nF, 2, FY, -{_P}\nF, 2, FX, {_H}\nQLOAD, 1, FY, {_q}\n")
+    _rso = _ax_so_ref(_P, _q, _H)
+    for _ms in (1, 4):
+        _rr = FRM.second_order_case(FRM.subdivide(_dso, _ms) if _ms > 1 else _dso, "0", [],
+                                    disp=[(2, "X")]).get("disp", {}).get(("U", 2, "X"))
+        _axs.append((_P, _q, _ms, _rr is not None and float(_rr[0]) <= _rso <= float(_rr[1]),
+                     _rr and [float(_rr[0]), float(_rr[1])], _rso))
+check("2D SECOND ORDER WITH AN AXIAL MEMBER LOAD (2026-11-02): the tip of a column under self-weight / a pull with a "
+      "lateral load — the proved range contains the fine mesh's second-order answer, one and four elements (N_a G_a + "
+      "N_b G_b, D <= Nmax^2 k/(1-Pk) G; the mean N alone misses it in 9 of 9 such cases, MEASURED)",
+      all(t_[3] for t_ in _axs), _axs)
 _ax3 = []
 _ref3 = _ax_ref(0, -100000, I=3e-5)                    # the weak axis (I = 3e-5) of the 2D fine mesh
 for _th in (0, 90):
@@ -3263,6 +3294,16 @@ for _th in (0, 90):
 check("SPACE frame stability with an AXIAL member load (2026-11-02, the 2D split ported): a column under self-weight, "
       "THETA 0 and 90 — lambda_low <= the fine mesh's lambda_cr about the weak axis <= lambda_high (it was refused)",
       all(t_[1] for t_ in _ax3), _ax3)
+_so3 = []
+for _th in (0, 90):
+    _ds3 = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\n"
+            f"R, 1, 0.01, 8e-5, 8e-5, 0.2, 0.2, {_th}, 0, 5e-5\nN, 1, 0, 0, 0\nN, 2, 0, 0, 4\nE, 1, 2\n"
+            "D, 1, ALL, 0\nF, 2, FZ, -300000\nF, 2, FX, 2000\nQLOAD, 1, FZ, -100000\n")
+    _r = _F3.second_order_disp(_ds3, "0", ["U(2,X)"])["BASE"]["U(2,X)"]
+    _so3.append((_th, float(_r[0]) <= _ax_so_ref(300000, -100000, 2000) <= float(_r[1]), float(_r[0]), float(_r[1])))
+check("SPACE frame second-order DISPLACEMENTS with an AXIAL member load: a column (I_y = I_z = the 2D column's) under "
+      "self-weight, tip load and a lateral load — the 2D fine mesh's answer inside the proved range, THETA 0 and 90",
+      all(t_[1] for t_ in _so3), _so3)
 _r3d = _F3.second_order_disp(_d3s, "0.5%", ["U(2,X)", "U(3,X)"])["BASE"]
 _X3d = _F3._EXTRA.get("last") or {}
 _dy_ok = lambda x: x == 0 or (x.denominator & (x.denominator - 1) == 0 and abs(x.numerator).bit_length() <= 70)
