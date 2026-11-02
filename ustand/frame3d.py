@@ -26,6 +26,10 @@ is exact too, and refuses otherwise.
 One part per element (E and G scale together with the modulus factor p in the box).
 MATERIALS AND SECTIONS: `MP, EX|PRXY, id, value` and `R, id, ...` define them by id; `MAT, id` and `REAL, id` set the
 current pair and every `E` takes it (as ANSYS; default 1).
+END RELEASES: `RELEASE, elem, I|J, MY|MZ[, MY|MZ]` — the member's end rotation about that local axis becomes its own
+unknown (a hinge for that bending moment; torsion stays connected). MEMBER LOADS: `QLOAD, elem, FX|FY|FZ, q` — a
+uniform load per length along a global axis (in the current load case), as consistent nodal loads: the nodal
+displacements are exact; member STRESSES and SECOND ORDER with member loads are not yet (they refuse, said).
 LOAD CASES: `LC, name` opens a case (F lines before any LC form case BASE); `LCOMB, name, case, factor, ...` builds a
 combination; with LCOMB lines the combinations are judged, otherwise the cases. A requirement must hold in EVERY one
 (one ZTL conjunction); all share one factorization and one proved lambda_min (ZTL certify_cases).
@@ -58,6 +62,7 @@ def read_deck(text):
     nodes, elems, supports = {}, [], set()
     cases, combos, cur = {"BASE": {}}, {}, "BASE"
     loads = cases["BASE"]
+    releases = {}
     mats, reals, cur_m, cur_r = {}, {}, 1, 1
     for ln, raw in enumerate(text.splitlines(), 1):
         line = raw.split("!")[0].strip()
@@ -105,6 +110,21 @@ def read_deck(text):
                 if dd is None:
                     raise Frame3DError(f"{where}: support {f[2]} — UX UY UZ ROTX ROTY ROTZ ALL only")
                 supports.add((int(f[1]), dd))
+        elif cmd == "RELEASE":
+            k, end = int(f[1]), f[2].upper()
+            if end not in ("I", "J"):
+                raise Frame3DError(f"{where}: RELEASE, elem, I|J, MY|MZ[, MY|MZ]")
+            for comp in f[3:]:
+                c_ = comp.strip().upper()
+                if c_ not in ("MY", "MZ"):
+                    raise Frame3DError(f"{where}: release {comp} — MY or MZ (local bending moments) only")
+                releases.setdefault(k, set()).add((end, c_[1]))
+        elif cmd == "QLOAD":
+            k, d = int(f[1]), f[2].upper()
+            if d not in ("FX", "FY", "FZ"):
+                raise Frame3DError(f"{where}: QLOAD, elem, FX|FY|FZ, q (per unit length, global direction)")
+            key = (("Q", k), d[1])
+            loads[key] = loads.get(key, F(0)) + _num(f[3], where)
         elif cmd == "LC":
             cur = f[1].strip()
             if cur in cases and cases[cur]:
@@ -155,7 +175,32 @@ def read_deck(text):
             judged[name] = tot
     else:
         judged = cases
+    for k in releases:
+        if not 1 <= k <= len(elems):
+            raise Frame3DError(f"RELEASE on element {k}: no such element")
     return nodes, elems, judged, supports, props
+
+
+def _releases(text):
+    """{elem: {(end, axis)}} from the RELEASE lines (read_deck validates them)."""
+    out = {}
+    for raw in text.splitlines():
+        line = raw.split("!")[0].strip()
+        f = [x.strip() for x in (line.split(",") if "," in line else line.split())]
+        if f and f[0].upper() == "RELEASE":
+            for comp in f[3:]:
+                out.setdefault(int(f[1]), set()).add((f[2].upper(), comp.strip().upper()[1]))
+    return out
+
+
+def _has_qload(text):
+    return any(raw.split("!")[0].strip().upper().startswith("QLOAD") for raw in text.splitlines())
+
+
+def _no_qload(text, what):
+    if _has_qload(text):
+        raise Frame3DError(f"{what} with member loads (QLOAD) is not yet in version 1 — displacements are exact with "
+                           f"them; member stresses and second order need the interior bounds (the 2D frame has them)")
 
 
 def _axes(pi, pj, theta):
@@ -187,7 +232,10 @@ def _axes(pi, pj, theta):
 def energy_system(text, tol):
     nodes, elems, loads, supports, props = read_deck(text)
     t = F(0) if tol in (None, "0", 0) else tolerance(tol) if isinstance(tol, str) else F(tol)
+    releases = _releases(text)
     free = [(n, d) for n in sorted(nodes) for d in DIRS if (n, d) not in supports]
+    # a released end: the member's own rotation about that local axis, an unknown of its own (not the node's)
+    free += [(("IR", k, end), ax) for k in sorted(releases) for end, ax in sorted(releases[k])]
     dof = {nd: k for k, nd in enumerate(free)}
     parts, emap = [], {}
     for k, (i, j) in enumerate(elems, 1):
@@ -207,6 +255,11 @@ def energy_system(text, tol):
             names = ("RX", "RY", "RZ") if rot else ("X", "Y", "Z")
             return [((n, names[q]), axis[q]) for q in range(3)]
 
+        def rot(n, end, axis, ax):                    # the member end's rotation about local `ax` ("Y" or "Z")
+            if (end, ax) in releases.get(k, ()):
+                return [((("IR", k, end), ax), F(1))]
+            return proj(n, axis, True)
+
         def neg(lst):
             return [(key, -v) for key, v in lst]
 
@@ -214,19 +267,48 @@ def energy_system(text, tol):
             return [(key, s * v) for key, v in lst]
         a = row(proj(j, xp, False) + neg(proj(i, xp, False)))
         tt = row(proj(j, xp, True) + neg(proj(i, xp, True)))
-        bz = row(proj(i, zp, True) + neg(proj(j, zp, True)))
-        cz = row(proj(i, zp, True) + proj(j, zp, True) + sc(proj(j, yp, False), -2 / L) + sc(proj(i, yp, False), 2 / L))
-        by = row(proj(i, yp, True) + neg(proj(j, yp, True)))
-        cy = row(proj(i, yp, True) + proj(j, yp, True) + sc(proj(j, zp, False), 2 / L) + sc(proj(i, zp, False), -2 / L))
-        emap[k] = {"part": len(parts), "L": L, "a": a, "t": tt, "bz": bz, "cz": cz, "by": by, "cy": cy, "p": pk}
+        bz = row(rot(i, "I", zp, "Z") + neg(rot(j, "J", zp, "Z")))
+        cz = row(rot(i, "I", zp, "Z") + rot(j, "J", zp, "Z") + sc(proj(j, yp, False), -2 / L) + sc(proj(i, yp, False), 2 / L))
+        by = row(rot(i, "I", yp, "Y") + neg(rot(j, "J", yp, "Y")))
+        cy = row(rot(i, "I", yp, "Y") + rot(j, "J", yp, "Y") + sc(proj(j, zp, False), 2 / L) + sc(proj(i, zp, False), -2 / L))
+        emap[k] = {"part": len(parts), "L": L, "a": a, "t": tt, "bz": bz, "cz": cz, "by": by, "cy": cy, "p": pk,
+                   "ij": (i, j), "axes": (xp, yp, zp)}
         parts.append({"t": t, "terms": [(ex * area / L, a), (G * ixx / L, tt), (ex * izz / L, bz),
                                         (3 * ex * izz / L, cz), (ex * iyy / L, by), (3 * ex * iyy / L, cy)]})
     fs = {}
     for name, ld in loads.items():
         f = [F(0)] * len(free)
+
+        def put(key, v):
+            if v and key in dof:
+                f[dof[key]] += v
         for (n, d), v in ld.items():
-            if (n, d) in dof:
-                f[dof[(n, d)]] += v
+            if isinstance(n, tuple) and n[0] == "Q":
+                # QLOAD: a uniform load per length along a global axis, its CONSISTENT nodal loads (Hermite: the
+                # nodal displacements are exact): the axial part in halves; per bending plane w L/2 at each end and
+                # the end moments +-w L^2/12 (about z': +, - at I, J; about y': -, + since dw'/dx' = -th_y)
+                k = n[1]
+                m = emap[k]
+                i, j = m["ij"]
+                xp, yp, zp = m["axes"]
+                L = m["L"]
+                q = [F(0)] * 3
+                q["XYZ".index(d)] = v
+                for nd in (i, j):
+                    for c_, ax in zip(q, "XYZ"):
+                        put((nd, ax), c_ * L / 2)
+                wy = sum(q[c_] * yp[c_] for c_ in range(3))
+                wz = sum(q[c_] * zp[c_] for c_ in range(3))
+                for nd, end, sgn in ((i, "I", 1), (j, "J", -1)):
+                    mz, my = sgn * wy * L * L / 12, -sgn * wz * L * L / 12
+                    for mval, ax_name, axis in ((mz, "Z", zp), (my, "Y", yp)):
+                        if (end, ax_name) in releases.get(k, ()):
+                            put((("IR", k, end), ax_name), mval)
+                        else:
+                            for c_, rn in zip(axis, ("RX", "RY", "RZ")):
+                                put((nd, rn), mval * c_)
+                continue
+            put((n, d), v)
         fs[name] = f
     return parts, fs, dof, emap
 
@@ -322,6 +404,7 @@ def stresses(text, tol, ks=None):
     case (first order). sigma = E p_k (g.u): an output scaled by the element's own modulus factor (ZTL)."""
     from . import judge_ztl  # noqa: F401
     import zenergy as ZE
+    _no_qload(text, "member stresses")
     parts, fs, dof, emap = energy_system(text, tol)
     ks = sorted(emap) if ks is None else ks
     es, idx = [], []
@@ -410,6 +493,7 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     import numpy as np
     import scipy.sparse as sp
     import scipy.sparse.linalg as sla
+    _no_qload(text, "stability")
     nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, tol)
     names = list(fs) if case is None else [case]
@@ -754,6 +838,7 @@ def stability_upper(text, case=None):
     import zenergy as ZE
     import numpy as np
     import scipy.sparse.linalg as sla
+    _no_qload(text, "stability")
     nodes, elems, loads, supports, props = read_deck(text)
     parts, fs, dof, emap = energy_system(text, "0")
     c = list(fs)[0] if case is None else case

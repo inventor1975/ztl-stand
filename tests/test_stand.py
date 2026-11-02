@@ -3078,5 +3078,26 @@ check("space frame, SEVERAL MATERIALS AND SECTIONS (MAT / REAL as ANSYS): a two-
       "section at the root; aluminium, smaller at the tip) — the tip deflection is EXACTLY P (L^3 - b^3)/(3 E1 I1) + "
       "P b^3/(3 E2 I2)", _ms3r == _ms3x, (str(_ms3r), str(_ms3x)))
 
+_hd3 = "ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0, 0, 0, 0, 5e-5\n"
+_bm3 = _hd3 + "N, 1, 0, 0, 0\nN, 2, 2, 0, 0\nN, 3, 4, 0, 0\nE, 1, 2\nE, 2, 3\nD, 1, ALL, 0\n"
+_E3x, _Iz3x, _Iy3x = F(210 * 10 ** 9), F(8, 10 ** 5), F(3, 10 ** 5)
+_rl = [(_F3.range_of(_bm3 + "D, 3, ALL, 0\nRELEASE, 1, I, MZ, MY\nRELEASE, 2, J, MZ, MY\nF, 2, FY, -1000\n", "0",
+                     "U(2,Y)")["lo"], F(-1000) * 64 / (48 * _E3x * _Iz3x)),
+       (_F3.range_of(_bm3 + "QLOAD, 1, FY, -500\nQLOAD, 2, FY, -500\n", "0", "U(3,Y)")["lo"],
+        F(-500) * 256 / (8 * _E3x * _Iz3x)),
+       (_F3.range_of(_bm3 + "D, 3, ALL, 0\nQLOAD, 1, FZ, -500\nQLOAD, 2, FZ, -500\n", "0", "U(2,Z)")["lo"],
+        F(-500) * 256 / (384 * _E3x * _Iy3x)),
+       (_F3.range_of(_bm3 + "D, 3, ALL, 0\nRELEASE, 1, I, MZ, MY\nRELEASE, 2, J, MZ, MY\nQLOAD, 1, FZ, -500\n"
+                     "QLOAD, 2, FZ, -500\n", "0", "U(2,Z)")["lo"], F(-500) * 5 * 256 / (384 * _E3x * _Iy3x))]
+_qref = False
+try:
+    _F3.stresses(_bm3 + "QLOAD, 1, FY, -500\n", "0")
+except _F3.Frame3DError:
+    _qref = True
+check("space frame END RELEASES and MEMBER LOADS: hinges by RELEASE (the member's own end rotation) and QLOAD's "
+      "consistent nodal loads give EXACTLY P L^3/(48EI) (pinned, point load), q L^4/(8EI) (cantilever), q L^4/(384EI) "
+      "(clamped, in Z) and 5 q L^4/(384EI) (pinned, in Z); member stresses with QLOAD refuse (not yet), said",
+      all(a == b for a, b in _rl) and _qref, [(str(a), str(b)) for a, b in _rl])
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")
