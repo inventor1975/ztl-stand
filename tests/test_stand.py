@@ -3334,5 +3334,35 @@ check("space frame second order: the proved outputs, N_lo/N_hi and cq are OUTWAR
       and all(_dy_ok(v) for v in list(_X3d.get("Nlo", {}).values()) + list(_X3d.get("Nhi", {}).values())
               + list(_X3d.get("cq", {}).values())), _r3d)
 
+# LATERAL-TORSIONAL / TORSIONAL BUCKLING of one member (ustand/ltb.py, 2026-11-02, DESIGN-LTB.md): forks, doubly
+# symmetric (an IPE 300-like section, L = 6 m), both sides against exact formulas; the continuum correction needed
+from ustand import ltb as _LTB                       # noqa: E402
+import math as _mlt                                  # noqa: E402
+_Elt, _Glt = F(210 * 10 ** 9), F(81 * 10 ** 9)
+_Izl, _Jl, _Iwl, _Iyl, _Al = F("6.04e-6"), F("2.01e-7"), F("1.26e-7"), F("8.356e-5"), F("5.38e-3")
+_seclt = (_Elt * _Izl, _Glt * _Jl, _Elt * _Iwl, (_Iyl + _Izl) / _Al)
+_Mlt = F(100000)
+_mcr = _mlt.pi / 6 * _mlt.sqrt(float(_Elt * _Izl * _Glt * _Jl) * (1 + _mlt.pi ** 2 * float(_Elt * _Iwl)
+                                                                    / (float(_Glt * _Jl) * 36)))
+_l1 = _LTB.alpha_lower(F(6), _seclt, (F(0), F(0)), (_Mlt, _Mlt), (_Mlt, _Mlt), F(0))
+_h1 = _LTB.alpha_upper(F(6), _seclt, _Mlt, _Mlt, F(0), F(0))
+_ncr = min(_mlt.pi ** 2 * float(_Elt * _Izl) / 36,
+           (float(_Glt * _Jl) + _mlt.pi ** 2 * float(_Elt * _Iwl) / 36) / float(_seclt[3]))
+_l2 = _LTB.alpha_lower(F(6), _seclt, (F(-100000), F(-100000)), (F(0), F(0)), (F(0), F(0)), F(0))
+_h2 = _LTB.alpha_upper(F(6), _seclt, F(0), F(0), F(0), F(-100000))
+_keep_corr = _LTB._correction
+_LTB._correction = lambda *a: [[F(0)] * 8 for _ in range(8)]            # MUTATION: the continuum correction dropped
+_l1m = _LTB.alpha_lower(F(6), _seclt, (F(0), F(0)), (_Mlt, _Mlt), (_Mlt, _Mlt), F(0), m=2, rel=F(1, 10 ** 6))
+# (two sub-elements: the Hermite model alone is 0.909 there, the exact 0.9047 — MEASURED; at eight it is within the
+# bisection's 1e-3 of the exact and the sabotage would hide)
+_LTB._correction = _keep_corr
+check("LATERAL-TORSIONAL BUCKLING, one member between forks, BOTH SIDES: uniform moment — lambda_low <= M_cr/M = "
+      "(pi/L) sqrt(E I_z G J (1 + pi^2 E I_w/(G J L^2)))/M <= lambda_high; a column — min(Euler about the weak axis, "
+      "torsional (G J + pi^2 E I_w/L^2)/i0^2) inside; the continuum correction DROPPED puts the 'lower' bound above "
+      "the exact value (the Hermite model alone is no lower bound)",
+      float(_l1) <= _mcr / 100000 <= float(_h1) and float(_l2) <= _ncr / 100000 <= float(_h2)
+      and float(_l1m) > _mcr / 100000,
+      (float(_l1), _mcr / 100000, float(_h1), float(_l2), _ncr / 100000, float(_h2), float(_l1m)))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")
