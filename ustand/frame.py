@@ -521,6 +521,14 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
             if a >= b:
                 Gsum[(a, b)] = Gsum.get((a, b), F(0)) + Nlo[k] * v
                 Gnom[(a, b)] = Gnom.get((a, b), F(0)) + Nnom[k] * v
+    for k in qax:
+        # a member load's LINEAR N in the nominal estimate too (2026-11-02): with the mean N alone a column in mean
+        # tension but compressed at one end had no positive eigenvalue, and the stand said "no buckling" (the fine
+        # mesh: lambda_cr = 178) — N_a G_a + N_b G_b = N_mean G + (aL/2)(G_a - G_b)
+        for key, v in Gal[k].items():
+            Gnom[key] = Gnom.get(key, F(0)) + qax[k] * v
+        for key, v in Gbl[k].items():
+            Gnom[key] = Gnom.get(key, F(0)) - qax[k] * v
     # float estimate of the nominal lambda_cr: K0 v = -lam K_G v
     A = ZE._float_matrix(K0, n)
     Bm = ZE._float_matrix(Gnom, n)
@@ -540,7 +548,14 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
                     # LINEAR N along the element (an axial member load): the geometric part exactly split,
                     # N_a = N_nodes + aL/2 at I, N_b = N_nodes - aL/2 at J, each from below; the continuum
                     # correction with the largest compression and G (not Q: the mean trick needs constant N)
+                    # CLIPPED at 0 (2026-11-02): the cross term 2 int N w_H' eta' is bounded by max|N|, not by the largest
+                    # compression P — a member whose tension end outweighs its compression broke P^2 k/(1 - P k). The
+                    # form with N~ = min(N, 0) is below (int (N - N~) w'^2 >= 0); N~ is concave, so >= its chord
+                    # min(Na, 0)(1 - s) + min(Nb, 0) s; |N~| <= P and the correction P^2 k/(1 - P k) G holds again.
+                    # (when the compression dominates, Nhi <= -Nlo, max|N| = P: no clip needed, tension kept)
                     Na, Nb = Nnodes_lo.get(k, F(0)) + qax[k], Nnodes_lo.get(k, F(0)) - qax[k]
+                    if Nhi[k] > -Nlo[k]:
+                        Na, Nb = min(Na, F(0)), min(Nb, F(0))
                     P = -lam * Nlo[k]
                     if P * kk[k] >= 1:
                         return False
@@ -629,6 +644,8 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
         for k in Gl:
             if k in qax and Nlo[k] < 0:
                 Na, Nb = Nnodes_lo.get(k, F(0)) + qax[k], Nnodes_lo.get(k, F(0)) - qax[k]
+                if Nhi[k] > -Nlo[k]:                                     # clipped at 0, as in `proved`
+                    Na, Nb = min(Na, F(0)), min(Nb, F(0))
                 P = -lam * Nlo[k]
                 if P * kk[k] >= 1:
                     return False
@@ -661,11 +678,16 @@ def _stability_lower(text, tol, jobs=1, rel=F(1, 1000), model="continuum"):
         if mu <= 0:
             return False
         return ZE.pd_ieee_float(n, rr, cc, Mv, d2, F(mu) * F(9, 10)) is not None
-    if lam_est is None:
-        return {"lam_low": None, "why": "no compressed member: no buckling under these loads", "lam_est": None,
-                "unknowns": n, "T": T, "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
-    lo, hi = F(0), F(lam_est) * F(11, 10)
-    start = F(lam_est) / 1000
+    # Nlo < 0 somewhere (else returned above): a compressed member and no nominal estimate is NOT "no buckling"
+    # (2026-11-02: a column in mean tension, compressed at one end; a beam whose N = 0 is proved only to +-18 N) —
+    # the bisection then starts from the compressed members' own Euler factor min 1/(P k); only proved_f proves
+    guess = min((1 / (-Nlo[k] * kk[k]) for k in kk if Nlo.get(k, F(0)) < 0), default=None)
+    if lam_est is None and guess is None:
+        return {"lam_low": F(0), "why": "a member is compressed but no buckling estimate: nothing proved",
+                "lam_est": None, "unknowns": n, "T": T, "Nlo": Nlo, "Nhi": Nhi, "Nnom": Nnom}
+    top = F(lam_est) if lam_est is not None else _dy(guess, True)
+    lo, hi = F(0), top * F(11, 10)
+    start = top / 1000
     for _ in range(20):                           # a noisy estimate (members barely compressed): step down
         if proved_f(start):
             break
@@ -713,6 +735,19 @@ def stability_upper(text, tol="0"):
         for (a, b), v in Ge[k].items():
             if a >= b:
                 Gnom[(a, b)] = Gnom.get((a, b), F(0)) + Nmid.get(k, F(0)) * v
+    # an AXIAL member load (2026-11-02): N is linear along the member, N(x) = N_mean + a (L - 2x)/2, and the Hermite
+    # field's geometric form is N_mean G + (aL/2)(G_a - G_b) — with N_mean G alone the witness's form was not the
+    # continuum's (a false upper bound possible) and a column in mean tension had "no buckling"
+    qax, Gab = {}, {}
+    for k, (a_, w_, L_) in read_qloads(text).items():
+        if a_:
+            i, j = elems[k - 1]
+            c_, s_ = (nodes[j][0] - nodes[i][0]) / L_, (nodes[j][1] - nodes[i][1]) / L_
+            Ga_, Gb_ = _geo_split(L_)
+            qax[k] = a_ * L_ / 2
+            Gab[k] = _beam_form(i, j, c_, s_, dof, [[Ga_[r][c] - Gb_[r][c] for c in range(4)] for r in range(4)])
+            for key, v in Gab[k].items():
+                Gnom[key] = Gnom.get(key, F(0)) + qax[k] * v
     A = ZE._float_matrix(K0, n)
     Bm = ZE._float_matrix(Gnom, n)
     try:
@@ -720,7 +755,7 @@ def stability_upper(text, tol="0"):
     except Exception:
         return {"lam_high": None, "why": "no buckling mode found"}
     if vals[0] <= 0:
-        return {"lam_high": None, "why": "no compressed member: no buckling under these loads"}
+        return {"lam_high": None, "why": "the estimate found no buckling mode: no upper bound"}
     x = [F(float(v)) for v in vecs[:, 0]]
     qK = sum(a * b for a, b in zip(x, ZE._kmul(K0, x, n)))
     den = F(0)
@@ -729,6 +764,8 @@ def stability_upper(text, tol="0"):
             continue
         g = sum(v * x[a] * x[b] for (a, b), v in G.items())        # both triangles: the full form, >= 0
         den -= Nhi[k] * g
+    for k, Gk in Gab.items():                                       # lower triangle: off-diagonal twice
+        den -= qax[k] * sum(v * x[a] * x[b] * (1 if a == b else 2) for (a, b), v in Gk.items())
     if den <= 0:
         return {"lam_high": None, "why": "the witness does not load the mode in compression"}
     lam = qK / den                                       # x'K0x + lam sum N_hi g = 0 <= 0: not positive definite
@@ -812,7 +849,7 @@ def judge_buckling_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
     _curve_premises(a)
     st = stability_lower(text, tol, jobs=jobs)
     lam = st.get("lam_low")
-    if st.get("lam_est") is None:
+    if lam is None:                                   # lam_low None: no member compressed anywhere in the box
         return {"verdict": "EARNED", "why": "no compressed member under these loads", "members": []}
     su = stability_upper(text, "0")
     lam_hi = su.get("lam_high")
@@ -947,6 +984,7 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     T = max((p["t"] for p in parts), default=F(0))
     lam = st.get("lam_low")
     if st.get("lam_est") is not None and (lam is None or lam <= 1):
+        # an early exit only: certify_general below proves A > 0 over the whole box itself (or raises: OPEN)
         return {"verdict": "OPEN", "why": f"the critical factor is not proved above 1 (proved {lam}): the frame may "
                                           f"buckle under these loads", "checks": []}
     Nlo, Nhi = st["Nlo"], st["Nhi"]
@@ -1182,7 +1220,7 @@ def judge_members(text, tol, checks, jobs=1, order=2, phi=PHI0):
         r1 = _judge_members_1(deck, tol, checks, jobs)
         st = stability_lower(deck, tol, jobs=jobs)
         lam = st.get("lam_low")
-        none = st.get("lam_est") is None
+        none = lam is None                            # nothing compressed (not "no estimate": 2026-11-02)
         amp = F(1) if none else (1 / (1 - 1 / lam) if lam and lam >= 3 else None)
         mode = "no compression" if none else "first order allowed" if lam >= 10 else "amplified" if amp else \
             "not allowed"
@@ -1316,7 +1354,7 @@ def judge_interaction_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
     n = len(dof)
     st = stability_lower(text, tol, jobs=jobs)
     lam = st.get("lam_low")
-    if st.get("lam_est") is None or lam is None:
+    if lam is None:                                   # lam_low None: no member compressed anywhere in the box
         return {"verdict": "EARNED", "why": "no compressed member under these loads", "members": []}
     # end moments M = E p (I/L)(+-b + 3c).u at both ends of every element: scaled outputs, all at once
     es, keys = [], []
@@ -1359,6 +1397,9 @@ def judge_interaction_case(text, tol, fy, curve, gamma_m1=F(1), jobs=1):
         if nlo >= 0:
             continue
         N = -nlo
+        if not lam or lam <= 0:                      # compressed, alpha_cr not proved above 0
+            rows.append({"member": mem, "verdict": "OPEN", "why": "the critical factor is not proved"})
+            continue
         lb_lo = _sqrt_down(area * fy / (lam * N))
         H = lam * _g_lower(lb_lo, a)
         if H <= 0:

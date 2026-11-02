@@ -632,7 +632,7 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     pd_ieee_float, the matrix built in floats with a proved distance). PREMISE (stated): doubly symmetric sections,
     no torsional / flexural-torsional / lateral-torsional buckling (Wagner terms not in); Euler-Bernoulli members."""
     from . import judge_ztl  # noqa: F401
-    from .frame import PI2_LO
+    from .frame import PI2_LO, _dy
     import zenergy as ZE
     import numpy as np
     import scipy.sparse as sp
@@ -686,7 +686,12 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
     except Exception:
         lam_est = None
     if not lam_est or lam_est <= 0:
-        return dict(base, lam_low=None, why="no buckling mode found at the nominal forces")
+        # a member IS compressed (all Nlo >= 0 returned above): no estimate is not "no buckling" (2026-11-02); the
+        # bisection starts from the compressed members' own Euler factor min 1/(P k) — only the proof decides
+        lam_est = None
+        guess = min((1 / (-Nlo[k] * kk) for (k, plane), (G, Q, Bf, kk) in forms.items() if Nlo[k] < 0), default=None)
+        if guess is None:
+            return dict(base, lam_low=F(0), lam_est=None, why="a member is compressed but no buckling estimate")
     keys = list(K0)
     kidx = {key: q for q, key in enumerate(keys)}
     def _arr(mat):
@@ -744,8 +749,9 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
         if mu <= 0:
             return False
         return ZE.pd_ieee_float(n, rr, cc, Mv, d2, F(mu) * F(9, 10)) is not None
-    lo, hi = F(0), F(lam_est) * F(11, 10)
-    start = F(lam_est) / 1000
+    top = F(lam_est) if lam_est is not None else _dy(guess, True)
+    lo, hi = F(0), top * F(11, 10)
+    start = top / 1000
     for _ in range(20):
         if proved(start):
             break
@@ -799,7 +805,7 @@ def second_order_disp(text, tol, targets, case=None):
         return {c: second_order_disp(text, tol, targets, c)[c] for c in names}
     st = stability_lower(text, tol, names[0])
     lam = st.get("lam_low")
-    if st.get("lam_est") is not None and (lam is None or lam <= 1):
+    if st.get("lam_est") is not None and (lam is None or lam <= 1):   # an early exit only (certify_general proves)
         return {names[0]: {"verdict": "OPEN", "why": f"the critical factor is not proved above 1 ({lam})"}}
     Nlo, Nhi = st["Nlo"], st["Nhi"]
     n = len(dof)
