@@ -2967,5 +2967,19 @@ check("space frame STRESSES: a cantilever under axial + biaxial tip loads — th
       _sl == _sh == _sx and _js["verdict"] == "EARNED" and _js2["verdict"] == "REFUTED",
       (float(_sl), float(_sx), _js["verdict"], _js2["verdict"]))
 
+_cn3 = "".join(f"N, {k + 1}, 0, 0, {F(4 * k, 16)}\n" for k in range(17))
+_ce3 = "".join(f"E, {k + 1}, {k + 2}\n" for k in range(16))
+_cb3 = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0, 0, 0, 0, 5e-5\n" + _cn3 + _ce3
+        + "D, 1, ALL, 0\nF, 17, FZ, -10000\n")
+_ew = _math.pi ** 2 * 210e9 * 3e-5 / (4 * 16) / 10000
+_es = _math.pi ** 2 * 210e9 * 8e-5 / (4 * 16) / 10000
+_s3a = float(_F3.stability_lower(_cb3, "0")["lam_low"])
+_s3b = float(_F3.stability_lower(_cb3 + "".join(f"D, {k + 1}, UX, 0\n" for k in range(1, 17)), "0")["lam_low"])
+_c2d = float(FRM.stability_lower(_col, "0")["lam_low"])
+check("space frame STABILITY: a vertical cantilever column (16 elements) — the proved lower bound lies just below "
+      "Euler's load about the WEAK axis (within 0.1 %); braced in the weak plane it lies just below the STRONG-axis "
+      "Euler load and equals the 2D frame's bound for the same column (within 1e-6)",
+      0.999 * _ew < _s3a < _ew and _s3b < _es and abs(_s3b - _c2d) <= 1e-6 * _c2d, (_s3a, _ew, _s3b, _c2d, _es))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

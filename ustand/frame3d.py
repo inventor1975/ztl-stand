@@ -359,6 +359,165 @@ def judge_stress(text, tol, fy, gamma_m0=F(1), ks=None):
                     "load case; NOT here: buckling, shear and torsion stresses, second order"}
 
 
+def _form3(i, j, vax, rax, rsign, dof, M4):
+    """A local 4 x 4 form over (v_i, r_i, v_j, r_j) on the global DOFs (lower triangle): v_n = vax . u_n,
+    r_n = rsign * rax . th_n."""
+    def comp(n, ax, rot, sg):
+        names = ("RX", "RY", "RZ") if rot else ("X", "Y", "Z")
+        return [((n, names[q]), sg * ax[q]) for q in range(3) if ax[q]]
+    loc = [comp(i, vax, False, 1), comp(i, rax, True, rsign), comp(j, vax, False, 1), comp(j, rax, True, rsign)]
+    out = {}
+    for a in range(4):
+        for b in range(4):
+            if not M4[a][b]:
+                continue
+            for (na, va) in loc[a]:
+                for (nb, vb) in loc[b]:
+                    if na in dof and nb in dof:
+                        key = (dof[na], dof[nb])
+                        if key[0] >= key[1]:
+                            out[key] = out.get(key, F(0)) + M4[a][b] * va * vb
+    return out
+
+
+def stability_lower(text, tol, case=None, rel=F(1, 1000)):
+    """A PROVED lower bound on the critical load factor of ONE load case (or the smallest over all cases) — the 2D
+    frame's continuum stability (frame.stability_lower) in both bending planes of every member:
+        K_exact(lam) >= (1 - T) K0 + sum_members sum_planes [ -P G - P^2 k/(1 - P k) Q   (compressed, P = -lam N_lo)
+                                                               | lam N_lo b b^T / L       (in tension) ],
+    k = L^2 / (4 pi^2 E_lo I_plane), one positive definite matrix proved at each bisection step (ZTL
+    pd_ieee_float, the matrix built in floats with a proved distance). PREMISE (stated): doubly symmetric sections,
+    no torsional / flexural-torsional / lateral-torsional buckling (Wagner terms not in); Euler-Bernoulli members."""
+    from . import judge_ztl  # noqa: F401
+    from .frame import PI2_LO
+    import zenergy as ZE
+    import numpy as np
+    import scipy.sparse as sp
+    import scipy.sparse.linalg as sla
+    nodes, elems, loads, supports, ex, nu, (area, izz, iyy, tkz, tky, theta, ixx) = read_deck(text)
+    parts, fs, dof, emap = energy_system(text, tol)
+    names = list(fs) if case is None else [case]
+    if len(names) > 1:
+        res = [stability_lower(text, tol, c, rel) for c in names]
+        best = min((r for r in res if r.get("lam_low") is not None), key=lambda r: r["lam_low"], default=res[0])
+        return dict(best, cases={c: r.get("lam_low") for c, r in zip(names, res)})
+    f = fs[names[0]]
+    n = len(dof)
+    T = max((p["t"] for p in parts), default=F(0))
+    ks = [k for k in emap if emap[k]["a"]]
+    rs = ZE.certify_many(parts, f, [dict(emap[k]["a"]) for k in ks], n, scale=[emap[k]["part"] for k in ks])
+    Nlo, Nnom = {}, {}
+    for k, r in zip(ks, rs):
+        fac = ex * area / emap[k]["L"]
+        Nlo[k] = min(fac * r["lo"], fac * r["hi"])
+        Nnom[k] = fac * r["nominal"]
+    if all(v >= 0 for v in Nlo.values()):
+        return {"case": names[0], "lam_low": None, "why": "no compressed member: no buckling under these loads"}
+    Elo = (1 - T) * ex
+    K0 = ZE.matrix(parts, n)
+    forms = {}                                      # (k, plane) -> (G, Q, B, kk)
+    for k, (i, j) in enumerate(elems, 1):
+        if k not in Nlo:
+            continue
+        L, xp, yp, zp = _axes(nodes[i], nodes[j], theta)
+        Gloc = [[F(v) / (30 * L) for v in r] for r in [[36, 3 * L, -36, 3 * L], [3 * L, 4 * L * L, -3 * L, -L * L],
+                                                        [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
+        Bloc = [[F(v) / L for v in r] for r in [[1, 0, -1, 0], [0, 0, 0, 0], [-1, 0, 1, 0], [0, 0, 0, 0]]]
+        Qloc = [[Gloc[a][b] - Bloc[a][b] for b in range(4)] for a in range(4)]
+        for plane, (vax, rax, sg, I) in (("y", (yp, zp, 1, izz)), ("z", (zp, yp, -1, iyy))):
+            forms[(k, plane)] = tuple(_form3(i, j, vax, rax, sg, dof, X) for X in (Gloc, Qloc, Bloc)) + \
+                (L * L / (4 * PI2_LO * Elo * I),)
+    # nominal estimate: K0 v = -lam K_G(N_nom) v
+    Gn = {}
+    for (k, plane), (G, Q, B, kk) in forms.items():
+        for key, v in G.items():
+            Gn[key] = Gn.get(key, F(0)) + Nnom[k] * v
+    A = ZE._float_matrix(K0, n)
+    Bm = ZE._float_matrix(Gn, n)
+    try:
+        lam_est = float(1 / sla.eigsh(-Bm, k=1, M=A, which="LA", return_eigenvectors=False, v0=np.ones(n))[0])
+    except Exception:
+        lam_est = None
+    if not lam_est or lam_est <= 0:
+        return {"case": names[0], "lam_low": None, "why": "no buckling mode found at the nominal forces"}
+    keys = list(K0)
+    kidx = {key: q for q, key in enumerate(keys)}
+    def _arr(mat):
+        ix = []
+        for key in mat:
+            if key not in kidx:
+                kidx[key] = len(keys); keys.append(key)
+            ix.append(kidx[key])
+        return np.array(ix, dtype=np.int64), np.array([float(v) for v in mat.values()])
+    arrs = {kp: tuple(_arr(m) for m in fq[:3]) for kp, fq in forms.items()}
+    K0i = np.array([kidx[key] for key in K0], dtype=np.int64)
+    K0v = np.array([float(v) for v in K0.values()])
+    nk_ = len(keys)
+    cnt = np.bincount(np.concatenate([K0i] + [a[0] for t3 in arrs.values() for a in t3]), minlength=nk_)
+    m_ = int(cnt.max()) + 4
+    u_ = F(1, 2 ** 53)
+    gam = m_ * u_ / (1 - m_ * u_)
+    rr = np.array([a for a, b in keys], dtype=np.int64); cc = np.array([b for a, b in keys], dtype=np.int64)
+    offd = (rr != cc).astype(float)
+    import math
+
+    def _fl(x, up):
+        v = float(x)
+        if up and F(v) < x:
+            v = math.nextafter(v, math.inf)
+        elif not up and F(v) > x:
+            v = math.nextafter(v, -math.inf)
+        return v
+
+    def proved(lam):
+        a0 = _fl(1 - T, False)
+        ix, vv, av = [K0i], [a0 * K0v], [abs(a0) * np.abs(K0v)]
+        for (k, plane), (G, Q, B, kk) in forms.items():
+            (Gi, Gv), (Qi, Qv), (Bi, Bv) = arrs[(k, plane)]
+            if Nlo[k] < 0:
+                P = -lam * Nlo[k]
+                if P * kk >= 1:
+                    return False
+                cP, cQ = -_fl(P, True), -_fl(P * P * kk / (1 - P * kk), True)
+                ix += [Gi, Qi]; vv += [cP * Gv, cQ * Qv]; av += [abs(cP) * np.abs(Gv), abs(cQ) * np.abs(Qv)]
+            elif Nlo[k] > 0:
+                cB = _fl(lam * Nlo[k], False)
+                ix.append(Bi); vv.append(cB * Bv); av.append(abs(cB) * np.abs(Bv))
+        ixc = np.concatenate(ix)
+        Mv = np.bincount(ixc, weights=np.concatenate(vv), minlength=nk_)
+        Ma = np.bincount(ixc, weights=np.concatenate(av), minlength=nk_)
+        dl = Ma * float(gam) * 1.0000001
+        d2 = F(float(np.sum(dl * dl * (1 + offd)))) * (1 + 4 * gam) + F(nk_, 2 ** 1000)
+        Mf = sp.csc_matrix((np.concatenate([Mv, Mv[offd > 0]]), (np.concatenate([rr, cc[offd > 0]]),
+                                                                  np.concatenate([cc, rr[offd > 0]]))), shape=(n, n))
+        try:
+            mu = float(sla.eigsh(Mf, k=1, sigma=0, which="LM", return_eigenvectors=False, v0=np.ones(n))[0])
+        except Exception:
+            return False
+        if mu <= 0:
+            return False
+        return ZE.pd_ieee_float(n, rr, cc, Mv, d2, F(mu) * F(9, 10)) is not None
+    lo, hi = F(0), F(lam_est) * F(11, 10)
+    start = F(lam_est) / 1000
+    for _ in range(20):
+        if proved(start):
+            break
+        hi, start = start, start / 10
+    else:
+        return {"case": names[0], "lam_low": F(0), "lam_est": lam_est, "why": "not even a small factor proved"}
+    lo = start
+    for _ in range(40):
+        mid = (lo + hi) / 2
+        if proved(mid):
+            lo = mid
+        else:
+            hi = mid
+        if hi - lo <= rel * hi:
+            break
+    return {"case": names[0], "lam_low": lo, "lam_est": lam_est, "unknowns": n,
+            "premise": "doubly symmetric sections; torsional and flexural-torsional buckling NOT checked"}
+
+
 def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
         print(__doc__)
