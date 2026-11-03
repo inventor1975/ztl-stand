@@ -1,0 +1,73 @@
+50/608 done, 10 s
+/home/user/ztl-stand/ustand/frame3d.py:704: RuntimeWarning: k >= N for N * N square matrix. Attempting to use scipy.linalg.eigh instead.
+  lam_est = float(1 / sla.eigsh(-Bm, k=1, M=A, which="LA", return_eigenvectors=False, v0=np.ones(n))[0])
+/home/user/ztl-stand/ustand/frame3d.py:780: RuntimeWarning: k >= N for N * N square matrix. Attempting to use scipy.linalg.eigh instead.
+  mu = float(sla.eigsh(Mf, k=1, sigma=0, which="LM", return_eigenvectors=False, v0=np.ones(n))[0])
+/home/user/ztl-stand/ustand/frame3d.py:1282: RuntimeWarning: k >= N for N * N square matrix. Attempting to use scipy.linalg.eigh instead.
+  vals, vecs = sla.eigsh(-Bm, k=1, M=A, which="LA", v0=np.ones(n))
+100/608 done, 33 s
+150/608 done, 42 s
+200/608 done, 83 s
+/home/user/ztl-stand/ustand/frame3d.py:704: RuntimeWarning: k >= N for N * N square matrix. Attempting to use scipy.linalg.eigh instead.
+  lam_est = float(1 / sla.eigsh(-Bm, k=1, M=A, which="LA", return_eigenvectors=False, v0=np.ones(n))[0])
+/home/user/ztl-stand/ustand/frame3d.py:780: RuntimeWarning: k >= N for N * N square matrix. Attempting to use scipy.linalg.eigh instead.
+  mu = float(sla.eigsh(Mf, k=1, sigma=0, which="LM", return_eigenvectors=False, v0=np.ones(n))[0])
+/home/user/ztl-stand/ustand/frame3d.py:1282: RuntimeWarning: k >= N for N * N square matrix. Attempting to use scipy.linalg.eigh instead.
+  vals, vecs = sla.eigsh(-Bm, k=1, M=A, which="LA", v0=np.ones(n))
+250/608 done, 206 s
+300/608 done, 234 s
+350/608 done, 242 s
+400/608 done, 264 s
+450/608 done, 282 s
+500/608 done, 303 s
+550/608 done, 400 s
+600/608 done, 417 s
+# Night battery report
+
+wall 421 s, 2 processes
+
+| sweep | cases | checked | violations | skipped | errors | cpu s |
+|---|---|---|---|---|---|---|
+| A | 80 | 446 | 0 | 0 | 0 | 13 |
+| A-MUT | 40 | 230 | 18 | 0 | 0 | 6 |
+| A-MUTG | 40 | 230 | 129 | 0 | 0 | 6 |
+| B | 24 | 1980 | 0 | 0 | 0 | 52 |
+| B-MUT | 6 | 360 | 3 | 0 | 0 | 6 |
+| B-MUTG | 6 | 441 | 38 | 0 | 0 | 11 |
+| C | 24 | 24 | 0 | 0 | 0 | 24 |
+| D | 40 | 40 | 0 | 0 | 0 | 2 |
+| E | 120 | 6504 | 0 | 66 | 0 | 3 |
+| F | 4 | 4 | 0 | 0 | 0 | 9 |
+| G | 12 | 1608 | 0 | 0 | 0 | 150 |
+| G-MUTG3 | 4 | 807 | 520 | 0 | 0 | 53 |
+| G-MUTM3 | 4 | 319 | 41 | 0 | 0 | 11 |
+| H | 24 | 48 | 0 | 0 | 0 | 17 |
+| H-MUTA | 12 | 22 | 4 | 0 | 0 | 5 |
+| I | 30 | 88 | 0 | 0 | 0 | 51 |
+| I-MUTL | 12 | 27 | 11 | 0 | 0 | 8 |
+| J | 30 | 354 | 0 | 0 | 0 | 178 |
+| J-MUTA | 12 | 105 | 55 | 0 | 0 | 201 |
+| K | 24 | 47 | 0 | 0 | 0 | 2 |
+| K-MUTR | 12 | 21 | 9 | 0 | 0 | 1 |
+| L | 32 | 64 | 0 | 0 | 0 | 18 |
+| L-MUTE | 8 | 16 | 3 | 0 | 0 | 5 |
+| L-MUTU | 8 | 16 | 3 | 0 | 0 | 6 |
+
+Violations must be 0 in A-F and > 0 in the -MUT rows (the check can see a broken bound).
+
+- A-MUT: examples [{'seed': 900003, 'L': 2, 'P': 20485206, 'q': -19200, 'M': [-4524, -56], 'nsub': 4, 'ref': np.float64(2078905856.2248814), 'bound': 2078822723.4468386}, {'seed': 900036, 'L': 3, 'P': 2305051, 'q': -13615, 'M': [-43935, 28211], 'nsub': 2, 'ref': np.float64(306408214.0976073), 'bound': 305594920.5531277}, {'seed': 900009, 'L': 5, 'P': 2142208, 'q': 7859, 'M': [-31139, -35063], 'nsub': 1, 'ref': np.float64(274588272.72318554), 'bound': 263462487.5637016}]; notes []
+- A-MUTG: examples [{'seed': 950033, 'elem': 1, 'end': 'I', 'ref': np.float64(11177.99999723211), 'proved': [11788.328563220646, 13075.518316617363]}, {'seed': 950030, 'elem': 1, 'end': 'I', 'ref': np.float64(19117.00000116136), 'proved': [19418.101969965275, 19895.61222072321]}, {'seed': 950019, 'elem': 1, 'end': 'I', 'ref': np.float64(27233.00000014424), 'proved': [27443.165769014868, 28255.54483556295]}]; notes []
+- B-MUT: examples [{'seed': 900002, 'member': 15, 'ref': np.float64(402951044.87157834), 'bound': 402931245.6440264}, {'seed': 900001, 'member': 33, 'ref': np.float64(79789664.27194688), 'bound': 79741641.69849703}]; notes []
+- B-MUTG: examples [{'seed': 950003, 'member': 1, 'end': 'I', 'ref': np.float64(558518.515687669), 'proved': [565484.6242699916, 570228.3755569626]}, {'seed': 950001, 'member': 1, 'end': 'I', 'ref': np.float64(280290.3760910266), 'proved': [283840.2974594652, 285402.49333330325]}, {'seed': 950002, 'member': 1, 'end': 'I', 'ref': np.float64(24152.61135462307), 'proved': [24184.062360597432, 24185.005313829468]}]; notes []
+- G-MUTG3: examples [{'seed': 960000, 'second': 'U(18,X)', 'proved': [0.0712344645388041, 0.07394008706075056], 'ref': np.float64(0.10706226912431845)}, {'seed': 960003, 'second': 'U(24,X)', 'proved': [0.03847153480036002, 0.04369064989205602], 'ref': np.float64(0.053469795670651764)}, {'seed': 960002, 'second': 'U(18,X)', 'proved': [0.06357614075039193, 0.06986529431965184], 'ref': np.float64(0.10179924136733076)}]; notes []
+- G-MUTM3: examples [{'seed': 970000, 'member': 1, 'end': 'zI', 'proved': [-221584.09955609436, -210289.8434868509], 'ref': np.float64(-209684.54269138712)}, {'seed': 970001, 'member': 1, 'sigma': [1033993173.7248967, np.float64(970960491.234632), 1239552630.159128]}, {'seed': 970003, 'member': 2, 'sigma': [1086244205.100663, np.float64(1067267540.7685895), 1376439290.5147014]}]; notes []
+- H-MUTA: examples [{'seed': 980001, 'hi': 8.507094063703457, 'fine': 8.697924335118138}, {'seed': 980006, 'hi': 39.81733869531531, 'fine': 40.46008399979958}, {'seed': 980005, 'hi': 6.942180276797709, 'fine': 10.252516366049285}]; notes []
+- I-MUTL: examples [{'seed': 990003, 'lo': 6.330260451024735, 'ref': np.float64(6.251056190206285), 'm': 2}, {'seed': 990000, 'lo': 1.5667031706960348, 'ref': np.float64(1.4363311490449684), 'm': 2}, {'seed': 990005, 'lo': 2.221181792155935, 'ref': np.float64(2.2022918825550852), 'm': 2}]; notes []
+- J-MUTA: examples [{'seed': 991010, 'moment': (1, 'J', 2.291168133775941e-15, -962.9187013573801, -436.93500195676575)}, {'seed': 991007, 'moment': (2, 'J', 6.601213065987717e-16, 0.4137930013976067, 1.1759203395726394)}, {'seed': 991004, 'moment': (1, 'J', -5.646173354272366e-16, -72.56419040483709, -6.494175108234937)}]; notes []
+- K-MUTR: examples [{'seed': 992009, 'ends': ('pin', 'pin'), 'ne': 3, 'hi': 16.950083798908835, 'true': 18.423261378766036}, {'seed': 992005, 'ends': ('pin', 'pin'), 'ne': 4, 'hi': 4.2115513526719175, 'true': 4.6058153816391885}, {'seed': 992006, 'ends': ('pin', 'pin'), 'ne': 1, 'lo': 18.41665277675781, 'true': 4.6058153816391885}]; notes []
+- L-MUTE: examples [{'seed': 993021, 'lower': 83.4654238898174, 'soft_upper': 74.05703281691622}, {'seed': 993009, 'lower': 81.26005032912519, 'soft_upper': 77.30260213092618}, {'seed': 993005, 'lower': 134.9686386556949, 'soft_upper': 123.01378846797006}]; notes []
+- L-MUTU: examples [{'seed': 994005, 'upper': 61.12386104640284, 'stiff_lower': 67.7735991038104}, {'seed': 994021, 'upper': 62.38575831428729, 'stiff_lower': 67.4355514150148}, {'seed': 994009, 'upper': 71.30461234569655, 'stiff_lower': 72.40442127273019}]; notes []
+
+real	7m1.187s
+user	6m8.880s
+sys	1m41.751s

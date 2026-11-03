@@ -1,0 +1,2 @@
+ztl-stand (parallel, 2 shards over 389 checking statements, 809 s): 396 ok, 0 failed
+USTAND GREEN
