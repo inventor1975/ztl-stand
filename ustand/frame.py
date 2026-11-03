@@ -957,6 +957,22 @@ def _glob(i, j, c, s, dof, l):
     return {k: v for k, v in g.items() if v}
 
 
+def _span_max(MI, MJ, c):
+    """max over m_i in MI, m_j in MJ (intervals) and t in [0, 1] of |m_i (1 - t) + m_j t + c t (1 - t)|, exact: for each
+    corner a quadratic in t — its ends and its vertex."""
+    best = F(0)
+    for mi in MI:
+        for mj in MJ:
+            ts = [F(0), F(1)]
+            if c:
+                tv = (mj - mi + c) / (2 * c)
+                if 0 < tv < 1:
+                    ts.append(tv)
+            for t_ in ts:
+                best = max(best, abs(mi * (1 - t_) + mj * t_ + c * t_ * (1 - t_)))
+    return best
+
+
 def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
     """PHYSICAL SECOND ORDER (2026-11-01, the curator's "(а)"): member stresses of the frame under its loads, with
     every modulus in the box, in second-order theory with the axial forces of the first-order analysis (a NAMED
@@ -1220,19 +1236,20 @@ def second_order_case(text, tol, checks, jobs=1, disp=(), at=None):
             mint = mend + (beta * mend + (L * L / 8) * (a_abs * th + abs(wq))) / (1 - beta)
             interior = "bounded (axial member load: Dirichlet bound on M'' = N'v' + (N/EI)M)"
         elif wq:
-            # a transversely loaded member: M = M_lin + m, m'' +- k^2 m = -q -+ k^2 M_lin, m = 0 at the ends; the
-            # Dirichlet Green function is positive, its integral <= (L^2/8)/(1 - k^2 L^2/8) in compression
-            # (sec phi - 1 <= (phi^2/2)/(1 - phi^2/2)), <= L^2/8 in tension
-            if P:
-                k2 = P / ((1 - T) * ex * izz)
-                if k2 * L * L / 8 >= 1:
-                    return {"verdict": "OPEN", "why": f"element {kchk}: too slender between its nodes (subdivide)",
-                            "checks": []}
-                mint = mend + (abs(wq) + k2 * mend) * (L * L / 8) / (1 - k2 * L * L / 8)
-            if Nh > 0:                                          # tension possible too (a range through zero: both)
-                kt = Nh / ((1 - T) * ex * izz)
-                mint = max(mint, mend + (abs(wq) + kt * mend) * L * L / 8)
-            interior = "bounded (member load: the Dirichlet Green function's bound)"
+            # a transversely loaded member (2026-11-03, SIGN-AWARE): in the outputs' convention (the clamped beam's ends
+            # read -w L^2/12, the 'mb' above) M(x) = M_lin(x) + w x (L - x)/2 + r(x), M_lin the chord of the end values;
+            # r'' = (N/EI) M, r = 0 at the ends, so |r| <= (L^2/8) K max|M| (Dirichlet, sign-free), K = max|N| / EI_lo:
+            #   max|M| <= A / (1 - K L^2/8),  A = max over the end-moment intervals' corners and t in [0, 1] of
+            #   |M_I (1 - t) + M_J t + w L^2 t (1 - t)/2|  — hogging ends and the sagging span cancel where they do.
+            # (Before: mend + |w| L^2/8 added outright — MEASURED up to ~2x the reference on loaded beams.)
+            K_ = max(P, max(F(0), Nh)) / ((1 - T) * ex * izz)
+            if K_ * L * L / 8 >= 1:
+                return {"verdict": "OPEN", "why": f"element {kchk}: too slender between its nodes (subdivide)",
+                        "checks": []}
+            mint = _span_max(Ml["I"], Ml["J"], wq * L * L / 2) / (1 - K_ * L * L / 8)
+            if _MUTANT.get("span_sign"):              # sabotage (tests only): the span term with the wrong sign
+                mint = _span_max(Ml["I"], Ml["J"], -wq * L * L / 2) / (1 - K_ * L * L / 8)
+            interior = "bounded (member load: the signed span moment, Dirichlet for second order)"
         elif P:
             phi2 = L * L * P / (4 * (1 - T) * ex * izz)
             (al, ah), (bl, bh) = Ml["I"], Ml["J"]

@@ -3670,6 +3670,44 @@ check("PLATE BUCKLING: a simply supported square panel — uniform compression k
       and 0.40 < _pbj["rho_EN_1993_1_5_4_4"][0] <= _pbj["rho_EN_1993_1_5_4_4"][1] < 0.42,
       (_pb1, _pb0, _pbm, _pbj["sigma_cr"], _pbj["rho_EN_1993_1_5_4_4"], _pbj.get("verdict")))
 
+# SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
+# w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
+# sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,
+# now median 1.000 on sweep B2). The sign is the dangerous part: a pinned 3D beam with loads in both planes and end
+# moments in all sign combinations, against the independent numpy FE (bench/night/frame3d_ref.py, 64 el.); the sabotage
+# 'span_sign' must be caught. (2D: sweep A catches the same sabotage in 11 of 200.)
+import sys as _sys_sp, itertools as _it_sp
+_sys_sp.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "bench", "night"))
+import frame3d_ref as _RF3   # noqa: E402
+def _span3(mut):
+    _F3._MUTANT.clear()
+    if mut:
+        _F3._MUTANT["span_sign"] = True
+    bad = 0
+    try:
+        for sz, sy, qy, qz in _it_sp.product((1, -1), (1, -1), (-3000, 4000), (2500,)):
+            d = ("ET, 1, BEAM4\nMP, EX, 1, 210e9\nMP, PRXY, 1, 0.3\nR, 1, 0.01, 8e-5, 3e-5, 0.2, 0.15, 0, 0, 5e-5\n"
+                 "N, 1, 0, 0, 0\nN, 2, 5, 0, 0\nE, 1, 2\nD, 1, UX, 0\nD, 1, UY, 0\nD, 1, UZ, 0\nD, 1, ROTX, 0\n"
+                 "D, 2, UY, 0\nD, 2, UZ, 0\n"
+                 f"F, 2, FX, -300000\nF, 1, MZ, {sz * 20000}\nF, 2, MZ, {-sz * 15000}\nF, 1, MY, {sy * 12000}\n"
+                 f"F, 2, MY, {-sy * 9000}\nQLOAD, 1, FY, {qy}\nQLOAD, 1, FZ, {qz}\n")
+            hi = float(F(_F3.second_order_stress(d, "0", F(10) ** 12)["members"][0]["sigma_abs"][1].split()[0]))
+            nd_, el_, ld_, sp_, pr_ = _F3.read_deck(d)
+            nl_ = {k: v for k, v in ld_["BASE"].items() if not isinstance(k[0], tuple)}
+            _, fr_ = _RF3.solve(nd_, el_, pr_, nl_, sp_, _F3._qloads(d).get("BASE", {}), m=64, second=True, forces=True)
+            pk = pr_[1]
+            ref = max(abs(N) / float(pk.area) + abs(mz) * float(pk.tky) / 2 / float(pk.izz)
+                      + abs(my) * float(pk.tkz) / 2 / float(pk.iyy)
+                      for (N, mzi, mzj, myi, myj) in fr_[1] for mz, my in ((mzi, myi), (mzj, myj)))
+            bad += ref > hi * (1 + 1e-6)
+    finally:
+        _F3._MUTANT.clear()
+    return bad
+_sp_real, _sp_mut = _span3(False), _span3(True)
+check("SIGN-AWARE SPAN BOUND in 3D: a pinned beam-column with member loads in both planes and end moments in all sign "
+      "combinations — the proved max|sigma| never below the independent FE; the sign sabotage is caught",
+      _sp_real == 0 and _sp_mut > 0, (_sp_real, _sp_mut))
+
 # BOX ORDER (2026-11-03, the cloud red team's round 2, PR #2): a modulus box written high-to-low was read as lo = first,
 # hi = last — elastic3d proved [188.18, 191.32] for E [205, 200] on the pored cube and said 'E_app >= 188' EARNED,
 # while the truth at E = 200 is at most 185.97 (an independent Q1 solve). Now refused, in elastic3d and conduction3d;

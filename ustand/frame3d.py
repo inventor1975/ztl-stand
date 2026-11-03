@@ -1161,18 +1161,17 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                                                           f"axial-load interior bound (subdivide)"}
                     mint = mend + (beta * mend + (L * L / 8) * (a_abs * thb + w)) / (1 - beta)   # + |w|: M'' gains w
                 elif w:
-                    # M = M_lin + m, m'' +- k^2 m = -q -+ k^2 M_lin, m = 0 at the ends: the Dirichlet Green function is
-                    # positive, its integral <= (L^2/8)/(1 - k^2 L^2/8) in compression, <= L^2/8 in tension (2D frame)
-                    if P:
-                        k2 = P / ((1 - T) * ex * I)
-                        if k2 * L * L / 8 >= 1:
-                            return {"verdict": "OPEN", "why": f"element {k}: too slender between its nodes (subdivide)"}
-                        mint = mend + (w + k2 * mend) * (L * L / 8) / (1 - k2 * L * L / 8)
-                    if Nh > 0:
-                        kt = Nh / ((1 - T) * ex * I)
-                        mint = max(mint, mend + (w + kt * mend) * L * L / 8)
-                    if not P and not Nh > 0:
-                        mint = mend + w * L * L / 8
+                    # SIGN-AWARE (2026-11-03, the 2D frame's _span_max): in the outputs' convention this plane's ends
+                    # read mb = -w_eff L^2/12 (w_eff = ws in the (v, th_z) plane, -ws in the (w, phi) plane), so
+                    # M(x) = M_lin + w_eff x (L - x)/2 + r, |r| <= (L^2/8) K max|M|, K = max|N| / EI_lo
+                    from .frame import _span_max
+                    w_eff = ws if plane == "y" else -ws
+                    if _MUTANT.get("span_sign"):        # sabotage (tests only): the span term's sign flipped
+                        w_eff = -w_eff
+                    K_ = max(P, max(F(0), Nh)) / ((1 - T) * ex * I)
+                    if K_ * L * L / 8 >= 1:
+                        return {"verdict": "OPEN", "why": f"element {k}: too slender between its nodes (subdivide)"}
+                    mint = _span_max(Ml["I"], Ml["J"], w_eff * L * L / 2) / (1 - K_ * L * L / 8)
                 elif P:
                     phi2 = L * L * P / (4 * (1 - T) * ex * I)
                     (al, ah), (bl, bh) = Ml["I"], Ml["J"]
