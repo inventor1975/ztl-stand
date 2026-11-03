@@ -3976,6 +3976,41 @@ check("ELASTICITY, OVERLAPPING COLUMNS: stripes (exact 125) and a homogeneous cu
       "overlapping columns, not trivially (> 80 %); the sabotage (no cross terms) crosses 100",
       100 < _eo[0] <= 125 and 80 < _eo[1] <= 100 < _eom, ([float(x) for x in (*_eo, _eom)]))
 
+# MARKOV RELIABILITY (2026-11-03, the curator's "Да"): MTTF and availability of a continuous-time Markov chain with
+# rates in ranges, by exact certificates checked at the box's vertices. Two sides on closed forms: one repairable
+# unit (MTTF 1/lambda, A = mu/(lambda + mu): the box's ends are the bracket's, tight); two parallel units, one crew,
+# point rates (MTTF (3 lambda + mu)/(2 lambda^2), A from the birth-death balance). The sabotage 'vertex_flip' (the
+# wrong vertex in search AND check) gives a bracket that misses the exact ends
+from ustand import markov as _MK   # noqa: E402
+_m1 = {"states": ["up", "down"], "up": ["up"], "start": "up",
+       "rates": [{"from": "up", "to": "down", "rate": ["1/1000", "1/500"]},
+                 {"from": "down", "to": "up", "rate": ["1/20", "1/10"]}]}
+_mt1, _av1 = _MK.mttf_bounds(_m1), _MK.availability_bounds(_m1)
+_a1x = (F(1, 20) / (F(1, 500) + F(1, 20)), F(1, 10) / (F(1, 1000) + F(1, 10)))
+_l, _mu = F(1, 1000), F(1, 24)
+_m2 = {"states": ["2", "1", "0"], "up": ["2", "1"], "start": "2",
+       "rates": [{"from": "2", "to": "1", "rate": [2 * _l, 2 * _l]}, {"from": "1", "to": "0", "rate": [_l, _l]},
+                 {"from": "1", "to": "2", "rate": [_mu, _mu]}, {"from": "0", "to": "1", "rate": [_mu, _mu]}]}
+_mt2, _av2 = _MK.mttf_bounds(_m2), _MK.availability_bounds(_m2)
+_mt2x = (3 * _l + _mu) / (2 * _l * _l)
+_rr = 2 * _l / _mu
+_av2x = (1 + _rr) / (1 + _rr + _rr * _l / _mu)
+_MK.MUTANT["vertex_flip"] = True
+try:
+    _mtm, _avm = _MK.mttf_bounds(_m1), _MK.availability_bounds(_m1)
+finally:
+    _MK.MUTANT.clear()
+_close = lambda lo, x, hi: lo <= x <= hi and hi - lo <= x * F(1, 10 ** 9)
+check("MARKOV RELIABILITY: one repairable unit — MTTF [500, 1000] and availability at the box's exact ends, tight; two "
+      "parallel units (point rates) — MTTF and availability hold their closed forms tightly; the sabotage (wrong vertex) "
+      "misses the exact ends",
+      _mt1[0] <= 500 and 1000 <= _mt1[1] and _mt1[1] - _mt1[0] < 500 + F(1, 10 ** 6)
+      and _av1[0] <= _a1x[0] and _a1x[1] <= _av1[1] and _av1[1] - _av1[0] < _a1x[1] - _a1x[0] + F(1, 10 ** 9)
+      and _close(_mt2[0], _mt2x, _mt2[1]) and _close(_av2[0], _av2x, _av2[1])
+      and (_mtm[0] is None or _mtm[0] > 500 or _mtm[1] < 1000) and (_avm[0] is None or _avm[0] > _a1x[0] or _avm[1] < _a1x[1]),
+      ([float(x) for x in (*_mt1[:2], *_av1[:2], *_mt2[:2], _mt2x, *_av2[:2], _av2x)],
+       [None if x is None else float(x) for x in (*_mtm[:2], *_avm[:2])]))
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,

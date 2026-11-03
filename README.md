@@ -126,6 +126,12 @@ from the fields' Gram matrix — BM03 the same cube 0.0742 (rigorous; disjoint 0
 Elasticity the same (`elastic3d.lower_overlap`): a zigzag 12 x 12 x 6, contrast 200 — disjoint 3.48, overlapping 14.74,
 direct [19.61, 25.37].
 
+RELIABILITY (2026-11-03, `ustand/markov.py`): a continuous-time Markov chain with every rate in a range — the mean
+time to failure and the long-run availability PROVED for every rate in the box, by rational certificates checked
+exactly at the box's vertices (M-matrix comparison for the MTTF, a gain/bias certificate for availability); judged
+by ZTL (`--need-mttf`, `--need-availability`). Premise stated in the output: exponential holding times. Closed forms
+held tightly (one repairable unit; two parallel units with one crew).
+
 ## Run
 
     python3 -m ustand.stand examples/divider-1pct-req-1pct.json
