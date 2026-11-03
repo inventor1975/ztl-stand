@@ -1,7 +1,7 @@
 """conduction3d — PROVED two-sided bounds on the conductance of a 3D voxel volume (ionic, electrical or thermal
 conduction), judged by ZTL. The stand's 3D phase, track 1 (2026-11-02, the curator: "делать глобально").
 
-    python3 -m ustand.conduction3d volume.npy --s 0:0 --s 1:6.11e-3 [--need 1e-3] [--refine 2]
+    python3 -m ustand.conduction3d volume.npy --s 0:0 --s 1:6.11e-3 [--need 1e-3] [--refine 2] [--blocks 2,2,2]
 
 The quantity: the conductance G of the box [0,nx] x [0,ny] x [0,nz] (voxel units), electrodes on x = 0 and x = nx,
 the four other faces insulated; s_eff = G nx / (ny nz) (in the units of the phase conductivities). Linear conduction
@@ -822,9 +822,56 @@ def bounds(V, s, refine=1, p2=False):
     return lo / k, up / k, note, M
 
 
-def s_eff(V, s, refine=1):
+def _cuts(n, p):
+    """p contiguous index ranges covering 0..n (as equal as possible)."""
+    e = [round(n * i / p) for i in range(p + 1)]
+    return [(e[i], e[i + 1]) for i in range(p) if e[i + 1] > e[i]]
+
+
+def bounds_blocks(V, s, px=1, py=1, pz=1, refine=1):
+    """(2026-11-03) Bounds for a sample TOO LARGE for one solve, from smaller solves — each piece by the unchanged
+    proved machinery above; only the GLUING is new, and it is monotonicity (Rayleigh's):
+      UPPER: short the planes x = const between px slabs (perfect conductors only RAISE G): slab k, its own two faces
+        electrodes, has U_k >= its conductance; slab potentials with drops d_k = (1/U_k) / sum (1/U_j) glue into one
+        continuous admissible u of the whole box, so G <= E(u) = 1 / sum_k (1/U_k) (exact Fractions).
+      LOWER: insert insulating sheets along x between py x pz columns (insulators only LOWER G): column c, full x
+        length, has L_c <= its conductance; its divergence-free flux (zero normal flux on its sides) glues with the
+        others into one admissible flux of the whole box, so G >= sum_c L_c.
+    The price is a wider bracket (the sheets are not in the sample); the gain is memory (the pieces are 1/px resp.
+    1/(py pz) of the box). Returns (lower, upper, notes) in the box's (refined: divided by refine) voxel units."""
+    V = np.asarray(V)
+    if refine > 1:
+        V = np.repeat(np.repeat(np.repeat(V, refine, 0), refine, 1), refine, 2)
+    nx, ny, nz = V.shape
+    inv = F(0)
+    for (x0, x1) in _cuts(nx, px):
+        M = Mesh(V[x0:x1])
+        u_k = upper(M, M.sigma(s))[0]
+        if u_k == 0:
+            inv = None                                     # a non-conducting slab: the whole box conducts nothing
+            break
+        inv += 1 / u_k
+    up = F(0) if inv is None else 1 / inv
+    if MUTANT.get("blocks_upper_len"):                   # sabotage (tests only): the slabs' length counted twice
+        up = up / px
+    lo, notes = F(0), []
+    for (y0, y1) in _cuts(ny, py):
+        for (z0, z1) in _cuts(nz, pz):
+            l_c, _u, note, _M = bounds(V[:, y0:y1, z0:z1], s)
+            lo += l_c
+            notes.append(note)
+    if MUTANT.get("blocks_lower_series"):                # sabotage (tests only): the columns taken in series
+        lo = lo * (py * pz) if py * pz > 1 else lo
+    return lo / refine, up / refine, notes
+
+
+def s_eff(V, s, refine=1, blocks=None):
     nx, ny, nz = np.asarray(V).shape
-    lo, up, note, _ = bounds(V, s, refine)
+    if blocks:
+        lo, up, note = bounds_blocks(V, s, *blocks, refine=refine)
+        note = {"blocks": list(blocks), "pieces": note}
+    else:
+        lo, up, note, _ = bounds(V, s, refine)
     g = F(nx, ny * nz)
     return lo * g, up * g, note
 
@@ -838,14 +885,14 @@ def _box(vals, what):
     return lo, hi
 
 
-def judge(V, phases, need, refine=1):
+def judge(V, phases, need, refine=1, blocks=None):
     """s_eff >= need, by ZTL: the proved bracket at the conductivity box's ends (G is non-decreasing in every
     phase conductivity), provenance the weakest input's. phases: {id: {"s": [lo, hi] | [v], "earned": bool}}."""
     from . import judge_ztl  # noqa: F401
     from znumjudge import parse_quantities, judge_sheet_claim
     boxes = {k: _box(p["s"], f"phase {k} conductivity") for k, p in phases.items()}
-    lo, _, note = s_eff(V, {k: b[0] for k, b in boxes.items()}, refine)
-    _, up, _ = s_eff(V, {k: b[1] for k, b in boxes.items()}, refine)
+    lo, _, note = s_eff(V, {k: b[0] for k, b in boxes.items()}, refine, blocks)
+    _, up, _ = s_eff(V, {k: b[1] for k, b in boxes.items()}, refine, blocks)
     used = set(np.unique(np.asarray(V)).tolist())
     prov = "earned:conduction3d" if all(phases[k].get("earned") for k in used if k in phases) else "credit"
     f = lambda x: f"{x.numerator}/{x.denominator}"
@@ -863,7 +910,7 @@ def main(argv):
         print(__doc__)
         return 2
     V = np.load(argv[0])
-    s, need, refine = {}, None, 1
+    s, need, refine, blocks = {}, None, 1, None
     i = 1
     while i < len(argv):
         if argv[i] == "--s":
@@ -874,17 +921,19 @@ def main(argv):
             need = argv[i + 1]; i += 2
         elif argv[i] == "--refine":
             refine = int(argv[i + 1]); i += 2
+        elif argv[i] == "--blocks":                      # px,py,pz: x-slabs (upper) and y-z columns (lower)
+            blocks = tuple(int(x) for x in argv[i + 1].split(",")); i += 2
         else:
             raise SystemExit(f"unknown argument {argv[i]}")
     if need is None:
         # the box's ends (2026-11-03: both bounds were computed at the LOW end, so with a box the printed upper bound
         # did not cover its high end — found beside the round-2 finding): lower at lo, upper at hi (G is monotone)
         boxes = {k: _box(p["s"], f"phase {k} conductivity") for k, p in s.items()}
-        lo, _, note = s_eff(V, {k: b[0] for k, b in boxes.items()}, refine)
-        _, up, _ = s_eff(V, {k: b[1] for k, b in boxes.items()}, refine)
+        lo, _, note = s_eff(V, {k: b[0] for k, b in boxes.items()}, refine, blocks)
+        _, up, _ = s_eff(V, {k: b[1] for k, b in boxes.items()}, refine, blocks)
         print(json.dumps({"s_eff_lower": float(lo), "s_eff_upper": float(up), "note": note}))
     else:
-        print(json.dumps(judge(V, s, need, refine)))
+        print(json.dumps(judge(V, s, need, refine, blocks)))
     return 0
 
 

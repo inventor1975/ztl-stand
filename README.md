@@ -112,6 +112,12 @@ otherwise — the solver only chooses the fields, the bounds stay proved either 
 The algebra of every bound is in ZTL's Lean (zero axioms): ZNet, ZEnergy, ZRound, ZHigham, ZFloatPath, ZStability,
 ZChi, ZHypercircle.
 
+Large samples by BLOCKS (2026-11-03, `--blocks`): conduction — the upper bound from x-slabs (planes shorted, G <= 1 /
+sum 1/U_k), the lower from y-z columns (insulating sheets, G >= sum L_c); elasticity — the lower bound from columns
+(traction-free sheets: the area-weighted mean of the columns' bounds), the upper whole. Only the gluing is new, and it
+is Rayleigh monotonicity; the price is a wider bracket. MEASURED (random 50 % two-phase, contrast 100): 64^3 by
+2 x 2 x 2 in 470 s / 7.7 GB, s_eff [0.182, 0.425]; 96^3 by 3 x 3 x 3 in 634 s, [0.144, 0.424].
+
 ## Run
 
     python3 -m ustand.stand examples/divider-1pct-req-1pct.json

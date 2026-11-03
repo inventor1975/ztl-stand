@@ -3,7 +3,7 @@ judged by ZTL. The stand's 3D phase, track 3: version 1 (2026-11-03 night, the c
 version 2 (the same day, his "берёмся") the lower bound.
 
     python3 -m ustand.elastic3d volume.npy --e 0:0 --e 1:200e9 --nu 1:0.3 [--need-max 150e9] [--need-min 9e10]
-            [--refine 2] [--one-sided]
+            [--refine 2] [--one-sided] [--blocks 2,2]
 
 THE TEST: the box [0,nx] x [0,ny] x [0,nz] (voxel units), smooth grips on x = 0 and x = nx (u_x = 0 and u_x = nx:
 mean axial strain 1; u_y, u_z free there), the four other faces free. The apparent modulus E_app = 2 U / (V eps^2)
@@ -609,13 +609,41 @@ def _exact_lower(M, KS, Fc, act, ty, gl, sg, nl, nh, Elo, Ehi, slot, sol2, grip,
     return F(M.nx) * Fres * Fres / (F(M.ny * M.nz) * En), "ok"
 
 
-def judge(V, phases, need_max=None, need_min=None, refine=1, two_sided=True):
+def lower_blocks(V, phases, py=1, pz=1, refine=1):
+    """(2026-11-03) The LOWER bound of a sample too large for one solve, from py x pz COLUMNS (full x length, the grips
+    theirs): cutting along x with traction-free sheets only SOFTENS the sample (the sheets are not in it), and the
+    columns' stresses glue — zero traction on both sides of every sheet, so div tau = 0 across it, the grips' zero
+    tangential traction kept. With F_c, ||tau_c|| per column, E_low,c = n_x F_c^2 / (A_c ||tau_c||^2), the best
+    combination sum alpha_c tau_c gives n_x (sum F)^2 / (A ||tau||^2) = sum_c (A_c / A) E_low,c <= E_app: the
+    area-weighted mean of the columns' bounds, each by the unchanged lower(). The upper bound has no such gluing here
+    (smooth grips on a shared plane leave the lateral displacement discontinuous) — it is computed whole, and costs
+    less memory than the lower. Returns (Fraction, notes)."""
+    from .conduction3d import _cuts
+    V = np.asarray(V)
+    _nx, ny, nz = V.shape
+    tot, notes = F(0), []
+    for (y0, y1) in _cuts(ny, py):
+        for (z0, z1) in _cuts(nz, pz):
+            l_c, note = lower(V[:, y0:y1, z0:z1], phases, refine)
+            w = F((y1 - y0) * (z1 - z0), ny * nz)
+            if _MUTANT.get("blocks_sum"):                 # sabotage (tests only): the columns' bounds added, not averaged
+                w = F(1)
+            tot += w * l_c
+            notes.append(note)
+    return tot, notes
+
+
+def judge(V, phases, need_max=None, need_min=None, refine=1, two_sided=True, blocks=None):
     """E_app <= need_max and E_app >= need_min, by ZTL over the proved [lower, upper] (two_sided=False: [0, upper],
     version 1's one-sided bracket)."""
     from . import judge_ztl  # noqa: F401
     from znumjudge import parse_quantities, judge_sheet_claim
     up, _, _ = upper(V, phases, refine)
-    lo, note = lower(V, phases, refine) if two_sided else (F(0), "one-sided")
+    if two_sided and blocks:
+        lo, note = lower_blocks(V, phases, *blocks, refine=refine)
+        note = {"blocks (py, pz)": list(blocks), "columns": note}
+    else:
+        lo, note = lower(V, phases, refine) if two_sided else (F(0), "one-sided")
     used = set(np.unique(np.asarray(V)).tolist())
     prov = "earned:elastic3d" if all(phases[k].get("earned") for k in used if k in phases) else "credit"
     f = lambda x: f"{x.numerator}/{x.denominator}"
@@ -655,7 +683,7 @@ def main(argv):
     V = np.load(argv[0])
     ph, rest = _parse_phases(argv[1:])
     need_max = need_min = None
-    refine, i, two_sided = 1, 0, True
+    refine, i, two_sided, blocks = 1, 0, True, None
     while i < len(rest):
         if rest[i] == "--need-max":
             need_max = rest[i + 1]; i += 2
@@ -665,9 +693,11 @@ def main(argv):
             two_sided = False; i += 1
         elif rest[i] == "--refine":
             refine = int(rest[i + 1]); i += 2
+        elif rest[i] == "--blocks":                      # py,pz: the lower bound from y-z columns (lower_blocks)
+            blocks = tuple(int(x) for x in rest[i + 1].split(",")); i += 2
         else:
             raise SystemExit(f"unknown argument {rest[i]}")
-    print(json.dumps(judge(V, ph, need_max, need_min, refine, two_sided)))
+    print(json.dumps(judge(V, ph, need_max, need_min, refine, two_sided, blocks)))
     return 0
 
 

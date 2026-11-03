@@ -3890,6 +3890,53 @@ check("PLATE sigma + tau, EN 1993-1-5 SECTION 10: the combined bracket holds the
       (_cb, _cref, _cneg, _cmut, _cpure, _cj["alpha_cr"], _acr_ref, _cj["U_10_5"], _uref, _cj["verdict"],
        _cj2["verdict"], _cj3["verdict"]))
 
+# CONDUCTION, LARGE SAMPLES BY BLOCKS (2026-11-03): upper from x-slabs (planes shorted: G <= 1 / sum 1/U_k), lower from
+# x-columns (insulating sheets: G >= sum L_c), each piece by the unchanged bounds. Two sides on laminates whose
+# conductance is EXACT (layers across x: series; along x: parallel — there the sheets and shorts change nothing); a
+# random 24^3 two-phase sample's block bracket overlaps the direct one (MEASURED [4.40, 10.27] vs [4.59, 10.19]).
+# Sabotages: the slabs' length counted twice (upper too low) and the columns taken in series (lower too high)
+from ustand import conduction3d as _C3b   # noqa: E402
+_sb = {0: F(1, 100), 1: F(1)}
+_Vser = _np_ax.zeros((12, 12, 12), int); _Vser[:6] = 1
+_Vpar = _np_ax.zeros((12, 12, 12), int); _Vpar[:, :6] = 1
+_exs, _exp = 1 / (F(6, 144) + F(6, 144) / F(1, 100)), (72 + F(72, 100)) / 12
+def _blk(V, mut=None):
+    _C3b.MUTANT.clear()
+    if mut:
+        _C3b.MUTANT[mut] = True
+    try:
+        return _C3b.bounds_blocks(V, _sb, 2, 2, 2)[:2]
+    finally:
+        _C3b.MUTANT.clear()
+_bs, _bp = _blk(_Vser), _blk(_Vpar)
+_bm1, _bm2 = _blk(_Vser, "blocks_upper_len"), _blk(_Vpar, "blocks_lower_series")
+_Vr = (_np_ax.random.default_rng(3).random((16, 16, 16)) < 0.5).astype(int)
+_dr, _br = _C3b.bounds(_Vr, _sb)[:2], _C3b.bounds_blocks(_Vr, _sb, 2, 2, 2)[:2]
+check("CONDUCTION BY BLOCKS: x-slab upper / x-column lower hold the EXACT conductance of a series and a parallel "
+      "laminate (tight), a random sample's block bracket overlaps the direct one; the sabotages (slab length twice / "
+      "columns in series) cross the exact value",
+      _bs[0] <= _exs <= _bs[1] < _exs * F(1001, 1000) and _bp[0] <= _exp <= _bp[1] < _exp * F(1001, 1000)
+      and _bm1[1] < _exs and _bm2[0] > _exp and _br[0] <= _dr[1] and _dr[0] <= _br[1] and _br[0] < _br[1],
+      ([float(x) for x in (*_bs, _exs, *_bp, _exp, *_bm1, *_bm2, *_dr, *_br)]))
+
+# ELASTICITY, LOWER BOUND BY COLUMNS (2026-11-03): traction-free sheets along x only soften the sample, the columns'
+# stresses glue, so E_app >= the area-weighted mean of the columns' lower bounds. Two sides on stripes along x with one
+# nu (E_app EXACTLY the area mean, 125): the block bound is under it and tight, the upper above; on a random sample the
+# block bound stays under the whole sample's upper bound (MEASURED 12^3, 70 % solid, contrast 200: 56.6 vs direct
+# 64.2, upper 124.0). The sabotage 'blocks_sum' (the columns added, not averaged) crosses the exact value
+from ustand import elastic3d as _E3b   # noqa: E402
+_phb = {0: {"E": [F(50)], "nu": [F(3, 10)], "earned": False}, 1: {"E": [F(200)], "nu": [F(3, 10)], "earned": False}}
+_Vst = _np_ax.zeros((6, 6, 6), int); _Vst[:, :3] = 1
+_eb = (_E3b.lower_blocks(_Vst, _phb, 2, 1)[0], _E3b.upper(_Vst, _phb)[0])
+_E3b._MUTANT["blocks_sum"] = True
+try:
+    _ebm = _E3b.lower_blocks(_Vst, _phb, 2, 1)[0]
+finally:
+    _E3b._MUTANT.clear()
+check("ELASTICITY BY COLUMNS: stripes along x (one nu) — the column lower bound holds the exact area mean 125 from "
+      "below, tight (> 124.9), the upper above; the sabotage (columns added) crosses it",
+      F(1249, 10) < _eb[0] <= 125 <= _eb[1] and _ebm > 125, ([float(x) for x in (*_eb, _ebm)]))
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,
