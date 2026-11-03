@@ -3527,10 +3527,36 @@ _eo = _EL3.judge(_np_el.ones((3, 3, 3), int), {1: {"E": [F(190), F(210)], "nu": 
 check("3D ELASTICITY (upper bound on the apparent modulus): homogeneous = E, laminate along x = Voigt 135, across x "
       "(nu 0) = Reuss 103.70, each from above within 1e-9; a porous sample's bound does not rise under refinement; "
       "the box E 190..210 bounded at 210 (the sabotage 'low end' gives 190 — below the box's true 210); verdicts: "
-      "<= 211 EARNED, >= 215 REFUTED, <= 209 and >= 200 OPEN (one-sided: no lower bound in version 1)",
+      "<= 211 EARNED, >= 215 REFUTED, <= 209 and >= 200 OPEN (inside the box's bracket)",
       200 <= _eh <= 200 * (1 + 1e-9) and 135 <= _ep <= 135 * (1 + 1e-9) and _rs <= _es <= _rs * (1 + 1e-9)
       and _er[1] <= _er[0] and _em < 210 and _eb["verdict_max"] == "EARNED" and _eb["verdict_min"] == "REFUTED"
       and _eo["verdict_max"] == "OPEN" and _eo["verdict_min"] == "OPEN", (_eh, _ep, _es, _er, _em, _eb, _eo))
+
+# 3D ELASTICITY, the LOWER bound (version 2, 2026-11-03, the curator's "берёмся"): the Alfeld-split stress element on
+# Kuhn tets, exactly admissible in integers. MEASURED: on the exact cases lower = upper within 1e-11; one central pore
+# [183.594, 191.320]; the box E 190..210 bracketed EXACTLY [190, 210] (">= 185" EARNED); the sabotage "stiffest end
+# in the compliance" lifts the box's lower bound to 210 — above the soft corner's true 190 — and must be caught.
+_l3h = float(_EL3.lower(_np_el.ones((3, 2, 4), int), {1: _P3(200, "0.3")})[0])
+_l3p = float(_EL3.lower(_Vp, {1: _P3(200, "0.25"), 2: _P3(70, "0.25")})[0])
+_l3s = float(_EL3.lower(_Vs, {1: _P3(200, 0), 2: _P3(70, 0)})[0])
+_Vo = _np_el.ones((3, 3, 3), int); _Vo[1, 1, 1] = 0
+_l3o = float(_EL3.lower(_Vo, {0: _P3(0, 0), 1: _P3(200, "0.3")})[0])
+_u3o = float(_EL3.upper(_Vo, {0: _P3(0, 0), 1: _P3(200, "0.3")})[0])
+_bx3 = {1: {"E": [F(190), F(210)], "nu": [F("0.3")], "earned": True}}
+_j3 = _EL3.judge(_np_el.ones((3, 3, 3), int), _bx3, need_max=211, need_min=185)
+_EL3._MUTANT["lower_e_high"] = True
+try:
+    _l3m = float(_EL3.lower(_np_el.ones((3, 3, 3), int), _bx3)[0])
+finally:
+    _EL3._MUTANT.clear()
+check("3D ELASTICITY two-sided: the exactly admissible stress gives a LOWER bound — homogeneous 200, Voigt 135, Reuss "
+      "103.70 from below within 1e-9 (the upper bound meets them from above); one central pore bracketed [183.59, "
+      "191.32] (proved both ways); the box E 190..210 bracketed [190, 210] with '>= 185' EARNED and '<= 211' EARNED; "
+      "the sabotage (the box's stiff end in the compliance) gives 210 > the soft corner's 190",
+      200 * (1 - 1e-9) <= _l3h <= 200 and 135 * (1 - 1e-9) <= _l3p <= 135 and _rs * (1 - 1e-9) <= _l3s <= _rs
+      and 183.5 <= _l3o <= 183.6 and _l3o < _u3o and abs(_j3["lower"] - 190) < 1e-6
+      and _j3["verdict_min"] == "EARNED" and _j3["verdict_max"] == "EARNED" and _l3m > 190 * (1 + 1e-6),
+      (_l3h, _l3p, _l3s, _l3o, _u3o, _j3, _l3m))
 
 # END RELEASES in buckling and second order (2026-11-03, the cloud red team's FINDING 1, PR #1): the geometric forms
 # and the end-moment rows read the NODE's rotation at a released member end — a hinged strut framing into held nodes

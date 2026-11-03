@@ -69,6 +69,34 @@ meet 39 conditions given its face tractions, so a push needs elements whose insi
 traction: Krizek's composite tetrahedron / a Johnson-Mercier-type split — the next design step) and COST (62208
 unknowns took 93 s with a direct solve).
 
+**The exact construction (2026-11-03, the curator's "берёмся").** MEASURED by exact rank (sympy): on one Kuhn
+tetrahedron, symmetric divergence-free polynomial stresses whose face tractions are linear realise only 21 of the 30
+dimensions of balanced linear face tractions — at degree 1, 2 AND 3: no single-polynomial element works. The ALFELD
+split (the barycentre, 4 sub-tetrahedra, linear symmetric divergence-free stress on each, normal traction continuous
+across the 6 inner faces) has a space of dimension exactly 30 and its outer trace map has rank 30: a BIJECTION onto
+the balanced linear face tractions. So the lower bound is built from FACE data, as conduction3d's flux:
+  1. unknowns g_f = tau n2 at the 3 vertices of every face (n2 the integer area normal, 9 numbers per face, shared by
+     the face's two tets with opposite sign); free faces 0, grips: tangential 0; per tet the 6 balance equations
+     (force (1/6) sum g, moment (1/24) sum (1 + delta_ij) x_i x g_j); a float KKT minimises sum_T g_T^T S g_T with
+     resultant 1 (S: the element's compliance form through the bijection — exact rationals per Kuhn type);
+  2. g rounded to a dyadic grid; balance restored EXACTLY by pushing each tet's 6-residual through a face of its
+     spanning tree (the face's 9 values carry any force and moment: an exact 9 x 6 right inverse), the roots' residual
+     absorbed by a grip face's normal traction (3 values: F_x, M_y, M_z; F_y, F_z, M_x of a component's total are
+     exactly 0 because shared faces cancel and grip tractions are normal); islands without a grip total 0;
+  3. inside each tet the stress is R g_T (the bijection, exact): divergence-free, symmetric, traction-continuous;
+  4. E_app >= n_x F^2 / (n_y n_z ||tau||^2), the energy at the box's softest corner per tet, summed in floats with a
+     rigorous bound (Higham, plus the conversion of g to binary64). Premise: Green's formula, as the hypercircle.
+
+**Version 2 IN (2026-11-03): TWO-SIDED.** `ustand/kuhn_split.py` (the element, sympy, cached exact JSON; rank 30 and
+the balance asserted per type) and `elastic3d.lower` (the four steps above; the 24 face blocks are UNIMODULAR —
+Smith normal form all ones, MEASURED — so the push stays in integers, no denominator growth). MEASURED: homogeneous,
+Voigt, Reuss: lower = upper within 4e-12; one central pore [183.59, 191.32] (the P1-per-tet spike gave 181.72);
+random 80 % solid 4^3 [132.08, 161.07]; 100 random two-phase porous samples with moduli boxes: lower <= the soft
+corner's refined upper in every case, the sabotage (stiff end in the compliance) caught in 68; cost 6^3 1.4 s, 8^3
+9.3 s, 10^3 34 s (a direct KKT solve: the next limit). The gap is widest where voxels touch by an EDGE only: the
+P1 displacement bridges the edge (too stiff on a coarse mesh), the face-based stress cannot pass it (it is the
+truth's side: an edge contact carries no force in the continuum).
+
 The hypercircle in 3D: a P1/P2 displacement field (lower bound of compliance), an EXACTLY equilibrated stress field
 (upper) — in 2D it came from the Airy function (HCT); in 3D there is no scalar Airy function, so the equilibrated
 field must be built as for track 1's flux: element-wise equilibrium made exact (a stress analogue of the face
