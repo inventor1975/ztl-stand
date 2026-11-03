@@ -123,6 +123,9 @@ there: in tortuous media the column lower bound is weak; the slab upper bound is
 columns (`lower_overlap(V, s, width, stride)`): their exact fluxes sum to an admissible flux of the whole box, weights
 from the fields' Gram matrix — BM03 the same cube 0.0742 (rigorous; disjoint 0.0610, whole 0.0830), a zigzag conductor
 1.363 against disjoint 0.024 (direct [1.632, 1.743]). RT0 fluxes only (the small-column BDM1 is stronger there).
+LIMIT (MEASURED): BM03 256^3 centre, axis 2, width 64 / stride 32 — lower 0.0433, only 20 of 49 columns carry a path
+(over 256 voxels the current wanders more than 64 sideways); wider columns run into memory. On that volume the method
+does not reach the measured 0.065 — no conclusion either way there.
 Elasticity the same (`elastic3d.lower_overlap`): a zigzag 12 x 12 x 6, contrast 200 — disjoint 3.48, overlapping 14.74,
 direct [19.61, 25.37].
 
