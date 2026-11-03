@@ -4059,6 +4059,16 @@ check("MARKOV REACH + SOLAR OUTAGE: 1 - (1 - p)^30 at the range's ends exactly; 
       and _s2f[0] <= _s2x <= _s2f[1] and _s2f[1] - _s2f[0] < _s2c[1] - _s2c[0] and _s2m[1] < _s2x,
       ([float(x) for x in (*_rb, *_rbx, *_s1, _s1x, *_s2c, *_s2f, _s2x, _s2m[1])]))
 
+# SOLAR OUTAGE JUDGED (2026-11-03): 'P(short day) <= need' by ZTL over the proved bracket of the case above (exact
+# 0.10656, bracket at 10 Wh ~[0.10656, 0.10656]): need 0.11 EARNED, 0.10 REFUTED; at a 300 Wh unit ([0.060, 0.406])
+# the same need 0.11 stays OPEN — the coarse unit cannot decide it
+_sspec = lambda u: {"capacity_wh": 1800, "load_wh": [600, 600], "gain_wh": {k: [v, v] for k, v in _g2.items()},
+                    "weather": _Wm, "start_charge_wh": 1200, "start_weather": "sun", "days": 8, "unit_wh": u}
+_sj = (_MK.judge_solar(_sspec(10), "0.11")["verdict"], _MK.judge_solar(_sspec(10), "0.10")["verdict"],
+       _MK.judge_solar(_sspec(300), "0.11")["verdict"])
+check("SOLAR OUTAGE JUDGED: P(short day) <= 0.11 EARNED, <= 0.10 REFUTED at a 10 Wh unit; <= 0.11 OPEN at 300 Wh",
+      _sj[0] == "EARNED" and _sj[1].startswith("REFUTED") and _sj[2].startswith("OPEN"), _sj)
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,

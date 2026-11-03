@@ -2,6 +2,7 @@
 ranges, judged by ZTL (2026-11-03, the curator: "Да. Звучит как хорошее расширение для стенда").
 
     python3 -m ustand.markov model.json [--need-mttf 8760] [--need-availability 0.99]
+    python3 -m ustand.markov --solar spec.json --need-outage 0.01
 
 THE MODEL (a premise, stated in every output): a continuous-time Markov chain — exponential holding times; states;
 transitions i -> j with a rate known to lie in [lo, hi] (each rate independently anywhere in its range); the set of
@@ -320,10 +321,33 @@ def judge(model, need_mttf=None, need_availability=None):
     return out
 
 
+def judge_solar(spec, need_outage_at_most):
+    """'P(at least one short day) <= need' by ZTL over solar_outage's proved bracket. spec: {"capacity_wh",
+    "load_wh": [lo, hi], "gain_wh": {w: [lo, hi]}, "weather": {w: {w2: [lo, hi]}}, "start_charge_wh",
+    "start_weather", "days", "unit_wh"}."""
+    from . import judge_ztl  # noqa: F401
+    from znumjudge import parse_quantities, judge_sheet_claim
+    lo, hi = solar_outage(spec["capacity_wh"], spec["load_wh"], spec["gain_wh"], spec["weather"],
+                          spec["start_charge_wh"], spec["start_weather"], spec["days"], spec["unit_wh"])
+    f = lambda x: f"{x.numerator}/{x.denominator}"
+    qs, mk = parse_quantities(f"pout=[{f(lo)},{f(hi)}] earned:markov")
+    r = judge_sheet_claim(f"pout <= {f(F(need_outage_at_most))}", qs, mk)
+    return {"outage_probability": [float(lo), float(hi)],
+            "verdict": r["disposition"] + (f" ({r['polarity']})" if r.get("polarity") else ""),
+            "premise": "daily steps; weather a Markov chain with transition probabilities in the stated ranges (any "
+                       "day-varying choice inside them); daily gain per weather and load in their ranges; the battery "
+                       "counted in whole units of unit_wh, rounded against the claim on each side"}
+
+
 def main(argv):
     if not argv or argv[0] in ("-h", "--help"):
         print(__doc__)
         return 2
+    if argv[0] == "--solar":                              # python3 -m ustand.markov --solar spec.json --need-outage 0.01
+        spec = json.load(open(argv[1]))
+        need = argv[argv.index("--need-outage") + 1] if "--need-outage" in argv else "1"
+        print(json.dumps(judge_solar(spec, need)))
+        return 0
     model = json.load(open(argv[0]))
     nm = na = None
     i = 1
