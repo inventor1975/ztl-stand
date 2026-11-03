@@ -335,24 +335,24 @@ _SH = ["{a}*{b} - {c}", "{a}/({b} + {c})", "{a}*{a} - {b}*{c}", "({a} - {b})*({b
        "{a}*{b}/{c} - {a}", "1/{a} + 1/{b} - {c}*{a}", "({a} + {b})*({a} - {c})*{b}"]
 both = ztl_only = false_ok = tried = 0
 for _ in range(150):
-    names = [f"p{i}" for i in range(_rng.randint(1, 3))]
-    bxs = {}
-    for n in names:
-        a = F(_rng.randint(1, 30), _rng.randint(1, 4))
-        bxs[n] = (a, a + F(_rng.randint(1, 20), _rng.randint(1, 4)))
-    text = _rng.choice(_SH).format(a=_rng.choice(names), b=_rng.choice(names), c=_rng.choice(names))
-    law = [f"y == {text}"]
-    pts = [dict(zip(names, c)) for c in __import__("itertools").product(*[bxs[n] for n in names])]
-    pts += [{n: a + (b - a) * F(_rng.randint(0, 100), 100) for n, (a, b) in bxs.items()} for _ in range(20)]
-    top = max(C._val(C._eq(law[0])[1], p) for p in pts)
-    bound = top + (abs(top) + 1) / 50
-    got = _K.prove(text, {}, bxs, "<=", bound)
-    if "proved" not in got:
+    _j9names = [f"p{i}" for i in range(_rng.randint(1, 3))]
+    _j9b = {}
+    for _j9n in _j9names:
+        _j9a = F(_rng.randint(1, 30), _rng.randint(1, 4))
+        _j9b[_j9n] = (_j9a, _j9a + F(_rng.randint(1, 20), _rng.randint(1, 4)))
+    _j9text = _rng.choice(_SH).format(a=_rng.choice(_j9names), b=_rng.choice(_j9names), c=_rng.choice(_j9names))
+    _j9law = [f"y == {_j9text}"]
+    _j9pts = [dict(zip(_j9names, _j9c)) for _j9c in __import__("itertools").product(*[_j9b[_j9n] for _j9n in _j9names])]
+    _j9pts += [{_j9n: _j9a + (_j9b2 - _j9a) * F(_rng.randint(0, 100), 100) for _j9n, (_j9a, _j9b2) in _j9b.items()} for _ in range(20)]
+    _j9top = max(C._val(C._eq(_j9law[0])[1], _j9p) for _j9p in _j9pts)
+    _j9bound = _j9top + (abs(_j9top) + 1) / 50
+    _j9got = _K.prove(_j9text, {}, _j9b, "<=", _j9bound)
+    if "proved" not in _j9got:
         continue
     tried += 1
-    agree = C.check_certificate(law, {}, bxs, ["y"], "y", "<=", bound, got["cert"])[0]
-    both += agree; ztl_only += not agree
-    false_ok += C.check_certificate(law, {}, bxs, ["y"], "y", "<=", top - (abs(top) + 1) / 50, got["cert"])[0]
+    _j9agree = C.check_certificate(_j9law, {}, _j9b, ["y"], "y", "<=", _j9bound, _j9got["cert"])[0]
+    both += _j9agree; ztl_only += not _j9agree
+    false_ok += C.check_certificate(_j9law, {}, _j9b, ["y"], "y", "<=", _j9top - (abs(_j9top) + 1) / 50, _j9got["cert"])[0]
 check(f"J9 at random: {tried} certificates ZTL accepted — the checker re-checked {both}, could not {ztl_only}; "
       f"false bounds (below a sampled value) accepted by the checker: {false_ok}",
       tried >= 100 and false_ok == 0 and both >= tried * 9 // 10, f"{tried} {both} {ztl_only} {false_ok}")
@@ -445,16 +445,16 @@ check("t11b the same with Tj >= -7 at idle: EARNED and optimal (HS 1.2, pad 0.5,
       and r["per_mode"]["full load"]["guaranteed"]["Tj"][1].startswith("1143/10")
       and r["per_mode"]["cold idle"]["guaranteed"]["Tj"][0].startswith("-827/125"), json.dumps(r)[:300])
 same = []
-for name in ("divider-1pct-req-1pct", "divider-1pct-req-0.5pct", "power-16thW-only"):
-    b0 = ex(name)
-    b1 = dict(b0, requirements=[], modes={"only": {"requirements": b0["requirements"]}})
-    r0, r1 = S.run(b0, conflicts=False), S.run(b1)
-    same.append((r0["verdict"], r0.get("design")) == (r1["verdict"], r1.get("design")))
-for name in ("t1-thermal-heatsink", "t5-divider-tcr", "t8-load-power-peak-inside"):
-    b0 = json.load(open(T / f"{name}.json", encoding="utf-8"))
-    b1 = dict(b0, requirements=[], modes={"only": {"requirements": b0["requirements"]}})
-    r0, r1 = S.run(b0, conflicts=False), S.run(b1)
-    same.append((r0["verdict"], r0.get("design")) == (r1["verdict"], r1.get("design")))
+for _m_name in ("divider-1pct-req-1pct", "divider-1pct-req-0.5pct", "power-16thW-only"):
+    _m_b0 = ex(_m_name)
+    _m_b1 = dict(_m_b0, requirements=[], modes={"only": {"requirements": _m_b0["requirements"]}})
+    _m_r0, _m_r1 = S.run(_m_b0, conflicts=False), S.run(_m_b1)
+    same.append((_m_r0["verdict"], _m_r0.get("design")) == (_m_r1["verdict"], _m_r1.get("design")))
+for _m_name in ("t1-thermal-heatsink", "t5-divider-tcr", "t8-load-power-peak-inside"):
+    _m_b0 = json.load(open(T / f"{_m_name}.json", encoding="utf-8"))
+    _m_b1 = dict(_m_b0, requirements=[], modes={"only": {"requirements": _m_b0["requirements"]}})
+    _m_r0, _m_r1 = S.run(_m_b0, conflicts=False), S.run(_m_b1)
+    same.append((_m_r0["verdict"], _m_r0.get("design")) == (_m_r1["verdict"], _m_r1.get("design")))
 check(f"one mode equal to the plain brick gives the same verdict and design on 6 examples: {same}", all(same))
 bad = dict(ex("divider-1pct-req-1pct"), modes={"x": {"quantities": {"Vout": {"value": "1"}},
                                                      "requirements": []}})
@@ -3861,34 +3861,38 @@ def _sine_comb(alpha, cs, ct, N=24):
     Bs = _np_ax.diag([(m * _mpb.pi / a_) ** 2 * a_ / 4 for m, n in idx])
     import scipy.linalg as _sl_c
     return 1.0 / _sl_c.eigh(cs * Bs + ct * (T + T.T), _np_ax.diag(A), eigvals_only=True).max() / _mpb.pi ** 2
+# (2026-11-03: split into five independent checks — one check over all of it kept ~185 s in a single shard)
 _cref = _sine_comb(1, 1, 1)
 _cb = (_kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, 1, _SS, 32, 32)[0]),
        _kb(_PB.upper_factor_combined(1, 1, F(3, 10), 1, 1, 1, _SS, 12, 12)[0]))
-_cneg = _kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, -1, _SS, 32, 32)[0])
-_cpure = (_kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, 0, _SS, 32, 32)[0]), _kb(_PB.lower_factor(1, 1, F(3, 10), 1, _SS, 32, 32)[0]),
-          _kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 0, 1, _SS, 32, 32)[0]), _shb[0])
+check("PLATE sigma + tau, EN 1993-1-5 SECTION 10 (1/5): the combined bracket holds the independent sine-series value, "
+      "within 6 %", _cb[0] <= _cref <= _cb[1] < _cref * 1.001 and _cb[0] > _cref * 0.94, (_cb, _cref))
+_csym = (_kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, 1, _SS, 24, 24)[0]),
+         _kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, -1, _SS, 24, 24)[0]))
 _PB.MUTANT["comb_signed_g"] = True
 try:
-    _cmut = _kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, -1, _SS, 32, 32)[0])
+    _cmut = _kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, -1, _SS, 24, 24)[0])
 finally:
     _PB.MUTANT.clear()
+check("PLATE sigma + tau (2/5): the bound is even in tau like the panel; the signed-charge sabotage is not",
+      abs(_csym[1] - _csym[0]) < 5e-3 * _csym[0] and abs(_cmut - _csym[0]) > 0.02 * _csym[0], (_csym, _cmut))
+_cpure = (_kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, 0, _SS, 32, 32)[0]), _kb(_PB.lower_factor(1, 1, F(3, 10), 1, _SS, 32, 32)[0]),
+          _kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 0, 1, _SS, 32, 32)[0]),
+          _kb(_PB.lower_factor_shear(1, 1, F(3, 10), _SS, 32, 32)[0]))
+check("PLATE sigma + tau (3/5): a pure load reproduces the single-load bounds",
+      _cpure[1] * (1 - 1e-9) <= _cpure[0] < _cpure[1] * 1.001 and abs(_cpure[2] - _cpure[3]) < 1e-9, _cpure)
 _cj = _PB.judge_combined(2000, 1000, 10, 210000, F(3, 10), 1, 100, 60, _SS, 355, n_low=24, n_up=8)
-_cj2 = _PB.judge_combined(2000, 1000, 10, 210000, F(3, 10), 1, 150, 100, _SS, 355, n_low=24, n_up=8)
-_cj3 = _PB.judge_combined(1000, 2000, 10, 210000, F(3, 10), 1, 100, 60, _SS, 355)
 _acr_ref = _sine_comb(2, 100, 60) * _mpb.pi ** 2 * 210000 * 100 / (12 * 0.91) / 1000 ** 2
 _lr = _mpb.sqrt(355 / _mpb.sqrt(100 ** 2 + 3 * 60 ** 2) / _acr_ref)
 _uref = (100 / (_PB.rho_internal(_lr, 1) * 355)) ** 2 + 3 * (60 / (_PB.chi_w(_lr) * 355)) ** 2
-check("PLATE sigma + tau, EN 1993-1-5 SECTION 10: the combined bracket holds the independent sine-series value; a pure "
-      "load reproduces the single-load bounds; the bound is even in tau like the panel, the signed-charge sabotage is "
-      "not; a 2000 x 1000 x 10 mm S355 panel (sigma 100, tau 60 MPa): alpha_cr and U (10.5) bracket the sine-series "
-      "values, EARNED; at 150 / 100 REFUTED; a < b refused (OPEN)",
-      _cb[0] <= _cref <= _cb[1] < _cref * 1.001 and _cb[0] > _cref * 0.94
-      and _cpure[1] * (1 - 1e-9) <= _cpure[0] < _cpure[1] * 1.001 and abs(_cpure[2] - _cpure[3]) < 1e-9
-      and abs(_cneg - _cb[0]) < 5e-3 * _cb[0] and abs(_cmut - _cb[0]) > 0.02 * _cb[0]
-      and _cj["alpha_cr"][0] <= _acr_ref <= _cj["alpha_cr"][1] and _cj["U_10_5"][0] <= _uref <= _cj["U_10_5"][1]
-      and _cj["verdict"] == "EARNED" and _cj2["verdict"].startswith("REFUTED") and _cj3["verdict"] == "OPEN",
-      (_cb, _cref, _cneg, _cmut, _cpure, _cj["alpha_cr"], _acr_ref, _cj["U_10_5"], _uref, _cj["verdict"],
-       _cj2["verdict"], _cj3["verdict"]))
+check("PLATE sigma + tau (4/5): a 2000 x 1000 x 10 mm S355 panel (sigma 100, tau 60 MPa): alpha_cr and U (10.5) "
+      "bracket the sine-series values, EARNED",
+      _cj["alpha_cr"][0] <= _acr_ref <= _cj["alpha_cr"][1] and _cj["U_10_5"][0] <= _uref <= _cj["U_10_5"][1]
+      and _cj["verdict"] == "EARNED", (_cj["alpha_cr"], _acr_ref, _cj["U_10_5"], _uref, _cj["verdict"]))
+_cj2 = _PB.judge_combined(2000, 1000, 10, 210000, F(3, 10), 1, 150, 100, _SS, 355, n_low=24, n_up=8)
+_cj3 = _PB.judge_combined(1000, 2000, 10, 210000, F(3, 10), 1, 100, 60, _SS, 355)
+check("PLATE sigma + tau (5/5): at 150 / 100 MPa REFUTED; a < b refused (OPEN)",
+      _cj2["verdict"].startswith("REFUTED") and _cj3["verdict"] == "OPEN", (_cj2["verdict"], _cj3["verdict"]))
 
 # CONDUCTION, LARGE SAMPLES BY BLOCKS (2026-11-03): upper from x-slabs (planes shorted: G <= 1 / sum 1/U_k), lower from
 # x-columns (insulating sheets: G >= sum L_c), each piece by the unchanged bounds. Two sides on laminates whose
