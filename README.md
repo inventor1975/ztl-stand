@@ -116,7 +116,10 @@ Large samples by BLOCKS (2026-11-03, `--blocks`): conduction — the upper bound
 sum 1/U_k), the lower from y-z columns (insulating sheets, G >= sum L_c); elasticity — the lower bound from columns
 (traction-free sheets: the area-weighted mean of the columns' bounds), the upper whole. Only the gluing is new, and it
 is Rayleigh monotonicity; the price is a wider bracket. MEASURED (random 50 % two-phase, contrast 100): 64^3 by
-2 x 2 x 2 in 470 s / 7.7 GB, s_eff [0.182, 0.425]; 96^3 by 3 x 3 x 3 in 634 s, [0.144, 0.424].
+2 x 2 x 2 in 470 s / 7.7 GB, s_eff [0.182, 0.425]; 96^3 by 3 x 3 x 3 in 634 s, [0.144, 0.424]. LIMIT (MEASURED on a
+real tortuous sample, Giessen BM03 128^3 centre, axis 2): 2 x 2 columns give lower 0.0610 against the whole cube's
+0.0830 — the cut sample itself conducts at most 0.0682 (the columns' own brackets are tight), so the SHEETS cost >= 18 %
+there: in tortuous media the column lower bound is weak; the slab upper bound is not affected.
 
 ## Run
 
