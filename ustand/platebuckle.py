@@ -75,7 +75,7 @@ def _edges_on(nodes, i, j, a, b):
     return None
 
 
-def morley_system(a, b, nu, psi, bc, nx, ny):
+def morley_system(a, b, nu, psi, bc, nx, ny, want_tension=False):
     """Exact Morley matrices K (from a, units D) and B (from b with s^+_T per triangle, units sigma t) on the free
     dofs, as {(i, j): Fraction} lower triangles, and eps^2 for the lower bound. bc: {'x0','xa','y0','yb'} -> 'S'|'C'."""
     a, b, nu, psi = F(a), F(b), F(nu), F(psi)
@@ -98,8 +98,9 @@ def morley_system(a, b, nu, psi, bc, nx, ny):
             fixed.add(e)                                         # dw/dn = 0 on a clamped edge
     free = [d for d in range(nn + len(edge_id)) if d not in fixed]
     col = {d: k for k, d in enumerate(free)}
-    K, Bm = {}, {}
+    K, Bm, Bn = {}, {}, {}
     eps2 = F(0)
+    eps2n = F(0)
     cache = {}
     for t in tris:
         P0 = [nodes[v] for v in t]
@@ -134,7 +135,16 @@ def morley_system(a, b, nu, psi, bc, nx, ny):
                     G[p_][q_] += area / 3 * g[p_] * g[q_]
         h2 = max((P[i][0] - P[j][0]) ** 2 + (P[i][1] - P[j][1]) ** 2 for i in range(3) for j in range(i + 1, 3))
         eps2 = max(eps2, sT * KAPPA_CR ** 2 * h2 / (1 - nu))
-        for (Mloc, out, scale, tag) in ((Qc, K, area, "K"), (G, Bm, sT, "B")):
+        # the TENSION part (2026-11-03): s^- = max(0, -s); in the discrete form at its SMALLEST on T (it is ADDED to
+        # the stiffness side: a lower bound of the exact b^-), in eps_minus at its LARGEST
+        sn_lo = max(F(0), min(-s_of(y) for _, y in P0))
+        if MUTANT.get("tension_hi"):                    # sabotage (tests only): the tension at its LARGEST on T
+            sn_lo = max(F(0), max(-s_of(y) for _, y in P0))
+        if MUTANT.get("tension_x2"):                    # sabotage (tests only): the stabilising tension doubled
+            sn_lo = 2 * sn_lo
+        sn_hi = max(F(0), max(-s_of(y) for _, y in P0))
+        eps2n = max(eps2n, sn_hi * KAPPA_CR ** 2 * h2 / (1 - nu))
+        for (Mloc, out, scale, tag) in ((Qc, K, area, "K"), (G, Bm, sT, "B"), (G, Bn, sn_lo, "B")):
             if scale == 0:
                 continue
             ck = (shape, tag)
@@ -155,6 +165,8 @@ def morley_system(a, b, nu, psi, bc, nx, ny):
                         key = (max(col[di], col[dj]), min(col[di], col[dj]))
                         if col[di] >= col[dj]:
                             out[key] = out.get(key, F(0)) + v
+    if want_tension:
+        return K, Bm, Bn, len(free), eps2, eps2n
     return K, Bm, len(free), eps2
 
 
@@ -204,6 +216,72 @@ def lower_factor(a, b, nu, psi, bc, nx, ny):
         eps2 = F(0)
     low = mu / (1 + eps2 * mu)
     return low, {"lambda_M_est": lam_est, "lambda_M_proved": float(mu), "eps2": float(eps2), "unknowns": n}
+
+
+
+def lower_factor_t(a, b, nu, psi, bc, nx, ny, thetas=(F(1, 2), F(2, 3), F(4, 5), F(9, 10), F(19, 20))):
+    """A PROVED lower bound on lambda_1 KEEPING the tension (2026-11-03; for psi < 0 lower_factor drops it, ~24 % low
+    at psi = -1). lambda_1 >= mu iff a(v) + mu b^-(v) - mu b^+(v) >= 0 on V. With v = I_M v + e (Carstensen & Gallistl:
+    a(v) = a(I_M v) + a(e) by the projection property; ||e||_{b+-} <= eps_+- ||e||_a, eps^2 = max_T s_T^+- kappa_CR^2
+    h_T^2 / (1 - nu)) and Young (b^+(v) <= (1 + eta) b^+(I v) + (1 + 1/eta) ||e||_{b+}^2, b^-(v) >= (1 - delta) b^-(I v)
+    - (1/delta - 1) ||e||_{b-}^2), it suffices that
+      K + mu (1 - delta) B^- - mu (1 + eta) B^+ >= 0  (discrete, B^- with s^- at its smallest on T: a lower bound of
+      b^- on V_M) and  mu (1 + 1/eta) eps_+^2 + mu (1/delta - 1) eps_-^2 <= 1  (the e-terms absorbed by a(e)).
+    The budget 1 is split theta (b^+) / 1 - theta (b^-), the best theta of a short list kept (each is a proof, so the
+    largest is one too); mu by bisection, each step proved by pd_ieee. Without tension theta = 1: exactly Theorem 1."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    import scipy.sparse.linalg as ssl
+    K, Bp, Bn, n, e2p, e2n = morley_system(a, b, nu, psi, bc, nx, ny, want_tension=True)
+    if MUTANT.get("no_tension_eps"):                     # sabotage (tests only): the tension's interpolation error dropped
+        e2n = F(0)
+    keys = set(K) | set(Bp) | set(Bn)
+    def ok(mu, th):
+        if mu <= 0:
+            return True
+        if e2p and mu * e2p >= th:
+            return False
+        eta = (mu * e2p / (th - mu * e2p)) if e2p else F(0)            # mu (1 + 1/eta) e2p = theta
+        delta = (F(1) / (1 + (1 - th) / (mu * e2n))) if e2n else F(0)  # mu (1/delta - 1) e2n = 1 - theta
+        ent = {k_: K.get(k_, F(0)) + mu * (1 - delta) * Bn.get(k_, F(0)) - mu * (1 + eta) * Bp.get(k_, F(0))
+               for k_ in keys}
+        if n <= 400:
+            m = float(__import__("scipy.linalg").linalg.eigvalsh(_dense(ent, n))[0])
+        else:
+            try:
+                m = float(ssl.eigsh(_sparse(ent, n), k=1, sigma=0, which="LM", return_eigenvectors=False,
+                                    v0=np.ones(n))[0])
+            except Exception:
+                return False
+        if m <= 0:
+            return False
+        pd = ZE.pd_ieee(n, ent, F(m) * F(9, 10))
+        return pd is not None and pd > 0
+    # the float estimate of lambda for the start: K - lam (B+ - B-) (B- added), from lower_factor's float path
+    Ks, Bs = _sparse(K, n), _sparse({k_: Bp.get(k_, F(0)) - Bn.get(k_, F(0)) for k_ in keys}, n)
+    try:
+        lam_est = 1.0 / float(ssl.eigsh(Bs, k=1, M=Ks, which="LA", return_eigenvectors=False, v0=np.ones(n))[0])
+    except Exception:
+        lam_est = None
+    best, best_th = F(0), None
+    for th in ((F(1),) if not e2n else thetas):
+        hi = F(lam_est) if lam_est else F(10 ** 6)
+        lo = F(0)
+        for _ in range(40):
+            mid = (lo + hi) / 2
+            if ok(mid, th):
+                lo = mid
+            else:
+                hi = mid
+            if hi - lo <= lo * F(1, 10 ** 5):
+                break
+        lo = F(float(lo))                  # a short rational for the record (smaller than or equal: re-proved below)
+        while lo > 0 and not ok(lo, th):
+            lo = lo * (1 - F(1, 10 ** 6))
+        if lo > best:
+            best, best_th = lo, th
+    return best, {"lambda_est": lam_est, "eps2_plus": float(e2p), "eps2_minus": float(e2n), "theta": best_th,
+                  "unknowns": n}
 
 
 # --------------------------------------------------------------------------------------------- UPPER (BFS Ritz)
@@ -317,7 +395,9 @@ def sigma_cr_bracket(a, b, t, E, nu, psi, bc, n_low=48, n_up=16):
     if not (0 <= nu < F(1, 2)):
         raise ValueError("Poisson's ratio: 0 <= nu < 1/2 here")
     D = E * t ** 3 / (12 * (1 - nu ** 2))
-    lo, il = lower_factor(a, b, nu, psi, bc, n_low, n_low)
+    # psi < 0: the tension keeps part of the plate straight — the tension-aware bound (psi = -1, 48 x 48: 19.53 -> 23.29
+    # against Navier's 25.5283, MEASURED 2026-11-03); psi >= 0 has no tension and the two are the same theorem
+    lo, il = (lower_factor_t if psi < 0 else lower_factor)(a, b, nu, psi, bc, n_low, n_low)
     hi, iu = upper_factor(a, b, nu, psi, bc, n_up, n_up)
     if lo is None or hi is None:
         return None, None, {"lower": il, "upper": iu}
@@ -344,8 +424,8 @@ def judge(a, b, t, E, nu, psi, bc, fy, need_sigma_cr=None, n_low=48, n_up=16):
     out = {"sigma_cr": [float(lo), float(hi)], "rho_EN_1993_1_5_4_4": [rho[0], rho[1]],
            "premise": "Kirchhoff plate, linear elastic, the stated edge supports, sigma_x linear in y (psi), nu >= 0; "
                       "the Morley bound per Carstensen & Gallistl (2014) with kappa_CR rounded up",
-           "note": "psi < 0: the tension part is dropped from the lower bound (conservative, MEASURED ~24 % low at "
-                   "psi = -1)"}
+           "note": "psi < 0: the lower bound keeps the tension (s^- at its smallest per triangle, its interpolation "
+                   "error charged) — MEASURED ~9 % low at psi = -1, 48 x 48 (it was ~24 % with the tension dropped)"}
     if need_sigma_cr is not None:
         f = lambda x: f"{x.numerator}/{x.denominator}"
         qs, mk = parse_quantities(f"scr=[{f(lo)},{f(hi)}] earned:platebuckle")

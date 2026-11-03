@@ -3670,6 +3670,88 @@ check("PLATE BUCKLING: a simply supported square panel — uniform compression k
       and 0.40 < _pbj["rho_EN_1993_1_5_4_4"][0] <= _pbj["rho_EN_1993_1_5_4_4"][1] < 0.42,
       (_pb1, _pb0, _pbm, _pbj["sigma_cr"], _pbj["rho_EN_1993_1_5_4_4"], _pbj.get("verdict")))
 
+# PLATE BUCKLING, TENSION KEPT (2026-11-03): for psi < 0 the lower bound keeps the stabilising tension (it dropped it:
+# psi = -1 was ~24 % low). Two sides: the bound holds Navier's 25.5283 under it and the BFS upper above, and beats the
+# old one. The sabotages move it only 2-3 % (MEASURED, 64 x 64: 23.98 -> 24.12 / 24.46 / 24.11, all still under 25.53 —
+# the bracket can NOT catch them), so the tension matrix is checked DIRECTLY: v^T B^- v <= int s^- w_x^2 for random
+# Morley fields, the reference built here from the dof equations (not the module's basis) and integrated on 4^4
+# subtriangles; and the charged eps_-^2 = max s^- kappa^2 h^2 / (1 - nu) recomputed here
+import random as _rnd_t
+def _tension_ratio(mut, nx=4, psi=-1, trials=12):
+    _PB.MUTANT.clear()
+    if mut:
+        _PB.MUTANT[mut] = True
+    try:
+        _K, _Bp, Bn, n, _e2p, _e2n = _PB.morley_system(1, 1, F(3, 10), psi, _SS, nx, nx, want_tension=True)
+    finally:
+        _PB.MUTANT.clear()
+    nodes, tris = _PB.mesh(nx, nx, 1, 1)
+    eid, nn = {}, len(nodes)
+    for t in tris:
+        for k in range(3):
+            A, B = t[(k + 1) % 3], t[(k + 2) % 3]
+            eid.setdefault((min(A, B), max(A, B)), nn + len(eid))
+    fixed = set()
+    for (i, j), e in eid.items():
+        if _PB._edges_on(nodes, i, j, 1, 1) is not None:
+            fixed.update((i, j))
+    col = {d: k for k, d in enumerate(d for d in range(nn + len(eid)) if d not in fixed)}
+    rng, worst = _rnd_t.Random(7), 0.0
+    def sub(T, c, y0, lev):
+        if lev == 0:
+            (x0, y0_), (x1, y1), (x2, y2) = T
+            ar = abs((x1 - x0) * (y2 - y0_) - (x2 - x0) * (y1 - y0_)) / 2
+            acc = 0.0
+            for (xa, ya), (xb, yb) in ((T[0], T[1]), (T[1], T[2]), (T[2], T[0])):
+                mx, my = (xa + xb) / 2, (ya + yb) / 2
+                wx = c[1] + 2 * c[3] * mx + c[4] * my
+                acc += ar / 3 * max(0.0, -(1 - (1 - psi) * (y0 + my))) * wx * wx
+            return acc
+        a_, b_, c_ = T
+        m = lambda p, q: ((p[0] + q[0]) / 2, (p[1] + q[1]) / 2)
+        ab, bc_, ca = m(a_, b_), m(b_, c_), m(c_, a_)
+        return sum(sub(X, c, y0, lev - 1) for X in ((a_, ab, ca), (ab, b_, bc_), (ca, bc_, c_), (ab, bc_, ca)))
+    for _ in range(trials):
+        v = [rng.uniform(-1, 1) for _ in range(n)]
+        q = sum(float(val) * v[i] * v[j] * (1 if i == j else 2) for (i, j), val in Bn.items())
+        ref = 0.0
+        for t in tris:
+            P0 = [nodes[x] for x in t]
+            dofs, sg = list(t), [1, 1, 1]
+            for k in range(3):
+                A, B = t[(k + 1) % 3], t[(k + 2) % 3]
+                dofs.append(eid[(min(A, B), max(A, B))])
+                sg.append(1 if A < B else -1)
+            Pl = [(float(x - P0[0][0]), float(y - P0[0][1])) for x, y in P0]
+            rows = [[1, x, y, x * x, x * y, y * y] for x, y in Pl]
+            for k in range(3):
+                A, B = Pl[(k + 1) % 3], Pl[(k + 2) % 3]
+                mx, my = (A[0] + B[0]) / 2, (A[1] + B[1]) / 2
+                rx, ry = B[1] - A[1], -(B[0] - A[0])
+                rows.append([0, rx, ry, 2 * mx * rx, my * rx + mx * ry, 2 * my * ry])
+            dv = [sg[k] * (v[col[d]] if d in col else 0.0) for k, d in enumerate(dofs)]
+            c = _np_ax.linalg.solve(_np_ax.array(rows, float), _np_ax.array(dv, float))
+            ref += sub(Pl, c, float(P0[0][1]), 4)
+        worst = max(worst, q / ref)
+    return worst
+_tr = {m: _tension_ratio(m) for m in (None, "tension_hi", "tension_x2")}
+_e2n_ref = float(1 * _PB.KAPPA_CR ** 2 * (F(1, 16) + F(1, 16)) / (1 - F(3, 10)))
+_e2n = _PB.lower_factor_t(1, 1, F(3, 10), -1, _SS, 4, 4)[1]["eps2_minus"]
+_PB.MUTANT["no_tension_eps"] = True
+try:
+    _e2n_m = _PB.lower_factor_t(1, 1, F(3, 10), -1, _SS, 4, 4)[1]["eps2_minus"]
+finally:
+    _PB.MUTANT.clear()
+_pbt = (_kb(_PB.lower_factor_t(1, 1, F(3, 10), -1, _SS, 32, 32)[0]), _kb(_PB.lower_factor(1, 1, F(3, 10), -1, _SS, 32, 32)[0]),
+        _kb(_PB.upper_factor(1, 1, F(3, 10), -1, _SS, 12, 12)[0]))
+check("PLATE BUCKLING, TENSION KEPT: psi = -1 square SS panel — the tension-aware lower bound holds Navier's 25.5283 "
+      "under it (BFS upper above) and beats the tension-dropping one by > 10 %; the tension matrix is never above the "
+      "exact tension energy of a Morley field (independent reference), its charged error is the formula's; the "
+      "sabotages (tension at its largest / doubled / its error dropped) are caught",
+      _pbt[1] * 1.1 < _pbt[0] <= 25.5283 <= _pbt[2] and 0.3 < _tr[None] <= 1 + 1e-9 and _tr["tension_hi"] > 1.05
+      and _tr["tension_x2"] > 1.05 and _e2n >= _e2n_ref * (1 - 1e-12) and _e2n_m < _e2n_ref,
+      (_pbt, _tr, _e2n, _e2n_ref, _e2n_m))
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,
