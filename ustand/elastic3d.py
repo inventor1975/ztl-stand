@@ -29,7 +29,8 @@ LOWER (version 2, 2026-11-03; complementary energy): for ANY statically admissib
   integers make it exactly admissible (spanning-forest push through unimodular face blocks; the roots' residual
   into a grip face's normal traction), every tet's balance asserted exactly. The compliance at the box's softest
   corner per tet (E_lo; nu at the worse end — the form is linear in nu). Cost (MEASURED, random 80 % solid): the
-  hybridized choice with rigid-motion AMG 10^3 4.6 s, 16^3 17 s, 24^3 45 s / 7 GB (a direct KKT below HYBRID_FROM). Pores and voxel EDGE contacts: the stress passes faces
+  hybridized choice with rigid-motion AMG 10^3 4.6 s, 16^3 17 s, 24^3 45 s / 7 GB, 32^3 106 s / 15.6 GB (a direct
+  KKT below HYBRID_FROM). Pores and voxel EDGE contacts: the stress passes faces
   only, so an edge-only contact carries nothing below while the P1 field bridges it above — the gap is widest there.
 """
 from __future__ import annotations
