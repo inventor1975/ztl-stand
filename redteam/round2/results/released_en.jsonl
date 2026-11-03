@@ -24,3 +24,17 @@
 {"seed": 123, "status": "checked", "releases": 7, "checks": 23, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
 {"seed": 124, "status": "checked", "releases": 9, "checks": 113, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
 {"seed": 125, "status": "checked", "releases": 3, "checks": 23, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 126, "status": "checked", "releases": 8, "checks": 52, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 127, "status": "checked", "releases": 8, "checks": 46, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 128, "status": "checked", "releases": 5, "checks": 24, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 129, "status": "checked", "releases": 7, "checks": 122, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 130, "status": "checked", "releases": 7, "checks": 46, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 131, "status": "checked", "releases": 3, "checks": 43, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 132, "status": "error", "why": "ValueError('K0 is not positive definite: pivot 40 is 0')"}
+{"seed": 133, "status": "error", "why": "ValueError('K0 is not positive definite: pivot 33 is 0')"}
+{"seed": 134, "status": "checked", "releases": 15, "checks": 125, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 135, "status": "error", "why": "ValueError('K0 is not positive definite: pivot 33 is 0')"}
+{"seed": 136, "status": "checked", "releases": 9, "checks": 58, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 137, "status": "checked", "releases": 4, "checks": 42, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 138, "status": "checked", "releases": 5, "checks": 41, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 139, "status": "checked", "releases": 11, "checks": 57, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
