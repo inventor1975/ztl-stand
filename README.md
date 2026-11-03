@@ -96,7 +96,7 @@ Alfeld-split stress, hybridized + AMG: 32^3 voxels in 106 s, 15.6 GB; DESIGN-3D.
 slowly under uniform refinement (3D checkerboard: ratio 2.3 -> 1.4 at x4) — adaptive refinement is the next step.
 Contacts by an edge or a corner only, where the other voxels insulate, carry no current in the continuum: since
 2026-11-03 the potential is split there (an insulator/conductor checkerboard: upper 0.47 -> ~0, the truth; a 50 %
-random 8^3 map: ratio upper/lower 4.0 -> 2.0). The lower bound's flux is BDM1 (linear per tet) up to ~12^3 voxels
+random 8^3 map: ratio upper/lower 4.0 -> 2.0). The lower bound's flux is BDM1 (linear per tet; hybridized + AMG: 32^3 in 16 s, 48^3 in 50 s / 12.9 GB) up to ~48^3 voxels
 (2026-11-03, MEASURED median gap 1.244 -> 1.118 over 150 random maps), RT0 above; a P2 potential is an option above.
 Solver: smoothed-aggregation multigrid if `pyamg` is installed (optional; 64^3 voxels 141 s -> 22 s), Jacobi CG
 otherwise — the solver only chooses the fields, the bounds stay proved either way.

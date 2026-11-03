@@ -493,8 +493,9 @@ def _exact_and_energy(M, sig, Fc, q, open_f, nI, t1, t2, elec, te):
 
 # --------------------------------------------------------------------------------------------- LOWER, BDM1 (2026-11-03)
 MUTANT = {}             # TEST-ONLY sabotage switches; empty = the real bounds
-BDM1_UP_TO = 12000      # conducting tets: BDM1's float choice is a direct KKT (MEASURED 12^3 23 s, 16^3 233 s / 5.6 GB);
-                        # RT0 (hybridized, 0.8 s) above — a hybridized BDM1 is the next step
+BDM1_KKT_UP_TO = 3000   # conducting tets: BDM1's float choice by a direct KKT below, hybridized + AMG above
+BDM1_UP_TO = 400000     # conducting tets: BDM1 in bounds() up to here, RT0 above (MEASURED hybridized, random 50 %:
+                        # 16^3 2.9 s, 32^3 16 s / 3.9 GB, 48^3 50 s / 12.9 GB — the memory sets the line under 18 GB)
 
 
 def _bdm1_tables(M, Fc):
@@ -526,6 +527,65 @@ def _bdm1_tables(M, Fc):
         t1 = t0 + nvox - 1
         assert all((out[t1, f] * gn[fid[t1, f]] == n2[f]).all() for f in range(4))
     return tabs
+
+
+def _bdm1_hybrid(M, Fc, tabs, act, ty, slot, G12, S12, sig, nu_):
+    """BDM1's float CHOICE by hybridization (2026-11-03; as the RT0 mixed flux and elastic3d): per conducting tet the
+    local problem min 1/2 q^T A q + lam^T q, sum_out q = 0 (13 x 13, batched) gives q_T = -Z_T lam_T; the outward data
+    of a face's two tets sum to 0 — an SPD system on lam (a potential trace, 3 per open face, the SAME for both tets:
+    no orientation sign), lam = 0 / 1 on the x = 0 / x = nx electrodes, smoothed-aggregation AMG + CG."""
+    rows, cols, vals = [], [], []
+    Zs = {}
+    for t_ in range(6):
+        b = act[ty[act] == t_]
+        if not len(b):
+            continue
+        Q0 = tabs[t_]["Q0"]
+        for c0 in range(0, len(b), 20000):
+            bb = b[c0:c0 + 20000]
+            G = G12[bb]
+            open_ = G >= 0
+            A = Q0[None] / sig[bb][:, None, None]
+            A = np.where(open_[:, :, None] & open_[:, None, :], A, 0.0)
+            idx = np.arange(12)
+            A[:, idx, idx] = np.where(open_, A[:, idx, idx], 1.0)
+            Bv = open_.astype(float)          # conservation in the tet's OWN frame: q are outward already, all +1
+            sc = np.abs(A).max(axis=(1, 2))
+            K = np.zeros((len(bb), 13, 13))
+            K[:, :12, :12] = A
+            K[:, :12, 12] = Bv
+            K[:, 12, :12] = Bv
+            K[:, 12, 12] = -1e-12 * sc
+            Z = np.linalg.inv(K)[:, :12, :12] * (open_[:, :, None] & open_[:, None, :])
+            for i_, t in enumerate(bb):
+                Zs[int(t)] = Z[i_]
+            okm = open_[:, :, None] & open_[:, None, :]
+            rows.append(np.broadcast_to(G[:, :, None], okm.shape)[okm])
+            cols.append(np.broadcast_to(G[:, None, :], okm.shape)[okm])
+            vals.append(Z[okm])
+    Am = sp.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(nu_, nu_))
+    lamD = np.full(nu_, np.nan)
+    for key, val in (("x0", 0.0), ("x1", 1.0)):
+        fz = np.where(Fc[key] & (slot[:, 0] >= 0))[0]
+        lamD[slot[fz].ravel()] = val
+    dir_ = ~np.isnan(lamD)
+    free = np.where(~dir_)[0]
+    Af = Am[free][:, free]
+    rhs = -(Am[free][:, np.where(dir_)[0]] @ lamD[dir_])
+    d = Af.diagonal().copy()
+    zero = d == 0
+    Af = Af + sp.diags(zero.astype(float))
+    d[zero] = 1.0
+    lam = np.where(dir_, lamD, 0.0)
+    lam[free] = _spd_solve(Af, rhs, d, 1e-11)
+    q = np.zeros(nu_); cnt = np.zeros(nu_)
+    for t, Z in Zs.items():
+        G = G12[t]
+        m = G >= 0
+        lt = np.where(m, lam[np.maximum(G, 0)], 0.0)
+        qt = -(Z @ lt) * S12[t]                                         # outward -> the face's global orientation
+        np.add.at(q, G[m], qt[m]); np.add.at(cnt, G[m], 1.0)
+    return np.where(cnt > 0, q / np.maximum(cnt, 1), 0.0)
 
 
 def lower_bdm1(M, sig):
@@ -572,11 +632,14 @@ def lower_bdm1(M, sig):
     B = sp.csr_matrix((np.r_[ss[m] / 6.0, np.repeat(-x0o / 6.0, 3)],
                        (np.r_[ai[m], np.full(3 * len(x0f), len(act))], np.r_[gg[m], slot[x0f].ravel()])),
                       shape=(len(act) + 1, nu_))
-    rhs = np.zeros(len(act) + 1); rhs[-1] = 1.0
-    eps = 1e-12 * max(1.0, abs(Qm).max())
-    K = sp.bmat([[Qm + eps * sp.identity(nu_), B.T], [B, -eps * sp.identity(len(act) + 1)]]).tocsc()
-    import scipy.sparse.linalg as sla_
-    qf = sla_.spsolve(K, np.r_[np.zeros(nu_), rhs])[:nu_]
+    if len(act) > BDM1_KKT_UP_TO or MUTANT.get("bdm1_hybrid"):
+        qf = _bdm1_hybrid(M, Fc, tabs, act, ty, slot, G12, S12, sig, nu_)
+    else:
+        rhs = np.zeros(len(act) + 1); rhs[-1] = 1.0
+        eps = 1e-12 * max(1.0, abs(Qm).max())
+        K = sp.bmat([[Qm + eps * sp.identity(nu_), B.T], [B, -eps * sp.identity(len(act) + 1)]]).tocsc()
+        import scipy.sparse.linalg as sla_
+        qf = sla_.spsolve(K, np.r_[np.zeros(nu_), rhs])[:nu_]
     # 2. integers and the exact push (as the RT0 path, one value per face moved)
     scale = 2.0 ** (40 - max(0, int(np.ceil(np.log2(max(1.0, float(np.abs(qf).max())))))))   # |Q| < 2^41
     Qi = np.zeros((nf, 3), dtype=np.int64)

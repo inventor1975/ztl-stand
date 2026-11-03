@@ -2940,6 +2940,14 @@ check("3D conduction, the BDM1 flux's lower bound: the series laminate exact (0.
       "rises above that upper bound",
       F(2, 5) * (1 - F(1, 10 ** 12)) <= _lbs <= F(2, 5) and _lbr < _lbb <= _ubb < _lbm,
       (float(_lbs), float(_lbr), float(_lbb), float(_ubb), float(_lbm)))
+# BDM1 hybridized (2026-11-03): the same bound as the direct KKT (MEASURED 1e-16) at any size
+_C3.MUTANT["bdm1_hybrid"] = True
+try:
+    _lbh = _C3.lower_bdm1(_Mb, _sgb)[0]
+finally:
+    _C3.MUTANT.clear()
+check("3D conduction, BDM1's hybridized choice (local 13 x 13 + AMG): the checkerboard's lower bound equals the direct "
+      "KKT's within 1e-12", abs(float(_lbh) / float(_lbb) - 1) < 1e-12, (float(_lbh), float(_lbb)))
 _jd = _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2"], "earned": True}}, "1.9")
 _jr = _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2"], "earned": False}}, "2.1")
 check("3D conduction judged by ZTL: a homogeneous 2 S/m box meets s_eff >= 1.9 EARNED (inputs earned), and "
