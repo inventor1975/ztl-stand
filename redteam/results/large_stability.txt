@@ -1,0 +1,106 @@
+{
+"mutant": false,
+"cases": [
+{
+"bays": 8,
+"storeys": 24,
+"unknowns": 648,
+"cholmod": false,
+"lam_low": 15.402478186443878,
+"ref_ns2": 15.464857541023017,
+"ref_ns4": 15.45653467786917,
+"ref_change": 0.008322863153846782,
+"seconds": 1.0,
+"violation": false
+},
+{
+"bays": 19,
+"storeys": 32,
+"unknowns": 1920,
+"cholmod": true,
+"lam_low": 12.0822782259436,
+"ref_ns2": 12.131827216538777,
+"ref_ns4": 12.124705650726922,
+"ref_change": 0.007121565811855746,
+"seconds": 3.7,
+"violation": false
+},
+{
+"bays": 14,
+"storeys": 44,
+"unknowns": 1980,
+"cholmod": true,
+"lam_low": 8.640198902664956,
+"ref_ns2": 8.673041684840884,
+"ref_ns4": 8.668484429117646,
+"ref_change": 0.004557255723238285,
+"seconds": 3.6,
+"violation": false
+},
+{
+"bays": 24,
+"storeys": 25,
+"unknowns": 1875,
+"cholmod": true,
+"lam_low": 16.587272001785156,
+"ref_ns2": 16.662490410557574,
+"ref_ns4": 16.652193057174404,
+"ref_change": 0.010297353383169394,
+"seconds": 3.5,
+"violation": false
+}
+]
+}
+{
+"mutant": true,
+"cases": [
+{
+"bays": 8,
+"storeys": 24,
+"unknowns": 648,
+"cholmod": false,
+"lam_low": 15.710527750172755,
+"ref_ns2": 15.46485754102234,
+"ref_ns4": 15.45653467786785,
+"ref_change": 0.008322863154489824,
+"seconds": 1.1,
+"violation": true
+},
+{
+"bays": 19,
+"storeys": 32,
+"unknowns": 1920,
+"cholmod": true,
+"lam_low": 12.323923790462473,
+"ref_ns2": 12.131827216537832,
+"ref_ns4": 12.124705650727702,
+"ref_change": 0.007121565810130903,
+"seconds": 3.6,
+"violation": true
+},
+{
+"bays": 14,
+"storeys": 44,
+"unknowns": 1980,
+"cholmod": true,
+"lam_low": 8.813002880718255,
+"ref_ns2": 8.673041684842659,
+"ref_ns4": 8.668484429114383,
+"ref_change": 0.004557255728276033,
+"seconds": 3.5,
+"violation": true
+},
+{
+"bays": 24,
+"storeys": 25,
+"unknowns": 1875,
+"cholmod": true,
+"lam_low": 16.91901744182086,
+"ref_ns2": 16.662490410557357,
+"ref_ns4": 16.652193057177957,
+"ref_change": 0.010297353379399965,
+"seconds": 3.5,
+"violation": true
+}
+]
+}

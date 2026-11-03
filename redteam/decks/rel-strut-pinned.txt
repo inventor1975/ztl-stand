@@ -1,0 +1,19 @@
+! REDTEAM: a strut with HINGES at both ends (RELEASE, both bending axes), between two nodes whose rotations are held
+! (stiff connections). The strut itself is PIN-ENDED: P_cr = pi^2 EI/L^2 = 1.0363e7 N. The load 1.2e7 N EXCEEDS it.
+ET, 1, BEAM4
+MP, EX, 1, 210e9
+MP, PRXY, 1, 0.3
+R, 1, 0.01, 8e-5, 8e-5, 0.2, 0.2, 0, 0, 5e-5
+N, 1, 0, 0, 0
+N, 2, 4, 0, 0
+E, 1, 2
+D, 1, ALL, 0
+D, 2, UY, 0
+D, 2, UZ, 0
+D, 2, ROTX, 0
+D, 2, ROTY, 0
+D, 2, ROTZ, 0
+RELEASE, 1, I, MZ, MY
+RELEASE, 1, J, MZ, MY
+F, 2, FX, -12000000
+F, 2, FY, 10000
