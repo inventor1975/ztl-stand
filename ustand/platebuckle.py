@@ -16,6 +16,8 @@ so eps^2 = max_T s_T^+ kappa_CR^2 h_T^2 / (1 - nu) — in the units of D / (sigm
 replacing s by s^+ (pointwise) can only lower lambda_1, so the bound stays a lower bound for any psi. The theorem's
 Pythagoras needs D2_NC I_M = Pi_0 D2 (the integral-mean property of the Morley interpolant, any constant-coefficient
 a in D2). lambda_M itself from below: K - mu B positive definite (ZTL zenergy.pd_ieee, exact rational entries).
+Two extensions (2026-11-03): psi < 0 keeps the tension (lower_factor_t), and SHEAR (lower_factor_shear, judge_shear)
+with the indefinite b = 2 int w_x w_y — both by Young-split budgets on the interpolation error, see their docstrings.
 """
 from __future__ import annotations
 
@@ -284,6 +286,141 @@ def lower_factor_t(a, b, nu, psi, bc, nx, ny, thetas=(F(1, 2), F(2, 3), F(4, 5),
                   "unknowns": n}
 
 
+
+# --------------------------------------------------------------------------------------------- SHEAR (2026-11-03)
+def morley_shear_system(a, b, nu, bc, nx, ny):
+    """Exact Morley matrices for SHEAR buckling (tau_xy = tau uniform, the pre-buckling field exact): K (as in
+    morley_system), B_tau (2 int w_x w_y, piecewise, INDEFINITE) and G (int |grad w|^2, piecewise) on the free dofs, and
+    eps^2 = max_T kappa_CR^2 h_T^2 / (1 - nu). The 3-point edge-midpoint rule is exact (products of linears)."""
+    a, b, nu = F(a), F(b), F(nu)
+    nodes, tris = mesh(nx, ny, a, b)
+    edge_id, nn = {}, len(nodes)
+    for t in tris:
+        for k in range(3):
+            A_, B_ = t[(k + 1) % 3], t[(k + 2) % 3]
+            key = (min(A_, B_), max(A_, B_))
+            if key not in edge_id:
+                edge_id[key] = nn + len(edge_id)
+    fixed = set()
+    for (i, j), e in edge_id.items():
+        side = _edges_on(nodes, i, j, a, b)
+        if side is None:
+            continue
+        fixed.update((i, j))
+        if bc[side] == "C":
+            fixed.add(e)
+    free = [d for d in range(nn + len(edge_id)) if d not in fixed]
+    col = {d: k for k, d in enumerate(free)}
+    K, Bt, Gm = {}, {}, {}
+    eps2 = F(0)
+    cache = {}
+    for t in tris:
+        P0 = [nodes[v] for v in t]
+        P = [(x - P0[0][0], y - P0[0][1]) for x, y in P0]
+        shape = tuple(P)
+        if shape not in cache:
+            cache[shape] = _morley_basis(P)
+        C = cache[shape]
+        area = abs((P[1][0] - P[0][0]) * (P[2][1] - P[0][1]) - (P[2][0] - P[0][0]) * (P[1][1] - P[0][1])) / 2
+        dofs, sg = list(t), [1, 1, 1]
+        for k in range(3):
+            A_, B_ = t[(k + 1) % 3], t[(k + 2) % 3]
+            dofs.append(edge_id[(min(A_, B_), max(A_, B_))])
+            sg.append(1 if A_ < B_ else -1)
+        Qc = [[F(0)] * 6 for _ in range(6)]
+        Qc[3][3] += 4 * (1 - nu); Qc[4][4] += 2 * (1 - nu); Qc[5][5] += 4 * (1 - nu)
+        for p_, wp in ((3, 2), (5, 2)):
+            for q_, wq in ((3, 2), (5, 2)):
+                Qc[p_][q_] += nu * wp * wq
+        Tq = [[F(0)] * 6 for _ in range(6)]
+        Gq = [[F(0)] * 6 for _ in range(6)]
+        for k in range(3):
+            mx = (P[k][0] + P[(k + 1) % 3][0]) / 2
+            my = (P[k][1] + P[(k + 1) % 3][1]) / 2
+            gx = [F(0), F(1), F(0), 2 * mx, my, F(0)]
+            gy = [F(0), F(0), F(1), F(0), mx, 2 * my]
+            for p_ in range(6):
+                for q_ in range(6):
+                    Tq[p_][q_] += area / 3 * (gx[p_] * gy[q_] + gy[p_] * gx[q_])
+                    Gq[p_][q_] += area / 3 * (gx[p_] * gx[q_] + gy[p_] * gy[q_])
+        tscale = F(9, 10) if MUTANT.get("tau_low") else F(1)   # sabotage (tests only): the load under-integrated
+        h2 = max((P[i][0] - P[j][0]) ** 2 + (P[i][1] - P[j][1]) ** 2 for i in range(3) for j in range(i + 1, 3))
+        eps2 = max(eps2, KAPPA_CR ** 2 * h2 / (1 - nu))
+        gscale = F(0) if MUTANT.get("tau_no_cross") else F(1)   # sabotage (tests only): the u-e cross term dropped
+        for (Mloc, out, scale, tag) in ((Qc, K, area, "K"), (Tq, Bt, tscale, "T"), (Gq, Gm, gscale, "G")):
+            if scale == 0:
+                continue
+            ck = (shape, tag)
+            if ck not in cache:
+                CM = [[sum(Mloc[p_][r] * C[r][j] for r in range(6)) for j in range(6)] for p_ in range(6)]
+                cache[ck] = [[sum(C[p_][i] * CM[p_][j] for p_ in range(6)) for j in range(6)] for i in range(6)]
+            Lm = cache[ck]
+            for i in range(6):
+                di = dofs[i]
+                if di not in col:
+                    continue
+                for j in range(6):
+                    dj = dofs[j]
+                    if dj not in col or col[di] < col[dj]:
+                        continue
+                    v = scale * sg[i] * sg[j] * Lm[i][j]
+                    if v:
+                        key = (col[di], col[dj])
+                        out[key] = out.get(key, F(0)) + v
+    return K, Bt, Gm, len(free), eps2
+
+
+def lower_factor_shear(a, b, nu, bc, nx, ny):
+    """A PROVED lower bound on the shear buckling factor lambda_1 (tau_cr = lambda_1 D / t). lambda_1 >= mu iff
+    a(v) - mu b(v) >= 0 on V (b(v) = 2 int v_x v_y). With u = I_M v, e = v - u: a(v) = a(u) + a(e) (Carstensen &
+    Gallistl's projection property), |b(e)| <= ||grad e||^2, |2 b(u, e)| <= 2 ||grad u|| ||grad e|| <= eta ||grad u||^2
+    + ||grad e||^2 / eta (Cauchy-Schwarz: |u_x e_y + u_y e_x| <= |grad u| |grad e|), ||grad e||^2 <= eps^2 a(e). So it
+    suffices that K - mu (B_tau + eta G) is positive definite (pd_ieee) and mu (1 + 1/eta) eps^2 <= 1 (eta set by the
+    equality). mu by bisection."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    import scipy.sparse.linalg as ssl
+    K, Bt, Gm, n, e2 = morley_shear_system(a, b, nu, bc, nx, ny)
+    keys = set(K) | set(Bt) | set(Gm)
+    def ok(mu):
+        if mu <= 0:
+            return True
+        if mu * e2 >= 1:
+            return False
+        eta = mu * e2 / (1 - mu * e2)                    # mu (1 + 1/eta) e2 = 1
+        ent = {k_: K.get(k_, F(0)) - mu * Bt.get(k_, F(0)) - mu * eta * Gm.get(k_, F(0)) for k_ in keys}
+        if n <= 400:
+            m = float(__import__("scipy.linalg").linalg.eigvalsh(_dense(ent, n))[0])
+        else:
+            try:
+                m = float(ssl.eigsh(_sparse(ent, n), k=1, sigma=0, which="LM", return_eigenvectors=False,
+                                    v0=np.ones(n))[0])
+            except Exception:
+                return False
+        if m <= 0:
+            return False
+        pd = ZE.pd_ieee(n, ent, F(m) * F(9, 10))
+        return pd is not None and pd > 0
+    Ks, Bs = _sparse(K, n), _sparse(Bt, n)
+    try:
+        lam_est = 1.0 / float(ssl.eigsh(Bs, k=1, M=Ks, which="LA", return_eigenvectors=False, v0=np.ones(n))[0])
+    except Exception:
+        lam_est = None
+    hi, lo = (F(lam_est) if lam_est else F(10 ** 6)), F(0)
+    for _ in range(40):
+        mid = (lo + hi) / 2
+        if ok(mid):
+            lo = mid
+        else:
+            hi = mid
+        if hi - lo <= lo * F(1, 10 ** 5):
+            break
+    lo = F(float(lo))
+    while lo > 0 and not ok(lo):
+        lo = lo * (1 - F(1, 10 ** 6))
+    return lo, {"lambda_M_est": lam_est, "eps2": float(e2), "unknowns": n}
+
+
 # --------------------------------------------------------------------------------------------- UPPER (BFS Ritz)
 def _hermite_1d(h):
     """The cubic Hermite basis on [0, h] (dofs u(0), u'(0), u(h), u'(h)) as exact polynomial coefficient lists
@@ -305,8 +442,9 @@ def _int_poly(p, q, h, w=(F(1),)):
     return sum(c * F(h) ** (e + 1) / (e + 1) for e, c in prod.items())
 
 
-def bfs_system(a, b, nu, psi, bc, nx, ny):
-    """Exact BFS matrices K (a, with nu) and B (b with the TRUE s(y), tension included), free dofs only."""
+def bfs_system(a, b, nu, psi, bc, nx, ny, shear=False):
+    """Exact BFS matrices K (a, with nu) and B (b with the TRUE s(y), tension included; shear=True: b = 2 int w_x w_y,
+    tau uniform), free dofs only."""
     a, b, nu, psi = F(a), F(b), F(nu), F(psi)
     hx, hy = a / nx, b / ny
     H, H1, H2 = _hermite_1d(hx)
@@ -314,6 +452,7 @@ def bfs_system(a, b, nu, psi, bc, nx, ny):
     I = lambda P, Q, h, w=(F(1),): [[_int_poly(P[i], Q[j], h, w) for j in range(4)] for i in range(4)]
     X00, X11, X22, X02 = I(H, H, hx), I(H1, H1, hx), I(H2, H2, hx), I(H, H2, hx)
     Y00, Y11, Y22, Y02 = I(G, G, hy), I(G1, G1, hy), I(G2, G2, hy), I(G, G2, hy)
+    X10, Y01 = I(H1, H, hx), I(G, G1, hy)                 # int phi_a' phi_b (x), int psi_a psi_b' (y)
     # local dof k = (end, kind) in 1D: 0 u(0), 1 u'(0), 2 u(h), 3 u'(h); 2D node dofs (w, w_x, w_y, w_xy) at corner (ex, ey)
     def gdof(i, j, kx, ky):            # kx, ky in {0, 1}: value / derivative in x / y
         return 4 * (j * (nx + 1) + i) + (kx + 2 * ky)
@@ -354,7 +493,8 @@ def bfs_system(a, b, nu, psi, bc, nx, ny):
                     kv = (X22[ax][bx] * Y00[ay][by] + X00[ax][bx] * Y22[ay][by]
                           + nu * (X02[ax][bx] * Y02[by][ay] + X02[bx][ax] * Y02[ay][by])
                           + 2 * (1 - nu) * X11[ax][bx] * Y11[ay][by])
-                    bv = X11[ax][bx] * Ys[ay][by]
+                    bv = ((X10[ax][bx] * Y01[ay][by] + X10[bx][ax] * Y01[by][ay]) if shear
+                          else X11[ax][bx] * Ys[ay][by])
                     key = (col[da], col[db])
                     if kv:
                         K[key] = K.get(key, F(0)) + kv
@@ -363,11 +503,11 @@ def bfs_system(a, b, nu, psi, bc, nx, ny):
     return K, Bm, len(free)
 
 
-def upper_factor(a, b, nu, psi, bc, nx, ny):
+def upper_factor(a, b, nu, psi, bc, nx, ny, shear=False):
     """A PROVED upper bound on lambda_1: the Rayleigh quotient a(w)/b(w) of a conforming (C1) BFS field w — the
     discrete eigenvector rounded to dyadics — computed EXACTLY (Rayleigh: lambda_1 = min a/b over b > 0)."""
     import scipy.sparse.linalg as ssl
-    K, Bm, n = bfs_system(a, b, nu, psi, bc, nx, ny)
+    K, Bm, n = bfs_system(a, b, nu, psi, bc, nx, ny, shear=shear)
     Ks, Bs = _sparse(K, n), _sparse(Bm, n)
     # B is INDEFINITE when part of the panel is in tension (psi < 0): the largest eigenvalue of B relative to the
     # positive definite K gives 1 / lambda_1 (shift-invert with B as the mass needs B >= 0)
@@ -430,5 +570,52 @@ def judge(a, b, t, E, nu, psi, bc, fy, need_sigma_cr=None, n_low=48, n_up=16):
         f = lambda x: f"{x.numerator}/{x.denominator}"
         qs, mk = parse_quantities(f"scr=[{f(lo)},{f(hi)}] earned:platebuckle")
         r = judge_sheet_claim(f"scr >= {f(F(need_sigma_cr))}", qs, mk)
+        out["verdict"] = r["disposition"] + (f" ({r['polarity']})" if r.get("polarity") else "")
+    return out
+
+
+def chi_w(lam_w, eta=1.2, rigid_end_post=False):
+    """EN 1993-1-5 Table 5.1: the shear buckling reduction chi_w(lambda_w) — eta below 0.83 / eta, then 0.83 / lambda_w
+    (non-rigid end post), or 1.37 / (0.7 + lambda_w) from 1.08 (rigid). Non-increasing in lambda_w."""
+    if lam_w < 0.83 / eta:
+        return eta
+    if rigid_end_post and lam_w >= 1.08:
+        return 1.37 / (0.7 + lam_w)
+    return 0.83 / lam_w
+
+
+def judge_shear(a, b, t, E, nu, bc, fy, need_tau_cr=None, eta=1.2, rigid_end_post=False, n_low=48, n_up=12):
+    """SHEAR buckling of the panel (tau uniform; a along x): PROVED [low, high] of tau_cr = lambda_1 D / t (Morley lower
+    with the cross-term budget, BFS upper), 'tau_cr >= need' by ZTL, and EN 1993-1-5 5.3's chi_w bracket from
+    lambda_w = 0.76 sqrt(fy / tau_cr) (the LOWER tau_cr gives the LOWER chi_w — conservative). The contribution of the
+    flanges (5.4) is not included."""
+    from . import judge_ztl  # noqa: F401
+    from znumjudge import parse_quantities, judge_sheet_claim
+    a, b, t, E, nu = (F(v) for v in (a, b, t, E, nu))
+    if not (0 <= nu < F(1, 2)):
+        raise ValueError("Poisson's ratio: 0 <= nu < 1/2 here")
+    D = E * t ** 3 / (12 * (1 - nu ** 2))
+    # the mesh: n_low elements across the SHORTER side, square cells
+    sh = min(a, b)
+    nx, ny = max(1, round(float(a / sh * n_low))), max(1, round(float(b / sh * n_low)))
+    mx, my = max(1, round(float(a / sh * n_up))), max(1, round(float(b / sh * n_up)))
+    lo, il = lower_factor_shear(a, b, nu, bc, nx, ny)
+    hi, iu = upper_factor(a, b, nu, 0, bc, mx, my, shear=True)
+    if not lo or hi is None:
+        return {"verdict": "OPEN", "why": "a bound was not proved", "info": {"lower": il, "upper": iu}}
+    lo, hi = lo * D / t, hi * D / t
+    fyf = float(fy)
+    lam = (0.76 * math.sqrt(fyf / float(lo)) * (1 + 1e-12), 0.76 * math.sqrt(fyf / float(hi)))
+    out = {"tau_cr": [float(lo), float(hi)], "chi_w_EN_1993_1_5_5_3": [chi_w(lam[0], eta, rigid_end_post),
+                                                                    chi_w(lam[1], eta, rigid_end_post)],
+           "premise": "Kirchhoff plate, linear elastic, the stated edge supports, tau uniform, nu >= 0; the Morley "
+                      "bound per Carstensen & Gallistl (2014) with kappa_CR rounded up and the shear cross term "
+                      "charged; chi_w: Table 5.1 (eta = %s, %s end post), flanges' contribution (5.4) not included"
+                      % (eta, "rigid" if rigid_end_post else "non-rigid"),
+           "info": {"lower": il, "upper": iu}}
+    if need_tau_cr is not None:
+        f = lambda x: f"{x.numerator}/{x.denominator}"
+        qs, mk = parse_quantities(f"tcr=[{f(lo)},{f(hi)}] earned:platebuckle")
+        r = judge_sheet_claim(f"tcr >= {f(F(need_tau_cr))}", qs, mk)
         out["verdict"] = r["disposition"] + (f" ({r['polarity']})" if r.get("polarity") else "")
     return out

@@ -92,7 +92,9 @@ clamped, sigma_x linear (psi) — sigma_cr PROVED from both sides (Morley + Cars
 correction below; a conforming BFS field's exact Rayleigh quotient above) and EN 1993-1-5 4.4's rho from it; MEASURED
 k in [3.978, 4.0000] (uniform), [7.585, 7.812] (psi 0), [9.904, 10.075] clamped; psi < 0 keeps the stabilising
 tension in the lower bound (Young-split error budget): psi = -1 [23.29, 25.529] at 48 x 48 (Navier 25.5283; it was
-19.53 with the tension dropped), psi = -2 [47.37, 54.40] at 64 x 64. Not yet: shear, transverse stress, stiffened panels. Lateral-torsional buckling: member level, 3D (`judge_ltb`, DESIGN-LTB.md).
+19.53 with the tension dropped), psi = -2 [47.37, 54.40] at 64 x 64. Shear (`judge_shear`, tau uniform): k_tau SS square
+[8.681, 9.326] (sine-series reference 9.3245), SS 2:1 [6.207, 6.547], clamped square [13.345, 14.647]; EN 1993-1-5
+5.3's chi_w bracketed (Table 5.1; the flanges' contribution 5.4 not included). Not yet: sigma + tau interaction, transverse stress, stiffened panels. Lateral-torsional buckling: member level, 3D (`judge_ltb`, DESIGN-LTB.md).
 3D phase: track 1 (conduction) in; track 2 (space frames, 6 DOF per node) in; track 3 (3D elasticity) in
 (2026-11-03): `python3 -m ustand.elastic3d volume.npy --e 1:200e9 --nu 1:0.3 --need-max 150e9 --need-min 9e10` —
 PROVED two-sided bounds on a voxel sample's apparent modulus (upper: P1 displacements; lower: an exactly admissible

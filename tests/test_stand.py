@@ -3752,6 +3752,95 @@ check("PLATE BUCKLING, TENSION KEPT: psi = -1 square SS panel — the tension-aw
       and _tr["tension_x2"] > 1.05 and _e2n >= _e2n_ref * (1 - 1e-12) and _e2n_m < _e2n_ref,
       (_pbt, _tr, _e2n, _e2n_ref, _e2n_m))
 
+# PLATE SHEAR BUCKLING (2026-11-03): tau uniform, b = 2 int w_x w_y (indefinite). Lower: Morley + the cross term
+# u-e charged (Cauchy-Schwarz + Young); upper: BFS Ritz. MEASURED SS square [8.681, 9.326] (32 / 12), SS 2:1
+# [6.207, 6.547], clamped square [13.345, 14.647]; the independent reference: a double sine Ritz series (computed here,
+# 30 x 30 terms: 9.32453 — literature ~9.32). Sabotages: 'tau_low' (load under-integrated) lifts the lower bound above
+# the upper (caught by the bracket); 'tau_no_cross' moves it only 9.13 (under the truth: NOT caught by the bracket), so
+# the matrices are checked directly: v^T B_tau v = 2 int u_x u_y and v^T G v = int |grad u|^2 for random Morley fields
+# (reference from the dof equations here, not the module's basis)
+def _sine_k_tau(alpha, N):
+    a_, idx = float(alpha), [(m, n) for m in range(1, N + 1) for n in range(1, N + 1)]
+    A = _np_ax.array([(a_ / 4) * _mpb.pi ** 4 * ((m / a_) ** 2 + n ** 2) ** 2 for m, n in idx])
+    T = _np_ax.zeros((len(idx), len(idx)))
+    for i, (m, n) in enumerate(idx):
+        for j, (p_, q_) in enumerate(idx):
+            if (m + p_) % 2 and (n + q_) % 2:
+                T[i, j] = m * 2 * p_ / (p_ * p_ - m * m) * q_ * 2 * n / (n * n - q_ * q_)
+    import scipy.linalg as _sl_sh
+    return 1.0 / _sl_sh.eigh(T + T.T, _np_ax.diag(A), eigvals_only=True).max() / _mpb.pi ** 2
+def _shear_mats(mut, nx=4, trials=8):
+    _PB.MUTANT.clear()
+    if mut:
+        _PB.MUTANT[mut] = True
+    try:
+        _K, Bt, Gm, n, _e2 = _PB.morley_shear_system(1, 1, F(3, 10), _SS, nx, nx)
+    finally:
+        _PB.MUTANT.clear()
+    nodes, tris = _PB.mesh(nx, nx, 1, 1)
+    eid, nn = {}, len(nodes)
+    for t in tris:
+        for k in range(3):
+            A, B = t[(k + 1) % 3], t[(k + 2) % 3]
+            eid.setdefault((min(A, B), max(A, B)), nn + len(eid))
+    fixed = set()
+    for (i, j), e in eid.items():
+        if _PB._edges_on(nodes, i, j, 1, 1) is not None:
+            fixed.update((i, j))
+    col = {d: k for k, d in enumerate(d for d in range(nn + len(eid)) if d not in fixed)}
+    rng, worst = _rnd_t.Random(11), 0.0
+    for _ in range(trials):
+        v = [rng.uniform(-1, 1) for _ in range(n)]
+        qf = lambda E: sum(float(val) * v[i] * v[j] * (1 if i == j else 2) for (i, j), val in E.items())
+        rb = rg = 0.0
+        for t in tris:
+            P0 = [nodes[x] for x in t]
+            dofs, sg = list(t), [1, 1, 1]
+            for k in range(3):
+                A, B = t[(k + 1) % 3], t[(k + 2) % 3]
+                dofs.append(eid[(min(A, B), max(A, B))])
+                sg.append(1 if A < B else -1)
+            Pl = [(float(x - P0[0][0]), float(y - P0[0][1])) for x, y in P0]
+            rows = [[1, x, y, x * x, x * y, y * y] for x, y in Pl]
+            for k in range(3):
+                A, B = Pl[(k + 1) % 3], Pl[(k + 2) % 3]
+                mx, my = (A[0] + B[0]) / 2, (A[1] + B[1]) / 2
+                rx, ry = B[1] - A[1], -(B[0] - A[0])
+                rows.append([0, rx, ry, 2 * mx * rx, my * rx + mx * ry, 2 * my * ry])
+            dv = [sg[k] * (v[col[d]] if d in col else 0.0) for k, d in enumerate(dofs)]
+            c = _np_ax.linalg.solve(_np_ax.array(rows, float), _np_ax.array(dv, float))
+            ar = abs((Pl[1][0] - Pl[0][0]) * (Pl[2][1] - Pl[0][1]) - (Pl[2][0] - Pl[0][0]) * (Pl[1][1] - Pl[0][1])) / 2
+            # 7-point-free check: the integrand is quadratic -> vertices + midpoints (Simpson-type, exact for P2)
+            pts = Pl + [((Pl[i][0] + Pl[j][0]) / 2, (Pl[i][1] + Pl[j][1]) / 2) for i, j in ((0, 1), (1, 2), (2, 0))]
+            wts = [0.0] * 3 + [ar / 3] * 3
+            for (x, y), wgt in zip(pts, wts):
+                ux, uy = c[1] + 2 * c[3] * x + c[4] * y, c[2] + c[4] * x + 2 * c[5] * y
+                rb += wgt * 2 * ux * uy
+                rg += wgt * (ux * ux + uy * uy)
+        worst = max(worst, abs(qf(Bt) - rb) / max(1e-12, abs(rb)), abs(qf(Gm) - rg) / rg)
+    return worst
+_shm = {m: _shear_mats(m) for m in (None, "tau_low", "tau_no_cross")}
+_skt = _sine_k_tau(1, 30)
+_shb = (_kb(_PB.lower_factor_shear(1, 1, F(3, 10), _SS, 32, 32)[0]),
+        _kb(_PB.upper_factor(1, 1, F(3, 10), 0, _SS, 12, 12, shear=True)[0]))
+_PB.MUTANT["tau_low"] = True
+try:
+    _shl = _kb(_PB.lower_factor_shear(1, 1, F(3, 10), _SS, 32, 32)[0])
+finally:
+    _PB.MUTANT.clear()
+_shj = _PB.judge_shear(1000, 1000, 10, 210000, F(3, 10), _SS, 355, need_tau_cr=150, n_low=32, n_up=8)
+_shx = _skt * _mpb.pi ** 2 * 210000 * 1000 / (12 * 0.91) / 10 / 1e6
+check("PLATE SHEAR BUCKLING: a simply supported square panel — k_tau bracket [lower, upper] holds the independent "
+      "sine-series value (~9.3245) and is within 7 %; the Morley shear and gradient matrices equal the exact integrals "
+      "of random Morley fields; a 1000 x 1000 x 10 mm S355 panel's tau_cr bracket holds ~177 MPa, 'tau_cr >= 150' "
+      "EARNED, chi_w (Table 5.1, non-rigid end post) bracketed; the sabotages (load under-integrated / cross term "
+      "dropped) are caught",
+      _shb[0] <= _skt <= _shb[1] < _skt * 1.001 and _shb[0] > _skt * 0.93 and _shm[None] < 1e-9
+      and _shm["tau_low"] > 0.05 and _shm["tau_no_cross"] > 0.5 and _shl > _shb[1]
+      and _shj["tau_cr"][0] <= _shx <= _shj["tau_cr"][1] and _shj["verdict"] == "EARNED"
+      and 0.70 < _shj["chi_w_EN_1993_1_5_5_3"][0] <= _shj["chi_w_EN_1993_1_5_5_3"][1] < 0.80,
+      (_shb, _skt, _shm, _shl, _shj["tau_cr"], _shx, _shj["chi_w_EN_1993_1_5_5_3"], _shj.get("verdict")))
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,
