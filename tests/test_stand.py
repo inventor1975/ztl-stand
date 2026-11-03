@@ -4099,31 +4099,38 @@ check("WHAT TO MEASURE: the refuted village pump — 'drawdown >= ~5.5833 fails 
       and (_fx(_ffm["Drawdown"]["Drawdown"][0]) < F(67, 12) or float(_fx(_ffm["Tsun"]["Tsun"][1])) > _tstar),
       (float(_dlo), float(_thi), _tstar, _pr, _vcorner, _ffm))
 
-# CLINIC ON ONE BATTERY — power and water with ONE shared weather (2026-11-03, the curator's "сеть формул: давай
-# сделаем"): the fridge has priority, the pump runs on what is left. MEASURED: power alone 0, water alone (pump
-# assumed powered) 0, JOINT 10 days 0.282258108 (= the enumeration of all 2^10 weather sequences, exactly), 30 days
-# 0.733, 90 days 0.986 — two separate checks pass, the system fails. Two sides: the joint bracket IS the enumeration
-# on the grid and holds it off the grid (300 Wh unit); sabotages: the pump not paid from the battery (separate
-# modelling — 0, under the exact 0.282) and the worst chain rounded favourably (its high bound under the exact value)
+# CLINIC ON ONE BATTERY + STOCKS BRICK (2026-11-03, the curator's "сеть формул: давай сделаем" and "масштабировать…
+# Делай"): the fridge has priority, the pump runs on what is left, one weather for both. MEASURED: power alone 0, water
+# alone (pump assumed powered) 0, JOINT 10 days 0.282258108 (= the enumeration of all 2^10 weather sequences) — two
+# separate checks pass, the system fails. FIX the same day: the first version bounded ranged data by their
+# 'unfavourable ends' — the pump on the leftover makes the failure NON-MONOTONE (a lighter pump runs more often):
+# battery 1500, sun 1400-1700, cloud 500, fridge 400, pump 400-600 Wh, 6 days — the worst fixed data is the pump at
+# 500 Wh, exact 0.26924; ends-only said 0.25240. Now ustand.stocks: every amount chosen by an adversary on the unit
+# grid. Two sides: the point case IS the enumeration; on the counterexample the high bound holds the exact maximum
+# over every fixed data choice and the low bound is under the minimum; sabotages: the pump not paid (0 < 0.2823) and
+# the first version's fixed 'unfavourable ends' (under the exact maximum). A battery-only stocks brick = an independent
+# enumeration in the stocks semantics (capped after the inflow — solar_outage caps after the load, a different model);
+# amounts off the unit grid are refused
+from ustand import stocks as _SK   # noqa: E402
 _Wc = {"sun": {"sun": [F(7, 10)] * 2, "cloud": [F(3, 10)] * 2}, "cloud": {"sun": [F(4, 10)] * 2, "cloud": [F(6, 10)] * 2}}
-def _clinic(fridge=400, days=10, unit=100):
-    return {"battery_wh": 2000, "fridge_wh": [fridge, fridge], "pump_wh": [600, 600], "pump_m3": [2, 2],
-            "need_m3": [F(3, 2)] * 2, "tank_m3": 4, "gain_wh": {"sun": [1800, 1800], "cloud": [500, 500]}, "weather": _Wc,
-            "start_charge_wh": 2000, "start_tank_m3": 4, "start_weather": "sun", "days": days, "unit_wh": unit,
+def _clinic(fridge=(400, 400), pump=(600, 600), sun=(1800, 1800), cloud=(500, 500), bat=2000, days=10):
+    return {"battery_wh": bat, "fridge_wh": list(fridge), "pump_wh": list(pump), "pump_m3": [2, 2],
+            "need_m3": [F(3, 2)] * 2, "tank_m3": 4, "gain_wh": {"sun": list(sun), "cloud": list(cloud)}, "weather": _Wc,
+            "start_charge_wh": bat, "start_tank_m3": 4, "start_weather": "sun", "days": days, "unit_wh": 100,
             "unit_m3": F(1, 2)}
-def _clinic_enum(fridge=400, days=10, fail="any", pump_free=False):
+def _clinic_enum(fridge=400, pump=600, sun=1800, cloud=500, bat=2000, days=10, fail="any", pump_free=False):
     tot = F(0)
     for seq in _it_mk.product(["sun", "cloud"], repeat=days):
-        p_, w, c, t, bad = F(1), "sun", F(2000), F(4), False
+        p_, w, c, t, bad = F(1), "sun", F(bat), F(4), False
         for w2 in seq:
             p_ *= _Wc[w][w2][0]
             if not bad:
-                c = min(F(2000), c + {"sun": 1800, "cloud": 500}[w2])
+                c = min(F(bat), c + {"sun": sun, "cloud": cloud}[w2])
                 pb = c < fridge
                 c -= fridge
-                runs = pump_free or c >= 600
+                runs = pump_free or c >= pump
                 if runs and not pump_free:
-                    c -= 600
+                    c -= pump
                 t = min(F(4), t + (2 if runs else 0)) - F(3, 2)
                 bad = {"any": pb or t < 0, "power": pb, "water": t < 0}[fail]
             w = w2
@@ -4133,26 +4140,54 @@ def _clinic_enum(fridge=400, days=10, fail="any", pump_free=False):
 _cx = _clinic_enum()
 _cj = _MK.clinic_joint(dict(_clinic(), fail="any"))
 _cp = _MK.clinic_joint(dict(_clinic(), fail="power"))
-_cx2 = _clinic_enum(fridge=450)
-_cj2 = _MK.clinic_joint(dict(_clinic(fridge=450, unit=300), fail="any"))
+_ce = dict(fridge=(400, 400), pump=(400, 600), sun=(1400, 1700), cloud=(500, 500), bat=1500, days=6)
+_cfix = [_clinic_enum(fridge=400, pump=pm, sun=sn, cloud=500, bat=1500, days=6)
+         for pm in (400, 500, 600) for sn in (1400, 1500, 1600, 1700)]
+_cce = _MK.clinic_joint(dict(_clinic(**_ce), fail="any"))
 _MK.MUTANT["clinic_pump_free"] = True
 try:
     _cw = _MK.clinic_joint(dict(_clinic(), fail="water"))
     _cjm = _MK.clinic_joint(dict(_clinic(), fail="any"))
 finally:
     _MK.MUTANT.clear()
-_MK.MUTANT["clinic_round_wrong"] = True
+_MK.MUTANT["ends_fixed"] = True
 try:
-    _cjr = _MK.clinic_joint(dict(_clinic(fridge=450, unit=300), fail="any"))
+    _cee = _MK.clinic_joint(dict(_clinic(**_ce), fail="any"))
 finally:
     _MK.MUTANT.clear()
+_solar_as_stocks = {"driver": {"start": "sun", "p": _Wm},
+                    "stocks": {"battery": {"capacity": 1800, "start": 1200, "unit": 300}},
+                    "steps": [{"add": "battery", "amount": {"sun": [1200, 1200], "cloud": [300, 300]}},
+                              {"take": "battery", "amount": [600, 600], "fail": "short"}], "days": 8}
+_sx = _SK.fail_bounds(_solar_as_stocks)
+def _bat_enum():                                          # the stocks semantics: capped after the inflow, then the take
+    tot = F(0)
+    for seq in _it_mk.product(["sun", "cloud"], repeat=8):
+        p_, w, c, bad = F(1), "sun", F(1200), False
+        for w2 in seq:
+            p_ *= _Wm[w][w2][0]
+            if not bad:
+                c = min(F(1800), c + {"sun": 1200, "cloud": 300}[w2]) - 600
+                bad = c < 0
+            w = w2
+        if bad:
+            tot += p_
+    return tot
+_sbx = _bat_enum()
+try:
+    _SK.fail_bounds(dict(_solar_as_stocks, steps=[{"add": "battery", "amount": [250, 250]}]))
+    _refused = False
+except ValueError:
+    _refused = True
 _eq = lambda b, x: b[0] <= x <= b[1] and b[1] - b[0] < F(1, 10 ** 15)
-check("CLINIC ON ONE BATTERY: power alone 0, water alone (pump assumed powered) 0, JOINT = the enumeration 0.2823 exactly; "
-      "off the grid the joint bracket holds the enumeration; the sabotages (pump not paid / worst chain rounded "
-      "favourably) fall under the exact value",
+check("CLINIC ON ONE BATTERY + STOCKS: power alone 0, water alone 0, JOINT = the enumeration 0.2823; on the "
+      "non-monotone counterexample the high bound holds the exact maximum over every fixed data choice (0.26924, the "
+      "pump at 500 Wh) and the low bound is under the minimum; the sabotages (pump not paid / the first version's fixed "
+      "unfavourable ends) fall under the exact values; a battery-only stocks brick = its enumeration; off-grid refused",
       _eq(_cj, _cx) and _cp[1] < F(1, 10 ** 15) and _cw[1] < F(1, 10 ** 15) and _cx > F(1, 4)
-      and _cj2[0] <= _cx2 <= _cj2[1] and _cjm[1] < _cx and _cjr[1] < _cx2,
-      ([float(x) for x in (*_cj, _cx, *_cp, *_cw, *_cj2, _cx2, *_cjm, *_cjr)]))
+      and _cce[0] <= min(_cfix) and max(_cfix) <= _cce[1] < max(_cfix) + F(1, 10 ** 12) and _cjm[1] < _cx
+      and _cee[1] < max(_cfix) and _eq(_sx, _sbx) and _refused,
+      ([float(x) for x in (*_cj, _cx, *_cce, min(_cfix), max(_cfix), *_cee, *_cjm, *_sx, _sbx)]))
 
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a

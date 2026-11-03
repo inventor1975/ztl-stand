@@ -140,7 +140,11 @@ short day, PROVED from both sides (8 days, two weathers: the exact 0.10656 brack
 closed to 0.10656 at 10 Wh). `clinic_joint`: a clinic on ONE battery — the fridge first, the water pump on what is
 left, one weather for both (the shared ground): power alone 0, water alone (pump assumed powered) 0, JOINT over 10 days
 0.2823 (= the enumeration of all 2^10 weather sequences), 30 days 0.733, 90 days 0.986 — two separate checks pass,
-the system fails.
+the system fails. STOCKS AND FLOWS in general (`ustand/stocks.py`, `python3 -m ustand.stocks system.json`): stocks with
+capacities, inflows by a shared random driver, MUST takes (a shortfall is a named failure), MAY takes with their
+consequences (a pump on the leftover), the probability of a failure within N steps PROVED with every ranged amount
+chosen by an adversary on the unit grid — no monotonicity assumed. (The clinic's first version took the ranges'
+"unfavourable ends": wrong — a lighter pump runs more often; MEASURED counterexample 0.26924 vs 0.25240. Fixed.)
 
 ## Run
 

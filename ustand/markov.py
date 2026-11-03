@@ -324,59 +324,35 @@ def judge(model, need_mttf=None, need_availability=None):
 def clinic_joint(spec):
     """PROVED [low, high] of the probability that a clinic on ONE solar battery has at least one bad day in `days`:
     the battery feeds the FRIDGE first and the WATER PUMP only from what is left (the pump skips a day it cannot be
-    paid for); the tank gets the pump's water and pays the clinic's daily need. A bad day: the fridge's need not
-    covered (power) or the tank cannot pay the need (water). One weather chain drives both — the shared ground.
-    spec: {"battery_wh", "fridge_wh": [lo, hi], "pump_wh": [lo, hi], "pump_m3": [lo, hi], "need_m3": [lo, hi],
-           "tank_m3", "gain_wh": {w: [lo, hi]}, "weather": {w: {w2: [lo, hi]}}, "start_charge_wh", "start_tank_m3",
+    paid for); the tank gets the pump's water and pays the clinic's daily need; one weather drives both.
+    spec: {"battery_wh", "fridge_wh", "pump_wh", "pump_m3", "need_m3": [lo, hi] each, "tank_m3",
+           "gain_wh": {w: [lo, hi]}, "weather": {w: {w2: [lo, hi]}}, "start_charge_wh", "start_tank_m3",
            "start_weather", "days", "unit_wh", "unit_m3", "fail": "any" | "power" | "water"}
-    The bad-day probability does not decrease as the gains, the pump's water or the stores decrease, or as the needs
-    grow (the fridge's priority keeps the power side independent of the pump), so the HIGH bound is the chain with
-    every datum at its unfavourable end, rounded against the claim to whole units; the LOW bound the reverse."""
-    uw, um = F(spec["unit_wh"]), F(spec["unit_m3"])
-    W = list(spec["weather"])
-    fail = spec.get("fail", "any")
-    def chain(worst):
-        dn = lambda x, u: (F(x) / u).__floor__()
-        up = lambda x, u: (F(x) / u).__ceil__()
-        fav, unf = (dn, up) if worst else (up, dn)        # favourable data rounded down in the worst chain
-        if MUTANT.get("clinic_round_wrong") and worst:
-            fav, unf = unf, fav
-        e = lambda k: 0 if worst else 1                   # the end of a range a favourable datum takes
-        bat = dn(spec["battery_wh"], uw) if worst else up(spec["battery_wh"], uw)
-        tank = dn(spec["tank_m3"], um) if worst else up(spec["tank_m3"], um)
-        g = {w: fav(_box(spec["gain_wh"][w], "gain")[e(0)], uw) for w in W}
-        Lf = unf(_box(spec["fridge_wh"], "fridge")[1 - e(0)], uw)
-        Lp = unf(_box(spec["pump_wh"], "pump energy")[1 - e(0)], uw)
-        vp = fav(_box(spec["pump_m3"], "pump water")[e(0)], um)
-        nd = unf(_box(spec["need_m3"], "water need")[1 - e(0)], um)
-        c0, t0 = min(bat, fav(spec["start_charge_wh"], uw)), min(tank, fav(spec["start_tank_m3"], um))
-        states = [f"{c}|{t}|{w}" for c in range(bat + 1) for t in range(tank + 1) for w in W] + ["BAD"]
-        merged = {}
-        for c in range(bat + 1):
-            for t in range(tank + 1):
-                for w in W:
-                    for w2, pr in spec["weather"][w].items():
-                        e_ = min(bat, c + g[w2])          # the day's charge (the battery tops out)
-                        power_bad = e_ < Lf
-                        e_ = e_ - Lf
-                        runs = e_ >= Lp
-                        if MUTANT.get("clinic_pump_free"):   # sabotage (tests only): the pump not paid from the battery
-                            runs = True
-                        else:
-                            e_ = e_ - Lp if runs else e_
-                        t2 = min(tank, t + (vp if runs else 0)) - nd
-                        water_bad = t2 < 0
-                        bad = {"any": power_bad or water_bad, "power": power_bad, "water": water_bad}[fail]
-                        to = "BAD" if bad else f"{max(0, e_)}|{max(0, t2)}|{w2}"
-                        lo, hi = _box(pr, "probability")
-                        a, b = merged.get((f"{c}|{t}|{w}", to), (F(0), F(0)))
-                        merged[(f"{c}|{t}|{w}", to)] = (a + lo, b + hi)
-        probs = [{"from": a, "to": b, "p": [lo, hi]} for (a, b), (lo, hi) in merged.items()]
-        return {"states": states, "start": f"{c0}|{t0}|{spec['start_weather']}", "target": ["BAD"],
-                "steps": spec["days"], "probs": probs}
-    lo, _ = reach_bounds(chain(worst=False))
-    _, hi = reach_bounds(chain(worst=True))
-    return lo, hi
+    2026-11-03 FIX: the first version took every datum at its 'unfavourable end' — WRONG: the pump that runs only on
+    what is left makes the failure non-monotone (a lighter pump runs more often and drains the battery; MEASURED
+    counterexample: battery 1500 Wh, sun 1400-1700, cloud 500, fridge 400, pump 400-600 Wh, 6 days — the worst fixed
+    data is the pump at 500 Wh, exact 0.26924, while the old 'high' bound said 0.25240). Now a stocks brick
+    (ustand.stocks): every amount chosen by an adversary on the unit grid, no monotonicity assumed; amounts must be
+    whole units (refused otherwise)."""
+    from . import stocks as SK
+    rg = lambda k: [F(x) for x in _box(spec[k], k)]
+    if MUTANT.get("ends_fixed"):                          # sabotage (tests only): the first version's 'unfavourable
+        lo_, hi_ = (lambda k: [F(_box(spec[k], k)[0])] * 2), (lambda k: [F(_box(spec[k], k)[1])] * 2)   # ends'
+        spec = dict(spec, fridge_wh=hi_("fridge_wh"), pump_wh=hi_("pump_wh"), pump_m3=lo_("pump_m3"),
+                    need_m3=hi_("need_m3"), gain_wh={w: [F(_box(v, "gain")[0])] * 2 for w, v in spec["gain_wh"].items()})
+    pump = {"take": "battery", "amount": rg("pump_wh"), "then": [{"add": "tank", "amount": rg("pump_m3")}]}
+    if MUTANT.get("clinic_pump_free"):                    # sabotage (tests only): the pump not paid from the battery
+        pump = {"add": "tank", "amount": rg("pump_m3")}
+    system = {"driver": {"start": spec["start_weather"], "p": spec["weather"]},
+              "stocks": {"battery": {"capacity": spec["battery_wh"], "start": spec["start_charge_wh"],
+                                     "unit": spec["unit_wh"]},
+                         "tank": {"capacity": spec["tank_m3"], "start": spec["start_tank_m3"], "unit": spec["unit_m3"]}},
+              "steps": [{"add": "battery", "amount": {w: [F(x) for x in _box(v, "gain")] for w, v in spec["gain_wh"].items()}},
+                        {"take": "battery", "amount": rg("fridge_wh"), "fail": "power"}, pump,
+                        {"take": "tank", "amount": rg("need_m3"), "fail": "water"}],
+              "days": spec["days"],
+              "fail_on": {"any": [], "power": ["power"], "water": ["water"]}[spec.get("fail", "any")]}
+    return SK.fail_bounds(system)
 
 
 def judge_solar(spec, need_outage_at_most):
