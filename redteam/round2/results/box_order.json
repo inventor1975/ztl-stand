@@ -1,0 +1,79 @@
+{
+ "ascending": {
+  "E_box_as_written": [
+   "100",
+   "200"
+  ],
+  "api_upper": 200.00000000003965,
+  "api_lower": 99.99999999964076,
+  "truth_over_the_box": [
+   100.0,
+   200.0
+  ],
+  "upper_false": false,
+  "lower_false": false,
+  "judge_verdicts": [
+   "OPEN",
+   "OPEN"
+  ]
+ },
+ "descending": {
+  "E_box_as_written": [
+   "200",
+   "100"
+  ],
+  "api_upper": 100.00000000001982,
+  "api_lower": 199.99999999928153,
+  "truth_over_the_box": [
+   100.0,
+   200.0
+  ],
+  "upper_false": true,
+  "lower_false": true,
+  "judge_verdicts": [
+   "E",
+   "E"
+  ]
+ },
+ "cli_descending": {
+  "upper": 100.00000000001982,
+  "lower": 199.99999999928153,
+  "lower_note": "ok",
+  "premise": "linear isotropic elasticity per phase; the voxel map is the sample; smooth grips on x = 0 / x = nx (mean strain 1), other faces free; Green's formula; IEEE 754 rounding (bounded)",
+  "verdict_max": "E"
+ },
+ "cli_descending_nu_is_refused": "ValueError: Poisson's ratio 3/10..1/10: needs -1 < nu < 1/2",
+ "conduction3d_ascending": {
+  "lower": 0.9999999999998878,
+  "upper": 2.0000000000002025,
+  "verdict": "OPEN",
+  "truth_over_the_box": [
+   1.0,
+   2.0
+  ]
+ },
+ "conduction3d_descending": {
+  "lower": 1.999999999999775,
+  "upper": 1.0000000000001013,
+  "verdict": "E",
+  "truth_over_the_box": [
+   1.0,
+   2.0
+  ]
+ },
+ "false_earned_reversed [205, 200]": {
+  "lower": 188.1843041981028,
+  "upper": 191.31966495728977,
+  "E_app >= 188": "EARNED"
+ },
+ "false_earned_ordered [200, 205]": {
+  "lower": 183.59444312010035,
+  "upper": 196.10265658122202,
+  "E_app >= 188": "OPEN"
+ },
+ "false_earned_independent": {
+  "Q1 r=2 at E=200 (>= truth)": 187.75051685351215,
+  "Q1 r=4 at E=200 (>= truth)": 186.5249001715865,
+  "Q1 r=8 at E=200 (>= truth)": 185.97383379582894
+ }
+}

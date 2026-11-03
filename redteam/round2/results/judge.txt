@@ -1,0 +1,2 @@
+{"mutant": false, "judged": 54, "wrong": 0, "first": [], "verdicts": ["EARNED", "OPEN", "REFUTED"]}
+{"mutant": true, "judged": 54, "wrong": 8, "first": [{"case": "homog", "kind": "min", "need": 100.00000010000001, "verdict": "EARNED"}, {"case": "homog", "kind": "min", "need": 100.00009999999999, "verdict": "EARNED"}, {"case": "voigt", "kind": "max", "need": 274.999999725, "verdict": "EARNED"}], "verdicts": ["EARNED", "OPEN", "REFUTED"]}

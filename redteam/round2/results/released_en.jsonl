@@ -1,0 +1,26 @@
+{"seed": 100, "status": "checked", "releases": 5, "checks": 30, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 101, "status": "checked", "releases": 7, "checks": 26, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 102, "status": "checked", "releases": 10, "checks": 77, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 103, "status": "checked", "releases": 9, "checks": 57, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 104, "status": "checked", "releases": 4, "checks": 25, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 105, "status": "checked", "releases": 10, "checks": 70, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 106, "status": "error", "why": "ValueError('K0 is not positive definite: pivot 8 is 0')"}
+{"seed": 107, "status": "error", "why": "ValueError('K0 is not positive definite: pivot 29 is 0')"}
+{"seed": 108, "status": "checked", "releases": 3, "checks": 75, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 109, "status": "checked", "releases": 10, "checks": 33, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 110, "status": "checked", "releases": 16, "checks": 116, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 111, "status": "checked", "releases": 2, "checks": 17, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 112, "status": "checked", "releases": 13, "checks": 113, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 113, "status": "checked", "releases": 11, "checks": 42, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 114, "status": "checked", "releases": 11, "checks": 76, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 115, "status": "checked", "releases": 9, "checks": 62, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 116, "status": "checked", "releases": 11, "checks": 79, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 117, "status": "checked", "releases": 6, "checks": 39, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 118, "status": "error", "why": "RuntimeError('Factor is exactly singular')"}
+{"seed": 119, "status": "error", "why": "ValueError('K0 is not positive definite: pivot 32 is 0')"}
+{"seed": 120, "status": "checked", "releases": 10, "checks": 58, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 121, "status": "checked", "releases": 6, "checks": 26, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 122, "status": "checked", "releases": 10, "checks": 36, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 123, "status": "checked", "releases": 7, "checks": 23, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
+{"seed": 124, "status": "checked", "releases": 9, "checks": 113, "violations": 0, "first": [], "verdicts": ["EARNED", "EARNED"]}
+{"seed": 125, "status": "checked", "releases": 3, "checks": 23, "violations": 0, "first": [], "verdicts": ["OPEN", "EARNED"]}
