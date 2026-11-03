@@ -87,7 +87,11 @@ Axial member loads: stability and second-order DISPLACEMENTS (2D and 3D, since 2
 STRESSES in 2D (2026-11-03: end moments with N_a G_a + N_b G_b, brackets < 0.01 % around an independent continuum
 solve; the interior by a Dirichlet bound on M'' = N'v' + (N/EI)M, MEASURED 3-29 % above the reference on 1-2 elements
 per member, 0.07-0.18 % on 8-16; in 3D per bending plane, the same brackets), also with a transverse load on the same
-member (2026-11-03; battery sweep J: 1614 checks vs solve_bvp, 0 violations). Not yet: plate buckling. Lateral-torsional buckling: member level, 3D (`judge_ltb`, DESIGN-LTB.md).
+member (2026-11-03; battery sweep J: 1614 checks vs solve_bvp, 0 violations). Plate buckling (2026-11-03, `ustand/platebuckle.py`): a rectangular Kirchhoff panel, edges simply supported or
+clamped, sigma_x linear (psi) — sigma_cr PROVED from both sides (Morley + Carstensen & Gallistl's guaranteed
+correction below; a conforming BFS field's exact Rayleigh quotient above) and EN 1993-1-5 4.4's rho from it; MEASURED
+k in [3.978, 4.0000] (uniform), [7.585, 7.812] (psi 0), [9.904, 10.075] clamped; psi < 0 conservative below (the
+tension is dropped: ~24 % low at psi = -1). Not yet: shear, transverse stress, stiffened panels. Lateral-torsional buckling: member level, 3D (`judge_ltb`, DESIGN-LTB.md).
 3D phase: track 1 (conduction) in; track 2 (space frames, 6 DOF per node) in; track 3 (3D elasticity) in
 (2026-11-03): `python3 -m ustand.elastic3d volume.npy --e 1:200e9 --nu 1:0.3 --need-max 150e9 --need-min 9e10` —
 PROVED two-sided bounds on a voxel sample's apparent modulus (upper: P1 displacements; lower: an exactly admissible

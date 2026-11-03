@@ -3643,6 +3643,33 @@ check("3D ELASTICITY, edge/corner-only contacts carry no force: the split displa
       "random 6^3: 83.68 -> 51.12) and stays above the proved lower bound 25.15",
       _lsp <= _usp1 < 0.7 * _usp0, (_usp0, _usp1, _lsp))
 
+# PLATE BUCKLING (2026-11-03): proved bounds on a rectangular Kirchhoff panel's critical stress — lower by the Morley
+# element with Carstensen & Gallistl's guaranteed correction (Numer. Math. 126 (2014), kappa_CR = 0.298234942888),
+# upper by a conforming BFS Ritz field's EXACT Rayleigh quotient. MEASURED (k = sigma_cr b^2 t / (pi^2 D)): SS psi = 1
+# [3.978, 4.0000] (exact 4), psi = 0 [7.585, 7.812] (Navier 7.81196), psi = -1 [19.53, 25.529] (Navier, two half-waves,
+# 25.5283); clamped psi = 1 [9.904, 10.075] (~10.07); the sabotage 'b_low' (the load under-integrated by 10 %) lifts
+# the 'lower' bound to 4.42 > the upper 4.0000
+from ustand import platebuckle as _PB    # noqa: E402
+import math as _mpb                       # noqa: E402
+_SS = {"x0": "S", "xa": "S", "y0": "S", "yb": "S"}
+_kb = lambda x: float(x) / _mpb.pi ** 2
+_pb1 = (_kb(_PB.lower_factor(1, 1, F(3, 10), 1, _SS, 32, 32)[0]), _kb(_PB.upper_factor(1, 1, F(3, 10), 1, _SS, 8, 8)[0]))
+_pb0 = (_kb(_PB.lower_factor(1, 1, F(3, 10), 0, _SS, 32, 32)[0]), _kb(_PB.upper_factor(1, 1, F(3, 10), 0, _SS, 12, 12)[0]))
+_PB.MUTANT["b_low"] = True
+try:
+    _pbm = _kb(_PB.lower_factor(1, 1, F(3, 10), 1, _SS, 32, 32)[0])
+finally:
+    _PB.MUTANT.clear()
+_pbj = _PB.judge(1000, 1000, 10, 210000, F(3, 10), 1, _SS, 355, need_sigma_cr=70, n_low=32, n_up=8)
+_pbx = 4 * _mpb.pi ** 2 * 210000 * 100 / (12 * 0.91 * 1e6)
+check("PLATE BUCKLING: a simply supported square panel — uniform compression k in [3.95, 4.0000] holding 4, psi = 0 "
+      "holding Navier's 7.8120; a 1000 x 1000 x 10 mm S355 panel's sigma_cr bracket holds 75.920 MPa, 'sigma_cr >= 70' "
+      "EARNED, EN 1993-1-5's rho bracketed ~0.41; the sabotage (load under-integrated) rises above the upper bound",
+      3.94 < _pb1[0] <= 4 <= _pb1[1] < 4.001 and _pb0[0] <= 7.81196 <= _pb0[1] and _pbm > _pb1[1]
+      and _pbj["sigma_cr"][0] <= _pbx <= _pbj["sigma_cr"][1] and _pbj["verdict"] == "EARNED"
+      and 0.40 < _pbj["rho_EN_1993_1_5_4_4"][0] <= _pbj["rho_EN_1993_1_5_4_4"][1] < 0.42,
+      (_pb1, _pb0, _pbm, _pbj["sigma_cr"], _pbj["rho_EN_1993_1_5_4_4"], _pbj.get("verdict")))
+
 # BOX ORDER (2026-11-03, the cloud red team's round 2, PR #2): a modulus box written high-to-low was read as lo = first,
 # hi = last — elastic3d proved [188.18, 191.32] for E [205, 200] on the pored cube and said 'E_app >= 188' EARNED,
 # while the truth at E = 200 is at most 185.97 (an independent Q1 solve). Now refused, in elastic3d and conduction3d;
