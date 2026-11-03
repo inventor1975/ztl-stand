@@ -3919,6 +3919,29 @@ check("CONDUCTION BY BLOCKS: x-slab upper / x-column lower hold the EXACT conduc
       and _bm1[1] < _exs and _bm2[0] > _exp and _br[0] <= _dr[1] and _dr[0] <= _br[1] and _br[0] < _br[1],
       ([float(x) for x in (*_bs, _exs, *_bp, _exp, *_bm1, *_bm2, *_dr, *_br)]))
 
+# CONDUCTION, OVERLAPPING COLUMNS (2026-11-03): disjoint columns' sheets cut every cross path (a zigzag conductor: the
+# block lower bound collapses to 0.024 against the direct [1.632, 1.743], MEASURED); overlapping columns' exact fluxes
+# SUM to an admissible flux of the whole box (1.363 there). Two sides: a parallel laminate EXACT (6.06) and tight; a
+# homogeneous cube exact 8 from below. The sabotage 'overlap_no_cross' (the energy without the overlaps' cross terms)
+# on four nearly identical columns gives 24.5 > the exact 8
+_Vzz = _np_ax.zeros((16, 16, 8), int)
+_Vzz[0:4, :8] = 1; _Vzz[4:6, :] = 1; _Vzz[6:10, 8:] = 1; _Vzz[10:12, :] = 1; _Vzz[12:16, :8] = 1
+_szz = {0: F(1, 1000), 1: F(1)}
+_ozz = (_C3b.lower_overlap(_Vzz, _szz, 8, 4)[0], _C3b.bounds_blocks(_Vzz, _szz, 1, 2, 1)[0], _C3b.bounds(_Vzz, _szz)[1])
+_olam = _C3b.lower_overlap(_Vpar, _sb, 6, 3)[0]
+_Vhom = _np_ax.ones((8, 8, 8), int)
+_ohom = _C3b.lower_overlap(_Vhom, {1: F(1)}, 7, 1)[0]
+_C3b.MUTANT["overlap_no_cross"] = True
+try:
+    _ohm = _C3b.lower_overlap(_Vhom, {1: F(1)}, 7, 1)[0]
+finally:
+    _C3b.MUTANT.clear()
+check("CONDUCTION, OVERLAPPING COLUMNS: a zigzag conductor — overlapping columns hold > 50x the disjoint columns' "
+      "lower bound and stay under the direct upper; a parallel laminate exact and tight; a homogeneous cube under its "
+      "exact 8; the sabotage (no cross terms) crosses 8",
+      _ozz[0] > 50 * _ozz[1] and _ozz[0] <= _ozz[2] and _exp * F(999, 1000) < _olam <= _exp and _ohom <= 8 < _ohm,
+      ([float(x) for x in (*_ozz, _olam, _exp, _ohom, _ohm)]))
+
 # ELASTICITY, LOWER BOUND BY COLUMNS (2026-11-03): traction-free sheets along x only soften the sample, the columns'
 # stresses glue, so E_app >= the area-weighted mean of the columns' lower bounds. Two sides on stripes along x with one
 # nu (E_app EXACTLY the area mean, 125): the block bound is under it and tight, the upper above; on a random sample the

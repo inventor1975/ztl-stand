@@ -119,7 +119,10 @@ is Rayleigh monotonicity; the price is a wider bracket. MEASURED (random 50 % tw
 2 x 2 x 2 in 470 s / 7.7 GB, s_eff [0.182, 0.425]; 96^3 by 3 x 3 x 3 in 634 s, [0.144, 0.424]. LIMIT (MEASURED on a
 real tortuous sample, Giessen BM03 128^3 centre, axis 2): 2 x 2 columns give lower 0.0610 against the whole cube's
 0.0830 — the cut sample itself conducts at most 0.0682 (the columns' own brackets are tight), so the SHEETS cost >= 18 %
-there: in tortuous media the column lower bound is weak; the slab upper bound is not affected.
+there: in tortuous media the column lower bound is weak; the slab upper bound is not affected. The cure: OVERLAPPING
+columns (`lower_overlap(V, s, width, stride)`): their exact fluxes sum to an admissible flux of the whole box, weights
+from the fields' Gram matrix — BM03 the same cube 0.0742 (rigorous; disjoint 0.0610, whole 0.0830), a zigzag conductor
+1.363 against disjoint 0.024 (direct [1.632, 1.743]). RT0 fluxes only (the small-column BDM1 is stronger there).
 
 ## Run
 
