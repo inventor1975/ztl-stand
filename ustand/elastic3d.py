@@ -574,6 +574,9 @@ def _exact_lower(M, KS, Fc, act, ty, gl, sg, nl, nh, Elo, Ehi, slot, sol2, grip,
     if Fres <= 0:
         return F(0), "no load carried"
     gf = np.array([float(v) for v in Gq])                      # |gf - Gq| <= u |gf| (round to nearest)
+    if _CAPTURE is not None:                               # lower_overlap: the stress face data per solid tet
+        _CAPTURE.append({"act": act, "G": np.where(gl[act] >= 0, gf[np.maximum(gl[act], 0)], 0.0) * sg[act],
+                         "F": Fres})
     tot = 0.0
     nterms = 0
     gam = _gam(1300)
@@ -607,6 +610,125 @@ def _exact_lower(M, KS, Fc, act, ty, gl, sg, nl, nh, Elo, Ehi, slot, sol2, grip,
     # refined units: the box and every length x k; F scales as k^2 at fixed stress, the energy as k^3, so
     # nx F^2 / (ny nz En) is unchanged with nx, ny, nz the refined counts
     return F(M.nx) * Fres * Fres / (F(M.ny * M.nz) * En), "ok"
+
+
+_CAPTURE = None          # a list to receive the lower bound's stress field (lower_overlap; None = off)
+
+
+def _energy_up(KS, tyb, G, D, nl, nh, Elo):
+    """A rigorous upper bound on the complementary energy sum_T ||tau_T||^2_{C^-1} (the softest corner of the box per
+    tet) for face data G (n x 36, the tets' own signs applied) known within |error| <= D: the forms as in
+    _exact_lower, plus 2 |G|^T |S| D + D^T |S| D for the data's error."""
+    tot, nterms = 0.0, 0
+    gam = _gam(1300)
+    for t_ in range(6):
+        b = np.where(tyb == t_)[0]
+        if not len(b):
+            continue
+        Gb, Db = G[b], D[b]
+        Ab = np.abs(Gb)
+        S1, S2 = KS[t_]["S1"], KS[t_]["S2"]
+        aS1, aS2 = np.abs(S1), np.abs(S2)
+        e1 = np.einsum("ti,ij,tj->t", Gb, S1, Gb); w1 = np.einsum("ti,ij,tj->t", Ab, aS1, Ab)
+        e2 = np.einsum("ti,ij,tj->t", Gb, S2, Gb); w2 = np.einsum("ti,ij,tj->t", Ab, aS2, Ab)
+        d1 = 2 * np.einsum("ti,ij,tj->t", Ab, aS1, Db) + np.einsum("ti,ij,tj->t", Db, aS1, Db)
+        d2 = 2 * np.einsum("ti,ij,tj->t", Ab, aS2, Db) + np.einsum("ti,ij,tj->t", Db, aS2, Db)
+        e1u = e1 + 2 * gam * w1 + d1 * (1 + gam)
+        e2l = e2 - 2 * gam * w2 - d2 * (1 + gam)
+        e2u = e2 + 2 * gam * w2 + d2 * (1 + gam)
+        n_l, n_h = nl[b], nh[b]
+        best = np.maximum((1 + n_l) * e1u - np.where(n_l >= 0, n_l * e2l, n_l * e2u),
+                          (1 + n_h) * e1u - np.where(n_h >= 0, n_h * e2l, n_h * e2u))
+        best = best + 4 * U * (np.abs(e1u) + np.abs(e2) + 2 * gam * w2 + d2)
+        term = np.maximum(best, 0.0) / (Elo[b] * (1 - 2 * U)) * (1 + 4 * U)
+        tot += float(np.sum(term))
+        nterms += len(b)
+    return F(tot) * (1 + 3 * F(_gam(nterms + 16))) + F(nterms, 2 ** 1000)
+
+
+def lower_overlap(V, phases, width, stride):
+    """(2026-11-03) The LOWER bound from OVERLAPPING x-columns (as conduction3d.lower_overlap): each column's exactly
+    admissible stress (zero traction on its sides, the grips' zero tangential traction) extended by zero is statically
+    admissible in the whole box, and so is any sum tau = sum alpha_c tau_c, overlap or not (balance is linear; on a
+    column's side the traction is 0 from that column alone). E_app >= n_x F^2 / (n_y n_z ||tau||^2_{C^-1}), F = sum
+    alpha_c F_c. alpha: the float optimum over the fields' Gram matrix, rounded to dyadics; the energy rigorously
+    from above with the summed data's error carried (_energy_up)."""
+    global _CAPTURE
+    from .conduction3d import _faces  # noqa: F401
+    V = np.asarray(V)
+    nx, ny, nz = V.shape
+    starts = lambda n: sorted(set(list(range(0, max(1, n - width + 1), stride)) + [max(0, n - width)]))
+    Mg = Mesh(V)
+    nvg = len(Mg.vox)
+    _solid, Elo_g, nl_g, nh_g, _ph, _ex = _phase_soft(Mg, phases)
+    KS = _ks()
+    cols = []
+    for y0 in starts(ny):
+        for z0 in starts(nz):
+            _CAPTURE = []
+            try:
+                lower(V[:, y0:y0 + width, z0:z0 + width], phases)
+                cap = _CAPTURE[0] if _CAPTURE else None
+            finally:
+                _CAPTURE = None
+            if cap is None:
+                continue
+            M = Mesh(V[:, y0:y0 + width, z0:z0 + width])
+            nv = len(M.vox)
+            t = cap["act"]
+            vx = M.vox[t % nv]
+            gt = (t // nv) * nvg + (vx[:, 0] * ny + (vx[:, 1] + y0)) * nz + (vx[:, 2] + z0)
+            o = np.argsort(gt)
+            cols.append((gt[o], cap["G"][o], cap["F"]))
+    if not cols:
+        return F(0), "no load carried"
+    n = len(cols)
+    tyg = np.arange(Mg.nt) // nvg
+    def form(i, j):
+        _c, ia, ib = np.intersect1d(cols[i][0], cols[j][0], assume_unique=True, return_indices=True)
+        if not len(ia):
+            return 0.0
+        tt = cols[i][0][ia]
+        tot = 0.0
+        for t_ in range(6):
+            b = np.where(tyg[tt] == t_)[0]
+            if not len(b):
+                continue
+            Gi, Gj = cols[i][1][ia[b]], cols[j][1][ib[b]]
+            e1 = np.einsum("ti,ij,tj->t", Gi, KS[t_]["S1"], Gj)
+            e2 = np.einsum("ti,ij,tj->t", Gi, KS[t_]["S2"], Gj)
+            nu_ = nl_g[tt[b]]
+            tot += float(np.sum(((1 + nu_) * e1 - nu_ * e2) / Elo_g[tt[b]]))
+        return tot
+    Q = np.zeros((n, n))
+    for i in range(n):
+        for j in range(i, n):
+            Q[i, j] = Q[j, i] = form(i, j)
+    Fv = np.array([float(c[2]) for c in cols])
+    try:
+        al = np.linalg.solve(Q + 1e-14 * np.trace(Q) * np.eye(n), Fv)
+    except np.linalg.LinAlgError:
+        al = Fv / np.diag(Q)
+    al = al / np.abs(al).max()
+    alF = [F(round(float(a_) * 2 ** 30), 2 ** 30) for a_ in al]
+    Ft = sum((a_ * c[2] for a_, c in zip(alF, cols)), F(0))
+    if Ft <= 0:
+        return F(0), "no load through the combination"
+    allt = np.unique(np.concatenate([c[0] for c in cols]))
+    G = np.zeros((len(allt), 36)); Gs = np.zeros((len(allt), 36))
+    for a_, c in zip(alF, cols):
+        ix = np.searchsorted(allt, c[0])
+        af = float(a_)
+        G[ix] += af * c[1]
+        Gs[ix] += abs(af) * np.abs(c[1])
+    if _MUTANT.get("overlap_no_cross"):                  # sabotage (tests only): the overlaps' cross terms dropped
+        En = sum((a_ * a_ * _energy_up(KS, tyg[c[0]], c[1], U * np.abs(c[1]), nl_g[c[0]], nh_g[c[0]], Elo_g[c[0]])
+                  for a_, c in zip(alF, cols)), F(0))
+    else:
+        # the data's error: each column's float data within u of its exact value, scaled by |alpha|, plus the sum's
+        D = Gs * (U * (1 + _gam(n + 2)) + _gam(n + 2))
+        En = _energy_up(KS, tyg[allt], G, D, nl_g[allt], nh_g[allt], Elo_g[allt])
+    return F(nx) * Ft * Ft / (F(ny * nz) * En), f"ok ({n} columns)"
 
 
 def lower_blocks(V, phases, py=1, pz=1, refine=1):

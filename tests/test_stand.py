@@ -3960,6 +3960,22 @@ check("ELASTICITY BY COLUMNS: stripes along x (one nu) — the column lower boun
       "below, tight (> 124.9), the upper above; the sabotage (columns added) crosses it",
       F(1249, 10) < _eb[0] <= 125 <= _eb[1] and _ebm > 125, ([float(x) for x in (*_eb, _ebm)]))
 
+# ELASTICITY, OVERLAPPING COLUMNS (2026-11-03): the columns' exactly admissible stresses sum to an admissible stress
+# of the whole box (MEASURED zigzag 12 x 12 x 6, contrast 200: disjoint columns 3.48, overlapping 14.74, direct
+# [19.61, 25.37]). Two sides: stripes along x (one nu) exact 125 from below; a homogeneous cube exact 100 from below;
+# the sabotage 'overlap_no_cross' on four nearly identical columns gives 277.8 > 100
+_p1h = {1: {"E": [F(100)], "nu": [F(3, 10)], "earned": False}}
+_Vh6 = _np_ax.ones((6, 6, 6), int)
+_eo = (_E3b.lower_overlap(_Vst, _phb, 4, 2)[0], _E3b.lower_overlap(_Vh6, _p1h, 5, 1)[0])
+_E3b._MUTANT["overlap_no_cross"] = True
+try:
+    _eom = _E3b.lower_overlap(_Vh6, _p1h, 5, 1)[0]
+finally:
+    _E3b._MUTANT.clear()
+check("ELASTICITY, OVERLAPPING COLUMNS: stripes (exact 125) and a homogeneous cube (exact 100) bounded from below by "
+      "overlapping columns, not trivially (> 80 %); the sabotage (no cross terms) crosses 100",
+      100 < _eo[0] <= 125 and 80 < _eo[1] <= 100 < _eom, ([float(x) for x in (*_eo, _eom)]))
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,
