@@ -30,6 +30,8 @@ bound deliberately broken (MUTATION) — they must find violations, or the check
      continuum correction.
   J  second-order member STRESSES with an AXIAL member load (2026-11-03): one random column vs a solve_bvp continuum
      reference, end moments both sides and |sigma| from above; J-MUTA: the geometric moment with N_mid G.
+  B2 sweep B on frames whose beams peak INSIDE the span (pinned bases, wide bays, heavy member loads; 2026-11-03):
+     B2-MUT, the 'ends only' sabotage, is visible there (B-MUT saw 3 of 360 on B's end-dominated frames).
   K  END RELEASES in 3D buckling (2026-11-03, the cloud red team's finding 1): one member, hinges by RELEASE, the
      bracket vs redteam/ref_hinged.py; K-MUTR: the old forms (the node's rotation at a released end).
   L  3D ELASTICITY (2026-11-03): ustand.elastic3d's lower and upper bounds against each other at the moduli box's
@@ -189,10 +191,14 @@ def beam_column_case(seed):
             {"seed": seed, "L": L, "P": P, "q": q, "M": [M1, M2], "nsub": nsub, "ref": ref, "bound": bound}) or ex_m}
 
 
-def random_frame(rng, with_q=True):
-    ns, nb = rng.randint(2, 6), rng.randint(1, 4)
+def random_frame(rng, with_q=True, interior=False):
+    """interior (2026-11-03, sweep B2): pinned bases, wide bays and every beam under a heavy member load — frames
+    whose beams peak INSIDE the span, where the 'ends only' sabotage changes the answer (on fixed-base frames with
+    one section the ends dominate, and B-MUT saw 3 of 360)."""
+    ns, nb = (1, rng.randint(1, 2)) if interior else (rng.randint(2, 6), rng.randint(1, 4))
     nid = lambda f_, c_: f_ * (nb + 1) + c_ + 1
-    H, B = rng.choice([3, 4]), rng.choice([4, 5, 6])
+    # a one-storey portal with tall columns on pins: the beam's span moment beats its end moments (H = L: 1.5x)
+    H, B = (rng.choice([6, 8]), rng.choice([4, 5, 6])) if interior else (rng.choice([3, 4]), rng.choice([4, 5, 6]))
     L_ = ["/PREP7", "ET, 1, BEAM3", "MP, EX, 1, 210e9", "R, 1, 0.01, 8e-5, 0.2"]
     for f_ in range(ns + 1):
         for c_ in range(nb + 1):
@@ -208,22 +214,24 @@ def random_frame(rng, with_q=True):
             beams.append(len(el))
     L_ += [f"E, {a}, {b}" for a, b in el]
     for c_ in range(nb + 1):
-        L_ += [f"D, {nid(0, c_)}, UX, 0", f"D, {nid(0, c_)}, UY, 0", f"D, {nid(0, c_)}, ROTZ, 0"]
-    scale = rng.choice([1, 2, 4, 8])
+        L_ += [f"D, {nid(0, c_)}, UX, 0", f"D, {nid(0, c_)}, UY, 0"] + ([] if interior else [f"D, {nid(0, c_)}, ROTZ, 0"])
+    scale = 1 if interior else rng.choice([1, 2, 4, 8])
     for f_ in range(1, ns + 1):
-        L_.append(f"F, {nid(f_, 0)}, FX, {rng.randint(0, 15000) * scale}")
+        L_.append(f"F, {nid(f_, 0)}, FX, {rng.randint(0, 2000 if interior else 15000) * scale}")
         for c_ in range(nb + 1):
             L_.append(f"F, {nid(f_, c_)}, FY, -{rng.randint(5000, 30000) * scale}")
     if with_q:
         for k in beams:
-            if rng.random() < 0.5:
+            if interior:
+                L_.append(f"QLOAD, {k}, FY, -{rng.randint(5000, 25000)}")
+            elif rng.random() < 0.5:
                 L_.append(f"QLOAD, {k}, FY, -{rng.randint(2000, 15000) * scale}")
     return "\n".join(L_), len(el), nid(ns, 0)
 
 
-def frame_case(seed):
+def frame_case(seed, interior=False):
     rng = random.Random(seed)
-    deck, ne, roof = random_frame(rng)
+    deck, ne, roof = random_frame(rng, interior=interior)
     tol = rng.choice(["0", "0.5%"])
     checks = [(k, F(10) ** 15) for k in range(1, ne + 1)]
     try:
@@ -670,6 +678,11 @@ def elastic_case(seed):
     return {"checked": n_chk, "violations": viol, "example": ex_}
 
 
+def frame_interior_case(seed):
+    """sweep B2 (2026-11-03): sweep B's checks on frames whose beams peak inside the span (random_frame interior)."""
+    return frame_case(seed, interior=True)
+
+
 def ltb_case(seed):
     """sweep I (2026-11-02): ustand.ltb's member critical factor against bench/night/ltb_ref.py (Gauss-quadrature
     Hermite elements, 96 per member, nothing shared): random doubly symmetric sections (I_w = 0 sometimes), spans,
@@ -883,7 +896,7 @@ DIST = []
 
 SWEEPS = {"A": (beam_column_case, 400), "B": (frame_case, 120), "C": (stability_case, 120), "D": (truss_case, 200),
           "E": (general_case, 600), "F": (plate_case, 24), "G": (space_frame_case, 60), "H": (axial_case, 120), "I": (ltb_case, 150),
-          "J": (axial_stress_case, 150), "K": (release_case, 120),
+          "J": (axial_stress_case, 150), "K": (release_case, 120), "B2": (frame_interior_case, 60),
           "L": (elastic_case, 160)}
 
 
@@ -918,6 +931,7 @@ def main(argv):
         tasks += [("B", 900000 + s, True) for s in range(int(30 * scale))]
         tasks += [("A", 950000 + s, "geo") for s in range(int(200 * scale))]
         tasks += [("B", 950000 + s, "geo") for s in range(int(30 * scale))]
+        tasks += [("B2", 900000 + s, True) for s in range(int(30 * scale))]
         tasks += [("G", 960000 + s, "geo3") for s in range(int(20 * scale))]
         tasks += [("G", 970000 + s, "geom3") for s in range(int(20 * scale))]
         tasks += [("H", 980000 + s, "axial") for s in range(int(60 * scale))]
