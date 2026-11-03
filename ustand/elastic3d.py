@@ -54,6 +54,17 @@ def _up_float(x):
     return f if F(f) >= x else float(np.nextafter(f, np.inf))
 
 
+def _box(vals, what):
+    """A box [lo, hi] (or one value) as Fractions, REFUSED when written high-to-low (2026-11-03, the cloud red team's
+    round-2 finding: E [205, 200] was read as lo = 205, hi = 200 — the bounds computed at the wrong ends, a false
+    EARNED on 'E_app >= 188' where the truth at E = 200 is at most 185.97). Never sorted silently: a reversed box is
+    more likely a typo than an intent."""
+    lo, hi = F(vals[0]), F(vals[-1])
+    if lo > hi:
+        raise ValueError(f"{what}: the box [{vals[0]}, {vals[-1]}] is written high-to-low — write it [low, high]")
+    return lo, hi
+
+
 def _lame_hi(E, nu):
     """(mu_hi, lambda_hi) as floats rounded up, over E in [E_lo, E_hi], nu in [nu_lo, nu_hi] (Fractions)."""
     (E_lo, E_hi), (nu_lo, nu_hi) = E, nu
@@ -114,7 +125,7 @@ def material(M, phases):
                 raise ValueError(f"phase {k} has no modulus")
             continue
         p = phases[k]
-        E, nu = (p["E"][0], p["E"][-1]), (p["nu"][0], p["nu"][-1])
+        E, nu = _box(p["E"], f"phase {k} E"), _box(p["nu"], f"phase {k} nu")
         if E[1] == 0:
             continue
         Em, nm = (E[0] + E[1]) / 2, (nu[0] + nu[1]) / 2
@@ -236,8 +247,8 @@ def _phase_soft(M, phases):
     Elo, nl, nh = np.ones(M.nt), np.zeros(M.nt), np.zeros(M.nt)
     exact = {}
     for k, p in phases.items():
-        E_lo, E_hi = p["E"][0], p["E"][-1]
-        nu_lo, nu_hi = p["nu"][0], p["nu"][-1]
+        E_lo, E_hi = _box(p["E"], f"phase {k} E")
+        nu_lo, nu_hi = _box(p["nu"], f"phase {k} nu")
         sel = ph == k
         if E_hi == 0:
             continue
@@ -360,7 +371,7 @@ def lower(V, phases, refine=1):
     solid, Elo, nl, nh, ph, exact = _phase_soft(M, phases)
     Ehi = np.ones(M.nt)
     for k_, p_ in phases.items():
-        Ehi[ph == k_] = float(p_["E"][-1]) or 1.0
+        Ehi[ph == k_] = float(_box(p_["E"], f"phase {k_} E")[1]) or 1.0
     # local outward normals agree with the global ones (out * gn): the face tables and _faces must match
     for t_ in range(6):
         t0 = t_ * nvox

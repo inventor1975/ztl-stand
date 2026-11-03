@@ -3596,6 +3596,32 @@ check("3D ELASTICITY, the hybridized solve (AMG with rigid motions): homogeneous
       "pored cube's lower bound equals the direct KKT's within 1e-9 (183.594)",
       200 * (1 - 1e-9) <= _h3h <= 200 and abs(_h3o / _k3o - 1) < 1e-9, (_h3h, _h3o, _k3o))
 
+# BOX ORDER (2026-11-03, the cloud red team's round 2, PR #2): a modulus box written high-to-low was read as lo = first,
+# hi = last — elastic3d proved [188.18, 191.32] for E [205, 200] on the pored cube and said 'E_app >= 188' EARNED,
+# while the truth at E = 200 is at most 185.97 (an independent Q1 solve). Now refused, in elastic3d and conduction3d;
+# and conduction3d's CLI without --need gives the bounds at the box's two ENDS (it computed both at the low end).
+_bxr = []
+for _fn in (lambda: _EL3.upper(_Vo, {0: _P3(0, 0), 1: {"E": [F(205), F(200)], "nu": [F("0.3")]}}),
+            lambda: _EL3.lower(_Vo, {0: _P3(0, 0), 1: {"E": [F(205), F(200)], "nu": [F("0.3")]}}),
+            lambda: _EL3.judge(_Vo, {0: _P3(0, 0), 1: {"E": [F(205), F(200)], "nu": [F("0.3")], "earned": True}},
+                               need_min=188),
+            lambda: _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2", "1"], "earned": True}}, "1.5")):
+    try:
+        _fn(); _bxr.append(False)
+    except ValueError as _e:
+        _bxr.append("high-to-low" in str(_e))
+import tempfile as _tf, io as _io, contextlib as _cl
+with _tf.TemporaryDirectory() as _td:
+    _np3.save(_td + "/h.npy", _np3.zeros((3, 2, 2), int))
+    _bo = _io.StringIO()
+    with _cl.redirect_stdout(_bo):
+        _C3.main([_td + "/h.npy", "--s", "0:1,2"])
+    _bcl = json.loads(_bo.getvalue())
+check("BOX ORDER: a modulus / conductivity box written high-to-low is REFUSED (elastic3d upper, lower, judge; "
+      "conduction3d judge) — it gave a false EARNED; conduction3d's CLI brackets a box [1, 2] S/m at its two ends "
+      "(homogeneous 3x2x2: s_eff = s, so [1, 2]), not both at the low end",
+      all(_bxr) and abs(_bcl["s_eff_lower"] - 1) < 1e-9 and abs(_bcl["s_eff_upper"] - 2) < 1e-9, (_bxr, _bcl))
+
 # END RELEASES in buckling and second order (2026-11-03, the cloud red team's FINDING 1, PR #1): the geometric forms
 # and the end-moment rows read the NODE's rotation at a released member end — a hinged strut framing into held nodes
 # was buckled clamped-clamped. Decks: redteam/decks; references: Euler's fixed-pinned 20.1907 EI/L^2 and pinned

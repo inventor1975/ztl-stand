@@ -496,13 +496,23 @@ def s_eff(V, s, refine=1):
     return lo * g, up * g, note
 
 
+def _box(vals, what):
+    """A conductivity box [lo, hi] (or one value), REFUSED when written high-to-low (2026-11-03, the cloud red team's
+    round 2: a descending box gave an inverted bracket)."""
+    lo, hi = F(vals[0]), F(vals[-1])
+    if lo > hi:
+        raise ValueError(f"{what}: the box [{vals[0]}, {vals[-1]}] is written high-to-low — write it [low, high]")
+    return lo, hi
+
+
 def judge(V, phases, need, refine=1):
     """s_eff >= need, by ZTL: the proved bracket at the conductivity box's ends (G is non-decreasing in every
     phase conductivity), provenance the weakest input's. phases: {id: {"s": [lo, hi] | [v], "earned": bool}}."""
     from . import judge_ztl  # noqa: F401
     from znumjudge import parse_quantities, judge_sheet_claim
-    lo, _, note = s_eff(V, {k: F(p["s"][0]) for k, p in phases.items()}, refine)
-    _, up, _ = s_eff(V, {k: F(p["s"][-1]) for k, p in phases.items()}, refine)
+    boxes = {k: _box(p["s"], f"phase {k} conductivity") for k, p in phases.items()}
+    lo, _, note = s_eff(V, {k: b[0] for k, b in boxes.items()}, refine)
+    _, up, _ = s_eff(V, {k: b[1] for k, b in boxes.items()}, refine)
     used = set(np.unique(np.asarray(V)).tolist())
     prov = "earned:conduction3d" if all(phases[k].get("earned") for k in used if k in phases) else "credit"
     f = lambda x: f"{x.numerator}/{x.denominator}"
@@ -534,7 +544,11 @@ def main(argv):
         else:
             raise SystemExit(f"unknown argument {argv[i]}")
     if need is None:
-        lo, up, note = s_eff(V, {k: F(p["s"][0]) for k, p in s.items()}, refine)
+        # the box's ends (2026-11-03: both bounds were computed at the LOW end, so with a box the printed upper bound
+        # did not cover its high end — found beside the round-2 finding): lower at lo, upper at hi (G is monotone)
+        boxes = {k: _box(p["s"], f"phase {k} conductivity") for k, p in s.items()}
+        lo, _, note = s_eff(V, {k: b[0] for k, b in boxes.items()}, refine)
+        _, up, _ = s_eff(V, {k: b[1] for k, b in boxes.items()}, refine)
         print(json.dumps({"s_eff_lower": float(lo), "s_eff_upper": float(up), "note": note}))
     else:
         print(json.dumps(judge(V, s, need, refine)))
