@@ -4069,6 +4069,36 @@ _sj = (_MK.judge_solar(_sspec(10), "0.11")["verdict"], _MK.judge_solar(_sspec(10
 check("SOLAR OUTAGE JUDGED: P(short day) <= 0.11 EARNED, <= 0.10 REFUTED at a 10 Wh unit; <= 0.11 OPEN at 300 Wh",
       _sj[0] == "EARNED" and _sj[1].startswith("REFUTED") and _sj[2].startswith("OPEN"), _sj)
 
+# WHAT TO MEASURE NEXT (2026-11-03, the curator: "делаем сейчас именно это"): the backward pass over the brick's ranged
+# inputs. The village pump (REFUTED: drawdown 5-15 m, sun 5-6 h, need 8 m3/day) has closed forms: drawdown >= 67/12 m
+# fails for every sun hour (16 - 15 (5/6)^2), sun <= 5 sqrt(15/11) h fails for every drawdown, no single input settles
+# it, and on the found pair region the worst corner gives exactly 8. Two sides: each threshold within 1e-3 of its
+# closed form AND on the safe side; the sabotage 'no_recheck' (a region widened past its last proof) crosses a form
+from ustand import measure as _ME   # noqa: E402
+import math as _mme
+_pb = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "examples", "pump-village-refuted.json")))
+_wm = _ME.what_to_measure(_pb)
+_ff = {list(r)[0]: r for r in _wm["fails_for_sure"]}
+_fx = lambda x: F(str(x).split()[0])
+_dlo = _fx(_ff["Drawdown"]["Drawdown"][0])
+_thi = _fx(_ff["Tsun"]["Tsun"][1])
+_pr = _wm["settles"][0] if _wm["settles"] else {}
+_vcorner = (1.6 * _mme.sqrt((16 - float(_fx(_pr["Drawdown"][1]))) / 15) * float(_fx(_pr["Tsun"][0]))) if _pr else 0
+_ME.MUTANT["no_recheck"] = True
+try:
+    _wmm = _ME.what_to_measure(_pb)
+finally:
+    _ME.MUTANT.clear()
+_ffm = {list(r)[0]: r for r in _wmm["fails_for_sure"]}
+_tstar = 5 * _mme.sqrt(15 / 11)
+check("WHAT TO MEASURE: the refuted village pump — 'drawdown >= ~5.5833 fails whatever the sun' and 'sun <= ~5.8387 fails "
+      "whatever the drawdown' at their closed forms (safe side, within 1e-3); no single input settles it, a pair does "
+      "(worst corner = 8); the sabotage (no re-check) crosses a closed form",
+      _wm["verdict"] == "REFUTED" and F(67, 12) <= _dlo < F(67, 12) + F(1, 1000)
+      and _tstar - 1e-3 < float(_thi) <= _tstar and set(_pr) == {"Drawdown", "Tsun"} and 8 - 1e-9 <= _vcorner < 8.01
+      and (_fx(_ffm["Drawdown"]["Drawdown"][0]) < F(67, 12) or float(_fx(_ffm["Tsun"]["Tsun"][1])) > _tstar),
+      (float(_dlo), float(_thi), _tstar, _pr, _vcorner, _ffm))
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,

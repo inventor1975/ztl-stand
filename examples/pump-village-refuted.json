@@ -1,0 +1,87 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "Hmax": {
+   "role": "given",
+   "value": "45",
+   "unit": "m"
+  },
+  "Hrated": {
+   "role": "given",
+   "value": "30",
+   "unit": "m"
+  },
+  "Qrated": {
+   "role": "given",
+   "value": "1.6",
+   "unit": "m^3/h"
+  },
+  "Depth": {
+   "role": "given",
+   "value": "22",
+   "unit": "m"
+  },
+  "Drawdown": {
+   "role": "given",
+   "range": [
+    "5",
+    "15"
+   ],
+   "unit": "m"
+  },
+  "Htower": {
+   "role": "given",
+   "value": "6",
+   "unit": "m"
+  },
+  "Hfric": {
+   "role": "given",
+   "value": "1",
+   "unit": "m"
+  },
+  "Tsun": {
+   "role": "given",
+   "range": [
+    "5",
+    "6"
+   ],
+   "unit": "h"
+  },
+  "Htot": {
+   "role": "derived",
+   "unit": "m"
+  },
+  "Q": {
+   "role": "derived",
+   "unit": "m^3/h"
+  },
+  "Vday": {
+   "role": "derived",
+   "unit": "m^3"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "laws": [
+  {
+   "zfl": "Htot == Depth + Drawdown + Htower + Hfric",
+   "source": "hauteur statique + pertes"
+  },
+  {
+   "zfl": "Q == Qrated*sqrt((Hmax - Htot)/(Hmax - Hrated))",
+   "source": "courbe pompe H = H0 - a*Q^2 calee sur Hmax et point rated"
+  },
+  {
+   "zfl": "Vday == Q*Tsun",
+   "source": "volume journalier = debit x heures de soleil"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Vday",
+   "op": ">=",
+   "value": "8",
+   "why": "besoin village 8 m3/jour"
+  }
+ ]
+}

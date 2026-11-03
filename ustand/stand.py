@@ -993,7 +993,7 @@ def _shorten(x):
         m = _LONG.match(x)
         if m:
             return f"~{_approx(F(int(m.group(1)), int(m.group(2))), 12)} (an exact fraction of {len(m.group(2))} digits)"
-        if x.startswith("outside ZTL") or x.startswith("ZTL"):
+        if x.startswith(("outside ZTL", "by the stand", "ZTL")):
             return re.sub(r"-?\d{30,}/\d{30,}", lambda mm: f"~{_approx(F(mm.group(0)), 12)}", x)
     return x
 
@@ -1960,10 +1960,12 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
             elif q in defs and q in ztl_defs:
                 how[q] = ("ZTL, interval reading of the definition (" + _wide(rng, q) + ")" + _ck(q, dbound, back))
             elif q in defs:
-                how[q] = ("outside ZTL: interval bound over ZTL's ranges (" + _wide(rng, q) + ")" + _ck(q, dbound, back))
+                how[q] = ("outside ZTL's kernel — bounded by the stand's own interval arithmetic over ZTL's ranges "
+                          "(sound: it can only be wider than the truth) (" + _wide(rng, q) + ")" + _ck(q, dbound, back))
             elif q in ztl_gap:
-                how[q] = ("outside ZTL: ZTL left it unbounded (a product of toleranced quantities); "
-                          "interval bound by the stand, every corner checked inside")
+                how[q] = ("outside ZTL's kernel — the kernel does not yet bound a product of toleranced quantities, so "
+                          "the stand bounded it by its own interval arithmetic: sound (it can only be wider than the "
+                          "truth), and every corner of the ranges was also checked inside")
             else:
                 how[q] = {"corners": "ZTL, exact at the corners",
                           "critical": "ZTL, exact at the corners and the critical points of a shared parameter"
