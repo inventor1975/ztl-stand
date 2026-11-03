@@ -1037,6 +1037,52 @@ def _stopped_report():
     return out
 
 
+_STOCKS_MUTANT = {}     # TEST-ONLY sabotage switches for _run_stocks
+
+
+def _run_stocks(raw) -> dict:
+    """A STOCKS brick (BRICKS.md 7h, 2026-11-03): stocks and flows under a shared random driver; the requirement is on
+    P_fail, the probability of at least one counted failure within `days` (ustand.stocks: proved from both sides, every
+    ranged amount chosen by an adversary on the unit grid). The answer in the stand's usual shape."""
+    from . import stocks as SK
+    reqs = raw.get("requirements") or []
+    if not reqs or any(r.get("quantity") != "P_fail" for r in reqs):
+        raise B.BrickError("a stocks brick's requirements are on P_fail, e.g. "
+                           '{"quantity": "P_fail", "op": "<=", "value": "0.01"}')
+    for r in reqs:
+        if r.get("op") not in ("<=", "<", ">=", ">", "within"):
+            raise B.BrickError(f"requirement op must be one of <=, <, >=, >, within (got {r.get('op')!r})")
+    try:
+        lo, hi = SK.fail_bounds(raw)
+    except (ValueError, KeyError, TypeError) as e:
+        raise B.BrickError(f"stocks brick: {e}")
+    f = lambda x: f"{x.numerator}/{x.denominator}"
+    from znumjudge import parse_quantities, judge_sheet_claim
+    qs, mk = parse_quantities(f"P_fail=[{f(lo)},{f(hi)}] earned:stocks")
+    disp = []
+    for r in reqs:
+        if r["op"] == "within":
+            a_, b_ = (F(str(x)) for x in r["value"])
+            claim = f"P_fail >= {f(a_)} & P_fail <= {f(b_)}"
+        else:
+            claim = f"P_fail {r['op']} {f(F(str(r['value'])))}"
+        res = judge_sheet_claim(claim, qs, mk)
+        disp.append(res["disposition"])
+    if _STOCKS_MUTANT.get("lo_earns"):                   # sabotage (tests only): EARNED read off the LOW end
+        disp = ["EARNED" if (r["op"] in ("<=", "<") and lo <= F(str(r["value"]))) else d for r, d in zip(reqs, disp)]
+    verdict = ("EARNED" if all(d == "EARNED" for d in disp) else
+               "REFUTED" if any(d.startswith("REFUTED") for d in disp) else "OPEN")
+    return {"stand": "ztl-stand/1", "kind": "stocks", "verdict": verdict,
+            "why": {"EARNED": "every system whose data lie in the ranges meets the requirement on P_fail",
+                    "REFUTED": "the proved range of P_fail lies outside the requirement",
+                    "OPEN": "the proved range of P_fail straddles the requirement (narrow the ranges or the units)"}[verdict],
+            "guaranteed": {"P_fail": [_s(lo), _s(hi)]}, "guaranteed_unit": {"P_fail": ""},
+            "how": {"P_fail": "stocks and flows: robust Bellman over the stock levels and the driver, every ranged "
+                              "amount chosen anew each step by an adversary on the unit grid, the driver's rows within "
+                              "their ranges — no monotonicity assumed; exact rationals rounded outward"},
+            "requirements": reqs, "premise": SK.PREMISE}
+
+
 def run(b, conflicts=True) -> dict:
     """Never a traceback (the blind test of 2026-10-10 met eight). A malformed brick is a BRICK
     ERROR with its reason; anything else that escapes is a STAND ERROR — the stand's own bug,
@@ -1051,6 +1097,8 @@ def run(b, conflicts=True) -> dict:
     _DEPTH[0] += 1
     try:
         raw = b if isinstance(b, dict) else json.load(open(b, encoding="utf-8"))
+        if isinstance(raw, dict) and raw.get("kind") == "stocks":
+            return _run_stocks(raw)                       # stocks and flows (BRICKS.md 7h), a different kind of brick
         if top and isinstance(raw, dict) and raw.get("components"):
             from . import components as CM  # component files only inside the brick's own folder (components.py)
             import os as _os

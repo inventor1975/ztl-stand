@@ -4193,6 +4193,40 @@ check("CLINIC ON ONE BATTERY + STOCKS: power alone 0, water alone 0, JOINT = the
       and _cee[1] < max(_cfix) and _eq(_sx, _sbx) and _refused,
       ([float(x) for x in (*_cj, _cx, *_cce, min(_cfix), max(_cfix), *_cee, *_cjm, *_sx, _sbx)]))
 
+# STOCKS BRICK IN THE STAND (2026-11-03, the curator: "Подключай кирпич"): "kind": "stocks" goes through stand.run
+# and answers in the stand's shape — the requirement on P_fail judged by ZTL over the proved bracket. Two sides: the
+# clinic (point data, P_fail exactly 0.2823 over 10 days): <= 0.3 EARNED, <= 0.25 REFUTED; BRICKS.md's own example
+# (ranged data, MEASURED [0.110, 0.987]) <= 0.01 REFUTED, <= 0.5 OPEN; a brick without a P_fail requirement and an
+# off-grid amount are BRICK ERRORs. The sabotage 'lo_earns' (EARNED read off the low end) turns that OPEN into EARNED
+_stk_md = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "BRICKS.md"), encoding="utf-8").read()
+_stk_i = _stk_md.index("## 7h. stocks")
+_stk_j = _stk_md.index("```json", _stk_i) + 7
+_stk_ex = json.loads(_stk_md[_stk_j:_stk_md.index("```", _stk_j)])
+_stk_cl = {"stand": "ztl-stand/1", "kind": "stocks",
+           "driver": {"start": "sun", "p": {"sun": {"sun": ["0.7", "0.7"], "cloud": ["0.3", "0.3"]},
+                                             "cloud": {"sun": ["0.4", "0.4"], "cloud": ["0.6", "0.6"]}}},
+           "stocks": {"battery": {"capacity": "2000", "start": "2000", "unit": "100"},
+                      "tank": {"capacity": "4", "start": "4", "unit": "0.5"}},
+           "steps": [{"add": "battery", "amount": {"sun": ["1800", "1800"], "cloud": ["500", "500"]}},
+                     {"take": "battery", "amount": ["400", "400"], "fail": "power"},
+                     {"take": "battery", "amount": ["600", "600"], "then": [{"add": "tank", "amount": ["2", "2"]}]},
+                     {"take": "tank", "amount": ["1.5", "1.5"], "fail": "water"}], "days": 10}
+_stk_v = lambda b, v: S.run(dict(b, requirements=[{"quantity": "P_fail", "op": "<=", "value": v}]))["verdict"]
+_stk_r = (_stk_v(_stk_cl, "0.3"), _stk_v(_stk_cl, "0.25"), _stk_v(_stk_ex, "0.01"), _stk_v(_stk_ex, "0.5"),
+          S.run(dict(_stk_cl))["verdict"],
+          S.run(dict(_stk_cl, steps=[{"add": "battery", "amount": ["250", "250"]}],
+                     requirements=[{"quantity": "P_fail", "op": "<=", "value": "0.5"}]))["verdict"])
+S._STOCKS_MUTANT["lo_earns"] = True
+try:
+    _stk_m = _stk_v(_stk_ex, "0.5")
+finally:
+    S._STOCKS_MUTANT.clear()
+check("STOCKS BRICK IN THE STAND: the clinic <= 0.3 EARNED / <= 0.25 REFUTED (exact 0.2823); BRICKS.md's example "
+      "<= 0.01 REFUTED, <= 0.5 OPEN; no P_fail requirement / off-grid amount -> BRICK ERROR; the sabotage (EARNED off "
+      "the low end) is caught",
+      _stk_r == ("EARNED", "REFUTED", "REFUTED", "OPEN", "BRICK ERROR", "BRICK ERROR") and _stk_m == "EARNED",
+      (_stk_r, _stk_m))
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,

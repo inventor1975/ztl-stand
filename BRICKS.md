@@ -650,6 +650,45 @@ A **system** names components and wires them:
   correlation. MEASURED on the charger: flat brick Vend ∈ [4.152, 4.238] V, the system [4.144, 4.246] V (the
   battery's bands are wider than what arrives).
 
+## 7h. stocks — a system of stocks and flows under a shared random driver (since 2026-11-03)
+
+A DIFFERENT kind of brick, for "how likely is it to run short within N days": a battery and a water tank fed by one
+weather, a store fed by uncertain deliveries. Mark it `"kind": "stocks"`; it has no quantities/laws. The answer is
+P_fail — the probability of at least one counted failure within `days` steps — PROVED from both sides.
+
+```json
+{"stand": "ztl-stand/1", "kind": "stocks",
+ "driver": {"start": "sun", "p": {"sun":   {"sun": ["0.6", "0.8"], "cloud": ["0.2", "0.4"]},
+                                  "cloud": {"sun": ["0.3", "0.5"], "cloud": ["0.5", "0.7"]}}},
+ "stocks": {"battery": {"capacity": "2000", "start": "2000", "unit": "100"},
+            "tank":    {"capacity": "4",    "start": "4",    "unit": "0.5"}},
+ "steps": [{"add": "battery", "amount": {"sun": ["1700", "1900"], "cloud": ["400", "600"]}, "why": "solar, Wh/day"},
+           {"take": "battery", "amount": ["400", "400"], "fail": "power", "why": "vaccine fridge first"},
+           {"take": "battery", "amount": ["600", "600"], "then": [{"add": "tank", "amount": ["2", "2"]}],
+            "why": "the pump runs only on what is left, and then fills the tank"},
+           {"take": "tank", "amount": ["1.5", "1.5"], "fail": "water", "why": "the clinic's daily water"}],
+ "days": 30,
+ "requirements": [{"quantity": "P_fail", "op": "<=", "value": "0.01", "why": "at most 1 % chance of a bad day"}]}
+```
+
+- **driver**: the shared random factor as a Markov chain — its states, the start, and for EVERY state the
+  probabilities of the next state as ranges `[lo, hi]` (a row must admit a distribution: sum of lo <= 1 <= sum of hi).
+  One step = one day (or the step the person names). A known climate gives the ranges; say where they come from.
+- **stocks**: each with `capacity`, `start` and a `unit`. EVERY amount, capacity and start of that stock must be a
+  whole number of its unit (choose the unit that divides them all: 100 Wh, 0.5 m³). Fewer, larger units are faster;
+  the product of (capacity/unit + 1) over the stocks times the driver's states must stay under 200 000.
+- **steps**, applied in order every step AFTER the driver has moved: `add` (an inflow, capped at the capacity;
+  its amount may depend on the driver's state, a dict by state), `take` with `fail` (MUST: if the stock cannot pay,
+  that is a failure with this name), `take` without `fail` (MAY: only if the stock can pay, and then its `then`
+  steps run — a pump that runs on the leftover). Order is priority: the fridge before the pump.
+- Every `amount` is a range `[lo, hi]`; the stand lets an adversary pick ANY grid value in it anew each step (the
+  bound holds for fixed and for varying data alike — and does not assume that less is always worse).
+- `fail_on`: optional list of the failure names that count (default: all).
+- **requirements**: on `P_fail` only (`<=`, `<`, `>=`, `>`, `within`). EARNED: every system in the ranges meets it;
+  REFUTED: the proved range lies outside; OPEN: it straddles (narrow the ranges or use smaller units).
+- Model only what the person describes; a failure the person did not ask about is not a step. Do not split one
+  device into two stocks.
+
 ## 7b. modes (optional) — the design must hold in every one
 
 ```json
