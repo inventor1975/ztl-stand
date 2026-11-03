@@ -10,7 +10,8 @@ Ionic / electrical / thermal conductance of a voxel volume, two-sided and proved
 conservative Raviart–Thomas face flux below). Use: composite cathodes from tomography, porous electrodes, thermal
 paths. MEASURED: 64^3 voxels (1.6 M tetrahedra) in 141 s, 2 GB; 85 % is the hybridized flux solve (Jacobi CG) —
 the cure is algebraic multigrid (pyamg, pending the curator's OK to install). Open: adaptive refinement at voxel
-edge/corner contacts (they make the bracket close slowly), anisotropic phases (tensor conductivity), sub-volume
+edge/corner contacts (they make the bracket close slowly; where the other voxels INSULATE, the potential is split since
+2026-11-03 — a line or point contact carries no current — MEASURED ratio 4.0 -> 2.0 on a 50 % random 8^3 map), anisotropic phases (tensor conductivity), sub-volume
 sweeps over a large tomogram.
 
 ## Track 2 — space frames (`ustand/frame3d.py`, IN — status at the end of the section)

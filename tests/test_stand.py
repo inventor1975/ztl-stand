@@ -2894,6 +2894,26 @@ check("3D conduction: refining the voxels (Kuhn -> Freudenthal, nested spaces) n
       "bound does not rise, the lower does not fall (an insulating matrix with a percolating phase: 50 % random)",
       float(_r2[1]) <= float(_r1[1]) * (1 + 1e-9) and float(_r2[0]) >= float(_r1[0]) * (1 - 1e-9) and _r1[0] > 0,
       (float(_r1[0]), float(_r1[1]), float(_r2[0]), float(_r2[1])))
+# EDGE AND CORNER CONTACTS (2026-11-03): two conducting voxels meeting only along an edge or at a corner are NOT
+# connected in the continuum (a line / point contact has infinite spreading resistance); the potential is split there
+# (one copy per face-connected group around a node). MEASURED: a conductor/insulator 3D checkerboard (no face path,
+# true G = 0) — version 1's upper bound 0.47, now ~0; a 50 % random 8^3 map's bracket ratio 4.0 -> 2.0; 120 random
+# maps: never below any proved lower bound (x1, x2), always at most version 1's.
+_I3, _J3c, _K3 = _np3.meshgrid(range(4), range(4), range(4), indexing="ij")
+_cb3 = ((_I3 + _J3c + _K3) % 2).astype(int)
+_C3.SPLIT = False
+_cbo = float(_C3.s_eff(_cb3, {0: 1.0, 1: 0.0})[1])
+_Vs3 = (_np3.random.default_rng(3).random((8, 8, 8)) < 0.5).astype(int)
+_rso = _C3.s_eff(_Vs3, {0: 0.0, 1: 1.0})
+_C3.SPLIT = True
+_cbn = _C3.s_eff(_cb3, {0: 1.0, 1: 0.0})
+_rsn = _C3.s_eff(_Vs3, {0: 0.0, 1: 1.0})
+check("3D conduction, edge/corner-only contacts carry nothing: the insulator/conductor checkerboard's upper bound "
+      "drops from 0.47 (version 1 bridged the edges) to ~0 = the truth; a 50 % random 8^3 map's upper bound drops "
+      "(ratio upper/lower 4.0 -> 2.0) and stays above the proved lower bound",
+      _cbo > 0.4 and float(_cbn[1]) < 1e-20 and "no current path" in _cbn[2]
+      and _rsn[0] <= _rsn[1] < _rso[1] and float(_rsn[1] / _rsn[0]) < 2.1 < float(_rso[1] / _rso[0]),
+      (_cbo, float(_cbn[1]), float(_rso[0]), float(_rso[1]), float(_rsn[1])))
 _jd = _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2"], "earned": True}}, "1.9")
 _jr = _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2"], "earned": False}}, "2.1")
 check("3D conduction judged by ZTL: a homogeneous 2 S/m box meets s_eff >= 1.9 EARNED (inputs earned), and "

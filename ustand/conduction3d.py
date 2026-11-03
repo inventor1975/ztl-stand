@@ -91,12 +91,88 @@ class Mesh:
 
 
 # --------------------------------------------------------------------------------------------- UPPER (potential)
+SPLIT = True        # split nodes at edge/corner-only contacts (False: one potential per node — version 1, looser)
+
+
+def _q3_table():
+    """For every 8-bit mask of conducting voxels around a node (bit b = the voxel at offset b - 1, b = (bx, by, bz)
+    read as bx + 2 by + 4 bz), the component of each voxel under FACE adjacency (Hamming distance 1 on the cube Q3),
+    -1 where not conducting; and the number of components."""
+    comp = np.full((256, 8), -1, dtype=np.int8)
+    ncomp = np.zeros(256, dtype=np.int8)
+    for m in range(256):
+        lab = -1
+        for b in range(8):
+            if not (m >> b) & 1 or comp[m, b] >= 0:
+                continue
+            lab += 1
+            stack = [b]
+            comp[m, b] = lab
+            while stack:
+                c = stack.pop()
+                for k in range(3):
+                    d = c ^ (1 << k)
+                    if (m >> d) & 1 and comp[m, d] < 0:
+                        comp[m, d] = lab
+                        stack.append(d)
+        ncomp[m] = lab + 1
+    return comp, ncomp
+
+
+_Q3 = None
+
+
+def _split_nodes(M, cond):
+    """(2026-11-03) The conducting region is the INTERIOR of the union of conducting voxels: two of them meeting only
+    along an edge or at a corner are not connected there (a line or point contact carries no current in the continuum —
+    its spreading resistance is infinite). One continuous potential per node bridged such contacts and made the upper
+    bound too high (MEASURED: an insulator/conductor checkerboard with no face path — true G = 0 — had the upper bound
+    0.47; a 50 % random 8^3 map's ratio upper/lower 4.0, now 2.0). Here every node gets one copy per FACE-connected
+    group of the conducting voxels around it; a tet's vertex takes the copy of its voxel's group. The field is
+    continuous inside the region and piecewise linear: admissible, so the bound stays a bound. Returns (tv', nn',
+    copy -> original node)."""
+    global _Q3
+    if _Q3 is None:
+        _Q3 = _q3_table()
+    comp, ncomp = _Q3
+    nx, ny, nz = M.nx, M.ny, M.nz
+    vcond = np.zeros(len(M.vox), bool)
+    np.logical_or.at(vcond, M.tvox, cond)
+    mask = np.zeros(M.nn, dtype=np.int32)
+    vx, vy, vz = M.vox[:, 0], M.vox[:, 1], M.vox[:, 2]
+    for cx in (0, 1):
+        for cy in (0, 1):
+            for cz in (0, 1):
+                node = (vx + cx) + (nx + 1) * ((vy + cy) + (ny + 1) * (vz + cz))
+                b = (1 - cx) + 2 * (1 - cy) + 4 * (1 - cz)          # the voxel's place in the node's 2x2x2 block
+                np.bitwise_or.at(mask, node[vcond], 1 << b)
+    k = ncomp[mask].astype(np.int64)
+    extra = np.maximum(k - 1, 0)
+    base = M.nn + np.concatenate([[0], np.cumsum(extra)[:-1]])
+    nn2 = M.nn + int(extra.sum())
+    orig = np.concatenate([np.arange(M.nn), np.repeat(np.arange(M.nn), extra)])
+    tv2 = M.tv.astype(np.int64).copy()
+    tvox = M.tvox
+    for j in range(4):
+        n = M.tv[:, j].astype(np.int64)
+        X, Y, Z = M.X[n], M.Y[n], M.Z[n]
+        b = (M.vox[tvox, 0] - X + 1) + 2 * (M.vox[tvox, 1] - Y + 1) + 4 * (M.vox[tvox, 2] - Z + 1)
+        c = comp[mask[n], b].astype(np.int64)
+        tv2[:, j] = np.where(c > 0, base[n] + c - 1, n)
+    return tv2, nn2, orig
+
+
 def upper(M, sig, rtol=1e-12):
-    nt, nn, X = M.nt, M.nn, M.X
+    nt = M.nt
+    if SPLIT:
+        tv, nn, orig = _split_nodes(M, sig > 0)
+    else:
+        tv, nn, orig = M.tv, M.nn, np.arange(M.nn)
+    X = M.X[orig]
     w = sig / 6.0
     rows, cols, vals = [], [], []
     for (p, q) in ((0, 1), (1, 2), (2, 3)):
-        a, b = M.tv[:, p], M.tv[:, q]
+        a, b = tv[:, p], tv[:, q]
         rows += [a, b, a, b]; cols += [a, b, b, a]; vals += [w, w, -w, -w]
     A = sp.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(nn, nn))
     fixed = (X == 0) | (X == M.nx)
@@ -111,8 +187,9 @@ def upper(M, sig, rtol=1e-12):
     sol = _spd_solve(Af, rhs, d, rtol)
     u = ub.copy()
     u[free] = sol
-    g2 = sum((u[M.tv[:, q]] - u[M.tv[:, p]]) ** 2 for p, q in ((0, 1), (1, 2), (2, 3)))
-    return _up(float(np.sum(sig * g2)) / 6.0, 4 * nt), u
+    g2 = sum((u[tv[:, q]] - u[tv[:, p]]) ** 2 for p, q in ((0, 1), (1, 2), (2, 3)))
+    # the potential per ORIGINAL node (the first copy) for the legacy averaged-flux lower bound, which only CHOOSES
+    return _up(float(np.sum(sig * g2)) / 6.0, 4 * nt), u[:M.nn]
 
 
 # --------------------------------------------------------------------------------------------- LOWER (face fluxes)

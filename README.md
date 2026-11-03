@@ -94,6 +94,9 @@ PROVED two-sided bounds on a voxel sample's apparent modulus (upper: P1 displace
 Alfeld-split stress, hybridized + AMG: 32^3 voxels in 106 s, 15.6 GB; DESIGN-3D.md). Measured
 (conduction3d, 2026-11-02): 16^3 random 50 % electrolyte in 0.5 s; voxel edge/corner contacts make the bracket close
 slowly under uniform refinement (3D checkerboard: ratio 2.3 -> 1.4 at x4) — adaptive refinement is the next step.
+Contacts by an edge or a corner only, where the other voxels insulate, carry no current in the continuum: since
+2026-11-03 the potential is split there (an insulator/conductor checkerboard: upper 0.47 -> ~0, the truth; a 50 %
+random 8^3 map: ratio upper/lower 4.0 -> 2.0).
 Solver: smoothed-aggregation multigrid if `pyamg` is installed (optional; 64^3 voxels 141 s -> 22 s), Jacobi CG
 otherwise — the solver only chooses the fields, the bounds stay proved either way.
 The algebra of every bound is in ZTL's Lean (zero axioms): ZNet, ZEnergy, ZRound, ZHigham, ZFloatPath, ZStability,
