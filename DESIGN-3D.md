@@ -92,8 +92,13 @@ the balance asserted per type) and `elastic3d.lower` (the four steps above; the 
 Smith normal form all ones, MEASURED — so the push stays in integers, no denominator growth). MEASURED: homogeneous,
 Voigt, Reuss: lower = upper within 4e-12; one central pore [183.59, 191.32] (the P1-per-tet spike gave 181.72);
 random 80 % solid 4^3 [132.08, 161.07]; 100 random two-phase porous samples with moduli boxes: lower <= the soft
-corner's refined upper in every case, the sabotage (stiff end in the compliance) caught in 68; cost 6^3 1.4 s, 8^3
-9.3 s, 10^3 34 s (a direct KKT solve: the next limit). The gap is widest where voxels touch by an EDGE only: the
+corner's refined upper in every case, the sabotage (stiff end in the compliance) caught in 68; cost with a direct
+KKT 6^3 1.4 s, 8^3 9.3 s, 10^3 34 s. **The hybridized choice (same day):** per tet the 42 x 42 local KKT (batched),
+an SPD system on displacement-like face traces (the same for both tets — a sign there once made it a SUM, caught by
+the balance residual), smoothed-aggregation AMG with the six rigid motions as near-null space (without them CG hit
+500 iterations); MEASURED random 80 % solid: 10^3 4.6 s, 16^3 17 s, 24^3 45 s (7 GB); the same bound as the KKT
+(1e-10); the solver tolerance 1e-9 (1e-6 moves the bound by 7e-5, 1e-4 collapses it 3x: the exact push pays for a
+mismatch at every face). The gap is widest where voxels touch by an EDGE only: the
 P1 displacement bridges the edge (too stiff on a coarse mesh), the face-based stress cannot pass it (it is the
 truth's side: an edge contact carries no force in the continuum).
 

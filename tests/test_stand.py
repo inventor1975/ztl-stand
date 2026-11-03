@@ -3558,6 +3558,24 @@ check("3D ELASTICITY two-sided: the exactly admissible stress gives a LOWER boun
       and _j3["verdict_min"] == "EARNED" and _j3["verdict_max"] == "EARNED" and _l3m > 190 * (1 + 1e-6),
       (_l3h, _l3p, _l3s, _l3o, _u3o, _j3, _l3m))
 
+# the HYBRIDIZED choice (2026-11-03): local 42 x 42 solves per tet + AMG with the six rigid motions on the face traces;
+# the same bound as the direct KKT (each is proved; the choices agree), exact on the homogeneous box
+_EL3._MUTANT["force_hybrid"] = True
+try:
+    _h3h = float(_EL3.lower(_np_el.ones((3, 2, 4), int), {1: _P3(200, "0.3")})[0])
+    _h3o = float(_EL3.lower(_Vo, {0: _P3(0, 0), 1: _P3(200, "0.3")})[0])
+finally:
+    _EL3._MUTANT.clear()
+_hf = _EL3.HYBRID_FROM
+_EL3.HYBRID_FROM = 10 ** 9
+try:
+    _k3o = float(_EL3.lower(_Vo, {0: _P3(0, 0), 1: _P3(200, "0.3")})[0])
+finally:
+    _EL3.HYBRID_FROM = _hf
+check("3D ELASTICITY, the hybridized solve (AMG with rigid motions): homogeneous 200 from below within 1e-9; the "
+      "pored cube's lower bound equals the direct KKT's within 1e-9 (183.594)",
+      200 * (1 - 1e-9) <= _h3h <= 200 and abs(_h3o / _k3o - 1) < 1e-9, (_h3h, _h3o, _k3o))
+
 # END RELEASES in buckling and second order (2026-11-03, the cloud red team's FINDING 1, PR #1): the geometric forms
 # and the end-moment rows read the NODE's rotation at a released member end — a hinged strut framing into held nodes
 # was buckled clamped-clamped. Decks: redteam/decks; references: Euler's fixed-pinned 20.1907 EI/L^2 and pinned

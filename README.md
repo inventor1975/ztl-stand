@@ -91,7 +91,7 @@ member (2026-11-03; battery sweep J: 1614 checks vs solve_bvp, 0 violations). No
 3D phase: track 1 (conduction) in; track 2 (space frames, 6 DOF per node) in; track 3 (3D elasticity) in
 (2026-11-03): `python3 -m ustand.elastic3d volume.npy --e 1:200e9 --nu 1:0.3 --need-max 150e9 --need-min 9e10` —
 PROVED two-sided bounds on a voxel sample's apparent modulus (upper: P1 displacements; lower: an exactly admissible
-Alfeld-split stress; direct solve, up to ~10^3 voxels; DESIGN-3D.md). Measured
+Alfeld-split stress, hybridized + AMG: 24^3 voxels in 45 s, 7 GB; DESIGN-3D.md). Measured
 (conduction3d, 2026-11-02): 16^3 random 50 % electrolyte in 0.5 s; voxel edge/corner contacts make the bracket close
 slowly under uniform refinement (3D checkerboard: ratio 2.3 -> 1.4 at x4) — adaptive refinement is the next step.
 Solver: smoothed-aggregation multigrid if `pyamg` is installed (optional; 64^3 voxels 141 s -> 22 s), Jacobi CG

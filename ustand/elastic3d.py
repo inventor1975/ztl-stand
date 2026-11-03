@@ -28,8 +28,8 @@ LOWER (version 2, 2026-11-03; complementary energy): for ANY statically admissib
   linear face tractions — a single polynomial reaches only 21 of 30), built from FACE data; a float KKT chooses it,
   integers make it exactly admissible (spanning-forest push through unimodular face blocks; the roots' residual
   into a grip face's normal traction), every tet's balance asserted exactly. The compliance at the box's softest
-  corner per tet (E_lo; nu at the worse end — the form is linear in nu). Cost: a direct KKT solve (10^3 in 34 s,
-  MEASURED); larger samples need an iterative solve — not yet. Pores and voxel EDGE contacts: the stress passes faces
+  corner per tet (E_lo; nu at the worse end — the form is linear in nu). Cost (MEASURED, random 80 % solid): the
+  hybridized choice with rigid-motion AMG 10^3 4.6 s, 16^3 17 s, 24^3 45 s / 7 GB (a direct KKT below HYBRID_FROM). Pores and voxel EDGE contacts: the stress passes faces
   only, so an edge-only contact carries nothing below while the P1 field bridges it above — the gap is widest there.
 """
 from __future__ import annotations
@@ -40,6 +40,7 @@ from fractions import Fraction as F
 
 import numpy as np
 import scipy.sparse as sp
+import scipy.sparse.linalg as sla
 
 from .conduction3d import Mesh, PERMS, U, _gam, _spd_solve
 
@@ -247,6 +248,99 @@ def _phase_soft(M, phases):
     return solid, Elo, nl, nh, ph, exact
 
 
+HYBRID_FROM = 2000      # open face slots from which the float choice uses the hybridized solve (KKT below it)
+
+
+def _rigid_amg_solve(M, A, rhs, free, slot_xyz, nu_, tol=1e-9):
+    """Smoothed-aggregation AMG + CG with the SIX RIGID MOTIONS as the near-null space (2026-11-03, MEASURED: without
+    them CG stopped at 500 iterations on 10^3 voxels, 26 of 31 s); scipy CG with Jacobi if pyamg is missing. Only
+    CHOOSES the field."""
+    xyz, comp = slot_xyz
+    xyz, comp = xyz[free], comp[free]
+    B = np.zeros((len(free), 6))
+    for c in range(3):
+        B[comp == c, c] = 1.0                                  # translations
+    # rotations about x, y, z: e_k x r
+    for k, (a, b) in enumerate(((1, 2), (2, 0), (0, 1))):
+        B[comp == a, 3 + k] = -xyz[comp == a, b]
+        B[comp == b, 3 + k] = xyz[comp == b, a]
+    try:
+        import pyamg
+        ml = pyamg.smoothed_aggregation_solver(A.tocsr(), B=B, symmetry="symmetric", max_coarse=500)
+        res = []
+        x = ml.solve(rhs, tol=tol, accel="cg", maxiter=400, residuals=res)
+        return x
+    except ImportError:
+        x, _ = sla.cg(A, rhs, M=sp.diags(1.0 / A.diagonal()), rtol=tol, maxiter=100000)
+        return x
+
+
+def _hybrid_g(M, KS, act, ty, gl, sg, nl, nh, Elo, slot, grip_x1, grip_x0, nu_, slot_xyz=None):
+    """The float CHOICE of the face data by HYBRIDIZATION (2026-11-03; as conduction3d's mixed flux): per solid tet
+    the local problem min 1/2 g^T S g + lam_T^T g, BAL g = 0 (a 42 x 42 KKT, batched) gives g_T = -Z_T lam_T; the
+    traction continuity (the two tets' OUTWARD data sum to 0) on every inner face is an SPD system on lam (a displacement-like trace,
+    9 per open face): lam's normal component prescribed on the grips (x = 0: 0, x = nx: 1), smoothed-aggregation AMG
+    + CG. Only CHOOSES g: exactness and the bound come after, unchanged."""
+    nm = 0.5 * (nl + nh)
+    rows, cols, vals = [], [], []
+    Zs = {}
+    for t_ in range(6):
+        blk = act[ty[act] == t_]
+        if not len(blk):
+            continue
+        for c0 in range(0, len(blk), 20000):
+            b = blk[c0:c0 + 20000]
+            S = KS[t_]["S1"][None] * ((1 + nm[b]) / Elo[b])[:, None, None] - \
+                KS[t_]["S2"][None] * (nm[b] / Elo[b])[:, None, None]
+            open_ = gl[b] >= 0
+            Sm = np.where(open_[:, :, None] & open_[:, None, :], S, 0.0)
+            idx = np.arange(36)
+            Sm[:, idx, idx] = np.where(open_, Sm[:, idx, idx], 1.0)
+            Bm = np.where(open_[:, None, :], KS[t_]["BALf"][None], 0.0)
+            sc = np.abs(Sm).max(axis=(1, 2))
+            K = np.zeros((len(b), 42, 42))
+            K[:, :36, :36] = Sm
+            K[:, :36, 36:] = np.transpose(Bm, (0, 2, 1))
+            K[:, 36:, :36] = Bm
+            K[:, 36:, 36:] = -1e-12 * sc[:, None, None] * np.eye(6)[None]
+            Kinv = np.linalg.inv(K)
+            Z = Kinv[:, :36, :36] * (open_[:, :, None] & open_[:, None, :])
+            for i_, t in enumerate(b):
+                Zs[int(t)] = Z[i_]
+            G = gl[b]; Sg = sg[b]
+            okm = (G[:, :, None] >= 0) & (G[:, None, :] >= 0)
+            rows.append(np.broadcast_to(G[:, :, None], okm.shape)[okm])
+            cols.append(np.broadcast_to(G[:, None, :], okm.shape)[okm])
+            vals.append(Z[okm])           # lam is a displacement-like trace: the same for both tets (no orientation)
+    A = sp.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(nu_, nu_))
+    lamD = np.full(nu_, np.nan)
+    for fz in grip_x0:
+        for v in range(3):
+            lamD[slot[9 * fz + 3 * v]] = 0.0
+    for fz in grip_x1:
+        for v in range(3):
+            lamD[slot[9 * fz + 3 * v]] = 1.0
+    dir_ = ~np.isnan(lamD)
+    free = np.where(~dir_)[0]
+    Af = A[free][:, free]
+    rhs = -(A[free][:, np.where(dir_)[0]] @ lamD[dir_])
+    d = Af.diagonal().copy()
+    eps = 1e-10 * (float(np.abs(d).max()) if len(d) else 1.0)
+    Af = Af + sp.diags(np.where(d == 0, 1.0, eps))
+    d = np.where(d == 0, 1.0, d + eps)
+    lam = np.where(dir_, lamD, 0.0)
+    lam[free] = _rigid_amg_solve(M, Af, rhs, free, slot_xyz, nu_)
+    # g on each face: -Z lam from each side, outward -> global, averaged over the face's tets
+    g = np.zeros(nu_); cnt = np.zeros(nu_)
+    for t, Z in Zs.items():
+        G = gl[t]; Sg_ = sg[t]
+        lt = np.where(G >= 0, lam[np.maximum(G, 0)], 0.0)
+        gt = -(Z @ lt) * Sg_                                   # the tet's outward data -> the face's global orientation
+        m = G >= 0
+        np.add.at(g, G[m], gt[m]); np.add.at(cnt, G[m], 1.0)
+    return np.where(cnt > 0, g / np.maximum(cnt, 1), 0.0)
+
+
 def lower(V, phases, refine=1):
     """A PROVED LOWER bound on E_app (Fraction) for every modulus in the phases' boxes, and a note.
     The stress: the Alfeld-split element on every solid Kuhn tet (ustand.kuhn_split), built from FACE data g = tau n2
@@ -296,6 +390,24 @@ def lower(V, phases, refine=1):
             for c in range(3):
                 gl[:, 9 * f + 3 * v + c] = slot[9 * fid[:, f] + 3 * v + c]
                 sg[:, 9 * f + 3 * v + c] = out[:, f]
+    x1f = np.where(Fc["x1"] & grip)[0]
+    if nu_ >= HYBRID_FROM or _MUTANT.get("force_hybrid"):
+        # each open slot's vertex position and component (the rigid motions for the AMG)
+        fnodes = np.zeros((nf, 3), dtype=np.int64)
+        for f in range(4):
+            tri = np.sort(np.delete(M.tv, f, axis=1), axis=1)
+            fnodes[fid[:, f]] = tri
+        allxyz = np.stack([M.X, M.Y, M.Z], axis=1).astype(float)
+        sx = np.zeros((nu_, 3)); sc_ = np.zeros(nu_, dtype=np.int64)
+        idx = np.where(slot >= 0)[0]
+        fz_, rem = idx // 9, idx % 9
+        sx[slot[idx]] = allxyz[fnodes[fz_, rem // 3]]
+        sc_[slot[idx]] = rem % 3
+        g = _hybrid_g(M, KS, act, ty, gl, sg, nl, nh, Elo, slot, x1f, np.where(Fc["x0"] & grip)[0], nu_, (sx, sc_))
+        Fg = sum(g[slot[9 * fz + 3 * v]] * out[first[fz], list(fid[first[fz]]).index(fz)] for fz in x1f for v in range(3))
+        if Fg < 0:
+            g = -g                                               # the sign of the load: F^2 is what counts
+        return _exact_lower(M, KS, Fc, act, ty, gl, sg, nl, nh, Elo, Ehi, slot, sol2, grip, x1f, g)
     # 1. the float KKT: min sum_T g_T^T S_T g_T, BAL g_T = 0 per solid tet, resultant at x = nx equal to 1
     nm = 0.5 * (nl + nh)
     rows, cols, vals = [], [], []
@@ -320,7 +432,6 @@ def lower(V, phases, refine=1):
                 if B[r, j] and gl[t, j] >= 0:
                     cr.append(6 * i_ + r); cc.append(gl[t, j]); cv.append(B[r, j] * sg[t, j])
     nb = 6 * len(act)
-    x1f = np.where(Fc["x1"] & grip)[0]
     for fz in x1f:
         t = first[fz]
         for v in range(3):
@@ -333,6 +444,12 @@ def lower(V, phases, refine=1):
     import scipy.sparse.linalg as sla
     sol = sla.spsolve(K, np.r_[np.zeros(nu_), rhs_c])
     g = sol[:nu_]
+    return _exact_lower(M, KS, Fc, act, ty, gl, sg, nl, nh, Elo, Ehi, slot, sol2, grip, x1f, g)
+
+
+def _exact_lower(M, KS, Fc, act, ty, gl, sg, nl, nh, Elo, Ehi, slot, sol2, grip, x1f, g):
+    """Steps 2-4 of lower(): g (floats, any) made EXACTLY admissible in integers, and the proved bound."""
+    fid, out, first, second = Fc["fid"], Fc["out"], Fc["first"], Fc["second"]
     # 2. integers: a dyadic grid, then EXACT balance by a spanning-forest push
     scale = 2.0 ** (40 - max(0, int(np.ceil(np.log2(max(1.0, float(np.abs(g).max())))))))
     Gi = [int(v) for v in np.round(g * scale)]                 # Python ints: no overflow in the pushes
@@ -406,9 +523,27 @@ def lower(V, phases, refine=1):
         so = int(out[t, f])
         for v in range(3):
             Gq[slot[9 * fz + 3 * v]] += so * F(int(sp_.fraction(sol3[v])[0]), int(sp_.fraction(sol3[v])[1]))
-    # EXACT checks: every solid tet balanced; nothing outside the open slots (by construction of slot)
-    for t in act:
-        assert not any(residF(int(t))), "balance not exact"
+    # EXACT checks: every solid tet balanced; nothing outside the open slots (by construction of slot). In int64 over
+    # a common denominator when no product can overflow (|BALI| <= 24, 36 terms), else in Python integers
+    import math
+    D = 1
+    for v in Gq:
+        if v.denominator != 1:
+            D = D * v.denominator // math.gcd(D, v.denominator)
+    GD = [int(v * D) for v in Gq]
+    big = max((abs(v) for v in GD), default=0)
+    if big * 24 * 36 < 2 ** 62:
+        GDa = np.array(GD, dtype=np.int64)
+        for t_ in range(6):
+            blk = act[ty[act] == t_]
+            if not len(blk):
+                continue
+            Gt = np.where(gl[blk] >= 0, GDa[np.maximum(gl[blk], 0)], 0) * sg[blk].astype(np.int64)
+            R_ = Gt @ KS[t_]["BALI"].astype(np.int64).T
+            assert not R_.any(), "balance not exact"
+    else:
+        for t in act:
+            assert not any(residF(int(t))), "balance not exact"
     # 3.-4. the resultant and the energy bound
     Fres = sum((Gq[slot[9 * fz + 3 * v]] * int(out[first[fz], list(fid[first[fz]]).index(fz)])
                 for fz in x1f for v in range(3)), F(0)) / 6
@@ -445,7 +580,6 @@ def lower(V, phases, refine=1):
     En = F(tot) * (1 + 3 * F(_gam(nterms + 16))) + F(nterms, 2 ** 1000)
     if En == 0:
         return F(0), "zero energy"
-    k = refine
     # refined units: the box and every length x k; F scales as k^2 at fixed stress, the energy as k^3, so
     # nx F^2 / (ny nz En) is unchanged with nx, ny, nz the refined counts
     return F(M.nx) * Fres * Fres / (F(M.ny * M.nz) * En), "ok"
