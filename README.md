@@ -137,7 +137,10 @@ held tightly (one repairable unit; two parallel units with one crew). REACH with
 time, probabilities in ranges per row): robust Bellman with the exact greedy row, valid for every chain in the ranges,
 day-varying included; `solar_outage`: an off-grid battery under a weather chain — the probability of at least one
 short day, PROVED from both sides (8 days, two weathers: the exact 0.10656 bracketed [0.060, 0.406] at a 300 Wh unit,
-closed to 0.10656 at 10 Wh).
+closed to 0.10656 at 10 Wh). `clinic_joint`: a clinic on ONE battery — the fridge first, the water pump on what is
+left, one weather for both (the shared ground): power alone 0, water alone (pump assumed powered) 0, JOINT over 10 days
+0.2823 (= the enumeration of all 2^10 weather sequences), 30 days 0.733, 90 days 0.986 — two separate checks pass,
+the system fails.
 
 ## Run
 

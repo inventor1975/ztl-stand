@@ -4099,6 +4099,61 @@ check("WHAT TO MEASURE: the refuted village pump — 'drawdown >= ~5.5833 fails 
       and (_fx(_ffm["Drawdown"]["Drawdown"][0]) < F(67, 12) or float(_fx(_ffm["Tsun"]["Tsun"][1])) > _tstar),
       (float(_dlo), float(_thi), _tstar, _pr, _vcorner, _ffm))
 
+# CLINIC ON ONE BATTERY — power and water with ONE shared weather (2026-11-03, the curator's "сеть формул: давай
+# сделаем"): the fridge has priority, the pump runs on what is left. MEASURED: power alone 0, water alone (pump
+# assumed powered) 0, JOINT 10 days 0.282258108 (= the enumeration of all 2^10 weather sequences, exactly), 30 days
+# 0.733, 90 days 0.986 — two separate checks pass, the system fails. Two sides: the joint bracket IS the enumeration
+# on the grid and holds it off the grid (300 Wh unit); sabotages: the pump not paid from the battery (separate
+# modelling — 0, under the exact 0.282) and the worst chain rounded favourably (its high bound under the exact value)
+_Wc = {"sun": {"sun": [F(7, 10)] * 2, "cloud": [F(3, 10)] * 2}, "cloud": {"sun": [F(4, 10)] * 2, "cloud": [F(6, 10)] * 2}}
+def _clinic(fridge=400, days=10, unit=100):
+    return {"battery_wh": 2000, "fridge_wh": [fridge, fridge], "pump_wh": [600, 600], "pump_m3": [2, 2],
+            "need_m3": [F(3, 2)] * 2, "tank_m3": 4, "gain_wh": {"sun": [1800, 1800], "cloud": [500, 500]}, "weather": _Wc,
+            "start_charge_wh": 2000, "start_tank_m3": 4, "start_weather": "sun", "days": days, "unit_wh": unit,
+            "unit_m3": F(1, 2)}
+def _clinic_enum(fridge=400, days=10, fail="any", pump_free=False):
+    tot = F(0)
+    for seq in _it_mk.product(["sun", "cloud"], repeat=days):
+        p_, w, c, t, bad = F(1), "sun", F(2000), F(4), False
+        for w2 in seq:
+            p_ *= _Wc[w][w2][0]
+            if not bad:
+                c = min(F(2000), c + {"sun": 1800, "cloud": 500}[w2])
+                pb = c < fridge
+                c -= fridge
+                runs = pump_free or c >= 600
+                if runs and not pump_free:
+                    c -= 600
+                t = min(F(4), t + (2 if runs else 0)) - F(3, 2)
+                bad = {"any": pb or t < 0, "power": pb, "water": t < 0}[fail]
+            w = w2
+        if bad:
+            tot += p_
+    return tot
+_cx = _clinic_enum()
+_cj = _MK.clinic_joint(dict(_clinic(), fail="any"))
+_cp = _MK.clinic_joint(dict(_clinic(), fail="power"))
+_cx2 = _clinic_enum(fridge=450)
+_cj2 = _MK.clinic_joint(dict(_clinic(fridge=450, unit=300), fail="any"))
+_MK.MUTANT["clinic_pump_free"] = True
+try:
+    _cw = _MK.clinic_joint(dict(_clinic(), fail="water"))
+    _cjm = _MK.clinic_joint(dict(_clinic(), fail="any"))
+finally:
+    _MK.MUTANT.clear()
+_MK.MUTANT["clinic_round_wrong"] = True
+try:
+    _cjr = _MK.clinic_joint(dict(_clinic(fridge=450, unit=300), fail="any"))
+finally:
+    _MK.MUTANT.clear()
+_eq = lambda b, x: b[0] <= x <= b[1] and b[1] - b[0] < F(1, 10 ** 15)
+check("CLINIC ON ONE BATTERY: power alone 0, water alone (pump assumed powered) 0, JOINT = the enumeration 0.2823 exactly; "
+      "off the grid the joint bracket holds the enumeration; the sabotages (pump not paid / worst chain rounded "
+      "favourably) fall under the exact value",
+      _eq(_cj, _cx) and _cp[1] < F(1, 10 ** 15) and _cw[1] < F(1, 10 ** 15) and _cx > F(1, 4)
+      and _cj2[0] <= _cx2 <= _cj2[1] and _cjm[1] < _cx and _cjr[1] < _cx2,
+      ([float(x) for x in (*_cj, _cx, *_cp, *_cw, *_cj2, _cx2, *_cjm, *_cjr)]))
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,
