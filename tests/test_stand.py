@@ -3663,7 +3663,7 @@ finally:
 _pbj = _PB.judge(1000, 1000, 10, 210000, F(3, 10), 1, _SS, 355, need_sigma_cr=70, n_low=32, n_up=8)
 _pbx = 4 * _mpb.pi ** 2 * 210000 * 100 / (12 * 0.91 * 1e6)
 check("PLATE BUCKLING: a simply supported square panel — uniform compression k in [3.95, 4.0000] holding 4, psi = 0 "
-      "holding Navier's 7.8120; a 1000 x 1000 x 10 mm S355 panel's sigma_cr bracket holds 75.920 MPa, 'sigma_cr >= 70' "
+      "holding Navier's 7.81196 (60 terms); a 1000 x 1000 x 10 mm S355 panel's sigma_cr bracket holds 75.920 MPa, 'sigma_cr >= 70' "
       "EARNED, EN 1993-1-5's rho bracketed ~0.41; the sabotage (load under-integrated) rises above the upper bound",
       3.94 < _pb1[0] <= 4 <= _pb1[1] < 4.001 and _pb0[0] <= 7.81196 <= _pb0[1] and _pbm > _pb1[1]
       and _pbj["sigma_cr"][0] <= _pbx <= _pbj["sigma_cr"][1] and _pbj["verdict"] == "EARNED"
