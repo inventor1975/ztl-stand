@@ -133,7 +133,11 @@ RELIABILITY (2026-11-03, `ustand/markov.py`): a continuous-time Markov chain wit
 time to failure and the long-run availability PROVED for every rate in the box, by rational certificates checked
 exactly at the box's vertices (M-matrix comparison for the MTTF, a gain/bias certificate for availability); judged
 by ZTL (`--need-mttf`, `--need-availability`). Premise stated in the output: exponential holding times. Closed forms
-held tightly (one repairable unit; two parallel units with one crew).
+held tightly (one repairable unit; two parallel units with one crew). REACH within N steps (`reach_bounds`, discrete
+time, probabilities in ranges per row): robust Bellman with the exact greedy row, valid for every chain in the ranges,
+day-varying included; `solar_outage`: an off-grid battery under a weather chain — the probability of at least one
+short day, PROVED from both sides (8 days, two weathers: the exact 0.10656 bracketed [0.060, 0.406] at a 300 Wh unit,
+closed to 0.10656 at 10 Wh).
 
 ## Run
 

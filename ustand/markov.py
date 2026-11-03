@@ -189,6 +189,104 @@ def availability_bounds(model):
     return out[0], out[1], "ok"
 
 
+# ------------------------------------------------------------------------------- REACH WITHIN N STEPS (DTMC, 2026-11-03)
+def _greedy_row(succ, v, maximise):
+    """The extreme of sum_j p_j v_j over {lo_j <= p_j <= hi_j, sum p_j = 1} (exact): every p_j at lo, the rest of the
+    mass to the successors with the largest v first (maximise) or the smallest first — a linear program over a box cut
+    by one equality, whose optimum this greedy order reaches exactly."""
+    rest = 1 - sum(lo for _j, (lo, _hi) in succ)
+    tot = sum(lo * v[j] for j, (lo, _hi) in succ)
+    order = sorted(succ, key=lambda t: v[t[0]], reverse=maximise)
+    if MUTANT.get("greedy_wrong_end"):                    # sabotage (tests only): the rest of the mass to the wrong end
+        order = order[::-1]
+    for j, (lo, hi) in order:
+        take = min(hi - lo, rest)
+        if take > 0:
+            tot += take * v[j]
+            rest -= take
+    return tot
+
+
+def _round(x, up, bits=60):
+    """Outward to a dyadic with `bits` fractional bits (the operator is monotone: rounding up stays an upper bound)."""
+    q = x * 2 ** bits
+    n = q.numerator // q.denominator
+    if up and n * q.denominator != q.numerator:
+        n += 1
+    return F(n, 2 ** bits)
+
+
+def reach_bounds(model):
+    """PROVED [low, high] of the probability that a discrete-time chain, started at `start`, enters `target` within
+    `steps` steps — for EVERY chain whose transition probabilities lie in the stated ranges, even one that changes
+    them from step to step (the bounds are the robust values: nature picks the worst / best row at every step).
+    model: {"states", "start", "target": [...], "steps": N, "probs": [{"from", "to", "p": [lo, hi]}, ...]}; each row
+    must admit a distribution (sum lo <= 1 <= sum hi). Exact rationals, rounded outward each step."""
+    st = list(model["states"])
+    ix = {x: k for k, x in enumerate(st)}
+    tgt = {ix[x] for x in model["target"]}
+    start, N = ix[model["start"]], int(model["steps"])
+    rows = {k: [] for k in range(len(st))}
+    for r in model["probs"]:
+        rows[ix[r["from"]]].append((ix[r["to"]], _box(r["p"], f"probability {r['from']} -> {r['to']}")))
+    for k, succ in rows.items():
+        if k in tgt:
+            continue
+        lo, hi = sum(a for _j, (a, _b) in succ), sum(b for _j, (_a, b) in succ)
+        if not succ or lo > 1 or hi < 1:
+            raise ValueError(f"state {st[k]}: its probabilities admit no distribution (sum lo {lo}, sum hi {hi})")
+    out = []
+    for maximise in (False, True):
+        v = [F(1) if k in tgt else F(0) for k in range(len(st))]
+        for _ in range(N):
+            v = [F(1) if k in tgt else _round(_greedy_row(rows[k], v, maximise), up=maximise)
+                 for k in range(len(st))]
+        out.append(min(max(v[start], F(0)), F(1)))
+    return out[0], out[1]
+
+
+def solar_outage(capacity_wh, load_wh, gain_wh, weather, start_charge_wh, start_weather, days, unit_wh):
+    """PROVED [low, high] of the probability that an off-grid solar battery runs short on at least one of `days` days.
+    Each day: the weather moves to w' (probabilities in ranges, `weather` = {w: {w': [lo, hi]}}); the battery gains
+    gain_wh[w'] (a range) and pays load_wh (a range); charge = min(capacity, charge + gain - load); a day whose need
+    is not covered is an OUTAGE (the target). The outage probability does not decrease as the charge, the gains or the
+    load's complement decrease, so the HIGH bound takes the chain with every gain at its low end rounded DOWN to whole
+    units and the load at its high end rounded UP (the charge rounded down), and the LOW bound the reverse; both by
+    reach_bounds (every chain in the ranges, day-varying included). Exact rationals."""
+    unit = F(unit_wh)
+    cap_u = int(F(capacity_wh) / unit)                    # the capacity rounded DOWN to units: a smaller battery
+    W = list(weather)
+    def chain(worst):
+        rd = (lambda x: (F(x) / unit).__floor__()) if worst else (lambda x: (F(x) / unit).__ceil__())
+        ru = (lambda x: (F(x) / unit).__ceil__()) if worst else (lambda x: (F(x) / unit).__floor__())
+        cap = cap_u if worst else (F(capacity_wh) / unit).__ceil__()
+        if MUTANT.get("solar_round_wrong") and worst:     # sabotage (tests only): the worst chain rounded favourably
+            rd, ru = ru, rd
+        g = {w: rd(_box(gain_wh[w], f"gain {w}")[0 if worst else 1]) for w in W}
+        L = ru(_box(load_wh, "load")[1 if worst else 0])
+        c0 = min(cap, rd(start_charge_wh))
+        states = [f"{c}|{w}" for c in range(cap + 1) for w in W] + ["OUT"]
+        probs = []
+        for c in range(cap + 1):
+            for w in W:
+                for w2, pr in weather[w].items():
+                    nc = c + g[w2] - L
+                    to = "OUT" if nc < 0 else f"{min(cap, nc)}|{w2}"
+                    probs.append({"from": f"{c}|{w}", "to": to, "p": pr})
+        # merge parallel edges (two weathers can land on the same state): sum their ranges
+        merged = {}
+        for r in probs:
+            k = (r["from"], r["to"])
+            lo, hi = _box(r["p"], "probability")
+            a, b = merged.get(k, (F(0), F(0)))
+            merged[k] = (a + lo, b + hi)
+        probs = [{"from": a, "to": b, "p": [lo, hi]} for (a, b), (lo, hi) in merged.items()]
+        return {"states": states, "start": f"{c0}|{start_weather}", "target": ["OUT"], "steps": days, "probs": probs}
+    lo, _ = reach_bounds(chain(worst=False))
+    _, hi = reach_bounds(chain(worst=True))
+    return lo, hi
+
+
 PREMISE = ("continuous-time Markov chain (exponential holding times), each rate anywhere in its stated range "
            "independently; long-run availability over any stationary distribution")
 

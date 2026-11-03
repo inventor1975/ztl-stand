@@ -4011,6 +4011,54 @@ check("MARKOV RELIABILITY: one repairable unit — MTTF [500, 1000] and availabi
       ([float(x) for x in (*_mt1[:2], *_av1[:2], *_mt2[:2], _mt2x, *_av2[:2], _av2x)],
        [None if x is None else float(x) for x in (*_mtm[:2], *_avm[:2])]))
 
+# MARKOV, REACH WITHIN N STEPS + SOLAR OUTAGE (2026-11-03): interval DTMC, robust Bellman with the exact greedy row
+# (bounds hold for every chain in the ranges, day-varying included). Two sides: 1 - (1 - p)^N at the range's ends,
+# exactly; a solar battery (weather Markov chain, daily gain / load) against an independent enumeration of all 2^8
+# weather sequences — point data on the unit grid: the bracket is the exact value (to the outward rounding, 2^-60 per
+# step); off the grid (unit 300 Wh): [0.060, 0.406] holds 0.10656, and a 10 Wh unit closes it to 0.10656 (MEASURED). Sabotages: the greedy's rest of the mass to the wrong end (inverted bracket), the worst chain
+# rounded favourably (its high bound falls under the exact value)
+import itertools as _it_mk
+_rm = {"states": ["ok", "bad"], "start": "ok", "target": ["bad"], "steps": 30,
+       "probs": [{"from": "ok", "to": "bad", "p": ["1/100", "1/50"]}, {"from": "ok", "to": "ok", "p": ["49/50", "99/100"]}]}
+_rb = _MK.reach_bounds(_rm)
+_rbx = (1 - (1 - F(1, 100)) ** 30, 1 - (1 - F(1, 50)) ** 30)
+_MK.MUTANT["greedy_wrong_end"] = True
+try:
+    _rbm = _MK.reach_bounds(_rm)
+finally:
+    _MK.MUTANT.clear()
+_Wm = {"sun": {"sun": [F(7, 10)] * 2, "cloud": [F(3, 10)] * 2}, "cloud": {"sun": [F(4, 10)] * 2, "cloud": [F(6, 10)] * 2}}
+def _sol_exact(g, L, c0=1200, cap=1800, days=8):
+    tot = F(0)
+    for seq in _it_mk.product(["sun", "cloud"], repeat=days):
+        p_, w, c, out = F(1), "sun", F(c0), False
+        for w2 in seq:
+            p_ *= _Wm[w][w2][0]
+            if not out:
+                c = c + g[w2] - L
+                out = c < 0
+                c = min(F(cap), c)
+            w = w2
+        if out:
+            tot += p_
+    return tot
+_g1, _g2 = {"sun": 1200, "cloud": 300}, {"sun": 1150, "cloud": 280}
+_s1x, _s2x = _sol_exact(_g1, 600), _sol_exact(_g2, 600)
+_sb = lambda g, u: _MK.solar_outage(1800, [600, 600], {k: [v, v] for k, v in g.items()}, _Wm, 1200, "sun", 8, u)
+_s1, _s2c, _s2f = _sb(_g1, 300), _sb(_g2, 300), _sb(_g2, 10)
+_MK.MUTANT["solar_round_wrong"] = True
+try:
+    _s2m = _sb(_g2, 300)
+finally:
+    _MK.MUTANT.clear()
+check("MARKOV REACH + SOLAR OUTAGE: 1 - (1 - p)^30 at the range's ends exactly; a solar battery against the enumeration "
+      "of all weather sequences — exact on the unit grid, held off it and narrower with a finer unit; the sabotages "
+      "(greedy to the wrong end / worst chain rounded favourably) are caught",
+      _rb[0] <= _rbx[0] < _rb[0] + F(1, 10 ** 15) and _rb[1] - F(1, 10 ** 15) < _rbx[1] <= _rb[1] and _rbm[0] > _rbm[1]
+      and _s1[0] <= _s1x <= _s1[1] and _s1[1] - _s1[0] < F(1, 10 ** 15) and _s2c[0] <= _s2x <= _s2c[1]
+      and _s2f[0] <= _s2x <= _s2f[1] and _s2f[1] - _s2f[0] < _s2c[1] - _s2c[0] and _s2m[1] < _s2x,
+      ([float(x) for x in (*_rb, *_rbx, *_s1, _s1x, *_s2c, *_s2f, _s2x, _s2m[1])]))
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,
