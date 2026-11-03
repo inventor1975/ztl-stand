@@ -32,6 +32,8 @@ bound deliberately broken (MUTATION) — they must find violations, or the check
      reference, end moments both sides and |sigma| from above; J-MUTA: the geometric moment with N_mid G.
   K  END RELEASES in 3D buckling (2026-11-03, the cloud red team's finding 1): one member, hinges by RELEASE, the
      bracket vs redteam/ref_hinged.py; K-MUTR: the old forms (the node's rotation at a released end).
+  L  3D ELASTICITY (2026-11-03): ustand.elastic3d's lower and upper bounds against each other at the moduli box's
+     corners and on exact cases (homogeneous, Voigt, Reuss); L-MUTE / L-MUTU break the lower / the upper.
   A and B also check BOTH SIDES since 2026-11-02 (B: the 8-element mesh's end moments, with the geometric part): every proved end-moment interval must contain an INDEPENDENT numpy FE
      reference (K_E - P G rows, 64 elements) — the old stress check shared the stand's K_E-row formula
 Writes bench/night/REPORT.json and REPORT.md.
@@ -613,6 +615,61 @@ def release_case(seed):
     return {"checked": (lo is not None) + (hi is not None), "violations": viol, "example": ex_}
 
 
+def elastic_case(seed):
+    """sweep L (2026-11-03): 3D elasticity's two proved bounds (ustand.elastic3d) on random two-phase porous voxel
+    samples with moduli boxes, both sides against each other at the box's corners (nothing else knows the truth):
+    the box's lower bound <= the SOFT corner's upper bound refined x2, and the box's upper bound >= the STIFF corner's
+    lower bound; plus the exact cases (a homogeneous box, a laminate along x with equal nu: Voigt; across x with
+    nu = 0: Reuss) inside [lower, upper]. L-MUTE: the lower bound's compliance at the stiff end; L-MUTU: the upper
+    bound's moduli at the soft end."""
+    import numpy as np
+    from ustand import elastic3d as EL
+    rng = np.random.default_rng(seed)
+    P = lambda E, nu: {"E": [F(E)], "nu": [F(nu)]}
+    viol, n_chk, ex_ = 0, 0, None
+    if seed % 4 == 0:
+        # an exact case
+        n = rng.integers(2, 5, size=3)
+        kind = rng.choice(["homog", "voigt", "reuss"])
+        V = np.ones(tuple(n), int)
+        E1, E2 = int(rng.integers(50, 300)), int(rng.integers(20, 300))
+        nu = F(int(rng.integers(0, 40)), 100)
+        if kind == "homog":
+            ph, exact = {1: P(E1, nu)}, E1
+        elif kind == "voigt":
+            V[:, : n[1] // 2 or 1, :] = 2
+            fr = F(int(n[1] // 2 or 1), int(n[1]))
+            ph, exact = {1: P(E1, nu), 2: P(E2, nu)}, float(fr * E2 + (1 - fr) * E1)
+        else:
+            V[: n[0] // 2 or 1] = 2
+            fr = F(int(n[0] // 2 or 1), int(n[0]))
+            ph, exact = {1: P(E1, 0), 2: P(E2, 0)}, float(1 / (fr / E2 + (1 - fr) / E1))
+        lo = float(EL.lower(V, ph)[0]); up = float(EL.upper(V, ph)[0])
+        n_chk = 2
+        for ok_, what in ((lo <= exact * (1 + 1e-9), "lower"), (up >= exact * (1 - 1e-9), "upper")):
+            if not ok_:
+                viol += 1; ex_ = ex_ or {"seed": seed, "kind": kind, what: lo if what == "lower" else up, "exact": exact}
+        return {"checked": n_chk, "violations": viol, "example": ex_}
+    n = tuple(int(v) for v in rng.integers(2, 5, size=3))
+    V = (rng.random(n) < rng.choice([0.6, 0.75, 0.9])).astype(int)
+    V[V == 1] = rng.integers(1, 3, size=int((V == 1).sum()))
+    box = {0: P(0, 0), 1: {"E": [F(190), F(210)], "nu": [F(25, 100), F(30, 100)]},
+           2: {"E": [F(60), F(80)], "nu": [F(30, 100), F(35, 100)]}}
+    corner = lambda e1, n1, e2, n2: {0: P(0, 0), 1: P(e1, n1), 2: P(e2, n2)}
+    lo = float(EL.lower(V, box)[0])
+    up = float(EL.upper(V, box)[0])
+    soft = min(float(EL.upper(V, corner(190, F(25, 100), 60, F(30, 100)), refine=2)[0]),
+               float(EL.upper(V, corner(190, F(30, 100), 60, F(35, 100)), refine=2)[0]))
+    stiff = max(float(EL.lower(V, corner(210, F(25, 100), 80, F(30, 100)))[0]),
+                float(EL.lower(V, corner(210, F(30, 100), 80, F(35, 100)))[0]))
+    n_chk = 2
+    if lo > soft * (1 + 1e-9):
+        viol += 1; ex_ = {"seed": seed, "lower": lo, "soft_upper": soft}
+    if up < stiff * (1 - 1e-9):
+        viol += 1; ex_ = ex_ or {"seed": seed, "upper": up, "stiff_lower": stiff}
+    return {"checked": n_chk, "violations": viol, "example": ex_}
+
+
 def ltb_case(seed):
     """sweep I (2026-11-02): ustand.ltb's member critical factor against bench/night/ltb_ref.py (Gauss-quadrature
     Hermite elements, 96 per member, nothing shared): random doubly symmetric sections (I_w = 0 sometimes), spans,
@@ -792,6 +849,10 @@ def mutate(kind=True):
     if kind == "axial":
         FRM._MUTANT["axial_mean"] = True
         return FRM._MUTANT.clear
+    if kind in ("elasl", "elasu"):
+        from ustand import elastic3d as EL
+        EL._MUTANT["lower_e_high" if kind == "elasl" else "e_low"] = True
+        return EL._MUTANT.clear
     if kind == "release":
         from ustand import frame3d as F3
         F3._MUTANT["ignore_release"] = True
@@ -822,7 +883,8 @@ DIST = []
 
 SWEEPS = {"A": (beam_column_case, 400), "B": (frame_case, 120), "C": (stability_case, 120), "D": (truss_case, 200),
           "E": (general_case, 600), "F": (plate_case, 24), "G": (space_frame_case, 60), "H": (axial_case, 120), "I": (ltb_case, 150),
-          "J": (axial_stress_case, 150), "K": (release_case, 120)}
+          "J": (axial_stress_case, 150), "K": (release_case, 120),
+          "L": (elastic_case, 160)}
 
 
 def _run(args):
@@ -838,7 +900,7 @@ def _run(args):
         if restore:
             restore()
     r["seconds"] = time.time() - t0
-    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3", "axial": "-MUTA", "ltb": "-MUTL", "axialm": "-MUTA", "release": "-MUTR"}.get(
+    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3", "axial": "-MUTA", "ltb": "-MUTL", "axialm": "-MUTA", "release": "-MUTR", "elasl": "-MUTE", "elasu": "-MUTU"}.get(
         mutated, "-MUT" if mutated else "")
     return key + tag, r
 
@@ -862,6 +924,8 @@ def main(argv):
         tasks += [("I", 990000 + s, "ltb") for s in range(int(60 * scale))]
         tasks += [("J", 991000 + s, "axialm") for s in range(int(60 * scale))]
         tasks += [("K", 992000 + s, "release") for s in range(int(60 * scale))]
+        tasks += [("L", 993001 + 4 * s, "elasl") for s in range(int(40 * scale))]
+        tasks += [("L", 994001 + 4 * s, "elasu") for s in range(int(40 * scale))]
     random.Random(7).shuffle(tasks)
     t0 = time.time()
     agg = {}
