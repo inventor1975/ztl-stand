@@ -491,6 +491,171 @@ def _exact_and_energy(M, sig, Fc, q, open_f, nI, t1, t2, elec, te):
 
 
 
+# --------------------------------------------------------------------------------------------- LOWER, BDM1 (2026-11-03)
+MUTANT = {}             # TEST-ONLY sabotage switches; empty = the real bounds
+BDM1_UP_TO = 12000      # conducting tets: BDM1's float choice is a direct KKT (MEASURED 12^3 23 s, 16^3 233 s / 5.6 GB);
+                        # RT0 (hybridized, 0.8 s) above — a hybridized BDM1 is the next step
+
+
+def _bdm1_tables(M, Fc):
+    """Per Kuhn type (all its tets are translates): for each vertex v, the three faces through it (as (face, place
+    of v among that face's sorted vertices)), the integer matrix N_v of their OUTWARD area normals (rows), adj(N_v)
+    and det(N_v) — J(v) = adj(N_v) q_v / det(N_v); and the 12 x 12 energy form for s = 1 (floats: the CHOICE only)."""
+    fid, out, gn = Fc["fid"], Fc["out"], Fc["gn"]
+    nvox = len(M.vox)
+    tabs = []
+    for ty in range(6):
+        t0 = ty * nvox
+        n2 = [out[t0, f] * gn[fid[t0, f]].astype(np.int64) for f in range(4)]
+        verts = []
+        Jmap = np.zeros((4, 3, 12))
+        for v in range(4):
+            fs = [f for f in range(4) if f != v]
+            pos = [[w for w in range(4) if w != f].index(v) for f in fs]
+            N = np.array([n2[f] for f in fs], dtype=np.int64)
+            det = int(round(np.linalg.det(N.astype(float))))
+            adj = np.round(np.linalg.inv(N.astype(float)) * det).astype(np.int64)
+            assert (N @ adj == det * np.eye(3, dtype=np.int64)).all()
+            verts.append((fs, pos, adj, det))
+            for a, (f, p) in enumerate(zip(fs, pos)):
+                Jmap[v, :, 3 * f + p] += adj[:, a] / det
+        A1 = sum(Jmap[v].T @ Jmap[v] for v in range(4))
+        Js = Jmap.sum(axis=0)
+        tabs.append({"verts": verts, "Q0": (1 / 6) / 20 * (A1 + Js.T @ Js)})
+        # every tet of the type has the same outward normals (translates): checked on the type's last tet
+        t1 = t0 + nvox - 1
+        assert all((out[t1, f] * gn[fid[t1, f]] == n2[f]).all() for f in range(4))
+    return tabs
+
+
+def lower_bdm1(M, sig):
+    """The conductance's LOWER bound from a BDM1 flux (linear on each tet; its normal component linear on each face,
+    3 values per face q_{f,v} = J(v).n2): at each vertex the three faces through it fix J(v), so the 12 face values
+    ARE the tet's field; div J is a constant, sum_out q / (6 |T|), so conservation is ONE integer condition per tet and
+    the RT0 path's spanning-forest push carries over (a residual moved through one value of one face, coefficient 1).
+    MEASURED (float choice, same mesh): checkerboard 1/0.25 RT0 2.630 -> BDM1 3.004 (RT0 at x2: 2.902). The energy
+    int |J|^2 / s = |T|/20 (sum_v |J(v)|^2 + |sum_v J(v)|^2) / s, rigorously from above."""
+    Fc = _faces(M)
+    fid, out, gn, nf, first, second = Fc["fid"], Fc["out"], Fc["gn"], Fc["nf"], Fc["first"], Fc["second"]
+    cond = sig > 0
+    closed = _closed(M, Fc, cond)
+    openf = ~closed
+    nvox = len(M.vox)
+    ty = np.arange(M.nt) // nvox
+    tabs = _bdm1_tables(M, Fc)
+    act = np.where(cond)[0]
+    slot = -np.ones((nf, 3), dtype=np.int64)
+    oi = np.where(openf)[0]
+    slot[oi] = np.arange(3 * len(oi)).reshape(-1, 3)
+    nu_ = 3 * len(oi)
+    # 1. the float choice: min energy, conservation per tet, net inflow 1 at x = 0 (direct KKT)
+    rows, cols, vals = [], [], []
+    G12 = slot[fid].reshape(M.nt, 12)                          # (nt, 12): face f's three values, in order
+    S12 = np.repeat(out, 3, axis=1).astype(float)
+    for t_ in range(6):
+        b = act[ty[act] == t_]
+        if not len(b):
+            continue
+        Q0 = tabs[t_]["Q0"]
+        G = G12[b]; Sg = S12[b]
+        okm = (G[:, :, None] >= 0) & (G[:, None, :] >= 0)
+        rows.append(np.broadcast_to(G[:, :, None], okm.shape)[okm])
+        cols.append(np.broadcast_to(G[:, None, :], okm.shape)[okm])
+        vals.append((Q0[None] / sig[b][:, None, None] * Sg[:, :, None] * Sg[:, None, :])[okm])
+    Qm = sp.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(nu_, nu_))
+    ai = np.repeat(np.arange(len(act)), 12)
+    gg = G12[act].ravel(); ss = S12[act].ravel()
+    m = gg >= 0
+    x0f = np.where(Fc["x0"] & openf)[0]
+    x0t = first[x0f]
+    x0o = np.array([out[t, list(fid[t]).index(f)] for t, f in zip(x0t, x0f)], dtype=float)
+    B = sp.csr_matrix((np.r_[ss[m] / 6.0, np.repeat(-x0o / 6.0, 3)],
+                       (np.r_[ai[m], np.full(3 * len(x0f), len(act))], np.r_[gg[m], slot[x0f].ravel()])),
+                      shape=(len(act) + 1, nu_))
+    rhs = np.zeros(len(act) + 1); rhs[-1] = 1.0
+    eps = 1e-12 * max(1.0, abs(Qm).max())
+    K = sp.bmat([[Qm + eps * sp.identity(nu_), B.T], [B, -eps * sp.identity(len(act) + 1)]]).tocsc()
+    import scipy.sparse.linalg as sla_
+    qf = sla_.spsolve(K, np.r_[np.zeros(nu_), rhs])[:nu_]
+    # 2. integers and the exact push (as the RT0 path, one value per face moved)
+    scale = 2.0 ** (40 - max(0, int(np.ceil(np.log2(max(1.0, float(np.abs(qf).max())))))))   # |Q| < 2^41
+    Qi = np.zeros((nf, 3), dtype=np.int64)
+    Qi[oi] = np.round(qf.reshape(-1, 3) * scale).astype(np.int64)
+    def residual():
+        R = np.zeros(M.nt, dtype=np.int64)
+        for f in range(4):
+            R += out[:, f].astype(np.int64) * Qi[fid[:, f]].sum(axis=1)
+        return R
+    R = residual()
+    inner = openf & (second >= 0)
+    nI = np.where(inner)[0]
+    t1, t2 = first[nI], second[nI]
+    elec = openf & (second < 0) & (Fc["x0"] | Fc["x1"])
+    te = first[elec]
+    G_ = sp.csr_matrix((np.r_[nI, nI] + 1, (np.r_[t1, t2], np.r_[t2, t1])), shape=(M.nt, M.nt))
+    root_face = np.full(M.nt, -1)
+    root_face[te] = np.where(elec)[0]
+    parent = np.full(M.nt, -2); pface = np.full(M.nt, -1)
+    roots = np.where(root_face >= 0)[0]
+    parent[roots] = -1
+    order = list(roots); head = 0
+    indptr, indices, data = G_.indptr, G_.indices, G_.data
+    while head < len(order):
+        t = order[head]; head += 1
+        for k in range(indptr[t], indptr[t + 1]):
+            v = indices[k]
+            if parent[v] == -2 and cond[v]:
+                parent[v] = t; pface[v] = data[k] - 1; order.append(v)
+    island = cond & (parent == -2)
+    if island.any():
+        for f in range(4):
+            Qi[fid[island, f]] = 0
+        R = residual()
+    for t in reversed(order):
+        rt = int(R[t])
+        if rt == 0:
+            continue
+        f = pface[t] if parent[t] >= 0 else root_face[t]
+        loc = int(np.argmax(fid[t] == f))
+        so = int(out[t, loc])
+        Qi[f, 0] -= so * rt
+        R[t] = 0
+        if parent[t] >= 0:
+            ploc = int(np.argmax(fid[parent[t]] == f))
+            R[parent[t]] -= int(out[parent[t], ploc]) * so * rt
+    Rc = residual()
+    assert not Rc[cond].any(), "conservation not exact"
+    assert not Qi[closed].any(), "flux through a closed face"
+    assert np.abs(Qi).max() < 2 ** 46, "face values too large for exact int64 products"
+    I_int = int(np.sum(-x0o.astype(np.int64)[:, None] * Qi[x0f]))   # 6 x the net inflow at x = 0, times scale
+    if I_int == 0:
+        return F(0), "no current path between the electrodes"
+    I = F(I_int, 6) / F(scale)
+    # 3. the energy, from above: J(v) = adj q_v / det (adj q_v exact in int64), nonnegative squares
+    tot = 0.0
+    g8 = _gam(8)
+    for t_ in range(6):
+        b = act[ty[act] == t_]
+        if not len(b):
+            continue
+        Jv = []
+        for fs, pos, adj, det in tabs[t_]["verts"]:
+            qv = np.stack([out[b, f].astype(np.int64) * Qi[fid[b, f], p] for f, p in zip(fs, pos)], axis=1)
+            Jv.append((qv @ adj.T).astype(np.float64) / det)              # one rounding per component
+        Jv = np.array(Jv)                                                  # (4, n, 3)
+        Jb = np.abs(Jv) * (1 + 2 * U)
+        S1 = np.sum(Jb * Jb, axis=(0, 2))
+        A = np.abs(Jv.sum(axis=0)) + g8 * Jb.sum(axis=0)
+        S2 = np.sum(A * A, axis=1)
+        if MUTANT.get("bdm1_no_cross"):                  # sabotage (tests only): the |sum J_v|^2 term dropped
+            S2 = 0 * S2
+        tot += float(np.sum((S1 + S2) / sig[b])) / (6.0 * 20.0)
+    # each tet's term: ~20 operations on its inputs (12 squares, 3 sums of 4, the division by s, s itself rounded to
+    # nearest) -> (1 + gamma_24); the sum of len(act) nonnegative terms in 6 blocks -> _up's (1 + 3 gamma_(n+16))
+    E = _up(tot, len(act) + 6) * (1 + F(_gam(24))) / F(scale) ** 2
+    return I * I / E, "ok"
+
+
 
 MIXED = True        # the lower bound's flux from the hybridized mixed problem (False: from the potential, averaged)
 
@@ -585,7 +750,10 @@ def bounds(V, s, refine=1, p2=False):
         # a piecewise-quadratic potential (2026-11-03): never above P1 (its space contains P1's), MEASURED small gains
         # (0.2-6 %: the field is singular at the phases' edges and corners) — the bracket's gap is mostly the LOWER side
         up = min(up, upper_p2(M, sig)[0])
-    lo, note = lower(M, sig, u)
+    if 0 < int((sig > 0).sum()) <= BDM1_UP_TO:
+        lo, note = lower_bdm1(M, sig)                   # (2026-11-03) BDM1: MEASURED median gap 1.244 -> 1.118
+    else:
+        lo, note = lower(M, sig, u)
     k = refine
     # conductance of the refined box in refined voxel units = k x that in original units (G = s A / L, h -> h/k)
     return lo / k, up / k, note, M

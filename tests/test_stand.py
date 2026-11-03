@@ -2921,6 +2921,25 @@ _Mh2 = _C3.Mesh(_np3.zeros((3, 2, 2), int)); _uh2 = _C3.upper_p2(_Mh2, _Mh2.sigm
 check("3D conduction, the P2 potential's upper bound: the homogeneous box exact within 1e-12 (G = 8/3), and on a "
       "porous map at most P1's and above the proved lower bound",
       F(8, 3) <= _uh2 <= F(8, 3) * (1 + F(1, 10 ** 12)) and _l2p <= _u2p <= _u1p, (float(_uh2), float(_l2p), float(_u2p), float(_u1p)))
+# BDM1 FLUX for the lower bound (2026-11-03): linear per tet, 3 values per face; conservation one integer per tet (the
+# RT0 push carries over). MEASURED: checkerboard 1/0.25 lower 2.630 (RT0) -> 3.004 (BDM1; RT0 at x2: 2.902); 150 random
+# maps: never above the best upper (P1, P2, P1 x2), always >= RT0, median gap 1.244 -> 1.118; the sabotage
+# 'bdm1_no_cross' (the |sum J_v|^2 energy term dropped) exceeds an upper bound in 136 of 150
+_cbp = ((_I3 + _J3c + _K3) % 2).astype(int)
+_Mb = _C3.Mesh(_cbp); _sgb = _Mb.sigma({0: 1.0, 1: 0.25})
+_lbr = _C3.lower(_Mb, _sgb, None)[0]; _lbb = _C3.lower_bdm1(_Mb, _sgb)[0]
+_ubb = min(_C3.upper(_Mb, _sgb)[0], _C3.upper_p2(_Mb, _sgb)[0])
+_C3.MUTANT["bdm1_no_cross"] = True
+try:
+    _lbm = _C3.lower_bdm1(_Mb, _sgb)[0]
+finally:
+    _C3.MUTANT.clear()
+_Mser = _C3.Mesh(_ser); _lbs = _C3.lower_bdm1(_Mser, _Mser.sigma(_s3))[0]
+check("3D conduction, the BDM1 flux's lower bound: the series laminate exact (0.4) from below within 1e-12; the 4^3 "
+      "checkerboard 1/0.25 lifted above RT0's and below the best upper bound; the sabotage (a dropped energy term) "
+      "rises above that upper bound",
+      F(2, 5) * (1 - F(1, 10 ** 12)) <= _lbs <= F(2, 5) and _lbr < _lbb <= _ubb < _lbm,
+      (float(_lbs), float(_lbr), float(_lbb), float(_ubb), float(_lbm)))
 _jd = _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2"], "earned": True}}, "1.9")
 _jr = _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2"], "earned": False}}, "2.1")
 check("3D conduction judged by ZTL: a homogeneous 2 S/m box meets s_eff >= 1.9 EARNED (inputs earned), and "
