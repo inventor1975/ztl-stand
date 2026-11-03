@@ -3532,5 +3532,32 @@ check("3D ELASTICITY (upper bound on the apparent modulus): homogeneous = E, lam
       and _er[1] <= _er[0] and _em < 210 and _eb["verdict_max"] == "EARNED" and _eb["verdict_min"] == "REFUTED"
       and _eo["verdict_max"] == "OPEN" and _eo["verdict_min"] == "OPEN", (_eh, _ep, _es, _er, _em, _eb, _eo))
 
+# END RELEASES in buckling and second order (2026-11-03, the cloud red team's FINDING 1, PR #1): the geometric forms
+# and the end-moment rows read the NODE's rotation at a released member end — a hinged strut framing into held nodes
+# was buckled clamped-clamped. Decks: redteam/decks; references: Euler's fixed-pinned 20.1907 EI/L^2 and pinned
+# pi^2 EI/L^2, the pin-pin beam-column's closed forms (central load Q, P = 575727 N: v_mid 0.02128166 m, max sigma
+# 91.638 MPa). Both sides; the sabotage "ignore_release" restores the old forms and must be caught.
+_rdk = lambda n_: open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "redteam", "decks", n_)).read()
+def _rel_cases():
+    a_ = float(_F3.stability_lower(_rdk("rel-column-fixed-pinned.txt"), "0")["lam_low"])
+    b_ = _F3.judge_buckling(_rdk("rel-strut-12m.txt"), "0", F(235) * 10 ** 6, "b", "b")
+    c_ = _F3.second_order_disp(_rdk("rel-strut-second-order.txt"), "0", ["U(2,Y)"])["BASE"]["U(2,Y)"]
+    d_ = _F3.second_order_stress(_rdk("rel-strut-second-order.txt"), "0", F(917, 10) * 10 ** 6)
+    return a_, b_["verdict"], (float(F(c_[0])), float(F(c_[1]))), d_["verdict"]
+_ra = _rel_cases()
+_F3._MUTANT["ignore_release"] = True
+try:
+    _rm = _rel_cases()
+finally:
+    _F3._MUTANT.clear()
+_EIr = 210e9 * 8e-5
+check("space frame END RELEASES in buckling and second order (the cloud red team's finding 1): a column fixed below "
+      "and hinged on top proves lambda_low <= 20.19 EI/L^2 (2.1200; it read 4.144 before); a 12 m pinned strut at 1.3 "
+      "MN (true alpha_cr 0.886) is not EARNED by EN 6.3.1 (it was, at 0.713); a stable pinned strut's second-order "
+      "deflection bracket holds the closed form 0.02128166 m; its stress at 91.7 MPa (true 91.638) is not REFUTED; "
+      "the sabotage ignore_release brings the false lambda and the false EARNED back",
+      _ra[0] <= 20.1907 * _EIr / 16 / 1e7 and _ra[1] != "EARNED" and _ra[2][0] <= 0.02128166 <= _ra[2][1]
+      and _ra[3] != "REFUTED" and _rm[0] > 20.1907 * _EIr / 16 / 1e7 and _rm[1] == "EARNED", (_ra, _rm))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

@@ -30,6 +30,8 @@ bound deliberately broken (MUTATION) — they must find violations, or the check
      continuum correction.
   J  second-order member STRESSES with an AXIAL member load (2026-11-03): one random column vs a solve_bvp continuum
      reference, end moments both sides and |sigma| from above; J-MUTA: the geometric moment with N_mid G.
+  K  END RELEASES in 3D buckling (2026-11-03, the cloud red team's finding 1): one member, hinges by RELEASE, the
+     bracket vs redteam/ref_hinged.py; K-MUTR: the old forms (the node's rotation at a released end).
   A and B also check BOTH SIDES since 2026-11-02 (B: the 8-element mesh's end moments, with the geometric part): every proved end-moment interval must contain an INDEPENDENT numpy FE
      reference (K_E - P G rows, 64 elements) — the old stress check shared the stand's K_E-row formula
 Writes bench/night/REPORT.json and REPORT.md.
@@ -571,6 +573,46 @@ def axial_stress_case(seed):
     return {"checked": n_chk, "violations": viol, "example": ex_}
 
 
+def release_case(seed):
+    """sweep K (2026-11-03, after the cloud red team's finding 1): one straight member with END RELEASES (a hinge by
+    RELEASE where the node itself is held) — fixed / pinned / free ends, 1-4 elements, along X or Z: lambda_low <=
+    the true critical factor <= lambda_high, the reference redteam/ref_hinged.py (Hermite, hinges as free end rotations,
+    240 elements; nothing shared). K-MUTR: the old forms that read the node's rotation at a released end."""
+    sys.path.insert(0, str(ROOT / "redteam"))
+    import ref_hinged as RH
+    from ustand import frame3d as F3
+    rng = random.Random(seed)
+    L, ne = rng.choice([3, 4, 6, 8]), rng.choice([1, 2, 3, 4])
+    ends = (rng.choice(["fixed", "pin"]), rng.choice(["fixed", "pin", "free"]))
+    if ends == ("pin", "free"):
+        ends = ("pin", "pin")
+    ax = rng.choice(["X", "Z"])
+    pos = lambda t: (t, 0, 0) if ax == "X" else (0, 0, t)
+    lines = ["ET, 1, BEAM4", "MP, EX, 1, 210e9", "MP, PRXY, 1, 0.3", "R, 1, 0.01, 8e-5, 8e-5, 0.2, 0.2, 0, 0, 5e-5"]
+    lines += ["N, %d, %s, %s, %s" % ((k + 1,) + tuple(str(c) for c in pos(F(L) * k / ne))) for k in range(ne + 1)]
+    lines += [f"E, {k + 1}, {k + 2}" for k in range(ne)] + ["D, 1, ALL, 0"]
+    top = ne + 1
+    if ends[1] != "free":
+        lines += [f"D, {top}, U{d}, 0" for d in "XYZ" if d != ax] + [f"D, {top}, ROT{d}, 0" for d in "XYZ"]
+    else:
+        lines.append(f"D, {top}, ROT{ax}, 0")
+    if ends[0] == "pin":
+        lines.append("RELEASE, 1, I, MZ, MY")
+    if ends[1] == "pin":
+        lines.append(f"RELEASE, {ne}, J, MZ, MY")
+    lines += [f"D, {k}, ROT{ax}, 0" for k in range(2, top)] + [f"F, {top}, F{ax}, -1000000"]
+    t = "\n".join(lines)
+    true = RH.buckling(210e9 * 8e-5, float(L), ends, n=240) / 1e6
+    lo = F3.stability_lower(t, "0").get("lam_low")
+    hi = F3.stability_upper(t).get("lam_high")
+    viol, ex_ = 0, None
+    if lo is not None and float(lo) > true * (1 + 1e-6):
+        viol += 1; ex_ = {"seed": seed, "ends": ends, "ne": ne, "lo": float(lo), "true": true}
+    if hi is not None and float(hi) < true * (1 - 1e-6):
+        viol += 1; ex_ = ex_ or {"seed": seed, "ends": ends, "ne": ne, "hi": float(hi), "true": true}
+    return {"checked": (lo is not None) + (hi is not None), "violations": viol, "example": ex_}
+
+
 def ltb_case(seed):
     """sweep I (2026-11-02): ustand.ltb's member critical factor against bench/night/ltb_ref.py (Gauss-quadrature
     Hermite elements, 96 per member, nothing shared): random doubly symmetric sections (I_w = 0 sometimes), spans,
@@ -750,6 +792,10 @@ def mutate(kind=True):
     if kind == "axial":
         FRM._MUTANT["axial_mean"] = True
         return FRM._MUTANT.clear
+    if kind == "release":
+        from ustand import frame3d as F3
+        F3._MUTANT["ignore_release"] = True
+        return F3._MUTANT.clear
     if kind == "axialm":
         FRM._MUTANT["axial_const_moment"] = True
         return FRM._MUTANT.clear
@@ -776,7 +822,7 @@ DIST = []
 
 SWEEPS = {"A": (beam_column_case, 400), "B": (frame_case, 120), "C": (stability_case, 120), "D": (truss_case, 200),
           "E": (general_case, 600), "F": (plate_case, 24), "G": (space_frame_case, 60), "H": (axial_case, 120), "I": (ltb_case, 150),
-          "J": (axial_stress_case, 150)}
+          "J": (axial_stress_case, 150), "K": (release_case, 120)}
 
 
 def _run(args):
@@ -792,7 +838,7 @@ def _run(args):
         if restore:
             restore()
     r["seconds"] = time.time() - t0
-    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3", "axial": "-MUTA", "ltb": "-MUTL", "axialm": "-MUTA"}.get(
+    tag = {"geo": "-MUTG", "geo3": "-MUTG3", "geom3": "-MUTM3", "axial": "-MUTA", "ltb": "-MUTL", "axialm": "-MUTA", "release": "-MUTR"}.get(
         mutated, "-MUT" if mutated else "")
     return key + tag, r
 
@@ -815,6 +861,7 @@ def main(argv):
         tasks += [("H", 980000 + s, "axial") for s in range(int(60 * scale))]
         tasks += [("I", 990000 + s, "ltb") for s in range(int(60 * scale))]
         tasks += [("J", 991000 + s, "axialm") for s in range(int(60 * scale))]
+        tasks += [("K", 992000 + s, "release") for s in range(int(60 * scale))]
     random.Random(7).shuffle(tasks)
     t0 = time.time()
     agg = {}

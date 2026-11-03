@@ -590,13 +590,17 @@ def judge_stress(text, tol, fy, gamma_m0=F(1), ks=None):
                     "load case; NOT here: buckling, shear and torsion stresses, second order"}
 
 
-def _form3(i, j, vax, rax, rsign, dof, M4):
+def _form3(i, j, vax, rax, rsign, dof, M4, k=None):
     """A local 4 x 4 form over (v_i, r_i, v_j, r_j) on the global DOFs (lower triangle): v_n = vax . u_n,
-    r_n = rsign * rax . th_n."""
-    def comp(n, ax, rot, sg):
+    r_n = rsign * rax . th_n — or, at a RELEASED end of member k, rsign times the member's own rotation."""
+    def comp(n, ax, rot, sg, end):
+        rk = _rel_key(k, end, rsign, dof) if rot and not _MUTANT.get("ignore_release") else None
+        if rk is not None:
+            return [(rk, sg)]
         names = ("RX", "RY", "RZ") if rot else ("X", "Y", "Z")
         return [((n, names[q]), sg * ax[q]) for q in range(3) if ax[q]]
-    loc = [comp(i, vax, False, 1), comp(i, rax, True, rsign), comp(j, vax, False, 1), comp(j, rax, True, rsign)]
+    loc = [comp(i, vax, False, 1, "I"), comp(i, rax, True, rsign, "I"), comp(j, vax, False, 1, "J"),
+           comp(j, rax, True, rsign, "J")]
     out = {}
     for a in range(4):
         for b in range(4):
@@ -680,10 +684,10 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
         if k in qax:
             Ga_, Gb_ = _geo_split(L)
         for plane, (vax, rax, sg, I) in (("y", (yp, zp, 1, izz)), ("z", (zp, yp, -1, iyy))):
-            forms[(k, plane)] = tuple(_form3(i, j, vax, rax, sg, dof, X) for X in (Gloc, Qloc, Bloc)) + \
+            forms[(k, plane)] = tuple(_form3(i, j, vax, rax, sg, dof, X, k=k) for X in (Gloc, Qloc, Bloc)) + \
                 (L * L / (4 * PI2_LO * Elo * I),)
             if k in qax:
-                gab[(k, plane)] = (_form3(i, j, vax, rax, sg, dof, Ga_), _form3(i, j, vax, rax, sg, dof, Gb_))
+                gab[(k, plane)] = (_form3(i, j, vax, rax, sg, dof, Ga_, k=k), _form3(i, j, vax, rax, sg, dof, Gb_, k=k))
     # nominal estimate: K0 v = -lam K_G(N_nom) v, the linear N of a member load included
     Gn = {}
     for (k, plane), (G, Q, Bf, kk) in forms.items():
@@ -801,11 +805,27 @@ def stability_lower(text, tol, case=None, rel=F(1, 1000)):
                 premise="doubly symmetric sections; torsional and flexural-torsional buckling NOT checked")
 
 
-def _glob3(i, j, vax, rax, rsign, dof, l):
-    """A local 4-vector over (v_i, r_i, v_j, r_j) as a global row."""
+def _rel_key(k, end, rsign, dof):
+    """A RELEASED member end's own rotation unknown for this bending plane (rsign 1: the (v, th_z) plane, about local
+    z; -1: the (w, phi = -th_y) plane, about local y), or None (2026-11-03, the cloud red team's finding 1: the
+    geometric forms and the end-moment rows read the NODE's rotation for a released end — a hinged strut framing into
+    held nodes was buckled as clamped-clamped, alpha_cr 4x too high, EN 6.3.1 EARNED where it fails)."""
+    if k is None:
+        return None
+    key = (("IR", k, end), "Z" if rsign == 1 else "Y")
+    return key if key in dof else None
+
+
+def _glob3(i, j, vax, rax, rsign, dof, l, k=None):
+    """A local 4-vector over (v_i, r_i, v_j, r_j) as a global row (k: the member — its released ends' own rotations)."""
     g = {}
-    for (n, ax, rot, sg), c in zip(((i, vax, False, 1), (i, rax, True, rsign), (j, vax, False, 1), (j, rax, True, rsign)), l):
+    for (n, ax, rot, sg, end), c in zip(((i, vax, False, 1, "I"), (i, rax, True, rsign, "I"), (j, vax, False, 1, "J"),
+                                         (j, rax, True, rsign, "J")), l):
         if not c:
+            continue
+        rk = _rel_key(k, end, rsign, dof) if rot and not _MUTANT.get("ignore_release") else None
+        if rk is not None:
+            g[dof[rk]] = g.get(dof[rk], F(0)) + c * sg
             continue
         names = ("RX", "RY", "RZ") if rot else ("X", "Y", "Z")
         for q in range(3):
@@ -874,7 +894,7 @@ def second_order_disp(text, tol, targets, case=None):
             nmax = max(-Nlo[k], Nhi[k], F(0))
             for (plane, vax, rax, sg, I) in (("y", yp, zp, 1, izz), ("z", zp, yp, -1, iyy)):
                 for (lo_, hi_), Gx in (((nn_lo + qa, nn_hi + qa), Ga_), ((nn_lo - qa, nn_hi - qa), Gb_)):
-                    Gt = [(d, g) for d, g in ((d, _glob3(i, j, vax, rax, sg, dof, l)) for d, l in _psd_terms(Gx)) if g]
+                    Gt = [(d, g) for d, g in ((d, _glob3(i, j, vax, rax, sg, dof, l, k=k)) for d, l in _psd_terms(Gx)) if g]
                     if _MUTANT.get("no_geo"):
                         Gt = []
                     m0 = (lo_ + hi_) / 2
@@ -895,7 +915,7 @@ def second_order_disp(text, tol, targets, case=None):
                 cqd[(k, plane)] = cq
                 if cq:
                     for d, l in _psd_terms(Gloc):
-                        g = _glob3(i, j, vax, rax, sg, dof, l)
+                        g = _glob3(i, j, vax, rax, sg, dof, l, k=k)
                         if g:
                             cterms.append((_dy(cq * d, True), g))
                             cgrp.setdefault((k, plane), []).append(cterms[-1])   # a transverse load couples here
@@ -903,7 +923,7 @@ def second_order_disp(text, tol, targets, case=None):
         Gt = []
         P = max(F(0), -Nlo[k])
         for (plane, vax, rax, sg, I) in (("y", yp, zp, 1, izz), ("z", zp, yp, -1, iyy)):
-            terms = [(d, _glob3(i, j, vax, rax, sg, dof, l)) for d, l in _psd_terms(Gloc)]
+            terms = [(d, _glob3(i, j, vax, rax, sg, dof, l, k=k)) for d, l in _psd_terms(Gloc)]
             Gt += [(d, g) for d, g in terms if g]
             kk = L * L / (4 * PI2_LO * Elo * I)
             if P * kk >= 1:
@@ -912,7 +932,7 @@ def second_order_disp(text, tol, targets, case=None):
             cqd[(k, plane)] = cq
             if cq:
                 for d, l in _psd_terms(Qloc):
-                    g = _glob3(i, j, vax, rax, sg, dof, l)
+                    g = _glob3(i, j, vax, rax, sg, dof, l, k=k)
                     if g:
                         cterms.append((_dy(cq * d, True), g))
                         cgrp.setdefault((k, plane), []).append(cterms[-1])
@@ -1047,17 +1067,17 @@ def second_order_stress(text, tol, fy, gamma_m0=F(1), case=None, ks=None):
                 # the GEOMETRIC part of the end moment (2026-11-02): the (K_E + N G) row, not K_E's alone — the G row
                 # at each end in the plane's own coordinates (v, th_z) or (w, phi = -th_y), unscaled
                 for end, row in (("I", Gl_[1]), ("J", Gl_[3])):
-                    outs.append(vec(_glob3(ii, jj, vax, rax, sg, dof, row))); items.append((k, plane + "G" + end))
+                    outs.append(vec(_glob3(ii, jj, vax, rax, sg, dof, row, k=k))); items.append((k, plane + "G" + end))
                 if k in qax3:
                     # an AXIAL member load: the geometric moment split (G_a, G_b rows) and the plane's end slopes
                     from .frame import _geo_split
                     Ga_, Gb_ = _geo_split(L)
                     for nm_, Gx in (("A", Ga_), ("B", Gb_)):
                         for end, row in (("I", Gx[1]), ("J", Gx[3])):
-                            outs.append(vec(_glob3(ii, jj, vax, rax, sg, dof, row)))
+                            outs.append(vec(_glob3(ii, jj, vax, rax, sg, dof, row, k=k)))
                             items.append((k, plane + "G" + nm_ + end))
                     for end, row in (("I", [0, 1, 0, 0]), ("J", [0, 0, 0, 1])):
-                        outs.append(vec(_glob3(ii, jj, vax, rax, sg, dof, [F(v) for v in row])))
+                        outs.append(vec(_glob3(ii, jj, vax, rax, sg, dof, [F(v) for v in row], k=k)))
                         items.append((k, plane + "R" + end))
         _EXTRA["outputs"] = outs
         res = second_order_disp(text, tol, [], c)[c]
@@ -1239,7 +1259,7 @@ def stability_upper(text, case=None):
                                                         [-36, -3 * L, 36, -3 * L], [3 * L, -L * L, -3 * L, 4 * L * L]]]
         G = {}
         for (vax, rax, sg) in ((yp, zp, 1), (zp, yp, -1)):
-            for key, v in _form3(i, j, vax, rax, sg, dof, Gloc).items():
+            for key, v in _form3(i, j, vax, rax, sg, dof, Gloc, k=k).items():
                 G[key] = G.get(key, F(0)) + v
         Ge[k] = G
         for key, v in G.items():
@@ -1251,7 +1271,7 @@ def stability_upper(text, case=None):
             D = [[Ga_[r][q_] - Gb_[r][q_] for q_ in range(4)] for r in range(4)]
             Dk = {}
             for (vax, rax, sg) in ((yp, zp, 1), (zp, yp, -1)):
-                for key, v in _form3(i, j, vax, rax, sg, dof, D).items():
+                for key, v in _form3(i, j, vax, rax, sg, dof, D, k=k).items():
                     Dk[key] = Dk.get(key, F(0)) + v
             qax[k], Gd[k] = a_ * L / 2, Dk
             for key, v in Dk.items():
