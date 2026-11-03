@@ -882,9 +882,7 @@ def lower_overlap(V, s, width, stride):
     V = np.asarray(V)
     nx, ny, nz = V.shape
     starts = lambda n: sorted(set(list(range(0, max(1, n - width + 1), stride)) + [max(0, n - width)]))
-    Mg = Mesh(V)
-    sig_g = Mg.sigma(s)
-    nvg = len(Mg.vox)
+    nvg = nx * ny * nz                                    # the global voxel count (no global mesh: memory)
     cols = []
     for y0 in starts(ny):
         for z0 in starts(nz):
@@ -906,17 +904,17 @@ def lower_overlap(V, s, width, stride):
             vx = M.vox[t % nv]
             gv = (vx[:, 0] * ny + (vx[:, 1] + y0)) * nz + (vx[:, 2] + z0)
             gt = (t // nv) * nvg + gv                     # the same Kuhn type, the global voxel
-            cols.append((gt, cap["J"][t], cap["Ja"][t], cap["I"]))
+            o = np.argsort(gt)
+            cols.append((gt[o], cap["J"][t][o], cap["Ja"][t][o], cap["I"], (1.0 / sig[t][o]) / 6.0))
     if not cols:
         return F(0), "no current path"
     n = len(cols)
     # alpha: the float optimum over the Gram matrix (sparse overlaps through the global tet index)
     Q = np.zeros((n, n))
-    w = np.where(sig_g > 0, 1.0 / np.where(sig_g > 0, sig_g, 1.0), 0.0) / 6.0
     for i in range(n):
         for j in range(i, n):
             _c, ia, ib = np.intersect1d(cols[i][0], cols[j][0], assume_unique=True, return_indices=True)
-            Q[i, j] = Q[j, i] = float(np.sum(w[cols[i][0][ia]] * np.einsum("nk,nk->n", cols[i][1][ia], cols[j][1][ib])))
+            Q[i, j] = Q[j, i] = float(np.sum(cols[i][4][ia] * np.einsum("nk,nk->n", cols[i][1][ia], cols[j][1][ib])))
     Iv = np.array([float(c[3]) for c in cols])
     try:
         al = np.linalg.solve(Q + 1e-14 * np.trace(Q) * np.eye(n), Iv)
@@ -925,21 +923,26 @@ def lower_overlap(V, s, width, stride):
     al = al / np.abs(al).max()
     if MUTANT.get("overlap_no_cross"):                   # sabotage (tests only): the energy without the overlaps' cross terms
         I = sum((F(float(a_)) * c[3] for a_, c in zip(al, cols)), F(0))
-        E = sum(F(float(a_)) ** 2 * F(float(np.sum(w[c[0]] * (c[1] * c[1]).sum(axis=1)))) for a_, c in zip(al, cols))
+        E = sum(F(float(a_)) ** 2 * F(float(np.sum(c[4] * (c[1] * c[1]).sum(axis=1)))) for a_, c in zip(al, cols))
         return I * I / E, "sabotage"
     alF = [F(round(float(a_) * 2 ** 30), 2 ** 30) for a_ in al]       # dyadic weights, exact
     I = sum((a_ * c[3] for a_, c in zip(alF, cols)), F(0))
     if I <= 0:
         return F(0), "no current through the combination"
-    Jt = np.zeros((Mg.nt, 3)); Ja = np.zeros((Mg.nt, 3)); Js = np.zeros((Mg.nt, 3))
+    # the combined field on the union of the columns' conducting tets only (memory)
+    allt = np.unique(np.concatenate([c[0] for c in cols]))
+    Jt = np.zeros((len(allt), 3)); Ja = np.zeros((len(allt), 3)); Js = np.zeros((len(allt), 3))
+    w = np.zeros(len(allt))
     for a_, c in zip(alF, cols):
+        ix = np.searchsorted(allt, c[0])
         af = float(a_)                                    # exact: a 30-bit dyadic
-        Jt[c[0]] += af * c[1]
-        Js[c[0]] += abs(af) * np.abs(c[1])
-        Ja[c[0]] += abs(af) * 2 * _gam(8) * c[2]          # each column's own rounding bound, scaled
+        Jt[ix] += af * c[1]
+        Js[ix] += abs(af) * np.abs(c[1])
+        Ja[ix] += abs(af) * 2 * _gam(8) * c[2]            # each column's own rounding bound, scaled
+        w[ix] = c[4]                                      # 1/(6 s) of the tet: the same in every column
     # the float sum of <= n terms per entry, each term a rounded product: (gamma_(n+1)) of the absolute sum
     Jb = np.abs(Jt) + Ja * (1 + _gam(n + 2)) + _gam(n + 2) * Js
-    E = _up(float(np.sum(w * (Jb * Jb).sum(axis=1))) * (1 + 4 * U), 4 * Mg.nt)
+    E = _up(float(np.sum(w * (Jb * Jb).sum(axis=1))) * (1 + 4 * U), 4 * len(allt))
     return I * I / E, f"ok ({n} columns)"
 
 
