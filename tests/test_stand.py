@@ -2914,6 +2914,13 @@ check("3D conduction, edge/corner-only contacts carry nothing: the insulator/con
       _cbo > 0.4 and float(_cbn[1]) < 1e-20 and "no current path" in _cbn[2]
       and _rsn[0] <= _rsn[1] < _rso[1] and float(_rsn[1] / _rsn[0]) < 2.1 < float(_rso[1] / _rso[0]),
       (_cbo, float(_cbn[1]), float(_rso[0]), float(_rso[1]), float(_rsn[1])))
+# P2 potential for the upper bound (2026-11-03): exact on the homogeneous box, never above P1, never below the lower
+_Mp2 = _C3.Mesh(_Vs3); _sgp2 = _Mp2.sigma({0: 0.0, 1: 1.0})
+_u1p = _C3.upper(_Mp2, _sgp2)[0]; _u2p = _C3.upper_p2(_Mp2, _sgp2)[0]; _l2p = _C3.lower(_Mp2, _sgp2, None)[0]
+_Mh2 = _C3.Mesh(_np3.zeros((3, 2, 2), int)); _uh2 = _C3.upper_p2(_Mh2, _Mh2.sigma({0: 2.0}))[0]
+check("3D conduction, the P2 potential's upper bound: the homogeneous box exact within 1e-12 (G = 8/3), and on a "
+      "porous map at most P1's and above the proved lower bound",
+      F(8, 3) <= _uh2 <= F(8, 3) * (1 + F(1, 10 ** 12)) and _l2p <= _u2p <= _u1p, (float(_uh2), float(_l2p), float(_u2p), float(_u1p)))
 _jd = _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2"], "earned": True}}, "1.9")
 _jr = _C3.judge(_np3.zeros((3, 2, 2), int), {0: {"s": ["2"], "earned": False}}, "2.1")
 check("3D conduction judged by ZTL: a homogeneous 2 S/m box meets s_eff >= 1.9 EARNED (inputs earned), and "

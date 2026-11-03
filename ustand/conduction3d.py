@@ -192,6 +192,104 @@ def upper(M, sig, rtol=1e-12):
     return _up(float(np.sum(sig * g2)) / 6.0, 4 * nt), u[:M.nn]
 
 
+# --------------------------------------------------------------------------------------------- UPPER, P2 (2026-11-03)
+_EDGES = [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)]
+
+
+def _p2_tables():
+    """Per Kuhn type: D (3 x 4) the barycentric gradients (integers: the path steps), and the P2 stiffness (10 x 10)
+    for s = 1 by an exact degree-2 quadrature (floats: it only CHOOSES the field)."""
+    out = []
+    a, b = 0.5854101966249685, 0.1381966011250105
+    Q = [[a if i == j else b for i in range(4)] for j in range(4)]
+    for (p, q_, r) in PERMS:
+        D = np.zeros((3, 4))
+        for k, ax in enumerate((p, q_, r)):
+            D[ax, k + 1] += 1.0
+            D[ax, k] -= 1.0
+        K = np.zeros((10, 10))
+        for lam in Q:
+            G = [(4 * lam[i] - 1) * D[:, i] for i in range(4)]
+            G += [4 * (lam[j] * D[:, i] + lam[i] * D[:, j]) for i, j in _EDGES]
+            G = np.array(G)
+            K += (1.0 / 6.0) / 4.0 * (G @ G.T)
+        out.append((D, K))
+    return out
+
+
+def upper_p2(M, sig, rtol=1e-12):
+    """A rigorous upper bound on G from a continuous piecewise-QUADRATIC potential (P2 on the Kuhn tets: the
+    vertices, split at edge/corner-only contacts as upper(), and the edge midpoints). The energy per tet is exact as
+    nonnegative squares: the gradient is linear, so int |grad u|^2 = |T|/20 (sum_c sum_i L_ci^2 + sum_c (sum_i L_ci)^2),
+    L_ci the gradient's component c at vertex i — from the nodal values with INTEGER coefficients
+    (grad u(v_k) = 3 u_k g_k - sum_{i != k} u_i g_i + 4 sum_{j != k} u_kj g_j, g = the integer barycentric gradients),
+    each bounded by |L| + gamma_32 (its absolute sum) before squaring."""
+    tv, nn, orig = _split_nodes(M, sig > 0) if SPLIT else (M.tv.astype(np.int64), M.nn, np.arange(M.nn))
+    nvox = len(M.vox)
+    ty = np.arange(M.nt) // nvox
+    # edge dofs: one per (vertex copy, vertex copy) pair — split copies give separate edges automatically
+    ea = np.stack([np.minimum(tv[:, i], tv[:, j]) for i, j in _EDGES], axis=1)
+    eb = np.stack([np.maximum(tv[:, i], tv[:, j]) for i, j in _EDGES], axis=1)
+    key = ea.astype(np.int64) * nn + eb
+    uk, inv = np.unique(key.ravel(), return_inverse=True)
+    eid = nn + inv.reshape(M.nt, 6)
+    ndof = nn + len(uk)
+    dofs = np.concatenate([tv, eid], axis=1)                   # (nt, 10)
+    # x of every dof (the Dirichlet faces): vertices from their original node, midpoints the mean of the two ends
+    xv = M.X[orig].astype(float)
+    xe = 0.5 * (xv[(uk // nn).astype(np.int64)] + xv[(uk % nn).astype(np.int64)])
+    x = np.concatenate([xv, xe])
+    tab = _p2_tables()
+    rows, cols, vals = [], [], []
+    for t_ in range(6):
+        blk = np.where((ty == t_) & (sig > 0))[0]
+        if not len(blk):
+            continue
+        K = tab[t_][1]
+        d = dofs[blk]
+        rows.append(np.repeat(d, 10, axis=1).ravel()); cols.append(np.tile(d, (1, 10)).ravel())
+        vals.append((sig[blk][:, None, None] * K[None]).ravel())
+    A = sp.csr_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols))), shape=(ndof, ndof))
+    fixed = (x == 0) | (x == M.nx)
+    ub = np.where(x == M.nx, 1.0, 0.0)
+    free = np.where(~fixed)[0]
+    Af = A[free][:, free]
+    rhs = -(A[free][:, np.where(fixed)[0]] @ ub[fixed])
+    dg = Af.diagonal().copy()
+    zero = dg == 0
+    Af = Af + sp.diags(zero.astype(float))
+    dg[zero] = 1.0
+    u = ub.copy()
+    u[free] = _spd_solve(Af, rhs, dg, rtol)
+    # the energy, rigorously from above
+    tot = 0.0
+    for t_ in range(6):
+        blk = np.where((ty == t_) & (sig > 0))[0]
+        if not len(blk):
+            continue
+        D = tab[t_][0]
+        uv = u[dofs[blk, :4]]                                  # (n, 4)
+        ue = u[dofs[blk, 4:]]                                  # (n, 6)
+        edge_of = {}
+        for e, (i, j) in enumerate(_EDGES):
+            edge_of[(i, j)] = edge_of[(j, i)] = e
+        S1 = np.zeros(len(blk)); S2 = np.zeros(len(blk))
+        for c in range(3):
+            Lc = []
+            for k in range(4):
+                terms = [3 * uv[:, k] * D[c, k]]
+                terms += [-uv[:, i] * D[c, i] for i in range(4) if i != k]
+                terms += [4 * ue[:, edge_of[(k, j)]] * D[c, j] for j in range(4) if j != k]
+                val = np.sum(terms, axis=0)
+                ab = np.sum(np.abs(terms), axis=0)
+                Lc.append(np.abs(val) + _gam(32) * ab)          # >= |the exact gradient component at vertex k|
+            Lc = np.array(Lc)
+            S1 += np.sum(Lc * Lc, axis=0)
+            S2 += np.sum(Lc, axis=0) ** 2
+        tot += float(np.sum(sig[blk] * (S1 + S2))) / (6.0 * 20.0)
+    return _up(tot * (1 + 4 * U), 12 * M.nt), u
+
+
 # --------------------------------------------------------------------------------------------- LOWER (face fluxes)
 def _faces(M):
     """Global faces: id per (tet, local face f = the face opposite local vertex f), the outward sign of the global
@@ -476,13 +574,17 @@ def _mixed_flux(M, sig, Fc):
     return np.where(cnt > 0, qn / np.maximum(cnt, 1), 0.0)
 
 
-def bounds(V, s, refine=1):
+def bounds(V, s, refine=1, p2=False):
     V = np.asarray(V)
     if refine > 1:
         V = np.repeat(np.repeat(np.repeat(V, refine, 0), refine, 1), refine, 2)
     M = Mesh(V)
     sig = M.sigma(s)
     up, u = upper(M, sig)
+    if p2:
+        # a piecewise-quadratic potential (2026-11-03): never above P1 (its space contains P1's), MEASURED small gains
+        # (0.2-6 %: the field is singular at the phases' edges and corners) — the bracket's gap is mostly the LOWER side
+        up = min(up, upper_p2(M, sig)[0])
     lo, note = lower(M, sig, u)
     k = refine
     # conductance of the refined box in refined voxel units = k x that in original units (G = s A / L, h -> h/k)
