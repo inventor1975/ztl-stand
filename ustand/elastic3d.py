@@ -46,6 +46,7 @@ import scipy.sparse.linalg as sla
 from .conduction3d import Mesh, PERMS, U, _gam, _spd_solve
 
 _MUTANT = {}       # TEST-ONLY sabotage switches; empty = the real bound
+SPLIT = True       # split nodes at edge/corner-only contacts between solid voxels (False: version 1, stiffer)
 
 
 def _up_float(x):
@@ -198,8 +199,19 @@ def upper(V, phases, refine=1):
         V = np.repeat(np.repeat(np.repeat(V, refine, 0), refine, 1), refine, 2)
     M = Mesh(V)
     mu_s, la_s, mu_h, la_h = material(M, phases)
-    v = _solve(M, mu_s, la_s)
-    a = energy_upper(M, v, mu_h, la_h)
+    Ms = M
+    if SPLIT:
+        # (2026-11-03, as conduction3d) solid voxels meeting only along an edge or at a corner, the others pores, are
+        # not connected in the continuum: one displacement per node bridged them and made the upper bound too stiff;
+        # each node gets one copy per face-connected group of solid voxels around it (the field stays in H^1 of the
+        # solid's interior: admissible). The lower bound's stress already passes faces only.
+        import types
+        from .conduction3d import _split_nodes
+        tv, nn, orig = _split_nodes(M, (mu_h > 0) | (la_h > 0))
+        Ms = types.SimpleNamespace(tv=tv, nn=nn, X=M.X[orig], nx=M.nx, ny=M.ny, nz=M.nz, nt=M.nt, vox=M.vox,
+                                   tvox=M.tvox, tp=M.tp)
+    v = _solve(Ms, mu_s, la_s)
+    a = energy_upper(Ms, v, mu_h, la_h)
     # refined units: lengths x k, the strain field the same, a and V both x k^3: E_app = a / V unchanged
     return a / (M.nx * M.ny * M.nz), v, M
 

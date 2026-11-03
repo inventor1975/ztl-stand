@@ -88,6 +88,11 @@ the balanced linear face tractions. So the lower bound is built from FACE data, 
   4. E_app >= n_x F^2 / (n_y n_z ||tau||^2), the energy at the box's softest corner per tet, summed in floats with a
      rigorous bound (Higham, plus the conversion of g to binary64). Premise: Green's formula, as the hypercircle.
 
+**Edge/corner-only contacts (2026-11-03, after conduction3d):** the upper bound's displacement is split where solid
+voxels meet only along an edge or at a corner (MEASURED: a 60 % random 6^3 map 83.68 -> 51.12, the lower 25.15; 100
+random maps never below a proved lower bound, median ratio 1.69 -> 1.54). **Box order (the cloud's round 2):** a box
+written high-to-low is refused (it gave a false EARNED).
+
 **Version 2 IN (2026-11-03): TWO-SIDED.** `ustand/kuhn_split.py` (the element, sympy, cached exact JSON; rank 30 and
 the balance asserted per type) and `elastic3d.lower` (the four steps above; the 24 face blocks are UNIMODULAR —
 Smith normal form all ones, MEASURED — so the push stays in integers, no denominator growth). MEASURED: homogeneous,

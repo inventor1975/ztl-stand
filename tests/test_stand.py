@@ -3596,6 +3596,19 @@ check("3D ELASTICITY, the hybridized solve (AMG with rigid motions): homogeneous
       "pored cube's lower bound equals the direct KKT's within 1e-9 (183.594)",
       200 * (1 - 1e-9) <= _h3h <= 200 and abs(_h3o / _k3o - 1) < 1e-9, (_h3h, _h3o, _k3o))
 
+# 3D ELASTICITY, edge/corner-only contacts (2026-11-03, as conduction3d): the displacement is split where solid voxels
+# meet only along an edge or at a corner (the others pores). MEASURED on a 60 % random 6^3 map: upper 83.68 -> 51.12,
+# the proved lower 25.15; 100 random maps (x1, x2): never below any proved lower bound, median upper/lower 1.69 -> 1.54
+_Vsp = (_np_el.random.default_rng(6).random((6, 6, 6)) < 0.6).astype(int)
+_EL3.SPLIT = False
+_usp0 = float(_EL3.upper(_Vsp, {0: _P3(0, 0), 1: _P3(200, "0.3")})[0])
+_EL3.SPLIT = True
+_usp1 = float(_EL3.upper(_Vsp, {0: _P3(0, 0), 1: _P3(200, "0.3")})[0])
+_lsp = float(_EL3.lower(_Vsp, {0: _P3(0, 0), 1: _P3(200, "0.3")})[0])
+check("3D ELASTICITY, edge/corner-only contacts carry no force: the split displacement's upper bound drops (60 % "
+      "random 6^3: 83.68 -> 51.12) and stays above the proved lower bound 25.15",
+      _lsp <= _usp1 < 0.7 * _usp0, (_usp0, _usp1, _lsp))
+
 # BOX ORDER (2026-11-03, the cloud red team's round 2, PR #2): a modulus box written high-to-low was read as lo = first,
 # hi = last — elastic3d proved [188.18, 191.32] for E [205, 200] on the pored cube and said 'E_app >= 188' EARNED,
 # while the truth at E = 200 is at most 185.97 (an independent Q1 solve). Now refused, in elastic3d and conduction3d;
