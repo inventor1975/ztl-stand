@@ -619,3 +619,157 @@ def judge_shear(a, b, t, E, nu, bc, fy, need_tau_cr=None, eta=1.2, rigid_end_pos
         r = judge_sheet_claim(f"tcr >= {f(F(need_tau_cr))}", qs, mk)
         out["verdict"] = r["disposition"] + (f" ({r['polarity']})" if r.get("polarity") else "")
     return out
+
+
+# --------------------------------------------------------------------------------- COMBINED sigma + tau (2026-11-03)
+def lower_factor_combined(a, b, nu, psi, cs, ct, bc, nx, ny,
+                          splits=((F(1, 2), F(0), F(1, 2)), (F(3, 4), F(0), F(1, 4)), (F(1, 4), F(0), F(3, 4)),
+                                  (F(9, 20), F(1, 10), F(9, 20)), (F(7, 10), F(1, 10), F(1, 5)),
+                                  (F(1, 5), F(1, 10), F(7, 10)))):
+    """A PROVED lower bound on lambda_1 for the COMBINED field cs * s(y) (sigma_x, s = 1 - (1 - psi) y / b, cs >= 0
+    the compression at y = 0) + ct (tau uniform, either sign): a(v) = lambda (cs b_s(v) + ct b_tau(v)). With u = I_M v,
+    e = v - u, a(v) = a(u) + a(e) and
+      cs b^+(v) <= cs (1 + eta1) b^+(u) + cs (1 + 1/eta1) b^+(e),      b^+(e) <= eps_+^2 a(e)
+      cs b^-(v) >= cs (1 - delta) b^-(u) - cs (1/delta - 1) b^-(e),     b^-(e) <= eps_-^2 a(e)
+      ct b_tau(v) <= ct b_tau(u) + |ct| (eta2 G(u) + (1 + 1/eta2) ||grad e||^2),   ||grad e||^2 <= eps_g^2 a(e)
+    so lambda_1 >= mu if K - mu [cs (1 + eta1) B^+ - cs (1 - delta) B^- + ct B_tau + |ct| eta2 G] is positive definite
+    and the three e-charges fill a budget theta_p + theta_n + theta_g = 1 (eta1, delta, eta2 by equality). The best of a
+    short list of splits is kept (each a proof). cs = 0 or ct = 0 reduce to the single-load bounds."""
+    from . import judge_ztl  # noqa: F401
+    import zenergy as ZE
+    import scipy.sparse.linalg as ssl
+    cs, ct = F(cs), F(ct)
+    if cs < 0:
+        raise ValueError("cs: the compression at y = 0, >= 0 (psi carries the sign change)")
+    K, Bp, Bn, n, e2p, e2n = morley_system(a, b, nu, psi, bc, nx, ny, want_tension=True)
+    K2, Bt, Gm, n2, e2g = morley_shear_system(a, b, nu, bc, nx, ny)
+    assert n2 == n and K2 == K                            # the same mesh, dofs and stiffness
+    e2p, e2n, e2g = cs * e2p, cs * e2n, abs(ct) * e2g     # the charges per unit mu
+    gsg = ct if MUTANT.get("comb_signed_g") else abs(ct)  # sabotage (tests only): the cross-term charge signed
+    keys = set(K) | set(Bp) | set(Bn) | set(Bt) | set(Gm)
+    def ok(mu, sp):
+        thp, thn, thg = sp
+        if mu <= 0:
+            return True
+        if (e2p and mu * e2p >= thp) or (e2g and mu * e2g >= thg) or (e2n and thn == 0) or not (e2p or e2n or e2g):
+            return False
+        eta1 = mu * e2p / (thp - mu * e2p) if e2p else F(0)
+        delta = F(1) / (1 + thn / (mu * e2n)) if e2n else F(0)
+        eta2 = mu * e2g / (thg - mu * e2g) if e2g else F(0)
+        ent = {k_: K.get(k_, F(0)) - mu * (cs * (1 + eta1) * Bp.get(k_, F(0)) - cs * (1 - delta) * Bn.get(k_, F(0))
+                                         + ct * Bt.get(k_, F(0)) + gsg * eta2 * Gm.get(k_, F(0)))
+               for k_ in keys}
+        if n <= 400:
+            m = float(__import__("scipy.linalg").linalg.eigvalsh(_dense(ent, n))[0])
+        else:
+            try:
+                m = float(ssl.eigsh(_sparse(ent, n), k=1, sigma=0, which="LM", return_eigenvectors=False,
+                                    v0=np.ones(n))[0])
+            except Exception:
+                return False
+        if m <= 0:
+            return False
+        pd = ZE.pd_ieee(n, ent, F(m) * F(9, 10))
+        return pd is not None and pd > 0
+    Bsum = {k_: cs * (Bp.get(k_, F(0)) - Bn.get(k_, F(0))) + ct * Bt.get(k_, F(0)) for k_ in keys}
+    try:
+        lam_est = 1.0 / float(ssl.eigsh(_sparse(Bsum, n), k=1, M=_sparse(K, n), which="LA",
+                                        return_eigenvectors=False, v0=np.ones(n))[0])
+    except Exception:
+        lam_est = None
+    # the splits over the ACTIVE charges only (a zero charge gives its share to the others: cs = 0 or ct = 0 is then
+    # exactly the single-load bound); duplicates dropped
+    act = (bool(e2p), bool(e2n), bool(e2g))
+    norm = []
+    for sp in splits:
+        if act[1] and not sp[1]:
+            continue                                      # tension present: it needs a share
+        tot = sum(x for x, on in zip(sp, act) if on)
+        if tot == 0:
+            continue
+        q = tuple((x / tot if on else F(0)) for x, on in zip(sp, act))
+        if q not in norm:
+            norm.append(q)
+    best, best_sp = F(0), None
+    for sp in norm:
+        hi, lo = (F(lam_est) if lam_est else F(10 ** 6)), F(0)
+        for _ in range(40):
+            mid = (lo + hi) / 2
+            if ok(mid, sp):
+                lo = mid
+            else:
+                hi = mid
+            if hi - lo <= lo * F(1, 10 ** 5):
+                break
+        lo = F(float(lo))
+        while lo > 0 and not ok(lo, sp):
+            lo = lo * (1 - F(1, 10 ** 6))
+        if lo > best:
+            best, best_sp = lo, sp
+    return best, {"lambda_M_est": lam_est, "split": [str(x) for x in best_sp] if best_sp else None, "unknowns": n}
+
+
+def upper_factor_combined(a, b, nu, psi, cs, ct, bc, nx, ny):
+    """A PROVED upper bound for the combined field: the exact Rayleigh quotient of a BFS field (as upper_factor)."""
+    import scipy.sparse.linalg as ssl
+    cs, ct = F(cs), F(ct)
+    K, Bs, n = bfs_system(a, b, nu, psi, bc, nx, ny)
+    _K2, Bt, _n2 = bfs_system(a, b, nu, psi, bc, nx, ny, shear=True)
+    Bm = {k_: cs * Bs.get(k_, F(0)) + ct * Bt.get(k_, F(0)) for k_ in set(Bs) | set(Bt)}
+    vals, vecs = ssl.eigsh(_sparse(Bm, n), k=1, M=_sparse(K, n), which="LA", v0=np.ones(n))
+    v = vecs[:, 0] / np.abs(vecs[:, 0]).max()
+    w = [F(int(round(x * 2 ** 40)), 2 ** 40) for x in v]
+    quad = lambda E: sum(c * w[i] * w[j] * (1 if i == j else 2) for (i, j), c in E.items())
+    aw, bw = quad(K), quad(Bm)
+    if bw <= 0:
+        return None, {"why": "the Ritz field does not load the plate"}
+    return aw / bw, {"lambda_ritz_est": 1.0 / float(vals[0]), "unknowns": n}
+
+
+def judge_combined(a, b, t, E, nu, psi, sigma, tau, bc, fy, gamma_M1=1, eta=1.2, rigid_end_post=False,
+                   n_low=48, n_up=12):
+    """EN 1993-1-5 Section 10 (reduced stress method) for an unstiffened panel under sigma_x (sigma at y = 0, the
+    larger compression, >= 0; psi) + tau (uniform), sigma_z = 0: alpha_cr of the WHOLE field PROVED from both sides
+    (lower_factor_combined / upper_factor_combined), alpha_ult,k = fy / sqrt(sigma_max^2 + 3 tau^2), lambda_p =
+    sqrt(alpha_ult,k / alpha_cr), rho_x (4.4(2)) and chi_w (Table 5.1) from lambda_p, and (10.5)
+    U = (sigma_max / (rho_x fy / gamma_M1))^2 + 3 (tau / (chi_w fy / gamma_M1))^2 <= 1 judged by ZTL. rho and chi_w are
+    non-increasing in lambda_p, so the LOWER alpha_cr gives the LARGER U — the bracket of U is sound. Plate-like
+    behaviour (4.5.4): for a >= b EN's xi = sigma_cr,p / sigma_cr,c - 1 >= 3, so rho_c = rho; a < b is refused (OPEN)."""
+    from . import judge_ztl  # noqa: F401
+    from znumjudge import parse_quantities, judge_sheet_claim
+    a, b, t, E, nu, psi, sigma, tau = (F(v) for v in (a, b, t, E, nu, psi, sigma, tau))
+    if not (0 <= nu < F(1, 2)):
+        raise ValueError("Poisson's ratio: 0 <= nu < 1/2 here")
+    if a < b:
+        return {"verdict": "OPEN", "why": "a < b: the column-like interaction (EN 1993-1-5 4.5.4) is not modelled"}
+    if sigma < 0:
+        raise ValueError("sigma: the compression at y = 0, >= 0 (psi carries the sign change)")
+    D = E * t ** 3 / (12 * (1 - nu ** 2))
+    nx, ny = max(1, round(float(a / b * n_low))), n_low
+    mx, my = max(1, round(float(a / b * n_up))), n_up
+    lo, il = lower_factor_combined(a, b, nu, psi, sigma, tau, bc, nx, ny)
+    hi, iu = upper_factor_combined(a, b, nu, psi, sigma, tau, bc, mx, my)
+    if not lo or hi is None:
+        return {"verdict": "OPEN", "why": "a bound was not proved", "info": {"lower": il, "upper": iu}}
+    acr = (lo * D / t, hi * D / t)
+    smax = sigma * max(F(1), abs(psi))
+    fyf, g = float(fy), float(gamma_M1)
+    ault = fyf / math.sqrt(float(smax) ** 2 + 3 * float(tau) ** 2)
+    def U(acr_):
+        lam = math.sqrt(ault / float(acr_))
+        rho, chi = rho_internal(lam, psi), chi_w(lam, eta, rigid_end_post)
+        return (float(smax) / (rho * fyf / g)) ** 2 + 3 * (float(tau) / (chi * fyf / g)) ** 2, lam, rho, chi
+    u_hi, lam_hi, rho_lo, chi_lo = U(acr[0] * (1 - F(1, 10 ** 12)))
+    u_lo, lam_lo, rho_hi, chi_hi = U(acr[1])
+    u_hi, u_lo = F(u_hi) * (1 + F(1, 10 ** 9)), F(u_lo) * (1 - F(1, 10 ** 9))   # outward over the float evaluation
+    f = lambda x: f"{x.numerator}/{x.denominator}"
+    qs, mk = parse_quantities(f"U=[{f(u_lo)},{f(u_hi)}] earned:platebuckle")
+    r = judge_sheet_claim("U <= 1", qs, mk)
+    return {"alpha_cr": [float(acr[0]), float(acr[1])], "lambda_p": [lam_lo, lam_hi], "rho_x": [rho_lo, rho_hi],
+            "chi_w": [chi_lo, chi_hi], "U_10_5": [float(u_lo), float(u_hi)],
+            "verdict": r["disposition"] + (f" ({r['polarity']})" if r.get("polarity") else ""),
+            "premise": "EN 1993-1-5 Section 10, sigma_z = 0, unstiffened panel a >= b (plate-like), Kirchhoff plate, "
+                       "the stated edge supports; alpha_cr by Morley + Carstensen & Gallistl with every interpolation "
+                       "charge budgeted, and BFS Ritz; chi_w Table 5.1 (eta = %s, %s end post), gamma_M1 = %s"
+                       % (eta, "rigid" if rigid_end_post else "non-rigid", gamma_M1),
+            "info": {"lower": il, "upper": iu}}

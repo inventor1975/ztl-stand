@@ -3841,6 +3841,55 @@ check("PLATE SHEAR BUCKLING: a simply supported square panel — k_tau bracket [
       and 0.70 < _shj["chi_w_EN_1993_1_5_5_3"][0] <= _shj["chi_w_EN_1993_1_5_5_3"][1] < 0.80,
       (_shb, _skt, _shm, _shl, _shj["tau_cr"], _shx, _shj["chi_w_EN_1993_1_5_5_3"], _shj.get("verdict")))
 
+# PLATE sigma + tau COMBINED, EN 1993-1-5 SECTION 10 (2026-11-03): alpha_cr of the whole field, lower with the three
+# interpolation charges budgeted (compression / tension / shear cross term), upper BFS. Two sides against an
+# independent double-sine Ritz series computed here (sigma = tau, square: 3.45388; MEASURED bracket [3.307, 3.454]);
+# a pure load gives the single-load bound (the budget goes to the active charge only; pure sigma by bisection is a hair
+# above lower_factor's closed form, 3.95080 vs 3.95043, MEASURED). The sabotage
+# 'comb_signed_g' (the cross-term charge with the SIGN of tau) is unsafe for tau < 0 but stays under the upper bound
+# (3.431 < 3.454): it is caught by the panel's mirror symmetry — the true lambda is even in tau, the real bound is too
+# (3.30725 both, MEASURED), the sabotage is not (3.7 %). Section 10 on a 2000 x 1000 x 10 mm S355 panel, sigma 100 /
+# tau 60 MPa: U (10.5) bracketed around the value from the sine-series alpha_cr, EARNED; 150 / 100 REFUTED; a < b OPEN
+def _sine_comb(alpha, cs, ct, N=24):
+    a_, idx = float(alpha), [(m, n) for m in range(1, N + 1) for n in range(1, N + 1)]
+    A = _np_ax.array([(a_ / 4) * _mpb.pi ** 4 * ((m / a_) ** 2 + n ** 2) ** 2 for m, n in idx])
+    T = _np_ax.zeros((len(idx), len(idx)))
+    for i, (m, n) in enumerate(idx):
+        for j, (p_, q_) in enumerate(idx):
+            if (m + p_) % 2 and (n + q_) % 2:
+                T[i, j] = m * 2 * p_ / (p_ * p_ - m * m) * q_ * 2 * n / (n * n - q_ * q_)
+    Bs = _np_ax.diag([(m * _mpb.pi / a_) ** 2 * a_ / 4 for m, n in idx])
+    import scipy.linalg as _sl_c
+    return 1.0 / _sl_c.eigh(cs * Bs + ct * (T + T.T), _np_ax.diag(A), eigvals_only=True).max() / _mpb.pi ** 2
+_cref = _sine_comb(1, 1, 1)
+_cb = (_kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, 1, _SS, 32, 32)[0]),
+       _kb(_PB.upper_factor_combined(1, 1, F(3, 10), 1, 1, 1, _SS, 12, 12)[0]))
+_cneg = _kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, -1, _SS, 32, 32)[0])
+_cpure = (_kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, 0, _SS, 32, 32)[0]), _kb(_PB.lower_factor(1, 1, F(3, 10), 1, _SS, 32, 32)[0]),
+          _kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 0, 1, _SS, 32, 32)[0]), _shb[0])
+_PB.MUTANT["comb_signed_g"] = True
+try:
+    _cmut = _kb(_PB.lower_factor_combined(1, 1, F(3, 10), 1, 1, -1, _SS, 32, 32)[0])
+finally:
+    _PB.MUTANT.clear()
+_cj = _PB.judge_combined(2000, 1000, 10, 210000, F(3, 10), 1, 100, 60, _SS, 355, n_low=24, n_up=8)
+_cj2 = _PB.judge_combined(2000, 1000, 10, 210000, F(3, 10), 1, 150, 100, _SS, 355, n_low=24, n_up=8)
+_cj3 = _PB.judge_combined(1000, 2000, 10, 210000, F(3, 10), 1, 100, 60, _SS, 355)
+_acr_ref = _sine_comb(2, 100, 60) * _mpb.pi ** 2 * 210000 * 100 / (12 * 0.91) / 1000 ** 2
+_lr = _mpb.sqrt(355 / _mpb.sqrt(100 ** 2 + 3 * 60 ** 2) / _acr_ref)
+_uref = (100 / (_PB.rho_internal(_lr, 1) * 355)) ** 2 + 3 * (60 / (_PB.chi_w(_lr) * 355)) ** 2
+check("PLATE sigma + tau, EN 1993-1-5 SECTION 10: the combined bracket holds the independent sine-series value; a pure "
+      "load reproduces the single-load bounds; the bound is even in tau like the panel, the signed-charge sabotage is "
+      "not; a 2000 x 1000 x 10 mm S355 panel (sigma 100, tau 60 MPa): alpha_cr and U (10.5) bracket the sine-series "
+      "values, EARNED; at 150 / 100 REFUTED; a < b refused (OPEN)",
+      _cb[0] <= _cref <= _cb[1] < _cref * 1.001 and _cb[0] > _cref * 0.94
+      and _cpure[1] * (1 - 1e-9) <= _cpure[0] < _cpure[1] * 1.001 and abs(_cpure[2] - _cpure[3]) < 1e-9
+      and abs(_cneg - _cb[0]) < 5e-3 * _cb[0] and abs(_cmut - _cb[0]) > 0.02 * _cb[0]
+      and _cj["alpha_cr"][0] <= _acr_ref <= _cj["alpha_cr"][1] and _cj["U_10_5"][0] <= _uref <= _cj["U_10_5"][1]
+      and _cj["verdict"] == "EARNED" and _cj2["verdict"].startswith("REFUTED") and _cj3["verdict"] == "OPEN",
+      (_cb, _cref, _cneg, _cmut, _cpure, _cj["alpha_cr"], _acr_ref, _cj["U_10_5"], _uref, _cj["verdict"],
+       _cj2["verdict"], _cj3["verdict"]))
+
 # SIGN-AWARE SPAN BOUND (2026-11-03): a member-loaded member's interior moment is the chord of its end values plus
 # w x (L - x)/2 (the outputs' convention, the clamped beam's -w L^2/12) plus a second-order rest — hogging ends and a
 # sagging span cancel where they do (it added w L^2/8 outright: loaded beams' stress bounds up to ~2x the reference,
