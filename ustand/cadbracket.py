@@ -105,8 +105,11 @@ def main(argv):
     ap.add_argument("--d-min", type=float)
     ap.add_argument("--E-range")
     ap.add_argument("--E-ground", default="credit")
+    ap.add_argument("--matfree", choices=("auto", "yes", "no"), default="auto",
+                    help="the trace system: never assembled (yes), assembled + AMG (no), by size (auto: > 1e5 tets)")
     a = ap.parse_args(argv)
-    r = bracket(a.deck, a.subcase, log=lambda s: print(s, file=sys.stderr, flush=True))
+    mf = {"auto": None, "yes": True, "no": False}[a.matfree]
+    r = bracket(a.deck, a.subcase, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf)
     if (a.d_max is not None or a.d_min is not None) and r["work_conjugate"]:
         from . import cadstiff as CS
         Er = tuple(float(x) for x in a.E_range.split(":")) if a.E_range else (r["E"], r["E"])
