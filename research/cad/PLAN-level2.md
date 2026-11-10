@@ -252,3 +252,20 @@ MEASURED on SimJEB 631 (82k tets, subcase 1, 4 cores, Z in float32):
 For comparison, the assembled AMG solve takes 217 iterations / 366 s / ~7 GB. So the matrix-free solve is ~3x slower
 here and buys memory, which is what 640k-tet parts need. The bound it yields is still exact: `finish` + the errfloat
 energy do not care how the trace was chosen.
+
+## ★ SimJEB 148 — 640197 tets, BOTH sides proved (2026-11-10 21:30, MEASURED)
+
+Vertical load: C ∈ [59892.152, 63506.641], gap 6.0 % (displacement of the load point along F: [1.6830, 1.7846] mm).
+Run: matrix-free trace solve, Z in float64, 6 cores, 8475 s in all:
+- lower bound 38 s;
+- forms + KKT ~3.5 min;
+- CG 4396 iterations, 6866 s;
+- exact push ~20 min (0 unbalanced, denominators ≤ 301 bits);
+- rigorous energy ~3 min.
+Memory peak 16.5 GB (the forms/KKT stage, before the chunk was cut to 8000); the push held ~10.5 GB.
+Logs: mem148_s1.log; result: results148_s1_matfree_z64.json.
+What this is: a two-sided PROVED compliance bracket on a real part at the low end of industrial mesh sizes (640k
+first-order tets). Where it will break at 5M tets (measured, not guessed):
+- CG iterations grow with the mesh (82k: 5431 with float64 at 1e-8; 640k: 4396), so the preconditioner holds for now;
+- the exact push is pure-Python Fractions (~2 ms a tet);
+- memory peaks in the KKT stage.

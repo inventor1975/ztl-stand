@@ -1,0 +1,423 @@
+19:07:29 1491904 1867032 
+19:07:49 1829760 2052532   [equil 0.0 s] element forms: computed per chunk of 20000 t
+19:08:09 3736872 3736872   [equil 0.0 s] element forms: computed per chunk of 20000 t
+19:08:29 4365856 4562212   [equil 0.0 s] element forms: computed per chunk of 20000 t
+19:08:49 4443080 5394400   [equil 0.0 s] element forms: computed per chunk of 20000 t
+19:09:09 6026536 6026536   [equil 0.0 s] element forms: computed per chunk of 20000 t
+19:09:29 6655520 6850388   [equil 0.0 s] element forms: computed per chunk of 20000 t
+19:09:49 6759520 7683628   [equil 0.0 s] element forms: computed per chunk of 20000 t
+19:10:09 8314152 8314152   [equil 0.0 s] element forms: computed per chunk of 20000 t
+19:10:29 8945184 9140148   [equil 0.0 s] element forms: computed per chunk of 20000 t
+19:10:49 15954164 15956376   [equil 175.1 s] local KKTs
+19:11:09 11509796 16467776   [equil 175.1 s] local KKTs
+19:11:29 12564464 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:11:49 12575596 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:12:09 12077040 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:12:29 11851408 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:12:49 12323144 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:13:09 11869716 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:13:29 12143384 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:13:49 11869716 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:14:09 11869716 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:14:30 11970284 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:14:50 11869716 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:15:10 12143384 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:15:30 12143384 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:15:50 12143384 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:16:10 11956160 16467776   [equil 215.5 s] auxiliary space: 386013 nodal dof, AMG 3 l
+19:16:30 12253856 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:16:50 11869716 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:17:10 12046320 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:17:30 11869716 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:17:50 12143384 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:18:10 11869716 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:18:30 11869716 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:18:50 12143384 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:19:10 12143384 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:19:30 12035652 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:19:50 11869716 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:20:10 11869716 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:20:30 11783272 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:20:50 12143384 16467776   [equil 525.0 s] matrix-free CG iteration 200: residual 2.2
+19:21:10 12027460 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:21:30 11869716 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:21:50 11974640 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:22:10 12089068 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:22:30 11869716 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:22:50 12143384 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:23:10 12593136 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:23:30 12489156 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:23:50 11869716 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:24:10 11819328 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:24:30 12143384 16467776   [equil 800.4 s] matrix-free CG iteration 400: residual 1.7
+19:24:50 11963556 16467776   [equil 1010.3 s] matrix-free CG iteration 600: residual 5.
+19:25:10 12143384 16467776   [equil 1010.3 s] matrix-free CG iteration 600: residual 5.
+19:25:30 11869716 16467776   [equil 1010.3 s] matrix-free CG iteration 600: residual 5.
+19:25:50 11869716 16467776   [equil 1010.3 s] matrix-free CG iteration 600: residual 5.
+19:26:10 12143384 16467776   [equil 1010.3 s] matrix-free CG iteration 600: residual 5.
+19:26:30 12143384 16467776   [equil 1010.3 s] matrix-free CG iteration 600: residual 5.
+19:26:50 12143384 16467776   [equil 1010.3 s] matrix-free CG iteration 600: residual 5.
+19:27:10 11869716 16467776   [equil 1010.3 s] matrix-free CG iteration 600: residual 5.
+19:27:30 12143384 16467776   [equil 1010.3 s] matrix-free CG iteration 600: residual 5.
+19:27:50 11869716 16467776   [equil 1010.3 s] matrix-free CG iteration 600: residual 5.
+19:28:10 11869716 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:28:30 11884864 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:28:50 11869716 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:29:10 12143384 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:29:30 12575580 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:29:50 11869716 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:30:10 11869716 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:30:30 11874792 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:30:50 11869716 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:31:10 11869716 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:31:30 11821376 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:31:50 12143384 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:32:10 12143384 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:32:30 11869716 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:32:50 12143384 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:33:10 11956160 16467776   [equil 1226.9 s] matrix-free CG iteration 800: residual 1.
+19:33:30 12143384 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:33:50 12143384 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:34:10 11869716 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:34:30 12120048 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:34:50 12474268 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:35:10 11919848 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:35:31 11869716 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:35:51 12095212 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:36:11 11785444 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:36:31 12143384 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:36:51 12143384 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:37:11 11917204 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:37:31 12390728 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:37:51 11869716 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:38:11 11869716 16467776   [equil 1537.5 s] matrix-free CG iteration 1000: residual 5
+19:38:31 12143384 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:38:51 12143384 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:39:11 11869716 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:39:31 11869716 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:39:51 11869716 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:40:11 12143384 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:40:31 12143784 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:40:51 11841168 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:41:11 11835284 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:41:31 12143384 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:41:51 12143384 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:42:11 11869716 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:42:31 12580420 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:42:51 11869716 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:43:11 12143384 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:43:31 11820260 16467776   [equil 1844.9 s] matrix-free CG iteration 1200: residual 3
+19:43:51 12147360 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:44:11 12143384 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:44:31 12143384 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:44:51 11869716 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:45:11 11956160 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:45:31 11955664 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:45:51 11869716 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:46:11 12143384 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:46:31 11783272 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:46:52 11869716 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:47:12 12011076 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:47:32 11922324 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:47:52 11869716 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:48:12 12076612 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:48:32 12142576 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:48:52 11810708 16467776   [equil 2154.7 s] matrix-free CG iteration 1400: residual 1
+19:49:12 12143384 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:49:32 12310772 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:49:52 11852096 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:50:12 11872148 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:50:32 12143384 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:50:52 12143384 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:51:12 11869716 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:51:32 12143384 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:51:52 12143384 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:52:12 12143384 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:52:32 11831188 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:52:52 11793208 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:53:12 12402708 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:53:32 11869716 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:53:52 11869716 16467776   [equil 2469.5 s] matrix-free CG iteration 1600: residual 5
+19:54:12 11869716 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:54:32 12035652 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:54:52 11869716 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:55:12 11869716 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:55:32 12489156 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:55:52 12143384 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:56:12 12130288 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:56:32 12143384 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:56:52 11869716 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:57:12 12143384 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:57:32 11909440 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:57:52 11869716 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:58:12 12143384 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:58:32 11936064 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:58:52 12143384 16467776   [equil 2783.7 s] matrix-free CG iteration 1800: residual 1
+19:59:12 12143384 16467776   [equil 3070.7 s] matrix-free CG iteration 2000: residual 5
+19:59:32 12143384 16467776   [equil 3070.7 s] matrix-free CG iteration 2000: residual 5
+19:59:52 11869716 16467776   [equil 3070.7 s] matrix-free CG iteration 2000: residual 5
+20:00:12 12143384 16467776   [equil 3070.7 s] matrix-free CG iteration 2000: residual 5
+20:00:32 11869716 16467776   [equil 3070.7 s] matrix-free CG iteration 2000: residual 5
+20:00:52 12353436 16467776   [equil 3070.7 s] matrix-free CG iteration 2000: residual 5
+20:01:12 12143384 16467776   [equil 3070.7 s] matrix-free CG iteration 2000: residual 5
+20:01:32 11869716 16467776   [equil 3070.7 s] matrix-free CG iteration 2000: residual 5
+20:01:52 11846456 16467776   [equil 3070.7 s] matrix-free CG iteration 2000: residual 5
+20:02:12 11869716 16467776   [equil 3070.7 s] matrix-free CG iteration 2000: residual 5
+20:02:32 12143384 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:02:52 11869716 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:03:12 12143384 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:03:32 11869716 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:03:52 11938708 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:04:12 11956160 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:04:32 12284148 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:04:52 12143384 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:05:12 11869716 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:05:32 12038296 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:05:52 12143384 16467776   [equil 3281.4 s] matrix-free CG iteration 2200: residual 2
+20:06:12 11869716 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:06:32 11869716 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:06:53 11869716 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:07:13 12143384 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:07:33 11869716 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:07:53 12143384 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:08:13 12143384 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:08:33 12060396 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:08:53 11869716 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:09:13 11869716 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:09:33 12143384 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:09:53 12143384 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:10:13 11831616 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:10:33 12143384 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:10:53 12143384 16467776   [equil 3497.2 s] matrix-free CG iteration 2400: residual 8
+20:11:13 11869716 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:11:33 12575596 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:11:53 11869716 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:12:13 12143384 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:12:33 11869716 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:12:53 12078660 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:13:13 11849360 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:13:33 11869716 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:13:53 11804992 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:14:13 12013124 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:14:33 12143384 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:14:53 11869716 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:15:13 12143384 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:15:33 11869716 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:15:53 12593136 16467776   [equil 3802.1 s] matrix-free CG iteration 2600: residual 4
+20:16:13 11869716 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:16:33 12143384 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:16:53 12070896 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:17:13 12257524 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:17:33 12143384 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:17:53 12143384 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:18:13 12143384 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:18:33 12229828 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:18:53 11869716 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:19:13 11869716 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:19:33 11783272 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:19:53 12575596 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:20:13 12143384 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:20:33 12143384 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:20:53 12143384 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:21:13 12143384 16467776   [equil 4106.5 s] matrix-free CG iteration 2800: residual 1
+20:21:33 11789540 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:21:53 12143384 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:22:14 11869716 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:22:34 12143384 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:22:54 12573992 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:23:14 12143384 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:23:34 11998788 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:23:54 12575596 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:24:14 12143384 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:24:34 11837072 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:24:54 12143384 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:25:14 11869716 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:25:34 11783276 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:25:54 11869716 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:26:14 12573608 16467776   [equil 4415.2 s] matrix-free CG iteration 3000: residual 5
+20:26:34 12143384 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:26:54 11915752 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:27:14 11783272 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:27:34 12499396 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:27:54 12143384 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:28:14 11869716 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:28:34 11869716 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:28:54 11907988 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:29:14 11879316 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:29:34 12143384 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:29:54 12079256 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:30:14 11861220 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:30:34 11869716 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:30:54 11925396 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:31:14 12143384 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:31:34 12143384 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:31:54 12143384 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:32:14 11869716 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:32:34 12143384 16467776   [equil 4726.1 s] matrix-free CG iteration 3200: residual 1
+20:32:54 12143384 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:33:14 12573828 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:33:34 11906964 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:33:54 12143384 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:34:14 11872148 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:34:34 11869716 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:34:54 11783272 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:35:14 12143384 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:35:35 12143384 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:35:55 12143384 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:36:15 11810708 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:36:35 11869716 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:36:55 12573648 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:37:15 12143384 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:37:35 11869716 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:37:55 11783272 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:38:15 12142900 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:38:35 12143384 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:38:55 11869716 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:39:15 11880340 16467776   [equil 5095.6 s] matrix-free CG iteration 3400: residual 5
+20:39:35 11869716 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:39:55 11869716 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:40:15 11869716 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:40:35 12329288 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:40:55 12143384 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:41:15 11956160 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:41:35 11869716 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:41:55 12143384 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:42:15 12575596 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:42:35 11869716 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:42:55 11869716 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:43:15 11855764 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:43:35 12143384 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:43:55 12143384 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:44:15 12143384 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:44:35 11869716 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:44:55 11869716 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:45:15 12143384 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:45:35 12143384 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:45:55 11869716 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:46:15 11869716 16467776   [equil 5506.8 s] matrix-free CG iteration 3600: residual 1
+20:46:35 12179700 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:46:55 11889556 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:47:15 11869684 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:47:35 11869684 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:47:55 12143352 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:48:15 11869684 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:48:35 12143352 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:48:55 11869684 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:49:15 11869684 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:49:35 11869684 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:49:55 11956128 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:50:15 12143352 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:50:35 11901384 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:50:56 11869684 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:51:16 12143352 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:51:36 11948320 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:51:56 11869684 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:52:16 11869684 16467776   [equil 5919.9 s] matrix-free CG iteration 3800: residual 3
+20:52:36 11966416 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:52:56 12143352 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:53:16 11869684 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:53:36 11869684 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:53:56 11958560 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:54:16 12574436 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:54:36 11869684 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:54:56 11869684 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:55:16 11869684 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:55:36 11869684 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:55:56 12143352 16467776   [equil 6288.0 s] matrix-free CG iteration 4000: residual 1
+20:56:16 12143352 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:56:36 12143352 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:56:56 11869684 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:57:16 11783240 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:57:36 11869684 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:57:56 11869684 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:58:16 11869684 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:58:36 12575504 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:58:56 11869684 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:59:16 11869684 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:59:36 11783240 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+20:59:56 12143352 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+21:00:16 11869684 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+21:00:36 11869684 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+21:00:56 11956128 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+21:01:16 11869684 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+21:01:36 12072912 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+21:01:56 11869684 16467776   [equil 6509.0 s] matrix-free CG iteration 4200: residual 3
+21:02:16 12143352 16467776   [equil 6865.9 s] matrix-free CG done: 4396 iterations, res
+21:02:36 12953368 16467776   [equil 6865.9 s] matrix-free CG done: 4396 iterations, res
+21:02:56 12750864 16467776   [equil 6865.9 s] matrix-free CG done: 4396 iterations, res
+21:03:16 12953368 16467776   [equil 6865.9 s] matrix-free CG done: 4396 iterations, res
+21:03:36 12953368 16467776   [equil 6865.9 s] matrix-free CG done: 4396 iterations, res
+21:03:56 12750864 16467776   [equil 6865.9 s] matrix-free CG done: 4396 iterations, res
+21:04:16 12628132 16467776   [equil 6865.9 s] matrix-free CG done: 4396 iterations, res
+21:04:36 12953368 16467776   [equil 6865.9 s] matrix-free CG done: 4396 iterations, res
+21:04:56 12750864 16467776   [equil 6865.9 s] matrix-free CG done: 4396 iterations, res
+21:05:16 1916788 16467776 upper choice (float): 63506.640889; 7084 s
+21:05:36 3482496 16467776 upper choice (float): 63506.640889; 7084 s
+21:05:56 3941832 16467776 upper choice (float): 63506.640889; 7084 s
+21:06:16 4398496 16467776 upper choice (float): 63506.640889; 7084 s
+21:06:36 4898716 16467776 upper choice (float): 63506.640889; 7084 s
+21:06:56 5335464 16467776 upper choice (float): 63506.640889; 7084 s
+21:07:17 5847156 16467776 upper choice (float): 63506.640889; 7084 s
+21:07:37 6264968 16467776 upper choice (float): 63506.640889; 7084 s
+21:07:57 6784836 16467776 upper choice (float): 63506.640889; 7084 s
+21:08:17 7290672 16467776 upper choice (float): 63506.640889; 7084 s
+21:08:37 7693976 16467776 upper choice (float): 63506.640889; 7084 s
+21:08:57 8199152 16467776 upper choice (float): 63506.640889; 7084 s
+21:09:17 8705432 16467776 upper choice (float): 63506.640889; 7084 s
+21:09:37 9068712 16467776 upper choice (float): 63506.640889; 7084 s
+21:09:57 9421240 16467776 upper choice (float): 63506.640889; 7084 s
+21:10:17 9518288 16467776 upper choice (float): 63506.640889; 7084 s
+21:10:37 9619048 16467776 upper choice (float): 63506.640889; 7084 s
+21:10:57 9740876 16467776 upper choice (float): 63506.640889; 7084 s
+21:11:17 9840568 16467776 upper choice (float): 63506.640889; 7084 s
+21:11:37 9944520 16467776 upper choice (float): 63506.640889; 7084 s
+21:11:57 10432964 16467776 upper choice (float): 63506.640889; 7084 s
+21:12:17 10432964 16467776 upper choice (float): 63506.640889; 7084 s
+21:12:37 10437936 16467776 upper choice (float): 63506.640889; 7084 s
+21:12:57 10443816 16467776 upper choice (float): 63506.640889; 7084 s
+21:13:17 10448668 16467776 upper choice (float): 63506.640889; 7084 s
+21:13:37 10453356 16467776 upper choice (float): 63506.640889; 7084 s
+21:13:57 10457884 16467776 upper choice (float): 63506.640889; 7084 s
+21:14:17 10461912 16467776 upper choice (float): 63506.640889; 7084 s
+21:14:37 10465680 16467776 upper choice (float): 63506.640889; 7084 s
+21:14:57 10468560 16467776 upper choice (float): 63506.640889; 7084 s
+21:15:17 10471628 16467776 upper choice (float): 63506.640889; 7084 s
+21:15:37 10475028 16467776 upper choice (float): 63506.640889; 7084 s
+21:15:57 10478228 16467776 upper choice (float): 63506.640889; 7084 s
+21:16:17 10481032 16467776 upper choice (float): 63506.640889; 7084 s
+21:16:37 10484336 16467776 upper choice (float): 63506.640889; 7084 s
+21:16:57 10488224 16467776 upper choice (float): 63506.640889; 7084 s
+21:17:17 10492768 16467776 upper choice (float): 63506.640889; 7084 s
+21:17:37 10498096 16467776 upper choice (float): 63506.640889; 7084 s
+21:17:57 10503232 16467776 upper choice (float): 63506.640889; 7084 s
+21:18:17 10509312 16467776 upper choice (float): 63506.640889; 7084 s
+21:18:37 10516400 16467776 upper choice (float): 63506.640889; 7084 s
+21:18:57 10522424 16467776 upper choice (float): 63506.640889; 7084 s
+21:19:17 10530368 16467776 upper choice (float): 63506.640889; 7084 s
+21:19:37 10537536 16467776 upper choice (float): 63506.640889; 7084 s
+21:19:57 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:20:17 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:20:37 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:20:57 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:21:17 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:21:37 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:21:57 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:22:17 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:22:37 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:22:57 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:23:17 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:23:37 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:23:57 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:24:17 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:24:37 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:24:57 10542232 16467776 upper choice (float): 63506.640889; 7084 s
+21:25:17 3614572 16467776 exact push: 0 unbalanced, denominators <= 301 bits; 8294 s
+21:25:37 4274664 16467776 exact push: 0 unbalanced, denominators <= 301 bits; 8294 s
+21:25:57 5445476 16467776 exact push: 0 unbalanced, denominators <= 301 bits; 8294 s
+21:26:17 6539100 16467776 exact push: 0 unbalanced, denominators <= 301 bits; 8294 s
+21:26:37 7257296 16467776 exact push: 0 unbalanced, denominators <= 301 bits; 8294 s
+21:26:57 8484984 16467776 exact push: 0 unbalanced, denominators <= 301 bits; 8294 s
+21:27:17 8484984 16467776 exact push: 0 unbalanced, denominators <= 301 bits; 8294 s
+21:27:37 8484984 16467776 exact push: 0 unbalanced, denominators <= 301 bits; 8294 s
+21:27:57 8484984 16467776 exact push: 0 unbalanced, denominators <= 301 bits; 8294 s
+21:28:17 6550236 16467776 exact push: 0 unbalanced, denominators <= 301 bits; 8294 s
