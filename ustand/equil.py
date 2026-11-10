@@ -168,11 +168,18 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
         mlK = pyamg.smoothed_aggregation_solver(Kf, B=Bn, symmetry="symmetric", max_coarse=500)
         Kpre = mlK.aspreconditioner(cycle="V")
         # scale: lam = Pi u for a nodal field u has the trace energy (Pi u)^T A (Pi u) ~ c u^T K u; the correction is
-        # Pi (c K)^-1 Pi^T — c from random nodal probes (only a scale: the preconditioner stays SPD for any c > 0)
+        # Pi (c K)^-1 Pi^T. c is only a scale: the preconditioner stays SPD for any c > 0, so it moves the iteration
+        # count, never the bound. c is the Rayleigh ratio on SMOOTHED probes (one AMG V-cycle applied to a random
+        # vector): the correction is meant for the smooth modes, and a raw random probe is mostly high frequency.
+        # MEASURED 2026-11-11 on SimJEB 631 (subcase 1, float64 Z, CG to 1e-8, 4 cores):
+        # - raw random probes (the old rule): c = 2.85e2;
+        # - a sweep of c x {0.1 .. 300}, residual at 800 its: x1 1.16, x3 0.118, x10 0.043, x30 0.038, x100 0.100;
+        # - to 1e-8: x10 -> 2248 its, x30 -> 2217 its;
+        # - one-V-cycle smoothed probes give c = x17 (spread x14..x40 over 3 probes; 2 or 4 cycles: x63..x71, too far).
         rng = np.random.default_rng(0)
         cs = []
-        for _ in range(3):
-            u_ = rng.normal(size=Kf.shape[0])
+        for _ in range(8):
+            u_ = Kpre(rng.normal(size=Kf.shape[0]))
             cs.append(float((Pi @ u_) @ Av(Pi @ u_)) / float(u_ @ (Kf @ u_)))
         c_aux = float(np.median(cs))
         say(f"auxiliary space: {Kf.shape[0]} nodal dof, AMG {len(mlK.levels)} levels, scale c = {c_aux:.3e}")

@@ -64,6 +64,12 @@ for n, ref in ((3, 8.782992), (4, 8.767626)):
                 acc[(fid, v)] = acc[(fid, v)] + g[t, f * 9 + jv * 3:f * 9 + jv * 3 + 3]
     worst = max(float(np.abs(x).max()) for x in acc.values())
     check(worst < 1e-8 * float(np.abs(g).max()), f"n = {n}: traction continuous on interior faces ({worst:.1e})")
+    # the MATRIX-FREE trace solve (CG + face-block Jacobi + auxiliary space) must reach the same energy: until
+    # 2026-11-11 no test went through this path at all
+    gm, em, im = EQ.choose(X, T, F, own, tf, kind, 1000.0, 0.3, q, matfree=True, tol=1e-10)
+    check(abs(em - ref) < 2e-6, f"n = {n}: matrix-free energy {em:.7f} = the global KKT's {ref}")
+    check(float(np.abs(np.einsum("nij,nj->ni", BAL, gm)).max()) < 1e-8 * float(np.abs(gm).max()),
+          f"n = {n}: matrix-free choice balanced in floats")
 
 if FAILS:
     print(f"EQUIL RED ({len(FAILS)} of {CHECKS})")

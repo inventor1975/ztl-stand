@@ -285,3 +285,27 @@ On a 10k-tet box: 73 → 10.2 s.
 
 A trap that hid this for an hour: an int64 guard sent decimal-coordinate parts back to the Fraction path. The box,
 with integer coordinates, passed the guard and showed ×7. Lesson: measure on the real data.
+
+## The auxiliary-space scale c: ×2 fewer CG iterations (2026-11-11 00:47, MEASURED)
+
+Profile first (SimJEB 631, 400 iterations, 4 cores): Av is 72 % of the CG time, 0.071 s a call. It is memory-bound:
+the einsum streams Z, 82k × 36 × 36 float64, about 0.85 GB a call. `np.add.at` is only 2.4 s of Av's 28.8 s. So a
+faster Av buys at most ×2 (symmetric storage, float32). The real lever is the ITERATION COUNT.
+
+The scale c of the correction Pi (c K)^-1 Pi^T was the Rayleigh ratio on 3 RAW random probes. A random vector is
+mostly high frequency, and the correction is meant for the smooth modes. A sweep of c on 631 (residual at 800
+iterations): ×0.1 7.82; ×0.3 4.98; ×1 1.16; ×3 0.118; ×10 0.043; ×30 0.038; ×100 0.100; ×300 0.387. The old c
+over-weighted the correction by a factor of 10 to 30.
+
+The rule now: the Rayleigh ratio on 8 probes SMOOTHED by one AMG V-cycle. It gives ×17 (3 probes) to ×27 (8 probes;
+c = 7.756e3) of the old c, inside the optimum. 2 or 4 cycles go too far (×63 to ×71).
+
+To 1e-8, the same 4 cores, the same day:
+- old rule: 4304 iterations, ~427 s of CG;
+- new rule: 2197 iterations, 216 s of CG; the whole bracket 279 s.
+The bracket is unchanged, [42132.98, 45676.73], gap equal to 1e-15, 365 push bits
+(results631_s1_matfree_smoothc.json). c never touches validity: the preconditioner is SPD for any c > 0.
+Not yet measured on 148 (4396 iterations, 6866 s with the old rule).
+
+A hole closed: until today no test went through the matrix-free path. test_equil now checks that it reaches the
+global KKT energy and a balanced choice. A planted unconverged solve (3 iterations) turns it RED.
