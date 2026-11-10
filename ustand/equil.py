@@ -41,10 +41,18 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
     import time as _t
     t0 = _t.time()
     say = (lambda m: log(f"  [equil {(_t.time() - t0):.1f} s] {m}")) if log else (lambda m: None)
-    Q1, Q2, BAL = AL.float_forms(X[T])
-    S = ((1 + nu) * Q1 - nu * Q2) / E
-    del Q1, Q2
-    say(f"element forms for {nt} tets")
+    CH = 20000
+
+    def forms(b):
+        # the element forms of a CHUNK of tets, recomputed where needed instead of stored (2026-11-10, toward 640k
+        # tets: Q1 + Q2 + S for all tets peaked at ~31 KB a tet — MEASURED ~54 KB/tet overall on SimJEB 40/631)
+        Q1, Q2, BALb = AL.float_forms(X[T[b]])
+        return ((1 + nu) * Q1 - nu * Q2) / E, BALb
+
+    def energy_of(g):
+        return float(sum(np.einsum("ni,nij,nj->", g[c0:c0 + CH], forms(slice(c0, min(nt, c0 + CH)))[0],
+                                   g[c0:c0 + CH]) for c0 in range(0, nt, CH)))
+    say(f"element forms: computed per chunk of {CH} tets ({nt} tets)")
     # per tet slot (f, jv, c): face, the vertex's position in F's sorted triple, the sign of the tet's outward normal
     # relative to the face's orientation (owner 0's outward)
     loc = np.array([[1, 2, 3], [0, 2, 3], [0, 1, 3], [0, 1, 2]])
@@ -68,13 +76,14 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
     # push and the rigorous energy make the bound, so a float32 choice costs tightness at most, never validity)
     Z = np.zeros((nt, 36, 36), zdtype)
     z0 = np.zeros((nt, 36))
-    for c0 in range(0, nt, 20000):
-        b = slice(c0, min(nt, c0 + 20000))
+    for c0 in range(0, nt, CH):
+        b = slice(c0, min(nt, c0 + CH))
+        Sb, BALb = forms(b)
         o = open_[b]
-        Sm = np.where(o[:, :, None] & o[:, None, :], S[b], 0.0)
+        Sm = np.where(o[:, :, None] & o[:, None, :], Sb, 0.0)
         ii = np.arange(36)
         Sm[:, ii, ii] = np.where(o, Sm[:, ii, ii], 1.0)
-        Bm = np.where(o[:, None, :], BAL[b], 0.0)
+        Bm = np.where(o[:, None, :], BALb, 0.0)
         sc = np.abs(Sm).max(axis=(1, 2))
         K = np.zeros((Sm.shape[0], 42, 42))
         K[:, :36, :36] = Sm
@@ -84,8 +93,8 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
         Ki = np.linalg.inv(K)
         g_p = gp[b]
         rhs = np.zeros((Sm.shape[0], 42))
-        rhs[:, :36] = -np.where(o, np.einsum("nij,nj->ni", S[b], g_p), 0.0)
-        rhs[:, 36:] = -np.einsum("nij,nj->ni", BAL[b], g_p)
+        rhs[:, :36] = -np.where(o, np.einsum("nij,nj->ni", Sb, g_p), 0.0)
+        rhs[:, 36:] = -np.einsum("nij,nj->ni", BALb, g_p)
         sol = np.einsum("nij,nj->ni", Ki, rhs)
         Z[b] = Ki[:, :36, :36] * (o[:, :, None] & o[:, None, :])
         z0[b] = np.where(o, sol[:, :36], 0.0)
@@ -192,9 +201,7 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
         for c0 in range(0, nt, 20000):
             b = slice(c0, min(nt, c0 + 20000))
             g[b] = -np.einsum("nij,nj->ni", Z[b].astype(np.float64), lt[b]) + z0[b] + gp[b]
-        energy = float(sum(np.einsum("ni,nij,nj->", g[c0:c0 + 20000], S[c0:c0 + 20000], g[c0:c0 + 20000])
-                           for c0 in range(0, nt, 20000)))
-        return g, energy, info
+        return g, energy_of(g), info
     A = sp.csr_matrix((nl, nl))
     for c0 in range(0, nt, 20000):                       # assembled in chunks, int32 indices
         b = slice(c0, min(nt, c0 + 20000))
@@ -243,7 +250,7 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
     for c0 in range(0, nt, 20000):
         b = slice(c0, min(nt, c0 + 20000))
         g[b] = -np.einsum("nij,nj->ni", Z[b].astype(np.float64), lt[b]) + z0[b] + gp[b]
-    energy = float(np.einsum("ni,nij,nj->", g, S, g))
+    energy = energy_of(g)
     # continuity check (float): outward data of the two tets of every interior face sum to ~0
     return g, energy, info
 
