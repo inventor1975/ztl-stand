@@ -103,3 +103,28 @@ Checks (tests/test_prestress.py, 28 checks):
 Honest limits: local brackets are wide (n = 8: width 4.85 on a mean of ~2.5), as Ladevèze–Pled–Chamoin predict. The s
 used (balancing C_f and s²C_p) is not the best for WIDTH: width ≈ (gap_f + s² gap_p)/(2 s l) is least at
 s = √(gap_f/gap_p) — ~1.7× narrower on the n = 8 block by that estimate (not run).
+
+## 3b — FIRST RESULT ON A REAL PART (2026-11-11 01:00, SimJEB 631, MEASURED)
+
+The quantity: the mean of σ_yy over ω under the vertical load (subcase 1). ω is the tets whose centroid lies in the box
+[−23.98, −80.014, 18.324] – [−11.476, −67.509, 30.828]: 1458 tets, |ω| = 589.12 mm³.
+- The box is centred on the median centroid of the top 1 % von Mises tets of the float P1 solution. That is the
+  high-stress zone, not the singular point: the float vM max is 2285, the 99th percentile 884.
+- σ_yy is the dominant mean component there; float P1 gives 530.5 MPa.
+- s = √(C_f / C_p) = √(42132.98 / 248.38) = 13 (C_p: the float compliance of the prestress load alone).
+
+Two brackets, matrix-free, float64 Z, the new c rule, 4 cores each:
+- C(f + 13 l_p) ∈ [97903.245, 104395.680] (6.6 %), CG 1980 iterations, ~5 min;
+- C(f − 13 l_p) ∈ [70316.404, 75462.576] (7.3 %), CG 1936 iterations.
+
+Polarization: **mean σ_yy over ω ∈ [431.55, 655.37] MPa, TENSION PROVED.** The float value, 530.5, lies inside.
+Files: results631_3b_yy_{plus,minus}.json; `polarize.py … --s 13 --mean-stress yy`.
+
+The width is 41 % of the midpoint, against the ~7 % of each compliance bracket. That is the price of locality stated
+up front: the polarization divides the bracket widths, each ~6.5e3 N·mm, by 4s|l| ≈ 2.8e4. Ways to narrow it, none
+tried yet:
+- a larger ω (less local);
+- the width-optimal s* = √(gap_f / gap_p) in place of the balance;
+- a finer mesh near ω (the gap is the discretisation error).
+What it is: a two-sided proved bound on a stress average in the most loaded zone of a real bracket. What it is not:
+a bound on the peak stress. The peak does not exist as a number; see above.
