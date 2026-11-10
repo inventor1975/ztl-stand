@@ -72,8 +72,10 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
                 open_[:, col] = ~isp
                 gl[:, col] = np.where(lam_face[fid], 9 * lidx[fid] + 3 * pos + c, -1)
     # batched local KKT
-    # Z stored in float32 (2026-11-10: 170-200k-tet brackets were killed by the 16 GB cap; Z only CHOOSES — the exact
-    # push and the rigorous energy make the bound, so a float32 choice costs tightness at most, never validity)
+    # Z may be stored in float32 (zdtype): it only CHOOSES — the exact push and the rigorous energy make the bound,
+    # so float32 never costs validity. But it costs a LOT of tightness, MEASURED 2026-11-10 on SimJEB: the float32
+    # choice is as good as float64 (631: 45686 vs 45677), its balance/continuity errors are not, and the exact push
+    # over the forest inflates them (proved upper 631: 61518 vs 45677; 40: 44812 vs 31382). Callers default to float64.
     Z = np.zeros((nt, 36, 36), zdtype)
     z0 = np.zeros((nt, 36))
     for c0 in range(0, nt, CH):
