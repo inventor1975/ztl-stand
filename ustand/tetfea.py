@@ -290,35 +290,77 @@ def solve_cases(deck, subcases, E=None, nu=None, tol=1e-9, log=print, exact=Fals
         fvec = np.zeros(ndof)
         for n, fi in zip(rnodes, fl):
             fvec[3 * idx[n]:3 * idx[n] + 3] += fi
+        # level 3b (2026-11-11): a PRESTRESS added to the load, l_p(v) = int_omega eps(v) : sig_e — {"omega": a bool
+        # mask over the deck's tets, "sigma": 3 x 3 exact (Fractions)}; its float nodal vector only CHOOSES v, the bound
+        # takes l_p(v) exactly (prestress_work_exact)
+        pre = subcase.get("prestress") if custom else None
+        ftot = fvec
+        if pre is not None:
+            if len(tets) != len(deck["tets"]):
+                raise ValueError("a prestress region needs every deck tet on the mesh")
+            om = np.asarray(pre["omega"], bool)
+            sgf = np.array([[float(x) for x in row] for row in pre["sigma"]])
+            contrib = vol[om, None, None] * (grads[om] @ sgf.T)                       # (n, 4, 3): node i, comp a
+            dofs_p = 3 * T[om, :, None] + np.arange(3)[None, None, :]
+            ftot = fvec.copy()
+            np.add.at(ftot, dofs_p.ravel(), contrib.ravel())
         res = []
-        uf = ml.solve(fvec[free], tol=tol, accel="cg", maxiter=2000, residuals=res)
+        uf = ml.solve(ftot[free], tol=tol, accel="cg", maxiter=2000, residuals=res)
         log(f"  solved: {len(res)} iterations, residual {res[-1] / res[0]:.2e}; {time.time() - t0:.1f} s")
         u = np.zeros(ndof)
         u[free] = uf
-        c_float = float(fvec @ u)
+        c_float = float(ftot @ u)
         # ---- EXACT: v = round(u * 2^S) / 2^S, zero on the supports (exactly)
         vi = [int(round(x * 2 ** S)) for x in u]
         for i in fixed:
             vi[3 * i] = vi[3 * i + 1] = vi[3 * i + 2] = 0
         fv = sum(Fr(float(fvec[j])) * vi[j] for j in range(ndof) if fvec[j] != 0) / 2 ** S
+        fp_exact = None
+        if pre is not None:
+            fp_exact = prestress_work_exact(XI, tets, vi, np.where(om)[0], pre["sigma"], k)
+            fv += fp_exact
         if not exact:
             a_up = a_upper_float(XI, tets, vi, mu, lam, k, Xf=X)
         else:
             a_up = a_upper_exact(XI, tets, vi, mu, lam, k)
         lower = fv * fv / Fr(a_up)
         Fn = math.sqrt(sum(x * x for x in F))
-        out = {"subcase": subcase, "label": (subcase.get("label", "custom") if custom
+        out = {"subcase": ({kk: vv for kk, vv in subcase.items() if kk != "prestress"} if custom else subcase), "label": (subcase.get("label", "custom") if custom
                                              else deck["subcases"][subcase].get("LABEL")), "F": F, "M": Mm,
                "E": float(E), "nu": float(nu), "dof": ndof, "fixed_nodes": len(fixed), "loaded_nodes": len(rnodes),
                "compliance_float": c_float, "compliance_lower_proved": float(lower) * (1 - 2 * U),
                "f_v_exact": float(fv), "a_vv_up": a_up, "seconds": round(time.time() - t0, 1),
                "cg_iterations": len(res), "a_bound": "exact integers" if exact else "binary64, rounding bounded"}
-        if Fn and not any(Mm):
+        if pre is not None:
+            out["prestress"] = {"tets": int(om.sum()), "work_exact": float(fp_exact)}
+        if Fn and not any(Mm) and pre is None:
             out["ref_disp_along_F_lower_proved"] = out["compliance_lower_proved"] / Fn * (1 - 2 * U)
         if return_u:
             out["u"] = u.reshape(-1, 3)                  # the float FE displacement (node order = sorted GRID ids)
         outs.append(out)
     return outs
+
+
+def prestress_work_exact(XI, tets, vi, omega, sig, k):
+    """l_p(v) = sum over the tets of omega of |T| eps(v) : sig, EXACTLY, for v = vi / 2^S (P1) and the exact coordinates
+    XI / 10^k: |T| grad v = sign(det) dV adj(D) / (6 2^S 10^(2k)) with D, adj(D), dV in integers (sig symmetric, so
+    eps : sig = grad : sig). sig: 3 x 3 Fractions."""
+    acc = Fr(0)
+    for t in omega:
+        p0, p1, p2, p3 = tets[int(t)]
+        x0 = XI[p0]
+        (a11, a12, a13), (a21, a22, a23), (a31, a32, a33) = [[XI[q][r] - x0[r] for q in (p1, p2, p3)] for r in range(3)]
+        dt = a11 * (a22 * a33 - a23 * a32) - a12 * (a21 * a33 - a23 * a31) + a13 * (a21 * a32 - a22 * a31)
+        if dt == 0:
+            raise ValueError("a degenerate tetrahedron")
+        adj = [[a22 * a33 - a23 * a32, a13 * a32 - a12 * a33, a12 * a23 - a13 * a22],
+               [a23 * a31 - a21 * a33, a11 * a33 - a13 * a31, a13 * a21 - a11 * a23],
+               [a21 * a32 - a22 * a31, a12 * a31 - a11 * a32, a11 * a22 - a12 * a21]]
+        v0 = vi[3 * p0:3 * p0 + 3]
+        dV = [[vi[3 * q + c] - v0[c] for q in (p1, p2, p3)] for c in range(3)]
+        term = sum(sum(dV[c][q] * adj[q][b] for q in range(3)) * sig[c][b] for c in range(3) for b in range(3))
+        acc += term if dt > 0 else -term
+    return acc / (6 * 2 ** S * 10 ** (2 * k))
 
 
 def a_upper_exact(XI, tets, vi, mu, lam, k):

@@ -23,11 +23,13 @@ PRESCRIBED_KINDS = (2, 3)          # tetmesh kinds: 2 loaded, 3 free; 0 interior
 
 
 def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, direct=None, log=None,
-           zdtype=np.float64, matfree=False, maxiter=20000):
+           zdtype=np.float64, matfree=False, maxiter=20000, lin=None):
     """X (nv, 3), T (nt, 4), F/owner/tface/kind from tetmesh; qpres: (nf, 3, 3) the prescribed FLUX q at each face's
     3 vertices (in F's vertex order, oriented as owner[:, 0]'s outward normal) — used on loaded / free / interface
-    faces; iface: a bool mask of faces to treat as prescribed in addition (interfaces of a subdomain).
-    -> g (nt, 36) the chosen face data per tet, float energy, info."""
+    faces; iface: a bool mask of faces to treat as prescribed in addition (interfaces of a subdomain);
+    lin: (nt, 36) or None, a LINEAR term added to each tet's energy (minimise 1/2 g^T S g + lin . g; level 3b: the
+    prestress cross term, see prestress_linear_float — only the local right-hand sides change, Z does not).
+    -> g (nt, 36) the chosen face data per tet, float energy (g^T S g, without the linear term), info."""
     X = np.asarray(X, float)
     T = np.asarray(T, np.int64)
     nt, nf = len(T), len(F)
@@ -98,6 +100,8 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
         g_p = gp[b]
         rhs = np.zeros((Sm.shape[0], 42))
         rhs[:, :36] = -np.where(o, np.einsum("nij,nj->ni", Sb, g_p), 0.0)
+        if lin is not None:
+            rhs[:, :36] -= np.where(o, lin[b], 0.0)
         rhs[:, 36:] = -np.einsum("nij,nj->ni", BALb, g_p)
         sol = np.einsum("nij,nj->ni", Ki, rhs)
         Z[b] = Ki[:, :36, :36] * (o[:, :, None] & o[:, None, :])
@@ -493,3 +497,73 @@ def finish(Xq, T, F, owner, tface, kind, g, qpres, tets=None, fixed_faces=None, 
             tt, tr2 = AL.energy(P[t], g_exact(t))
             up += ((1 + nu) * tt - nu * tr2) / E
     return q, bad, up, maxbits
+
+
+# ------------------------------------------------------------------------------------------------ level 3b: prestress
+# A PRESTRESS load l_p(v) = int_omega eps(v) : sig_e (sig_e a constant symmetric "extractor", omega a set of tets).
+# THE UPPER SIDE NEEDS NO NEW ADMISSIBILITY (2026-11-11). tau is admissible for the load f + l_p iff
+#     int tau : eps(v) = f(v) + int_omega sig_e : eps(v)  for every v,   i.e.  tau = tau' + sig_e chi_omega
+# with tau' admissible for f alone — exactly what choose + finish already deliver. So C(f + l_p) <= ||tau' + p||^2_A
+# with p = sig_e chi_omega, and per tet of omega (A the compliance tensor, div tau' = 0 inside the Alfeld element):
+#     ||tau' + sig_e||^2_T = ||tau'||^2_T + 2 (A sig_e) : int_T tau' + |T| sig_e : A sig_e,
+#     int_T tau'_ij = int_dT t_i x_j = sum over the 36 slots g[f, v, i] w[f, v, j],   w[f, v] = sum_u (1 + d_uv)/24 x_u
+# (the same weights as the balance map's moment rows; exact for the linear face traction of the element). So the
+# cross term is b_T . g_T with b_T[f, v, i] = sum_j (A sig_e)_ij w[f, v, j] — EXACT rational from the exact fluxes.
+# For TIGHTNESS the choice must minimise ||tau' + p||^2, not ||tau'||^2: choose(lin = b) (the same b in floats).
+def compliance_apply(sig, E, nu):
+    """A sig = ((1 + nu) sig - nu tr(sig) I) / E (exact when the inputs are Fractions)."""
+    tr = sig[0][0] + sig[1][1] + sig[2][2]
+    return [[((1 + nu) * sig[i][j] - (nu * tr if i == j else 0)) / E for j in range(3)] for i in range(3)]
+
+
+def _slot_weights(P):
+    """w[f * 3 + v] (3-vector): sum over face f's vertices u of (1 + d_uv)/24 x_u (alfeld's face / vertex order)."""
+    out = []
+    for f in range(4):
+        vs = [v for v in range(4) if v != f]
+        for jv in range(3):
+            out.append([sum(((2 if iv == jv else 1) * P[vv][k] for iv, vv in enumerate(vs)), 0 * P[0][0]) / 24
+                        for k in range(3)])
+    return out
+
+
+def mean_stress_integral(P, g):
+    """int_T tau (3 x 3) of the element stress with BALANCED face data g on the tet P — from the boundary data alone
+    (div tau = 0: int_T tau_ij = int_dT t_i x_j). Exact for Fractions."""
+    w = _slot_weights(P)
+    return [[sum(g[s * 3 + i] * w[s][j] for s in range(12)) for j in range(3)] for i in range(3)]
+
+
+def prestress_linear(P, sig, E, nu):
+    """b (36): the cross term (A sig) : int_T tau = b . g, exactly (Fractions in, Fractions out)."""
+    As = compliance_apply(sig, E, nu)
+    w = _slot_weights(P)
+    return [sum(As[i][j] * w[s][j] for j in range(3)) for s in range(12) for i in range(3)]
+
+
+def tet_volume(P):
+    """|T| = |det(P1 - P0, P2 - P0, P3 - P0)| / 6 (exact for Fractions)."""
+    a = [[P[k + 1][r] - P[0][r] for k in range(3)] for r in range(3)]
+    det = (a[0][0] * (a[1][1] * a[2][2] - a[1][2] * a[2][1]) - a[0][1] * (a[1][0] * a[2][2] - a[1][2] * a[2][0])
+           + a[0][2] * (a[1][0] * a[2][1] - a[1][1] * a[2][0]))
+    return abs(det) / 6
+
+
+def prestress_self(P, sig, E, nu):
+    """|T| sig : A sig (exact for Fractions)."""
+    As = compliance_apply(sig, E, nu)
+    return tet_volume(P) * sum(sig[i][j] * As[i][j] for i in range(3) for j in range(3))
+
+
+def prestress_linear_float(PX, sig, E, nu):
+    """The float b for many tets at once: PX (n, 4, 3), sig (3, 3) floats -> (n, 36). Only to CHOOSE."""
+    PX = np.asarray(PX, float)
+    sig = np.asarray(sig, float)
+    As = ((1 + nu) * sig - nu * np.trace(sig) * np.eye(3)) / E
+    out = np.zeros((len(PX), 36))
+    for f in range(4):
+        vs = [v for v in range(4) if v != f]
+        for jv in range(3):
+            w = sum((2 if iv == jv else 1) * PX[:, vv] for iv, vv in enumerate(vs)) / 24      # (n, 3)
+            out[:, f * 9 + jv * 3:f * 9 + jv * 3 + 3] = w @ As.T
+    return out

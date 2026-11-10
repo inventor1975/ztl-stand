@@ -67,3 +67,39 @@ vertical load, the load point moves in +x by 0.868 to 0.952 mm (the work-conjuga
 load; files results631_cross_{plus,minus}.json). The float pilot's −33125.8 lies inside the bracket.
 So a CROSS quantity, one that is not a compliance and has no sign of its own, is certified by the existing pipeline
 with no new mathematics. The width (9 %) matches the a-priori estimate 0.08·√(C1·C2)/|X| ≈ 10 %.
+
+## 3b — BUILT (2026-11-11, a fork of Logic1; tests/test_prestress.py, MEASURED)
+
+**Simpler than planned: the upper side needs no new admissibility.** τ is admissible for the load f + l_p iff
+τ = τ' + σ_e χ_ω with τ' admissible for f ALONE, which is what `equil.choose` + `equil.finish` already deliver,
+unchanged. So C(f + l_p) ≤ ‖τ' + σ_e χ_ω‖², and per tet of ω the extra terms are EXACT from the exact fluxes:
+2 (Aσ_e) : ∫_T τ' + |T| σ_e : Aσ_e, with ∫_T τ'_ij = ∫_∂T t_i x_j (div τ' = 0 in the Alfeld element) = b_T · g_T. The
+plan's "the admissible stress must balance the prestress's jump on ∂ω" is absorbed by the shift: τ' has no jump.
+What changed in code:
+- `tetfea`: the load may carry `prestress = {omega, sigma}`; l_p(v) is taken EXACTLY (`prestress_work_exact`:
+  |T| grad v = sign(det) dV adj(D) / (6 2^S 10^(2k)) in integers); its float nodal vector only chooses v.
+- `equil.choose(lin=b)`: a linear term in each tet's energy, so the choice minimises ‖τ' + p‖², not ‖τ'‖² (only
+  the local right-hand sides change; Z, the trace system and the matrix-free CG are untouched).
+- `cadbracket`: `--omega-box x0,y0,z0,x1,y1,z1 --mean-stress C --prestress-scale ±s` (σ_e = ℂ:Π_C / |ω|, so
+  l_p(u) = the mean of σ_C over ω); `research/cad/polarize.py --mean-stress C`.
+
+Checks (tests/test_prestress.py, 28 checks):
+- the upper side's algebra EXACTLY (Fractions, `alfeld.energy`) on 3 random tets with random balanced data:
+  ‖τ' + σ‖² = ‖τ'‖² + 2 b·g + |T| σ:Aσ;
+- the lower functional EXACTLY: l_p(Gx) = |ω| σ : sym(G) for a linear field;
+- KNOWN VALUE: the box (n = 4, ν = 0.3) clamped at z = 0, pulled by F_z = 1000; ω = the full layer 2.5 < z < 7.5.
+  By section equilibrium the mean σ_zz over the layer is F/A = 10 exactly. Proved: [9.51169, 10.48831] at s = 0.031.
+  CAVEAT, measured: this case is EASY — the prestress part adds NO gap (the gaps of C(f ± sp) are 0.06055 at every
+  s from 0.031 to 0.248; the zz-extractor's prestress solution on a full layer is P1-exact, τ' = 0), so the width
+  shrinks as 1/s (s = 0.248: [9.93896, 10.06104]). It checks the plumbing against an exact value, not tightness;
+- HARD CASE: mean σ_xx over the block (2.5, 7.5)² × (0, 2.5) at the clamp (no closed form). n = 4: [−5.046, 10.203];
+  n = 8: [0.02216, 4.87263] — the SIGN IS PROVED (the clamp holds back the Poisson contraction: tension); float FE
+  2.73 / 2.51 inside both; the brackets overlap; the prestress gap dominates (0.183 vs the traction's 0.019 at n = 8);
+- planted errors: dropping the self term |T|σ:Aσ on the upper side → upper < lower on both signs (caught); the wrong
+  extractor on the lower side → caught; 9 and 11 lie outside the layer bracket. NOT caught, and said: dropping BOTH
+  upper terms in the hard case (the cross term is negative there, so the "bound" without it is larger — unsound in
+  principle, invisible in fact). A bracket only catches errors that push a side across the other.
+
+Honest limits: local brackets are wide (n = 8: width 4.85 on a mean of ~2.5), as Ladevèze–Pled–Chamoin predict. The s
+used (balancing C_f and s²C_p) is not the best for WIDTH: width ≈ (gap_f + s² gap_p)/(2 s l) is least at
+s = √(gap_f/gap_p) — ~1.7× narrower on the n = 8 block by that estimate (not run).

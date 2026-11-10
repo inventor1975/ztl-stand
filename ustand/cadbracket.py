@@ -68,9 +68,25 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
         for p_ in range(3):
             q[fid, p_] = tr[int(F[fid, p_])] * n2[fid]
     E, nu = d["mat"][0], d["mat"][1]
+    # level 3b: a prestress in the load (subcase = {"F", "M", "prestress": {"omega", "sigma"}}). The upper side keeps
+    # tau' admissible for the traction alone and adds p = sig_e chi_omega analytically (equil: "level 3b"); the choice
+    # minimises ||tau' + p||^2 through the linear term lin.
+    pre = subcase.get("prestress") if isinstance(subcase, dict) else None
+    lin = om = None
+    if pre is not None:
+        om = np.asarray(pre["omega"], bool)
+        sgf = [[float(x) for x in row] for row in pre["sigma"]]
+        lin = np.zeros((len(T), 36))
+        lin[om] = EQ.prestress_linear_float(X[T[om]], sgf, float(E), float(nu))
     g, e_float, info = EQ.choose(X, T, F, own, tf, kind, float(E), float(nu), q, direct=False, tol=cg_tol,
                                  log=lambda m: log(m), zdtype=np.float64 if zdtype is None else zdtype,
-                                 matfree=(len(T) > 100000) if matfree is None else matfree)
+                                 matfree=(len(T) > 100000) if matfree is None else matfree, lin=lin)
+    if pre is not None:
+        sg_ = np.array(sgf)
+        As_ = ((1 + float(nu)) * sg_ - float(nu) * np.trace(sg_) * np.eye(3)) / float(E)
+        P_ = X[T[om]]
+        vol_ = np.abs(np.linalg.det(np.stack([P_[:, 1] - P_[:, 0], P_[:, 2] - P_[:, 0], P_[:, 3] - P_[:, 0]], 2))) / 6
+        e_float = e_float + 2 * float((lin[om] * g[om]).sum()) + float(vol_.sum() * (sg_ * As_).sum())
     log(f"upper choice (float): {e_float:.6f}; {time.time() - t0:.0f} s")
     if dump_g:                                      # the float choice, saved to profile the exact finish alone
         np.save(dump_g, g)
@@ -93,11 +109,26 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
         Ps.append([list(Xq[v]) for v in T[t]])
         gs.append(out)
     up = AL.energy_upper_ev(Ps, gs, E, nu)
+    pre_out = None
+    if pre is not None:
+        # ||tau' + p||^2 = ||tau'||^2 + sum over omega (2 b_T . g_T + |T| sig : A sig) — the extra terms EXACT
+        cross = self_ = Fr(0)
+        for t in np.where(om)[0]:
+            bT = EQ.prestress_linear(Ps[t], pre["sigma"], E, nu)
+            cross += 2 * sum(x * y for x, y in zip(bT, gs[t]))
+            self_ += EQ.prestress_self(Ps[t], pre["sigma"], E, nu)
+        extra = cross + self_
+        up = math.nextafter(float(Fr(up) + extra), math.inf)
+        pre_out = {"tets": int(om.sum()), "extra_exact": float(extra), "cross_exact": float(cross),
+                   "self_exact": float(self_), "sigma_e": [[float(x) for x in row] for row in pre["sigma"]]}
+        log(f"prestress: {int(om.sum())} tets, exact extra {float(extra):.6f}; upper {up:.6f}")
     Fn, Mn = math.sqrt(sum(x * x for x in Fv)), math.sqrt(sum(x * x for x in Mv))
     c_lo, c_hi = lo["compliance_lower_proved"], up
     w = Fn if Fn and not Mn else (Mn if Mn and not Fn else None)
     U_ = 2.0 ** -53
-    return {"deck": path, "sha256": sha, "subcase": subcase, "label": lo["label"], "F": Fv, "M": Mv,
+    if pre is not None:
+        w = None                                    # a traction + prestress load has no single work-conjugate
+    out = {"deck": path, "sha256": sha, "subcase": lo["subcase"], "label": lo["label"], "F": Fv, "M": Mv,
             "tets": int(len(T)), "E": float(E), "nu": float(nu),
             "compliance": [c_lo, c_hi], "gap": c_hi / c_lo - 1,
             "work_conjugate": ([c_lo / w * (1 - 2 * U_), c_hi / w * (1 + 2 * U_)] if w else None),
@@ -107,6 +138,57 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
             "rests_on": [f"the deck {path} (sha256 {sha[:16]}…): its tets ARE the part — EARNED IF STABLE on it",
                          "linear isotropic elasticity", "supports: RBE2 spiders to SPC'd nodes (u = 0)",
                          "the load: the traction whose consistent nodal loads are the RBE3 distribution"]}
+    if pre_out is not None:
+        out["prestress"] = pre_out
+        out["rests_on"].append("plus the prestress load int_omega eps(v) : sig_e (omega = the selected tets)")
+    return out
+
+
+_COMP = {"xx": (0, 0), "yy": (1, 1), "zz": (2, 2), "xy": (0, 1), "xz": (0, 2), "yz": (1, 2)}
+
+
+def omega_box(deck, box):
+    """omega = the deck's tets whose CENTROID lies strictly inside the box (x0, y0, z0, x1, y1, z1); exact decimals.
+    -> (mask over the deck's tets, |omega| exact)."""
+    from fractions import Fraction as Fr
+    g = deck["grids"]
+    lo, hi = [Fr(str(x)) for x in box[:3]], [Fr(str(x)) for x in box[3:]]
+    mask, vol = [], Fr(0)
+    for t in deck["tets"]:
+        P = [[TF._nas(x) for x in g[n]] for n in t]
+        c = [sum(p[k] for p in P) / 4 for k in range(3)]
+        inside = all(lo[k] < c[k] < hi[k] for k in range(3))
+        mask.append(inside)
+        if inside:
+            vol += EQ.tet_volume(P)
+    return np.array(mask, bool), vol
+
+
+def mean_stress_extractor(comp, E, nu, vol):
+    """sig_e with int_omega eps(u) : sig_e = (1 / |omega|) int_omega sigma(u)_comp: sig_e = C : Pi / |omega|,
+    Pi the unit tensor of the component (sym for a shear), C = 2 mu I + lam 1 (x) 1. Exact (Fractions)."""
+    i, j = _COMP[comp]
+    Pi = [[0] * 3 for _ in range(3)]
+    if i == j:
+        Pi[i][i] = 1
+    else:
+        Pi[i][j] = Pi[j][i] = type(E)(1, 2)
+    mu, lam = E / (2 * (1 + nu)), E * nu / ((1 + nu) * (1 - 2 * nu))
+    tr = Pi[0][0] + Pi[1][1] + Pi[2][2]
+    return [[(2 * mu * Pi[a][b] + (lam * tr if a == b else 0)) / vol for b in range(3)] for a in range(3)]
+
+
+def subcase_load(deck, n):
+    """the RBE3 resultant (F, M) of a deck subcase, as tetfea reads it"""
+    lid = int(deck["subcases"][n]["LOAD"])
+    F, M = (0.0, 0.0, 0.0), (0.0, 0.0, 0.0)
+    if lid in deck["force"]:
+        _, sc, v = deck["force"][lid]
+        F = tuple(float(sc * x) for x in v)
+    if lid in deck["moment"]:
+        _, sc, v = deck["moment"][lid]
+        M = tuple(float(sc * x) for x in v)
+    return F, M
 
 
 def main(argv):
@@ -127,6 +209,12 @@ def main(argv):
                          "2026-11-10, its choice drifts and the exact push inflates the bound (631: 45677 -> 61518; "
                          "40: 31382 -> 44812)")
     ap.add_argument("--dump-g", help="save the float choice g (nt x 36) to this .npy (to profile the finish alone)")
+    ap.add_argument("--omega-box", help="level 3b: the region omega = tets with the centroid inside "
+                    "'x0,y0,z0,x1,y1,z1'; with --mean-stress adds the prestress load s * l_p to the traction")
+    ap.add_argument("--mean-stress", choices=sorted(_COMP), help="level 3b: l_p(u) = the mean of this stress "
+                    "component over omega")
+    ap.add_argument("--prestress-scale", default="1", help="level 3b: s (exact decimal, signed) in f + s l_p; "
+                    "polarization needs the runs with +s and -s")
     a = ap.parse_args(argv)
     mf = {"auto": None, "yes": True, "no": False}[a.matfree]
     zd = {"auto": None, "32": np.float32, "64": np.float64}[a.zdtype]
@@ -134,6 +222,21 @@ def main(argv):
     if a.load:
         v = [float(x) for x in a.load.split(",")]
         sub = {"F": v[:3], "M": v[3:6], "label": f"load {a.load}"}
+    if a.omega_box or a.mean_stress:
+        from fractions import Fraction as Fr
+        if not (a.omega_box and a.mean_stress):
+            ap.error("--omega-box and --mean-stress go together")
+        dk = TF.read_deck(a.deck)
+        if not isinstance(sub, dict):
+            Fd, Md = subcase_load(dk, sub)
+            sub = {"F": Fd, "M": Md, "label": f"subcase {sub}"}
+        mask, vol = omega_box(dk, [float(x) for x in a.omega_box.split(",")])
+        if not mask.any():
+            ap.error("omega is empty")
+        s = Fr(a.prestress_scale)
+        sig = mean_stress_extractor(a.mean_stress, dk["mat"][0], dk["mat"][1], vol)
+        sub["prestress"] = {"omega": mask, "sigma": [[s * x for x in row] for row in sig]}
+        sub["label"] += f" + {a.prestress_scale} * mean {a.mean_stress} over {int(mask.sum())} tets"
     r = bracket(a.deck, sub, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd, dump_g=a.dump_g)
     if (a.d_max is not None or a.d_min is not None) and r["work_conjugate"]:
         from . import cadstiff as CS

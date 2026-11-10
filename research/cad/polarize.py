@@ -13,6 +13,11 @@ so from proved brackets C(f+sg) in [P_lo, P_hi] and C(f-sg) in [M_lo, M_hi]:
 and dividing by |g| gives the work-conjugate displacement of g's application under f.
 
     python3 -I polarize.py plus.json minus.json --s 1 --g=gx,gy,gz      (--g= : a leading minus is not an option)
+
+Level 3b (2026-11-11): g may be a PRESTRESS load (cadbracket --omega-box --mean-stress C --prestress-scale +-s); then
+l = l_p(u) is the mean of the stress component C over omega under f, and there is no --g:
+
+    python3 -I polarize.py plus.json minus.json --s S --mean-stress zz
 """
 import argparse
 import json
@@ -25,7 +30,8 @@ def main():
     ap.add_argument("plus")
     ap.add_argument("minus")
     ap.add_argument("--s", default="1")
-    ap.add_argument("--g", required=True, help="the force g of the test load, 'gx,gy,gz'")
+    ap.add_argument("--g", help="the force g of the test load, 'gx,gy,gz' (level 3a)")
+    ap.add_argument("--mean-stress", help="level 3b: the component whose mean over omega the prestress extracts")
     a = ap.parse_args()
     P = json.load(open(a.plus))
     M = json.load(open(a.minus))
@@ -33,17 +39,22 @@ def main():
     plo, phi = (Fr(x) for x in P["compliance"])
     mlo, mhi = (Fr(x) for x in M["compliance"])
     lo, hi = (plo - mhi) / (4 * s), (phi - mlo) / (4 * s)
-    gn = math.sqrt(sum(float(x) ** 2 for x in a.g.split(",")))
+    if not a.g and not a.mean_stress:
+        ap.error("--g (3a) or --mean-stress (3b)")
     print(f"C(f+sg) in [{float(plo):.6f}, {float(phi):.6f}]   C(f-sg) in [{float(mlo):.6f}, {float(mhi):.6f}]")
     mid = abs((hi + lo) / 2)
     rel = f"{100 * float((hi - lo) / mid):.1f} % of the midpoint" if mid else "midpoint 0"
     print(f"l = a(u, w) in [{float(lo):.6f}, {float(hi):.6f}]   width {float(hi - lo):.3f} ({rel})")
     sign = "POSITIVE (proved)" if lo > 0 else "NEGATIVE (proved)" if hi < 0 else "OPEN"
     print(f"sign of l: {sign}")
-    # the displacement of g's application point along g, under f (|g| in binary64; rounding below the printed digits)
-    print(f"displacement along g under f: [{float(lo) / gn:.5f}, {float(hi) / gn:.5f}] mm")
-    print(json.dumps({"l": [float(lo), float(hi)], "s": str(s), "g": a.g, "sign": sign,
-                      "plus": a.plus, "minus": a.minus}))
+    if a.g:
+        # the displacement of g's application point along g, under f (|g| in binary64; rounding below the digits)
+        gn = math.sqrt(sum(float(x) ** 2 for x in a.g.split(",")))
+        print(f"displacement along g under f: [{float(lo) / gn:.5f}, {float(hi) / gn:.5f}] mm")
+    else:
+        print(f"mean sigma_{a.mean_stress} over omega under f: [{float(lo):.6f}, {float(hi):.6f}] (MPa for N, mm)")
+    print(json.dumps({"l": [float(lo), float(hi)], "s": str(s), "g": a.g, "mean_stress": a.mean_stress,
+                      "sign": sign, "plus": a.plus, "minus": a.minus}))
 
 
 if __name__ == "__main__":
