@@ -1,0 +1,71 @@
+{
+ "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem",
+ "sha256": "62f42a041a9d74bed8a12769aac7417a8f2ba99f5a8fb6a9523bfe6987c307f4",
+ "subcase": {
+  "F": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "M": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "label": "load 0,0,0,0,0,0 + 1 * mean yy over 1458 tets"
+ },
+ "label": "load 0,0,0,0,0,0 + 1 * mean yy over 1458 tets",
+ "F": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 82414,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  248.3836876876746,
+  261.84853199543613
+ ],
+ "gap": 0.05420985747136764,
+ "work_conjugate": null,
+ "work_conjugate_is": null,
+ "upper_float_choice": 261.8485319820624,
+ "push_bits": 371,
+ "seconds": 269.7,
+ "rests_on": [
+  "the deck /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem (sha256 62f42a041a9d74be\u2026): its tets ARE the part \u2014 EARNED IF STABLE on it",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the traction whose consistent nodal loads are the RBE3 distribution",
+  "plus the prestress load int_omega eps(v) : sig_e (omega = the selected tets)"
+ ],
+ "prestress": {
+  "tets": 1458,
+  "extra_exact": 223.971276953167,
+  "cross_exact": -75.75451007215582,
+  "self_exact": 299.7257870253228,
+  "sigma_e": [
+   [
+    155.78452760282735,
+    0.0,
+    0.0
+   ],
+   [
+    0.0,
+    299.7257870253228,
+    0.0
+   ],
+   [
+    0.0,
+    0.0,
+    155.78452760282735
+   ]
+  ]
+ }
+}

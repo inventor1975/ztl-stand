@@ -128,3 +128,21 @@ tried yet:
 - a finer mesh near ω (the gap is the discretisation error).
 What it is: a two-sided proved bound on a stress average in the most loaded zone of a real bracket. What it is not:
 a bound on the peak stress. The peak does not exist as a number; see above.
+
+## 3b — what sets the width (2026-11-11 01:50, MEASURED; corrects the "×1.7 from s*" estimate)
+
+The prestress-alone bracket on the same ω (scale 1): C_p ∈ [248.384, 261.849], width w_p = 13.465 (gap 5.4 %). The
+traction bracket: w_f = 3543.745.
+
+Write the combination widths as W(f ± s p) = w_f + s² w_p. Then the mean's width is 2 (w_f + s² w_p) / (4 s):
+- predicted at s = 13: 223.81937;
+- measured at s = 13 (the two real brackets): 223.81937, equal to 8 digits.
+So the model holds here. Its optimum is s* = √(w_f / w_p) = 16.22, with width √(w_f w_p) = 218.44. That is only
+2.4 % narrower than s = 13. The "×1.7 narrower" estimate written with the first 3b test was wrong for this part, and
+s* is not worth a run.
+
+The width is fixed by the two discretisation gaps: relative width = √(w_f w_p) / |l|. A larger ω does not help by
+itself. C_p scales like 1/|ω| at a fixed extractor shape, while the mean |l| also falls. The float pilot gives
+530 → 319 MPa from the 3 % box to the 5 % box, against a √(1/2.2) gain, so the relative width would grow ~1.1×
+(an estimate, not run). The real lever is a smaller gap: mesh refinement in ω and along the load path, or a
+better upper equilibrium field.
