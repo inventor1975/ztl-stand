@@ -269,3 +269,19 @@ first-order tets). Where it will break at 5M tets (measured, not guessed):
 - CG iterations grow with the mesh (82k: 5431 with float64 at 1e-8; 640k: 4396), so the preconditioner holds for now;
 - the exact push is pure-Python Fractions (~2 ms a tet);
 - memory peaks in the KKT stage.
+
+## The exact finish on integers (2026-11-10 23:27, MEASURED)
+
+`equil.finish` now does the balance map and the push's 6×6 systems in exact integer arithmetic:
+- the balance map is scaled by 24·Dx;
+- the 6×6 systems are solved fraction-free (Bareiss).
+
+Measured on SimJEB 631, the same g, one core:
+- new 53.8 s, old 254.1 s (×4.7);
+- 0 unbalanced;
+- the exact fluxes q are IDENTICAL on every face and component.
+
+On a 10k-tet box: 73 → 10.2 s.
+
+A trap that hid this for an hour: an int64 guard sent decimal-coordinate parts back to the Fraction path. The box,
+with integer coordinates, passed the guard and showed ×7. Lesson: measure on the real data.
