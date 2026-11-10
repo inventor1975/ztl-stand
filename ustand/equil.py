@@ -335,11 +335,55 @@ def finish(Xq, T, F, owner, tface, kind, g, qpres, tets=None, fixed_faces=None, 
                 r = qq[int(pos[t, f, jv])]
                 out += [r[0] * s_, r[1] * s_, r[2] * s_]
         return out
-    BM = {t: AL.bal_matrix(P[t]) for t in tets}
+    # THE BALANCE MAP IN INTEGERS (2026-11-10, toward 5M tets: the Fraction sums were the finisher's whole cost —
+    # MEASURED by cProfile on a 10k-tet box: 73 s, ~70 % inside fractions.py; on SimJEB 148 the push took 20 min and
+    # held ~8 GB of Fractions). With Dx the common denominator of the coordinates, 24 Dx * (the 6 x 36 balance map)
+    # is an integer matrix BI (force rows 4 Dx; moment rows sum (1 + d) XI). A residual row is then ONE integer dot
+    # product over the tet's common denominator L of its face data, and one Fraction at the end: exact, no gcd per term.
+    import math
+    from math import lcm
+    Dx = 1
+    for t in tets:
+        for v in T[t]:
+            for x in Xq[v]:
+                Dx = lcm(Dx, Fr(x).denominator)
+    BI = None
+    XIall = {}
+    for t in tets:
+        for v in T[t]:
+            if v not in XIall:
+                XIall[v] = [int(Fr(x) * Dx) for x in Xq[v]]
+    if max((abs(c) for xi in XIall.values() for c in xi), default=0) * 2 < 2 ** 61 and 4 * Dx < 2 ** 61:
+        BI = {}
+        for t in tets:
+            vsx = [XIall[int(v)] for v in T[t]]
+            A = [[0] * 36 for _ in range(6)]
+            for f in range(4):
+                vs = [v for v in range(4) if v != f]
+                for jv in range(3):
+                    w = [sum((1 + (iv == jv)) * vsx[vv][k] for iv, vv in enumerate(vs)) for k in range(3)]
+                    base = f * 9 + jv * 3
+                    A[0][base] = A[1][base + 1] = A[2][base + 2] = 4 * Dx
+                    A[4][base], A[5][base] = w[2], -w[1]
+                    A[3][base + 1], A[5][base + 1] = -w[2], w[0]
+                    A[3][base + 2], A[4][base + 2] = w[1], -w[0]
+            BI[t] = A
+    DB = 24 * Dx
+    BM = None if BI is not None else {t: AL.bal_matrix(P[t]) for t in tets}
+
+    def bm_entry(t, i, col):
+        return Fr(BI[t][i][col], DB) if BI is not None else BM[t][i][col]
 
     def bal(t):
         gv = g_exact(t)
-        return [sum(a * b for a, b in zip(row, gv) if a and b) for row in BM[t]]
+        if BI is None:
+            return [sum(a * b for a, b in zip(row, gv) if a and b) for row in BM[t]]
+        L = 1
+        for x in gv:
+            if x:
+                L = lcm(L, x.denominator)
+        nums = [x.numerator * (L // x.denominator) if x else 0 for x in gv]
+        return [Fr(sum(a * b for a, b in zip(row, nums) if a and b), DB * L) for row in BI[t]]
     resid = {t: bal(t) for t in tets}
     adj = {t: [] for t in tets}
     for t in tets:
@@ -386,7 +430,7 @@ def finish(Xq, T, F, owner, tface, kind, g, qpres, tets=None, fixed_faces=None, 
             p_ = int(pos[t, f, jv])
             for c in range(3):
                 col = f * 9 + jv * 3 + c
-                cols.append((p_, c, [BM[t][i][col] * s_ for i in range(6)]))
+                cols.append((p_, c, [bm_entry(t, i, col) * s_ for i in range(6)]))
         Am = [[col[2][i] for col in cols] for i in range(6)]
         AAt = [[sum(Am[i][m] * Am[j][m] for m in range(9)) for j in range(6)] for i in range(6)]
         y = _solve6(AAt, [-x for x in r_])
