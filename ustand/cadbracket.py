@@ -38,7 +38,7 @@ def _trim():
         pass
 
 
-def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None):
+def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, dump_g=None):
     from fractions import Fraction as Fr
     t0 = time.time()
     sha = hashlib.sha256(open(path, "rb").read()).hexdigest()
@@ -72,6 +72,8 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None):
                                  log=lambda m: log(m), zdtype=np.float64 if zdtype is None else zdtype,
                                  matfree=(len(T) > 100000) if matfree is None else matfree)
     log(f"upper choice (float): {e_float:.6f}; {time.time() - t0:.0f} s")
+    if dump_g:                                      # the float choice, saved to profile the exact finish alone
+        np.save(dump_g, g)
     qp = {int(f): [[Fr(float(q[f, p_, c])) for c in range(3)] for p_ in range(3)] for f in np.where(kind == 2)[0]}
     qp.update({int(f): [[Fr(0)] * 3 for _ in range(3)] for f in np.where(kind == 3)[0]})
     qd, bad, _, bits = EQ.finish(Xq, T, F, own, tf, kind, g, qp, fixed_faces=set(qp))
@@ -124,6 +126,7 @@ def main(argv):
                     help="the local inverse blocks Z: float64 (auto) or float32 — float32 stays VALID but loose: MEASURED "
                          "2026-11-10, its choice drifts and the exact push inflates the bound (631: 45677 -> 61518; "
                          "40: 31382 -> 44812)")
+    ap.add_argument("--dump-g", help="save the float choice g (nt x 36) to this .npy (to profile the finish alone)")
     a = ap.parse_args(argv)
     mf = {"auto": None, "yes": True, "no": False}[a.matfree]
     zd = {"auto": None, "32": np.float32, "64": np.float64}[a.zdtype]
@@ -131,7 +134,7 @@ def main(argv):
     if a.load:
         v = [float(x) for x in a.load.split(",")]
         sub = {"F": v[:3], "M": v[3:6], "label": f"load {a.load}"}
-    r = bracket(a.deck, sub, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd)
+    r = bracket(a.deck, sub, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd, dump_g=a.dump_g)
     if (a.d_max is not None or a.d_min is not None) and r["work_conjugate"]:
         from . import cadstiff as CS
         Er = tuple(float(x) for x in a.E_range.split(":")) if a.E_range else (r["E"], r["E"])
