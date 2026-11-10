@@ -112,6 +112,8 @@ def main(argv):
     ap = argparse.ArgumentParser(prog="ustand.cadbracket")
     ap.add_argument("deck")
     ap.add_argument("--subcase", type=int, default=1)
+    ap.add_argument("--load", help="an explicit RBE3 resultant 'Fx,Fy,Fz,Mx,My,Mz' on the deck's RBE3 instead of a "
+                    "subcase (level 3a: combinations f +- s g for polarization)")
     ap.add_argument("--d-max", type=float)
     ap.add_argument("--d-min", type=float)
     ap.add_argument("--E-range")
@@ -125,7 +127,11 @@ def main(argv):
     a = ap.parse_args(argv)
     mf = {"auto": None, "yes": True, "no": False}[a.matfree]
     zd = {"auto": None, "32": np.float32, "64": np.float64}[a.zdtype]
-    r = bracket(a.deck, a.subcase, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd)
+    sub = a.subcase
+    if a.load:
+        v = [float(x) for x in a.load.split(",")]
+        sub = {"F": v[:3], "M": v[3:6], "label": f"load {a.load}"}
+    r = bracket(a.deck, sub, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd)
     if (a.d_max is not None or a.d_min is not None) and r["work_conjugate"]:
         from . import cadstiff as CS
         Er = tuple(float(x) for x in a.E_range.split(":")) if a.E_range else (r["E"], r["E"])

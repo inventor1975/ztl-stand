@@ -270,13 +270,18 @@ def solve_cases(deck, subcases, E=None, nu=None, tol=1e-9, log=print, exact=Fals
     ml = pyamg.smoothed_aggregation_solver(Kf, B=B[free], symmetry="symmetric", max_coarse=500)
     outs = []
     for subcase in subcases:
-        # load
-        lid = int(deck["subcases"][subcase]["LOAD"])
+        # load: a deck subcase, or (2026-11-10, level 3a) an explicit RBE3 resultant {"F": (3,), "M": (3,), "label": ..}
+        # on the deck's RBE3 — a combination f +- s g of subcases for polarization
+        custom = isinstance(subcase, dict)
+        lid = None if custom else int(deck["subcases"][subcase]["LOAD"])
         F, Mm = (0.0, 0.0, 0.0), (0.0, 0.0, 0.0)
-        if lid in deck["force"]:
+        if custom:
+            F = tuple(float(x) for x in subcase.get("F", F))
+            Mm = tuple(float(x) for x in subcase.get("M", Mm))
+        elif lid in deck["force"]:
             ref, sc, v = deck["force"][lid]
             F = tuple(float(sc * x) for x in v)
-        if lid in deck["moment"]:
+        if not custom and lid in deck["moment"]:
             ref, sc, v = deck["moment"][lid]
             Mm = tuple(float(sc * x) for x in v)
         rref, _, rnodes = deck["rbe3"][0]
@@ -302,7 +307,8 @@ def solve_cases(deck, subcases, E=None, nu=None, tol=1e-9, log=print, exact=Fals
             a_up = a_upper_exact(XI, tets, vi, mu, lam, k)
         lower = fv * fv / Fr(a_up)
         Fn = math.sqrt(sum(x * x for x in F))
-        out = {"subcase": subcase, "label": deck["subcases"][subcase].get("LABEL"), "F": F, "M": Mm,
+        out = {"subcase": subcase, "label": (subcase.get("label", "custom") if custom
+                                             else deck["subcases"][subcase].get("LABEL")), "F": F, "M": Mm,
                "E": float(E), "nu": float(nu), "dof": ndof, "fixed_nodes": len(fixed), "loaded_nodes": len(rnodes),
                "compliance_float": c_float, "compliance_lower_proved": float(lower) * (1 - 2 * U),
                "f_v_exact": float(fv), "a_vv_up": a_up, "seconds": round(time.time() - t0, 1),
