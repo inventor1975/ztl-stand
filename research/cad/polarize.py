@@ -12,7 +12,7 @@ so from proved brackets C(f+sg) in [P_lo, P_hi] and C(f-sg) in [M_lo, M_hi]:
 
 and dividing by |g| gives the work-conjugate displacement of g's application under f.
 
-    python3 -I polarize.py plus.json minus.json --s 1 --g "gx,gy,gz"
+    python3 -I polarize.py plus.json minus.json --s 1 --g=gx,gy,gz      (--g= : a leading minus is not an option)
 """
 import argparse
 import json
@@ -35,8 +35,9 @@ def main():
     lo, hi = (plo - mhi) / (4 * s), (phi - mlo) / (4 * s)
     gn = math.sqrt(sum(float(x) ** 2 for x in a.g.split(",")))
     print(f"C(f+sg) in [{float(plo):.6f}, {float(phi):.6f}]   C(f-sg) in [{float(mlo):.6f}, {float(mhi):.6f}]")
-    print(f"l = a(u, w) in [{float(lo):.6f}, {float(hi):.6f}]   width {float(hi - lo):.3f} "
-          f"({100 * float((hi - lo) / abs((hi + lo) / 2)):.1f} % of the midpoint)")
+    mid = abs((hi + lo) / 2)
+    rel = f"{100 * float((hi - lo) / mid):.1f} % of the midpoint" if mid else "midpoint 0"
+    print(f"l = a(u, w) in [{float(lo):.6f}, {float(hi):.6f}]   width {float(hi - lo):.3f} ({rel})")
     sign = "POSITIVE (proved)" if lo > 0 else "NEGATIVE (proved)" if hi < 0 else "OPEN"
     print(f"sign of l: {sign}")
     # the displacement of g's application point along g, under f (|g| in binary64; rounding below the printed digits)
