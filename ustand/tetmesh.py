@@ -201,3 +201,27 @@ def merge_small(sid, owner, min_size=200):
         sid = remap[sid]
     _, sid = np.unique(sid, return_inverse=True)
     return sid
+
+
+def p1_stiffness(X, T, E, nu, chunk=100000):
+    """The P1 elasticity stiffness (float, chunked assembly) -> csr (3 nv x 3 nv)."""
+    import scipy.sparse as sp
+    X = np.asarray(X, float)
+    T = np.asarray(T, np.int64)
+    nd = 3 * len(X)
+    mu, lam = E / (2 * (1 + nu)), E * nu / ((1 + nu) * (1 - 2 * nu))
+    K = sp.csr_matrix((nd, nd))
+    for c0 in range(0, len(T), chunk):
+        Tc = T[c0:c0 + chunk]
+        P = X[Tc]
+        D = np.stack([P[:, 1] - P[:, 0], P[:, 2] - P[:, 0], P[:, 3] - P[:, 0]], axis=2)
+        Di = np.linalg.inv(D)
+        gr = np.concatenate([-Di.sum(axis=1, keepdims=True), Di], axis=1)
+        vol = np.abs(np.linalg.det(D)) / 6
+        gg = np.einsum("nik,njk->nij", gr, gr)
+        Ke = (mu * np.einsum("nij,ab->niajb", gg, np.eye(3)) + mu * np.einsum("nib,nja->niajb", gr, gr)
+              + lam * np.einsum("nia,njb->niajb", gr, gr)) * vol[:, None, None, None, None]
+        dofs = (3 * Tc[:, :, None] + np.arange(3)[None, None, :]).reshape(len(Tc), 12)
+        K = K + sp.csr_matrix((Ke.reshape(len(Tc), 144).ravel(), (np.repeat(dofs, 12, axis=1).ravel(),
+                                                                  np.tile(dofs, (1, 12)).ravel())), shape=(nd, nd))
+    return K

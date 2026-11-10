@@ -121,8 +121,47 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
         Dg += (1e-12 * float(np.abs(d).max())) * np.eye(9)[None]
         Dinv = np.linalg.inv(Dg)
 
+        # AUXILIARY-SPACE correction (2026-11-10: block Jacobi alone did not converge on SimJEB 631 — residual ~3
+        # after 2200 iterations): lam is a displacement-like trace at the faces' vertices, so the nodal P1 stiffness
+        # (AMG with the rigid motions) approximates its system on the smooth modes; Pi maps a node's displacement to
+        # every lam slot at that vertex.
+        from . import tetmesh as _TM
+        import pyamg
+        K = _TM.p1_stiffness(X, T, E, nu)
+        fixed_nodes = np.unique(F[kind == 1].ravel()) if (kind == 1).any() else np.array([], np.int64)
+        freen = np.ones(len(X), bool)
+        freen[fixed_nodes] = False
+        freed = np.repeat(freen, 3)
+        dmap = -np.ones(3 * len(X), np.int64)
+        dmap[freed] = np.arange(int(freed.sum()))
+        lf_faces = np.where(lam_face)[0]
+        node_of = F[lf_faces].repeat(3, axis=1).ravel() * 3 + np.tile(np.arange(3), 3 * len(lf_faces))
+        col = dmap[node_of]
+        okc = col >= 0
+        Pi = sp.csr_matrix((np.ones(int(okc.sum())), (np.arange(nl)[okc], col[okc])), shape=(nl, int(freed.sum())))
+        Kf = K[freed][:, freed].tocsr()
+        Xn = X[freen].repeat(3, axis=0)
+        cmp = np.tile(np.arange(3), int(freen.sum()))
+        Bn = np.zeros((Kf.shape[0], 6))
+        for c3 in range(3):
+            Bn[cmp == c3, c3] = 1.0
+        Bn[cmp == 0, 3], Bn[cmp == 1, 3] = -Xn[cmp == 0, 1], Xn[cmp == 1, 0]
+        Bn[cmp == 1, 4], Bn[cmp == 2, 4] = -Xn[cmp == 1, 2], Xn[cmp == 2, 1]
+        Bn[cmp == 0, 5], Bn[cmp == 2, 5] = Xn[cmp == 0, 2], -Xn[cmp == 2, 0]
+        mlK = pyamg.smoothed_aggregation_solver(Kf, B=Bn, symmetry="symmetric", max_coarse=500)
+        Kpre = mlK.aspreconditioner(cycle="V")
+        # scale: lam = Pi u for a nodal field u has the trace energy (Pi u)^T A (Pi u) ~ c u^T K u; the correction is
+        # Pi (c K)^-1 Pi^T — c from random nodal probes (only a scale: the preconditioner stays SPD for any c > 0)
+        rng = np.random.default_rng(0)
+        cs = []
+        for _ in range(3):
+            u_ = rng.normal(size=Kf.shape[0])
+            cs.append(float((Pi @ u_) @ Av(Pi @ u_)) / float(u_ @ (Kf @ u_)))
+        c_aux = float(np.median(cs))
+        say(f"auxiliary space: {Kf.shape[0]} nodal dof, AMG {len(mlK.levels)} levels, scale c = {c_aux:.3e}")
+
         def Mv(r):
-            return np.einsum("fij,fj->fi", Dinv, r.reshape(-1, 9)).ravel()
+            return np.einsum("fij,fj->fi", Dinv, r.reshape(-1, 9)).ravel() + (Pi @ Kpre(Pi.T @ r)) / c_aux
         x = np.zeros(nl)
         r = rhsl - Av(x)
         z = Mv(r)
