@@ -259,6 +259,30 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
     return g, energy, info
 
 
+def _solve_int(A, b):
+    """FRACTION-FREE (Bareiss) solve of A x = b for an integer matrix A and integer b: -> (N, d) with x = N / d exactly,
+    all integers (2026-11-10: the Fraction Gauss on the push's 6 x 6 systems was the finisher's largest cost)."""
+    n = len(b)
+    M = [list(row) + [b[i]] for i, row in enumerate(A)]
+    prev = 1
+    for k in range(n):
+        if M[k][k] == 0:
+            piv = next(i for i in range(k + 1, n) if M[i][k] != 0)
+            M[k], M[piv] = M[piv], M[k]
+        for i in range(k + 1, n):
+            for j in range(k + 1, n + 1):
+                M[i][j] = (M[k][k] * M[i][j] - M[i][k] * M[k][j]) // prev
+            M[i][k] = 0
+        prev = M[k][k]
+    d = M[n - 1][n - 1]
+    N = [0] * n
+    for i in range(n - 1, -1, -1):
+        acc = d * M[i][n] - sum(M[i][j] * N[j] for j in range(i + 1, n))
+        N[i] = acc // M[i][i]                       # exact (Bareiss)
+        assert N[i] * M[i][i] == acc
+    return N, d
+
+
 def _solve6(A, b):
     n = len(b)
     M = [row[:] + [b[i]] for i, row in enumerate(A)]
@@ -430,10 +454,14 @@ def finish(Xq, T, F, owner, tface, kind, g, qpres, tets=None, fixed_faces=None, 
             # change is Am^T y = DB * Bc^T M^-1 (-r) — the same exact numbers, the 6 x 6 system on integers
             slots = [(int(pos[t, f, jv]), c, f * 9 + jv * 3 + c) for jv in range(3) for c in range(3)]
             Bc = [[BI[t][i][col] * s_ for (_, _, col) in slots] for i in range(6)]
-            Mi = [[Fr(sum(Bc[i][m] * Bc[j][m] for m in range(9))) for j in range(6)] for i in range(6)]   # Fr: _solve6 divides
-            z = _solve6(Mi, [-x for x in r_])
+            Mi = [[sum(Bc[i][m] * Bc[j][m] for m in range(9)) for j in range(6)] for i in range(6)]
+            Dr = 1
+            for x in r_:
+                Dr = Dr * x.denominator // math.gcd(Dr, x.denominator)
+            Rn = [-(x.numerator * (Dr // x.denominator)) for x in r_]      # -r = Rn / Dr
+            N, dd = _solve_int(Mi, Rn)                                       # M^-1 Rn = N / dd
             for m, (p_, c, _) in enumerate(slots):
-                q[fid][p_][c] += DB * sum(Bc[i][m] * z[i] for i in range(6) if Bc[i][m])
+                q[fid][p_][c] += Fr(DB * sum(Bc[i][m] * N[i] for i in range(6) if Bc[i][m]), dd * Dr)
                 maxbits = max(maxbits, q[fid][p_][c].denominator.bit_length())
             if par is not None:
                 resid[par] = bal(par)
