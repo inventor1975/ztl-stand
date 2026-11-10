@@ -377,7 +377,10 @@ def finish(Xq, T, F, owner, tface, kind, g, qpres, tets=None, fixed_faces=None, 
         for v in T[t]:
             if v not in XIall:
                 XIall[v] = [int(Fr(x) * Dx) for x in Xq[v]]
-    if max((abs(c) for xi in XIall.values() for c in xi), default=0) * 2 < 2 ** 61 and 4 * Dx < 2 ** 61:
+    # Python ints never overflow: the integer path always applies (2026-11-10: an int64 guard here sent every SimJEB
+    # part, decimals with up to ~10 digits, back to the Fraction path — MEASURED on 631: 660 s under cProfile, _solve6
+    # and bal_matrix still called 82414 times; the box with integer coordinates had passed the guard and hidden it)
+    if True:
         BI = {}
         for t in tets:
             vsx = [XIall[int(v)] for v in T[t]]
