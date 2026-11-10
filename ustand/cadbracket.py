@@ -28,6 +28,16 @@ import numpy as np
 from . import tetfea as TF, tetmesh as TM, equil as EQ, alfeld as AL
 
 
+def _trim():
+    """hand freed heap back to the OS (glibc keeps it otherwise: the lower bound's assembled K and AMG, freed, still
+    counted against the cap — 148 peaked at 16.5 GB of an 18 GB cap, 2026-11-10)"""
+    try:
+        import ctypes
+        ctypes.CDLL("libc.so.6").malloc_trim(0)
+    except OSError:
+        pass
+
+
 def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None):
     from fractions import Fraction as Fr
     t0 = time.time()
@@ -35,6 +45,7 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None):
     d = TF.read_deck(path)
     lo = TF.solve_cases(d, [subcase], tol=1e-4, log=lambda s: None)[0]
     log(f"lower (2a): C >= {lo['compliance_lower_proved']:.6f}; {time.time() - t0:.0f} s")
+    _trim()
     ids = sorted(d["grids"])
     idx = {n: i for i, n in enumerate(ids)}
     Xq = [tuple(TF._nas(x) for x in d["grids"][n]) for n in ids]

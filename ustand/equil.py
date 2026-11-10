@@ -41,7 +41,9 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
     import time as _t
     t0 = _t.time()
     say = (lambda m: log(f"  [equil {(_t.time() - t0):.1f} s] {m}")) if log else (lambda m: None)
-    CH = 20000
+    # chunk of tets for the forms and the local KKTs: its temporaries (S, Q1, Q2, Sm, K, Ki: ~6 x 36^2..42^2 doubles a
+    # tet) are a FIXED cost — MEASURED on 631 with tracemalloc: 2.0 GB transient at 20000; 8000 keeps it ~0.8 GB
+    CH = 8000
 
     def forms(b):
         # the element forms of a CHUNK of tets, recomputed where needed instead of stored (2026-11-10, toward 640k
