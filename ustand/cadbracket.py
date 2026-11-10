@@ -28,7 +28,7 @@ import numpy as np
 from . import tetfea as TF, tetmesh as TM, equil as EQ, alfeld as AL
 
 
-def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None):
+def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None):
     from fractions import Fraction as Fr
     t0 = time.time()
     sha = hashlib.sha256(open(path, "rb").read()).hexdigest()
@@ -58,7 +58,7 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None):
             q[fid, p_] = tr[int(F[fid, p_])] * n2[fid]
     E, nu = d["mat"][0], d["mat"][1]
     g, e_float, info = EQ.choose(X, T, F, own, tf, kind, float(E), float(nu), q, direct=False, tol=cg_tol,
-                                 log=lambda m: log(m), zdtype=np.float32 if len(T) > 100000 else np.float64,
+                                 log=lambda m: log(m), zdtype=(np.float32 if len(T) > 100000 else np.float64) if zdtype is None else zdtype,
                                  matfree=(len(T) > 100000) if matfree is None else matfree)
     log(f"upper choice (float): {e_float:.6f}; {time.time() - t0:.0f} s")
     qp = {int(f): [[Fr(float(q[f, p_, c])) for c in range(3)] for p_ in range(3)] for f in np.where(kind == 2)[0]}
@@ -107,9 +107,12 @@ def main(argv):
     ap.add_argument("--E-ground", default="credit")
     ap.add_argument("--matfree", choices=("auto", "yes", "no"), default="auto",
                     help="the trace system: never assembled (yes), assembled + AMG (no), by size (auto: > 1e5 tets)")
+    ap.add_argument("--zdtype", choices=("auto", "32", "64"), default="auto",
+                    help="the local inverse blocks Z: float32 / float64 / by size (auto: float32 above 1e5 tets)")
     a = ap.parse_args(argv)
     mf = {"auto": None, "yes": True, "no": False}[a.matfree]
-    r = bracket(a.deck, a.subcase, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf)
+    zd = {"auto": None, "32": np.float32, "64": np.float64}[a.zdtype]
+    r = bracket(a.deck, a.subcase, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd)
     if (a.d_max is not None or a.d_min is not None) and r["work_conjugate"]:
         from . import cadstiff as CS
         Er = tuple(float(x) for x in a.E_range.split(":")) if a.E_range else (r["E"], r["E"])
