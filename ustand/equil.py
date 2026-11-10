@@ -333,7 +333,7 @@ def finish(Xq, T, F, owner, tface, kind, g, qpres, tets=None, fixed_faces=None, 
             s_ = int(sgn[t, f])
             for jv in range(3):
                 r = qq[int(pos[t, f, jv])]
-                out += [r[0] * s_, r[1] * s_, r[2] * s_]
+                out += r if s_ > 0 else [-r[0], -r[1], -r[2]]
         return out
     # THE BALANCE MAP IN INTEGERS (2026-11-10, toward 5M tets: the Fraction sums were the finisher's whole cost —
     # MEASURED by cProfile on a 10k-tet box: 73 s, ~70 % inside fractions.py; on SimJEB 148 the push took 20 min and
@@ -425,6 +425,20 @@ def finish(Xq, T, F, owner, tface, kind, g, qpres, tets=None, fixed_faces=None, 
         if fid is None or all(x == 0 for x in r_):
             continue
         s_ = int(sgn[t, f])
+        if BI is not None:
+            # in integers: Am = Bc / DB with Bc integer, so y = DB^2 M^-1 (-r) with M = Bc Bc^T, and the least-norm
+            # change is Am^T y = DB * Bc^T M^-1 (-r) — the same exact numbers, the 6 x 6 system on integers
+            slots = [(int(pos[t, f, jv]), c, f * 9 + jv * 3 + c) for jv in range(3) for c in range(3)]
+            Bc = [[BI[t][i][col] * s_ for (_, _, col) in slots] for i in range(6)]
+            Mi = [[Fr(sum(Bc[i][m] * Bc[j][m] for m in range(9))) for j in range(6)] for i in range(6)]   # Fr: _solve6 divides
+            z = _solve6(Mi, [-x for x in r_])
+            for m, (p_, c, _) in enumerate(slots):
+                q[fid][p_][c] += DB * sum(Bc[i][m] * z[i] for i in range(6) if Bc[i][m])
+                maxbits = max(maxbits, q[fid][p_][c].denominator.bit_length())
+            if par is not None:
+                resid[par] = bal(par)
+            resid[t] = [Fr(0)] * 6
+            continue
         cols = []
         for jv in range(3):
             p_ = int(pos[t, f, jv])
