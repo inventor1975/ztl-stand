@@ -309,3 +309,8 @@ Not yet measured on 148 (4396 iterations, 6866 s with the old rule).
 
 A hole closed: until today no test went through the matrix-free path. test_equil now checks that it reaches the
 global KKT energy and a balanced choice. A planted unconverged solve (3 iterations) turns it RED.
+
+**148 with the new c (2026-11-11 01:49, MEASURED, 6 cores, the same command as the 21:30 run):** CG 2100 iterations
+(was 4396), ~1793 s of CG (was 6866). The whole bracket took 2345 s (was 8475 s), but the old run's conditions
+(other jobs on the machine) were not recorded, so the ×3.6 in time is not a clean comparison; the ×2.1 in iterations
+is. The bracket is the same: [59892.152, 63506.641], gap 6.03 %, 301 push bits (results148_s1_matfree_smoothc.json).
