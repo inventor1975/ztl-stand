@@ -21,3 +21,17 @@ pairs: 15, ORDERED (proved) 13, OPEN 2
    494 > 631
    494 > 40
    631 ? 40
+
+AGAINST SimJEB's OWN NUMBERS (metadata: mass, max_ver_magdisp — the largest nodal |u| anywhere, one float each)
+  id   mass     their max|u|  our load-point u (proved)   their F/(max|u| m)   our k/m = F/(u m) (proved)
+  454  0.6037   0.6856        [0.4018, 0.4390]             85982.6              [134265.9, 146698.3]
+  348  1.1450   0.3608        [0.2382, 0.2567]             86138.7              [121068.6, 130498.3]
+  506  0.3690   1.4083        [0.8414, 0.8947]             68472.1              [107779.7, 114599.4]
+  494  0.4293   1.2503        [0.7206, 0.7873]             66294.2              [105286.8, 115024.4]
+  631  0.2872   2.0795        [1.1840, 1.2836]             59578.0              [ 96522.3, 104640.7]
+   40  0.4285   1.3709        [0.8127, 0.8819]             60575.1              [ 94162.9, 102177.7]
+- No contradiction: every proved load-point displacement lies below SimJEB's max |u| (ratio 0.59-0.66).
+- The two measures rank differently. By max |u|, 348 edges 454 (by 0.2 %); by load-point stiffness, 454 > 348 is PROVED
+  (the intervals are 3 % apart at their closest). Both are true statements about different quantities: "stiffer"
+  must name WHICH displacement. And by max |u|, 40 > 631 (by 1.7 %, a single float with no error bar); by load-point
+  stiffness this pair is OPEN (the intervals overlap).
