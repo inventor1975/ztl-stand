@@ -54,3 +54,16 @@ the section (or exactly the section, as a surface prestress). This follows from 
   zone). That is the price of locality, and it will be measured, not hidden.
 - A stress at a POINT is not a bounded functional: it gets no bound, and the stand will say so (E: no subject),
   rather than print a number.
+
+## 3a — FIRST RESULT (2026-11-10 21:15, SimJEB 631, MEASURED)
+
+f = the vertical load (0, 0, 35585.77); g = the horizontal load (−37809.9, 0, 0); s = 1 (the balanced choice is
+√(C1/C2) = 0.98). Both loads act on the same RBE3 hole. Two brackets, float64 Z, matrix-free:
+- C(f + g) ∈ [19709.651, 20940.259] (6.2 %);
+- C(f − g) ∈ [152212.842, 163691.504] (7.5 %).
+
+Polarization: a(u_f, u_g) ∈ [−35995.46, −32818.15], width 9.2 % of the midpoint. **The SIGN is PROVED:** under the
+vertical load, the load point moves in +x by 0.868 to 0.952 mm (the work-conjugate displacement of the horizontal
+load; files results631_cross_{plus,minus}.json). The float pilot's −33125.8 lies inside the bracket.
+So a CROSS quantity, one that is not a compliance and has no sign of its own, is certified by the existing pipeline
+with no new mathematics. The width (9 %) matches the a-priori estimate 0.08·√(C1·C2)/|X| ≈ 10 %.
