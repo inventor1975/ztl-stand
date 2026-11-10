@@ -1,0 +1,262 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 20,
+  "failed_at_nominal": 20,
+  "judged": 0,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "LUM=F3(Phi=8550, W=96, cu6=57/100, cu7=27/50, cu8=51/100); NL=cnt(N=1)",
+      "verdict": "REFUTED",
+      "fails": "50 fc maintained",
+      "by_at_witness": "37927/2000 (~18.9635)",
+      "unit": "1/ft^2"
+    },
+    {
+      "design": "LUM=F3(Phi=8550, W=96, cu6=57/100, cu7=27/50, cu8=51/100); NL=cnt(N=2)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "72",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F3(Phi=8550, W=96, cu6=57/100, cu7=27/50, cu8=51/100); NL=cnt(N=3)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "168",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F3(Phi=8550, W=96, cu6=57/100, cu7=27/50, cu8=51/100); NL=cnt(N=4)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "264",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F3(Phi=8550, W=96, cu6=57/100, cu7=27/50, cu8=51/100); NL=cnt(N=5)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "360",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F2(Phi=5700, W=64, cu6=3/5, cu7=57/100, cu8=27/50); NL=cnt(N=1)",
+      "verdict": "REFUTED",
+      "fails": "50 fc maintained",
+      "by_at_witness": "28169/1000 (~28.169)",
+      "unit": "1/ft^2"
+    },
+    {
+      "design": "LUM=F2(Phi=5700, W=64, cu6=3/5, cu7=57/100, cu8=27/50); NL=cnt(N=2)",
+      "verdict": "REFUTED",
+      "fails": "50 fc maintained",
+      "by_at_witness": "3169/500 (~6.338)",
+      "unit": "1/ft^2"
+    },
+    {
+      "design": "LUM=F2(Phi=5700, W=64, cu6=3/5, cu7=57/100, cu8=27/50); NL=cnt(N=3)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "72",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F2(Phi=5700, W=64, cu6=3/5, cu7=57/100, cu8=27/50); NL=cnt(N=4)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "136",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F2(Phi=5700, W=64, cu6=3/5, cu7=57/100, cu8=27/50); NL=cnt(N=5)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "200",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L1(Phi=4800, W=41, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=1)",
+      "verdict": "REFUTED",
+      "fails": "50 fc maintained",
+      "by_at_witness": "3872/125 (~30.976)",
+      "unit": "1/ft^2"
+    },
+    {
+      "design": "LUM=L1(Phi=4800, W=41, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=2)",
+      "verdict": "REFUTED",
+      "fails": "50 fc maintained",
+      "by_at_witness": "1494/125 (~11.952)",
+      "unit": "1/ft^2"
+    },
+    {
+      "design": "LUM=L1(Phi=4800, W=41, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=3)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "3",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L1(Phi=4800, W=41, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=4)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "44",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L1(Phi=4800, W=41, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=5)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "85",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L2(Phi=6200, W=50, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=1)",
+      "verdict": "REFUTED",
+      "fails": "50 fc maintained",
+      "by_at_witness": "38141/1500 (~25.4273)",
+      "unit": "1/ft^2"
+    },
+    {
+      "design": "LUM=L2(Phi=6200, W=50, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=2)",
+      "verdict": "REFUTED",
+      "fails": "50 fc maintained",
+      "by_at_witness": "641/750 (~0.854667)",
+      "unit": "1/ft^2"
+    },
+    {
+      "design": "LUM=L2(Phi=6200, W=50, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=3)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "30",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L2(Phi=6200, W=50, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=4)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "80",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L2(Phi=6200, W=50, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=5)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "130",
+      "unit": "W"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 20
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "LUM": {
+      "catalog": "L1",
+      "Phi": {
+        "nominal": "4800",
+        "tolerance": "0"
+      },
+      "W": {
+        "nominal": "41",
+        "tolerance": "0"
+      },
+      "cu6": {
+        "nominal": "31/50 (~0.62)",
+        "tolerance": "0"
+      },
+      "cu7": {
+        "nominal": "59/100 (~0.59)",
+        "tolerance": "0"
+      },
+      "cu8": {
+        "nominal": "14/25 (~0.56)",
+        "tolerance": "0"
+      }
+    },
+    "NL": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "3",
+        "tolerance": "0"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "LLF": "4/5 (~0.8)",
+    "RCR": "137/20 (~6.85)"
+  },
+  "point_units": {
+    "LLF": "",
+    "RCR": ""
+  },
+  "value_there": {
+    "Ptot": "123"
+  },
+  "unit": "W",
+  "requirement": {
+    "quantity": "Ptot",
+    "op": "<=",
+    "value": "Pmax",
+    "why": "LPD <= 1.0 W/ft2"
+  },
+  "overshoot": "3",
+  "reasons": {
+    "spread_over_tolerances": [
+      "123",
+      "123"
+    ],
+    "largest_contributors": []
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "each_requirement": [
+    {
+      "requirement": {
+        "quantity": "E",
+        "op": ">=",
+        "value": "50",
+        "why": "50 fc maintained"
+      },
+      "verdict": "EARNED",
+      "guaranteed": {
+        "E": [
+          "1314/25 (~52.56)",
+          "6171/100 (~61.71)"
+        ]
+      }
+    },
+    {
+      "requirement": {
+        "quantity": "Ptot",
+        "op": "<=",
+        "value": "Pmax",
+        "why": "LPD <= 1.0 W/ft2"
+      },
+      "verdict": "REFUTED",
+      "overshoot": "3"
+    }
+  ],
+  "_core": [
+    0,
+    1
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "50 fc maintained",
+        "LPD <= 1.0 W/ft2"
+      ]
+    ],
+    "undecided_sets": [],
+    "complete": true,
+    "subset_runs": 2,
+    "subsets_inferred": 0,
+    "how": "first one minimal set by deletion (each requirement dropped in turn while the rest stays refuted), then every subset by size, smallest first; a subset of an EARNED set is EARNED and a superset of a REFUTED one REFUTED without a run (monotone: one design holds the smaller set), within a budget of 24 subset runs"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

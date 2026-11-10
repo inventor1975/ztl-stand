@@ -1,0 +1,249 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 1,
+  "failed_at_nominal": 0,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "P=nop(NRR=7, price=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "D": [
+          "314579970044102309175/2305843009213693952 (~136.427)",
+          "8314775278114029400025/36893488147419103232 (~225.372)"
+        ],
+        "TWA": [
+          "340308158211552175863887/3689348814741910323200 (~92.2407)",
+          "176833591901666924555627/1844674407370955161600 (~95.8617)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1
+  },
+  "verdict": "EARNED",
+  "design": {
+    "P": {
+      "catalog": "nop",
+      "NRR": {
+        "nominal": "7",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "0",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "D": [
+      "314579970044102309175/2305843009213693952 (~136.427)",
+      "8314775278114029400025/36893488147419103232 (~225.372)"
+    ],
+    "TWA": [
+      "340308158211552175863887/3689348814741910323200 (~92.2407)",
+      "176833591901666924555627/1844674407370955161600 (~95.8617)"
+    ]
+  },
+  "guaranteed_unit": {
+    "D": "",
+    "TWA": "dBA"
+  },
+  "how": {
+    "D": "ZTL, interval reading of the definition (sound, may be wide)",
+    "TWA": "ZTL, interval reading of the definition (sound, may be wide)"
+  },
+  "requirements": [
+    {
+      "quantity": "D",
+      "op": ">=",
+      "value": "0",
+      "why": "measure only: worst-case range of dose (no protector)"
+    },
+    {
+      "quantity": "TWA",
+      "op": ">=",
+      "value": "0",
+      "why": "measure only: range of TWA"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "Le1 -> [97, 101] by the system over its parameters, exact at the corners (credit)",
+    "Le2 -> [91, 94] by the system over its parameters, exact at the corners (credit)",
+    "Le3 -> [84, 87] by the system over its parameters, exact at the corners (credit)",
+    "Le4 -> [74, 79] by the system over its parameters, exact at the corners (credit)",
+    "d1 -> [121703123666313790245/147573952589676412928, 105948722862607337615/73786976294838206464] by [d1 == ifpos(Lth - Le1, 0, C1 / T0 * pow(2, (Le1 - L0) / S))], interval reading, sound, may be wider than the truth (credit)",
+    "d2 -> [15892308429391099575/36893488147419103232, 96352940666083741365/147573952589676412928] by [d2 == ifpos(Lth - Le2, 0, C2 / T0 * pow(2, (Le2 - L0) / S))], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "proof": {
+    "proved": 2,
+    "of": 2,
+    "count": "2 of 2 requirement(s) proved as Lean theorems; 0 rest on ZTL's verdict alone (no Lean theorem)",
+    "requirements": [
+      {
+        "quantity": "D",
+        "op": ">=",
+        "value_si": "0",
+        "definition": "D = (100 * ((((ifpos((Lth - Le1), 0, ((C1 / T0) * pow(2, ((Le1 - L0) / S))))) + (ifpos((Lth - Le2), 0, ((C2 / T0) * pow(2, ((Le2 - L0) / S)))))) + (ifpos((Lth - Le3), 0, ((C3 / T0) * pow(2, ((Le3 - L0) / S)))))) + (ifpos((Lth - Le4), 0, ((C4 / T0) * pow(2, ((Le4 - L0) / S))))))) (the system's solutions substituted)",
+        "status": "theorem",
+        "axioms": "none (each #print axioms: does not depend on any axioms)",
+        "reads": "D >= 0",
+        "about": "a TABLE, branch by branch (16 branches): at every point of the box, WHICHEVER branch applies, the requirement holds (ZBoundIf — a branch's piece is proved or excluded by its own condition; that the branches cover the table is the table's reading); the expression from ZTL's exact elimination, Python",
+        "file": "/media/vitaly/SSD_1000GB/Projects/ZTL/lean/gen/ZStand_93817f21eef5.lean",
+        "theorems": [
+          "ZStand_93817f21eef5.req0",
+          "ZStand_93817f21eef5.breq0_0",
+          "ZStand_93817f21eef5.breq1_0",
+          "ZStand_93817f21eef5.breq2_0",
+          "ZStand_93817f21eef5.breq3_0",
+          "ZStand_93817f21eef5.breq4_0",
+          "ZStand_93817f21eef5.breq5_0",
+          "ZStand_93817f21eef5.breq6_0",
+          "ZStand_93817f21eef5.breq7_0",
+          "ZStand_93817f21eef5.breq8_0",
+          "ZStand_93817f21eef5.breq9_0",
+          "ZStand_93817f21eef5.breq10_0",
+          "ZStand_93817f21eef5.breq11_0",
+          "ZStand_93817f21eef5.breq12_0",
+          "ZStand_93817f21eef5.breq13_0",
+          "ZStand_93817f21eef5.breq14_0",
+          "ZStand_93817f21eef5.breq15_0",
+          "ZStand_93817f21eef5.bcl0_0",
+          "ZStand_93817f21eef5.bcl1_0",
+          "ZStand_93817f21eef5.bcl2_0",
+          "ZStand_93817f21eef5.bcl3_0",
+          "ZStand_93817f21eef5.bcl4_0",
+          "ZStand_93817f21eef5.bcl5_0",
+          "ZStand_93817f21eef5.bcl6_0",
+          "ZStand_93817f21eef5.bcl7_0",
+          "ZStand_93817f21eef5.bcl8_0",
+          "ZStand_93817f21eef5.bcl9_0",
+          "ZStand_93817f21eef5.bcl10_0",
+          "ZStand_93817f21eef5.bcl11_0",
+          "ZStand_93817f21eef5.bcl12_0",
+          "ZStand_93817f21eef5.bcl13_0",
+          "ZStand_93817f21eef5.bcl14_0",
+          "ZStand_93817f21eef5.bcl15_0"
+        ],
+        "params": [
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ],
+        "theorem_vars": {
+          "L1": "var 0 = L1",
+          "L2": "var 1 = L2",
+          "L3": "var 2 = L3",
+          "L4": "var 3 = L4"
+        },
+        "box": {
+          "L1": [
+            "97",
+            "101"
+          ],
+          "L2": [
+            "91",
+            "94"
+          ],
+          "L3": [
+            "84",
+            "87"
+          ],
+          "L4": [
+            "74",
+            "79"
+          ]
+        },
+        "box_is": "rounded outward to dyadics"
+      },
+      {
+        "quantity": "TWA",
+        "op": ">=",
+        "value_si": "0",
+        "definition": "TWA = (((1661/100) * log10((((100 * ((((ifpos((Lth - Le1), 0, ((C1 / T0) * pow(2, ((Le1 - L0) / S))))) + (ifpos((Lth - Le2), 0, ((C2 / T0) * pow(2, ((Le2 - L0) / S)))))) + (ifpos((Lth - Le3), 0, ((C3 / T0) * pow(2, ((Le3 - L0) / S)))))) + (ifpos((Lth - Le4), 0, ((C4 / T0) * pow(2, ((Le4 - L0) / S)))))))) / 100))) + L0) (the system's solutions substituted)",
+        "status": "theorem",
+        "axioms": "none (each #print axioms: does not depend on any axioms)",
+        "reads": "TWA >= 0",
+        "about": "a TABLE, branch by branch (16 branches): at every point of the box, WHICHEVER branch applies, the requirement holds (ZBoundIf — a branch's piece is proved or excluded by its own condition; that the branches cover the table is the table's reading); the expression from ZTL's exact elimination, Python",
+        "file": "/media/vitaly/SSD_1000GB/Projects/ZTL/lean/gen/ZStand_3885604fb740.lean",
+        "theorems": [
+          "ZStand_3885604fb740.req0",
+          "ZStand_3885604fb740.breq0_0",
+          "ZStand_3885604fb740.breq1_0",
+          "ZStand_3885604fb740.breq2_0",
+          "ZStand_3885604fb740.breq3_0",
+          "ZStand_3885604fb740.breq4_0",
+          "ZStand_3885604fb740.breq5_0",
+          "ZStand_3885604fb740.breq6_0",
+          "ZStand_3885604fb740.breq7_0",
+          "ZStand_3885604fb740.breq8_0",
+          "ZStand_3885604fb740.breq9_0",
+          "ZStand_3885604fb740.breq10_0",
+          "ZStand_3885604fb740.breq11_0",
+          "ZStand_3885604fb740.breq12_0",
+          "ZStand_3885604fb740.breq13_0",
+          "ZStand_3885604fb740.breq14_0",
+          "ZStand_3885604fb740.breq15_0",
+          "ZStand_3885604fb740.bcl0_0",
+          "ZStand_3885604fb740.bcl1_0",
+          "ZStand_3885604fb740.bcl2_0",
+          "ZStand_3885604fb740.bcl3_0",
+          "ZStand_3885604fb740.bcl4_0",
+          "ZStand_3885604fb740.bcl5_0",
+          "ZStand_3885604fb740.bcl6_0",
+          "ZStand_3885604fb740.bcl7_0",
+          "ZStand_3885604fb740.bcl8_0",
+          "ZStand_3885604fb740.bcl9_0",
+          "ZStand_3885604fb740.bcl10_0",
+          "ZStand_3885604fb740.bcl11_0",
+          "ZStand_3885604fb740.bcl12_0",
+          "ZStand_3885604fb740.bcl13_0",
+          "ZStand_3885604fb740.bcl14_0",
+          "ZStand_3885604fb740.bcl15_0"
+        ],
+        "params": [
+          "L1",
+          "L2",
+          "L3",
+          "L4"
+        ],
+        "theorem_vars": {
+          "L1": "var 0 = L1",
+          "L2": "var 1 = L2",
+          "L3": "var 2 = L3",
+          "L4": "var 3 = L4"
+        },
+        "box": {
+          "L1": [
+            "97",
+            "101"
+          ],
+          "L2": [
+            "91",
+            "94"
+          ],
+          "L3": [
+            "84",
+            "87"
+          ],
+          "L4": [
+            "74",
+            "79"
+          ]
+        },
+        "box_is": "rounded outward to dyadics"
+      }
+    ],
+    "seconds": 24.4,
+    "check_again": "cd /media/vitaly/SSD_1000GB/Projects/ZTL/lean && lake env lean --tstack=400000 <file>",
+    "rests_on": "each requirement says what its theorem is ABOUT: the LAWS (every value of the unknowns satisfying them; each law read as a polynomial row — multiplied by its denominators, the parameters scaled — Python, local per law; the elimination checked by the kernel), or the EXPRESSION from ZTL's exact elimination (Python, not proved in Lean); the tolerances are the brick's data, taken as stated; values in SI"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

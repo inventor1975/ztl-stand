@@ -1,0 +1,28 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "r":   {"role": "given", "range": ["0.09", "0.11"], "unit": "", "why": "discount rate, one value shared by both trucks"},
+  "NPV": {"role": "derived", "unit": "USD"},
+  "EAA": {"role": "derived", "unit": "USD"}
+ },
+ "slots": {"T": {"from": ["trucks"]}},
+ "laws": [
+  {"zfl": "NPV == -T.price + T.inflow*(1 - pow(1 + r, -T.n))/r", "source": "NPV = -price + sum_{k=1..n} inflow/(1+r)^k (geometric sum in closed form)"},
+  {"zfl": "EAA == NPV*r/(1 - pow(1 + r, -T.n))", "source": "equivalent annual annuity"}
+ ],
+ "requirements": [
+  {"quantity": "EAA", "op": ">=", "value": "17000", "why": "EAA at least 17000 USD per year in the worst case"}
+ ],
+ "catalog": {
+  "trucks": {
+   "items": [
+    {"price": {"value": "50000"}, "n": {"value": "3"}, "inflow": {"range": ["38000", "42000"]}, "label": "Older, larger"},
+    {"price": {"value": "50000"}, "n": {"value": "6"}, "inflow": {"range": ["28500", "31500"]}, "label": "Newer, smaller"}
+   ],
+   "ground": "problem statement",
+   "fields": {"price": {"unit": "USD"}, "n": {"unit": ""}, "inflow": {"unit": "USD"}}
+  }
+ },
+ "objective": {"minimize": "-EAA", "case": "worst", "why": "buy the truck with the best worst-case EAA"},
+ "report": "all"
+}

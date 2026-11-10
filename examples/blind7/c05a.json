@@ -1,0 +1,138 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "r": {
+   "role": "given",
+   "range": [
+    "0.09",
+    "0.11"
+   ],
+   "unit": "",
+   "why": "cost of capital, one shared value 9..11 %"
+  },
+  "NPV": {
+   "role": "derived",
+   "unit": "USD"
+  }
+ },
+ "slots": {
+  "M": {
+   "from": [
+    "machines"
+   ]
+  }
+ },
+ "define": {
+  "d1": "1/((1+r))",
+  "d2": "1/((1+r)*(1+r))",
+  "d3": "1/((1+r)*(1+r)*(1+r))",
+  "d4": "1/((1+r)*(1+r)*(1+r)*(1+r))",
+  "d5": "1/((1+r)*(1+r)*(1+r)*(1+r)*(1+r))",
+  "d6": "1/((1+r)*(1+r)*(1+r)*(1+r)*(1+r)*(1+r))"
+ },
+ "laws": [
+  {
+   "zfl": "NPV == M.CF0 + M.CF1*d1 + M.CF2*d2 + M.CF3*d3 + M.CF4*d4 + M.CF5*d5 + M.CF6*d6",
+   "source": "NPV = sum CF_k/(1+r)^k"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "NPV",
+   "op": ">=",
+   "value": "1165",
+   "why": "NPV at least 1165 USD in the worst case"
+  }
+ ],
+ "catalog": {
+  "machines": {
+   "items": [
+    {
+     "label": "Regular",
+     "CF0": {
+      "value": "-16000"
+     },
+     "CF1": {
+      "value": "2000",
+      "tolerance": "0.03"
+     },
+     "CF2": {
+      "value": "4000",
+      "tolerance": "0.03"
+     },
+     "CF3": {
+      "value": "5000",
+      "tolerance": "0.03"
+     },
+     "CF4": {
+      "value": "5000",
+      "tolerance": "0.03"
+     },
+     "CF5": {
+      "value": "5000",
+      "tolerance": "0.03"
+     },
+     "CF6": {
+      "value": "5000",
+      "tolerance": "0.03"
+     }
+    },
+    {
+     "label": "Heavy-duty",
+     "CF0": {
+      "value": "-25000"
+     },
+     "CF1": {
+      "value": "2000",
+      "tolerance": "0.03"
+     },
+     "CF2": {
+      "value": "4000",
+      "tolerance": "0.03"
+     },
+     "CF3": {
+      "value": "8000",
+      "tolerance": "0.03"
+     },
+     "CF4": {
+      "value": "9000",
+      "tolerance": "0.03"
+     },
+     "CF5": {
+      "value": "9000",
+      "tolerance": "0.03"
+     },
+     "CF6": {
+      "value": "9000",
+      "tolerance": "0.03"
+     }
+    }
+   ],
+   "ground": "problem statement cash flows",
+   "fields": {
+    "CF0": {
+     "unit": "USD"
+    },
+    "CF1": {
+     "unit": "USD"
+    },
+    "CF2": {
+     "unit": "USD"
+    },
+    "CF3": {
+     "unit": "USD"
+    },
+    "CF4": {
+     "unit": "USD"
+    },
+    "CF5": {
+     "unit": "USD"
+    },
+    "CF6": {
+     "unit": "USD"
+    }
+   }
+  }
+ },
+ "report": "all"
+}

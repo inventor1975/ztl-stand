@@ -1,0 +1,13 @@
+coarse balance: {'subdomains': 11, 'with_support': 6, 'interfaces': 15, 'interface_faces': 2487, 'floating_unbalanced_after': [], 'unreached': []}; 7 s
+subdomain 0: 10240 tets, float 60110.9364, proved 60133.8884, bits 590; 52 s
+subdomain 1: 1801 tets, float 841.5395, proved 841.5399, bits 358; 56 s
+subdomain 2: 10300 tets, float 1238.1128, proved 1238.1141, bits 360; 117 s
+subdomain 3: 10304 tets, float 1170.6471, proved 1170.6496, bits 358; 169 s
+subdomain 4: 8499 tets, float 808.8511, proved 808.8570, bits 363; 197 s
+subdomain 5: 8510 tets, float 818.0269, proved 818.0315, bits 377; 225 s
+subdomain 6: 1789 tets, float 613.2158, proved 613.2161, bits 329; 229 s
+subdomain 7: 9857 tets, float 42395.2183, proved 42411.4904, bits 411; 274 s
+subdomain 8: 10414 tets, float 4418.8799, proved 4418.8821, bits 559; 328 s
+subdomain 9: 10363 tets, float 3827.5839, proved 3827.5860, bits 414; 377 s
+subdomain 10: 337 tets, float 191.1969, proved 191.1976, bits 347; 378 s
+{"upper_dd": 116473.45254021313, "lower": 42132.98124394912, "subdomains": 11, "coarse": {"subdomains": 11, "with_support": 6, "interfaces": 15, "interface_faces": 2487, "floating_unbalanced_after": [], "unreached": []}, "bits": 590, "seconds": 378.1}

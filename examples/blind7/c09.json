@@ -1,0 +1,41 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "ASD": {"role": "given", "range": ["170", "190"], "unit": "m", "why": "available sight distance 170-190 m"},
+  "ASDmin": {"role": "given", "value": "170", "unit": "m", "why": "minimum ASD, for the percentage"},
+  "G": {"role": "given", "range": ["0.02", "0.04"], "unit": "", "why": "downgrade 2-4 %"},
+  "dv": {"role": "given", "range": ["0", "5"], "unit": "", "why": "vehicle may exceed posted speed by up to 5 km/h"},
+  "tr": {"role": "given", "value": "2.5", "unit": "s", "why": "perception-reaction time"},
+  "kc": {"role": "given", "value": "0.278", "unit": "m/s", "why": "0.278 m/s per km/h, as in the formula; v is a plain number in km/h"},
+  "gc": {"role": "given", "value": "19.6", "unit": "m/s^2", "why": "constant 19.6 of the formula"},
+  "v": {"role": "derived", "unit": "", "why": "actual speed, km/h (number)"},
+  "ds": {"role": "derived", "unit": "m", "why": "stopping sight distance"},
+  "margin": {"role": "derived", "unit": "m", "why": "ASDmin - ds"},
+  "pct": {"role": "derived", "unit": "", "why": "fraction of min ASD by which ds falls below it"}
+ },
+ "slots": {"P": {"from": ["posted"]}},
+ "laws": [
+  {"zfl": "v == P.Vp + dv", "source": "actual speed between posted and posted + 5 km/h"},
+  {"zfl": "ds == kc*tr*v + (kc*v)*(kc*v)/(gc*(P.f - G))", "source": "stopping sight distance formula of the problem"},
+  {"zfl": "margin == ASDmin - ds", "source": "margin to the minimum ASD"},
+  {"zfl": "pct == margin/ASDmin", "source": "percentage of minimum ASD"}
+ ],
+ "requirements": [
+  {"quantity": "ds", "op": "<=", "value": "ASD", "why": "d_s <= ASD in the worst case"}
+ ],
+ "objective": {"minimize": "0 - P.Vp", "why": "highest admissible posted speed"},
+ "report": "all",
+ "catalog": {
+  "posted": {
+   "ground": "problem table",
+   "items": [
+    {"name": "60", "Vp": "60", "f": "0.33"},
+    {"name": "70", "Vp": "70", "f": "0.31"},
+    {"name": "80", "Vp": "80", "f": "0.30"},
+    {"name": "90", "Vp": "90", "f": "0.30"},
+    {"name": "100", "Vp": "100", "f": "0.29"}
+   ],
+   "fields": {"Vp": {"unit": ""}, "f": {"unit": ""}}
+  }
+ }
+}

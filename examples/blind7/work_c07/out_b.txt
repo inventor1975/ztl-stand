@@ -1,0 +1,272 @@
+[stand] 1/20 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 20,
+  "failed_at_nominal": 14,
+  "judged": 6,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "LUM=F3(Phi=8550, W=96, cu6=57/100, cu7=27/50, cu8=51/100); NL=cnt(N=1)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Ptot": [
+          "96",
+          "96"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "-79265625/258064 (~-307.155)",
+        "reached_at_least": "-79265625/258064 (~-307.155)"
+      }
+    },
+    {
+      "design": "LUM=F3(Phi=8550, W=96, cu6=57/100, cu7=27/50, cu8=51/100); NL=cnt(N=2)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "72",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F3(Phi=8550, W=96, cu6=57/100, cu7=27/50, cu8=51/100); NL=cnt(N=3)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "168",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F3(Phi=8550, W=96, cu6=57/100, cu7=27/50, cu8=51/100); NL=cnt(N=4)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "264",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F3(Phi=8550, W=96, cu6=57/100, cu7=27/50, cu8=51/100); NL=cnt(N=5)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "360",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F2(Phi=5700, W=64, cu6=3/5, cu7=57/100, cu8=27/50); NL=cnt(N=1)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Ptot": [
+          "64",
+          "64"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "-13953125/64516 (~-216.274)",
+        "reached_at_least": "-13953125/64516 (~-216.274)"
+      }
+    },
+    {
+      "design": "LUM=F2(Phi=5700, W=64, cu6=3/5, cu7=57/100, cu8=27/50); NL=cnt(N=2)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "8",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F2(Phi=5700, W=64, cu6=3/5, cu7=57/100, cu8=27/50); NL=cnt(N=3)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "72",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F2(Phi=5700, W=64, cu6=3/5, cu7=57/100, cu8=27/50); NL=cnt(N=4)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "136",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=F2(Phi=5700, W=64, cu6=3/5, cu7=57/100, cu8=27/50); NL=cnt(N=5)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "200",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L1(Phi=4800, W=41, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=1)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Ptot": [
+          "41",
+          "41"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "-9125000/48387 (~-188.584)",
+        "reached_at_least": "-9125000/48387 (~-188.584)"
+      }
+    },
+    {
+      "design": "LUM=L1(Phi=4800, W=41, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=2)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Ptot": [
+          "82",
+          "82"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "-18250000/48387 (~-377.167)",
+        "reached_at_least": "-18250000/48387 (~-377.167)"
+      }
+    },
+    {
+      "design": "LUM=L1(Phi=4800, W=41, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=3)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "3",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L1(Phi=4800, W=41, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=4)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "44",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L1(Phi=4800, W=41, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=5)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "85",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L2(Phi=6200, W=50, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=1)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Ptot": [
+          "50",
+          "50"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "-35359375/145161 (~-243.587)",
+        "reached_at_least": "-35359375/145161 (~-243.587)"
+      }
+    },
+    {
+      "design": "LUM=L2(Phi=6200, W=50, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=2)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Ptot": [
+          "100",
+          "100"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "-70718750/145161 (~-487.175)",
+        "reached_at_least": "-70718750/145161 (~-487.175)"
+      }
+    },
+    {
+      "design": "LUM=L2(Phi=6200, W=50, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=3)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "30",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L2(Phi=6200, W=50, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=4)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "80",
+      "unit": "W"
+    },
+    {
+      "design": "LUM=L2(Phi=6200, W=50, cu6=31/50, cu7=59/100, cu8=14/25); NL=cnt(N=5)",
+      "verdict": "REFUTED",
+      "fails": "LPD <= 1.0 W/ft2",
+      "by_at_witness": "130",
+      "unit": "W"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 6,
+    "REFUTED": 14
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "-E",
+    "case": "worst",
+    "value": "-2263/50 (~-45.26)",
+    "unit": "1/ft^2",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "value_is": "a proved upper bound of the worst case over the box",
+    "reached_at_least": "-2263/50 (~-45.26)",
+    "optimal": true,
+    "note": "its proved worst case is at or below the worst case every other earned design reaches at a corner of its box; the rest refuted, none open"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "LUM": {
+      "catalog": "L2",
+      "Phi": {
+        "nominal": "6200",
+        "tolerance": "0"
+      },
+      "W": {
+        "nominal": "50",
+        "tolerance": "0"
+      },
+      "cu6": {
+        "nominal": "31/50 (~0.62)",
+        "tolerance": "0"
+      },
+      "cu7": {
+        "nominal": "59/100 (~0.59)",
+        "tolerance": "0"
+      },
+      "cu8": {
+        "nominal": "14/25 (~0.56)",
+        "tolerance": "0"
+      }
+    },
+    "NL": {
+      "catalog": "cnt",
+      "N": {
+        "nominal": "2",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Ptot": [
+      "100",
+      "100"
+    ]
+  },
+  "guaranteed_unit": {
+    "Ptot": "W"
+  },
+  "how": {
+    "Ptot": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "Ptot",
+      "op": "<=",
+      "value": "Pmax",
+      "why": "LPD <= 1.0 W/ft2"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "Ptot = 100 by exact elimination (credit)",
+    "CU -> [73/125, 121/200] by [CU == ifpos(RCR - 6, ifpos(RCR - 7, ifpos(RCR - 8, LUM__cu8, LUM__cu7 + (LUM__cu8 - LUM__cu7) * (RCR - 7) / (8 - 7)), LUM__cu6 + (LUM__cu7 - LUM__cu6) * (RCR - 6) / (7 - 6)), LUM__cu6)], interval reading, sound, may be wider than the truth (credit)",
+    "E -> [70718750/145161, 996359375/1741932] by [E == NL__N*LUM__Phi*CU*LLF/A], multilinear, exact at the corners (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+0.24s

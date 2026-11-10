@@ -1,0 +1,97 @@
+[stand] 1/4 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 4,
+  "failed_at_nominal": 0,
+  "judged": 4,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "ST=steels(name=A36, SY=36, KIC=60)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ac": [
+          "122070312500000000/76969020012949953 (~1.58597)",
+          "29541015625000000000/12468981242097888417 (~2.36916)"
+        ]
+      }
+    },
+    {
+      "design": "ST=steels(name=A441, SY=50, KIC=53)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ac": [
+          "5486328125000000/8552113334772217 (~0.641517)",
+          "1327691406250000000/1385442360233098713 (~0.958316)"
+        ]
+      }
+    },
+    {
+      "design": "ST=steels(name=A572, SY=50, KIC=100)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ac": [
+          "19531250000000000/8552113334772217 (~2.28379)",
+          "4726562500000000000/1385442360233098713 (~3.41159)"
+        ]
+      }
+    },
+    {
+      "design": "ST=steels(name=A514, SY=100, KIC=60)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ac": [
+          "1757812500000000/8552113334772217 (~0.205541)",
+          "47265625000000000/153938040025899857 (~0.307043)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 4
+  },
+  "verdict": "EARNED",
+  "design": {
+    "ST": {
+      "catalog": "steels",
+      "name": "A36",
+      "SY": {
+        "nominal": "36",
+        "tolerance": "0"
+      },
+      "KIC": {
+        "nominal": "60",
+        "tolerance": "1/10 (~0.1)"
+      }
+    }
+  },
+  "guaranteed": {
+    "ac": [
+      "122070312500000000/76969020012949953 (~1.58597)",
+      "29541015625000000000/12468981242097888417 (~2.36916)"
+    ]
+  },
+  "guaranteed_unit": {
+    "ac": "in"
+  },
+  "how": {
+    "ac": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "ac",
+      "op": ">=",
+      "value": "Areq",
+      "why": "critical crack length >= 0 (probe: reads each steel's guaranteed range)"
+    }
+  ],
+  "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "ac -> [3100585937500000/76969020012949953, 750341796875000000/12468981242097888417] by [ac == Lu*ST__KIC*ST__KIC/(pi*Q*Q*(0.6*ST__SY)*(0.6*ST__SY))], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+wall 0.23s

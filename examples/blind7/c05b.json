@@ -1,0 +1,67 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "r": {
+   "role": "given",
+   "value": "0.1",
+   "unit": "",
+   "why": "placeholder, searched"
+  },
+  "NR": {
+   "role": "derived",
+   "unit": "USD"
+  },
+  "NH": {
+   "role": "derived",
+   "unit": "USD"
+  },
+  "Diff": {
+   "role": "derived",
+   "unit": "USD"
+  },
+  "usd": {
+   "role": "given",
+   "value": "1",
+   "unit": "USD",
+   "why": "unit dollar"
+  }
+ },
+ "slots": {},
+ "catalog": {},
+ "define": {
+  "d1": "1/((1+r))",
+  "d2": "1/((1+r)*(1+r))",
+  "d3": "1/((1+r)*(1+r)*(1+r))",
+  "d4": "1/((1+r)*(1+r)*(1+r)*(1+r))",
+  "d5": "1/((1+r)*(1+r)*(1+r)*(1+r)*(1+r))",
+  "d6": "1/((1+r)*(1+r)*(1+r)*(1+r)*(1+r)*(1+r))"
+ },
+ "laws": [
+  {
+   "zfl": "NR == (-16000)*usd + (2000)*usd*d1 + (4000)*usd*d2 + (5000)*usd*d3 + (5000)*usd*d4 + (5000)*usd*d5 + (5000)*usd*d6",
+   "source": "NPV regular"
+  },
+  {
+   "zfl": "NH == (-25000)*usd + (2000)*usd*d1 + (4000)*usd*d2 + (8000)*usd*d3 + (9000)*usd*d4 + (9000)*usd*d5 + (9000)*usd*d6",
+   "source": "NPV heavy"
+  },
+  {
+   "zfl": "Diff == NH - NR",
+   "source": "difference"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "Diff",
+   "op": ">=",
+   "value": "0",
+   "why": "heavy at least as good as regular"
+  }
+ ],
+ "find": {
+  "largest": "r",
+  "from": "0",
+  "to": "0.3",
+  "precision": "0.00001"
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "subcase": 2,
+ "label": "horizontal",
+ "F": [
+  -37809.9,
+  0.0,
+  0.0
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "E": 113800.0,
+ "nu": 0.342,
+ "dof": 387795,
+ "fixed_nodes": 594,
+ "loaded_nodes": 690,
+ "compliance_float": 39329.69425481104,
+ "compliance_lower_proved": 39329.694252012036,
+ "f_v_exact": 39329.69425481149,
+ "a_vv_up": 39329.694257610936,
+ "seconds": 29.2,
+ "ref_disp_along_F_lower_proved": 1.0401956697058714,
+ "sha256": "b6445fd72eccba938abfe3b40a72f2c283c003490159c0e306917fef8837e088"
+}

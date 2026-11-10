@@ -251,6 +251,32 @@ def _val(node, env):
 _ELIM = {}          # coefficient matrix -> (reduced matrix, the row operations T, rank, pivots); see solve_at
 
 
+def _solve_float(rows, lin_unknowns, defs, env):
+    """A FLOAT POINT (2026-11-09): numpy, not the exact Gauss-Jordan in Python — for the stand's own estimates only
+    (stand.reasons' ranking). Exact points (Fractions) never take this path. The matrix is filled sparse (a dense
+    tuple of Fraction zeros cost more than the solve). MEASURED: a 128-unknown chain, 12 ms per float solve in pure
+    Python -> ~1 ms."""
+    import numpy as _np
+    idx = {u: i for i, u in enumerate(lin_unknowns)}
+    A = _np.zeros((len(rows), len(lin_unknowns)))
+    b = _np.zeros(len(rows))
+    for i, row in enumerate(rows):
+        for k, v in row.items():
+            if k == 1:
+                b[i] = -float(v)
+            else:
+                A[i, idx[k]] = float(v)
+    try:
+        xs = _np.linalg.solve(A, b)
+    except _np.linalg.LinAlgError:
+        raise CheckError("a singular system at a float point")
+    out = {u: float(x) for u, x in zip(lin_unknowns, xs)}
+    full = dict(env, **out)
+    for name, rhs_ in defs:
+        full[name] = out[name] = _val(rhs_, full)
+    return out
+
+
 def solve_at(laws, env, unknowns):
     """Exact values of every derived quantity at one point (env: name -> Fraction)."""
     unknowns = list(unknowns)
@@ -266,6 +292,8 @@ def solve_at(laws, env, unknowns):
             row[k] = row.get(k, 0) - v
         rows.append(row)
     n = len(lin_unknowns)
+    if n and len(rows) == n and all(isinstance(v, float) for v in env.values() if not isinstance(v, tuple)):
+        return _solve_float(rows, lin_unknowns, defs, env)
     M = tuple(tuple(row.get(u, F(0)) for u in lin_unknowns) for row in rows)
     rhs = [-row.get(1, F(0)) for row in rows]
     # THE ELIMINATION IS CACHED PER MATRIX (2026-10-20, the bridge girder: a 93-unknown truss whose matrix is the same

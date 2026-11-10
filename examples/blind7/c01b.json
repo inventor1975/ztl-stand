@@ -1,0 +1,105 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "Q": {
+   "role": "given",
+   "value": "1.12",
+   "unit": ""
+  },
+  "Areq": {
+   "role": "given",
+   "value": "0",
+   "unit": "in",
+   "why": "required critical crack length"
+  },
+  "ac": {
+   "role": "derived",
+   "unit": "in",
+   "why": "critical crack length"
+  },
+  "Lu": {
+   "role": "given",
+   "value": "1",
+   "unit": "in",
+   "why": "1 inch: K_IC is in ksi*sqrt(in); the sqrt(in) is carried by Lu (the unit checker cannot take sqrt of a scaled unit)"
+  }
+ },
+ "slots": {
+  "ST": {
+   "from": [
+    "steels"
+   ]
+  }
+ },
+ "define": {
+  "sig": "0.6*ST.SY"
+ },
+ "laws": [
+  {
+   "zfl": "ac == Lu*ST.KIC*ST.KIC/(pi*Q*Q*sig*sig)",
+   "source": "K_IC = Q*sigma*sqrt(pi*a) solved for a; sigma = 0.6*sigma_y,min"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "ac",
+   "op": ">=",
+   "value": "Areq",
+   "why": "critical crack length at least 2.5 in"
+  }
+ ],
+ "catalog": {
+  "steels": {
+   "ground": "problem table",
+   "items": [
+    {
+     "name": "A36",
+     "SY": "36",
+     "KIC": {
+      "value": "60",
+      "tolerance": "0.1"
+     }
+    },
+    {
+     "name": "A441",
+     "SY": "50",
+     "KIC": {
+      "value": "53",
+      "tolerance": "0.1"
+     }
+    },
+    {
+     "name": "A572",
+     "SY": "50",
+     "KIC": {
+      "value": "100",
+      "tolerance": "0.1"
+     }
+    },
+    {
+     "name": "A514",
+     "SY": "100",
+     "KIC": {
+      "value": "60",
+      "tolerance": "0.1"
+     }
+    }
+   ],
+   "fields": {
+    "SY": {
+     "unit": "ksi"
+    },
+    "KIC": {
+     "unit": "ksi"
+    }
+   }
+  }
+ },
+ "report": "all",
+ "find": {
+  "largest": "Areq",
+  "from": "0",
+  "to": "10",
+  "precision": "0.001"
+ }
+}

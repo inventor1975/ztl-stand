@@ -1,0 +1,20 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "Th": {"role": "given", "range": ["313.15", "318.15"], "unit": "K"},
+  "Tc": {"role": "given", "range": ["253.15", "263.15"], "unit": "K"},
+  "Qh": {"role": "given", "range": ["8.5", "9.5"], "unit": "kW"},
+  "Tfrost": {"role": "given", "value": "258.15", "unit": "K"},
+  "eta": {"role": "given", "value": "0.5", "unit": "", "why": "table eta searched (find smallest)"},
+  "Pel": {"role": "derived", "unit": "kW"}
+ },
+ "slots": {},
+ "laws": [
+  {"zfl": "Pel == Qh*(Th - Tc)/(Th*eta*if(Tc < Tfrost, 9/10, 1))", "source": "P_el = Q_h/COP, COP = eta*COP_ideal; x0.9 below -15 C strictly"}
+ ],
+ "requirements": [
+  {"quantity": "Pel", "op": "<=", "value": "4.0", "why": "supply circuit limit"}
+ ],
+ "catalog": {},
+ "find": {"smallest": "eta", "from": "0.3", "to": "0.8", "precision": "0.0001"}
+}

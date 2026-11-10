@@ -1,0 +1,45 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "D":  {"role": "given", "value": "60", "unit": "mm"},
+  "L":  {"role": "given", "value": "200", "unit": "mm"},
+  "f":  {"role": "given", "value": "0.20", "unit": "mm"},
+  "Tl": {"role": "given", "value": "1.5", "unit": "min"},
+  "Cm": {"role": "given", "value": "1.20", "unit": "USD/min"},
+  "Tu": {"role": "given", "value": "1", "unit": "min"},
+  "Vstep": {"role": "given", "value": "0.1", "unit": "m/min"},
+  "Tmax": {"role": "given", "value": "3.0", "unit": "min"},
+  "Tm":   {"role": "derived", "unit": "min", "why": "machining time per part"},
+  "Tlife":{"role": "derived", "unit": "min", "why": "tool life per edge"},
+  "Cycle":{"role": "derived", "unit": "min"},
+  "Cost": {"role": "derived", "unit": "USD"}
+ },
+ "slots": {"G": {"from": ["grades"]}, "S": {"from": ["speed"]}},
+ "computed": {"V": {"value": "Vstep*S.N", "unit": "m/min"}},
+ "where": ["V >= G.Vlo", "V <= G.Vhi"],
+ "define": {"Ex": "1/G.n"},
+ "laws": [
+  {"zfl": "Tm == pi*D*L/(f*V)", "source": "T_m = pi D L / (1000 f V); the 1000 is the mm-to-m scaling the stand does by units"},
+  {"zfl": "Tlife == Tu*pow(G.C/V, Ex)", "source": "Taylor law V T^n = C"},
+  {"zfl": "Cycle == Tl + Tm", "source": "cycle time"},
+  {"zfl": "Cost == Cm*(Tl + Tm) + (Cm*G.Tc + G.Ct)*Tm/Tlife", "source": "cost per part"}
+ ],
+ "requirements": [
+  {"quantity": "Cost", "op": "<=", "value": "4.04", "why": "worst-case cost per part at most 4.04 USD"},
+  {"quantity": "Cycle", "op": "<=", "value": "Tmax", "why": "cycle time at most 3.0 min"}
+ ],
+ "objective": {"minimize": "Cost", "case": "worst", "why": "minimise worst-case cost per part"},
+ "report": "all",
+ "catalog": {
+  "grades": {
+   "items": [
+    {"n": {"range": ["0.2375", "0.2625"]}, "C": {"range": ["240", "260"]}, "Ct": "2.50", "Tc": "1.0", "Vlo": "60", "Vhi": "180", "grade": "A"},
+    {"n": {"range": ["0.285", "0.315"]},   "C": {"range": ["300", "330"]}, "Ct": "4.00", "Tc": "1.0", "Vlo": "80", "Vhi": "220", "grade": "B"},
+    {"n": {"range": ["0.38", "0.42"]},     "C": {"range": ["430", "470"]}, "Ct": "7.00", "Tc": "1.5", "Vlo": "100", "Vhi": "260", "grade": "C"}
+   ],
+   "fields": {"n": {"unit": ""}, "C": {"unit": "m/min"}, "Ct": {"unit": "USD"}, "Tc": {"unit": "min"},
+              "Vlo": {"unit": "m/min"}, "Vhi": {"unit": "m/min"}}
+  },
+  "speed": {"integers": {"field": "N", "from": "600", "to": "2600", "unit": ""}}
+ }
+}

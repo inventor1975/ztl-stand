@@ -1,0 +1,226 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "smallest",
+  "quantity": "eta",
+  "unit": "",
+  "proved": "337/625 (~0.5392)",
+  "proved_means": "every eta in [337/625 (~0.5392), 4/5 (~0.8)] works (EARNED on the whole range)",
+  "beyond": "5391/10000 (~0.5391)",
+  "beyond_is": "REFUTED: the range [5391/10000 (~0.5391), 4/5 (~0.8)] holds a concrete failing point (at_beyond)",
+  "precision": "1/10000 (~0.0001)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 5627be6",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "Pel": [
+            "10625/6363 (~1.66981)",
+            "4"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {},
+    "guaranteed": {
+      "Pel": [
+        "10625/6363 (~1.66981)",
+        "4"
+      ]
+    },
+    "guaranteed_unit": {
+      "Pel": "kW"
+    },
+    "guaranteed_ends": {
+      "Pel": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+    },
+    "how": {
+      "Pel": "ZTL, certificate checked exactly (2 pieces; found by the stand's search, the extreme may lie inside the box)"
+    },
+    "requirements": [
+      {
+        "quantity": "Pel",
+        "op": "<=",
+        "value": "4.0",
+        "why": "supply circuit limit"
+      }
+    ],
+    "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "Pel -> [10625000/6363, 77187500000/18995679] by [Pel == Qh * (Th - Tc) / (Th * eta * ifpos(Tfrost - Tc, 9 / 10, 1))], interval reading, sound, may be wider than the truth (credit)"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 5627be6",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "REFUTED",
+        "fails": "supply circuit limit",
+        "by_at_witness": "94412/308726397 (~0.000305811)",
+        "unit": "kW"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {},
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "Th": "6363/20 (~318.15)",
+      "Tc": "5063/20 (~253.15)",
+      "Qh": "19/2 (~9.5)",
+      "eta": "5391/10000 (~0.5391)"
+    },
+    "point_units": {
+      "Th": "K",
+      "Tc": "K",
+      "Qh": "kW",
+      "eta": ""
+    },
+    "value_there": {
+      "Pel": [
+        "1235000000/308726397 (~4.00031)",
+        "1235000000/308726397 (~4.00031)"
+      ]
+    },
+    "unit": "kW",
+    "requirement": {
+      "quantity": "Pel",
+      "op": "<=",
+      "value": "4.0",
+      "why": "supply circuit limit"
+    },
+    "overshoot": "94412/308726397 (~0.000305811)",
+    "reasons": {
+      "spread_over_tolerances": [
+        "10625/6263 (~1.69647)",
+        "1235000000/308726397 (~4.00031)"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "eta",
+          "moves_it_by": "402764375/308726397 (~1.3046)"
+        },
+        {
+          "quantity": "Tc",
+          "moves_it_by": "294500000/308726397 (~0.953919)"
+        },
+        {
+          "quantity": "Qh",
+          "moves_it_by": "130000000/308726397 (~0.421085)"
+        },
+        {
+          "quantity": "Th",
+          "moves_it_by": "480985000000/1933553424411 (~0.248757)"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+    "_core": [
+      0
+    ]
+  },
+  "tries": [
+    {
+      "eta": "4/5 (~0.8)",
+      "verdict": "EARNED"
+    },
+    {
+      "eta": "3/10 (~0.3)",
+      "verdict": "REFUTED"
+    },
+    {
+      "eta": "11/20 (~0.55)",
+      "verdict": "EARNED"
+    },
+    {
+      "eta": "17/40 (~0.425)",
+      "verdict": "REFUTED"
+    },
+    {
+      "eta": "39/80 (~0.4875)",
+      "verdict": "REFUTED"
+    },
+    {
+      "eta": "1297/2500 (~0.5188)",
+      "verdict": "REFUTED"
+    },
+    {
+      "eta": "334/625 (~0.5344)",
+      "verdict": "REFUTED"
+    },
+    {
+      "eta": "2711/5000 (~0.5422)",
+      "verdict": "EARNED"
+    },
+    {
+      "eta": "5383/10000 (~0.5383)",
+      "verdict": "REFUTED"
+    },
+    {
+      "eta": "2701/5000 (~0.5402)",
+      "verdict": "EARNED"
+    },
+    {
+      "eta": "337/625 (~0.5392)",
+      "verdict": "EARNED"
+    },
+    {
+      "eta": "1347/2500 (~0.5388)",
+      "verdict": "REFUTED"
+    },
+    {
+      "eta": "539/1000 (~0.539)",
+      "verdict": "REFUTED"
+    },
+    {
+      "eta": "5391/10000 (~0.5391)",
+      "verdict": "REFUTED"
+    }
+  ],
+  "decision": {
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "minimal_conflicts": {
+      "sets": [
+        [
+          "supply circuit limit"
+        ]
+      ],
+      "undecided_sets": [],
+      "complete": true,
+      "subset_runs": 0,
+      "subsets_inferred": 0,
+      "how": "first one minimal set by deletion (each requirement dropped in turn while the rest stays refuted), then every subset by size, smallest first; a subset of an EARNED set is EARNED and a superset of a REFUTED one REFUTED without a run (monotone: one design holds the smaller set), within a budget of 24 subset runs"
+    },
+    "its_violating_point": {
+      "Th": "6363/20 (~318.15)",
+      "Tc": "5063/20 (~253.15)",
+      "Qh": "19/2 (~9.5)"
+    }
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

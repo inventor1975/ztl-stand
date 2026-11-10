@@ -34,6 +34,7 @@ from . import forward as W
 from . import judge_ztl as J
 from . import units as U
 from . import certify as K
+from . import prove as PV
 
 
 def _approx(x, digits=6):
@@ -288,6 +289,23 @@ def _run_continuous(b, parts, conflicts=False):
                **({"per_mode": v["per_mode"], "modes": v.get("modes")} if v.get("per_mode") else {}),
                mix_verdict_checker=v.get("checker") or ({m: pm.get("checker") for m, pm in v["per_mode"].items()}
                                                          if v.get("per_mode") else None))
+    if PV.PROVE[0] and _DEPTH[0] == PV.LEVEL[0]:
+        # --prove (2026-11-09): the earned MIX's requirements — the WHOLE brick (its modes too) with the mix pinned,
+        # one proving run
+        bm = b
+        try:
+            cont = LP.continuous_slots(bm)
+            rp = _run(LP._pinned(LP._design_brick(bm, best["design"], cont), best["values"]), conflicts=False)
+        except Exception as ex:                     # the proof is an addition: its failure is said, never a verdict
+            rp = {"proof": {"proved": 0, "of": 0, "count": f"not run: {type(ex).__name__}: {str(ex)[:120]}",
+                            "requirements": []}}
+        for k in ("proof", "proof_count"):
+            if rp.get(k):
+                out[k] = rp[k]
+        if rp.get("per_mode"):
+            for m, pm in rp["per_mode"].items():
+                if pm.get("proof") and m in out.get("per_mode", {}):
+                    out["per_mode"][m]["proof"] = pm["proof"]
     return out
 
 
@@ -626,27 +644,49 @@ def reasons(laws, fixed, boxes, derived, point, r, req_iv):
                                             "another design")
     contrib = []
     import time as _time
-    for n, (lo_n, hi_n) in boxes.items():
+    mid = lambda v: (v[0] + v[1]) / 2 if isinstance(v, tuple) else v     # a function's interval: its middle
+
+    def moves(n, lo_n, hi_n, conv):
         e_lo, e_hi = dict(fixed, **point), dict(fixed, **point)
         e_lo[n], e_hi[n] = lo_n, hi_n
+        e_lo, e_hi = ({k: conv(v) for k, v in e.items()} for e in (e_lo, e_hi))
+        vh, vl = C.solve_at(laws, e_hi, derived)[q], C.solve_at(laws, e_lo, derived)[q]
+        return abs(mid(vh) - mid(vl))
+
+    # RANKED IN FLOATS, the five shown recomputed EXACTLY (2026-11-09, the curator's "начинай со скорости"): an
+    # explanation, not the verdict. MEASURED: a 128-link chain's refutation spent 39 of 49 s (profiled) here — two
+    # exact Gauss-Jordan eliminations per toleranced quantity, the matrix moving with every point so the cache never
+    # hit. Floats only choose WHICH five are shown (a near-tie at the fifth place may swap — said); each number shown
+    # is the exact one. A float solve that fails falls back to the exact one.
+    for n, (lo_n, hi_n) in boxes.items():
         t0 = _time.monotonic()
         try:
-            vh, vl = C.solve_at(laws, e_hi, derived)[q], C.solve_at(laws, e_lo, derived)[q]
+            try:
+                d = float(moves(n, lo_n, hi_n, float))
+            except Exception:       # ANY float failure (a function's interval reader wants Fractions, test 2026-11-09)
+                # -> the exact solve; the float is only a ranking estimate
+                d = moves(n, lo_n, hi_n, lambda v: v)
         except (C.CheckError, ZeroDivisionError):
             continue
         took = _time.monotonic() - t0
         if took > 2 * GREEDY_SOLVE_MAX and not contrib:
-            # two exact solutions per quantity, each too dear (Muhanna's benchmark 1: 27 s each, 420 moduli -> ~6 h
+            # two solutions per quantity, each too dear (Muhanna's benchmark 1: 27 s each, 420 moduli -> ~6 h
             # for every refutation, MEASURED 2026-10-16) — said, not computed
-            out["not_computed"] = (f"the largest contributors: two exact solutions took {took:.0f} s, "
+            out["not_computed"] = (f"the largest contributors: two solutions took {took:.0f} s, "
                                    f"x {len(boxes)} quantities")
             break
-        mid = lambda v: (v[0] + v[1]) / 2 if isinstance(v, tuple) else v     # a function's interval: its middle
-        d = abs(mid(vh) - mid(vl))
         contrib.append((d, n))
     contrib.sort(reverse=True)
-    out["largest_contributors"] = [{"quantity": n.replace("__", "."), "moves_it_by": _s(d)}
-                                   for d, n in contrib[:5] if d]
+    shown = []
+    for d, n in contrib[:5]:
+        if not d:
+            continue
+        try:
+            dx = moves(n, *boxes[n], lambda v: v)              # the exact number shown
+        except (C.CheckError, ZeroDivisionError):
+            continue
+        shown.append({"quantity": n.replace("__", "."), "moves_it_by": _s(dx)})
+    out["largest_contributors"] = shown
     return out
 
 
@@ -897,6 +937,18 @@ def run_modes(b, conflicts=False) -> dict:
                     ties = _ties(all_designs, design, cost, outcomes)
                     if ties:
                         out["objective"]["ties"] = ties
+                if PV.PROVE[0] and _DEPTH[0] == PV.LEVEL[0]:
+                    # --prove (2026-11-08): each mode's requirements for the earned design, one proving run per mode
+                    # (the loop's own runs are brief); a count over all modes
+                    tot = got = 0
+                    for m, bm in per_mode.items():
+                        rp = _run(_pinned(bm, design), conflicts=False, brief=False, loaded=True)
+                        if rp.get("proof"):
+                            out["per_mode"][m]["proof"] = rp["proof"]
+                            tot += rp["proof"]["of"]
+                            got += rp["proof"]["proved"]
+                    out["proof_count"] = (f"{got} of {tot} requirement(s) over {len(per_mode)} modes proved as Lean "
+                                          f"theorems; {tot - got} rest on ZTL's verdict alone")
                 first_earned = out
             if not report_all:
                 break
@@ -1113,9 +1165,13 @@ def run(b, conflicts=True) -> dict:
             if out.get("verdict") not in ("BRICK ERROR", "STAND ERROR") and not _STOP[0]:
                 # THE DECISION TOO (blind test 6: c03, c04, c09, c12 each kept a second brick for it): the brick as
                 # written, without its find — its verdict, design, conflicts — next to the limit
-                dec = _shorten(run({k: v for k, v in raw.items() if k != "find"}, conflicts))
+                PV.LEVEL[0] = 2             # --prove: the decision's own run is the one to prove, not the find's
+                try:
+                    dec = _shorten(run({k: v for k, v in raw.items() if k != "find"}, conflicts))
+                finally:
+                    PV.LEVEL[0] = 1
                 out["decision"] = {k: dec.get(k) for k in ("verdict", "why", "design", "objective", "guaranteed",
-                                                           "minimal_conflicts", "fails", "its_violating_point")
+                                                           "minimal_conflicts", "fails", "its_violating_point", "proof")
                                    if dec.get(k) is not None}
             out["checked_by"] = ("ZTL + the independent checker (dev mode)" if MODE.DEV[0] else
                                  "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the "
@@ -1167,7 +1223,9 @@ def run(b, conflicts=True) -> dict:
         _DEPTH[0] -= 1
 
 
-_DEPTH = [0]
+_DEPTH = PV.DEPTH       # SHARED with every copy of this module: `python -m ustand.stand` loads it twice (__main__ and
+                        # ustand.stand, imported by components.py) — each copy had its own depth, and --prove never
+                        # fired on a components system (2026-11-08)
 
 
 def _couples(reqs, b):
@@ -1273,7 +1331,7 @@ def _find(raw) -> dict:
     anchor, far = (lo, hi) if largest else (hi, lo)       # every tried range shares the anchor end
     tries = []
 
-    def judge(a):
+    def judge(a, record=True):
         b = json.loads(json.dumps(raw))
         del b["find"]
         qq = b["quantities"][name]
@@ -1287,8 +1345,22 @@ def _find(raw) -> dict:
             r = run(b, conflicts=False)
         except Stopped:
             r = {"verdict": "OPEN", "stopped": "a stop asked from outside, mid-search: the bracket so far"}
-        tries.append({name: _s(a), "verdict": r.get("verdict")})
+        if record:
+            tries.append({name: _s(a), "verdict": r.get("verdict")})
         return r
+
+    def proved_proof(good):
+        """--prove: the find's OWN claim — every value of the proved range works — as theorems: the brick with the
+        searched quantity set to that range, proved at the nested level (2026-11-09, blind7 c10b: a 'smallest' find's
+        decision is the brick as written, refuted at its own value — the proved range carried no proof)."""
+        if not PV.PROVE[0]:
+            return {}
+        PV.LEVEL[0] = 2
+        try:
+            r2 = judge(good, record=False)
+        finally:
+            PV.LEVEL[0] = 1
+        return ({"proof": r2["proof"], "proof_covers": f"every {name} in {span(good)}"} if r2.get("proof") else {})
 
     def span(a):
         return f"[{_s(min(a, anchor))}, {_s(max(a, anchor))}] {unit}".strip()
@@ -1310,7 +1382,7 @@ def _find(raw) -> dict:
     if r.get("verdict") == "EARNED":
         return {"verdict": "EARNED", **head, "proved": _s(far),
                 "proved_means": f"every {name} in {span(far)} works — the WHOLE search range; widen it to find the limit",
-                "at_proved": r, "tries": tries}
+                "at_proved": r, "tries": tries, **proved_proof(far)}
     bad, bad_r = far, r                       # the nearest end not proved
     refuted = far if r.get("verdict") == "REFUTED" else None    # the nearest end with a failing point
     while abs(bad - good) > eps:
@@ -1339,6 +1411,7 @@ def _find(raw) -> dict:
                          + (f"; a failing point is proved within {span(refuted)}" if refuted is not None else "")),
            "precision": _s(abs(bad - good)),
            "at_proved": good_r, "at_beyond": bad_r, "tries": tries}
+    out.update(proved_proof(good))
     return out
 
 
@@ -2034,6 +2107,10 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
                             "definitions bounded by the checker's own interval arithmetic" if MODE.DEV[0] else
                             "not run (work mode: ZTL's verdict; --dev runs the independent checker)"),
                    judge_log=log[:6])
+        if PV.PROVE[0] and _DEPTH[0] == PV.LEVEL[0] and not brief:
+            # --prove (2026-11-08): the earned design's requirements as Lean theorems, with an honest count
+            fx_p, bx_p, dv_p, gr_p = frame(b, design)
+            out["proof"] = PV.prove(laws, fx_p, bx_p, dv_p, gr_p, reqs)
     elif worst_case and earned_all:
         out.update(verdict="OPEN", why="designs were earned, but the worst case of the objective could not be bounded "
                                        "for any of them")
@@ -2903,6 +2980,9 @@ def main():
     if "--dev" in args:             # the independent checker on every design (ustand/mode.py)
         MODE.DEV[0] = True
         args.remove("--dev")
+    if "--prove" in args:           # the EARNED verdict's requirements as Lean theorems (ustand/prove.py)
+        PV.PROVE[0] = True
+        args.remove("--prove")
     if "--jobs" in args:            # judge designs in N worker processes (ustand/parallel.py); the verdict is the same
         k = args.index("--jobs")
         PL.JOBS[0] = max(1, int(args[k + 1]))

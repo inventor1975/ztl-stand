@@ -1,0 +1,255 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "T0": {
+   "role": "given",
+   "value": "8",
+   "unit": "h",
+   "why": "reference allowed time at 90 dBA"
+  },
+  "L0": {
+   "role": "given",
+   "value": "90",
+   "unit": "dBA",
+   "why": "criterion level"
+  },
+  "S": {
+   "role": "given",
+   "value": "5",
+   "unit": "dBA",
+   "why": "exchange rate: time halves per 5 dB"
+  },
+  "Lth": {
+   "role": "given",
+   "value": "80",
+   "unit": "dBA",
+   "why": "below 80 dBA does not count"
+  },
+  "N7": {
+   "role": "given",
+   "value": "7",
+   "unit": "dB",
+   "why": "NRR derating offset (NRR-7)"
+  },
+  "C1": {
+   "role": "given",
+   "value": "2.5",
+   "unit": "h",
+   "why": "Press line duration"
+  },
+  "L1": {
+   "role": "given",
+   "range": [
+    "97",
+    "101"
+   ],
+   "unit": "dBA",
+   "why": "Press line level range"
+  },
+  "Le1": {
+   "role": "derived",
+   "unit": "dBA",
+   "why": "level after protector"
+  },
+  "d1": {
+   "role": "derived",
+   "unit": "",
+   "why": "dose fraction C/T (0 below 80 dBA)"
+  },
+  "C2": {
+   "role": "given",
+   "value": "3.0",
+   "unit": "h",
+   "why": "Grinding duration"
+  },
+  "L2": {
+   "role": "given",
+   "range": [
+    "91",
+    "94"
+   ],
+   "unit": "dBA",
+   "why": "Grinding level range"
+  },
+  "Le2": {
+   "role": "derived",
+   "unit": "dBA",
+   "why": "level after protector"
+  },
+  "d2": {
+   "role": "derived",
+   "unit": "",
+   "why": "dose fraction C/T (0 below 80 dBA)"
+  },
+  "C3": {
+   "role": "given",
+   "value": "2.0",
+   "unit": "h",
+   "why": "Assembly duration"
+  },
+  "L3": {
+   "role": "given",
+   "range": [
+    "84",
+    "87"
+   ],
+   "unit": "dBA",
+   "why": "Assembly level range"
+  },
+  "Le3": {
+   "role": "derived",
+   "unit": "dBA",
+   "why": "level after protector"
+  },
+  "d3": {
+   "role": "derived",
+   "unit": "",
+   "why": "dose fraction C/T (0 below 80 dBA)"
+  },
+  "C4": {
+   "role": "given",
+   "value": "0.5",
+   "unit": "h",
+   "why": "Inspection booth duration"
+  },
+  "L4": {
+   "role": "given",
+   "range": [
+    "74",
+    "79"
+   ],
+   "unit": "dBA",
+   "why": "Inspection booth level range"
+  },
+  "Le4": {
+   "role": "derived",
+   "unit": "dBA",
+   "why": "level after protector"
+  },
+  "d4": {
+   "role": "derived",
+   "unit": "",
+   "why": "dose fraction C/T (0 below 80 dBA)"
+  },
+  "D": {
+   "role": "derived",
+   "unit": "",
+   "why": "daily dose, fraction (x100 = percent)"
+  }
+ },
+ "slots": {
+  "P": {
+   "from": [
+    "prot"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "Le1 == L1 - (P.NRR - N7)",
+   "source": "protector lowers level by NRR-7"
+  },
+  {
+   "zfl": "d1 == if(Le1 >= Lth, C1/T0*pow(2,(Le1-L0)/S), 0)",
+   "source": "C/T with T=8/2^((L-90)/5); zero below 80 dBA"
+  },
+  {
+   "zfl": "Le2 == L2 - (P.NRR - N7)",
+   "source": "protector lowers level by NRR-7"
+  },
+  {
+   "zfl": "d2 == if(Le2 >= Lth, C2/T0*pow(2,(Le2-L0)/S), 0)",
+   "source": "C/T with T=8/2^((L-90)/5); zero below 80 dBA"
+  },
+  {
+   "zfl": "Le3 == L3 - (P.NRR - N7)",
+   "source": "protector lowers level by NRR-7"
+  },
+  {
+   "zfl": "d3 == if(Le3 >= Lth, C3/T0*pow(2,(Le3-L0)/S), 0)",
+   "source": "C/T with T=8/2^((L-90)/5); zero below 80 dBA"
+  },
+  {
+   "zfl": "Le4 == L4 - (P.NRR - N7)",
+   "source": "protector lowers level by NRR-7"
+  },
+  {
+   "zfl": "d4 == if(Le4 >= Lth, C4/T0*pow(2,(Le4-L0)/S), 0)",
+   "source": "C/T with T=8/2^((L-90)/5); zero below 80 dBA"
+  },
+  {
+   "zfl": "D == 100*(d1+d2+d3+d4)",
+   "source": "D=100*sum(C/T)"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "D",
+   "op": "<=",
+   "value": "15",
+   "why": "dose must not exceed 15 %"
+  }
+ ],
+ "objective": {
+  "minimize": "P.price",
+  "why": "cheapest admissible protector"
+ },
+ "report": "all",
+ "catalog": {
+  "prot": {
+   "items": [
+    {
+     "name": "P1",
+     "NRR": {
+      "value": "15"
+     },
+     "price": "0.20"
+    },
+    {
+     "name": "P2",
+     "NRR": {
+      "value": "19"
+     },
+     "price": "0.30"
+    },
+    {
+     "name": "P3",
+     "NRR": {
+      "value": "22"
+     },
+     "price": "0.45"
+    },
+    {
+     "name": "P4",
+     "NRR": {
+      "value": "24"
+     },
+     "price": "0.80"
+    },
+    {
+     "name": "P5",
+     "NRR": {
+      "value": "27"
+     },
+     "price": "1.10"
+    },
+    {
+     "name": "P6",
+     "NRR": {
+      "value": "30"
+     },
+     "price": "1.60"
+    }
+   ],
+   "fields": {
+    "NRR": {
+     "unit": "dB"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   },
+   "ground": "problem table"
+  }
+ }
+}

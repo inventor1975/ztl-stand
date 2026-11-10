@@ -1,0 +1,141 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 4,
+  "failed_at_nominal": 0,
+  "judged": 4,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "ST=steels(name=A36, SY=36, KIC=60)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ac": [
+          "122070312500000000/76969020012949953 (~1.58597)",
+          "29541015625000000000/12468981242097888417 (~2.36916)"
+        ]
+      }
+    },
+    {
+      "design": "ST=steels(name=A441, SY=50, KIC=53)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ac": [
+          "5486328125000000/8552113334772217 (~0.641517)",
+          "1327691406250000000/1385442360233098713 (~0.958316)"
+        ]
+      }
+    },
+    {
+      "design": "ST=steels(name=A572, SY=50, KIC=100)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ac": [
+          "19531250000000000/8552113334772217 (~2.28379)",
+          "4726562500000000000/1385442360233098713 (~3.41159)"
+        ]
+      }
+    },
+    {
+      "design": "ST=steels(name=A514, SY=100, KIC=60)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ac": [
+          "1757812500000000/8552113334772217 (~0.205541)",
+          "47265625000000000/153938040025899857 (~0.307043)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "EARNED": 4
+  },
+  "verdict": "EARNED",
+  "design": {
+    "ST": {
+      "catalog": "steels",
+      "name": "A36",
+      "SY": {
+        "nominal": "36",
+        "tolerance": "0"
+      },
+      "KIC": {
+        "nominal": "60",
+        "tolerance": "1/10 (~0.1)"
+      }
+    }
+  },
+  "guaranteed": {
+    "ac": [
+      "122070312500000000/76969020012949953 (~1.58597)",
+      "29541015625000000000/12468981242097888417 (~2.36916)"
+    ]
+  },
+  "guaranteed_unit": {
+    "ac": "in"
+  },
+  "how": {
+    "ac": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "ac",
+      "op": ">=",
+      "value": "Areq",
+      "why": "critical crack length >= 0 (probe: reads each steel's guaranteed range)"
+    }
+  ],
+  "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "ac -> [3100585937500000/76969020012949953, 750341796875000000/12468981242097888417] by [ac == Lu*ST__KIC*ST__KIC/(pi*Q*Q*(0.6*ST__SY)*(0.6*ST__SY))], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "proof": {
+    "proved": 1,
+    "of": 1,
+    "count": "1 of 1 requirement(s) proved as Lean theorems; 0 rest on ZTL's verdict alone (no Lean theorem)",
+    "requirements": [
+      {
+        "quantity": "ac",
+        "op": ">=",
+        "value_si": "Areq",
+        "status": "theorem",
+        "axioms": "none (each #print axioms: does not depend on any axioms)",
+        "reads": "ac >= 0",
+        "about": "the LAWS: for every point of the box and EVERY value of the unknowns satisfying the laws (rows + a cofactor certificate checked by the kernel — the elimination not trusted; theorems lawreq*)",
+        "file": "/media/vitaly/SSD_1000GB/Projects/ZTL/lean/gen/ZStand_aca8fc179a0b.lean",
+        "theorems": [
+          "ZStand_aca8fc179a0b.lawreq0",
+          "ZStand_aca8fc179a0b.law_val",
+          "ZStand_aca8fc179a0b.req0",
+          "ZStand_aca8fc179a0b.cleared0",
+          "ZStand_aca8fc179a0b.q_pos"
+        ],
+        "params": [
+          "ST__KIC",
+          "pi"
+        ],
+        "theorem_vars": {
+          "ST__KIC": "var 0 = 645160·ST__KIC",
+          "pi": "var 1 = 1000000000000000·pi"
+        },
+        "box": {
+          "ST__KIC": [
+            "240203967224067",
+            "293582626607193"
+          ],
+          "pi": [
+            "3141592653589793",
+            "3141592653589794"
+          ]
+        },
+        "box_is": "exact: each parameter an integer multiple, an integer box"
+      }
+    ],
+    "seconds": 2.3,
+    "check_again": "cd /media/vitaly/SSD_1000GB/Projects/ZTL/lean && lake env lean --tstack=400000 <file>",
+    "rests_on": "each requirement says what its theorem is ABOUT: the LAWS (every value of the unknowns satisfying them; each law read as a polynomial row — multiplied by its denominators, the parameters scaled — Python, local per law; the elimination checked by the kernel), or the EXPRESSION from ZTL's exact elimination (Python, not proved in Lean); the tolerances are the brick's data, taken as stated; values in SI"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

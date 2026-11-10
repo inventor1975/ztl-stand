@@ -1,0 +1,347 @@
+{
+  "verdict": "EARNED",
+  "find": "largest",
+  "quantity": "L",
+  "unit": "USD",
+  "proved": "1668117/100 (~16681.2)",
+  "proved_means": "every L in [0, 1668117/100 (~16681.2)] USD works (EARNED on the whole range)",
+  "beyond": "834059/50 (~16681.2)",
+  "beyond_is": "REFUTED: the range [0, 834059/50 (~16681.2)] USD holds a concrete failing point (at_beyond)",
+  "precision": "1/100 (~0.01)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 5627be6",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "T=trucks(label=Newer, smaller, price=50000, n=6, inflow=[28500,31500])",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "EAA": [
+            "1668117/100 (~16681.2)",
+            "3540766970299997428232203000/115132536416984770552491 (~30753.8)"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {
+      "T": {
+        "catalog": "trucks",
+        "price": {
+          "nominal": "50000",
+          "tolerance": "0"
+        },
+        "n": {
+          "nominal": "6",
+          "tolerance": "0"
+        },
+        "inflow": {
+          "range": [
+            "28500",
+            "31500"
+          ]
+        },
+        "label": "Newer, smaller"
+      }
+    },
+    "guaranteed": {
+      "EAA": [
+        "1668117/100 (~16681.2)",
+        "3540766970299997428232203000/115132536416984770552491 (~30753.8)"
+      ]
+    },
+    "guaranteed_unit": {
+      "EAA": "USD"
+    },
+    "guaranteed_ends": {
+      "EAA": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+    },
+    "how": {
+      "EAA": "ZTL, certificate checked exactly (9 pieces; found by the stand's search, the extreme may lie inside the box)"
+    },
+    "requirements": [
+      {
+        "quantity": "EAA",
+        "op": ">=",
+        "value": "L",
+        "why": "EAA at least L in the worst case"
+      }
+    ],
+    "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "NPV -> [91575477721300000/1677100110841, 211124365648300000/1870414552161] by [NPV == -T__price + T__inflow*(1 - pow(1 + r, -T__n))/r], interval reading, sound, may be wider than the truth (credit)",
+      "EAA -> [15415569553591347504365637000/1459772341906832476077401, 3540766970299997428232203000/115132536416984770552491] by [EAA == NPV*r/(1 - pow(1 + r, -T__n))], interval reading, sound, may be wider than the truth (credit)"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 5627be6",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "T=trucks(label=Newer, smaller, price=50000, n=6, inflow=[28500,31500])",
+        "verdict": "REFUTED",
+        "fails": "EAA at least L in the worst case",
+        "by_at_witness": "32361427409/3956429782550 (~0.00817945)",
+        "unit": "USD"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {
+      "T": {
+        "catalog": "trucks",
+        "price": {
+          "nominal": "50000",
+          "tolerance": "0"
+        },
+        "n": {
+          "nominal": "6",
+          "tolerance": "0"
+        },
+        "inflow": {
+          "range": [
+            "28500",
+            "31500"
+          ]
+        },
+        "label": "Newer, smaller"
+      }
+    },
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "L": "834059/50 (~16681.2)",
+      "T.inflow": "28500",
+      "r": "11/100 (~0.11)"
+    },
+    "point_units": {
+      "L": "USD",
+      "T.inflow": "USD",
+      "r": ""
+    },
+    "value_there": {
+      "EAA": [
+        "1319957699973000/79128595651 (~16681.2)",
+        "1319957699973000/79128595651 (~16681.2)"
+      ]
+    },
+    "unit": "USD",
+    "requirement": {
+      "quantity": "EAA",
+      "op": ">=",
+      "value": "L",
+      "why": "EAA at least L in the worst case"
+    },
+    "overshoot": "32361427409/3956429782550 (~0.00817945)",
+    "reasons": {
+      "spread_over_tolerances": [
+        "1319957699973000/79128595651 (~16681.2)",
+        "1531300332523000/75233345649 (~20354)"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "T.inflow",
+          "moves_it_by": "3000"
+        },
+        {
+          "quantity": "r",
+          "moves_it_by": "614620835711468647000/913473835711468647 (~672.839)"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+    "_core": [
+      0
+    ]
+  },
+  "tries": [
+    {
+      "L": "0",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "40000",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "20000",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "10000",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "15000",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "17500",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "16250",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "16875",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "33125/2 (~16562.5)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "66875/4 (~16718.8)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "832031/50 (~16640.6)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "416992/25 (~16679.7)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "834961/50 (~16699.2)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "333789/20 (~16689.5)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "417114/25 (~16684.6)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "417053/25 (~16682.1)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "166809/10 (~16680.9)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "1668151/100 (~16681.5)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "83406/5 (~16681.2)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "333621/20 (~16681)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "417028/25 (~16681.1)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "417029/25 (~16681.2)",
+      "verdict": "EARNED"
+    },
+    {
+      "L": "834059/50 (~16681.2)",
+      "verdict": "REFUTED"
+    },
+    {
+      "L": "1668117/100 (~16681.2)",
+      "verdict": "EARNED"
+    }
+  ],
+  "decision": {
+    "verdict": "EARNED",
+    "design": {
+      "T": {
+        "catalog": "trucks",
+        "price": {
+          "nominal": "50000",
+          "tolerance": "0"
+        },
+        "n": {
+          "nominal": "6",
+          "tolerance": "0"
+        },
+        "inflow": {
+          "range": [
+            "28500",
+            "31500"
+          ]
+        },
+        "label": "Newer, smaller"
+      }
+    },
+    "guaranteed": {
+      "EAA": [
+        "15415569553591347504365637000/1459772341906832476077401 (~10560.3)",
+        "3540766970299997428232203000/115132536416984770552491 (~30753.8)"
+      ]
+    },
+    "proof": {
+      "proved": 1,
+      "of": 1,
+      "count": "1 of 1 requirement(s) proved as Lean theorems; 0 rest on ZTL's verdict alone (no Lean theorem)",
+      "requirements": [
+        {
+          "quantity": "EAA",
+          "op": ">=",
+          "value_si": "L",
+          "definition": "EAA = (((((0 - T__price) + ((T__inflow * (1 - pow((1 + r), (0 - T__n)))) / r))) * r) / (1 - pow((1 + r), (0 - T__n)))) (the system's solutions substituted)",
+          "status": "theorem",
+          "axioms": "none (each #print axioms: does not depend on any axioms)",
+          "reads": "EAA >= 0",
+          "about": "the EXPRESSION of the quantity from the laws (ZTL's exact elimination, Python)",
+          "file": "/media/vitaly/SSD_1000GB/Projects/ZTL/lean/gen/ZStand_0be8a6189047.lean",
+          "theorems": [
+            "ZStand_0be8a6189047.req0",
+            "ZStand_0be8a6189047.cleared0",
+            "ZStand_0be8a6189047.q_pos"
+          ],
+          "params": [
+            "T__inflow",
+            "r"
+          ],
+          "theorem_vars": {
+            "T__inflow": "var 0 = T__inflow",
+            "r": "var 1 = r"
+          },
+          "box": {
+            "T__inflow": [
+              "28500",
+              "31500"
+            ],
+            "r": [
+              "25332747903959/281474976710656",
+              "30962247438173/281474976710656"
+            ]
+          },
+          "box_is": "rounded outward to dyadics"
+        }
+      ],
+      "seconds": 2.9,
+      "check_again": "cd /media/vitaly/SSD_1000GB/Projects/ZTL/lean && lake env lean --tstack=400000 <file>",
+      "rests_on": "each requirement says what its theorem is ABOUT: the LAWS (every value of the unknowns satisfying them; each law read as a polynomial row — multiplied by its denominators, the parameters scaled — Python, local per law; the elimination checked by the kernel), or the EXPRESSION from ZTL's exact elimination (Python, not proved in Lean); the tolerances are the brick's data, taken as stated; values in SI"
+    }
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

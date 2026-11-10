@@ -1,0 +1,98 @@
+[stand] 1/4 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 4,
+  "failed_at_nominal": 0,
+  "judged": 4,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "U=units(name=U1, eta=21/50, price=4200)",
+      "verdict": "REFUTED",
+      "fails": "supply circuit limit, worst case",
+      "by_at_witness": "1364572/1202607 (~1.13468)",
+      "unit": "kW"
+    },
+    {
+      "design": "U=units(name=U2, eta=47/100, price=5100)",
+      "verdict": "REFUTED",
+      "fails": "supply circuit limit, worst case",
+      "by_at_witness": "1583804/2691549 (~0.588436)",
+      "unit": "kW"
+    },
+    {
+      "design": "U=units(name=U3, eta=13/25, price=6400)",
+      "verdict": "REFUTED",
+      "fails": "supply circuit limit, worst case",
+      "by_at_witness": "8432/57267 (~0.14724)",
+      "unit": "kW"
+    },
+    {
+      "design": "U=units(name=U4, eta=11/20, price=7900)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Pel": [
+          "170000/69993 (~2.42881)",
+          "2470000/620037 (~3.98363)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 3,
+    "EARNED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "U.price",
+    "value": "7900",
+    "unit": "USD",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "U": {
+      "catalog": "units",
+      "name": "U4",
+      "eta": {
+        "nominal": "11/20 (~0.55)",
+        "tolerance": "0"
+      },
+      "price": {
+        "nominal": "7900",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Pel": [
+      "170000/69993 (~2.42881)",
+      "2470000/620037 (~3.98363)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Pel": "kW"
+  },
+  "how": {
+    "Pel": "ZTL, interval reading of the definition (sound, may be wide)"
+  },
+  "requirements": [
+    {
+      "quantity": "Pel",
+      "op": "<=",
+      "value": "4.0",
+      "why": "supply circuit limit, worst case"
+    }
+  ],
+  "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "Pel -> [170000000/69993, 2470000000/620037] by [Pel == Qh * (Th - Tc) / (Th * U__eta * ifpos(Tfrost - Tc, 9 / 10, 1))], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+0.21s

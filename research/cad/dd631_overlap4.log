@@ -1,0 +1,25 @@
+  overlap solve 0: 12460 tets (2220 in the layer), float 15486.694
+  overlap solve 1: 2367 tets (566 in the layer), float 1434.562
+  overlap solve 2: 11989 tets (1689 in the layer), float 1742.413
+  overlap solve 3: 12031 tets (1727 in the layer), float 1774.621
+  overlap solve 4: 8903 tets (404 in the layer), float 945.141
+  overlap solve 5: 8903 tets (393 in the layer), float 802.360
+  overlap solve 6: 2359 tets (570 in the layer), float 1356.905
+  overlap solve 7: 11910 tets (2053 in the layer), float 15257.228
+  overlap solve 8: 12607 tets (2193 in the layer), float 5901.792
+  overlap solve 9: 12276 tets (1913 in the layer), float 5003.275
+  overlap solve 10: 1161 tets (824 in the layer), float 186.854
+overlap fluxes: 0 interface faces without an overlap estimate; 235 s
+coarse balance: {'subdomains': 11, 'with_support': 6, 'interfaces': 15, 'interface_faces': 2487, 'floating_unbalanced_after': [], 'unreached': []}; 236 s
+subdomain 0: 10240 tets, float 112267.6419, proved 112360.3752, bits 590; 275 s
+subdomain 1: 1801 tets, float 729.4447, proved 729.4451, bits 359; 279 s
+subdomain 2: 10300 tets, float 1211.1370, proved 1211.1387, bits 364; 332 s
+subdomain 3: 10304 tets, float 1219.3051, proved 1219.3083, bits 354; 379 s
+subdomain 4: 8499 tets, float 820.3435, proved 820.3491, bits 365; 402 s
+subdomain 5: 8510 tets, float 719.7908, proved 719.7943, bits 382; 426 s
+subdomain 6: 1789 tets, float 645.9157, proved 645.9160, bits 325; 430 s
+subdomain 7: 9857 tets, float 39225.0123, proved 39242.1841, bits 411; 468 s
+subdomain 8: 10414 tets, float 4485.3171, proved 4485.3193, bits 559; 513 s
+subdomain 9: 10363 tets, float 3721.5885, proved 3721.5905, bits 414; 562 s
+subdomain 10: 337 tets, float 40.9976, proved 40.9976, bits 347; 563 s
+{"upper_dd": 165196.41815362198, "lower": 42132.981243949114, "subdomains": 11, "coarse": {"subdomains": 11, "with_support": 6, "interfaces": 15, "interface_faces": 2487, "floating_unbalanced_after": [], "unreached": []}, "bits": 590, "seconds": 563.0}

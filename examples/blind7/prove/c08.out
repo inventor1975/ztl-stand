@@ -1,0 +1,170 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 7,
+  "failed_at_nominal": 3,
+  "judged": 4,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "C=banks(name=b100, kvar=100, cost=4100)",
+      "verdict": "REFUTED",
+      "fails": "corrected pf >= 0.95 in the worst case",
+      "by_at_witness": "~0.0844540359839 (an exact fraction of 61 digits)",
+      "unit": ""
+    },
+    {
+      "design": "C=banks(name=b150, kvar=150, cost=5850)",
+      "verdict": "REFUTED",
+      "fails": "corrected pf >= 0.95 in the worst case",
+      "by_at_witness": "~0.0393191844611 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "C=banks(name=b175, kvar=175, cost=6725)",
+      "verdict": "REFUTED",
+      "fails": "corrected pf >= 0.95 in the worst case",
+      "by_at_witness": "~0.0187016334477 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "C=banks(name=b200, kvar=200, cost=7000)",
+      "verdict": "REFUTED",
+      "fails": "corrected pf >= 0.95 in the worst case",
+      "by_at_witness": "~0.0311762166684 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "C=banks(name=b225, kvar=225, cost=7875)",
+      "verdict": "REFUTED",
+      "fails": "corrected pf >= 0.95 in the worst case",
+      "by_at_witness": "~0.0130526728312 (an exact fraction of 62 digits)",
+      "unit": ""
+    },
+    {
+      "design": "C=banks(name=b250, kvar=250, cost=8750)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "pfc": [
+          "19/20 (~0.95)",
+          "210000000000000000/190689897211969207 (~1.10126)"
+        ],
+        "payback": [
+          "4375000000000000000/267930308364565953 (~16.3289)",
+          "32"
+        ]
+      }
+    },
+    {
+      "design": "C=banks(name=b300, kvar=300, cost=10500)",
+      "verdict": "REFUTED",
+      "fails": "payback <= 32 months in the worst case",
+      "by_at_witness": "~2.83208180774 (an exact fraction of 60 digits)",
+      "unit": ""
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 6,
+    "EARNED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "C.cost",
+    "value": "8750",
+    "unit": "USD",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "C": {
+      "catalog": "banks",
+      "kvar": {
+        "nominal": "250",
+        "tolerance": "0"
+      },
+      "cost": {
+        "nominal": "8750",
+        "tolerance": "0"
+      },
+      "name": "b250"
+    }
+  },
+  "guaranteed": {
+    "pfc": [
+      "19/20 (~0.95)",
+      "210000000000000000/190689897211969207 (~1.10126)"
+    ],
+    "payback": [
+      "4375000000000000000/267930308364565953 (~16.3289)",
+      "32"
+    ]
+  },
+  "guaranteed_unit": {
+    "pfc": "",
+    "payback": ""
+  },
+  "guaranteed_ends": {
+    "pfc": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside",
+    "payback": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+  },
+  "how": {
+    "pfc": "ZTL, certificate checked exactly (3 pieces; found by the stand's search, the extreme may lie inside the box)",
+    "payback": "ZTL, certificate checked exactly (3 pieces; found by the stand's search, the extreme may lie inside the box)"
+  },
+  "requirements": [
+    {
+      "quantity": "pfc",
+      "op": ">=",
+      "value": "0.95",
+      "why": "corrected pf >= 0.95 in the worst case"
+    },
+    {
+      "quantity": "payback",
+      "op": "<=",
+      "value": "32",
+      "why": "payback <= 32 months in the worst case"
+    }
+  ],
+  "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "Q -> [5824515001261/19750000, 4630064794369/12500000] by [Q == P*sqrt(1 - pf*pf)/pf], interval reading, sound, may be wider than the truth (credit)",
+    "kVA0 -> [240506329113810029/500000000000, 140000000000078929/250000000000] by [kVA0 == sqrt(P*P + Q*Q)], interval reading, sound, may be wider than the truth (credit)",
+    "Qnet -> [640140001261/19750000, 1661314794369/12500000] by [Qnet == Q - dl*C__kvar]",
+    "kVA1 -> [190689897211969207/500000000000, 440526716345707689/1000000000000] by [kVA1 == sqrt(P*P + Qnet*Qnet)], interval reading, sound, may be wider than the truth (credit)",
+    "pfc -> [380000000000000000/440526716345707689, 210000000000000000/190689897211969207] by [pfc == P/kVA1], interval reading, sound, may be wider than the truth (credit)",
+    "save -> [121457825645737107/1000000000000000, 267930308364565953/500000000000000] by [save == tar*(kVA0 - kVA1)]"
+  ],
+  "proof": {
+    "proved": 0,
+    "of": 2,
+    "count": "0 of 2 requirement(s) proved as Lean theorems; 2 rest on ZTL's verdict alone (no Lean theorem)",
+    "requirements": [
+      {
+        "quantity": "pfc",
+        "op": ">=",
+        "value_si": "19/20",
+        "definition": "pfc = (P / (sqrt(((P * P) + ((((((P * sqrt((1 - (pf * pf)))) / pf)) - (dl * C__kvar))) * (((((P * sqrt((1 - (pf * pf)))) / pf)) - (dl * C__kvar)))))))) (the system's solutions substituted)",
+        "status": "refused",
+        "why": "a denominator (or a logarithm's argument) is NOT PROVED positive on the box (posOK false: Q) — negative somewhere (a missing domain law?) or the interval reading too wide to show it",
+        "reads": "pfc >= 19/20"
+      },
+      {
+        "quantity": "payback",
+        "op": "<=",
+        "value_si": "32",
+        "definition": "payback = (C__cost / ((tar * ((sqrt(((P * P) + ((((P * sqrt((1 - (pf * pf)))) / pf)) * (((P * sqrt((1 - (pf * pf)))) / pf)))))) - (sqrt(((P * P) + ((((((P * sqrt((1 - (pf * pf)))) / pf)) - (dl * C__kvar))) * (((((P * sqrt((1 - (pf * pf)))) / pf)) - (dl * C__kvar))))))))))) (the system's solutions substituted)",
+        "status": "refused",
+        "why": "a denominator (or a logarithm's argument) is NOT PROVED positive on the box (posOK false: Q) — negative somewhere (a missing domain law?) or the interval reading too wide to show it",
+        "reads": "payback <= 32"
+      }
+    ],
+    "seconds": 45.4,
+    "check_again": "cd /media/vitaly/SSD_1000GB/Projects/ZTL/lean && lake env lean --tstack=400000 <file>",
+    "rests_on": "each requirement says what its theorem is ABOUT: the LAWS (every value of the unknowns satisfying them; each law read as a polynomial row — multiplied by its denominators, the parameters scaled — Python, local per law; the elimination checked by the kernel), or the EXPRESSION from ZTL's exact elimination (Python, not proved in Lean); the tolerances are the brick's data, taken as stated; values in SI"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

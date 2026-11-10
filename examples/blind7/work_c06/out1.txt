@@ -1,0 +1,3472 @@
+[stand] 1/4203 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "excluded_by_where": 1800,
+  "designs_tried": 4203,
+  "failed_at_nominal": 2309,
+  "judged": 1894,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1393)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7650649754 (an exact fraction of 35 digits)",
+          "~4.03992238319 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "19872277960769379/6965000000000000 (~2.85316)",
+          "9936138980384691/3482500000000000 (~2.85316)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03992238319 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03992238319 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1394)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.76451508409 (an exact fraction of 36 digits)",
+          "~4.03971977493 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "19879777960769379/6970000000000000 (~2.85219)",
+          "9939888980384691/3485000000000000 (~2.85219)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03971977493 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03971977493 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1395)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "252666612398337925527331545563953/67127734356828000937500000000000 (~3.76397)",
+          "~4.03951964783 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6629092653589793/2325000000000000 (~2.85122)",
+          "1104848775598299/387500000000000 (~2.85122)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03951964783 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03951964783 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1396)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.76342230606 (an exact fraction of 36 digits)",
+          "~4.03932199841 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "19894777960769379/6980000000000000 (~2.85025)",
+          "9947388980384691/3490000000000000 (~2.85025)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03932199841 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03932199841 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1397)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.76287941265 (an exact fraction of 35 digits)",
+          "~4.0391268232 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "19902277960769379/6985000000000000 (~2.84929)",
+          "9951138980384691/3492500000000000 (~2.84929)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0391268232 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.0391268232 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1398)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7623388452 (an exact fraction of 36 digits)",
+          "~4.03893411871 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6636592653589793/2330000000000000 (~2.84832)",
+          "3318296326794897/1165000000000000 (~2.84832)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03893411871 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03893411871 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1399)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.76180060042 (an exact fraction of 36 digits)",
+          "~4.03874388151 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "19917277960769379/6995000000000000 (~2.84736)",
+          "9958638980384691/3497500000000000 (~2.84736)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03874388151 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03874388151 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1400)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "1830246585798525853855091915771627/486604039852618140500000000000000 (~3.76126)",
+          "~4.03855610814 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "19924777960769379/7000000000000000 (~2.8464)",
+          "9962388980384691/3500000000000000 (~2.8464)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03855610814 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03855610814 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1401)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.76073106559 (an exact fraction of 35 digits)",
+          "~4.03837079516 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6644092653589793/2335000000000000 (~2.84544)",
+          "3322046326794897/1167500000000000 (~2.84544)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03837079516 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03837079516 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1402)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.76019976897 (an exact fraction of 36 digits)",
+          "~4.03818793915 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "19939777960769379/7010000000000000 (~2.84448)",
+          "9969888980384691/3505000000000000 (~2.84448)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03818793915 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03818793915 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1403)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75967078184 (an exact fraction of 35 digits)",
+          "~4.03800753669 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "19947277960769379/7015000000000000 (~2.84352)",
+          "9973638980384691/3507500000000000 (~2.84352)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03800753669 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03800753669 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1404)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75914410094 (an exact fraction of 35 digits)",
+          "~4.03782958438 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "511660973353061/180000000000000 (~2.84256)",
+          "369532925199433/130000000000000 (~2.84256)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03782958438 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03782958438 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1405)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75861972301 (an exact fraction of 36 digits)",
+          "~4.03765407882 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "19962277960769379/7025000000000000 (~2.84161)",
+          "9981138980384691/3512500000000000 (~2.84161)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03765407882 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03765407882 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1406)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75809764481 (an exact fraction of 36 digits)",
+          "~4.03748101661 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "19969777960769379/7030000000000000 (~2.84065)",
+          "9984888980384691/3515000000000000 (~2.84065)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03748101661 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03748101661 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1407)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75757786309 (an exact fraction of 35 digits)",
+          "~4.0373103944 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6659092653589793/2345000000000000 (~2.8397)",
+          "3329546326794897/1172500000000000 (~2.8397)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0373103944 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.0373103944 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1408)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75706037464 (an exact fraction of 36 digits)",
+          "523309847758293521580826288150499/129623833071391111200000000000000 (~4.03714)"
+        ],
+        "Cycle": [
+          "19984777960769379/7040000000000000 (~2.83875)",
+          "9992388980384691/3520000000000000 (~2.83875)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "523309847758293521580826288150499/129623833071391111200000000000000 (~4.03714)",
+        "reached_at_least": "~4.03714220879 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1409)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75654517624 (an exact fraction of 36 digits)",
+          "~4.03697645645 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "19992277960769379/7045000000000000 (~2.8378)",
+          "9996138980384691/3522500000000000 (~2.8378)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03697645645 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03697645645 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1410)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75603226468 (an exact fraction of 35 digits)",
+          "7704435631356190182673535734676751/1908544035991655915687500000000000 (~4.03681)"
+        ],
+        "Cycle": [
+          "6666592653589793/2350000000000000 (~2.83685)",
+          "3333296326794897/1175000000000000 (~2.83685)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "7704435631356190182673535734676751/1908544035991655915687500000000000 (~4.03681)",
+        "reached_at_least": "~4.03681313402 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1411)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75552163676 (an exact fraction of 35 digits)",
+          "~4.03665223817 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20007277960769379/7055000000000000 (~2.8359)",
+          "10003638980384691/3527500000000000 (~2.8359)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03665223817 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03665223817 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1412)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7550132893 (an exact fraction of 35 digits)",
+          "~4.03649376556 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20014777960769379/7060000000000000 (~2.83495)",
+          "10007388980384691/3530000000000000 (~2.83495)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03649376556 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03649376556 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1413)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75450721912 (an exact fraction of 35 digits)",
+          "~4.03633771288 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6674092653589793/2355000000000000 (~2.83401)",
+          "1112348775598299/392500000000000 (~2.83401)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03633771288 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03633771288 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1414)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "29932177706702028048304376912710641/7973401814953927373539000000000000 (~3.754)",
+          "~4.03618407682 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20029777960769379/7070000000000000 (~2.83307)",
+          "10014888980384691/3535000000000000 (~2.83307)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03618407682 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03618407682 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1415)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75350189794 (an exact fraction of 35 digits)",
+          "~4.03603285408 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20037277960769379/7075000000000000 (~2.83212)",
+          "10018638980384691/3537500000000000 (~2.83212)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03603285408 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03603285408 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1416)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "31060703882970053138407495717677659/8276227558899692363500000000000000 (~3.753)",
+          "~4.03588404137 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6681592653589793/2360000000000000 (~2.83118)",
+          "3340796326794897/1180000000000000 (~2.83118)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03588404137 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03588404137 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1417)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75250564798 (an exact fraction of 34 digits)",
+          "1650973912467308219623954953093721/409088514075419640296250000000000 (~4.03574)"
+        ],
+        "Cycle": [
+          "1542482920059183/545000000000000 (~2.83024)",
+          "10026138980384691/3542500000000000 (~2.83024)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "1650973912467308219623954953093721/409088514075419640296250000000000 (~4.03574)",
+        "reached_at_least": "~4.03573763541 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1418)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75201091687 (an exact fraction of 35 digits)",
+          "~4.03559363292 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "20059777960769379/7090000000000000 (~2.82931)",
+          "10029888980384691/3545000000000000 (~2.82931)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03559363292 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03559363292 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1419)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75151844417 (an exact fraction of 35 digits)",
+          "~4.03545203066 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6689092653589793/2365000000000000 (~2.82837)",
+          "3344546326794897/1182500000000000 (~2.82837)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03545203066 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03545203066 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1420)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75102822678 (an exact fraction of 34 digits)",
+          "~4.03531282536 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20074777960769379/7100000000000000 (~2.82743)",
+          "10037388980384691/3550000000000000 (~2.82743)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03531282536 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03531282536 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1421)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75054026159 (an exact fraction of 35 digits)",
+          "~4.03517601378 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "20082277960769379/7105000000000000 (~2.8265)",
+          "10041138980384691/3552500000000000 (~2.8265)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03517601378 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03517601378 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1422)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.75005454551 (an exact fraction of 36 digits)",
+          "~4.03504159269 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6696592653589793/2370000000000000 (~2.82557)",
+          "1116098775598299/395000000000000 (~2.82557)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03504159269 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03504159269 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1423)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74957107546 (an exact fraction of 35 digits)",
+          "~4.03490955887 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20097277960769379/7115000000000000 (~2.82463)",
+          "10048638980384691/3557500000000000 (~2.82463)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03490955887 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03490955887 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1424)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74908984836 (an exact fraction of 36 digits)",
+          "~4.0347799091 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20104777960769379/7120000000000000 (~2.8237)",
+          "10052388980384691/3560000000000000 (~2.8237)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0347799091 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.0347799091 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1425)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74861086114 (an exact fraction of 35 digits)",
+          "~4.03465264017 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6704092653589793/2375000000000000 (~2.82278)",
+          "3352046326794897/1187500000000000 (~2.82278)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03465264017 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03465264017 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1426)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "18969429587449961091789667352667/5061032777082853315000000000000 (~3.74813)",
+          "6511642238833853671485008677574281/1613978796059019576392500000000000 (~4.03453)"
+        ],
+        "Cycle": [
+          "20119777960769379/7130000000000000 (~2.82185)",
+          "10059888980384691/3565000000000000 (~2.82185)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "6511642238833853671485008677574281/1613978796059019576392500000000000 (~4.03453)",
+        "reached_at_least": "~4.0345277489 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1427)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74765959416 (an exact fraction of 36 digits)",
+          "~4.03440523208 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20127277960769379/7135000000000000 (~2.82092)",
+          "10063638980384691/3567500000000000 (~2.82092)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03440523208 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03440523208 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1428)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74718730831 (an exact fraction of 36 digits)",
+          "~4.03428508656 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6711592653589793/2380000000000000 (~2.82)",
+          "3355796326794897/1190000000000000 (~2.82)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03428508656 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03428508656 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1429)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "9697863506549935507161658267952539/2588362787735828158755500000000000 (~3.74672)",
+          "~4.03416730914 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20142277960769379/7145000000000000 (~2.81907)",
+          "10071138980384691/3572500000000000 (~2.81907)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03416730914 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03416730914 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1430)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "5584413395790258979295464876067601/1490667805193779443275000000000000 (~3.74625)",
+          "~4.03405189669 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "1549982920059183/550000000000000 (~2.81815)",
+          "10074888980384691/3575000000000000 (~2.81815)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03405189669 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03405189669 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1431)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74578380503 (an exact fraction of 35 digits)",
+          "646132375591094875082883785001907/160174063180491846309250000000000 (~4.03394)"
+        ],
+        "Cycle": [
+          "6719092653589793/2385000000000000 (~2.81723)",
+          "373282925199433/132500000000000 (~2.81723)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "646132375591094875082883785001907/160174063180491846309250000000000 (~4.03394)",
+        "reached_at_least": "~4.03393884604 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1432)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74532041198 (an exact fraction of 35 digits)",
+          "~4.03382815405 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20164777960769379/7160000000000000 (~2.81631)",
+          "10082388980384691/3580000000000000 (~2.81631)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03382815405 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03382815405 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1433)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74485923463 (an exact fraction of 34 digits)",
+          "~4.03371981759 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20172277960769379/7165000000000000 (~2.81539)",
+          "10086138980384691/3582500000000000 (~2.81539)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03371981759 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03371981759 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1434)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74440027 (an exact fraction of 36 digits)",
+          "~4.03361383355 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6726592653589793/2390000000000000 (~2.81447)",
+          "3363296326794897/1195000000000000 (~2.81447)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03361383355 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03361383355 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1435)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74394351511 (an exact fraction of 36 digits)",
+          "~4.03351019879 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20187277960769379/7175000000000000 (~2.81356)",
+          "10093638980384691/3587500000000000 (~2.81356)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03351019879 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03351019879 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1436)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.743488967 (an exact fraction of 35 digits)",
+          "~4.03340891022 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20194777960769379/7180000000000000 (~2.81264)",
+          "10097388980384691/3590000000000000 (~2.81264)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03340891022 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03340891022 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1437)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7430366227 (an exact fraction of 35 digits)",
+          "~4.03330996475 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6734092653589793/2395000000000000 (~2.81173)",
+          "3367046326794897/1197500000000000 (~2.81173)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03330996475 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03330996475 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1438)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74258647928 (an exact fraction of 34 digits)",
+          "~4.03321335927 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "20209777960769379/7190000000000000 (~2.81082)",
+          "10104888980384691/3595000000000000 (~2.81082)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03321335927 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03321335927 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1439)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74213853379 (an exact fraction of 36 digits)",
+          "~4.03311909072 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20217277960769379/7195000000000000 (~2.80991)",
+          "10108638980384691/3597500000000000 (~2.80991)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03311909072 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03311909072 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1440)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7416927833 (an exact fraction of 35 digits)",
+          "~4.03302715602 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6741592653589793/2400000000000000 (~2.809)",
+          "1123598775598299/400000000000000 (~2.809)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03302715602 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03302715602 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1441)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74124922489 (an exact fraction of 35 digits)",
+          "~4.03293755211 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20232277960769379/7205000000000000 (~2.80809)",
+          "10116138980384691/3602500000000000 (~2.80809)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03293755211 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03293755211 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1442)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.74080785564 (an exact fraction of 34 digits)",
+          "1675082419250820116879971822864941/415359436784142935262500000000000 (~4.03285)"
+        ],
+        "Cycle": [
+          "20239777960769379/7210000000000000 (~2.80718)",
+          "10119888980384691/3605000000000000 (~2.80718)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "1675082419250820116879971822864941/415359436784142935262500000000000 (~4.03285)",
+        "reached_at_least": "~4.03285027594 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1443)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "454207003501337626551528599278261/121433752458856920807500000000000 (~3.74037)",
+          "593438820287823976206102355005147/147154315349684536156250000000000 (~4.03277)"
+        ],
+        "Cycle": [
+          "519160973353061/185000000000000 (~2.80628)",
+          "3374546326794897/1202500000000000 (~2.80628)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "593438820287823976206102355005147/147154315349684536156250000000000 (~4.03277)",
+        "reached_at_least": "~4.03276532447 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1444)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73993167306 (an exact fraction of 36 digits)",
+          "~4.03268269465 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20254777960769379/7220000000000000 (~2.80537)",
+          "10127388980384691/3610000000000000 (~2.80537)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03268269465 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03268269465 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1445)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73949685393 (an exact fraction of 36 digits)",
+          "~4.03260238346 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20262277960769379/7225000000000000 (~2.80447)",
+          "10131138980384691/3612500000000000 (~2.80447)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03260238346 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03260238346 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1446)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "1949197380747713751578762357983199/521306206585913728125000000000000 (~3.73906)",
+          "4439700750353062431791427167253537/1100973068804603251737500000000000 (~4.03252)"
+        ],
+        "Cycle": [
+          "28035654164273/10000000000000 (~2.80357)",
+          "3378296326794897/1205000000000000 (~2.80357)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "4439700750353062431791427167253537/1100973068804603251737500000000000 (~4.03252)",
+        "reached_at_least": "~4.03252438788 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1447)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73863374561 (an exact fraction of 36 digits)",
+          "~4.0324487049 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20277277960769379/7235000000000000 (~2.80266)",
+          "10138638980384691/3617500000000000 (~2.80266)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0324487049 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.0324487049 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1448)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73820545069 (an exact fraction of 36 digits)",
+          "~4.03237533153 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20284777960769379/7240000000000000 (~2.80176)",
+          "10142388980384691/3620000000000000 (~2.80176)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03237533153 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03237533153 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1449)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73777932478 (an exact fraction of 35 digits)",
+          "11785319997866366315528986159761651/2922725871870181630618750000000000 (~4.0323)"
+        ],
+        "Cycle": [
+          "6764092653589793/2415000000000000 (~2.80087)",
+          "1127348775598299/402500000000000 (~2.80087)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "11785319997866366315528986159761651/2922725871870181630618750000000000 (~4.0323)",
+        "reached_at_least": "~4.03230426476 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1450)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73735536506 (an exact fraction of 35 digits)",
+          "~4.03223550161 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20299777960769379/7250000000000000 (~2.79997)",
+          "10149888980384691/3625000000000000 (~2.79997)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03223550161 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03223550161 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1451)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73693356867 (an exact fraction of 36 digits)",
+          "~4.03216903912 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20307277960769379/7255000000000000 (~2.79907)",
+          "10153638980384691/3627500000000000 (~2.79907)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03216903912 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03216903912 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1452)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73651393279 (an exact fraction of 35 digits)",
+          "290872385121301649716868127977067/72139092158897968825000000000000 (~4.0321)"
+        ],
+        "Cycle": [
+          "6771592653589793/2420000000000000 (~2.79818)",
+          "3385796326794897/1210000000000000 (~2.79818)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "290872385121301649716868127977067/72139092158897968825000000000000 (~4.0321)",
+        "reached_at_least": "~4.0321048743 (an exact fraction of 73 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1453)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7360964546 (an exact fraction of 36 digits)",
+          "~4.0320430042 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20322277960769379/7265000000000000 (~2.79729)",
+          "10161138980384691/3632500000000000 (~2.79729)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0320430042 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.0320430042 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1454)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7356811313 (an exact fraction of 35 digits)",
+          "~4.03198342587 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20329777960769379/7270000000000000 (~2.79639)",
+          "10164888980384691/3635000000000000 (~2.79639)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03198342587 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03198342587 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1455)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73526796007 (an exact fraction of 36 digits)",
+          "5839398254725803679030676055565683/1448289987769614621031250000000000 (~4.03193)"
+        ],
+        "Cycle": [
+          "6779092653589793/2425000000000000 (~2.7955)",
+          "3389546326794897/1212500000000000 (~2.7955)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "5839398254725803679030676055565683/1448289987769614621031250000000000 (~4.03193)",
+        "reached_at_least": "~4.03192613637 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1456)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73485693813 (an exact fraction of 34 digits)",
+          "7774134426078294177280626428173931/1928170363115006219300000000000000 (~4.03187)"
+        ],
+        "Cycle": [
+          "1564982920059183/560000000000000 (~2.79461)",
+          "10172388980384691/3640000000000000 (~2.79461)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "7774134426078294177280626428173931/1928170363115006219300000000000000 (~4.03187)",
+        "reached_at_least": "~4.03187113276 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1457)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "1659882218936173276935795853669233/444478592572863152712500000000000 (~3.73445)",
+          "~4.03181841211 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20352277960769379/7285000000000000 (~2.79372)",
+          "10176138980384691/3642500000000000 (~2.79372)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03181841211 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03181841211 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1458)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73404133095 (an exact fraction of 35 digits)",
+          "~4.03176797152 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6786592653589793/2430000000000000 (~2.79284)",
+          "377032925199433/135000000000000 (~2.79284)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03176797152 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03176797152 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1459)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73363674018 (an exact fraction of 34 digits)",
+          "~4.03171980806 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20367277960769379/7295000000000000 (~2.79195)",
+          "10183638980384691/3647500000000000 (~2.79195)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03171980806 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03171980806 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1460)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73323428759 (an exact fraction of 35 digits)",
+          "~4.03167391884 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20374777960769379/7300000000000000 (~2.79107)",
+          "10187388980384691/3650000000000000 (~2.79107)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03167391884 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03167391884 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1461)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73283397044 (an exact fraction of 36 digits)",
+          "~4.03163030097 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6794092653589793/2435000000000000 (~2.79018)",
+          "3397046326794897/1217500000000000 (~2.79018)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03163030097 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03163030097 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1462)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "4276455314683248609548058809819877/1145754558121872068855000000000000 (~3.73244)",
+          "~4.03158895155 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "20389777960769379/7310000000000000 (~2.7893)",
+          "10194888980384691/3655000000000000 (~2.7893)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03158895155 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03158895155 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1463)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73203973147 (an exact fraction of 36 digits)",
+          "~4.03154986772 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20397277960769379/7315000000000000 (~2.78842)",
+          "10198638980384691/3657500000000000 (~2.78842)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03154986772 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03154986772 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1464)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73164580419 (an exact fraction of 34 digits)",
+          "265893504037745555241601069703139/65953774913819932810000000000000 (~4.03151)"
+        ],
+        "Cycle": [
+          "6801592653589793/2440000000000000 (~2.78754)",
+          "3400796326794897/1220000000000000 (~2.78754)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "265893504037745555241601069703139/65953774913819932810000000000000 (~4.03151)",
+        "reached_at_least": "~4.0315130466 (an exact fraction of 71 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1465)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73125400141 (an exact fraction of 34 digits)",
+          "~4.03147848534 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20412277960769379/7325000000000000 (~2.78666)",
+          "10206138980384691/3662500000000000 (~2.78666)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03147848534 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03147848534 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1466)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73086432041 (an exact fraction of 36 digits)",
+          "~4.03144618107 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20419777960769379/7330000000000000 (~2.78578)",
+          "10209888980384691/3665000000000000 (~2.78578)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03144618107 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03144618107 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1467)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73047675851 (an exact fraction of 36 digits)",
+          "~4.03141613096 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6809092653589793/2445000000000000 (~2.7849)",
+          "1134848775598299/407500000000000 (~2.7849)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03141613096 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03141613096 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1468)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.73009131299 (an exact fraction of 36 digits)",
+          "~4.03138833217 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20434777960769379/7340000000000000 (~2.78403)",
+          "10217388980384691/3670000000000000 (~2.78403)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03138833217 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03138833217 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1469)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72970798116 (an exact fraction of 34 digits)",
+          "~4.03136278187 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "1572482920059183/565000000000000 (~2.78316)",
+          "10221138980384691/3672500000000000 (~2.78316)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03136278187 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03136278187 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1470)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72932676036 (an exact fraction of 35 digits)",
+          "~4.03133947723 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6816592653589793/2450000000000000 (~2.78228)",
+          "3408296326794897/1225000000000000 (~2.78228)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03133947723 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03133947723 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1471)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72894764789 (an exact fraction of 36 digits)",
+          "~4.03131841545 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20457277960769379/7355000000000000 (~2.78141)",
+          "10228638980384691/3677500000000000 (~2.78141)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03131841545 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03131841545 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1472)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72857064111 (an exact fraction of 36 digits)",
+          "34157130512560594408724112376583769/8472982401438916694000000000000000 (~4.0313)"
+        ],
+        "Cycle": [
+          "20464777960769379/7360000000000000 (~2.78054)",
+          "10232388980384691/3680000000000000 (~2.78054)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "34157130512560594408724112376583769/8472982401438916694000000000000000 (~4.0313)",
+        "reached_at_least": "~4.03129959373 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1473)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72819573734 (an exact fraction of 35 digits)",
+          "~4.03128300925 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6824092653589793/2455000000000000 (~2.77967)",
+          "3412046326794897/1227500000000000 (~2.77967)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03128300925 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03128300925 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1474)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72782293394 (an exact fraction of 35 digits)",
+          "~4.03126865923 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20479777960769379/7370000000000000 (~2.7788)",
+          "10239888980384691/3685000000000000 (~2.7788)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03126865923 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03126865923 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1475)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72745222827 (an exact fraction of 35 digits)",
+          "~4.0312565409 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20487277960769379/7375000000000000 (~2.77794)",
+          "10243638980384691/3687500000000000 (~2.77794)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0312565409 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.0312565409 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1476)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72708361769 (an exact fraction of 35 digits)",
+          "6036570481579047398539602120752803/1497445084232269242355000000000000 (~4.03125)"
+        ],
+        "Cycle": [
+          "6831592653589793/2460000000000000 (~2.77707)",
+          "1138598775598299/410000000000000 (~2.77707)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "6036570481579047398539602120752803/1497445084232269242355000000000000 (~4.03125)",
+        "reached_at_least": "~4.03124665148 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1477)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72671709957 (an exact fraction of 36 digits)",
+          "~4.03123898819 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20502277960769379/7385000000000000 (~2.77621)",
+          "10251138980384691/3692500000000000 (~2.77621)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03123898819 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03123898819 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1478)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7263526713 (an exact fraction of 36 digits)",
+          "~4.03123354828 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20509777960769379/7390000000000000 (~2.77534)",
+          "10254888980384691/3695000000000000 (~2.77534)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03123354828 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03123354828 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1479)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72599033027 (an exact fraction of 35 digits)",
+          "~4.03123032901 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6839092653589793/2465000000000000 (~2.77448)",
+          "3419546326794897/1232500000000000 (~2.77448)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03123032901 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03123032901 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1480)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72563007386 (an exact fraction of 36 digits)",
+          "~4.03122932762 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20524777960769379/7400000000000000 (~2.77362)",
+          "10262388980384691/3700000000000000 (~2.77362)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03122932762 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03122932762 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1481)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72527189949 (an exact fraction of 36 digits)",
+          "~4.03123054139 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20532277960769379/7405000000000000 (~2.77276)",
+          "10266138980384691/3702500000000000 (~2.77276)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03123054139 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03123054139 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1482)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "4230576955747236997642378654307659/1135751028404190503975000000000000 (~3.72492)",
+          "~4.03123396757 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "526660973353061/190000000000000 (~2.7719)",
+          "3423296326794897/1235000000000000 (~2.7719)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03123396757 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03123396757 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1483)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72456178649 (an exact fraction of 36 digits)",
+          "~4.03123960346 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20547277960769379/7415000000000000 (~2.77104)",
+          "10273638980384691/3707500000000000 (~2.77104)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03123960346 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03123960346 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1484)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72420984272 (an exact fraction of 36 digits)",
+          "~4.03124744634 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20554777960769379/7420000000000000 (~2.77019)",
+          "10277388980384691/3710000000000000 (~2.77019)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03124744634 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03124744634 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1485)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72385997066 (an exact fraction of 35 digits)",
+          "~4.03125749351 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6854092653589793/2475000000000000 (~2.76933)",
+          "380782925199433/137500000000000 (~2.76933)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03125749351 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03125749351 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1486)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72351216777 (an exact fraction of 36 digits)",
+          "965219942302663484340704792401227/239433231714946651862500000000000 (~4.03127)"
+        ],
+        "Cycle": [
+          "20569777960769379/7430000000000000 (~2.76848)",
+          "10284888980384691/3715000000000000 (~2.76848)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "965219942302663484340704792401227/239433231714946651862500000000000 (~4.03127)",
+        "reached_at_least": "~4.03126974225 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1487)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72316643149 (an exact fraction of 36 digits)",
+          "~4.0312841899 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "20577277960769379/7435000000000000 (~2.76762)",
+          "10288638980384691/3717500000000000 (~2.76762)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0312841899 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.0312841899 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1488)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72282275928 (an exact fraction of 35 digits)",
+          "~4.03130083375 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6861592653589793/2480000000000000 (~2.76677)",
+          "3430796326794897/1240000000000000 (~2.76677)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03130083375 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03130083375 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1489)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7224811486 (an exact fraction of 35 digits)",
+          "~4.03131967114 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20592277960769379/7445000000000000 (~2.76592)",
+          "10296138980384691/3722500000000000 (~2.76592)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03131967114 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03131967114 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1490)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72214159693 (an exact fraction of 35 digits)",
+          "~4.0313406994 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20599777960769379/7450000000000000 (~2.76507)",
+          "10299888980384691/3725000000000000 (~2.76507)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0313406994 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.0313406994 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1491)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72180410173 (an exact fraction of 35 digits)",
+          "3163638353710577162222546918930913/784756330545688861468750000000000 (~4.03136)"
+        ],
+        "Cycle": [
+          "6869092653589793/2485000000000000 (~2.76422)",
+          "3434546326794897/1242500000000000 (~2.76422)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "3163638353710577162222546918930913/784756330545688861468750000000000 (~4.03136)",
+        "reached_at_least": "~4.03136391587 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1492)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7214686605 (an exact fraction of 36 digits)",
+          "~4.03138931789 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20614777960769379/7460000000000000 (~2.76338)",
+          "10307388980384691/3730000000000000 (~2.76338)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03138931789 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03138931789 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1493)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72113527073 (an exact fraction of 35 digits)",
+          "~4.03141690281 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20622277960769379/7465000000000000 (~2.76253)",
+          "10311138980384691/3732500000000000 (~2.76253)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03141690281 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03141690281 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1494)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72080392992 (an exact fraction of 36 digits)",
+          "~4.031446668 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6876592653589793/2490000000000000 (~2.76168)",
+          "1146098775598299/415000000000000 (~2.76168)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.031446668 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.031446668 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1495)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.72047463557 (an exact fraction of 35 digits)",
+          "~4.03147861083 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "1587482920059183/575000000000000 (~2.76084)",
+          "10318638980384691/3737500000000000 (~2.76084)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03147861083 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03147861083 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1496)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7201473852 (an exact fraction of 36 digits)",
+          "~4.03151272867 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20644777960769379/7480000000000000 (~2.76)",
+          "10322388980384691/3740000000000000 (~2.76)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03151272867 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03151272867 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1497)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71982217633 (an exact fraction of 34 digits)",
+          "~4.0315490189 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6884092653589793/2495000000000000 (~2.75916)",
+          "3442046326794897/1247500000000000 (~2.75916)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0315490189 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.0315490189 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1498)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7194990065 (an exact fraction of 36 digits)",
+          "~4.03158747892 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20659777960769379/7490000000000000 (~2.75831)",
+          "10329888980384691/3745000000000000 (~2.75831)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03158747892 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03158747892 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1499)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71917787323 (an exact fraction of 36 digits)",
+          "~4.03162810611 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20667277960769379/7495000000000000 (~2.75748)",
+          "10333638980384691/3747500000000000 (~2.75748)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03162810611 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03162810611 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1500)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71885877406 (an exact fraction of 35 digits)",
+          "2049300477226099194142150485538623/508300535715296215625000000000000 (~4.03167)"
+        ],
+        "Cycle": [
+          "6891592653589793/2500000000000000 (~2.75664)",
+          "3445796326794897/1250000000000000 (~2.75664)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "2049300477226099194142150485538623/508300535715296215625000000000000 (~4.03167)",
+        "reached_at_least": "~4.03167089789 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1501)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71854170656 (an exact fraction of 35 digits)",
+          "3492446705588490471693024270756729/866243265666581001309250000000000 (~4.03172)"
+        ],
+        "Cycle": [
+          "20682277960769379/7505000000000000 (~2.7558)",
+          "10341138980384691/3752500000000000 (~2.7558)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "3492446705588490471693024270756729/866243265666581001309250000000000 (~4.03172)",
+        "reached_at_least": "~4.03171585167 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1502)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71822666827 (an exact fraction of 36 digits)",
+          "~4.03176296486 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20689777960769379/7510000000000000 (~2.75496)",
+          "10344888980384691/3755000000000000 (~2.75496)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03176296486 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03176296486 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1503)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71791365677 (an exact fraction of 35 digits)",
+          "~4.03181223489 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6899092653589793/2505000000000000 (~2.75413)",
+          "1149848775598299/417500000000000 (~2.75413)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03181223489 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03181223489 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1504)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71760266961 (an exact fraction of 36 digits)",
+          "~4.03186365919 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20704777960769379/7520000000000000 (~2.75329)",
+          "10352388980384691/3760000000000000 (~2.75329)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03186365919 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03186365919 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1505)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71729370439 (an exact fraction of 35 digits)",
+          "452144067423996810033515553678599/112141207531795915593750000000000 (~4.03192)"
+        ],
+        "Cycle": [
+          "20712277960769379/7525000000000000 (~2.75246)",
+          "10356138980384691/3762500000000000 (~2.75246)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "452144067423996810033515553678599/112141207531795915593750000000000 (~4.03192)",
+        "reached_at_least": "~4.0319172352 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1506)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71698675868 (an exact fraction of 36 digits)",
+          "~4.03197296038 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6906592653589793/2510000000000000 (~2.75163)",
+          "3453296326794897/1255000000000000 (~2.75163)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03197296038 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03197296038 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1507)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71668183008 (an exact fraction of 36 digits)",
+          "~4.03203083216 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20727277960769379/7535000000000000 (~2.7508)",
+          "10363638980384691/3767500000000000 (~2.7508)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03203083216 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03203083216 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1508)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "4848811176206322052426061684970843/1304713885630329985190000000000000 (~3.71638)",
+          "~4.03209084801 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "1594982920059183/580000000000000 (~2.74997)",
+          "10367388980384691/3770000000000000 (~2.74997)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03209084801 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03209084801 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1509)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7160780146 (an exact fraction of 36 digits)",
+          "~4.03215300541 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6914092653589793/2515000000000000 (~2.74914)",
+          "3457046326794897/1257500000000000 (~2.74914)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03215300541 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03215300541 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1510)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "7731096494156204526250708109402127/2080612501003221012205000000000000 (~3.71578)",
+          "~4.03221730182 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "20749777960769379/7550000000000000 (~2.74831)",
+          "10374888980384691/3775000000000000 (~2.74831)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03221730182 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03221730182 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1511)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71548223883 (an exact fraction of 36 digits)",
+          "~4.03228373472 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20757277960769379/7555000000000000 (~2.74749)",
+          "10378638980384691/3777500000000000 (~2.74749)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03228373472 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03228373472 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1512)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71518735989 (an exact fraction of 35 digits)",
+          "1101914414910625477645009035300589/273268388397599601650000000000000 (~4.03235)"
+        ],
+        "Cycle": [
+          "6921592653589793/2520000000000000 (~2.74666)",
+          "384532925199433/140000000000000 (~2.74666)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "1101914414910625477645009035300589/273268388397599601650000000000000 (~4.03235)",
+        "reached_at_least": "~4.0323523016 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1513)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71489448375 (an exact fraction of 36 digits)",
+          "1980631013476890212146502656149069/491176400266819819141250000000000 (~4.03242)"
+        ],
+        "Cycle": [
+          "20772277960769379/7565000000000000 (~2.74584)",
+          "10386138980384691/3782500000000000 (~2.74584)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "1980631013476890212146502656149069/491176400266819819141250000000000 (~4.03242)",
+        "reached_at_least": "~4.03242299997 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1514)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71460360806 (an exact fraction of 36 digits)",
+          "~4.03249582731 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20779777960769379/7570000000000000 (~2.74502)",
+          "10389888980384691/3785000000000000 (~2.74502)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03249582731 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03249582731 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1515)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71431473046 (an exact fraction of 36 digits)",
+          "~4.03257078114 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6929092653589793/2525000000000000 (~2.7442)",
+          "3464546326794897/1262500000000000 (~2.7442)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03257078114 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03257078114 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1516)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71402784861 (an exact fraction of 36 digits)",
+          "~4.03264785897 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20794777960769379/7580000000000000 (~2.74337)",
+          "10397388980384691/3790000000000000 (~2.74337)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03264785897 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03264785897 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1517)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71374296016 (an exact fraction of 36 digits)",
+          "~4.03272705833 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20802277960769379/7585000000000000 (~2.74255)",
+          "10401138980384691/3792500000000000 (~2.74255)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03272705833 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03272705833 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1518)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71346006279 (an exact fraction of 36 digits)",
+          "~4.03280837674 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6936592653589793/2530000000000000 (~2.74174)",
+          "3468296326794897/1265000000000000 (~2.74174)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03280837674 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03280837674 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1519)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71317915416 (an exact fraction of 36 digits)",
+          "2470695186235000699294261823240721/612636118588582854263750000000000 (~4.03289)"
+        ],
+        "Cycle": [
+          "20817277960769379/7595000000000000 (~2.74092)",
+          "10408638980384691/3797500000000000 (~2.74092)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "2470695186235000699294261823240721/612636118588582854263750000000000 (~4.03289)",
+        "reached_at_least": "~4.03289181174 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1520)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71290023196 (an exact fraction of 36 digits)",
+          "~4.03297736088 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "20824777960769379/7600000000000000 (~2.7401)",
+          "10412388980384691/3800000000000000 (~2.7401)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03297736088 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03297736088 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1521)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "6320952464963191370691813203492131/1702556915856259894177500000000000 (~3.71262)",
+          "~4.03306502169 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "534160973353061/195000000000000 (~2.73929)",
+          "1157348775598299/422500000000000 (~2.73929)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03306502169 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03306502169 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1522)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71234833761 (an exact fraction of 36 digits)",
+          "5084573760276915441816088166584143/1260693928904496546411500000000000 (~4.03315)"
+        ],
+        "Cycle": [
+          "20839777960769379/7610000000000000 (~2.73847)",
+          "10419888980384691/3805000000000000 (~2.73847)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "5084573760276915441816088166584143/1260693928904496546411500000000000 (~4.03315)",
+        "reached_at_least": "~4.03315479174 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1523)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71207536084 (an exact fraction of 36 digits)",
+          "~4.03324666858 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "20847277960769379/7615000000000000 (~2.73766)",
+          "10423638980384691/3807500000000000 (~2.73766)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03324666858 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03324666858 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1524)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71180436129 (an exact fraction of 35 digits)",
+          "~4.0333406498 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6951592653589793/2540000000000000 (~2.73685)",
+          "3475796326794897/1270000000000000 (~2.73685)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0333406498 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.0333406498 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1525)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71153533667 (an exact fraction of 36 digits)",
+          "~4.03343673295 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20862277960769379/7625000000000000 (~2.73604)",
+          "10431138980384691/3812500000000000 (~2.73604)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03343673295 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03343673295 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1526)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7112682847 (an exact fraction of 36 digits)",
+          "~4.03353491563 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20869777960769379/7630000000000000 (~2.73523)",
+          "10434888980384691/3815000000000000 (~2.73523)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03353491563 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03353491563 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1527)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "81329249501219896008933457488696259/21915704473957662812202500000000000 (~3.711)",
+          "~4.03363519541 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6959092653589793/2545000000000000 (~2.73442)",
+          "3479546326794897/1272500000000000 (~2.73442)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03363519541 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03363519541 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1528)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71074008962 (an exact fraction of 36 digits)",
+          "~4.03373756991 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20884777960769379/7640000000000000 (~2.73361)",
+          "10442388980384691/3820000000000000 (~2.73361)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03373756991 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03373756991 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1529)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71047894199 (an exact fraction of 34 digits)",
+          "~4.03384203671 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "20892277960769379/7645000000000000 (~2.7328)",
+          "10446138980384691/3822500000000000 (~2.7328)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03384203671 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03384203671 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1530)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.71021975794 (an exact fraction of 35 digits)",
+          "~4.03394859343 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "6966592653589793/2550000000000000 (~2.732)",
+          "1161098775598299/425000000000000 (~2.732)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03394859343 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03394859343 (an exact fraction of 73 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1531)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70996253525 (an exact fraction of 36 digits)",
+          "~4.03405723767 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20907277960769379/7655000000000000 (~2.73119)",
+          "10453638980384691/3827500000000000 (~2.73119)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03405723767 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03405723767 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1532)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70970727166 (an exact fraction of 36 digits)",
+          "4178280336786778110046944568304853/1035722947306983713195000000000000 (~4.03417)"
+        ],
+        "Cycle": [
+          "20914777960769379/7660000000000000 (~2.73039)",
+          "10457388980384691/3830000000000000 (~2.73039)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "4178280336786778110046944568304853/1035722947306983713195000000000000 (~4.03417)",
+        "reached_at_least": "~4.03416796707 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1533)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70945396494 (an exact fraction of 36 digits)",
+          "~4.03428077925 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6974092653589793/2555000000000000 (~2.72959)",
+          "3487046326794897/1277500000000000 (~2.72959)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03428077925 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03428077925 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1534)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "30908605698458355039351170881803083/8332951559803853649125000000000000 (~3.7092)",
+          "~4.03439567183 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "1609982920059183/590000000000000 (~2.72878)",
+          "10464888980384691/3835000000000000 (~2.72878)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03439567183 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03439567183 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1535)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7089532132 (an exact fraction of 36 digits)",
+          "~4.03451264246 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20937277960769379/7675000000000000 (~2.72798)",
+          "10468638980384691/3837500000000000 (~2.72798)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03451264246 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03451264246 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1536)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70870576375 (an exact fraction of 36 digits)",
+          "1994463536951497037320495375510077/494335961939277621324800000000000 (~4.03463)"
+        ],
+        "Cycle": [
+          "6981592653589793/2560000000000000 (~2.72718)",
+          "3490796326794897/1280000000000000 (~2.72718)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "1994463536951497037320495375510077/494335961939277621324800000000000 (~4.03463)",
+        "reached_at_least": "~4.0346316888 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1537)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70846026229 (an exact fraction of 36 digits)",
+          "~4.03475280848 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20952277960769379/7685000000000000 (~2.72639)",
+          "10476138980384691/3842500000000000 (~2.72639)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03475280848 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03475280848 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1538)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70821670662 (an exact fraction of 36 digits)",
+          "~4.03487599916 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20959777960769379/7690000000000000 (~2.72559)",
+          "10479888980384691/3845000000000000 (~2.72559)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03487599916 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03487599916 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1539)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70797509454 (an exact fraction of 35 digits)",
+          "27586119679215032452064584737831023/6836706586136499776531250000000000 (~4.035)"
+        ],
+        "Cycle": [
+          "6989092653589793/2565000000000000 (~2.72479)",
+          "388282925199433/142500000000000 (~2.72479)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "27586119679215032452064584737831023/6836706586136499776531250000000000 (~4.035)",
+        "reached_at_least": "~4.03500125852 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1540)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "4589290803121783713439901621346747/1237761134081608316950000000000000 (~3.70774)",
+          "~4.03512858423 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "20974777960769379/7700000000000000 (~2.724)",
+          "10487388980384691/3850000000000000 (~2.724)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03512858423 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03512858423 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1541)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70749769241 (an exact fraction of 36 digits)",
+          "~4.03525797395 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "20982277960769379/7705000000000000 (~2.7232)",
+          "10491138980384691/3852500000000000 (~2.7232)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03525797395 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03525797395 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1542)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.707261898 (an exact fraction of 36 digits)",
+          "~4.03538942538 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "6996592653589793/2570000000000000 (~2.72241)",
+          "3498296326794897/1285000000000000 (~2.72241)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03538942538 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03538942538 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1543)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70702803845 (an exact fraction of 36 digits)",
+          "~4.03552293621 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "20997277960769379/7715000000000000 (~2.72162)",
+          "10498638980384691/3857500000000000 (~2.72162)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03552293621 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03552293621 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1544)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70679611161 (an exact fraction of 36 digits)",
+          "~4.03565850412 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "21004777960769379/7720000000000000 (~2.72083)",
+          "10502388980384691/3860000000000000 (~2.72083)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03565850412 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03565850412 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1545)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7065661153 (an exact fraction of 36 digits)",
+          "~4.03579612683 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "7004092653589793/2575000000000000 (~2.72004)",
+          "3502046326794897/1287500000000000 (~2.72004)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03579612683 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03579612683 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1546)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70633804739 (an exact fraction of 36 digits)",
+          "~4.03593580205 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "21019777960769379/7730000000000000 (~2.71925)",
+          "10509888980384691/3865000000000000 (~2.71925)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03593580205 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03593580205 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1547)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70611190571 (an exact fraction of 34 digits)",
+          "7673657862037233242669687471169927/1901266219442823186931250000000000 (~4.03608)"
+        ],
+        "Cycle": [
+          "1617482920059183/595000000000000 (~2.71846)",
+          "10513638980384691/3867500000000000 (~2.71846)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "7673657862037233242669687471169927/1901266219442823186931250000000000 (~4.03608)",
+        "reached_at_least": "~4.03607752747 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1548)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70588768813 (an exact fraction of 36 digits)",
+          "~4.03622130084 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "7011592653589793/2580000000000000 (~2.71767)",
+          "1168598775598299/430000000000000 (~2.71767)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03622130084 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03622130084 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1549)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70566539252 (an exact fraction of 36 digits)",
+          "~4.03636711987 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "21042277960769379/7745000000000000 (~2.71689)",
+          "10521138980384691/3872500000000000 (~2.71689)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03636711987 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03636711987 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1550)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70544501674 (an exact fraction of 36 digits)",
+          "~4.03651498229 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "21049777960769379/7750000000000000 (~2.7161)",
+          "10524888980384691/3875000000000000 (~2.7161)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03651498229 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03651498229 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1551)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70522655866 (an exact fraction of 35 digits)",
+          "7631797631780152761429350144562129/1890619570263202092943750000000000 (~4.03666)"
+        ],
+        "Cycle": [
+          "7019092653589793/2585000000000000 (~2.71532)",
+          "3509546326794897/1292500000000000 (~2.71532)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "7631797631780152761429350144562129/1890619570263202092943750000000000 (~4.03666)",
+        "reached_at_least": "~4.03666488585 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1552)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70501001618 (an exact fraction of 35 digits)",
+          "~4.03681682829 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "21064777960769379/7760000000000000 (~2.71453)",
+          "10532388980384691/3880000000000000 (~2.71453)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03681682829 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03681682829 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1553)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70479538718 (an exact fraction of 36 digits)",
+          "~4.03697080736 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "21072277960769379/7765000000000000 (~2.71375)",
+          "10536138980384691/3882500000000000 (~2.71375)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03697080736 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03697080736 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1554)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70458266956 (an exact fraction of 36 digits)",
+          "3286773954765218507713988979022029/814136909898316734362500000000000 (~4.03713)"
+        ],
+        "Cycle": [
+          "7026592653589793/2590000000000000 (~2.71297)",
+          "3513296326794897/1295000000000000 (~2.71297)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "3286773954765218507713988979022029/814136909898316734362500000000000 (~4.03713)",
+        "reached_at_least": "~4.03712682081 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1555)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70437186121 (an exact fraction of 36 digits)",
+          "~4.03728486642 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "21087277960769379/7775000000000000 (~2.71219)",
+          "10543638980384691/3887500000000000 (~2.71219)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03728486642 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03728486642 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1556)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70416296004 (an exact fraction of 36 digits)",
+          "~4.03744494195 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "21094777960769379/7780000000000000 (~2.71141)",
+          "10547388980384691/3890000000000000 (~2.71141)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03744494195 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03744494195 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1557)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70395596396 (an exact fraction of 35 digits)",
+          "~4.03760704517 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "7034092653589793/2595000000000000 (~2.71063)",
+          "1172348775598299/432500000000000 (~2.71063)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03760704517 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03760704517 (an exact fraction of 74 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1558)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7037508709 (an exact fraction of 35 digits)",
+          "~4.03777117386 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "21109777960769379/7790000000000000 (~2.70986)",
+          "10554888980384691/3895000000000000 (~2.70986)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03777117386 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03777117386 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1559)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70354767876 (an exact fraction of 35 digits)",
+          "~4.03793732581 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "21117277960769379/7795000000000000 (~2.70908)",
+          "10558638980384691/3897500000000000 (~2.70908)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03793732581 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03793732581 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1560)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.7033463855 (an exact fraction of 34 digits)",
+          "~4.03810549882 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "541660973353061/200000000000000 (~2.7083)",
+          "3520796326794897/1300000000000000 (~2.7083)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03810549882 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03810549882 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1561)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70314698903 (an exact fraction of 35 digits)",
+          "~4.03827569067 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "21132277960769379/7805000000000000 (~2.70753)",
+          "10566138980384691/3902500000000000 (~2.70753)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03827569067 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03827569067 (an exact fraction of 77 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1562)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70294948731 (an exact fraction of 35 digits)",
+          "~4.03844789918 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "21139777960769379/7810000000000000 (~2.70676)",
+          "10569888980384691/3905000000000000 (~2.70676)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03844789918 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03844789918 (an exact fraction of 77 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1563)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70275387827 (an exact fraction of 35 digits)",
+          "~4.03862212216 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "7049092653589793/2605000000000000 (~2.70599)",
+          "3524546326794897/1302500000000000 (~2.70599)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03862212216 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03862212216 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1564)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70256015988 (an exact fraction of 36 digits)",
+          "~4.03879835741 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "21154777960769379/7820000000000000 (~2.70521)",
+          "10577388980384691/3910000000000000 (~2.70521)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03879835741 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03879835741 (an exact fraction of 77 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1565)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70236833009 (an exact fraction of 36 digits)",
+          "~4.03897660277 (an exact fraction of 36 digits)"
+        ],
+        "Cycle": [
+          "21162277960769379/7825000000000000 (~2.70444)",
+          "10581138980384691/3912500000000000 (~2.70444)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03897660277 (an exact fraction of 36 digits)",
+        "reached_at_least": "~4.03897660277 (an exact fraction of 77 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1566)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70217838686 (an exact fraction of 35 digits)",
+          "830926489695376188450149561676427/205717806786961926162500000000000 (~4.03916)"
+        ],
+        "Cycle": [
+          "7056592653589793/2610000000000000 (~2.70368)",
+          "392032925199433/145000000000000 (~2.70368)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "830926489695376188450149561676427/205717806786961926162500000000000 (~4.03916)",
+        "reached_at_least": "~4.03915685605 (an exact fraction of 73 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1567)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70199032816 (an exact fraction of 36 digits)",
+          "~4.0393391151 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "21177277960769379/7835000000000000 (~2.70291)",
+          "10588638980384691/3917500000000000 (~2.70291)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.0393391151 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.0393391151 (an exact fraction of 77 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1568)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70180415198 (an exact fraction of 36 digits)",
+          "~4.03952337774 (an exact fraction of 34 digits)"
+        ],
+        "Cycle": [
+          "21184777960769379/7840000000000000 (~2.70214)",
+          "10592388980384691/3920000000000000 (~2.70214)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03952337774 (an exact fraction of 34 digits)",
+        "reached_at_least": "~4.03952337774 (an exact fraction of 76 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1569)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70161985628 (an exact fraction of 36 digits)",
+          "~4.03970964183 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "7064092653589793/2615000000000000 (~2.70137)",
+          "3532046326794897/1307500000000000 (~2.70137)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03970964183 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03970964183 (an exact fraction of 75 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=B, n=[57/200,63/200], C=[300,330], Ct=4, Tc=1, Vlo=80, Vhi=220); S=speed(N=1570)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "Cost": [
+          "~3.70143743907 (an exact fraction of 36 digits)",
+          "~4.03989790521 (an exact fraction of 35 digits)"
+        ],
+        "Cycle": [
+          "21199777960769379/7850000000000000 (~2.70061)",
+          "10599888980384691/3925000000000000 (~2.70061)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "~4.03989790521 (an exact fraction of 35 digits)",
+        "reached_at_least": "~4.03989790521 (an exact fraction of 77 digits)"
+      }
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=600)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "3063430607313547404581/1953125000000000000000 (~1.56848)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=601)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "3667970819511003885388366030957/2347656250000000000000000000000 (~1.5624)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=602)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "228739245825723553062393702557/146972656250000000000000000000 (~1.55634)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=603)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "405743119994014086645593457813/261718750000000000000000000000 (~1.5503)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=604)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "14232622147654465183461560857/9216308593750000000000000000 (~1.54429)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=605)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "5816668020597525736425198317/3781250000000000000000000000 (~1.53829)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=606)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "75568475401796343649321457839/49316406250000000000000000000 (~1.53232)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=607)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "3619159199172960442787849833357/2371093750000000000000000000000 (~1.52637)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=608)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "3526401037778812949123029403/2319335937500000000000000000 (~1.52044)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=609)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "1200971073330812661314375603759/792968750000000000000000000000 (~1.51453)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=610)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "359479488127908085800291037/238281250000000000000000000 (~1.50864)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=611)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "3586679656747491330831285633437/2386718750000000000000000000000 (~1.50277)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=612)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "1553197724225896726057522513/1037597656250000000000000000 (~1.49692)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=613)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "3570458591121540096085254767677/2394531250000000000000000000000 (~1.49109)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=614)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "222647048157186682143899152157/149902343750000000000000000000 (~1.48528)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=615)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "1895600056035103137531298879/1281250000000000000000000000 (~1.47949)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=616)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "3463037700253696073079332623/2349853515625000000000000000 (~1.47372)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=617)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "3538054280799374784888451425197/2410156250000000000000000000000 (~1.46798)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=618)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "73540857137579489362397242559/50292968750000000000000000000 (~1.46225)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=619)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "3521871200809072386369649465597/2417968750000000000000000000000 (~1.45654)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=620)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "21961152911049058596794297/15136718750000000000000000 (~1.45085)",
+      "unit": "USD"
+    },
+    {
+      "design": "G=grades(grade=A, n=[19/80,21/80], C=[240,260], Ct=5/2, Tc=1, Vlo=60, Vhi=180); S=speed(N=621)",
+      "verdict": "REFUTED",
+      "fails": "worst-case cost per part at most 4.04 USD",
+      "by_at_witness": "389522327538843195786733205813/269531250000000000000000000000 (~1.44518)",
+      "unit": "USD"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 4025,
+    "EARNED": 178
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "designs_not_listed": 4003,
+  "listing": "earned first, then open, then refuted",
+  "objective": {
+    "minimize": "Cost",
+    "case": "worst",
+    "value": "~4.03122932762 (an exact fraction of 35 digits)",
+    "unit": "USD",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "value_is": "a proved upper bound of the worst case over the box",
+    "reached_at_least": "~4.03122932762 (an exact fraction of 76 digits)",
+    "optimal": true,
+    "note": "its proved worst case is at or below the worst case every other earned design reaches at a corner of its box; the rest refuted, none open"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "G": {
+      "catalog": "grades",
+      "n": {
+        "range": [
+          "57/200 (~0.285)",
+          "63/200 (~0.315)"
+        ]
+      },
+      "C": {
+        "range": [
+          "300",
+          "330"
+        ]
+      },
+      "Ct": {
+        "nominal": "4",
+        "tolerance": "0"
+      },
+      "Tc": {
+        "nominal": "1",
+        "tolerance": "0"
+      },
+      "Vlo": {
+        "nominal": "80",
+        "tolerance": "0"
+      },
+      "Vhi": {
+        "nominal": "220",
+        "tolerance": "0"
+      },
+      "grade": "B"
+    },
+    "S": {
+      "catalog": "speed",
+      "N": {
+        "nominal": "1480",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "Cost": [
+      "~3.72563007386 (an exact fraction of 36 digits)",
+      "~4.03122932762 (an exact fraction of 35 digits)"
+    ],
+    "Cycle": [
+      "20524777960769379/7400000000000000 (~2.77362)",
+      "10262388980384691/3700000000000000 (~2.77362)"
+    ]
+  },
+  "guaranteed_unit": {
+    "Cost": "USD",
+    "Cycle": "min"
+  },
+  "how": {
+    "Cost": "ZTL, interval reading of the definition (sound, may be wide)",
+    "Cycle": "ZTL, exact at the corners"
+  },
+  "requirements": [
+    {
+      "quantity": "Cost",
+      "op": "<=",
+      "value": "4.04",
+      "why": "worst-case cost per part at most 4.04 USD"
+    },
+    {
+      "quantity": "Cycle",
+      "op": "<=",
+      "value": "Tmax",
+      "why": "cycle time at most 3.0 min"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "Cycle -> [61574333882308137/370000000000000, 30787166941154073/185000000000000] by the system over its parameters, exact at the corners (credit)",
+    "Tm -> [28274333882308137/370000000000000, 14137166941154073/185000000000000] by the system over its parameters, exact at the corners (credit)",
+    "Tlife -> [81473855964969431505/144115188075855872, 288289369717682772225/288230376151711744] by [Tlife == Tu*pow(G__C/V, (1/G__n))], interval reading, sound, may be wider than the truth (credit)",
+    "Cost -> [1324673439813621999228154926556462407/355556889318475419077500000000000000, 40507575037399269244962542984061339/10048442235679563218950000000000000] by [Cost == Cm*(Tl + Tm) + (Cm*G__Tc + G__Ct)*Tm/Tlife], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

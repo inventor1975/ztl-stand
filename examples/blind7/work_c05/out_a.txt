@@ -1,0 +1,96 @@
+[stand] 1/2 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 2,
+  "failed_at_nominal": 0,
+  "judged": 2,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "M=machines(label=Regular, CF0=-16000, CF1=2000, CF2=4000, CF3=5000, CF4=5000, CF5=5000, CF6=5000)",
+      "verdict": "REFUTED",
+      "fails": "NPV at least 1165 USD in the worst case",
+      "by_at_witness": "104344426149565/1870414552161 (~55.7868)",
+      "unit": "USD"
+    },
+    {
+      "design": "M=machines(label=Heavy-duty, CF0=-25000, CF1=2000, CF2=4000, CF3=8000, CF4=9000, CF5=9000, CF6=9000)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "NPV": [
+          "243123529741000/207823839129 (~1169.85)",
+          "8116804769269000/1677100110841 (~4839.79)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 1,
+    "EARNED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "EARNED",
+  "design": {
+    "M": {
+      "catalog": "machines",
+      "label": "Heavy-duty",
+      "CF0": {
+        "nominal": "-25000",
+        "tolerance": "0"
+      },
+      "CF1": {
+        "nominal": "2000",
+        "tolerance": "3/100 (~0.03)"
+      },
+      "CF2": {
+        "nominal": "4000",
+        "tolerance": "3/100 (~0.03)"
+      },
+      "CF3": {
+        "nominal": "8000",
+        "tolerance": "3/100 (~0.03)"
+      },
+      "CF4": {
+        "nominal": "9000",
+        "tolerance": "3/100 (~0.03)"
+      },
+      "CF5": {
+        "nominal": "9000",
+        "tolerance": "3/100 (~0.03)"
+      },
+      "CF6": {
+        "nominal": "9000",
+        "tolerance": "3/100 (~0.03)"
+      }
+    }
+  },
+  "guaranteed": {
+    "NPV": [
+      "243123529741000/207823839129 (~1169.85)",
+      "8116804769269000/1677100110841 (~4839.79)"
+    ]
+  },
+  "guaranteed_unit": {
+    "NPV": "USD"
+  },
+  "how": {
+    "NPV": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "NPV",
+      "op": ">=",
+      "value": "1165",
+      "why": "NPV at least 1165 USD in the worst case"
+    }
+  ],
+  "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "NPV -> [243123529741000/207823839129, 8116804769269000/1677100110841] by [NPV == M__CF0 + M__CF1*(1/((1+r))) + M__CF2*(1/((1+r)*(1+r))) + M__CF3*(1/((1+r)*(1+r)*(1+r))) + M__CF4*(1/((1+r)*(1+r)*(1+r)*(1+r))) + M__CF5*(1/((1+r)*(1+r)*(1+r)*(1+r)*(1+r))) + M__CF6*(1/((1+r)*(1+r)*(1+r)*(1+r)*(1+r)*(1+r)))], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+0.29s

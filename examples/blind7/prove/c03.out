@@ -1,0 +1,144 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 2,
+  "failed_at_nominal": 0,
+  "judged": 2,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "T=trucks(label=Older, larger, price=50000, n=3, inflow=[38000,42000])",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "EAA": [
+          "17000",
+          "44094782366112500/1210472418897 (~36427.7)"
+        ]
+      },
+      "objective_worst": {
+        "proved_at_most": "-17000",
+        "reached_at_least": "-586182500/33421 (~-17539.3)"
+      }
+    },
+    {
+      "design": "T=trucks(label=Newer, smaller, price=50000, n=6, inflow=[28500,31500])",
+      "verdict": "REFUTED",
+      "fails": "EAA at least 17000 USD per year in the worst case",
+      "by_at_witness": "25228426094000/79128595651 (~318.828)",
+      "unit": "USD"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1,
+    "REFUTED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "-EAA",
+    "case": "worst",
+    "value": "-17000",
+    "unit": "USD",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "value_is": "a proved upper bound of the worst case over the box",
+    "reached_at_least": "-586182500/33421 (~-17539.3)",
+    "optimal": true,
+    "note": "its proved worst case is at or below the worst case every other earned design reaches at a corner of its box; the rest refuted, none open"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "T": {
+      "catalog": "trucks",
+      "price": {
+        "nominal": "50000",
+        "tolerance": "0"
+      },
+      "n": {
+        "nominal": "3",
+        "tolerance": "0"
+      },
+      "inflow": {
+        "range": [
+          "38000",
+          "42000"
+        ]
+      },
+      "label": "Older, larger"
+    }
+  },
+  "guaranteed": {
+    "EAA": [
+      "17000",
+      "44094782366112500/1210472418897 (~36427.7)"
+    ]
+  },
+  "guaranteed_unit": {
+    "EAA": "USD"
+  },
+  "guaranteed_ends": {
+    "EAA": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+  },
+  "how": {
+    "EAA": "ZTL, certificate checked exactly (11 pieces; found by the stand's search, the extreme may lie inside the box)"
+  },
+  "requirements": [
+    {
+      "quantity": "EAA",
+      "op": ">=",
+      "value": "17000",
+      "why": "EAA at least 17000 USD per year in the worst case"
+    }
+  ],
+  "rests_on": "ZTL disposition None: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "NPV -> [408844250000/14245319, 309538750000/4102893] by [NPV == -T__price + T__inflow*(1 - pow(1 + r, -T__n))/r], interval reading, sound, may be wider than the truth (credit)",
+    "EAA -> [50323326342457500/5237020869289, 44094782366112500/1210472418897] by [EAA == NPV*r/(1 - pow(1 + r, -T__n))], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "proof": {
+    "proved": 1,
+    "of": 1,
+    "count": "1 of 1 requirement(s) proved as Lean theorems; 0 rest on ZTL's verdict alone (no Lean theorem)",
+    "requirements": [
+      {
+        "quantity": "EAA",
+        "op": ">=",
+        "value_si": "17000",
+        "definition": "EAA = (((((0 - T__price) + ((T__inflow * (1 - pow((1 + r), (0 - T__n)))) / r))) * r) / (1 - pow((1 + r), (0 - T__n)))) (the system's solutions substituted)",
+        "status": "theorem",
+        "axioms": "none (each #print axioms: does not depend on any axioms)",
+        "reads": "EAA >= 17000",
+        "about": "the EXPRESSION of the quantity from the laws (ZTL's exact elimination, Python)",
+        "file": "/media/vitaly/SSD_1000GB/Projects/ZTL/lean/gen/ZStand_749599c4ec4c.lean",
+        "theorems": [
+          "ZStand_749599c4ec4c.req0",
+          "ZStand_749599c4ec4c.cleared0",
+          "ZStand_749599c4ec4c.q_pos"
+        ],
+        "params": [
+          "T__inflow",
+          "r"
+        ],
+        "theorem_vars": {
+          "T__inflow": "var 0 = T__inflow",
+          "r": "var 1 = r"
+        },
+        "box": {
+          "T__inflow": [
+            "38000",
+            "42000"
+          ],
+          "r": [
+            "25332747903959/281474976710656",
+            "30962247438173/281474976710656"
+          ]
+        },
+        "box_is": "rounded outward to dyadics"
+      }
+    ],
+    "seconds": 22.6,
+    "check_again": "cd /media/vitaly/SSD_1000GB/Projects/ZTL/lean && lake env lean --tstack=400000 <file>",
+    "rests_on": "each requirement says what its theorem is ABOUT: the LAWS (every value of the unknowns satisfying them; each law read as a polynomial row — multiplied by its denominators, the parameters scaled — Python, local per law; the elimination checked by the kernel), or the EXPRESSION from ZTL's exact elimination (Python, not proved in Lean); the tolerances are the brick's data, taken as stated; values in SI"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

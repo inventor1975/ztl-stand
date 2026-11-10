@@ -1,0 +1,127 @@
+[stand] 1/6 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 6,
+  "failed_at_nominal": 4,
+  "judged": 2,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "C=radii(R=300, cost=1)",
+      "verdict": "REFUTED",
+      "fails": "R >= R_min in the worst case",
+      "by_at_witness": "190739600/3240243 (~58.8658)",
+      "unit": "m"
+    },
+    {
+      "design": "C=radii(R=350, cost=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R >= R_min in the worst case",
+      "by_at_witness": "28727450/3240243 (~8.86583)",
+      "unit": "m"
+    },
+    {
+      "design": "C=radii(R=400, cost=29/20)",
+      "verdict": "REFUTED",
+      "fails": "R >= R_min in the worst case",
+      "by_at_witness": "3134200/556227 (~5.63475)",
+      "unit": "m"
+    },
+    {
+      "design": "C=radii(R=450, cost=17/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "24677150/556227 (~44.3653)",
+          "31647350/238383 (~132.758)"
+        ],
+        "arc": [
+          "~314.159265359 (an exact fraction of 38 digits)",
+          "~314.159265359 (an exact fraction of 38 digits)"
+        ]
+      }
+    },
+    {
+      "design": "C=radii(R=500, cost=2)",
+      "verdict": "REFUTED",
+      "fails": "right-of-way allows arc <= 330 m",
+      "by_at_witness": "~19.0658503989 (an exact fraction of 37 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "C=radii(R=600, cost=13/5)",
+      "verdict": "REFUTED",
+      "fails": "right-of-way allows arc <= 330 m",
+      "by_at_witness": "~88.8790204786 (an exact fraction of 38 digits)",
+      "unit": "m"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 5,
+    "EARNED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "C.cost",
+    "value": "17/10 (~1.7)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "C": {
+      "catalog": "radii",
+      "R": {
+        "nominal": "450",
+        "tolerance": "0"
+      },
+      "cost": {
+        "nominal": "17/10 (~1.7)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "margin": [
+      "24677150/556227 (~44.3653)",
+      "31647350/238383 (~132.758)"
+    ],
+    "arc": [
+      "~314.159265359 (an exact fraction of 38 digits)",
+      "~314.159265359 (an exact fraction of 38 digits)"
+    ]
+  },
+  "guaranteed_unit": {
+    "margin": "m",
+    "arc": "m"
+  },
+  "how": {
+    "margin": "ZTL, interval reading of the definition (sound, may be wide)",
+    "arc": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "margin",
+      "op": ">=",
+      "value": "0",
+      "why": "R >= R_min in the worst case"
+    },
+    {
+      "quantity": "arc",
+      "op": "<=",
+      "value": "330",
+      "why": "right-of-way allows arc <= 330 m"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "arc = 15707963267948966192313216916397514420987/50000000000000000000000000000000000000 by exact elimination (credit)",
+    "fmax -> [1/8, 33/250] by [fmax == ifpos(v / vu - 80, ifpos(v / vu - 90, ifpos(v / vu - 100, 0.12, 0.13 + (0.12 - 0.13) * (v / vu - 90) / (100 - 90)), 0.14 + (0.13 - 0.14) * (v / vu - 80) / (90 - 80)), 0.14)], interval reading, sound, may be wider than the truth (credit)",
+    "Rmin -> [75625000/238383, 225625000/556227] by [Rmin == v*v/(G*(e + fmax))], interval reading, sound, may be wider than the truth (credit)",
+    "margin -> [24677150/556227, 31647350/238383] by [margin == C__R - Rmin]"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

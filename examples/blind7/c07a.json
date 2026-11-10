@@ -1,0 +1,252 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "A": {
+   "role": "given",
+   "value": "120",
+   "unit": "ft^2",
+   "ground": "problem statement"
+  },
+  "Pmax": {
+   "role": "given",
+   "value": "120",
+   "unit": "W",
+   "ground": "LPD 1.0 W/ft2 x 120 ft2"
+  },
+  "LLF": {
+   "role": "given",
+   "range": [
+    "0.75",
+    "0.85"
+   ],
+   "unit": ""
+  },
+  "RCR": {
+   "role": "given",
+   "range": [
+    "6.5",
+    "7.2"
+   ],
+   "unit": ""
+  },
+  "E": {
+   "role": "derived",
+   "unit": "1/ft^2",
+   "why": "illuminance, lm/ft2 = fc"
+  },
+  "CU": {
+   "role": "derived",
+   "unit": ""
+  },
+  "Ptot": {
+   "role": "derived",
+   "unit": "W"
+  }
+ },
+ "slots": {
+  "LUM": {
+   "from": [
+    "F3",
+    "F2",
+    "L1",
+    "L2"
+   ]
+  },
+  "NL": {
+   "from": [
+    "cnt"
+   ]
+  }
+ },
+ "laws": [
+  {
+   "zfl": "CU == table(RCR, 6, LUM.cu6, 7, LUM.cu7, 8, LUM.cu8)",
+   "source": "CU table, linear interpolation in RCR"
+  },
+  {
+   "zfl": "E == NL.N*LUM.Phi*CU*LLF/A",
+   "source": "lumen method"
+  },
+  {
+   "zfl": "Ptot == NL.N*LUM.W",
+   "source": "installed power"
+  }
+ ],
+ "catalog": {
+  "F3": {
+   "items": [
+    {
+     "Phi": {
+      "value": "8550"
+     },
+     "W": {
+      "value": "96"
+     },
+     "cu6": {
+      "value": "0.57"
+     },
+     "cu7": {
+      "value": "0.54"
+     },
+     "cu8": {
+      "value": "0.51"
+     }
+    }
+   ],
+   "fields": {
+    "Phi": {
+     "unit": ""
+    },
+    "W": {
+     "unit": "W"
+    },
+    "cu6": {
+     "unit": ""
+    },
+    "cu7": {
+     "unit": ""
+    },
+    "cu8": {
+     "unit": ""
+    }
+   }
+  },
+  "F2": {
+   "items": [
+    {
+     "Phi": {
+      "value": "5700"
+     },
+     "W": {
+      "value": "64"
+     },
+     "cu6": {
+      "value": "0.60"
+     },
+     "cu7": {
+      "value": "0.57"
+     },
+     "cu8": {
+      "value": "0.54"
+     }
+    }
+   ],
+   "fields": {
+    "Phi": {
+     "unit": ""
+    },
+    "W": {
+     "unit": "W"
+    },
+    "cu6": {
+     "unit": ""
+    },
+    "cu7": {
+     "unit": ""
+    },
+    "cu8": {
+     "unit": ""
+    }
+   }
+  },
+  "L1": {
+   "items": [
+    {
+     "Phi": {
+      "value": "4800"
+     },
+     "W": {
+      "value": "41"
+     },
+     "cu6": {
+      "value": "0.62"
+     },
+     "cu7": {
+      "value": "0.59"
+     },
+     "cu8": {
+      "value": "0.56"
+     }
+    }
+   ],
+   "fields": {
+    "Phi": {
+     "unit": ""
+    },
+    "W": {
+     "unit": "W"
+    },
+    "cu6": {
+     "unit": ""
+    },
+    "cu7": {
+     "unit": ""
+    },
+    "cu8": {
+     "unit": ""
+    }
+   }
+  },
+  "L2": {
+   "items": [
+    {
+     "Phi": {
+      "value": "6200"
+     },
+     "W": {
+      "value": "50"
+     },
+     "cu6": {
+      "value": "0.62"
+     },
+     "cu7": {
+      "value": "0.59"
+     },
+     "cu8": {
+      "value": "0.56"
+     }
+    }
+   ],
+   "fields": {
+    "Phi": {
+     "unit": ""
+    },
+    "W": {
+     "unit": "W"
+    },
+    "cu6": {
+     "unit": ""
+    },
+    "cu7": {
+     "unit": ""
+    },
+    "cu8": {
+     "unit": ""
+    }
+   }
+  },
+  "cnt": {
+   "integers": {
+    "field": "N",
+    "from": "1",
+    "to": "5",
+    "unit": ""
+   }
+  }
+ },
+ "report": "all",
+ "requirements": [
+  {
+   "quantity": "E",
+   "op": ">=",
+   "value": "50",
+   "why": "50 fc maintained"
+  },
+  {
+   "quantity": "Ptot",
+   "op": "<=",
+   "value": "Pmax",
+   "why": "LPD <= 1.0 W/ft2"
+  }
+ ]
+}

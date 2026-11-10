@@ -1,0 +1,40 @@
+{
+ "stand": "ztl-stand/1",
+ "report": "all",
+ "quantities": {
+  "v":   {"role": "given", "range": ["88", "95"], "unit": "km/h", "why": "85th-percentile speed"},
+  "vu":  {"role": "given", "value": "1", "unit": "km/h", "ground": "unit for the table argument"},
+  "e":   {"role": "given", "range": ["0.05", "0.06"], "unit": "", "why": "superelevation as built"},
+  "G":   {"role": "given", "value": "9.81", "unit": "m/s^2", "ground": "problem statement uses 9.81"},
+  "ang": {"role": "given", "value": "40", "unit": "deg", "ground": "deflection angle"},
+  "fmax":   {"role": "derived", "unit": ""},
+  "Rmin":   {"role": "derived", "unit": "m"},
+  "arc":    {"role": "derived", "unit": "m"},
+  "margin": {"role": "derived", "unit": "m"}
+ },
+ "slots": {"C": {"from": ["radii"]}},
+ "catalog": {
+  "radii": {
+   "items": [
+    {"R": {"value": "300"}, "cost": "1.00"},
+    {"R": {"value": "350"}, "cost": "1.20"},
+    {"R": {"value": "400"}, "cost": "1.45"},
+    {"R": {"value": "450"}, "cost": "1.70"},
+    {"R": {"value": "500"}, "cost": "2.00"},
+    {"R": {"value": "600"}, "cost": "2.60"}
+   ],
+   "fields": {"R": {"unit": "m"}, "cost": {"unit": ""}}
+  }
+ },
+ "laws": [
+  {"zfl": "fmax == table(v/vu, 80, 0.14, 90, 0.13, 100, 0.12)", "source": "tabulated f_max, linear between table speeds"},
+  {"zfl": "Rmin == v*v/(G*(e + fmax))", "source": "R_min = (v/3.6)^2/(9.81(e+f_max)); v in km/h is converted to m/s by the unit system"},
+  {"zfl": "arc == C.R*ang", "source": "arc length = pi*R*40/180 (deg -> rad conversion by the unit system)"},
+  {"zfl": "margin == C.R - Rmin", "source": "R - R_min, required >= 0"}
+ ],
+ "requirements": [
+  {"quantity": "margin", "op": ">=", "value": "0", "why": "R >= R_min in the worst case"},
+  {"quantity": "arc", "op": "<=", "value": "330", "why": "right-of-way allows arc <= 330 m"}
+ ],
+ "objective": {"minimize": "C.cost", "why": "cheapest admissible radius"}
+}

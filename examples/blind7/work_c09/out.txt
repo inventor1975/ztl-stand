@@ -1,0 +1,114 @@
+[stand] 1/5 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 5,
+  "failed_at_nominal": 2,
+  "judged": 3,
+  "undecided": 0,
+  "units": "not checked: no unit for P.name",
+  "designs": [
+    {
+      "design": "P=posted(name=100, Vp=100, f=29/100)",
+      "verdict": "REFUTED",
+      "fails": "d_s <= ASD in the worst case",
+      "by_at_witness": "10308453/203840 (~50.5713)",
+      "unit": "m"
+    },
+    {
+      "design": "P=posted(name=90, Vp=90, f=3/10)",
+      "verdict": "REFUTED",
+      "fails": "d_s <= ASD in the worst case",
+      "by_at_witness": "1956427/211680 (~9.24238)",
+      "unit": "m"
+    },
+    {
+      "design": "P=posted(name=80, Vp=80, f=3/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ds": [
+          "249922/1715 (~145.727)",
+          "8594231/50960 (~168.647)"
+        ]
+      }
+    },
+    {
+      "design": "P=posted(name=70, Vp=70, f=31/100)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ds": [
+          "66859/580 (~115.274)",
+          "19738/147 (~134.272)"
+        ]
+      }
+    },
+    {
+      "design": "P=posted(name=60, Vp=60, f=33/100)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "ds": [
+          "1328979/15190 (~87.4904)",
+          "1458249/14210 (~102.621)"
+        ]
+      }
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 2,
+    "EARNED": 3
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "0 - P.Vp",
+    "value": "-80",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "P": {
+      "catalog": "posted",
+      "name": {
+        "nominal": "80",
+        "tolerance": "0"
+      },
+      "Vp": {
+        "nominal": "80",
+        "tolerance": "0"
+      },
+      "f": {
+        "nominal": "3/10 (~0.3)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "ds": [
+      "249922/1715 (~145.727)",
+      "8594231/50960 (~168.647)"
+    ]
+  },
+  "guaranteed_unit": {
+    "ds": "m"
+  },
+  "how": {
+    "ds": "ZTL, interval reading of the definition (sound, may be wide)"
+  },
+  "requirements": [
+    {
+      "quantity": "ds",
+      "op": "<=",
+      "value": "ASD",
+      "why": "d_s <= ASD in the worst case"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "v -> [80, 85] by [v == P__Vp + dv]",
+    "ds -> [249922/1715, 8594231/50960] by [ds == kc*tr*v + (kc*v)*(kc*v)/(gc*(P__f - G))], interval reading, sound, may be wider than the truth (credit)",
+    "margin -> [68969/50960, 41628/1715] by [margin == ASDmin - ds]",
+    "pct -> [4057/509600, 20814/145775] by [pct == margin/ASDmin]"
+  ],
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

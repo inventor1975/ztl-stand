@@ -1,0 +1,237 @@
+{
+ "stand": "ztl-stand/1",
+ "report": "all",
+ "quantities": {
+  "Budget": {
+   "role": "given",
+   "value": "200",
+   "unit": "MUSD",
+   "why": "capital budget"
+  },
+  "NPV": {
+   "role": "derived",
+   "unit": "MUSD"
+  }
+ },
+ "slots": {
+  "PA": {
+   "from": [
+    "pA"
+   ],
+   "optional": true
+  },
+  "PB": {
+   "from": [
+    "pB"
+   ],
+   "optional": true
+  },
+  "PC": {
+   "from": [
+    "pC"
+   ],
+   "optional": true
+  },
+  "PD": {
+   "from": [
+    "pD"
+   ],
+   "optional": true
+  },
+  "PE": {
+   "from": [
+    "pE"
+   ],
+   "optional": true
+  },
+  "PF": {
+   "from": [
+    "pF"
+   ],
+   "optional": true
+  },
+  "PG": {
+   "from": [
+    "pG"
+   ],
+   "optional": true
+  }
+ },
+ "where": [
+  "PA.inv+PB.inv+PC.inv+PD.inv+PE.inv+PF.inv+PG.inv <= Budget"
+ ],
+ "laws": [
+  {
+   "zfl": "NPV == PA.npv+PB.npv+PC.npv+PD.npv+PE.npv+PF.npv+PG.npv",
+   "source": "total NPV is the sum of project NPVs"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "NPV",
+   "op": ">=",
+   "value": "74.0",
+   "why": "worst-case total NPV at least 74.0 MUSD"
+  }
+ ],
+ "objective": {
+  "minimize": "-(PA.npv+PB.npv+PC.npv+PD.npv+PE.npv+PF.npv+PG.npv)",
+  "why": "maximise total NPV (nominal order = worst-case order, all NPVs scaled by the same 0.95..1.05 range)"
+ },
+ "catalog": {
+  "pA": {
+   "items": [
+    {
+     "inv": {
+      "value": "150"
+     },
+     "npv": {
+      "value": "60",
+      "tolerance": "0.05"
+     }
+    }
+   ],
+   "fields": {
+    "inv": {
+     "unit": "MUSD"
+    },
+    "npv": {
+     "unit": "MUSD"
+    }
+   },
+   "ground": "problem table"
+  },
+  "pB": {
+   "items": [
+    {
+     "inv": {
+      "value": "100"
+     },
+     "npv": {
+      "value": "25",
+      "tolerance": "0.05"
+     }
+    }
+   ],
+   "fields": {
+    "inv": {
+     "unit": "MUSD"
+    },
+    "npv": {
+     "unit": "MUSD"
+    }
+   },
+   "ground": "problem table"
+  },
+  "pC": {
+   "items": [
+    {
+     "inv": {
+      "value": "70"
+     },
+     "npv": {
+      "value": "10",
+      "tolerance": "0.05"
+     }
+    }
+   ],
+   "fields": {
+    "inv": {
+     "unit": "MUSD"
+    },
+    "npv": {
+     "unit": "MUSD"
+    }
+   },
+   "ground": "problem table"
+  },
+  "pD": {
+   "items": [
+    {
+     "inv": {
+      "value": "50"
+     },
+     "npv": {
+      "value": "15",
+      "tolerance": "0.05"
+     }
+    }
+   ],
+   "fields": {
+    "inv": {
+     "unit": "MUSD"
+    },
+    "npv": {
+     "unit": "MUSD"
+    }
+   },
+   "ground": "problem table"
+  },
+  "pE": {
+   "items": [
+    {
+     "inv": {
+      "value": "30"
+     },
+     "npv": {
+      "value": "11",
+      "tolerance": "0.05"
+     }
+    }
+   ],
+   "fields": {
+    "inv": {
+     "unit": "MUSD"
+    },
+    "npv": {
+     "unit": "MUSD"
+    }
+   },
+   "ground": "problem table"
+  },
+  "pF": {
+   "items": [
+    {
+     "inv": {
+      "value": "20"
+     },
+     "npv": {
+      "value": "7",
+      "tolerance": "0.05"
+     }
+    }
+   ],
+   "fields": {
+    "inv": {
+     "unit": "MUSD"
+    },
+    "npv": {
+     "unit": "MUSD"
+    }
+   },
+   "ground": "problem table"
+  },
+  "pG": {
+   "items": [
+    {
+     "inv": {
+      "value": "10"
+     },
+     "npv": {
+      "value": "2",
+      "tolerance": "0.05"
+     }
+    }
+   ],
+   "fields": {
+    "inv": {
+     "unit": "MUSD"
+    },
+    "npv": {
+     "unit": "MUSD"
+    }
+   },
+   "ground": "problem table"
+  }
+ }
+}

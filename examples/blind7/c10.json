@@ -1,0 +1,31 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "Th": {"role": "given", "range": ["313.15", "318.15"], "unit": "K", "why": "heating water 40..45 C, T(K)=T(C)+273.15"},
+  "Tc": {"role": "given", "range": ["253.15", "263.15"], "unit": "K", "why": "outdoor -20..-10 C"},
+  "Qh": {"role": "given", "range": ["8.5", "9.5"], "unit": "kW", "why": "heat load"},
+  "Tfrost": {"role": "given", "value": "258.15", "unit": "K", "why": "-15 C threshold, strictly below derates"},
+  "Pel": {"role": "derived", "unit": "kW"}
+ },
+ "slots": {"U": {"from": ["units"]}},
+ "laws": [
+  {"zfl": "Pel == Qh*(Th - Tc)/(Th*U.eta*if(Tc < Tfrost, 9/10, 1))", "source": "P_el = Q_h/COP, COP = eta*COP_ideal, COP_ideal = Th/(Th-Tc); eta x 0.9 when outdoor temp strictly below -15 C"}
+ ],
+ "requirements": [
+  {"quantity": "Pel", "op": "<=", "value": "4.0", "why": "supply circuit limit, worst case"}
+ ],
+ "objective": {"minimize": "U.price", "why": "cheapest admissible unit (problem asks which are admissible; report all)"},
+ "report": "all",
+ "catalog": {
+  "units": {
+   "ground": "problem table",
+   "items": [
+    {"name": "U1", "eta": "0.42", "price": "4200"},
+    {"name": "U2", "eta": "0.47", "price": "5100"},
+    {"name": "U3", "eta": "0.52", "price": "6400"},
+    {"name": "U4", "eta": "0.55", "price": "7900"}
+   ],
+   "fields": {"eta": {"unit": ""}, "price": {"unit": "USD"}}
+  }
+ }
+}

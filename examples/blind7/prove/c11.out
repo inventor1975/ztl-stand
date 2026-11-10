@@ -1,0 +1,198 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 6,
+  "failed_at_nominal": 4,
+  "judged": 2,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "C=radii(R=300, cost=1)",
+      "verdict": "REFUTED",
+      "fails": "R >= R_min in the worst case",
+      "by_at_witness": "190739600/3240243 (~58.8658)",
+      "unit": "m"
+    },
+    {
+      "design": "C=radii(R=350, cost=6/5)",
+      "verdict": "REFUTED",
+      "fails": "R >= R_min in the worst case",
+      "by_at_witness": "28727450/3240243 (~8.86583)",
+      "unit": "m"
+    },
+    {
+      "design": "C=radii(R=400, cost=29/20)",
+      "verdict": "REFUTED",
+      "fails": "R >= R_min in the worst case",
+      "by_at_witness": "3134200/556227 (~5.63475)",
+      "unit": "m"
+    },
+    {
+      "design": "C=radii(R=450, cost=17/10)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "margin": [
+          "24677150/556227 (~44.3653)",
+          "31647350/238383 (~132.758)"
+        ],
+        "arc": [
+          "~314.159265359 (an exact fraction of 38 digits)",
+          "~314.159265359 (an exact fraction of 38 digits)"
+        ]
+      }
+    },
+    {
+      "design": "C=radii(R=500, cost=2)",
+      "verdict": "REFUTED",
+      "fails": "right-of-way allows arc <= 330 m",
+      "by_at_witness": "~19.0658503989 (an exact fraction of 37 digits)",
+      "unit": "m"
+    },
+    {
+      "design": "C=radii(R=600, cost=13/5)",
+      "verdict": "REFUTED",
+      "fails": "right-of-way allows arc <= 330 m",
+      "by_at_witness": "~88.8790204786 (an exact fraction of 38 digits)",
+      "unit": "m"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 5,
+    "EARNED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "C.cost",
+    "value": "17/10 (~1.7)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "C": {
+      "catalog": "radii",
+      "R": {
+        "nominal": "450",
+        "tolerance": "0"
+      },
+      "cost": {
+        "nominal": "17/10 (~1.7)",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "margin": [
+      "24677150/556227 (~44.3653)",
+      "31647350/238383 (~132.758)"
+    ],
+    "arc": [
+      "~314.159265359 (an exact fraction of 38 digits)",
+      "~314.159265359 (an exact fraction of 38 digits)"
+    ]
+  },
+  "guaranteed_unit": {
+    "margin": "m",
+    "arc": "m"
+  },
+  "how": {
+    "margin": "ZTL, interval reading of the definition (sound, may be wide)",
+    "arc": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "margin",
+      "op": ">=",
+      "value": "0",
+      "why": "R >= R_min in the worst case"
+    },
+    {
+      "quantity": "arc",
+      "op": "<=",
+      "value": "330",
+      "why": "right-of-way allows arc <= 330 m"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "arc = 15707963267948966192313216916397514420987/50000000000000000000000000000000000000 by exact elimination (credit)",
+    "fmax -> [1/8, 33/250] by [fmax == ifpos(v / vu - 80, ifpos(v / vu - 90, ifpos(v / vu - 100, 0.12, 0.13 + (0.12 - 0.13) * (v / vu - 90) / (100 - 90)), 0.14 + (0.13 - 0.14) * (v / vu - 80) / (90 - 80)), 0.14)], interval reading, sound, may be wider than the truth (credit)",
+    "Rmin -> [75625000/238383, 225625000/556227] by [Rmin == v*v/(G*(e + fmax))], interval reading, sound, may be wider than the truth (credit)",
+    "margin -> [24677150/556227, 31647350/238383] by [margin == C__R - Rmin]"
+  ],
+  "proof": {
+    "proved": 2,
+    "of": 2,
+    "count": "2 of 2 requirement(s) proved as Lean theorems; 0 rest on ZTL's verdict alone (no Lean theorem)",
+    "requirements": [
+      {
+        "quantity": "margin",
+        "op": ">=",
+        "value_si": "0",
+        "definition": "margin = (C__R - (((v * v) / (G * (e + (ifpos(((v / vu) - 80), ifpos(((v / vu) - 90), ifpos(((v / vu) - 100), (3/25), ((13/100) + ((((3/25) - (13/100)) * ((v / vu) - 90)) / (100 - 90)))), ((7/50) + ((((13/100) - (7/50)) * ((v / vu) - 80)) / (90 - 80)))), (7/50)))))))) (the system's solutions substituted)",
+        "status": "theorem",
+        "axioms": "none (each #print axioms: does not depend on any axioms)",
+        "reads": "margin >= 0",
+        "about": "a TABLE, branch by branch (4 branches): at every point of the box, WHICHEVER branch applies, the requirement holds (ZBoundIf — a branch's piece is proved or excluded by its own condition; that the branches cover the table is the table's reading); the expression from ZTL's exact elimination, Python",
+        "file": "/media/vitaly/SSD_1000GB/Projects/ZTL/lean/gen/ZStand_4097aae88471.lean",
+        "theorems": [
+          "ZStand_4097aae88471.req0",
+          "ZStand_4097aae88471.breq0_0",
+          "ZStand_4097aae88471.breq1_0",
+          "ZStand_4097aae88471.breq2_0",
+          "ZStand_4097aae88471.breq3_0",
+          "ZStand_4097aae88471.bcl0_0",
+          "ZStand_4097aae88471.bcl1_0",
+          "ZStand_4097aae88471.bcl2_0",
+          "ZStand_4097aae88471.bcl3_0"
+        ],
+        "params": [
+          "e",
+          "v"
+        ],
+        "theorem_vars": {
+          "e": "var 0 = e",
+          "v": "var 1 = v"
+        },
+        "box": {
+          "e": [
+            "3518437208883/70368744177664",
+            "1055531162665/17592186044416"
+          ],
+          "v": [
+            "1720124857676231/70368744177664",
+            "7427811885420089/281474976710656"
+          ]
+        },
+        "box_is": "rounded outward to dyadics"
+      },
+      {
+        "quantity": "arc",
+        "op": "<=",
+        "value_si": "330",
+        "status": "theorem",
+        "axioms": "none (each #print axioms: does not depend on any axioms)",
+        "reads": "arc <= 330",
+        "about": "the LAWS: for every point of the box and EVERY value of the unknowns satisfying the laws (rows + a cofactor certificate checked by the kernel — the elimination not trusted; theorems lawreq*)",
+        "file": "/media/vitaly/SSD_1000GB/Projects/ZTL/lean/gen/ZStand_2356385e5a72.lean",
+        "theorems": [
+          "ZStand_2356385e5a72.lawreq0",
+          "ZStand_2356385e5a72.law_val",
+          "ZStand_2356385e5a72.req0",
+          "ZStand_2356385e5a72.cleared0",
+          "ZStand_2356385e5a72.q_pos"
+        ],
+        "params": [],
+        "theorem_vars": {},
+        "box": {},
+        "box_is": "rounded outward to dyadics"
+      }
+    ],
+    "seconds": 4.8,
+    "check_again": "cd /media/vitaly/SSD_1000GB/Projects/ZTL/lean && lake env lean --tstack=400000 <file>",
+    "rests_on": "each requirement says what its theorem is ABOUT: the LAWS (every value of the unknowns satisfying them; each law read as a polynomial row — multiplied by its denominators, the parameters scaled — Python, local per law; the elimination checked by the kernel), or the EXPRESSION from ZTL's exact elimination (Python, not proved in Lean); the tolerances are the brick's data, taken as stated; values in SI"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

@@ -1,0 +1,289 @@
+[stand] 1/4 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "largest",
+  "quantity": "Areq",
+  "unit": "in",
+  "proved": "2283/1000 (~2.283)",
+  "proved_means": "every Areq in [0, 2283/1000 (~2.283)] in works (EARNED on the whole range)",
+  "beyond": "571/250 (~2.284)",
+  "beyond_is": "REFUTED: the range [0, 571/250 (~2.284)] in holds a concrete failing point (at_beyond)",
+  "precision": "1/1000 (~0.001)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 5627be6",
+    "designs_tried": 4,
+    "failed_at_nominal": 2,
+    "judged": 2,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "ST=steels(name=A36, SY=36, KIC=60)",
+        "verdict": "REFUTED",
+        "fails": "critical crack length at least 2.5 in",
+        "by_at_witness": "107299920379129373531/153938040025899857000 (~0.697033)",
+        "unit": "in"
+      },
+      {
+        "design": "ST=steels(name=A441, SY=50, KIC=53)",
+        "verdict": "REFUTED",
+        "fails": "critical crack length at least 2.5 in",
+        "by_at_witness": "1936867316824329730361/5541769440932395734000 (~0.349503)",
+        "unit": "in"
+      },
+      {
+        "design": "ST=steels(name=A572, SY=50, KIC=100)",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "ac": [
+            "19531250000000000/8552113334772217 (~2.28379)",
+            "4726562500000000000/1385442360233098713 (~3.41159)"
+          ]
+        }
+      },
+      {
+        "design": "ST=steels(name=A514, SY=100, KIC=60)",
+        "verdict": "REFUTED",
+        "fails": "critical crack length at least 2.5 in",
+        "by_at_witness": "546631090758258858929/615752160103599526000 (~0.887745)",
+        "unit": "in"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 3,
+      "EARNED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "EARNED",
+    "design": {
+      "ST": {
+        "catalog": "steels",
+        "name": "A572",
+        "SY": {
+          "nominal": "50",
+          "tolerance": "0"
+        },
+        "KIC": {
+          "nominal": "100",
+          "tolerance": "1/10 (~0.1)"
+        }
+      }
+    },
+    "guaranteed": {
+      "ac": [
+        "19531250000000000/8552113334772217 (~2.28379)",
+        "4726562500000000000/1385442360233098713 (~3.41159)"
+      ]
+    },
+    "guaranteed_unit": {
+      "ac": "in"
+    },
+    "how": {
+      "ac": "ZTL, outer range"
+    },
+    "requirements": [
+      {
+        "quantity": "ac",
+        "op": ">=",
+        "value": "Areq",
+        "why": "critical crack length at least 2.5 in"
+      }
+    ],
+    "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": [
+      "ac -> [496093750000000/8552113334772217, 120054687500000000/1385442360233098713] by [ac == Lu*ST__KIC*ST__KIC/(pi*Q*Q*(0.6*ST__SY)*(0.6*ST__SY))], interval reading, sound, may be wider than the truth (credit)"
+    ]
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 5627be6",
+    "designs_tried": 4,
+    "failed_at_nominal": 2,
+    "judged": 2,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "ST=steels(name=A36, SY=36, KIC=60)",
+        "verdict": "REFUTED",
+        "fails": "critical crack length at least 2.5 in",
+        "by_at_witness": "26863464604788818347/38484510006474964250 (~0.698033)",
+        "unit": "in"
+      },
+      {
+        "design": "ST=steels(name=A441, SY=50, KIC=53)",
+        "verdict": "REFUTED",
+        "fails": "critical crack length at least 2.5 in",
+        "by_at_witness": "484909550386198982057/1385442360233098933500 (~0.350003)",
+        "unit": "in"
+      },
+      {
+        "design": "ST=steels(name=A572, SY=50, KIC=100)",
+        "verdict": "REFUTED",
+        "fails": "critical crack length at least 2.5 in",
+        "by_at_witness": "7995854788818347/38484510006474964250 (~0.000207768)",
+        "unit": "in"
+      },
+      {
+        "design": "ST=steels(name=A514, SY=100, KIC=60)",
+        "verdict": "REFUTED",
+        "fails": "critical crack length at least 2.5 in",
+        "by_at_witness": "136734741709577664673/153938040025899881500 (~0.888245)",
+        "unit": "in"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 4
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {
+      "ST": {
+        "catalog": "steels",
+        "name": "A572",
+        "SY": {
+          "nominal": "50",
+          "tolerance": "0"
+        },
+        "KIC": {
+          "nominal": "100",
+          "tolerance": "1/10 (~0.1)"
+        }
+      }
+    },
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "Areq": "571/250 (~2.284)",
+      "ST.KIC": "90"
+    },
+    "point_units": {
+      "Areq": "in",
+      "ST.KIC": "ksi"
+    },
+    "value_there": {
+      "ac": "351562500000000000/153938040025899857 (~2.28379)"
+    },
+    "unit": "in",
+    "requirement": {
+      "quantity": "ac",
+      "op": ">=",
+      "value": "Areq",
+      "why": "critical crack length at least 2.5 in"
+    },
+    "overshoot": "7995854788818347/38484510006474964250 (~0.000207768)",
+    "reasons": {
+      "spread_over_tolerances": [
+        "19531250000000000/8552113334772217 (~2.28379)",
+        "4726562500000000000/1385442360233098713 (~3.41159)"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "ST.KIC",
+          "moves_it_by": "1562500000000000000/1385442360233098713 (~1.1278)"
+        },
+        {
+          "quantity": "pi",
+          "moves_it_by": "19531250000000000/26867256425187702935777011181081 (~7.26954e-16)"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+    "_core": [
+      0
+    ]
+  },
+  "tries": [
+    {
+      "Areq": "0",
+      "verdict": "EARNED"
+    },
+    {
+      "Areq": "10",
+      "verdict": "REFUTED"
+    },
+    {
+      "Areq": "5",
+      "verdict": "REFUTED"
+    },
+    {
+      "Areq": "5/2 (~2.5)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Areq": "5/4 (~1.25)",
+      "verdict": "EARNED"
+    },
+    {
+      "Areq": "15/8 (~1.875)",
+      "verdict": "EARNED"
+    },
+    {
+      "Areq": "547/250 (~2.188)",
+      "verdict": "EARNED"
+    },
+    {
+      "Areq": "293/125 (~2.344)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Areq": "1133/500 (~2.266)",
+      "verdict": "EARNED"
+    },
+    {
+      "Areq": "461/200 (~2.305)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Areq": "1143/500 (~2.286)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Areq": "569/250 (~2.276)",
+      "verdict": "EARNED"
+    },
+    {
+      "Areq": "2281/1000 (~2.281)",
+      "verdict": "EARNED"
+    },
+    {
+      "Areq": "571/250 (~2.284)",
+      "verdict": "REFUTED"
+    },
+    {
+      "Areq": "1141/500 (~2.282)",
+      "verdict": "EARNED"
+    },
+    {
+      "Areq": "2283/1000 (~2.283)",
+      "verdict": "EARNED"
+    }
+  ],
+  "decision": {
+    "verdict": "EARNED",
+    "design": {
+      "ST": {
+        "catalog": "steels",
+        "name": "A36",
+        "SY": {
+          "nominal": "36",
+          "tolerance": "0"
+        },
+        "KIC": {
+          "nominal": "60",
+          "tolerance": "1/10 (~0.1)"
+        }
+      }
+    },
+    "guaranteed": {
+      "ac": [
+        "122070312500000000/76969020012949953 (~1.58597)",
+        "29541015625000000000/12468981242097888417 (~2.36916)"
+      ]
+    }
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+wall 0.76s

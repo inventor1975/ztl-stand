@@ -1,0 +1,14 @@
+363 decks run: 362 bounded, 1 errors: 293 (ValueError: max() iterable argument is empty)
+cases where the PROVED load-point displacement exceeds SimJEB's maximum vertex displacement: 0 []
+vertical stiffness per mass, PROVED UPPER bounds (N/mm per kg) — top 10. NOT a certified ranking: an upper bound
+  alone cannot order two designs; with both bounds (cadbracket), non-overlapping brackets order them:
+  bracket   66 (arch): k <= 87662 N/mm, mass 0.4666 kg, k/m <= 187874
+  bracket  271 (flat): k <= 176511 N/mm, mass 0.9928 kg, k/m <= 177791
+  bracket  356 (flat): k <= 115835 N/mm, mass 0.6741 kg, k/m <= 171841
+  bracket  321 (block): k <= 125826 N/mm, mass 0.7356 kg, k/m <= 171056
+  bracket  290 (flat): k <= 192528 N/mm, mass 1.2183 kg, k/m <= 158037
+  bracket  289 (flat): k <= 194477 N/mm, mass 1.2962 kg, k/m <= 150035
+  bracket  320 (block): k <= 82830 N/mm, mass 0.5593 kg, k/m <= 148092
+  bracket  454 (arch): k <= 88560 N/mm, mass 0.5983 kg, k/m <= 148023
+  bracket  553 (flat): k <= 121626 N/mm, mass 0.8411 kg, k/m <= 144597
+  bracket  198 (flat): k <= 109361 N/mm, mass 0.7826 kg, k/m <= 139735

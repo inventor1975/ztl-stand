@@ -1,0 +1,25 @@
+{
+ "subcase": 4,
+ "label": "torsion",
+ "F": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "M": [
+  0.0,
+  0.0,
+  564924.2
+ ],
+ "E": 113800.0,
+ "nu": 0.342,
+ "dof": 387795,
+ "fixed_nodes": 594,
+ "loaded_nodes": 690,
+ "compliance_float": 3225.451758813196,
+ "compliance_lower_proved": 3225.451758583745,
+ "f_v_exact": 3225.4517588132503,
+ "a_vv_up": 3225.451759042755,
+ "seconds": 28.3,
+ "sha256": "b6445fd72eccba938abfe3b40a72f2c283c003490159c0e306917fef8837e088"
+}

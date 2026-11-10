@@ -1,0 +1,205 @@
+[stand] 1/1 designs, 0 s: 
+{
+  "verdict": "EARNED",
+  "find": "largest",
+  "quantity": "r",
+  "unit": "",
+  "proved": "5963/50000 (~0.11926)",
+  "proved_means": "every r in [0, 5963/50000 (~0.11926)] works (EARNED on the whole range)",
+  "beyond": "11927/100000 (~0.11927)",
+  "beyond_is": "REFUTED: the range [0, 11927/100000 (~0.11927)] holds a concrete failing point (at_beyond)",
+  "precision": "1/100000 (~1e-05)",
+  "at_proved": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 5627be6",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "EARNED",
+        "guaranteed": {
+          "Diff": [
+            "0",
+            "457048301333325914662353281088000/30718918775281952276436174409 (~14878.4)"
+          ]
+        }
+      }
+    ],
+    "designs_count": {
+      "EARNED": 1
+    },
+    "verdict": "EARNED",
+    "design": {},
+    "guaranteed": {
+      "Diff": [
+        "0",
+        "457048301333325914662353281088000/30718918775281952276436174409 (~14878.4)"
+      ]
+    },
+    "guaranteed_unit": {
+      "Diff": "USD"
+    },
+    "guaranteed_ends": {
+      "Diff": "an end equal to the requirement's bound is what a certificate PROVED (the quantity stays on its side of it); the true extreme may lie further inside"
+    },
+    "how": {
+      "Diff": "ZTL, certificate checked exactly (4 pieces; found by the stand's search, the extreme may lie inside the box)"
+    },
+    "requirements": [
+      {
+        "quantity": "Diff",
+        "op": ">=",
+        "value": "0",
+        "why": "heavy at least as good as regular"
+      }
+    ],
+    "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+    "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+    "judge_log": []
+  },
+  "at_beyond": {
+    "stand": "ztl-stand/1",
+    "judge": "ZTL 5627be6",
+    "designs_tried": 1,
+    "failed_at_nominal": 0,
+    "judged": 1,
+    "undecided": 0,
+    "units": "checked: every law's dimensions agree",
+    "designs": [
+      {
+        "design": "",
+        "verdict": "REFUTED",
+        "fails": "heavy at least as good as regular",
+        "by_at_witness": "356466453064980984053572601000/1966116195613112664553783730289 (~0.181305)",
+        "unit": "USD"
+      }
+    ],
+    "designs_count": {
+      "REFUTED": 1
+    },
+    "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+    "verdict": "REFUTED",
+    "why": "every design in the catalog violates a requirement at a concrete point",
+    "closest_design": {},
+    "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+    "its_violating_point": {
+      "r": "11927/100000 (~0.11927)"
+    },
+    "point_units": {
+      "r": ""
+    },
+    "value_there": {
+      "Diff": "-356466453064980984053572601000/1966116195613112664553783730289 (~-0.181305)"
+    },
+    "unit": "USD",
+    "requirement": {
+      "quantity": "Diff",
+      "op": ">=",
+      "value": "0",
+      "why": "heavy at least as good as regular"
+    },
+    "overshoot": "356466453064980984053572601000/1966116195613112664553783730289 (~0.181305)",
+    "reasons": {
+      "spread_over_tolerances": [
+        "-356466453064980984053572601000/1966116195613112664553783730289 (~-0.181305)",
+        "6000"
+      ],
+      "largest_contributors": [
+        {
+          "quantity": "r",
+          "moves_it_by": "11797053640131740968306755954335000/1966116195613112664553783730289 (~6000.18)"
+        }
+      ]
+    },
+    "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+    "_core": [
+      0
+    ]
+  },
+  "tries": [
+    {
+      "r": "0",
+      "verdict": "EARNED"
+    },
+    {
+      "r": "3/10 (~0.3)",
+      "verdict": "REFUTED"
+    },
+    {
+      "r": "3/20 (~0.15)",
+      "verdict": "REFUTED"
+    },
+    {
+      "r": "3/40 (~0.075)",
+      "verdict": "EARNED"
+    },
+    {
+      "r": "9/80 (~0.1125)",
+      "verdict": "EARNED"
+    },
+    {
+      "r": "21/160 (~0.13125)",
+      "verdict": "REFUTED"
+    },
+    {
+      "r": "3047/25000 (~0.12188)",
+      "verdict": "REFUTED"
+    },
+    {
+      "r": "11719/100000 (~0.11719)",
+      "verdict": "EARNED"
+    },
+    {
+      "r": "5977/50000 (~0.11954)",
+      "verdict": "REFUTED"
+    },
+    {
+      "r": "2959/25000 (~0.11836)",
+      "verdict": "EARNED"
+    },
+    {
+      "r": "2379/20000 (~0.11895)",
+      "verdict": "EARNED"
+    },
+    {
+      "r": "2981/25000 (~0.11924)",
+      "verdict": "EARNED"
+    },
+    {
+      "r": "11939/100000 (~0.11939)",
+      "verdict": "REFUTED"
+    },
+    {
+      "r": "2983/25000 (~0.11932)",
+      "verdict": "REFUTED"
+    },
+    {
+      "r": "1491/12500 (~0.11928)",
+      "verdict": "REFUTED"
+    },
+    {
+      "r": "5963/50000 (~0.11926)",
+      "verdict": "EARNED"
+    },
+    {
+      "r": "11927/100000 (~0.11927)",
+      "verdict": "REFUTED"
+    }
+  ],
+  "decision": {
+    "verdict": "EARNED",
+    "design": {},
+    "guaranteed": {
+      "Diff": [
+        "1288951000/1771561 (~727.579)",
+        "1288951000/1771561 (~727.579)"
+      ]
+    }
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+1.33s

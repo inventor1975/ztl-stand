@@ -1,0 +1,1588 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 350,
+  "failed_at_nominal": 336,
+  "judged": 14,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "YS=Yset(N=54); RS=Rset(N=11)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "mY": [
+          "47/3630 (~0.0129477)",
+          "33107/46780 (~0.707717)"
+        ],
+        "mR": [
+          "727/9870 (~0.0736575)",
+          "1/10 (~0.1)"
+        ]
+      }
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=19)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=39); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "101839/90340 (~1.12729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=20)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=19)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=39); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "101839/90340 (~1.12729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=40); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "18561/18068 (~1.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=21)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=20)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=19)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=39); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "101839/90340 (~1.12729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=40); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "18561/18068 (~1.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=41); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "83771/90340 (~0.927286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=22)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=21)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=20)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=19)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=39); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "101839/90340 (~1.12729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=40); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "18561/18068 (~1.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=41); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "83771/90340 (~0.927286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=42); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "74737/90340 (~0.827286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=23)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=22)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=21)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=20)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=19)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=39); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "101839/90340 (~1.12729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=40); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "18561/18068 (~1.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=41); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "83771/90340 (~0.927286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=42); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "74737/90340 (~0.827286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=43); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "65703/90340 (~0.727286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=24)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=23)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=22)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=21)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=20)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=19)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=39); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "101839/90340 (~1.12729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=40); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "18561/18068 (~1.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=41); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "83771/90340 (~0.927286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=42); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "74737/90340 (~0.827286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=43); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "65703/90340 (~0.727286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=44); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "56669/90340 (~0.627286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=25)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=24)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=23)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=22)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=21)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=20)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=19)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=39); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "101839/90340 (~1.12729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=40); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "18561/18068 (~1.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=41); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "83771/90340 (~0.927286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=42); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "74737/90340 (~0.827286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=43); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "65703/90340 (~0.727286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=44); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "56669/90340 (~0.627286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=45); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "9527/18068 (~0.527286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=26)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=25)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=24)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=23)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=22)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=21)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=20)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=19)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=39); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "101839/90340 (~1.12729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=40); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "18561/18068 (~1.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=41); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "83771/90340 (~0.927286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=42); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "74737/90340 (~0.827286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=43); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "65703/90340 (~0.727286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=44); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "56669/90340 (~0.627286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=45); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "9527/18068 (~0.527286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=46); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "38601/90340 (~0.427286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=27)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=26)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=25)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=24)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=23)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=22)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=21)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=20)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=19)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=39); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "101839/90340 (~1.12729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=40); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "18561/18068 (~1.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=41); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "83771/90340 (~0.927286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=42); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "74737/90340 (~0.827286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=43); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "65703/90340 (~0.727286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=44); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "56669/90340 (~0.627286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=45); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "9527/18068 (~0.527286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=46); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "38601/90340 (~0.427286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=47); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "29567/90340 (~0.327286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=28)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=27)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=26)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=25)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=24)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=23)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=22)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=21)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=20)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=39); RS=Rset(N=19)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "101839/90340 (~1.12729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=40); RS=Rset(N=18)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "18561/18068 (~1.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=41); RS=Rset(N=17)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "83771/90340 (~0.927286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=42); RS=Rset(N=16)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "74737/90340 (~0.827286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=43); RS=Rset(N=15)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "65703/90340 (~0.727286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=44); RS=Rset(N=14)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "56669/90340 (~0.627286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=45); RS=Rset(N=13)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "9527/18068 (~0.527286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=46); RS=Rset(N=12)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "38601/90340 (~0.427286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=47); RS=Rset(N=11)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "29567/90340 (~0.327286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=48); RS=Rset(N=10)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "20533/90340 (~0.227286)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=30); RS=Rset(N=29)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "36629/18068 (~2.02729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=31); RS=Rset(N=28)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "174111/90340 (~1.92729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=32); RS=Rset(N=27)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "165077/90340 (~1.82729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=33); RS=Rset(N=26)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "156043/90340 (~1.72729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=34); RS=Rset(N=25)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "147009/90340 (~1.62729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=35); RS=Rset(N=24)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "27595/18068 (~1.52729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=36); RS=Rset(N=23)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "128941/90340 (~1.42729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=37); RS=Rset(N=22)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "119907/90340 (~1.32729)",
+      "unit": "s"
+    },
+    {
+      "design": "YS=Yset(N=38); RS=Rset(N=21)",
+      "verdict": "REFUTED",
+      "fails": "Y at least the formula value (rounded up)",
+      "by_at_witness": "110873/90340 (~1.22729)",
+      "unit": "s"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 349,
+    "EARNED": 1
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "designs_not_listed": 150,
+  "listing": "earned first, then open, then refuted",
+  "objective": {
+    "minimize": "YS.N + RS.N",
+    "value": "65",
+    "optimal": true,
+    "note": "every cheaper design was refuted",
+    "ties": {
+      "same_objective": 25,
+      "first": [
+        {
+          "design": "YS=Yset(N=30); RS=Rset(N=35)",
+          "verdict": "REFUTED"
+        },
+        {
+          "design": "YS=Yset(N=31); RS=Rset(N=34)",
+          "verdict": "REFUTED"
+        },
+        {
+          "design": "YS=Yset(N=32); RS=Rset(N=33)",
+          "verdict": "REFUTED"
+        }
+      ],
+      "note": "these cost the same; \"not judged\" ones come after the earned design in the search, which stops at the first EARNED — \"report\": \"all\" judges them"
+    }
+  },
+  "verdict": "EARNED",
+  "design": {
+    "YS": {
+      "catalog": "Yset",
+      "N": {
+        "nominal": "54",
+        "tolerance": "0"
+      }
+    },
+    "RS": {
+      "catalog": "Rset",
+      "N": {
+        "nominal": "11",
+        "tolerance": "0"
+      }
+    }
+  },
+  "guaranteed": {
+    "mY": [
+      "47/3630 (~0.0129477)",
+      "33107/46780 (~0.707717)"
+    ],
+    "mR": [
+      "727/9870 (~0.0736575)",
+      "1/10 (~0.1)"
+    ]
+  },
+  "guaranteed_unit": {
+    "mY": "s",
+    "mR": "s"
+  },
+  "how": {
+    "mY": "ZTL, outer range",
+    "mR": "ZTL, interval reading of the definition (sound, may be wide)"
+  },
+  "requirements": [
+    {
+      "quantity": "mY",
+      "op": ">=",
+      "value": "0",
+      "why": "Y at least the formula value (rounded up)"
+    },
+    {
+      "quantity": "mR",
+      "op": ">=",
+      "value": "0",
+      "why": "R at least the formula value, floor 1.0 s"
+    }
+  ],
+  "rests_on": "ZTL disposition OPEN: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "R = 11/10 by exact elimination (credit)",
+    "Y = 27/5 by exact elimination (credit)",
+    "YR = 13/2 by exact elimination (credit)",
+    "mY -> [47/3630, 33107/46780] by [mY == YS__N*dt - (t + su*1.47*V/(2*a + 64.4*g))], interval reading, sound, may be wider than the truth (credit)",
+    "mR -> [727/9870, 1/10] by [mR == RS__N*dt - (max((su*(W + L)/(1.47*(min(V, Vlim))) - one), one))], interval reading, sound, may be wider than the truth (credit)"
+  ],
+  "proof": {
+    "proved": 2,
+    "of": 2,
+    "count": "2 of 2 requirement(s) proved as Lean theorems; 0 rest on ZTL's verdict alone (no Lean theorem)",
+    "requirements": [
+      {
+        "quantity": "mY",
+        "op": ">=",
+        "value_si": "0",
+        "status": "theorem",
+        "axioms": "none (each #print axioms: does not depend on any axioms)",
+        "reads": "mY >= 0",
+        "about": "the LAWS: for every point of the box and EVERY value of the unknowns satisfying the laws (rows + a cofactor certificate checked by the kernel — the elimination not trusted; theorems lawreq*)",
+        "file": "/media/vitaly/SSD_1000GB/Projects/ZTL/lean/gen/ZStand_2eef12158a97.lean",
+        "theorems": [
+          "ZStand_2eef12158a97.lawreq0",
+          "ZStand_2eef12158a97.law_val",
+          "ZStand_2eef12158a97.req0",
+          "ZStand_2eef12158a97.cleared0",
+          "ZStand_2eef12158a97.q_pos"
+        ],
+        "params": [
+          "V",
+          "g"
+        ],
+        "theorem_vars": {
+          "V": "var 0 = 1·V",
+          "g": "var 1 = 50·g"
+        },
+        "box": {
+          "V": [
+            "47",
+            "52"
+          ],
+          "g": [
+            "-2",
+            "-1"
+          ]
+        },
+        "box_is": "exact: each parameter an integer multiple, an integer box"
+      },
+      {
+        "quantity": "mR",
+        "op": ">=",
+        "value_si": "0",
+        "definition": "mR = ((RS__N * dt) - max((((su * (W + L)) / ((147/100) * min(V, Vlim))) - one), one)) (the system's solutions substituted)",
+        "status": "theorem",
+        "axioms": "none (each #print axioms: does not depend on any axioms)",
+        "reads": "mR >= 0",
+        "about": "the EXPRESSION of the quantity from the laws (ZTL's exact elimination, Python)",
+        "file": "/media/vitaly/SSD_1000GB/Projects/ZTL/lean/gen/ZStand_915096a6d684.lean",
+        "theorems": [
+          "ZStand_915096a6d684.req0",
+          "ZStand_915096a6d684.cleared0"
+        ],
+        "params": [
+          "V",
+          "W"
+        ],
+        "theorem_vars": {
+          "V": "var 0 = V",
+          "W": "var 1 = W"
+        },
+        "box": {
+          "V": [
+            "47",
+            "52"
+          ],
+          "W": [
+            "112",
+            "120"
+          ]
+        },
+        "box_is": "rounded outward to dyadics"
+      }
+    ],
+    "seconds": 4.3,
+    "check_again": "cd /media/vitaly/SSD_1000GB/Projects/ZTL/lean && lake env lean --tstack=400000 <file>",
+    "rests_on": "each requirement says what its theorem is ABOUT: the LAWS (every value of the unknowns satisfying them; each law read as a polynomial row — multiplied by its denominators, the parameters scaled — Python, local per law; the elimination checked by the kernel), or the EXPRESSION from ZTL's exact elimination (Python, not proved in Lean); the tolerances are the brick's data, taken as stated; values in SI"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

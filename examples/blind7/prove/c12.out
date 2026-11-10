@@ -1,0 +1,610 @@
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "excluded_by_where": 68,
+  "designs_tried": 60,
+  "failed_at_nominal": 58,
+  "judged": 2,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "PA=pA(inv=150, npv=60); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "EARNED",
+      "guaranteed": {
+        "NPV": [
+          "741/10 (~74.1)",
+          "819/10 (~81.9)"
+        ]
+      }
+    },
+    {
+      "design": "PA=pA(inv=150, npv=60); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "11/4 (~2.75)",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=pA(inv=150, npv=60); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "1",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=pA(inv=150, npv=60); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "3",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=pA(inv=150, npv=60); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "5",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=pA(inv=150, npv=60); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "7",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=pA(inv=150, npv=60); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "12",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=pA(inv=150, npv=60); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "14",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "16",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "21",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "23",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "25",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "27",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "28",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "29",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "29",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "30",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "31",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "31",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "32",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "32",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "34",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "36",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "36",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "37",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "38",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "38",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "39",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "39",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "40",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "40",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "41",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "42",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "42",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "44",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "46",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "46",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "47",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "47",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "48",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=pB(inv=100, npv=25); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "49",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "49",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "50",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "51",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "52",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "53",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "54",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "55",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "56",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "57",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "57",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=pD(inv=50, npv=15); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "59",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "61",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "62",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=pE(inv=30, npv=11); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "63",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=pC(inv=70, npv=10); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "64",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "65",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=pF(inv=20, npv=7); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "67",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=pG(inv=10, npv=2)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "72",
+      "unit": "MUSD"
+    },
+    {
+      "design": "PA=PA_none(name=none, inv=0, npv=0); PB=PB_none(name=none, inv=0, npv=0); PC=PC_none(name=none, inv=0, npv=0); PD=PD_none(name=none, inv=0, npv=0); PE=PE_none(name=none, inv=0, npv=0); PF=PF_none(name=none, inv=0, npv=0); PG=PG_none(name=none, inv=0, npv=0)",
+      "verdict": "REFUTED",
+      "fails": "worst-case total NPV at least 74.0 MUSD",
+      "by_at_witness": "74",
+      "unit": "MUSD"
+    }
+  ],
+  "designs_count": {
+    "EARNED": 1,
+    "REFUTED": 59
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "objective": {
+    "minimize": "-(PA.npv+PB.npv+PC.npv+PD.npv+PE.npv+PF.npv+PG.npv)",
+    "value": "-78",
+    "unit": "MUSD",
+    "unit_from": "the unit of the prices in the objective (no objective \"unit\" given)",
+    "optimal": true,
+    "note": "every cheaper design was refuted"
+  },
+  "verdict": "EARNED",
+  "design": {
+    "PA": {
+      "catalog": "pA",
+      "inv": {
+        "nominal": "150",
+        "tolerance": "0"
+      },
+      "npv": {
+        "nominal": "60",
+        "tolerance": "1/20 (~0.05)"
+      }
+    },
+    "PB": {
+      "catalog": "PB_none",
+      "inv": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "npv": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "name": "none"
+    },
+    "PC": {
+      "catalog": "PC_none",
+      "inv": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "npv": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "name": "none"
+    },
+    "PD": {
+      "catalog": "PD_none",
+      "inv": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "npv": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "name": "none"
+    },
+    "PE": {
+      "catalog": "pE",
+      "inv": {
+        "nominal": "30",
+        "tolerance": "0"
+      },
+      "npv": {
+        "nominal": "11",
+        "tolerance": "1/20 (~0.05)"
+      }
+    },
+    "PF": {
+      "catalog": "pF",
+      "inv": {
+        "nominal": "20",
+        "tolerance": "0"
+      },
+      "npv": {
+        "nominal": "7",
+        "tolerance": "1/20 (~0.05)"
+      }
+    },
+    "PG": {
+      "catalog": "PG_none",
+      "inv": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "npv": {
+        "nominal": "0",
+        "tolerance": "0"
+      },
+      "name": "none"
+    }
+  },
+  "guaranteed": {
+    "NPV": [
+      "741/10 (~74.1)",
+      "819/10 (~81.9)"
+    ]
+  },
+  "guaranteed_unit": {
+    "NPV": "MUSD"
+  },
+  "how": {
+    "NPV": "ZTL, outer range"
+  },
+  "requirements": [
+    {
+      "quantity": "NPV",
+      "op": ">=",
+      "value": "74.0",
+      "why": "worst-case total NPV at least 74.0 MUSD"
+    }
+  ],
+  "rests_on": "ZTL disposition ON CREDIT: the tolerances and ranges are the brick's data (the given quantities and the catalog's datasheet values) — taken as stated, not verified",
+  "checker": "not run (work mode: ZTL's verdict; --dev runs the independent checker)",
+  "judge_log": [
+    "NPV -> [74100000, 81900000] by [NPV == PA__npv+PB__npv+PC__npv+PD__npv+PE__npv+PF__npv+PG__npv]"
+  ],
+  "proof": {
+    "proved": 1,
+    "of": 1,
+    "count": "1 of 1 requirement(s) proved as Lean theorems; 0 rest on ZTL's verdict alone (no Lean theorem)",
+    "requirements": [
+      {
+        "quantity": "NPV",
+        "op": ">=",
+        "value_si": "74000000",
+        "status": "theorem",
+        "axioms": "none (each #print axioms: does not depend on any axioms)",
+        "reads": "NPV >= 74000000",
+        "about": "the LAWS: for every point of the box and EVERY value of the unknowns satisfying the laws (rows + a cofactor certificate checked by the kernel — the elimination not trusted; theorems lawreq*)",
+        "file": "/media/vitaly/SSD_1000GB/Projects/ZTL/lean/gen/ZStand_febdb2b3b80d.lean",
+        "theorems": [
+          "ZStand_febdb2b3b80d.lawreq0",
+          "ZStand_febdb2b3b80d.law_val",
+          "ZStand_febdb2b3b80d.req0",
+          "ZStand_febdb2b3b80d.cleared0",
+          "ZStand_febdb2b3b80d.q_pos"
+        ],
+        "params": [
+          "PA__npv",
+          "PE__npv",
+          "PF__npv"
+        ],
+        "theorem_vars": {
+          "PA__npv": "var 0 = 1·PA__npv",
+          "PE__npv": "var 1 = 1·PE__npv",
+          "PF__npv": "var 2 = 1·PF__npv"
+        },
+        "box": {
+          "PA__npv": [
+            "57000000",
+            "63000000"
+          ],
+          "PE__npv": [
+            "10450000",
+            "11550000"
+          ],
+          "PF__npv": [
+            "6650000",
+            "7350000"
+          ]
+        },
+        "box_is": "exact: each parameter an integer multiple, an integer box"
+      }
+    ],
+    "seconds": 2.0,
+    "check_again": "cd /media/vitaly/SSD_1000GB/Projects/ZTL/lean && lake env lean --tstack=400000 <file>",
+    "rests_on": "each requirement says what its theorem is ABOUT: the LAWS (every value of the unknowns satisfying them; each law read as a polynomial row — multiplied by its denominators, the parameters scaled — Python, local per law; the elimination checked by the kernel), or the EXPRESSION from ZTL's exact elimination (Python, not proved in Lean); the tolerances are the brick's data, taken as stated; values in SI"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}

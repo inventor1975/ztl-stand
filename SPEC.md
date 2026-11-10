@@ -51,7 +51,8 @@ A datasheet that lies makes an EARNED design fail in the world. That is the boun
   does its own exact arithmetic.
 - ZTL's kernel rules are kernel-checked in Lean 4 with zero axioms (ZTL/lean; for example `lean/ZConflict.lean`
   for the conflict search's rules and `lean/ZContract.lean` for HC4 contraction). The stand's Python is not
-  verified in Lean; its tests are in `tests/`.
+  verified in Lean; its tests are in `tests/`. With `--prove`, the earned requirements on linear laws (and
+  rational definitions over them) are additionally Lean theorems about the requirement itself (see §3).
 
 ## 3. Install and run
 
@@ -65,6 +66,18 @@ A datasheet that lies makes an EARNED design fail in the world. That is the boun
 - ZTL is found beside this repository (`../ZTL`), or wherever `USTAND_ZTL` points.
 - `--jobs N` judges designs in N worker processes. The verdict is the same, only faster.
 - `--dev` adds the independent checker on every design and every certificate (slower).
+- `--prove` (2026-11-08) adds a `proof` field to an EARNED verdict: each requirement on a quantity of the LINEAR laws
+  (or a definition over them, e.g. a power `I*I*R`) becomes a Lean theorem on VR's continuum, checked by the Lean
+  kernel with zero axioms (ZTL `tools/zbound2lean.py`, `lean/ZBound.lean`), and an honest count — how many
+  requirements are theorems, how many rest on ZTL's verdict alone. Said, not hidden: the elimination laws ⇒
+  expression is ZTL's exact Python algebra, not Lean; the tolerances are the brick's data. Needs ZTL's Lean build.
+  A TABLE (`if(...)`) whose condition is not one variable's affine sign is proved branch by branch (2026-11-09,
+  ZTL `lean/ZBoundIf.lean`): at every point of the box, whichever branch applies, the requirement holds — each
+  piece proved or excluded by its own condition; that the branches cover the table is the table's reading.
+  MANY tables in one quantity (a sum of power curves) — each table's value a variable with a proved range; their
+  dependence on one another unused (said in the `about`).
+  A `find` proves its own claim as well (2026-11-09): the proved range — the brick with the searched quantity set to
+  it — carries a `proof` and `proof_covers`, beside the `decision`'s (the brick as written, which may be refuted).
 - Developed and tested on Python 3.12.
 
 ## 4. The brick, in one screen

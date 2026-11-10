@@ -4318,5 +4318,49 @@ check("space frame END RELEASES in buckling and second order (the cloud red team
       _ra[0] <= 20.1907 * _EIr / 16 / 1e7 and _ra[1] != "EARNED" and _ra[2][0] <= 0.02128166 <= _ra[2][1]
       and _ra[3] != "REFUTED" and _rm[0] > 20.1907 * _EIr / 16 / 1e7 and _rm[1] == "EARNED", (_ra, _rm))
 
+# --prove (2026-11-08, the curator: "важно, если стенд будет давать не только сертификат, но и доказательства"):
+# the EARNED design's requirements as Lean theorems (ustand/prove.py -> ZTL tools/zbound2lean.py). The other side:
+# in WORK mode a judge lying narrow EARNS ±0.5 % from 1 % parts (no checker) — the proof must NOT come.
+from ustand import prove as _PV                # noqa: E402
+_PV.PROVE[0], _dev_p = True, _MODE.DEV[0]
+try:
+    _MODE.DEV[0] = False
+    _p1 = S.run(ex("divider-1pct-req-1pct"))
+    _p2 = S.run(ex("divider-1pct-req-0.5pct"))
+    _p4 = S.run(ex("power-16thW-or-quarterW"))      # the powers P = I*I*R: definitions, the systems' solutions in
+    _p5 = S.run(ex("real3/s07/brick_choice_3400"))   # a TABLE not read as hinges: branch by branch (ZBoundIf)
+    _p6 = S.run(ex("blind7/c10b"))                   # a 'smallest' find: its decision refuted, its proved range not
+
+    def _lying_narrow(laws, fixed, boxes, derived, grounds):
+        out, log, d = real(laws, fixed, boxes, derived, grounds)
+        if "Vout" in out:
+            out["Vout"] = (F(249, 100), F(251, 100), "corners")
+        return out, log, d
+    J.judge = _lying_narrow
+    _p3 = S.run(ex("divider-1pct-req-0.5pct"))
+finally:
+    J.judge, _MODE.DEV[0], _PV.PROVE[0] = real, _dev_p, False
+check("--prove: the divider's +-1 % requirement is a Lean THEOREM (1 of 1, zero axioms); a REFUTED verdict carries no "
+      "proof; a judge lying narrow in work mode EARNS +-0.5 % falsely, and the proof refuses it (0 of 1); the 27 ohm "
+      "divider with its powers P = I*I*R against the 1/4 W rating: 4 of 4 (non-dyadic box, exact)",
+      _p1["verdict"] == "EARNED" and _p1["proof"]["proved"] == 1 and _p1["proof"]["requirements"][0]["status"] == "theorem"
+      and _p2["verdict"] == "REFUTED" and "proof" not in _p2
+      and _p3["verdict"] == "EARNED" and _p3["proof"]["proved"] == 0
+      and _p4["verdict"] == "EARNED" and _p4["proof"]["proved"] == 4 == _p4["proof"]["of"],
+      json.dumps([_p1.get("proof"), _p3.get("proof")], ensure_ascii=False)[:400])
+_r5 = (_p5.get("proof") or {}).get("requirements") or [{}]
+check("--prove on a TABLE (real3/s07, 5 branches): a theorem branch by branch — the 'about' says so and the "
+      "branch theorems are named (2026-11-09; was 'not translated (yet): ifpos')",
+      _p5["verdict"] == "EARNED" and _p5["proof"]["proved"] == _p5["proof"]["of"] >= 1
+      and str(_r5[0].get("about", "")).startswith("a TABLE")
+      and any(".breq" in n for n in _r5[0].get("theorems", [])),
+      json.dumps(_p5.get("proof"), ensure_ascii=False)[:400])
+
+check("--prove on a 'smallest' find (blind7 c10b): the PROVED RANGE carries its own proof (1 of 1, 'every eta in "
+      "[0.5392, 0.8]'), though the decision — the brick as written — is refuted at its own value (2026-11-09)",
+      _p6["verdict"] == "EARNED" and (_p6.get("proof") or {}).get("proved") == 1 == (_p6.get("proof") or {}).get("of")
+      and "every eta in" in str(_p6.get("proof_covers")) and (_p6.get("decision") or {}).get("verdict") == "REFUTED",
+      json.dumps({k: _p6.get(k) for k in ("verdict", "proof_covers")}, ensure_ascii=False)[:300])
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

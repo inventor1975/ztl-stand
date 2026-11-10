@@ -1,0 +1,172 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "t": {
+   "role": "given",
+   "value": "1",
+   "unit": "s",
+   "ground": "problem: perception-reaction time"
+  },
+  "su": {
+   "role": "given",
+   "value": "1",
+   "unit": "s",
+   "why": "unit carrier so the dimensionless fraction becomes seconds"
+  },
+  "dt": {
+   "role": "given",
+   "value": "0.1",
+   "unit": "s",
+   "why": "setting granularity"
+  },
+  "a": {
+   "role": "given",
+   "value": "10",
+   "unit": "",
+   "why": "deceleration 10 ft/s^2 (formula in ft, s, mph)"
+  },
+  "L": {
+   "role": "given",
+   "value": "20",
+   "unit": "",
+   "why": "vehicle length 20 ft"
+  },
+  "Vlim": {
+   "role": "given",
+   "value": "55",
+   "unit": "",
+   "why": "posted speed limit mph"
+  },
+  "one": {
+   "role": "given",
+   "value": "1",
+   "unit": "s",
+   "why": "R floor and start-up delay credit, 1 s"
+  },
+  "V": {
+   "role": "given",
+   "range": [
+    "47",
+    "52"
+   ],
+   "unit": "",
+   "why": "85th pct speed mph"
+  },
+  "g": {
+   "role": "given",
+   "range": [
+    "-0.04",
+    "-0.02"
+   ],
+   "unit": "",
+   "why": "grade, decimal, downhill"
+  },
+  "W": {
+   "role": "given",
+   "range": [
+    "112",
+    "120"
+   ],
+   "unit": "",
+   "why": "intersection width ft"
+  },
+  "mY": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "mR": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "Y": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "R": {
+   "role": "derived",
+   "unit": "s"
+  },
+  "YR": {
+   "role": "derived",
+   "unit": "s"
+  }
+ },
+ "slots": {
+  "YS": {
+   "from": [
+    "Yset"
+   ]
+  },
+  "RS": {
+   "from": [
+    "Rset"
+   ]
+  }
+ },
+ "define": {
+  "Yf": "t + su*1.47*V/(2*a + 64.4*g)",
+  "VR": "min(V, Vlim)",
+  "Rf": "su*(W + L)/(1.47*VR) - one",
+  "Rreq": "max(Rf, one)"
+ },
+ "laws": [
+  {
+   "zfl": "Y == YS.N*dt",
+   "source": "Y is a multiple of 0.1 s"
+  },
+  {
+   "zfl": "R == RS.N*dt",
+   "source": "R is a multiple of 0.1 s"
+  },
+  {
+   "zfl": "mY == YS.N*dt - Yf",
+   "source": "setting minus formula value (formula rounded up to 0.1 == setting >= formula, since setting is a multiple of 0.1)"
+  },
+  {
+   "zfl": "mR == RS.N*dt - Rreq",
+   "source": "setting minus formula value with the 1.0 s floor"
+  },
+  {
+   "zfl": "YR == Y + R",
+   "source": "total intergreen"
+  }
+ ],
+ "requirements": [
+  {
+   "quantity": "mY",
+   "op": ">=",
+   "value": "0",
+   "why": "Y at least the formula value (rounded up)"
+  },
+  {
+   "quantity": "mR",
+   "op": ">=",
+   "value": "0",
+   "why": "R at least the formula value, floor 1.0 s"
+  }
+ ],
+ "objective": {
+  "minimize": "YS.N + RS.N",
+  "why": "smallest admissible settings"
+ },
+ "catalog": {
+  "Yset": {
+   "integers": {
+    "field": "N",
+    "from": "30",
+    "to": "60",
+    "unit": ""
+   },
+   "ground": "Y in [3.0,6.0] s, tenths"
+  },
+  "Rset": {
+   "integers": {
+    "field": "N",
+    "from": "10",
+    "to": "60",
+    "unit": ""
+   },
+   "ground": "R in [1.0,6.0] s, tenths"
+  }
+ }
+}

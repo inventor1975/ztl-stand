@@ -1,0 +1,112 @@
+[stand] 1/4 designs, 0 s: 
+{
+  "stand": "ztl-stand/1",
+  "judge": "ZTL 5627be6",
+  "designs_tried": 4,
+  "failed_at_nominal": 3,
+  "judged": 1,
+  "undecided": 0,
+  "units": "checked: every law's dimensions agree",
+  "designs": [
+    {
+      "design": "ST=steels(name=A36, SY=36, KIC=60)",
+      "verdict": "REFUTED",
+      "fails": "critical crack length at least 2.5 in",
+      "by_at_witness": "27033562420978904015/49875924968391561606 (~0.542016)",
+      "unit": "in"
+    },
+    {
+      "design": "ST=steels(name=A441, SY=50, KIC=53)",
+      "verdict": "REFUTED",
+      "fails": "critical crack length at least 2.5 in",
+      "by_at_witness": "9465361102330989335/5541769440932395734 (~1.708)",
+      "unit": "in"
+    },
+    {
+      "design": "ST=steels(name=A572, SY=50, KIC=100)",
+      "verdict": "REFUTED",
+      "fails": "critical crack length at least 2.5 in",
+      "by_at_witness": "3698066673861085/17104226669544434 (~0.216208)",
+      "unit": "in"
+    },
+    {
+      "design": "ST=steels(name=A514, SY=100, KIC=60)",
+      "verdict": "REFUTED",
+      "fails": "critical crack length at least 2.5 in",
+      "by_at_witness": "1383130400258998815/615752160103599526 (~2.24625)",
+      "unit": "in"
+    }
+  ],
+  "designs_count": {
+    "REFUTED": 4
+  },
+  "designs_by": "'by_at_witness' is the overshoot at the witness point the stand found (the nominal point or a corner), in the quantity's own unit — the worst case may be larger",
+  "verdict": "REFUTED",
+  "why": "every design in the catalog violates a requirement at a concrete point",
+  "closest_design": {
+    "ST": {
+      "catalog": "steels",
+      "name": "A572",
+      "SY": {
+        "nominal": "50",
+        "tolerance": "0"
+      },
+      "KIC": {
+        "nominal": "100",
+        "tolerance": "1/10 (~0.1)"
+      }
+    }
+  },
+  "closest_by": "the smallest overshoot found, each in its own requirement's unit — overshoots of different requirements are not comparable (blind test 4, c11)",
+  "its_violating_point": {
+    "ST.KIC": "90"
+  },
+  "point_units": {
+    "ST.KIC": "ksi"
+  },
+  "value_there": {
+    "ac": "19531250000000000/8552113334772217 (~2.28379)"
+  },
+  "unit": "in",
+  "requirement": {
+    "quantity": "ac",
+    "op": ">=",
+    "value": "Areq",
+    "why": "critical crack length at least 2.5 in"
+  },
+  "overshoot": "3698066673861085/17104226669544434 (~0.216208)",
+  "reasons": {
+    "spread_over_tolerances": [
+      "19531250000000000/8552113334772217 (~2.28379)",
+      "4726562500000000000/1385442360233098713 (~3.41159)"
+    ],
+    "largest_contributors": [
+      {
+        "quantity": "ST.KIC",
+        "moves_it_by": "781250000000000000/692721180116549577 (~1.1278)"
+      },
+      {
+        "quantity": "pi",
+        "moves_it_by": "19531250000000000/26867256425187702935777011181081 (~7.26954e-16)"
+      }
+    ]
+  },
+  "checker": "the violating point recomputed exactly (rational arithmetic, no judge code)",
+  "_core": [
+    0
+  ],
+  "minimal_conflicts": {
+    "sets": [
+      [
+        "critical crack length at least 2.5 in"
+      ]
+    ],
+    "undecided_sets": [],
+    "complete": true,
+    "subset_runs": 0,
+    "subsets_inferred": 0,
+    "how": "first one minimal set by deletion (each requirement dropped in turn while the rest stays refuted), then every subset by size, smallest first; a subset of an EARNED set is EARNED and a superset of a REFUTED one REFUTED without a run (monotone: one design holds the smaller set), within a budget of 24 subset runs"
+  },
+  "checked_by": "ZTL (work mode; a refutation's witness recomputed exactly; --dev adds the independent checker on every design)"
+}
+wall 0.22s
