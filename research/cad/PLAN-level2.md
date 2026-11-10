@@ -240,3 +240,15 @@ faces whose flux is ~0). So the coarse push is not what spoils the bound. The su
 (0 and 7: 48 and 45 kN resolved on their supports) are where the energy explodes: the Alfeld element must reproduce
 the ROUGH (piecewise-constant, or averaged-from-two-solves) interface traction face by face, in the highest-stress
 zone. Remedy unchanged: optimise the interface fluxes (the trace system iterated by subdomains).
+
+## The global trace system WITHOUT assembling it (2026-11-10, toward industrial scale)
+
+The DD path above stalls on the interface fluxes. The other road: keep the GLOBAL hybrid (exact, tight) and never
+assemble its trace system. `equil.choose(matfree=True)` runs CG on per-tet blocks; the preconditioner is a 9x9
+face-block Jacobi plus an AUXILIARY-SPACE correction (nodal P1 AMG through the face-to-node map).
+MEASURED on SimJEB 631 (82k tets, subcase 1, 4 cores, Z in float32):
+- block Jacobi alone: residual ~3 after 2200 iterations, no convergence;
+- with the auxiliary space: 1.7e-5 at 4000 iterations (792 s), 4.3e-8 at 5200 (1058 s), heading to the 1e-8 target.
+For comparison, the assembled AMG solve takes 217 iterations / 366 s / ~7 GB. So the matrix-free solve is ~3x slower
+here and buys memory, which is what 640k-tet parts need. The bound it yields is still exact: `finish` + the errfloat
+energy do not care how the trace was chosen.
