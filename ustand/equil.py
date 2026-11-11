@@ -24,7 +24,7 @@ PRESCRIBED_KINDS = (2, 3)          # tetmesh kinds: 2 loaded, 3 free; 0 interior
 
 
 def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, direct=None, log=None,
-           zdtype=np.float64, matfree=False, maxiter=20000, lin=None):
+           zdtype=np.float64, matfree=False, maxiter=20000, lin=None, smoother="jacobi"):
     """X (nv, 3), T (nt, 4), F/owner/tface/kind from tetmesh; qpres: (nf, 3, 3) the prescribed FLUX q at each face's
     3 vertices (in F's vertex order, oriented as owner[:, 0]'s outward normal) — used on loaded / free / interface
     faces; iface: a bool mask of faces to treat as prescribed in addition (interfaces of a subdomain);
@@ -138,6 +138,41 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
         d = np.einsum("fii->f", Dg)
         Dg += (1e-12 * float(np.abs(d).max())) * np.eye(9)[None]
         Dinv = np.linalg.inv(Dg)
+        if smoother == "schwarz":
+            # TET-PATCH ADDITIVE SCHWARZ (2026-11-11), in place of the 9 x 9 face-block Jacobi. A restricted to tet T's
+            # 36 slots = Z_T off the face blocks, the assembled face block Dg on them (a neighbour shares only one face
+            # with T). Inverted in chunks, kept in float32 (a smoother only: symmetric after the cast). MEASURED on
+            # the graded 631 deck (131k tets, CG to 1e-8, 6 cores): Jacobi 5354 its / ~895 s, Schwarz 3213 its /
+            # ~714 s (-20 %); on the coarse 631 (82k, 4 cores) 1719 its / 226 s against 2197 / 216 s: no gain there.
+            # MEASURED through cadbracket on the same graded deck, whole run with the exact finish: Jacobi 5353 its,
+            # 998.6 s; Schwarz 3217 its, 831.5 s (-17 %); the bracket is the same, [43089.1992, 45632.7445], push
+            # 0 unbalanced both. It never touches the bound: the preconditioner only steers CG.
+            mloc = m
+            ATinv = np.empty((nt, 36, 36), np.float32)
+            ar9 = [np.arange(9 * f, 9 * f + 9) for f in range(4)]
+            for c0 in range(0, nt, 20000):
+                c1 = min(nt, c0 + 20000)
+                AT = Z[c0:c1].astype(np.float64)
+                for f in range(4):
+                    ok = gl[c0:c1, 9 * f] >= 0
+                    rows = np.where(ok)[0]
+                    P_ = gl[c0:c1][ok][:, 9 * f:9 * f + 9] % 9
+                    Fi = fidx[c0:c1][ok][:, 9 * f]
+                    AT[rows[:, None, None], ar9[f][None, :, None], ar9[f][None, None, :]] = \
+                        Dg[Fi[:, None, None], P_[:, :, None], P_[:, None, :]]
+                mk = mloc[c0:c1]
+                AT = np.where(mk[:, :, None] & mk[:, None, :], AT, 0.0)
+                AT[:, np.arange(36), np.arange(36)] += np.where(mk, 0.0, 1.0)
+                ATinv[c0:c1] = np.linalg.inv(AT).astype(np.float32)
+                del AT
+            sidx = gl[mloc]
+
+            def Sv(r):
+                rt = np.where(mloc, r[glc], 0.0).astype(np.float32)
+                y = np.einsum("nij,nj->ni", ATinv, rt, optimize=True)
+                return np.bincount(sidx, weights=y[mloc].astype(np.float64), minlength=nl)
+        elif smoother != "jacobi":
+            raise ValueError(f"smoother: 'jacobi' or 'schwarz', not {smoother!r}")
 
         # AUXILIARY-SPACE correction (2026-11-10: block Jacobi alone did not converge on SimJEB 631 — residual ~3
         # after 2200 iterations): lam is a displacement-like trace at the faces' vertices, so the nodal P1 stiffness
@@ -186,7 +221,8 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
         say(f"auxiliary space: {Kf.shape[0]} nodal dof, AMG {len(mlK.levels)} levels, scale c = {c_aux:.3e}")
 
         def Mv(r):
-            return np.einsum("fij,fj->fi", Dinv, r.reshape(-1, 9)).ravel() + (Pi @ Kpre(Pi.T @ r)) / c_aux
+            loc = Sv(r) if smoother == "schwarz" else np.einsum("fij,fj->fi", Dinv, r.reshape(-1, 9)).ravel()
+            return loc + (Pi @ Kpre(Pi.T @ r)) / c_aux
         x = np.zeros(nl)
         r = rhsl - Av(x)
         z = Mv(r)

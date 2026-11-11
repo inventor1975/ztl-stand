@@ -70,6 +70,14 @@ for n, ref in ((3, 8.782992), (4, 8.767626)):
     check(abs(em - ref) < 2e-6, f"n = {n}: matrix-free energy {em:.7f} = the global KKT's {ref}")
     check(float(np.abs(np.einsum("nij,nj->ni", BAL, gm)).max()) < 1e-8 * float(np.abs(gm).max()),
           f"n = {n}: matrix-free choice balanced in floats")
+    # the tet-patch Schwarz smoother (2026-11-11) must reach the same energy: it only steers CG
+    gs, es, _ = EQ.choose(X, T, F, own, tf, kind, 1000.0, 0.3, q, matfree=True, tol=1e-10, smoother="schwarz")
+    check(abs(es - ref) < 2e-6, f"n = {n}: matrix-free + Schwarz energy {es:.7f} = the global KKT's {ref}")
+    try:
+        EQ.choose(X, T, F, own, tf, kind, 1000.0, 0.3, q, matfree=True, tol=1e-10, smoother="gauss")
+        check(False, "an unknown smoother is refused")
+    except ValueError:
+        check(True, "an unknown smoother is refused")
 
 if FAILS:
     print(f"EQUIL RED ({len(FAILS)} of {CHECKS})")

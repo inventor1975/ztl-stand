@@ -38,7 +38,8 @@ def _trim():
         pass
 
 
-def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, dump_g=None, dump_eta=None):
+def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, dump_g=None, dump_eta=None,
+            smoother="jacobi"):
     from fractions import Fraction as Fr
     t0 = time.time()
     sha = hashlib.sha256(open(path, "rb").read()).hexdigest()
@@ -91,7 +92,7 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
             lin[om] = EQ.prestress_linear_float(X[T[om]], sgf, float(E), float(nu))
     g, e_float, info = EQ.choose(X, T, F, own, tf, kind, float(E), float(nu), q, direct=False, tol=cg_tol,
                                  log=lambda m: log(m), zdtype=np.float64 if zdtype is None else zdtype,
-                                 matfree=(len(T) > 100000) if matfree is None else matfree, lin=lin)
+                                 matfree=(len(T) > 100000) if matfree is None else matfree, lin=lin, smoother=smoother)
     if pre is not None:
         if "S1" in pre:
             self_f = EQ.extractor_linear_self_float(X[T[om]], pre["S0"], pre["S1"], float(E), float(nu))
@@ -464,6 +465,9 @@ def main(argv):
     ap.add_argument("--E-ground", default="credit")
     ap.add_argument("--matfree", choices=("auto", "yes", "no"), default="auto",
                     help="the trace system: never assembled (yes), assembled + AMG (no), by size (auto: > 1e5 tets)")
+    ap.add_argument("--smoother", choices=("jacobi", "schwarz"), default="jacobi",
+                    help="matrix-free CG local smoother: 9x9 face-block Jacobi (default) or tet-patch additive Schwarz "
+                         "(MEASURED -20 %% CG time on a graded 131k deck, no gain on the coarse 631; never touches the bound)")
     ap.add_argument("--zdtype", choices=("auto", "32", "64"), default="auto",
                     help="the local inverse blocks Z: float64 (auto) or float32 — float32 stays VALID but loose: MEASURED "
                          "2026-11-10, its choice drifts and the exact push inflates the bound (631: 45677 -> 61518; "
@@ -535,7 +539,8 @@ def main(argv):
                             "S1": [[[s * x for x in cc] for cc in r] for r in S1], "label": a.scl_kind}
         sub["label"] += (f" + {a.prestress_scale} * sigma_{a.scl_kind[0]} of sigma_tt on the SCL slab "
                          f"({int(mask.sum())} tets, |omega| {float(vol):.6f})")
-    r = bracket(a.deck, sub, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd, dump_g=a.dump_g, dump_eta=a.dump_eta)
+    r = bracket(a.deck, sub, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd, dump_g=a.dump_g, dump_eta=a.dump_eta,
+                smoother=a.smoother)
     if (a.d_max is not None or a.d_min is not None) and r["work_conjugate"]:
         from . import cadstiff as CS
         Er = tuple(float(x) for x in a.E_range.split(":")) if a.E_range else (r["E"], r["E"])
