@@ -311,3 +311,24 @@ the prediction width = √(w_f w_p)/|l| with both gaps shrinking ~×3.
 - The coarse bracket of the same quantity is [431.55, 655.37] (41 %). **The fine bracket lies inside it.** The
   hard check (overlap) holds, and here it is even nested.
 Files: results631r1_3b_yy_children_{plus,minus}.json.
+
+## 3c on the refined 631 over the SAME SCL slab — nested (2026-11-11 11:49, MEASURED)
+
+`--omega-children` now covers the SCL slab as well (children_of, b50b362). The slab is 3648 = 8 × 456 tets,
+|ω| = 171.8845 mm³ exactly. A centroid test on the fine tets would have chosen 3593 tets, 169.87 mm³: another
+region. Same s as on the coarse mesh; matfree, z64, 6 cores, ~50 min a bracket.
+
+| quantity | coarse (82k tets) | refined (659k tets) |
+|---|---|---|
+| σ_m, membrane of σ_tt | [390.71, 898.74] MPa, 79 % | **[550.21, 762.10] MPa, 32.3 %** |
+| σ_b, bending of σ_tt | [161.40, 1819.42] MPa, 167 % | **[710.94, 1380.44] MPa, 64.0 %** |
+
+- Both signs are proved. Each fine bracket lies inside the coarse bracket of the same quantity.
+- Hand checks: membrane (97634.883 − 81568.758)/29.2 = 550.21 and (100918.677 − 78665.368)/29.2 = 762.10;
+  bending (104582.590 − 89493.561)/21.224 = 710.94 and (112398.219 − 83099.668)/21.224 = 1380.44.
+- Files: results631r1_3c_t1_{membrane,bending}_children_{plus,minus}.json.
+
+Honest reading. One refinement step roughly halves the 3c widths; on 3b and the compliance it cut them by ×2.6
+to ×3. Bending stays the widest, as expected for P1 through a thin wall. For a code check (ASME membrane +
+bending against an allowable) these brackets are still wide; another level, or a graded refinement through the
+wall, is the next lever.

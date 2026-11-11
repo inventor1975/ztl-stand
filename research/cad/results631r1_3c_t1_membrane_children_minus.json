@@ -1,0 +1,133 @@
+{
+ "deck": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/631_r1.deck.pkl",
+ "sha256": "03a80dd95b02eeb3ea96e027c83418b1a1c59eb335192ba3a1e181d86f1ff44a",
+ "subcase": {
+  "F": [
+   0.0,
+   0.0,
+   35585.77
+  ],
+  "M": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "label": "subcase 1 + -7.3 * sigma_m of sigma_tt on the SCL slab (3648 tets, |omega| 171.884500)"
+ },
+ "label": "subcase 1 + -7.3 * sigma_m of sigma_tt on the SCL slab (3648 tets, |omega| 171.884500)",
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 659312,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  78665.3680559283,
+  81568.75789130888
+ ],
+ "gap": 0.03690810717768933,
+ "work_conjugate": null,
+ "work_conjugate_is": "displacement along F (mm)",
+ "upper_float_choice": 81568.75786695389,
+ "push_bits": 370,
+ "seconds": 3026.5,
+ "rests_on": [
+  "a red refinement (ustand.refine) of /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem (sha256 62f42a041a9d74be\u2026): the same faceted part, its tets subdivided 1:8",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the coarse deck's traction (linear per coarse loaded face, its nodal values M_s t = f_RBE3), given at the fine nodes",
+  "plus the prestress load int_omega eps(v) : sig_e (omega = the selected tets)"
+ ],
+ "refined_from": {
+  "tets": 82414,
+  "grids": 18141,
+  "mixed_fixed_midpoints": 0,
+  "traction_residual": 5.684341886080802e-14,
+  "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem",
+  "sha256": "62f42a041a9d74bed8a12769aac7417a8f2ba99f5a8fb6a9523bfe6987c307f4"
+ },
+ "prestress": {
+  "tets": 3648,
+  "extra_exact": 26838.055061953273,
+  "cross_exact": -27906.0753185705,
+  "self_exact": 54744.13038052378,
+  "S0": [
+   [
+    -3906.0726901753865,
+    172.72554875634845,
+    6.3431274431306415
+   ],
+   [
+    172.72554875634845,
+    -7486.042352392069,
+    -131.77519318491656
+   ],
+   [
+    6.3431274431306415,
+    -131.77519318491656,
+    -3902.597654826662
+   ]
+  ],
+  "S1": [
+   [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  ],
+  "extractor": "membrane"
+ }
+}
