@@ -332,3 +332,8 @@ Honest reading. One refinement step roughly halves the 3c widths; on 3b and the 
 to ×3. Bending stays the widest, as expected for P1 through a thin wall. For a code check (ASME membrane +
 bending against an allowable) these brackets are still wide; another level, or a graded refinement through the
 wall, is the next lever.
+
+**Why not a second uniform level** (an extrapolation from measured peaks, not run): 148 (640k tets) and the refined
+631 (659k) peaked at ~16.5 GB, so 8 × 659k ≈ 5.3M tets would need ~130 GB against the machine's 62 GB. The next
+lever is GRADED refinement through the wall near the SCL. Conforming transitions (red-green) or hanging nodes with
+constraints are a design decision; plan it in words first.
