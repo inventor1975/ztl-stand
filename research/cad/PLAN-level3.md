@@ -275,3 +275,27 @@ The measured lever is a smaller discretisation gap: the 3b width is √(w_f w_p)
    corners).
 What this does NOT do: the hole and fillet surfaces are faceted in the SimJEB mesh; refining keeps the facets. It
 certifies the faceted part, the same object as before, not a smoother CAD surface.
+
+## Narrowing — BUILT and measured on 631 (2026-11-11 06:15, MEASURED; ustand/refine.py, tests/test_refine.py)
+
+Red 1:8 refinement of SimJEB 631 (ustand.refine): 82 414 → 659 312 tets, 18 141 → 127 771 grids; 0 midpoints
+between fixed nodes of different RBE2s; the coarse traction's residual |M_s t − f_RBE3| = 5.7e-14. The load on the
+refined deck is the coarse deck's traction, not a new RBE3 spread.
+
+**Compliance (subcase 1, matrix-free, z64, 6 cores):** C ∈ [44350.490, 45615.145], gap **2.85 %** (coarse
+[42132.981, 45676.726], 8.41 %).
+- The refined bracket lies INSIDE the coarse one: the lower bound rose by 5.3 %, the upper fell by 0.13 %.
+- The hard check (overlap) holds. CG took 4050 iterations, the whole run 4000 s, push 370 bits
+  (results631r1_s1_matfree.json).
+
+**3b, the mean σ_yy over the same box, s = 13:** C(f ± 13 l_p) gaps 2.67 % / 3.12 % (were 6.6 % / 7.3 %).
+- Mean **σ_yy ∈ [507.31, 604.06] MPa, width 17.4 %** (coarse [431.55, 655.37], 41 %). Tension is proved again.
+- The refined interval lies inside the coarse one (results631r1_3b_yy_{plus,minus}.json).
+- CAUTION, not the identical quantity: the box picks tets by CENTROID. On the refined mesh it selects 11 612 tets,
+  |ω| = 581.07 mm³, not the 8 × 1458 children of the coarse ω (589.12 mm³, −1.4 %). The two means are over slightly
+  different regions. Both are proved, so the nesting is suggestive, not a theorem.
+- For an exact like-for-like comparison, ω on the refined deck must be the children of the coarse ω (tets 8i … 8i+7
+  of a coarse tet i keep that order in ustand.refine). That option is not built.
+
+The scaling: the compliance gap fell 8.41 → 2.85 % (×2.95) at h/2, the mean's width 41 → 17.4 % (×2.4). This matches
+the prediction width = √(w_f w_p)/|l| with both gaps shrinking ~×3.
