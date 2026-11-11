@@ -1,0 +1,27 @@
+{
+ "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem",
+ "out": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/adapt631b/631_b1.deck.pkl",
+ "tets_in": 82414,
+ "tets_out": 86598,
+ "marked": 289,
+ "marked_share": 0.0035066857572742497,
+ "eta_share_marked": 0.5002979897231488,
+ "marked_off_ball_share": 0.010380622837370242,
+ "eta_off_ball_share": 0.2641033986809746,
+ "ball": {
+  "centre": [
+   -17.728,
+   -73.7615,
+   24.576
+  ],
+  "radius": 11.4219
+ },
+ "patterns": {
+  "red": 482,
+  "none": 85388,
+  "face": 205,
+  "one": 195
+ },
+ "closure_rounds": 3,
+ "conforming": true
+}

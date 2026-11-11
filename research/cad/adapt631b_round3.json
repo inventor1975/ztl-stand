@@ -1,0 +1,28 @@
+{
+ "deck": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/adapt631b/631_b3.deck.pkl",
+ "out": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/adapt631b/631_b4.deck.pkl",
+ "tets_in": 374023,
+ "tets_out": 1380748,
+ "marked": 60884,
+ "marked_share": 0.16278143322736838,
+ "eta_share_marked": 0.5000012126346285,
+ "marked_off_ball_share": 0.6056435188226792,
+ "eta_off_ball_share": 0.5982124091087415,
+ "ball": {
+  "centre": [
+   -17.728,
+   -73.7615,
+   24.576
+  ],
+  "radius": 11.4219
+ },
+ "patterns": {
+  "red": 126625,
+  "face": 40656,
+  "none": 1128338,
+  "one": 44529,
+  "opp": 182
+ },
+ "closure_rounds": 6,
+ "conforming": true
+}

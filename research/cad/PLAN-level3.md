@@ -554,3 +554,34 @@ equilibrium), but the float choice of the direct path is the less accurate of th
 
 **Where the day's speed-up stands** (graded round-2 deck, one bracket): 5353 its / ~1000 s in the morning →
 Schwarz 3217 / 832 s → conjugate-trace Pi 3984 (Jacobi) → + sliver block 549 its (old deck), 476 its / 247 s (new).
+
+
+## Indicator-driven rounds on 631, re-run on the repaired refinement (2026-11-12, measured)
+
+Same SCL slab (ω = the children of the coarse slab, |ω| = 171.8845 exactly at every round), same s (7.3 membrane,
+5.306 bending), Dörfler θ = 0.5 on the summed indicators of the four brackets. Results: results631b{r}_3c_t1_*.json,
+adapt631b_round{r}.json.
+
+| round | tets | σ_m, MPa | width | σ_b, MPa | width | CG its | s per bracket |
+|---|---|---|---|---|---|---|---|
+| 0 (coarse) | 82 414 | [390.71, 898.74] | 78.8 % | [161.40, 1819.42] | 167.4 % | ~250 | 97 |
+| 1 | 86 598 | [457.56, 836.27] | 58.5 % | [503.90, 1521.93] | 100.5 % | ~900 (no sliver block yet) | 180–265 |
+| 2 | 125 743 | [527.69, 773.62] | 37.8 % | [746.59, 1320.06] | 55.5 % | ~2950 (no sliver block yet; 476 with it) | 640–840 (247 with it) |
+| 3 | 374 023 | [589.42, 721.17] | 20.1 % | [913.17, 1198.02] | 27.0 % | 660–700 | 880–1020 |
+| uniform 1:8 | 659 312 | [550.21, 762.10] | 32.3 % | [710.94, 1380.44] | 64 % | — | — |
+
+Every bracket lies inside the previous round's and inside the uniform one's. Round 3 with 374k tets is narrower than
+the uniform refinement with 659k: 20 % against 32 % (membrane), 27 % against 64 % (bending). Rounds 0–1 are the same
+meshes as before the repair (same brackets); round 2 differs slightly (125 743 tets against 130 757; widths 37.8 /
+55.5 % against 37.6 / 54.6 %): the repair did not narrow the brackets, it made the rounds solvable (round 3 would
+have taken over an hour a bracket) and keeps the shapes bounded. Round 4 would be 1 380 748 tets: over the memory
+cap (the Z blocks alone ~14 GB) — not run.
+
+**Not done, in words: one solve per load and one per functional.** The polarization runs C(f + s p) and C(f − s p):
+two solves per functional. Both sides are linear in the load, so f and p can be solved once each: with
+A_ff, A_pp, A_fp from the P1 fields and E_ff, E_pp, E_fp from the two equilibrated fields,
+l(u) ∈ (A_fp + E_fp)/2 ± ½ √(w_f w_p), w = E − A, which is the optimum over s of the present bracket (the width
+model √(w_f w_p) was already matched to 8 digits). Membrane and bending then cost 3 solves instead of 4, n loads
+with m functionals n + m instead of 2nm. It needs the cross terms A_fp, E_fp evaluated with the same rigour as
+the squares (the exact finish on each field, the error-bounded energy on the pair) — a real piece of work, not
+started.
