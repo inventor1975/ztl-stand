@@ -199,6 +199,67 @@ check(ru["parent"] == [i for i in range(len(d["tets"])) for _ in range(8)], "red
 ou, hu = RF.conformity(ru)
 check(ou == 0 and hu == 0, "the uniform red refinement is conforming too")
 
+# ---- MANY ROUNDS (2026-11-11): a green tet is never refined and Bey's order is kept, so the shapes stay bounded
+def quality(deck):
+    """volume / longest edge^3, scaled to 1 on the regular tet."""
+    g = deck["grids"]
+    Xq = {n: np.array([float(TF._nas(c)) for c in g[n]]) for n in g}
+    P = np.array([[Xq[n] for n in t] for t in deck["tets"]])
+    vol = np.abs(np.einsum("ni,ni->n", P[:, 1] - P[:, 0], np.cross(P[:, 2] - P[:, 0], P[:, 3] - P[:, 0]))) / 6
+    ed = np.stack([np.linalg.norm(P[:, a] - P[:, b], axis=1) for a, b in RF.EDGES], 1)
+    return vol / ed.max(1) ** 3 * 6 * np.sqrt(2)
+
+
+def resultant(deck):
+    Xr = {n: [TF._nas(c) for c in deck["grids"][n]] for n in deck["grids"]}
+    ids_ = sorted(deck["grids"])
+    ix = {n: i for i, n in enumerate(ids_)}
+    Xn = np.array([[float(c) for c in Xr[n]] for n in ids_])
+    Tn = np.array([[ix[n] for n in t] for t in deck["tets"]])
+    Fq, ow, _, _ = TM.faces(Tn)
+    fx = {ix[n] for ind, deps in deck["rbe2"] for n in deps if deck["spc"].get(ind, "").startswith("123")}
+    kd = TM.classify(Fq, ow, fx, {ix[n] for n in deck["traction"]["nodal"]})
+    f_ = RF.traction_loads(Xn, Fq, kd, {ix[n]: v for n, v in deck["traction"]["nodal"].items()})
+    return f_.sum(0), np.cross(Xn, f_).sum(0)
+
+
+def rounds(planted, n_rounds=5):
+    dk, qs, conf = d, [], []
+    for k in range(n_rounds):
+        dk = RF.graded_refine(dk, ball_mask(dk, (5.0, 5.0, 8.5), 3.2 / 1.5 ** k), planted=planted)
+        qs.append(float(quality(dk).min()))
+        conf.append(RF.conformity(dk))
+    return dk, qs, conf
+
+
+d5, q5, c5 = rounds(None)
+print(f"MEASURED 5 rounds toward (5, 5, 8.5): {len(d5['tets'])} tets, worst quality by round {[round(x, 4) for x in q5]}"
+      f" (coarse {float(quality(d).min()):.4f})")
+check(all(c == (0, 0) for c in c5), f"5 rounds: conforming after every round ({c5})")
+check(all(x >= q5[0] * (1 - 1e-9) for x in q5), "5 rounds: the worst quality never falls below round 1's")
+_, qp, _ = rounds("green_on_green", 2)
+print(f"MEASURED planted green_on_green: worst quality by round {[round(x, 4) for x in qp]}")
+check(qp[1] < 0.5 * q5[1], f"PLANTED (green tets refined): the quality check SEES it ({qp[1]:.4f} against {q5[1]:.4f})")
+X5 = {n: [TF._nas(c) for c in d5["grids"][n]] for n in d5["grids"]}
+kids5 = {}
+for j, pa in enumerate(d5["parent"]):
+    kids5.setdefault(pa, []).append(j)
+check(all(sum(vol6([X5[n] for n in d5["tets"][j]]) for j in kids5[i]) == vol6([Xc[n] for n in t])
+          for i, t in enumerate(d["tets"])), "5 rounds: every coarse tet is filled EXACTLY by its descendants")
+check(all((vol6([X5[n] for n in d5["tets"][j]]) > 0) == (vol6([Xc[n] for n in d["tets"][pa]]) > 0)
+          for j, pa in enumerate(d5["parent"])), "5 rounds: every tet keeps its root's orientation")
+F5, M5 = resultant(d5)
+check(np.abs(F5 - Fc).max() < 1e-9 * 1000 and np.abs(M5 - Mc).max() < 1e-9 * 1e4,
+      f"5 rounds: the resultant is the coarse one ({F5}, {M5})")
+check(len(d5["traction"]["nodal"]) > len(r["traction"]["nodal"]), "5 rounds: the load face is refined further")
+# all marked = uniform red, three times: Bey's order kept -> the Kuhn tets of the box stay Kuhn tets
+du = d
+for _ in range(3):
+    du = RF.graded_refine(du, np.ones(len(du["tets"]), bool))
+qu = quality(du)
+check(len(du["tets"]) == 512 * len(d["tets"]) and abs(float(qu.min()) - float(quality(d).min())) < 1e-9,
+      f"3 uniform red rounds: {len(du['tets'])} tets, the worst quality stays the coarse one ({float(qu.min()):.4f})")
+
 if FAILS:
     print(f"GRADED RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)

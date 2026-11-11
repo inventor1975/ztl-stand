@@ -474,3 +474,60 @@ Against the earlier meshes:
 - Not run: round 3. Its deck is built (438 388 tets, conforming) but is over the ~400k cap that was set. It fits the
   18G cap by the measured ~25 KB/tet (≈ 11 GB), at roughly 1 h a bracket.
 Files: results631a{0,1,2}_3c_t1_{membrane,bending}_{plus,minus}.json, adapt631_round{0,1,2}.json.
+
+## The trace solve: the auxiliary map was wrong; the tail is slivers (2026-11-11, measured)
+
+**What was wrong.** The auxiliary-space correction maps a nodal displacement u to the multiplier lam by Pi. Pi was the
+injection (lam_j = u_j at every slot of the vertex). But lam is conjugate to the flux slots q_j = 2|F| t(v_j), and
+∫_F t·u = Σ_j q_j·(2u_j + u_k + u_l)/24, so the trace of u is lam_j = (2u_j + u_k + u_l)/24. With this Pi,
+lam^T Z_T lam = sup over the local stresses of 2∫σ:ε(u) − ∫σ:C⁻¹σ ≤ u^T K_T u, with equality in a tet with no
+prescribed face: Pi^T A Pi ≤ K, equal in the interior. The scale c is then ~1 instead of a tuned 4·10³.
+
+**Measured** (CG to 1e-8, face-block Jacobi unless said):
+
+| mesh | injection | conjugate trace |
+|---|---|---|
+| boxes n = 4, 6, 8, 12 | 196, 245, 281, 326 its | 75, 78, 79, 81 its (with Schwarz 46, 48, 49, 50) |
+| Rayleigh on a raw random u, same boxes | ~250–300 | 0.878, 0.919, 0.933, 0.959 |
+| SimJEB 631 coarse, 82k tets | 2197 its, ~240 s whole run | 323 its, 112 s; an exact LU of K: 317 |
+| graded round 2, 131k tets | 5353 (Schwarz 3217) | 3984 (Schwarz 2133) |
+
+The brackets are unchanged to all printed digits (the preconditioner only steers CG). On the uniform meshes the count
+no longer grows with n. AMG is not the limit (the exact LU gives the same count).
+
+**The tail on the graded deck is not smooth error.** Dumping the iterate: at 400 its 13 faces of 251 051 hold half of
+|error|², at 1000 its 7, at 1600 its 2; 99.8 % of it sits in the worst-quality decile, none of it in the range of Pi,
+none at the boundary. The faces belong to slivers of quality 0.02 (volume / longest edge³, 1 = regular).
+
+**Where the slivers come from.** graded_refine closes with green tets and the next round refines those green tets
+again. Measured, tets under quality 0.03 / the 0.1 % quantile / the median:
+coarse 9 / 0.066 / 0.406 → round 1: 22 / 0.061 / 0.403 → round 2: 168 / 0.029 / 0.374 → round 3: 1980 / 0.019 / 0.298.
+This is the textbook fault of red-green: a green tet must never be refined.
+
+**The repair, in words.** A round starts by UN-GREENING: every green family is replaced by its parent, so the leaves
+are red descendants only (the mesh is then non-conforming exactly at the parents' split edges, whose midpoints are
+kept). Marks pass to the leaves (a parent is marked when any of its green children is). Then, to a fixed point:
+a marked leaf, a leaf whose split edges form no green pattern, and a leaf whose green children would have a split
+edge of their own (a neighbour two levels finer) are split red for real, their 8 children becoming leaves; a face
+with exactly two split edges gets the third. At the end every leaf is unsplit or green, and the green children are
+emitted — with the family recorded for the next round's un-greening. Every tet is then a red descendant of a coarse
+tet or one green child of such: the shapes stay in a bounded family, whatever the number of rounds.
+Validity is untouched (a conforming tet mesh of the same body; `conformity` checks it). What changes is the mesh the
+rounds produce, so rounds 1–3 are to be re-run; the committed round-1/2 results stay valid brackets on their meshes.
+
+**A second fault, found while testing the repair: Bey's order.** The red rule cuts the octahedron along m02–m13 of
+the tet's vertex ORDER, and Bey's bound on the shapes holds only if the children are refined in the order the rule
+gave them. The code re-oriented each child (swapping its first two vertices where the sign flipped) and refined that.
+Measured, the worst quality over 5 red levels: a Kuhn tet 0.2722 → 0.2722, 0.1265, 0.0962, 0.0388 with the swap,
+0.2722 at every level without; a random tet 0.0318 → 0.0016 with, 0.0318 without. Now the Bey order is carried
+beside the oriented tets (deck["bey"]). One uniform level (the 659k deck) was never affected.
+
+**Built and measured (box n = 4, 5 rounds toward a point on the loaded face).** Worst quality by round
+0.068, 0.068, 0.068, 0.068, 0.068 (27 580 tets; the 0.068 are the green children of the Kuhn tets); the old
+behaviour, planted: 0.068 → 0.017 at round 2. Conforming after every round; every coarse tet filled exactly by its
+descendants; the load's resultant unchanged. test_graded 30 checks, test_adapt 31, test_refine 24.
+
+**Checks built.** (1) conformity after 4 rounds toward a corner of a cut box; (2) the worst quality after rounds
+2–4 does not fall below that of round 1 by more than a fixed factor, and a PLANTED green-on-green run (the old
+behaviour) does; (3) the parent map still partitions the coarse tets exactly (volumes); (4) test_graded/test_adapt
+as they are.
