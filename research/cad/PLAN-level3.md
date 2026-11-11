@@ -250,3 +250,25 @@ These are the line formulas (1/t)∫σ dz and (6/t²)∫σ z dz averaged over th
 - Honest reading. The signs are proved; the magnitudes are not usable for a code check yet. The wall is 3.8 mm with
   P1 tets, and the bending field across it is poorly resolved (the brackets' gaps of 21 % say so). As in 3b, the
   width is set by the discretisation gaps, and the lever is refinement through the wall.
+
+## Narrowing 3b/3c — mesh refinement, IN WORDS (2026-11-11 03:15; not built)
+
+The measured lever is a smaller discretisation gap: the 3b width is √(w_f w_p)/|l|. Plan:
+1. **Uniform red refinement** (Bey 1:8) of the whole tet mesh: 82k → 660k tets on 631, the size of 148, ~40 min a
+   bracket with the new c and ~16.5 GB peak, under the 18G cap.
+   - New nodes are edge midpoints. Their coordinates stay exact: the midpoint of two decimals is a decimal with one
+     more digit, so the integer scaling of tetfea still applies.
+   - Local (graded) refinement only near ω needs conforming transitions. It comes after the uniform version works.
+2. **The same continuum problem, exactly:**
+   - geometry: flat faces stay flat;
+   - supports: a midpoint between two RBE2-fixed hole nodes is fixed (u = 0 on the hole surface is kept);
+   - load: the traction is linear on each coarse loaded face, so it is reproduced exactly on the fine faces by its
+     values at the midpoints, and the consistent fine nodal loads follow.
+   Under these conditions the exact C is the same number. **Both sides check each other:** the fine bracket must lie
+   inside the coarse one (lower_fine ≥ lower_coarse is not guaranteed in general, but both brackets must contain
+   C), and they must overlap. A fine bracket disjoint from the coarse one means a bug.
+3. Then rerun the 3b and 3c brackets on the refined 631 and measure the width against the predicted
+   √(w_f w_p) scaling (P1: the gap should drop ~×2 per halving of h for smooth parts, less near the singular
+   corners).
+What this does NOT do: the hole and fillet surfaces are faceted in the SimJEB mesh; refining keeps the facets. It
+certifies the faceted part, the same object as before, not a smoother CAD surface.
