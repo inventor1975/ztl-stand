@@ -173,3 +173,23 @@ the extractor linear in x; an SCL helper (a point, a unit normal n, the wall thi
 **The open question for the curator / plan:** WHERE the SCL goes on 631. Through the wall at the 3b hot zone, normal
 along the local wall direction. That needs the wall's two faces found along a line, which is a geometry step, not
 mathematics.
+
+## 3c — CORRECTION before building (2026-11-11, fork of Logic1; CHECKED EXACTLY, research/cad/moment_full_check.py)
+
+Two statements in "3c IN WORDS" above are wrong.
+1. "Only the part symmetric in (j, k) is boundary-determined" — FALSE. For a symmetric div-free τ, EVERY first
+   moment is boundary-determined. With M_ijk = ∫_∂T t_i x_j x_k:
+       ∫_T τ_ij x_k = ( M_ijk + M_jik − M_kij ) / 2      (the Christoffel trick: A_ijk symmetric in ij)
+   sympy, the same random tet and Beltrami field: exact on 27/27. (The earlier "e.g." only showed that
+   ∫τ_00 x_1 ≠ M_001/2, which was never the claim.) So ANY linear extractor σ_e(x) = S + L·x keeps the upper side
+   exact, and the restriction "Aσ_e must be Π_nn·(linear)" is unnecessary.
+2. "Bending = ∫ σ_nn (x_n − c)" is not the ASME bending stress. On a classification line through a wall of normal
+   direction n, bending is the first moment of a stress component TANGENT to the wall (σ_tt, t ⊥ n) about the
+   through-thickness coordinate x_n: σ_b = (6/t²)∫ σ_tt (x_n − c) dx_n. Membrane likewise averages σ_tt (or each
+   component), not σ_nn. In a beam this is σ_xx about y. This is the (i=j=t, k=n) case, exact by 1.
+
+What to build is therefore a design decision for the curator / Logic1, not made here:
+- (a) the ASME-style σ_tt membrane + bending on an SCL (exact by the formula above; needs the wall normal n AND a
+  chosen tangent t);
+- (b) general linear extractors.
+Not built: the directive fixed the extractor to Π_nn (x_n − c), which the correction shows is the wrong quantity.
