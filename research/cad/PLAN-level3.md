@@ -264,9 +264,12 @@ The measured lever is a smaller discretisation gap: the 3b width is √(w_f w_p)
    - supports: a midpoint between two RBE2-fixed hole nodes is fixed (u = 0 on the hole surface is kept);
    - load: the traction is linear on each coarse loaded face, so it is reproduced exactly on the fine faces by its
      values at the midpoints, and the consistent fine nodal loads follow.
-   Under these conditions the exact C is the same number. **Both sides check each other:** the fine bracket must lie
-   inside the coarse one (lower_fine ≥ lower_coarse is not guaranteed in general, but both brackets must contain
-   C), and they must overlap. A fine bracket disjoint from the coarse one means a bug.
+   Under these conditions the exact C is the same number. **Both sides check each other:**
+   - LOWER: red refinement nests the P1 spaces, so the best fine lower bound is ≥ the coarse one, up to the CG
+     tolerance and the rounding of v.
+   - UPPER: no nesting is guaranteed. The coarse Alfeld subtets do not align with the fine tets.
+   - The HARD check: both brackets contain C, so they must overlap. A fine bracket disjoint from the coarse one means
+     a bug.
 3. Then rerun the 3b and 3c brackets on the refined 631 and measure the width against the predicted
    √(w_f w_p) scaling (P1: the gap should drop ~×2 per halving of h for smooth parts, less near the singular
    corners).
