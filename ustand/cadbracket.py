@@ -75,18 +75,26 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
     lin = om = None
     if pre is not None:
         om = np.asarray(pre["omega"], bool)
-        sgf = [[float(x) for x in row] for row in pre["sigma"]]
         lin = np.zeros((len(T), 36))
-        lin[om] = EQ.prestress_linear_float(X[T[om]], sgf, float(E), float(nu))
+        if "S1" in pre:                             # level 3c: a LINEAR extractor sig_e(x) = S0 + S1 . x
+            lin[om] = EQ.extractor_linear_b_float(X[T[om]], pre["S0"], pre["S1"], float(E), float(nu))
+        else:
+            sgf = [[float(x) for x in row] for row in pre["sigma"]]
+            lin[om] = EQ.prestress_linear_float(X[T[om]], sgf, float(E), float(nu))
     g, e_float, info = EQ.choose(X, T, F, own, tf, kind, float(E), float(nu), q, direct=False, tol=cg_tol,
                                  log=lambda m: log(m), zdtype=np.float64 if zdtype is None else zdtype,
                                  matfree=(len(T) > 100000) if matfree is None else matfree, lin=lin)
     if pre is not None:
-        sg_ = np.array(sgf)
-        As_ = ((1 + float(nu)) * sg_ - float(nu) * np.trace(sg_) * np.eye(3)) / float(E)
-        P_ = X[T[om]]
-        vol_ = np.abs(np.linalg.det(np.stack([P_[:, 1] - P_[:, 0], P_[:, 2] - P_[:, 0], P_[:, 3] - P_[:, 0]], 2))) / 6
-        e_float = e_float + 2 * float((lin[om] * g[om]).sum()) + float(vol_.sum() * (sg_ * As_).sum())
+        if "S1" in pre:
+            self_f = EQ.extractor_linear_self_float(X[T[om]], pre["S0"], pre["S1"], float(E), float(nu))
+        else:
+            sg_ = np.array(sgf)
+            As_ = ((1 + float(nu)) * sg_ - float(nu) * np.trace(sg_) * np.eye(3)) / float(E)
+            P_ = X[T[om]]
+            vol_ = np.abs(np.linalg.det(np.stack([P_[:, 1] - P_[:, 0], P_[:, 2] - P_[:, 0], P_[:, 3] - P_[:, 0]],
+                                                 2))) / 6
+            self_f = float(vol_.sum() * (sg_ * As_).sum())
+        e_float = e_float + 2 * float((lin[om] * g[om]).sum()) + self_f
     log(f"upper choice (float): {e_float:.6f}; {time.time() - t0:.0f} s")
     if dump_g:                                      # the float choice, saved to profile the exact finish alone
         np.save(dump_g, g)
@@ -113,14 +121,25 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
     if pre is not None:
         # ||tau' + p||^2 = ||tau'||^2 + sum over omega (2 b_T . g_T + |T| sig : A sig) — the extra terms EXACT
         cross = self_ = Fr(0)
+        linear = "S1" in pre
         for t in np.where(om)[0]:
-            bT = EQ.prestress_linear(Ps[t], pre["sigma"], E, nu)
+            if linear:
+                bT = EQ.extractor_linear_b(Ps[t], pre["S0"], pre["S1"], E, nu)
+                self_ += EQ.extractor_linear_self(Ps[t], pre["S0"], pre["S1"], E, nu)
+            else:
+                bT = EQ.prestress_linear(Ps[t], pre["sigma"], E, nu)
+                self_ += EQ.prestress_self(Ps[t], pre["sigma"], E, nu)
             cross += 2 * sum(x * y for x, y in zip(bT, gs[t]))
-            self_ += EQ.prestress_self(Ps[t], pre["sigma"], E, nu)
         extra = cross + self_
         up = math.nextafter(float(Fr(up) + extra), math.inf)
         pre_out = {"tets": int(om.sum()), "extra_exact": float(extra), "cross_exact": float(cross),
-                   "self_exact": float(self_), "sigma_e": [[float(x) for x in row] for row in pre["sigma"]]}
+                   "self_exact": float(self_)}
+        if linear:
+            pre_out["S0"] = [[float(x) for x in row] for row in pre["S0"]]
+            pre_out["S1"] = [[[float(x) for x in c] for c in row] for row in pre["S1"]]
+            pre_out["extractor"] = pre.get("label", "linear")
+        else:
+            pre_out["sigma_e"] = [[float(x) for x in row] for row in pre["sigma"]]
         log(f"prestress: {int(om.sum())} tets, exact extra {float(extra):.6f}; upper {up:.6f}")
     Fn, Mn = math.sqrt(sum(x * x for x in Fv)), math.sqrt(sum(x * x for x in Mv))
     c_lo, c_hi = lo["compliance_lower_proved"], up
@@ -178,6 +197,111 @@ def mean_stress_extractor(comp, E, nu, vol):
     return [[(2 * mu * Pi[a][b] + (lam * tr if a == b else 0)) / vol for b in range(3)] for a in range(3)]
 
 
+# ------------------------------------------------------------------------------------------------ level 3c: SCL
+# Membrane and bending on a stress classification line (ASME VIII-2 5-A style), certified over a thin SLAB omega, not a
+# line: omega = the tets whose centroid lies within the wall (|x.n - c| < t_w / 2) and within R of the line p + s n.
+# sigma_m = (1 / |omega|) int_omega sigma_tt,   sigma_b = 6 / (t_w |omega|) int_omega sigma_tt (x.n - c)
+# (= the line formulas (1/t) int sigma dz and (6/t^2) int sigma z dz averaged over the patch, A_perp := |omega| / t_w).
+# n is an EXACTLY unit rational vector; Pi = t' t'^T / |t'|^2 with t' = u - (u.n) n, exactly perpendicular to n.
+def rational_unit(v, den=10 ** 6):
+    """an exactly unit rational vector near the float direction v (inverse stereographic map of a rational point)"""
+    from fractions import Fraction as Fr
+    v = np.asarray(v, float)
+    v = v / np.linalg.norm(v)
+    flip = v[2] < 0
+    w = -v if flip else v
+    a, b = Fr(round(w[0] / (1 + w[2]) * den), den), Fr(round(w[1] / (1 + w[2]) * den), den)
+    q = 1 + a * a + b * b
+    n = [2 * a / q, 2 * b / q, (1 - a * a - b * b) / q]
+    assert sum(x * x for x in n) == 1
+    return [-x for x in n] if flip else n
+
+
+def tangent_projector(u, n, den=10 ** 6):
+    """Pi = t' t'^T / |t'|^2, t' = u - (u.n) n with u the float direction rounded to den: exact, t' . n = 0 exactly"""
+    from fractions import Fraction as Fr
+    uq = [Fr(round(float(x) * den), den) for x in u]
+    un = sum(uq[i] * n[i] for i in range(3))
+    tp = [uq[i] - un * n[i] for i in range(3)]
+    nn = sum(x * x for x in tp)
+    return [[tp[i] * tp[j] / nn for j in range(3)] for i in range(3)], tp
+
+
+def wall_chord(deck, p, ndir=4000):
+    """FLOAT (choosing only): the shortest chord through p to the mesh boundary over ndir directions of a hemisphere
+    -> (unit direction, length, the two hit points)."""
+    ids = sorted(deck["grids"])
+    idx = {n: i for i, n in enumerate(ids)}
+    X = np.array([[float(TF._nas(c)) for c in deck["grids"][n]] for n in ids])
+    T = np.array([[idx[n] for n in t] for t in deck["tets"]])
+    F, own, lf, tf = TM.faces(T)
+    bnd = F[own[:, 1] < 0]
+    A, B, C = X[bnd[:, 0]], X[bnd[:, 1]], X[bnd[:, 2]]
+    e1, e2 = B - A, C - A
+    p = np.asarray(p, float)
+    k = np.arange(ndir) + 0.5
+    zc = k / ndir                                   # hemisphere z in (0, 1], Fibonacci spiral
+    ph = np.pi * (1 + 5 ** 0.5) * k
+    D = np.stack([np.sqrt(1 - zc * zc) * np.cos(ph), np.sqrt(1 - zc * zc) * np.sin(ph), zc], 1)
+    best = (np.inf, None, None, None)
+    s = p - A
+    q = np.cross(s, e1)
+    for d in D:
+        hits = []
+        for sg in (1.0, -1.0):
+            dd = sg * d
+            h = np.cross(dd, e2)
+            a = (e1 * h).sum(1)
+            ok = np.abs(a) > 1e-14
+            f = np.where(ok, 1.0 / np.where(ok, a, 1.0), 0.0)
+            uu = f * (s * h).sum(1)
+            vv = f * (q @ dd)
+            tt = f * (e2 * q).sum(1)
+            m = ok & (uu >= 0) & (vv >= 0) & (uu + vv <= 1) & (tt > 1e-9)
+            hits.append(tt[m].min() if m.any() else np.inf)
+        L = hits[0] + hits[1]
+        if L < best[0]:
+            best = (L, d, p + hits[0] * d, p - hits[1] * d)
+    return best[1], best[0], best[2], best[3]
+
+
+def omega_slab(deck, p, n, c, tw, R):
+    """omega = tets with the centroid at |x.n - c| < tw / 2 and within R of the line p + s n (float test: omega is a
+    DEFINITION, the chosen set); -> (mask, |omega| EXACT)."""
+    from fractions import Fraction as Fr
+    g = deck["grids"]
+    nf = np.array([float(x) for x in n])
+    pf = np.asarray([float(x) for x in p], float)
+    mask, vol = [], Fr(0)
+    for t in deck["tets"]:
+        Pq = [[TF._nas(x) for x in g[q]] for q in t]
+        cf = np.array([float(sum(P_[k] for P_ in Pq) / 4) for k in range(3)])
+        dn = float(cf @ nf) - float(c)
+        lat = (cf - pf) - ((cf - pf) @ nf) * nf
+        inside = abs(dn) < float(tw) / 2 and float(np.linalg.norm(lat)) < float(R)
+        mask.append(inside)
+        if inside:
+            vol += EQ.tet_volume(Pq)
+    return np.array(mask, bool), vol
+
+
+def scl_extractor(kind, Pi, n, c, tw, vol, E, nu):
+    """(S0, S1) of the linear extractor (exact): membrane sigma_e = C:Pi / |omega|; bending
+    sigma_e(x) = 6 / (tw |omega|) C:Pi (x.n - c)."""
+    mu, lam = E / (2 * (1 + nu)), E * nu / ((1 + nu) * (1 - 2 * nu))
+    tr = Pi[0][0] + Pi[1][1] + Pi[2][2]
+    CP = [[2 * mu * Pi[a][b] + (lam * tr if a == b else 0) for b in range(3)] for a in range(3)]
+    z3 = [[[0 * CP[0][0]] * 3 for _ in range(3)] for _ in range(3)]
+    if kind == "membrane":
+        return [[x / vol for x in r] for r in CP], z3
+    if kind == "bending":
+        kap = 6 / (tw * vol)
+        S0 = [[-c * kap * x for x in r] for r in CP]
+        S1 = [[[kap * CP[i][j] * n[k] for k in range(3)] for j in range(3)] for i in range(3)]
+        return S0, S1
+    raise ValueError(kind)
+
+
 def subcase_load(deck, n):
     """the RBE3 resultant (F, M) of a deck subcase, as tetfea reads it"""
     lid = int(deck["subcases"][n]["LOAD"])
@@ -215,6 +339,10 @@ def main(argv):
                     "component over omega")
     ap.add_argument("--prestress-scale", default="1", help="level 3b: s (exact decimal, signed) in f + s l_p; "
                     "polarization needs the runs with +s and -s")
+    ap.add_argument("--scl", help="level 3c: a JSON spec {point, n: [3 exact strings, exactly unit], u: [3 floats, the "
+                    "tangent direction], c, tw, R} (from the SCL pilot); with --scl-kind adds s * l_p, l_p = sigma_m "
+                    "or sigma_b of sigma_tt on the slab")
+    ap.add_argument("--scl-kind", choices=("membrane", "bending"))
     a = ap.parse_args(argv)
     mf = {"auto": None, "yes": True, "no": False}[a.matfree]
     zd = {"auto": None, "32": np.float32, "64": np.float64}[a.zdtype]
@@ -237,6 +365,29 @@ def main(argv):
         sig = mean_stress_extractor(a.mean_stress, dk["mat"][0], dk["mat"][1], vol)
         sub["prestress"] = {"omega": mask, "sigma": [[s * x for x in row] for row in sig]}
         sub["label"] += f" + {a.prestress_scale} * mean {a.mean_stress} over {int(mask.sum())} tets"
+    if a.scl or a.scl_kind:
+        from fractions import Fraction as Fr
+        if not (a.scl and a.scl_kind):
+            ap.error("--scl and --scl-kind go together")
+        spec = json.load(open(a.scl))
+        dk = TF.read_deck(a.deck)
+        if not isinstance(sub, dict):
+            Fd, Md = subcase_load(dk, sub)
+            sub = {"F": Fd, "M": Md, "label": f"subcase {sub}"}
+        n = [Fr(x) for x in spec["n"]]
+        if sum(x * x for x in n) != 1:
+            ap.error("--scl: n must be EXACTLY unit (use rational_unit)")
+        Pi, tp = tangent_projector(spec["u"], n)
+        c, tw = Fr(spec["c"]), Fr(spec["tw"])
+        mask, vol = omega_slab(dk, spec["point"], n, c, tw, Fr(spec["R"]))
+        if not mask.any():
+            ap.error("omega is empty")
+        S0, S1 = scl_extractor(a.scl_kind, Pi, n, c, tw, vol, dk["mat"][0], dk["mat"][1])
+        s = Fr(a.prestress_scale)
+        sub["prestress"] = {"omega": mask, "S0": [[s * x for x in r] for r in S0],
+                            "S1": [[[s * x for x in cc] for cc in r] for r in S1], "label": a.scl_kind}
+        sub["label"] += (f" + {a.prestress_scale} * sigma_{a.scl_kind[0]} of sigma_tt on the SCL slab "
+                         f"({int(mask.sum())} tets, |omega| {float(vol):.6f})")
     r = bracket(a.deck, sub, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd, dump_g=a.dump_g)
     if (a.d_max is not None or a.d_min is not None) and r["work_conjugate"]:
         from . import cadstiff as CS

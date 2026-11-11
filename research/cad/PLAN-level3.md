@@ -193,3 +193,60 @@ What to build is therefore a design decision for the curator / Logic1, not made 
   chosen tangent t);
 - (b) general linear extractors.
 Not built: the directive fixed the extractor to Π_nn (x_n − c), which the correction shows is the wrong quantity.
+
+## 3c — BUILT: membrane and bending on an SCL slab (2026-11-11, fork of Logic1; decision (a) of the coordinator)
+
+**What it computes.** A stress classification line through a wall, certified over a thin SLAB ω, not a line. ω is
+the tets whose centroid lies inside the wall (|x·n − c| < t_w/2) and within R of the line p + s n.
+- σ_m = (1/|ω|) ∫_ω σ_tt;
+- σ_b = 6/(t_w |ω|) ∫_ω σ_tt (x·n − c).
+These are the line formulas (1/t)∫σ dz and (6/t²)∫σ z dz averaged over the patch, with A_⊥ := |ω|/t_w by definition.
+- n is an EXACTLY unit rational vector (inverse stereographic map of a rational point).
+- Π = t′t′ᵀ/|t′|², with t′ = u − (u·n) n, is exact and t′ ⊥ n exactly.
+
+**How.** Through the GENERAL linear extractor σ_e(x) = S0 + S1·x:
+- lower side (tetfea): ∫_T σ_e : ε(v) = |T| σ_e(centroid) : ε(v), exact in integers;
+- upper side (equil): the cross term needs ∫_T τ′_ij x_k = (M_ijk + M_jik − M_kij)/2 from the exact fluxes, with the
+  second-moment face weights 1/20, 1/60, 1/120; the self term is the exact quadratic integral.
+- Code: equil.extractor_linear_b / _self (+ float versions); alfeld.moments, an INDEPENDENT quadrature check;
+  cadbracket.rational_unit / tangent_projector / wall_chord / omega_slab / scl_extractor and `--scl spec.json
+  --scl-kind membrane|bending`; research/cad/scl_pilot.py (the float pilot: chord, slab, tangent, s);
+  polarize --scl-kind.
+
+**Tests** (tests/test_scl.py, 35/35, MEASURED):
+- b·g against the element's OWN first moments (Alfeld sub-tet quadrature, exact to degree 2): exact on 3 random tets.
+  The quadrature's sign is T/det; with |det| it failed exactly on a det < 0 tet.
+- The self term against the same quadrature, exact. The float b and self term agree with the exact ones.
+- Lower side l_p(Gx) for the linear extractor, exact.
+- Beam (the box clamped at z = 0, top load F = (0, 500, 1000), M_x = 10000 through the RBE3 at (5, 5, 12); ω = the
+  layer 2.5 < z < 7.5; t = e_z, n = e_y, c = 5, t_w = 10). Exact by equilibrium: σ_m = 10 and
+  σ_b = 0.006 (M_x − 7 F_y) = 39.
+
+  | n | tets | σ_m (exact 10) | σ_b (exact 39) |
+  |---|---|---|---|
+  | 4 | 384 | [6.059, 13.941] | [26.570, 44.323] |
+  | 8 | 3072 | [8.645, 11.355] | [34.848, 40.972] |
+
+  The float FE values lie inside; the finer mesh is narrower.
+- Planted errors, all caught:
+  - the moment formula WITHOUT the permutation term: n = 4 and n = 8, the C(f − s p) "bracket" inverts. Measured
+    first with F_y = 0: NOT caught, and the two brackets were equal to every digit, because over a full layer the
+    permutation term sums to −½κ ∫_∂ω t_y z², which is zero when the section shear is zero. F_y was added for that;
+  - the self term dropped: caught on n = 4 and n = 8;
+  - the wrong sign of c (c = −5): its bracket contains its own exact value 99 and refutes 39.
+- Regression green: prestress 28/28, equil, tetfea, alfeld, errfloat, cadstiff, cadmesh, dd, tetmesh, robust, stand.
+
+**SimJEB 631, subcase 1 (matfree, float64 Z, 3 cores each; ~5 min a bracket, CG ~1930 iterations):**
+- SCL point = the 3b box centre (−17.728, −73.7615, 24.576).
+- The shortest wall chord: direction ≈ (−0.042, −0.039, 0.998), t_w = 3.8073 mm, c = 27.1741.
+- The slab, R = t_w: 456 tets, |ω| = 171.8845 mm³.
+- Float mean stress in the slab, projected on the wall plane: the principal 626.0 MPa along t1 ≈ (−0.048, 0.998,
+  0.037), the second 63.6 MPa (ratio 0.10, not significant, so t2 is not run).
+- **σ_m(σ_t1t1) ∈ [390.71, 898.74] MPa, tension PROVED** (s = 7.3; C(f ± s p) brackets 8.5 % / 9.1 %; float 626.0
+  inside; width 79 %).
+- **σ_b(σ_t1t1) ∈ [161.40, 1819.42] MPa, the sign PROVED** (s = 5.306; brackets 20.8 % / 21.0 %; float 901.5
+  inside; width 167 %).
+- Files: results631_3c_t1_{membrane,bending}_{plus,minus}.json.
+- Honest reading. The signs are proved; the magnitudes are not usable for a code check yet. The wall is 3.8 mm with
+  P1 tets, and the bending field across it is poorly resolved (the brackets' gaps of 21 % say so). As in 3b, the
+  width is set by the discretisation gaps, and the lever is refinement through the wall.

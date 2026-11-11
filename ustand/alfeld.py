@@ -396,3 +396,36 @@ def energy_upper_ev(P, g, E, nu, return_terms=False):
     tot = per.sum()
     up = float(tot.upper())
     return (up, per) if return_terms else up
+
+
+def moments(P, g):
+    """INDEPENDENT exact check (tests only): (int_T tau_ij, int_T tau_ij x_k) of the element stress itself, by the
+    sub-tet quadrature (10 points, exact to degree 2; tau is piecewise linear, tau x_k quadratic). The physical stress
+    at a point is B S B^T / det (the double Piola map; energy() squares it, so its sign is moot there)."""
+    r = ref()
+    B = [[P[k + 1][row] - P[0][row] for k in range(3)] for row in range(3)]
+    det, Bi = _inv3(B)
+    sg = 1 if det > 0 else -1
+    gh = []
+    for vtx in range(12):
+        gv = g[3 * vtx:3 * vtx + 3]
+        gh += [sg * sum(Bi[a][b] * gv[b] for b in range(3)) for a in range(3)]
+    m0 = [[Fr(0)] * 3 for _ in range(3)]
+    m1 = [[[Fr(0)] * 3 for _ in range(3)] for _ in range(3)]
+    for si, pts in enumerate(_quad_points()):
+        for (w, M), (xi, _w2) in zip(r["EVAL"][si], pts):
+            s = [sum(M[p][j] * gh[j] for j in range(36) if gh[j]) for p in range(6)]
+            S = [[s[0], s[3], s[4]], [s[3], s[1], s[5]], [s[4], s[5], s[2]]]
+            BS = [[sum(B[a][k] * S[k][l] for k in range(3)) for l in range(3)] for a in range(3)]
+            T = [[sum(BS[a][l] * B[c][l] for l in range(3)) for c in range(3)] for a in range(3)]
+            x = [P[0][k] + sum(B[k][q] * xi[q] for q in range(3)) for k in range(3)]
+            for i in range(3):
+                for j in range(3):
+                    m0[i][j] += w * T[i][j]
+                    for k in range(3):
+                        m1[i][j][k] += w * T[i][j] * x[k]
+    # weights sum to 1 per sub-tet; a sub-tet's physical volume is |det|/24; tau = T/|det| -> factor 1/24
+    # the sign: tau = T / det (signed). MEASURED 2026-11-11: with T / |det| the zeroth moment disagreed with the
+    # boundary formula exactly on a tet with det < 0 and agreed on one with det > 0
+    return ([[sg * m0[i][j] / 24 for j in range(3)] for i in range(3)],
+            [[[sg * m1[i][j][k] / 24 for k in range(3)] for j in range(3)] for i in range(3)])

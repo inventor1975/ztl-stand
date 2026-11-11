@@ -32,7 +32,11 @@ def main():
     ap.add_argument("--s", default="1")
     ap.add_argument("--g", help="the force g of the test load, 'gx,gy,gz' (level 3a)")
     ap.add_argument("--mean-stress", help="level 3b: the component whose mean over omega the prestress extracts")
+    ap.add_argument("--scl-kind", choices=("membrane", "bending"),
+                    help="level 3c: the runs used cadbracket --scl ... --scl-kind; l is sigma_m or sigma_b itself")
     a = ap.parse_args()
+    if a.scl_kind:
+        a.mean_stress = f"{a.scl_kind} (sigma_tt on the SCL slab)"
     P = json.load(open(a.plus))
     M = json.load(open(a.minus))
     s = Fr(a.s)
@@ -40,7 +44,7 @@ def main():
     mlo, mhi = (Fr(x) for x in M["compliance"])
     lo, hi = (plo - mhi) / (4 * s), (phi - mlo) / (4 * s)
     if not a.g and not a.mean_stress:
-        ap.error("--g (3a) or --mean-stress (3b)")
+        ap.error("--g (3a), --mean-stress (3b) or --scl-kind (3c)")
     print(f"C(f+sg) in [{float(plo):.6f}, {float(phi):.6f}]   C(f-sg) in [{float(mlo):.6f}, {float(mhi):.6f}]")
     mid = abs((hi + lo) / 2)
     rel = f"{100 * float((hi - lo) / mid):.1f} % of the midpoint" if mid else "midpoint 0"

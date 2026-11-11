@@ -299,8 +299,17 @@ def solve_cases(deck, subcases, E=None, nu=None, tol=1e-9, log=print, exact=Fals
             if len(tets) != len(deck["tets"]):
                 raise ValueError("a prestress region needs every deck tet on the mesh")
             om = np.asarray(pre["omega"], bool)
-            sgf = np.array([[float(x) for x in row] for row in pre["sigma"]])
-            contrib = vol[om, None, None] * (grads[om] @ sgf.T)                       # (n, 4, 3): node i, comp a
+            if "S1" in pre:
+                # level 3c: a LINEAR extractor sig_e(x) = S0 + S1 . x; eps(v) is constant on a P1 tet, so
+                # int_T sig_e(x) : eps(v) = |T| sig_e(centroid) : eps(v) EXACTLY
+                S0f = np.array([[float(x) for x in r] for r in pre["S0"]])
+                S1f = np.array([[[float(x) for x in c] for c in r] for r in pre["S1"]])
+                cen = P[om].mean(axis=1)
+                sgT = S0f[None] + np.einsum("ijk,nk->nij", S1f, cen)
+                contrib = vol[om, None, None] * np.einsum("nia,nba->nib", grads[om], sgT)
+            else:
+                sgf = np.array([[float(x) for x in row] for row in pre["sigma"]])
+                contrib = vol[om, None, None] * (grads[om] @ sgf.T)                   # (n, 4, 3): node i, comp a
             dofs_p = 3 * T[om, :, None] + np.arange(3)[None, None, :]
             ftot = fvec.copy()
             np.add.at(ftot, dofs_p.ravel(), contrib.ravel())
@@ -317,7 +326,15 @@ def solve_cases(deck, subcases, E=None, nu=None, tol=1e-9, log=print, exact=Fals
         fv = sum(Fr(float(fvec[j])) * vi[j] for j in range(ndof) if fvec[j] != 0) / 2 ** S
         fp_exact = None
         if pre is not None:
-            fp_exact = prestress_work_exact(XI, tets, vi, np.where(om)[0], pre["sigma"], k)
+            if "S1" in pre:
+                sig_per = {}
+                for tt_ in np.where(om)[0]:
+                    cq = [Fr(sum(XI[q][r] for q in tets[int(tt_)]), 4 * 10 ** k) for r in range(3)]
+                    sig_per[int(tt_)] = [[pre["S0"][i][j] + sum(pre["S1"][i][j][kk] * cq[kk] for kk in range(3))
+                                          for j in range(3)] for i in range(3)]
+                fp_exact = prestress_work_exact(XI, tets, vi, np.where(om)[0], None, k, sig_per=sig_per)
+            else:
+                fp_exact = prestress_work_exact(XI, tets, vi, np.where(om)[0], pre["sigma"], k)
             fv += fp_exact
         if not exact:
             a_up = a_upper_float(XI, tets, vi, mu, lam, k, Xf=X)
@@ -341,7 +358,7 @@ def solve_cases(deck, subcases, E=None, nu=None, tol=1e-9, log=print, exact=Fals
     return outs
 
 
-def prestress_work_exact(XI, tets, vi, omega, sig, k):
+def prestress_work_exact(XI, tets, vi, omega, sig, k, sig_per=None):
     """l_p(v) = sum over the tets of omega of |T| eps(v) : sig, EXACTLY, for v = vi / 2^S (P1) and the exact coordinates
     XI / 10^k: |T| grad v = sign(det) dV adj(D) / (6 2^S 10^(2k)) with D, adj(D), dV in integers (sig symmetric, so
     eps : sig = grad : sig). sig: 3 x 3 Fractions."""
@@ -358,7 +375,8 @@ def prestress_work_exact(XI, tets, vi, omega, sig, k):
                [a21 * a32 - a22 * a31, a12 * a31 - a11 * a32, a11 * a22 - a12 * a21]]
         v0 = vi[3 * p0:3 * p0 + 3]
         dV = [[vi[3 * q + c] - v0[c] for q in (p1, p2, p3)] for c in range(3)]
-        term = sum(sum(dV[c][q] * adj[q][b] for q in range(3)) * sig[c][b] for c in range(3) for b in range(3))
+        sg_ = sig_per[int(t)] if sig_per is not None else sig      # level 3c: sig_e at the tet's centroid
+        term = sum(sum(dV[c][q] * adj[q][b] for q in range(3)) * sg_[c][b] for c in range(3) for b in range(3))
         acc += term if dt > 0 else -term
     return acc / (6 * 2 ** S * 10 ** (2 * k))
 

@@ -16,6 +16,7 @@ smoothed-aggregation AMG + CG (rigid near-null space at the face vertices) or a 
 from __future__ import annotations
 
 import numpy as np
+from fractions import Fraction as Fr
 
 from . import alfeld as AL
 
@@ -574,3 +575,132 @@ def prestress_linear_float(PX, sig, E, nu):
             w = sum((2 if iv == jv else 1) * PX[:, vv] for iv, vv in enumerate(vs)) / 24      # (n, 3)
             out[:, f * 9 + jv * 3:f * 9 + jv * 3 + 3] = w @ As.T
     return out
+
+
+# ------------------------------------------------------------------------------------------------ level 3c: LINEAR extractor
+# sig_e(x) = S0 + S1 . x  (S1[i][j][k]: the coefficient of x_k in sig_e_ij, symmetric in i, j), on omega. The upper side
+# again needs no new admissibility (tau = tau' + sig_e chi_omega is admissible for f + l_p for ANY p). The cross term
+# int_T (A sig_e) : tau' needs the FIRST moments of tau'. For a symmetric, div-free tau (2026-11-11, checked exactly in
+# research/cad/moment_full_check.py on 27/27 index triples):
+#     int_T tau_ij x_k = ( M_ijk + M_jik - M_kij ) / 2,      M_ijk = int_dT t_i x_j x_k,
+# every first moment is boundary-determined (the Christoffel trick: A_ijk is symmetric in i, j). With the element's
+# linear face traction, M_ijk = sum over slots g[s, i] W2[s][j][k], W2 = int_F lam_v x_j x_k / (2 |F|) from
+# int_F lam_v lam_a lam_b = 2 |F| (1/20 all equal, 1/60 two equal, 1/120 all distinct).
+# PLANT_NO_PERMUTATION: a test-only switch for the planted error "the moment formula without the permutation term".
+PLANT_NO_PERMUTATION = False
+
+
+def _slot_second_weights(P):
+    """W2[f * 3 + v][j][k] = sum_{a, b in face f} m(v, a, b) x_a,j x_b,k, m = 1/20, 1/60, 1/120 (alfeld's order)."""
+    out = []
+    for f in range(4):
+        vs = [v for v in range(4) if v != f]
+        for jv in range(3):
+            W = [[0 * P[0][0] for _ in range(3)] for _ in range(3)]
+            for ia, a in enumerate(vs):
+                for ib, b in enumerate(vs):
+                    same = (ia == jv) + (ib == jv) + (ia == ib)
+                    m = Fr(1, 20) if same == 3 else (Fr(1, 60) if same == 1 else Fr(1, 120))
+                    for j in range(3):
+                        for k in range(3):
+                            W[j][k] += m * P[a][j] * P[b][k]
+            out.append(W)
+    return out
+
+
+def first_moment_integral(P, g):
+    """A[i][j][k] = int_T tau_ij x_k of the element stress with BALANCED face data g — from the boundary data alone."""
+    W2 = _slot_second_weights(P)
+    M = [[[sum(g[s * 3 + i] * W2[s][j][k] for s in range(12)) for k in range(3)] for j in range(3)] for i in range(3)]
+    if PLANT_NO_PERMUTATION:
+        return [[[(M[i][j][k] + M[j][i][k]) / 2 for k in range(3)] for j in range(3)] for i in range(3)]
+    return [[[(M[i][j][k] + M[j][i][k] - M[k][i][j]) / 2 for k in range(3)] for j in range(3)] for i in range(3)]
+
+
+def _apply_A_lin(S0, S1, E, nu):
+    """B0 = A S0 and B1[:, :, k] = A S1[:, :, k] (A the compliance tensor; exact for Fractions)."""
+    B0 = compliance_apply(S0, E, nu)
+    cols = [compliance_apply([[S1[i][j][k] for j in range(3)] for i in range(3)], E, nu) for k in range(3)]
+    B1 = [[[cols[k][i][j] for k in range(3)] for j in range(3)] for i in range(3)]
+    return B0, B1
+
+
+def extractor_linear_b(P, S0, S1, E, nu):
+    """b (36): int_T (A sig_e(x)) : tau' = b . g, EXACTLY (Fractions in, Fractions out), sig_e = S0 + S1 . x."""
+    B0, B1 = _apply_A_lin(S0, S1, E, nu)
+    w = _slot_weights(P)
+    W2 = _slot_second_weights(P)
+    b = []
+    for s in range(12):
+        for a in range(3):
+            v = sum(B0[a][j] * w[s][j] for j in range(3))
+            v += sum(B1[a][j][k] * W2[s][j][k] for j in range(3) for k in range(3))
+            if not PLANT_NO_PERMUTATION:
+                v -= sum(B1[i][j][a] * W2[s][i][j] for i in range(3) for j in range(3)) / 2
+            else:
+                v += 0          # the planted formula (M_ijk + M_jik)/2 has no permutation term
+            b.append(v)
+    return b
+
+
+def extractor_linear_self(P, S0, S1, E, nu):
+    """int_T sig_e(x) : A sig_e(x) for the linear sig_e, EXACTLY: int x_k = |T| c_k, int x_k x_l = |T|/20 (sum_a x_ak
+    x_al + (sum_a x_ak)(sum_a x_al))."""
+    B0, B1 = _apply_A_lin(S0, S1, E, nu)
+    V = tet_volume(P)
+    c = [sum(p[k] for p in P) / 4 for k in range(3)]
+    Q = [[V * (sum(p[k] * p[l] for p in P) + sum(p[k] for p in P) * sum(p[l] for p in P)) / 20 for l in range(3)]
+         for k in range(3)]
+    d0 = sum(S0[i][j] * B0[i][j] for i in range(3) for j in range(3))
+    d1 = [sum(S0[i][j] * B1[i][j][k] + S1[i][j][k] * B0[i][j] for i in range(3) for j in range(3)) for k in range(3)]
+    d2 = [[sum(S1[i][j][k] * B1[i][j][l] for i in range(3) for j in range(3)) for l in range(3)] for k in range(3)]
+    return V * d0 + V * sum(d1[k] * c[k] for k in range(3)) + sum(d2[k][l] * Q[k][l] for k in range(3) for l in range(3))
+
+
+def extractor_at(S0, S1, x):
+    """sig_e(x) (exact for Fractions)."""
+    return [[S0[i][j] + sum(S1[i][j][k] * x[k] for k in range(3)) for j in range(3)] for i in range(3)]
+
+
+def extractor_linear_b_float(PX, S0, S1, E, nu):
+    """The float b for many tets at once (only to CHOOSE): PX (n, 4, 3) -> (n, 36)."""
+    PX = np.asarray(PX, float)
+    S0f = np.array([[float(x) for x in r] for r in S0])
+    S1f = np.array([[[float(x) for x in c] for c in r] for r in S1])
+    Af = lambda s: ((1 + nu) * s - nu * np.trace(s) * np.eye(3)) / E
+    B0 = Af(S0f)
+    B1 = np.stack([Af(S1f[:, :, k]) for k in range(3)], axis=2)
+    out = np.zeros((len(PX), 36))
+    for f in range(4):
+        vs = [v for v in range(4) if v != f]
+        for jv in range(3):
+            w = sum((2 if iv == jv else 1) * PX[:, vv] for iv, vv in enumerate(vs)) / 24        # (n, 3)
+            W2 = np.zeros((len(PX), 3, 3))
+            for ia, a in enumerate(vs):
+                for ib, b in enumerate(vs):
+                    same = (ia == jv) + (ib == jv) + (ia == ib)
+                    m = 1 / 20 if same == 3 else (1 / 60 if same == 1 else 1 / 120)
+                    W2 += m * PX[:, a, :, None] * PX[:, b, None, :]
+            v = w @ B0.T + np.einsum("ajk,njk->na", B1, W2)
+            if not PLANT_NO_PERMUTATION:
+                v -= 0.5 * np.einsum("ija,nij->na", B1, W2)
+            out[:, f * 9 + jv * 3:f * 9 + jv * 3 + 3] = v
+    return out
+
+
+def extractor_linear_self_float(PX, S0, S1, E, nu):
+    """float self term summed over the tets PX (n, 4, 3) (only to choose / report)."""
+    PX = np.asarray(PX, float)
+    S0f = np.array([[float(x) for x in r] for r in S0])
+    S1f = np.array([[[float(x) for x in c] for c in r] for r in S1])
+    Af = lambda s: ((1 + nu) * s - nu * np.trace(s) * np.eye(3)) / E
+    B0 = Af(S0f)
+    B1 = np.stack([Af(S1f[:, :, k]) for k in range(3)], axis=2)
+    V = np.abs(np.linalg.det(np.stack([PX[:, 1] - PX[:, 0], PX[:, 2] - PX[:, 0], PX[:, 3] - PX[:, 0]], 2))) / 6
+    c = PX.mean(axis=1)
+    sx = PX.sum(axis=1)
+    Q = V[:, None, None] * (np.einsum("nak,nal->nkl", PX, PX) + sx[:, :, None] * sx[:, None, :]) / 20
+    d0 = float((S0f * B0).sum())
+    d1 = np.einsum("ij,ijk->k", S0f, B1) + np.einsum("ijk,ij->k", S1f, B0)
+    d2 = np.einsum("ijk,ijl->kl", S1f, B1)
+    return float((V * d0).sum() + (V * (c @ d1)).sum() + np.einsum("kl,nkl->", d2, Q))
