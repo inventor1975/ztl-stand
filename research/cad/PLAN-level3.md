@@ -585,3 +585,37 @@ model √(w_f w_p) was already matched to 8 digits). Membrane and bending then c
 with m functionals n + m instead of 2nm. It needs the cross terms A_fp, E_fp evaluated with the same rigour as
 the squares (the exact finish on each field, the error-bounded energy on the pair) — a real piece of work, not
 started.
+
+
+## Level 3d — one solve per load, one per functional (2026-11-12, in words; supersedes the paragraph above)
+
+**No new rigorous evaluator is needed** (the paragraph above asked for enclosures of the cross terms A_fp, E_fp —
+wrong turn). Both sides are linear in the load, so the FIELDS are combined and the existing evaluators run on the
+combination.
+
+- Fields, once each. For the load f: the P1 field v_f (tetfea's exact integer vector) and the exactly equilibrated
+  flux data g_f (after the exact finish). For each functional p (a prestress / extractor sig_e on ω, no traction):
+  v_p, and g_p for ZERO traction with the linear term of p (the choice minimises ||tau' + sig_e chi_ω||²).
+- For any dyadic s (an exact binary64), the load f + s p has
+  - the admissible P1 field v_f + s v_p (integers after clearing the denominator of s; the bound
+    (f + s p)(v)² / a(v, v) is homogeneous of degree 0 in v) — tetfea's exact works and its a(v, v) upper bound, as now;
+  - the exactly equilibrated field tau'_f + s tau'_p plus s sig_e chi_ω — alfeld.energy_upper_ev on
+    Ev.rounded(g_f) + Ev.exact(s) * Ev.rounded(g_p) (errfloat carries the cancellation; no Fractions kept beyond the
+    one rounding of each field), plus the exact extra 2s X_f + 2s² X_p + s² self with
+    X_f = Σ_ω b_T·g_f, X_p = Σ_ω b_T·g_p, self = Σ_ω |T| sig_e : A sig_e — three exact rationals, computed once.
+  So L(s) <= C(f + s p) <= U(s) for every s, at the cost of one energy evaluation and one a(v, v) evaluation.
+- The functional: l_p(u) = [C(f + s p) − C(f − s p)] / (4s), so
+  (L(s) − U(−s)) / (4s) <= l_p(u) <= (U(s) − L(−s)) / (4s), the last step in exact rationals, rounded outward
+  (today the summary scripts do it in plain floats). s is chosen AFTER the solves from the float widths,
+  s* = sqrt(w_f / w_p) — no guess (7.3, 5.306 were guesses; the width model was within 2.4 % of optimal).
+- Cost: n loads and m functionals take n + m trace solves and exact finishes instead of 2nm; membrane + bending on
+  one load 3 instead of 4. Memory falls too: a field is kept as 36 doubles a tet, not 36 Fractions.
+- What must be added: (1) tetfea: the proved lower bound as a function of a given integer field (now inline in
+  solve_cases), and a load with NO traction on a refined deck (today a refined deck refuses any load but its own);
+  (2) cadbracket: the orchestration and the output (the compliance bracket of f, and for each functional the
+  bracket of l_p(u), s, and the four numbers it came from).
+- Checks: on the box, at the SAME s the new bracket equals the present two-run bracket to the CG tolerance; the
+  exact mean stress 10 lies inside; at s* it is not wider than at the guessed s; planted — g_p solved with the
+  traction left on (not zero) must be caught (the combined field then equilibrates f + s f, not f): the balance
+  check or the comparison with the two-run bracket goes RED; on 631 round 2 the brackets of sigma_m, sigma_b overlap
+  the committed ones.
