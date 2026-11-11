@@ -337,3 +337,28 @@ wall, is the next lever.
 631 (659k) peaked at ~16.5 GB, so 8 × 659k ≈ 5.3M tets would need ~130 GB against the machine's 62 GB. The next
 lever is GRADED refinement through the wall near the SCL. Conforming transitions (red-green) or hanging nodes with
 constraints are a design decision; plan it in words first.
+
+## Graded refinement through the wall — the two roads, IN WORDS (2026-11-11 11:55; decision pending)
+
+The goal: refine only near the SCL (a ball or slab around ω, a few wall thicknesses), keep the rest at the
+current level. That gives the width gain of more levels without ~130 GB.
+
+**(A) Red-green, conforming** (Bank / Bey: red 1:8 inside the zone; green closure tets on the transition layer, so
+no face has a hanging node).
+- Lower side: the mesh stays conforming, so the P1 space is an ordinary conforming space. f(v)²/a(v,v) stays a
+  valid lower bound with NO new mathematics.
+- Upper side: every tet is still a tet, and every interior face is shared by exactly two tets. The Alfeld hybrid,
+  the trace system and the exact push apply unchanged. NO new mathematics.
+- Cost: mesh code only (green patterns for 1, 2 or 3 marked edges; quality of the green tets), plus tests on the box
+  with a known answer.
+- Risk: green tets are flatter. That can slow CG and widen the local gap a little. It is MEASURED, not hidden.
+
+**(B) Hanging nodes with constraints.**
+- Lower side: P1 with the hanging values constrained to the edge or face interpolant is still conforming. Valid, but
+  the assembly needs constraint handling.
+- Upper side: a coarse face now meets 4 fine faces. The face-by-face traction continuity of the hybrid has no
+  partner. It needs a mortar-type balance on non-matching faces, and the exact push must be redone for it: NEW
+  mathematics in the part that carries the proof.
+
+**Recommendation: (A).** It keeps both proofs exactly as they are and moves all the novelty into mesh code, where a
+mistake shows up as a failed test, not as a wrong bound.
