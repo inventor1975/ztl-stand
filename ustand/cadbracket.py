@@ -187,13 +187,19 @@ def omega_children(deck, box):
     and |omega| is the coarse |omega| exactly (the children fill the parent). Found 2026-11-11: a centroid test on
     the fine tets picked 11612 tets / 581.07 mm^3 against 8 x 1458 / 589.12, so the two means were of different
     regions. -> (fine mask, |omega| exact)."""
+    return children_of(deck, lambda coarse: omega_box(coarse, box))
+
+
+def children_of(deck, select):
+    """The fine omega of a red-refined deck = the 8 children of each coarse tet that select(coarse deck) -> (mask,
+    |omega|) chooses; |omega| is the coarse one exactly. Used for the 3b box and the 3c SCL slab alike."""
     rf = deck.get("refined_from") or {}
     if "deck" not in rf:
         raise ValueError("--omega-children needs a deck made by ustand.refine (refined_from.deck)")
     coarse = TF.read_deck(rf["deck"])
     if 8 * len(coarse["tets"]) != len(deck["tets"]):
         raise ValueError("the refined deck does not have 8 children per coarse tet")
-    cmask, vol = omega_box(coarse, box)
+    cmask, vol = select(coarse)
     return np.repeat(cmask, 8), vol
 
 
@@ -366,7 +372,7 @@ def main(argv):
     ap.add_argument("--dump-g", help="save the float choice g (nt x 36) to this .npy (to profile the finish alone)")
     ap.add_argument("--omega-box", help="level 3b: the region omega = tets with the centroid inside "
                     "'x0,y0,z0,x1,y1,z1'; with --mean-stress adds the prestress load s * l_p to the traction")
-    ap.add_argument("--omega-children", action="store_true", help="level 3b on a REFINED deck: omega = the children "
+    ap.add_argument("--omega-children", action="store_true", help="level 3b/3c on a REFINED deck: omega (box or SCL slab) = the children "
                     "of the COARSE deck's box selection (the same region, the same exact volume), not a new centroid "
                     "test on the fine tets")
     ap.add_argument("--mean-stress", choices=sorted(_COMP), help="level 3b: l_p(u) = the mean of this stress "
@@ -417,7 +423,10 @@ def main(argv):
             ap.error("--scl: n must be EXACTLY unit (use rational_unit)")
         Pi, tp = tangent_projector(spec["u"], n)
         c, tw = Fr(spec["c"]), Fr(spec["tw"])
-        mask, vol = omega_slab(dk, spec["point"], n, c, tw, Fr(spec["R"]))
+        if a.omega_children:
+            mask, vol = children_of(dk, lambda coarse: omega_slab(coarse, spec["point"], n, c, tw, Fr(spec["R"])))
+        else:
+            mask, vol = omega_slab(dk, spec["point"], n, c, tw, Fr(spec["R"]))
         if not mask.any():
             ap.error("omega is empty")
         S0, S1 = scl_extractor(a.scl_kind, Pi, n, c, tw, vol, dk["mat"][0], dk["mat"][1])
