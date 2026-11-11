@@ -299,3 +299,15 @@ refined deck is the coarse deck's traction, not a new RBE3 spread.
 
 The scaling: the compliance gap fell 8.41 → 2.85 % (×2.95) at h/2, the mean's width 41 → 17.4 % (×2.4). This matches
 the prediction width = √(w_f w_p)/|l| with both gaps shrinking ~×3.
+
+## 3b on the refined 631 over the SAME ω — nested (2026-11-11 08:09, MEASURED)
+
+`--omega-children` (185c3d0): ω on the refined deck is the 8 children of each coarse ω tet. That is 11664 =
+8 × 1458 tets with |ω| exactly 589.1209 mm³, the coarse region itself (the centroid run above had 11612 tets,
+581.07 mm³).
+- C(f + 13 l_p) ∈ [101612.414, 104105.870]; C(f − 13 l_p) ∈ [73120.895, 75186.262] (fine, matfree, z64, 6 cores).
+- **Mean σ_yy over ω ∈ [508.20, 595.86] MPa, width 15.9 %, tension proved.** Hand check: (101612.414 −
+  75186.262)/52 = 508.20, (104105.870 − 73120.895)/52 = 595.86.
+- The coarse bracket of the same quantity is [431.55, 655.37] (41 %). **The fine bracket lies inside it.** The
+  hard check (overlap) holds, and here it is even nested.
+Files: results631r1_3b_yy_children_{plus,minus}.json.
