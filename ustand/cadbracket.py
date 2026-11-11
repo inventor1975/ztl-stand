@@ -53,14 +53,22 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
     T = np.array([[idx[n] for n in t] for t in d["tets"]])
     F, own, lf, tf = TM.faces(T)
     fixed = {idx[n] for ind, deps in d["rbe2"] for n in deps if d["spc"].get(ind, "").startswith("123")}
-    ref, _, rn = d["rbe3"][0]
-    kind = TM.classify(F, own, fixed, {idx[n] for n in rn})
     Fv, Mv = tuple(lo["F"]), tuple(lo["M"])
-    xyz = {n: list(X[idx[n]]) for n in rn + [ref]}
-    fl = TF.rbe3_loads(xyz, ref, rn, Fv, Mv)
-    tr, res, lost = TM.rbe3_traction(X, F, kind, {idx[n]: fl[i] for i, n in enumerate(rn)})
-    if lost:
-        raise ValueError(f"{len(lost)} RBE3 nodal forces on nodes of no loaded face: the load is not a traction here")
+    trc = d.get("traction")
+    if trc is not None:
+        # a REFINED deck (ustand.refine): the traction itself is given (the coarse deck's, linear per coarse face);
+        # tetfea already refused any other load on it
+        kind = TM.classify(F, own, fixed, {idx[n] for n in trc["nodal"]})
+        tr = {idx[n]: np.asarray(v, float) for n, v in trc["nodal"].items()}
+    else:
+        ref, _, rn = d["rbe3"][0]
+        kind = TM.classify(F, own, fixed, {idx[n] for n in rn})
+        xyz = {n: list(X[idx[n]]) for n in rn + [ref]}
+        fl = TF.rbe3_loads(xyz, ref, rn, Fv, Mv)
+        tr, res, lost = TM.rbe3_traction(X, F, kind, {idx[n]: fl[i] for i, n in enumerate(rn)})
+        if lost:
+            raise ValueError(f"{len(lost)} RBE3 nodal forces on nodes of no loaded face: the load is not a traction "
+                             f"here")
     A, B, C = X[F[:, 0]], X[F[:, 1]], X[F[:, 2]]
     n2 = np.linalg.norm(np.cross(B - A, C - A), axis=1)
     q = np.zeros((len(F), 3, 3))
@@ -157,6 +165,13 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
             "rests_on": [f"the deck {path} (sha256 {sha[:16]}…): its tets ARE the part — EARNED IF STABLE on it",
                          "linear isotropic elasticity", "supports: RBE2 spiders to SPC'd nodes (u = 0)",
                          "the load: the traction whose consistent nodal loads are the RBE3 distribution"]}
+    if trc is not None:
+        rf = d.get("refined_from", {})
+        out["refined_from"] = {k: v for k, v in rf.items() if k != "nodal"}
+        out["rests_on"][0] = (f"a red refinement (ustand.refine) of {rf.get('deck', '?')} (sha256 "
+                              f"{str(rf.get('sha256', '?'))[:16]}…): the same faceted part, its tets subdivided 1:8")
+        out["rests_on"][3] = ("the load: the coarse deck's traction (linear per coarse loaded face, its nodal values "
+                              "M_s t = f_RBE3), given at the fine nodes")
     if pre_out is not None:
         out["prestress"] = pre_out
         out["rests_on"].append("plus the prestress load int_omega eps(v) : sig_e (omega = the selected tets)")

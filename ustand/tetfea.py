@@ -66,6 +66,11 @@ def _fields(line):
 
 
 def read_deck(path):
+    if str(path).endswith(".deck.pkl"):
+        # a deck WE wrote (ustand.refine: a red refinement carrying its traction) — never a downloaded file
+        import pickle
+        with open(path, "rb") as f:
+            return pickle.load(f)
     grids, tets, rbe2, rbe3, spc, force, moment, mat = {}, [], [], [], {}, {}, {}, None
     subcases = {}
     cards, cur = [], None
@@ -284,12 +289,30 @@ def solve_cases(deck, subcases, E=None, nu=None, tol=1e-9, log=print, exact=Fals
         if not custom and lid in deck["moment"]:
             ref, sc, v = deck["moment"][lid]
             Mm = tuple(float(sc * x) for x in v)
-        rref, _, rnodes = deck["rbe3"][0]
-        xyz = {n: [float(x) for x in dec[n]] for n in rnodes + [rref]}
-        fl = rbe3_loads(xyz, rref, rnodes, F, Mm)
-        fvec = np.zeros(ndof)
-        for n, fi in zip(rnodes, fl):
-            fvec[3 * idx[n]:3 * idx[n] + 3] += fi
+        trc = deck.get("traction")
+        if trc is not None:
+            # a REFINED deck (ustand.refine): the load IS the coarse deck's traction, linear per coarse face, given by
+            # its nodal values; the fine nodal loads are its consistent loads. Only that load is defined here.
+            if custom:
+                same = all(abs(a - b) <= 1e-9 * (1 + abs(b)) for a, b in zip(F + Mm, tuple(trc["F"]) + tuple(trc["M"])))
+            else:
+                same = subcase == trc["subcase"]
+            if not same:
+                raise ValueError("a refined deck carries the traction of ONE load; this subcase / load is not it")
+            from . import tetmesh as _TM
+            from . import refine as _RF
+            Fm, own_, _, _ = _TM.faces(T)
+            kind_ = _TM.classify(Fm, own_, fixed, {idx[n] for n in trc["nodal"]})
+            fn = _RF.traction_loads(X, Fm, kind_, {idx[n]: v for n, v in trc["nodal"].items()})
+            fvec = fn.ravel().copy()
+            rnodes = list(trc["nodal"])
+        else:
+            rref, _, rnodes = deck["rbe3"][0]
+            xyz = {n: [float(x) for x in dec[n]] for n in rnodes + [rref]}
+            fl = rbe3_loads(xyz, rref, rnodes, F, Mm)
+            fvec = np.zeros(ndof)
+            for n, fi in zip(rnodes, fl):
+                fvec[3 * idx[n]:3 * idx[n] + 3] += fi
         # level 3b (2026-11-11): a PRESTRESS added to the load, l_p(v) = int_omega eps(v) : sig_e — {"omega": a bool
         # mask over the deck's tets, "sigma": 3 x 3 exact (Fractions)}; its float nodal vector only CHOOSES v, the bound
         # takes l_p(v) exactly (prestress_work_exact)
