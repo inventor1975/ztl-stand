@@ -362,3 +362,49 @@ no face has a hanging node).
 
 **Recommendation: (A).** It keeps both proofs exactly as they are and moves all the novelty into mesh code, where a
 mistake shows up as a failed test, not as a wrong bound.
+
+## (A) BUILT — red-green on 631, two levels at the SCL (2026-11-11, MEASURED)
+
+Code: `ustand.refine.graded_refine` with a green closure on edges. The allowed tet patterns are none, one edge, two
+opposite edges, the 3 edges of one face, and red. Each face is then split uniquely, so neighbours agree.
+`conformity()` counts faces in more than 2 tets and hanging edges. `deck["parent"]` maps every child to its ROOT
+coarse tet, and `children_of` uses it. tests/test_graded.py, 22 checks, GREEN; a planted no-closure run shows 67
+hanging edges.
+
+Zone: tet centroids in a ball of radius 3 t_w = 11.42 mm around the SCL point. Level 1 marks 2852 of 82414 tets →
+104118 tets. Level 2, the same ball on level 1, marks 22697 → **269254 tets**. Both levels are conforming: 0 faces
+in more than 2 tets, 0 hanging edges.
+
+Tet quality q = 6√2 V / l_rms³ (1 = regular):
+
+| mesh | tets | p1 | p10 | median | q < 0.1 |
+|---|---|---|---|---|---|
+| coarse | 82414 | 0.244 | 0.579 | 0.793 | 11 |
+| uniform r1 | 659312 | 0.210 | 0.462 | 0.743 | 590 |
+| graded g2 | 269254 | 0.167 | 0.395 | 0.721 | 588 |
+
+The green tets are flatter, but the minimum is no worse than the uniform mesh's (0.016 vs 0.013).
+
+Brackets (matfree, z64, 6 cores; the 3c slab = 29184 = 456 × 64 children, |ω| = 171.8845 exactly):
+
+| quantity | coarse 82k | uniform r1 659k | graded g2 269k |
+|---|---|---|---|
+| C, compliance gap | 8.41 % | 2.85 % | 7.16 % ([42614.75, 45665.60]) |
+| σ_m, MPa | [390.71, 898.74] 79 % | [550.21, 762.10] 32.3 % | [514.03, 782.81] 41.5 % |
+| σ_b, MPa | [161.40, 1819.42] 167 % | [710.94, 1380.44] 64 % | **[761.78, 1298.90] 52.1 %** |
+| CG iterations | ~1930–2200 | 4050 | 6968–8767 |
+
+All brackets overlap; the graded bending lies inside the uniform one. Signs are proved.
+
+**What this says (the width model, measured before):** width ≈ √(w_f·w_p)/|l|.
+- Local refinement shrinks w_p, the prestress side, whose error lives in the slab.
+- It barely touches w_f, the global traction gap: 7.16 % against 2.85 % for uniform. That error lives along the
+  load path and at the singular corners, away from the ball.
+- So the more local quantity (bending) beats uniform with 2.4× fewer tets, and the less local one (membrane) does
+  not.
+The next lever: refine where EACH side's error lives, by goal-oriented indicators of both the f and the p brackets,
+not a ball.
+
+Cost: CG iterations rose ×2 against uniform at 2.4× fewer tets, from the grading and the flat greens. Each 3c bracket
+took ~45 min. The preconditioner, not memory, is the limit now.
+Files: results631g2_s1_matfree.json, results631g2_3c_t1_{membrane,bending}_children_{plus,minus}.json.

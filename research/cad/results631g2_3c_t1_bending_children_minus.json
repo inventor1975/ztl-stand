@@ -1,0 +1,143 @@
+{
+ "deck": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/631_g2.deck.pkl",
+ "sha256": "4b1fa649cf7be2f959ed0a179eff88a024236bfe1e189abc1132647613ae77ad",
+ "subcase": {
+  "F": [
+   0.0,
+   0.0,
+   35585.77
+  ],
+  "M": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "label": "subcase 1 + -5.306 * sigma_b of sigma_tt on the SCL slab (29184 tets, |omega| 171.884500)"
+ },
+ "label": "subcase 1 + -5.306 * sigma_b of sigma_tt on the SCL slab (29184 tets, |omega| 171.884500)",
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 269254,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  84565.85821312007,
+  89219.36543788365
+ ],
+ "gap": 0.055028203143589804,
+ "work_conjugate": null,
+ "work_conjugate_is": "displacement along F (mm)",
+ "upper_float_choice": 89219.36685619596,
+ "push_bits": 363,
+ "seconds": 2784.7,
+ "rests_on": [
+  "a red refinement (ustand.refine) of /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem (sha256 62f42a041a9d74be\u2026): the same faceted part, its tets subdivided 1:8",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the coarse deck's traction (linear per coarse loaded face, its nodal values M_s t = f_RBE3), given at the fine nodes",
+  "plus the prestress load int_omega eps(v) : sig_e (omega = the selected tets)"
+ ],
+ "refined_from": {
+  "tets": 82414,
+  "grids": 18141,
+  "mixed_fixed_midpoints": 0,
+  "traction_residual": 5.684341886080802e-14,
+  "graded": true,
+  "closure_rounds": 3,
+  "patterns": {
+   "none": 79474,
+   "red": 23112,
+   "face": 910,
+   "one": 622
+  },
+  "marked": 22697,
+  "level_from_tets": 104118,
+  "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem",
+  "sha256": "62f42a041a9d74bed8a12769aac7417a8f2ba99f5a8fb6a9523bfe6987c307f4"
+ },
+ "prestress": {
+  "tets": 29184,
+  "extra_exact": 8311.275700961682,
+  "cross_exact": -81942.15572589851,
+  "self_exact": 90253.43142686019,
+  "S0": [
+   [
+    121583.3281652177,
+    -5376.3840928463305,
+    -197.44090975360794
+   ],
+   [
+    -5376.3840928463305,
+    233016.13056994474,
+    4101.732821648355
+   ],
+   [
+    -197.44090975360794,
+    4101.732821648355,
+    121475.1616264197
+   ]
+  ],
+  "S1": [
+   [
+    [
+     187.24662195392148,
+     173.0569366783569,
+     -4466.96485797207
+    ],
+    [
+     -8.279998375634788,
+     -7.652534073174068,
+     197.5280588887111
+    ],
+    [
+     -0.3040724739549323,
+     -0.28102964059773256,
+     7.2539682759540645
+    ]
+   ],
+   [
+    [
+     -8.279998375634788,
+     -7.652534073174068,
+     197.5280588887111
+    ],
+    [
+     358.86074158708584,
+     331.6660134379738,
+     -8560.999952083444
+    ],
+    [
+     6.316948438584519,
+     5.838245488912394,
+     -150.6974405750428
+    ]
+   ],
+   [
+    [
+     -0.3040724739549323,
+     -0.28102964059773256,
+     7.2539682759540645
+    ],
+    [
+     6.316948438584519,
+     5.838245488912394,
+     -150.6974405750428
+    ],
+    [
+     187.08003810312533,
+     172.90297667300118,
+     -4462.990825225059
+    ]
+   ]
+  ],
+  "extractor": "bending"
+ }
+}
