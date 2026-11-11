@@ -146,3 +146,30 @@ itself. C_p scales like 1/|ω| at a fixed extractor shape, while the mean |l| al
 530 → 319 MPa from the 3 % box to the 5 % box, against a √(1/2.2) gain, so the relative width would grow ~1.1×
 (an estimate, not run). The real lever is a smaller gap: mesh refinement in ω and along the load path, or a
 better upper equilibrium field.
+
+## 3c — membrane and bending on a section, IN WORDS (2026-11-11 02:30; not built)
+
+**Membrane** = the mean of σ_nn over a thin slab ω around the classification line (SCL). That is exactly 3b with a
+constant extractor. Nothing new.
+
+**Bending** = the first moment of σ_nn across the wall: l(u) = ∫_ω σ_nn(u) (x_n − c) / I. The extractor is now
+LINEAR in x: σ_e(x) = C : Π_nn (x_n − c) / I. Does the upper side stay exact? Yes, for two reasons.
+1. Because σ_e = C : (…), Aσ_e = Π_nn (x_n − c) / I has only the nn component. So the cross term
+   2 ∫_T Aσ_e : τ' is 2/I ∫_T τ'_nn (x_n − c).
+2. For a symmetric, divergence-free τ (the Alfeld element, piecewise, with continuous traction inside T):
+       ∫_T (τ_ij x_k + τ_ik x_j) = ∫_∂T t_i x_j x_k,
+   so 2 ∫_T τ_nn x_n = ∫_∂T t_n x_n². A boundary integral of the linear face traction (the 36 slots g) against a
+   quadratic, exact from the exact fluxes. The c-term is the 3b mean, already exact.
+- CHECKED EXACTLY (sympy, research/cad/moment_identity_check.py): on a random tet with a random polynomial
+  symmetric div-free τ (a Beltrami field of a cubic Φ), the identity holds on all 27 (i, j, k).
+- Caution: only the part symmetric in (j, k) is boundary-determined. ∫ τ_mm x_n with m ≠ n alone is NOT. The
+  construction must keep Aσ_e = Π_nn·(linear); a general linear extractor would break exactness.
+- Lower side: ε(v) is constant on a P1 tet, so ∫_T σ_e(x) = |T| σ_e(centroid), exact. The self term ∫ σ_e : Aσ_e is a
+  quadratic over a tet, exact.
+
+**What it needs in code** (~half a day): slot weights for the second moment, per face ∫ φ_v x_n² (exact, rational);
+the extractor linear in x; an SCL helper (a point, a unit normal n, the wall thickness → a slab ω).
+
+**The open question for the curator / plan:** WHERE the SCL goes on 631. Through the wall at the 3b hot zone, normal
+along the local wall direction. That needs the wall's two faces found along a line, which is a geometry step, not
+mathematics.
