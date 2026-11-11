@@ -166,7 +166,207 @@ def red_refine(deck, subcase=1, fix_mixed=True, planted=None):
         out["traction"] = {"subcase": subcase, "F": Fv, "M": Mv, "nodal": tr}
     out["refined_from"] = {"tets": len(deck["tets"]), "grids": len(g), "mixed_fixed_midpoints": mixed,
                            "traction_residual": res}
+    out["parent"] = [i for i in range(len(deck["tets"])) for _ in range(8)]
     return out
+
+
+# ------------------------------------------------------------------------------------------------ graded (red-green)
+# LOCAL refinement (2026-11-11, PLAN-level3 "Graded refinement", road A): marked tets are split red (Bey 1:8); a
+# GREEN closure keeps the mesh CONFORMING (no hanging node), so both bounds apply unchanged:
+#   lower: the fine P1 space is conforming and contains the coarse one (a coarse P1 field is P1 on every child);
+#   upper: every tet is a tet, every interior face has exactly two tets — the Alfeld hybrid and the exact push as is.
+# Closure on EDGES. The marked-edge set of a tet must be one of these patterns; each face is then split by 0, 1 or 3 of
+# its edges, and that split is UNIQUE (1 edge: the median to the opposite vertex; 3: the 4 red triangles), so two
+# tets sharing a face split it the same way:
+#   none | one edge (2 children) | two OPPOSITE edges (4) | the 3 edges of one face (4) | all 6 = red (8).
+# Rules, to a fixed point: a face with exactly 2 marked edges gets its third marked; a tet whose set is no pattern
+# becomes red (all 6 marked). Each child keeps the index of its ROOT coarse tet in "parent".
+OPP = ((0, 5), (1, 4), (2, 3))                    # opposite edge pairs, as indices into EDGES
+FACE_EDGES = tuple(tuple(i for i, (a, b) in enumerate(EDGES) if k not in (a, b)) for k in range(4))   # face opp. k
+
+
+def pattern(mask):
+    """The closure pattern of a tet's 6-edge mark mask: 'none', 'one', 'opp', 'face', 'red', or None (no pattern)."""
+    s = tuple(i for i in range(6) if mask[i])
+    if not s:
+        return "none"
+    if len(s) == 6:
+        return "red"
+    if len(s) == 1:
+        return "one"
+    if len(s) == 2 and s in OPP:
+        return "opp"
+    if len(s) == 3 and s in FACE_EDGES:
+        return "face"
+    return None
+
+
+def green_children(v, mid, pat, mask):
+    """Children of tet v under pattern pat; mid[(a, b)] the midpoint of LOCAL edge a-b (a < b) where marked."""
+    if pat == "none":
+        return [tuple(v)]
+    if pat == "red":
+        return children(v, mid)
+    s = [i for i in range(6) if mask[i]]
+    if pat == "one":
+        a, b = EDGES[s[0]]
+        c, d = [k for k in range(4) if k not in (a, b)]
+        m = mid[(a, b)]
+        return [(v[a], m, v[c], v[d]), (m, v[b], v[c], v[d])]
+    if pat == "opp":
+        (a, b), (c, d) = EDGES[s[0]], EDGES[s[1]]
+        m, n = mid[(a, b)], mid[(c, d)]
+        return [(v[a], m, v[c], n), (v[a], m, n, v[d]), (m, v[b], v[c], n), (m, v[b], n, v[d])]
+    if pat == "face":
+        k = [q for q in range(4) if FACE_EDGES[q] == tuple(s)][0]          # the apex: the vertex off the face
+        a, b, c = [q for q in range(4) if q != k]
+        mab, mac, mbc = mid[(a, b)], mid[(a, c)], mid[(b, c)]
+        return [(v[a], mab, mac, v[k]), (mab, v[b], mbc, v[k]), (mac, mbc, v[c], v[k]), (mab, mbc, mac, v[k])]
+    raise ValueError(f"no closure pattern {pat}")
+
+
+def _face_counts(tets):
+    cnt = {}
+    for t in tets:
+        for k in range(4):
+            key = frozenset(t[q] for q in range(4) if q != k)
+            cnt[key] = cnt.get(key, 0) + 1
+    return cnt
+
+
+def _deck_traction(deck, subcase):
+    """(nodal traction, F, M, loaded faces as grid triples, residual): from deck["traction"] when the deck is itself a
+    refined one (a second level), else read off the RBE3 (coarse_traction)."""
+    trc = deck.get("traction")
+    if trc is None:
+        return coarse_traction(deck, subcase)
+    nodal = dict(trc["nodal"])
+    cnt = _face_counts(deck["tets"])
+    loaded = [tuple(sorted(key)) for key, c in cnt.items() if c == 1 and all(n in nodal for n in key)]
+    return (nodal, tuple(trc["F"]), tuple(trc["M"]), loaded,
+            (deck.get("refined_from") or {}).get("traction_residual", 0.0))
+
+
+def graded_refine(deck, marked, subcase=1, fix_mixed=True, planted=None):
+    """Local red-green refinement: marked (bool per tet of deck) split red, the rest closed green. Works on a coarse
+    deck or on one this module refined (a second level; "parent" then maps to the ORIGINAL coarse tets).
+    planted (tests only): "no_closure" — red on the marked tets and NOTHING else (hanging nodes on the transition)."""
+    g = deck["grids"]
+    dec = {n: tuple(TF._nas(c) for c in g[n]) for n in g}
+    nodal, Fv, Mv, loaded_faces, res = _deck_traction(deck, subcase)
+    tets_in = [tuple(t) for t in deck["tets"]]
+    E = [[frozenset((t[a], t[b])) for a, b in EDGES] for t in tets_in]
+    mk = set()
+    for i in range(len(tets_in)):
+        if marked[i]:
+            mk.update(E[i])
+    rounds = 0
+    if planted != "no_closure":
+        while True:
+            rounds += 1
+            changed = False
+            for i in range(len(tets_in)):
+                m = [e in mk for e in E[i]]
+                if not any(m):
+                    continue
+                for fe in FACE_EDGES:
+                    if sum(m[j] for j in fe) == 2:
+                        for j in fe:
+                            if not m[j]:
+                                mk.add(E[i][j])
+                                m[j] = True
+                                changed = True
+                if pattern(m) is None:
+                    for e in E[i]:
+                        if e not in mk:
+                            mk.add(e)
+                            changed = True
+            if not changed:
+                break
+    nid = max(g) + 1
+    mid = {}
+    grids = dict(g)
+    for e in sorted(mk, key=lambda e: tuple(sorted(e))):
+        a, b = sorted(e)
+        mid[e] = nid
+        grids[nid] = tuple(dec_str((x + y) / 2) for x, y in zip(dec[a], dec[b]))
+        nid += 1
+    Xf = {n: np.array([float(TF._nas(c)) for c in grids[n]]) for n in grids}
+    par_in = deck.get("parent") or list(range(len(tets_in)))
+    tets, parent, pats = [], [], {}
+    for i, t in enumerate(tets_in):
+        m = [e in mk for e in E[i]]
+        if planted == "no_closure":
+            pat = "red" if marked[i] else "none"
+            m = [bool(marked[i])] * 6
+        else:
+            pat = pattern(m)
+        pats[pat] = pats.get(pat, 0) + 1
+        loc = {(a, b): mid[E[i][j]] for j, (a, b) in enumerate(EDGES) if m[j]}
+        s0 = np.sign(_det(np.array([Xf[n] for n in t])))
+        for c in green_children(t, loc, pat, m):
+            if np.sign(_det(np.array([Xf[n] for n in c]))) != s0:
+                c = (c[1], c[0], c[2], c[3])
+            tets.append(c)
+            parent.append(par_in[i])
+    # supports: a midpoint between two dependents of one RBE2 joins it (as red_refine)
+    rbe2 = [(ind, list(deps)) for ind, deps in deck["rbe2"]]
+    spc_dep, owner_of = set(), {}
+    for k, (ind, deps) in enumerate(deck["rbe2"]):
+        if deck["spc"].get(ind, "").startswith("123"):
+            spc_dep |= set(deps)
+        for n in deps:
+            owner_of.setdefault(n, k)
+    depsets = [set(deps) for ind, deps in deck["rbe2"]]
+    mixed = 0
+    for e, m in mid.items():
+        a, b = tuple(e)
+        same = [k for k, s in enumerate(depsets) if a in s and b in s]
+        if same:
+            rbe2[same[0]][1].append(m)
+        elif fix_mixed and a in spc_dep and b in spc_dep:
+            rbe2[owner_of[a]][1].append(m)
+            mixed += 1
+    # the SAME traction: at the midpoint of a loaded face's marked edge, the mean of its ends (exact: t is linear)
+    tr = dict(nodal)
+    for fa in loaded_faces:
+        for i in range(3):
+            for j in range(i + 1, 3):
+                e = frozenset((fa[i], fa[j]))
+                if e in mid:
+                    tr[mid[e]] = tuple((x + y) / 2 for x, y in zip(nodal[fa[i]], nodal[fa[j]]))
+    rf_in = deck.get("refined_from") or {}
+    out = dict(grids=grids, tets=tets, rbe2=rbe2, rbe3=deck["rbe3"], spc=deck["spc"], force=deck["force"],
+               moment=deck["moment"], mat=deck["mat"], subcases=deck["subcases"],
+               traction={"subcase": subcase, "F": Fv, "M": Mv, "nodal": tr}, parent=parent)
+    out["refined_from"] = {"tets": rf_in.get("tets", len(tets_in)), "grids": rf_in.get("grids", len(g)),
+                           "mixed_fixed_midpoints": mixed, "traction_residual": res, "graded": True,
+                           "closure_rounds": rounds, "patterns": pats, "marked": int(np.sum(marked)),
+                           "level_from_tets": len(tets_in)}
+    for k in ("deck", "sha256"):
+        if k in rf_in:
+            out["refined_from"][k] = rf_in[k]
+    return out
+
+
+def conformity(deck):
+    """Combinatorial check -> (faces shared by > 2 tets, HANGING edges). An edge hangs when its midpoint is a node of the
+    mesh while the edge itself is still an edge of some tet (a neighbour split it, this tet did not)."""
+    cnt = _face_counts(deck["tets"])
+    used = set()
+    for t in deck["tets"]:
+        for a, b in EDGES:
+            used.add(frozenset((t[a], t[b])))
+    over = sum(1 for v in cnt.values() if v > 2)
+    g = deck["grids"]
+    dec = {n: tuple(TF._nas(c) for c in g[n]) for n in g}
+    pos = {v: n for n, v in dec.items()}
+    hanging = 0
+    for e in used:
+        a, b = tuple(e)
+        if tuple((x + y) / 2 for x, y in zip(dec[a], dec[b])) in pos:
+            hanging += 1
+    return over, hanging
 
 
 def traction_loads(X, F, kind, tr_idx):

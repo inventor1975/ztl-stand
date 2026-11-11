@@ -197,9 +197,15 @@ def children_of(deck, select):
     if "deck" not in rf:
         raise ValueError("--omega-children needs a deck made by ustand.refine (refined_from.deck)")
     coarse = TF.read_deck(rf["deck"])
+    cmask, vol = select(coarse)
+    par = deck.get("parent")
+    if par is not None:
+        # every fine tet carries its ROOT coarse tet (uniform red: 8i..8i+7; graded red-green: any number, >= 1)
+        if len(par) != len(deck["tets"]) or max(par) >= len(coarse["tets"]):
+            raise ValueError("the refined deck's parent map does not fit its coarse deck")
+        return np.asarray(cmask, bool)[np.asarray(par)], vol
     if 8 * len(coarse["tets"]) != len(deck["tets"]):
         raise ValueError("the refined deck does not have 8 children per coarse tet")
-    cmask, vol = select(coarse)
     return np.repeat(cmask, 8), vol
 
 
