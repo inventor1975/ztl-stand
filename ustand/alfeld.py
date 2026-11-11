@@ -337,12 +337,23 @@ def energy_upper_ev(P, g, E, nu, return_terms=False):
     (Fractions -> rounded once). Same formulas as `energy`: the double Piola map, the rational degree-2 rule; every
     rounding carried by errfloat.Ev. E, nu: Fractions. -> float upper bound (and per-tet Ev if return_terms)."""
     import numpy as np
-    from fractions import Fraction as Fr
     from .errfloat import Ev
     Pv = np.array([[[float(c) for c in p] for p in tet] for tet in P])
     gv = np.array([[float(x) for x in row] for row in g])
+    return energy_upper_ev_g(Pv, Ev.rounded(gv), E, nu, return_terms=return_terms)
+
+
+def energy_upper_ev_g(Pv, ge, E, nu, return_terms=False):
+    """energy_upper_ev with the face data given as an errfloat.Ev (level 3d, 2026-11-12): ge (N, 36) carries its own
+    proved error, e.g. Ev.rounded(g_f) + Ev.exact(s) * Ev.rounded(g_p) for the combined field of the load f + s p —
+    the error of the combination is carried, nothing is kept in Fractions. Pv (N, 4, 3): the exact coordinates
+    rounded ONCE to binary64 (float(Fraction) is correctly rounded; Ev.rounded claims exactly that). The arithmetic is
+    energy_upper_ev's, unchanged (energy_upper_ev calls this). -> float upper bound (and per-tet Ev if return_terms)."""
+    import numpy as np
+    from fractions import Fraction as Fr
+    from .errfloat import Ev
+    Pv = np.asarray(Pv, dtype=np.float64)
     Pe = Ev.rounded(Pv)
-    ge = Ev.rounded(gv)
     B = [[Pe[:, k + 1, r] - Pe[:, 0, r] for k in range(3)] for r in range(3)]        # B[r][k] = column k, row r
     a = B
     adj = [[a[1][1] * a[2][2] - a[1][2] * a[2][1], a[0][2] * a[2][1] - a[0][1] * a[2][2], a[0][1] * a[1][2] - a[0][2] * a[1][1]],

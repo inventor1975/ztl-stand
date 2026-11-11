@@ -207,8 +207,9 @@ def solve(deck, subcase=1, E=None, nu=None, tol=1e-9, log=print, exact=False):
     return solve_cases(deck, [subcase], E, nu, tol, log, exact)[0]
 
 
-def solve_cases(deck, subcases, E=None, nu=None, tol=1e-9, log=print, exact=False, return_u=False):
-    """The stiffness, its AMG and the supports once; then each subcase: its load, its solve, its exact bound."""
+def setup(deck, E=None, nu=None, log=print):
+    """The part posed once (level 3d split out of solve_cases, 2026-11-12): exact coordinates, the material, the
+    supports, the float stiffness and its AMG. -> ctx (a dict) for case_load / case_field / lower_bound."""
     import numpy as np
     import scipy.sparse as sp
     t0 = time.time()
@@ -273,101 +274,162 @@ def solve_cases(deck, subcases, E=None, nu=None, tol=1e-9, log=print, exact=Fals
     B[comp == 1, 4], B[comp == 2, 4] = -Xn[comp == 1, 2], Xn[comp == 2, 1]
     B[comp == 0, 5], B[comp == 2, 5] = Xn[comp == 0, 2], -Xn[comp == 2, 0]
     ml = pyamg.smoothed_aggregation_solver(Kf, B=B[free], symmetry="symmetric", max_coarse=500)
+    return dict(t0=t0, deck=deck, ids=ids, idx=idx, dec=dec, k=k, XI=XI, X=X, E=E, nu=nu, mu=mu, lam=lam, tets=tets,
+                T=T, fixed=fixed, ndof=ndof, P=P, grads=grads, vol=vol, free=free, ml=ml)
+
+
+def case_load(ctx, subcase):
+    """One load on the posed part -> dict: fvec (the traction's consistent nodal loads, exact as the binary64 values
+    they are), ftot (fvec + the prestress's float nodal vector: only CHOOSES v), F, M, rnodes, pre, om, custom.
+    subcase: a deck subcase number, or a dict {"F", "M", "label", "prestress"?, "traction"?}. "traction": False
+    (level 3d, 2026-11-12) poses the PRESTRESS ALONE — fvec = 0 — also on a refined deck, whose own traction is then
+    simply not applied (zero is a load like any other; only a DIFFERENT traction is undefined there)."""
+    import numpy as np
+    deck, idx, dec, T, X = ctx["deck"], ctx["idx"], ctx["dec"], ctx["T"], ctx["X"]
+    ndof, P, grads, vol, tets = ctx["ndof"], ctx["P"], ctx["grads"], ctx["vol"], ctx["tets"]
+    # load: a deck subcase, or (2026-11-10, level 3a) an explicit RBE3 resultant {"F": (3,), "M": (3,), "label": ..}
+    # on the deck's RBE3 — a combination f +- s g of subcases for polarization
+    custom = isinstance(subcase, dict)
+    lid = None if custom else int(deck["subcases"][subcase]["LOAD"])
+    F, Mm = (0.0, 0.0, 0.0), (0.0, 0.0, 0.0)
+    if custom:
+        F = tuple(float(x) for x in subcase.get("F", F))
+        Mm = tuple(float(x) for x in subcase.get("M", Mm))
+    elif lid in deck["force"]:
+        ref, sc, v = deck["force"][lid]
+        F = tuple(float(sc * x) for x in v)
+    if not custom and lid in deck["moment"]:
+        ref, sc, v = deck["moment"][lid]
+        Mm = tuple(float(sc * x) for x in v)
+    no_traction = custom and subcase.get("traction", True) is False
+    trc = deck.get("traction")
+    if no_traction:
+        if any(F) or any(Mm):
+            raise ValueError("a load posed without traction must have F = M = 0")
+        fvec = np.zeros(ndof)
+        rnodes = []
+    elif trc is not None:
+        # a REFINED deck (ustand.refine): the load IS the coarse deck's traction, linear per coarse face, given by
+        # its nodal values; the fine nodal loads are its consistent loads. Only that load is defined here.
+        if custom:
+            same = all(abs(a - b) <= 1e-9 * (1 + abs(b)) for a, b in zip(F + Mm, tuple(trc["F"]) + tuple(trc["M"])))
+        else:
+            same = subcase == trc["subcase"]
+        if not same:
+            raise ValueError("a refined deck carries the traction of ONE load; this subcase / load is not it")
+        from . import tetmesh as _TM
+        from . import refine as _RF
+        Fm, own_, _, _ = _TM.faces(T)
+        kind_ = _TM.classify(Fm, own_, ctx["fixed"], {idx[n] for n in trc["nodal"]})
+        fn = _RF.traction_loads(X, Fm, kind_, {idx[n]: v for n, v in trc["nodal"].items()})
+        fvec = fn.ravel().copy()
+        rnodes = list(trc["nodal"])
+    else:
+        rref, _, rnodes = deck["rbe3"][0]
+        xyz = {n: [float(x) for x in dec[n]] for n in rnodes + [rref]}
+        fl = rbe3_loads(xyz, rref, rnodes, F, Mm)
+        fvec = np.zeros(ndof)
+        for n, fi in zip(rnodes, fl):
+            fvec[3 * idx[n]:3 * idx[n] + 3] += fi
+    # level 3b (2026-11-11): a PRESTRESS added to the load, l_p(v) = int_omega eps(v) : sig_e — {"omega": a bool
+    # mask over the deck's tets, "sigma": 3 x 3 exact (Fractions)}; its float nodal vector only CHOOSES v, the bound
+    # takes l_p(v) exactly (prestress_work_exact)
+    pre = subcase.get("prestress") if custom else None
+    ftot = fvec
+    om = None
+    if pre is not None:
+        if len(tets) != len(deck["tets"]):
+            raise ValueError("a prestress region needs every deck tet on the mesh")
+        om = np.asarray(pre["omega"], bool)
+        if "S1" in pre:
+            # level 3c: a LINEAR extractor sig_e(x) = S0 + S1 . x; eps(v) is constant on a P1 tet, so
+            # int_T sig_e(x) : eps(v) = |T| sig_e(centroid) : eps(v) EXACTLY
+            S0f = np.array([[float(x) for x in r] for r in pre["S0"]])
+            S1f = np.array([[[float(x) for x in c] for c in r] for r in pre["S1"]])
+            cen = P[om].mean(axis=1)
+            sgT = S0f[None] + np.einsum("ijk,nk->nij", S1f, cen)
+            contrib = vol[om, None, None] * np.einsum("nia,nba->nib", grads[om], sgT)
+        else:
+            sgf = np.array([[float(x) for x in row] for row in pre["sigma"]])
+            contrib = vol[om, None, None] * (grads[om] @ sgf.T)                   # (n, 4, 3): node i, comp a
+        dofs_p = 3 * T[om, :, None] + np.arange(3)[None, None, :]
+        ftot = fvec.copy()
+        np.add.at(ftot, dofs_p.ravel(), contrib.ravel())
+    return dict(fvec=fvec, ftot=ftot, F=F, M=Mm, rnodes=rnodes, pre=pre, om=om, custom=custom)
+
+
+def case_field(ctx, ftot, tol=1e-9, log=print):
+    """The float P1 solve of the load vector ftot (it only CHOOSES v) and its exact integer field: v = vi / 2^S,
+    vi = round(u 2^S), exactly zero on the supports. -> (u (ndof,), vi (a list of Python ints), CG residual history)."""
+    import numpy as np
+    free, fixed = ctx["free"], ctx["fixed"]
+    res = []
+    uf = ctx["ml"].solve(ftot[free], tol=tol, accel="cg", maxiter=2000, residuals=res)
+    log(f"  solved: {len(res)} iterations, residual {res[-1] / res[0]:.2e}; {time.time() - ctx['t0']:.1f} s")
+    u = np.zeros(ctx["ndof"])
+    u[free] = uf
+    # ---- EXACT: v = round(u * 2^S) / 2^S, zero on the supports (exactly)
+    vi = [int(round(x * 2 ** S)) for x in u]
+    for i in fixed:
+        vi[3 * i] = vi[3 * i + 1] = vi[3 * i + 2] = 0
+    return u, vi, res
+
+
+def traction_work_exact(fvec, vi):
+    """f(v) EXACTLY for v = vi / 2^S: the nodal loads taken as the binary64 values they are."""
+    # started at Fr(0): an all-zero fvec gave the INT 0, then 0 / 2^S the float 0.0, and the old inline code's f(v) for a
+    # traction-free load became a float (rounded, not exact) once l_p(v) was added — fixed 2026-11-12
+    return sum((Fr(float(fvec[j])) * vi[j] for j in range(len(fvec)) if fvec[j] != 0), Fr(0)) / 2 ** S
+
+
+def prestress_work_of(ctx, pre, om, vi):
+    """l_p(v) EXACTLY (the constant 3b prestress or the linear 3c extractor) for v = vi / 2^S."""
+    import numpy as np
+    XI, tets, k = ctx["XI"], ctx["tets"], ctx["k"]
+    if "S1" in pre:
+        sig_per = {}
+        for tt_ in np.where(om)[0]:
+            cq = [Fr(sum(XI[q][r] for q in tets[int(tt_)]), 4 * 10 ** k) for r in range(3)]
+            sig_per[int(tt_)] = [[pre["S0"][i][j] + sum(pre["S1"][i][j][kk] * cq[kk] for kk in range(3))
+                                  for j in range(3)] for i in range(3)]
+        return prestress_work_exact(XI, tets, vi, np.where(om)[0], None, k, sig_per=sig_per)
+    return prestress_work_exact(XI, tets, vi, np.where(om)[0], pre["sigma"], k)
+
+
+def lower_bound(ctx, vi, fvec=None, pre=None, om=None, t_scale=1, p_scale=1, exact=False, works=None):
+    """The PROVED lower bound C(t_scale f + p_scale p) >= W^2 / a_up(v, v) for the GIVEN integer field v = vi / 2^S
+    (any v zero on the supports is admissible; level 3d, 2026-11-12: the field of one load is used for another).
+    W = t_scale f(v) + p_scale l_p(v), exact (t_scale, p_scale exact rationals: 0 / 1 and a dyadic s);
+    a_up: a_upper_float (or a_upper_exact). works = (f(v), l_p(v)) if already computed for this vi.
+    -> (lower as an exact Fraction, W, f(v), l_p(v) or None, a_up)."""
+    if works is None:
+        fv = traction_work_exact(fvec, vi) if (fvec is not None and t_scale != 0) else Fr(0)
+        fp = prestress_work_of(ctx, pre, om, vi) if (pre is not None and p_scale != 0) else None
+    else:
+        fv, fp = works
+    W = Fr(t_scale) * fv + (Fr(p_scale) * fp if fp is not None else 0)
+    if not exact:
+        a_up = a_upper_float(ctx["XI"], ctx["tets"], vi, ctx["mu"], ctx["lam"], ctx["k"], Xf=ctx["X"])
+    else:
+        a_up = a_upper_exact(ctx["XI"], ctx["tets"], vi, ctx["mu"], ctx["lam"], ctx["k"])
+    return W * W / Fr(a_up), W, fv, fp, a_up
+
+
+def solve_cases(deck, subcases, E=None, nu=None, tol=1e-9, log=print, exact=False, return_u=False):
+    """The stiffness, its AMG and the supports once; then each subcase: its load, its solve, its exact bound."""
+    ctx = setup(deck, E, nu, log)
+    t0, E, nu, ndof, fixed = ctx["t0"], ctx["E"], ctx["nu"], ctx["ndof"], ctx["fixed"]
     outs = []
     for subcase in subcases:
-        # load: a deck subcase, or (2026-11-10, level 3a) an explicit RBE3 resultant {"F": (3,), "M": (3,), "label": ..}
-        # on the deck's RBE3 — a combination f +- s g of subcases for polarization
-        custom = isinstance(subcase, dict)
-        lid = None if custom else int(deck["subcases"][subcase]["LOAD"])
-        F, Mm = (0.0, 0.0, 0.0), (0.0, 0.0, 0.0)
-        if custom:
-            F = tuple(float(x) for x in subcase.get("F", F))
-            Mm = tuple(float(x) for x in subcase.get("M", Mm))
-        elif lid in deck["force"]:
-            ref, sc, v = deck["force"][lid]
-            F = tuple(float(sc * x) for x in v)
-        if not custom and lid in deck["moment"]:
-            ref, sc, v = deck["moment"][lid]
-            Mm = tuple(float(sc * x) for x in v)
-        trc = deck.get("traction")
-        if trc is not None:
-            # a REFINED deck (ustand.refine): the load IS the coarse deck's traction, linear per coarse face, given by
-            # its nodal values; the fine nodal loads are its consistent loads. Only that load is defined here.
-            if custom:
-                same = all(abs(a - b) <= 1e-9 * (1 + abs(b)) for a, b in zip(F + Mm, tuple(trc["F"]) + tuple(trc["M"])))
-            else:
-                same = subcase == trc["subcase"]
-            if not same:
-                raise ValueError("a refined deck carries the traction of ONE load; this subcase / load is not it")
-            from . import tetmesh as _TM
-            from . import refine as _RF
-            Fm, own_, _, _ = _TM.faces(T)
-            kind_ = _TM.classify(Fm, own_, fixed, {idx[n] for n in trc["nodal"]})
-            fn = _RF.traction_loads(X, Fm, kind_, {idx[n]: v for n, v in trc["nodal"].items()})
-            fvec = fn.ravel().copy()
-            rnodes = list(trc["nodal"])
-        else:
-            rref, _, rnodes = deck["rbe3"][0]
-            xyz = {n: [float(x) for x in dec[n]] for n in rnodes + [rref]}
-            fl = rbe3_loads(xyz, rref, rnodes, F, Mm)
-            fvec = np.zeros(ndof)
-            for n, fi in zip(rnodes, fl):
-                fvec[3 * idx[n]:3 * idx[n] + 3] += fi
-        # level 3b (2026-11-11): a PRESTRESS added to the load, l_p(v) = int_omega eps(v) : sig_e — {"omega": a bool
-        # mask over the deck's tets, "sigma": 3 x 3 exact (Fractions)}; its float nodal vector only CHOOSES v, the bound
-        # takes l_p(v) exactly (prestress_work_exact)
-        pre = subcase.get("prestress") if custom else None
-        ftot = fvec
-        if pre is not None:
-            if len(tets) != len(deck["tets"]):
-                raise ValueError("a prestress region needs every deck tet on the mesh")
-            om = np.asarray(pre["omega"], bool)
-            if "S1" in pre:
-                # level 3c: a LINEAR extractor sig_e(x) = S0 + S1 . x; eps(v) is constant on a P1 tet, so
-                # int_T sig_e(x) : eps(v) = |T| sig_e(centroid) : eps(v) EXACTLY
-                S0f = np.array([[float(x) for x in r] for r in pre["S0"]])
-                S1f = np.array([[[float(x) for x in c] for c in r] for r in pre["S1"]])
-                cen = P[om].mean(axis=1)
-                sgT = S0f[None] + np.einsum("ijk,nk->nij", S1f, cen)
-                contrib = vol[om, None, None] * np.einsum("nia,nba->nib", grads[om], sgT)
-            else:
-                sgf = np.array([[float(x) for x in row] for row in pre["sigma"]])
-                contrib = vol[om, None, None] * (grads[om] @ sgf.T)                   # (n, 4, 3): node i, comp a
-            dofs_p = 3 * T[om, :, None] + np.arange(3)[None, None, :]
-            ftot = fvec.copy()
-            np.add.at(ftot, dofs_p.ravel(), contrib.ravel())
-        res = []
-        uf = ml.solve(ftot[free], tol=tol, accel="cg", maxiter=2000, residuals=res)
-        log(f"  solved: {len(res)} iterations, residual {res[-1] / res[0]:.2e}; {time.time() - t0:.1f} s")
-        u = np.zeros(ndof)
-        u[free] = uf
+        L = case_load(ctx, subcase)
+        custom, F, Mm, fvec, ftot, pre, om = L["custom"], L["F"], L["M"], L["fvec"], L["ftot"], L["pre"], L["om"]
+        u, vi, res = case_field(ctx, ftot, tol, log)
         c_float = float(ftot @ u)
-        # ---- EXACT: v = round(u * 2^S) / 2^S, zero on the supports (exactly)
-        vi = [int(round(x * 2 ** S)) for x in u]
-        for i in fixed:
-            vi[3 * i] = vi[3 * i + 1] = vi[3 * i + 2] = 0
-        fv = sum(Fr(float(fvec[j])) * vi[j] for j in range(ndof) if fvec[j] != 0) / 2 ** S
-        fp_exact = None
-        if pre is not None:
-            if "S1" in pre:
-                sig_per = {}
-                for tt_ in np.where(om)[0]:
-                    cq = [Fr(sum(XI[q][r] for q in tets[int(tt_)]), 4 * 10 ** k) for r in range(3)]
-                    sig_per[int(tt_)] = [[pre["S0"][i][j] + sum(pre["S1"][i][j][kk] * cq[kk] for kk in range(3))
-                                          for j in range(3)] for i in range(3)]
-                fp_exact = prestress_work_exact(XI, tets, vi, np.where(om)[0], None, k, sig_per=sig_per)
-            else:
-                fp_exact = prestress_work_exact(XI, tets, vi, np.where(om)[0], pre["sigma"], k)
-            fv += fp_exact
-        if not exact:
-            a_up = a_upper_float(XI, tets, vi, mu, lam, k, Xf=X)
-        else:
-            a_up = a_upper_exact(XI, tets, vi, mu, lam, k)
-        lower = fv * fv / Fr(a_up)
+        lower, fv, _, fp_exact, a_up = lower_bound(ctx, vi, fvec, pre, om, exact=exact)
         Fn = math.sqrt(sum(x * x for x in F))
         out = {"subcase": ({kk: vv for kk, vv in subcase.items() if kk != "prestress"} if custom else subcase), "label": (subcase.get("label", "custom") if custom
                                              else deck["subcases"][subcase].get("LABEL")), "F": F, "M": Mm,
-               "E": float(E), "nu": float(nu), "dof": ndof, "fixed_nodes": len(fixed), "loaded_nodes": len(rnodes),
+               "E": float(E), "nu": float(nu), "dof": ndof, "fixed_nodes": len(fixed), "loaded_nodes": len(L["rnodes"]),
                "compliance_float": c_float, "compliance_lower_proved": float(lower) * (1 - 2 * U),
                "f_v_exact": float(fv), "a_vv_up": a_up, "seconds": round(time.time() - t0, 1),
                "cg_iterations": len(res), "a_bound": "exact integers" if exact else "binary64, rounding bounded"}
