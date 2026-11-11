@@ -1,0 +1,133 @@
+{
+ "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem",
+ "sha256": "62f42a041a9d74bed8a12769aac7417a8f2ba99f5a8fb6a9523bfe6987c307f4",
+ "subcase": {
+  "F": [
+   0.0,
+   0.0,
+   35585.77
+  ],
+  "M": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "label": "subcase 1 + -5.306 * sigma_b of sigma_tt on the SCL slab (456 tets, |omega| 171.884500)"
+ },
+ "label": "subcase 1 + -5.306 * sigma_b of sigma_tt on the SCL slab (456 tets, |omega| 171.884500)",
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 82414,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  74699.17889630266,
+  90407.35288811648
+ ],
+ "gap": 0.21028576517045638,
+ "work_conjugate": null,
+ "work_conjugate_is": "displacement along F (mm)",
+ "upper_float_choice": 90407.35315857695,
+ "push_bits": 363,
+ "seconds": 267.8,
+ "rests_on": [
+  "the deck /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem (sha256 62f42a041a9d74be\u2026): its tets ARE the part \u2014 EARNED IF STABLE on it",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the traction whose consistent nodal loads are the RBE3 distribution",
+  "plus the prestress load int_omega eps(v) : sig_e (omega = the selected tets)"
+ ],
+ "prestress": {
+  "tets": 456,
+  "extra_exact": 10661.428776464767,
+  "cross_exact": -79592.00265039543,
+  "self_exact": 90253.43142686019,
+  "S0": [
+   [
+    121583.3281652177,
+    -5376.3840928463305,
+    -197.44090975360794
+   ],
+   [
+    -5376.3840928463305,
+    233016.13056994474,
+    4101.732821648355
+   ],
+   [
+    -197.44090975360794,
+    4101.732821648355,
+    121475.1616264197
+   ]
+  ],
+  "S1": [
+   [
+    [
+     187.24662195392148,
+     173.0569366783569,
+     -4466.96485797207
+    ],
+    [
+     -8.279998375634788,
+     -7.652534073174068,
+     197.5280588887111
+    ],
+    [
+     -0.3040724739549323,
+     -0.28102964059773256,
+     7.2539682759540645
+    ]
+   ],
+   [
+    [
+     -8.279998375634788,
+     -7.652534073174068,
+     197.5280588887111
+    ],
+    [
+     358.86074158708584,
+     331.6660134379738,
+     -8560.999952083444
+    ],
+    [
+     6.316948438584519,
+     5.838245488912394,
+     -150.6974405750428
+    ]
+   ],
+   [
+    [
+     -0.3040724739549323,
+     -0.28102964059773256,
+     7.2539682759540645
+    ],
+    [
+     6.316948438584519,
+     5.838245488912394,
+     -150.6974405750428
+    ],
+    [
+     187.08003810312533,
+     172.90297667300118,
+     -4462.990825225059
+    ]
+   ]
+  ],
+  "extractor": "bending"
+ },
+ "eta": {
+  "sum": 15708.17398983136,
+  "hypercircle": 15708.173989831354,
+  "alpha": 0.9999999999999123,
+  "negative_tets": 0,
+  "min": 2.755773864515179e-07,
+  "gap": 15708.17399181382
+ }
+}

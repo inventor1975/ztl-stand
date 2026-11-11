@@ -430,3 +430,47 @@ and Σ η_T² bounds the bracket's gap. Both τ (choose + push) and v (tetfea) e
   graded meshes (×2 iterations, measured) stays; a better preconditioner on graded meshes is a separate item.
 - What would refute the idea: if the marked set is the whole part (the error spread evenly), the indicator gains
   nothing over uniform refinement. The first round's mark fraction shows this.
+
+## Indicator-driven refinement — BUILT and run on 631 (2026-11-11 18:31, MEASURED)
+
+Code: `cadbracket --dump-eta` / `bracket(dump_eta=…)` (the per-tet hypercircle indicator, float, only to choose),
+`cadbracket.doerfler`, `research/cad/adapt_mark.py` (one round: sum the indicators of the brackets just run,
+Doerfler θ = 0.5, graded_refine against the ORIGINAL root, conformity check). Tests: tests/test_adapt.py (31 GREEN).
+- **The identity holds on the real part.** On 631, Σ η_T² equals the bracket's gap to ~2e-6 absolute on all four
+  round-0 brackets (gaps 6870 … 19482). The hypercircle sum is exactly the gap, so the indicator localises exactly
+  the quantity that sets the width.
+- **Box (test_adapt).** After 2 rounds, mean σ_zz width (exact 10 inside every time): indicator 0.1144 at 2690 tets;
+  shuffled marking 0.2184 at 3065; a ball of the same marked count 0.2994 at 1224; coarse 0.3028.
+
+631, 3c on the same SCL slab (ω = the children of the coarse 456 tets; |ω| = 171.8845 exactly on every round).
+Each round has 4 brackets (membrane ±7.3, bending ±5.306), matfree, z64, 6 cores; marking uses the sum of the four
+indicators.
+
+| round | tets | σ_m | σ_b | marked (share) | marked off the 3·t_w ball | η off the ball | CG its |
+|---|---|---|---|---|---|---|---|
+| 0 | 82 414 | [390.71, 898.74] 78.8 % | [161.40, 1819.42] 167.4 % | 289 (0.35 %) | 1.0 % | 26.4 % | ~1950 |
+| 1 | 86 598 | [457.56, 836.27] 58.5 % | [503.90, 1521.93] 100.5 % | 2 673 (3.1 %) | 16.8 % | 40.0 % | ~1980 |
+| 2 | 130 757 | **[528.17, 773.03] 37.6 %** | **[751.63, 1316.27] 54.6 %** | 15 716 (12.0 %) | 52.9 % | 54.9 % | ~4900 |
+
+Against the earlier meshes:
+
+| mesh | tets | σ_m width | σ_b width |
+|---|---|---|---|
+| coarse | 82 k | 79 % | 167 % |
+| uniform red 1:8 | 659 k | 32.3 % | 64 % |
+| ball 3·t_w, 2 levels | 269 k | 41.5 % | 52.1 % |
+| **indicator, round 2** | **131 k** | **37.6 %** | **54.6 %** |
+
+- Every round's bracket lies inside the previous round's for both quantities, and overlaps the uniform and ball
+  brackets. Both signs are proved.
+- What it shows:
+  - At 131k tets the indicator mesh is close to the ball on bending (54.6 vs 52.1 % at 2× the tets) and beats it
+    on membrane (37.6 vs 41.5 %).
+  - It is within reach of the uniform mesh on membrane (37.6 vs 32.3 % at 5× the tets).
+  - It already beats the uniform mesh on bending (54.6 vs 64 %).
+  - The ball missed the membrane gain because the error also lives on the load path. By round 2, 53 % of the marked
+    tets lie OUTSIDE the ball, and so does 55 % of η. The indicator found the load path by itself.
+- The cost: CG ~4900 iterations at 131k (the graded meshes again), against ~1950 on the coarse mesh.
+- Not run: round 3. Its deck is built (438 388 tets, conforming) but is over the ~400k cap that was set. It fits the
+  18G cap by the measured ~25 KB/tet (≈ 11 GB), at roughly 1 h a bracket.
+Files: results631a{0,1,2}_3c_t1_{membrane,bending}_{plus,minus}.json, adapt631_round{0,1,2}.json.

@@ -1,0 +1,151 @@
+{
+ "deck": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/adapt631/631_a1.deck.pkl",
+ "sha256": "dd97fb205a0e0d776396d80e408f572feea5b6dfb1261d92da32721a591e072d",
+ "subcase": {
+  "F": [
+   0.0,
+   0.0,
+   35585.77
+  ],
+  "M": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "label": "subcase 1 + -7.3 * sigma_m of sigma_tt on the SCL slab (2783 tets, |omega| 171.884500)"
+ },
+ "label": "subcase 1 + -7.3 * sigma_m of sigma_tt on the SCL slab (2783 tets, |omega| 171.884500)",
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 86598,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  76591.34424394862,
+  81644.43010139564
+ ],
+ "gap": 0.06597463339137377,
+ "work_conjugate": null,
+ "work_conjugate_is": "displacement along F (mm)",
+ "upper_float_choice": 81644.43009899836,
+ "push_bits": 366,
+ "seconds": 281.7,
+ "rests_on": [
+  "a red refinement (ustand.refine) of /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem (sha256 62f42a041a9d74be\u2026): the same faceted part, its tets subdivided 1:8",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the coarse deck's traction (linear per coarse loaded face, its nodal values M_s t = f_RBE3), given at the fine nodes",
+  "plus the prestress load int_omega eps(v) : sig_e (omega = the selected tets)"
+ ],
+ "refined_from": {
+  "tets": 82414,
+  "grids": 18141,
+  "mixed_fixed_midpoints": 0,
+  "traction_residual": 5.684341886080802e-14,
+  "graded": true,
+  "closure_rounds": 2,
+  "patterns": {
+   "none": 81532,
+   "red": 482,
+   "face": 205,
+   "one": 195
+  },
+  "marked": 289,
+  "level_from_tets": 82414,
+  "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/631.fem",
+  "sha256": "62f42a041a9d74bed8a12769aac7417a8f2ba99f5a8fb6a9523bfe6987c307f4"
+ },
+ "prestress": {
+  "tets": 2783,
+  "extra_exact": 26893.90411643213,
+  "cross_exact": -27850.22626409164,
+  "self_exact": 54744.13038052378,
+  "S0": [
+   [
+    -3906.0726901753865,
+    172.72554875634845,
+    6.3431274431306415
+   ],
+   [
+    172.72554875634845,
+    -7486.042352392069,
+    -131.77519318491656
+   ],
+   [
+    6.3431274431306415,
+    -131.77519318491656,
+    -3902.597654826662
+   ]
+  ],
+  "S1": [
+   [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ],
+   [
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ],
+    [
+     0.0,
+     0.0,
+     0.0
+    ]
+   ]
+  ],
+  "extractor": "membrane"
+ },
+ "eta": {
+  "sum": 5053.0858557197735,
+  "hypercircle": 5053.085855719808,
+  "alpha": 0.9999999999999719,
+  "negative_tets": 0,
+  "min": 5.9150949642118415e-06,
+  "gap": 5053.0858574470185
+ }
+}
