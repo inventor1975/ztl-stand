@@ -38,12 +38,12 @@ def _trim():
         pass
 
 
-def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, dump_g=None):
+def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, dump_g=None, dump_eta=None):
     from fractions import Fraction as Fr
     t0 = time.time()
     sha = hashlib.sha256(open(path, "rb").read()).hexdigest()
     d = TF.read_deck(path)
-    lo = TF.solve_cases(d, [subcase], tol=1e-4, log=lambda s: None)[0]
+    lo = TF.solve_cases(d, [subcase], tol=1e-4, log=lambda s: None, return_u=dump_eta is not None)[0]
     log(f"lower (2a): C >= {lo['compliance_lower_proved']:.6f}; {time.time() - t0:.0f} s")
     _trim()
     ids = sorted(d["grids"])
@@ -124,7 +124,10 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
                 out += [r[0] * s_, r[1] * s_, r[2] * s_]
         Ps.append([list(Xq[v]) for v in T[t]])
         gs.append(out)
-    up = AL.energy_upper_ev(Ps, gs, E, nu)
+    if dump_eta is not None:
+        up, per_ev = AL.energy_upper_ev(Ps, gs, E, nu, return_terms=True)
+    else:
+        up = AL.energy_upper_ev(Ps, gs, E, nu)
     pre_out = None
     if pre is not None:
         # ||tau' + p||^2 = ||tau'||^2 + sum over omega (2 b_T . g_T + |T| sig : A sig) — the extra terms EXACT
@@ -175,7 +178,97 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
     if pre_out is not None:
         out["prestress"] = pre_out
         out["rests_on"].append("plus the prestress load int_omega eps(v) : sig_e (omega = the selected tets)")
+    if dump_eta is not None:
+        Gf = np.array([[float(x) for x in row] for row in gs])
+        eta, info_eta = eta_indicator(X, T, Gf, per_ev.v, lo["u"], float(E), float(nu), pre=pre, om=om)
+        info_eta["gap"] = c_hi - c_lo
+        out["eta"] = info_eta
+        if dump_eta == "return":
+            out["_eta_array"] = eta
+            # the indicator's inputs, for tests that plant a wrong tau into eta_indicator itself
+            out["_eta_parts"] = {"X": X, "T": T, "G": Gf, "energy": np.asarray(per_ev.v, float), "u": lo["u"],
+                                 "E": float(E), "nu": float(nu), "pre": pre, "om": om}
+        else:
+            np.save(dump_eta, eta)
+        log(f"indicator: sum eta^2 = {info_eta['sum']:.6f} vs the gap {c_hi - c_lo:.6f} (hypercircle "
+            f"{info_eta['hypercircle']:.6f})")
     return out
+
+
+def eta_indicator(X, T, G, energy_T, u, E, nu, pre=None, om=None):
+    """The per-tet HYPERCIRCLE indicator (float; it only CHOOSES a mesh, no bound rests on it), 2026-11-11.
+    For tau admissible for the load l and a kinematic field alpha*u, Prager-Synge gives, with alpha = l(u)/a(u, u):
+        sum_T || tau - alpha C eps(u) ||^2_{A,T} = ||tau||^2_A - l(u)^2 / a(u, u)  (= upper - lower when the lower is
+    the Rayleigh quotient of u). Per tet, with sigma_u = C eps(u) constant on a P1 tet and div tau' = 0 inside T:
+        eta_T^2 = ||tau_T||^2 - 2 alpha int_T tau : eps(u) + alpha^2 |T| eps : C eps,
+        int_T tau' = boundary moments of the face data (mean_stress_integral's weights), tau = tau' + p on omega
+        (p the 3b prestress or the 3c linear extractor): ||tau'+p||^2_T = ||tau'||^2_T + 2 b_T . g_T + self_T,
+        int_T p : eps = eps : |T| p(centroid).
+    X (nv,3), T (nt,4), G (nt,36) the EXACT face data (as floats), energy_T (nt) ||tau'||^2_{A,T}, u (nv,3) the P1
+    solution of the same load. -> (eta^2 (nt), info)"""
+    P = X[T]
+    D = np.stack([P[:, 1] - P[:, 0], P[:, 2] - P[:, 0], P[:, 3] - P[:, 0]], axis=2)
+    Di = np.linalg.inv(D)
+    gr = np.concatenate([-Di.sum(axis=1, keepdims=True), Di], axis=1)          # (n, 4, 3) grad of barycentrics
+    vol = np.abs(np.linalg.det(D)) / 6
+    Gu = np.einsum("nia,nib->nab", u[T], gr)
+    eps = 0.5 * (Gu + Gu.transpose(0, 2, 1))
+    mu, lam = E / (2 * (1 + nu)), E * nu / ((1 + nu) * (1 - 2 * nu))
+    sig = 2 * mu * eps + lam * np.trace(eps, axis1=1, axis2=2)[:, None, None] * np.eye(3)
+    a_T = vol * np.einsum("nij,nij->n", sig, eps)
+    # int_T tau'_ij = sum over the 12 slots s = (f, jv) of g[s, i] w[s, j], w = sum_u (1 + d_uv)/24 x_u
+    It = np.zeros((len(T), 3, 3))
+    for f in range(4):
+        vs = [v for v in range(4) if v != f]
+        for jv in range(3):
+            w = sum((2 if iv == jv else 1) * P[:, vv] for iv, vv in enumerate(vs)) / 24          # (n, 3)
+            s = f * 3 + jv
+            It += G[:, 3 * s:3 * s + 3, None] * w[:, None, :]
+    l_T = np.einsum("nij,nij->n", It, eps)
+    tau2 = np.asarray(energy_T, float).copy()
+    if pre is not None:
+        omi = np.where(np.asarray(om, bool))[0]
+        Po = P[omi]
+        if "S1" in pre:
+            S0 = np.array([[float(x) for x in r] for r in pre["S0"]])
+            S1 = np.array([[[float(x) for x in c] for c in r] for r in pre["S1"]])
+            b = EQ.extractor_linear_b_float(Po, pre["S0"], pre["S1"], E, nu)
+            c = Po.mean(axis=1)
+            pc = S0[None] + np.einsum("ijk,nk->nij", S1, c)                      # p at the centroid
+            Af = lambda s_: ((1 + nu) * s_ - nu * np.trace(s_) * np.eye(3)) / E
+            B0 = Af(S0)
+            B1 = np.stack([Af(S1[:, :, k]) for k in range(3)], axis=2)
+            sx = Po.sum(axis=1)
+            Q = vol[omi, None, None] * (np.einsum("nak,nal->nkl", Po, Po) + sx[:, :, None] * sx[:, None, :]) / 20
+            d0 = float((S0 * B0).sum())
+            d1 = np.einsum("ij,ijk->k", S0, B1) + np.einsum("ijk,ij->k", S1, B0)
+            d2 = np.einsum("ijk,ijl->kl", S1, B1)
+            self_T = vol[omi] * d0 + vol[omi] * (c @ d1) + np.einsum("kl,nkl->n", d2, Q)
+        else:
+            sg = np.array([[float(x) for x in r] for r in pre["sigma"]])
+            b = EQ.prestress_linear_float(Po, sg, E, nu)
+            pc = np.broadcast_to(sg, (len(omi), 3, 3))
+            As = ((1 + nu) * sg - nu * np.trace(sg) * np.eye(3)) / E
+            self_T = vol[omi] * float((sg * As).sum())
+        tau2[omi] += 2 * np.einsum("ni,ni->n", b, G[omi]) + self_T
+        l_T[omi] += vol[omi] * np.einsum("nij,nij->n", pc, eps[omi])
+    l_, a_ = float(l_T.sum()), float(a_T.sum())
+    alpha = l_ / a_
+    eta = tau2 - 2 * alpha * l_T + alpha ** 2 * a_T
+    info = {"sum": float(eta.sum()), "hypercircle": float(tau2.sum()) - l_ * l_ / a_, "alpha": alpha,
+            "negative_tets": int((eta < 0).sum()), "min": float(eta.min())}
+    return eta, info
+
+
+def doerfler(eta, theta=0.5):
+    """The smallest set of tets carrying the fraction theta of sum eta (largest first) -> bool mask."""
+    eta = np.maximum(np.asarray(eta, float), 0.0)
+    o = np.argsort(-eta)
+    cum = np.cumsum(eta[o])
+    k = int(np.searchsorted(cum, theta * cum[-1])) + 1
+    m = np.zeros(len(eta), bool)
+    m[o[:k]] = True
+    return m
 
 
 _COMP = {"xx": (0, 0), "yy": (1, 1), "zz": (2, 2), "xy": (0, 1), "xz": (0, 2), "yz": (1, 2)}
@@ -376,6 +469,7 @@ def main(argv):
                          "2026-11-10, its choice drifts and the exact push inflates the bound (631: 45677 -> 61518; "
                          "40: 31382 -> 44812)")
     ap.add_argument("--dump-g", help="save the float choice g (nt x 36) to this .npy (to profile the finish alone)")
+    ap.add_argument("--dump-eta", help="save the per-tet hypercircle indicator eta^2 (nt) to this .npy (only to CHOOSE a mesh; the bounds are unchanged)")
     ap.add_argument("--omega-box", help="level 3b: the region omega = tets with the centroid inside "
                     "'x0,y0,z0,x1,y1,z1'; with --mean-stress adds the prestress load s * l_p to the traction")
     ap.add_argument("--omega-children", action="store_true", help="level 3b/3c on a REFINED deck: omega (box or SCL slab) = the children "
@@ -441,7 +535,7 @@ def main(argv):
                             "S1": [[[s * x for x in cc] for cc in r] for r in S1], "label": a.scl_kind}
         sub["label"] += (f" + {a.prestress_scale} * sigma_{a.scl_kind[0]} of sigma_tt on the SCL slab "
                          f"({int(mask.sum())} tets, |omega| {float(vol):.6f})")
-    r = bracket(a.deck, sub, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd, dump_g=a.dump_g)
+    r = bracket(a.deck, sub, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd, dump_g=a.dump_g, dump_eta=a.dump_eta)
     if (a.d_max is not None or a.d_min is not None) and r["work_conjugate"]:
         from . import cadstiff as CS
         Er = tuple(float(x) for x in a.E_range.split(":")) if a.E_range else (r["E"], r["E"])
