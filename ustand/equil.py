@@ -146,7 +146,9 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
             # ~714 s (-20 %); on the coarse 631 (82k, 4 cores) 1719 its / 226 s against 2197 / 216 s: no gain there.
             # MEASURED through cadbracket on the same graded deck, whole run with the exact finish: Jacobi 5353 its,
             # 998.6 s; Schwarz 3217 its, 831.5 s (-17 %); the bracket is the same, [43089.1992, 45632.7445], push
-            # 0 unbalanced both. It never touches the bound: the preconditioner only steers CG.
+            # 0 unbalanced both. (All of these with the old injection Pi; with the conjugate-trace Pi the same graded deck
+            # takes 3984 its with Jacobi, 2133 with Schwarz.) It never touches the bound: the preconditioner only
+            # steers CG.
             mloc = m
             ATinv = np.empty((nt, 36, 36), np.float32)
             ar9 = [np.arange(9 * f, 9 * f + 9) for f in range(4)]
@@ -176,8 +178,22 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
 
         # AUXILIARY-SPACE correction (2026-11-10: block Jacobi alone did not converge on SimJEB 631 — residual ~3
         # after 2200 iterations): lam is a displacement-like trace at the faces' vertices, so the nodal P1 stiffness
-        # (AMG with the rigid motions) approximates its system on the smooth modes; Pi maps a node's displacement to
-        # every lam slot at that vertex.
+        # (AMG with the rigid motions) approximates its system on the smooth modes; Pi maps a nodal displacement to
+        # its lam.
+        # Pi IS THE CONJUGATE TRACE, NOT THE INJECTION (2026-11-11). lam is conjugate to the flux slots
+        # q_j = 2 |F| t(v_j): int_F t . u = sum_j q_j . (2 u_j + u_k + u_l) / 24 for P1 t and u on the face, so a nodal
+        # field u has lam_j = (2 u_j + u_k + u_l) / 24. With it lam^T Z_T lam = sup over balanced g of
+        # 2 g . lam - g^T S g = sup over the local stresses of 2 int s : eps(u) - int s : C^-1 s <= u^T K_T u, with
+        # equality where the constant stress C eps(u) is admissible (a tet with no prescribed face). So
+        # Pi^T A Pi <= K, equal away from the prescribed faces: the scale c is ~1, no longer mesh-dependent.
+        # MEASURED (CG to 1e-8, face-block Jacobi; the old Pi put u_j itself into every slot at the vertex):
+        # - boxes n = 4, 6, 8, 12: Rayleigh (Pi u)^T A (Pi u) / u^T K u on a raw random u 0.878, 0.919, 0.933, 0.959
+        #   (the injection: ~250-300); CG 75, 78, 79, 81 its (the injection 196, 245, 281, 326: growing with n);
+        # - SimJEB 631 (82k tets): 323 its, the whole bracket 112 s (the injection 2197 its, ~240 s); the same
+        #   bracket [42132.98, 45676.73]; an exact LU of K in place of the AMG V-cycle: 317 its (AMG is not the limit);
+        # - the graded 631 deck of round 2 (131k tets): 3984 its (the injection 5353), with Schwarz 2133 (3217).
+        #   The tail there is NOT smooth: at 1000 its 7 faces hold half of |error|^2, all in slivers (quality 0.02)
+        #   that green-on-green refinement made (168 tets under 0.03; the coarse deck has 9).
         from . import tetmesh as _TM
         import pyamg
         K = _TM.p1_stiffness(X, T, E, nu)
@@ -188,10 +204,19 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
         dmap = -np.ones(3 * len(X), np.int64)
         dmap[freed] = np.arange(int(freed.sum()))
         lf_faces = np.where(lam_face)[0]
-        node_of = F[lf_faces].repeat(3, axis=1).ravel() * 3 + np.tile(np.arange(3), 3 * len(lf_faces))
-        col = dmap[node_of]
-        okc = col >= 0
-        Pi = sp.csr_matrix((np.ones(int(okc.sum())), (np.arange(nl)[okc], col[okc])), shape=(nl, int(freed.sum())))
+        Fl = F[lf_faces]
+        rows_, cols_, vals_ = [], [], []
+        base = 9 * np.arange(len(lf_faces))
+        for j in range(3):
+            for k in range(3):
+                for c3 in range(3):
+                    cc = dmap[Fl[:, k] * 3 + c3]
+                    ok_ = cc >= 0
+                    rows_.append((base + 3 * j + c3)[ok_])
+                    cols_.append(cc[ok_])
+                    vals_.append(np.full(int(ok_.sum()), (2.0 if j == k else 1.0) / 24.0))
+        Pi = sp.csr_matrix((np.concatenate(vals_), (np.concatenate(rows_), np.concatenate(cols_))),
+                           shape=(nl, int(freed.sum())))
         Kf = K[freed][:, freed].tocsr()
         Xn = X[freen].repeat(3, axis=0)
         cmp = np.tile(np.arange(3), int(freen.sum()))
@@ -203,21 +228,20 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
         Bn[cmp == 0, 5], Bn[cmp == 2, 5] = Xn[cmp == 0, 2], -Xn[cmp == 2, 0]
         mlK = pyamg.smoothed_aggregation_solver(Kf, B=Bn, symmetry="symmetric", max_coarse=500)
         Kpre = mlK.aspreconditioner(cycle="V")
-        # scale: lam = Pi u for a nodal field u has the trace energy (Pi u)^T A (Pi u) ~ c u^T K u; the correction is
-        # Pi (c K)^-1 Pi^T. c is only a scale: the preconditioner stays SPD for any c > 0, so it moves the iteration
-        # count, never the bound. c is the Rayleigh ratio on SMOOTHED probes (one AMG V-cycle applied to a random
-        # vector): the correction is meant for the smooth modes, and a raw random probe is mostly high frequency.
-        # MEASURED 2026-11-11 on SimJEB 631 (subcase 1, float64 Z, CG to 1e-8, 4 cores):
-        # - raw random probes (the old rule): c = 2.85e2;
-        # - a sweep of c x {0.1 .. 300}, residual at 800 its: x1 1.16, x3 0.118, x10 0.043, x30 0.038, x100 0.100;
-        # - to 1e-8: x10 -> 2248 its, x30 -> 2217 its;
-        # - one-V-cycle smoothed probes give c = x17 (spread x14..x40 over 3 probes; 2 or 4 cycles: x63..x71, too far).
+        # scale: the correction is Pi (c K)^-1 Pi^T with c = the Rayleigh ratio (Pi u)^T A (Pi u) / u^T K u on SMOOTHED
+        # probes (one AMG V-cycle applied to a random vector). c is only a scale: the preconditioner stays SPD for any
+        # c > 0, so it moves the iteration count, never the bound. With the conjugate-trace Pi it comes out 0.88-0.98
+        # (below 1 only through the tets at prescribed faces). HISTORY, MEASURED 2026-11-11 with the old injection Pi
+        # on SimJEB 631: raw probes gave 2.85e2, the best c in a sweep was x10-x30 of that (2217-2248 its), smoothed
+        # probes x17 -> 2197 its: the scale was tuned around a wrong map.
         rng = np.random.default_rng(0)
         cs = []
         for _ in range(8):
             u_ = Kpre(rng.normal(size=Kf.shape[0]))
             cs.append(float((Pi @ u_) @ Av(Pi @ u_)) / float(u_ @ (Kf @ u_)))
         c_aux = float(np.median(cs))
+        u_ = rng.normal(size=Kf.shape[0])
+        aux_rayleigh = float((Pi @ u_) @ Av(Pi @ u_)) / float(u_ @ (Kf @ u_))     # <= 1 by the argument above
         say(f"auxiliary space: {Kf.shape[0]} nodal dof, AMG {len(mlK.levels)} levels, scale c = {c_aux:.3e}")
 
         def Mv(r):
@@ -246,7 +270,8 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
             p_ = z + (rz_new / rz) * p_
             rz = rz_new
         lam = x
-        info = {"lam_unknowns": nl, "matfree": True, "cg_iterations": it, "cg_residual": rn / r0}
+        info = {"lam_unknowns": nl, "matfree": True, "cg_iterations": it, "cg_residual": rn / r0,
+                "aux_scale": c_aux, "aux_rayleigh": aux_rayleigh}
         say(f"matrix-free CG done: {it} iterations, residual {rn / r0:.2e}")
         lt = np.where(m, lam[np.maximum(gl, 0)], 0.0)
         g = np.empty_like(z0)

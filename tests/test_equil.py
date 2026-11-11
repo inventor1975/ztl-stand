@@ -70,6 +70,10 @@ for n, ref in ((3, 8.782992), (4, 8.767626)):
     check(abs(em - ref) < 2e-6, f"n = {n}: matrix-free energy {em:.7f} = the global KKT's {ref}")
     check(float(np.abs(np.einsum("nij,nj->ni", BAL, gm)).max()) < 1e-8 * float(np.abs(gm).max()),
           f"n = {n}: matrix-free choice balanced in floats")
+    # the auxiliary map is the CONJUGATE trace: Pi^T A Pi <= K, close to K (the injection gave a ratio ~250), and the
+    # iteration count must not grow with n (the injection: 196 at n = 4, 326 at n = 12)
+    check(0.8 < im["aux_rayleigh"] <= 1.0 + 1e-9, f"n = {n}: (Pi u)^T A (Pi u) / u^T K u = {im['aux_rayleigh']:.4f} in (0.8, 1]")
+    check(im["cg_iterations"] < 120, f"n = {n}: matrix-free CG took {im['cg_iterations']} iterations (< 120)")
     # the tet-patch Schwarz smoother (2026-11-11) must reach the same energy: it only steers CG
     gs, es, _ = EQ.choose(X, T, F, own, tf, kind, 1000.0, 0.3, q, matfree=True, tol=1e-10, smoother="schwarz")
     check(abs(es - ref) < 2e-6, f"n = {n}: matrix-free + Schwarz energy {es:.7f} = the global KKT's {ref}")
