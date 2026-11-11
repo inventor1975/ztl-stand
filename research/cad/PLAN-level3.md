@@ -408,3 +408,25 @@ not a ball.
 Cost: CG iterations rose ×2 against uniform at 2.4× fewer tets, from the grading and the flat greens. Each 3c bracket
 took ~45 min. The preconditioner, not memory, is the limit now.
 Files: results631g2_s1_matfree.json, results631g2_3c_t1_{membrane,bending}_children_{plus,minus}.json.
+
+## Refining where the error lives — indicator-driven, IN WORDS (2026-11-11 16:40; not built)
+
+What the measurements say: the width of a polarized local quantity is 2 (W(f+sp) + W(f−sp)) / (4s), and each W is
+the gap of a whole-part bracket. A ball around the SCL cut the p-part of the gap and left the f-part (the load path)
+almost untouched: the compliance gap went 8.41 → 7.16 % only. So refine where BOTH combinations f ± s p lose energy.
+
+**The indicator is already in hand, exactly the gap, localised.** For admissible τ and kinematic v, the
+hypercircle (Prager–Synge) gives ‖τ − σ(u)‖² + ‖σ(u) − σ(v)‖² = ‖τ − σ(v)‖². Per tet, η_T² = ‖τ_T − C ε(v_T)‖²_{A,T},
+and Σ η_T² bounds the bracket's gap. Both τ (choose + push) and v (tetfea) exist for every bracket we run.
+- Indicator for one 3b/3c quantity: η_T² = η_T²(f + s p) + η_T²(f − s p), taken from the two brackets we compute
+  anyway.
+- Marking (Dörfler): the smallest set of tets that carries θ = 50 % of Σ η_T². It is red-marked, and graded_refine
+  closes it green.
+- Loop: bracket ± → η → mark → refine → bracket ±, while the deck fits the 18G cap; record the width after each
+  round.
+- Validity is untouched. The indicator is float and only CHOOSES the mesh; each bracket stays exact on the mesh it
+  is run on. --omega-children keeps ω the same region throughout, by the parent map.
+- What it costs: each round is two brackets (~1 h each at 270–660k tets) plus the η extraction. The CG slowdown on
+  graded meshes (×2 iterations, measured) stays; a better preconditioner on graded meshes is a separate item.
+- What would refute the idea: if the marked set is the whole part (the error spread evenly), the indicator gains
+  nothing over uniform refinement. The first round's mark fraction shows this.
