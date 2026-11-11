@@ -1,0 +1,79 @@
+{
+ "deck": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/rank_adapt/456_a1.deck.pkl",
+ "sha256": "d9beaf3b0955eda419f4a0691acd747d4effc16c8fa20ec0833190e849b73565",
+ "subcase": 1,
+ "label": "vertical",
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 269796,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  23682.734687593955,
+  25127.027379919306
+ ],
+ "gap": 0.06098504718215403,
+ "work_conjugate": [
+  0.6655113740012919,
+  0.706097616545021
+ ],
+ "work_conjugate_is": "displacement along F (mm)",
+ "upper_float_choice": 25127.02737889657,
+ "push_bits": 490,
+ "seconds": 465.2,
+ "rests_on": [
+  "a red refinement (ustand.refine) of /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/456.fem (sha256 9d94db28b91c6571\u2026): the same faceted part, its tets subdivided 1:8",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the coarse deck's traction (linear per coarse loaded face, its nodal values M_s t = f_RBE3), given at the fine nodes"
+ ],
+ "refined_from": {
+  "tets": 198282,
+  "grids": 42196,
+  "mixed_fixed_midpoints": 0,
+  "traction_residual": 2.842170943040401e-14,
+  "graded": true,
+  "closure_rounds": 4,
+  "patterns": {
+   "red": 8067,
+   "none": 246884,
+   "face": 3583,
+   "one": 4278,
+   "opp": 6
+  },
+  "marked": 4365,
+  "level_from_tets": 198282,
+  "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/456.fem",
+  "sha256": "9d94db28b91c6571c2b8230ffeae997bf3aa3de0f62acd668b0bec4f23d4d2dd"
+ },
+ "eta": {
+  "sum": 1444.292690602781,
+  "hypercircle": 1444.292690602786,
+  "alpha": 1.000000000000433,
+  "negative_tets": 0,
+  "min": 4.079693403720797e-07,
+  "gap": 1444.2926923253508
+ },
+ "intersection_of": {
+  "rank_vertical 10.11": [
+   22890.394026804748,
+   25231.287425729846
+  ],
+  "r0": [
+   22890.394026804748,
+   25231.287425728282
+  ],
+  "r1 indicator": [
+   23682.734687593955,
+   25127.027379919306
+  ]
+ }
+}

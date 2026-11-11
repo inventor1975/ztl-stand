@@ -1,0 +1,65 @@
+{
+ "deck": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/rank_adapt/202_a1.deck.pkl",
+ "sha256": "73f98b5eee21e7aecb6f767d25165ec9b0568ac2e8b8a1bb4f05eaed723f21df",
+ "subcase": 1,
+ "label": "vertical",
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 325957,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  26341.674034724656,
+  27515.248146922648
+ ],
+ "gap": 0.04455199432849022,
+ "work_conjugate": [
+  0.7402305481861051,
+  0.7732092953706681
+ ],
+ "work_conjugate_is": "displacement along F (mm)",
+ "upper_float_choice": 27515.248145409212,
+ "push_bits": 351,
+ "seconds": 609.7,
+ "rests_on": [
+  "a red refinement (ustand.refine) of /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/202.fem (sha256 828cf5a010f4157f\u2026): the same faceted part, its tets subdivided 1:8",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the coarse deck's traction (linear per coarse loaded face, its nodal values M_s t = f_RBE3), given at the fine nodes"
+ ],
+ "refined_from": {
+  "tets": 171243,
+  "grids": 35818,
+  "mixed_fixed_midpoints": 0,
+  "traction_residual": 2.842170943040401e-14,
+  "graded": true,
+  "closure_rounds": 6,
+  "patterns": {
+   "red": 18056,
+   "none": 283353,
+   "one": 7262,
+   "face": 6985,
+   "opp": 35
+  },
+  "marked": 8998,
+  "level_from_tets": 171243,
+  "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/202.fem",
+  "sha256": "828cf5a010f4157f2f6e0efe3dbf885c5fce18a9816863e6bb8d494249ae72ed"
+ },
+ "eta": {
+  "sum": 1173.574109863089,
+  "hypercircle": 1173.5741098630933,
+  "alpha": 0.9999999999998913,
+  "negative_tets": 0,
+  "min": 2.199404159114523e-08,
+  "gap": 1173.5741121979918
+ }
+}

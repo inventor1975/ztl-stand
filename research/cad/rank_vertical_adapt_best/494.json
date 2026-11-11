@@ -1,0 +1,79 @@
+{
+ "deck": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/rank_adapt/494_a1.deck.pkl",
+ "sha256": "42d1ed56636d1547f1f7cd13cb32f4a384e57259ad0976059bd05d7b5456d012",
+ "subcase": 1,
+ "label": "vertical",
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 400100,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  26525.820589606366,
+  27679.80040800178
+ ],
+ "gap": 0.04350401958337824,
+ "work_conjugate": [
+  0.7454052726583228,
+  0.7778333982376043
+ ],
+ "work_conjugate_is": "displacement along F (mm)",
+ "upper_float_choice": 27679.80040648571,
+ "push_bits": 352,
+ "seconds": 709.2,
+ "rests_on": [
+  "a red refinement (ustand.refine) of /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/494.fem (sha256 4376b967195445f5\u2026): the same faceted part, its tets subdivided 1:8",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the coarse deck's traction (linear per coarse loaded face, its nodal values M_s t = f_RBE3), given at the fine nodes"
+ ],
+ "refined_from": {
+  "tets": 160706,
+  "grids": 34674,
+  "mixed_fixed_midpoints": 0,
+  "traction_residual": 2.842170943040401e-14,
+  "graded": true,
+  "closure_rounds": 5,
+  "patterns": {
+   "red": 27226,
+   "none": 326428,
+   "one": 12884,
+   "face": 11862,
+   "opp": 114
+  },
+  "marked": 12264,
+  "level_from_tets": 160706,
+  "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/494.fem",
+  "sha256": "4376b967195445f585dbe39fc1f04ede3e31a8fbd5b199bbbc5a521cafa39cfd"
+ },
+ "eta": {
+  "sum": 1153.9798156983095,
+  "hypercircle": 1153.9798156983088,
+  "alpha": 1.0000000000000533,
+  "negative_tets": 0,
+  "min": 5.517537982012642e-07,
+  "gap": 1153.9798183954154
+ },
+ "intersection_of": {
+  "rank_vertical 10.11": [
+   25643.31148669677,
+   28014.968889398457
+  ],
+  "r0": [
+   25643.311486695024,
+   27726.085321656043
+  ],
+  "r1 indicator": [
+   26525.820589606366,
+   27679.80040800178
+  ]
+ }
+}

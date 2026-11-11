@@ -314,3 +314,49 @@ global KKT energy and a balanced choice. A planted unconverged solve (3 iteratio
 (was 4396), ~1793 s of CG (was 6866). The whole bracket took 2345 s (was 8475 s), but the old run's conditions
 (other jobs on the machine) were not recorded, so the ×3.6 in time is not a clean comparison; the ×2.1 in iterations
 is. The bracket is the same: [59892.152, 63506.641], gap 6.03 %, 301 push bits (results148_s1_matfree_smoothc.json).
+
+
+## The ranking after one indicator round — and where the gap really is (2026-11-12, measured)
+
+Compliance-indicator rounds (Dörfler 0.5) on the four parts of the open pairs, subcase 1; brackets intersected with
+the earlier ones (the same continuum problem): research/cad/rank_vertical_adapt/, rank_vertical_adapt_best/.
+
+| part | coarse | gap | round 1 | tets | gap | s per bracket (coarse / round 1) |
+|---|---|---|---|---|---|---|
+| 202 | [25521.61, 27580.27] | 8.07 % | [26341.67, 27515.25] | 325 957 | 4.46 % | 216 / 610 |
+| 494 | [25643.31, 27726.09] | 8.12 % | [26525.82, 27679.80] | 400 100 | 4.35 % | 185 / 709 |
+| 456 | [22890.39, 25231.29] | 10.23 % | [23682.73, 25127.03] | 269 796 | 6.10 % | 245 / 465 |
+| 506 | [29942.50, 31837.10] | 6.33 % | [30667.06, 31777.74] | 213 367 | 3.62 % | 139 / 400 |
+
+- The new trace solver on parts it had never seen: 247–302 CG its coarse, 550–700 on round 1; part 202's coarse
+  bracket is the one of 2026-11-10 (2260 s then, 216 s now).
+- The ranking did NOT move: 21 of 28 pairs proved before and after; the same 7 open (202/456/506/494 among
+  themselves, 40 ? 631). A second round would be 0.67–1.29M tets — over the memory cap.
+- **The gap is the P1 lower side.** In every row the upper end barely moves (202: −0.24 %, 494: −0.17 %, 456:
+  −0.41 %, 506: −0.19 %) while the lower end rises 3.2–3.5 %. Same on 631: uniform 1:8 moved the upper end by 0.13 %
+  and the lower by 5.3 %. The equilibrated side is already within a few tenths of a percent of C on the COARSE mesh;
+  the linear tets are stiff.
+
+## A P2 lower side (2026-11-12, in words — not built)
+
+The lower bound (f(v))² / a(v, v) holds for ANY v in H¹ vanishing on the fixed faces. Take v quadratic on the same
+straight-sided tets (10 nodes: the vertices and the edge midpoints), not linear.
+- Admissible: v = 0 at the fixed nodes and at the midpoint of every edge whose two ends are fixed (then v = 0 on
+  every fixed face; a superset of what is needed, still a subspace).
+- Solve the P2 stiffness in floats (AMG-CG with the rigid motions), round the nodal values to integers / 2^S exactly
+  as now, and evaluate, proved:
+  - f(v): the traction is linear on a loaded face, v quadratic: a degree-3 integrand on a triangle, exact rational
+    weights;
+  - l_p(v) for the 3b/3c prestress: eps(v) is linear in a tet, sig_e constant or linear: exact rational weights;
+  - a(v, v): eps(v) linear in a tet, the integrand quadratic: an exact degree-2 rule; an upper bound with every
+    rounding bounded (errfloat), an exact-integer version beside it for the tests — as a_upper_float / a_upper_exact.
+- Nothing changes on the upper side, in the exact finish or in level 3d (it takes "a field and its proved lower
+  bound"): the P2 field simply replaces the P1 one where it is available.
+- What it should buy — a GUESS until measured: P2 on these meshes typically leaves a fraction of a percent in the
+  energy, so the compliance gaps (8 % coarse) would fall toward 1 % WITHOUT refining, and the functional widths
+  with them (width ~ sqrt(w_f w_p)). The ranking pairs differ by 2–5 % (456/506: ~0.4 %, likely to stay open).
+- Checks: the P2 bound >= the P1 bound and <= the proved upper bound on boxes and on 631; exact-integer a(v, v) =
+  the errfloat one within its bound; a patch test (a linear displacement field reproduced exactly: gap closes to
+  rounding on a box under uniform tension with nu = 0 or with matching boundary data); planted — a wrong quadrature
+  weight, a midpoint on a fixed face left free, the traction work with the P1 formula — each must turn a check RED
+  (the bound exceeding the proved upper bound is the natural alarm).
