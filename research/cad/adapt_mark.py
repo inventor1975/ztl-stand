@@ -28,7 +28,7 @@ def main(argv):
     ap.add_argument("deck")
     ap.add_argument("out")
     ap.add_argument("--eta", nargs="+", required=True)
-    ap.add_argument("--scl", required=True)
+    ap.add_argument("--scl", help="an SCL spec: only for the off-ball statistics (3 tw around its point)")
     ap.add_argument("--theta", type=float, default=0.5)
     ap.add_argument("--root")
     ap.add_argument("--stats")
@@ -38,12 +38,14 @@ def main(argv):
     if len(eta) != len(d["tets"]):
         raise SystemExit(f"eta has {len(eta)} entries, the deck {len(d['tets'])} tets")
     mk = CB.doerfler(eta, a.theta)
-    spec = json.load(open(a.scl))
-    pt = np.array([float(x) for x in spec["point"]])
-    tw = float(Fraction(str(spec["tw"])))
-    g = d["grids"]
-    cen = np.array([np.mean([[float(TF._nas(x)) for x in g[n]] for n in t], axis=0) for t in d["tets"]])
-    off = np.linalg.norm(cen - pt, axis=1) > 3 * tw
+    off = None
+    if a.scl:
+        spec = json.load(open(a.scl))
+        pt = np.array([float(x) for x in spec["point"]])
+        tw = float(Fraction(str(spec["tw"])))
+        g = d["grids"]
+        cen = np.array([np.mean([[float(TF._nas(x)) for x in g[n]] for n in t], axis=0) for t in d["tets"]])
+        off = np.linalg.norm(cen - pt, axis=1) > 3 * tw
     nd = RF.graded_refine(d, mk)
     if "deck" not in nd["refined_from"]:
         root = a.root or a.deck
@@ -56,9 +58,12 @@ def main(argv):
         pickle.dump(nd, f, protocol=pickle.HIGHEST_PROTOCOL)
     st = {"deck": a.deck, "out": a.out, "tets_in": len(d["tets"]), "tets_out": len(nd["tets"]),
           "marked": int(mk.sum()), "marked_share": float(mk.mean()), "eta_share_marked": float(eta[mk].sum() / eta.sum()),
-          "marked_off_ball_share": float(off[mk].mean()), "eta_off_ball_share": float(eta[off].sum() / eta.sum()),
-          "ball": {"centre": pt.tolist(), "radius": 3 * tw}, "patterns": nd["refined_from"]["patterns"],
+          "patterns": nd["refined_from"]["patterns"],
           "closure_rounds": nd["refined_from"]["closure_rounds"], "conforming": True}
+    if off is not None:
+        st.update({"marked_off_ball_share": float(off[mk].mean()),
+                   "eta_off_ball_share": float(eta[off].sum() / eta.sum()),
+                   "ball": {"centre": pt.tolist(), "radius": 3 * tw}})
     print(json.dumps(st))
     if a.stats:
         json.dump(st, open(a.stats, "w"), indent=1)
