@@ -619,3 +619,22 @@ combination.
   traction left on (not zero) must be caught (the combined field then equilibrates f + s f, not f): the balance
   check or the comparison with the two-run bracket goes RED; on 631 round 2 the brackets of sigma_m, sigma_b overlap
   the committed ones.
+
+## Level 3d — BUILT (2026-11-12, MEASURED)
+
+`cadbracket.bracket_functionals` / CLI `--functionals` (repeatable `--scl-kind`, `--mean-stress`; `--s` for explicit
+values beside s*); tetfea split into setup / case_load / case_field / lower_bound (a traction-free load also on a
+refined deck); `alfeld.energy_upper_ev_g` (face data as an Ev). One deviation from the words above: the combined P1
+field is v = round(v_f + s v_p), scaled down by a power of two when s v_p is large — any integer field is admissible
+and the bound is degree-0 homogeneous; clearing s's denominator exactly overflowed a_upper_float's 2^51 for s* ~ 4e4.
+- tests/test_functionals.py: FUNCTIONALS GREEN (28). At the same s the four numbers and the ends equal the two-run
+  bracket to <= 2e-14 relative (box: 3b zz, 3b xx at the clamp, 3c membrane and bending in one call, a red-refined
+  deck). Planted g_p-with-traction and v_p-wrong-sign are caught ONLY by that agreement (the known value stays inside:
+  the wrong sign is still a valid, looser lower bound; the traction-on g_p is unsound but not visibly so here); X_f
+  dropped is caught by the known value too.
+- 631 round 2 (125 743 tets, subcase 1, slab t1, `--matfree yes --zdtype 64`, 6 cores, heavy -m 12G): ONE run, 718 s
+  (wall 12:00), peak RSS 4.13 GB; C(f) in [43083.29, 45632.68]; trace CG 534 (f), 457 (membrane), 472 (bending).
+  sigma_m at s* = 11.42: [539.07, 762.24] (width 223.2; at the old s = 7.3: [527.69, 773.62], width 245.9 = the
+  committed two-run value); sigma_b at s* = 4.505: [750.38, 1316.26] (565.9; at 5.306: [746.59, 1320.06] = committed).
+  The four compliance numbers at the old s agree with the committed runs: uppers to <= 1e-13, lowers to <= 2e-9
+  (the P1 solve at tol 1e-4 of v_f + s v_p vs of f + s p). results631b2_3d_t1.json.
