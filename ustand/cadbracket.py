@@ -181,6 +181,22 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
 _COMP = {"xx": (0, 0), "yy": (1, 1), "zz": (2, 2), "xy": (0, 1), "xz": (0, 2), "yz": (1, 2)}
 
 
+def omega_children(deck, box):
+    """omega on a red-refined deck (ustand.refine) = the 8 children of every COARSE tet the box selects. red_refine
+    appends the children of coarse tet i as fine tets 8i .. 8i+7, so the fine mask is the coarse one repeated 8 times,
+    and |omega| is the coarse |omega| exactly (the children fill the parent). Found 2026-11-11: a centroid test on
+    the fine tets picked 11612 tets / 581.07 mm^3 against 8 x 1458 / 589.12, so the two means were of different
+    regions. -> (fine mask, |omega| exact)."""
+    rf = deck.get("refined_from") or {}
+    if "deck" not in rf:
+        raise ValueError("--omega-children needs a deck made by ustand.refine (refined_from.deck)")
+    coarse = TF.read_deck(rf["deck"])
+    if 8 * len(coarse["tets"]) != len(deck["tets"]):
+        raise ValueError("the refined deck does not have 8 children per coarse tet")
+    cmask, vol = omega_box(coarse, box)
+    return np.repeat(cmask, 8), vol
+
+
 def omega_box(deck, box):
     """omega = the deck's tets whose CENTROID lies strictly inside the box (x0, y0, z0, x1, y1, z1); exact decimals.
     -> (mask over the deck's tets, |omega| exact)."""
@@ -350,6 +366,9 @@ def main(argv):
     ap.add_argument("--dump-g", help="save the float choice g (nt x 36) to this .npy (to profile the finish alone)")
     ap.add_argument("--omega-box", help="level 3b: the region omega = tets with the centroid inside "
                     "'x0,y0,z0,x1,y1,z1'; with --mean-stress adds the prestress load s * l_p to the traction")
+    ap.add_argument("--omega-children", action="store_true", help="level 3b on a REFINED deck: omega = the children "
+                    "of the COARSE deck's box selection (the same region, the same exact volume), not a new centroid "
+                    "test on the fine tets")
     ap.add_argument("--mean-stress", choices=sorted(_COMP), help="level 3b: l_p(u) = the mean of this stress "
                     "component over omega")
     ap.add_argument("--prestress-scale", default="1", help="level 3b: s (exact decimal, signed) in f + s l_p; "
@@ -373,7 +392,11 @@ def main(argv):
         if not isinstance(sub, dict):
             Fd, Md = subcase_load(dk, sub)
             sub = {"F": Fd, "M": Md, "label": f"subcase {sub}"}
-        mask, vol = omega_box(dk, [float(x) for x in a.omega_box.split(",")])
+        box = [float(x) for x in a.omega_box.split(",")]
+        if a.omega_children:
+            mask, vol = omega_children(dk, box)
+        else:
+            mask, vol = omega_box(dk, box)
         if not mask.any():
             ap.error("omega is empty")
         s = Fr(a.prestress_scale)

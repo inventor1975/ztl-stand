@@ -20,7 +20,7 @@ from fractions import Fraction as Fr
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from ustand import tetfea as TF, refine as RF, cadbracket as CB, tetmesh as TM          # noqa: E402
+from ustand import tetfea as TF, refine as RF, cadbracket as CB, tetmesh as TM, equil as EQ          # noqa: E402
 
 CHECKS, FAILS = 0, []
 
@@ -186,6 +186,20 @@ check(lc[2] * 8 == lf[2], "omega on the refined deck is exactly the children of 
 check(lc[0] <= 10 <= lc[1], "coarse: the exact mean 10 inside")
 check(lf[0] <= 10 <= lf[1], "refined: the exact mean 10 inside")
 check(lf[1] - lf[0] < lc[1] - lc[0], "refined: the mean's bracket is narrower")
+
+# ---- omega_children (2026-11-11): on 631 a centroid test on the fine tets chose a DIFFERENT region (11612 tets,
+# 581.07 mm^3, against the 8 x 1458 children, 589.12). A box whose planes cut the coarse tets shows the same here.
+r_named = dict(r)
+r_named["refined_from"] = dict(r["refined_from"], deck=p)
+cut_box = [-1, -1, 4.2, 11, 11, 6.1]
+cm, cv = CB.omega_box(d, cut_box)
+km, kv = CB.omega_children(r_named, cut_box)
+fm, fv = CB.omega_box(r_named, cut_box)
+check(int(km.sum()) == 8 * int(cm.sum()) and kv == cv,
+      f"omega_children = the 8 children of the coarse omega, |omega| exactly the coarse one ({float(kv)})")
+check(sum(EQ.tet_volume([[TF._nas(c) for c in r["grids"][n]] for n in t]) for t, mk in zip(r["tets"], km) if mk) == cv,
+      "the children's volumes sum EXACTLY to the coarse |omega| (fine tets 8i..8i+7 are the children of coarse i)")
+check(fv != cv, f"a centroid test on the fine tets picks another region here ({float(fv)} vs {float(cv)}): the trap is real")
 
 # ---- planted (a): bolt midpoints left unfixed — another problem (point supports): caught by the bracket
 ra = RF.red_refine(d, planted="unfixed_bolt_midpoints")
