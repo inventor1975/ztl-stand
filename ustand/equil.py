@@ -24,7 +24,8 @@ PRESCRIBED_KINDS = (2, 3)          # tetmesh kinds: 2 loaded, 3 free; 0 interior
 
 
 def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, direct=None, log=None,
-           zdtype=np.float64, matfree=False, maxiter=20000, lin=None, smoother="jacobi"):
+           zdtype=np.float64, matfree=False, maxiter=20000, lin=None, smoother="jacobi",
+           sliver_q=0.1):
     """X (nv, 3), T (nt, 4), F/owner/tface/kind from tetmesh; qpres: (nf, 3, 3) the prescribed FLUX q at each face's
     3 vertices (in F's vertex order, oriented as owner[:, 0]'s outward normal) — used on loaded / free / interface
     faces; iface: a bool mask of faces to treat as prescribed in addition (interfaces of a subdomain);
@@ -175,6 +176,57 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
                 return np.bincount(sidx, weights=y[mloc].astype(np.float64), minlength=nl)
         elif smoother != "jacobi":
             raise ValueError(f"smoother: 'jacobi' or 'schwarz', not {smoother!r}")
+        lu_, cdof, n_sliver_faces = None, None, 0
+        if smoother == "jacobi" and sliver_q > 0:
+            # SLIVER BLOCK (2026-11-11). A flat tet is a stiff spring across its thin direction: Z_T ~ E |F| / thickness
+            # couples its faces, each face block carries that stiffness, and the mode "the sliver's faces move together"
+            # costs almost nothing in A but a lot in the face-block Jacobi. MEASURED on the graded 631 deck of round 2
+            # (131k tets, 168 under quality 0.03): the CG iterate's error at 1000 its had half of its square in 7 faces
+            # of 251 051, all in slivers of quality 0.02, none of it in the range of Pi. So the faces of all tets under
+            # quality sliver_q (volume / longest edge^3, 1 = regular) form ONE Jacobi block: the principal submatrix of
+            # A on them, factored sparse (refined slivers make plates of slivers: dense blocks capped at 32 faces lost
+            # most of the gain). Block Jacobi with another block: SPD, never touches the bound.
+            # MEASURED (CG to 1e-8, sliver_q 0.1, with the conjugate-trace Pi):
+            # - SimJEB 631 coarse (82k tets, 400 under 0.1): 323 -> 225 its;
+            # - round 2 of the repaired refinement (126k tets, 2768 under 0.1, 8725 faces, factor nnz 7.9e6):
+            #   2980 -> 476 its, the whole bracket 641 s -> 247 s, the same bracket to 10 digits;
+            # - the old round-2 deck (131k, 3823 under 0.1): 3984 -> 549 its (dense clusters capped at 32 faces:
+            #   ~2250; uncapped dense clusters: 1040, the largest 191 faces);
+            # - sliver_q 0.05 on the coarse deck: 323 (nothing gained); 0.2: 177 there, but on the old graded deck
+            #   one tet in ten is under 0.2 and dense clusters ran out of memory (not tried with the sparse factor).
+            Pq = X[T]
+            volq = np.abs(np.einsum("ni,ni->n", Pq[:, 1] - Pq[:, 0],
+                                    np.cross(Pq[:, 2] - Pq[:, 0], Pq[:, 3] - Pq[:, 0]))) / 6
+            lmax = np.max([np.linalg.norm(Pq[:, a_] - Pq[:, b_], axis=1)
+                           for a_, b_ in ((0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3))], axis=0)
+            bad = (volq / lmax ** 3 * 6 * np.sqrt(2)) < sliver_q
+            nfl = nl // 9
+            tfl = np.where(gl[:, ::9] >= 0, gl[:, ::9] // 9, -1)       # (nt, 4): the lam face of each tet face
+            inC = np.zeros(nfl, bool)
+            fb = tfl[bad]
+            inC[fb[fb >= 0]] = True
+            n_sliver_faces = int(inC.sum())
+            if n_sliver_faces:
+                import scipy.sparse.linalg as spl
+                cpos = -np.ones(nfl, np.int64)
+                cpos[inC] = np.arange(n_sliver_faces)
+                sC = np.where(m, inC[np.where(m, gl // 9, 0)], False)   # (nt, 36): the slot lies on a block face
+                tt = np.where(sC.any(1))[0]
+                ri, ci, vi = [], [], []
+                for c0 in range(0, len(tt), 5000):
+                    tb = tt[c0:c0 + 5000]
+                    sc = sC[tb]
+                    lo_ = cpos[np.where(sc, gl[tb] // 9, 0)] * 9 + gl[tb] % 9
+                    ti, si, sj = np.where(sc[:, :, None] & sc[:, None, :])
+                    ri.append(lo_[ti, si]), ci.append(lo_[ti, sj]), vi.append(Z[tb][ti, si, sj].astype(np.float64))
+                nC = 9 * n_sliver_faces
+                Acc = sp.csc_matrix((np.concatenate(vi), (np.concatenate(ri), np.concatenate(ci))), shape=(nC, nC))
+                Acc = Acc + (1e-12 * float(Acc.diagonal().max())) * sp.identity(nC, format="csc")
+                lu_ = spl.splu(Acc)
+                cdof = (9 * np.where(inC)[0][:, None] + np.arange(9)[None]).ravel()
+                Dinv[inC] = 0.0
+                say(f"sliver block (quality < {sliver_q}): {int(bad.sum())} tets, {n_sliver_faces} faces, "
+                    f"factor nnz {lu_.L.nnz + lu_.U.nnz}")
 
         # AUXILIARY-SPACE correction (2026-11-10: block Jacobi alone did not converge on SimJEB 631 — residual ~3
         # after 2200 iterations): lam is a displacement-like trace at the faces' vertices, so the nodal P1 stiffness
@@ -246,6 +298,8 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
 
         def Mv(r):
             loc = Sv(r) if smoother == "schwarz" else np.einsum("fij,fj->fi", Dinv, r.reshape(-1, 9)).ravel()
+            if lu_ is not None:
+                loc[cdof] = lu_.solve(r[cdof])                # the face blocks of these faces were zeroed above
             return loc + (Pi @ Kpre(Pi.T @ r)) / c_aux
         x = np.zeros(nl)
         r = rhsl - Av(x)
@@ -271,7 +325,7 @@ def choose(X, T, F, owner, tface, kind, E, nu, qpres, iface=None, tol=1e-10, dir
             rz = rz_new
         lam = x
         info = {"lam_unknowns": nl, "matfree": True, "cg_iterations": it, "cg_residual": rn / r0,
-                "aux_scale": c_aux, "aux_rayleigh": aux_rayleigh}
+                "aux_scale": c_aux, "aux_rayleigh": aux_rayleigh, "sliver_faces": n_sliver_faces}
         say(f"matrix-free CG done: {it} iterations, residual {rn / r0:.2e}")
         lt = np.where(m, lam[np.maximum(gl, 0)], 0.0)
         g = np.empty_like(z0)

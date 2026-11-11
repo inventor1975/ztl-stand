@@ -531,3 +531,26 @@ descendants; the load's resultant unchanged. test_graded 30 checks, test_adapt 3
 2–4 does not fall below that of round 1 by more than a fixed factor, and a PLANTED green-on-green run (the old
 behaviour) does; (3) the parent map still partitions the coarse tets exactly (volumes); (4) test_graded/test_adapt
 as they are.
+
+
+**The tail did not go away with the repaired refinement — it is the coarse deck's own slivers (measured).**
+Re-running the rounds with the repaired refinement: round 0 reproduces the committed brackets to 10 digits (97 s a
+bracket instead of 275), round 1 takes ~900 CG its, round 2 (125 743 tets) ~2980. The coarse SimJEB 631 has 400 tets
+under quality 0.1 (worst 0.0056); a red split keeps a sliver's shape and makes 8 of it, and the green children of a
+poor tet are poorer. So the solver has to live with slivers.
+
+**The sliver block.** A flat tet is a stiff spring across its thin direction (Z_T ~ E|F|/thickness) coupling its
+faces; "the sliver's faces move together" is cheap in A and expensive in the face-block Jacobi. The faces of all tets
+under quality 0.1 become ONE Jacobi block: the principal submatrix of A on them, factored sparse. Measured (CG to
+1e-8): round 2 of the repaired refinement 2980 → 476 its, the bracket 641 s → 247 s, the same to 10 digits; the old
+round-2 deck 3984 → 549 (5353 at the start of the day); the coarse deck 323 → 225; round 3 (374 023 tets, 16 613
+slivers, 49 949 faces, factor nnz 9.3e7): 696 its. Dense clusters capped at 32 faces gave ~2250 on the old deck:
+refined slivers form plates, the block must hold a whole plate.
+
+**A side measurement: the direct trace solve is rounding-limited on slivers.** On a box with one layer squashed to
+3 % the direct solve (used below 60 000 trace unknowns) leaves a relative flux jump 3.3e-9, the matrix-free CG
+1.4e-12, and its energy is 2e-7 lower for that reason. The bracket does not depend on it (the exact finish restores
+equilibrium), but the float choice of the direct path is the less accurate of the two.
+
+**Where the day's speed-up stands** (graded round-2 deck, one bracket): 5353 its / ~1000 s in the morning →
+Schwarz 3217 / 832 s → conjugate-trace Pi 3984 (Jacobi) → + sliver block 549 its (old deck), 476 its / 247 s (new).

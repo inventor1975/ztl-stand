@@ -83,6 +83,31 @@ for n, ref in ((3, 8.782992), (4, 8.767626)):
     except ValueError:
         check(True, "an unknown smoother is refused")
 
+# ---- SLIVERS (2026-11-11): a box with one layer squashed to 3 % of its height. Its tets are flat (quality 0.008),
+# their faces form the sliver block of the Jacobi smoother; the choice must still be the direct solve's
+X, T = box(4)
+zs = np.unique(X[:, 2])
+X = X.copy()
+X[X[:, 2] == zs[2], 2] = zs[1] + 0.03 * (zs[2] - zs[1])
+F, own, lf, tf = TM.faces(T)
+kind = TM.classify(F, own, {i for i in range(len(X)) if X[i, 2] == 0}, {i for i in range(len(X)) if X[i, 2] == 10.0})
+q = np.zeros((len(F), 3, 3))
+A, B, C = X[F[:, 0]], X[F[:, 1]], X[F[:, 2]]
+q[kind == 2, :, 2] = 3.0 * np.linalg.norm(np.cross(B - A, C - A), axis=1)[kind == 2, None]
+q[kind == 2, :, 0] = 1.0 * np.linalg.norm(np.cross(B - A, C - A), axis=1)[kind == 2, None]
+_, ed, _ = EQ.choose(X, T, F, own, tf, kind, 1000.0, 0.3, q)
+_, e1, i1 = EQ.choose(X, T, F, own, tf, kind, 1000.0, 0.3, q, matfree=True, tol=1e-10)
+_, e0, i0 = EQ.choose(X, T, F, own, tf, kind, 1000.0, 0.3, q, matfree=True, tol=1e-10, sliver_q=0.0)
+print(f"MEASURED squashed layer: direct {ed:.8f}; matrix-free {e1:.8f} in {i1['cg_iterations']} its with the sliver "
+      f"block ({i1['sliver_faces']} faces), {e0:.8f} in {i0['cg_iterations']} its without")
+check(i1["sliver_faces"] > 0 and i0["sliver_faces"] == 0, "the squashed layer's faces are in the sliver block")
+check(abs(e1 - e0) < 1e-9 * e0, "slivers: the same energy with and without the block (it only steers CG)")
+# MEASURED: the DIRECT solve comes out 2.1e-7 lower here, whatever the CG tolerance. It is the direct solve that is
+# off: on this mesh with the vertical load alone its relative flux jump is 3.3e-9, the matrix-free one's 1.4e-12
+# (LU rounding on the stiff system; a discontinuous flux relaxes the constraint, hence the lower energy).
+check(abs(e1 - ed) < 1e-6 * ed, f"slivers: matrix-free energy within 1e-6 of the direct solve's ({(e1 - ed) / ed:.1e})")
+check(2 * i1["cg_iterations"] < i0["cg_iterations"], "slivers: the block at least halves the CG iterations")
+
 if FAILS:
     print(f"EQUIL RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)
