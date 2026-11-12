@@ -1,0 +1,73 @@
+{
+ "deck": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/rank_adapt/506_a1.deck.pkl",
+ "sha256": "c3498a1c8029a7dc122e4531fca11d9d568eb1a35b3fae6736fe87adb926e829",
+ "subcase": 1,
+ "label": "vertical",
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 213367,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  31675.56375843929,
+  31777.735434466973
+ ],
+ "gap": 0.0032255677217571943,
+ "work_conjugate": [
+  0.8901188244188417,
+  0.8929899629674161
+ ],
+ "work_conjugate_is": "displacement along F (mm)",
+ "upper_float_choice": 31777.73543328464,
+ "push_bits": 274,
+ "seconds": 407.6,
+ "rests_on": [
+  "a red refinement (ustand.refine) of /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/506.fem (sha256 bd9ef264920c4df0\u2026): the same faceted part, its tets subdivided 1:8",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the coarse deck's traction (linear per coarse loaded face, its nodal values M_s t = f_RBE3), given at the fine nodes",
+  "the lower side: v quadratic (P2) on the same tets, against the traction t_q = the upper side's flux q (linear per loaded face)"
+ ],
+ "lower_side": "p2",
+ "p2": {
+  "dof": 942747,
+  "dof_free": 933630,
+  "midpoints": 271244,
+  "nnz": 76623986,
+  "cg_iterations": 113,
+  "residual": 9.637303888717281e-05,
+  "compliance_float": 31675.563762577447,
+  "f_v_exact": 31675.563762577487,
+  "a_vv_up": 31675.56376671568,
+  "seconds": 69.6,
+  "compliance_lower_proved": 31675.56375843929,
+  "p1_lower": 30667.062883843628
+ },
+ "refined_from": {
+  "tets": 120064,
+  "grids": 25829,
+  "mixed_fixed_midpoints": 0,
+  "traction_residual": 2.842170943040401e-14,
+  "graded": true,
+  "closure_rounds": 5,
+  "patterns": {
+   "red": 9980,
+   "none": 177555,
+   "face": 5502,
+   "one": 6832,
+   "opp": 35
+  },
+  "marked": 4805,
+  "level_from_tets": 120064,
+  "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/506.fem",
+  "sha256": "bd9ef264920c4df0feb96f38f556a8f816b4160e1c617361b6171499ea526b85"
+ }
+}

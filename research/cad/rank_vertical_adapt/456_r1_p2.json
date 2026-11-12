@@ -1,0 +1,73 @@
+{
+ "deck": "/tmp/claude-1000/-media-vitaly-SSD-1000GB-logik1/24d518c0-a14f-42a4-bce1-9ea9b810d17f/scratchpad/rank_adapt/456_a1.deck.pkl",
+ "sha256": "d9beaf3b0955eda419f4a0691acd747d4effc16c8fa20ec0833190e849b73565",
+ "subcase": 1,
+ "label": "vertical",
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 269796,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  24932.14466202238,
+  25127.0273799191
+ ],
+ "gap": 0.00781652443215508,
+ "work_conjugate": [
+  0.7006211938654798,
+  0.7060976165450152
+ ],
+ "work_conjugate_is": "displacement along F (mm)",
+ "upper_float_choice": 25127.02737882898,
+ "push_bits": 490,
+ "seconds": 466.6,
+ "rests_on": [
+  "a red refinement (ustand.refine) of /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/456.fem (sha256 9d94db28b91c6571\u2026): the same faceted part, its tets subdivided 1:8",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the coarse deck's traction (linear per coarse loaded face, its nodal values M_s t = f_RBE3), given at the fine nodes",
+  "the lower side: v quadratic (P2) on the same tets, against the traction t_q = the upper side's flux q (linear per loaded face)"
+ ],
+ "lower_side": "p2",
+ "p2": {
+  "dof": 1210527,
+  "dof_free": 1201581,
+  "midpoints": 347839,
+  "nnz": 97629740,
+  "cg_iterations": 83,
+  "residual": 9.378951116329131e-05,
+  "compliance_float": 24932.14466530052,
+  "f_v_exact": 24932.144665300646,
+  "a_vv_up": 24932.1446685789,
+  "seconds": 70.9,
+  "compliance_lower_proved": 24932.14466202238,
+  "p1_lower": 23682.73468759406
+ },
+ "refined_from": {
+  "tets": 198282,
+  "grids": 42196,
+  "mixed_fixed_midpoints": 0,
+  "traction_residual": 2.842170943040401e-14,
+  "graded": true,
+  "closure_rounds": 4,
+  "patterns": {
+   "red": 8067,
+   "none": 246884,
+   "face": 3583,
+   "one": 4278,
+   "opp": 6
+  },
+  "marked": 4365,
+  "level_from_tets": 198282,
+  "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/456.fem",
+  "sha256": "9d94db28b91c6571c2b8230ffeae997bf3aa3de0f62acd668b0bec4f23d4d2dd"
+ }
+}

@@ -383,3 +383,29 @@ Boxes (test_p2): n = 3 17.49 % -> 5.42 %, n = 4 11.75 % -> 3.60 %, red n = 3 7.3
 Planted: a too-small weight in a(v, v) -> above the proved upper bound + quadrature + Galerkin + the P1 pin; a free
 support midpoint -> refused by the admissibility check only (the bound does not see it); the P1 traction formula ->
 the 7-point quadrature + Galerkin only (the bound stayed under the upper end).
+
+
+## The certified ranking with the P2 lower side: 28 of 28 pairs proved (2026-11-12, measured)
+
+Subcase 1, k/V = |F|² / (C V). Every bracket is ONE run on ONE mesh (no intersection across meshes is needed):
+the coarse deck with `--lower p2` for 454, 348, 202, 494, 631, 40 (139–270 s each), and the indicator round-1 deck
+with `--lower p2` for 456 (269 796 tets, 467 s, 7.3 GB) and 506 (213 367 tets, 408 s, 5.8 GB).
+research/cad/rank_vertical_single/ (RANKING.txt).
+
+| part | C bracket | gap | k/V |
+|---|---|---|---|
+| 454 | [15441.25, 15594.74] | 0.99 % | [0.60127, 0.60725] |
+| 348 | [9058.59, 9135.23] | 0.85 % | [0.54118, 0.54576] |
+| 202 | [27338.37, 27580.27] | 0.89 % | [0.49334, 0.49771] |
+| 456 | [24932.14, 25127.03] | 0.78 % | [0.48490, 0.48869] |
+| 506 | [31675.56, 31777.74] | 0.32 % | [0.48268, 0.48423] |
+| 494 | [27568.67, 27726.09] | 0.57 % | [0.47554, 0.47825] |
+| 631 | [45498.68, 45676.73] | 0.39 % | [0.43145, 0.43314] |
+| 40 | [31132.71, 31382.25] | 0.80 % | [0.42091, 0.42428] |
+
+454 > 348 > 202 > 456 > 506 > 494 > 631 > 40, every pair proved. History of the same eight parts: P1 coarse 21 of
+28 (2026-11-10); P1 + one indicator round 21 of 28; P2 coarse 27 of 28 (456 ? 506 open); with the round-1 decks
+for those two, 28. The closest pair is 456 > 506 by 0.14 % (0.48490 against 0.48423).
+rank_vertical_best/ holds the intersections of all brackets per part (narrower, but they rest on the refined
+decks posing the same traction as the coarse ones, which holds only up to float rounding of the nodal values —
+~1e-15, not bounded rigorously); the claim above does not use them.

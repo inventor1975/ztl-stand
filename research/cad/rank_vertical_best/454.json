@@ -1,0 +1,33 @@
+{
+ "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/454.fem",
+ "subcase": 1,
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 143967,
+ "compliance": [
+  15441.253930974077,
+  15594.739973079384
+ ],
+ "gap": 0.00993999857728034,
+ "lower_from": "P2 coarse",
+ "upper_from": "P2 coarse",
+ "intersection_of": {
+  "P1 coarse 10.11": [
+   14299.277139944541,
+   15623.320786690289
+  ],
+  "P2 coarse": [
+   15441.253930974077,
+   15594.739973079384
+  ]
+ },
+ "note": "the intersection of proved brackets of the SAME continuum problem (the same faceted part and traction)"
+}
