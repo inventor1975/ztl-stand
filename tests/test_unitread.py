@@ -59,6 +59,18 @@ try:
     check(False, "a dimension mismatch is refused")
 except U.UnitError:
     check(True, "a dimension mismatch is refused")
+# near = the number AS WRITTEN, with its unit too (2026-11-12, PLE M6: near="3.0%" matched nothing)
+T2 = "the computed rate was 2.2% in 2031, under the policy minimum of 3.0%."
+check(one(T2, "%", "3.0%") == 3 and one(T2, "%", "3.0") == 3 and one(T2, "%", "3.0 %") == 3
+      and one(T2, "%", "2.2%") == F(11, 5) and one(T2, "%", "minimum of") == 3,
+      "near as written: 3.0%, 3.0, 3.0 %, 2.2%, or the words before it")
+try:
+    one(T2, "%", "4%")
+    check(False, "a near that is not in the text is refused")
+except ValueError:
+    check(True, "a near that is not in the text is refused")
+check(R.near_number("120,000 USD") == (120000, "USD") and R.near_number("floor of") is None,
+      "near_number: a number with its unit, or None for words")
 if FAILS:
     print(f"UNITREAD RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)

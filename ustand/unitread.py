@@ -212,22 +212,38 @@ def dims_match(unit, to):
         return False
 
 
+def near_number(near):
+    """`near` as the number AS WRITTEN — "3.0", "3.0%", "120,000 USD" -> (value, unit or None); None when `near` is
+    a word, not one number. (2026-11-12, PLE M6: near="3.0%" — exactly what the model is told to give — was taken
+    for a word and matched nothing; the discount rate was refused with the % in the text.)"""
+    s = str(near).strip()
+    try:
+        return _num(s), None
+    except (ValueError, ZeroDivisionError):
+        pass
+    ms = mentions(s)
+    if len(ms) == 1 and not re.search(r"[A-Za-z]", s[:ms[0].start]):
+        return ms[0].value, ms[0].unit
+    return None
+
+
+def near_match(m, near, text=""):
+    """does the mention `m` (of `text`) match `near` — the number as written (value, and unit if written), or a word
+    the mention follows within 40 characters?"""
+    nn = near_number(near)
+    if nn is not None:
+        v, u = nn
+        return m.value == v and (u is None or m.unit == u)
+    return str(near).lower() in text.lower()[max(0, m.start - 40):m.start]
+
+
 def read(text, to, near=None):
     """-> (value in `to`, the Mention) — the ONE mention convertible to `to` (and matching `near`, if given: the number
     as written, or a word the mention follows within 40 characters). Raises ValueError, naming the candidates, when
     there is none or more than one: never a guess."""
     ms = [m for m in mentions(text) if m.unit is not None and dims_match(m.unit, to)]
     if near is not None:
-        nv = None
-        try:
-            nv = _num(str(near))
-        except (ValueError, ZeroDivisionError):
-            pass
-        if nv is not None:
-            ms = [m for m in ms if m.value == nv or _num(text[m.start:m.start + len(str(near))] or "0") == nv]
-        else:
-            low = text.lower()
-            ms = [m for m in ms if near.lower() in low[max(0, m.start - 40):m.start]]
+        ms = [m for m in ms if near_match(m, near, text)]
     if not ms:
         all_ = mentions(text)
         raise ValueError(f"no number with a unit convertible to {to!r} in the text; numbers read: "
