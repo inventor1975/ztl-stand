@@ -547,10 +547,24 @@ def lower_bound2(ctx, V, q=None, pre=None, om=None, t_scale=1, p_scale=1, exact=
 def solve_case2(deck, subcase, q=None, tol=1e-4, log=print, exact=False, ctx=None):
     """setup2 + case_load2 + case_field2 + lower_bound2 -> dict (mirrors tetfea.solve_cases' output keys)."""
     t0 = time.time()
-    if ctx is None:
+    own = ctx is None
+    if own:
         ctx = setup2(deck, log=log)
     L = case_load2(ctx, subcase, q=q)
     u, V, res = case_field2(ctx, L["ftot"], tol=tol, log=log)
+    if own:
+        # the AMG hierarchy (with the P2 stiffness in it) is not needed for the evaluations: drop it before them.
+        # MEASURED 2026-11-12 on SimJEB 107 (231 319 tets, 1 031 970 P2 dof): with the hierarchy kept, the run was
+        # killed by a 6 GB cap during the P2 evaluation; with it dropped the P2 stage stays under ~4.3 GB (its
+        # assembly; ~1.5 GB during the evaluation) and the whole run peaks at 6.39 GB, now on the upper side.
+        import ctypes
+        import gc
+        ctx.pop("ml", None)
+        gc.collect()
+        try:
+            ctypes.CDLL("libc.so.6").malloc_trim(0)
+        except OSError:
+            pass
     c_float = float(L["ftot"] @ u)
     lower, W, fv, fp, a_up = lower_bound2(ctx, V, L["q"], L["pre"], L["om"], exact=exact)
     out = {"compliance_float": c_float, "compliance_lower_proved": float(lower) * (1 - 2 * U),
