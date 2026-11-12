@@ -409,3 +409,18 @@ for those two, 28. The closest pair is 456 > 506 by 0.14 % (0.48490 against 0.48
 rank_vertical_best/ holds the intersections of all brackets per part (narrower, but they rest on the refined
 decks posing the same traction as the coarse ones, which holds only up to float rounding of the nodal values —
 ~1e-15, not bounded rigorously); the claim above does not use them.
+
+
+## A sweep over 103 SimJEB decks with the P2 lower side (2026-11-12, measured)
+
+Every deck under 17 MB (82 414 … 243 679 tets; 103 of the 381), subcase 1 ("vertical"), `--matfree yes --zdtype 64
+--lower p2`, three runs at a time; research/cad/sweep_p2/ (one JSON a part, RANKING.txt).
+
+- **103 of 103 proved brackets.** Gap: min 0.156 %, median 0.663 %, max 2.891 %; under 1 % for 77 parts, under 2 %
+  for 94. The P1 lower end of the SAME runs would give: median 8.59 %, 4.49 … 45.05 %.
+- Time a part 124–397 s, median 302 s (with three runs sharing the machine).
+- No failure of the pipeline itself (deck parsing, the traction, the trace CG, the exact finish, the P2 evaluation)
+  on 102 parts never run before. The only failures were 12 runs killed by a 6 GB cap right after the P2 solve; all
+  12 passed under 16 GB. The memory peak is in the P2 stage (stiffness + AMG + the errfloat a(v, v)) — to trim.
+- The certified k/V ranking over the 103: 5174 of 5253 pairs proved (98.5 %), 79 open.
+- What this is NOT: the other 278 decks are larger (up to ~3M tets) and were not run; one subcase only.

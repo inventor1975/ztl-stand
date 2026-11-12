@@ -1,0 +1,54 @@
+{
+ "deck": "/media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/449.fem",
+ "sha256": "e62712aefa89c38de36bb58427e0bfb976f13094637c78645e9c1033be383e3b",
+ "subcase": 1,
+ "label": "vertical",
+ "F": [
+  0.0,
+  0.0,
+  35585.77
+ ],
+ "M": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "tets": 243679,
+ "E": 113800.0,
+ "nu": 0.342,
+ "compliance": [
+  23450.5111595297,
+  23561.13409085759
+ ],
+ "gap": 0.004717292965400466,
+ "work_conjugate": [
+  0.6589856327270619,
+  0.6620942610166254
+ ],
+ "work_conjugate_is": "displacement along F (mm)",
+ "upper_float_choice": 23561.13409008235,
+ "push_bits": 335,
+ "seconds": 304.5,
+ "rests_on": [
+  "the deck /media/vitaly/SSD_1000GB/Projects/ext-data/simjeb/fem/449.fem (sha256 e62712aefa89c38d\u2026): its tets ARE the part \u2014 EARNED IF STABLE on it",
+  "linear isotropic elasticity",
+  "supports: RBE2 spiders to SPC'd nodes (u = 0)",
+  "the load: the traction whose consistent nodal loads are the RBE3 distribution",
+  "the lower side: v quadratic (P2) on the same tets, against the traction t_q = the upper side's flux q (linear per loaded face)"
+ ],
+ "lower_side": "p2",
+ "p2": {
+  "dof": 1118082,
+  "dof_free": 1113462,
+  "midpoints": 320609,
+  "nnz": 89094877,
+  "cg_iterations": 66,
+  "residual": 9.854023749397235e-05,
+  "compliance_float": 23450.51116156114,
+  "f_v_exact": 23450.511161561328,
+  "a_vv_up": 23450.511163592953,
+  "seconds": 58.4,
+  "compliance_lower_proved": 23450.5111595297,
+  "p1_lower": 21636.135759091874
+ }
+}
