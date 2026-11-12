@@ -716,6 +716,47 @@ P_fail — the probability of at least one counted failure within `days` steps �
 - Model only what the person describes; a failure the person did not ask about is not a step. Do not split one
   device into two stocks.
 
+## 7i. HVAC models: library functions and performance curves (since 2026-11-12, ported from EnergyPlus 26.2.0)
+
+DESIGN-HVAC.md has the plan and the sources. Two devices, both expanded into ordinary laws before the stand reads the
+brick — ZTL proves the expansion like any law.
+
+**Library functions** `ep_<name>(...)`, arguments and results in SI (temperatures in K, pressure in Pa, humidity ratio
+as a pure number, enthalpy in J/kg):
+
+| function | is | EnergyPlus |
+|---|---|---|
+| `ep_psat(T)` | saturation pressure (Hyland-Wexler, ice below 273.16 K) | PsyPsatFnTemp |
+| `ep_h(T, W)`, `ep_h_tdbrhpb(T, RH, P)` | enthalpy of moist air | PsyHFnTdbW, PsyHFnTdbRhPb |
+| `ep_cpair(W)`, `ep_hfg(W, T)`, `ep_hg(W, T)` | specific heat, latent heat, vapour enthalpy | PsyCpAirFnW, PsyHfgAirFnWTdb, PsyHgAirFnWTdb |
+| `ep_tdb_hw(H, W)`, `ep_w_tdbh(T, H)` | dry bulb from enthalpy; humidity ratio from enthalpy | PsyTdbFnHW, PsyWFnTdbH |
+| `ep_w_tdppb(Tdp, P)`, `ep_w_tdbrhpb(T, RH, P)`, `ep_w_tdbtwbpb(T, Twb, P)` | humidity ratio from dew point, RH, wet bulb | PsyWFnTdpPb, PsyWFnTdbRhPb, PsyWFnTdbTwbPb |
+| `ep_rh_tdbwpb(T, W, P)`, `ep_rhov_tdbwpb`, `ep_rhov_tdbrh`, `ep_v(T, W, P)` | RH, vapour density, specific volume | PsyRhFnTdbWPb, PsyRhov*, PsyVFnTdbWPb |
+| `ep_tsat_h_std(H)` | saturation temperature from enthalpy at standard pressure (its own fits) | PsyTsatFnHPb |
+| `ep_w_twb_newW(T, Twb, P)` | the relation PsyTwbFnTdbWPb solves (with its ice branch) | PsyTwbFnTdbWPb |
+
+An ITERATIVE EnergyPlus function is an implicit law: the wet bulb of (T, W, P) is the derived `Twb` with
+`"search": [lo, hi]` and the law `W == ep_w_twb_newW(T, Twb, P)`. Note: in EnergyPlus itself the wet-bulb solver and
+PsyWFnTdbTwbPb use DIFFERENT coefficients, so `ep_w_tdbtwbpb` is not the inverse of the wet-bulb solve.
+
+**Performance curves** by name, in a `"curves"` block, called as `curve(NAME, x, y, ...)`:
+
+```json
+"curves": {"CAPFT": {"type": "Curve:Biquadratic", "coeffs": ["0.257896", "0.0389016", "-0.00021708", "0.0468684",
+                                                             "-0.00094284", "-0.00034344"],
+                     "x_min": "5", "x_max": "10", "y_min": "24", "y_max": "35", "inputs": ["degC", "degC"]}},
+"laws": [{"zfl": "Cap == Cap_ref*curve(CAPFT, Tchw, Tcond)", "source": "capacity f(T)"}]
+```
+
+- Every input is clamped to its limits first and the output to `out_min` / `out_max`, as EnergyPlus's Curve::value.
+- `inputs`: `"degC"` for a temperature (the argument, in K in the stand, enters the curve in deg C as EnergyPlus feeds
+  it) or `""` for a pure number; limits are in those units, as an IDF writes them.
+- Types: Linear, Quadratic, Cubic, Quartic, Exponent, Sigmoid, RectangularHyperbola1/2, ExponentialDecay,
+  DoubleExponentialDecay, Biquadratic, QuadraticLinear, CubicLinear, Bicubic, FanPressureRise, ChillerPartLoadWithLift,
+  Triquadratic, QuadLinear, QuintLinear. Refused aloud: ExponentialSkewNormal (erf), Table:Lookup.
+- From an IDF: `ustand.hvac.curves.curves_from_idf(text)` gives the specs by name (all 976 curves of EnergyPlus's
+  datasets read).
+
 ## 7b. modes (optional) — the design must hold in every one
 
 ```json

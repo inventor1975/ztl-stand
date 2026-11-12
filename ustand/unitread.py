@@ -239,3 +239,31 @@ def read(text, to, near=None):
                          " — say which (the number as written)")
     m = ms[0]
     return convert(m.value, m.unit, to), m
+
+
+def unit_in(text):
+    """The unit a column HEADER or a label names, with no number beside it: "Flow (gpm)", "Price, $", "Energy
+    [kWh/yr]", "UPV* factor" (none). -> (units.py string or None, note). The last parenthesised / bracketed group
+    is tried first, then the text after the last comma, then the whole text."""
+    cands = re.findall(r"[(\[]([^()\[\]]+)[)\]]", text)[::-1]
+    if "," in text:
+        cands.append(text.rsplit(",", 1)[1])
+    cands.append(text)
+    notes = []
+    for c in cands:
+        c = c.strip().strip(".:;")
+        if not c:
+            continue
+        low = c.lower()
+        if low in CUR_PREFIX:
+            return CUR_PREFIX[low], ""
+        if low.startswith(("$/", "$ per ", "usd/", "usd per ")):
+            u2, n2, note = _unit_from_words(re.sub(r"^(\$|usd)\s*(/|per)\s*", "", c, flags=re.I))
+            if u2 is not None:
+                return f"USD/({u2})", note
+        u, n, note = _unit_from_words(c)
+        if u is not None and n == len(c):
+            return u, note
+        if note:
+            notes.append(note)
+    return None, "; ".join(notes) or "no unit named"
