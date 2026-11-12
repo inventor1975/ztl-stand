@@ -37,9 +37,18 @@ check(C._sgn(C._fold(C._d(ast.parse("max(x, 2*x - 1)", mode="eval").body, "x")),
       "a kink with both slopes positive is strictly rising (the hull [1, 2])")
 
 
+REFUSED = (None, None)
+
+
 def root(g, lo, hi, env=None):
+    """the enclosure of the roots at a point — or REFUSED when no root is shown to exist there"""
     node = ast.parse(f"implicit(_root_x, {g}, {lo}, {hi})", mode="eval").body
-    return C._implicit_iv(node, {k: (F(v), F(v)) for k, v in (env or {}).items()})
+    try:
+        return C._implicit_iv(node, {k: (F(v), F(v)) for k, v in (env or {}).items()})
+    except C.CheckError as e:
+        if "SHOWN TO EXIST" not in str(e):
+            raise
+        return REFUSED
 
 
 # 2. roots at a point, with max/min in the law — tight, and equal to the root
@@ -55,9 +64,14 @@ a, b = root("(_root_x - 1)*(_root_x - 2)", "0", "3")
 check(a <= 1 and b >= 2, f"PLANTED two roots (x-1)(x-2): the enclosure keeps both ({float(a)}, {float(b)})")
 a, b = root("max(_root_x - 1, 0)*(_root_x - 2)*(_root_x - 2.5)", "1.5", "3")
 check(a <= 2 and b >= F(5, 2), f"PLANTED two roots behind a max: both kept ({float(a)}, {float(b)})")
-# a touching root (g >= 0, zero at 2): dg changes sign there — never cleared by monotony
-a, b = root("(_root_x - 2)*(_root_x - 2)", "0", "3")
-check(a <= 2 <= b, f"PLANTED a double root is kept ({float(a)}, {float(b)})")
+# a touching root (g >= 0, zero at 2): no sign change anywhere — its existence is not shown, so no value is given
+check(root("(_root_x - 2)*(_root_x - 2)", "0", "3") == REFUSED,
+      "a root that only touches zero is REFUSED at a point (no sign change: existence not shown)")
+# NO ROOT AT ALL — a jump across zero, poles with a sign change, a capped pole: every one refused, none enclosed
+for g_, lo_, hi_ in [("ifpos(_root_x - 1, _root_x + 5, _root_x - 3)", "0", "3"), ("1/(_root_x - 1)", "0", "2"),
+                     ("1/(_root_x - 1) + 0.5", "0", "3"), ("tan(_root_x)", "1.5", "1.6"),
+                     ("min(1/(_root_x - 1), 5) - 6", "0", "3")]:
+    check(root(g_, lo_, hi_) == REFUSED, f"PLANTED no root: {g_} on [{lo_}, {hi_}] gives no value (not an enclosure of nothing)")
 
 # PLANTED — poles: monotony clears a piece only where the derivative is READ (a pole inside: it is not), so a root
 # beside a pole is kept and the pole's neighbourhood is never cleared as "monotone"
@@ -65,7 +79,9 @@ for g_, lo_, hi_, x_ in [("1/(_root_x - 1) - 0.5", "0", "5", 3.0), ("(_root_x - 
                          ("tan(_root_x)", "1.5", "4", 3.141592653589793),
                          ("max(_root_x, 0)/(_root_x - 2) + 3", "0.5", "5", 1.5)]:
     a, b = root(g_, lo_, hi_)
-    check(float(a) <= x_ <= float(b), f"PLANTED pole: {g_} on [{lo_}, {hi_}] keeps its root {x_} ({float(a)}, {float(b)})")
+    check((a, b) == REFUSED or float(a) <= x_ <= float(b),
+          f"PLANTED pole: {g_} on [{lo_}, {hi_}] keeps its root {x_} or gives no value — never an enclosure without it "
+          f"({(a, b) if (a, b) == REFUSED else (float(a), float(b))})")
 a, b = root("ln(_root_x) + 1", "0.01", "3")
 check(b - a < F(1, 10 ** 9) and abs(float(a) - 0.36787944117144233) < 1e-9, f"ln(x) = -1: tight at 1/e ({float(a)})")
 
@@ -87,17 +103,24 @@ r3 = S.run(brick("(x - 1)*(x - 2) == c - 3", ["0", "3"], {"op": "<=", "value": "
 check(r3.get("verdict") != "EARNED", f"PLANTED stand: roots 1 and 2, x <= 1.5 is not EARNED ({r3.get('verdict')})")
 # PLANTED — a branch that JUMPS across zero with no root: no root may be invented from the sign change
 r4 = S.run(brick("if(x > 1, x + 5, x - 3) == c - 3", ["0", "3"], {"op": "<=", "value": "2"}))
-# KNOWN DEFECT, found by this planted case 2026-11-12 (older than the change tested here: the same on the checker
-# before it). The kernel proves an ENCLOSURE of the roots ("every root lies in a kept piece") and never that a root
-# EXISTS; the stand reads the enclosure as the quantity's range. Around a jump no piece can be excluded, so the
-# stand says EARNED with x ~ 1 for a law that has no root at all. BRICKS.md promises OPEN ("no root in search").
-# Not counted green; reported to the curator (the stand's claim boundary — his word). When fixed, make it a check.
+# THE ROOT MUST EXIST (the curator, 2026-11-12: "OPEN — honesty above all"). Found by this planted case: the kernel
+# proves an ENCLOSURE of the roots and the stand read it as the quantity's range — this law, with no root at all, was
+# EARNED with x ~ 1, and REFUTED "at a concrete point" for x >= 2. Now the stand shows a root exists (a strict sign
+# change, the law continuous between: checker.implicit_exists) or the design is OPEN.
+check(r4.get("verdict") == "OPEN", f"PLANTED stand: a jump from -2 to 6 with no root, x <= 2 -> OPEN ({r4.get('verdict')})")
+r5 = S.run(brick("if(x > 1, x + 5, x - 3) == c - 3", ["0", "3"], {"op": ">=", "value": "2"}))
+r6 = S.run(brick("if(x > 1, x + 5, x - 3) == c - 3", ["0", "3"], {"op": "within", "value": ["0.9", "1.1"]}))
+check(r5.get("verdict") == "OPEN" and r6.get("verdict") == "OPEN",
+      f"PLANTED stand: the same law is neither REFUTED at a point that has no root nor EARNED around the jump "
+      f"({r5.get('verdict')}, {r6.get('verdict')})")
+r7 = S.run(brick("1/(x - 1) == c - 3", ["0", "2"], {"op": "<=", "value": "1.5"}))
+check(r7.get("verdict") == "OPEN", f"PLANTED stand: a pole with a sign change and no root -> OPEN ({r7.get('verdict')})")
+# two roots (x^2 = c): the root set exists (a sign change between an end and the middle) and both branches are judged
+r8 = S.run(brick("x*x == c", ["-3", "3"], {"op": "within", "value": ["-1.8", "1.8"]}))
+r9 = S.run(brick("x*x == c", ["-3", "3"], {"op": "<=", "value": "1"}))
+check(r8.get("verdict") == "EARNED" and r9.get("verdict") != "EARNED",
+      f"stand: x^2 = 3 on [-3, 3] — within [-1.8, 1.8] EARNED (both roots), x <= 1 not EARNED ({r8.get('verdict')}, {r9.get('verdict')})")
 KNOWN = []
-if r4.get("verdict") == "EARNED":
-    KNOWN.append("a law that jumps across zero with no root is EARNED (existence of the root is not shown)")
-    print("KNOWN DEFECT:", KNOWN[-1], "| guaranteed", r4.get("guaranteed"))
-else:
-    print("NOTE: the jump case is no longer EARNED — turn the KNOWN DEFECT into a check:", r4.get("verdict"))
 
 if FAILS:
     print(f"IMPLICIT POINT RED ({len(FAILS)} of {CHECKS})")

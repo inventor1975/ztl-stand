@@ -982,10 +982,34 @@ def _safe_texts(b):
             pass                                    # unreadable text is the readers' own error, said there
 
 
+def _legacy_c_with_hvac(b):
+    """The legacy unit "C" in a brick that calls the HVAC library: refused (2026-11-12, MEASURED: T = 20 "C" given to
+    ep_psat was EARNED with Pw = 0.0014 Pa — the formula read 20 K; with degC it is 2338.8 Pa). "C" is a difference
+    with no offset, the library takes absolute temperatures in K, and the unit check cannot tell them apart (both are
+    kelvins by dimension). A brick without the library keeps "C" as before."""
+    if not isinstance(b, dict) or not isinstance(b.get("quantities"), dict):
+        return
+    # the FORMULAS only (a law's "source" may say "fan curve (datasheet)": MEASURED 2026-11-12, t18 was refused)
+    laws = b.get("laws") if isinstance(b.get("laws"), list) else []
+    reqs = b.get("requirements") if isinstance(b.get("requirements"), list) else []
+    dfn = b.get("define") if isinstance(b.get("define"), dict) else {}
+    text = " ; ".join([str(l.get("zfl", "")) if isinstance(l, dict) else str(l) for l in laws]
+                      + [str(v) for v in dfn.values()]
+                      + [str(r.get("value", "")) for r in reqs if isinstance(r, dict)])
+    if not (b.get("curves") or re.search(r"(?<![\w.])(ep_[A-Za-z0-9_]+|curve)\s*\(", text)):
+        return
+    old_c = sorted(n for n, q in b["quantities"].items() if isinstance(q, dict) and q.get("unit") == "C")
+    if old_c:
+        raise BrickError(f"{', '.join(old_c)}: the unit \"C\" is a temperature DIFFERENCE with no offset (20 C is read "
+                         "as 20 K), and this brick calls the HVAC library (ep_... / curve), which takes absolute "
+                         "temperatures — write \"degC\" for a temperature and \"dC\" for a difference")
+
+
 def load(path_or_dict) -> dict:
     import copy as _copy
     b = _copy.deepcopy(path_or_dict) if isinstance(path_or_dict, dict) \
         else json.load(open(path_or_dict, encoding="utf-8"))          # never edit the caller's brick
+    _legacy_c_with_hvac(b)
     if isinstance(b, dict) and (b.get("curves") or "curve(" in json.dumps(b.get("laws", ""))):
         from .hvac import curves as _CV           # performance curves (ustand/hvac/curves.py), expanded first
         try:

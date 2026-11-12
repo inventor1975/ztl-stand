@@ -151,6 +151,29 @@ except (ValueError, OverflowError):
 H.LIBRARY["ep_psat"] = save
 check(w1 > 1e-6 and w2 > 1e-6, f"PLANTED a changed coefficient ({w1:.1e}) and a lost ice branch ({w2:.1e}) are caught")
 
+# the legacy unit "C" (a difference: 20 C = 20 K) given to the library is REFUSED, not judged (2026-11-12, MEASURED:
+# it was EARNED with Pw = 0.0014 Pa); the same brick in degC is judged at 2338.8 Pa
+_bc = {"stand": "ztl-stand/1", "slots": {}, "catalog": {},
+       "quantities": {"T": {"role": "given", "value": "20", "unit": "C"}, "Pw": {"role": "derived", "unit": "Pa"}},
+       "laws": [{"zfl": "Pw == ep_psat(T)", "source": "test"}],
+       "requirements": [{"quantity": "Pw", "op": "<=", "value": "3000", "why": "test"}]}
+_rc = S.run(_bc)
+_bc["quantities"]["T"]["unit"] = "degC"
+_rd = S.run(_bc)
+check(_rc.get("verdict") == "BRICK ERROR" and "degC" in str(_rc.get("why")) and _rd.get("verdict") == "EARNED"
+      and "2338.8" in str(_rd.get("guaranteed")),
+      f"PLANTED a temperature in the legacy unit C given to ep_psat is a BRICK ERROR that names degC; in degC it is "
+      f"EARNED at 2338.8 Pa ({_rc.get('verdict')}: {str(_rc.get('why'))[:90]} | {_rd.get('verdict')})")
+
+# ... and a brick WITHOUT the library keeps the legacy C — also when a law's "source" merely says "curve (" in prose
+_bp = {"stand": "ztl-stand/1", "slots": {}, "catalog": {},
+       "quantities": {"Ta": {"role": "given", "value": "20", "unit": "C"}, "dT": {"role": "given", "value": "5", "unit": "C"},
+                      "To": {"role": "derived", "unit": "C"}},
+       "laws": [{"zfl": "To == Ta + dT", "source": "fan curve (datasheet), ep_psat (not called here)"}],
+       "requirements": [{"quantity": "To", "op": "<=", "value": "30", "why": "test"}]}
+check(S.run(_bp).get("verdict") == "EARNED",
+      "a brick that does not CALL the library keeps the legacy C (prose in a source naming a curve is not a call)")
+
 # ================================================================================ layer 2: performance curves
 from ustand.hvac import curves as CV      # noqa: E402
 import random                              # noqa: E402

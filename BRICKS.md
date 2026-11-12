@@ -35,7 +35,7 @@ checker on every design and every certificate — for new kinds of problems and 
 ```json
 "Vin":  {"role": "given",   "value": "5",  "unit": "V", "ground": "psu"},
 "P":    {"role": "given",   "value": "20", "tolerance": "0.1", "unit": "W"},
-"Ta":   {"role": "given",   "range": ["20", "45"], "unit": "C"},
+"Ta":   {"role": "given",   "range": ["20", "45"], "unit": "degC"},
 "Vout": {"role": "derived", "unit": "V"}
 ```
 
@@ -277,6 +277,13 @@ quantity.
 - More than one root in `search` (x² = p on [-3, 3]): the range holds every branch, and a requirement must hold on
   all of them. Narrow `search` to the physical branch if you mean one.
 - No root in `search` for a design: that design is OPEN, with the reason. Widen `search` if it is too narrow.
+- **The root must be SHOWN TO EXIST** (since 2026-11-12). ZTL proves an enclosure of the roots; that a root exists for
+  every value of the box is a second fact, and the stand shows it — two values of Q where the law keeps strictly
+  opposite signs over the box, with the law continuous between (no pole, every `if` there decided), per part of a
+  partition of the box — or the design is OPEN with that reason. So a law that JUMPS across zero (an `if` whose
+  branches disagree at the switch), a pole with a sign change, a root that only touches zero, and a `search` that
+  some values of the box have no root in are all OPEN, never EARNED around a root that is not there — and never
+  REFUTED "at a point" that has none. Two roots (x² = p) are shown by the sign change between an end and the middle.
 - Inside a certificate (an extreme inside the box), Q enters as one variable over its proved range: the pump's
   power `rho*g*Q*(H0 - a*Q^2)/eta` peaks INSIDE Q's range and is still proved.
 - Version 1 limits, each a BRICK ERROR: an implicit law may use only given and catalog quantities besides Q (put
@@ -330,8 +337,10 @@ quantity.
   - A conversion factor typed into a law (`Q*1000` to turn m^3 into L) is a bare number, so the unit check cannot
     see it (blind test 4: a `*1000` with the unit L passed silently). Never convert inside a law: give each quantity
     its own unit and let the stand scale it.
-- `C` (Celsius) is treated as a temperature difference with no offset. That is fine for sums and differences. A law
-  that multiplies absolute temperatures needs `K`.
+- **Write temperatures in `degC` (or `degF`, `K`) and differences in `dC` (`dF`).** The old unit `C` is a temperature
+  DIFFERENCE with no offset — 20 `C` is read as 20 K. It stays for old bricks made of sums and differences only; a
+  brick that calls the HVAC library (`ep_...`, `curve`) with a quantity in `C` is refused (2026-11-12: 20 `C` given
+  to `ep_psat` was EARNED at 0.0014 Pa — the formula at 20 K).
 - **Absolute temperatures: `degC` and `degF`** (since 2026-11-12, `ustand/temperature.py`). A quantity or a catalog
   field written in `degC` or `degF` is converted to K EXACTLY before the stand reads the brick
   (K = C + 273.15, K = (F + 459.67) x 5/9); the output keeps the stand's values in K (labelled K) and adds

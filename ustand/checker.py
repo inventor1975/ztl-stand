@@ -950,6 +950,13 @@ def _implicit_core(node, rng, ph, g, lo, hi, target):
             one = localise(live)
             if one is not None:
                 live = prune(one, IMPLICIT_DEPTH)
+        # AT A POINT THE ROOT MUST EXIST (2026-11-12): the pieces left enclose every root, and around a jump or a pole
+        # they enclose NONE — a witness "at a concrete point" was read from such an enclosure. No root shown: no value.
+        ok, _why = implicit_exists(node, rng, live[0][0], live[-1][1], budget=1)
+        if not ok:
+            raise CheckError(f"the implicit law of {ph[len('_root_'):]}: no root is SHOWN TO EXIST at this point "
+                             f"(enclosure [{float(live[0][0]):.6g}, {float(live[-1][1]):.6g}]: no strict sign change "
+                             "with the law continuous between — a jump, a pole or a touching root)")
         return live[0][0], live[-1][1]
     # over a BOX: a coarse enclosure first, then the corners; the fine pruning only when the corners
     # cannot be used (MEASURED 2026-10-10: the pump's box enclosure took 13 s at full depth, and the
@@ -986,6 +993,171 @@ def implicit_excludes(law_rhs, rng, zlo, zhi, depth=60, splits=14):
 
     # the open ends: a root exactly AT zlo or zhi is inside the range, so the outer pieces stop there
     return clear(lo, zlo, 0) and clear(zhi, hi, 0)
+
+
+def _continuous_on(g, rng):
+    """g is CONTINUOUS over the region `rng` — shown, or False. The functions of the brick language are continuous on
+    their domains, and this checker's reading REFUSES at every domain edge (a division by a range containing zero, ln
+    / sqrt / a non-integer power of a range reaching below the domain, tan beyond its window: MEASURED 2026-11-12, each
+    raises CheckError). So: every branch `ifpos` on the path taken is DECIDED over the region (a branch may jump at
+    its switch; the branch not taken is not read), and the reading of g over the region is defined and finite."""
+    wide = [n for n, v in rng.items() if v[0] != v[1]]
+
+    def side_mv(cond):
+        """the side of a branch by the MEAN VALUE form, when the plain reading straddles: cond(mid) + the sum over the
+        varying names of d cond/dn (read over the region) x (n - mid). 2026-11-12, a chiller's false load
+        Avail*PLR*FRAC - Qevap: identically 0 in normal running, read as +-168 W over 0.002 K (the terms cancel and
+        an interval cannot see it) — the derivative form sees it. Sound for max/min inside (the hull of the slopes)."""
+        names = [n for n in wide if n in _names_of(cond)]
+        if not names:
+            return 0
+        try:
+            mid = dict(rng, **{n: ((rng[n][0] + rng[n][1]) / 2,) * 2 for n in names})
+            c0 = _ivm(cond, mid)
+            lo, hi = c0.a, c0.b
+            for n in names:
+                d = _ivm(_dg(cond, n), rng)
+                h = _leaf((rng[n][1] - rng[n][0]) / 2).b
+                m = max(abs(d.a), abs(d.b)) * h
+                lo, hi = lo - m, hi + m
+        except (CheckError, ValueError, ZeroDivisionError, TypeError):
+            return 0
+        return 1 if lo > 0 else (-1 if hi <= 0 else 0)
+
+    def decided(node):
+        if isinstance(node, ast.Call) and getattr(node.func, "id", "") in ("ifpos", "ifpos_d"):
+            c = _ivm(node.args[0], rng)
+            side = 1 if c.a > 0 else (-1 if c.b <= 0 else 0)
+            if side == 0:
+                side = side_mv(node.args[0])
+            if side == 0:
+                return False
+            return decided(node.args[0]) and decided(node.args[1] if side == 1 else node.args[2])
+        if isinstance(node, ast.Call) and getattr(node.func, "id", "") == "implicit":
+            return False
+        return all(decided(ch) for ch in ast.iter_child_nodes(node) if isinstance(ch, (ast.Call, ast.BinOp, ast.UnaryOp)))
+    try:
+        if not decided(g):
+            return False
+        r = _ivm(g, rng)
+        return float("-inf") < float(r.a) and float(r.b) < float("inf")
+    except (CheckError, ValueError, ZeroDivisionError, TypeError):
+        return False
+
+
+EXISTS_BUDGET = 600
+
+
+def implicit_exists(law_rhs, rng, zlo, zhi, budget=None):
+    """A ROOT EXISTS for EVERY point of the box, inside the search range — proved, or (False, why). (2026-11-12, the
+    curator's word: "OPEN — honesty above all". The kernel proves an ENCLOSURE of the roots, [zlo, zhi]; it does not
+    say that a root exists, and the stand read the enclosure as the quantity's range: a law that jumps across zero, or
+    has a pole there, with NO root was EARNED.) The proof, per part of a partition of the box: two values qa < qb of
+    the unknown, in the search range, where g keeps one STRICT sign over the whole part — opposite signs — and g is
+    continuous on [qa, qb] x the part (_continuous_on). Then for every point of the part the intermediate value
+    theorem gives a root in [qa, qb]. The values tried: the enclosure's ends, steps outside them, and points inside it
+    (two roots, x^2 = p: the sign changes between an end and the middle). The parts tile the box (each halves the
+    parameter widest in it). rng: name -> (lo, hi) for every given (a point is (v, v)). -> (True, how) | (False, why)."""
+    node = ast.parse(law_rhs, mode="eval").body if isinstance(law_rhs, str) else law_rhs
+    ph, g = node.args[0].id, node.args[1]
+    slo, shi = _ivl(node.args[2], {})[0], _ivl(node.args[3], {})[0]
+    # (_names_of also lists function names; a quantity with no range makes every reading below refuse: not shown)
+    params = sorted(n for n in _names_of(g) if n != ph and n in rng and rng[n][0] != rng[n][1])
+    whole = {n: rng[n][1] - rng[n][0] for n in params}
+    left = [EXISTS_BUDGET if budget is None else budget]
+    w = zhi - zlo
+    span = shi - slo
+    outs = [w / 8, w / 2, 2 * w, span / 1024, span / 64, span / 8, span]
+    # the values of the unknown to read, nearest the enclosure first
+    first = [zlo, zhi]
+    more = sorted({max(slo, zlo - d) for d in outs} | {min(shi, zhi + d) for d in outs}
+                  | {zlo + w * F(k, 4) for k in (1, 2, 3)} - {zlo, zhi})
+
+    def sign_at(x, box):
+        try:
+            r = _ivm(g, dict(box, **{ph: (x, x)}))
+        except (CheckError, ValueError, ZeroDivisionError):
+            return 0
+        return 1 if r.a > 0 else (-1 if r.b < 0 else 0)
+
+    def exact_root(x, box):
+        try:
+            return not params and _ivl(g, dict(box, **{ph: (x, x)})) == (0, 0)
+        except (CheckError, ValueError, ZeroDivisionError, NeedsInterval):
+            return False
+
+    def crossing(signs, box):
+        """two read values with opposite strict signs and a continuous law between: the closest pair first"""
+        pts = sorted(x for x, sg in signs.items() if sg)
+        pairs = [(pts[i + 1] - pts[i], pts[i], pts[i + 1]) for i in range(len(pts) - 1) if signs[pts[i]] != signs[pts[i + 1]]]
+        return any(_continuous_on(g, dict(box, **{ph: (a, b)})) for _, a, b in sorted(pairs))
+
+    def part(box):
+        left[0] -= 1
+        if left[0] < 0:
+            return False
+        if exact_root(zlo, box) or exact_root(zhi, box):
+            return True                              # g is exactly 0 there: a root, no theorem needed
+        signs = {x: sign_at(x, box) for x in first}
+        if crossing(signs, box):
+            return True
+        if params:
+            # A BRACKET OF THIS PART'S OWN (2026-11-12, a reformulated chiller: over 24..26 C of entering water the
+            # root moves 2 K, and across the whole enclosure a branch of the law is undecided — no continuity, OPEN).
+            # The root at the part's middle, read as a point; then a bracket around it, widened until the law keeps
+            # a strict sign at each end over the whole part — narrow, so the branches there are decided.
+            # (the root at the middle only AIMS the bracket — the proof is the signs and the continuity below — so it
+            # is bisected by exact signs at points, ~30 readings, not solved rigorously: MEASURED 15 s a part by
+            # _implicit_iv on a 30 KB chiller law, 40 parts in 10 min)
+            mid = {n: ((v[0] + v[1]) / 2,) * 2 for n, v in box.items()}
+            d = max(w, span / 2 ** 20) / 2 ** 12
+            r_lo, r_hi = zlo, zhi
+            s_lo, s_hi = sign_at(r_lo, mid), sign_at(r_hi, mid)
+            if s_lo and s_hi and s_lo != s_hi:
+                for _ in range(40):
+                    if r_hi - r_lo <= d:
+                        break
+                    m = (r_lo + r_hi) / 2
+                    sm = sign_at(m, mid)
+                    if sm == 0:
+                        break
+                    if sm == s_lo:
+                        r_lo = m
+                    else:
+                        r_hi = m
+            else:
+                try:
+                    r_lo, r_hi = _implicit_iv(node, mid)
+                except CheckError:
+                    return False                     # no root shown at the middle itself: nothing to continue from
+            while True:
+                qa, qb = max(slo, r_lo - d), min(shi, r_hi + d)
+                sa, sb = sign_at(qa, box), sign_at(qb, box)
+                if sa and sb and sa != sb:
+                    if _continuous_on(g, dict(box, **{ph: (qa, qb)})):
+                        return True
+                    break                            # wider only loses the continuity: split the part instead
+                if qa == slo and qb == shi:
+                    break
+                d *= 2
+        signs.update({x: sign_at(x, box) for x in more})
+        if crossing(signs, box):
+            return True
+        if not params:
+            return False
+        v = max(params, key=lambda n: (box[n][1] - box[n][0]) / whole[n])
+        if box[v][0] == box[v][1]:
+            return False
+        m = (box[v][0] + box[v][1]) / 2
+        return part(dict(box, **{v: (box[v][0], m)})) and part(dict(box, **{v: (m, box[v][1])}))
+
+    if part(dict(rng)):
+        used = (EXISTS_BUDGET if budget is None else budget) - left[0]
+        return True, ("a root exists for every point of the box: a strict sign change of the law across the range, the "
+                      f"law continuous between ({used} part{'s' if used != 1 else ''} of the box)")
+    return False, ("its roots are enclosed, but NO ROOT IS SHOWN TO EXIST for every value of the box: no strict sign "
+                   "change of the law with the law continuous between (a jump of a branch, a pole, a root that only "
+                   "touches zero, or a search range some values of the box have no root in)")
 
 
 def implicit_root_outside(law_rhs, point, zlo, zhi, grid=512):

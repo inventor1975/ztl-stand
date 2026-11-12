@@ -1678,8 +1678,21 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
             if got_i is None:
                 impl_fail = f"{n}: {how_i}"
                 break
+            # THE ROOT MUST BE SHOWN TO EXIST (2026-11-12, the curator: "OPEN — honesty above all"). ZTL proved an
+            # ENCLOSURE of the roots; that a root exists for every value of the box is a second fact, shown here by a
+            # strict sign change with the law continuous between (checker.implicit_exists) — or the design is OPEN.
+            # Before: a law jumping across zero with no root at all was EARNED with x ~ the jump.
+            ex_box = {k: (v, v) for k, v in fixed.items()}
+            ex_box.update(boxes)
+            try:
+                ex_ok, ex_how = C.implicit_exists(text, ex_box, got_i[0], got_i[1])
+            except (C.CheckError, ZeroDivisionError, ValueError) as e:
+                ex_ok, ex_how = False, f"the existence of its root could not be read: {e}"
+            if not ex_ok:
+                impl_fail = f"{n}: {ex_how}"
+                break
             def_ranges[n] = (got_i[0], got_i[1], "implicit")
-            impl_how[n] = how_i
+            impl_how[n] = how_i + "; " + ex_how
         if impl_fail:
             undecided += 1
             undecided_before_earned += 1
