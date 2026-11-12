@@ -424,3 +424,18 @@ Every deck under 17 MB (82 414 … 243 679 tets; 103 of the 381), subcase 1 ("ve
   12 passed under 16 GB. The memory peak is in the P2 stage (stiffness + AMG + the errfloat a(v, v)) — to trim.
 - The certified k/V ranking over the 103: 5174 of 5253 pairs proved (98.5 %), 79 open.
 - What this is NOT: the other 278 decks are larger (up to ~3M tets) and were not run; one subcase only.
+
+
+## The two records of the load on the P1 path, measured on 631 (2026-11-12)
+
+The P1 lower side works against the nodal loads themselves, the upper side equilibrates the linear traction t_q
+obtained from them in floats; the P2 path uses t_q on both sides. research/cad/two_tractions.py evaluates f(v) of
+the SAME exact P1 field against both records, in exact rationals:
+
+| deck | relative difference of f(v) | shift of the P1 lower bound |
+|---|---|---|
+| 631 coarse (82 414 tets) | 6.4e-17 | 1.3e-16 relative (5.4e-12 of 42132.98) |
+| 631 round 2 (125 743 tets) | −3.5e-19 | −6.9e-19 relative |
+
+Both are under the 2U = 2.2e-16 margin the P1 bound is already lowered by. This is a MEASUREMENT on two decks, not
+a bound: the P1 path still rests on "the two records are the same load", stated, not proved. The P2 path does not.
