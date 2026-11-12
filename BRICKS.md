@@ -292,8 +292,9 @@ quantity.
 - If any unit is missing, the output says `units: not checked: …`.
 - **Prefixes scale values to SI**:
   - prefixes: `p n u m c k M G`;
-  - units: `V A ohm W F H Hz s m g K C J N Pa ppm % h min day year L mol t Ah Wh bar rpm dB dBA rad deg Gy Sv VA
-    var in ft lb lbf psi ksi oz ozf gal gpm daN`, and the
+  - units: `V A ohm W F H Hz s m g K C J N Pa ppm % h min day week month quarter year L mol t Ah Wh bar rpm dB dBA
+    rad deg Gy Sv VA var in ft lb lbf psi ksi oz ozf gal gpm cfm daN BTU BTUH MBH TR therm hp dC dF degR` (absolute
+    `degC` / `degF`: see temperatures below), and the
     currencies `USD EUR GBP ILS RUB JPY CHF CNY`. Each currency is its own dimension: adding USD to EUR is a unit
     error, and an exchange rate is a quantity (`EUR/USD`). A currency takes `k` and `M` only: `kEUR`, `MUSD`;
   - `Gy` and `Sv` are J/kg, `VA` and `var` are W: the check cannot tell absorbed from equivalent dose, nor apparent
@@ -307,6 +308,16 @@ quantity.
     **degF / degC**: see the bullet on temperatures below (since 2026-11-12).
   - `year` (or `yr`) is the **Julian year, 365.25 days**. A life counted as 365 x 24 = 8760 hours a year is not
     that: write it in hours (`262800 h` for 30 such years), or the 0.07 % difference decides a tight bound;
+  - **one reckoning for calendar time** (since 2026-11-12): `month` (`mo`) is the BILLING month, exactly 1/12 of that
+    year (30.4375 days) — never a calendar month of 28-31 days; `quarter` (`qtr`) is 1/4 of it; `week` (`wk`) 7 days.
+    So a charge per month times a year is exactly twelve charges;
+  - **two ways of writing** a unit are read (since 2026-11-12): a HYPHEN between two names is a product that binds
+    tighter than `/` — `USD/kW-month` is USD per (kW x month), `N-m` is N*m (`m^-2` stays a power); the word `per`
+    between spaces — `USD per kWh` is `USD/(kWh)`, `per kWh` is `1/kWh`;
+  - **US energy units, exact by definition** (since 2026-11-12): `BTU` (`Btu`, the International Table BTU,
+    1055.05585262 J; `kBTU`, `MBTU` = 10^6 BTU), `BTUH` (BTU/h), `MBH` (1000 BTU/h), `TR` the ton of refrigeration
+    (12 000 BTU/h), `therm` (100 000 BTU), `hp` (550 ft*lbf/s), `cfm` (ft^3/min), and `kgal` / `Mgal`. Plain `ton` is
+    refused (it is also the short ton of 2000 lb; `t` is the metric tonne);
   - combined with `*`, `/`, powers and parentheses: `C/W`, `1/C`, `m*s^-2`, `J/(kg*K)`, `m^3/h`, `cm^4`. A power
     may be a fraction — `m^2.5/s`, `m^(1/2)/s` (a weir's coefficient) — on an unscaled unit (`km^0.5` is refused:
     write it in SI). `pow(H, 1.5)` and `sqrt(H)` of a length are then half powers, checked like any other.

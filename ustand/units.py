@@ -70,13 +70,34 @@ BASE = {
     # The ABSOLUTE scales degC / degF have an offset, so they are not factors: ustand/temperature.py translates a
     # brick that writes them into K before the stand reads it; here they are refused inside any unit expression.
     "dC": (F(1), _d(K=1)), "dF": (F(5, 9), _d(K=1)), "degR": (F(5, 9), _d(K=1)),
+    # 2026-11-12, the curator: "all quantities to one reckoning — minutes, hours, months, years, quarters — defined,
+    # and computed in them". CALENDAR units are fixed fractions of the Julian year (J7): a month is the BILLING month,
+    # 1/12 of the year (30.4375 days), a quarter 1/4 — never a calendar month of 28-31 days; a week is 7 days.
+    "week": (F(604800), _d(s=1)), "wk": (F(604800), _d(s=1)),
+    "month": (F(31557600, 12), _d(s=1)), "mo": (F(31557600, 12), _d(s=1)),
+    "quarter": (F(31557600, 4), _d(s=1)), "qtr": (F(31557600, 4), _d(s=1)),
+    # US engineering units, exact by definition: the International Table BTU (1055.05585262 J), the mechanical
+    # horsepower (550 ft*lbf/s), the TON OF REFRIGERATION (12 000 BTU/h; "TR" — plain "ton" is refused: it is also
+    # the short ton of 2000 lb, and "t" is the metric tonne), MBH (1000 BTU/h), the therm (100 000 BTU), the cubic
+    # foot per minute.
+    "BTU": (F("1055.05585262"), _d(m=2, kg=1, s=-2)), "Btu": (F("1055.05585262"), _d(m=2, kg=1, s=-2)),
+    "BTUH": (F("1055.05585262") / 3600, _d(m=2, kg=1, s=-3)),
+    "MBH": (F("1055.05585262") * 1000 / 3600, _d(m=2, kg=1, s=-3)),
+    "TR": (F("1055.05585262") * 12000 / 3600, _d(m=2, kg=1, s=-3)),
+    "therm": (F("1055.05585262") * 100000, _d(m=2, kg=1, s=-2)),
+    "hp": (550 * F("0.3048") * F("0.45359237") * F("9.80665"), _d(m=2, kg=1, s=-3)),
+    "cfm": (F("0.3048") ** 3 / 60, _d(m=3, s=-1)),
     **{c: (F(1), _d(**{c: 1})) for c in CURRENCIES},
 }
 PREFIX = {"p": F(1, 10**12), "n": F(1, 10**9), "u": F(1, 10**6), "m": F(1, 1000), "c": F(1, 100),
           "k": F(1000), "M": F(10**6), "G": F(10**9)}
-NO_PREFIX = {"dC", "dF", "degR", "", "1", "%", "ppm", "dB", "dBA", "rad", "min", "day", "h", "rpm", "year", "yr", "deg",
+NO_PREFIX = {"week", "wk", "month", "mo", "quarter", "qtr", "Btu", "BTUH", "MBH", "TR", "therm", "hp", "cfm",
+             "dC", "dF", "degR", "", "1", "%", "ppm", "dB", "dBA", "rad", "min", "day", "h", "rpm", "year", "yr", "deg",
              "in", "ft", "lb", "lbf", "ksi", "oz", "ozf", "gal", "gpm", "daN"}
 CURRENCY_PREFIX = {"k", "M"}          # J7: kEUR, MUSD — and no other (mEUR would be a typo)
+# 2026-11-12: the same two for the gallon and the BTU — kgal / Mgal of water bills, kBTU / MBTU of energy tables
+# (MBTU is a MILLION BTU here, the SI reading; the US "MBtu = 1000 Btu" is written MBH-style as kBTU)
+LIMITED_PREFIX = {"gal": {"k", "M"}, "BTU": {"k", "M"}}
 NAME = re.compile(r"[A-Za-z%]+|1")
 NUMBER = re.compile(r"\d+(?:\.\d+)?")      # a factor in a unit: kWh/100km (blind test 5, c08)
 
@@ -86,6 +107,15 @@ class UnitError(ValueError):
 
 
 def _name(name):
+    if name in ("ton", "tons"):
+        raise UnitError(f"unit {name!r} is ambiguous: TR is the ton of refrigeration (12 000 BTU/h), t the metric "
+                        "tonne; the short ton of 2000 lb is written 2000*lb")
+    if len(name) > 1 and name[1:] in LIMITED_PREFIX:
+        if name[0] in LIMITED_PREFIX[name[1:]]:
+            scale, dim = BASE[name[1:]]
+            return PREFIX[name[0]] * scale, dim
+        if name[0] in PREFIX:
+            raise UnitError(f"unit {name!r}: {name[1:]} takes the prefixes {sorted(LIMITED_PREFIX[name[1:]])} only")
     if name in ("degC", "degF"):
         raise UnitError(f"unit {name!r} is an absolute scale with an offset: allowed only as the WHOLE unit of a "
                         "quantity or a catalog field (ustand/temperature.py converts it to K); a difference or a rate "
@@ -99,6 +129,24 @@ def _name(name):
     raise UnitError(f"unit {name!r} not known (known: {sorted(k for k in BASE if k)}; prefixes {sorted(PREFIX)})")
 
 
+def _normalise(unit: str) -> str:
+    """Two ways engineers write units that the grammar below did not read (2026-11-12, the PLE task: "per kWh",
+    "USD/kW-month"):
+      "A per B"  -> "A/(B)";  "per B" -> "1/(B)"         (the word, separated by spaces)
+      "kW-month" -> "(kW*month)"                          (a HYPHEN between two names is a product that binds
+                                                           tighter than "/": USD/kW-month is USD per kW-month)"""
+    u = unit.strip()
+    m = re.match(r"^(.*?)\s*\bper\b\s+(.+)$", u)
+    if m:
+        u = f"{m.group(1) or '1'}/({m.group(2)})"
+    u = u.replace(" ", "")
+    prev = None
+    while prev != u:
+        prev = u
+        u = re.sub(r"(?<![\w^])([A-Za-z%][A-Za-z0-9]*)-([A-Za-z][A-Za-z0-9]*)", r"(\1*\2)", u)
+    return u
+
+
 def parse(unit: str):
     """A unit string -> (scale to SI, dimension). Products `*`, quotients `/`, integer powers `^-2`
     and PARENTHESES (2026-10-10: `J/(kg*K)` met in the blind test). '' or None: dimensionless."""
@@ -106,7 +154,7 @@ def parse(unit: str):
         return F(1), _d()
     if not isinstance(unit, str):       # the fuzz, 2026-10-12: a unit written as a number reached .replace
         raise UnitError(f"unit {unit!r}: write a unit as a string, e.g. \"ohm\"")
-    text = unit.replace(" ", "")
+    text = _normalise(unit)
     pos = [0]
 
     def peek():

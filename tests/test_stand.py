@@ -4362,6 +4362,50 @@ check("--prove on a 'smallest' find (blind7 c10b): the PROVED RANGE carries its 
       and "every eta in" in str(_p6.get("proof_covers")) and (_p6.get("decision") or {}).get("verdict") == "REFUTED",
       json.dumps({k: _p6.get(k) for k in ("verdict", "proof_covers")}, ensure_ascii=False)[:300])
 
+# ONE RECKONING FOR TIME AND THE US ENGINEERING UNITS (2026-11-12, the curator: "минуты, часы, месяцы, годы, кварталы
+# — приводим к определённому и считаем в них")
+_yr = U.parse("year")[0]
+_units_ok = (U.parse("month")[0] * 12 == _yr and U.parse("quarter")[0] * 4 == _yr and U.parse("mo") == U.parse("month")
+             and U.parse("week")[0] == 7 * 86400 and U.parse("qtr") == U.parse("quarter")
+             and U.parse("USD/kW-month") == U.parse("USD/(kW*month)") and U.parse("per kWh") == U.parse("1/kWh")
+             and U.parse("USD per kWh") == U.parse("USD/kWh") and U.parse("N-m") == U.parse("N*m")
+             and U.parse("m^-2")[0] == 1 and U.parse("kgal")[0] == 1000 * U.parse("gal")[0]
+             and U.parse("TR")[0] == 12000 * U.parse("BTUH")[0] and U.parse("BTU")[0] == F("1055.05585262")
+             and U.parse("hp")[0] == 550 * U.parse("ft*lbf/s")[0] and U.parse("cfm")[0] == U.parse("ft^3/min")[0]
+             and U.parse("therm")[0] == 100000 * U.parse("BTU")[0])
+_refused = []
+for _u in ("ton", "tons", "mgal"):
+    try:
+        U.parse(_u)
+    except U.UnitError:
+        _refused.append(_u)
+check("units: a month is 1/12 and a quarter 1/4 of the Julian year, a week 7 days; 'USD/kW-month' is USD per "
+      "(kW*month), 'per kWh' is 1/kWh; kgal, BTU, BTUH, MBH, TR (12 000 BTU/h), hp (550 ft*lbf/s), cfm, therm "
+      "exact by definition; 'ton' refused as ambiguous, mgal refused", _units_ok and _refused == ["ton", "tons", "mgal"],
+      str(_refused))
+_bill = {"stand": "ztl-stand/1",
+         "quantities": {"Pk": {"role": "given", "value": "120", "unit": "kW", "ground": "peak demand"},
+                        "rate": {"role": "given", "value": "14.25", "unit": "USD/kW-month", "ground": "tariff"},
+                        "T": {"role": "given", "value": "1", "unit": "year", "ground": "billing period"},
+                        "cost": {"role": "derived", "unit": "USD"}},
+         "laws": [{"zfl": "cost == Pk*rate*T", "source": "demand charge, twelve months"}],
+         "requirements": [{"quantity": "cost", "op": "<=", "value": "20520", "why": "120 x 14.25 x 12"}]}
+_rb = S.run(_bill)
+check("units: a demand charge in USD/kW-month over one year comes out exactly 12 monthly bills (120 kW x 14.25 x 12 "
+      "= 20 520 USD, EARNED at <= 20 520)",
+      _rb["verdict"] == "EARNED" and [str(x).split(" ")[0] for x in _rb["guaranteed"]["cost"]] == ["20520", "20520"],
+      json.dumps(_rb.get("guaranteed")))
+
+# READING UNITS AS DOCUMENTS WRITE THEM (2026-11-12, ustand/unitread.py: code, not the model) — its own suite
+import subprocess as _sp_ur      # noqa: E402
+_ur = _sp_ur.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_unitread.py")],
+                 capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parent.parent),
+                 env=dict(os.environ, PYTHONPATH=str(pathlib.Path(__file__).resolve().parent.parent)))
+check("unitread: numbers and units read from document text by code ('1,250 gpm', '$14.25 per kW-month', '8.12 "
+      "cents/kWh', '78 °F' to K by the offset, '10 °F' into dF as a difference, '$1.2 million'), exact; a bare 'ton', "
+      "'psig', a missing unit and two candidates refused, never guessed", "UNITREAD GREEN" in _ur.stdout,
+      (_ur.stdout + _ur.stderr)[-300:])
+
 # ABSOLUTE TEMPERATURE SCALES degC / degF (2026-11-12, ustand/temperature.py): translated to K exactly before the
 # stand reads the brick; the converted values come back beside the stand's own (in K)
 from ustand import temperature as _TS        # noqa: E402
