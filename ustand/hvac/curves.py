@@ -17,6 +17,14 @@ Types: Linear, Quadratic, Cubic, Quartic, Exponent, Biquadratic, QuadraticLinear
 Triquadratic, QuadLinear, QuintLinear, ChillerPartLoadWithLift, FanPressureRise, Sigmoid, RectangularHyperbola1/2,
 ExponentialDecay, DoubleExponentialDecay. Not ported: ExponentialSkewNormal (erf, which the stand's laws do not have),
 Table:Lookup (Btwxt interpolation) — refused aloud.
+
+Layer 3 adds two types that are not Curve:* objects but are evaluated the same way — the user-defined coefficient
+sets of a variable-speed cooling tower, CoolingTowerPerformance:CoolTools (35 coefficients) and :YorkCalc (27):
+curve(NAME, FRW, FRA, Twb, Tr) = the approach (K), inputs water flow ratio, air flow ratio, inlet wet bulb ("degC"),
+range ("dC": a temperature DIFFERENCE, K = deltaC), output "dC". The limits a spec states are applied as EnergyPlus's
+checkModelBounds applies them (ustand/hvac/towers.py): z_min / z_max clamp the wet bulb, x_min / x_max the water flow
+ratio (curve_from_idf writes those for CoolTools only — for YorkCalc EnergyPlus does not cap it); the range and
+approach limits of the object are kept in the spec for the record (range_min, ...), EnergyPlus only warns on them.
 """
 from __future__ import annotations
 
@@ -50,6 +58,12 @@ TYPES = {
     "Curve:QuadLinear": (4, 5, "c0 + V1*c1 + V2*c2 + V3*c3 + V4*c4"),
     "Curve:QuintLinear": (5, 6, "c0 + V1*c1 + V2*c2 + V3*c3 + V4*c4 + V5*c5"),
 }
+from .towers import COOLTOOLS_TERMS as _CT_T, YORKCALC_TERMS as _YC_T, polynomial as _poly   # noqa: E402
+
+_TOWER_SYM = {"A": "V2*V2*V2", "W": "V1", "T": "V3", "R": "V4", "F": "V1/V2"}
+TYPES["CoolingTowerPerformance:CoolTools"] = (4, 35, _poly(_CT_T, [f"c{i}" for i in range(35)], _TOWER_SYM))
+TYPES["CoolingTowerPerformance:YorkCalc"] = (4, 27, _poly(_YC_T, [f"c{i}" for i in range(27)], _TOWER_SYM))
+TOWER_TYPES = {"CoolingTowerPerformance:CoolTools": 8, "CoolingTowerPerformance:YorkCalc": 9}   # limit fields first
 REFUSED = {"Curve:ExponentialSkewNormal": "uses erf, which the stand's laws do not have",
            "Table:Lookup": "Btwxt table interpolation is not ported (write the table as a table() or a fitted curve)"}
 LIM = ("x", "y", "z", "w", "v")          # Curve:* limit fields: Minimum Value of x / y / z / w / v
@@ -106,9 +120,16 @@ def call_text(spec, args):
         u = units[j] if j < len(units) else ""
         if u in ("degC", "C", "Temperature"):
             a = f"(({a})/ep_K - 273.15)"
+        elif u in ("dC", "deltaC", "dK"):          # a temperature DIFFERENCE: K = deltaC, no offset
+            a = f"(({a})/ep_K)"
         elif u not in ("", "1", "Dimensionless", "dimensionless"):
-            raise CurveError(f"curve input unit {u!r}: degC (a temperature) or '' (a pure number)")
-        body = re.sub(rf"(?<![\w]){re.escape(f'_V{j + 1}')}(?![\w])", f"({a})", body)
+            raise CurveError(f"curve input unit {u!r}: degC (a temperature), dC (a difference) or '' (a pure number)")
+        body = re.sub(rf"(?<![\w]){re.escape(f'_V{j + 1}')}(?![\w])", lambda _m, _a=a: f"({_a})", body)
+    out = spec.get("output") or ""
+    if out in ("dC", "deltaC", "dK"):
+        body = f"(({body})*ep_K)"
+    elif out not in ("", "1", "Dimensionless", "dimensionless"):
+        raise CurveError(f"curve output unit {out!r}: dC (a temperature difference) or '' (a pure number)")
     return body
 
 
@@ -199,6 +220,21 @@ def curve_from_idf(cls, fields):
         raise CurveError(f"{cls}: not a curve type")
     n, k, _ = TYPES.get(t, (1, 0, ""))
     name, rest = fields[0], fields[1:]
+    if t in TOWER_TYPES:
+        # CoolingTowerPerformance:*: min/max inlet wet bulb, range, approach, water flow ratio (YorkCalc: + the
+        # maximum liquid-to-gas ratio), then the coefficients (GetTowerInput: NumArray2(1..8/9), then Coeff)
+        m = TOWER_TYPES[t]
+        lim, co = rest[:m], rest[m:m + k]
+        if len(lim) < m or len(co) != k or any(not x for x in lim + co):
+            raise CurveError(f"{cls} {name!r}: {m} limits and {k} coefficients expected")
+        spec = {"type": t, "coeffs": co, "z_min": lim[0], "z_max": lim[1], "range_min": lim[2], "range_max": lim[3],
+                "approach_min": lim[4], "approach_max": lim[5], "frw_min": lim[6], "frw_max": lim[7],
+                "inputs": ["", "", "degC", "dC"], "output": "dC"}
+        if t.endswith("CoolTools"):
+            spec["x_min"], spec["x_max"] = lim[6], lim[7]      # capped by checkModelBounds (CoolTools only)
+        else:
+            spec["lg_max"] = lim[8]
+        return name, spec
     spec = {"type": t, "coeffs": rest[:k]}
     lims = rest[k:k + 2 * n]
     for j in range(n):
@@ -221,7 +257,7 @@ def curve_from_idf(cls, fields):
 def curves_from_idf(text):
     out = {}
     for cls, fields in idf_objects(text):
-        if cls.lower().startswith("curve:"):
+        if cls.lower().startswith(("curve:", "coolingtowerperformance:")):
             try:
                 name, spec = curve_from_idf(cls, fields)
                 out[name] = spec

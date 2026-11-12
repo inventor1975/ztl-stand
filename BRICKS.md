@@ -756,6 +756,122 @@ PsyWFnTdbTwbPb use DIFFERENT coefficients, so `ep_w_tdbtwbpb` is not the inverse
   Triquadratic, QuadLinear, QuintLinear. Refused aloud: ExponentialSkewNormal (erf), Table:Lookup.
 - From an IDF: `ustand.hvac.curves.curves_from_idf(text)` gives the specs by name (all 976 curves of EnergyPlus's
   datasets read).
+- `inputs` may also be `"dC"` (a temperature DIFFERENCE: K = deltaC, no offset) and `"output": "dC"` gives the
+  result in K — used by the tower types below.
+
+### Cooling towers (since 2026-11-12; EnergyPlus CondenserLoopTowers.cc — ustand/hvac/towers.py)
+
+Temperatures in K, ranges and approaches in K (differences), flow ratios pure numbers, powers W, flows kg/s or m^3/s.
+
+| function | is | EnergyPlus |
+|---|---|---|
+| `ep_tower_approach_cooltools(FRW, FRA, Twb, Tr)`, `ep_tower_approach_yorkcalc(...)` | approach (K) of a variable-speed tower from water flow ratio, air flow ratio, inlet wet bulb, range — built-in coefficients, CAPPED as the operating tower caps | calculateVariableSpeedApproach after checkModelBounds |
+| `..._cooltools_raw`, `..._yorkcalc_raw` | the same without any capping (sizing, calibration) | calculateVariableSpeedApproach |
+| `ep_tower_twbcap_cooltools(Twb)`, `ep_tower_twbcap_yorkcalc(Twb)` | the wet bulb clamped to the model's limits (-1..26.6667 C; -34.4..29.4444 C) | checkModelBounds |
+| `ep_tower_vs_tout(Ton, Twin, Tset, FC)`, `ep_tower_vs_cycling(Ton, Tmin, Twin, Tset, FC)`, `ep_tower_vs_afr(..., AFRmin, AFRsol)`, `ep_tower_vs_power(Ton, Tmin, Twin, Tset, FC, FPRmin, FPRsol, Pdes)` | outlet temperature, fan cycling ratio, air flow ratio, fan power over the four regimes (full speed, fan off, cycling at the minimum air flow, modulating) | calculateVariableSpeedTower |
+| `ep_tower_fpr_cube(FRA)` | fan power ratio FRA^3 — the default; with a fan curve write `curve(FAN, FRA)` in its place | calculateVariableSpeedTower |
+| `ep_hsat(T, P)` | enthalpy of saturated air | PsyHFnTdbRhPb(T, 1, Pb) |
+| `ep_tower_cpairside(Twb, X, P)`, `ep_tower_q_ua(UA, MCW, MA, CPS, CPA, Twin, Twb)`, `ep_tower_q_air(MA, Twb, X, P)`, `ep_tower_tout(Twin, Q, MCW)` | the UA (effectiveness-NTU) tower: air-side specific heat, heat of one pass, heat taken by the air, outlet water temperature | calculateSimpleTowerOutletTemp |
+| `ep_tower_ss_tout / ss_power(Toff, Ton, Tset[, Pfan])`, `ep_tower_ts_tout / ts_power(Toff, T1, T2, Tset[, Plow, Phigh])` | single- and two-speed fan cycling between the stage outlet temperatures | calculateSingleSpeedTower, calculateTwoSpeedTower |
+| `ep_tower_evap_satexit(MA, Win, Wout, RHOW)`, `ep_tower_evap_lossfactor(F, Twin, Tout, MW, RHOW)`, `ep_tower_drift(Vdes, DF, AFR)`, `ep_tower_blowdown(Evap, Drift, CR)` | water use (m^3/s): evaporation by the saturated-exit method and by the loss factor, drift, blowdown by concentration ratio | calculateWaterUsage |
+| `ep_rhoair(P, T, W)`, `ep_rho_h2o(T)` | density of moist air; EnergyPlus's cubic for liquid water | PsyRhoAirFnPbTdbW, RhoH2O |
+
+How EnergyPlus caps the inputs (found in the code, kept exactly): the wet bulb is clamped to the model's limits; the
+water flow ratio to 0.75..1.25 for CoolTools ONLY (YorkCalc is not capped); the range and the approach are NOT
+capped (only warned about); the air flow ratio is not capped (the search keeps it in [minimum, 1]).
+
+What EnergyPlus ITERATES is an implicit law — one derived quantity with `search`:
+
+```json
+"quantities": {"Twb": {"role": "given", "range": ["288.15", "298.15"], "unit": "K", "ground": "wet bulb 15..25 C"},
+               "Twin": {"role": "given", "value": "308.15", "unit": "K", "ground": "water in, 35 C"},
+               "FRW": {"role": "given", "value": "1", "unit": "", "ground": "design flow"},
+               "FRA": {"role": "given", "value": "1", "unit": "", "ground": "full fan"},
+               "MaxRange": {"role": "given", "value": "11.1111", "unit": "K", "ground": "CoolTools model limit"},
+               "Tr": {"role": "derived", "unit": "K", "search": ["0.001", "22.2222"]},
+               "Tout": {"role": "derived", "unit": "K"}},
+"laws": [{"zfl": "Twin == ep_tower_twbcap_cooltools(Twb) + ep_tower_approach_cooltools(FRW, FRA, Twb, Tr) + Tr",
+          "source": "EnergyPlus calculateVariableTowerOutletTemp: the range it iterates to"},
+         {"zfl": "Tout == Twin - min(Tr, MaxRange)", "source": "EnergyPlus calculateVariableTowerOutletTemp"}],
+"requirements": [{"quantity": "Tout", "op": "<=", "value": "302.629", "why": "the chiller's entering condenser limit"}]
+```
+
+- The range at a FIXED fan speed (above): search `[0.001, max(the model's maximum range, 22.2222)]` K. No root there:
+  EnergyPlus uses the maximum range and warns; the stand says OPEN.
+- The air flow ratio that MEETS a setpoint: `Tset - Twb == ep_tower_approach_cooltools(FRW, FRA, Twb, Twin - Tset)`,
+  `"FRA": {"role": "derived", "search": ["0.2", "1"]}` (from the minimum air flow ratio); then
+  `Pfan == Pdes*ep_tower_fpr_cube(FRA)`. The requested approach uses the uncapped wet bulb, as EnergyPlus.
+- The calibration at sizing: `Tapp_des == ep_tower_approach_cooltools_raw(FRW, FRA1, Twb_des, Tr_des)` with FRW
+  searched from 0.5; the calibrated design flow is the design water flow / FRW.
+- The control sequence, once the outlet at full fan `Ton` and at the minimum air flow `Tmin` are known:
+  `Tout == ep_tower_vs_tout(Ton, Twin, Tset, FC)`, `Pfan == ep_tower_vs_power(Ton, Tmin, Twin, Tset, FC, FPRmin, FPRsol, Pdes)`.
+- User coefficients: a curve of type `CoolingTowerPerformance:CoolTools` (35 coefficients) or `:YorkCalc` (27),
+  called `curve(TWR, FRW, FRA, Twb, Tr)`; `curves_from_idf` reads the object with its limits
+  (`"z_min"`/`"z_max"` the wet bulb, `"x_min"`/`"x_max"` the water flow ratio — CoolTools only).
+- A UA tower (CoolingTower:SingleSpeed / :TwoSpeed): the exit air wet bulb `X` is the unknown,
+
+  ```json
+  "X": {"role": "derived", "unit": "K", "search": ["298.65", "308.15"]},
+  {"zfl": "ep_tower_q_air(MA, Twb, X, P) == ep_tower_q_ua(UA, MCW, MA, ep_tower_cpairside(Twb, X, P), ep_cpair(W), Twin, Twb)",
+   "source": "EnergyPlus calculateSimpleTowerOutletTemp: the fixed point of its iteration"},
+  {"zfl": "Tout == ep_tower_tout(Twin, ep_tower_q_air(MA, Twb, X, P), MCW)", "source": "EnergyPlus calculateSimpleTowerOutletTemp"}
+  ```
+
+  with `MA` = air volume flow x `ep_rhoair(P, Tdb, W)` and `MCW` = water mass flow x its specific heat; search `X`
+  from a little above the inlet wet bulb to the inlet water temperature. This law is long (the saturation pressure
+  sits in it dozens of times): about 4 minutes per design with exact inputs (and with every input exact the stand can earn it but found no witness to REFUTE it — DESIGN-HVAC.md). EnergyPlus stops its iteration early;
+  its outlet differs from the root by up to 4e-4 K (measured on 300 towers). A Merkel variable-speed tower is this
+  tower with `UA*curve(UAWB, Twb_des - Twb)*curve(UAAF, FRA)*curve(UAWF, FRW)` in place of `UA` (the curve
+  input of a wet-bulb difference is `"dC"`).
+- Water use: `ustand.hvac.towers.water_use_laws("SaturatedExit")` (or `"LossFactor"`) returns the quantities and
+  the laws of the chain — `h_out == ep_hsat(Twb, P) + Q/MA`, `Tsat_out == ep_tsat_h_std(h_out)`,
+  `Wout == ep_w_tdbh(Tsat_out, h_out)`, `Evap == ep_tower_evap_satexit(MA, Win, Wout, RHOW)`,
+  `Drift == ep_tower_drift(Vdes, DF, AFR)`, `Blowdown == ep_tower_blowdown(Evap, Drift, CR)`,
+  `Makeup == Evap + Drift + Blowdown` — over the brick's `MA, Twb, P, Win, Q, RHOW, Vdes, DF, AFR, CR`.
+  Two things EnergyPlus does that a reader would not guess: the loss factor `F` is multiplied AS ENTERED (the field
+  is documented in percent per K, and nothing divides it by 100 — `DF`, the drift, is divided); a concentration
+  ratio of 2 or less is treated as 2.
+- The water's density and specific heat are the brick's quantities (EnergyPlus's fluid tables are not ported).
+
+### Chillers (since 2026-11-12; EnergyPlus ChillerElectricEIR.cc, ChillerReformulatedEIR.cc — ustand/hvac/chillers.py)
+
+| function | is |
+|---|---|
+| `ep_chiller_avail(RefCap, CapFT)` | available capacity, the curve value floored at 0 |
+| `ep_chiller_qevap(Load, Avail, MaxPLR)`, `ep_chiller_qevap_lim(Load, Avail, MaxPLR, ME, CP, Tin, Tlow)` | evaporator heat: the load, cut at Avail x MaxPLR (and by the leaving-water lower limit) |
+| `ep_chiller_plr(Q, Avail, MinUnl, MaxPLR)` | part load ratio, never below the minimum unloading ratio |
+| `ep_chiller_frac(Q, Avail, MinPLR, MaxPLR)` | cycling ratio below the minimum part load ratio (taken BEFORE the unloading floor) |
+| `ep_chiller_falseload(Q, Avail, PLR, FRAC, Small)` | false loading (hot-gas bypass), zero below `Small` (HVAC::SmallLoad) |
+| `ep_chiller_power(Avail, COP, EIRFT, EIRFPLR, FRAC)` | compressor power, negative curve values floored at 0 |
+| `ep_chiller_qcond(Power, Fcond, Q, False)`, `ep_chiller_tcondout(QC, MC, CP, Tci)` | condenser heat; condenser outlet temperature |
+| `ep_chiller_condflow(M, Mmax, MinRatio)`, `ep_chiller_cop_reform(COP)`, `ep_chiller_evapcond_water(MC, Win, Twb, P, Tconv)` | condenser flow limits; the reformulated chiller's COP <= 0 -> 5.5; water use of an evaporatively-cooled condenser |
+
+A chiller is built BY CODE from the IDF text that states it (name, reference capacity and COP, the three curves):
+
+```python
+from ustand.hvac import chillers
+parts = chillers.chiller_from_idf(open("Chillers.idf", encoding="latin-1").read(),
+                                  "ElectricEIRChiller McQuay WSC 471kW/5.89COP/Vanes")
+brick = {"stand": "ztl-stand/1", "curves": parts["curves"],
+         "quantities": dict(parts["quantities"],
+                            Load={"role": "given", "range": ["200000", "450000"], "unit": "W", "ground": "cooling load"},
+                            Tchw={"role": "given", "value": "281.15", "unit": "K", "ground": "leaving setpoint 8 C"},
+                            Tcond={"role": "given", "range": ["295.15", "303.15"], "unit": "K", "ground": "22..30 C"}),
+         "laws": parts["laws"],
+         "requirements": [{"quantity": "Power", "op": "<=", "value": "79028", "why": "electrical budget"}]}
+```
+
+- The brick gives the operating quantities `Load` (W), `Tchw` (K, the leaving chilled-water setpoint) and, for
+  Chiller:Electric:EIR, `Tcond` (K, the ENTERING condenser temperature); it gets `Avail, Qevap, PLR, FRAC, Qfalse,
+  Power, Qcond`. `prefix="CH1_"` names every quantity and curve of one chiller apart from another's. An autosized
+  reference capacity (the dataset's generic DOE-2 chillers) is the brick's to give as `RefCap`.
+- Chiller:Electric:ReformulatedEIR reads its curves at the LEAVING condenser temperature, which depends on the
+  condenser heat: the brick gives `Tcin` (K), `Mcond` (kg/s), `CpCond` (J/(kg*K)) and gets `Tco` as an implicit
+  quantity, `Tco == ep_chiller_tcondout(Qcond(Tco), Mcond, CpCond, Tcin)`, searched between the curves' limits
+  (2-3 minutes per design). Where the root lies outside those limits EnergyPlus does not solve it (it
+  substitutes twice); the stand says OPEN.
+- The laws take the load the evaporator is asked for and the water leaving at its setpoint; flow modes, heat
+  recovery, the thermosiphon and sizing are not in them.
 
 ## 7b. modes (optional) — the design must hold in every one
 

@@ -189,6 +189,8 @@ def direct(spec, *v):
 allc = {}
 for f in ("PerfCurves.idf", "Chillers.idf"):
     allc.update(CV.curves_from_idf(open(os.path.join(DS, f), encoding="latin-1").read()))
+# the two CoolingTowerPerformance objects of PerfCurves.idf are layer 3's (tests/test_hvac_plant.py)
+allc = {k: v for k, v in allc.items() if v["type"].startswith("Curve:")}
 rnd = random.Random(7)
 worst, n_eval = 0.0, 0
 for name, sp in allc.items():
