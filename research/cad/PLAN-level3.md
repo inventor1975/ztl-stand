@@ -638,3 +638,21 @@ and the bound is degree-0 homogeneous; clearing s's denominator exactly overflow
   committed two-run value); sigma_b at s* = 4.505: [750.38, 1316.26] (565.9; at 5.306: [746.59, 1320.06] = committed).
   The four compliance numbers at the old s agree with the committed runs: uppers to <= 1e-13, lowers to <= 2e-9
   (the P1 solve at tol 1e-4 of v_f + s v_p vs of f + s p). results631b2_3d_t1.json.
+
+
+## Round 3 in ONE run (level 3d), and P2 on the coarse deck beside it (2026-11-12, measured)
+
+`--functionals` on the round-3 deck (374 023 tets), membrane + bending in one run: 2995 s (the four two-run brackets
+took 880–1020 s each), results631b3_3d_t1.json. At the old s it reproduces the committed round-3 brackets
+([589.42, 721.17], [913.17, 1198.02]); at s*:
+
+| | P1, round 3 (374k tets), s* | P2 lower side, COARSE deck (82k tets), s* |
+|---|---|---|
+| C(f) | [44174.69, 45607.62] 3.2 % | [45498.68, 45676.73] 0.39 % |
+| sigma_m, MPa | [597.87, 712.73] (s* 12.48) | [628.70, 695.89] |
+| sigma_b, MPa | [913.36, 1197.83] (s* 5.04) | [1009.81, 1146.99] |
+| time | 2995 s | 377 s |
+
+The P2 coarse brackets lie inside the round-3 ones. Refinement by the P1 indicator is no longer the way to a
+narrow bracket: the quadratic lower side on the coarse mesh is narrower and 8 times cheaper. What limits the
+bracket now is the UPPER side (0.39 % of C on the coarse deck is mostly the equilibrated field's).
