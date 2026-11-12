@@ -283,7 +283,12 @@ quantity.
   - OPERATIONAL — per part of a partition of the box, a bracket where the law keeps strictly opposite signs at the two
     ends over the whole part AND its slope in Q keeps one strict sign (bounded away from zero). This is the rule ZTL
     proves in Lean with zero axioms (`ZRootPar.par_root`, `tree_root`): the root is built, and is the only one in the
-    bracket. `--prove` gives that theorem for an EARNED verdict; without it the stand's checker reads the same rule.
+    bracket. `--prove` gives that theorem for an EARNED verdict. Without it the rule is read twice, by two
+    implementations: ZTL's kernel checks a brought cover of the box (`zimplicit.check_exists`, ZTL after 2026-11-13),
+    and the stand's checker builds the root by its own route. Either one that builds it earns the fact, and the
+    note under `how` says which did. The kernel reads no slope through `min` / `max` (the HVAC curves), and it
+    reads each occurrence of Q on its own, so a wide bracket around zero can defeat it; there the checker's route
+    stands alone, and the note says so. With an older ZTL (no `check_exists`) the checker's route alone is used.
   - FORMAL — the sign change with the law only continuous between (the classical intermediate value theorem): "a root
     exists", with no object built. Said in the output, and NOT enough for a verdict.
   The marks go to ZTL's JUDGE as the claim "(a root in the window & every root there in its range) | (a root outside

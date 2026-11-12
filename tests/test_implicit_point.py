@@ -165,6 +165,58 @@ check(C._sgn(C._dg(gb, "x"), {"x": (F(3), F(5)), "a": (F(7), F(7))}) == 1
       and C._sgn(C._dg(ast.parse("ifpos(x - 4, x, 0 - x)", mode="eval").body, "x"), {"x": (F(3), F(5))}) is None,
       "a branch whose condition cancels is decided by the mean value form; a real switch inside the box stays undecided")
 
+# ZTL'S KERNEL BUILDS THE ROOT TOO (2026-11-13: zimplicit.check_exists, the same rule checked on a brought cover)
+# The section needs a ZTL that has check_exists; on an older clone it is skipped, and said (the stand itself then
+# uses the checker's route alone — the fourth check below plants exactly that).
+import zimplicit as _ZI                                # noqa: E402
+
+if not hasattr(_ZI, "check_exists"):
+    print("SKIPPED: this ZTL has no zimplicit.check_exists — the kernel's existence route is not tested here")
+else:
+    def box_brick(law, search, req):
+        b = brick(law, search, req)
+        b["quantities"]["c"] = {"role": "given", "range": ["2.9", "3.1"]}
+        return b
+
+
+    def how_x(r):
+        return str((r.get("how") or {}).get("x"))
+
+
+    rk1 = S.run(box_brick("x*x*x + x == c", ["0", "3"], {"op": "<=", "value": "1.5"}))
+    check(rk1.get("verdict") == "EARNED" and "ZTL's kernel; the checker built it by its own route too" in how_x(rk1)
+          and "_root_" not in how_x(rk1),
+          f"stand: a smooth law over a box — the root is built by ZTL's kernel AND by the checker, and the note says so "
+          f"({rk1.get('verdict')}: {how_x(rk1)[-200:]})")
+    rk2 = S.run(box_brick("x*x*x + max(x, 1) == c", ["0", "3"], {"op": "<=", "value": "1.5"}))
+    check(rk2.get("verdict") == "EARNED" and "the checker's route; ZTL's kernel did not build it" in how_x(rk2),
+          f"stand: a law with max — the kernel has no slope to read, the checker builds the root, and the note says who "
+          f"({rk2.get('verdict')}: {how_x(rk2)[-200:]})")
+    rk3 = S.run(box_brick("if(x > 1, x + 5, x - 3) == c - 3", ["0", "3"], {"op": "<=", "value": "2"}))
+    check(rk3.get("verdict") == "OPEN" and "s kernel: the search built no existence certificate" in str(rk3),
+          f"PLANTED a jump over a box: neither the kernel nor the checker builds a root — OPEN ({rk3.get('verdict')})")
+    # an OLDER ZTL (no check_exists): the stand says so and the checker's route still earns the atom
+    _keep = _ZI.check_exists
+    del _ZI.check_exists
+    try:
+        rk4 = S.run(box_brick("x*x*x + x == c", ["0", "3"], {"op": "<=", "value": "1.5"}))
+    finally:
+        _ZI.check_exists = _keep
+    check(rk4.get("verdict") == "EARNED" and "has no existence check" in how_x(rk4),
+          f"stand on an older ZTL (no check_exists): the checker's route alone, said in the note ({rk4.get('verdict')})")
+    # the kernel builds where the checker's own route does not: then the atom is the kernel's, and the note says so
+    _keep_c = C.implicit_exists
+    C.implicit_exists = lambda *a, **k: (C.NOT_SHOWN, "the checker was silenced for this test")
+    try:
+        rk5 = S.run(box_brick("x*x*x + x == c", ["0", "3"], {"op": "<=", "value": "1.5"}))
+        rk6 = S.run(box_brick("if(x > 1, x + 5, x - 3) == c - 3", ["0", "3"], {"op": "<=", "value": "2"}))
+    finally:
+        C.implicit_exists = _keep_c
+    check(rk5.get("verdict") == "EARNED" and "ZTL's kernel; the checker alone did not build it" in how_x(rk5)
+          and rk6.get("verdict") == "OPEN",
+          f"stand with the checker's existence route silenced: the kernel alone builds the smooth root (EARNED) and "
+          f"builds nothing on the jump (OPEN) ({rk5.get('verdict')}, {rk6.get('verdict')})")
+
 if FAILS:
     print(f"IMPLICIT POINT RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)

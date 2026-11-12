@@ -138,3 +138,35 @@ def implicit(law_rhs, fixed, boxes, grounds, goal=None, tighten=0):
                       "widen `search` if a root may lie outside it"), None
     return res[1], res[2], cert
 
+
+def root_built(law_rhs, fixed, boxes, grounds, window, budget=64):
+    """Does ZTL's KERNEL build a root of the implicit law in the window, for every value of the box? (2026-11-13.)
+    zimplicit.search_exists proposes a cover of the parameter box with a bracket per part (the search, outside the
+    kernel); zimplicit.check_exists checks it with the kernel's own readings by the rule of lean/ZRootPar (par_root /
+    tree_root, zero axioms): a strict sign change at the bracket's ends and the slope in the unknown bounded away from
+    zero. The enclosure (`implicit` above) says "every root is in the range"; this says "a root is there".
+    -> (True, how) | (False, why) | (None, why) when this ZTL has no check_exists (an older clone)."""
+    import ast
+    import zimplicit
+    from znumjudge import _parse_arith
+    if not hasattr(zimplicit, "check_exists"):
+        return None, "this ZTL's kernel has no existence check (zimplicit.check_exists, ZTL after 2026-11-13)"
+    call = ast.parse(law_rhs, mode="eval").body
+    ph = call.args[0].id
+    lo, hi = (F(ast.unparse(a).replace(" ", "")) for a in call.args[2:4])
+    qs = parse_quantities(sheet(fixed, boxes, [ph], grounds))[0]
+    try:
+        g = _parse_arith(ast.unparse(call.args[1]), qs)
+    except Exception as e:                  # ZTL's reader refused the law: said, not crashed
+        return False, f"ZTL could not read the implicit law: {e}"
+    from .stopflag import interruptible
+    with interruptible():
+        cert = zimplicit.search_exists(g, ph, qs, [str(lo), str(hi)], [str(window[0]), str(window[1])], budget=budget)
+    if cert is None:
+        return False, "the search built no existence certificate for ZTL's kernel (its reading has no slope here, " \
+                      "or keeps no strict sign)"
+    res = zimplicit.check_exists(g, ph, qs, cert)
+    if not res[0]:
+        return False, f"ZTL's kernel refused the existence certificate: {res[1]}"
+    return True, res[2].replace(ph, ph[len("_root_"):] if ph.startswith("_root_") else ph)
+

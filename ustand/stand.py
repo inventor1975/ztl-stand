@@ -1692,6 +1692,22 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
                 ex_level, ex_how = C.implicit_exists(text, ex_box, got_i[0], got_i[1])
             except (C.CheckError, ZeroDivisionError, ValueError) as e:
                 ex_level, ex_how = C.NOT_SHOWN, f"the existence of its root could not be read: {e}"
+            # THE KERNEL BUILDS IT TOO (2026-11-13): ZTL's zimplicit.check_exists checks a brought cover by the same
+            # rule (lean/ZRootPar). Either route that BUILDS the root earns the atom, and the note says which did: the
+            # kernel cannot differentiate min / max (the HVAC curves), the checker can; where both read the law, the
+            # root is built twice, by two implementations.
+            try:
+                k_built, k_how = J.root_built(text, fixed, boxes, grounds, (got_i[0], got_i[1]))
+            except Exception as e:                           # noqa: BLE001 — a search that failed built nothing
+                k_built, k_how = False, f"ZTL's kernel could not be asked: {e}"
+            if k_built and ex_level == C.OPERATIONAL:
+                ex_how = f"{k_how} — ZTL's kernel; the checker built it by its own route too ({ex_how})"
+            elif k_built:
+                ex_level, ex_how = C.OPERATIONAL, f"{k_how} — ZTL's kernel; the checker alone did not build it ({ex_how})"
+            elif ex_level == C.OPERATIONAL:
+                ex_how = f"{ex_how} — the checker's route; ZTL's kernel did not build it ({k_how})"
+            else:
+                ex_how = f"{ex_how}; ZTL's kernel: {k_how}"
             ex_disp, ex_dirty = _root_claim(ex_level)
             if ex_disp != "EARNED":
                 impl_fail = (f"{n}: ZTL's judge on \"a root in the search window, and every root there in its range — "
@@ -2349,7 +2365,8 @@ ROOT_ATOMS = {"in_window": "a root of the law exists in the search window (built
 
 def _root_claim(level):
     """What ZTL's judge says of the claim about an implicit quantity, from the marks the checks earned: `in_window`
-    is T only when the checker BUILT a root (operational), `ok_in` is T by the kernel's enclosure certificate, and
+    is T only when a root was BUILT (operational: by ZTL's kernel, zimplicit.check_exists, or by the checker's own
+    route), `ok_in` is T by the kernel's enclosure certificate, and
     nobody looked outside the window. -> (disposition, the dirty atoms in words). (MEASURED 2026-11-12 on the judge:
     built -> EARNED; not built -> OPEN, dirty in_window, outside, ok_out.)"""
     import ztljudge
