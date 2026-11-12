@@ -66,11 +66,15 @@ BASE = {
     "oz": (F("0.45359237") / 16, _d(kg=1)), "ozf": (F("0.45359237") / 16 * F("9.80665"), _d(m=1, kg=1, s=-2)),
     "gal": (231 * F("0.0254") ** 3, _d(m=3)), "gpm": (231 * F("0.0254") ** 3 / 60, _d(m=3, s=-1)),
     "daN": (F(10), _d(m=1, kg=1, s=-2)),       # the decanewton of lashing tables (blind test 6, c09)
+    # 2026-11-12 (the PLE cooling-tower task): temperature DIFFERENCES in the two common scales, and the Rankine.
+    # The ABSOLUTE scales degC / degF have an offset, so they are not factors: ustand/temperature.py translates a
+    # brick that writes them into K before the stand reads it; here they are refused inside any unit expression.
+    "dC": (F(1), _d(K=1)), "dF": (F(5, 9), _d(K=1)), "degR": (F(5, 9), _d(K=1)),
     **{c: (F(1), _d(**{c: 1})) for c in CURRENCIES},
 }
 PREFIX = {"p": F(1, 10**12), "n": F(1, 10**9), "u": F(1, 10**6), "m": F(1, 1000), "c": F(1, 100),
           "k": F(1000), "M": F(10**6), "G": F(10**9)}
-NO_PREFIX = {"", "1", "%", "ppm", "dB", "dBA", "rad", "min", "day", "h", "rpm", "year", "yr", "deg",
+NO_PREFIX = {"dC", "dF", "degR", "", "1", "%", "ppm", "dB", "dBA", "rad", "min", "day", "h", "rpm", "year", "yr", "deg",
              "in", "ft", "lb", "lbf", "ksi", "oz", "ozf", "gal", "gpm", "daN"}
 CURRENCY_PREFIX = {"k", "M"}          # J7: kEUR, MUSD — and no other (mEUR would be a typo)
 NAME = re.compile(r"[A-Za-z%]+|1")
@@ -82,6 +86,10 @@ class UnitError(ValueError):
 
 
 def _name(name):
+    if name in ("degC", "degF"):
+        raise UnitError(f"unit {name!r} is an absolute scale with an offset: allowed only as the WHOLE unit of a "
+                        "quantity or a catalog field (ustand/temperature.py converts it to K); a difference or a rate "
+                        "is written with dC / dF")
     if name in BASE:
         return BASE[name]
     if len(name) > 1 and name[0] in PREFIX and name[1:] in BASE and name[1:] not in NO_PREFIX and \

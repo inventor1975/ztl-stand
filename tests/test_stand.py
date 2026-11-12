@@ -4362,5 +4362,77 @@ check("--prove on a 'smallest' find (blind7 c10b): the PROVED RANGE carries its 
       and "every eta in" in str(_p6.get("proof_covers")) and (_p6.get("decision") or {}).get("verdict") == "REFUTED",
       json.dumps({k: _p6.get(k) for k in ("verdict", "proof_covers")}, ensure_ascii=False)[:300])
 
+# ABSOLUTE TEMPERATURE SCALES degC / degF (2026-11-12, ustand/temperature.py): translated to K exactly before the
+# stand reads the brick; the converted values come back beside the stand's own (in K)
+from ustand import temperature as _TS        # noqa: E402
+_conv_ok = (_TS.to_k(32, "degF") == F(27315, 100) == _TS.to_k(0, "degC") and _TS.to_k(212, "degF") == F(37315, 100)
+            and _TS.to_k(-40, "degF") == _TS.to_k(-40, "degC") and _TS.from_k(_TS.to_k(F(781, 10), "degF"), "degF") == F(781, 10)
+            and U.parse("dF") == (F(5, 9), U.parse("K")[1]) and U.parse("W/dF")[0] == F(9, 5))
+try:
+    U.parse("degF")
+    _deg_refused = False
+except U.UnitError:
+    _deg_refused = True
+check("temperature: 32 F = 0 C = 273.15 K, 212 F = 373.15 K, -40 F = -40 C exactly; dF = 5/9 K; degF alone is no "
+      "factor (refused inside a unit expression)", _conv_ok and _deg_refused)
+
+
+def _tw(unit_t, lo, hi, a, unit_a, bound):
+    return {"stand": "ztl-stand/1",
+            "quantities": {"Twb": {"role": "given", "range": [lo, hi], "unit": unit_t, "ground": "climate"},
+                           "A": {"role": "given", "value": a, "unit": unit_a, "ground": "tower"},
+                           "CWS": {"role": "derived", "unit": unit_t}},
+            "laws": [{"zfl": "CWS == Twb + A", "source": "approach"}],
+            "requirements": [{"quantity": "CWS", "op": "<=", "value": bound, "why": "chiller limit"}]}
+
+
+def _ex(v):
+    return F(str(v).split(" (", 1)[0])
+
+
+_f1, _c1 = S.run(_tw("degF", "75", "78", "7", "dF", "85")), S.run(_tw("degC", "215/9", "230/9", "35/9", "dC", "265/9"))
+_f2 = S.run(_tw("degF", "75", "78", "7", "dF", "84"))
+check("temperature: a degF brick EARNS 82..85 F (written back in F) and the SAME problem in degC gives the same "
+      "kelvins exactly (each scale checks the other); at <= 84 F REFUTED at Twb = 78 F, overshoot 1 F (a difference)",
+      _f1["verdict"] == _c1["verdict"] == "EARNED"
+      and [_ex(x) for x in _f1["guaranteed"]["CWS"]] == [_ex(x) for x in _c1["guaranteed"]["CWS"]]
+      and _f1["in_written_scales"]["guaranteed"]["CWS"] == ["82", "85"]
+      and _f2["verdict"] == "REFUTED" and _f2["in_written_scales"]["its_violating_point"] == {"Twb": "78"}
+      and _f2["in_written_scales"]["overshoot"] == "1",
+      json.dumps([_f1.get("in_written_scales"), _f2.get("in_written_scales")])[:300])
+_bad = [S.run(json.loads(json.dumps(_tw("degF", "75", "78", "7", "dF", "85")).replace("Twb + A", "Twb + 7"))),
+        S.run(json.loads(json.dumps(_tw("degF", "75", "78", "7", "dF", "85")).replace(
+            '"value": "7", "unit": "dF"', '"value": "7", "tolerance": "1/10", "unit": "degF"'))),
+        S.run(_tw("degF", "75", "78", "7", "C", "85")), S.run(_tw("degF", "75", "78", "7", "degF/h", "85"))]
+check("temperature: refused aloud — a number added to an absolute temperature in a law, a relative tolerance on one, "
+      "the legacy difference unit C beside degF, and degF inside a compound unit",
+      all(r["verdict"] == "BRICK ERROR" and "TemperatureError" in r["why"] for r in _bad),
+      json.dumps([r.get("why") for r in _bad])[:400])
+_cat = {"stand": "ztl-stand/1",
+        "quantities": {"Twb": {"role": "given", "range": ["75", "78"], "unit": "degF", "ground": "climate"},
+                       "A": {"role": "given", "value": "7", "unit": "dF", "ground": "tower"},
+                       "CWS": {"role": "derived", "unit": "degF"}},
+        "slots": {"CH": {"from": ["chillers"]}},
+        "catalog": {"chillers": {"ground": "submittal", "fields": {"Tmax": {"unit": "degF"}, "price": {"unit": "USD"}},
+                                 "items": [{"name": "C84", "Tmax": "84", "price": "100"},
+                                           {"name": "C86", "Tmax": "86", "price": "120"}]}},
+        "laws": [{"zfl": "CWS == Twb + A", "source": "approach"}],
+        "requirements": [{"quantity": "CWS", "op": "<=", "value": "CH.Tmax", "why": "the machine's limit"}],
+        "objective": {"minimize": "CH.price", "unit": "USD"}}
+_rc = S.run(_cat)
+check("temperature: a catalog field in degF bounds a requirement — the 84 F machine is refuted, the 86 F one chosen",
+      _rc["verdict"] == "EARNED" and "C86" in json.dumps(_rc.get("design")), json.dumps(_rc)[:300])
+_save = _TS.SCALES["degF"]
+_TS.SCALES["degF"] = (F(5, 9), F(0))           # PLANTED: the offset forgotten (degF read as a factor)
+try:
+    _pf = S.run(_tw("degF", "75", "78", "7", "dF", "85"))
+finally:
+    _TS.SCALES["degF"] = _save
+check("temperature: PLANTED degF without its offset — the cross-check against degC SEES it (different kelvins)",
+      [_ex(x) for x in (_pf.get("guaranteed") or {}).get("CWS", ["0", "0"])] != [_ex(x) for x in _c1["guaranteed"]["CWS"]])
+_plain = _tw("K", "297", "299", "4", "K", "302")
+check("temperature: a brick without an absolute scale is not touched (the same object back, no in_written_scales)",
+      _TS.translate(_plain)[0] is _plain and "in_written_scales" not in S.run(_plain))
+
 print(f"ztl-stand: {ok} ok, {fail} failed")
 print("USTAND GREEN" if fail == 0 else "USTAND RED")

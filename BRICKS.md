@@ -302,9 +302,9 @@ quantity.
     `rpm` is a revolution per minute (1/60 s^-1); `oz` the avoirdupois ounce (1/16 lb), `ozf` its force, `gal`
     the US liquid gallon (231 in^3), `gpm` a gallon per minute — all exact by definition.
   - `in ft lb lbf psi ksi` (since 2026-10-12, real round 3) are exact by definition: 0.0254 m, 0.3048 m,
-    0.45359237 kg, that pound under 9.80665 m/s^2, lbf/in^2 (6894.757... Pa), 1000 psi. Not there: **degF** (an
-    offset scale — write the temperature in C or K) and **dBm** (a logarithm — write levels in dB and judge
-    differences, as a link budget does).
+    0.45359237 kg, that pound under 9.80665 m/s^2, lbf/in^2 (6894.757... Pa), 1000 psi. Not there: **dBm** (a
+    logarithm — write levels in dB and judge differences, as a link budget does). Absolute temperatures in
+    **degF / degC**: see the bullet on temperatures below (since 2026-11-12).
   - `year` (or `yr`) is the **Julian year, 365.25 days**. A life counted as 365 x 24 = 8760 hours a year is not
     that: write it in hours (`262800 h` for 30 such years), or the 0.07 % difference decides a tight bound;
   - combined with `*`, `/`, powers and parentheses: `C/W`, `1/C`, `m*s^-2`, `J/(kg*K)`, `m^3/h`, `cm^4`. A power
@@ -321,6 +321,22 @@ quantity.
     its own unit and let the stand scale it.
 - `C` (Celsius) is treated as a temperature difference with no offset. That is fine for sums and differences. A law
   that multiplies absolute temperatures needs `K`.
+- **Absolute temperatures: `degC` and `degF`** (since 2026-11-12, `ustand/temperature.py`). A quantity or a catalog
+  field written in `degC` or `degF` is converted to K EXACTLY before the stand reads the brick
+  (K = C + 273.15, K = (F + 459.67) x 5/9); the output keeps the stand's values in K (labelled K) and adds
+  `in_written_scales` — the guaranteed range, the violating point and the value there back in the written scale, and
+  the overshoot as a difference. Differences and rates use `dC` (1 K) and `dF` (5/9 K); `degR` is the Rankine.
+  ```json
+  "Twb": {"role": "given", "range": ["75", "78"], "unit": "degF"},
+  "A":   {"role": "given", "value": "7", "unit": "dF"},
+  "CWS": {"role": "derived", "unit": "degF"}          // CWS == Twb + A; CWS <= 85 (deg F)
+  ```
+  Refused, each with its reason, because each would be a silent wrong answer: `degC`/`degF` inside a compound unit
+  (`degF/h` — write `dF/h`); a relative `tolerance` on an absolute temperature (+-1 % of 78 F is not +-1 % of
+  298.7 K — write a range); a NUMBER added to an absolute temperature in a law, a define or a bound (`Twb + 7`: the
+  7 would be 7 K — write the difference as a given quantity in `dF`); the legacy `C` beside `degC`/`degF` in one
+  brick. Version 1 translates plain bricks (with catalog, modes and find); components, stocks and networks stay
+  in K.
 
 ### Correlated tolerances (one value shared by several parts)
 

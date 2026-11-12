@@ -1136,6 +1136,26 @@ def _run_stocks(raw) -> dict:
 
 
 def run(b, conflicts=True) -> dict:
+    """The entry. Absolute temperature scales (degC, degF) are translated to K first, exactly, and the output gets
+    the converted values back beside the stand's own (ustand/temperature.py); everything else: _run_entry."""
+    if _DEPTH[0] == 0:
+        from . import temperature as TS
+        try:
+            raw = b if isinstance(b, dict) else json.load(open(b, encoding="utf-8"))
+        except (FileNotFoundError, json.JSONDecodeError, OSError):
+            return _run_entry(b, conflicts)
+        if TS.uses_scales(raw):
+            try:
+                kb, info = TS.translate(raw)
+            except (TS.TemperatureError, ValueError, ZeroDivisionError) as e:
+                return {"verdict": "BRICK ERROR", "why": f"TemperatureError: {e}"}
+            except Exception:                              # never a traceback from the pre-pass: the stand judges
+                return _run_entry(b, conflicts)
+            return TS.annotate(_run_entry(kb, conflicts), info)
+    return _run_entry(b, conflicts)
+
+
+def _run_entry(b, conflicts=True) -> dict:
     """Never a traceback (the blind test of 2026-10-10 met eight). A malformed brick is a BRICK
     ERROR with its reason; anything else that escapes is a STAND ERROR — the stand's own bug,
     named as such, never blamed on the brick and never a verdict about the design."""
