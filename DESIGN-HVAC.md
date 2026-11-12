@@ -126,7 +126,11 @@ range, air flow ratio, the reformulated chiller) are refuted normally.
   approaches.
 - The evaporation LOSS FACTOR (documented in percent per K) is multiplied as entered — nothing divides it by 100,
   while the drift percent beside it is divided. With the field's default 0.2 the "evaporation" of a 5.5 K range
-  is 1.1 times the whole water flow.
+  is 1.1 times the whole water flow. Checked by Logik1 in idd/Energy+.idd.in of the same tag (downloaded 2026-11-12):
+  the field is `\units percent/K`, "Typical values are from 0.15 to 0.27 [%/K]", `\default 0.2`; the only use is
+  CondenserLoopTowers.cc:6063 (`UserEvapLossFactor * (Tin - Tout) * (m / rho)`), and EnergyPlus's unit tests assert no
+  LossFactor evaporation. So the port is faithful to the code, and the code disagrees with its own field definition by a
+  factor of 100 — a brick that means %/K must divide by 100 itself. (Not run in EnergyPlus.)
 - checkModelBounds computes capped values of the range and of the approach and never uses them; the water flow
   ratio is capped for CoolTools only.
 - In calculateVariableSpeedTower the outlet at full fan is compared with the setpoint by `>` and then by `<`: at

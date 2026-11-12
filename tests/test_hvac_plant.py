@@ -22,7 +22,9 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from ustand import hvac as H, stand as S          # noqa: E402
 from ustand.hvac import curves as CV, towers as TW, chillers as CH   # noqa: E402
 
-EP = os.environ.get("EP_ROOT", "/media/vitaly/SSD_1000GB/Projects/ext-data/energyplus/v26.2.0")
+_HV = os.path.dirname(os.path.abspath(CV.__file__))       # the EnergyPlus files shipped beside the port
+DS = os.environ.get("EP_DATASETS", os.path.join(_HV, "datasets"))
+SRC = os.environ.get("EP_SOURCES", os.path.join(_HV, "sources"))
 FAST = "--fast" in sys.argv
 CHECKS, FAILS = 0, []
 K = 273.15
@@ -178,7 +180,7 @@ def solve_root_cpp(Eps, MaxIte, f, X_0, X_1):
 
 
 # =============================================================================== layer 3: variable-speed towers
-_cc = open(os.path.join(EP, "src/EnergyPlus/CondenserLoopTowers.cc"), encoding="utf-8", errors="replace").read()
+_cc = open(os.path.join(SRC, "CondenserLoopTowers.cc"), encoding="utf-8", errors="replace").read()
 
 
 def coeffs_from_cpp(start, end):
@@ -369,7 +371,7 @@ check(set(_user) == {"UserCT", "UserYC"} and _user["UserYC"].get("lg_max") == "7
       f"limits (wet bulb capped; water flow ratio capped for CoolTools only) at 1600 points (worst {worst:.1e})")
 
 # EnergyPlus's OWN dataset states the two built-in models as user-defined objects (datasets/PerfCurves.idf)
-_ds = CV.curves_from_idf(open(os.path.join(EP, "datasets/PerfCurves.idf"), encoding="latin-1").read())
+_ds = CV.curves_from_idf(open(os.path.join(DS, "PerfCurves.idf"), encoding="latin-1").read())
 _dct, _dyc = _ds["CoolTools CrossFlow Default Tower Model"], _ds["YorkCalc Default Tower Model"]
 rnd = random.Random(6)
 w_ct = w_yc_in = w_yc_out = 0.0
@@ -844,7 +846,7 @@ def ev_law(text, curves, env, trees):
     return H._ev(tree[1], e)
 
 
-_chillers_idf = open(os.path.join(EP, "datasets/Chillers.idf"), encoding="latin-1").read()
+_chillers_idf = open(os.path.join(DS, "Chillers.idf"), encoding="latin-1").read()
 _objs = CV.idf_objects(_chillers_idf)
 EIR_NAMES = [f[0] for c, f in _objs if c.lower() == "chiller:electric:eir"]
 REF_NAMES = [f[0] for c, f in _objs if c.lower() == "chiller:electric:reformulatedeir"]
