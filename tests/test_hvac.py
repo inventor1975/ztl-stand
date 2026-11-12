@@ -154,7 +154,7 @@ check(w1 > 1e-6 and w2 > 1e-6, f"PLANTED a changed coefficient ({w1:.1e}) and a 
 # ================================================================================ layer 2: performance curves
 from ustand.hvac import curves as CV      # noqa: E402
 import random                              # noqa: E402
-DS = os.environ.get("EP_DATASETS", "/media/vitaly/SSD_1000GB/Projects/ext-data/energyplus/v26.2.0/datasets")
+DS = os.environ.get("EP_DATASETS", os.path.join(os.path.dirname(os.path.abspath(CV.__file__)), "datasets"))
 
 
 def direct(spec, *v):
