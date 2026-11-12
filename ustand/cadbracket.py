@@ -5,7 +5,8 @@ cadbracket — a PROVED two-sided bracket on a solid part's compliance, from its
     python3 -m ustand.cadbracket part.fem [--subcase N] [--d-max D] [--d-min D] [--E-range LO:HI] [--E-ground credit]
 
   LOWER: ustand.tetfea (minimum potential energy; P1 on the deck's tets; the bound evaluated with every rounding
-         bounded) — C >= f(v)^2 / a(v, v).
+         bounded) — C >= f(v)^2 / a(v, v). With --lower p2 (2026-11-12): ustand.tetfea2, v QUADRATIC on the same tets,
+         against the upper side's own traction (tetfea2.traction_flux); the P1 bound is reported beside it.
   UPPER: ustand.equil.choose (the Alfeld stress, hybridized: per-tet KKT + an SPD trace system, AMG + CG) CHOOSES an
          equilibrated field; ustand.equil.finish makes it EXACTLY admissible (exact fluxes per face, the forest push);
          ustand.alfeld.energy_upper_ev bounds its compliance energy (binary64, every rounding carried) — C <= ||tau||^2.
@@ -25,7 +26,7 @@ import time
 
 import numpy as np
 
-from . import tetfea as TF, tetmesh as TM, equil as EQ, alfeld as AL
+from . import tetfea as TF, tetfea2 as T2, tetmesh as TM, equil as EQ, alfeld as AL
 
 
 def _trim():
@@ -39,12 +40,12 @@ def _trim():
 
 
 def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, dump_g=None, dump_eta=None,
-            smoother="jacobi"):
+            smoother="jacobi", lower="p1", lower_tol=1e-4):
     from fractions import Fraction as Fr
     t0 = time.time()
     sha = hashlib.sha256(open(path, "rb").read()).hexdigest()
     d = TF.read_deck(path)
-    lo = TF.solve_cases(d, [subcase], tol=1e-4, log=lambda s: None, return_u=dump_eta is not None)[0]
+    lo = TF.solve_cases(d, [subcase], tol=lower_tol, log=lambda s: None, return_u=dump_eta is not None)[0]
     log(f"lower (2a): C >= {lo['compliance_lower_proved']:.6f}; {time.time() - t0:.0f} s")
     _trim()
     ids = sorted(d["grids"])
@@ -56,27 +57,27 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
     fixed = {idx[n] for ind, deps in d["rbe2"] for n in deps if d["spc"].get(ind, "").startswith("123")}
     Fv, Mv = tuple(lo["F"]), tuple(lo["M"])
     trc = d.get("traction")
-    if trc is not None:
-        # a REFINED deck (ustand.refine): the traction itself is given (the coarse deck's, linear per coarse face);
-        # tetfea already refused any other load on it
-        kind = TM.classify(F, own, fixed, {idx[n] for n in trc["nodal"]})
-        tr = {idx[n]: np.asarray(v, float) for n, v in trc["nodal"].items()}
-    else:
-        ref, _, rn = d["rbe3"][0]
-        kind = TM.classify(F, own, fixed, {idx[n] for n in rn})
-        xyz = {n: list(X[idx[n]]) for n in rn + [ref]}
-        fl = TF.rbe3_loads(xyz, ref, rn, Fv, Mv)
-        tr, res, lost = TM.rbe3_traction(X, F, kind, {idx[n]: fl[i] for i, n in enumerate(rn)})
-        if lost:
-            raise ValueError(f"{len(lost)} RBE3 nodal forces on nodes of no loaded face: the load is not a traction "
-                             f"here")
-    A, B, C = X[F[:, 0]], X[F[:, 1]], X[F[:, 2]]
-    n2 = np.linalg.norm(np.cross(B - A, C - A), axis=1)
-    q = np.zeros((len(F), 3, 3))
-    for fid in np.where(kind == 2)[0]:
-        for p_ in range(3):
-            q[fid, p_] = tr[int(F[fid, p_])] * n2[fid]
+    # the traction (a refined deck: the coarse deck's, given at the fine nodes — tetfea already refused any other
+    # load on it; a coarse deck: M_s t = f_RBE3) as the flux q — ONE definition for the upper and the P2 lower side
+    kind, q = T2.traction_flux(d, X, F, own, idx, fixed, Fv, Mv)
     E, nu = d["mat"][0], d["mat"][1]
+    p2 = None
+    if lower == "p2":
+        # the P2 LOWER side (2026-11-12, research/cad/PLAN-level2.md "A P2 lower side"): v quadratic on the same tets,
+        # working against THIS q (the upper side's traction); the P1 bound above is kept for comparison
+        ts = time.time()
+        r2 = T2.solve_case2(d, subcase, q=q, tol=lower_tol, log=lambda m: log(m))
+        p2 = {k_: r2[k_] for k_ in ("dof", "dof_free", "midpoints", "nnz", "cg_iterations", "residual",
+                                     "compliance_float", "f_v_exact", "a_vv_up")}
+        p2["seconds"] = round(time.time() - ts, 1)
+        p2["compliance_lower_proved"] = r2["compliance_lower_proved"]
+        p2["p1_lower"] = lo["compliance_lower_proved"]
+        del r2
+        _trim()
+        log(f"lower (P2): C >= {p2['compliance_lower_proved']:.6f} (P1 {lo['compliance_lower_proved']:.6f}), "
+            f"{p2['dof']} dof, {p2['cg_iterations']} AMG-CG; {time.time() - t0:.0f} s")
+    elif lower != "p1":
+        raise ValueError(f"lower must be 'p1' or 'p2', not {lower!r}")
     # level 3b: a prestress in the load (subcase = {"F", "M", "prestress": {"omega", "sigma"}}). The upper side keeps
     # tau' admissible for the traction alone and adds p = sig_e chi_omega analytically (equil: "level 3b"); the choice
     # minimises ||tau' + p||^2 through the linear term lin.
@@ -154,7 +155,7 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
             pre_out["sigma_e"] = [[float(x) for x in row] for row in pre["sigma"]]
         log(f"prestress: {int(om.sum())} tets, exact extra {float(extra):.6f}; upper {up:.6f}")
     Fn, Mn = math.sqrt(sum(x * x for x in Fv)), math.sqrt(sum(x * x for x in Mv))
-    c_lo, c_hi = lo["compliance_lower_proved"], up
+    c_lo, c_hi = (lo["compliance_lower_proved"] if p2 is None else p2["compliance_lower_proved"]), up
     w = Fn if Fn and not Mn else (Mn if Mn and not Fn else None)
     U_ = 2.0 ** -53
     if pre is not None:
@@ -169,6 +170,11 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
             "rests_on": [f"the deck {path} (sha256 {sha[:16]}…): its tets ARE the part — EARNED IF STABLE on it",
                          "linear isotropic elasticity", "supports: RBE2 spiders to SPC'd nodes (u = 0)",
                          "the load: the traction whose consistent nodal loads are the RBE3 distribution"]}
+    out["lower_side"] = lower
+    if p2 is not None:
+        out["p2"] = p2
+        out["rests_on"].append("the lower side: v quadratic (P2) on the same tets, against the traction t_q = the "
+                               "upper side's flux q (linear per loaded face)")
     if trc is not None:
         rf = d.get("refined_from", {})
         out["refined_from"] = {k: v for k, v in rf.items() if k != "nodal"}
@@ -183,6 +189,9 @@ def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, 
         Gf = np.array([[float(x) for x in row] for row in gs])
         eta, info_eta = eta_indicator(X, T, Gf, per_ev.v, lo["u"], float(E), float(nu), pre=pre, om=om)
         info_eta["gap"] = c_hi - c_lo
+        if p2 is not None:                          # the indicator stays on the P1 field: its identity is the P1 gap
+            info_eta["gap_p1"] = c_hi - lo["compliance_lower_proved"]
+            info_eta["indicator_field"] = "P1 (the hypercircle of the P1 float field; the P2 lower side not used)"
         out["eta"] = info_eta
         if dump_eta == "return":
             out["_eta_array"] = eta
@@ -238,7 +247,7 @@ def _face_data(qd, nf, T, tf, pos, sgn, rows_for=()):
 
 
 def bracket_functionals(path, subcase=1, functionals=(), s_values=None, log=print, cg_tol=1e-8, matfree=None,
-                        zdtype=None, smoother="jacobi", lower_tol=1e-4, planted=None):
+                        zdtype=None, smoother="jacobi", lower_tol=1e-4, planted=None, lower="p1"):
     """LEVEL 3d (2026-11-12): brackets of stress functionals l_p(u) with ONE solve per load and ONE per functional.
     research/cad/PLAN-level3.md, "Level 3d — one solve per load, one per functional".
 
@@ -253,6 +262,8 @@ def bracket_functionals(path, subcase=1, functionals=(), s_values=None, log=prin
         U(s) = energy_upper_ev_g(Ev.rounded(g_f) + Ev.exact(s) Ev.rounded(g_p)) + 2 s X_f + 2 s^2 X_p + s^2 self,
                X_f = sum_omega b_T . g_f,T, X_p = sum_omega b_T . g_p,T, self = sum_omega |T| sig_e : A sig_e (exact);
         (L(s) - U(-s)) / (4 s) <= l_p(u) <= (U(s) - L(-s)) / (4 s), in exact rationals, rounded outward.
+    lower: "p1" (tetfea) or "p2" (tetfea2: v_f, v_p quadratic integer fields, the same combination; f's traction the
+    upper side's flux q, asserted to be the same array).
     planted (tests only): "gp_traction" — g_p chosen and finished with the traction left on; "drop_xf" — X_f = 0;
     "vp_sign" — v = v_f - s v_p."""
     from fractions import Fraction as Fr
@@ -267,13 +278,24 @@ def bracket_functionals(path, subcase=1, functionals=(), s_values=None, log=prin
     if isinstance(subcase, dict) and subcase.get("prestress") is not None:
         raise ValueError("the load f carries no prestress here: the functionals are given separately")
     E, nu = d["mat"][0], d["mat"][1]
-    # ---------------------------------------------------------------- the lower side: one P1 solve per field
-    ctx = TF.setup(d, log=quiet)
-    Lf = TF.case_load(ctx, subcase)
+    # ---------------------------------------------------------------- the lower side: one P1 (or P2) solve per field
+    if lower not in ("p1", "p2"):
+        raise ValueError(f"lower must be 'p1' or 'p2', not {lower!r}")
+    if lower == "p2":
+        # the P2 lower side (ustand.tetfea2): the same combination logic with P2 integer fields; f's traction is the
+        # flux q of tetfea2.traction_flux — the very function (and inputs) the upper side's q comes from below
+        ctx = T2.setup2(d, log=quiet)
+        Lf = T2.case_load2(ctx, subcase)
+        _field, _load, _lower = T2.case_field2, T2.case_load2, T2.lower_bound2
+        fvec = Lf["q"]
+    else:
+        ctx = TF.setup(d, log=quiet)
+        Lf = TF.case_load(ctx, subcase)
+        _field, _load, _lower = TF.case_field, TF.case_load, TF.lower_bound
+        fvec = Lf["fvec"]
     ts = time.time()
-    _, vi_f, res_f = TF.case_field(ctx, Lf["ftot"], tol=lower_tol, log=quiet)
-    fvec = Lf["fvec"]
-    low_f, _, _, _, _ = TF.lower_bound(ctx, vi_f, fvec)
+    _, vi_f, res_f = _field(ctx, Lf["ftot"], tol=lower_tol, log=quiet)
+    low_f, _, _, _, _ = _lower(ctx, vi_f, fvec)
     L_f = _down(low_f)
     log(f"lower field f: {len(res_f)} AMG-CG iterations, C(f) >= {L_f:.6f}; {time.time() - t0:.0f} s")
     timing = {"lower_f": round(time.time() - ts, 1)}
@@ -281,15 +303,15 @@ def bracket_functionals(path, subcase=1, functionals=(), s_values=None, log=prin
     for i, fn in enumerate(functionals):
         pre = {k_: v_ for k_, v_ in fn.items() if k_ in ("sigma", "S0", "S1")}
         pre["omega"] = np.asarray(fn["omega"], bool)
-        Lp = TF.case_load(ctx, {"F": (0.0, 0.0, 0.0), "M": (0.0, 0.0, 0.0), "traction": False, "prestress": pre})
+        Lp = _load(ctx, {"F": (0.0, 0.0, 0.0), "M": (0.0, 0.0, 0.0), "traction": False, "prestress": pre})
         ts = time.time()
-        _, vi_p, res_p = TF.case_field(ctx, Lp["ftot"], tol=lower_tol, log=quiet)
-        low_p, _, _, _, _ = TF.lower_bound(ctx, vi_p, None, pre, pre["omega"], t_scale=0)
+        _, vi_p, res_p = _field(ctx, Lp["ftot"], tol=lower_tol, log=quiet)
+        low_p, _, _, _, _ = _lower(ctx, vi_p, None, pre, pre["omega"], t_scale=0)
         fields.append({"label": fn.get("label", f"functional {i}"), "pre": pre, "om": pre["omega"], "vi_p": vi_p,
                        "L_p": _down(low_p), "cg_lower": len(res_p), "sec_lower": round(time.time() - ts, 1)})
         log(f"lower field p[{fields[-1]['label']}]: {len(res_p)} AMG-CG iterations, C(p) >= {fields[-1]['L_p']:.6f}; "
             f"{time.time() - t0:.0f} s")
-    for key in ("ml", "grads", "P", "vol"):          # the stiffness's AMG is not needed for the evaluations
+    for key in ("ml", "Kf", "grads", "P", "vol"):    # the stiffness's AMG is not needed for the evaluations
         ctx.pop(key, None)
     _trim()
     # ---------------------------------------------------------------- the upper side: one trace solve per field
@@ -301,24 +323,9 @@ def bracket_functionals(path, subcase=1, functionals=(), s_values=None, log=prin
     F, own, lf, tf = TM.faces(T)
     fixed = {idx[n] for ind, deps in d["rbe2"] for n in deps if d["spc"].get(ind, "").startswith("123")}
     trc = d.get("traction")
-    if trc is not None:
-        kind = TM.classify(F, own, fixed, {idx[n] for n in trc["nodal"]})
-        tr = {idx[n]: np.asarray(v, float) for n, v in trc["nodal"].items()}
-    else:
-        ref, _, rn = d["rbe3"][0]
-        kind = TM.classify(F, own, fixed, {idx[n] for n in rn})
-        xyz = {n: list(X[idx[n]]) for n in rn + [ref]}
-        fl = TF.rbe3_loads(xyz, ref, rn, tuple(Lf["F"]), tuple(Lf["M"]))
-        tr, res, lost = TM.rbe3_traction(X, F, kind, {idx[n]: fl[i] for i, n in enumerate(rn)})
-        if lost:
-            raise ValueError(f"{len(lost)} RBE3 nodal forces on nodes of no loaded face: the load is not a traction "
-                             f"here")
-    A_, B_, C_ = X[F[:, 0]], X[F[:, 1]], X[F[:, 2]]
-    n2 = np.linalg.norm(np.cross(B_ - A_, C_ - A_), axis=1)
-    q = np.zeros((len(F), 3, 3))
-    for fid in np.where(kind == 2)[0]:
-        for p_ in range(3):
-            q[fid, p_] = tr[int(F[fid, p_])] * n2[fid]
+    kind, q = T2.traction_flux(d, X, F, own, idx, fixed, tuple(Lf["F"]), tuple(Lf["M"]))
+    if lower == "p2" and not np.array_equal(q, fvec):
+        raise RuntimeError("the P2 lower side's traction is not the upper side's")      # one definition, asserted
     pos, sgn = EQ.slot_maps(T, F, own, tf)
     Pv = X[T]                                       # the exact coordinates rounded once (as energy_upper_ev does)
     mf = (len(T) > 100000) if matfree is None else matfree
@@ -386,13 +393,15 @@ def bracket_functionals(path, subcase=1, functionals=(), s_values=None, log=prin
     def L_at(fd, s):
         m_, den = s.as_integer_ratio()                # den a power of two
         sg = -1 if planted == "vp_sign" else 1
-        N = [a * den + sg * m_ * b for a, b in zip(vi_f, fd["vi_p"])]           # exact: den (v_f + s v_p) 2^S
+        N = [int(a) * den + sg * m_ * int(b) for a, b in zip(vi_f, fd["vi_p"])]  # exact: den (v_f + s v_p) 2^S
         # any integer field zero on the supports is admissible and the bound is homogeneous of degree 0 in v: scale
         # the combination down by 2^e so a_upper_float's integers stay < 2^51 (a large s: s v_p >> v_f)
         e = max(0, (max(abs(x) for x in N) // den).bit_length() - 49)
         dd = den << e
         v = [(x + dd // 2) // dd for x in N]
-        low, W, fv, fp, a_up = TF.lower_bound(ctx, v, fvec, fd["pre"], fd["om"], t_scale=1, p_scale=Fr(s))
+        if lower == "p2":
+            v = np.array(v, dtype=np.int64)
+        low, W, fv, fp, a_up = _lower(ctx, v, fvec, fd["pre"], fd["om"], t_scale=1, p_scale=Fr(s))
         return _down(low)
 
     def U_at(fd, s):
@@ -430,7 +439,7 @@ def bracket_functionals(path, subcase=1, functionals=(), s_values=None, log=prin
              "at_s": extra, "p_alone_compliance": [fd["L_p"], fd["U_p"]], "w_f": w_f, "w_p": w_p,
              "tets": int(fd["om"].sum()), "X_f": float(fd["X_f"]), "X_p": float(fd["X_p"]),
              "self": float(fd["self"]),
-             "cg_iterations": {"lower_p1_amg": fd["cg_lower"], "upper_trace": fd["info_upper"]["cg_iterations"]},
+             "cg_iterations": {f"lower_{lower}_amg": fd["cg_lower"], "upper_trace": fd["info_upper"]["cg_iterations"]},
              "push_bits": fd["info_upper"]["push_bits"],
              "seconds": {"lower_field": fd["sec_lower"], "upper_field": fd["info_upper"]["seconds"],
                          "evaluations": sec_eval}}
@@ -444,7 +453,7 @@ def bracket_functionals(path, subcase=1, functionals=(), s_values=None, log=prin
            "subcase": subcase if not isinstance(subcase, dict) else {k_: v_ for k_, v_ in subcase.items()},
            "F": tuple(Lf["F"]), "M": tuple(Lf["M"]), "tets": int(len(T)), "E": float(E), "nu": float(nu),
            "compliance": [L_f, U_f], "gap": U_f / L_f - 1,
-           "cg_iterations_f": {"lower_p1_amg": len(res_f), "upper_trace": info_f["cg_iterations"]},
+           "cg_iterations_f": {f"lower_{lower}_amg": len(res_f), "upper_trace": info_f["cg_iterations"]},
            "push_bits_f": info_f["push_bits"],
            "seconds_f": {"lower_field": timing["lower_f"], "upper_field": info_f["seconds"]},
            "functionals": out_f, "seconds": round(time.time() - t0, 1),
@@ -454,6 +463,11 @@ def bracket_functionals(path, subcase=1, functionals=(), s_values=None, log=prin
                          if trc is None else "the load: the coarse deck's traction, given at the fine nodes"),
                         "each functional l_p(v) = int_omega eps(v) : sig_e (omega = the selected tets), by "
                         "polarization of C(f + s p) and C(f - s p)"]}
+    out["lower_side"] = lower
+    if lower == "p2":
+        out["lower_p2_dof"] = int(ctx["ndof"])
+        out["rests_on"].append("the lower side: v quadratic (P2) on the same tets, against the traction t_q = the "
+                               "upper side's flux q (linear per loaded face)")
     if planted:
         out["PLANTED"] = planted
     return out
@@ -736,7 +750,15 @@ def main(argv):
                          "2026-11-10, its choice drifts and the exact push inflates the bound (631: 45677 -> 61518; "
                          "40: 31382 -> 44812)")
     ap.add_argument("--dump-g", help="save the float choice g (nt x 36) to this .npy (to profile the finish alone)")
-    ap.add_argument("--dump-eta", help="save the per-tet hypercircle indicator eta^2 (nt) to this .npy (only to CHOOSE a mesh; the bounds are unchanged)")
+    ap.add_argument("--dump-eta", help="save the per-tet hypercircle indicator eta^2 (nt) to this .npy (only to CHOOSE a mesh; the bounds are unchanged). "
+                    "It always uses the P1 float field (also with --lower p2): its identity is the P1 gap")
+    ap.add_argument("--lower", choices=("p1", "p2"), default="p1",
+                    help="the lower side's field: p1 (piecewise linear, default) or p2 (piecewise quadratic on the same "
+                         "tets, ustand.tetfea2; the P1 bound is still computed and reported beside it, except with "
+                         "--functionals)")
+    ap.add_argument("--lower-tol", type=float, default=1e-4,
+                    help="the lower side's AMG-CG relative residual (default 1e-4; any v is admissible: a looser solve "
+                         "only loosens the bound)")
     ap.add_argument("--omega-box", help="level 3b: the region omega = tets with the centroid inside "
                     "'x0,y0,z0,x1,y1,z1'; with --mean-stress adds the prestress load s * l_p to the traction")
     ap.add_argument("--omega-children", action="store_true", help="level 3b/3c on a REFINED deck: omega (box or SCL slab) = the children "
@@ -816,7 +838,7 @@ def main(argv):
         sub["label"] += (f" + {a.prestress_scale} * sigma_{a.scl_kind[0]} of sigma_tt on the SCL slab "
                          f"({int(mask.sum())} tets, |omega| {float(vol):.6f})")
     r = bracket(a.deck, sub, log=lambda s: print(s, file=sys.stderr, flush=True), matfree=mf, zdtype=zd, dump_g=a.dump_g, dump_eta=a.dump_eta,
-                smoother=a.smoother)
+                smoother=a.smoother, lower=a.lower, lower_tol=a.lower_tol)
     if (a.d_max is not None or a.d_min is not None) and r["work_conjugate"]:
         from . import cadstiff as CS
         Er = tuple(float(x) for x in a.E_range.split(":")) if a.E_range else (r["E"], r["E"])
@@ -884,7 +906,7 @@ def _main_functionals(a, ap):
         sv = [[x] for x in vals]
     del dk
     r = bracket_functionals(a.deck, sub, funs, s_values=sv, log=lambda s: print(s, file=sys.stderr, flush=True),
-                            matfree=mf, zdtype=zd, smoother=a.smoother)
+                            matfree=mf, zdtype=zd, smoother=a.smoother, lower=a.lower, lower_tol=a.lower_tol)
     for fo, fn in zip(r["functionals"], funs):
         if "describe" in fn:
             fo["describe"] = fn["describe"]

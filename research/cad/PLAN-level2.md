@@ -360,3 +360,26 @@ straight-sided tets (10 nodes: the vertices and the edge midpoints), not linear.
   rounding on a box under uniform tension with nu = 0 or with matching boundary data); planted — a wrong quadrature
   weight, a midpoint on a fixed face left free, the traction work with the P1 formula — each must turn a check RED
   (the bound exceeding the proved upper bound is the natural alarm).
+
+## The P2 lower side — BUILT (2026-11-12, ustand/tetfea2.py; tests/test_p2.py; MEASURED)
+
+`cadbracket --lower p2` (default stays p1). v quadratic (vertices + edge-midpoint dofs) on the same tets; f(v) against
+the UPPER side's traction (tetfea2.traction_flux: the flux q = t |n2| cadbracket hands to the finish, its exact
+Fractions; per face sum_p q_p . [2, -1, -1 | 8, 8, 4] v / 120, no area), l_p(v) and a(v, v) by exact degree-2 rules,
+a(v, v) bounded with errfloat. The P1 side works against the traction whose consistent loads are f_RBE3 itself — the
+same up to the float solve of M_s t = f (on the box: f(v) equal to the printed digits).
+
+| deck | P1 bracket | gap | P2 bracket | gap | P2 dof | CG | s total |
+|---|---|---|---|---|---|---|---|
+| 631 coarse | [42132.98, 45676.73] | 8.41 % | [45498.68, 45676.73] | 0.39 % | 383 313 | 61 | 123 (P2 lower 23) |
+| 506 coarse | [29942.50, 31837.10] | 6.33 % | [31616.87, 31837.10] | 0.70 % | 551 697 | 88 | 193 (P2 lower 41) |
+
+Peak RSS 2.4 GB (631) / 3.2 GB (506) under the 6G cap. Both P2 lower ends sit under the proved upper ends of the
+refined meshes (631: 45615.14; 506: 31777.74). The upper side is now the wider half of the gap.
+Level 3d on 631 coarse (SCL t1, `--functionals --lower p2`): sigma_m [628.70, 695.89], sigma_b [1009.81, 1146.99] MPa
+— inside round 3 of the P1 adaptive refinement ([589.42, 721.17], [913.17, 1198.02]) and narrower, on the COARSE mesh.
+Boxes (test_p2): n = 3 17.49 % -> 5.42 %, n = 4 11.75 % -> 3.60 %, red n = 3 7.35 % -> 0.96 %, graded n = 4
+10.50 % -> 2.90 %; 3d beam bending width 16.0 -> 1e-5 (the exact field is quadratic: P2 holds it).
+Planted: a too-small weight in a(v, v) -> above the proved upper bound + quadrature + Galerkin + the P1 pin; a free
+support midpoint -> refused by the admissibility check only (the bound does not see it); the P1 traction formula ->
+the 7-point quadrature + Galerkin only (the bound stayed under the upper end).
