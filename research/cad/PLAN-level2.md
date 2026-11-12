@@ -388,7 +388,7 @@ the 7-point quadrature + Galerkin only (the bound stayed under the upper end).
 ## The certified ranking with the P2 lower side: 28 of 28 pairs proved (2026-11-12, measured)
 
 Subcase 1, k/V = |F|² / (C V). Every bracket is ONE run on ONE mesh (no intersection across meshes is needed):
-the coarse deck with `--lower p2` for 454, 348, 202, 494, 631, 40 (139–270 s each), and the indicator round-1 deck
+the coarse deck with `--lower p2` for 454, 348, 202, 494, 631, 40 (123–235 s each), and the indicator round-1 deck
 with `--lower p2` for 456 (269 796 tets, 467 s, 7.3 GB) and 506 (213 367 tets, 408 s, 5.8 GB).
 research/cad/rank_vertical_single/ (RANKING.txt).
 
