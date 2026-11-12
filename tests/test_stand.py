@@ -4396,6 +4396,20 @@ check("units: a demand charge in USD/kW-month over one year comes out exactly 12
       _rb["verdict"] == "EARNED" and [str(x).split(" ")[0] for x in _rb["guaranteed"]["cost"]] == ["20520", "20520"],
       json.dumps(_rb.get("guaranteed")))
 
+# THE CHECKER'S IMPLICIT ROOT AT A POINT (2026-11-12: max/min differentiated, a piece cleared by monotony, a wide
+# enclosure localised — an EnergyPlus UA tower past its bound was OPEN) — its own suite, with planted cases
+import subprocess as _sp_ip      # noqa: E402
+_ip = _sp_ip.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_implicit_point.py")],
+                 capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parent.parent),
+                 env=dict(os.environ, PYTHONPATH=str(pathlib.Path(__file__).resolve().parent.parent)))
+check("checker, an implicit root at a point: d max/min is the hull where the arguments cross; roots with max/min in "
+      "the law come out tight; PLANTED two roots, a root behind a max and a double root are all kept; the stand "
+      "REFUTES a violated bound on such a quantity", "IMPLICIT POINT GREEN" in _ip.stdout,
+      (_ip.stdout + _ip.stderr)[-400:])
+for _ln in _ip.stdout.splitlines():
+    if _ln.startswith("KNOWN DEFECT"):
+        print("  " + _ln)
+
 # READING UNITS AS DOCUMENTS WRITE THEM (2026-11-12, ustand/unitread.py: code, not the model) — its own suite
 import subprocess as _sp_ur      # noqa: E402
 _ur = _sp_ur.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_unitread.py")],

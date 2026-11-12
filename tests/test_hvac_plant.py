@@ -1258,6 +1258,7 @@ def run_stand_proofs():
     jobs = {"vs+": vs_brick(b3(vs_max + 0.3 + K)), "vs-": vs_brick(b3(vs_max - 0.3 + K)),
             "fan+": fan_brick(b3(fan_max * 1.05)), "fan-": fan_brick(b3(fan_max * 0.95)),
             "ua+": ua_brick(b3(ua_e - 0.02 + K), b3(ua_e + 0.02 + K)),
+            "ua-": ua_brick(b3(ua_e - 5 + K), b3(ua_e - 0.05 + K)),
             "wat+": water_brick(repr(round(wat_max * 1.02, 9))), "wat-": water_brick(repr(round(wat_max * 0.98, 9))),
             "eir+": eir_brick(b3(eir_max * 1.02)), "eir-": eir_brick(b3(eir_max * 0.98)),
             "ref+": reform_brick(b3(ref_max * 1.02)), "ref-": reform_brick(b3(ref_max * 0.98)),
@@ -1276,7 +1277,7 @@ def run_stand_proofs():
     def why(k):
         return f"{v(k)}, {str(r[k].get('why'))[:160]}, {r[k].get('guaranteed')}, {r[k].get('its_violating_point')}"
     ok_units = all(str(x.get("units", "")).startswith("checked") for x in r.values())
-    check(ok_units, f"stand: every law of the fifteen tower and chiller bricks passes the unit check "
+    check(ok_units, f"stand: every law of the sixteen tower and chiller bricks passes the unit check "
                     f"({[(k, x.get('units')) for k, x in r.items() if not str(x.get('units', '')).startswith('checked')]})")
     # layer 3
     pt = r["vs-"].get("its_violating_point") or {}
@@ -1295,13 +1296,15 @@ def run_stand_proofs():
           f"stand, layer 3: the air flow ratio that meets a 30 C setpoint (implicit) and the cube-law fan power, wet bulb "
           f"21..23 C — fan power <= {fan_max * 1.05:.1f} W EARNED, <= {fan_max * 0.95:.1f} W REFUTED at its point (by hand "
           f"there {1000 * a_p ** 3:.1f} W) ({why('fan+')} | {why('fan-')})")
-    # NOT here, MEASURED 2026-11-12 (four runs, 641..728 s each): the same brick with a bound the proved range lies
-    # wholly past ('Tout <= 302.35 K', 'Tout <= 301.4 K', 'X <= 304.6 K', a window below) ends OPEN — "proved within [302.4, 302.4] K, which
-    # reaches past the bound, yet no corner violates it": with every given exact and the root not a fraction, the
-    # stand finds no corner witness for this long law. A gap of the stand, not of the port (DESIGN-HVAC.md).
-    check(v("ua+") == "EARNED",
+    # 2026-11-12: the same brick with a window the proved outlet lies wholly ABOVE was OPEN (four runs, 641..728 s:
+    # "no corner violates it") — the checker's root at the witness point stayed 4.5 K wide: max/min had no derivative
+    # and g's interval over a piece is ~60x its values (72 KB of law). Now: max_d/min_d, a piece cleared by monotony,
+    # the enclosure localised (ustand/checker.py; tests/test_implicit_point.py) -> REFUTED at its point.
+    pt = r["ua-"].get("its_violating_point") or {}
+    check(v("ua+") == "EARNED" and v("ua-") == "REFUTED",
           f"stand, layer 3: a UA tower (effectiveness-NTU; the exit wet bulb implicit) — its outlet PROVED within "
-          f"+-0.02 K of EnergyPlus's own iterate {ua_e:.4f} C ({why('ua+')})")
+          f"+-0.02 K of EnergyPlus's own iterate {ua_e:.4f} C, and a window 0.05 K below it REFUTED at a point "
+          f"({why('ua+')} | {why('ua-')})")
     pt = r["wat-"].get("its_violating_point") or {}
     wat_p = water_usage_cpp("MoistTheory", w["P"], w["tdb"], w["W"], w["twb"], w["afr"], vair_w, num(pt["Q"]), w["rho"], 0.0,
                             0, 0, 0, w["vdes"], w["df"], w["cr"])[3] if "Q" in pt else 0.0

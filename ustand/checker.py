@@ -441,6 +441,16 @@ def _ivl(node, rng):
             raise CheckError("the derivative of a branch is not read where the branch is undecided")
         a, b = _ivl(node.args[1], rng), _ivl(node.args[2], rng)
         return min(a[0], b[0]), max(a[1], b[1])
+    if isinstance(node, ast.Call) and node.func.id in ("max_d", "min_d"):
+        a, b = _ivl(node.args[0], rng), _ivl(node.args[1], rng)
+        first = (a[0] > b[1]) if node.func.id == "max_d" else (a[1] < b[0])     # the first argument is taken
+        second = (b[0] > a[1]) if node.func.id == "max_d" else (b[1] < a[0])
+        if first:
+            return _ivl(node.args[2], rng)
+        if second:
+            return _ivl(node.args[3], rng)
+        da, db = _ivl(node.args[2], rng), _ivl(node.args[3], rng)
+        return min(da[0], db[0]), max(da[1], db[1])
     if isinstance(node, ast.Call):
         return _call_iv(node.func.id, [_ivl(a, rng) for a in node.args])
     if isinstance(node, ast.Constant):
@@ -582,6 +592,19 @@ def _compile(node):
             a, b = fa(env), fb(env)
             return ivc.mpf([min(a.a, b.a), max(a.b, b.b)])
         return branch
+    if isinstance(node, ast.Call) and node.func.id in ("max_d", "min_d"):
+        fa_, fb_, fda, fdb = (_compile(x) for x in node.args)
+        is_max = node.func.id == "max_d"
+
+        def dmax(env):
+            a, b = fa_(env), fb_(env)
+            if (a.a > b.b) if is_max else (a.b < b.a):
+                return fda(env)
+            if (b.a > a.b) if is_max else (b.b < a.a):
+                return fdb(env)
+            x, y = fda(env), fdb(env)
+            return ivc.mpf([min(x.a, y.a), max(x.b, y.b)])
+        return dmax
     if isinstance(node, ast.Call) and node.func.id != "implicit":
         name = node.func.id
         fs = [_compile(x) for x in node.args]
@@ -757,9 +780,6 @@ def _implicit_iv(node, rng):
 
 def _implicit_core(node, rng, ph, g, lo, hi, target):
 
-    def rootless(a, b):
-        return _g_excludes(g, ph, rng, a, b)
-
     params = sorted(n for n in _names_of(g) if n != ph and n in rng and rng[n][0] != rng[n][1])
 
     def read_at(x):
@@ -768,6 +788,26 @@ def _implicit_core(node, rng, ph, g, lo, hi, target):
         except (CheckError, ValueError, ZeroDivisionError):
             return 0, None
         return (1 if r.a > 0 else (-1 if r.b < 0 else 0)), float(r.mid)
+
+    def rootless(a, b):
+        if _g_excludes(g, ph, rng, a, b):
+            return True
+        if params:
+            return False
+        # AT A POINT, BY MONOTONY (2026-11-12, the EnergyPlus UA tower: g's interval over [304.6, 304.7] K was
+        # (-75507, 48263) where its values are (-1369, 649) — 72 KB of law, the root's variable in it ~40 times — so
+        # no piece near the root was ever excluded, the enclosure stayed 4.5 K wide and a violated bound came out
+        # OPEN). If dg/dq keeps one strict sign on [a, b], g is strictly monotone there (a branch undecided or a
+        # pole: no derivative is read, no claim), and the sign of g at ONE end, read exactly at a point, decides:
+        # rising and g(a) > 0, or falling and g(a) < 0 -> no root; likewise at b.
+        try:
+            s = _sgn(_dg(g, ph), dict(rng, **{ph: (a, b)}))
+        except CheckError:
+            return False
+        if s not in (1, -1):
+            return False
+        sa, sb = read_at(a)[0], read_at(b)[0]
+        return (s == 1 and (sa == 1 or sb == -1)) or (s == -1 and (sa == -1 or sb == 1))
 
     def one_root(a, b):
         """At a POINT: [a, b] holds exactly one root when dg/dq keeps one strict sign there."""
@@ -860,10 +900,56 @@ def _implicit_core(node, rng, ph, g, lo, hi, target):
     def none_left():
         return CheckError(f"the implicit law of {ph[len('_root_'):]} has no root in [{lo}, {hi}] here")
 
+    def localise(live):
+        """AT A POINT, when pruning crept in from the ends and stopped wide (2026-11-12, the UA tower: 48 levels moved
+        each end ~0.07 K, the enclosure stayed [302.06, 306.52] K around a root at 304.668): bisect by the EXACT
+        signs of g at points down to a piece where dg/dq keeps one strict sign (one root there), then CLEAR the rest
+        of the enclosure piece by piece (exclusion or monotony). Every piece cleared -> that one piece, for the secant
+        steps; one not cleared (another root, a pole, a branch undecided) -> None: the wide enclosure stands."""
+        a, b = live[0][0], live[-1][1]
+        sa, sb = read_at(a)[0], read_at(b)[0]
+        if not (sa and sb and sa != sb):
+            return None
+        for _ in range(60):
+            if one_root(a, b):
+                break
+            m = (a + b) / 2
+            sm = read_at(m)[0]
+            if sm == 0:
+                return None
+            if sm == sa:
+                a = m
+            else:
+                b = m
+        else:
+            return None
+        budget = [4000]
+
+        def clear(x, y, depth):
+            if x >= y:
+                return True
+            budget[0] -= 1
+            if budget[0] < 0:
+                return False
+            if rootless(x, y):
+                return True
+            if depth == 0:
+                return False
+            m = (x + y) / 2
+            return clear(x, m, depth - 1) and clear(m, y, depth - 1)
+        for (x, y) in live:
+            if not (clear(x, min(y, a), 40) and clear(max(x, b), y, 40)):
+                return None
+        return [(a, b)]
+
     if not params:
         live = prune(live, IMPLICIT_DEPTH)
         if not live:
             raise none_left()
+        if live[-1][1] - live[0][0] > target:
+            one = localise(live)
+            if one is not None:
+                live = prune(one, IMPLICIT_DEPTH)
         return live[0][0], live[-1][1]
     # over a BOX: a coarse enclosure first, then the corners; the fine pruning only when the corners
     # cannot be used (MEASURED 2026-10-10: the pump's box enclosure took 13 s at full depth, and the
@@ -1164,9 +1250,17 @@ def _d(node, x):
         if name in ("ifpos", "ifpos_d"):
             return _call("ifpos_d", args[0], _d(args[1], x), _d(args[2], x))
         if name in ("min", "max"):
-            if x in _names_of(node):
-                raise CheckError(f"{name} has no derivative where its arguments cross")
-            return _c(0)
+            if x not in _names_of(node):
+                return _c(0)
+            if len(args) != 2:
+                raise CheckError(f"{name} of {len(args)} arguments has no derivative here")
+            # max(a, b)' = a' where a > b over the box, b' where b > a, and where they CROSS the hull of a' and b'
+            # (the Clarke gradient: max/min of Lipschitz functions are Lipschitz, and Lebourg's mean value theorem
+            # gives g(q2) - g(q1) in hull(g')*(q2 - q1) — so a strict sign of the hull still means strictly
+            # monotone, and the mean-value forms stay sound). 2026-11-12: every EnergyPlus template has max(Tc, 0)
+            # or a capacity ratio min(Ca, Cw)/max(Ca, Cw); with "no derivative" a UA tower's root at a point was
+            # never secant-refined, its enclosure stayed 4.5 K wide and a violated bound came out OPEN.
+            return _call(name + "_d", args[0], args[1], _d(args[0], x), _d(args[1], x))
         if name == "pow":
             u, v = args
             du, dv = _d(u, x), _d(v, x)
