@@ -300,7 +300,7 @@ quantity.
 - **Prefixes scale values to SI**:
   - prefixes: `p n u m c k M G`;
   - units: `V A ohm W F H Hz s m g K C J N Pa ppm % h min day week month quarter year L mol t Ah Wh bar rpm dB dBA
-    rad deg Gy Sv VA var in ft lb lbf psi ksi oz ozf gal gpm cfm daN BTU BTUH MBH TR therm hp dC dF degR` (absolute
+    rad deg Gy Sv VA var in ft yd mi lb lbf kip psi ksi psf ksf plf klf pcf mph oz ozf gal gpm cfm daN BTU BTUH MBH TR therm hp dC dF degR` (absolute
     `degC` / `degF`: see temperatures below), and the
     currencies `USD EUR GBP ILS RUB JPY CHF CNY`. Each currency is its own dimension: adding USD to EUR is a unit
     error, and an exchange rate is a quantity (`EUR/USD`). A currency takes `k` and `M` only: `kEUR`, `MUSD`;
@@ -321,6 +321,9 @@ quantity.
   - **two ways of writing** a unit are read (since 2026-11-12): a HYPHEN between two names is a product that binds
     tighter than `/` — `USD/kW-month` is USD per (kW x month), `N-m` is N*m (`m^-2` stays a power); the word `per`
     between spaces — `USD per kWh` is `USD/(kWh)`, `per kWh` is `1/kWh`;
+  - **US structural units, exact** (since 2026-11-12): `kip` (1000 lbf), `psf` (lbf/ft^2), `ksf`, `plf` (lbf/ft),
+    `klf`, `pcf` — the UNIT WEIGHT lbf/ft^3 of load standards (a mass density is `lb/ft^3`) — `mph`, `mi`, `yd`.
+    No prefix on any of them.
   - **US energy units, exact by definition** (since 2026-11-12): `BTU` (`Btu`, the International Table BTU,
     1055.05585262 J; `kBTU`, `MBTU` = 10^6 BTU), `BTUH` (BTU/h), `MBH` (1000 BTU/h), `TR` the ton of refrigeration
     (12 000 BTU/h), `therm` (100 000 BTU), `hp` (550 ft*lbf/s), `cfm` (ft^3/min), and `kgal` / `Mgal`. Plain `ton` is

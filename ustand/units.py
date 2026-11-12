@@ -87,13 +87,24 @@ BASE = {
     "therm": (F("1055.05585262") * 100000, _d(m=2, kg=1, s=-2)),
     "hp": (550 * F("0.3048") * F("0.45359237") * F("9.80665"), _d(m=2, kg=1, s=-3)),
     "cfm": (F("0.3048") ** 3 / 60, _d(m=3, s=-1)),
+    # US structural units (2026-11-12: a roof load "20 psf" was read from a document as lbf/ft^2 and could not be written
+    # back as psf — the unit itself was missing). All exact from 1 ft = 0.3048 m, 1 lbf = 0.45359237 kg x 9.80665 m/s^2.
+    # pcf is the UNIT WEIGHT lbf/ft^3 (snow, soil, concrete densities of load standards) — a mass density is lb/ft^3.
+    "kip": (1000 * F("0.45359237") * F("9.80665"), _d(m=1, kg=1, s=-2)),
+    "psf": (F("0.45359237") * F("9.80665") / F("0.3048") ** 2, _d(m=-1, kg=1, s=-2)),
+    "ksf": (1000 * F("0.45359237") * F("9.80665") / F("0.3048") ** 2, _d(m=-1, kg=1, s=-2)),
+    "plf": (F("0.45359237") * F("9.80665") / F("0.3048"), _d(kg=1, s=-2)),
+    "klf": (1000 * F("0.45359237") * F("9.80665") / F("0.3048"), _d(kg=1, s=-2)),
+    "pcf": (F("0.45359237") * F("9.80665") / F("0.3048") ** 3, _d(m=-2, kg=1, s=-2)),
+    "mi": (F("1609.344"), _d(m=1)), "mph": (F("1609.344") / 3600, _d(m=1, s=-1)), "yd": (F("0.9144"), _d(m=1)),
     **{c: (F(1), _d(**{c: 1})) for c in CURRENCIES},
 }
 PREFIX = {"p": F(1, 10**12), "n": F(1, 10**9), "u": F(1, 10**6), "m": F(1, 1000), "c": F(1, 100),
           "k": F(1000), "M": F(10**6), "G": F(10**9)}
 NO_PREFIX = {"week", "wk", "month", "mo", "quarter", "qtr", "Btu", "BTUH", "MBH", "TR", "therm", "hp", "cfm",
              "dC", "dF", "degR", "", "1", "%", "ppm", "dB", "dBA", "rad", "min", "day", "h", "rpm", "year", "yr", "deg",
-             "in", "ft", "lb", "lbf", "ksi", "oz", "ozf", "gal", "gpm", "daN"}
+             "in", "ft", "lb", "lbf", "ksi", "oz", "ozf", "gal", "gpm", "daN",
+             "kip", "psf", "ksf", "plf", "klf", "pcf", "mi", "mph", "yd"}
 CURRENCY_PREFIX = {"k", "M"}          # J7: kEUR, MUSD — and no other (mEUR would be a typo)
 # 2026-11-12: the same two for the gallon and the BTU — kgal / Mgal of water bills, kBTU / MBTU of energy tables
 # (MBTU is a MILLION BTU here, the SI reading; the US "MBtu = 1000 Btu" is written MBH-style as kBTU)

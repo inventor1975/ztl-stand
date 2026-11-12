@@ -71,6 +71,19 @@ except ValueError:
     check(True, "a near that is not in the text is refused")
 check(R.near_number("120,000 USD") == (120000, "USD") and R.near_number("floor of") is None,
       "near_number: a number with its unit, or None for words")
+# US structural units (2026-11-12): written as the documents write them, exact, and usable as a quantity's own unit
+check(U.parse("psf") == U.parse("lbf/ft^2") and U.parse("plf") == U.parse("lbf/ft") and U.parse("pcf") == U.parse("lbf/ft^3")
+      and U.parse("kip")[0] == 1000 * U.parse("lbf")[0] and U.parse("ksf")[0] == 1000 * U.parse("psf")[0]
+      and U.parse("klf")[0] == 1000 * U.parse("plf")[0] and U.parse("mph")[0] == U.parse("mi/h")[0],
+      "psf, plf, pcf (unit weight), kip, ksf, klf, mph are exact and are the stand's own units")
+check(one("The roof live load is 20 psf.", "psf") == 20 and one("diaphragm shear 450 plf", "lbf/ft") == 450
+      and one("a force of 85 kips", "lbf") == 85000 and one("snow density 18.2 pcf", "pcf") == F("18.2")
+      and one("basic wind speed 115 mph", "mph") == 115, "20 psf, 450 plf, 85 kips, 18.2 pcf, 115 mph read from text")
+try:
+    U.parse("kkip")
+    check(False, "a prefix on kip is refused")
+except Exception:
+    check(True, "a prefix on kip is refused")
 if FAILS:
     print(f"UNITREAD RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)
