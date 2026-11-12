@@ -119,6 +119,15 @@ def compile_expr(text: str, defines=None) -> str:
     parameter into an unknown and made Ohm's law nonlinear; expanded, it stays a
     coefficient and the system stays linear)."""
     defines = defines or {}
+    # LIBRARY FUNCTIONS (2026-11-12, DESIGN-HVAC.md): ep_<name>(...) expanded into its template FIRST, so that its
+    # numbers, branches and powers go through every rewriting below like any text of the brick
+    if "ep_" in text or any(isinstance(v, str) and "ep_" in v for v in defines.values()):
+        from . import hvac as _HV
+        try:
+            text = _HV.expand(text)[0]
+            defines = {k: (_HV.expand(v)[0] if isinstance(v, str) else v) for k, v in defines.items()}
+        except ValueError as e:
+            raise BrickError(f"library function: {e}")
     # a number in SCIENTIFIC notation (8.6541e-5) as an exact fraction in parentheses: ZTL's reader splits at the
     # exponent's minus (blind test 6, c10: "unknown quantity or malformed arithmetic: '8.6541e'")
     text = _DEC.sub(_dec_exact, _SCI.sub(_sci_exact, text))
@@ -642,6 +651,25 @@ def _add_constants(b):
     for name, spec in CONSTANTS.items():
         if name in used and name not in b["quantities"]:
             b["quantities"][name] = dict(spec)
+    from . import hvac as _HV0                  # unit constants named directly (an expanded curve uses ep_K)
+    for c in _HV0.UNIT_CONSTANTS:
+        if c in used and c not in b["quantities"]:
+            b["quantities"][c] = {"role": "given", "value": "1", "unit": _HV0.UNIT_CONSTANTS[c],
+                                  "ground": "built-in unit constant of the library functions"}
+    # the unit constants of the LIBRARY FUNCTIONS a text calls (ustand/hvac: value 1 in their unit, exact)
+    defs = b.get("define") if isinstance(b.get("define"), dict) else {}
+    if any(isinstance(t, str) and "ep_" in t for t in list(texts) + list(defs.values())):
+        from . import hvac as _HV
+        for t in list(texts) + [v for v in defs.values() if isinstance(v, str)]:
+            if isinstance(t, str) and _HV.uses_library(t):
+                try:
+                    consts = _HV.expand(t)[1]
+                except ValueError:
+                    continue                      # compile_expr reports it with its place
+                for c in consts:
+                    if c not in b["quantities"]:
+                        b["quantities"][c] = {"role": "given", "value": "1", "unit": _HV.UNIT_CONSTANTS[c],
+                                              "ground": "built-in unit constant of the library functions"}
 
 
 _VALID = re.compile(r"^(.*?)(<=|>=|<|>)(.*)$")
@@ -958,6 +986,12 @@ def load(path_or_dict) -> dict:
     import copy as _copy
     b = _copy.deepcopy(path_or_dict) if isinstance(path_or_dict, dict) \
         else json.load(open(path_or_dict, encoding="utf-8"))          # never edit the caller's brick
+    if isinstance(b, dict) and (b.get("curves") or "curve(" in json.dumps(b.get("laws", ""))):
+        from .hvac import curves as _CV           # performance curves (ustand/hvac/curves.py), expanded first
+        try:
+            _CV.expand_curves(b)
+        except _CV.CurveError as e:
+            raise BrickError(f"curves: {e}")
     _named_tolerances(b)
     _add_constants(b)
     _add_domains(b)

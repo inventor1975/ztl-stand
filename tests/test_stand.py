@@ -4406,6 +4406,16 @@ check("unitread: numbers and units read from document text by code ('1,250 gpm',
       "'psig', a missing unit and two candidates refused, never guessed", "UNITREAD GREEN" in _ur.stdout,
       (_ur.stdout + _ur.stderr)[-300:])
 
+# HVAC LIBRARY, layer 1: psychrometrics ported from EnergyPlus 26.2.0 (DESIGN-HVAC.md, ustand/hvac) — its own suite
+_hv = _sp_ur.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_hvac.py")],
+                 capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parent.parent),
+                 env=dict(os.environ, PYTHONPATH=str(pathlib.Path(__file__).resolve().parent.parent)))
+check("hvac psychrometrics: the templates agree with an independent transcription of EnergyPlus's C++ to 1e-12; "
+      "EnergyPlus's own unit-test values (PsyTsatFnHPb at nine points, PsyTsatFnPb 99.974 C, PsyTwbFnTdbWPb -2.200 C, "
+      "PsyWFnTdpPb 17.5250143) reproduced; a saturation-pressure range proved and refuted at its exact minimum; the "
+      "wet bulb proved as an implicit law; a planted coefficient and a lost branch caught", "HVAC GREEN" in _hv.stdout,
+      (_hv.stdout + _hv.stderr)[-300:])
+
 # ABSOLUTE TEMPERATURE SCALES degC / degF (2026-11-12, ustand/temperature.py): translated to K exactly before the
 # stand reads the brick; the converted values come back beside the stand's own (in K)
 from ustand import temperature as _TS        # noqa: E402
