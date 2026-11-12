@@ -6,6 +6,7 @@ The KNOWN answer: a box clamped at z = 0, pulled at z = L by a force F_z (any di
 of cells between two node planes. By equilibrium of the part above any section, int_section sigma_zz dA = F_z, so the
 mean of sigma_zz over the layer is F_z / A EXACTLY for the continuum solution — whatever the clamp does to the field
 (nu = 0.3: the field is NOT uniform). The polarized bracket must contain it; planted errors must break it."""
+# The default lower side became P2 on 2026-11-12; this file tests the P1 path, so it asks for lower="p1" explicitly.
 import os
 import sys
 import tempfile
@@ -175,8 +176,8 @@ cp = TF.solve_cases(deck, [{"F": (0.0, 0.0, 0.0), "M": (0.0, 0.0, 0.0), "label":
                             "prestress": {"omega": mask, "sigma": sig_e}}], log=lambda m: None)[0]["compliance_float"]
 s = Fr(round(float(np.sqrt(cf / cp)), 3)).limit_denominator(1000)
 quiet = lambda m: None
-rp = CB.bracket(p, load(s), log=quiet)
-rm = CB.bracket(p, load(-s), log=quiet)
+rp = CB.bracket(p, load(s), log=quiet, lower="p1")
+rm = CB.bracket(p, load(-s), log=quiet, lower="p1")
 plo, phi = (Fr(x) for x in rp["compliance"])
 mlo, mhi = (Fr(x) for x in rm["compliance"])
 lo, hi = (plo - mhi) / (4 * s), (phi - mlo) / (4 * s)
@@ -239,8 +240,8 @@ for n5 in (4, 8):
     c_p = TF.solve_cases(d5, [{"F": (0.0, 0.0, 0.0), "M": (0.0, 0.0, 0.0), "label": "p",
                                "prestress": {"omega": m5, "sigma": sx}}], log=quiet)[0]["compliance_float"]
     s5 = Fr(round(float(np.sqrt(c_f / c_p)), 4)).limit_denominator(10000)
-    b_p, b_m = CB.bracket(p5, ld(s5), log=quiet), CB.bracket(p5, ld(-s5), log=quiet)
-    b_0 = CB.bracket(p5, ld(0, False), log=quiet)
+    b_p, b_m = CB.bracket(p5, ld(s5), log=quiet, lower="p1"), CB.bracket(p5, ld(-s5), log=quiet, lower="p1")
+    b_0 = CB.bracket(p5, ld(0, False), log=quiet, lower="p1")
     Pl, Ph = (Fr(x) for x in b_p["compliance"])
     Ml, Mh = (Fr(x) for x in b_m["compliance"])
     l5, h5 = (Pl - Mh) / (4 * s5), (Ph - Ml) / (4 * s5)

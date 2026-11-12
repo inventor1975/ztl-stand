@@ -40,7 +40,7 @@ def _trim():
 
 
 def bracket(path, subcase=1, log=print, cg_tol=1e-8, matfree=None, zdtype=None, dump_g=None, dump_eta=None,
-            smoother="jacobi", lower="p1", lower_tol=1e-4):
+            smoother="jacobi", lower="p2", lower_tol=1e-4):
     from fractions import Fraction as Fr
     t0 = time.time()
     sha = hashlib.sha256(open(path, "rb").read()).hexdigest()
@@ -247,7 +247,7 @@ def _face_data(qd, nf, T, tf, pos, sgn, rows_for=()):
 
 
 def bracket_functionals(path, subcase=1, functionals=(), s_values=None, log=print, cg_tol=1e-8, matfree=None,
-                        zdtype=None, smoother="jacobi", lower_tol=1e-4, planted=None, lower="p1"):
+                        zdtype=None, smoother="jacobi", lower_tol=1e-4, planted=None, lower="p2"):
     """LEVEL 3d (2026-11-12): brackets of stress functionals l_p(u) with ONE solve per load and ONE per functional.
     research/cad/PLAN-level3.md, "Level 3d — one solve per load, one per functional".
 
@@ -752,10 +752,11 @@ def main(argv):
     ap.add_argument("--dump-g", help="save the float choice g (nt x 36) to this .npy (to profile the finish alone)")
     ap.add_argument("--dump-eta", help="save the per-tet hypercircle indicator eta^2 (nt) to this .npy (only to CHOOSE a mesh; the bounds are unchanged). "
                     "It always uses the P1 float field (also with --lower p2): its identity is the P1 gap")
-    ap.add_argument("--lower", choices=("p1", "p2"), default="p1",
-                    help="the lower side's field: p1 (piecewise linear, default) or p2 (piecewise quadratic on the same "
-                         "tets, ustand.tetfea2; the P1 bound is still computed and reported beside it, except with "
-                         "--functionals)")
+    ap.add_argument("--lower", choices=("p1", "p2"), default="p2",
+                    help="the lower side's field: p2 (piecewise quadratic on the same tets, ustand.tetfea2; the DEFAULT "
+                         "since 2026-11-12 — MEASURED on 103 SimJEB decks: gap median 0.66 %% against 8.6 %% with p1; the P1 "
+                         "bound is still computed and reported beside it, except with --functionals) or p1 "
+                         "(piecewise linear, the earlier default)")
     ap.add_argument("--lower-tol", type=float, default=1e-4,
                     help="the lower side's AMG-CG relative residual (default 1e-4; any v is admissible: a looser solve "
                          "only loosens the bound)")

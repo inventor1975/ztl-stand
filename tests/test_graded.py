@@ -17,6 +17,7 @@ one 56 / face 40 / red 50, closure in 2 rounds. PLANTED no closure: 67 hanging e
 hanging node shows only as an edge check). C: coarse [0.515420, 0.575970] 11.75 %, graded [0.518896, 0.573380]
 10.50 %, a second level [0.520233, 0.573119] 10.17 % (3904 tets). Mean sigma_zz (exact 10): coarse [9.84862,
 10.15138], graded [9.86379, 10.13621]."""
+# The default lower side became P2 on 2026-11-12; this file tests the P1 path, so it asks for lower="p1" explicitly.
 import os
 import pickle
 import sys
@@ -138,8 +139,8 @@ check(np.abs(Msum - Mc).max() < 1e-9 * 1e4, f"graded resultant moment = coarse (
 check(any(n not in d["grids"] for n in r["traction"]["nodal"]), "the zone reaches the loaded face: midpoints carry t")
 
 # ---- brackets
-bc = CB.bracket(p, 1, log=quiet)
-bg = CB.bracket(q, 1, log=quiet)
+bc = CB.bracket(p, 1, log=quiet, lower="p1")
+bg = CB.bracket(q, 1, log=quiet, lower="p1")
 c0, c1 = bc["compliance"], bg["compliance"]
 print(f"MEASURED box n=4: coarse C in [{c0[0]:.6f}, {c0[1]:.6f}] ({100 * bc['gap']:.2f} %), graded "
       f"[{c1[0]:.6f}, {c1[1]:.6f}] ({100 * bg['gap']:.2f} %)")
@@ -156,7 +157,7 @@ check(o2 == 0 and h2 == 0, f"second level conforming ({o2}, {h2}); {len(r2['tets
 check(max(r2["parent"]) < len(d["tets"]) and len(r2["parent"]) == len(r2["tets"]),
       "second level: every tet maps to an ORIGINAL coarse tet")
 q2 = save(r2, where, "box_g2.deck.pkl")
-bg2 = CB.bracket(q2, 1, log=quiet)
+bg2 = CB.bracket(q2, 1, log=quiet, lower="p1")
 c2 = bg2["compliance"]
 print(f"MEASURED box n=4 second level: [{c2[0]:.6f}, {c2[1]:.6f}] ({100 * bg2['gap']:.2f} %), {len(r2['tets'])} tets")
 check(max(c1[0], c2[0]) <= min(c1[1], c2[1]) and c2[0] >= c1[0] * (1 - 1e-9),
@@ -177,7 +178,7 @@ def mean_bracket(path, s, children):
     for sg in (s, -s):
         sub = {"F": (0.0, 0.0, 1000.0), "M": (0.0, 0.0, 0.0), "label": "pull",
                "prestress": {"omega": mask, "sigma": [[sg * x for x in row] for row in sig]}}
-        out.append(CB.bracket(path, sub, log=quiet)["compliance"])
+        out.append(CB.bracket(path, sub, log=quiet, lower="p1")["compliance"])
     (pl, ph), (ml, mh) = out
     s = float(s)
     return (pl - mh) / (4 * s), (ph - ml) / (4 * s), int(mask.sum()), vol

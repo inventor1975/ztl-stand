@@ -11,6 +11,7 @@ Checks, both sides:
   planted errors — (a) bolt midpoints left unfixed: another problem, caught by the bracket; (b) the RBE3 spread anew
     over the fine nodes: the SAME resultant (so a resultant check cannot see it) but another traction — caught by
     comparing the nodal loads with the coarse traction's."""
+# The default lower side became P2 on 2026-11-12; this file tests the P1 path, so it asks for lower="p1" explicitly.
 import os
 import pickle
 import sys
@@ -152,8 +153,8 @@ check(kind.tolist().count(1) == 4 * 18, f"the 18 coarse fixed faces became exact
                                         f"({kind.tolist().count(1)})")
 
 # ---- brackets
-bc = CB.bracket(p, 1, log=quiet)
-bf = CB.bracket(q, 1, log=quiet)
+bc = CB.bracket(p, 1, log=quiet, lower="p1")
+bf = CB.bracket(q, 1, log=quiet, lower="p1")
 c0, c1 = bc["compliance"], bf["compliance"]
 print(f"MEASURED box n=3: coarse C in [{c0[0]:.6f}, {c0[1]:.6f}] ({100 * bc['gap']:.2f} %), refined "
       f"[{c1[0]:.6f}, {c1[1]:.6f}] ({100 * bf['gap']:.2f} %)")
@@ -171,7 +172,7 @@ def mean_bracket(path, s):
     for sg in (s, -s):
         sub = {"F": (0.0, 0.0, 1000.0), "M": (0.0, 0.0, 0.0), "label": "pull",
                "prestress": {"omega": mask, "sigma": [[sg * x for x in row] for row in sig]}}
-        out.append(CB.bracket(path, sub, log=quiet)["compliance"])
+        out.append(CB.bracket(path, sub, log=quiet, lower="p1")["compliance"])
     (pl, ph), (ml, mh) = out
     s = float(s)
     return (pl - mh) / (4 * s), (ph - ml) / (4 * s), int(mask.sum())
@@ -205,7 +206,7 @@ check(fv != cv, f"a centroid test on the fine tets picks another region here ({f
 ra = RF.red_refine(d, planted="unfixed_bolt_midpoints")
 qa = save(ra, where, "box_r1_a.deck.pkl")
 try:
-    ba = CB.bracket(qa, 1, log=quiet)
+    ba = CB.bracket(qa, 1, log=quiet, lower="p1")
     ca = ba["compliance"]
     caught = ca[0] > c0[1] or ca[1] < c0[0]
     msg = f"[{ca[0]:.6f}, {ca[1]:.6f}] vs coarse [{c0[0]:.6f}, {c0[1]:.6f}]"

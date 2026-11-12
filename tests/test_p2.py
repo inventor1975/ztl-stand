@@ -292,7 +292,7 @@ fz = {"label": "mean zz", "omega": mask, "sigma": pre_c["sigma"]}
 # layer is mesh-aligned), so its w_p is solver error only, and at the default 1e-4 the comparison measures the CG
 # tolerance, not the space (MEASURED: P1 width 1e-6, P2 1.2e-4 for mean zz at 1e-4)
 TOL3 = 1e-8
-r1 = CB.bracket_functionals(path, LOAD, [fz], log=quiet, lower_tol=TOL3)["functionals"][0]
+r1 = CB.bracket_functionals(path, LOAD, [fz], log=quiet, lower="p1", lower_tol=TOL3)["functionals"][0]
 r2 = CB.bracket_functionals(path, LOAD, [fz], log=quiet, lower="p2", lower_tol=TOL3)
 r2d = CB.bracket_functionals(path, LOAD, [fz], log=quiet, lower="p2")["functionals"][0]
 check(r2d["bracket"][0] <= 10.0 <= r2d["bracket"][1], f"3d P2 at the default tolerance: 10 inside {r2d['bracket']}")
@@ -309,7 +309,7 @@ fun3 = []
 for kind in ("membrane", "bending"):
     S0k, S1k = CB.scl_extractor(kind, Pi_zz, ey, Fr(5), Fr(10), volw, E, nu)
     fun3.append({"label": kind, "omega": mask, "S0": S0k, "S1": S1k})
-b1 = CB.bracket_functionals(path, BEAM, fun3, log=quiet, lower_tol=TOL3)
+b1 = CB.bracket_functionals(path, BEAM, fun3, log=quiet, lower="p1", lower_tol=TOL3)
 b2 = CB.bracket_functionals(path, BEAM, fun3, log=quiet, lower="p2", lower_tol=TOL3)
 for o1, o2 in zip(b1["functionals"], b2["functionals"]):
     k_ = o2["label"]

@@ -11,6 +11,7 @@ the planted no-permutation bracket equalled the right one to every digit. omega 
 t_w = 10, c = 5, n = e_y, t = e_z):
     sigma_m = (1/|omega|) int sigma_zz = F_z / 100,
     sigma_b = 6 / (t_w |omega|) int sigma_zz (y - 5) = 0.006 (M_x - 7 F_y)   (7 = the layer's mean arm 12 - z0)."""
+# The default lower side became P2 on 2026-11-12; this file tests the P1 path, so it asks for lower="p1" explicitly.
 import os
 import random
 import sys
@@ -133,7 +134,7 @@ def run(n_, kind, c_=Fr(5), plant_self=False):
     cp = TF.solve_cases(d_, [{"F": (0.0, 0.0, 0.0), "M": (0.0, 0.0, 0.0), "label": "p",
                               "prestress": ld(1)["prestress"]}], log=quiet)[0]["compliance_float"]
     s_ = Fr(round(float(np.sqrt(cf / cp)), 4)).limit_denominator(10000)
-    bp, bm = CB.bracket(p_, ld(s_), log=quiet), CB.bracket(p_, ld(-s_), log=quiet)
+    bp, bm = CB.bracket(p_, ld(s_), log=quiet, lower="p1"), CB.bracket(p_, ld(-s_), log=quiet, lower="p1")
     Pl, Ph = (Fr(x) for x in bp["compliance"])
     Ml, Mh = (Fr(x) for x in bm["compliance"])
     if plant_self:

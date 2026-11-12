@@ -21,6 +21,7 @@ MEASURED 2026-11-11 (box n = 4):
     ball (the same marked counts nearest the centre) -> 804 / 1224 tets, 0.29949 -> 0.29944.
   The indicator halves the width of a random marking at fewer tets; a ball at the box centre (where the uniform
   pull has little error) gains almost nothing."""
+# The default lower side became P2 on 2026-11-12; this file tests the P1 path, so it asks for lower="p1" explicitly.
 import os
 import pickle
 import sys
@@ -61,7 +62,7 @@ where = os.path.dirname(p)
 d = TF.read_deck(p)
 
 # ---- 1. the identity: sum eta^2 = upper - lower
-r = CB.bracket(p, 1, log=quiet, dump_eta="return")
+r = CB.bracket(p, 1, log=quiet, lower="p1", dump_eta="return")
 e = r["eta"]
 print(f"MEASURED traction: sum eta^2 {e['sum']:.12f}, gap {e['gap']:.12f}, min eta^2 {e['min']:.3e}")
 check(abs(e["sum"] - e["gap"]) <= 1e-8 * e["gap"], "traction: sum eta^2 = the gap (hypercircle)")
@@ -73,7 +74,7 @@ sig = CB.mean_stress_extractor("zz", d["mat"][0], d["mat"][1], v3b)
 for sg in (Fr(1, 10), -Fr(1, 10)):
     sub = {"F": (0.0, 0.0, 1000.0), "M": (0.0, 0.0, 0.0), "label": "pull",
            "prestress": {"omega": m3b, "sigma": [[sg * x for x in row] for row in sig]}}
-    e = CB.bracket(p, sub, log=quiet, dump_eta="return")["eta"]
+    e = CB.bracket(p, sub, log=quiet, lower="p1", dump_eta="return")["eta"]
     check(abs(e["sum"] - e["gap"]) <= 1e-8 * e["gap"], f"3b s = {sg}: sum eta^2 = the gap ({e['sum']:.10f} vs "
           f"{e['gap']:.10f})")
 
@@ -96,7 +97,7 @@ mc, vc = CB.omega_box(d, slab)
 s_b = Fr(3, 10)
 etas0 = []
 for sv in (s_b, -s_b):
-    rb = CB.bracket(p, scl_load(d, sv, mc, vc), log=quiet, dump_eta="return")
+    rb = CB.bracket(p, scl_load(d, sv, mc, vc), log=quiet, lower="p1", dump_eta="return")
     e = rb["eta"]
     etas0.append(rb["_eta_array"])
     print(f"MEASURED 3c bending s = {sv}: sum eta^2 {e['sum']:.10f}, gap {e['gap']:.10f}")
@@ -104,7 +105,7 @@ for sv in (s_b, -s_b):
     check(e["min"] >= -1e-12 * e["gap"], f"3c bending s = {sv}: no tet negative beyond rounding")
 
 # ---- 2. PLANTED: a tau not admissible for the load breaks the identity (through eta_indicator itself)
-rr = CB.bracket(p, 1, log=quiet, dump_eta="return")
+rr = CB.bracket(p, 1, log=quiet, lower="p1", dump_eta="return")
 P_ = rr["_eta_parts"]
 eta_h, _ = CB.eta_indicator(P_["X"], P_["T"], P_["G"], P_["energy"], P_["u"], P_["E"], P_["nu"])
 check(abs(eta_h.sum() - rr["eta"]["gap"]) <= 1e-8 * rr["eta"]["gap"], "control: the honest inputs give the gap")
@@ -135,7 +136,7 @@ def mean_bracket(path, deck, children):
     for sv in (s_m, -s_m):
         sub = {"F": (0.0, 0.0, 1000.0), "M": (0.0, 0.0, 0.0), "label": "pull",
                "prestress": {"omega": mask, "sigma": [[sv * x for x in row] for row in sg_]}}
-        b = CB.bracket(path, sub, log=quiet, dump_eta="return")
+        b = CB.bracket(path, sub, log=quiet, lower="p1", dump_eta="return")
         out.append(b["compliance"])
         eta = eta + b["_eta_array"]
     (pl, ph), (ml, mh) = out
