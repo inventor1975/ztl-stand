@@ -4416,6 +4416,20 @@ check("hvac psychrometrics: the templates agree with an independent transcriptio
       "wet bulb proved as an implicit law; a planted coefficient and a lost branch caught", "HVAC GREEN" in _hv.stdout,
       (_hv.stdout + _hv.stderr)[-300:])
 
+# HVAC LIBRARY, layers 3-4: cooling towers and chillers (ustand/hvac/towers.py, chillers.py) — their own suite; its
+# fifteen stand proofs run in six processes (HVAC_PLANT_WORKERS), the slowest about four minutes
+_hp = _sp_ur.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_hvac_plant.py")],
+                 capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parent.parent),
+                 env=dict(os.environ, PYTHONPATH=str(pathlib.Path(__file__).resolve().parent.parent)))
+check("hvac towers and chillers: the templates agree with an independent transcription of CondenserLoopTowers.cc, "
+      "ChillerElectricEIR.cc and ChillerReformulatedEIR.cc inside and outside the clamps; what EnergyPlus iterates "
+      "(tower range, air flow ratio, the UA tower's exit wet bulb, the reformulated chiller's leaving condenser "
+      "temperature) is the root of our implicit laws; EnergyPlus's own unit-test values reproduced (tower outlet "
+      "26.9537 C, FanCyclingRatio 0.5424, 40 - 22.2222 C; chiller condenser flow 2.31460814 kg/s, water use "
+      "6.22019725e-06 m3/s, power 20987 W); every chiller of datasets/Chillers.idf built by code; nine bricks EARNED "
+      "and six REFUTED with their points recomputed by the transcription; eight planted errors caught", "HVAC PLANT GREEN" in _hp.stdout,
+      (_hp.stdout + _hp.stderr)[-400:])
+
 # ABSOLUTE TEMPERATURE SCALES degC / degF (2026-11-12, ustand/temperature.py): translated to K exactly before the
 # stand reads the brick; the converted values come back beside the stand's own (in K)
 from ustand import temperature as _TS        # noqa: E402

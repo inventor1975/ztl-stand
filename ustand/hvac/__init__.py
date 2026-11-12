@@ -21,7 +21,7 @@ import re
 
 # unit constants the templates use (value 1 in the unit)
 UNIT_CONSTANTS = {"ep_K": "K", "ep_Pa": "Pa", "ep_J_kg": "J/kg", "ep_J_kgK": "J/(kg*K)", "ep_kg_m3": "kg/m^3",
-                  "ep_m3_kg": "m^3/kg"}
+                  "ep_m3_kg": "m^3/kg", "ep_W": "W"}
 
 LIBRARY: dict[str, dict] = {}
 
@@ -32,8 +32,11 @@ def register(name, args, expr, unit, source, note=""):
 
 
 from . import psychro  # noqa: E402,F401  (registers its functions)
+from . import towers   # noqa: E402,F401  (layer 3: cooling towers)
+from . import chillers  # noqa: E402,F401  (layer 4: chillers)
 
 CALL_RE = re.compile(r"(?<![\w.])(ep_[A-Za-z0-9_]+)\s*\(")
+MAX_EXPANSIONS = 200000       # calls expanded in one text (layers 3-4 nest: one tower law holds hundreds of ep_psat)
 
 
 def uses_library(text):
@@ -45,7 +48,7 @@ def expand(text):
     calls (a template calling another, an argument calling one) expanded to a fixed point. -> (text, set of unit
     constants used). Raises ValueError on an unknown ep_ name or a wrong argument count."""
     used = set()
-    for _ in range(32):
+    for _ in range(MAX_EXPANSIONS):
         m = None
         for mm in CALL_RE.finditer(text):
             m = mm
@@ -78,9 +81,13 @@ def expand(text):
         spec = LIBRARY[name]
         if len(args) != len(spec["args"]):
             raise ValueError(f"{name} takes {len(spec['args'])} arguments ({', '.join(spec['args'])}), not {len(args)}")
+        # all parameters substituted AT ONCE (one after another, an argument that itself holds a later parameter's
+        # name — a brick quantity called _T — would be substituted a second time)
+        sub = {p: f"({a})" for p, a in zip(spec["args"], args)}
         body = spec["expr"]
-        for p, a in zip(spec["args"], args):
-            body = re.sub(rf"(?<![\w.]){re.escape(p)}(?![\w])", f"({a})", body)
+        if sub:
+            pat = "|".join(re.escape(p) for p in sorted(sub, key=len, reverse=True))
+            body = re.sub(rf"(?<![\w.])({pat})(?![\w])", lambda mm: sub[mm.group(1)], body)
         text = text[:m.start()] + f"({body})" + text[i:]
     else:
         raise ValueError("library expansion did not end (a function calls itself?)")
@@ -117,8 +124,15 @@ def _ev(node, env):
 def evaluate(name, *args):
     """The function in double precision, from its template (the tests compare it with EnergyPlus's own values).
     Arguments in SI numbers (K, Pa, kg/kg); the result in SI."""
-    text, _ = expand(f"{name}({', '.join(f'__a{i}' for i in range(len(args)))})")
+    sig = tuple(v["expr"] for v in LIBRARY.values())      # a changed template (a planted error) is read again
+    hit = _TREES.get((name, len(args)))
+    if hit is None or hit[0] != sig:
+        text, _ = expand(f"{name}({', '.join(f'__a{i}' for i in range(len(args)))})")
+        tree = ast.parse(re.sub(r"(?<![\w.])if\s*\(", "__if__(", text), mode="eval").body
+        _TREES[(name, len(args))] = hit = (sig, tree)
     env = {f"__a{i}": float(v) for i, v in enumerate(args)}
     env.update({c: 1.0 for c in UNIT_CONSTANTS})
-    tree = ast.parse(re.sub(r"(?<![\w.])if\s*\(", "__if__(", text), mode="eval").body
-    return _ev(tree, env)
+    return _ev(hit[1], env)
+
+
+_TREES: dict = {}             # (name, number of arguments) -> (the templates it was read from, its syntax tree)

@@ -101,3 +101,12 @@ register("ep_w_twb_newW", ["_T", "_Twb", "_P"],
          f"if({_TWC} >= 0, ((2501.0 - 2.326*{_TWC})*{_WS} - 1.006*({TC} - {_TWC}))/(2501.0 + 1.86*{TC} - 4.186*{_TWC}), "
          f"((2830.0 - 0.24*{_TWC})*{_WS} - 1.006*({TC} - {_TWC}))/(2830.0 + 1.86*{TC} - 2.1*{_TWC}))", "",
          SRC + ".cc PsyTwbFnTdbWPb (the residual it iterates)")
+
+# ---- added with layers 3-4 (cooling towers, chillers)
+# PsyRhoAirFnPbTdbW: density of moist air, ideal gas, 287 J/(kg K); and RhoH2O: EnergyPlus's own cubic for liquid
+# water (what the EIR chiller's evaporative condenser divides by; a TOWER takes its water density from the plant
+# loop's fluid tables — FluidProperties, not among the ported files — so there it is a quantity of the brick)
+register("ep_rhoair", ["_P", "_T", "_W"], f"((_P/ep_Pa)/(287.0*{TK}*(1.0 + 1.6077687*max(_W, 1.0e-5))))*ep_kg_m3",
+         "kg/m^3", SRC + ".hh PsyRhoAirFnPbTdbW")
+register("ep_rho_h2o", ["_T"], f"(1000.1207 + 8.3215874e-04*{TC} - 4.929976e-03*{TC}*{TC} + 8.4791863e-06*{TC}*{TC}*{TC})"
+         "*ep_kg_m3", "kg/m^3", SRC + ".hh RhoH2O")

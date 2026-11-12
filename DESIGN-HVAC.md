@@ -45,6 +45,102 @@ which the stand already proves (zimplicit's root-exclusion certificate). The lib
    form on the leaving condenser temperature, minimum unloading, condenser heat.
 5. What layers 3-4 need besides: water properties at the needed accuracy, fans, pumps.
 
+## Status (2026-11-12): layers 1-4 done; what each does NOT hold
+
+Layers 1 and 2: ustand/hvac/psychro.py, curves.py (tests/test_hvac.py). Layers 3 and 4: ustand/hvac/towers.py,
+chillers.py (tests/test_hvac_plant.py; the functions and example bricks are in BRICKS.md 7i).
+
+**Layer 3, cooling towers — ported** (each against the C++ transcribed by hand in the test):
+- the approach correlations of CoolingTower:VariableSpeed, CoolToolsCrossFlow and YorkCalc with their built-in
+  coefficients (read back from CondenserLoopTowers.cc by the test), capped as the operating tower caps them, and raw;
+  the user-defined coefficient objects CoolingTowerPerformance:CoolTools / :YorkCalc as curve types read from IDF;
+- what EnergyPlus solves, as implicit laws: the range at a fixed fan speed, the air flow ratio that meets the
+  setpoint, the calibration of the water flow ratio at sizing;
+- the control sequence of calculateVariableSpeedTower (full speed / free convection / cycling at the minimum air
+  flow / modulating): outlet temperature, cycling ratio, air flow ratio, fan power (the cube law or a fan curve);
+- the UA tower of CoolingTower:SingleSpeed / :TwoSpeed (calculateSimpleTowerOutletTemp, effectiveness-NTU): one pass
+  as a template, the fixed point of its iteration as an implicit law; the fan cycling of both towers;
+- water use: evaporation by the saturated-exit method and by the loss factor, drift, blowdown by concentration
+  ratio, makeup (a scheduled blowdown is a given quantity in `Makeup == Evap + Drift + Blowdown`).
+
+EnergyPlus's capping, as found in the code (checkModelBounds): the inlet wet bulb is clamped to the model's limits
+before every evaluation; the water flow ratio is clamped for the CoolTools models ONLY (for YorkCalc it only warns,
+on the liquid-to-gas ratio); the range and the approach are compared with their limits for a warning and the capped
+values are never used; the air flow ratio is not clamped, the solver keeps it in [minimum, 1]. The setpoint's
+approach is formed from the UNCAPPED wet bulb while the model reads the capped one.
+
+**Layer 3 — NOT ported**: multi-cell staging; the fluid-bypass control of the single-speed tower; basin heater;
+fault models; sizing (UA from nominal capacity, autosized flows) other than the variable-speed calibration; the
+control sequence of CoolingTower:VariableSpeed:Merkel (its tower is the UA tower with UA multiplied by three
+curves, which a brick writes with `curve(...)`; the load-following sequence around it is not written); the water
+properties of the loop (density, specific heat: FluidProperties is not among the ported files — they are quantities
+of the brick, so no EnergyPlus test that depends on them at 1e-3 is reproduced).
+
+**Layer 4, chillers — ported**: Chiller:Electric:EIR (available capacity, the evaporator load and its cuts, part
+load ratio, cycling below the minimum part load ratio, the minimum unloading ratio and false loading, power,
+condenser heat, condenser outlet temperature, the condenser-flow limits, the evaporatively-cooled condenser's water
+use) and Chiller:Electric:ReformulatedEIR (all three curves on the LEAVING condenser temperature — an implicit law);
+`chiller_from_idf` builds the curves, quantities and laws of a brick from an IDF chiller object (every chiller of
+datasets/Chillers.idf: 162 EIR, 161 reformulated).
+
+**Layer 4 — NOT ported**: the evaporator flow modes and the plant's flow lock (the laws take the load the
+evaporator is asked for and the leaving water at its setpoint); heat recovery; thermosiphon; faults; sizing and
+the rated-performance (IPLV) report; the Lift form of the reformulated EIRFPLR; the reformulated chiller's
+fallbacks when its root is not bracketed by the curve limits (EnergyPlus then substitutes twice from the mean of
+its two end results — MEASURED on a sweep of the dataset: 87 of 483 operating points end that way; a brick there
+has no root in `search` and is OPEN). Two constants are outside the ported files and are arguments:
+HVAC::SmallLoad (1 W from memory of DataHVACGlobals.hh — to confirm) and Constant::InitConvTemp (5.05 C —
+confirmed by EnergyPlus's own test value at 1e-9).
+
+**Verified** (tests/test_hvac_plant.py; the numbers are printed by the test as MEASURED lines):
+templates = the C++ by hand to 3e-14 (approach, 6000 points inside and outside the limits), 4e-13 (UA tower pass),
+3e-12 (water use), 8e-15 (EIR chillers, 972 points over the whole dataset); EnergyPlus's iterates against the roots
+of the implicit laws: tower outlet within 7e-5 K, air flow ratio 3e-5 (400 points, cube law and a fan power curve), the UA tower's outlet within 4e-4 K (its
+iteration's own stopping error), the reformulated chiller's leaving condenser temperature within 6e-5 K.
+EnergyPlus's own unit-test values reproduced at their tolerances: tower outlet 26.9537 C, FanCyclingRatio 0.5424,
+outlet 30.0 C at the solved air flow, 40 - 22.2222 C beyond the model's range (CondenserLoopTowers.unit.cc);
+condenser flow 2.31460814 kg/s, evaporative water use 6.22019725e-06 m3/s, power 20987 W, the condenser-flow
+fractions (ChillerElectricEIR.unit.cc). NOT reproduced, and why: the sizing tests (UA 7389.232 W/K, air flows,
+nominal capacities: they need the water tables and the sizing routines), the input-default and report-table tests
+(no such objects here), the basin-heater test, the Merkel test, IPLV 2.03 (StandardRatings), the thermosiphon
+tests.
+
+**In the stand** (fifteen bricks, nine EARNED and six REFUTED with the refuting point recomputed by the
+transcription; seconds MEASURED on this machine, six at a time): a CoolTools tower's outlet over a wet-bulb range
+against a condenser limit (36 s), the air flow ratio that meets a setpoint and its fan power (24 s), the control
+sequences as explicit laws (under 1 s), makeup water by the saturated-exit chain (280 s EARNED, under 1 s REFUTED)
+and by the loss factor, a UA tower's outlet proved within 0.02 K of EnergyPlus's own iterate (240 s), an EIR
+chiller's power over a load and condenser-temperature box (4 s), a reformulated chiller's power with its leaving
+condenser temperature implicit (146 s EARNED, 18 s REFUTED).
+
+**A gap of the stand found here** (not of the port): the UA tower with every given exact could not be REFUTED.
+Four runs (641..728 s each) with a bound the proved range lies wholly past — `Tout <= 302.35 K`, `Tout <= 301.4 K`, `X <= 304.6 K`,
+a window below the value — ended OPEN: "proved within [302.4, 302.4] K, which reaches past the bound, yet no
+corner violates it". The range is PROVED to be on the wrong side, and the verdict is still OPEN, because the
+refutation wants a corner witness and none is found for this long implicit law. The shorter implicit laws (tower
+range, air flow ratio, the reformulated chiller) are refuted normally.
+
+**Found in EnergyPlus while porting** (each read in the code, the first two also measured by the test):
+- datasets/PerfCurves.idf states the built-in YorkCalc model as a user-defined object with a maximum wet bulb of
+  26.6667 C; the code's built-in YorkCalc uses 29.4444 C. Above 26.6667 C the "same" model gives different
+  approaches.
+- The evaporation LOSS FACTOR (documented in percent per K) is multiplied as entered — nothing divides it by 100,
+  while the drift percent beside it is divided. With the field's default 0.2 the "evaporation" of a 5.5 K range
+  is 1.1 times the whole water flow.
+- checkModelBounds computes capped values of the range and of the approach and never uses them; the water flow
+  ratio is capped for CoolTools only.
+- In calculateVariableSpeedTower the outlet at full fan is compared with the setpoint by `>` and then by `<`: at
+  exact equality neither branch runs and the tower reports the INLET temperature with zero fan power.
+- At full speed the fan power is the design power itself, not design power times the fan curve at 1.
+- Blowdown: a concentration ratio of 2 or less is treated as 2 ("protect divide by zero" at `> 2.0`).
+- The UA tower's effectiveness switches to NTU/(1 + NTU) (the equal-capacity limit) above a capacity ratio of
+  0.995 — a small jump in the outlet temperature across that line.
+- The EIR chiller reads CAPFT at the leaving-water SETPOINT and EIRFT at the actual leaving temperature; the
+  cycling ratio is taken from the part load ratio BEFORE the minimum unloading ratio is applied.
+- The reformulated chiller replaces a reference COP of zero or less by 5.5, silently.
+- The reformulated chiller solves its leaving condenser temperature only when the results at the two curve limits
+  fall strictly inside them; otherwise it substitutes twice — on our sweep of the dataset that was 87 of 483 points.
+
 ## Verification, per function
 
 - EnergyPlus's own unit tests (tst/EnergyPlus/unit/*.unit.cc): every reference value they assert becomes a stand check
