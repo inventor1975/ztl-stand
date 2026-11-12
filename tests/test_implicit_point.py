@@ -122,6 +122,49 @@ check(r8.get("verdict") == "EARNED" and r9.get("verdict") != "EARNED",
       f"stand: x^2 = 3 on [-3, 3] — within [-1.8, 1.8] EARNED (both roots), x <= 1 not EARNED ({r8.get('verdict')}, {r9.get('verdict')})")
 KNOWN = []
 
+# ---- OPERATIONAL vs FORMAL (2026-11-12, the curator: "we keep operationality"; ZTL v2.1.6 §25 — "the q such that the
+# law holds" is a definite description: it denotes only a grounded satisfier; ZRootPar.par_root builds one from a sign
+# change AND a slope bounded away from zero). The intermediate value theorem alone says "exists" and builds nothing.
+def level(g, lo, hi, zlo, zhi):
+    node = ast.parse(f"implicit(_root_x, {g}, {lo}, {hi})", mode="eval").body
+    return C.implicit_exists(node, {}, F(zlo), F(zhi))[0]
+
+
+check(level("_root_x*_root_x*_root_x + _root_x - 3", "0", "3", "1.2", "1.3") == C.OPERATIONAL,
+      "x^3 + x = 3: a sign change with a strict slope — the root is built (OPERATIONAL)")
+check(level("(_root_x*_root_x - 2)*(_root_x*_root_x - 2)*(_root_x*_root_x - 2)", "0", "3", "1.4", "1.5") == C.FORMAL,
+      "PLANTED (x^2 - 2)^3 = 0: the sign changes at sqrt 2 and the law is continuous, but the slope is 0 at the root — "
+      "FORMAL only, the root is not built")
+check(level("ifpos(_root_x - 1, _root_x + 5, _root_x - 3)", "0", "3", "0.9", "1.1") == C.NOT_SHOWN,
+      "a jump across zero: NOT_SHOWN (not even formally)")
+check(root("(_root_x*_root_x - 2)*(_root_x*_root_x - 2)*(_root_x*_root_x - 2)", "0", "3") == REFUSED,
+      "a formally existing root gives NO VALUE at a point (no witness, no REFUTED, from an object that is not built)")
+r10 = S.run(brick("(x*x - 2)*(x*x - 2)*(x*x - 2) == c - 3", ["0", "3"], {"op": "<=", "value": "2"}))
+w10 = str((r10.get("designs") or [{}])[0].get("why") or r10.get("why"))
+check(r10.get("verdict") == "OPEN" and "FORMALLY" in w10 and "ZTL's judge" in w10 and "to be verified" in w10,
+      f"stand: the formal root is OPEN by ZTL's judge, the dirty atom named, the formal existence said ({r10.get('verdict')}; {w10[:140]})")
+h2 = str((r2.get("how") or {}).get("x"))
+check("ZRootPar.par_root" in h2 and "ZTL's judge on the claim about the quantity: EARNED" in h2,
+      f"stand: an EARNED implicit quantity says its root was BUILT, by which rule, and that the judge granted it ({h2[-150:]})")
+# over a BOX of a parameter: the root is built on every part of a partition, or it is not built
+def level_box(g, lo, hi, zlo, zhi, p_lo, p_hi):
+    node = ast.parse(f"implicit(_root_x, {g}, {lo}, {hi})", mode="eval").body
+    return C.implicit_exists(node, {"p": (F(p_lo), F(p_hi))}, F(zlo), F(zhi))[0]
+
+
+check(level_box("_root_x*_root_x*_root_x + _root_x - p", "0", "5", "0.6", "1.3", 1, 3) == C.OPERATIONAL,
+      "x^3 + x = p for p in [1, 3]: built for every p (a strict slope on each part's own bracket)")
+check(level_box("_root_x*_root_x - p", "-3", "3", "-2", "2", 1, 4) == C.OPERATIONAL,
+      "x^2 = p for p in [1, 4], TWO roots: one of them is built (the bracket is aimed at ONE root, not at the hull of "
+      "both — aimed at the hull, the slope cannot be strict and the law came out OPEN, 2026-11-13)")
+check(level_box("(_root_x - p)*(_root_x - p)*(_root_x - p)", "0", "5", "1", "2", 1, 2) == C.FORMAL,
+      "PLANTED (x - p)^3 = 0 for p in [1, 2]: a sign change for every p, the slope 0 at the root — FORMAL, never built")
+# a branch whose condition cancels (a*(x/a) - x is identically 0): decided by the mean value form, so the slope reads
+gb = ast.parse("ifpos(1 - (a*(x/a) - x), x*x, 0 - 100)", mode="eval").body
+check(C._sgn(C._dg(gb, "x"), {"x": (F(3), F(5)), "a": (F(7), F(7))}) == 1
+      and C._sgn(C._dg(ast.parse("ifpos(x - 4, x, 0 - x)", mode="eval").body, "x"), {"x": (F(3), F(5))}) is None,
+      "a branch whose condition cancels is decided by the mean value form; a real switch inside the box stays undecided")
+
 if FAILS:
     print(f"IMPLICIT POINT RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)

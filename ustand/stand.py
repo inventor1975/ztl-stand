@@ -1678,21 +1678,29 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
             if got_i is None:
                 impl_fail = f"{n}: {how_i}"
                 break
-            # THE ROOT MUST BE SHOWN TO EXIST (2026-11-12, the curator: "OPEN — honesty above all"). ZTL proved an
-            # ENCLOSURE of the roots; that a root exists for every value of the box is a second fact, shown here by a
-            # strict sign change with the law continuous between (checker.implicit_exists) — or the design is OPEN.
-            # Before: a law jumping across zero with no root at all was EARNED with x ~ the jump.
+            # DOES THE QUANTITY DENOTE? (2026-11-12, the curator: "we keep operationality"; ZTL v2.1.6 §25: "the q
+            # such that the law holds" is a definite description — it denotes only a grounded satisfier, and existence
+            # is earned.) ZTL's kernel proved an ENCLOSURE of the roots in the search window; that a root is there is
+            # a second atom. The checker tries to BUILD one (checker.implicit_exists: OPERATIONAL = a sign change with
+            # the slope bounded away from zero, the rule of ZTL's ZRootPar.par_root; FORMAL = only the intermediate
+            # value theorem). The marks go to ZTL's JUDGE, which says what the claim about the quantity is worth —
+            # the stand does not write that verdict itself. Before: a law jumping across zero with no root at all was
+            # EARNED around the jump (the kernel's conditional "if a root, then in range" shown as "in range").
             ex_box = {k: (v, v) for k, v in fixed.items()}
             ex_box.update(boxes)
             try:
-                ex_ok, ex_how = C.implicit_exists(text, ex_box, got_i[0], got_i[1])
+                ex_level, ex_how = C.implicit_exists(text, ex_box, got_i[0], got_i[1])
             except (C.CheckError, ZeroDivisionError, ValueError) as e:
-                ex_ok, ex_how = False, f"the existence of its root could not be read: {e}"
-            if not ex_ok:
-                impl_fail = f"{n}: {ex_how}"
+                ex_level, ex_how = C.NOT_SHOWN, f"the existence of its root could not be read: {e}"
+            ex_disp, ex_dirty = _root_claim(ex_level)
+            if ex_disp != "EARNED":
+                impl_fail = (f"{n}: ZTL's judge on \"a root in the search window, and every root there in its range — "
+                             f"or a root outside the window\": {ex_disp}, to be verified: {', '.join(ex_dirty)}. "
+                             f"{ex_how[0].upper() + ex_how[1:]}")
                 break
+            how_i = how_i + "; " + ex_how + "; ZTL's judge on the claim about the quantity: EARNED"
             def_ranges[n] = (got_i[0], got_i[1], "implicit")
-            impl_how[n] = how_i + "; " + ex_how
+            impl_how[n] = how_i
         if impl_fail:
             undecided += 1
             undecided_before_earned += 1
@@ -2329,6 +2337,26 @@ def _independent_hit(laws, point, derived, reqs):
 
 def _is_implicit(e):
     return isinstance(e, ast.Call) and isinstance(e.func, ast.Name) and e.func.id == "implicit"
+
+
+ROOT_CLAIM = "((in_window & ok_in) | (outside & ok_out))"
+ROOT_ATOMS = {"in_window": "a root of the law exists in the search window (built: a sign change with the slope "
+                           "bounded away from zero)",
+              "ok_in": "every root in the window lies in the proved range",
+              "outside": "a root outside the search window (nobody looked: widen `search`)",
+              "ok_out": "that root's value"}
+
+
+def _root_claim(level):
+    """What ZTL's judge says of the claim about an implicit quantity, from the marks the checks earned: `in_window`
+    is T only when the checker BUILT a root (operational), `ok_in` is T by the kernel's enclosure certificate, and
+    nobody looked outside the window. -> (disposition, the dirty atoms in words). (MEASURED 2026-11-12 on the judge:
+    built -> EARNED; not built -> OPEN, dirty in_window, outside, ok_out.)"""
+    import ztljudge
+    marks = {"in_window": "T" if level == C.OPERATIONAL else "Z", "ok_in": "T", "outside": "Z", "ok_out": "Z"}
+    r = ztljudge.judge(ROOT_CLAIM, marks)
+    dirty = [ROOT_ATOMS[a] for a in ("in_window", "outside") if a in (r.get("dirty") or [])]
+    return r.get("disposition"), dirty
 
 
 def _witness_first(laws, fixed, boxes, derived, reqs, violation):

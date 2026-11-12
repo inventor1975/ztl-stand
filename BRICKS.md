@@ -277,13 +277,21 @@ quantity.
 - More than one root in `search` (x² = p on [-3, 3]): the range holds every branch, and a requirement must hold on
   all of them. Narrow `search` to the physical branch if you mean one.
 - No root in `search` for a design: that design is OPEN, with the reason. Widen `search` if it is too narrow.
-- **The root must be SHOWN TO EXIST** (since 2026-11-12). ZTL proves an enclosure of the roots; that a root exists for
-  every value of the box is a second fact, and the stand shows it — two values of Q where the law keeps strictly
-  opposite signs over the box, with the law continuous between (no pole, every `if` there decided), per part of a
-  partition of the box — or the design is OPEN with that reason. So a law that JUMPS across zero (an `if` whose
-  branches disagree at the switch), a pole with a sign change, a root that only touches zero, and a `search` that
-  some values of the box have no root in are all OPEN, never EARNED around a root that is not there — and never
-  REFUTED "at a point" that has none. Two roots (x² = p) are shown by the sign change between an end and the middle.
+- **The root must be BUILT** (since 2026-11-12/13; ZTL keeps the operational register). "The Q such that the law
+  holds" is a definite description: it denotes only a satisfier that exists, and existence is earned. ZTL's kernel
+  proves an ENCLOSURE of the roots in `search`; that a root is there is a second fact, with two possible grounds:
+  - OPERATIONAL — per part of a partition of the box, a bracket where the law keeps strictly opposite signs at the two
+    ends over the whole part AND its slope in Q keeps one strict sign (bounded away from zero). This is the rule ZTL
+    proves in Lean with zero axioms (`ZRootPar.par_root`, `tree_root`): the root is built, and is the only one in the
+    bracket. `--prove` gives that theorem for an EARNED verdict; without it the stand's checker reads the same rule.
+  - FORMAL — the sign change with the law only continuous between (the classical intermediate value theorem): "a root
+    exists", with no object built. Said in the output, and NOT enough for a verdict.
+  The marks go to ZTL's JUDGE as the claim "(a root in the window & every root there in its range) | (a root outside
+  the window)", and the stand prints the judge's disposition: built -> EARNED; not built -> OPEN, with what is to be
+  verified named. So a law that JUMPS across zero, a pole with a sign change, a root that only touches zero or has a
+  zero slope, and a `search` some values of the box have no root in are OPEN — never EARNED around a root that is not
+  there, and never REFUTED "at a point" that has none. With several roots (x² = p) one of them is built and the range
+  holds every one: the claim is "a root exists, and every root is in range", not "the root".
 - Inside a certificate (an extreme inside the box), Q enters as one variable over its proved range: the pump's
   power `rho*g*Q*(H0 - a*Q^2)/eta` peaks INSIDE Q's range and is still proved.
 - Version 1 limits, each a BRICK ERROR: an implicit law may use only given and catalog quantities besides Q (put
