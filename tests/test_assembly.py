@@ -86,6 +86,23 @@ check(r["unknowns"] == 2 * (nx + 1) * (ny + 1) and lo <= total <= hi and float(h
 check(mid["lo"] > 0 and f0["lo"] > 0 and f1["hi"] < 0 and abs(float(f0["nominal"] + f1["nominal"])) < 1e-9,
       f"... the middle moves with the load, and the shear flow at the two ends is equal and opposite - with proved signs "
       f"({float(f0['lo']):.4f} .. {float(f0['hi']):.4f}; {float(f1['lo']):.4f} .. {float(f1['hi']):.4f})")
+# many displacements at once take the batch path: the same proved values as one by one, in a fraction of the time
+from ustand import judge_ztl  # noqa: E402,F401  (puts ZTL on the path)
+import zenergy as ZE          # noqa: E402
+many = {**grid, "outputs": [{"u": [f"n{i}_{j}", "Y"]} for i in range(nx + 1) for j in range(ny + 1)]}
+t0 = time.time()
+rb = A.solve(many)["outputs"]
+tb = time.time() - t0
+parts_, f_, dof_, _meta = A.build(many)
+ones = ZE.certify_many(parts_, f_, [{dof_[(f"n{i}_{j}", "Y")]: F(1)} for i in (0, nx // 2, nx) for j in (0, ny)], len(dof_))
+pick = [rb[i * (ny + 1) + j] for i in (0, nx // 2, nx) for j in (0, ny)]
+check(len(rb) == (nx + 1) * (ny + 1) and all(p["lo"] <= p["hi"] and o["lo"] <= p["hi"] and p["lo"] <= o["hi"] for p, o in zip(pick, ones))
+      and all(float(p["hi"] - p["lo"]) <= float(o["hi"] - o["lo"]) + 1e-9 for p, o in zip(pick, ones)),
+      f"{len(rb)} displacements through the batch ({tb:.1f} s): each proved range meets the one computed alone, with the panels in their own ranges")
+exact = {**many, "elements": [dict(e, g="20") if e["type"] == "panel" else e for e in many["elements"]]}
+re_ = A.solve(exact)["outputs"]
+check(all(float(x["hi"] - x["lo"]) < 1e-9 for x in re_) and all(x["lo"] <= x["nominal"] <= x["hi"] for x in re_),
+      "with exact stiffnesses the batch's ranges are a rounding width (under 1e-9) around the value")
 # refusals: a wrong model is refused in words, never solved
 free_y = {"nodes": {"A": [0, 0], "B": [1, 0]}, "fixed": [["A", "X"], ["A", "Y"]], "elements": [{"id": "ab", "type": "bar", "a": "A", "b": "B", "k": "1"}],
           "loads": [["B", "X", "1"]], "outputs": [{"u": ["B", "X"]}]}
