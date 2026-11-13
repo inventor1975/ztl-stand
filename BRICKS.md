@@ -623,6 +623,36 @@ short list of requirements.
   -10.192083141099], every end exact, ~55 min per displacement (2026-10-16).
 - Examples (examples/truss): the benchmark's cantilever at 12 and 20 floors (bench/hard-tasks/mkcant.py).
 
+## 7j. An assembly of bars, springs and shear panels (since 2026-11-13) — `ustand.assembly`
+
+A plane linear elastic model stated element by element — the model an engineer draws for a roof or floor diaphragm:
+chords and collectors as axial bars, the deck as rectangular shear panels, the braced frames as springs to ground.
+It is not a brick section: call it from Python.
+
+    from ustand import assembly
+    r = assembly.solve({
+        "nodes": {"bl": [0, 0], "br": [4, 0], "tr": [4, 2], "tl": [0, 2]},
+        "fixed": [["bl", "X"], ["bl", "Y"], ["br", "X"], ["br", "Y"], ["tl", "Y"], ["tr", "Y"]],
+        "elements": [{"id": "p",   "type": "panel",  "nodes": ["bl", "br", "tr", "tl"], "g": "12"},
+                     {"id": "top", "type": "bar",    "a": "tl", "b": "tr", "k": "1000"},
+                     {"id": "s",   "type": "spring", "node": "tr", "dir": "X", "k": ["90", "110"]}],
+        "loads": [["tr", "X", "24"]],
+        "outputs": [{"flow": "p"}, {"u": ["tr", "X"]}, {"force": "top"}]})
+
+- `bar`: axial stiffness `k` = EA/L between two nodes (its direction must be exact: a rational length — on a grid it
+  always is). `spring`: a node's X or Y to ground. `panel`: the corners of a rectangle along the axes, in the order
+  bottom-left, bottom-right, top-right, top-left; `g` is the shear stiffness G' in force per length — the panel carries
+  a constant shear flow q = G' x (its shear strain).
+- Every stiffness is a number or a range `[low, high]` — that element's own tolerance.
+- Outputs: `u` a displacement; `force` a bar's tension or the force in a spring; `flow` a panel's shear flow. Each
+  comes back as `nominal`, `lo`, `hi` (exact fractions): a proved two-sided range.
+- Units are yours: one consistent system. The unit layer of the bricks is not involved.
+- A model that is a mechanism (no support; a displacement nothing holds) is refused with what is loose, never solved.
+- With exact stiffnesses the answer is exact. Measured: 574 unknowns, 790 elements, every panel's flow — 0.6 s. With
+  every panel in its own +-1 % range the largest flow is proved within +-2.5 %; with +-10 %, within +-33 %: a range on
+  hundreds of elements at once is a worst case over all of them. Give a range only to what is uncertain.
+- It proves the statics of the model as stated — not that the model is the structure.
+
 ## 7d. components (optional) — a system of devices, each proved once (since 2026-10-12)
 
 The curator's example: a 230 V socket, a 5 V adapter, a phone's charging board, a battery — four devices, each
