@@ -127,9 +127,37 @@ def _unit_from_words(t):
     return unit, n, ""
 
 
-def mentions(text):
+# FEET AND INCHES WRITTEN TOGETHER (2026-11-13, MEASURED on a drawing note: 3'-6" was read as "3 ft" and "-6 in" - the
+# dash of the notation taken for a minus sign, and a model that needed the height wrote "3 ft minus (-6 in)"). The
+# dash between feet and inches is a separator. ONE length: feet + inches/12, in ft. Only the two unambiguous forms:
+# the marks (3'-6", 3' 6", 5'-10 1/2") and the words joined by a dash (3 ft-6 in); "12 ft 6 in" with a plain space
+# stays two numbers, because "30 ft 6 in deep" is two quantities as often as one.
+_INCH = r"(\d+(?:\.\d+)?)(?:[ -](\d+)/(\d+))?"
+FTIN_RE = re.compile(
+    rf"(?<![\w.'\u2032-])(\d+)\s*(?:['\u2032]\s*[-\u2013]?\s*{_INCH}\s*(?:\"|\u2033|'')"
+    rf"|(?:ft|feet|foot)\s*[-\u2013]\s*{_INCH}\s*(?:in\b\.?|inch(?:es)?\b|\"))", re.I)
+
+
+def _feet_inches(text):
     out = []
+    for m in FTIN_RE.finditer(text):
+        g = m.groups()
+        inch, num, den = (g[1], g[2], g[3]) if g[1] is not None else (g[4], g[5], g[6])
+        try:
+            v = F(g[0]) + (F(inch) + (F(int(num), int(den)) if num else 0)) / 12
+        except (ValueError, ZeroDivisionError):
+            continue
+        out.append(Mention(v, "ft", "ft", m.start(), m.end(),
+                           f"feet and inches written together: {m.group(0).strip()!r} read as {v} ft"))
+    return out
+
+
+def mentions(text):
+    out = _feet_inches(text)
+    taken = [(m.start, m.end) for m in out]
     for m in NUM_RE.finditer(text):
+        if any(a <= m.start(1) < b for a, b in taken):
+            continue                                      # a part of a feet-and-inches length already read whole
         raw = m.group(1)
         try:
             v = _num(raw)
@@ -165,10 +193,19 @@ def mentions(text):
             if u is not None:
                 unit, unit_text = u, rest[ws:ws + n]
                 end += ws + n
+            else:
+                # the unit in brackets right after the number - "1.5 (ft)" - when the brackets hold a unit and
+                # nothing else (2026-11-13, MEASURED: a criteria clause writes its offsets so)
+                pm = re.match(r"[ \t]*\(([^()\n]{1,14})\)", rest)
+                if pm:
+                    u2, n2, note2 = _unit_from_words(pm.group(1).strip())
+                    if u2 is not None and n2 == len(pm.group(1).strip()):
+                        unit, unit_text, note = u2, pm.group(1).strip(), note2
+                        end += pm.end()
         if " " in raw.strip("-\u2212"):
             note = (note + "; " if note else "") + f"digits grouped by a plain space: {raw!r} read as {v}"
         out.append(Mention(v, unit_text.strip(), unit, start, end, note))
-    return out
+    return sorted(out, key=lambda x: x.start)
 
 
 _TEMP_ABS = {"degF": (F(5, 9), F(45967, 100)), "degC": (F(1), F(27315, 100))}

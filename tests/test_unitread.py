@@ -84,6 +84,18 @@ try:
     check(False, "a prefix on kip is refused")
 except Exception:
     check(True, "a prefix on kip is refused")
+# FEET AND INCHES WRITTEN TOGETHER (2026-11-13: 3'-6" had been read as "3 ft" and "-6 in")
+pairs = lambda t: [(m.value, m.unit) for m in R.mentions(t)]      # noqa: E731
+check(pairs("parapet height 3'-6\" above the deck") == [(F(7, 2), "ft")], "3'-6\" is ONE length, 7/2 ft: the dash is a separator, not a minus")
+check(pairs("3 ft-6 in") == [(F(7, 2), "ft")] and pairs("3' 6\"") == [(F(7, 2), "ft")], "the words joined by a dash, and the marks with a space, read the same")
+check(pairs("5'-10 1/2\"") == [(F(47, 8), "ft")], "inches with a fraction: 5'-10 1/2\" is 47/8 ft")
+check(pairs("joists at 6'-0\" on centre, 30'-0\" span") == [(F(6), "ft"), (F(30), "ft")], "two such lengths in one sentence stay two")
+check(pairs("height 12 ft 6 in") == [(F(12), "ft"), (F(6), "in")], "PLANTED a plain space between the words is NOT joined (30 ft 6 in deep is two quantities as often as one)")
+check(pairs("at -6 in below") == [(F(-6), "in")] and pairs("a 30' bay") == [(F(30), "ft")], "a real minus and a lone foot mark are read as before")
+check(R.near_match(R.mentions("height 3'-6\" min")[0], "3'-6\"", "height 3'-6\" min") and "read as 7/2 ft" in R.mentions("height 3'-6\" min")[0].note,
+      "such a length is found by `near` as it is written, and the note says how it was read")
+check(pairs("offset 1.5 (ft)") == [(F(3, 2), "ft")] and pairs("12 (in)") == [(F(12), "in")], "a unit in brackets right after the number")
+check(pairs("factor 2 (maximum)") == [(F(2), None)], "PLANTED brackets that hold a word, not a unit, give no unit")
 if FAILS:
     print(f"UNITREAD RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)
