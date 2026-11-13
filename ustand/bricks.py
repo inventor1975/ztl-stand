@@ -656,6 +656,23 @@ def _add_constants(b):
         if c in used and c not in b["quantities"]:
             b["quantities"][c] = {"role": "given", "value": "1", "unit": _HV0.UNIT_CONSTANTS[c],
                                   "ground": "built-in unit constant of the library functions"}
+    # ONE OF A UNIT, BY NAME (2026-11-13): `one_ft`, `one_psf`, `one_in` — exactly 1 of that unit, added when a text
+    # names it and the brick does not declare it. FOR EMPIRICAL FORMULAS: a code writes `h = a L^(1/3) (p + b)^(1/4)
+    # - c` "with L in ft and p in psf" — it is a rule about NUMBERS, not a balanced equality, and the unit check
+    # rightly refuses it as written (a length to the power 1/3 is not a length). The honest form says which number is
+    # meant: `(L/one_ft)**(1/3)` is the pure number of L in feet, and `one_ft*(...)` gives the result its unit back.
+    # (MEASURED 2026-11-13: the kernel computes the fractional power of a pure number; the refusal was the unit
+    # layer's, and a model that met it derived the value by hand and, rightly, did not write it.)
+    for name in sorted(used):
+        mm = re.fullmatch(r"one_([A-Za-z%]\w*)", name)
+        if mm and name not in b["quantities"]:
+            from . import units as _U1
+            try:
+                _U1.parse(mm.group(1))
+            except _U1.UnitError:
+                continue                        # not a unit: the name stays undeclared and is refused as any other
+            b["quantities"][name] = {"role": "given", "value": "1", "unit": mm.group(1),
+                                     "ground": "built-in unit constant (exactly one of that unit)"}
     # the unit constants of the LIBRARY FUNCTIONS a text calls (ustand/hvac: value 1 in their unit, exact)
     defs = b.get("define") if isinstance(b.get("define"), dict) else {}
     if any(isinstance(t, str) and "ep_" in t for t in list(texts) + list(defs.values())):

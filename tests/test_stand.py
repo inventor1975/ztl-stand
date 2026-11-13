@@ -478,6 +478,27 @@ r_built = S.run(b13b, conflicts=False)
 check("pi undeclared: the built-in bracket is used — same verdict and design as the brick's own pi",
       r_decl["verdict"] == r_built["verdict"] and r_decl.get("closest_design") == r_built.get("closest_design"), str(r_built)[:200])
 check("load never edits the caller's brick (the constant went into a copy)", "pi" not in b13b["quantities"])
+# ONE OF A UNIT, BY NAME (2026-11-13): an empirical rule about numbers ("with L in ft"), said honestly
+b_emp = {"stand": "ztl-stand/1", "slots": {}, "catalog": {},
+         "quantities": {"L": {"role": "given", "value": "216", "unit": "ft"}, "k": {"role": "given", "value": "1/2", "unit": ""},
+                        "h": {"role": "derived", "unit": "ft"}},
+         "laws": [{"zfl": "h == one_ft*k*(L/one_ft)**(1/3)", "source": "an empirical rule, L in ft"}],
+         "requirements": [{"quantity": "h", "op": "within", "value": ["2.999", "3.001"], "why": "the cube root of 216 is 6"}]}
+r_emp = S.run(b_emp, conflicts=False)
+check("one_ft: the number of a length in feet takes a fractional power, and the result gets its unit back",
+      r_emp["verdict"] == "EARNED", str(r_emp)[:240])
+b_emp2 = json.loads(json.dumps(b_emp)); b_emp2["laws"][0]["zfl"] = "h == k*L**(1/3)"
+r_emp2 = S.run(b_emp2, conflicts=False)
+check("PLANTED the same rule written as if it balanced is still a unit error (a length to 1/3 is not a length)",
+      r_emp2["verdict"] == "BRICK ERROR" and "unit" in str(r_emp2.get("why", "")).lower(), str(r_emp2)[:200])
+b_emp3 = json.loads(json.dumps(b_emp)); b_emp3["laws"][0]["zfl"] = "h == one_bananas*k*(L/one_ft)**(1/3)"
+r_emp3 = S.run(b_emp3, conflicts=False)
+check("PLANTED one_<not a unit> is no constant: the name is refused as any undeclared name",
+      r_emp3["verdict"] == "BRICK ERROR" and "one_bananas" in str(r_emp3.get("why", "")), str(r_emp3)[:200])
+b_emp4 = json.loads(json.dumps(b_emp)); b_emp4["quantities"]["one_ft"] = {"role": "given", "value": "2", "unit": "ft"}
+b_emp4["requirements"][0]["value"] = ["4.76", "4.77"]
+r_emp4 = S.run(b_emp4, conflicts=False)
+check("a brick's own quantity named one_ft wins over the built-in (as with pi)", r_emp4["verdict"] == "EARNED", str(r_emp4)[:200])
 b14 = ex("power-16thW-or-quarterW")
 b14e = json.loads(json.dumps(b14))
 for q in b14e["requirements"]:

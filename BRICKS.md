@@ -390,6 +390,16 @@ the brick declares a quantity of that name itself (then the brick's own wins).
 - `pi` is a rational bracket 1e-15 wide, because the stand computes in exact fractions.
 - `g0`, `R_gas` and `c0` are exact by the definition of the SI.
 
+**One of a unit, by name (since 2026-11-13).** `one_ft`, `one_psf`, `one_in`, `one_K` — `one_` and a unit name —
+is exactly 1 of that unit, added the same way when a text names it. It is for the EMPIRICAL formulas of codes and
+standards: `h = a L^(1/3) (p + b)^(1/4) - c`, "with L in ft and p in psf", is a rule about numbers, not a
+balanced equality, and the stand refuses it as written (a length to the power 1/3 is not a length). Say which number
+is meant: `(L/one_ft)**(1/3)` is the pure number of L in feet; multiply by `one_ft` to give the result its unit:
+
+    "h == one_ft*(k*(L/one_ft)**(1/3)*((p + p10)/one_psf)**(1/4) - c)"
+
+with `k`, `c` pure numbers and `p10` a pressure. A name `one_x` where `x` is not a unit is not a constant.
+
 ### Things that are allowed (asked in the blind test)
 
 - A define may use earlier defines.
