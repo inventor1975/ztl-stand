@@ -718,6 +718,42 @@ structure whose parts act on one another: "choose the deck of each zone so that 
 - Tests: `tests/test_assembly_brick.py` (the section: selection, coupling, modes, the refutation rule),
   `tests/test_assembly.py` (the solver's door).
 
+## 7k. search (optional) — the climb, for designs too many to judge one by one (since 2026-11-14)
+
+By default the stand judges the designs cheapest first and stops at the first EARNED one: every cheaper design was
+refuted, the answer is the optimum (`optimal: true`). Large catalogues are cut by groups (a requirement read over a
+whole group of items at once). Through a structure (`assembly`) neither is enough: a design is a solve, and a group
+has no reading to be cut by.
+
+```json
+"search": "climb"
+```
+
+- **What it does.** UP: every slot starts at its cheapest item; a design that is not earned names the requirement it
+  fails, and ONE slot is raised to its next item by cost — a slot that requirement names (its bound or its quantity
+  reads the slot's field, directly or through the laws), the one whose step costs least; when it names none, any
+  slot, cheapest step. DOWN: from the first EARNED design each slot is tried one step cheaper; a design that is still
+  EARNED is taken and the trial starts again, until no slot can be lowered.
+- **What is judged.** Every design the search proposes is judged by the stand as usual (in every mode). The search
+  is trusted for nothing.
+- **What is claimed.** The design is EARNED like any other. `objective.optimal` is **false**, and `search` says what
+  was shown: each slot one step cheaper was judged and is not earned (`one_step_cheaper`), how many designs were
+  judged and how many never were. It is NOT shown that no cheaper design exists.
+  PLANTED in the tests: two slots, `A.cap + B.cap >= 16`, parts (6, 10 USD) (7, 12) (8, 15) (13, 19) — the climb
+  stops at 8 + 8 for 30 USD, and 6 + 13 holds for 29; `"search": "all"` finds 29 and proves it.
+- **A climb that finds nothing is OPEN**, with how many designs it judged — never "every design is refuted": it has
+  judged a handful.
+- **When it runs by itself:** a brick with a structure section and more than 2000 designs. `"search": "all"` judges
+  every design, cheapest first (the default elsewhere). `"search": "climb"` asks for the climb on any brick.
+- **Needs** an objective (nominal, not `"case": "worst"`); not with `where` or `"report": "all"` (version 1).
+- MEASURED (a real roof diaphragm: 2542 unknowns, six zones each choosing one of six deck configurations — 46 656
+  designs, one load case, the shear requirement of every zone): judged one by one, 1163 designs in 454 s and none
+  earned yet (about nine hours for the catalogue); a group cannot be cut — with the zones' stiffness a RANGE over two
+  adjacent items ZTL's proved shear flow is [0, 1034] lbf/ft where the flow is 384. The climb: 8.5 s, EARNED, 12
+  designs judged (6 steps up, 5 trials down), each zone one step cheaper REFUTED. (The capacities and prices of that
+  measurement were synthetic; the stiffnesses were the catalogue's.)
+- Tests: `tests/test_climb.py`.
+
 ## 7d. components (optional) — a system of devices, each proved once (since 2026-10-12)
 
 The curator's example: a 230 V socket, a 5 V adapter, a phone's charging board, a battery — four devices, each

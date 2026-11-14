@@ -4460,6 +4460,16 @@ check("assembly inside a brick: the stand chooses from a catalogue through a str
       "another, in every mode, cheapest; a refutation leaning on a proved range stands only over the whole range",
       "ASSEMBLY BRICK GREEN" in _as2.stdout, (_as2.stdout + _as2.stderr)[-400:])
 
+# THE CLIMB (BRICKS.md 7k, 2026-11-14): a design space too large to judge one by one — its own suite
+_cb = _sp_ip.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_climb.py")],
+                 capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parent.parent),
+                 env=dict(os.environ, PYTHONPATH=str(pathlib.Path(__file__).resolve().parent.parent)))
+check("the climb: the same design as judging every design on small catalogues, in a handful of judgements, with and "
+      "without modes; optimal is never claimed and the designs not judged are counted; PLANTED a catalogue where the "
+      "climb stops one dollar above the cheapest — not called optimal, and judging all finds the cheaper one; nothing "
+      "holds -> OPEN, not a refutation of the catalogue; a structure of 6561 designs climbed unasked",
+      "CLIMB GREEN" in _cb.stdout, (_cb.stdout + _cb.stderr)[-400:])
+
 # A MODULE'S CONTRACT TIGHTENED ONLY WHERE THE SYSTEM NEEDS IT (BRICKS.md 7d, 2026-11-14) — its own suite
 _cl = _sp_ip.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_components_lazy.py")],
                  capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parent.parent),

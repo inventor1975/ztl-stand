@@ -1038,8 +1038,11 @@ def run_modes(b, conflicts=False) -> dict:
     names_m = list(per_mode)
     checks = [(bm, B.implicit_laws(bm, [B.compile_expr(l["zfl"], bm.get("define")) for l in bm["laws"]]),
                _si_reqs(bm)) for bm in per_mode.values()]
-    pr = P.prune(b, checks) if not (b.get("objective") or {}).get("case") == "worst" else None
-    all_designs = pr[0] if pr is not None else list(designs(b))
+    from . import climb as CL
+    # a space too large to judge one by one is CLIMBED (ustand/climb.py): the designs are not listed
+    climb, climbing = None, CL.wanted(b, worst_case=(b.get("objective") or {}).get("case") == "worst")
+    pr = P.prune(b, checks) if not (b.get("objective") or {}).get("case") == "worst" and not climbing else None
+    all_designs = pr[0] if pr is not None else [] if climbing else list(designs(b))
     cost = None
     if b.get("objective"):
         expr = B.compile_expr(b["objective"]["minimize"], b.get("define"))
@@ -1050,18 +1053,33 @@ def run_modes(b, conflicts=False) -> dict:
 
         def cost(d):
             return _nominal_cost(b, d, node, base_laws)
-        all_designs.sort(key=cost)
+        if climbing:
+            climb = CL.Climb(b, cost)
+            all_designs = [climb.first()]
+        else:
+            all_designs.sort(key=cost)
     tried = undecided = undecided_before = 0
     closest = None
     report_all, outcomes, first_earned = b.get("report") == "all", [], None
+    earned_outs, last_req, i_d = {}, None, 0
     # PARALLEL (ustand/parallel.py): each design's per-mode runs computed ahead by workers, in this order
     PL.STATE["modes"] = (per_mode, all_designs)
     pre = PL.iterate(_mode_item, len(all_designs))
-    for design in all_designs:
+    while True:
+        if climb is not None and i_d and i_d == len(all_designs):
+            # the climb's next design, from how the last one came out (and which requirement it failed, in which mode)
+            nxt = climb.after(all_designs[i_d - 1], outcomes[-1]["verdict"],
+                              CL.blamed(b, last_req) if outcomes[-1]["verdict"] == "REFUTED" else ())
+            if nxt is not None:
+                all_designs.append(nxt)
+        if i_d >= len(all_designs):
+            break
+        design = all_designs[i_d]
+        i_d += 1
         tried += 1
         _tick(tried, len(all_designs), outcomes)
         results = {}
-        mres = next(pre)
+        mres = next(pre) if climb is None else _mode_item(i_d - 1)
         for m, bm in per_mode.items():
             r = mres[m]                         # = _run(_pinned(bm, design), conflicts=False, brief=True, loaded=True)
             if r["verdict"] in ("BRICK ERROR", "STAND FAULT", "STAND ERROR"):
@@ -1070,7 +1088,7 @@ def run_modes(b, conflicts=False) -> dict:
         verdicts = {m: r["verdict"] for m, r in results.items()}
         if all(v == "EARNED" for v in verdicts.values()):
             outcomes.append({"design": _label(design), "verdict": "EARNED"})
-            if first_earned is None:
+            if first_earned is None or climb is not None:
                 out = {"stand": "ztl-stand/1", "judge": f"ZTL {J.ztl_commit()}", "verdict": "EARNED",
                        "modes": list(modes), "designs_tried": tried, "undecided": undecided,
                        "design": _design_out(design),
@@ -1096,8 +1114,10 @@ def run_modes(b, conflicts=False) -> dict:
                             got += rp["proof"]["proved"]
                     out["proof_count"] = (f"{got} of {tot} requirement(s) over {len(per_mode)} modes proved as Lean "
                                           f"theorems; {tot - got} rest on ZTL's verdict alone")
-                first_earned = out
-            if not report_all:
+                earned_outs[id(design)] = out
+                if first_earned is None:
+                    first_earned = out
+            if not report_all and climb is None:
                 break
             continue
         refuted = {m: r for m, r in results.items() if r["verdict"] == "REFUTED"}
@@ -1109,7 +1129,7 @@ def run_modes(b, conflicts=False) -> dict:
                     closest = (over, design, m, r)
                 if best is None or over < best[0]:
                     best = (over, m, r)
-            req = best[2]["requirement"]
+            req = last_req = best[2]["requirement"]
             outcomes.append({"design": _label(design), "verdict": "REFUTED", "mode": best[1],
                              "fails": req.get("why") or f"{req['quantity']} {req['op']} {req['value']}",
                              "by_at_witness": best[2]["overshoot"], "unit": best[2].get("unit", ""),
@@ -1128,6 +1148,19 @@ def run_modes(b, conflicts=False) -> dict:
     pre.close()                     # the workers stop here (ahead of an EARNED design their work is not needed)
     group_info = {"refuted_by_groups": sum(abs(p[3]) for p in pr[1]), "groups_pruned": len(pr[1]),
                   "groups_read": pr[2]} if pr is not None else {}
+    if climb is not None:
+        group_info = dict(group_info, search=climb.report(_label))
+        if climb.best_design() is not None:
+            # the climb's answer: the cheapest EARNED design it took; of the optimum only what was judged (climb.py)
+            first_earned = earned_outs[id(climb.best_design())]
+            if first_earned.get("objective"):
+                first_earned["objective"].update(optimal=False, note=(
+                    "found by climbing, not by judging every cheaper design: no single slot can be made one step "
+                    f"cheaper (see `search`), and {climb.total - len(climb.verdict)} of {climb.total} designs were "
+                    "never judged — a cheaper combination may exist"))
+                first_earned["objective"].pop("ties", None)
+        else:
+            first_earned = None
     if first_earned is not None:
         listed, counts, cut = _listing(outcomes)
         first_earned.update(group_info)
@@ -1143,6 +1176,11 @@ def run_modes(b, conflicts=False) -> dict:
         base["excluded_by_where"] = _excluded(b, all_designs, pr)
     if cut:
         base["designs_not_listed"], base["listing"] = cut, "earned first, then open, then refuted"
+    if climb is not None:
+        return dict(base, verdict="OPEN",
+                    why=(f"the climb found no earned design: {len(climb.verdict)} of {climb.total} designs were judged in "
+                         f"every mode and none is earned ({climb.stopped or 'stopped'}); the others were never judged, "
+                         "so this is not a refutation of the catalogue — \"search\": \"all\" judges every design"))
     if undecided:
         return dict(base, verdict="OPEN", why=f"{undecided} design(s) could not be decided in every mode and none was earned")
     if closest is None and pr is not None and pr[1]:
@@ -1706,11 +1744,17 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
                                "(choices from a catalogue are)")
         return _run_continuous(b, [(b, reqs_given, laws)], conflicts)
     from . import prune as P
+    from . import climb as CL
     si_list = _si_reqs(dict(b, requirements=reqs_given))
+    # A SPACE TOO LARGE TO JUDGE ONE BY ONE is climbed (ustand/climb.py says why, and what is then claimed): the
+    # designs are not listed, the search proposes the next one from how the last came out
+    climb, climbing = None, CL.wanted(b, worst_case=(b.get("objective") or {}).get("case") == "worst")
     pr = P.prune(b, [(b, laws, si_list)]) \
-        if not (b.get("objective") or {}).get("case") == "worst" and not b.get("assembly") else None
+        if not (b.get("objective") or {}).get("case") == "worst" and not b.get("assembly") and not climbing else None
     if pr is not None:
         all_designs = pr[0]                # the survivors; the rest refuted in groups (blind test 3, c11)
+    elif climbing:
+        all_designs = []                   # filled as the climb goes
     else:
         all_designs = list(designs(b))
     objective = None
@@ -1728,19 +1772,35 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
 
         def cost(d):
             return _nominal_cost(b, d, node, laws)
-        all_designs.sort(key=cost)          # stable: catalog order breaks ties
+        if climbing:
+            climb = CL.Climb(b, cost)
+            all_designs = [climb.first()]
+        else:
+            all_designs.sort(key=cost)          # stable: catalog order breaks ties
         objective = (b["objective"]["minimize"], cost)
 
+    earned_this = {}            # id(design) -> what an EARNED design is finalised from (the climb takes a later one)
     prev_design, und_mark = None, 0
     i_design, tight_now = 0, set()          # designs judged a second time with implicit edges pulled in
     # PARALLEL (ustand/parallel.py, JOBS > 1 only): each design judged ALONE by a worker, ahead, in this order; a
     # design a worker REFUTED is taken with the worker's witness (point, values, requirement, overshoot — checked
     # exactly there); every other design is judged here as before
     pre, pre_res = None, None
-    if PL.JOBS[0] > 1 and not brief and len(all_designs) > 1:
+    if PL.JOBS[0] > 1 and not brief and len(all_designs) > 1 and climb is None:
         PL.STATE["plain"] = (b, all_designs)
         pre = PL.iterate(_plain_item, len(all_designs))
-    while i_design < len(all_designs):
+    while True:
+        if climb is not None and prev_design is not None and i_design == len(all_designs):
+            # the climb's next design, from how the last one came out (and which requirement it failed)
+            how_out = ("EARNED" if id(prev_design) in earned_ids else
+                       "REFUTED" if id(prev_design) in refuted_by else "OPEN")
+            nxt = climb.after(prev_design, how_out,
+                              CL.blamed(b, reqs_given[reqs.index(refuted_by[id(prev_design)][0])])
+                              if how_out == "REFUTED" else ())
+            if nxt is not None:
+                all_designs.append(nxt)
+        if i_design >= len(all_designs):
+            break
         design = all_designs[i_design]
         i_design += 1
         if prev_design is not design:
@@ -2192,6 +2252,7 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
                     impl_how)
             if earned is None:
                 earned = this
+            earned_this[id(design)] = this
             if worst_case:
                 # Ub: a proved upper bound of the objective over the box (the readings' ranges);
                 # L: its largest value at the checker's corners — the worst case reaches at least L
@@ -2213,7 +2274,7 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
                         continue
                     L = lo_c if L is None else max(L, lo_c)
                 earned_all[id(design)] = (this, Ub, L)
-            if not report_all:
+            if not report_all and climb is None:
                 break
             continue
         if corner_hit:
@@ -2250,6 +2311,9 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
         finalize(prev_design, und_mark)
     if pre is not None:
         pre.close()                 # the workers stop here
+    if climb is not None:
+        # the climb's answer is the cheapest EARNED design it took (not the first one earned on the way up)
+        earned = earned_this.get(id(climb.best_design())) if climb.best_design() is not None else None
     worst_note = None
     if worst_case and earned_all:
         bounded = [(Ub, i, t, L) for i, (t, Ub, L) in earned_all.items() if Ub is not None]
@@ -2283,6 +2347,8 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
         outcomes = _pruned_outcomes(pr, b) + outcomes
         out["refuted_by_groups"] = sum(abs(p[3]) for p in pr[1])
         out["groups_pruned"], out["groups_read"] = len(pr[1]), pr[2]
+    if climb is not None:
+        out["search"] = climb.report(_label)
     out["designs"], out["designs_count"], cut = _listing(outcomes)
     if any(o["verdict"] == "REFUTED" for o in outcomes):
         # blind test 2 (c05, c07): "by" read as the worst shortfall — it is the one at the witness found
@@ -2309,6 +2375,12 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
             ties = _ties(all_designs, design, objective[1], outcomes)
             if ties:
                 out["objective"]["ties"] = ties
+            if climb is not None:
+                # WHAT A CLIMB SHOWS (climb.py): the design is earned; of the optimum only what was judged
+                out["objective"].update(optimal=False, note=(
+                    "found by climbing, not by judging every cheaper design: no single slot can be made one step "
+                    f"cheaper (see `search`), and {climb.total - len(climb.verdict)} of {climb.total} designs were "
+                    "never judged — a cheaper combination may exist"))
         how = {}
         for r in reqs:
             q = r["quantity"]
@@ -2376,6 +2448,12 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
     elif worst_case and earned_all:
         out.update(verdict="OPEN", why="designs were earned, but the worst case of the objective could not be bounded "
                                        "for any of them")
+    elif climb is not None:
+        # a climb that finds nothing has judged a handful of designs: it refutes none of the others
+        out.update(verdict="OPEN",
+                   why=(f"the climb found no earned design: {len(climb.verdict)} of {climb.total} designs were judged "
+                        f"and none is earned ({climb.stopped or 'stopped'}); the others were never judged, so this is "
+                        "not a refutation of the catalogue — \"search\": \"all\" judges every design"))
     elif undecided:
         out.update(verdict="OPEN", why=f"{undecided} design(s) could not be decided and none was earned")
     elif closest is None and pr is not None and pr[1]:
