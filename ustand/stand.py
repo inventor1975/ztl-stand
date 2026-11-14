@@ -2323,6 +2323,15 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
             # --prove (2026-11-08): the earned design's requirements as Lean theorems, with an honest count
             fx_p, bx_p, dv_p, gr_p = frame(b, design)
             out["proof"] = PV.prove(laws, fx_p, bx_p, dv_p, gr_p, reqs)
+            if b.get("assembly") and isinstance(out["proof"], dict):
+                # WHAT THESE THEOREMS DO NOT COVER (said in the output, not left to be assumed): the structure's
+                # results enter the theorem as data
+                out["proof"]["structure"] = (
+                    "the results of the structure section (" + ", ".join(sorted(_assembly_needed(b)))
+                    + ") enter these theorems as DATA: each theorem says the requirement holds for every value in "
+                      "the result's proved range. That the structure's solution lies in that range is ZTL's "
+                      "certificate (zenergy; its method is proved in lean/ZEnergy.lean), not a Lean theorem of "
+                      "this instance")
     elif worst_case and earned_all:
         out.update(verdict="OPEN", why="designs were earned, but the worst case of the objective could not be bounded "
                                        "for any of them")

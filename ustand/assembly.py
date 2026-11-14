@@ -222,6 +222,10 @@ def solve(spec, jobs=1, kkey=None):
             raise AssemblyError(f"output {o!r}: one of {{\"u\": [node, dir]}}, {{\"force\": element}}, {{\"flow\": panel}}")
     out = [None] * len(asked)
     kctx = None
+    # EXACT MEMBERS NEED NO SOLVE PER OUTPUT (zenergy's trial=False, 2026-11-14): with every stiffness exact there is
+    # no first order to sharpen, and one residual bounds every output - a range about 1e-10 wide instead of 1e-18,
+    # which the stand reads as an enclosure either way. With a tolerance on any element the full path is kept.
+    trial = any(pt["t"] != 0 for pt in parts)
     try:
         if n > ZE.EXACT_UP_TO:
             held = _KCTX.get(kkey) if kkey is not None else None
@@ -243,13 +247,13 @@ def solve(spec, jobs=1, kkey=None):
             zero = next((k for k, pt in enumerate(parts) if pt["t"] == 0), None)
             es = [e for _i, _l, e in plain]
             if zero is not None and len(es) >= ZE.BATCH_FROM and n > ZE.EXACT_UP_TO:
-                rs = ZE.certify_many(parts, f, es, n, jobs=jobs, scale=[zero] * len(es), kctx=kctx)
+                rs = ZE.certify_many(parts, f, es, n, jobs=jobs, scale=[zero] * len(es), kctx=kctx, trial=trial)
             else:
                 rs = ZE.certify_many(parts, f, es, n, jobs=jobs, kctx=kctx)
             for (i, label, _e), r in zip(plain, rs):
                 out[i] = {"output": label, "nominal": r["nominal"], "lo": r["lo"], "hi": r["hi"]}
         if scaled:
-            rs = ZE.certify_many(parts, f, [e for _i, _l, e, _p, _c in scaled], n, jobs=jobs, scale=[p for _i, _l, _e, p, _c in scaled], kctx=kctx)
+            rs = ZE.certify_many(parts, f, [e for _i, _l, e, _p, _c in scaled], n, jobs=jobs, scale=[p for _i, _l, _e, p, _c in scaled], kctx=kctx, trial=trial)
             for (i, label, _e, _p, c), r in zip(scaled, rs):
                 out[i] = {"output": label, "nominal": c * r["nominal"], "lo": c * r["lo"], "hi": c * r["hi"]}
     except AssemblyError:
