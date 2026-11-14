@@ -358,6 +358,16 @@ def _with_inputs(brick, values):
 
 TIGHT_TRIES = (F(1, 10 ** 6), F(1, 10 ** 4), F(1, 100))   # the margins tried past an attained extreme
 CORNERS_MAX = 10                                            # toleranced quantities read at every corner
+# AN OUTPUT READ THROUGH A FUNCTION OR AN IMPLICIT ROOT IS TIGHTENED ONLY WHERE THE SYSTEM NEEDS IT (2026-11-14, the
+# curator's choice of three). Its value at a point is the checker's proved interval, and each bound proved past it is
+# a certificate search over the whole law. MEASURED on a cooling tower's makeup water (2.5 MB of law): the band's own
+# judgement 0.2 s; one bound at a margin of 1 % - 29 s, at 0.01 % - 38 s, at one millionth - not finished in minutes;
+# three candidates x two ends at the tightest margin first would be about an hour, for a system that the outer reading
+# already earns. So such an output starts as the stand's outer reading (proved, like every range here), and the
+# system's judgement asks for one step more - LAZY_STEPS, the loosest margin first - only while it is undecided
+# (_run_one). An output with exact values at its points is tightened at once, as before.
+LAZY_STEPS = (F(1, 100), F(1, 10 ** 4), F(1, 10 ** 6))
+_WIDE = set()        # the names whose value at a point was an interval, in the last _attained
 
 
 def _attained(sub, names):
@@ -380,18 +390,26 @@ def _attained(sub, names):
         pts.append({k: (boxes[k][0] + boxes[k][1]) / 2 for k in keys})
         scale = {n: U.parse(b["quantities"][n].get("unit") or "")[0] for n in names}
         got = {}
+        _WIDE.clear()
         for pt in pts:
             vals = C.solve_at(laws, dict(fixed, **pt), derived)
             for n in names:
-                v = vals[n] / scale[n]
-                lo, hi = got.get(n, (v, v))
-                got[n] = (min(lo, v), max(hi, v))
+                # a value through a function or an implicit root is the checker's proved INTERVAL at the point
+                # (2026-11-14: divided as a number it raised, the aid said None, and a module with such a law kept
+                # the stand's outer reading - a chiller's rejected heat 297..728 kW where it is ~467 kW, and the
+                # system around it OPEN). Its outer ends serve: the proved bound starts just past them.
+                v_lo, v_hi = vals[n] if isinstance(vals[n], tuple) else (vals[n], vals[n])
+                if isinstance(vals[n], tuple):
+                    _WIDE.add(n)
+                v_lo, v_hi = v_lo / scale[n], v_hi / scale[n]
+                lo, hi = got.get(n, (v_lo, v_hi))
+                got[n] = (min(lo, v_lo), max(hi, v_hi))
         return got
     except Exception:                                    # noqa: BLE001 — a search aid, never a verdict
         return None
 
 
-def _tighten(sub, base, n, outer, attained):
+def _tighten(sub, base, n, outer, attained, tries=None):
     """The proved range of n made TIGHT (2026-10-12, real round 4: a contract was the stand's OUTER reading — a name
     that appears twice did not cancel, k01's remainder +-0.19 V against +-0.02 V true): the bound just past the attained
     extreme, proved as an ordinary requirement (a certificate, ZTL checks it); widened if not proved, never past the
@@ -403,7 +421,7 @@ def _tighten(sub, base, n, outer, attained):
     from .stopflag import check as _stop_check
     for side, op in ((0, ">="), (1, "<=")):
         a = a_lo if side == 0 else a_hi
-        for m in TIGHT_TRIES:
+        for m in tries or TIGHT_TRIES:
             _stop_check()
             c = a - m * span if side == 0 else a + m * span
             if (side == 0 and c <= lo_o) or (side == 1 and c >= hi_o):
@@ -469,12 +487,23 @@ def _judge_band(brick, base, ins, outs, band):
         got = {"earned": True, "why": None, "outputs": {}, "affine": {}}
         rd = lambda n: tuple(B.num(x.split(" ")[0]) for x in r["guaranteed"][n])
         att = _attained(sub, list(outs) + list(res_name.values())) if not brick.get("components") else None
-        tight = lambda n: _tighten(sub, base, n, rd(n), att[n]) if att and n in att else rd(n)
+        wide = set(_WIDE) if att else set()
+        # (a value that is an interval at a point: the outer reading now, a step tighter on demand - LAZY_STEPS)
+        tight = lambda n: rd(n) if not att or n not in att or n in wide else _tighten(sub, base, n, rd(n), att[n])
         for n in outs:
             got["outputs"][n] = tight(n)
+            if att and n in att and n in wide:
+                got.setdefault("lazy", {})[n] = {"sub": sub, "base": base, "outer": rd(n), "attained": att[n],
+                                                 "steps": {}}
         for o, nm in res_name.items():
             if nm in r["guaranteed"]:
                 got["affine"][o] = (dict(ks[o]), tight(nm))
+                if att and nm in att and nm in wide:
+                    # the remainder of the affine form is what the SYSTEM reads when one band is touched: it takes
+                    # the same steps on demand as the output itself
+                    got.setdefault("lazy", {})[nm] = {"sub": sub, "base": base, "outer": rd(nm), "attained": att[nm],
+                                                      "steps": {}}
+                    got.setdefault("affine_res", {})[o] = nm
         got["how"] = {n: (r.get("how") or {}).get(n) for n in outs}
         if r.get("design"):
             got["design"] = r["design"]
@@ -483,6 +512,22 @@ def _judge_band(brick, base, ins, outs, band):
                "why": f"{r.get('verdict')}: {str(r.get('why') or r.get('fails') or '')[:300]}"}
     _CACHE[key] = got
     return got
+
+
+def _at_level(j, o, level, start=None):
+    """The range of output o in the band's judgement j after `level` steps of tightening on demand (0: as judged).
+    Each step is proved once per (brick, band) and kept; the steps' ranges are all proved, so their meet is.
+    start: the range as judged, for a name that is not an output (an affine form's remainder)."""
+    lo, hi = start if start is not None else j["outputs"][o]
+    lz = (j.get("lazy") or {}).get(o)
+    if lz is None:
+        return lo, hi
+    for k in range(min(level, len(LAZY_STEPS))):
+        if k not in lz["steps"]:
+            lz["steps"][k] = _tighten(lz["sub"], lz["base"], o, lz["outer"], lz["attained"], tries=(LAZY_STEPS[k],))
+        a, b = lz["steps"][k]
+        lo, hi = max(lo, a), min(hi, b)
+    return lo, hi
 
 
 def contract(brick, base, cname="the component"):
@@ -515,9 +560,11 @@ def _order(comps, connect):
     return order
 
 
-def expand(raw, base, pick=None):
+def expand(raw, base, pick=None, levels=None, lazy=None):
     """The system brick -> (a flat brick with every component output a given range, the components' report, a reason
-    the system cannot be judged or None). pick: {component: candidate index} for chosen components."""
+    the system cannot be judged or None). pick: {component: candidate index} for chosen components.
+    levels: {"C.out": steps of tightening on demand} (LAZY_STEPS); lazy, when given, is filled with what could still be
+    tightened: {"more": {"C.out": steps left}, "blocked_by": the upstream output whose range left an assume}."""
     _shape(raw, "the system")
     comps = raw.get("components")
     connect = raw.get("connect") or {}
@@ -572,6 +619,8 @@ def expand(raw, base, pick=None):
             rep["inputs"][n] = {"from": src, "arrives": [_fr(lo), _fr(hi)], "assume": [_fr(a_lo), _fr(a_hi)],
                                 "inside": a_lo <= lo and hi <= a_hi}
             if not rep["inputs"][n]["inside"] and blocked is None:
+                if lazy is not None and src in arriving_out:
+                    lazy["blocked_by"] = src
                 blocked = (f"{c}.{n}: the range arriving from {src}, [{float(lo):.6g}, {float(hi):.6g}], leaves the "
                            f"component's assume [{float(a_lo):.6g}, {float(a_hi):.6g}] — its contract does not cover "
                            f"it (an arriving range encloses, so this is not a refutation)")
@@ -600,25 +649,42 @@ def expand(raw, base, pick=None):
                       for combo in itertools.product(*[touched[n] for n in names])]
         finally:
             _STACK.pop()
+        lvl = {o: (levels or {}).get(f"{c}.{o}", 0) for o in outs}
+        at = [{o: _at_level(j, o, lvl[o]) for o in j["outputs"]} if j["earned"] else {} for _bd, j in judged]
         rep["bands_used"] = [{"band": {n: [_fr(a), _fr(b)] for n, (a, b) in bd.items()},
                               "earned": j["earned"], **({"why": j["why"]} if not j["earned"] else
                                                         {"outputs": {o: [_fr(x), _fr(y)] for o, (x, y) in
-                                                                     j["outputs"].items()}})}
-                             for bd, j in judged]
+                                                                     at_j.items()}})}
+                             for (bd, j), at_j in zip(judged, at)]
         bad = [j for _bd, j in judged if not j["earned"]]
         if bad:
             blocked = f"component {c}: a band its input touches has no guarantee ({bad[0]['why']})"
             break
         cq = brick.get("quantities") or {}
+        if any(lvl.values()):
+            rep["tightened_on_demand"] = {o: f"{k} step(s): proved within {float(LAZY_STEPS[min(k, len(LAZY_STEPS)) - 1]):g} "
+                                             "of its span past the values it attains"
+                                          for o, k in lvl.items() if k and any((j.get("lazy") or {}).get(o) for _bd, j in judged)}
         for o in outs:
-            lo = min(j["outputs"][o][0] for _bd, j in judged)
-            hi = max(j["outputs"][o][1] for _bd, j in judged)
+            lo = min(at_j[o][0] for at_j in at)
+            hi = max(at_j[o][1] for at_j in at)
+            if lazy is not None and any((j.get("lazy") or {}).get(o) for _bd, j in judged) and lvl[o] < len(LAZY_STEPS):
+                lazy.setdefault("more", {})[f"{c}.{o}"] = len(LAZY_STEPS) - lvl[o]
             arriving_out[f"{c}.{o}"] = (lo, hi)
             out_unit[f"{c}.{o}"] = cq[o].get("unit", "")
             rep["outputs"][o] = [_fr(lo), _fr(hi)]
             # ONE band touched per input and an affine contract there: the output keeps its source
             if len(judged) == 1 and o in judged[0][1].get("affine", {}) and raw.get("contracts") != "ranges":
                 ks, (e_lo, e_hi) = judged[0][1]["affine"][o]
+                res = (judged[0][1].get("affine_res") or {}).get(o)
+                if res:
+                    e_lo, e_hi = _at_level(judged[0][1], res, lvl[o], start=(e_lo, e_hi))
+                    # THE NARROWER OF THE TWO PROVED FORMS (2026-11-14): a step that the output's own range took and
+                    # its remainder could not (the remainder's bound is the harder proof) leaves the form wider than
+                    # the range - then the range is what the system reads, as when no form applies
+                    spread = (e_hi - e_lo) + sum(abs(k) * (arriving[n][1] - arriving[n][0]) for n, k in ks.items())
+                    if lvl[o] and hi - lo < spread:
+                        continue
                 d_o = _dims(cq[o].get("unit", ""))
                 # slopes of inputs wired to ONE source ADD (audit 2026-10-13, cx1: a dict keyed by source let the
                 # second slope overwrite the first — G*(S - S) became G*S, a false EARNED)
@@ -999,7 +1065,27 @@ def _lift(raw, base, flat, out, pick=None):
 
 
 def _run_one(raw, base, pick=None):
-    flat, report, blocked = expand(raw, base, pick)
+    """One system (its candidates picked). WHILE IT IS UNDECIDED, the outputs that can still be tightened take one
+    step more (LAZY_STEPS) and it is judged again: the output whose range left a downstream assume when that is what
+    stopped it, every such output otherwise. EARNED and REFUTED end it at once - a wider proved range is still proved,
+    and what fails over a wider range fails over a narrower one."""
+    levels = {}
+    while True:
+        lazy = {}
+        out = _run_at(raw, base, pick, levels, lazy)
+        if out.get("verdict") != "OPEN":
+            return out
+        more = lazy.get("more") or {}
+        src = lazy.get("blocked_by")
+        step = [src] if src and more.get(src) else sorted(more)
+        if not step:
+            return out
+        for ref in step:
+            levels[ref] = levels.get(ref, 0) + 1
+
+
+def _run_at(raw, base, pick, levels, lazy):
+    flat, report, blocked = expand(raw, base, pick, levels=levels, lazy=lazy)
     if blocked:
         return {"verdict": "OPEN", "why": f"components: {blocked}", "components": report}
     from . import stand as S

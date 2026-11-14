@@ -25,6 +25,13 @@ import re
 import sys
 from fractions import Fraction as F
 
+# EXACT FRACTIONS ARE LONG, AND THAT IS NOT AN ATTACK (2026-11-14). Python refuses to turn an integer of more than 4300
+# digits into text or back (a guard against hostile input). The stand's numbers are its own exact results: a chiller
+# and its cooling tower as ONE flat brick ended, after 12 minutes of work, in "STAND ERROR ... value has 6384 digits"
+# at the door (_shorten), where the fraction was only being rounded for display. The guard is lifted for this process.
+if hasattr(sys, "set_int_max_str_digits"):
+    sys.set_int_max_str_digits(0)
+
 from . import bricks as B
 from . import checker as C
 from . import parallel as PL

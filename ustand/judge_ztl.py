@@ -108,7 +108,56 @@ def _judge(claim, fixed, boxes, derived, grounds):
     return out, lines, r.get("disposition")
 
 
+# THE SAME QUESTION ASKED AGAIN (2026-11-14). ZTL's answer about an implicit law is a function of the law and of the
+# data the law READS. A catalogue search asks it again for every design whose slot the law never names; a component's
+# contract asks it again for every bound it proves (components._tighten: one judgement per end of every output).
+# MEASURED on a reformulated chiller as a module (a 30 KB law, entering water 24..26 C): each such judgement was
+# ~35 s of ZTL's enclosure + ~90 s of the checker building the root - the same enclosure, the same root. The last
+# answers are kept by (the question, the law, the values of the names in the law); checker.implicit_exists keeps its
+# own the same way. Tests that plant a lying judge between two runs clear it: judge_ztl._ASKED.clear().
+_ASKED = {}
+_LAW_NAMES = {}
+
+
+def law_names(law_rhs):
+    """the names a compiled law reads - found once per law text (a law may be megabytes of text)"""
+    got = _LAW_NAMES.get(law_rhs)
+    if got is None:
+        import re
+        got = frozenset(re.findall(r"[A-Za-z_]\w*", law_rhs))
+        if len(_LAW_NAMES) >= 64:
+            _LAW_NAMES.pop(next(iter(_LAW_NAMES)))
+        _LAW_NAMES[law_rhs] = got
+    return got
+
+
+def asked(question, law_rhs, data, rest, compute, store=_ASKED):
+    """compute(), or its kept answer for the same (question, law, the law's own data, rest)."""
+    try:
+        names = law_names(law_rhs)
+        key = (question, law_rhs, tuple(sorted((n, v) for n, v in data.items() if n in names)), rest)
+        hash(key)
+    except TypeError:
+        return compute()
+    if key not in store:
+        got = compute()
+        if len(store) >= 64:
+            store.pop(next(iter(store)))
+        store[key] = got
+    return store[key]
+
+
 def implicit(law_rhs, fixed, boxes, grounds, goal=None, tighten=0):
+    """`_implicit`, asked once per (law, the data it reads, goal, tighten) - see _ASKED above."""
+    import zimplicit
+    data = dict({n: ("at", v) for n, v in fixed.items()}, **{n: ("in", v) for n, v in boxes.items()})
+    # (the kernel's own functions are part of the question: a test that plants another judge is asked afresh)
+    return asked("enclosure", law_rhs, data,
+                 (tuple(goal) if goal else None, tighten, zimplicit.search_certificate, zimplicit.check_implicit),
+                 lambda: _implicit(law_rhs, fixed, boxes, grounds, goal=goal, tighten=tighten))
+
+
+def _implicit(law_rhs, fixed, boxes, grounds, goal=None, tighten=0):
     """An IMPLICIT quantity's range, from ZTL (gap G6, 2026-10-10). law_rhs is the compiled
     `implicit(_root_Q, g, lo, hi)` (ustand/bricks.implicit_laws). The SEARCH for a certificate is
     zimplicit.search_certificate — outside the kernel by the decision of 2026-10-09; the kernel's
@@ -140,6 +189,15 @@ def implicit(law_rhs, fixed, boxes, grounds, goal=None, tighten=0):
 
 
 def root_built(law_rhs, fixed, boxes, grounds, window, budget=64):
+    """`_root_built`, asked once per (law, the data it reads, window, budget) - see _ASKED above."""
+    import zimplicit
+    data = dict({n: ("at", v) for n, v in fixed.items()}, **{n: ("in", v) for n, v in boxes.items()})
+    return asked("root built", law_rhs, data,
+                 (tuple(window), budget, getattr(zimplicit, "search_exists", None), getattr(zimplicit, "check_exists", None)),
+                 lambda: _root_built(law_rhs, fixed, boxes, grounds, window, budget=budget))
+
+
+def _root_built(law_rhs, fixed, boxes, grounds, window, budget=64):
     """Does ZTL's KERNEL build a root of the implicit law in the window, for every value of the box? (2026-11-13.)
     zimplicit.search_exists proposes a cover of the parameter box with a bracket per part (the search, outside the
     kernel); zimplicit.check_exists checks it with the kernel's own readings by the rule of lean/ZRootPar (par_root /

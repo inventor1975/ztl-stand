@@ -4460,6 +4460,16 @@ check("assembly inside a brick: the stand chooses from a catalogue through a str
       "another, in every mode, cheapest; a refutation leaning on a proved range stands only over the whole range",
       "ASSEMBLY BRICK GREEN" in _as2.stdout, (_as2.stdout + _as2.stderr)[-400:])
 
+# A MODULE'S CONTRACT TIGHTENED ONLY WHERE THE SYSTEM NEEDS IT (BRICKS.md 7d, 2026-11-14) — its own suite
+_cl = _sp_ip.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_components_lazy.py")],
+                 capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parent.parent),
+                 env=dict(os.environ, PYTHONPATH=str(pathlib.Path(__file__).resolve().parent.parent)))
+check("components, an output read through a function or an implicit root: its contract starts as the outer reading "
+      "and takes a step (1 %, 0.01 %, one millionth past what it attains) only while the system is undecided; an "
+      "exact module is tightened at once as before; PLANTED a system past its limit is never earned; one system's "
+      "steps do not leak into another's answer", "COMPONENTS LAZY GREEN" in _cl.stdout,
+      (_cl.stdout + _cl.stderr)[-400:])
+
 # READING UNITS AS DOCUMENTS WRITE THEM (2026-11-12, ustand/unitread.py: code, not the model) — its own suite
 import subprocess as _sp_ur      # noqa: E402
 _ur = _sp_ur.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_unitread.py")],

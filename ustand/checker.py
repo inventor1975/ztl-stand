@@ -1105,7 +1105,21 @@ EXISTS_BUDGET = 600
 OPERATIONAL, FORMAL, NOT_SHOWN = 2, 1, 0
 
 
+_EXISTS = {}        # (the law, the ranges of the names it reads, the window, the budget) -> (level, how)
+
+
 def implicit_exists(law_rhs, rng, zlo, zhi, budget=None):
+    """`_implicit_exists`, asked once per (law text, the ranges it reads, window, budget) when the law comes as text
+    (the stand's question per design and per proved bound: judge_ztl._ASKED says why and what was measured); a law
+    that comes as a tree (the checker's own question at a point) is answered afresh."""
+    if not isinstance(law_rhs, str):
+        return _implicit_exists(law_rhs, rng, zlo, zhi, budget=budget)
+    from .judge_ztl import asked
+    return asked("exists", law_rhs, rng, (zlo, zhi, budget),
+                 lambda: _implicit_exists(law_rhs, rng, zlo, zhi, budget=budget), store=_EXISTS)
+
+
+def _implicit_exists(law_rhs, rng, zlo, zhi, budget=None):
     """DOES A ROOT EXIST for every point of the box, inside the search range — and ON WHAT GROUND. -> (level, how).
 
     Two grounds, and they are not the same claim (the curator, 2026-11-12: "ZTL has two spaces — the operational, all

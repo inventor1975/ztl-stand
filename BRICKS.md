@@ -786,6 +786,21 @@ A **system** names components and wires them:
   k01 divider (one wide band, all 12 grade pairs OPEN) is now EARNED on the flat brick's answer; k02's amplifier +
   ADC system is within 0.2 mV of the flat range (it was twice as wide). Up to 10 toleranced quantities per
   component are read at every corner; above that, the outer reading as before.
+- **An output read through a function or an implicit root is tightened only where the system needs it** (since
+  2026-11-14). At a point such an output is the checker's proved interval, and every bound proved just past it is a
+  certificate search over the whole law. Until 2026-11-14 the tightening failed silently on such outputs and they
+  kept the stand's outer reading (a chiller's rejected heat 297..728 kW where it is ~467 kW — and the system around
+  it OPEN). Now: the outer reading is where such an output STARTS (it is proved, like every range), and while the
+  system is undecided the stand asks for one step more — proved within 1 %, then 0.01 %, then one millionth of the
+  span past the values the module attains — of the output whose range left a downstream `assume` when that is what
+  stopped the system, of every such output otherwise. EARNED and REFUTED end it at once. The report says which
+  outputs took steps (`tightened_on_demand`). An output with exact values at its points is tightened at once, as
+  before. A downstream module proved on fixed bands guarantees its whole band whatever arrives: give it
+  `"bands": "arriving"` if it must follow a tightened range. MEASURED (a reformulated-EIR chiller and a cooling
+  tower's makeup water as two modules, the tower's water treatment chosen from three by price): 362 s, the cheapest
+  refuted over its whole range, the next one EARNED and optimal — the answer of the same plant as one flat brick,
+  which takes 822 s; one bound of the tower costs 29 s at 1 % and 38 s at 0.01 %, and one millionth did not finish
+  in minutes, which is why the steps are taken only on demand and the loosest first.
 - A band is used when it OVERLAPS the arriving range; one sharing only an edge is not (round 4: it added a band
   and lost the affine form).
 - **Affine contracts** (since 2026-10-12, the curator's "да"): for an output of the same dimension as its inputs,
