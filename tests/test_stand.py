@@ -2225,6 +2225,20 @@ check("a design with no rail speed at its nominal point (thrust below weight) is
 check("fold_zeros: only the zeros fold, the factored rest is kept (no expansion)",
       K.fold_zeros("s3*(a + b)*(c + d) + x*(s4 - 0) + (Dt + dDt)*(Dt + dDt)/(1 + s3*y)", {"s3", "s4"})
       == "(Dt + dDt) * (Dt + dDt) / 1", K.fold_zeros("s3*(a + b) + (Dt + dDt)*(Dt + dDt)", {"s3"}))
+# SIMPLIFY DOES NOT PARSE WHAT IT CANNOT SIMPLIFY (2026-11-14): a text calling a function sympy does not know (ifpos,
+# a branch) came back unchanged — after sympy parsed all of it: laws of 0.6 and 2.5 MB, 198 s of a design's 227 s.
+import sympy as _sp_simpl      # noqa: E402
+_real_sympify, _parsed = _sp_simpl.sympify, []
+_sp_simpl.sympify = lambda *a, **k: (_parsed.append(1), _real_sympify(*a, **k))[1]
+_branchy = "ifpos(x, x*x + x, 2)*y + ifpos(y, 1, x)"
+_simpl_same = K.simplify(_branchy) == _branchy and not _parsed
+_simpl_plain = K.simplify("V*V*RL/(Rs+RL) + V*V*Rs/(Rs+RL)")
+_simpl_fn = K.simplify("max(x, 2)*x + x")
+_sp_simpl.sympify = _real_sympify
+check("simplify: a text with a function sympy does not know is handed back at once, unparsed; one sympy reads is "
+      "still put over one fraction and factored (V^2 RL/(Rs+RL) + V^2 Rs/(Rs+RL) = V*V), min/max among them",
+      _simpl_same and _simpl_plain == "(V*V)" and len(_parsed) == 2 and "max" in _simpl_fn,
+      f"{_simpl_same}, {_simpl_plain}, {_simpl_fn}, parsed {len(_parsed)}")
 _m38 = json.load(open(pathlib.Path(__file__).resolve().parent.parent / "examples" / "tasks" / "t38-srm-28-uncertain.json"))
 _m38["where"] = ['PR.name == "APCP" and GD.d == 25 and GL.Lg == 90 and GN.N == 2 and NT.Dt == 12 and NE.eps == 3 '
                  'and CT.t == 2.0']

@@ -163,6 +163,12 @@ def simplify(text):
     import sympy as sp
     fns = {"exp": sp.exp, "ln": sp.log, "log10": lambda u: sp.log(u, 10), "atan": sp.atan, "tan": sp.tan, "sin": sp.sin, "cos": sp.cos,
            "sqrt": sp.sqrt, "pow": sp.Pow, "min": sp.Min, "max": sp.Max}
+    if set(re.findall(r"([A-Za-z_]\w*)\s*\(", text)) - set(fns):
+        # A FUNCTION SYMPY DOES NOT KNOW (ifpos, a branch): it could only raise on it and hand the text back - after
+        # parsing all of it. MEASURED 2026-11-14, a cooling tower's makeup water (laws of 0.6 and 2.5 MB of text, the
+        # psychrometric fits full of ifpos): three such calls, 65 s each in Python's tokenizer, were 198 s of the
+        # design's 227 s - for the same text returned. Said here at once: the original is searched.
+        return text
     names = set(re.findall(r"[A-Za-z_]\w*", text)) - set(fns)
     syms = dict({n: sp.Symbol(n) for n in names}, **fns)
     try:
