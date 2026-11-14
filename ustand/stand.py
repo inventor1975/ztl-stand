@@ -411,10 +411,22 @@ def _nominal_cost(b, d, node, laws):
     """The objective at the NOMINAL point (every toleranced value at its nominal). Derived quantities in it
     (I3, blind test 3: the nominal energy of a house or a turbine) are read by the checker's exact solution
     of the laws there — an interval where a function is irrational: its middle orders the designs."""
-    fx, bx, derived, _ = frame(b, d)
+    names = {n.id for n in ast.walk(node) if isinstance(n, ast.Name)}
+    need_structure = bool(b.get("assembly"))
+    if need_structure:
+        # THE OBJECTIVE RARELY READS THE STRUCTURE (MEASURED 2026-11-14, a roof of 672 unknowns, 16 designs: ordering
+        # them by price solved the structure 16 times - 10 of the 22 solves of the whole run, for a price that never
+        # reads it). It is solved here only when the objective, or a law it leans on, names one of its results.
+        outs = {n for n, q in b["quantities"].items() if q.get("from_assembly")}
+        all_derived = {n for n, q in b["quantities"].items() if q["role"] == "derived"}
+        read = set(names)
+        if names & all_derived:
+            for law in _closure(laws, names & all_derived, all_derived)[0]:
+                read |= set(re.findall(r"[A-Za-z_]\w*", law))
+        need_structure = bool(read & outs)
+    fx, bx, derived, _ = frame(b, d, with_assembly=need_structure)
     point = dict(fx, **{n: (lo + hi) / 2 for n, (lo, hi) in bx.items()})
     known = {n: (v, v) for n, v in point.items()}
-    names = {n.id for n in ast.walk(node) if isinstance(n, ast.Name)}
     if names & set(derived):
         # ONLY THE LAWS THE OBJECTIVE NEEDS (its definitions, closed): a weak motor's rail speed sqrt(2*(F/m0 - g)*L)
         # has no value at its nominal point (thrust below weight) and stopped the whole catalog as a BRICK ERROR —
@@ -489,9 +501,35 @@ def _scale(unit):
     return U.parse(unit)[0] if unit else F(1)
 
 
-def frame(b, design, with_computed=True):
+def _assembly_needed(b):
+    """ONLY THE RESULTS THIS BRICK READS ARE COMPUTED (MEASURED 2026-11-14: a roof's solve spent 60 % of its time on
+    971 outputs - every node's displacement in two directions, every panel's flow - while a load case's requirements
+    read one direction; a mode's brick carries the laws of every mode's requirements, not their requirements).
+    -> the names of the structure's results that a requirement of THIS brick, its objective, or a law they lean on
+    reads. A result nobody reads is not solved for and stands at 0 in the frame."""
+    outs = {n for n, q in b["quantities"].items() if q.get("from_assembly")}
+    derived = {n for n, q in b["quantities"].items() if q["role"] == "derived"}
+    reqs = list(b.get("requirements") or []) + [r for m in (b.get("modes") or {}).values() if isinstance(m, dict)
+                                                for r in (m.get("requirements") or [])]
+    texts = [str(v) for r in reqs for v in ([r.get("quantity")] + (r["value"] if isinstance(r.get("value"), list) else [r.get("value")]))]
+    obj = b.get("objective") or {}
+    texts += [str(obj[k]) for k in ("minimize", "maximize") if obj.get(k)]
+    texts += [str(f_.get(k)) for f_ in (b["find"] if isinstance(b.get("find"), list) else [b["find"]] if b.get("find") else [])
+              for k in ("largest", "smallest") if isinstance(f_, dict) and f_.get(k)]
+    read = set()
+    for t in texts:
+        read |= set(re.findall(r"[A-Za-z_]\w*", B.compile_expr(t, b.get("define")) if not t.replace(".", "").replace("-", "").replace("/", "").replace("e", "").isdigit() else ""))
+    if read & derived:
+        laws = [B.compile_expr(l["zfl"], b.get("define")) for l in b.get("laws") or []]
+        for law in _closure(laws, read & derived, derived)[0]:
+            read |= set(re.findall(r"[A-Za-z_]\w*", law))
+    return read & outs
+
+
+def frame(b, design, with_computed=True, with_assembly=True):
     """fixed values, tolerance boxes, derived names, grounds — identifiers compiled, values in SI.
-    "computed" values join the fixed ones (exact, per design)."""
+    "computed" values join the fixed ones (exact, per design). `with_assembly=False`: without the structure's
+    results - for a reader that does not use them (the objective of most bricks: a price)."""
     fixed, boxes, grounds = {}, {}, {}
 
     def put(name, spec, ground=None, scale=F(1)):
@@ -530,15 +568,19 @@ def frame(b, design, with_computed=True):
             if isinstance(env[cn], str):
                 raise B.BrickError(f"computed.{cn}: a label is not a value for the laws")
             fixed[cn] = F(env[cn])
-    if with_computed and b.get("assembly"):
+    if with_computed and with_assembly and b.get("assembly"):
         # THE STRUCTURE OF THIS DESIGN, solved by ZTL (BRICKS.md 7j; 2026-11-14): its results join the design's
         # values. Exact (up to zenergy's exact size) -> a fixed value. Above it -> a PROVED ENCLOSURE of the one
         # true value: it sits among the boxes, and a refutation that leans on it is confirmed in _run's note().
         from . import assembly as AS
+        need = _assembly_needed(b)
         try:
-            got = AS.for_design(b, exact_env(b, design))
+            got = AS.for_design(b, exact_env(b, design), only=need)
         except AS.AssemblyError as e:
             raise B.BrickError(f"assembly: {e}")
+        for n, q_ in b["quantities"].items():
+            if q_.get("from_assembly") and n not in need:
+                fixed[n] = F(0)             # not computed: nothing this brick judges reads it (see _assembly_needed)
         for n, (lo, hi) in got.items():
             if lo == hi:
                 fixed[n] = lo

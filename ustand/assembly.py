@@ -184,8 +184,15 @@ def build(spec):
     return parts, f, dof, meta
 
 
-def solve(spec, jobs=1):
-    """The proved ranges of the outputs asked for. -> {"unknowns", "outputs": [{"output", "nominal", "lo", "hi"}]}"""
+_KCTX = {}      # a structure's prepared stiffness (zenergy.fp_prepare_K), by a key the caller gives
+
+
+def solve(spec, jobs=1, kkey=None):
+    """The proved ranges of the outputs asked for. -> {"unknowns", "outputs": [{"output", "nominal", "lo", "hi"}]}
+    `kkey`: a key of the STIFFNESS (nodes, supports, elements - not the loads). The load-independent half of the
+    floating path - the factor and the proved smallest eigenvalue - is prepared once per solve (it was prepared
+    twice: once for the displacements, once for the forces and flows) and, with a key, once for every load case of
+    the same structure (MEASURED 2026-11-14: preparation was a third of a solve; modes are load cases)."""
     from . import judge_ztl  # noqa: F401  (puts ZTL on the path)
     import zenergy as ZE
     parts, f, dof, meta = build(spec)
@@ -214,7 +221,20 @@ def solve(spec, jobs=1):
         else:
             raise AssemblyError(f"output {o!r}: one of {{\"u\": [node, dir]}}, {{\"force\": element}}, {{\"flow\": panel}}")
     out = [None] * len(asked)
+    kctx = None
     try:
+        if n > ZE.EXACT_UP_TO:
+            held = _KCTX.get(kkey) if kkey is not None else None
+            if held is not None:
+                # the same structure under another load: zenergy ties a prepared stiffness to the very `parts` it was
+                # made from, so those parts are used again (same key = same nodes, supports and elements; only f is new)
+                kctx, parts, meta = held
+            else:
+                kctx = ZE.fp_prepare_K(parts, n)
+                if kkey is not None:
+                    if len(_KCTX) >= 4:
+                        _KCTX.clear()
+                    _KCTX[kkey] = (kctx, parts, meta)
         if plain:
             # MANY DISPLACEMENTS GO THROUGH THE BATCH (MEASURED 2026-11-13, 2542 unknowns, 1271 displacements: one by
             # one 30.0 s, in the batch 3.9 s; the ends of the proved ranges agree to 6e-13). zenergy's batch is the
@@ -223,13 +243,13 @@ def solve(spec, jobs=1):
             zero = next((k for k, pt in enumerate(parts) if pt["t"] == 0), None)
             es = [e for _i, _l, e in plain]
             if zero is not None and len(es) >= ZE.BATCH_FROM and n > ZE.EXACT_UP_TO:
-                rs = ZE.certify_many(parts, f, es, n, jobs=jobs, scale=[zero] * len(es))
+                rs = ZE.certify_many(parts, f, es, n, jobs=jobs, scale=[zero] * len(es), kctx=kctx)
             else:
-                rs = ZE.certify_many(parts, f, es, n, jobs=jobs)
+                rs = ZE.certify_many(parts, f, es, n, jobs=jobs, kctx=kctx)
             for (i, label, _e), r in zip(plain, rs):
                 out[i] = {"output": label, "nominal": r["nominal"], "lo": r["lo"], "hi": r["hi"]}
         if scaled:
-            rs = ZE.certify_many(parts, f, [e for _i, _l, e, _p, _c in scaled], n, jobs=jobs, scale=[p for _i, _l, _e, p, _c in scaled])
+            rs = ZE.certify_many(parts, f, [e for _i, _l, e, _p, _c in scaled], n, jobs=jobs, scale=[p for _i, _l, _e, p, _c in scaled], kctx=kctx)
             for (i, label, _e, _p, c), r in zip(scaled, rs):
                 out[i] = {"output": label, "nominal": c * r["nominal"], "lo": c * r["lo"], "hi": c * r["hi"]}
     except AssemblyError:
@@ -539,9 +559,9 @@ def texts(b):
     return list(layout(b)["texts"])
 
 
-def for_design(b, env):
+def for_design(b, env, only=None):
     """The structure of this design, solved by ZTL (zenergy): -> {output name: (lo, hi)} in SI. `env`: the design's
-    EXACT values in SI (stand.exact_env). Version 1: every stiffness and load is exact per design - a quantity with a
+    EXACT values in SI (stand.exact_env). `only`: the names to compute (the rest are not asked of the solver). Version 1: every stiffness and load is exact per design - a quantity with a
     tolerance or a range, or a derived one, has no exact value and is refused by name."""
     import ast
     import json
@@ -569,28 +589,40 @@ def for_design(b, env):
         seen[text] = F(v)
         return seen[text]
 
+    want = [name for name in lay["plan"] if only is None or name in only]
+    if not want:
+        return {}
     # everything in SI: a coordinate x ls; a factor 1 / L (a bar's EA / L) is per section length -> / ls
     spec = {"nodes": {n: [str(x * ls), str(y * ls)] for n, (x, y) in lay["nodes"].items()}, "fixed": lay["fixed"],
-            "elements": [], "loads": [], "outputs": lay["outs"]}
+            "elements": [], "loads": []}
     for e, key, terms in lay["elems"]:
         k = sum((val(t) * (f_ if f_ == 1 else f_ / ls) for t, f_ in terms), F(0))
         spec["elements"].append({**e, key: str(k)})
+    kkey = json.dumps(spec, sort_keys=True)               # the stiffness alone: shared by every load case
     for (node, d), terms in sorted(lay["loads"].items()):
         p = sum((val(t) * f_ for t, f_ in terms), F(0))
         if p:
             spec["loads"].append([node, d, str(p)])
-    ckey = json.dumps(spec, sort_keys=True)
+    ckey = kkey + json.dumps(spec["loads"])
+    # THE RESULTS ARE KEPT BY NAME for this structure under this load: a later reader that wants fewer of them, or
+    # other ones, is served from what is there and only the missing are solved for (MEASURED 2026-11-14: keyed by
+    # the whole request, the confirmation of a refutation - one requirement - solved the same structure again)
     if ckey not in _CACHE:
         if len(_CACHE) > 256:
             _CACHE.clear()
-        got = solve(spec)["outputs"]
-        res = {}
-        for name, (_k, how, idx) in lay["plan"].items():
+        _CACHE[ckey] = {}
+    have = _CACHE[ckey]
+    missing = [name for name in want if name not in have]
+    if missing:
+        used = sorted({i for name in missing for i in lay["plan"][name][2]})
+        at = {i: k for k, i in enumerate(used)}
+        got = solve(dict(spec, outputs=[lay["outs"][i] for i in used]), kkey=kkey)["outputs"]
+        for name in missing:
+            _k, how, idx = lay["plan"][name]
             if how == "one":
-                res[name] = (got[idx[0]]["lo"], got[idx[0]]["hi"])
+                have[name] = (got[at[idx[0]]]["lo"], got[at[idx[0]]]["hi"])
             else:                                # the largest magnitude over several outputs: an enclosure of it
-                lo = max((x["lo"] if x["lo"] > 0 else -x["hi"] if x["hi"] < 0 else F(0)) for x in (got[i] for i in idx))
-                hi = max(max(abs(x["lo"]), abs(x["hi"])) for x in (got[i] for i in idx))
-                res[name] = (lo, hi)
-        _CACHE[ckey] = res
-    return dict(_CACHE[ckey])
+                lo = max((x["lo"] if x["lo"] > 0 else -x["hi"] if x["hi"] < 0 else F(0)) for x in (got[at[i]] for i in idx))
+                hi = max(max(abs(x["lo"]), abs(x["hi"])) for x in (got[at[i]] for i in idx))
+                have[name] = (lo, hi)
+    return {name: have[name] for name in want}
