@@ -746,12 +746,12 @@ has no reading to be cut by.
 - **When it runs by itself:** a brick with a structure section and more than 2000 designs. `"search": "all"` judges
   every design, cheapest first (the default elsewhere). `"search": "climb"` asks for the climb on any brick.
 - **Needs** an objective (nominal, not `"case": "worst"`); not with `where` or `"report": "all"` (version 1).
-- MEASURED (a real roof diaphragm: 2542 unknowns, six zones each choosing one of six deck configurations — 46 656
-  designs, one load case, the shear requirement of every zone): judged one by one, 1163 designs in 454 s and none
-  earned yet (about nine hours for the catalogue); a group cannot be cut — with the zones' stiffness a RANGE over two
-  adjacent items ZTL's proved shear flow is [0, 1034] lbf/ft where the flow is 384. The climb: 8.5 s, EARNED, 12
-  designs judged (6 steps up, 5 trials down), each zone one step cheaper REFUTED. (The capacities and prices of that
-  measurement were synthetic; the stiffnesses were the catalogue's.)
+- MEASURED 2026-11-14 (a roof diaphragm of about 2500 unknowns whose zones each choose a deck from a catalogue — tens
+  of thousands of designs, one load case, a shear requirement per zone): judged one by one, most of a second a
+  design, hours for the catalogue; a group cannot be cut — with the zones' stiffness a RANGE over two adjacent items
+  ZTL's proved shear flow ran from zero to about 2.7 times the true flow. The climb: under ten seconds, EARNED, a
+  dozen designs judged, each zone one step cheaper REFUTED. (The capacities and prices of that measurement were
+  synthetic.)
 - Tests: `tests/test_climb.py`.
 
 ## 7d. components (optional) — a system of devices, each proved once (since 2026-10-12)

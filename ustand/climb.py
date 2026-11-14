@@ -4,12 +4,12 @@
 
 WHY. The stand judges designs cheapest first and stops at the first EARNED one: every cheaper design was then refuted,
 and the answer is the optimum. Large catalogues are cut by GROUPS (prune.py): a requirement read over the hull of a
-whole group. Through a structure (`assembly`) neither works. MEASURED on a real roof diaphragm (2542 unknowns, six
-zones each choosing one of six deck configurations — 46 656 designs, one load case): one design 0.6-0.8 s, so the
-whole catalogue is about nine hours per load case; and a group has no reading to be cut by — with the zones' stiffness
-a RANGE over two ADJACENT catalogue items ZTL's proved shear flow is [0, 1034] lbf/ft where the flow is 384. But the
-flows hardly move with the zones' stiffness (384/439/334/271 with every zone at the weakest item, 382/441/336/273 at
-the third): what a zone needs is set almost by its own demand.
+whole group. Through a structure (`assembly`) neither works. MEASURED 2026-11-14 on a roof diaphragm of about 2500
+unknowns whose zones each choose a deck from a catalogue (tens of thousands of designs): one design takes most of a
+second, so the whole catalogue is hours per load case; and a group has no reading to be cut by — with the zones'
+stiffness a RANGE over two ADJACENT catalogue items, ZTL's proved shear flow ran from zero to about 2.7 times the true
+flow. But the flows moved by less than 1 % between the weakest deck everywhere and a deck two steps up: what a zone
+needs is set almost by its own demand.
 
 WHAT. A search, trusted for nothing — the stand's judgement of each design it proposes is the ordinary one:
   UP    start with every slot at its cheapest item; a design that is not earned names the requirement it fails;
