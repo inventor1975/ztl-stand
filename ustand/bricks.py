@@ -970,8 +970,10 @@ def _assembly_outputs(b):
         if name in qs:
             raise BrickError(f"assembly.outputs.{name}: a quantity of that name exists already - a result of the "
                              "structure takes a name of its own")
-        if not isinstance(o, dict) or sum(k in o for k in ASSEMBLY_KINDS) != 1 or not isinstance(o.get("unit"), str):
-            raise BrickError(f'assembly.outputs.{name}: one of "u", "force", "flow", and a "unit"')
+        if not isinstance(o, dict) or not isinstance(o.get("unit"), str) \
+                or (sum(k in o for k in ASSEMBLY_KINDS) != 1 and not isinstance(o.get("what"), str)):
+            raise BrickError(f'assembly.outputs.{name}: what to compute ("u", "force" or "flow"; on a grid "what": '
+                             '"max_u", "max_flow", ...) and its "unit"')
         qs[name] = {"role": "given", "value": "0", "unit": o["unit"], "from_assembly": True,
                     "why": "a result of the structure section (solved by the stand for every design)"}
     for mname, sp in (b.get("modes") or {}).items() if isinstance(b.get("modes"), dict) else []:

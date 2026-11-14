@@ -161,6 +161,74 @@ for word, edit in (("a bare number", lambda x: x["assembly"]["elements"][2].upda
     r = S.run(bad)
     check(r["verdict"] == "BRICK ERROR" and word in str(r.get("why")), f"PLANTED a wrong structure section is refused with its reason: {word!r} ({str(r.get('why'))[:110]})")
 
+# ---- 5b. THE SAME SECTION BY RULES ON A GRID: cells by box, bars along lines, loads spread, the largest over a zone
+by_rules = copy.deepcopy(one)
+by_rules["assembly"] = {"length_unit": "m", "grid": {"x": [0, 4], "y": [0, 2]},
+                        "panels": [{"g": "DECK.G"}],
+                        "bars": [{"along": "x", "lines": [2], "EA": "EAt"}],
+                        "fixed": [{"at": [0, 0], "dir": "X"}, {"at": [0, 0], "dir": "Y"}, {"at": [4, 0], "dir": "X"},
+                                  {"at": [4, 0], "dir": "Y"}, {"at": [0, 2], "dir": "Y"}, {"at": [4, 2], "dir": "Y"}],
+                        "loads": [{"at": [4, 2], "dir": "X", "P": "P"}],
+                        "outputs": {"q": {"what": "flow", "at": [2, 1], "unit": "kN/m"},
+                                    "u": {"what": "max_u", "dir": "X", "unit": "mm"}}}
+by_rules["quantities"].pop("Lc")
+r = S.run(by_rules)
+check(r["verdict"] == "EARNED" and names(r) == {"DECK": "D24"} and r["guaranteed"] == {"u_req": ["506", "506"], "q_req": ["6", "6"]},
+      f"the one-panel brick stated by grid rules gives the element-by-element answer exactly: a bar is EA over its segment ({r.get('guaranteed')})")
+
+
+def roof(seismic, drift):
+    """a plan 48 x 36 on a 6-grid: end zones and a middle zone of deck, a hole, chords, frames as springs, two load cases"""
+    reqs = lambda u: [{"quantity": "qEnd", "op": "<=", "value": "END.cap", "why": "end zone capacity"},      # noqa: E731
+                      {"quantity": "qMid", "op": "<=", "value": "MID.cap", "why": "middle zone capacity"},
+                      {"quantity": u, "op": "<=", "value": drift, "why": "drift limit"}]
+    return {"stand": "ztl-stand/1",
+            "quantities": {"EAc": {"role": "given", "value": "200000", "unit": "kN", "ground": "chords"},
+                           "KF": {"role": "given", "value": "30", "unit": "kN/mm", "ground": "frames"},
+                           "WX": {"role": "given", "value": "0", "unit": "kN", "ground": "load case"},
+                           "WY": {"role": "given", "value": "0", "unit": "kN", "ground": "load case"},
+                           "Aend": {"role": "given", "value": "864", "unit": "m^2"}, "Amid": {"role": "given", "value": "828", "unit": "m^2"}},
+            "slots": {"END": {"from": ["decks"]}, "MID": {"from": ["decks"]}}, "laws": [],
+            "assembly": {"length_unit": "m", "grid": {"x": {"from": 0, "to": 48, "step": 6}, "y": {"from": 0, "to": 36, "step": 6}},
+                         "panels": [{"g": "MID.G"}, {"g": "END.G", "box": [0, 0, 12, 36]}, {"g": "END.G", "box": [36, 0, 48, 36]}],
+                         "holes": [[18, 12, 24, 18]],
+                         "bars": [{"along": "x", "lines": "all", "EA": "EAc"}, {"along": "y", "lines": "all", "EA": "EAc"}],
+                         "springs": [{"at": [x, y], "dir": d, "k": "KF"} for x in (0, 48) for y in (0, 36) for d in "XY"],
+                         "loads": [{"on": "area", "dir": "X", "total": "WX"}, {"on": "area", "dir": "Y", "total": "WY"}],
+                         "outputs": {"qEnd": {"what": "max_flow", "box": [0, 0, 12, 36], "unit": "kN/m"},
+                                     "qMid": {"what": "max_flow", "box": [12, 0, 36, 36], "unit": "kN/m"},
+                                     "ux": {"what": "max_u", "dir": "X", "unit": "mm"}, "uy": {"what": "max_u", "dir": "Y", "unit": "mm"}}},
+            "requirements": [],
+            "modes": {"wind X": {"quantities": {"WX": {"value": "300"}}, "requirements": reqs("ux")},
+                      "seismic Y": {"quantities": {"WY": {"value": seismic}}, "requirements": reqs("uy")}},
+            "objective": {"minimize": "Aend*END.price + Amid*MID.price"},
+            "catalog": {"decks": {"ground": "catalogue",
+                                  "items": [{"name": "light", "G": "2000", "cap": "3", "price": "20"},
+                                            {"name": "medium", "G": "4000", "cap": "5", "price": "24"},
+                                            {"name": "heavy", "G": "9000", "cap": "9", "price": "31"}],
+                                  "fields": {"G": {"unit": "kN/m"}, "cap": {"unit": "kN/m"}, "price": {"unit": "USD/m^2"}}}}}
+
+
+rb = B.load(roof("400", "40"))
+check(len(S.frame(rb, next(iter(S.designs(rb))))[1]) >= 4, "the grid roof is above the exact size: its results are enclosures")
+r = S.run(roof("400", "40"))
+got = {k: {q: float(str(v[0]).lstrip("~").split(" ")[0]) for q, v in m["guaranteed"].items()} for k, m in (r.get("per_mode") or {}).items()}
+check(r["verdict"] == "EARNED" and r["objective"]["optimal"] is True and r["designs_count"].get("REFUTED", 0) >= 1
+      and all(got[m]["qEnd_req"] <= {"light": 3, "medium": 5, "heavy": 9}[names(r)["END"]] and got[m]["qMid_req"] <= {"light": 3, "medium": 5, "heavy": 9}[names(r)["MID"]] for m in got),
+      f"a roof by rules, two zones, two load cases: cheaper pairs refuted, the chosen pair holds in both and is optimal ({names(r)}, {r.get('designs_count')}, {got})")
+r_far = S.run(roof("400", "2"))
+mc = (r_far.get("minimal_conflicts") or {}).get("sets") or []
+check(r_far["verdict"] == "REFUTED" and any(len(s_) == 1 and "drift limit" in s_[0] for s_ in mc),
+      f"a drift limit no deck of the catalogue reaches: REFUTED, and the stand names the drift requirement as the one that cannot be met ({r_far.get('verdict')}, {mc})")
+for word, edit in (("is not a crossing", lambda x: x["assembly"]["springs"].append({"at": [5, 5], "dir": "X", "k": "KF"})),
+                   ("no panel lies inside", lambda x: x["assembly"]["outputs"]["qEnd"].update(box=[18, 12, 24, 18])),
+                   ("a bare number", lambda x: x["assembly"]["bars"][0].update(EA="200000")),
+                   ("what is one of", lambda x: x["assembly"]["outputs"]["ux"].update(what="largest"))):
+    bad = roof("400", "40")
+    edit(bad)
+    r = S.run(bad)
+    check(r["verdict"] == "BRICK ERROR" and word in str(r.get("why")), f"PLANTED a wrong grid rule is refused with its reason: {word!r} ({str(r.get('why'))[:110]})")
+
 # ---- 6. A brick WITHOUT the section is judged as before (the rule does not touch it)
 plain = {"stand": "ztl-stand/1",
          "quantities": {"y": {"role": "given", "range": ["0.9999999", "1.0000001"], "unit": "mm"}, "d": {"role": "derived", "unit": "mm"}},

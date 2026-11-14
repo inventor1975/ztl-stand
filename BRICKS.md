@@ -663,6 +663,38 @@ structure whose parts act on one another: "choose the deck of each zone so that 
 - `outputs`: name → one of `{"u": [node, "X"|"Y"]}` (a displacement), `{"force": element}` (a bar's tension or the
   force in a spring), `{"flow": panel}` (a panel's shear flow), each with its `unit`. Every output is a quantity of
   the brick under that name: use it in laws, in the objective, and directly in a requirement.
+- **By rules on a grid** (`"grid"` in place of `"nodes"`) — a real roof is hundreds of nodes, and nobody writes eight
+  hundred elements:
+
+  ```json
+  "assembly": {
+    "length_unit": "ft",
+    "grid":    {"x": {"from": 0, "to": 240, "step": 12}, "y": [0, 12, 24, 36]},
+    "panels":  [{"g": "MID.G"}, {"g": "END.G", "box": [0, 0, 24, 36]}],
+    "holes":   [[96, 12, 108, 24]],
+    "bars":    [{"along": "x", "lines": "boundary", "EA": "EAchord"}, {"along": "y", "lines": "all", "EA": "EAjoist"}],
+    "springs": [{"at": [0, 0], "dir": "Y", "k": "KY"}],
+    "fixed":   [{"at": [240, 0], "dir": "X"}],
+    "loads":   [{"on": "area", "dir": "X", "total": "WX"}, {"on": "line", "y": 36, "dir": "X", "total": "W2"},
+                {"at": [120, 0], "dir": "Y", "P": "P1", "sign": -1}],
+    "outputs": {"qEnd": {"what": "max_flow", "box": [0, 0, 24, 36], "unit": "kip/ft"},
+                "ux":   {"what": "max_u", "dir": "X", "unit": "in"}}
+  }
+  ```
+
+  - `grid`: each axis a list of coordinates or `{"from", "to", "step"}`; a node at every crossing.
+  - `panels`: the shear stiffness of the cells inside `box` (no box = every cell); a later rule replaces an earlier
+    one on the cells it covers — a ZONE is one rule. `holes`: every cell a box overlaps has no panel.
+  - `bars`: a bar on every grid segment of those lines (`"all"`, `"boundary"`, or a list of coordinates), stiffness
+    `EA` (a force) over the segment's length; rules on one segment add up.
+  - `loads`: a point (`at`, `P`); a grid line (`"on": "line"`, `x` or `y`, `total`) spread by tributary length; the
+    plan (`"on": "area"`, `total`) spread by tributary area. `"sign": -1` turns a load round.
+  - `outputs` — `"what"`: `u` (`at`, `dir`), `max_u` (`dir`, optional `box`), `flow` (`at`: a point in the cell),
+    `max_flow` (optional `box`), `max_bar_force` (`along`, `lines`, optional `box`), `spring_force` (`at`, `dir`).
+    A `max_…` is the largest MAGNITUDE over what it covers — one requirement holds a whole zone.
+  - MEASURED (synthetic, 240 x 180 ft on a 12 ft grid — 672 unknowns; two deck zones from a catalogue of four, two
+    load cases, the deck cost as objective): 6 designs tried, 5 refuted each with its mode and requirement, the pair
+    earned and proved optimal — 18 s.
 - **Modes** are load cases: a mode overrides the given loads, the structure is solved in each, the design must hold
   in all. A mode cannot override an output.
 - The mathematics is ZTL's (`zenergy`, Lean `ZEnergy.lean`): the stand only states the elements. Up to 120 unknowns
