@@ -237,6 +237,25 @@ plain = {"stand": "ztl-stand/1",
 r = S.run(plain)
 check(r["verdict"] == "REFUTED", f"a TOLERANCE past its limit at one end is refuted as before: every point of a tolerance is a state of the world ({r.get('verdict')})")
 
+# ---- A MODE'S OWN LOADS AND SUPPORTS OF THE STRUCTURE (2026-11-14): a load case is not only other numbers - another
+# load pattern, other frames holding it. The one-panel wall again: the mode "half" gives its own `loads` (12 kN in
+# place of 24) - the structure is linear, so drift and flow are exactly half: 253 mm and 3 kN/m beside 506 and 6.
+half = copy.deepcopy(one)
+half["quantities"]["Ph"] = {"role": "given", "value": "12", "unit": "kN", "ground": "load case"}
+half["modes"] = {"push": {}, "half": {"assembly": {"loads": [["tr", "X", "Ph"]]}}}
+r = S.run(half)
+pm = {m: {k: [str(x).split(" ")[0] for x in v] for k, v in (g.get("guaranteed") or {}).items()} for m, g in (r.get("per_mode") or {}).items()}
+check(r.get("verdict") == "EARNED" and names(r) == {"DECK": "D24"}
+      and pm.get("push") == {"u_req": ["506", "506"], "q_req": ["6", "6"]} and pm.get("half") == {"u_req": ["253", "253"], "q_req": ["3", "3"]},
+      f"a mode with its own loads of the structure: half the load gives exactly half the drift and the flow (253 mm, "
+      f"3 kN/m beside 506 and 6), the deck chosen for both ({r.get('verdict')}, {pm})")
+bad = copy.deepcopy(half)
+bad["modes"]["half"]["assembly"]["panels"] = []
+r = S.run(bad)
+check(r.get("verdict") == "BRICK ERROR" and "the same in every mode" in str(r.get("why")),
+      f"a mode that tries to change the structure itself (its panels) is refused: only springs, supports, loads and "
+      f"outputs are a mode's ({r.get('verdict')}: {str(r.get('why'))[:80]})")
+
 if FAILS:
     print(f"ASSEMBLY BRICK RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)

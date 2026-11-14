@@ -1079,6 +1079,11 @@ brick = {"stand": "ztl-stand/1", "curves": parts["curves"],
 - A mode may also carry its own `define` (replacing the brick's of that name: `"Nact": "CNT.N - 1"` for one instance
   down) and its own `laws` (added to the brick's: a standby path). Requirements on a quantity a mode's law defines
   belong in that mode.
+- With a structure section (7j) a mode may give its own `"assembly": {"springs", "fixed", "loads", "outputs"}` (since
+  2026-11-14): a load case of a diaphragm is another load pattern held by other frames, not only other numbers. What
+  the mode gives REPLACES the brick's of that name; the grid, panels, bars and holes are the structure itself and
+  cannot differ between modes (refused). Test: the one-panel wall under half its load — exactly half the drift and
+  the flow.
 
 ### Totals over the modes (since 2026-10-11)
 

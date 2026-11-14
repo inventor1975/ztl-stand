@@ -992,6 +992,20 @@ def _mode_brick(b, mode, spec):
         out["define"] = dict(out.get("define") or {}, **spec["define"])
     if spec.get("laws"):
         out["laws"] = list(out["laws"]) + list(spec["laws"])
+    # A MODE'S OWN SUPPORTS AND LOADS OF THE STRUCTURE (2026-11-14). A load case of a real diaphragm is not only other
+    # numbers: wind along X is held by the frames along X, wind along Y by the others, and each case has its own load
+    # pattern. A mode may give the structure section's `springs`, `fixed`, `loads` (and `outputs`) for that mode;
+    # they REPLACE the brick's of that name. The grid, the panels, the bars and the holes are the structure itself
+    # and stay the brick's.
+    if spec.get("assembly") is not None:
+        if not isinstance(out.get("assembly"), dict) or not isinstance(spec["assembly"], dict):
+            raise B.BrickError(f"mode {mode!r}: `assembly` in a mode replaces parts of the brick's structure section — "
+                               "the brick has none")
+        extra = sorted(set(spec["assembly"]) - {"springs", "fixed", "loads", "outputs"})
+        if extra:
+            raise B.BrickError(f"mode {mode!r}: a mode may give the structure's springs, fixed, loads and outputs; "
+                               f"{', '.join(extra)} belong(s) to the structure itself (the same in every mode)")
+        out["assembly"] = dict(out["assembly"], **copy.deepcopy(spec["assembly"]))
     return out
 
 
