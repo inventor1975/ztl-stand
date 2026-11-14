@@ -692,6 +692,9 @@ structure whose parts act on one another: "choose the deck of each zone so that 
   - `outputs` — `"what"`: `u` (`at`, `dir`), `max_u` (`dir`, optional `box`), `flow` (`at`: a point in the cell),
     `max_flow` (optional `box`), `max_bar_force` (`along`, `lines`, optional `box`), `spring_force` (`at`, `dir`).
     A `max_…` is the largest MAGNITUDE over what it covers — one requirement holds a whole zone.
+    `sag` (`dir`, `between`: the two ends `[[x, y], [x, y]]` of one grid line) is the plate's OWN deflection along
+    that line: at every node, the displacement minus the straight line through the two ends' displacements, the
+    largest magnitude — the quantity a deflection limit means when the supports themselves move.
   - MEASURED (synthetic, 240 x 180 ft on a 12 ft grid — 672 unknowns; two deck zones from a catalogue of four, two
     load cases, the deck cost as objective): 6 designs tried, 5 refuted each with its mode and requirement, the pair
     earned and proved optimal — 18 s.
