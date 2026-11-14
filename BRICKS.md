@@ -623,35 +623,68 @@ short list of requirements.
   -10.192083141099], every end exact, ~55 min per displacement (2026-10-16).
 - Examples (examples/truss): the benchmark's cantilever at 12 and 20 floors (bench/hard-tasks/mkcant.py).
 
-## 7j. An assembly of bars, springs and shear panels (since 2026-11-13) — `ustand.assembly`
+## 7j. assembly (optional) — a structure inside the brick: bars, springs and shear panels (since 2026-11-14)
 
 A plane linear elastic model stated element by element — the model an engineer draws for a roof or floor diaphragm:
 chords and collectors as axial bars, the deck as rectangular shear panels, the braced frames as springs to ground.
-It is not a brick section: call it from Python.
+Its stiffnesses and loads NAME the brick's quantities; its results are quantities of the brick. The stand solves the
+structure for EVERY design (and every mode), so the catalogue search, the objective and the modes work through a
+structure whose parts act on one another: "choose the deck of each zone so that the diaphragm holds, cheapest".
 
-    from ustand import assembly
-    r = assembly.solve({
-        "nodes": {"bl": [0, 0], "br": [4, 0], "tr": [4, 2], "tl": [0, 2]},
-        "fixed": [["bl", "X"], ["bl", "Y"], ["br", "X"], ["br", "Y"], ["tl", "Y"], ["tr", "Y"]],
-        "elements": [{"id": "p",   "type": "panel",  "nodes": ["bl", "br", "tr", "tl"], "g": "12"},
-                     {"id": "top", "type": "bar",    "a": "tl", "b": "tr", "k": "1000"},
-                     {"id": "s",   "type": "spring", "node": "tr", "dir": "X", "k": ["90", "110"]}],
-        "loads": [["tr", "X", "24"]],
-        "outputs": [{"flow": "p"}, {"u": ["tr", "X"]}, {"force": "top"}]})
+```json
+"quantities": {"P":  {"role": "given", "value": "40", "unit": "kN"},
+               "kc": {"role": "given", "value": "1000000000", "unit": "kN/m"}},
+"slots":   {"ZA": {"from": ["decks"]}, "ZB": {"from": ["decks"]}},
+"assembly": {
+  "length_unit": "m",
+  "nodes": {"a0": [0, 0], "a1": [4, 0], "a2": [8, 0], "t0": [0, 2], "t1": [4, 2], "t2": [8, 2]},
+  "fixed": [["a0", "X"], ["a0", "Y"], ["a1", "X"], ["a1", "Y"], ["a2", "X"], ["a2", "Y"],
+            ["t0", "Y"], ["t1", "Y"], ["t2", "Y"]],
+  "elements": [{"id": "pA", "type": "panel", "nodes": ["a0", "a1", "t1", "t0"], "g": "ZA.G"},
+               {"id": "pB", "type": "panel", "nodes": ["a1", "a2", "t2", "t1"], "g": "ZB.G"},
+               {"id": "c1", "type": "bar", "a": "t0", "b": "t1", "k": "kc"},
+               {"id": "c2", "type": "bar", "a": "t1", "b": "t2", "k": "kc"}],
+  "loads": [["t1", "X", "P"]],
+  "outputs": {"qA": {"flow": "pA", "unit": "kN/m"}, "qB": {"flow": "pB", "unit": "kN/m"}}
+},
+"requirements": [{"quantity": "qA", "op": "<=", "value": "ZA.cap", "why": "capacity, zone A"},
+                 {"quantity": "qB", "op": "<=", "value": "ZB.cap", "why": "capacity, zone B"}],
+"objective": {"minimize": "ZA.price + ZB.price"}
+```
 
-- `bar`: axial stiffness `k` = EA/L between two nodes (its direction must be exact: a rational length — on a grid it
-  always is). `spring`: a node's X or Y to ground. `panel`: the corners of a rectangle along the axes, in the order
-  bottom-left, bottom-right, top-right, top-left; `g` is the shear stiffness G' in force per length — the panel carries
-  a constant shear flow q = G' x (its shear strain).
-- Every stiffness is a number or a range `[low, high]` — that element's own tolerance.
-- Outputs: `u` a displacement; `force` a bar's tension or the force in a spring; `flow` a panel's shear flow. Each
-  comes back as `nominal`, `lo`, `hi` (exact fractions): a proved two-sided range.
-- Units are yours: one consistent system. The unit layer of the bricks is not involved.
+- `nodes`: name → `[x, y]`, numbers in `length_unit`. `fixed`: `[node, "X" | "Y"]` supports.
+- `elements` — `bar`: axial stiffness `k` = EA/L between nodes `a` and `b` (its direction must be exact: a rational
+  length — on a grid it always is). `spring`: a `node`'s `dir` (X or Y) to ground, stiffness `k`. `panel`: the corners
+  of a rectangle along the axes, in the order bottom-left, bottom-right, top-right, top-left; `g` is the shear
+  stiffness G' in force per length — the panel carries a constant shear flow q = G' × (its shear strain).
+- A stiffness (`k`, `g`) and a load are EXPRESSIONS of the brick's quantities, written as strings: a given, a field of
+  the item a slot holds (`ZA.G`), a computed value, arithmetic of them (`EA/L`). Their units are checked: a stiffness
+  is a force per length, a load a force. A bare number is refused — name a quantity that has the unit.
+- `outputs`: name → one of `{"u": [node, "X"|"Y"]}` (a displacement), `{"force": element}` (a bar's tension or the
+  force in a spring), `{"flow": panel}` (a panel's shear flow), each with its `unit`. Every output is a quantity of
+  the brick under that name: use it in laws, in the objective, and directly in a requirement.
+- **Modes** are load cases: a mode overrides the given loads, the structure is solved in each, the design must hold
+  in all. A mode cannot override an output.
+- The mathematics is ZTL's (`zenergy`, Lean `ZEnergy.lean`): the stand only states the elements. Up to 120 unknowns
+  the result is EXACT (a fraction); above, it is a PROVED RANGE of the one true value, about 1e-24 wide.
+- **A refutation that leans on such a range must hold over the whole of it.** A tolerance is a set of states the world
+  may take: one failing point refutes the design. A result of the structure above the exact size is ONE value known
+  only to lie in a range; an end of that range may not be a state at all. So a design is REFUTED through such a
+  result only when, at the witness's values of the real data, the requirement fails for every value of the range
+  (the stand's own judge earns the opposite with half the overshoot to spare). Otherwise the design is OPEN — "the
+  range does not separate the value from the bound" — and, being undecided, it counts against `optimal` like any
+  open design. MEASURED: a limit set inside a design's proved range — that design OPEN, the next one EARNED,
+  `optimal: false` ("1 cheaper design(s) undecided"); with the rule switched off the same brick refuted it and called
+  the dearer design optimal.
+- Version 1: every stiffness and load is EXACT per design — a quantity with a tolerance or a range, or a derived one,
+  is refused by name (so `find` cannot search a load of the structure yet); no continuous amounts beside the section;
+  the group pruning of large catalogues is off, each design is solved (about 0.1–0.2 s at 126–442 unknowns).
 - A model that is a mechanism (no support; a displacement nothing holds) is refused with what is loose, never solved.
-- With exact stiffnesses the answer is exact. Measured: 574 unknowns, 790 elements, every panel's flow — 0.6 s. With
-  every panel in its own +-1 % range the largest flow is proved within +-2.5 %; with +-10 %, within +-33 %: a range on
-  hundreds of elements at once is a worst case over all of them. Give a range only to what is uncertain.
 - It proves the statics of the model as stated — not that the model is the structure.
+- From Python, without a brick: `ustand.assembly.solve(spec)` with numbers in place of the names (a range
+  `[low, high]` is that element's own tolerance there) returns each output's `nominal`, `lo`, `hi`.
+- Tests: `tests/test_assembly_brick.py` (the section: selection, coupling, modes, the refutation rule),
+  `tests/test_assembly.py` (the solver's door).
 
 ## 7d. components (optional) — a system of devices, each proved once (since 2026-10-12)
 

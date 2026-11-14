@@ -1,0 +1,171 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "P": {
+   "role": "given",
+   "value": "24",
+   "unit": "kN",
+   "ground": "load case"
+  },
+  "EAt": {
+   "role": "given",
+   "value": "4000",
+   "unit": "kN",
+   "ground": "chord"
+  },
+  "Lc": {
+   "role": "given",
+   "value": "4",
+   "unit": "m",
+   "ground": "drawing"
+  }
+ },
+ "slots": {
+  "DECK": {
+   "from": [
+    "decks"
+   ]
+  }
+ },
+ "laws": [],
+ "assembly": {
+  "length_unit": "m",
+  "nodes": {
+   "bl": [
+    0,
+    0
+   ],
+   "br": [
+    4,
+    0
+   ],
+   "tr": [
+    4,
+    2
+   ],
+   "tl": [
+    0,
+    2
+   ]
+  },
+  "fixed": [
+   [
+    "bl",
+    "X"
+   ],
+   [
+    "bl",
+    "Y"
+   ],
+   [
+    "br",
+    "X"
+   ],
+   [
+    "br",
+    "Y"
+   ],
+   [
+    "tl",
+    "Y"
+   ],
+   [
+    "tr",
+    "Y"
+   ]
+  ],
+  "elements": [
+   {
+    "id": "p",
+    "type": "panel",
+    "nodes": [
+     "bl",
+     "br",
+     "tr",
+     "tl"
+    ],
+    "g": "DECK.G"
+   },
+   {
+    "id": "top",
+    "type": "bar",
+    "a": "tl",
+    "b": "tr",
+    "k": "EAt/Lc"
+   }
+  ],
+  "loads": [
+   [
+    "tr",
+    "X",
+    "P"
+   ]
+  ],
+  "outputs": {
+   "q": {
+    "flow": "p",
+    "unit": "kN/m"
+   },
+   "u": {
+    "u": [
+     "tr",
+     "X"
+    ],
+    "unit": "mm"
+   }
+  }
+ },
+ "requirements": [
+  {
+   "quantity": "u",
+   "op": "<=",
+   "value": "600",
+   "why": "drift limit"
+  },
+  {
+   "quantity": "q",
+   "op": "<=",
+   "value": "DECK.cap",
+   "why": "panel capacity"
+  }
+ ],
+ "objective": {
+  "minimize": "DECK.price"
+ },
+ "catalog": {
+  "decks": {
+   "ground": "catalogue",
+   "items": [
+    {
+     "name": "D12",
+     "G": "12",
+     "cap": "8",
+     "price": "10"
+    },
+    {
+     "name": "D24",
+     "G": "24",
+     "cap": "8",
+     "price": "15"
+    },
+    {
+     "name": "D48",
+     "G": "48",
+     "cap": "8",
+     "price": "22"
+    }
+   ],
+   "fields": {
+    "G": {
+     "unit": "kN/m"
+    },
+    "cap": {
+     "unit": "kN/m"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ }
+}

@@ -516,7 +516,7 @@ def frame(b, design, with_computed=True):
                 grounds[name] = ground
 
     for n, q in b["quantities"].items():
-        if q["role"] == "given":
+        if q["role"] == "given" and not q.get("from_assembly"):
             put(n, B.field(q if "range" in q else {"value": q["value"], "tolerance": q.get("tolerance", "0")}),
                 q.get("ground"), _scale(q.get("unit")))
     for s, (cname, item) in design.items():
@@ -530,6 +530,21 @@ def frame(b, design, with_computed=True):
             if isinstance(env[cn], str):
                 raise B.BrickError(f"computed.{cn}: a label is not a value for the laws")
             fixed[cn] = F(env[cn])
+    if with_computed and b.get("assembly"):
+        # THE STRUCTURE OF THIS DESIGN, solved by ZTL (BRICKS.md 7j; 2026-11-14): its results join the design's
+        # values. Exact (up to zenergy's exact size) -> a fixed value. Above it -> a PROVED ENCLOSURE of the one
+        # true value: it sits among the boxes, and a refutation that leans on it is confirmed in _run's note().
+        from . import assembly as AS
+        try:
+            got = AS.for_design(b, exact_env(b, design))
+        except AS.AssemblyError as e:
+            raise B.BrickError(f"assembly: {e}")
+        for n, (lo, hi) in got.items():
+            if lo == hi:
+                fixed[n] = lo
+                grounds[n] = "the structure section, solved exactly by ZTL (zenergy)"
+            else:
+                boxes[n] = (lo, hi)
     return fixed, boxes, derived, grounds
 
 
@@ -566,6 +581,24 @@ def _exact_units(b, design, dims=None):
             if (d or tuple(0 for _ in want)) != want:
                 raise U.UnitError(f"computed.{cn}: the expression is {U.show(d) if d else 'dimensionless'}, "
                                   f"the declared unit is {U.show(want)}")
+        if b.get("assembly"):
+            # the structure section: a stiffness is a force per length, a load a force; a result's unit is its kind's
+            from . import assembly as AS
+            kind_dim = {"stiffness": U.parse("N/m")[1], "force": U.parse("N")[1], "u": U.parse("m")[1],
+                        "flow": U.parse("N/m")[1]}
+            try:
+                for where_, text, what in AS.texts(b):
+                    if not isinstance(text, str):
+                        raise U.UnitError(f"{where_}: an expression of the brick's quantities, written as a string")
+                    d = X.dims(X.parse(B.compile_expr(text, b.get("define"))), dimof, where_, U.show)
+                    if (d or tuple(0 for _ in kind_dim[what])) != kind_dim[what]:
+                        raise U.UnitError(f"{where_}: {text!r} is {U.show(d) if d else 'a bare number'}; a {what} is "
+                                          f"{U.show(kind_dim[what])} - name a quantity that has the unit")
+            except AS.AssemblyError as e:
+                raise U.UnitError(f"assembly: {e}")
+            for name, (k, _w, unit) in AS.kinds(b).items():
+                if U.parse(unit)[1] != kind_dim[k]:
+                    raise U.UnitError(f"assembly.outputs.{name}: a {k} is {U.show(kind_dim[k])}, the unit given is {unit!r}")
     except X.ExactError as e:
         raise U.UnitError(str(e))
 
@@ -776,6 +809,71 @@ def _bound_shares_box(r, boxes):
             if names & set(boxes):
                 return True
     return False
+
+
+_CONFIRMING = [0]        # > 0 inside the sub-run that confirms a refutation (it must not confirm itself)
+
+
+def _enclosed(b, boxes):
+    """The names among a design's boxes that are PROVED ENCLOSURES of one value - results of the structure section
+    above zenergy's exact size - and not tolerances."""
+    return [n for n, q in b["quantities"].items() if q.get("from_assembly") and n in boxes]
+
+
+def _refutation_stands(b, design, point, values, r, over, encl):
+    """A REFUTATION THAT LEANS ON AN ENCLOSURE (2026-11-14, the curator's choice of the fast path: "we are building
+    the stand; what you found is what was not finished"). A design is refuted by a WITNESS - a point of its boxes where
+    a requirement fails - and every point of a tolerance box is a state the world may take. A result of the structure
+    is different: ONE value, known only to lie in a proved range (about 1e-24 wide). Read as a tolerance, its far end
+    is a 'state' that may not exist - MEASURED: a value known within [0.9999999, 1.0000001] against the limit 1 is
+    REFUTED at the upper end, whatever the value is. A false refutation drops a design that holds, and the objective
+    then calls a dearer one optimal.
+    THE RULE: the refutation stands only when, at the witness's values of the real data, the requirement fails for
+    EVERY value of the enclosures. Then it fails at the true one. Otherwise the design is not decided (OPEN).
+    HOW: the stand's own judge, on the design pinned and the witness's data pinned, asked to EARN the opposite with
+    half the witness's overshoot to spare: "the quantity stays past the bound by over/2, whatever the enclosures
+    are". Earned -> the refutation stands. (A witness exactly ON a strict bound has no overshoot to halve: OPEN.)"""
+    if not over or over <= 0:
+        return False
+    fx, _bx, _dv, _gr = frame(b, design)
+    lo_b, hi_b = iv = _req_at(r, dict(fx, **point))
+    v = values[r["quantity"]]
+    v_lo, v_hi = v if isinstance(v, tuple) else (v, v)
+    low_side = lo_b is not None and (v_hi <= lo_b if getattr(iv, "strict_lo", False) else v_hi < lo_b)
+    if not low_side and (hi_b is None or not v_lo >= hi_b):
+        return False                             # the witness does not show which side it is past
+    one = _pinned(b, design)
+    for n, x in point.items():
+        if n in encl or n in B.CONSTANTS:
+            continue
+        if n in one["quantities"]:
+            q_ = one["quantities"][n]
+            q_.pop("tolerance", None)
+            q_.pop("range", None)
+            q_["value"] = _s_fr(F(x) / _scale(q_.get("unit")))
+        elif "__" in n and f"__pinned_{n.split('__', 1)[0]}" in one["catalog"]:
+            slot, fld = n.split("__", 1)
+            cat = one["catalog"][f"__pinned_{slot}"]
+            cat["items"][0][fld] = {"value": _s_fr(F(x) / _scale((cat["fields"].get(fld) or {}).get("unit"))),
+                                    "tolerance": "0"}
+        else:
+            return False                         # a coordinate this rule cannot pin: not confirmed
+    q = r["quantity"]
+    sc = _scale(b["quantities"][q].get("unit"))
+    bound = (lo_b - over / 2) if low_side else (hi_b + over / 2)
+    one["requirements"] = [{"quantity": q, "op": "<=" if low_side else ">=", "value": _s_fr(F(bound) / sc),
+                            "why": "the refuted requirement, turned round, with half the overshoot to spare"}]
+    for k in ("objective", "find", "report", "modes"):
+        one.pop(k, None)
+    _CONFIRMING[0] += 1
+    try:
+        return _run(one, conflicts=False, brief=True, loaded=True).get("verdict") == "EARNED"
+    except Stopped:
+        raise
+    except Exception:                            # noqa: BLE001 - what cannot be confirmed is not refuted
+        return False
+    finally:
+        _CONFIRMING[0] -= 1
 
 
 def _req_at(r, point_env):
@@ -1504,7 +1602,19 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
         return None
 
     def note(design, point, values, r, over):
-        nonlocal closest
+        nonlocal closest, undecided, undecided_before_earned
+        if b.get("assembly") and not _CONFIRMING[0]:
+            encl = _enclosed(b, frame(b, design)[1])
+            if encl and not _refutation_stands(b, design, point, values, r, over, encl):
+                # not refuted, not earned: the design stays OPEN (see _refutation_stands) - and, being undecided, it
+                # counts against "optimal" like every design left open before the first earned one
+                if id(design) not in open_why:
+                    undecided += 1
+                    undecided_before_earned += 1
+                open_why[id(design)] = (f"{r.get('why') or r['quantity']}: fails at an end of the structure's proved "
+                                        "range and holds at another - the range does not separate the value from the "
+                                        "bound (not refuted, not earned)")
+                return
         if closest is None or over < closest[0]:
             closest = (over, design, point, values, r)
         prev = refuted_by.get(id(design))
@@ -1542,11 +1652,14 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
 
     from . import lp as LP
     if LP.continuous_slots(b):
+        if b.get("assembly"):
+            raise B.BrickError("assembly: a continuous amount beside a structure section is not in version 1 "
+                               "(choices from a catalogue are)")
         return _run_continuous(b, [(b, reqs_given, laws)], conflicts)
     from . import prune as P
     si_list = _si_reqs(dict(b, requirements=reqs_given))
     pr = P.prune(b, [(b, laws, si_list)]) \
-        if not (b.get("objective") or {}).get("case") == "worst" else None
+        if not (b.get("objective") or {}).get("case") == "worst" and not b.get("assembly") else None
     if pr is not None:
         all_designs = pr[0]                # the survivors; the rest refuted in groups (blind test 3, c11)
     else:

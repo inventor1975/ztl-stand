@@ -940,6 +940,51 @@ def _direct_requirements(b):
     b["quantities"] = qs
 
 
+ASSEMBLY_KINDS = ("u", "force", "flow")
+
+
+def _assembly_outputs(b):
+    """THE STRUCTURE SECTION'S RESULTS ARE QUANTITIES OF THE BRICK (2026-11-14, the curator: "the stand's input is a
+    brick, its core is ZTL, its output is verdicts" - the assembly of 2026-11-13 was a door beside the stand: its own
+    input, no units, no verdict, and nothing could be CHOSEN through it). Each output of `assembly` becomes a
+    quantity under its name, so laws, requirements, the objective and the modes read it like any other; its value is
+    not the author's - the stand solves the structure for every design (stand.frame) and puts the result there.
+    A requirement may name an output directly (the stand makes the derived twin, as for a given)."""
+    sec = b.get("assembly") if isinstance(b, dict) else None
+    if sec is None:
+        return
+    if not isinstance(sec, dict):
+        raise BrickError("assembly: must be an object with nodes, fixed, elements, loads, outputs")
+    outs = sec.get("outputs")
+    if not isinstance(outs, dict) or not outs:
+        raise BrickError('assembly.outputs: must be an object of name: {"u": [node, "X"|"Y"]} | {"force": element} | '
+                         '{"flow": panel}, each with its "unit"')
+    qs = b.get("quantities")
+    if not isinstance(qs, dict):
+        raise BrickError("quantities: must be an object")
+    for name, o in outs.items():
+        if not re.fullmatch(r"[A-Za-z_]\w*", str(name)) or "__" in str(name):
+            raise BrickError(f"assembly.outputs: {name!r} is not a plain name (letters, digits, _)")
+        if isinstance(qs.get(name), dict) and qs[name].get("from_assembly"):
+            continue                              # a brick loaded before (a mode's brick, a pinned design)
+        if name in qs:
+            raise BrickError(f"assembly.outputs.{name}: a quantity of that name exists already - a result of the "
+                             "structure takes a name of its own")
+        if not isinstance(o, dict) or sum(k in o for k in ASSEMBLY_KINDS) != 1 or not isinstance(o.get("unit"), str):
+            raise BrickError(f'assembly.outputs.{name}: one of "u", "force", "flow", and a "unit"')
+        qs[name] = {"role": "given", "value": "0", "unit": o["unit"], "from_assembly": True,
+                    "why": "a result of the structure section (solved by the stand for every design)"}
+    for mname, sp in (b.get("modes") or {}).items() if isinstance(b.get("modes"), dict) else []:
+        hit = sorted(set((sp or {}).get("quantities") or {}) & set(outs)) if isinstance(sp, dict) else []
+        if hit:
+            raise BrickError(f"modes.{mname}: {', '.join(hit)} is a result of the structure - a mode overrides what "
+                             "the world gives (a load), not what follows")
+    if b.get("laws") is None:
+        b["laws"] = []
+    if isinstance(b["laws"], list):
+        _direct_requirements(b)            # a requirement on an output: its derived twin and the law that ties it
+
+
 def _optional_slots(b):
     """A slot with "optional": true may stay EMPTY (J11, blind test 4, 2026-10-11, the curator's "да"): a catalog
     `<slot>_none` with one item "none" is added to it — every numeric field 0 (price 0, power 0, count 0), every
@@ -1036,6 +1081,7 @@ def load(path_or_dict) -> dict:
     _named_tolerances(b)
     _add_constants(b)
     _add_domains(b)
+    _assembly_outputs(b)
     _shape(b)
     _optional_slots(b)
     _direct_requirements(b)

@@ -1,0 +1,205 @@
+{
+ "stand": "ztl-stand/1",
+ "quantities": {
+  "P": {
+   "role": "given",
+   "value": "40",
+   "unit": "kN",
+   "ground": "load case"
+  },
+  "kc": {
+   "role": "given",
+   "value": "1000000000",
+   "unit": "kN/m",
+   "ground": "collector, nearly rigid"
+  }
+ },
+ "slots": {
+  "ZA": {
+   "from": [
+    "decks"
+   ]
+  },
+  "ZB": {
+   "from": [
+    "decks"
+   ]
+  }
+ },
+ "laws": [],
+ "assembly": {
+  "length_unit": "m",
+  "nodes": {
+   "a0": [
+    0,
+    0
+   ],
+   "a1": [
+    4,
+    0
+   ],
+   "a2": [
+    8,
+    0
+   ],
+   "t0": [
+    0,
+    2
+   ],
+   "t1": [
+    4,
+    2
+   ],
+   "t2": [
+    8,
+    2
+   ]
+  },
+  "fixed": [
+   [
+    "a0",
+    "X"
+   ],
+   [
+    "a0",
+    "Y"
+   ],
+   [
+    "a1",
+    "X"
+   ],
+   [
+    "a1",
+    "Y"
+   ],
+   [
+    "a2",
+    "X"
+   ],
+   [
+    "a2",
+    "Y"
+   ],
+   [
+    "t0",
+    "Y"
+   ],
+   [
+    "t1",
+    "Y"
+   ],
+   [
+    "t2",
+    "Y"
+   ]
+  ],
+  "elements": [
+   {
+    "id": "pA",
+    "type": "panel",
+    "nodes": [
+     "a0",
+     "a1",
+     "t1",
+     "t0"
+    ],
+    "g": "ZA.G"
+   },
+   {
+    "id": "pB",
+    "type": "panel",
+    "nodes": [
+     "a1",
+     "a2",
+     "t2",
+     "t1"
+    ],
+    "g": "ZB.G"
+   },
+   {
+    "id": "c1",
+    "type": "bar",
+    "a": "t0",
+    "b": "t1",
+    "k": "kc"
+   },
+   {
+    "id": "c2",
+    "type": "bar",
+    "a": "t1",
+    "b": "t2",
+    "k": "kc"
+   }
+  ],
+  "loads": [
+   [
+    "t1",
+    "X",
+    "P"
+   ]
+  ],
+  "outputs": {
+   "qA": {
+    "flow": "pA",
+    "unit": "kN/m"
+   },
+   "qB": {
+    "flow": "pB",
+    "unit": "kN/m"
+   }
+  }
+ },
+ "requirements": [
+  {
+   "quantity": "qA",
+   "op": "<=",
+   "value": "ZA.cap",
+   "why": "capacity, zone A"
+  },
+  {
+   "quantity": "qB",
+   "op": "<=",
+   "value": "ZB.cap",
+   "why": "capacity, zone B"
+  }
+ ],
+ "objective": {
+  "minimize": "ZA.price + ZB.price"
+ },
+ "catalog": {
+  "decks": {
+   "ground": "catalogue",
+   "items": [
+    {
+     "name": "soft",
+     "G": "10",
+     "cap": "4",
+     "price": "10"
+    },
+    {
+     "name": "mid",
+     "G": "20",
+     "cap": "6",
+     "price": "14"
+    },
+    {
+     "name": "stiff",
+     "G": "40",
+     "cap": "9",
+     "price": "20"
+    }
+   ],
+   "fields": {
+    "G": {
+     "unit": "kN/m"
+    },
+    "cap": {
+     "unit": "kN/m"
+    },
+    "price": {
+     "unit": "USD"
+    }
+   }
+  }
+ }
+}

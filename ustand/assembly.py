@@ -2,6 +2,10 @@
 """ASSEMBLY — a plane linear elastic model stated ELEMENT BY ELEMENT, with proved ranges of its displacements and of
 its members' forces.
 
+SINCE 2026-11-14 it is also a SECTION OF A BRICK (`"assembly"`, BRICKS.md 7j; the end of this file): its stiffnesses
+and loads name the brick's quantities, its results are quantities of the brick, and the stand solves it for every
+design - so a catalogue is searched THROUGH the structure. `solve` below is the door to the kernel that section uses.
+
 WHY (2026-11-13). The stand had the solver and no door to it. ZTL's `zenergy` proves, for a stiffness that is a sum
 of rank-one terms K(p) = sum_k p_k w_k g_k g_k^T with every p_k in [1 - t_k, 1 + t_k], a two-sided range of any
 linear output of the solution of K u = f — exactly up to 120 unknowns, above that by a floating solve whose residual
@@ -234,3 +238,86 @@ def solve(spec, jobs=1):
         raise AssemblyError("the model could not be solved with a proof (" + str(e)[:160] + "): a mechanism - a part of "
                             "it that nothing restrains - or a stiffness range so wide that it is not decided") from None
     return {"unknowns": n, "elements": len(parts), "outputs": out}
+
+
+# ---- THE BRICK SECTION (2026-11-14). `assembly` inside a brick: stiffnesses and loads NAME the brick's quantities
+# (a given, a field of the item a slot holds, a computed value), the results are quantities of the brick, and the
+# stand solves the structure for every design - so its catalogue search, its objective and its modes work through a
+# structure whose parts act on one another.
+_CACHE = {}
+
+
+def kinds(b):
+    """{output name: (kind, what it asks, unit)}"""
+    out = {}
+    for name, o in ((b.get("assembly") or {}).get("outputs") or {}).items():
+        k = next(k for k in ("u", "force", "flow") if k in o)
+        out[name] = (k, o[k], o.get("unit", ""))
+    return out
+
+
+def texts(b):
+    """every expression of the section with what it must be: [(where, text, "stiffness" | "force")]"""
+    sec, out = b.get("assembly") or {}, []
+    for i, e in enumerate(sec.get("elements") or []):
+        if not isinstance(e, dict):
+            raise AssemblyError(f"elements[{i}]: an object with id and type")
+        key = "g" if e.get("type") == "panel" else "k"
+        out.append((f"assembly.elements[{i}] ({e.get('id')}).{key}", e.get(key), "stiffness"))
+    for i, ld in enumerate(sec.get("loads") or []):
+        if not isinstance(ld, (list, tuple)) or len(ld) != 3:
+            raise AssemblyError(f"loads[{i}]: [node, \"X\" or \"Y\", force]")
+        out.append((f"assembly.loads[{i}]", ld[2], "force"))
+    return out
+
+
+def for_design(b, env):
+    """The structure of this design, solved by ZTL (zenergy): -> {output name: (lo, hi)} in SI. `env`: the design's
+    EXACT values in SI (stand.exact_env). Version 1: every stiffness and load is exact per design - a quantity with a
+    tolerance or a range, or a derived one, has no exact value and is refused by name."""
+    import ast
+    import json
+    from . import bricks as B, exact as X, units as U
+    sec = b["assembly"]
+    try:
+        ls = U.parse(sec.get("length_unit", "m"))[0]
+    except Exception as e:                       # noqa: BLE001
+        raise AssemblyError(f"length_unit: {e}") from None
+
+    def val(text, where):
+        if not isinstance(text, str) or not text.strip():
+            raise AssemblyError(f"{where}: an expression of the brick's quantities, written as a string")
+        code = B.compile_expr(text, b.get("define"))
+        names = {n.id for n in ast.walk(ast.parse(code, mode="eval")) if isinstance(n, ast.Name)}
+        missing = sorted(n for n in names if n not in env and n not in B.FUNCS)
+        if missing:
+            raise AssemblyError(f"{where}: {', '.join(m.replace('__', '.') for m in missing)} has no exact value for "
+                                "this design - version 1 of the structure section reads exact values only (not a "
+                                "tolerance, a range, or a derived quantity)")
+        v = X.evaluate(X.parse(code), env, where)
+        if isinstance(v, X._Iv) or isinstance(v, str):
+            raise AssemblyError(f"{where}: not an exact number")
+        return F(v)
+
+    spec = {"nodes": {str(n): [str(_q(xy[0], f"node {n}") * ls), str(_q(xy[1], f"node {n}") * ls)]
+                      for n, xy in (sec.get("nodes") or {}).items() if isinstance(xy, (list, tuple)) and len(xy) == 2},
+            "fixed": sec.get("fixed") or [], "elements": [], "loads": [], "outputs": []}
+    if len(spec["nodes"]) != len(sec.get("nodes") or {}):
+        raise AssemblyError("nodes: each is name: [x, y], numbers in the section's length_unit")
+    for (where, text, _what), e in zip(texts(b), sec.get("elements") or []):
+        key = "g" if e.get("type") == "panel" else "k"
+        spec["elements"].append({**{k: v for k, v in e.items() if k != key}, key: str(val(text, where))})
+    for (where, text, _what), ld in zip(texts(b)[len(spec["elements"]):], sec.get("loads") or []):
+        spec["loads"].append([ld[0], ld[1], str(val(text, where))])
+    names = list(kinds(b))
+    for name in names:
+        k, what, _u = kinds(b)[name]
+        spec["outputs"].append({k: what})
+    key = json.dumps(spec, sort_keys=True)
+    if key not in _CACHE:
+        if len(_CACHE) > 512:
+            _CACHE.clear()
+        r = solve(spec)
+        _CACHE[key] = {n: (o["lo"], o["hi"]) for n, o in zip(names, r["outputs"])}
+    return dict(_CACHE[key])
+
