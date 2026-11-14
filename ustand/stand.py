@@ -1009,14 +1009,23 @@ def _mode_brick(b, mode, spec):
     return out
 
 
-def _mode_item(i):
-    """One design's runs in every mode — exactly the loop's own calls (a worker of ustand/parallel.py, or here)."""
+def _mode_item(i, first=None, until_fails=False):
+    """One design's runs in every mode — exactly the loop's own calls (a worker of ustand/parallel.py, or here).
+    until_fails (the climb): the modes are run until one is NOT earned — the mode `first` (where the last design
+    failed) before the others. A design on the climb's way needs one failing load case to be passed by, not all of
+    them (MEASURED 2026-11-14, a roof diaphragm with eight load cases: 4.4 s a design in all eight, most of a second
+    in one); a design that holds is still run in every mode."""
     per_mode, ds = PL.STATE["modes"]
     out = {}
-    for m, bm in per_mode.items():
-        out[m] = _run(_pinned(bm, ds[i]), conflicts=False, brief=True, loaded=True)   # exact inside; the door shortens
+    order = list(per_mode)
+    if first in per_mode:
+        order = [first] + [m for m in order if m != first]
+    for m in order:
+        out[m] = _run(_pinned(per_mode[m], ds[i]), conflicts=False, brief=True, loaded=True)   # exact inside; the door shortens
         if out[m]["verdict"] in ("BRICK ERROR", "STAND FAULT", "STAND ERROR"):
             break                               # the loop returns at this mode: the later ones are never read
+        if until_fails and out[m]["verdict"] != "EARNED":
+            break
     return out
 
 
@@ -1075,7 +1084,7 @@ def run_modes(b, conflicts=False) -> dict:
     tried = undecided = undecided_before = 0
     closest = None
     report_all, outcomes, first_earned = b.get("report") == "all", [], None
-    earned_outs, last_req, i_d = {}, None, 0
+    earned_outs, last_req, i_d, last_mode = {}, None, 0, None
     # PARALLEL (ustand/parallel.py): each design's per-mode runs computed ahead by workers, in this order
     PL.STATE["modes"] = (per_mode, all_designs)
     pre = PL.iterate(_mode_item, len(all_designs))
@@ -1093,12 +1102,16 @@ def run_modes(b, conflicts=False) -> dict:
         tried += 1
         _tick(tried, len(all_designs), outcomes)
         results = {}
-        mres = next(pre) if climb is None else _mode_item(i_d - 1)
+        mres = next(pre) if climb is None else _mode_item(i_d - 1, first=last_mode, until_fails=True)
         for m, bm in per_mode.items():
+            if m not in mres:
+                continue                        # (the climb: not run - an earlier mode already failed the design)
             r = mres[m]                         # = _run(_pinned(bm, design), conflicts=False, brief=True, loaded=True)
             if r["verdict"] in ("BRICK ERROR", "STAND FAULT", "STAND ERROR"):
                 return dict(r, mode=m, design=_design_out(design))
             results[m] = r
+        if climb is not None:
+            last_mode = next((m for m, r in results.items() if r["verdict"] != "EARNED"), last_mode)
         verdicts = {m: r["verdict"] for m, r in results.items()}
         if all(v == "EARNED" for v in verdicts.values()):
             outcomes.append({"design": _label(design), "verdict": "EARNED"})
@@ -1163,7 +1176,9 @@ def run_modes(b, conflicts=False) -> dict:
     group_info = {"refuted_by_groups": sum(abs(p[3]) for p in pr[1]), "groups_pruned": len(pr[1]),
                   "groups_read": pr[2]} if pr is not None else {}
     if climb is not None:
-        group_info = dict(group_info, search=climb.report(_label))
+        group_info = dict(group_info, search=dict(climb.report(_label), modes=(
+            "a design the search passed by was judged until its first failing mode (its `failing_modes` names that "
+            "one); the design found, and every design earned on the way, was judged in every mode")))
         if climb.best_design() is not None:
             # the climb's answer: the cheapest EARNED design it took; of the optimum only what was judged (climb.py)
             first_earned = earned_outs[id(climb.best_design())]

@@ -65,7 +65,10 @@ m = three()
 m["modes"] = {"normal": {}, "storm": {"quantities": {"d1": {"value": "8"}}}}
 a, c = run(m, "all"), run(m, "climb")
 check(a["verdict"] == c["verdict"] == "EARNED" and names(a) == names(c) == {"A": "p10", "B": "p10", "C": "p3"}
-      and c["designs_tried"] < a["designs_tried"] and c["objective"]["optimal"] is False and "search" in c,
+      and c["designs_tried"] < a["designs_tried"] and c["objective"]["optimal"] is False and "search" in c
+      # a design passed by is judged until its first failing mode; the design found - in every mode
+      and set(c.get("per_mode") or {}) == {"normal", "storm"} and "first failing mode" in c["search"].get("modes", "")
+      and all(len(o.get("failing_modes", [1])) == 1 for o in c.get("designs", []) if o.get("verdict") == "REFUTED"),
       f"with two load cases (A carries 8 in the storm): the same design either way (p10, p10, p3), "
       f"{c['designs_tried']} judgements against {a['designs_tried']} ({names(c)})")
 
