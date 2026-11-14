@@ -1084,15 +1084,18 @@ def run_modes(b, conflicts=False) -> dict:
     tried = undecided = undecided_before = 0
     closest = None
     report_all, outcomes, first_earned = b.get("report") == "all", [], None
-    earned_outs, last_req, i_d, last_mode = {}, None, 0, None
+    earned_outs, last_req, i_d, last_mode, last_passed = {}, None, 0, None, set()
     # PARALLEL (ustand/parallel.py): each design's per-mode runs computed ahead by workers, in this order
     PL.STATE["modes"] = (per_mode, all_designs)
     pre = PL.iterate(_mode_item, len(all_designs))
     while True:
         if climb is not None and i_d and i_d == len(all_designs):
             # the climb's next design, from how the last one came out (and which requirement it failed, in which mode)
-            nxt = climb.after(all_designs[i_d - 1], outcomes[-1]["verdict"],
-                              CL.blamed(b, last_req) if outcomes[-1]["verdict"] == "REFUTED" else ())
+            lo_ = outcomes[-1]
+            nxt = climb.after(all_designs[i_d - 1], lo_["verdict"],
+                              CL.blamed(b, last_req) if lo_["verdict"] == "REFUTED" else (),
+                              over=(B.num(str(lo_["by_at_witness"]).split(" ")[0]) if lo_["verdict"] == "REFUTED" else None),
+                              mode=lo_.get("mode"), passed=last_passed)
             if nxt is not None:
                 all_designs.append(nxt)
         if i_d >= len(all_designs):
@@ -1112,6 +1115,7 @@ def run_modes(b, conflicts=False) -> dict:
             results[m] = r
         if climb is not None:
             last_mode = next((m for m, r in results.items() if r["verdict"] != "EARNED"), last_mode)
+            last_passed = {m for m, r in results.items() if r["verdict"] == "EARNED"}
         verdicts = {m: r["verdict"] for m, r in results.items()}
         if all(v == "EARNED" for v in verdicts.values()):
             outcomes.append({"design": _label(design), "verdict": "EARNED"})
@@ -1825,7 +1829,8 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
                        "REFUTED" if id(prev_design) in refuted_by else "OPEN")
             nxt = climb.after(prev_design, how_out,
                               CL.blamed(b, reqs_given[reqs.index(refuted_by[id(prev_design)][0])])
-                              if how_out == "REFUTED" else ())
+                              if how_out == "REFUTED" else (),
+                              over=(refuted_by[id(prev_design)][1] if how_out == "REFUTED" else None))
             if nxt is not None:
                 all_designs.append(nxt)
         if i_design >= len(all_designs):

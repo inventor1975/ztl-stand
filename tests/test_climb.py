@@ -155,6 +155,51 @@ check(r.get("verdict") == "EARNED" and again.get("verdict") == "EARNED" and agai
       f"judgements; the design found is EARNED again when judged alone, and every zone one step cheaper is not earned "
       f"({r.get('verdict')}, again {again.get('verdict')}, {names(r)}, {str(r.get('why') or '')[:120]})")
 
+# 6. A REQUIREMENT THAT NAMES NO SLOT (a drift of a whole structure): the step is found by TRYING every single step.
+# A small roof - two zones of deck from a catalogue of three, two load cases, a drift limit; with the limit at 20 the
+# cheapest design that holds is (heavy, medium): shear names the end zone, the drift names nobody. The climb reaches
+# the design that judging all nine takes, says a step was found by trying, and a limit nothing meets ends OPEN.
+def roof(seismic, drift):
+    """a plan 48 x 36 on a 6-grid: end zones and a middle zone of deck, a hole, chords, frames as springs, two load cases"""
+    reqs = lambda u: [{"quantity": "qEnd", "op": "<=", "value": "END.cap", "why": "end zone capacity"},      # noqa: E731
+                      {"quantity": "qMid", "op": "<=", "value": "MID.cap", "why": "middle zone capacity"},
+                      {"quantity": u, "op": "<=", "value": drift, "why": "drift limit"}]
+    return {"stand": "ztl-stand/1",
+            "quantities": {"EAc": {"role": "given", "value": "200000", "unit": "kN", "ground": "chords"},
+                           "KF": {"role": "given", "value": "30", "unit": "kN/mm", "ground": "frames"},
+                           "WX": {"role": "given", "value": "0", "unit": "kN", "ground": "load case"},
+                           "WY": {"role": "given", "value": "0", "unit": "kN", "ground": "load case"},
+                           "Aend": {"role": "given", "value": "864", "unit": "m^2"}, "Amid": {"role": "given", "value": "828", "unit": "m^2"}},
+            "slots": {"END": {"from": ["decks"]}, "MID": {"from": ["decks"]}}, "laws": [],
+            "assembly": {"length_unit": "m", "grid": {"x": {"from": 0, "to": 48, "step": 6}, "y": {"from": 0, "to": 36, "step": 6}},
+                         "panels": [{"g": "MID.G"}, {"g": "END.G", "box": [0, 0, 12, 36]}, {"g": "END.G", "box": [36, 0, 48, 36]}],
+                         "holes": [[18, 12, 24, 18]],
+                         "bars": [{"along": "x", "lines": "all", "EA": "EAc"}, {"along": "y", "lines": "all", "EA": "EAc"}],
+                         "springs": [{"at": [x, y], "dir": d, "k": "KF"} for x in (0, 48) for y in (0, 36) for d in "XY"],
+                         "loads": [{"on": "area", "dir": "X", "total": "WX"}, {"on": "area", "dir": "Y", "total": "WY"}],
+                         "outputs": {"qEnd": {"what": "max_flow", "box": [0, 0, 12, 36], "unit": "kN/m"},
+                                     "qMid": {"what": "max_flow", "box": [12, 0, 36, 36], "unit": "kN/m"},
+                                     "ux": {"what": "max_u", "dir": "X", "unit": "mm"}, "uy": {"what": "max_u", "dir": "Y", "unit": "mm"}}},
+            "requirements": [],
+            "modes": {"wind X": {"quantities": {"WX": {"value": "300"}}, "requirements": reqs("ux")},
+                      "seismic Y": {"quantities": {"WY": {"value": seismic}}, "requirements": reqs("uy")}},
+            "objective": {"minimize": "Aend*END.price + Amid*MID.price"},
+            "catalog": {"decks": {"ground": "catalogue",
+                                  "items": [{"name": "light", "G": "2000", "cap": "3", "price": "20"},
+                                            {"name": "medium", "G": "4000", "cap": "5", "price": "24"},
+                                            {"name": "heavy", "G": "9000", "cap": "9", "price": "31"}],
+                                  "fields": {"G": {"unit": "kN/m"}, "cap": {"unit": "kN/m"}, "price": {"unit": "USD/m^2"}}}}}
+
+
+ra, rc = S.run(dict(roof("400", "20"), search="all")), S.run(dict(roof("400", "20"), search="climb"))
+sc = rc.get("search") or {}
+check(ra["verdict"] == rc["verdict"] == "EARNED" and names(ra) == names(rc) == {"END": "heavy", "MID": "medium"}
+      and sc.get("steps_found_by_trying", 0) >= 1 and rc["objective"]["optimal"] is False,
+      f"a drift limit that names no slot: the climb finds its step by trying and reaches the design that judging all "
+      f"nine takes ({names(rc)}, tried {rc.get('designs_tried')}, by trying {sc.get('steps_found_by_trying')})")
+rn = S.run(dict(roof("400", "5"), search="climb"))
+check(rn["verdict"] == "OPEN" and "no earned design" in str((rn.get("search") or {}).get("found")),
+      f"PLANTED a drift limit no design meets: the climb ends OPEN and says so, never REFUTED ({rn.get('verdict')}, {(rn.get('search') or {}).get('found')})")
 if FAILS:
     print(f"CLIMB RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)
