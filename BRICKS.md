@@ -734,8 +734,11 @@ has no reading to be cut by.
 
 - **What it does.** UP: every slot starts at its cheapest item; a design that is not earned names the requirement it
   fails, and ONE slot is raised to its next item by cost — a slot that requirement names (its bound or its quantity
-  reads the slot's field, directly or through the laws), the one whose step costs least; when it names none, any
-  slot, cheapest step. DOWN: from the first EARNED design each slot is tried one step cheaper; a design that is still
+  reads the slot's field, directly or through the laws), the one whose step costs least. When it names NONE (a
+  result that leans on every slot: a drift of the structure, a force in a member), the step is found by TRYING:
+  every single step up from here is judged, and the climb goes to the one that gets furthest — past the mode that
+  failed (the cheapest such), else least far past the same requirement; when no step is nearer it stops (OPEN) and
+  `search` says so. `search.steps_found_by_trying` counts such steps. DOWN: from the first EARNED design each slot is tried one step cheaper; a design that is still
   EARNED is taken and the trial starts again, until no slot can be lowered.
 - **What is judged.** Every design the search proposes is judged by the stand as usual (in every mode). The search
   is trusted for nothing.
