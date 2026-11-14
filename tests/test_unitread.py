@@ -96,6 +96,15 @@ check(R.near_match(R.mentions("height 3'-6\" min")[0], "3'-6\"", "height 3'-6\" 
       "such a length is found by `near` as it is written, and the note says how it was read")
 check(pairs("offset 1.5 (ft)") == [(F(3, 2), "ft")] and pairs("12 (in)") == [(F(12), "in")], "a unit in brackets right after the number")
 check(pairs("factor 2 (maximum)") == [(F(2), None)], "PLANTED brackets that hold a word, not a unit, give no unit")
+# A UNIT PER COUNTED ITEM IN A HEADER (2026-11-14: a column "(<unit> per <item>)" could not be read)
+check(R.unit_in("Capacity C (lb per bolt)")[0] == "lb" and "per bolt" in R.unit_in("lb per bolt")[1],
+      "a header's 'lb per bolt' is lb, and the note says the item is counted, not a unit")
+check(R.unit_in("Cost ($ per panel)")[0] == "USD" and R.unit_in("W per rack")[0] == "W" and R.unit_in("Price, $ each")[0] == "USD",
+      "$ per panel, W per rack, $ each: the unit of one item")
+check(R.unit_in("lb per ft")[0] == "(lb)/(ft)" and R.unit_in("$ per kWh")[0] == "USD/(kWh)" and R.unit_in("Force (kip per in)")[0] == "(kip)/(in)",
+      "PLANTED a real unit after 'per' stays a rate, never an item")
+check(R.unit_in("Load (lb per ton)")[0] is None and R.unit_in("Rate (USD per linear foot)")[0] is None,
+      "PLANTED a refused word (a bare ton) is not an item, and two words after 'per' are not read")
 if FAILS:
     print(f"UNITREAD RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)

@@ -314,9 +314,34 @@ def unit_in(text):
             u2, n2, note = _unit_from_words(re.sub(r"^(\$|usd)\s*(/|per)\s*", "", c, flags=re.I))
             if u2 is not None:
                 return f"USD/({u2})", note
+            if _per_item(re.sub(r"^(\$|usd)\s*", "", c, flags=re.I)):
+                return "USD", _per_item(re.sub(r"^(\$|usd)\s*", "", c, flags=re.I)) + ": counted items, not a unit"
         u, n, note = _unit_from_words(c)
         if u is not None and n == len(c):
             return u, note
+        if u is not None and _per_item(c[n:]):
+            return u, note or f"{_per_item(c[n:])}: counted items, not a unit"
         if note:
             notes.append(note)
     return None, "; ".join(notes) or "no unit named"
+
+
+def _per_item(rest):
+    """`rest` is "per <one word>" (or "/ <one word>", "each") and the word is NOT a unit: a counted item ("lb per
+    bolt", "$ per panel", "W per rack") -> the word; else None. Running text already reads "40 lb per bolt"
+    as a force; a column header saying the same was refused (MEASURED 2026-11-14: a table's "(<unit> per <item>)"
+    column could not be read, and with the whole header row quoted the unit of ANOTHER column was taken). A word the
+    reader refuses (a bare "ton") or knows as a unit is never an item."""
+    m = re.fullmatch(r"\s*(?:(?:/|\bper\b)\s*([A-Za-z]{3,})|\beach\b)\s*", rest, flags=re.I)
+    if not m:
+        return None
+    w = m.group(1)
+    if w is None:
+        return "each"
+    if w.lower() in WORDS or w.lower() in REFUSED:
+        return None
+    try:
+        U.parse(w)
+        return None
+    except U.UnitError:
+        return "per " + w
