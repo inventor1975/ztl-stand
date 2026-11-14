@@ -275,7 +275,7 @@ def solve(spec, jobs=1, kkey=None):
 # area), and outputs that may be the LARGEST magnitude over a zone. Both are laid out into the same thing: elements
 # whose stiffness is a sum of (expression x exact factor), loads likewise, outputs read from the solver's.
 _CACHE, _LAYOUTS = {}, {}
-GRID_KINDS = {"u": "u", "max_u": "u", "flow": "flow", "max_flow": "flow", "max_bar_force": "force", "spring_force": "force"}
+GRID_KINDS = {"u": "u", "max_u": "u", "sag": "u", "flow": "flow", "max_flow": "flow", "max_bar_force": "force", "spring_force": "force"}
 
 
 def _axis(spec, name):
@@ -476,7 +476,7 @@ def _lay_grid(sec):
         for (i, j), sh in share.items():
             if sh:
                 loads.setdefault((nid(i, j), d), []).append((text, sign * sh))
-    outs, plan = [], {}
+    outs, plan, sags = [], {}, {}
 
     def ask(o):
         outs.append(o)
@@ -498,6 +498,34 @@ def _lay_grid(sec):
             if not pts:
                 raise AssemblyError(f"outputs.{name}: no free node lies inside that box")
             plan[name] = ("u", "max", [ask({"u": [nid(i, j), d]}) for i, j in pts])
+        elif what == "sag":
+            # THE PLATE'S OWN DEFLECTION along a grid line between two of its nodes: at every node of the line, its
+            # displacement minus the straight line through the two ends' displacements; the largest size of it.
+            # (MEASURED 2026-11-14: the supports of a diaphragm moved more than the diaphragm's deflection limit, so
+            # the largest displacement could never meet it; and the same quantity written as one law per node made
+            # the judging of a design several times dearer - here it is read from the one solve, like max_u.)
+            d = str(o.get("dir") or "").upper()
+            if d not in ("X", "Y"):
+                raise AssemblyError(f"outputs.{name}: dir is \"X\" or \"Y\"")
+            bt = o.get("between")
+            if not isinstance(bt, (list, tuple)) or len(bt) != 2:
+                raise AssemblyError(f"outputs.{name}: \"between\": [[x, y], [x, y]] - the two ends of a grid line")
+            (ia, ja), (ib, jb) = node_at(bt[0], f"outputs.{name}"), node_at(bt[1], f"outputs.{name}")
+            if (ia != ib) == (ja != jb):
+                raise AssemblyError(f"outputs.{name}: the two ends lie on one grid line (the same x, or the same y) and differ")
+            if ia == ib:
+                lo_, hi_ = sorted((ja, jb))
+                mids = [((ia, j), (ys[j] - ys[ja]) / (ys[jb] - ys[ja])) for j in range(lo_ + 1, hi_)]
+            else:
+                lo_, hi_ = sorted((ia, ib))
+                mids = [((i, ja), (xs[i] - xs[ia]) / (xs[ib] - xs[ia])) for i in range(lo_ + 1, hi_)]
+            if not mids:
+                raise AssemblyError(f"outputs.{name}: no grid node lies between the two ends")
+            bad = [pt_ for pt_ in [(ia, ja), (ib, jb)] + [m_[0] for m_ in mids] if (nid(*pt_), d) in fx_set]
+            if bad:
+                raise AssemblyError(f"outputs.{name}: a node of the line is held in {d} - its displacement is not a result")
+            plan[name] = ("u", "sag", [ask({"u": [nid(ia, ja), d]}), ask({"u": [nid(ib, jb), d]})] + [ask({"u": [nid(*m_[0]), d]}) for m_ in mids])
+            sags[name] = [m_[1] for m_ in mids]
         elif what == "flow":
             pt = o.get("at")
             if not isinstance(pt, (list, tuple)) or len(pt) != 2:
@@ -534,7 +562,7 @@ def _lay_grid(sec):
         else:
             raise AssemblyError(f"outputs.{name}: what is one of {', '.join(GRID_KINDS)}")
     return {"nodes": {nid(i, j): (x, y) for x, i in ix.items() for y, j in iy.items()}, "fixed": fixed, "elems": elems,
-            "loads": loads, "outs": outs, "plan": plan, "texts": texts_}
+            "loads": loads, "outs": outs, "plan": plan, "sags": sags, "texts": texts_}
 
 
 def layout(b):
@@ -625,6 +653,16 @@ def for_design(b, env, only=None):
             _k, how, idx = lay["plan"][name]
             if how == "one":
                 have[name] = (got[at[idx[0]]]["lo"], got[at[idx[0]]]["hi"])
+            elif how == "sag":                   # u - ((1 - t) u_a + t u_b), each end of the enclosure by its own ends
+                ua, ub = got[at[idx[0]]], got[at[idx[1]]]
+                los, his = [], []
+                for i, t in zip(idx[2:], lay["sags"][name]):
+                    x = got[at[i]]
+                    s_lo = x["lo"] - (1 - t) * ua["hi"] - t * ub["hi"]
+                    s_hi = x["hi"] - (1 - t) * ua["lo"] - t * ub["lo"]
+                    los.append(s_lo if s_lo > 0 else -s_hi if s_hi < 0 else F(0))
+                    his.append(max(abs(s_lo), abs(s_hi)))
+                have[name] = (max(los), max(his))
             else:                                # the largest magnitude over several outputs: an enclosure of it
                 lo = max((x["lo"] if x["lo"] > 0 else -x["hi"] if x["hi"] < 0 else F(0)) for x in (got[at[i]] for i in idx))
                 hi = max(max(abs(x["lo"]), abs(x["hi"])) for x in (got[at[i]] for i in idx))

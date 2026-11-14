@@ -229,6 +229,36 @@ for word, edit in (("is not a crossing", lambda x: x["assembly"]["springs"].appe
     r = S.run(bad)
     check(r["verdict"] == "BRICK ERROR" and word in str(r.get("why")), f"PLANTED a wrong grid rule is refused with its reason: {word!r} ({str(r.get('why'))[:110]})")
 
+# ---- 5b. THE PLATE'S OWN DEFLECTION (`sag`): along a grid line between two nodes, each node's displacement minus the
+# straight line through the two ends' displacements; the largest size of it. Checked against the same roof's node
+# displacements asked one by one: the sag's enclosure holds the value computed from them, and is not wider than theirs.
+sg = roof("400", "40")
+sg["catalog"]["decks"]["items"] = [sg["catalog"]["decks"]["items"][1]]
+line = [x for x in range(0, 49, 6)]
+sg["assembly"]["outputs"] = {"bow": {"what": "sag", "dir": "Y", "between": [[0, 18], [48, 18]], "unit": "mm"},
+                             **{f"v{x}": {"what": "u", "at": [x, 18], "dir": "Y", "unit": "mm"} for x in line}}
+sg["modes"] = {"seismic Y": {"quantities": {"WY": {"value": "400"}},
+                             "requirements": [{"quantity": q, "op": ">=", "value": "-1000000", "why": "(read)"} for q in sg["assembly"]["outputs"]]}}
+r = S.run(sg)
+g = ((r.get("per_mode") or {}).get("seismic Y") or {}).get("guaranteed") or {}
+num = lambda v: float(str(v).lstrip("~").split(" ")[0])      # noqa: E731
+try:
+    u = {x: (num(g[f"v{x}_req"][0]), num(g[f"v{x}_req"][1])) for x in line}
+    own = max(abs((u[x][0] + u[x][1]) / 2 - ((u[0][0] + u[0][1]) / 2 * (1 - x / 48) + (u[48][0] + u[48][1]) / 2 * (x / 48))) for x in line)
+    width = max(b_ - a_ for a_, b_ in u.values())
+    bow = (num(g["bow_req"][0]), num(g["bow_req"][1]))
+    ok = r["verdict"] == "EARNED" and own > 0.01 and bow[0] - 1e-9 <= own <= bow[1] + 1e-9 and (bow[1] - bow[0]) <= 4 * width + 1e-9
+except Exception as e:                                       # noqa: BLE001
+    own, bow, ok = None, str(e), False
+check(ok, f"a sag output: the largest bow of the line between its ends, equal to what the node displacements give ({bow}, own {own}, {r.get('verdict')} {str(r.get('why'))[:80]})")
+for word, edit in (("on one grid line", lambda x: x["assembly"]["outputs"]["bow"].update(between=[[0, 18], [48, 24]])),
+                   ("no grid node lies between", lambda x: x["assembly"]["outputs"]["bow"].update(between=[[0, 18], [6, 18]])),
+                   ("is held in", lambda x: x["assembly"].setdefault("fixed", []).append({"at": [24, 18], "dir": "Y"}))):
+    bad = copy.deepcopy(sg)
+    edit(bad)
+    r = S.run(bad)
+    check(r["verdict"] == "BRICK ERROR" and word in str(r.get("why")), f"PLANTED a wrong sag line is refused with its reason: {word!r} ({str(r.get('why'))[:110]})")
+
 # ---- 6. A brick WITHOUT the section is judged as before (the rule does not touch it)
 plain = {"stand": "ztl-stand/1",
          "quantities": {"y": {"role": "given", "range": ["0.9999999", "1.0000001"], "unit": "mm"}, "d": {"role": "derived", "unit": "mm"}},
