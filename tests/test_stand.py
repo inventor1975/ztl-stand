@@ -4431,6 +4431,21 @@ for _ln in _ip.stdout.splitlines():
     if _ln.startswith("KNOWN DEFECT"):
         print("  " + _ln)
 
+# THE STRUCTURE SECTION (BRICKS.md 7j, 2026-11-14) — its two suites: the solver's door, and `assembly` inside a brick
+# (selection through a structure, modes, the rule for a refutation that leans on a proved range)
+_as1 = _sp_ip.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_assembly.py")],
+                  capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parent.parent),
+                  env=dict(os.environ, PYTHONPATH=str(pathlib.Path(__file__).resolve().parent.parent)))
+check("assembly, the solver's door: bars, springs and shear panels solved by ZTL (zenergy), hand-solved cases, a "
+      "grid the size of a roof in balance, the refusals", "ASSEMBLY GREEN" in _as1.stdout,
+      (_as1.stdout + _as1.stderr)[-400:])
+_as2 = _sp_ip.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_assembly_brick.py")],
+                  capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parent.parent),
+                  env=dict(os.environ, PYTHONPATH=str(pathlib.Path(__file__).resolve().parent.parent)))
+check("assembly inside a brick: the stand chooses from a catalogue through a structure whose parts act on one "
+      "another, in every mode, cheapest; a refutation leaning on a proved range stands only over the whole range",
+      "ASSEMBLY BRICK GREEN" in _as2.stdout, (_as2.stdout + _as2.stderr)[-400:])
+
 # READING UNITS AS DOCUMENTS WRITE THEM (2026-11-12, ustand/unitread.py: code, not the model) — its own suite
 import subprocess as _sp_ur      # noqa: E402
 _ur = _sp_ur.run([sys.executable, str(pathlib.Path(__file__).resolve().parent / "test_unitread.py")],

@@ -277,9 +277,34 @@ def _solve_float(rows, lin_unknowns, defs, env):
     return out
 
 
+_SOLVED = {}        # (laws, point, unknowns) -> the values: the last few points solved through an implicit law
+
+
 def solve_at(laws, env, unknowns):
     """Exact values of every derived quantity at one point (env: name -> Fraction)."""
     unknowns = list(unknowns)
+    # THE SAME POINT ASKED TWICE (MEASURED 2026-11-14, a cooling tower's outlet past its bound, a brick at one point:
+    # the nominal point, then the same point again as the only "corner" for the reasons - 39 s each, the root of a
+    # 72 KB implicit law searched twice). The solution is a function of the laws, the point and the unknowns alone;
+    # kept only where a law is implicit (there a solution is a root search; elsewhere the key would cost more than
+    # it saves - a truss is solved at ten thousand points, each once).
+    key = None
+    if any("implicit(" in law for law in laws):
+        try:
+            key = (tuple(laws), tuple(sorted(env.items())), tuple(unknowns))
+            if key in _SOLVED:
+                return dict(_SOLVED[key])
+        except TypeError:
+            key = None
+    out = _solve_at(laws, env, unknowns)
+    if key is not None:
+        if len(_SOLVED) >= 8:
+            _SOLVED.pop(next(iter(_SOLVED)))
+        _SOLVED[key] = dict(out)
+    return out
+
+
+def _solve_at(laws, env, unknowns):
     linear, defs = classify(laws, set(env), unknowns)
     defined = {n for n, _ in defs}
     lin_unknowns = [u for u in unknowns if u not in defined]

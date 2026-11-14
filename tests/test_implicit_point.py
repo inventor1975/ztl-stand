@@ -217,6 +217,59 @@ else:
           f"stand with the checker's existence route silenced: the kernel alone builds the smooth root (EARNED) and "
           f"builds nothing on the jump (OPEN) ({rk5.get('verdict')}, {rk6.get('verdict')})")
 
+# ---- THE JUDGE FIRST (2026-11-14): where the floats say the nominal point holds, ZTL's judge is asked before the
+# checker's exact solution of that point (dear with an implicit law), and the point is read exactly only if the judge
+# did not show the design. The floats only ORDER the two: the verdict and everything said must be the same either way.
+from ustand import fwitness as FW, mode as MODE     # noqa: E402
+
+
+def run_counting(b, hint=None):
+    """The stand's answer, and how many exact solutions the checker made; hint: what the floats are MADE to say."""
+    calls, real_solve, real_hint = [0], C.solve_at, FW.holds_at_centre
+
+    def counted(*a, **k):
+        calls[0] += 1
+        return real_solve(*a, **k)
+    C.solve_at = counted
+    if hint is not None:
+        FW.holds_at_centre = lambda *a, **k: hint[0]
+    try:
+        out = S.run(b)
+    finally:
+        C.solve_at, FW.holds_at_centre = real_solve, real_hint
+    out.pop("seconds", None)
+    return out, calls[0]
+
+
+earn = brick("x*x*x + max(x, 1) == c", ["0", "3"], {"op": "<=", "value": "1.3"})
+fail = brick("x*x*x + max(x, 1) == c", ["0", "3"], {"op": "<=", "value": "1.1"})
+e_new, e_calls = run_counting(earn)
+e_old, e_old_calls = run_counting(earn, hint=[None])          # the floats silent: the order as it was
+check(e_new.get("verdict") == "EARNED" and e_calls == 0 and e_old_calls >= 1 and e_new == e_old,
+      f"judge first: an EARNED design with an implicit law makes NO exact solution of the nominal point ({e_calls}; "
+      f"in the old order {e_old_calls}), and the stand's whole answer is the same ({e_new.get('verdict')}, "
+      f"same: {e_new == e_old})")
+f_new, f_calls = run_counting(fail)                           # the floats see the failure: the checker first, as before
+f_old, _ = run_counting(fail, hint=[None])
+f_lie, f_lie_calls = run_counting(fail, hint=[True])          # PLANTED: the floats say "holds" of a point that fails
+check(f_new.get("verdict") == "REFUTED" and f_new == f_old and f_new == f_lie and f_lie_calls >= 1
+      and f_lie.get("failed_at_nominal") == 1 and f_lie.get("judged") == 0,
+      f"judge first, PLANTED floats that call a failing point fine: still REFUTED at the nominal point, read exactly "
+      f"after the judge; the answer is the same in all three orders ({f_new.get('verdict')}, {f_lie.get('verdict')}, "
+      f"same: {f_new == f_old}, {f_new == f_lie}; failed_at_nominal {f_lie.get('failed_at_nominal')})")
+two_new, _ = run_counting(brick("(x - 1)*(x - 2) == c - 3", ["0", "3"], {"op": "<=", "value": "1.5"}))
+two_old, _ = run_counting(brick("(x - 1)*(x - 2) == c - 3", ["0", "3"], {"op": "<=", "value": "1.5"}), hint=[None])
+check(two_new.get("verdict") != "EARNED" and two_new == two_old,
+      f"judge first, PLANTED two roots with the bound between them (the floats find the first root only and say "
+      f"'holds'): not EARNED, the same answer as in the old order ({two_new.get('verdict')}, same: {two_new == two_old})")
+MODE.DEV[0] = True
+try:
+    d_out, d_calls = run_counting(earn)
+finally:
+    MODE.DEV[0] = False
+check(d_out.get("verdict") == "EARNED" and d_calls >= 1,
+      f"judge first is WORK mode only: in dev mode the checker still solves the nominal point ({d_calls} solution(s))")
+
 if FAILS:
     print(f"IMPLICIT POINT RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)

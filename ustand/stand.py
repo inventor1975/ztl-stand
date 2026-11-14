@@ -1777,15 +1777,43 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
             continue
         linear, defs = W.split(laws, derived)
         nominal = dict(fixed, **{n: (lo + hi) / 2 for n, (lo, hi) in boxes.items()})
-        try:
-            nv = C.solve_at(laws, nominal, derived)
-            hit = violation(nv, nominal)
-        except (C.CheckError, ZeroDivisionError):
-            hit = None              # the laws have no solution at the box's middle: no shortcut, judge as usual
-            # but the part of the laws that does NOT lean on an implicit quantity may still refute the design
-            # there (blind test 2, c11: a duct too narrow for the velocity limit stayed OPEN because its fan's
-            # operating point had no root — the velocity never depended on it)
-            nv, hit = _independent_hit(laws, nominal, derived, reqs)
+
+        def nominal_hit(laws=laws, nominal=nominal, derived=derived):
+            try:
+                nv_ = C.solve_at(laws, nominal, derived)
+                return nv_, violation(nv_, nominal)
+            except (C.CheckError, ZeroDivisionError):
+                # the laws have no solution at the box's middle: no shortcut, judge as usual
+                # but the part of the laws that does NOT lean on an implicit quantity may still refute the design
+                # there (blind test 2, c11: a duct too narrow for the velocity limit stayed OPEN because its fan's
+                # operating point had no root — the velocity never depended on it)
+                return _independent_hit(laws, nominal, derived, reqs)
+
+        # THE JUDGE FIRST, WHERE THE NOMINAL POINT IS DEAR AND LIKELY FINE (2026-11-14, the curator's word). The
+        # nominal point is a SHORTCUT to a witness, not a check of the judge (that is dev mode). With an implicit law
+        # its exact solution is the checker's own root search — MEASURED on a cooling tower's outlet at one point:
+        # 41.5 s of an EARNED design's 88 s, to learn that the point does not fail. So where the FLOATS say every
+        # requirement holds at the nominal point (fwitness: trusted for nothing, it only orders two exact
+        # procedures), ZTL's judge is asked first; and the nominal point is read exactly, as before, at every exit
+        # where the judge did not show the design (late_hit below) — so only a design the judge EARNS skips it.
+        late_nominal = (not MODE.DEV[0]
+                        and any(isinstance(e, ast.Call) and isinstance(e.func, ast.Name) and e.func.id == "implicit"
+                                for e in defs.values())
+                        and FW.holds_at_centre(laws, fixed, boxes, reqs, _req_at) is True)
+
+        def late_hit(design=design, nominal=nominal, late=late_nominal, boxes=boxes):
+            nonlocal pruned, judged
+            if not late:
+                return False
+            nv_, hit_ = nominal_hit()
+            if not hit_:
+                return False
+            pruned += 1             # counted as it was before the order changed: failed at nominal, not judged
+            judged -= 1
+            note(design, {n: nominal[n] for n in boxes}, nv_, *hit_)
+            return True
+
+        nv, hit = (None, None) if late_nominal else nominal_hit()
         if hit:
             pruned += 1             # the nominal point itself already fails: it is the witness
             note(design, {n: nominal[n] for n in boxes}, nv, *hit)
@@ -1873,6 +1901,8 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
             def_ranges[n] = (got_i[0], got_i[1], "implicit")
             impl_how[n] = how_i
         if impl_fail:
+            if late_hit():
+                continue
             undecided += 1
             undecided_before_earned += 1
             checker_notes.append(f"{_design_out(design)}: {impl_fail}")
@@ -1944,6 +1974,8 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
             # edge, T = 11 at a CORNER, was left OPEN — the reading of (1 - r*r)*(1 - r*r) touched zero, and the
             # design was dropped before any point was tried). A failing point needs no range: found and recomputed
             # exactly, it refutes; none found, the design stays OPEN as before.
+            if late_hit():
+                continue
             try:
                 hit_ = _witness_first(laws, fixed, boxes, derived, reqs, violation)
             except (C.CheckError, ZeroDivisionError):
@@ -1963,6 +1995,8 @@ def _run(b, conflicts=True, brief=False, loaded=False) -> dict:
         cons = B.windows(reqs, boxes, fixed)     # least favourable bounds, MERGED per quantity (a dict by quantity
                                                  # kept only the last requirement: a false EARNED, 2026-10-11)
         ok = all(r["quantity"] in rng and B.inside(*rng[r["quantity"]], cons[r["quantity"]]) for r in reqs)
+        if not ok and late_hit():
+            continue
         # the checker CONFIRMS each implicit range by its own exclusion first; a confirmed range is then its
         # own to use for the definitions that lean on it (2026-10-10: its own enclosure was looser than ZTL's
         # pulled-in one, and the disagreement read as a STAND FAULT)

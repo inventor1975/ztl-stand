@@ -104,6 +104,30 @@ def _evaluate(comp, env):
     return env
 
 
+def holds_at_centre(laws, fixed, boxes, reqs, req_at):
+    """True: in floats every requirement holds at the centre of the box. False: one fails there. None: the floats
+    could not read the laws (a law of another form, no root, no value). Trusted for nothing — the stand uses it only
+    to ORDER two exact procedures (stand.py, "the judge first"): which of them is asked first, never what is said."""
+    try:
+        comp = _compile(laws)
+        if comp is None:
+            return None
+        centre = dict(fixed, **{n: (lo + hi) / 2 for n, (lo, hi) in boxes.items()})
+        env = _evaluate(comp, {n: float(v) for n, v in centre.items()})
+        if env is None:
+            return None
+        for r in reqs:
+            v = env.get(r["quantity"])
+            if v is None:
+                return None
+            a, c = req_at(r, centre)
+            if (a is not None and v < float(a)) or (c is not None and v > float(c)):
+                return False
+        return True
+    except Exception:                                   # noqa: BLE001 — a search aid: never a verdict, never a crash
+        return None
+
+
 RAN = [False]           # did the last find() evaluate the laws at all (False: the caller's exact walk instead)
 
 
