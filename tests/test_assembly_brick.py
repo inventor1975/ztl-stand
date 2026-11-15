@@ -286,6 +286,29 @@ check(r.get("verdict") == "BRICK ERROR" and "the same in every mode" in str(r.ge
       f"a mode that tries to change the structure itself (its panels) is refused: only springs, supports, loads and "
       f"outputs are a mode's ({r.get('verdict')}: {str(r.get('why'))[:80]})")
 
+# ---- A NAME IS NOT A DEFINITION (2026-11-15). The same structure under the same load, in ONE process, with the output
+# name `u` now meaning ANOTHER displacement (the other end of the top bar): the answer must be that output's, not the
+# value kept under the name from the first brick. The reference is the same brick judged by a fresh process.
+import json            # noqa: E402
+import subprocess      # noqa: E402
+two = copy.deepcopy(one)
+two["assembly"]["outputs"]["u"] = {"u": ["tl", "X"], "unit": "mm"}
+r_first = S.run(copy.deepcopy(one))
+r_two = S.run(copy.deepcopy(two))
+fresh = subprocess.run([sys.executable, "-c",
+                        "import json,sys;sys.path.insert(0, %r);from ustand import stand as S;"
+                        "print(json.dumps(S.run(json.loads(sys.stdin.read())).get('guaranteed')))"
+                        % os.path.dirname(os.path.dirname(os.path.abspath(__file__)))],
+                       input=json.dumps(two), capture_output=True, text=True, env=dict(os.environ))
+try:
+    g_fresh = json.loads(fresh.stdout.strip().splitlines()[-1])
+except (ValueError, IndexError):
+    g_fresh = f"no answer: {fresh.stderr[-200:]}"
+check(r_two.get("guaranteed") == g_fresh and r_two.get("guaranteed", {}).get("u_req") != r_first["guaranteed"]["u_req"],
+      f"PLANTED the same output NAME with another definition over the same structure and load, in one process: the "
+      f"second brick gets ITS output's value ({r_two.get('guaranteed')} here, {g_fresh} in a fresh process; the first "
+      f"brick's was {r_first['guaranteed']})")
+
 if FAILS:
     print(f"ASSEMBLY BRICK RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)

@@ -636,14 +636,21 @@ def for_design(b, env, only=None):
         if p:
             spec["loads"].append([node, d, str(p)])
     ckey = kkey + json.dumps(spec["loads"])
-    # THE RESULTS ARE KEPT BY NAME for this structure under this load: a later reader that wants fewer of them, or
+    # THE RESULTS ARE KEPT for this structure under this load: a later reader that wants fewer of them, or
     # other ones, is served from what is there and only the missing are solved for (MEASURED 2026-11-14: keyed by
-    # the whole request, the confirmation of a refutation - one requirement - solved the same structure again)
+    # the whole request, the confirmation of a refutation - one requirement - solved the same structure again).
+    # KEPT BY WHAT THE OUTPUT IS, NOT BY ITS NAME (2026-11-15, a wrong number in a proof, found by a graded package:
+    # kept by name, a second section over the same structure and load that gave ANOTHER output the same name - a
+    # chord force where the first had a collector force - was served the first one's value, and its requirement was
+    # judged with it. One process, two sections: a caller that restarts between them never saw it.)
     if ckey not in _CACHE:
         if len(_CACHE) > 256:
             _CACHE.clear()
         _CACHE[ckey] = {}
-    have = _CACHE[ckey]
+    kept = _CACHE[ckey]
+    odef = sec.get("outputs") or {}
+    fp = {name: json.dumps(odef.get(name), sort_keys=True, default=str) for name in want}
+    have = {name: kept[fp[name]] for name in want if fp[name] in kept}
     missing = [name for name in want if name not in have]
     if missing:
         used = sorted({i for name in missing for i in lay["plan"][name][2]})
@@ -667,4 +674,6 @@ def for_design(b, env, only=None):
                 lo = max((x["lo"] if x["lo"] > 0 else -x["hi"] if x["hi"] < 0 else F(0)) for x in (got[at[i]] for i in idx))
                 hi = max(max(abs(x["lo"]), abs(x["hi"])) for x in (got[at[i]] for i in idx))
                 have[name] = (lo, hi)
+        for name in missing:
+            kept[fp[name]] = have[name]
     return {name: have[name] for name in want}
