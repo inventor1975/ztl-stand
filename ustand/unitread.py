@@ -78,6 +78,33 @@ CUR_PREFIX = {"$": "USD", "us$": "USD", "€": "EUR", "eur": "EUR", "usd": "USD"
 
 NUM = r"[-−]?(?:\d{1,3}(?:(?:,| | | )\d{3})+|\d+)(?:\.\d+)?(?:[eE][-+]?\d+)?|[-−]?\.\d+"
 NUM_RE = re.compile(rf"(?<![\w.])({NUM})(?![\d])")
+# the same, with a PLAIN space never joining groups of three (thin and narrow no-break spaces are typed on purpose)
+NUM_PLAIN = NUM.replace("|\u2009|\u202f| )", "|\u2009|\u202f)")
+NUM_RE_PLAIN = re.compile(rf"(?<![\w.])({NUM_PLAIN})(?![\d])")
+assert NUM_PLAIN != NUM
+
+
+def _numbers(text):
+    """the number matches of a text. A PLAIN SPACE between groups of three is a way of writing thousands ("3 250") AND
+    the gap between two cells of a table printed as text; it is read as grouping (and said in the note) unless the
+    text itself says otherwise (2026-11-15, MEASURED: a table row printed as text, "... PIN-10 250 12.5 ... 1,480", was read as
+    10250 - a number that stands nowhere in the document - and went on as a quoted value):
+    - the text writes its thousands with a COMMA somewhere: then a plain space in it separates two numbers;
+    - the first group is the number of a designation ("PIN-10", "M-12", "RB08-4"): glued by a hyphen to a letter
+      or a digit before it, it is the end of a name, not the head of a number."""
+    comma = re.search(r"(?<![\d.,])\d{1,3}(?:,\d{3})+(?![\d,])", text) is not None
+    if comma:
+        return list(NUM_RE_PLAIN.finditer(text))
+    out, pos = [], 0
+    while True:
+        m = NUM_RE.search(text, pos)
+        if m is None:
+            return out
+        raw, st = m.group(1), m.start(1)
+        if " " in raw and st >= 2 and text[st - 1] in "-\u2013" and text[st - 2].isalnum():
+            m = NUM_RE_PLAIN.search(text, st)             # the designation's own number alone; the next starts after it
+        out.append(m)
+        pos = m.end(1)
 
 
 @dataclass
@@ -155,7 +182,7 @@ def _feet_inches(text):
 def mentions(text):
     out = _feet_inches(text)
     taken = [(m.start, m.end) for m in out]
-    for m in NUM_RE.finditer(text):
+    for m in _numbers(text):
         if any(a <= m.start(1) < b for a, b in taken):
             continue                                      # a part of a feet-and-inches length already read whole
         raw = m.group(1)

@@ -105,6 +105,15 @@ check(R.unit_in("lb per ft")[0] == "(lb)/(ft)" and R.unit_in("$ per kWh")[0] == 
       "PLANTED a real unit after 'per' stays a rate, never an item")
 check(R.unit_in("Load (lb per ton)")[0] is None and R.unit_in("Rate (USD per linear foot)")[0] is None,
       "PLANTED a refused word (a bare ton) is not an item, and two words after 'per' are not read")
+# a plain space is grouping only where the text does not say otherwise
+vals = lambda text: [m.value for m in R.mentions(text)]   # noqa: E731
+check(vals("24/3 PIN-10 250 12.5 640 1,480 9.5")[:4] == [F(24), F(3), F(10), F(250)],
+      "PLANTED a designation's number is not the head of a space-grouped number (PIN-10 250 is not 10250)")
+check(F(1480) in vals("24/3 PIN-10 250 12.5 640 1,480 9.5"), "the comma-grouped number of that row is read whole")
+check(vals("loads 12 500 and 1,250 lb") == [F(12), F(500), F(1250)],
+      "PLANTED a text that writes thousands with a comma: its plain space separates two numbers")
+check(vals("a span of 12 500 mm") == [F(12500)], "without such a sign a plain space still groups (and the note says so)")
+check(vals("Case 2 edge -1.75 -2.05 -64.5") == [F(2), F("-1.75"), F("-2.05"), F("-64.5")], "negative values of a table row keep their sign")
 if FAILS:
     print(f"UNITREAD RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)
