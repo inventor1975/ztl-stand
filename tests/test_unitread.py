@@ -114,6 +114,13 @@ check(vals("loads 12 500 and 1,250 lb") == [F(12), F(500), F(1250)],
       "PLANTED a text that writes thousands with a comma: its plain space separates two numbers")
 check(vals("a span of 12 500 mm") == [F(12500)], "without such a sign a plain space still groups (and the note says so)")
 check(vals("Case 2 edge -1.75 -2.05 -64.5") == [F(2), F("-1.75"), F("-2.05"), F("-64.5")], "negative values of a table row keep their sign")
+# "in" the word, not the inch
+check(pairs("at most 4 in total, and 12 in the north") == [(F(4), None), (F(12), None)],
+      "PLANTED a number before 'in total' / 'in the ...' is a count, not inches")
+check(pairs("a ratio of 1.5 in plan") == [(F(3, 2), None)], "PLANTED 'in plan' after a ratio is not inches")
+check(pairs("3 in insulation over 6 in thick slab, 2 in below") == [(F(3), "in"), (F(6), "in"), (F(2), "in")],
+      "an inch before a noun or a measure word stays an inch")
+check(pairs("a 6 in. pipe and a 4 inch pipe") == [(F(6), "in"), (F(4), "in")], "the abbreviations with a dot and the word are inches")
 if FAILS:
     print(f"UNITREAD RED ({len(FAILS)} of {CHECKS})")
     sys.exit(1)

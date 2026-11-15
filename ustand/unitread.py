@@ -121,10 +121,23 @@ def _num(s):
     return F(s.replace("−", "-").replace(",", "").replace(" ", "").replace(" ", "").replace(" ", ""))
 
 
+# "IN" THE WORD, NOT THE INCH (2026-11-15, MEASURED: "at most 4 in total" was read as 4 inches, "1.5 in plan"
+# as 1.5 inches - a length where the document states a count and a ratio). After a number, "in" followed by one of
+# these words is the preposition: the number has no unit there. An inch before a noun or a measure word stays an
+# inch ("3 in insulation", "6 in thick", "6 in below").
+IN_AS_WORD = frozenset("""the a an all total each every any this that these those both which its their his her our plan number turn series
+parallel place lieu case cases addition accordance general particular service use operation question order phase phases zone zones
+front between excess full effect contact line aggregate compliance conformance elevation section detail table figure clause schedule
+appendix part parts one two three four five six ten either neither some most many few such no not""".split())
+
+
 def _unit_from_words(t):
     """the longest recognised unit at the start of t -> (units.py string, chars consumed, note)"""
     t0 = t
     low = t.lower()
+    m_in = re.match(r"in\s+([A-Za-z]+)", t)
+    if m_in and m_in.group(1).lower() in IN_AS_WORD:
+        return None, 0, f"'in' before {m_in.group(1)!r} is the word, not inches"
     # "X per Y": read X, then "per" or "/", then Y
     best = None
     for k in sorted(WORDS, key=len, reverse=True):
